@@ -1,4 +1,4 @@
-library moon_flutter;
+library moon_design;
 
 /// A Calculator.
 class Calculator {

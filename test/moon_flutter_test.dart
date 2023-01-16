@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:moon_flutter/moon_flutter.dart';
+import 'package:moon_design/moon_design.dart';
 
 void main() {
   test('adds one to input values', () {
