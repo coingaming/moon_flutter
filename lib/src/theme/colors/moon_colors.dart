@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 @immutable
-class MoonColors extends ThemeExtension<MoonColors> {
+class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin {
   static const light = MoonColors(
     piccolo: Color(0xFF4E46B4),
     jiren: Color(0x1F4E46B4),
@@ -301,5 +302,51 @@ class MoonColors extends ThemeExtension<MoonColors> {
       whis60: Color.lerp(whis60, other.whis60, t)!,
       whis10: Color.lerp(whis10, other.whis10, t)!,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty("type", "MoonColors"))
+      ..add(DiagnosticsProperty("piccolo", piccolo))
+      ..add(DiagnosticsProperty("jiren", jiren))
+      ..add(DiagnosticsProperty("hit", hit))
+      ..add(DiagnosticsProperty("heles", heles))
+      ..add(DiagnosticsProperty("beerus", beerus))
+      ..add(DiagnosticsProperty("goku", goku))
+      ..add(DiagnosticsProperty("gohan", gohan))
+      ..add(DiagnosticsProperty("zeno", zeno))
+      ..add(DiagnosticsProperty("bulma", bulma))
+      ..add(DiagnosticsProperty("trunks", trunks))
+      ..add(DiagnosticsProperty("goten", goten))
+      ..add(DiagnosticsProperty("popo", popo))
+      ..add(DiagnosticsProperty("krillin100", krillin100))
+      ..add(DiagnosticsProperty("krillin60", krillin60))
+      ..add(DiagnosticsProperty("krillin10", krillin10))
+      ..add(DiagnosticsProperty("chiChi100", chiChi100))
+      ..add(DiagnosticsProperty("chiChi60", chiChi60))
+      ..add(DiagnosticsProperty("chiChi10", chiChi10))
+      ..add(DiagnosticsProperty("roshi100", roshi100))
+      ..add(DiagnosticsProperty("roshi60", roshi60))
+      ..add(DiagnosticsProperty("roshi10", roshi10))
+      ..add(DiagnosticsProperty("frieza100", frieza100))
+      ..add(DiagnosticsProperty("frieza60", frieza60))
+      ..add(DiagnosticsProperty("frieza10", frieza10))
+      ..add(DiagnosticsProperty("dodoria100", dodoria100))
+      ..add(DiagnosticsProperty("dodoria60", dodoria60))
+      ..add(DiagnosticsProperty("dodoria10", dodoria10))
+      ..add(DiagnosticsProperty("cell100", cell100))
+      ..add(DiagnosticsProperty("cell60", cell60))
+      ..add(DiagnosticsProperty("cell10", cell10))
+      ..add(DiagnosticsProperty("raditz100", raditz100))
+      ..add(DiagnosticsProperty("raditz60", raditz60))
+      ..add(DiagnosticsProperty("raditz10", raditz10))
+      ..add(DiagnosticsProperty("nappa100", nappa100))
+      ..add(DiagnosticsProperty("nappa60", nappa60))
+      ..add(DiagnosticsProperty("nappa10", nappa10))
+      ..add(DiagnosticsProperty("whis100", whis100))
+      ..add(DiagnosticsProperty("whis60", whis60))
+      ..add(DiagnosticsProperty("whis10", whis10));
   }
 }
