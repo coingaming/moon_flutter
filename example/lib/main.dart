@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 36),
             Text(
-              "Coming soon....",
+              "Coming soon...",
               style: TextStyle(
                 fontSize: 24,
                 color: Color(0xFF999CA0),
