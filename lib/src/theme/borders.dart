@@ -34,12 +34,12 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
 
   const MoonBorders({
     this.iXs = const Radius.circular(4),
-    this.iSm = const Radius.circular(4),
-    this.iMd = const Radius.circular(4),
+    this.iSm = const Radius.circular(8),
+    this.iMd = const Radius.circular(12),
     this.sXs = const Radius.circular(4),
-    this.sSm = const Radius.circular(4),
-    this.sMd = const Radius.circular(4),
-    this.sLg = const Radius.circular(4),
+    this.sSm = const Radius.circular(8),
+    this.sMd = const Radius.circular(12),
+    this.sLg = const Radius.circular(16),
     this.border = 1,
     this.border2 = 2,
   });
