@@ -4,7 +4,6 @@ import "package:flutter/material.dart";
 @immutable
 class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMixin {
   static const light = MoonShadows(
-    /// Small shadow for light theme
     sm: [
       BoxShadow(
         color: Color(0x66000000),
@@ -16,8 +15,6 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
         offset: Offset(0, 6),
       ),
     ],
-
-    /// Medium shadow for light theme
     md: [
       BoxShadow(
         color: Color(0x66000000),
@@ -29,8 +26,6 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
         offset: Offset(0, 12),
       ),
     ],
-
-    /// Large shadow for light theme
     lg: [
       BoxShadow(
         color: Color(0x66000000),
@@ -42,8 +37,6 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
         offset: Offset(0, 8),
       ),
     ],
-
-    /// Extra large shadow for light theme
     xl: [
       BoxShadow(
         color: Color(0x33000000),
@@ -62,7 +55,6 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
   );
 
   static const dark = MoonShadows(
-    /// Small shadow for dark theme
     sm: [
       BoxShadow(
         color: Color(0x8E000000),
@@ -74,8 +66,6 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
         offset: Offset(0, 6),
       ),
     ],
-
-    /// Medium shadow for dark theme
     md: [
       BoxShadow(
         color: Color(0x8E000000),
@@ -87,8 +77,6 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
         offset: Offset(0, 12),
       ),
     ],
-
-    /// Large shadow for dark theme
     lg: [
       BoxShadow(
         color: Color(0x8E000000),
@@ -100,8 +88,6 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
         offset: Offset(0, 24),
       ),
     ],
-
-    /// Extra large shadow for dark theme
     xl: [
       BoxShadow(
         color: Color(0xB7000000),
@@ -115,9 +101,16 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
     ],
   );
 
+  /// Small shadow.
   final List<BoxShadow> sm;
+
+  /// Medium shadow.
   final List<BoxShadow> md;
+
+  /// Large shadow.
   final List<BoxShadow> lg;
+
+  /// Extra large shadow.
   final List<BoxShadow> xl;
 
   const MoonShadows({
@@ -159,9 +152,9 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonShadows"))
-      ..add(DiagnosticsProperty("sm", sm))
-      ..add(DiagnosticsProperty("md", md))
-      ..add(DiagnosticsProperty("lg", lg))
-      ..add(DiagnosticsProperty("xl", xl));
+      ..add(DiagnosticsProperty<List<BoxShadow>>("sm", sm))
+      ..add(DiagnosticsProperty<List<BoxShadow>>("md", md))
+      ..add(DiagnosticsProperty<List<BoxShadow>>("lg", lg))
+      ..add(DiagnosticsProperty<List<BoxShadow>>("xl", xl));
   }
 }

@@ -5,31 +5,31 @@ import "package:flutter/material.dart";
 
 @immutable
 class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMixin {
-  /// Interactive radius XS
+  /// Interactive radius XS.
   final Radius iXs;
 
-  /// Interactive radius SM
+  /// Interactive radius SM.
   final Radius iSm;
 
-  /// Interactive radius MD
+  /// Interactive radius MD.
   final Radius iMd;
 
-  /// Surface radius XS
+  /// Surface radius XS.
   final Radius sXs;
 
-  /// Surface radius SM
+  /// Surface radius SM.
   final Radius sSm;
 
-  /// Surface radius MD
+  /// Surface radius MD.
   final Radius sMd;
 
-  /// Surface radius LG
+  /// Surface radius LG.
   final Radius sLg;
 
-  /// Default border width
+  /// Default border width.
   final double border;
 
-  /// Interactive border width
+  /// Interactive border width.
   final double border2;
 
   const MoonBorders({

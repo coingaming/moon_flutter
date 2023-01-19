@@ -87,59 +87,125 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     whis10: Color(0x143448F0),
   );
 
-  // Main colours:
-  // Accent colours
+  // Main colors:
+
+  /// Accent color.
   final Color piccolo;
+
+  /// Accent color.
   final Color hit;
-  // Border and line colour
+
+  /// Border and line color.
   final Color beerus;
-  // Background colours
+
+  /// Background color.
   final Color goku;
+
+  /// Background color.
   final Color gohan;
-  // Text and icon colours
+
+  /// Text and icon color.
   final Color bulma;
+
+  /// Text and icon color.
   final Color trunks;
-  // Forced colours
+
+  /// Forced color.
   final Color goten;
+
+  /// Forced color.
   final Color popo;
-  // Ghost/disabled colour
+
+  /// Ghost/disabled color.
   final Color jiren;
-  // Generic hover effect colour
+
+  /// Generic hover effect color.
   final Color heles;
-  // Modal overlay colour
+
+  /// Modal overlay color.
   final Color zeno;
 
-  // Supportive and Semantic colours:
-  // Warning colour
+  // Supportive and Semantic colors:
+
+  /// Warning color.
   final Color krillin100;
+
+  /// Warning color.
   final Color krillin60;
+
+  /// Warning color.
   final Color krillin10;
-  // Error colour
+
+  /// Error color.
   final Color chiChi100;
+
+  /// Error color.
   final Color chiChi60;
+
+  /// Error color.
   final Color chiChi10;
-  // Success colour
+
+  /// Success color.
   final Color roshi100;
+
+  /// Success color.
   final Color roshi60;
+
+  /// Success color.
   final Color roshi10;
-  // Other supportive colours
+
+  /// Supportive color.
   final Color frieza100;
+
+  /// Supportive color.
   final Color frieza60;
+
+  /// Supportive color.
   final Color frieza10;
+
+  /// Supportive color.
   final Color dodoria100;
+
+  /// Supportive color.
   final Color dodoria60;
+
+  /// Supportive color.
   final Color dodoria10;
+
+  /// Supportive color.
   final Color cell100;
+
+  /// Supportive color.
   final Color cell60;
+
+  /// Supportive color.
   final Color cell10;
+
+  /// Supportive color.
   final Color raditz100;
+
+  /// Supportive color.
   final Color raditz60;
+
+  /// Supportive color.
   final Color raditz10;
+
+  /// Supportive color.
   final Color nappa100;
+
+  /// Supportive color.
   final Color nappa60;
+
+  /// Supportive color.
   final Color nappa10;
+
+  /// Supportive color.
   final Color whis100;
+
+  /// Supportive color.
   final Color whis60;
+
+  /// Supportive color.
   final Color whis10;
 
   const MoonColors({
