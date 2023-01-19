@@ -122,7 +122,7 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   final Color roshi100;
   final Color roshi60;
   final Color roshi10;
-  //Other supportive colours
+  // Other supportive colours
   final Color frieza100;
   final Color frieza60;
   final Color frieza10;
@@ -187,17 +187,17 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   @override
   MoonColors copyWith({
     Color? piccolo,
-    Color? jiren,
     Color? hit,
-    Color? heles,
     Color? beerus,
     Color? goku,
     Color? gohan,
-    Color? zeno,
     Color? bulma,
     Color? trunks,
     Color? goten,
     Color? popo,
+    Color? jiren,
+    Color? heles,
+    Color? zeno,
     Color? krillin100,
     Color? krillin60,
     Color? krillin10,
@@ -228,17 +228,17 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   }) {
     return MoonColors(
       piccolo: piccolo ?? this.piccolo,
-      jiren: jiren ?? this.jiren,
       hit: hit ?? this.hit,
-      heles: heles ?? this.heles,
       beerus: beerus ?? this.beerus,
       goku: goku ?? this.goku,
       gohan: gohan ?? this.gohan,
-      zeno: zeno ?? this.zeno,
       bulma: bulma ?? this.bulma,
       trunks: trunks ?? this.trunks,
       goten: goten ?? this.goten,
       popo: popo ?? this.popo,
+      jiren: jiren ?? this.jiren,
+      heles: heles ?? this.heles,
+      zeno: zeno ?? this.zeno,
       krillin100: krillin100 ?? this.krillin100,
       krillin60: krillin60 ?? this.krillin60,
       krillin10: krillin10 ?? this.krillin10,
@@ -275,17 +275,17 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
 
     return MoonColors(
       piccolo: Color.lerp(piccolo, other.piccolo, t)!,
-      jiren: Color.lerp(jiren, other.jiren, t)!,
       hit: Color.lerp(hit, other.hit, t)!,
-      heles: Color.lerp(heles, other.heles, t)!,
       beerus: Color.lerp(beerus, other.beerus, t)!,
       goku: Color.lerp(goku, other.goku, t)!,
       gohan: Color.lerp(gohan, other.gohan, t)!,
-      zeno: Color.lerp(zeno, other.zeno, t)!,
       bulma: Color.lerp(bulma, other.bulma, t)!,
       trunks: Color.lerp(trunks, other.trunks, t)!,
       goten: Color.lerp(goten, other.goten, t)!,
       popo: Color.lerp(popo, other.popo, t)!,
+      jiren: Color.lerp(jiren, other.jiren, t)!,
+      heles: Color.lerp(heles, other.heles, t)!,
+      zeno: Color.lerp(zeno, other.zeno, t)!,
       krillin100: Color.lerp(krillin100, other.krillin100, t)!,
       krillin60: Color.lerp(krillin60, other.krillin60, t)!,
       krillin10: Color.lerp(krillin10, other.krillin10, t)!,
@@ -321,44 +321,44 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonColors"))
-      ..add(DiagnosticsProperty("piccolo", piccolo))
-      ..add(DiagnosticsProperty("jiren", jiren))
-      ..add(DiagnosticsProperty("hit", hit))
-      ..add(DiagnosticsProperty("heles", heles))
-      ..add(DiagnosticsProperty("beerus", beerus))
-      ..add(DiagnosticsProperty("goku", goku))
-      ..add(DiagnosticsProperty("gohan", gohan))
-      ..add(DiagnosticsProperty("zeno", zeno))
-      ..add(DiagnosticsProperty("bulma", bulma))
-      ..add(DiagnosticsProperty("trunks", trunks))
-      ..add(DiagnosticsProperty("goten", goten))
-      ..add(DiagnosticsProperty("popo", popo))
-      ..add(DiagnosticsProperty("krillin100", krillin100))
-      ..add(DiagnosticsProperty("krillin60", krillin60))
-      ..add(DiagnosticsProperty("krillin10", krillin10))
-      ..add(DiagnosticsProperty("chiChi100", chiChi100))
-      ..add(DiagnosticsProperty("chiChi60", chiChi60))
-      ..add(DiagnosticsProperty("chiChi10", chiChi10))
-      ..add(DiagnosticsProperty("roshi100", roshi100))
-      ..add(DiagnosticsProperty("roshi60", roshi60))
-      ..add(DiagnosticsProperty("roshi10", roshi10))
-      ..add(DiagnosticsProperty("frieza100", frieza100))
-      ..add(DiagnosticsProperty("frieza60", frieza60))
-      ..add(DiagnosticsProperty("frieza10", frieza10))
-      ..add(DiagnosticsProperty("dodoria100", dodoria100))
-      ..add(DiagnosticsProperty("dodoria60", dodoria60))
-      ..add(DiagnosticsProperty("dodoria10", dodoria10))
-      ..add(DiagnosticsProperty("cell100", cell100))
-      ..add(DiagnosticsProperty("cell60", cell60))
-      ..add(DiagnosticsProperty("cell10", cell10))
-      ..add(DiagnosticsProperty("raditz100", raditz100))
-      ..add(DiagnosticsProperty("raditz60", raditz60))
-      ..add(DiagnosticsProperty("raditz10", raditz10))
-      ..add(DiagnosticsProperty("nappa100", nappa100))
-      ..add(DiagnosticsProperty("nappa60", nappa60))
-      ..add(DiagnosticsProperty("nappa10", nappa10))
-      ..add(DiagnosticsProperty("whis100", whis100))
-      ..add(DiagnosticsProperty("whis60", whis60))
-      ..add(DiagnosticsProperty("whis10", whis10));
+      ..add(ColorProperty("piccolo", piccolo))
+      ..add(ColorProperty("hit", hit))
+      ..add(ColorProperty("beerus", beerus))
+      ..add(ColorProperty("goku", goku))
+      ..add(ColorProperty("gohan", gohan))
+      ..add(ColorProperty("bulma", bulma))
+      ..add(ColorProperty("trunks", trunks))
+      ..add(ColorProperty("goten", goten))
+      ..add(ColorProperty("popo", popo))
+      ..add(ColorProperty("jiren", jiren))
+      ..add(ColorProperty("heles", heles))
+      ..add(ColorProperty("zeno", zeno))
+      ..add(ColorProperty("krillin100", krillin100))
+      ..add(ColorProperty("krillin60", krillin60))
+      ..add(ColorProperty("krillin10", krillin10))
+      ..add(ColorProperty("chiChi100", chiChi100))
+      ..add(ColorProperty("chiChi60", chiChi60))
+      ..add(ColorProperty("chiChi10", chiChi10))
+      ..add(ColorProperty("roshi100", roshi100))
+      ..add(ColorProperty("roshi60", roshi60))
+      ..add(ColorProperty("roshi10", roshi10))
+      ..add(ColorProperty("frieza100", frieza100))
+      ..add(ColorProperty("frieza60", frieza60))
+      ..add(ColorProperty("frieza10", frieza10))
+      ..add(ColorProperty("dodoria100", dodoria100))
+      ..add(ColorProperty("dodoria60", dodoria60))
+      ..add(ColorProperty("dodoria10", dodoria10))
+      ..add(ColorProperty("cell100", cell100))
+      ..add(ColorProperty("cell60", cell60))
+      ..add(ColorProperty("cell10", cell10))
+      ..add(ColorProperty("raditz100", raditz100))
+      ..add(ColorProperty("raditz60", raditz60))
+      ..add(ColorProperty("raditz10", raditz10))
+      ..add(ColorProperty("nappa100", nappa100))
+      ..add(ColorProperty("nappa60", nappa60))
+      ..add(ColorProperty("nappa10", nappa10))
+      ..add(ColorProperty("whis100", whis100))
+      ..add(ColorProperty("whis60", whis60))
+      ..add(ColorProperty("whis10", whis10));
   }
 }
