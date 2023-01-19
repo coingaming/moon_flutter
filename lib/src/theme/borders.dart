@@ -27,10 +27,10 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
   final Radius sLg;
 
   /// Default border width.
-  final double border;
+  final double borderDefault;
 
   /// Interactive border width.
-  final double border2;
+  final double borderInteractive;
 
   const MoonBorders({
     this.iXs = const Radius.circular(4),
@@ -40,8 +40,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     this.sSm = const Radius.circular(8),
     this.sMd = const Radius.circular(12),
     this.sLg = const Radius.circular(16),
-    this.border = 1,
-    this.border2 = 2,
+    this.borderDefault = 1,
+    this.borderInteractive = 2,
   });
 
   @override
@@ -53,8 +53,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     Radius? sSm,
     Radius? sMd,
     Radius? sLg,
-    double? border,
-    double? border2,
+    double? borderDefault,
+    double? borderInteractive,
   }) {
     return MoonBorders(
       iXs: iXs ?? this.iXs,
@@ -64,8 +64,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       sSm: sSm ?? this.sSm,
       sMd: sMd ?? this.sMd,
       sLg: sLg ?? this.sLg,
-      border: border ?? this.border,
-      border2: border2 ?? this.border2,
+      borderDefault: borderDefault ?? this.borderDefault,
+      borderInteractive: borderInteractive ?? this.borderInteractive,
     );
   }
 
@@ -81,8 +81,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       sSm: Radius.lerp(sSm, other.sSm, t)!,
       sMd: Radius.lerp(sMd, other.sMd, t)!,
       sLg: Radius.lerp(sLg, other.sLg, t)!,
-      border: lerpDouble(border, other.border, t)!,
-      border2: lerpDouble(border2, other.border2, t)!,
+      borderDefault: lerpDouble(borderDefault, other.borderDefault, t)!,
+      borderInteractive: lerpDouble(borderInteractive, other.borderInteractive, t)!,
     );
   }
 
@@ -98,7 +98,7 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       ..add(DiagnosticsProperty<Radius>("sSm", sSm))
       ..add(DiagnosticsProperty<Radius>("sMd", sMd))
       ..add(DiagnosticsProperty<Radius>("sLg", sLg))
-      ..add(DoubleProperty("border", border))
-      ..add(DoubleProperty("border2", border2));
+      ..add(DoubleProperty("border", borderDefault))
+      ..add(DoubleProperty("borderInteractive", borderInteractive));
   }
 }
