@@ -5,17 +5,17 @@ import "package:flutter/material.dart";
 class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin {
   static const light = MoonColors(
     piccolo: Color(0xFF4E46B4),
-    jiren: Color(0x1F4E46B4),
     hit: Color(0xFF40A69F),
-    heles: Color(0x0A000000),
     beerus: Color(0xFFEBEBEB),
     goku: Color(0xFFF5F5F5),
     gohan: Color(0xFFFFFFFF),
-    zeno: Color(0x8F000000),
     bulma: Color(0xFF000000),
     trunks: Color(0xFF999CA0),
     goten: Color(0xFFFFFFFF),
     popo: Color(0xFF000000),
+    jiren: Color(0x1F4E46B4),
+    heles: Color(0x0A000000),
+    zeno: Color(0x8F000000),
     krillin100: Color(0xFFFF9800),
     krillin60: Color(0x8FFF9800),
     krillin10: Color(0x14FF9800),
@@ -47,17 +47,17 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
 
   static const dark = MoonColors(
     piccolo: Color(0xFF5B50EE),
-    jiren: Color(0x525B50EE),
     hit: Color(0xFF40A69F),
-    heles: Color(0x1FFFFFFF),
     beerus: Color(0xFF444444),
     goku: Color(0xFF0B0B0B),
     gohan: Color(0xFF1F1F1F),
-    zeno: Color(0x8F000000),
     bulma: Color(0xFFFFFFFF),
     trunks: Color(0xFF999CA0),
     goten: Color(0xFFFFFFFF),
     popo: Color(0xFF000000),
+    jiren: Color(0x525B50EE),
+    heles: Color(0x1FFFFFFF),
+    zeno: Color(0x8F000000),
     krillin100: Color(0xFFFF9800),
     krillin60: Color(0x8FFF9800),
     krillin10: Color(0x14FF9800),
@@ -87,30 +87,42 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     whis10: Color(0x143448F0),
   );
 
-  // Base colours
+  // Main colours:
+  // Accent colours
   final Color piccolo;
-  final Color jiren;
   final Color hit;
-  final Color heles;
+  // Border and line colour
   final Color beerus;
+  // Background colours
   final Color goku;
   final Color gohan;
-  final Color zeno;
+  // Text and icon colours
   final Color bulma;
   final Color trunks;
+  // Forced colours
   final Color goten;
   final Color popo;
+  // Ghost/disabled colour
+  final Color jiren;
+  // Generic hover effect colour
+  final Color heles;
+  // Modal overlay colour
+  final Color zeno;
 
-  // Supportive and Semantic colours
+  // Supportive and Semantic colours:
+  // Warning colour
   final Color krillin100;
   final Color krillin60;
   final Color krillin10;
+  // Error colour
   final Color chiChi100;
   final Color chiChi60;
   final Color chiChi10;
+  // Success colour
   final Color roshi100;
   final Color roshi60;
   final Color roshi10;
+  //Other supportive colours
   final Color frieza100;
   final Color frieza60;
   final Color frieza10;
@@ -132,17 +144,17 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
 
   const MoonColors({
     required this.piccolo,
-    required this.jiren,
     required this.hit,
-    required this.heles,
     required this.beerus,
     required this.goku,
     required this.gohan,
-    required this.zeno,
     required this.bulma,
     required this.trunks,
     required this.goten,
     required this.popo,
+    required this.jiren,
+    required this.heles,
+    required this.zeno,
     required this.krillin100,
     required this.krillin60,
     required this.krillin10,
