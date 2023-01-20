@@ -3,44 +3,44 @@ import "package:flutter/material.dart";
 import 'package:moon_design/src/theme/colors.dart';
 
 @immutable
-class MoonHover extends ThemeExtension<MoonHover> with DiagnosticableTreeMixin {
-  static final light = MoonHover(
+class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with DiagnosticableTreeMixin {
+  static final light = MoonHoverEffects(
     primaryHover: MoonColors.light.heles,
     secondaryHover: MoonColors.light.jiren,
   );
 
-  static final dark = MoonHover(
+  static final dark = MoonHoverEffects(
     primaryHover: MoonColors.dark.heles,
     secondaryHover: MoonColors.dark.jiren,
   );
 
-  /// Primary widget hover state color.
+  /// Primary hover state color.
   final Color primaryHover;
 
-  /// Secondary widget hover state color.
+  /// Secondary hover state color.
   final Color secondaryHover;
 
-  const MoonHover({
+  const MoonHoverEffects({
     required this.primaryHover,
     required this.secondaryHover,
   });
 
   @override
-  MoonHover copyWith({
+  MoonHoverEffects copyWith({
     Color? primaryHover,
     Color? secondaryHover,
   }) {
-    return MoonHover(
+    return MoonHoverEffects(
       primaryHover: primaryHover ?? this.primaryHover,
       secondaryHover: secondaryHover ?? this.secondaryHover,
     );
   }
 
   @override
-  MoonHover lerp(ThemeExtension<MoonHover>? other, double t) {
-    if (other is! MoonHover) return this;
+  MoonHoverEffects lerp(ThemeExtension<MoonHoverEffects>? other, double t) {
+    if (other is! MoonHoverEffects) return this;
 
-    return MoonHover(
+    return MoonHoverEffects(
       primaryHover: Color.lerp(primaryHover, other.primaryHover, t)!,
       secondaryHover: Color.lerp(secondaryHover, other.secondaryHover, t)!,
     );
@@ -50,7 +50,7 @@ class MoonHover extends ThemeExtension<MoonHover> with DiagnosticableTreeMixin {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonHover"))
+      ..add(DiagnosticsProperty("type", "MoonHoverEffects"))
       ..add(ColorProperty("primaryHover", primaryHover))
       ..add(ColorProperty("secondaryHover", secondaryHover));
   }
