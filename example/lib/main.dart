@@ -26,17 +26,19 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               "Moon Design for Flutter",
-              style: TextStyle(fontSize: 72),
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width > 800 ? 72 : 32,
+              ),
             ),
-            SizedBox(height: 36),
+            SizedBox(height: MediaQuery.of(context).size.width > 800 ? 36 : 16),
             Text(
               "Coming soon...",
               style: TextStyle(
-                fontSize: 24,
-                color: Color(0xFF999CA0),
+                fontSize: MediaQuery.of(context).size.width > 800 ? 24 : 20,
+                color: const Color(0xFF999CA0),
               ),
             ),
           ],
