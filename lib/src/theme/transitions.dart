@@ -13,7 +13,9 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     transitionDuration: Duration(milliseconds: 200),
   );
 
+  // Transition effect curve.
   final Curve transitionCurve;
+  // Transition effect duration.
   final Duration transitionDuration;
 
   const MoonTransitions({
