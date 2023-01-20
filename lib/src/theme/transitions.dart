@@ -1,36 +1,28 @@
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import 'package:moon_design/src/theme/transition_effects.dart';
 
 @immutable
 class MoonTransitions extends ThemeExtension<MoonTransitions> with DiagnosticableTreeMixin {
-  static const arrival = MoonTransitions(
-    transitionCurve: Curves.easeOut,
-    transitionDuration: Duration(milliseconds: 300),
-  );
+  /// Arrival effect.
+  final MoonTransitionEffects arrival;
 
-  static const departure = MoonTransitions(
-    transitionCurve: Curves.easeIn,
-    transitionDuration: Duration(milliseconds: 200),
-  );
-
-  // Transition effect curve.
-  final Curve transitionCurve;
-  // Transition effect duration.
-  final Duration transitionDuration;
+  /// Departure effect.
+  final MoonTransitionEffects departure;
 
   const MoonTransitions({
-    required this.transitionCurve,
-    required this.transitionDuration,
+    this.arrival = MoonTransitionEffects.arrival,
+    this.departure = MoonTransitionEffects.departure,
   });
 
   @override
   MoonTransitions copyWith({
-    Curve? transitionCurve,
-    Duration? transitionDuration,
+    MoonTransitionEffects? arrival,
+    MoonTransitionEffects? departure,
   }) {
     return MoonTransitions(
-      transitionCurve: transitionCurve ?? this.transitionCurve,
-      transitionDuration: transitionDuration ?? this.transitionDuration,
+      arrival: arrival ?? this.arrival,
+      departure: departure ?? this.departure,
     );
   }
 
@@ -39,8 +31,8 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     if (other is! MoonTransitions) return this;
 
     return MoonTransitions(
-      transitionCurve: transitionCurve,
-      transitionDuration: transitionDuration,
+      arrival: other.arrival,
+      departure: other.departure,
     );
   }
 
@@ -49,7 +41,7 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTransitions"))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration));
+      ..add(DiagnosticsProperty<MoonTransitionEffects>("arrival", arrival))
+      ..add(DiagnosticsProperty<MoonTransitionEffects>("departure", departure));
   }
 }
