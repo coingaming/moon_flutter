@@ -3,156 +3,156 @@ import "package:flutter/material.dart";
 
 @immutable
 class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableTreeMixin {
-  static const _defaultFont = "Averta";
-  static const _packageName = "moon_design";
+  static const _prefferredFont = "Averta";
+  static const _preferredFontPackage = "moon_design";
   static const _semiBold = FontWeight.w600;
 
   static const text = MoonTypography(
     text9: TextStyle(
       fontSize: 9,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text10: TextStyle(
       fontSize: 10,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text12: TextStyle(
       fontSize: 12,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text14: TextStyle(
       fontSize: 14,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text16: TextStyle(
       fontSize: 16,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text18: TextStyle(
       fontSize: 18,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text20: TextStyle(
       fontSize: 20,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text24: TextStyle(
       fontSize: 24,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text32: TextStyle(
       fontSize: 32,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text48: TextStyle(
       fontSize: 48,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text56: TextStyle(
       fontSize: 56,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text64: TextStyle(
       fontSize: 64,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text72: TextStyle(
       fontSize: 72,
-      fontFamily: _defaultFont,
-      package: _packageName,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
   );
 
   static const heading = MoonTypography(
     text9: TextStyle(
       fontSize: 9,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text10: TextStyle(
       fontSize: 10,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text12: TextStyle(
       fontSize: 12,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text14: TextStyle(
       fontSize: 14,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text16: TextStyle(
       fontSize: 16,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text18: TextStyle(
       fontSize: 18,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text20: TextStyle(
       fontSize: 20,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text24: TextStyle(
       fontSize: 24,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text32: TextStyle(
       fontSize: 32,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text48: TextStyle(
       fontSize: 48,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text56: TextStyle(
       fontSize: 56,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text64: TextStyle(
       fontSize: 64,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
     text72: TextStyle(
       fontSize: 72,
-      fontFamily: _defaultFont,
-      package: _packageName,
       fontWeight: _semiBold,
+      //fontFamily: _prefferredFont,
+      //package: _preferredFontPackage,
     ),
   );
 

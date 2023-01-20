@@ -18,10 +18,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  fonts:
-    - family: Averta
-      fonts:
-        - asset: packages/moon_design/assets/fonts/AvertaStd-Regular.otf
-        - asset: packages/moon_design/assets/fonts/AvertaStd-Semibold.otf
-          weight: 600
