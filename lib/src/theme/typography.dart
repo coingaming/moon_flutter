@@ -3,8 +3,8 @@ import "package:flutter/material.dart";
 
 @immutable
 class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableTreeMixin {
-  static const _prefferredFont = "Averta";
-  static const _preferredFontPackage = "moon_design";
+  //static const _prefferredFont = "Averta";
+  //static const _preferredFontPackage = "moon_design";
   static const _semiBold = FontWeight.w600;
 
   static const text = MoonTypography(
