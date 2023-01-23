@@ -20,6 +20,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   lint: ^2.0.1
+  storybook_flutter: ^0.11.4
 
 
 flutter:
