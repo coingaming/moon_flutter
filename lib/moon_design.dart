@@ -1,5 +1,6 @@
 library moon_design;
 
+export 'package:moon_design/src/control_wrapper.dart';
 export "package:moon_design/src/theme/borders.dart";
 export "package:moon_design/src/theme/colors.dart";
 export "package:moon_design/src/theme/hover_effects.dart";
