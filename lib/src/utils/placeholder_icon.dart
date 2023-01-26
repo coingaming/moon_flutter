@@ -15,7 +15,7 @@ class MoonPlaceholderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color strokeColor = iconColor ?? context.moonColors.bulma;
+    final Color strokeColor = iconColor ?? context.moonColors?.bulma ?? Colors.black;
 
     return CustomPaint(
       size: Size(width, height),

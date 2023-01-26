@@ -22,12 +22,8 @@ class StorybookPage extends StatelessWidget {
         theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
         darkTheme: ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.dark]),
         useInheritedMediaQuery: true,
-        home: Builder(
-          builder: (context) {
-            return Scaffold(
-              body: child,
-            );
-          },
+        home: Scaffold(
+          body: child,
         ),
       ),
       stories: [
@@ -35,13 +31,18 @@ class StorybookPage extends StatelessWidget {
           name: "FilledButton",
           description: "FilledButton",
           builder: (context) {
-            return const Center(
+            return /* ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                      "y"))  */
+                Center(
               child: MoonFilledButton(
                 child:
                     MoonPlaceholderIcon(), /* Text(
-                            "TEST",
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ), */
+                              "TEST",
+                              style: TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+              ) */
               ),
             );
           },
