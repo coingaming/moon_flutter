@@ -13,6 +13,11 @@ class MoonTransitionEffects extends ThemeExtension<MoonTransitionEffects> with D
     transitionDuration: Duration(milliseconds: 200),
   );
 
+  static const buttonEffect = MoonTransitionEffects(
+    transitionCurve: Curves.easeInOut,
+    transitionDuration: Duration(milliseconds: 150),
+  );
+
   // Transition effect curve.
   final Curve transitionCurve;
   // Transition effect duration.

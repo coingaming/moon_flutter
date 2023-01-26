@@ -10,19 +10,25 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
   /// Departure effect.
   final MoonTransitionEffects departure;
 
+  /// Button effect.
+  final MoonTransitionEffects buttonEffect;
+
   const MoonTransitions({
     this.arrival = MoonTransitionEffects.arrival,
     this.departure = MoonTransitionEffects.departure,
+    this.buttonEffect = MoonTransitionEffects.buttonEffect,
   });
 
   @override
   MoonTransitions copyWith({
     MoonTransitionEffects? arrival,
     MoonTransitionEffects? departure,
+    MoonTransitionEffects? buttonEffect,
   }) {
     return MoonTransitions(
       arrival: arrival ?? this.arrival,
       departure: departure ?? this.departure,
+      buttonEffect: buttonEffect ?? this.buttonEffect,
     );
   }
 
@@ -33,6 +39,7 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     return MoonTransitions(
       arrival: other.arrival,
       departure: other.departure,
+      buttonEffect: other.buttonEffect,
     );
   }
 
@@ -42,6 +49,7 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     properties
       ..add(DiagnosticsProperty("type", "MoonTransitions"))
       ..add(DiagnosticsProperty<MoonTransitionEffects>("arrival", arrival))
-      ..add(DiagnosticsProperty<MoonTransitionEffects>("departure", departure));
+      ..add(DiagnosticsProperty<MoonTransitionEffects>("departure", departure))
+      ..add(DiagnosticsProperty<MoonTransitionEffects>("buttonEffect", buttonEffect));
   }
 }

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:moon_design/moon_design.dart';
 
 class MoonPlaceholderIcon extends StatelessWidget {
   final double width;
   final double height;
-  final Color fillColor;
-  final Color strokeColor;
+  final Color? iconColor;
 
   const MoonPlaceholderIcon({
     super.key,
     this.width = 24,
     this.height = 24,
-    this.fillColor = Colors.black,
-    this.strokeColor = Colors.black,
+    this.iconColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final Color strokeColor = iconColor ?? context.moonColors.bulma;
+
     return CustomPaint(
       size: Size(width, height),
       painter: _MoonPlaceholderIconPainter(
-        fillColor: fillColor,
         strokeColor: strokeColor,
       ),
     );
@@ -27,10 +27,9 @@ class MoonPlaceholderIcon extends StatelessWidget {
 }
 
 class _MoonPlaceholderIconPainter extends CustomPainter {
-  final Color fillColor;
-  final Color strokeColor;
+  final Color? strokeColor;
 
-  const _MoonPlaceholderIconPainter({required this.fillColor, required this.strokeColor});
+  const _MoonPlaceholderIconPainter({this.strokeColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -182,13 +181,13 @@ class _MoonPlaceholderIconPainter extends CustomPainter {
 
     final Paint paint0stroke = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-    paint0stroke.color = strokeColor;
+      ..strokeWidth = 1;
+    paint0stroke.color = strokeColor ?? Colors.black;
     paint0stroke.strokeCap = StrokeCap.round;
     canvas.drawPath(path_0, paint0stroke);
 
     final Paint paint0fill = Paint()..style = PaintingStyle.fill;
-    paint0fill.color = fillColor;
+    paint0fill.color = Colors.transparent;
     canvas.drawPath(path_0, paint0fill);
   }
 

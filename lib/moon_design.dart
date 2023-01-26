@@ -12,3 +12,4 @@ export "package:moon_design/src/theme/theme.dart";
 export "package:moon_design/src/theme/transition_effects.dart";
 export "package:moon_design/src/theme/transitions.dart";
 export "package:moon_design/src/theme/typography.dart";
+export 'package:moon_design/src/utils/placeholder_icon.dart';
