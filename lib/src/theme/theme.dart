@@ -116,4 +116,9 @@ extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
   MoonBorders? get moonBorders => moonTheme?.borders;
   MoonColors? get moonColors => moonTheme?.colors;
+  MoonHoverEffects? get moonHoverEffects => moonTheme?.hoverEffects;
+  MoonShadows? get moonShadows => moonTheme?.shadows;
+  MoonSizes? get moonSizes => moonTheme?.sizes;
+  MoonTransitions? get moonTransitions => moonTheme?.transitions;
+  MoonTypography? get moonTypography => moonTheme?.typography;
 }

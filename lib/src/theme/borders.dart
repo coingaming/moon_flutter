@@ -29,8 +29,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
   /// Default border width.
   final double borderDefault;
 
-  /// Interactive border width.
-  final double borderInteractive;
+  /// Focus border width.
+  final double borderFocus;
 
   const MoonBorders({
     this.iXs = const Radius.circular(4),
@@ -41,7 +41,7 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     this.sMd = const Radius.circular(12),
     this.sLg = const Radius.circular(16),
     this.borderDefault = 1,
-    this.borderInteractive = 2,
+    this.borderFocus = 4,
   });
 
   @override
@@ -54,7 +54,7 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     Radius? sMd,
     Radius? sLg,
     double? borderDefault,
-    double? borderInteractive,
+    double? borderFocus,
   }) {
     return MoonBorders(
       iXs: iXs ?? this.iXs,
@@ -65,7 +65,7 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       sMd: sMd ?? this.sMd,
       sLg: sLg ?? this.sLg,
       borderDefault: borderDefault ?? this.borderDefault,
-      borderInteractive: borderInteractive ?? this.borderInteractive,
+      borderFocus: borderFocus ?? this.borderFocus,
     );
   }
 
@@ -82,7 +82,7 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       sMd: Radius.lerp(sMd, other.sMd, t)!,
       sLg: Radius.lerp(sLg, other.sLg, t)!,
       borderDefault: lerpDouble(borderDefault, other.borderDefault, t)!,
-      borderInteractive: lerpDouble(borderInteractive, other.borderInteractive, t)!,
+      borderFocus: lerpDouble(borderFocus, other.borderFocus, t)!,
     );
   }
 
@@ -99,6 +99,6 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       ..add(DiagnosticsProperty<Radius>("sMd", sMd))
       ..add(DiagnosticsProperty<Radius>("sLg", sLg))
       ..add(DoubleProperty("border", borderDefault))
-      ..add(DoubleProperty("borderInteractive", borderInteractive));
+      ..add(DoubleProperty("borderFocus", borderFocus));
   }
 }
