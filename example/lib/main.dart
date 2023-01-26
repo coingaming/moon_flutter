@@ -92,6 +92,12 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+                  const MoonFilledButton(
+                    child: Text(
+                      "TEST",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
                 ],
               ),
             ),

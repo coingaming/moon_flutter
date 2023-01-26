@@ -32,11 +32,7 @@ class MoonControlWrapper extends StatefulWidget {
 
   final Duration animationDuration;
 
-  final Duration reverseAnimationDuration;
-
   final Curve animationCurve;
-
-  final Curve reverseAnimationCurve;
 
   final MouseCursor cursor;
 
@@ -53,12 +49,10 @@ class MoonControlWrapper extends StatefulWidget {
     this.autofocus = false,
     this.showAnimation = true,
     this.ensureMinimalTouchTargetSize = false,
-    this.minTouchTargetSize = 48.0,
-    this.scaleAnimationLowerBound = 0.8,
-    this.animationCurve = Curves.easeOut,
-    this.reverseAnimationCurve = Curves.easeIn,
-    this.animationDuration = const Duration(milliseconds: 300),
-    this.reverseAnimationDuration = const Duration(milliseconds: 200),
+    this.minTouchTargetSize = 40.0,
+    this.scaleAnimationLowerBound = 0.9,
+    this.animationCurve = Curves.easeInOut,
+    this.animationDuration = const Duration(milliseconds: 150),
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
     required this.builder,
@@ -76,32 +70,29 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
 
   late AnimationController _controller;
   late Animation<double> _animation;
-  late Curve _reverseAnimationCurve;
   late Tween<double> _scaleTween;
   late Map<Type, Action<Intent>> _actions;
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
   bool get _canAnimate => widget.showAnimation && _isEnabled;
   FocusNode get _currentFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+  MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.forbidden;
 
   @override
   void initState() {
     super.initState();
 
-    _reverseAnimationCurve = widget.reverseAnimationCurve;
     _scaleTween = Tween(begin: 1.0, end: widget.scaleAnimationLowerBound);
 
     _controller = AnimationController(
       vsync: this,
       duration: widget.animationDuration,
-      reverseDuration: widget.reverseAnimationDuration,
-      debugLabel: 'MoonControlWrapper',
+      debugLabel: "MoonControlWrapper",
     );
 
     _animation = CurvedAnimation(
       parent: _controller,
       curve: widget.animationCurve,
-      reverseCurve: _reverseAnimationCurve,
     );
     _focusNode = FocusNode(canRequestFocus: _isEnabled);
     _currentFocusNode.canRequestFocus = _isEnabled;
@@ -259,7 +250,7 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
             enabled: _isEnabled && widget.isFocusable,
             focusNode: _currentFocusNode,
             autofocus: _isEnabled && widget.autofocus,
-            mouseCursor: widget.cursor,
+            mouseCursor: _cursor,
             onShowHoverHighlight: _handleHover,
             onShowFocusHighlight: _handleFocus,
             onFocusChange: _handleFocusChange,
