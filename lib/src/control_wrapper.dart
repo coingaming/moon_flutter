@@ -75,7 +75,7 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
   bool get _canAnimate => widget.showAnimation && _isEnabled;
-  FocusNode get _currentFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
   MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.forbidden;
 
   @override
@@ -95,11 +95,11 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
       curve: widget.animationCurve,
     );
     _focusNode = FocusNode(canRequestFocus: _isEnabled);
-    _currentFocusNode.canRequestFocus = _isEnabled;
+    _effectiveFocusNode.canRequestFocus = _isEnabled;
     _actions = <Type, Action<Intent>>{ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())};
 
     if (widget.autofocus) {
-      _currentFocusNode.requestFocus();
+      _effectiveFocusNode.requestFocus();
     }
   }
 
@@ -113,7 +113,7 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
       }
     }
 
-    _currentFocusNode.canRequestFocus = _isEnabled;
+    _effectiveFocusNode.canRequestFocus = _isEnabled;
 
     if (_isPressed && mounted) {
       if (widget.showAnimation) {
@@ -248,7 +248,7 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
           onVerticalDragEnd: _handleVerticalDragEnd,
           child: FocusableActionDetector(
             enabled: _isEnabled && widget.isFocusable,
-            focusNode: _currentFocusNode,
+            focusNode: _effectiveFocusNode,
             autofocus: _isEnabled && widget.autofocus,
             mouseCursor: _cursor,
             onShowHoverHighlight: _handleHover,
