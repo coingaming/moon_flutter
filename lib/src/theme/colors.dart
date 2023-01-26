@@ -89,10 +89,10 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
 
   // Main colors:
 
-  /// Accent color.
+  /// Primary color.
   final Color piccolo;
 
-  /// Accent color.
+  /// Secondary (accent) color.
   final Color hit;
 
   /// Border and line color.
@@ -101,28 +101,28 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   /// Background color.
   final Color goku;
 
-  /// Background color.
+  /// Surface color.
   final Color gohan;
 
-  /// Text and icon color.
+  /// Primary body text and icon color.
   final Color bulma;
 
-  /// Text and icon color.
+  /// Secondary body text and icon color.
   final Color trunks;
 
-  /// Forced color.
+  /// Primary button text and icon color.
   final Color goten;
 
-  /// Forced color.
+  /// Secondary button text and icon color.
   final Color popo;
 
-  /// Ghost/disabled color.
+  /// Secondary hover effect color.
   final Color jiren;
 
-  /// Generic hover effect color.
+  /// Primary hover effect color.
   final Color heles;
 
-  /// Modal overlay color.
+  /// Modal overlay (scrim) color.
   final Color zeno;
 
   // Supportive and Semantic colors:

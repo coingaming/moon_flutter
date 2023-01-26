@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/hover_effects.dart';
+import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/transitions.dart';
@@ -14,6 +15,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     borders: const MoonBorders(),
     colors: MoonColors.light,
     hoverEffects: MoonHoverEffects.light,
+    opacity: const MoonOpacity(),
     shadows: MoonShadows.light,
     sizes: const MoonSizes(),
     transitions: const MoonTransitions(),
@@ -24,6 +26,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     borders: const MoonBorders(),
     colors: MoonColors.dark,
     hoverEffects: MoonHoverEffects.dark,
+    opacity: const MoonOpacity(),
     shadows: MoonShadows.dark,
     sizes: const MoonSizes(),
     transitions: const MoonTransitions(),
@@ -38,6 +41,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   /// MDS hover effects.
   final MoonHoverEffects hoverEffects;
+
+  /// MDS opacities.
+  final MoonOpacity opacity;
 
   /// MDS shadows.
   final MoonShadows shadows;
@@ -55,6 +61,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.borders,
     required this.colors,
     required this.hoverEffects,
+    required this.opacity,
     required this.shadows,
     required this.sizes,
     required this.transitions,
@@ -66,6 +73,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonBorders? borders,
     MoonColors? colors,
     MoonHoverEffects? hoverEffects,
+    MoonOpacity? opacity,
     MoonShadows? shadows,
     MoonSizes? sizes,
     MoonTransitions? transitions,
@@ -75,6 +83,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       borders: borders ?? this.borders,
       colors: colors ?? this.colors,
       hoverEffects: hoverEffects ?? this.hoverEffects,
+      opacity: opacity ?? this.opacity,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
       transitions: transitions ?? this.transitions,
@@ -90,6 +99,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       borders: borders.lerp(other.borders, t),
       colors: colors.lerp(other.colors, t),
       hoverEffects: hoverEffects.lerp(other.hoverEffects, t),
+      opacity: opacity.lerp(other.opacity, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
       transitions: transitions.lerp(other.transitions, t),
@@ -105,6 +115,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonBorders>("moonBorders", borders))
       ..add(DiagnosticsProperty<MoonColors>("moonColors", colors))
       ..add(DiagnosticsProperty<MoonHoverEffects>("moonHoverEffects", hoverEffects))
+      ..add(DiagnosticsProperty<MoonOpacity>("moonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonShadows>("moonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("moonSizes", sizes))
       ..add(DiagnosticsProperty<MoonTransitions>("moonTransitions", transitions))
@@ -117,6 +128,7 @@ extension MoonThemeX on BuildContext {
   MoonBorders? get moonBorders => moonTheme?.borders;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonHoverEffects? get moonHoverEffects => moonTheme?.hoverEffects;
+  MoonOpacity? get moonOpacity => moonTheme?.opacity;
   MoonShadows? get moonShadows => moonTheme?.shadows;
   MoonSizes? get moonSizes => moonTheme?.sizes;
   MoonTransitions? get moonTransitions => moonTheme?.transitions;
