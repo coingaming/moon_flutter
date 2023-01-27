@@ -6,7 +6,6 @@ export "package:moon_design/src/theme/borders.dart";
 export "package:moon_design/src/theme/colors.dart";
 export "package:moon_design/src/theme/hover_effects.dart";
 export 'package:moon_design/src/theme/opacity.dart';
-export 'package:moon_design/src/theme/opacity_effects.dart';
 export "package:moon_design/src/theme/shadows.dart";
 export "package:moon_design/src/theme/sizes.dart";
 export "package:moon_design/src/theme/text_styles.dart";

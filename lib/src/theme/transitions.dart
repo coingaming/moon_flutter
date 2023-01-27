@@ -1,5 +1,6 @@
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+
 import 'package:moon_design/src/theme/transition_effects.dart';
 
 @immutable
@@ -10,25 +11,37 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
   /// Departure effect.
   final MoonTransitionEffects departure;
 
-  /// Button effect.
-  final MoonTransitionEffects buttonEffect;
+  /// Controls scale effect.
+  final MoonTransitionEffects controlScaleEffect;
+
+  /// Controls focus effect.
+  final MoonTransitionEffects controlFocusEffect;
+
+  /// Button hover effect.
+  final MoonTransitionEffects buttonHoverEffect;
 
   const MoonTransitions({
     this.arrival = MoonTransitionEffects.arrival,
     this.departure = MoonTransitionEffects.departure,
-    this.buttonEffect = MoonTransitionEffects.buttonEffect,
+    this.controlScaleEffect = MoonTransitionEffects.controlScaleEffect,
+    this.controlFocusEffect = MoonTransitionEffects.controlFocusEffect,
+    this.buttonHoverEffect = MoonTransitionEffects.buttonHoverEffect,
   });
 
   @override
   MoonTransitions copyWith({
     MoonTransitionEffects? arrival,
     MoonTransitionEffects? departure,
-    MoonTransitionEffects? buttonEffect,
+    MoonTransitionEffects? controlScaleEffect,
+    MoonTransitionEffects? controlFocusEffect,
+    MoonTransitionEffects? buttonHoverEffect,
   }) {
     return MoonTransitions(
       arrival: arrival ?? this.arrival,
       departure: departure ?? this.departure,
-      buttonEffect: buttonEffect ?? this.buttonEffect,
+      controlScaleEffect: controlScaleEffect ?? this.controlScaleEffect,
+      controlFocusEffect: controlFocusEffect ?? this.controlFocusEffect,
+      buttonHoverEffect: buttonHoverEffect ?? this.buttonHoverEffect,
     );
   }
 
@@ -39,7 +52,9 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     return MoonTransitions(
       arrival: other.arrival,
       departure: other.departure,
-      buttonEffect: other.buttonEffect,
+      controlScaleEffect: other.controlScaleEffect,
+      controlFocusEffect: other.controlFocusEffect,
+      buttonHoverEffect: other.buttonHoverEffect,
     );
   }
 
@@ -50,6 +65,8 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
       ..add(DiagnosticsProperty("type", "MoonTransitions"))
       ..add(DiagnosticsProperty<MoonTransitionEffects>("arrival", arrival))
       ..add(DiagnosticsProperty<MoonTransitionEffects>("departure", departure))
-      ..add(DiagnosticsProperty<MoonTransitionEffects>("buttonEffect", buttonEffect));
+      ..add(DiagnosticsProperty<MoonTransitionEffects>("controlScaleEffect", controlScaleEffect))
+      ..add(DiagnosticsProperty<MoonTransitionEffects>("controlFocusEffect", controlFocusEffect))
+      ..add(DiagnosticsProperty<MoonTransitionEffects>("buttonHoverEffect", buttonHoverEffect));
   }
 }

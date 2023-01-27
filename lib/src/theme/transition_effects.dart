@@ -13,29 +13,49 @@ class MoonTransitionEffects extends ThemeExtension<MoonTransitionEffects> with D
     transitionDuration: Duration(milliseconds: 200),
   );
 
-  static const buttonEffect = MoonTransitionEffects(
+  static const controlScaleEffect = MoonTransitionEffects(
     transitionCurve: Curves.easeInOut,
     transitionDuration: Duration(milliseconds: 150),
+    transitionLowerBound: 0.9,
   );
 
-  // Transition effect curve.
+  static const controlFocusEffect = MoonTransitionEffects(
+    transitionCurve: Curves.easeInOut,
+    transitionDuration: Duration(milliseconds: 150),
+    transitionLowerBound: 0.9,
+  );
+
+  static const buttonHoverEffect = MoonTransitionEffects(
+    transitionCurve: Curves.easeInOut,
+    transitionDuration: Duration(milliseconds: 150),
+    transitionLowerBound: 0.9,
+  );
+
+  /// Transition effect curve.
   final Curve transitionCurve;
-  // Transition effect duration.
+
+  /// Transition effect duration.
   final Duration transitionDuration;
+
+  /// Transition effect AnimationController lower bound value.
+  final double transitionLowerBound;
 
   const MoonTransitionEffects({
     required this.transitionCurve,
     required this.transitionDuration,
+    this.transitionLowerBound = 0,
   });
 
   @override
   MoonTransitionEffects copyWith({
     Curve? transitionCurve,
     Duration? transitionDuration,
+    double? transitionLowerBound,
   }) {
     return MoonTransitionEffects(
       transitionCurve: transitionCurve ?? this.transitionCurve,
       transitionDuration: transitionDuration ?? this.transitionDuration,
+      transitionLowerBound: transitionLowerBound ?? this.transitionLowerBound,
     );
   }
 
@@ -46,6 +66,7 @@ class MoonTransitionEffects extends ThemeExtension<MoonTransitionEffects> with D
     return MoonTransitionEffects(
       transitionCurve: other.transitionCurve,
       transitionDuration: other.transitionDuration,
+      transitionLowerBound: other.transitionLowerBound,
     );
   }
 
@@ -55,6 +76,7 @@ class MoonTransitionEffects extends ThemeExtension<MoonTransitionEffects> with D
     properties
       ..add(DiagnosticsProperty("type", "MoonTransitionEffects"))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration));
+      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
+      ..add(DoubleProperty("transitionLowerBound", transitionLowerBound));
   }
 }

@@ -1,19 +1,20 @@
+import 'dart:ui';
+
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
-import 'package:moon_design/moon_design.dart';
 
 @immutable
 class MoonOpacity extends ThemeExtension<MoonOpacity> with DiagnosticableTreeMixin {
-  /// Disabled opacity effect.
-  final MoonOpacityEffects disabled;
+  /// Dsiabled opacity value.
+  final double disabled;
 
   const MoonOpacity({
-    this.disabled = MoonOpacityEffects.disabled,
+    this.disabled = 0.68,
   });
 
   @override
   MoonOpacity copyWith({
-    MoonOpacityEffects? disabled,
+    double? disabled,
   }) {
     return MoonOpacity(
       disabled: disabled ?? this.disabled,
@@ -25,7 +26,7 @@ class MoonOpacity extends ThemeExtension<MoonOpacity> with DiagnosticableTreeMix
     if (other is! MoonOpacity) return this;
 
     return MoonOpacity(
-      disabled: other.disabled,
+      disabled: lerpDouble(disabled, other.disabled, t)!,
     );
   }
 
@@ -34,6 +35,6 @@ class MoonOpacity extends ThemeExtension<MoonOpacity> with DiagnosticableTreeMix
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonOpacity"))
-      ..add(DiagnosticsProperty<MoonOpacityEffects>("disabled", disabled));
+      ..add(DoubleProperty("disabled", disabled));
   }
 }
