@@ -16,7 +16,7 @@ class StorybookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: "Default",
+      initialStory: "FilledButton",
       plugins: _plugins,
       wrapperBuilder: (context, child) => MaterialApp(
         theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
@@ -31,18 +31,24 @@ class StorybookPage extends StatelessWidget {
           name: "FilledButton",
           description: "FilledButton",
           builder: (context) {
-            return /* ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                      "y"))  */
-                Center(
+            return Center(
               child: MoonFilledButton(
-                child:
-                    MoonPlaceholderIcon(), /* Text(
-                              "TEST",
-                              style: TextStyle(color: Colors.white, fontSize: 16),
-                            ),
-              ) */
+                buttonSize: context.knobs.options(
+                  label: "Sizes",
+                  initial: MoonButtonSize.md,
+                  options: const [
+                    Option(label: "XS", value: MoonButtonSize.xs),
+                    Option(label: "SM", value: MoonButtonSize.sm),
+                    Option(label: "MD", value: MoonButtonSize.md),
+                    Option(label: "LG", value: MoonButtonSize.lg),
+                    Option(label: "XL", value: MoonButtonSize.xl)
+                  ],
+                ),
+                onTap: () {},
+                backgroundColor: context.moonTheme!.colors.bulma,
+                leftIcon: const MoonPlaceholderIcon(),
+                rightIcon: const MoonPlaceholderIcon(),
+                label: const Text("Testy", style: TextStyle(fontSize: 16)),
               ),
             );
           },

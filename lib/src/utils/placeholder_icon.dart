@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:moon_design/moon_design.dart';
 
 class MoonPlaceholderIcon extends StatelessWidget {
   final double width;
   final double height;
   final Color? iconColor;
+  final Color? containerBackgroundColor;
 
   const MoonPlaceholderIcon({
     super.key,
     this.width = 24,
     this.height = 24,
     this.iconColor,
+    this.containerBackgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    final Color strokeColor = iconColor ?? context.moonColors?.bulma ?? Colors.black;
+    final effectiveStrokeColor = iconColor ?? DefaultTextStyle.of(context).style.color ?? Colors.black;
 
     return CustomPaint(
       size: Size(width, height),
       painter: _MoonPlaceholderIconPainter(
-        strokeColor: strokeColor,
+        strokeColor: effectiveStrokeColor,
       ),
     );
   }

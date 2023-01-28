@@ -54,6 +54,8 @@ class MoonControlWrapper extends StatefulWidget {
 
   final MouseCursor cursor;
 
+  final BorderRadiusGeometry borderRadius;
+
   final MoonControlWrapperBuilder builder;
 
   const MoonControlWrapper({
@@ -78,6 +80,7 @@ class MoonControlWrapper extends StatefulWidget {
     this.focusAnimationCurve,
     this.focusAnimationDuration,
     this.cursor = MouseCursor.defer,
+    required this.borderRadius,
     required this.builder,
   });
 
@@ -107,7 +110,7 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
     _controller = AnimationController(
       vsync: this,
       duration: widget.scaleAnimationDuration ??
-          context.moonTransitions?.controlScaleEffect.transitionDuration ??
+          /* context.moonTransitions?.controlScaleEffect.transitionDuration ?? */
           const Duration(milliseconds: 150),
       debugLabel: "MoonControlWrapper",
     );
@@ -311,6 +314,7 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
                     duration: focusAnimationDuration,
                     curve: focusAnimationCurve,
                     decoration: BoxDecoration(
+                      borderRadius: widget.borderRadius,
                       boxShadow: [
                         BoxShadow(
                           color: _canAnimateFocus ? focusBorderColor : Colors.transparent,
