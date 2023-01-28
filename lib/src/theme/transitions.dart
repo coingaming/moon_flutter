@@ -50,11 +50,11 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     if (other is! MoonTransitions) return this;
 
     return MoonTransitions(
-      arrival: other.arrival,
-      departure: other.departure,
-      controlScaleEffect: other.controlScaleEffect,
-      controlFocusEffect: other.controlFocusEffect,
-      buttonHoverEffect: other.buttonHoverEffect,
+      arrival: arrival.lerp(other.arrival, t),
+      departure: departure.lerp(other.departure, t),
+      controlScaleEffect: controlScaleEffect.lerp(other.controlScaleEffect, t),
+      controlFocusEffect: controlFocusEffect.lerp(other.controlFocusEffect, t),
+      buttonHoverEffect: buttonHoverEffect.lerp(other.buttonHoverEffect, t),
     );
   }
 

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 
@@ -65,8 +67,8 @@ class MoonTransitionEffects extends ThemeExtension<MoonTransitionEffects> with D
 
     return MoonTransitionEffects(
       transitionCurve: other.transitionCurve,
-      transitionDuration: other.transitionDuration,
-      transitionLowerBound: other.transitionLowerBound,
+      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionLowerBound: lerpDouble(transitionLowerBound, other.transitionLowerBound, t)!,
     );
   }
 

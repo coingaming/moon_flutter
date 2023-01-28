@@ -32,8 +32,8 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
     if (other is! MoonTypography) return this;
 
     return MoonTypography(
-      text: other.text,
-      heading: other.heading,
+      text: text.lerp(other.text, t),
+      heading: heading.lerp(other.heading, t),
     );
   }
 
