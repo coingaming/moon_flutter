@@ -47,7 +47,7 @@ class StorybookPage extends StatelessWidget {
                 onTap: () {},
                 backgroundColor: context.moonTheme!.colors.bulma,
                 leftIcon: const MoonPlaceholderIcon(),
-                rightIcon: const MoonPlaceholderIcon(),
+                //rightIcon: const MoonPlaceholderIcon(),
                 label: const Text("Testy", style: TextStyle(fontSize: 16)),
               ),
             );

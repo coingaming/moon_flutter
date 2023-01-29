@@ -17,7 +17,7 @@ class MoonFilledButton extends StatelessWidget {
   final Duration? scaleAnimationDuration;
   final Curve? hoverAnimationCurve;
   final Curve? scaleAnimationCurve;
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsets? padding;
   final BorderRadiusGeometry? borderRadius;
   final Widget? label;
   final Widget? leftIcon;
@@ -59,6 +59,13 @@ class MoonFilledButton extends StatelessWidget {
     final effectiveHeight = height ?? buttonSize?.height;
     final effectivePadding = padding ?? buttonSize?.padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 
+    final correctedPadding = EdgeInsetsDirectional.fromSTEB(
+      leftIcon == null && label != null ? effectivePadding.left : 0,
+      effectivePadding.top,
+      rightIcon == null && label != null ? effectivePadding.right : 0,
+      effectivePadding.bottom,
+    );
+
     final effectiveBorderRadius =
         borderRadius ?? buttonSize?.borderRadius ?? const BorderRadius.all(Radius.circular(8));
 
@@ -76,7 +83,7 @@ class MoonFilledButton extends StatelessWidget {
       borderRadius: effectiveBorderRadius,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         return AnimatedContainer(
-          padding: effectivePadding,
+          padding: correctedPadding,
           width: width,
           height: effectiveHeight,
           duration: effectiveHoverAnimationDuration,
@@ -91,15 +98,21 @@ class MoonFilledButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (leftIcon != null) ...[
-                  Flexible(child: leftIcon!),
-                  SizedBox(width: effectiveGap),
-                ],
+                if (leftIcon != null)
+                  Flexible(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                      child: leftIcon,
+                    ),
+                  ),
                 if (label != null) Flexible(child: label!),
-                if (rightIcon != null) ...[
-                  SizedBox(width: effectiveGap),
-                  Flexible(child: rightIcon!),
-                ],
+                if (rightIcon != null)
+                  Flexible(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                      child: rightIcon,
+                    ),
+                  ),
               ],
             ),
           ),
