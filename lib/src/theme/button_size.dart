@@ -1,43 +1,50 @@
 import 'dart:ui';
 
-import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+import 'package:moon_design/src/theme/text_styles.dart';
 
 @immutable
 class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableTreeMixin {
-  static const xs = MoonButtonSize(
+  static final xs = MoonButtonSize(
     height: 24,
     gap: 4,
-    padding: EdgeInsets.symmetric(horizontal: 8),
-    borderRadius: BorderRadius.all(Radius.circular(4)),
+    padding: const EdgeInsets.symmetric(horizontal: 8),
+    borderRadius: const BorderRadius.all(Radius.circular(4)),
+    textStyle: MoonTextStyles.heading.text12,
   );
 
-  static const sm = MoonButtonSize(
+  static final sm = MoonButtonSize(
     height: 32,
     gap: 4,
-    padding: EdgeInsets.symmetric(horizontal: 12),
-    borderRadius: BorderRadius.all(Radius.circular(8)),
+    padding: const EdgeInsets.symmetric(horizontal: 12),
+    borderRadius: const BorderRadius.all(Radius.circular(8)),
+    textStyle: MoonTextStyles.heading.text14,
   );
 
-  static const md = MoonButtonSize(
+  static final md = MoonButtonSize(
     height: 40,
     gap: 8,
-    padding: EdgeInsets.symmetric(horizontal: 16),
-    borderRadius: BorderRadius.all(Radius.circular(8)),
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    borderRadius: const BorderRadius.all(Radius.circular(8)),
+    textStyle: MoonTextStyles.heading.text14,
   );
 
-  static const lg = MoonButtonSize(
+  static final lg = MoonButtonSize(
     height: 48,
     gap: 12,
-    padding: EdgeInsets.symmetric(horizontal: 16),
-    borderRadius: BorderRadius.all(Radius.circular(8)),
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    borderRadius: const BorderRadius.all(Radius.circular(8)),
+    textStyle: MoonTextStyles.heading.text16,
   );
 
-  static const xl = MoonButtonSize(
+  static final xl = MoonButtonSize(
     height: 56,
     gap: 16,
-    padding: EdgeInsets.symmetric(horizontal: 24),
-    borderRadius: BorderRadius.all(Radius.circular(12)),
+    padding: const EdgeInsets.symmetric(horizontal: 24),
+    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    textStyle: MoonTextStyles.heading.text16,
   );
 
   /// Button height.
@@ -52,11 +59,15 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
   /// Button border radius.
   final BorderRadiusGeometry borderRadius;
 
+  /// Button text style.
+  final TextStyle textStyle;
+
   const MoonButtonSize({
     required this.height,
     required this.gap,
     required this.padding,
     required this.borderRadius,
+    required this.textStyle,
   });
 
   @override
@@ -65,12 +76,14 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
     double? gap,
     EdgeInsets? padding,
     BorderRadiusGeometry? borderRadius,
+    TextStyle? textStyle,
   }) {
     return MoonButtonSize(
       height: height ?? this.height,
       gap: gap ?? this.gap,
       padding: padding ?? this.padding,
       borderRadius: borderRadius ?? this.borderRadius,
+      textStyle: textStyle ?? this.textStyle,
     );
   }
 
@@ -83,6 +96,7 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
       gap: lerpDouble(gap, other.gap, t)!,
       padding: EdgeInsets.lerp(padding, other.padding, t)!,
       borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
 
@@ -94,6 +108,11 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("gap", gap))
       ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius));
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
+}
+
+extension MoonButtonSizeX on BuildContext {
+  MoonButtonSize? get moonButtonSize => Theme.of(this).extension<MoonButtonSize>();
 }
