@@ -5,6 +5,11 @@ import 'package:moon_design/src/theme/text_styles.dart';
 
 @immutable
 class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableTreeMixin {
+  static const textStyles = MoonTypography(
+    text: MoonTextStyles.text,
+    heading: MoonTextStyles.heading,
+  );
+
   /// Styles for text.
   final MoonTextStyles text;
 
@@ -12,8 +17,8 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
   final MoonTextStyles heading;
 
   const MoonTypography({
-    this.text = MoonTextStyles.text,
-    this.heading = MoonTextStyles.heading,
+    required this.text,
+    required this.heading,
   });
 
   @override

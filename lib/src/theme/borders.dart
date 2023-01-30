@@ -5,26 +5,38 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMixin {
+  static const borders = MoonBorders(
+    interactiveXs: BorderRadius.all(Radius.circular(4)),
+    interactiveSm: BorderRadius.all(Radius.circular(8)),
+    interactiveMd: BorderRadius.all(Radius.circular(12)),
+    surfaceXs: BorderRadius.all(Radius.circular(4)),
+    surfaceSm: BorderRadius.all(Radius.circular(8)),
+    surfaceMd: BorderRadius.all(Radius.circular(12)),
+    surfaceLg: BorderRadius.all(Radius.circular(16)),
+    borderDefault: 1,
+    borderFocus: 4,
+  );
+
   /// Interactive radius XS.
-  final BorderRadiusGeometry iXs;
+  final BorderRadiusGeometry interactiveXs;
 
   /// Interactive radius SM.
-  final BorderRadiusGeometry iSm;
+  final BorderRadiusGeometry interactiveSm;
 
   /// Interactive radius MD.
-  final BorderRadiusGeometry iMd;
+  final BorderRadiusGeometry interactiveMd;
 
   /// Surface radius XS.
-  final BorderRadiusGeometry sXs;
+  final BorderRadiusGeometry surfaceXs;
 
   /// Surface radius SM.
-  final BorderRadiusGeometry sSm;
+  final BorderRadiusGeometry surfaceSm;
 
   /// Surface radius MD.
-  final BorderRadiusGeometry sMd;
+  final BorderRadiusGeometry surfaceMd;
 
   /// Surface radius LG.
-  final BorderRadiusGeometry sLg;
+  final BorderRadiusGeometry surfaceLg;
 
   /// Default border width.
   final double borderDefault;
@@ -33,37 +45,37 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
   final double borderFocus;
 
   const MoonBorders({
-    this.iXs = const BorderRadius.all(Radius.circular(4)),
-    this.iSm = const BorderRadius.all(Radius.circular(8)),
-    this.iMd = const BorderRadius.all(Radius.circular(12)),
-    this.sXs = const BorderRadius.all(Radius.circular(4)),
-    this.sSm = const BorderRadius.all(Radius.circular(8)),
-    this.sMd = const BorderRadius.all(Radius.circular(12)),
-    this.sLg = const BorderRadius.all(Radius.circular(16)),
-    this.borderDefault = 1,
-    this.borderFocus = 4,
+    required this.interactiveXs,
+    required this.interactiveSm,
+    required this.interactiveMd,
+    required this.surfaceXs,
+    required this.surfaceSm,
+    required this.surfaceMd,
+    required this.surfaceLg,
+    required this.borderDefault,
+    required this.borderFocus,
   });
 
   @override
   MoonBorders copyWith({
-    BorderRadiusGeometry? iXs,
-    BorderRadiusGeometry? iSm,
-    BorderRadiusGeometry? iMd,
-    BorderRadiusGeometry? sXs,
-    BorderRadiusGeometry? sSm,
-    BorderRadiusGeometry? sMd,
-    BorderRadiusGeometry? sLg,
+    BorderRadiusGeometry? interactiveXs,
+    BorderRadiusGeometry? interactiveSm,
+    BorderRadiusGeometry? interactiveMd,
+    BorderRadiusGeometry? surfaceXs,
+    BorderRadiusGeometry? surfaceSm,
+    BorderRadiusGeometry? surfaceMd,
+    BorderRadiusGeometry? surfaceLg,
     double? borderDefault,
     double? borderFocus,
   }) {
     return MoonBorders(
-      iXs: iXs ?? this.iXs,
-      iSm: iSm ?? this.iSm,
-      iMd: iMd ?? this.iMd,
-      sXs: sXs ?? this.sXs,
-      sSm: sSm ?? this.sSm,
-      sMd: sMd ?? this.sMd,
-      sLg: sLg ?? this.sLg,
+      interactiveXs: interactiveXs ?? this.interactiveXs,
+      interactiveSm: interactiveSm ?? this.interactiveSm,
+      interactiveMd: interactiveMd ?? this.interactiveMd,
+      surfaceXs: surfaceXs ?? this.surfaceXs,
+      surfaceSm: surfaceSm ?? this.surfaceSm,
+      surfaceMd: surfaceMd ?? this.surfaceMd,
+      surfaceLg: surfaceLg ?? this.surfaceLg,
       borderDefault: borderDefault ?? this.borderDefault,
       borderFocus: borderFocus ?? this.borderFocus,
     );
@@ -74,13 +86,13 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     if (other is! MoonBorders) return this;
 
     return MoonBorders(
-      iXs: BorderRadiusGeometry.lerp(iXs, other.iXs, t)!,
-      iSm: BorderRadiusGeometry.lerp(iSm, other.iSm, t)!,
-      iMd: BorderRadiusGeometry.lerp(iMd, other.iMd, t)!,
-      sXs: BorderRadiusGeometry.lerp(sXs, other.sXs, t)!,
-      sSm: BorderRadiusGeometry.lerp(sSm, other.sSm, t)!,
-      sMd: BorderRadiusGeometry.lerp(sMd, other.sMd, t)!,
-      sLg: BorderRadiusGeometry.lerp(sLg, other.sLg, t)!,
+      interactiveXs: BorderRadiusGeometry.lerp(interactiveXs, other.interactiveXs, t)!,
+      interactiveSm: BorderRadiusGeometry.lerp(interactiveSm, other.interactiveSm, t)!,
+      interactiveMd: BorderRadiusGeometry.lerp(interactiveMd, other.interactiveMd, t)!,
+      surfaceXs: BorderRadiusGeometry.lerp(surfaceXs, other.surfaceXs, t)!,
+      surfaceSm: BorderRadiusGeometry.lerp(surfaceSm, other.surfaceSm, t)!,
+      surfaceMd: BorderRadiusGeometry.lerp(surfaceMd, other.surfaceMd, t)!,
+      surfaceLg: BorderRadiusGeometry.lerp(surfaceLg, other.surfaceLg, t)!,
       borderDefault: lerpDouble(borderDefault, other.borderDefault, t)!,
       borderFocus: lerpDouble(borderFocus, other.borderFocus, t)!,
     );
@@ -91,13 +103,13 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonBorders"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("iXs", iXs))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("iSm", iSm))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("iMd", iMd))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("sXs", sXs))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("sSm", sSm))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("sMd", sMd))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("sLg", sLg))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("interactiveXs", interactiveXs))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("interactiveSm", interactiveSm))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("interactiveMd", interactiveMd))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("surfaceXs", surfaceXs))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("surfaceSm", surfaceSm))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("surfaceMd", surfaceMd))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("surfaceLg", surfaceLg))
       ..add(DoubleProperty("border", borderDefault))
       ..add(DoubleProperty("borderFocus", borderFocus));
   }

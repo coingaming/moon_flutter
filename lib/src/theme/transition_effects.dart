@@ -24,13 +24,11 @@ class MoonTransitionEffects extends ThemeExtension<MoonTransitionEffects> with D
   static const controlFocusEffect = MoonTransitionEffects(
     transitionCurve: Curves.easeInOut,
     transitionDuration: Duration(milliseconds: 150),
-    transitionLowerBound: 0.9,
   );
 
   static const buttonHoverEffect = MoonTransitionEffects(
     transitionCurve: Curves.easeInOut,
     transitionDuration: Duration(milliseconds: 150),
-    transitionLowerBound: 0.9,
   );
 
   /// Transition effect curve.

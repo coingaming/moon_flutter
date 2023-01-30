@@ -3,7 +3,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:moon_design/src/theme/borders.dart';
+import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/transition_effects.dart';
 
 typedef MoonControlWrapperBuilder = Widget Function(
   BuildContext context,
@@ -110,8 +114,8 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
     _controller = AnimationController(
       vsync: this,
       duration: widget.scaleAnimationDuration ??
-          /* context.moonTransitions?.controlScaleEffect.transitionDuration ?? */
-          const Duration(milliseconds: 150),
+          context.moonTransitions?.controlScaleEffect.transitionDuration ??
+          MoonTransitionEffects.controlScaleEffect.transitionDuration,
       debugLabel: "MoonControlWrapper",
     );
 
@@ -242,31 +246,35 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
 
   @override
   Widget build(BuildContext context) {
-    final focusBorderColor = widget.focusBorderColor ?? context.moonTheme?.colors.jiren ?? Colors.purple;
-    final focusBorderWidth = widget.focusBorderWidth ?? context.moonTheme?.borders.borderFocus ?? 2.0;
-    final disabledOpacityValue = widget.disabledOpacityValue ?? context.moonTheme?.opacity.disabled ?? 0.5;
+    final focusBorderColor = widget.focusBorderColor ?? context.moonTheme?.colors.jiren ?? MoonColors.light.piccolo;
+
+    final disabledOpacityValue =
+        widget.disabledOpacityValue ?? context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+
+    final focusBorderWidth =
+        widget.focusBorderWidth ?? context.moonTheme?.borders.borderFocus ?? MoonBorders.borders.borderFocus;
 
     final scaleAnimation = CurvedAnimation(
       parent: _controller,
       curve: widget.scaleAnimationCurve ??
           context.moonTheme?.transitions.controlScaleEffect.transitionCurve ??
-          Curves.easeInOut,
+          MoonTransitionEffects.controlScaleEffect.transitionCurve,
     );
 
     final scaleTween = Tween(
       begin: 1.0,
       end: widget.scaleAnimationLowerBound ??
           context.moonTheme?.transitions.controlScaleEffect.transitionLowerBound ??
-          0.9,
+          MoonTransitionEffects.controlScaleEffect.transitionLowerBound,
     );
 
     final focusAnimationDuration = widget.focusAnimationDuration ??
         context.moonTheme?.transitions.controlFocusEffect.transitionDuration ??
-        const Duration(milliseconds: 150);
+        MoonTransitionEffects.controlFocusEffect.transitionDuration;
 
     final focusAnimationCurve = widget.focusAnimationCurve ??
         context.moonTheme?.transitions.controlFocusEffect.transitionCurve ??
-        Curves.easeInOut;
+        MoonTransitionEffects.controlFocusEffect.transitionCurve;
 
     final Widget child = widget.builder(
       context,

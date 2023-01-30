@@ -5,6 +5,19 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
+  static const sizes = MoonSizes(
+    x5s: 4,
+    x4s: 8,
+    x3s: 12,
+    x2s: 16,
+    xs: 24,
+    sm: 32,
+    md: 40,
+    lg: 48,
+    xl: 56,
+    x2l: 64,
+  );
+
   /// (5x) Extra small size, default value 4.
   final double x5s;
 
@@ -36,16 +49,16 @@ class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
   final double x2l;
 
   const MoonSizes({
-    this.x5s = 4,
-    this.x4s = 8,
-    this.x3s = 12,
-    this.x2s = 16,
-    this.xs = 24,
-    this.sm = 32,
-    this.md = 40,
-    this.lg = 48,
-    this.xl = 56,
-    this.x2l = 64,
+    required this.x5s,
+    required this.x4s,
+    required this.x3s,
+    required this.x2s,
+    required this.xs,
+    required this.sm,
+    required this.md,
+    required this.lg,
+    required this.xl,
+    required this.x2l,
   });
 
   @override

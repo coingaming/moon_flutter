@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/text_styles.dart';
 
 @immutable
-class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableTreeMixin {
-  static final xs = MoonButtonSize(
+class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with DiagnosticableTreeMixin {
+  static final xs = MoonButtonSizes(
     height: 24,
     gap: 4,
     padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -15,7 +15,7 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
     textStyle: MoonTextStyles.heading.text12,
   );
 
-  static final sm = MoonButtonSize(
+  static final sm = MoonButtonSizes(
     height: 32,
     gap: 4,
     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -23,7 +23,7 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
     textStyle: MoonTextStyles.heading.text14,
   );
 
-  static final md = MoonButtonSize(
+  static final md = MoonButtonSizes(
     height: 40,
     gap: 8,
     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -31,7 +31,7 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
     textStyle: MoonTextStyles.heading.text14,
   );
 
-  static final lg = MoonButtonSize(
+  static final lg = MoonButtonSizes(
     height: 48,
     gap: 12,
     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -39,7 +39,7 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
     textStyle: MoonTextStyles.heading.text16,
   );
 
-  static final xl = MoonButtonSize(
+  static final xl = MoonButtonSizes(
     height: 56,
     gap: 16,
     padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -62,7 +62,7 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
   /// Button text style.
   final TextStyle textStyle;
 
-  const MoonButtonSize({
+  const MoonButtonSizes({
     required this.height,
     required this.gap,
     required this.padding,
@@ -71,14 +71,14 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
   });
 
   @override
-  MoonButtonSize copyWith({
+  MoonButtonSizes copyWith({
     double? height,
     double? gap,
     EdgeInsets? padding,
     BorderRadiusGeometry? borderRadius,
     TextStyle? textStyle,
   }) {
-    return MoonButtonSize(
+    return MoonButtonSizes(
       height: height ?? this.height,
       gap: gap ?? this.gap,
       padding: padding ?? this.padding,
@@ -88,10 +88,10 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
   }
 
   @override
-  MoonButtonSize lerp(ThemeExtension<MoonButtonSize>? other, double t) {
-    if (other is! MoonButtonSize) return this;
+  MoonButtonSizes lerp(ThemeExtension<MoonButtonSizes>? other, double t) {
+    if (other is! MoonButtonSizes) return this;
 
-    return MoonButtonSize(
+    return MoonButtonSizes(
       height: lerpDouble(height, other.height, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       padding: EdgeInsets.lerp(padding, other.padding, t)!,
@@ -104,15 +104,11 @@ class MoonButtonSize extends ThemeExtension<MoonButtonSize> with DiagnosticableT
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonButtonSize"))
+      ..add(DiagnosticsProperty("type", "MoonButtonSizes"))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("gap", gap))
       ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
-}
-
-extension MoonButtonSizeX on BuildContext {
-  MoonButtonSize? get moonButtonSize => Theme.of(this).extension<MoonButtonSize>();
 }

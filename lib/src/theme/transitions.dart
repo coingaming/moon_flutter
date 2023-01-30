@@ -5,6 +5,14 @@ import 'package:moon_design/src/theme/transition_effects.dart';
 
 @immutable
 class MoonTransitions extends ThemeExtension<MoonTransitions> with DiagnosticableTreeMixin {
+  static const transitions = MoonTransitions(
+    arrival: MoonTransitionEffects.arrival,
+    departure: MoonTransitionEffects.departure,
+    controlScaleEffect: MoonTransitionEffects.controlScaleEffect,
+    controlFocusEffect: MoonTransitionEffects.controlFocusEffect,
+    buttonHoverEffect: MoonTransitionEffects.buttonHoverEffect,
+  );
+
   /// Arrival effect.
   final MoonTransitionEffects arrival;
 
@@ -21,11 +29,11 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
   final MoonTransitionEffects buttonHoverEffect;
 
   const MoonTransitions({
-    this.arrival = MoonTransitionEffects.arrival,
-    this.departure = MoonTransitionEffects.departure,
-    this.controlScaleEffect = MoonTransitionEffects.controlScaleEffect,
-    this.controlFocusEffect = MoonTransitionEffects.controlFocusEffect,
-    this.buttonHoverEffect = MoonTransitionEffects.buttonHoverEffect,
+    required this.arrival,
+    required this.departure,
+    required this.controlScaleEffect,
+    required this.controlFocusEffect,
+    required this.buttonHoverEffect,
   });
 
   @override
