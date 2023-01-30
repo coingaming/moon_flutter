@@ -3,11 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/effects/controls_effects.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/transition_effects.dart';
 
 typedef MoonControlWrapperBuilder = Widget Function(
   BuildContext context,
@@ -24,15 +22,17 @@ class MoonControlWrapper extends StatefulWidget {
 
   final FocusNode? focusNode;
 
-  final bool isFocusable;
-
   final bool autofocus;
 
-  final bool showScaleAnimation;
+  final bool isFocusable;
+
+  final bool ensureMinimalTouchTargetSize;
 
   final bool showFocusAnimation;
 
-  final bool ensureMinimalTouchTargetSize;
+  final bool showPulseAnimation;
+
+  final bool showScaleAnimation;
 
   final bool semanticTypeIsButton;
 
@@ -40,19 +40,27 @@ class MoonControlWrapper extends StatefulWidget {
 
   final double minTouchTargetSize;
 
-  final double? scaleAnimationLowerBound;
+  final double? disabledOpacityValue;
 
   final double? focusBorderWidth;
 
-  final double? disabledOpacityValue;
+  final double? pulseEffectWidth;
+
+  final double? scaleAnimationLowerBound;
 
   final Color? focusBorderColor;
 
-  final Duration? scaleAnimationDuration;
+  final Color? pulseEffectColor;
 
   final Duration? focusAnimationDuration;
 
+  final Duration? scaleAnimationDuration;
+
+  final Duration? pulseAnimationDuration;
+
   final Curve? focusAnimationCurve;
+
+  final Curve? pulseAnimationCurve;
 
   final Curve? scaleAnimationCurve;
 
@@ -67,22 +75,27 @@ class MoonControlWrapper extends StatefulWidget {
     this.onTap,
     this.onLongPress,
     this.focusNode,
-    this.isFocusable = true,
     this.autofocus = false,
-    this.showScaleAnimation = true,
-    this.showFocusAnimation = true,
+    this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
+    this.showFocusAnimation = true,
+    this.showPulseAnimation = false,
+    this.showScaleAnimation = true,
     this.semanticTypeIsButton = false,
     this.semanticLabel,
     this.minTouchTargetSize = 40.0,
-    this.scaleAnimationLowerBound,
-    this.focusBorderWidth,
     this.disabledOpacityValue,
+    this.focusBorderWidth,
+    this.pulseEffectWidth,
+    this.scaleAnimationLowerBound,
     this.focusBorderColor,
-    this.scaleAnimationCurve,
+    this.pulseEffectColor,
+    this.focusAnimationDuration,
+    this.pulseAnimationDuration,
     this.scaleAnimationDuration,
     this.focusAnimationCurve,
-    this.focusAnimationDuration,
+    this.pulseAnimationCurve,
+    this.scaleAnimationCurve,
     this.cursor = MouseCursor.defer,
     required this.borderRadius,
     required this.builder,
@@ -92,18 +105,22 @@ class MoonControlWrapper extends StatefulWidget {
   State<MoonControlWrapper> createState() => _MoonControlWrapperState();
 }
 
-class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTickerProviderStateMixin {
+class _MoonControlWrapperState extends State<MoonControlWrapper> with TickerProviderStateMixin {
   bool _isHovered = false;
   bool _isFocused = false;
   bool _isPressed = false;
   FocusNode? _focusNode;
 
-  late AnimationController _controller;
+  AnimationController? _scaleAnimationController;
+  AnimationController? _pulseAnimationController;
+  CurvedAnimation? _scaleAnimation;
+  CurvedAnimation? _pulseAnimation;
   late Map<Type, Action<Intent>> _actions;
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
   bool get _canAnimateScale => widget.showScaleAnimation && _isEnabled;
-  bool get _canAnimateFocus => widget.showFocusAnimation && _isEnabled && _isFocused || _isPressed;
+  bool get _canAnimatePulse => widget.showPulseAnimation && _isEnabled;
+  bool get _canAnimateFocus => widget.showFocusAnimation && _isEnabled && (_isFocused || _isPressed);
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
   MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.forbidden;
 
@@ -111,12 +128,42 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.scaleAnimationDuration ??
-          context.moonTransitions?.controlScaleEffect.transitionDuration ??
-          MoonTransitionEffects.controlScaleEffect.transitionDuration,
-      debugLabel: "MoonControlWrapper",
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        if (mounted) {
+          _scaleAnimationController = AnimationController(
+            vsync: this,
+            duration: widget.scaleAnimationDuration ??
+                context.moonEffects?.controlScaleEffect.effectDuration ??
+                MoonControlsEffects.controlScaleEffect.effectDuration,
+            debugLabel: "MoonControlWrapper scale animation controller",
+          );
+
+          _scaleAnimation = CurvedAnimation(
+            parent: _scaleAnimationController!,
+            curve: widget.scaleAnimationCurve ??
+                context.moonEffects?.controlScaleEffect.effectCurve ??
+                MoonControlsEffects.controlScaleEffect.effectCurve,
+          );
+
+          _pulseAnimationController = AnimationController(
+            vsync: this,
+            duration: widget.pulseAnimationDuration ??
+                context.moonEffects?.controlPulseEffect.effectDuration ??
+                MoonControlsEffects.controlPulseEffect.effectDuration,
+            debugLabel: "MoonControlWrapper pulse animation controller",
+          )..repeat();
+
+          _pulseAnimation = CurvedAnimation(
+            parent: _pulseAnimationController!,
+            curve: widget.pulseAnimationCurve ??
+                context.moonEffects?.controlPulseEffect.effectCurve ??
+                MoonControlsEffects.controlPulseEffect.effectCurve,
+          );
+
+          setState(() {});
+        }
+      },
     );
 
     _focusNode = FocusNode(canRequestFocus: _isEnabled);
@@ -140,9 +187,9 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
 
     _effectiveFocusNode.canRequestFocus = _isEnabled;
 
-    if (_isPressed && mounted) {
+    if (_isPressed && mounted && _scaleAnimationController != null) {
       if (widget.showScaleAnimation) {
-        _controller.forward();
+        _scaleAnimationController?.forward();
       }
       setState(() => _isPressed = false);
     }
@@ -152,8 +199,12 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
   void dispose() {
     _focusNode!.dispose();
 
-    if (widget.showScaleAnimation) {
-      _controller.dispose();
+    if (widget.showScaleAnimation && _scaleAnimationController != null) {
+      _pulseAnimationController?.dispose();
+    }
+
+    if (widget.showPulseAnimation && _pulseAnimationController != null) {
+      _pulseAnimationController?.dispose();
     }
 
     super.dispose();
@@ -177,10 +228,10 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
 
       widget.onTap?.call();
 
-      if (widget.showScaleAnimation) {
-        _controller.forward().then((_) {
+      if (widget.showScaleAnimation && _scaleAnimationController != null) {
+        _scaleAnimationController?.forward().then((_) {
           if (mounted) {
-            _controller.reverse();
+            _scaleAnimationController?.reverse();
           }
         });
       }
@@ -192,9 +243,9 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
   }
 
   void _handleTapUp(_) {
-    if (_isPressed && mounted) {
+    if (_isPressed && mounted && _scaleAnimationController != null) {
       if (widget.showScaleAnimation) {
-        _controller.reverse();
+        _scaleAnimationController?.reverse();
       }
       setState(() => _isPressed = false);
     }
@@ -207,18 +258,18 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
   }
 
   void _handleLongPressDown(_) {
-    if (!_isPressed && mounted) {
+    if (!_isPressed && mounted && _scaleAnimationController != null) {
       if (widget.showScaleAnimation) {
-        _controller.forward();
+        _scaleAnimationController?.forward();
       }
       setState(() => _isPressed = true);
     }
   }
 
   void _handleLongPressUp() {
-    if (_isPressed && mounted) {
+    if (_isPressed && mounted && _scaleAnimationController != null) {
       if (widget.showScaleAnimation) {
-        _controller.reverse();
+        _scaleAnimationController?.reverse();
       }
       setState(() => _isPressed = false);
     }
@@ -246,35 +297,60 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
 
   @override
   Widget build(BuildContext context) {
-    final focusBorderColor = widget.focusBorderColor ?? context.moonTheme?.colors.jiren ?? MoonColors.light.piccolo;
-
-    final disabledOpacityValue =
-        widget.disabledOpacityValue ?? context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
-
-    final focusBorderWidth =
-        widget.focusBorderWidth ?? context.moonTheme?.borders.borderFocus ?? MoonBorders.borders.borderFocus;
-
-    final scaleAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: widget.scaleAnimationCurve ??
-          context.moonTheme?.transitions.controlScaleEffect.transitionCurve ??
-          MoonTransitionEffects.controlScaleEffect.transitionCurve,
-    );
-
     final scaleTween = Tween(
       begin: 1.0,
       end: widget.scaleAnimationLowerBound ??
-          context.moonTheme?.transitions.controlScaleEffect.transitionLowerBound ??
-          MoonTransitionEffects.controlScaleEffect.transitionLowerBound,
+          context.moonEffects?.controlScaleEffect.effectLowerBound ??
+          MoonControlsEffects.controlScaleEffect.effectLowerBound,
     );
 
-    final focusAnimationDuration = widget.focusAnimationDuration ??
-        context.moonTheme?.transitions.controlFocusEffect.transitionDuration ??
-        MoonTransitionEffects.controlFocusEffect.transitionDuration;
+    final pulseTween = DecorationTween(
+      begin: BoxDecoration(
+        borderRadius: widget.borderRadius,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: widget.pulseEffectColor ??
+                context.moonEffects?.controlPulseEffect.effectColor ??
+                MoonControlsEffects.controlPulseEffect.effectColor!,
+          ),
+        ],
+      ),
+      end: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: widget.pulseEffectColor?.withOpacity(0) ??
+                context.moonEffects?.controlPulseEffect.effectColor?.withOpacity(0) ??
+                MoonControlsEffects.controlPulseEffect.effectColor!.withOpacity(0),
+            spreadRadius: widget.pulseEffectWidth ??
+                context.moonEffects?.controlPulseEffect.effectWidth ??
+                MoonControlsEffects.controlPulseEffect.effectWidth!,
+          ),
+        ],
+      ),
+    );
 
-    final focusAnimationCurve = widget.focusAnimationCurve ??
-        context.moonTheme?.transitions.controlFocusEffect.transitionCurve ??
-        MoonTransitionEffects.controlFocusEffect.transitionCurve;
+    final scaleAnimation = _scaleAnimation != null ? scaleTween.animate(_scaleAnimation!) : null;
+    final pulseAnimation = _pulseAnimation != null ? pulseTween.animate(_pulseAnimation!) : null;
+
+    final effectiveDisabledOpacityValue =
+        widget.disabledOpacityValue ?? context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
+
+    final effectiveFocusBorderColor = widget.focusBorderColor ??
+        context.moonEffects?.controlFocusEffect.effectColor ??
+        MoonControlsEffects.controlFocusEffect.effectColor!;
+
+    final effectiveFocusBorderWidth = widget.focusBorderWidth ??
+        context.moonEffects?.controlFocusEffect.effectWidth ??
+        MoonControlsEffects.controlFocusEffect.effectWidth!;
+
+    final effectiveFocusAnimationDuration = widget.focusAnimationDuration ??
+        context.moonEffects?.controlFocusEffect.effectDuration ??
+        MoonControlsEffects.controlFocusEffect.effectDuration;
+
+    final effectiveFocusAnimationCurve = widget.focusAnimationCurve ??
+        context.moonEffects?.controlFocusEffect.effectCurve ??
+        MoonControlsEffects.controlFocusEffect.effectCurve;
 
     final Widget child = widget.builder(
       context,
@@ -315,22 +391,27 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with SingleTick
                   ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)
                   : Size.zero,
               child: ScaleTransition(
-                scale: _canAnimateScale ? scaleTween.animate(scaleAnimation) : const AlwaysStoppedAnimation(1.0),
+                scale: _canAnimateScale && scaleAnimation != null ? scaleAnimation : const AlwaysStoppedAnimation(1.0),
                 child: Opacity(
-                  opacity: _isEnabled ? 1 : disabledOpacityValue,
-                  child: AnimatedContainer(
-                    duration: focusAnimationDuration,
-                    curve: focusAnimationCurve,
-                    decoration: BoxDecoration(
-                      borderRadius: widget.borderRadius,
-                      boxShadow: [
-                        BoxShadow(
-                          color: _canAnimateFocus ? focusBorderColor : Colors.transparent,
-                          spreadRadius: focusBorderWidth,
-                        )
-                      ],
+                  opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
+                  child: DecoratedBoxTransition(
+                    decoration: _canAnimatePulse && pulseAnimation != null
+                        ? pulseAnimation
+                        : const AlwaysStoppedAnimation(BoxDecoration()),
+                    child: AnimatedContainer(
+                      duration: effectiveFocusAnimationDuration,
+                      curve: effectiveFocusAnimationCurve,
+                      decoration: BoxDecoration(
+                        borderRadius: widget.borderRadius,
+                        boxShadow: [
+                          BoxShadow(
+                            color: _canAnimateFocus ? effectiveFocusBorderColor : Colors.transparent,
+                            spreadRadius: effectiveFocusBorderWidth,
+                          )
+                        ],
+                      ),
+                      child: child,
                     ),
-                    child: child,
                   ),
                 ),
               ),

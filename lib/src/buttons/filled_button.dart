@@ -1,22 +1,50 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/control_wrapper.dart';
-import 'package:moon_design/src/theme/button_size.dart';
+import 'package:moon_design/src/theme/button_sizes.dart';
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
+
+enum ButtonSize {
+  xs,
+  sm,
+  md,
+  lg,
+  xl,
+}
 
 class MoonFilledButton extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
-  final MoonButtonSize? buttonSize;
+  final ButtonSize? buttonSize;
+  final FocusNode? focusNode;
   final double? width;
   final double? height;
+  final double? disabledOpacityValue;
+  final double? focusBorderWidth;
+  final double? gap;
+  final double? pulseEffectWidth;
+  final double? scaleAnimationLowerBound;
+  final double minTouchTargetSize;
+  final bool autofocus;
+  final bool isFocusable;
+  final bool ensureMinimalTouchTargetSize;
+  final bool showFocusAnimation;
+  final bool showPulseAnimation;
+  final bool showScaleAnimation;
   final Color backgroundColor;
+  final Color? focusBorderColor;
   final Color? hoverOverlayColor;
+  final Color? pulseEffectColor;
+  final Duration? focusAnimationDuration;
   final Duration? hoverAnimationDuration;
   final Duration? scaleAnimationDuration;
+  final Duration? pulseAnimationDuration;
+  final Curve? focusAnimationCurve;
   final Curve? hoverAnimationCurve;
   final Curve? scaleAnimationCurve;
+  final Curve? pulseAnimationCurve;
   final EdgeInsets? padding;
   final BorderRadiusGeometry? borderRadius;
   final Widget? label;
@@ -28,14 +56,33 @@ class MoonFilledButton extends StatelessWidget {
     this.onTap,
     this.onLongPress,
     this.buttonSize,
+    this.focusNode,
     this.width,
     this.height,
+    this.disabledOpacityValue,
+    this.focusBorderWidth,
+    this.gap,
+    this.pulseEffectWidth,
+    this.scaleAnimationLowerBound,
+    this.minTouchTargetSize = 40,
+    this.autofocus = false,
+    this.isFocusable = true,
+    this.ensureMinimalTouchTargetSize = false,
+    this.showFocusAnimation = true,
+    this.showPulseAnimation = false,
+    this.showScaleAnimation = true,
     this.backgroundColor = Colors.blue,
+    this.focusBorderColor,
     this.hoverOverlayColor,
+    this.pulseEffectColor,
+    this.focusAnimationDuration,
     this.hoverAnimationDuration,
-    this.hoverAnimationCurve,
     this.scaleAnimationDuration,
+    this.pulseAnimationDuration,
+    this.focusAnimationCurve,
+    this.hoverAnimationCurve,
     this.scaleAnimationCurve,
+    this.pulseAnimationCurve,
     this.padding,
     this.borderRadius,
     this.label,
@@ -43,21 +90,33 @@ class MoonFilledButton extends StatelessWidget {
     this.rightIcon,
   });
 
-  Color get textColor => backgroundColor.computeLuminance() > 0.5 ? MoonColors.light.bulma : MoonColors.dark.bulma;
-
-  Color get effectiveHoverOverlayColor {
-    if (hoverOverlayColor != null) return hoverOverlayColor!;
-
-    return backgroundColor.computeLuminance() > 0.5 ? MoonColors.light.heles : MoonColors.dark.heles;
+  MoonButtonSizes getButtonSize(BuildContext context, ButtonSize? buttonSize) {
+    switch (buttonSize) {
+      case ButtonSize.xs:
+        return context.moonTheme?.buttons.xs ?? MoonButtonSizes.xs;
+      case ButtonSize.sm:
+        return context.moonTheme?.buttons.sm ?? MoonButtonSizes.sm;
+      case ButtonSize.md:
+        return context.moonTheme?.buttons.md ?? MoonButtonSizes.md;
+      case ButtonSize.lg:
+        return context.moonTheme?.buttons.lg ?? MoonButtonSizes.lg;
+      case ButtonSize.xl:
+        return context.moonTheme?.buttons.xl ?? MoonButtonSizes.xl;
+      default:
+        return context.moonTheme?.buttons.md ?? MoonButtonSizes.xs;
+    }
   }
 
-  Color get hoverColor => Color.alphaBlend(effectiveHoverOverlayColor, backgroundColor);
+  Color get textColor => backgroundColor.computeLuminance() > 0.5 ? MoonColors.light.bulma : MoonColors.dark.bulma;
 
   @override
   Widget build(BuildContext context) {
-    final effectiveGap = buttonSize?.gap ?? 8;
-    final effectiveHeight = height ?? buttonSize?.height;
-    final effectivePadding = padding ?? buttonSize?.padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+    final effectiveButtonSize = getButtonSize(context, buttonSize);
+
+    final effectiveGap = gap ?? effectiveButtonSize.gap;
+    final effectiveHeight = height ?? effectiveButtonSize.height;
+    final effectivePadding = padding ?? effectiveButtonSize.padding;
+    final effectiveBorderRadius = borderRadius ?? effectiveButtonSize.borderRadius;
 
     final correctedPadding = EdgeInsetsDirectional.fromSTEB(
       leftIcon == null && label != null ? effectivePadding.left : 0,
@@ -66,21 +125,46 @@ class MoonFilledButton extends StatelessWidget {
       effectivePadding.bottom,
     );
 
-    final effectiveBorderRadius =
-        borderRadius ?? buttonSize?.borderRadius ?? const BorderRadius.all(Radius.circular(8));
+    final effectiveHoverOverlayColor = hoverOverlayColor ??
+        context.moonEffects?.buttonHoverEffect.primaryHoverColor ??
+        MoonHoverEffects.lightButtonHoverEffect.primaryHoverColor;
 
-    final effectiveHoverAnimationCurve =
-        hoverAnimationCurve ?? context.moonTransitions?.buttonHoverEffect.transitionCurve ?? Curves.easeInOut;
+    final hoverColor = Color.alphaBlend(effectiveHoverOverlayColor, backgroundColor);
+
+    final effectiveHoverAnimationCurve = hoverAnimationCurve ??
+        context.moonEffects?.buttonHoverEffect.hoverCurve ??
+        MoonHoverEffects.lightButtonHoverEffect.hoverCurve;
 
     final effectiveHoverAnimationDuration = hoverAnimationDuration ??
-        context.moonTransitions?.buttonHoverEffect.transitionDuration ??
-        const Duration(milliseconds: 150);
+        context.moonEffects?.buttonHoverEffect.hoverDuration ??
+        MoonHoverEffects.lightButtonHoverEffect.hoverDuration;
 
     return MoonControlWrapper(
       onTap: onTap,
       onLongPress: onLongPress,
+      semanticLabel: "MoonFilledButton",
       semanticTypeIsButton: true,
       borderRadius: effectiveBorderRadius,
+      disabledOpacityValue: disabledOpacityValue,
+      minTouchTargetSize: minTouchTargetSize,
+      ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
+      focusNode: focusNode,
+      autofocus: autofocus,
+      isFocusable: isFocusable,
+      showFocusAnimation: showFocusAnimation,
+      focusBorderColor: focusBorderColor,
+      focusBorderWidth: focusBorderWidth,
+      focusAnimationDuration: focusAnimationDuration,
+      focusAnimationCurve: focusAnimationCurve,
+      showScaleAnimation: showScaleAnimation,
+      scaleAnimationLowerBound: scaleAnimationLowerBound,
+      scaleAnimationDuration: scaleAnimationDuration,
+      scaleAnimationCurve: scaleAnimationCurve,
+      showPulseAnimation: showPulseAnimation,
+      pulseEffectColor: pulseEffectColor,
+      pulseEffectWidth: pulseEffectWidth,
+      pulseAnimationDuration: pulseAnimationDuration,
+      pulseAnimationCurve: pulseAnimationCurve,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         return AnimatedContainer(
           padding: correctedPadding,
@@ -93,7 +177,7 @@ class MoonFilledButton extends StatelessWidget {
             borderRadius: effectiveBorderRadius,
           ),
           child: DefaultTextStyle.merge(
-            style: TextStyle(color: textColor),
+            style: TextStyle(color: textColor, fontSize: effectiveButtonSize.textStyle.fontSize),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,

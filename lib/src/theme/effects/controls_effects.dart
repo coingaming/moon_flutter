@@ -20,9 +20,9 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
   );
 
   static final controlPulseEffect = MoonControlsEffects(
-    effectCurve: Curves.easeOutQuart,
+    effectCurve: Curves.easeOutQuint,
     effectDuration: const Duration(milliseconds: 1500),
-    effectColor: MoonColors.light.jiren,
+    effectColor: MoonColors.light.piccolo,
     effectWidth: 30,
   );
 
