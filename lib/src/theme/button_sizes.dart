@@ -3,47 +3,49 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/borders.dart';
+import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/text_styles.dart';
 
 @immutable
 class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with DiagnosticableTreeMixin {
   static final xs = MoonButtonSizes(
-    height: 24,
-    gap: 4,
-    padding: const EdgeInsets.symmetric(horizontal: 8),
-    borderRadius: const BorderRadius.all(Radius.circular(4)),
+    height: MoonSizes.sizes.xs,
+    gap: MoonSizes.sizes.x5s,
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
+    borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text12,
   );
 
   static final sm = MoonButtonSizes(
-    height: 32,
-    gap: 4,
-    padding: const EdgeInsets.symmetric(horizontal: 12),
-    borderRadius: const BorderRadius.all(Radius.circular(8)),
+    height: MoonSizes.sizes.sm,
+    gap: MoonSizes.sizes.x5s,
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
+    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final md = MoonButtonSizes(
-    height: 40,
-    gap: 8,
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    borderRadius: const BorderRadius.all(Radius.circular(8)),
+    height: MoonSizes.sizes.md,
+    gap: MoonSizes.sizes.x4s,
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
+    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final lg = MoonButtonSizes(
-    height: 48,
-    gap: 12,
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    borderRadius: const BorderRadius.all(Radius.circular(8)),
+    height: MoonSizes.sizes.lg,
+    gap: MoonSizes.sizes.x3s,
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
+    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text16,
   );
 
   static final xl = MoonButtonSizes(
-    height: 56,
-    gap: 16,
-    padding: const EdgeInsets.symmetric(horizontal: 24),
-    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    height: MoonSizes.sizes.xl,
+    gap: MoonSizes.sizes.x2s,
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.xs),
+    borderRadius: MoonBorders.borders.interactiveMd,
     textStyle: MoonTextStyles.heading.text16,
   );
 

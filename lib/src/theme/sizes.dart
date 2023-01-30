@@ -18,34 +18,34 @@ class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
     x2l: 64,
   );
 
-  /// (5x) Extra small size, default value 4.
+  /// (5x) Extra small size.
   final double x5s;
 
-  /// (4x) Extra small size, default value 8.
+  /// (4x) Extra small size.
   final double x4s;
 
-  /// (3x) Extra small size, default value 12.
+  /// (3x) Extra small size.
   final double x3s;
 
-  /// (2x) Extra small size, default value 16.
+  /// (2x) Extra small size.
   final double x2s;
 
-  /// Extra small size, default value 24.
+  /// Extra small size.
   final double xs;
 
-  /// Small size, default value 32.
+  /// Small size.
   final double sm;
 
-  /// Medium size, default value 40.
+  /// Medium size.
   final double md;
 
-  /// Large size, default value 48.
+  /// Large size.
   final double lg;
 
-  /// Extra large size, default value 56.
+  /// Extra large size.
   final double xl;
 
-  /// (2x) Extra large size, default value 64.
+  /// (2x) Extra large size.
   final double x2l;
 
   const MoonSizes({

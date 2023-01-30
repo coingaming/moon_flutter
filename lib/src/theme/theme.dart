@@ -37,28 +37,28 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     typography: MoonTypography.textStyles,
   );
 
-  /// MDS borders.
+  /// Moon Design System borders.
   final MoonBorders borders;
 
-  /// MDS colors.
+  /// Moon Design System colors.
   final MoonColors colors;
 
-  /// MDS hover effects.
+  /// Moon Design System hover effects.
   final MoonHoverEffects hoverEffects;
 
-  /// MDS opacities.
+  /// Moon Design System opacities.
   final MoonOpacity opacity;
 
-  /// MDS shadows.
+  /// Moon Design System shadows.
   final MoonShadows shadows;
 
-  /// MDS sizes.
+  /// Moon Design System sizes.
   final MoonSizes sizes;
 
-  /// MDS transitions.
+  /// Moon Design System transitions.
   final MoonTransitions transitions;
 
-  /// MDS typography.
+  /// Moon Design System typography.
   final MoonTypography typography;
 
   final MoonButton buttons;

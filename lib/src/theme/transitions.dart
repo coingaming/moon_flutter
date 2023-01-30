@@ -19,10 +19,10 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
   /// Departure effect.
   final MoonTransitionEffects departure;
 
-  /// Controls scale effect.
+  /// Control widgets scale effect.
   final MoonTransitionEffects controlScaleEffect;
 
-  /// Controls focus effect.
+  /// Control widgets focus effect.
   final MoonTransitionEffects controlFocusEffect;
 
   /// Button hover effect.
