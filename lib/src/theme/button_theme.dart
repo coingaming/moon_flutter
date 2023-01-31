@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/button_sizes.dart';
 
 @immutable
-class MoonButton extends ThemeExtension<MoonButton> with DiagnosticableTreeMixin {
-  static final sizes = MoonButton(
+class MoonButtonTheme extends ThemeExtension<MoonButtonTheme> with DiagnosticableTreeMixin {
+  static final sizes = MoonButtonTheme(
     xs: MoonButtonSizes.xs,
     sm: MoonButtonSizes.sm,
     md: MoonButtonSizes.md,
@@ -28,7 +28,7 @@ class MoonButton extends ThemeExtension<MoonButton> with DiagnosticableTreeMixin
   /// Extra large button properties.
   final MoonButtonSizes xl;
 
-  const MoonButton({
+  const MoonButtonTheme({
     required this.xs,
     required this.sm,
     required this.md,
@@ -37,14 +37,14 @@ class MoonButton extends ThemeExtension<MoonButton> with DiagnosticableTreeMixin
   });
 
   @override
-  MoonButton copyWith({
+  MoonButtonTheme copyWith({
     MoonButtonSizes? xs,
     MoonButtonSizes? sm,
     MoonButtonSizes? md,
     MoonButtonSizes? lg,
     MoonButtonSizes? xl,
   }) {
-    return MoonButton(
+    return MoonButtonTheme(
       xs: xs ?? this.xs,
       sm: sm ?? this.sm,
       md: md ?? this.md,
@@ -54,10 +54,10 @@ class MoonButton extends ThemeExtension<MoonButton> with DiagnosticableTreeMixin
   }
 
   @override
-  MoonButton lerp(ThemeExtension<MoonButton>? other, double t) {
-    if (other is! MoonButton) return this;
+  MoonButtonTheme lerp(ThemeExtension<MoonButtonTheme>? other, double t) {
+    if (other is! MoonButtonTheme) return this;
 
-    return MoonButton(
+    return MoonButtonTheme(
       xs: xs.lerp(other.xs, t),
       sm: sm.lerp(other.sm, t),
       md: md.lerp(other.md, t),
@@ -70,7 +70,7 @@ class MoonButton extends ThemeExtension<MoonButton> with DiagnosticableTreeMixin
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonButton"))
+      ..add(DiagnosticsProperty("type", "MoonButtonTheme"))
       ..add(DiagnosticsProperty<MoonButtonSizes>("xs", xs))
       ..add(DiagnosticsProperty<MoonButtonSizes>("sm", sm))
       ..add(DiagnosticsProperty<MoonButtonSizes>("md", md))

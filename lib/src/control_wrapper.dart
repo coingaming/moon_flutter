@@ -199,12 +199,14 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with TickerProv
   void dispose() {
     _focusNode!.dispose();
 
-    if (widget.showScaleAnimation && _scaleAnimationController != null) {
-      _pulseAnimationController?.dispose();
+    if (_scaleAnimationController != null) {
+      _scaleAnimationController?.dispose();
+      _scaleAnimationController = null;
     }
 
-    if (widget.showPulseAnimation && _pulseAnimationController != null) {
+    if (_pulseAnimationController != null) {
       _pulseAnimationController?.dispose();
+      _pulseAnimationController = null;
     }
 
     super.dispose();
@@ -343,6 +345,10 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with TickerProv
                 context.moonEffects?.controlPulseEffect.effectColor ??
                 MoonControlsEffects.controlPulseEffect.effectColor!,
           ),
+          /* BoxShadow(
+            color: Colors.transparent,
+            spreadRadius: -100,
+          ) */
         ],
       ),
       end: BoxDecoration(

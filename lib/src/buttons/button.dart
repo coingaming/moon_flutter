@@ -6,6 +6,7 @@ import 'package:moon_design/src/theme/button_sizes.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
 
 enum ButtonSize {
   xs,
@@ -15,7 +16,7 @@ enum ButtonSize {
   xl,
 }
 
-class MoonFilledButton extends StatelessWidget {
+class MoonButton extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final ButtonSize? buttonSize;
@@ -56,7 +57,7 @@ class MoonFilledButton extends StatelessWidget {
   final Widget? leftIcon;
   final Widget? rightIcon;
 
-  const MoonFilledButton({
+  const MoonButton({
     super.key,
     this.onTap,
     this.onLongPress,
@@ -99,27 +100,119 @@ class MoonFilledButton extends StatelessWidget {
     this.rightIcon,
   });
 
+  const MoonButton.outlined({
+    super.key,
+    this.onTap,
+    this.onLongPress,
+    this.buttonSize,
+    this.focusNode,
+    this.semanticLabel,
+    this.width,
+    this.height,
+    this.disabledOpacityValue,
+    this.borderWidth,
+    this.focusBorderWidth,
+    this.gap,
+    this.pulseEffectWidth,
+    this.scaleAnimationLowerBound,
+    this.minTouchTargetSize = 40,
+    this.autofocus = false,
+    this.isFocusable = true,
+    this.ensureMinimalTouchTargetSize = false,
+    this.showFocusAnimation = true,
+    this.showPulseAnimation = false,
+    this.showScaleAnimation = true,
+    this.borderColor,
+    this.focusBorderColor,
+    this.hoverOverlayColor,
+    this.pulseEffectColor,
+    this.focusAnimationDuration,
+    this.hoverAnimationDuration,
+    this.scaleAnimationDuration,
+    this.pulseAnimationDuration,
+    this.focusAnimationCurve,
+    this.hoverAnimationCurve,
+    this.scaleAnimationCurve,
+    this.pulseAnimationCurve,
+    this.padding,
+    this.borderRadius,
+    this.label,
+    this.leftIcon,
+    this.rightIcon,
+  })  : showBorder = true,
+        backgroundColor = Colors.transparent;
+
+  const MoonButton.text({
+    super.key,
+    this.onTap,
+    this.onLongPress,
+    this.buttonSize,
+    this.focusNode,
+    this.semanticLabel,
+    this.width,
+    this.height,
+    this.disabledOpacityValue,
+    this.borderWidth,
+    this.focusBorderWidth,
+    this.gap,
+    this.pulseEffectWidth,
+    this.scaleAnimationLowerBound,
+    this.minTouchTargetSize = 40,
+    this.autofocus = false,
+    this.isFocusable = true,
+    this.ensureMinimalTouchTargetSize = false,
+    this.showFocusAnimation = true,
+    this.showPulseAnimation = false,
+    this.showScaleAnimation = true,
+    this.borderColor,
+    this.focusBorderColor,
+    this.hoverOverlayColor,
+    this.pulseEffectColor,
+    this.focusAnimationDuration,
+    this.hoverAnimationDuration,
+    this.scaleAnimationDuration,
+    this.pulseAnimationDuration,
+    this.focusAnimationCurve,
+    this.hoverAnimationCurve,
+    this.scaleAnimationCurve,
+    this.pulseAnimationCurve,
+    this.padding,
+    this.borderRadius,
+    this.label,
+    this.leftIcon,
+    this.rightIcon,
+  })  : showBorder = false,
+        backgroundColor = Colors.transparent;
+
   MoonButtonSizes getButtonSize(BuildContext context, ButtonSize? buttonSize) {
     switch (buttonSize) {
       case ButtonSize.xs:
-        return context.moonTheme?.buttons.xs ?? MoonButtonSizes.xs;
+        return context.moonTheme?.buttonTheme.xs ?? MoonButtonSizes.xs;
       case ButtonSize.sm:
-        return context.moonTheme?.buttons.sm ?? MoonButtonSizes.sm;
+        return context.moonTheme?.buttonTheme.sm ?? MoonButtonSizes.sm;
       case ButtonSize.md:
-        return context.moonTheme?.buttons.md ?? MoonButtonSizes.md;
+        return context.moonTheme?.buttonTheme.md ?? MoonButtonSizes.md;
       case ButtonSize.lg:
-        return context.moonTheme?.buttons.lg ?? MoonButtonSizes.lg;
+        return context.moonTheme?.buttonTheme.lg ?? MoonButtonSizes.lg;
       case ButtonSize.xl:
-        return context.moonTheme?.buttons.xl ?? MoonButtonSizes.xl;
+        return context.moonTheme?.buttonTheme.xl ?? MoonButtonSizes.xl;
       default:
-        return context.moonTheme?.buttons.md ?? MoonButtonSizes.xs;
+        return context.moonTheme?.buttonTheme.md ?? MoonButtonSizes.xs;
     }
   }
 
-  Color get textColor => backgroundColor.computeLuminance() > 0.5 ? MoonColors.light.bulma : MoonColors.dark.bulma;
+  Color getTextColor({required bool isDarkMode, required double backgroundLuminance}) {
+    if (backgroundColor == Colors.transparent && isDarkMode) return MoonColors.dark.bulma;
+    if (backgroundColor == Colors.transparent && !isDarkMode) return MoonColors.light.bulma;
+    if (backgroundLuminance > 0.5) return MoonColors.light.bulma;
+    return MoonColors.dark.bulma;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final backgroundLuminance = backgroundColor.computeLuminance();
+
+    final effectiveTextColor = getTextColor(isDarkMode: context.isDarkMode, backgroundLuminance: backgroundLuminance);
     final effectiveButtonSize = getButtonSize(context, buttonSize);
 
     final effectiveGap = gap ?? effectiveButtonSize.gap;
@@ -182,18 +275,19 @@ class MoonFilledButton extends StatelessWidget {
       pulseAnimationCurve: pulseAnimationCurve,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         return AnimatedContainer(
+          clipBehavior: Clip.hardEdge,
           padding: correctedPadding,
           width: width,
           height: effectiveHeight,
           duration: effectiveHoverAnimationDuration,
           curve: effectiveHoverAnimationCurve,
           decoration: BoxDecoration(
-            color: isHovered ? hoverColor : backgroundColor,
+            color: isHovered || isFocused ? hoverColor : backgroundColor,
             border: showBorder ? Border.all(color: effectiveBorderColor, width: effectiveBorderWidth) : null,
             borderRadius: effectiveBorderRadius,
           ),
           child: DefaultTextStyle.merge(
-            style: TextStyle(color: textColor, fontSize: effectiveButtonSize.textStyle.fontSize),
+            style: TextStyle(color: effectiveTextColor, fontSize: effectiveButtonSize.textStyle.fontSize),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,

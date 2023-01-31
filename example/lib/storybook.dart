@@ -29,11 +29,10 @@ class StorybookPage extends StatelessWidget {
       ),
       stories: [
         Story(
-          name: "FilledButton",
-          description: "FilledButton",
+          name: "Button",
           builder: (context) {
             return Center(
-              child: MoonFilledButton(
+              child: MoonButton(
                 buttonSize: context.knobs.options(
                   label: "Sizes",
                   initial: ButtonSize.md,
@@ -46,9 +45,61 @@ class StorybookPage extends StatelessWidget {
                   ],
                 ),
                 onTap: () {},
-                backgroundColor: context.moonTheme!.colors.piccolo,
+                backgroundColor: context.moonTheme!.colors.bulma,
                 //showPulseAnimation: true,
-                showBorder: true,
+                //showBorder: true,
+                leftIcon: const MoonPlaceholderIcon(),
+                //rightIcon: const MoonPlaceholderIcon(),
+                label: const Text("Testy"),
+              ),
+            );
+          },
+        ),
+        Story(
+          name: "Button.outlined",
+          builder: (context) {
+            return Center(
+              child: MoonButton.outlined(
+                buttonSize: context.knobs.options(
+                  label: "Sizes",
+                  initial: ButtonSize.md,
+                  options: const [
+                    Option(label: "XS", value: ButtonSize.xs),
+                    Option(label: "SM", value: ButtonSize.sm),
+                    Option(label: "MD", value: ButtonSize.md),
+                    Option(label: "LG", value: ButtonSize.lg),
+                    Option(label: "XL", value: ButtonSize.xl)
+                  ],
+                ),
+                onTap: () {},
+                showPulseAnimation: true,
+                //showBorder: true,
+                leftIcon: const MoonPlaceholderIcon(),
+                //rightIcon: const MoonPlaceholderIcon(),
+                label: const Text("Testy"),
+              ),
+            );
+          },
+        ),
+        Story(
+          name: "Button.text",
+          builder: (context) {
+            return Center(
+              child: MoonButton.text(
+                buttonSize: context.knobs.options(
+                  label: "Sizes",
+                  initial: ButtonSize.md,
+                  options: const [
+                    Option(label: "XS", value: ButtonSize.xs),
+                    Option(label: "SM", value: ButtonSize.sm),
+                    Option(label: "MD", value: ButtonSize.md),
+                    Option(label: "LG", value: ButtonSize.lg),
+                    Option(label: "XL", value: ButtonSize.xl)
+                  ],
+                ),
+                onTap: () {},
+                //showPulseAnimation: true,
+                //showBorder: true,
                 leftIcon: const MoonPlaceholderIcon(),
                 //rightIcon: const MoonPlaceholderIcon(),
                 label: const Text("Testy"),
