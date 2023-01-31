@@ -17,7 +17,7 @@ class StorybookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: "FilledButton",
+      //initialStory: "FilledButton",
       plugins: _plugins,
       wrapperBuilder: (context, child) => MaterialApp(
         theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
@@ -47,6 +47,8 @@ class StorybookPage extends StatelessWidget {
                 ),
                 onTap: () {},
                 backgroundColor: context.moonTheme!.colors.piccolo,
+                //showPulseAnimation: true,
+                showBorder: true,
                 leftIcon: const MoonPlaceholderIcon(),
                 //rightIcon: const MoonPlaceholderIcon(),
                 label: const Text("Testy"),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/control_wrapper.dart';
+import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button_sizes.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
@@ -19,9 +20,11 @@ class MoonFilledButton extends StatelessWidget {
   final VoidCallback? onLongPress;
   final ButtonSize? buttonSize;
   final FocusNode? focusNode;
+  final String? semanticLabel;
   final double? width;
   final double? height;
   final double? disabledOpacityValue;
+  final double? borderWidth;
   final double? focusBorderWidth;
   final double? gap;
   final double? pulseEffectWidth;
@@ -30,10 +33,12 @@ class MoonFilledButton extends StatelessWidget {
   final bool autofocus;
   final bool isFocusable;
   final bool ensureMinimalTouchTargetSize;
+  final bool showBorder;
   final bool showFocusAnimation;
   final bool showPulseAnimation;
   final bool showScaleAnimation;
   final Color backgroundColor;
+  final Color? borderColor;
   final Color? focusBorderColor;
   final Color? hoverOverlayColor;
   final Color? pulseEffectColor;
@@ -46,7 +51,7 @@ class MoonFilledButton extends StatelessWidget {
   final Curve? scaleAnimationCurve;
   final Curve? pulseAnimationCurve;
   final EdgeInsets? padding;
-  final BorderRadiusGeometry? borderRadius;
+  final BorderRadius? borderRadius;
   final Widget? label;
   final Widget? leftIcon;
   final Widget? rightIcon;
@@ -57,9 +62,11 @@ class MoonFilledButton extends StatelessWidget {
     this.onLongPress,
     this.buttonSize,
     this.focusNode,
+    this.semanticLabel,
     this.width,
     this.height,
     this.disabledOpacityValue,
+    this.borderWidth,
     this.focusBorderWidth,
     this.gap,
     this.pulseEffectWidth,
@@ -68,10 +75,12 @@ class MoonFilledButton extends StatelessWidget {
     this.autofocus = false,
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
+    this.showBorder = false,
     this.showFocusAnimation = true,
     this.showPulseAnimation = false,
     this.showScaleAnimation = true,
     this.backgroundColor = Colors.blue,
+    this.borderColor,
     this.focusBorderColor,
     this.hoverOverlayColor,
     this.pulseEffectColor,
@@ -139,10 +148,16 @@ class MoonFilledButton extends StatelessWidget {
         context.moonEffects?.buttonHoverEffect.hoverDuration ??
         MoonHoverEffects.lightButtonHoverEffect.hoverDuration;
 
+    final effectiveBorderColor = borderColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
+
+    final effectiveBorderWidth = borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
+
+    final effectiveFocusBorderColor = focusBorderColor ?? backgroundColor.withOpacity(0.2);
+
     return MoonControlWrapper(
       onTap: onTap,
       onLongPress: onLongPress,
-      semanticLabel: "MoonFilledButton",
+      semanticLabel: semanticLabel,
       semanticTypeIsButton: true,
       borderRadius: effectiveBorderRadius,
       disabledOpacityValue: disabledOpacityValue,
@@ -152,7 +167,7 @@ class MoonFilledButton extends StatelessWidget {
       autofocus: autofocus,
       isFocusable: isFocusable,
       showFocusAnimation: showFocusAnimation,
-      focusBorderColor: focusBorderColor,
+      focusBorderColor: effectiveFocusBorderColor,
       focusBorderWidth: focusBorderWidth,
       focusAnimationDuration: focusAnimationDuration,
       focusAnimationCurve: focusAnimationCurve,
@@ -174,6 +189,7 @@ class MoonFilledButton extends StatelessWidget {
           curve: effectiveHoverAnimationCurve,
           decoration: BoxDecoration(
             color: isHovered ? hoverColor : backgroundColor,
+            border: showBorder ? Border.all(color: effectiveBorderColor, width: effectiveBorderWidth) : null,
             borderRadius: effectiveBorderRadius,
           ),
           child: DefaultTextStyle.merge(

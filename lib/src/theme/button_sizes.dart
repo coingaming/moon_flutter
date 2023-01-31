@@ -13,7 +13,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     height: MoonSizes.sizes.xs,
     gap: MoonSizes.sizes.x5s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    borderRadius: MoonBorderRadiuses.borders.interactiveXs,
+    borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text12,
   );
 
@@ -21,7 +21,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     height: MoonSizes.sizes.sm,
     gap: MoonSizes.sizes.x5s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    borderRadius: MoonBorderRadiuses.borders.interactiveSm,
+    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
 
@@ -29,7 +29,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     height: MoonSizes.sizes.md,
     gap: MoonSizes.sizes.x4s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    borderRadius: MoonBorderRadiuses.borders.interactiveSm,
+    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
 
@@ -37,7 +37,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     height: MoonSizes.sizes.lg,
     gap: MoonSizes.sizes.x3s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    borderRadius: MoonBorderRadiuses.borders.interactiveSm,
+    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text16,
   );
 
@@ -45,7 +45,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     height: MoonSizes.sizes.xl,
     gap: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.xs),
-    borderRadius: MoonBorderRadiuses.borders.interactiveMd,
+    borderRadius: MoonBorders.borders.interactiveMd,
     textStyle: MoonTextStyles.heading.text16,
   );
 
@@ -59,7 +59,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
   final EdgeInsets padding;
 
   /// Button border radius.
-  final BorderRadiusGeometry borderRadius;
+  final BorderRadius borderRadius;
 
   /// Button text style.
   final TextStyle textStyle;
@@ -77,7 +77,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     double? height,
     double? gap,
     EdgeInsets? padding,
-    BorderRadiusGeometry? borderRadius,
+    BorderRadius? borderRadius,
     TextStyle? textStyle,
   }) {
     return MoonButtonSizes(
@@ -97,7 +97,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
       height: lerpDouble(height, other.height, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       padding: EdgeInsets.lerp(padding, other.padding, t)!,
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -110,7 +110,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("gap", gap))
       ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

@@ -15,7 +15,7 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
   static final controlFocusEffect = MoonControlsEffects(
     effectCurve: Curves.easeInOut,
     effectDuration: const Duration(milliseconds: 150),
-    effectColor: MoonColors.light.jiren,
+    effectColor: MoonColors.dark.jiren,
     effectWidth: 4,
   );
 

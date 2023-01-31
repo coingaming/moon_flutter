@@ -14,7 +14,7 @@ import 'package:moon_design/src/theme/typography.dart';
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
     buttons: MoonButton.sizes,
-    borders: MoonBorderRadiuses.borders,
+    borders: MoonBorders.borders,
     colors: MoonColors.light,
     effects: MoonEffects.light,
     opacity: MoonOpacity.opacities,
@@ -25,7 +25,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   static final dark = MoonTheme(
     buttons: MoonButton.sizes,
-    borders: MoonBorderRadiuses.borders,
+    borders: MoonBorders.borders,
     colors: MoonColors.dark,
     effects: MoonEffects.dark,
     opacity: MoonOpacity.opacities,
@@ -35,7 +35,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   );
 
   /// Moon Design System borders.
-  final MoonBorderRadiuses borders;
+  final MoonBorders borders;
 
   /// Moon Design System buttons theming.
   final MoonButton buttons;
@@ -71,7 +71,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   @override
   MoonTheme copyWith({
-    MoonBorderRadiuses? borders,
+    MoonBorders? borders,
     MoonButton? buttons,
     MoonColors? colors,
     MoonEffects? effects,
@@ -113,7 +113,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTheme"))
-      ..add(DiagnosticsProperty<MoonBorderRadiuses>("MoonBorderRadiuses", borders))
+      ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonButton>("MoonButton", buttons))
       ..add(DiagnosticsProperty<MoonColors>("moonColors", colors))
       ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
@@ -126,7 +126,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
-  MoonBorderRadiuses? get moonBorderRadiuses => moonTheme?.borders;
+  MoonBorders? get moonBorders => moonTheme?.borders;
   MoonButton? get moonButtons => moonTheme?.buttons;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonEffects? get moonEffects => moonTheme?.effects;

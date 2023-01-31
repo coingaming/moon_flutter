@@ -66,7 +66,7 @@ class MoonControlWrapper extends StatefulWidget {
 
   final MouseCursor cursor;
 
-  final BorderRadiusGeometry borderRadius;
+  final BorderRadius borderRadius;
 
   final MoonControlWrapperBuilder builder;
 
@@ -297,42 +297,6 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with TickerProv
 
   @override
   Widget build(BuildContext context) {
-    final scaleTween = Tween(
-      begin: 1.0,
-      end: widget.scaleAnimationLowerBound ??
-          context.moonEffects?.controlScaleEffect.effectLowerBound ??
-          MoonControlsEffects.controlScaleEffect.effectLowerBound,
-    );
-
-    final pulseTween = DecorationTween(
-      begin: BoxDecoration(
-        borderRadius: widget.borderRadius,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: widget.pulseEffectColor ??
-                context.moonEffects?.controlPulseEffect.effectColor ??
-                MoonControlsEffects.controlPulseEffect.effectColor!,
-          ),
-        ],
-      ),
-      end: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: widget.pulseEffectColor?.withOpacity(0) ??
-                context.moonEffects?.controlPulseEffect.effectColor?.withOpacity(0) ??
-                MoonControlsEffects.controlPulseEffect.effectColor!.withOpacity(0),
-            spreadRadius: widget.pulseEffectWidth ??
-                context.moonEffects?.controlPulseEffect.effectWidth ??
-                MoonControlsEffects.controlPulseEffect.effectWidth!,
-          ),
-        ],
-      ),
-    );
-
-    final scaleAnimation = _scaleAnimation != null ? scaleTween.animate(_scaleAnimation!) : null;
-    final pulseAnimation = _pulseAnimation != null ? pulseTween.animate(_pulseAnimation!) : null;
-
     final effectiveDisabledOpacityValue =
         widget.disabledOpacityValue ?? context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
 
@@ -351,6 +315,51 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> with TickerProv
     final effectiveFocusAnimationCurve = widget.focusAnimationCurve ??
         context.moonEffects?.controlFocusEffect.effectCurve ??
         MoonControlsEffects.controlFocusEffect.effectCurve;
+
+    final scaleTween = Tween(
+      begin: 1.0,
+      end: widget.scaleAnimationLowerBound ??
+          context.moonEffects?.controlScaleEffect.effectLowerBound ??
+          MoonControlsEffects.controlScaleEffect.effectLowerBound,
+    );
+
+    final effectivePulseEffectWidth = widget.pulseEffectWidth ??
+        context.moonEffects?.controlPulseEffect.effectWidth ??
+        MoonControlsEffects.controlPulseEffect.effectWidth!;
+
+    final pulseEffectEndBorderRadius = BorderRadius.only(
+      topLeft: widget.borderRadius.topLeft + Radius.circular(effectivePulseEffectWidth / 2),
+      topRight: widget.borderRadius.topRight + Radius.circular(effectivePulseEffectWidth / 2),
+      bottomLeft: widget.borderRadius.bottomLeft + Radius.circular(effectivePulseEffectWidth / 2),
+      bottomRight: widget.borderRadius.bottomRight + Radius.circular(effectivePulseEffectWidth / 2),
+    );
+
+    final pulseTween = DecorationTween(
+      begin: BoxDecoration(
+        borderRadius: widget.borderRadius,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: widget.pulseEffectColor ??
+                context.moonEffects?.controlPulseEffect.effectColor ??
+                MoonControlsEffects.controlPulseEffect.effectColor!,
+          ),
+        ],
+      ),
+      end: BoxDecoration(
+        borderRadius: pulseEffectEndBorderRadius,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: widget.pulseEffectColor?.withOpacity(0) ??
+                context.moonEffects?.controlPulseEffect.effectColor?.withOpacity(0) ??
+                MoonControlsEffects.controlPulseEffect.effectColor!.withOpacity(0),
+            spreadRadius: effectivePulseEffectWidth,
+          ),
+        ],
+      ),
+    );
+
+    final scaleAnimation = _scaleAnimation != null ? scaleTween.animate(_scaleAnimation!) : null;
+    final pulseAnimation = _pulseAnimation != null ? pulseTween.animate(_pulseAnimation!) : null;
 
     final Widget child = widget.builder(
       context,
