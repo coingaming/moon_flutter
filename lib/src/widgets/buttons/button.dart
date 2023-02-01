@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/control_wrapper.dart';
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button_sizes.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/widgets/control_wrapper.dart';
 
 enum ButtonSize {
   xs,
@@ -26,13 +26,14 @@ class MoonButton extends StatelessWidget {
   final double? height;
   final double? disabledOpacityValue;
   final double? borderWidth;
-  final double? focusBorderWidth;
   final double? gap;
-  final double? pulseEffectWidth;
+  final double? focusEffectExtent;
+  final double? pulseEffectExtent;
   final double? scaleAnimationLowerBound;
   final double minTouchTargetSize;
   final bool autofocus;
   final bool isFocusable;
+  final bool isFullWidth;
   final bool ensureMinimalTouchTargetSize;
   final bool showBorder;
   final bool showFocusAnimation;
@@ -40,7 +41,7 @@ class MoonButton extends StatelessWidget {
   final bool showScaleAnimation;
   final Color backgroundColor;
   final Color? borderColor;
-  final Color? focusBorderColor;
+  final Color? focusEffectColor;
   final Color? hoverOverlayColor;
   final Color? pulseEffectColor;
   final Duration? focusAnimationDuration;
@@ -68,13 +69,14 @@ class MoonButton extends StatelessWidget {
     this.height,
     this.disabledOpacityValue,
     this.borderWidth,
-    this.focusBorderWidth,
     this.gap,
-    this.pulseEffectWidth,
+    this.focusEffectExtent,
+    this.pulseEffectExtent,
     this.scaleAnimationLowerBound,
     this.minTouchTargetSize = 40,
     this.autofocus = false,
     this.isFocusable = true,
+    this.isFullWidth = false,
     this.ensureMinimalTouchTargetSize = false,
     this.showBorder = false,
     this.showFocusAnimation = true,
@@ -82,7 +84,7 @@ class MoonButton extends StatelessWidget {
     this.showScaleAnimation = true,
     this.backgroundColor = Colors.blue,
     this.borderColor,
-    this.focusBorderColor,
+    this.focusEffectColor,
     this.hoverOverlayColor,
     this.pulseEffectColor,
     this.focusAnimationDuration,
@@ -111,19 +113,20 @@ class MoonButton extends StatelessWidget {
     this.height,
     this.disabledOpacityValue,
     this.borderWidth,
-    this.focusBorderWidth,
     this.gap,
-    this.pulseEffectWidth,
+    this.focusEffectExtent,
+    this.pulseEffectExtent,
     this.scaleAnimationLowerBound,
     this.minTouchTargetSize = 40,
     this.autofocus = false,
     this.isFocusable = true,
+    this.isFullWidth = false,
     this.ensureMinimalTouchTargetSize = false,
     this.showFocusAnimation = true,
     this.showPulseAnimation = false,
     this.showScaleAnimation = true,
     this.borderColor,
-    this.focusBorderColor,
+    this.focusEffectColor,
     this.hoverOverlayColor,
     this.pulseEffectColor,
     this.focusAnimationDuration,
@@ -153,19 +156,19 @@ class MoonButton extends StatelessWidget {
     this.height,
     this.disabledOpacityValue,
     this.borderWidth,
-    this.focusBorderWidth,
     this.gap,
-    this.pulseEffectWidth,
+    this.focusEffectExtent,
+    this.pulseEffectExtent,
     this.scaleAnimationLowerBound,
     this.minTouchTargetSize = 40,
     this.autofocus = false,
     this.isFocusable = true,
+    this.isFullWidth = false,
     this.ensureMinimalTouchTargetSize = false,
     this.showFocusAnimation = true,
     this.showPulseAnimation = false,
     this.showScaleAnimation = true,
-    this.borderColor,
-    this.focusBorderColor,
+    this.focusEffectColor,
     this.hoverOverlayColor,
     this.pulseEffectColor,
     this.focusAnimationDuration,
@@ -182,6 +185,7 @@ class MoonButton extends StatelessWidget {
     this.leftIcon,
     this.rightIcon,
   })  : showBorder = false,
+        borderColor = null,
         backgroundColor = Colors.transparent;
 
   MoonButtonSizes getButtonSize(BuildContext context, ButtonSize? buttonSize) {
@@ -208,16 +212,28 @@ class MoonButton extends StatelessWidget {
     return MoonColors.dark.bulma;
   }
 
+  Color? getFocusColor({required bool isDarkMode}) {
+    if (backgroundColor != Colors.transparent) {
+      return isDarkMode ? backgroundColor.withOpacity(0.8) : backgroundColor.withOpacity(0.2);
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final backgroundLuminance = backgroundColor.computeLuminance();
 
     final effectiveTextColor = getTextColor(isDarkMode: context.isDarkMode, backgroundLuminance: backgroundLuminance);
+    final effectiveFocusColor = getFocusColor(isDarkMode: context.isDarkMode);
     final effectiveButtonSize = getButtonSize(context, buttonSize);
 
     final effectiveGap = gap ?? effectiveButtonSize.gap;
     final effectiveHeight = height ?? effectiveButtonSize.height;
     final effectivePadding = padding ?? effectiveButtonSize.padding;
+
+    final effectiveBorderColor = borderColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
+    final effectiveBorderWidth = borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
     final effectiveBorderRadius = borderRadius ?? effectiveButtonSize.borderRadius;
 
     final correctedPadding = EdgeInsetsDirectional.fromSTEB(
@@ -241,12 +257,6 @@ class MoonButton extends StatelessWidget {
         context.moonEffects?.buttonHoverEffect.hoverDuration ??
         MoonHoverEffects.lightButtonHoverEffect.hoverDuration;
 
-    final effectiveBorderColor = borderColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
-
-    final effectiveBorderWidth = borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
-
-    final effectiveFocusBorderColor = focusBorderColor ?? backgroundColor.withOpacity(0.2);
-
     return MoonControlWrapper(
       onTap: onTap,
       onLongPress: onLongPress,
@@ -260,8 +270,8 @@ class MoonButton extends StatelessWidget {
       autofocus: autofocus,
       isFocusable: isFocusable,
       showFocusAnimation: showFocusAnimation,
-      focusBorderColor: effectiveFocusBorderColor,
-      focusBorderWidth: focusBorderWidth,
+      focusEffectColor: effectiveFocusColor,
+      focusEffectExtent: focusEffectExtent,
       focusAnimationDuration: focusAnimationDuration,
       focusAnimationCurve: focusAnimationCurve,
       showScaleAnimation: showScaleAnimation,
@@ -270,45 +280,68 @@ class MoonButton extends StatelessWidget {
       scaleAnimationCurve: scaleAnimationCurve,
       showPulseAnimation: showPulseAnimation,
       pulseEffectColor: pulseEffectColor,
-      pulseEffectWidth: pulseEffectWidth,
+      pulseEffectExtent: pulseEffectExtent,
       pulseAnimationDuration: pulseAnimationDuration,
       pulseAnimationCurve: pulseAnimationCurve,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         return AnimatedContainer(
-          clipBehavior: Clip.hardEdge,
-          padding: correctedPadding,
           width: width,
           height: effectiveHeight,
+          padding: correctedPadding,
           duration: effectiveHoverAnimationDuration,
           curve: effectiveHoverAnimationCurve,
           decoration: BoxDecoration(
-            color: isHovered || isFocused ? hoverColor : backgroundColor,
+            color: isHovered || isFocused || isPressed ? hoverColor : backgroundColor,
             border: showBorder ? Border.all(color: effectiveBorderColor, width: effectiveBorderWidth) : null,
             borderRadius: effectiveBorderRadius,
           ),
           child: DefaultTextStyle.merge(
             style: TextStyle(color: effectiveTextColor, fontSize: effectiveButtonSize.textStyle.fontSize),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (leftIcon != null)
-                  Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                      child: leftIcon,
-                    ),
+            child: isFullWidth
+                ? Stack(
+                    fit: StackFit.expand,
+                    alignment: Alignment.center,
+                    children: [
+                      if (leftIcon != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                            child: leftIcon,
+                          ),
+                        ),
+                      if (label != null) Align(child: label),
+                      if (rightIcon != null)
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                            child: rightIcon,
+                          ),
+                        ),
+                    ],
+                  )
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (leftIcon != null)
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                            child: leftIcon,
+                          ),
+                        ),
+                      if (label != null) Flexible(child: label!),
+                      if (rightIcon != null)
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                            child: rightIcon,
+                          ),
+                        ),
+                    ],
                   ),
-                if (label != null) Flexible(child: label!),
-                if (rightIcon != null)
-                  Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                      child: rightIcon,
-                    ),
-                  ),
-              ],
-            ),
           ),
         );
       },

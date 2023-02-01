@@ -17,9 +17,10 @@ class MoonPlaceholderIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStrokeColor = iconColor ?? DefaultTextStyle.of(context).style.color ?? Colors.black;
+    final effectiveSize = DefaultTextStyle.of(context).style.fontSize == 12 ? 20 : 24;
 
     return CustomPaint(
-      size: Size(width, height),
+      size: Size(effectiveSize.toDouble(), effectiveSize.toDouble()),
       painter: _MoonPlaceholderIconPainter(
         strokeColor: effectiveStrokeColor,
       ),
