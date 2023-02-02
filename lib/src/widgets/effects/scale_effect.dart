@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/effects/controls_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/measure_size.dart';
+import 'package:moon_design/src/utils/sized_scale_transition.dart';
 
 class MoonScaleEffect extends StatefulWidget {
   final bool show;
@@ -26,6 +30,8 @@ class MoonScaleEffect extends StatefulWidget {
 class _MoonScaleEffectState extends State<MoonScaleEffect> with SingleTickerProviderStateMixin {
   AnimationController? _scaleAnimationController;
   CurvedAnimation? _scaleAnimation;
+
+  Size childSize = Size.zero;
 
   @override
   void didChangeDependencies() {
@@ -78,19 +84,23 @@ class _MoonScaleEffectState extends State<MoonScaleEffect> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final scaleTween = Tween(
-      begin: 1.0,
-      end: widget.effectExtent ??
-          context.moonEffects?.controlScaleEffect.effectLowerBound ??
-          MoonControlsEffects.controlScaleEffect.effectLowerBound,
-    );
+    final effectiveScaleEffectTarget = widget.effectExtent ??
+        context.moonEffects?.controlScaleEffect.effectLowerBound ??
+        MoonControlsEffects.controlScaleEffect.effectLowerBound!;
 
-    final scaleAnimation = scaleTween.animate(_scaleAnimation ?? const AlwaysStoppedAnimation(1));
+    log(childSize.toString());
 
-    return ScaleTransition(
-      filterQuality: FilterQuality.medium,
-      scale: scaleAnimation,
-      child: widget.child,
+    return MeasureSize(
+      getInitialSize: true,
+      onChange: (size) => childSize = size,
+      child: SizedScaleTransition(
+        childWidth: childSize.width,
+        childHeight: childSize.height,
+        scale: _scaleAnimation ?? const AlwaysStoppedAnimation(1),
+        targetScale: effectiveScaleEffectTarget,
+        filterQuality: FilterQuality.medium,
+        child: widget.child,
+      ),
     );
   }
 }

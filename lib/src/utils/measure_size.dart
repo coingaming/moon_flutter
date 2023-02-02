@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 
 typedef OnWidgetSizeChange = void Function(Size size);
 
-// Wrap this widget around your widget to get your widget size updates.
+/// Wrap this widget around your widget to get your widget size updates.
 class MeasureSize extends SingleChildRenderObjectWidget {
   final OnWidgetSizeChange onChange;
   final bool getInitialSize;
@@ -31,13 +31,16 @@ class MeasureSizeRenderObject extends RenderProxyBox {
   @override
   void performLayout() {
     super.performLayout();
+
+    final newSize = child!.size;
+
+    if (oldSize == newSize) return;
+
+    oldSize = newSize;
+
     if (getInitialSize) {
       onChange(child!.size);
     } else {
-      final newSize = child!.size;
-      if (oldSize == newSize) return;
-
-      oldSize = newSize;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         onChange(newSize);
       });
