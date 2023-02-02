@@ -64,8 +64,19 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
         duration: effectivePulseAnimationDuration,
         debugLabel: "MoonPulseEffect animation controller",
       );
+    }
+  }
 
-      if (widget.show) _pulseAnimationController!.repeat();
+  @override
+  void didUpdateWidget(covariant MoonPulseEffect oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.show != oldWidget.show) {
+      if (widget.show) {
+        _pulseAnimationController?.repeat();
+      } else {
+        _pulseAnimationController?.forward().then((_) => _pulseAnimationController?.reset());
+      }
     }
   }
 
