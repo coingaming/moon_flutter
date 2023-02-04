@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/utils/max_border_radius.dart';
 
 import 'package:moon_design/src/widgets/effects/painters/focus_effect_painter.dart';
 
@@ -31,17 +32,6 @@ class MoonFocusEffect extends StatefulWidget {
 class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late CurvedAnimation _focusAnimation;
-
-  double maxBorderRadius() {
-    final maxRadiusValue = [
-      max(widget.childBorderRadius.topLeft.x, widget.childBorderRadius.topLeft.y),
-      max(widget.childBorderRadius.topRight.x, widget.childBorderRadius.topRight.y),
-      max(widget.childBorderRadius.bottomLeft.x, widget.childBorderRadius.bottomLeft.y),
-      max(widget.childBorderRadius.bottomRight.x, widget.childBorderRadius.bottomRight.y)
-    ].reduce(max);
-
-    return maxRadiusValue > 1 ? maxRadiusValue : 1;
-  }
 
   @override
   void initState() {
@@ -83,7 +73,7 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final pulseEffectEndBorderRadius = maxBorderRadius();
+    final pulseEffectEndBorderRadius = maxBorderRadius(widget.childBorderRadius);
 
     return CustomPaint(
       isComplex: true,

@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 class FocusEffectPainter extends CustomPainter {
@@ -39,7 +40,7 @@ class FocusEffectPainter extends CustomPainter {
             rect.width * widthIncrease,
             rect.height * heightIncrease,
           ),
-          Radius.circular(endBorderRadius),
+          SmoothRadius(cornerRadius: endBorderRadius, cornerSmoothing: 1),
         ),
         paint,
       );

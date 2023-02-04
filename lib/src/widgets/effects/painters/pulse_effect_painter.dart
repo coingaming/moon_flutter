@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
@@ -55,7 +56,7 @@ class PulseEffectPainter extends CustomPainter {
             rect.width * widthIncrease,
             rect.height * heightIncrease,
           ),
-          Radius.circular(borderValueLerp!),
+          SmoothRadius(cornerRadius: borderValueLerp!, cornerSmoothing: 1),
         ),
         paint,
       );

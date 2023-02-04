@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
@@ -298,10 +299,33 @@ class MoonButton extends StatelessWidget {
           constraints: BoxConstraints(
             minWidth: effectiveHeight,
           ),
-          decoration: BoxDecoration(
+          decoration: ShapeDecoration(
             color: isHovered || isFocused || isPressed ? hoverColor : backgroundColor,
-            border: showBorder ? Border.all(color: effectiveBorderColor, width: effectiveBorderWidth) : null,
-            borderRadius: effectiveBorderRadius,
+            shape: SmoothRectangleBorder(
+              side: BorderSide(
+                color: effectiveBorderColor,
+                width: effectiveBorderWidth,
+                style: showBorder ? BorderStyle.solid : BorderStyle.none,
+              ),
+              borderRadius: SmoothBorderRadius.only(
+                topLeft: SmoothRadius(
+                  cornerRadius: effectiveBorderRadius.topLeft.x,
+                  cornerSmoothing: 1,
+                ),
+                topRight: SmoothRadius(
+                  cornerRadius: effectiveBorderRadius.topRight.x,
+                  cornerSmoothing: 1,
+                ),
+                bottomLeft: SmoothRadius(
+                  cornerRadius: effectiveBorderRadius.bottomLeft.x,
+                  cornerSmoothing: 1,
+                ),
+                bottomRight: SmoothRadius(
+                  cornerRadius: effectiveBorderRadius.bottomRight.x,
+                  cornerSmoothing: 1,
+                ),
+              ),
+            ),
           ),
           child: DefaultTextStyle.merge(
             style: TextStyle(color: effectiveTextColor, fontSize: effectiveButtonSize.textStyle.fontSize),
