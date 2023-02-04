@@ -9,7 +9,7 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
   static const controlScaleEffect = MoonControlsEffects(
     effectCurve: Curves.easeInOutCubic,
     effectDuration: Duration(milliseconds: 150),
-    effectLowerBound: 0.9,
+    effectScalar: 0.95,
   );
 
   static final controlPulseEffect = MoonControlsEffects(
@@ -31,15 +31,15 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
   /// Controls effect width.
   final double? effectExtent;
 
-  /// Controls effect AnimationController lower bound value.
-  final double? effectLowerBound;
+  /// Controls effect final scale.
+  final double? effectScalar;
 
   const MoonControlsEffects({
     required this.effectCurve,
     required this.effectDuration,
     this.effectColor,
     this.effectExtent,
-    this.effectLowerBound,
+    this.effectScalar,
   });
 
   @override
@@ -48,14 +48,14 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
     Duration? effectDuration,
     Color? effectColor,
     double? effectExtent,
-    double? effectLowerBound,
+    double? effectScalar,
   }) {
     return MoonControlsEffects(
       effectCurve: effectCurve ?? this.effectCurve,
       effectDuration: effectDuration ?? this.effectDuration,
       effectColor: effectColor ?? this.effectColor,
       effectExtent: effectExtent ?? this.effectExtent,
-      effectLowerBound: effectLowerBound ?? this.effectLowerBound,
+      effectScalar: effectScalar ?? this.effectScalar,
     );
   }
 
@@ -68,7 +68,7 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
       effectDuration: lerpDuration(effectDuration, other.effectDuration, t),
       effectColor: Color.lerp(effectColor, other.effectColor, t),
       effectExtent: lerpDouble(effectExtent, other.effectExtent, t),
-      effectLowerBound: lerpDouble(effectLowerBound, other.effectLowerBound, t),
+      effectScalar: lerpDouble(effectScalar, other.effectScalar, t),
     );
   }
 
@@ -81,6 +81,6 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
       ..add(DiagnosticsProperty<Duration>("effectDuration", effectDuration))
       ..add(ColorProperty("effectColor", effectColor))
       ..add(DoubleProperty("effectExtent", effectExtent))
-      ..add(DoubleProperty("transitionLowerBound", effectLowerBound));
+      ..add(DoubleProperty("transitionLowerBound", effectScalar));
   }
 }

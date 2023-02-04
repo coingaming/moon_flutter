@@ -2,26 +2,24 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/effects/focus_effects.dart';
-import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/effects/painters/focus_effect_painter.dart';
 
 class MoonFocusEffect extends StatefulWidget {
   final bool show;
-  final double? effectExtent;
-  final Color? effectColor;
-  final Curve? effectCurve;
-  final Duration? effectDuration;
+  final double effectExtent;
+  final Color effectColor;
+  final Curve effectCurve;
+  final Duration effectDuration;
   final BorderRadius childBorderRadius;
   final Widget child;
 
   const MoonFocusEffect({
     super.key,
-    this.show = true,
-    this.effectExtent,
-    this.effectColor,
-    this.effectCurve,
-    this.effectDuration,
+    required this.show,
+    required this.effectExtent,
+    required this.effectColor,
+    required this.effectCurve,
+    required this.effectDuration,
     required this.childBorderRadius,
     required this.child,
   });
@@ -31,8 +29,8 @@ class MoonFocusEffect extends StatefulWidget {
 }
 
 class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProviderStateMixin {
-  AnimationController? _focusAnimationController;
-  CurvedAnimation? _focusAnimation;
+  late AnimationController _animationController;
+  late CurvedAnimation _focusAnimation;
 
   double maxBorderRadius() {
     final maxRadiusValue = [
@@ -46,27 +44,19 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
 
-    if (mounted && _focusAnimationController == null) {
-      final effectiveFocusEffectDuration = widget.effectDuration ??
-          context.moonEffects?.controlFocusEffect.effectDuration ??
-          MoonFocusEffects.lightFocusEffect.effectDuration;
-
-      final effectiveFocusEffectCurve = widget.effectCurve ??
-          context.moonEffects?.controlFocusEffect.effectCurve ??
-          MoonFocusEffects.lightFocusEffect.effectCurve;
-
-      _focusAnimationController = AnimationController(
+    if (mounted) {
+      _animationController = AnimationController(
         vsync: this,
-        duration: effectiveFocusEffectDuration,
+        duration: widget.effectDuration,
         debugLabel: "MoonFocusEffect animation controller",
       );
 
       _focusAnimation = CurvedAnimation(
-        parent: _focusAnimationController!,
-        curve: effectiveFocusEffectCurve,
+        parent: _animationController,
+        curve: widget.effectCurve,
       );
     }
   }
@@ -77,19 +67,16 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
 
     if (mounted) {
       if (widget.show) {
-        _focusAnimationController?.forward();
+        _animationController.forward();
       } else {
-        _focusAnimationController?.reverse();
+        _animationController.reverse();
       }
     }
   }
 
   @override
   void dispose() {
-    if (_focusAnimationController != null) {
-      _focusAnimationController?.dispose();
-      _focusAnimationController = null;
-    }
+    _animationController.dispose();
 
     super.dispose();
   }
@@ -98,22 +85,14 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
   Widget build(BuildContext context) {
     final pulseEffectEndBorderRadius = maxBorderRadius();
 
-    final effectiveFocusEffectColor = widget.effectColor ??
-        context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonFocusEffects.lightFocusEffect.effectColor;
-
-    final effectiveFocusEffectExtent = widget.effectExtent ??
-        context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonFocusEffects.darkFocusEffect.effectExtent;
-
     return CustomPaint(
       isComplex: true,
       willChange: true,
       painter: FocusEffectPainter(
-        color: effectiveFocusEffectColor,
-        effectExtent: effectiveFocusEffectExtent,
+        color: widget.effectColor,
+        effectExtent: widget.effectExtent,
         borderRadiusValue: pulseEffectEndBorderRadius,
-        animation: _focusAnimation ?? const AlwaysStoppedAnimation(0),
+        animation: _focusAnimation,
       ),
       child: widget.child,
     );

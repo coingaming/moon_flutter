@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-//import 'package:moon_design/src/theme/effects/controls_effects.dart';
+import 'package:moon_design/src/theme/effects/controls_effects.dart';
+import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
@@ -29,11 +30,11 @@ class MoonControlWrapper extends StatefulWidget {
 
   final bool ensureMinimalTouchTargetSize;
 
-  final bool showFocusAnimation;
+  final bool showFocusEffect;
 
-  final bool showPulseAnimation;
+  final bool showPulseEffect;
 
-  final bool showPulseAnimationJiggle;
+  final bool showPulseEffectJiggle;
 
   final bool showScaleAnimation;
 
@@ -49,23 +50,23 @@ class MoonControlWrapper extends StatefulWidget {
 
   final double? pulseEffectExtent;
 
-  final double? scaleAnimationLowerBound;
+  final double? scaleEffectScalar;
 
   final Color? focusEffectColor;
 
   final Color? pulseEffectColor;
 
-  final Duration? focusAnimationDuration;
+  final Duration? focusEffectDuration;
 
-  final Duration? scaleAnimationDuration;
+  final Duration? scaleEffectDuration;
 
-  final Duration? pulseAnimationDuration;
+  final Duration? pulseEffectDuration;
 
-  final Curve? focusAnimationCurve;
+  final Curve? focusEffectCurve;
 
-  final Curve? pulseAnimationCurve;
+  final Curve? pulseEffectCurve;
 
-  final Curve? scaleAnimationCurve;
+  final Curve? scaleEffectCurve;
 
   final MouseCursor cursor;
 
@@ -81,9 +82,9 @@ class MoonControlWrapper extends StatefulWidget {
     this.autofocus = false,
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
-    this.showFocusAnimation = true,
-    this.showPulseAnimation = false,
-    this.showPulseAnimationJiggle = true,
+    this.showFocusEffect = true,
+    this.showPulseEffect = false,
+    this.showPulseEffectJiggle = true,
     this.showScaleAnimation = true,
     this.semanticTypeIsButton = false,
     this.semanticLabel,
@@ -91,15 +92,15 @@ class MoonControlWrapper extends StatefulWidget {
     this.disabledOpacityValue,
     this.focusEffectExtent,
     this.pulseEffectExtent,
-    this.scaleAnimationLowerBound,
+    this.scaleEffectScalar,
     this.focusEffectColor,
     this.pulseEffectColor,
-    this.focusAnimationDuration,
-    this.pulseAnimationDuration,
-    this.scaleAnimationDuration,
-    this.focusAnimationCurve,
-    this.pulseAnimationCurve,
-    this.scaleAnimationCurve,
+    this.focusEffectDuration,
+    this.pulseEffectDuration,
+    this.scaleEffectDuration,
+    this.focusEffectCurve,
+    this.pulseEffectCurve,
+    this.scaleEffectCurve,
     this.cursor = MouseCursor.defer,
     required this.borderRadius,
     required this.builder,
@@ -119,8 +120,8 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> {
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
   bool get _canAnimateScale => widget.showScaleAnimation && _isEnabled;
-  bool get _canAnimatePulse => widget.showPulseAnimation && _isEnabled;
-  bool get _canAnimateFocus => widget.showFocusAnimation && _isEnabled && (_isFocused || _isPressed);
+  bool get _canAnimatePulse => widget.showPulseEffect && _isEnabled;
+  bool get _canAnimateFocus => widget.showFocusEffect && _isEnabled && _isFocused;
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
   MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.forbidden;
 
@@ -244,6 +245,53 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> {
     final effectiveDisabledOpacityValue =
         widget.disabledOpacityValue ?? context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
 
+    // Scale effect props
+    final effectiveScaleEffectScalar = widget.scaleEffectScalar ??
+        context.moonEffects?.controlScaleEffect.effectScalar ??
+        MoonControlsEffects.controlScaleEffect.effectScalar!;
+
+    final effectiveScaleEffectDuration = widget.scaleEffectDuration ??
+        context.moonEffects?.controlScaleEffect.effectDuration ??
+        MoonControlsEffects.controlScaleEffect.effectDuration;
+
+    final effectiveScaleEffectCurve = widget.scaleEffectCurve ??
+        context.moonEffects?.controlScaleEffect.effectCurve ??
+        MoonControlsEffects.controlScaleEffect.effectCurve;
+
+    // Focus effect props
+    final effectiveFocusEffectColor = widget.focusEffectColor ??
+        context.moonEffects?.controlFocusEffect.effectColor ??
+        MoonFocusEffects.lightFocusEffect.effectColor;
+
+    final effectiveFocusEffectExtent = widget.focusEffectExtent ??
+        context.moonEffects?.controlFocusEffect.effectExtent ??
+        MoonFocusEffects.darkFocusEffect.effectExtent;
+
+    final effectiveFocusEffectCurve = widget.focusEffectCurve ??
+        context.moonEffects?.controlFocusEffect.effectCurve ??
+        MoonFocusEffects.lightFocusEffect.effectCurve;
+
+    final effectiveFocusEffectDuration = widget.focusEffectDuration ??
+        context.moonEffects?.controlFocusEffect.effectDuration ??
+        MoonFocusEffects.lightFocusEffect.effectDuration;
+
+    // Pulse effect props
+    final effectivePulseEffectColor = widget.pulseEffectColor ??
+        context.moonEffects?.controlPulseEffect.effectColor ??
+        MoonControlsEffects.controlPulseEffect.effectColor!;
+
+    final effectivePulseEffectExtent = widget.pulseEffectExtent ??
+        context.moonEffects?.controlPulseEffect.effectExtent ??
+        MoonControlsEffects.controlPulseEffect.effectExtent!;
+
+    final effectivePulseEffectDuration = widget.pulseEffectDuration ??
+        context.moonEffects?.controlPulseEffect.effectDuration ??
+        MoonControlsEffects.controlPulseEffect.effectDuration;
+
+    final effectivePulseEffectCurve = widget.pulseEffectCurve ??
+        context.moonEffects?.controlPulseEffect.effectCurve ??
+        MoonControlsEffects.controlPulseEffect.effectCurve;
+
     final Widget child = widget.builder(
       context,
       _isEnabled,
@@ -286,23 +334,23 @@ class _MoonControlWrapperState extends State<MoonControlWrapper> {
                 opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
                 child: MoonScaleEffect(
                   show: _canAnimateScale && _isPressed,
-                  effectExtent: widget.scaleAnimationLowerBound,
-                  effectCurve: widget.scaleAnimationCurve,
-                  effectDuration: widget.scaleAnimationDuration,
+                  effectCurve: effectiveScaleEffectCurve,
+                  effectDuration: effectiveScaleEffectDuration,
+                  effectScalar: effectiveScaleEffectScalar,
                   child: MoonPulseEffect(
                     show: _canAnimatePulse,
-                    showJiggle: widget.showPulseAnimationJiggle,
-                    effectColor: widget.pulseEffectColor,
-                    effectExtent: widget.pulseEffectExtent,
-                    effectCurve: widget.pulseAnimationCurve,
-                    effectDuration: widget.pulseAnimationDuration,
+                    showJiggle: widget.showPulseEffectJiggle,
+                    effectColor: effectivePulseEffectColor,
+                    effectExtent: effectivePulseEffectExtent,
+                    effectCurve: effectivePulseEffectCurve,
+                    effectDuration: effectivePulseEffectDuration,
                     childBorderRadius: widget.borderRadius,
                     child: MoonFocusEffect(
                       show: _canAnimateFocus,
-                      effectColor: widget.focusEffectColor,
-                      effectExtent: widget.focusEffectExtent,
-                      effectCurve: widget.focusAnimationCurve,
-                      effectDuration: widget.focusAnimationDuration,
+                      effectColor: effectiveFocusEffectColor,
+                      effectExtent: effectiveFocusEffectExtent,
+                      effectCurve: effectiveFocusEffectCurve,
+                      effectDuration: effectiveFocusEffectDuration,
                       childBorderRadius: widget.borderRadius,
                       child: child,
                     ),

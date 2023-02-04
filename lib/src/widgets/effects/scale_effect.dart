@@ -1,25 +1,24 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-
-import 'package:moon_design/src/theme/effects/controls_effects.dart';
-import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/utils/measure_size.dart';
-import 'package:moon_design/src/utils/sized_scale_transition.dart';
 
 class MoonScaleEffect extends StatefulWidget {
   final bool show;
-  final double? effectExtent;
-  final Curve? effectCurve;
-  final Duration? effectDuration;
+  final bool? reverseScaling;
+  final Curve effectCurve;
+  final Duration effectDuration;
+  final double effectScalar;
+  final double? parentWidth;
+  final double? parentHeight;
   final Widget child;
 
   const MoonScaleEffect({
     super.key,
-    this.show = true,
-    this.effectExtent,
-    this.effectCurve,
-    this.effectDuration,
+    required this.show,
+    this.reverseScaling = false,
+    required this.effectCurve,
+    required this.effectDuration,
+    required this.effectScalar,
+    this.parentWidth,
+    this.parentHeight,
     required this.child,
   });
 
@@ -28,79 +27,58 @@ class MoonScaleEffect extends StatefulWidget {
 }
 
 class _MoonScaleEffectState extends State<MoonScaleEffect> with SingleTickerProviderStateMixin {
-  AnimationController? _scaleAnimationController;
-  CurvedAnimation? _scaleAnimation;
-
-  Size childSize = Size.zero;
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
 
-    if (mounted && _scaleAnimationController == null) {
-      final effectiveScaleEffectDuration = widget.effectDuration ??
-          context.moonEffects?.controlScaleEffect.effectDuration ??
-          MoonControlsEffects.controlScaleEffect.effectDuration;
-
-      final effectiveScaleEffectCurve = widget.effectCurve ??
-          context.moonEffects?.controlScaleEffect.effectCurve ??
-          MoonControlsEffects.controlScaleEffect.effectCurve;
-
-      _scaleAnimationController = AnimationController(
+    if (mounted) {
+      _animationController = AnimationController(
         vsync: this,
-        duration: effectiveScaleEffectDuration,
+        duration: widget.effectDuration,
         debugLabel: "MoonScaleEffect animation controller",
       );
 
-      _scaleAnimation = CurvedAnimation(
-        parent: _scaleAnimationController!,
-        curve: effectiveScaleEffectCurve,
+      _scaleAnimation = Tween<double>(
+        begin: 1.0,
+        end: widget.effectScalar,
+      ).animate(
+        CurvedAnimation(
+          parent: _animationController,
+          curve: widget.effectCurve,
+        ),
       );
     }
   }
 
   @override
-  void didUpdateWidget(MoonScaleEffect oldWidget) {
+  void didUpdateWidget(covariant MoonScaleEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (mounted) {
       if (widget.show) {
-        _scaleAnimationController?.forward();
+        _animationController.forward();
       } else {
-        _scaleAnimationController?.reverse();
+        _animationController.reverse();
       }
     }
   }
 
   @override
   void dispose() {
-    if (_scaleAnimationController != null) {
-      _scaleAnimationController?.dispose();
-      _scaleAnimationController = null;
-    }
+    _animationController.dispose();
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final effectiveScaleEffectTarget = widget.effectExtent ??
-        context.moonEffects?.controlScaleEffect.effectLowerBound ??
-        MoonControlsEffects.controlScaleEffect.effectLowerBound!;
-
-    log(childSize.toString());
-
-    return MeasureSize(
-      getInitialSize: true,
-      onChange: (size) => childSize = size,
-      child: SizedScaleTransition(
-        childWidth: childSize.width,
-        childHeight: childSize.height,
-        scale: _scaleAnimation ?? const AlwaysStoppedAnimation(1),
-        targetScale: effectiveScaleEffectTarget,
-        filterQuality: FilterQuality.medium,
-        child: widget.child,
-      ),
+    return ScaleTransition(
+      scale: _scaleAnimation,
+      filterQuality: FilterQuality.medium,
+      child: widget.child,
     );
   }
 }

@@ -29,29 +29,30 @@ class MoonButton extends StatelessWidget {
   final double? gap;
   final double? focusEffectExtent;
   final double? pulseEffectExtent;
-  final double? scaleAnimationLowerBound;
+  final double? scaleEffectScalar;
   final double minTouchTargetSize;
   final bool autofocus;
   final bool isFocusable;
   final bool isFullWidth;
   final bool ensureMinimalTouchTargetSize;
   final bool showBorder;
-  final bool showFocusAnimation;
-  final bool showPulseAnimation;
+  final bool showFocusEffect;
+  final bool showPulseEffect;
+  final bool showPulseEffectJiggle;
   final bool showScaleAnimation;
   final Color backgroundColor;
   final Color? borderColor;
   final Color? focusEffectColor;
   final Color? hoverOverlayColor;
   final Color? pulseEffectColor;
-  final Duration? focusAnimationDuration;
-  final Duration? hoverAnimationDuration;
-  final Duration? scaleAnimationDuration;
-  final Duration? pulseAnimationDuration;
-  final Curve? focusAnimationCurve;
-  final Curve? hoverAnimationCurve;
-  final Curve? scaleAnimationCurve;
-  final Curve? pulseAnimationCurve;
+  final Duration? focusEffectDuration;
+  final Duration? hoverEffectDuration;
+  final Duration? scaleEffectDuration;
+  final Duration? pulseEffectDuration;
+  final Curve? focusEffectCurve;
+  final Curve? hoverEffectCurve;
+  final Curve? scaleEffectCurve;
+  final Curve? pulseEffectCurve;
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
   final Widget? label;
@@ -72,29 +73,30 @@ class MoonButton extends StatelessWidget {
     this.gap,
     this.focusEffectExtent,
     this.pulseEffectExtent,
-    this.scaleAnimationLowerBound,
+    this.scaleEffectScalar,
     this.minTouchTargetSize = 40,
     this.autofocus = false,
     this.isFocusable = true,
     this.isFullWidth = false,
     this.ensureMinimalTouchTargetSize = false,
     this.showBorder = false,
-    this.showFocusAnimation = true,
-    this.showPulseAnimation = false,
+    this.showFocusEffect = true,
+    this.showPulseEffect = false,
+    this.showPulseEffectJiggle = true,
     this.showScaleAnimation = true,
     this.backgroundColor = Colors.blue,
     this.borderColor,
     this.focusEffectColor,
     this.hoverOverlayColor,
     this.pulseEffectColor,
-    this.focusAnimationDuration,
-    this.hoverAnimationDuration,
-    this.scaleAnimationDuration,
-    this.pulseAnimationDuration,
-    this.focusAnimationCurve,
-    this.hoverAnimationCurve,
-    this.scaleAnimationCurve,
-    this.pulseAnimationCurve,
+    this.focusEffectDuration,
+    this.hoverEffectDuration,
+    this.scaleEffectDuration,
+    this.pulseEffectDuration,
+    this.focusEffectCurve,
+    this.hoverEffectCurve,
+    this.scaleEffectCurve,
+    this.pulseEffectCurve,
     this.padding,
     this.borderRadius,
     this.label,
@@ -116,27 +118,28 @@ class MoonButton extends StatelessWidget {
     this.gap,
     this.focusEffectExtent,
     this.pulseEffectExtent,
-    this.scaleAnimationLowerBound,
+    this.scaleEffectScalar,
     this.minTouchTargetSize = 40,
     this.autofocus = false,
     this.isFocusable = true,
     this.isFullWidth = false,
     this.ensureMinimalTouchTargetSize = false,
-    this.showFocusAnimation = true,
-    this.showPulseAnimation = false,
+    this.showFocusEffect = true,
+    this.showPulseEffect = false,
+    this.showPulseEffectJiggle = true,
     this.showScaleAnimation = true,
     this.borderColor,
     this.focusEffectColor,
     this.hoverOverlayColor,
     this.pulseEffectColor,
-    this.focusAnimationDuration,
-    this.hoverAnimationDuration,
-    this.scaleAnimationDuration,
-    this.pulseAnimationDuration,
-    this.focusAnimationCurve,
-    this.hoverAnimationCurve,
-    this.scaleAnimationCurve,
-    this.pulseAnimationCurve,
+    this.focusEffectDuration,
+    this.hoverEffectDuration,
+    this.scaleEffectDuration,
+    this.pulseEffectDuration,
+    this.focusEffectCurve,
+    this.hoverEffectCurve,
+    this.scaleEffectCurve,
+    this.pulseEffectCurve,
     this.padding,
     this.borderRadius,
     this.label,
@@ -159,26 +162,27 @@ class MoonButton extends StatelessWidget {
     this.gap,
     this.focusEffectExtent,
     this.pulseEffectExtent,
-    this.scaleAnimationLowerBound,
+    this.scaleEffectScalar,
     this.minTouchTargetSize = 40,
     this.autofocus = false,
     this.isFocusable = true,
     this.isFullWidth = false,
     this.ensureMinimalTouchTargetSize = false,
-    this.showFocusAnimation = true,
-    this.showPulseAnimation = false,
+    this.showFocusEffect = true,
+    this.showPulseEffect = false,
+    this.showPulseEffectJiggle = true,
     this.showScaleAnimation = true,
     this.focusEffectColor,
     this.hoverOverlayColor,
     this.pulseEffectColor,
-    this.focusAnimationDuration,
-    this.hoverAnimationDuration,
-    this.scaleAnimationDuration,
-    this.pulseAnimationDuration,
-    this.focusAnimationCurve,
-    this.hoverAnimationCurve,
-    this.scaleAnimationCurve,
-    this.pulseAnimationCurve,
+    this.focusEffectDuration,
+    this.hoverEffectDuration,
+    this.scaleEffectDuration,
+    this.pulseEffectDuration,
+    this.focusEffectCurve,
+    this.hoverEffectCurve,
+    this.scaleEffectCurve,
+    this.pulseEffectCurve,
     this.padding,
     this.borderRadius,
     this.label,
@@ -236,26 +240,26 @@ class MoonButton extends StatelessWidget {
     final effectiveBorderWidth = borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
     final effectiveBorderRadius = borderRadius ?? effectiveButtonSize.borderRadius;
 
+    final effectiveHoverOverlayColor = hoverOverlayColor ??
+        context.moonEffects?.buttonHoverEffect.primaryHoverColor ??
+        MoonHoverEffects.lightButtonHoverEffect.primaryHoverColor;
+
+    final effectiveHoverEffectCurve = hoverEffectCurve ??
+        context.moonEffects?.buttonHoverEffect.hoverCurve ??
+        MoonHoverEffects.lightButtonHoverEffect.hoverCurve;
+
+    final effectiveHoverEffectDuration = hoverEffectDuration ??
+        context.moonEffects?.buttonHoverEffect.hoverDuration ??
+        MoonHoverEffects.lightButtonHoverEffect.hoverDuration;
+
+    final hoverColor = Color.alphaBlend(effectiveHoverOverlayColor, backgroundColor);
+
     final correctedPadding = EdgeInsetsDirectional.fromSTEB(
       leftIcon == null && label != null ? effectivePadding.left : 0,
       effectivePadding.top,
       rightIcon == null && label != null ? effectivePadding.right : 0,
       effectivePadding.bottom,
     );
-
-    final effectiveHoverOverlayColor = hoverOverlayColor ??
-        context.moonEffects?.buttonHoverEffect.primaryHoverColor ??
-        MoonHoverEffects.lightButtonHoverEffect.primaryHoverColor;
-
-    final hoverColor = Color.alphaBlend(effectiveHoverOverlayColor, backgroundColor);
-
-    final effectiveHoverAnimationCurve = hoverAnimationCurve ??
-        context.moonEffects?.buttonHoverEffect.hoverCurve ??
-        MoonHoverEffects.lightButtonHoverEffect.hoverCurve;
-
-    final effectiveHoverAnimationDuration = hoverAnimationDuration ??
-        context.moonEffects?.buttonHoverEffect.hoverDuration ??
-        MoonHoverEffects.lightButtonHoverEffect.hoverDuration;
 
     return MoonControlWrapper(
       onTap: onTap,
@@ -269,27 +273,31 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       autofocus: autofocus,
       isFocusable: isFocusable,
-      showFocusAnimation: showFocusAnimation,
+      showFocusEffect: showFocusEffect,
       focusEffectColor: effectiveFocusColor,
       focusEffectExtent: focusEffectExtent,
-      focusAnimationDuration: focusAnimationDuration,
-      focusAnimationCurve: focusAnimationCurve,
+      focusEffectDuration: focusEffectDuration,
+      focusEffectCurve: focusEffectCurve,
       showScaleAnimation: showScaleAnimation,
-      scaleAnimationLowerBound: scaleAnimationLowerBound,
-      scaleAnimationDuration: scaleAnimationDuration,
-      scaleAnimationCurve: scaleAnimationCurve,
-      showPulseAnimation: showPulseAnimation,
+      scaleEffectScalar: scaleEffectScalar,
+      scaleEffectDuration: scaleEffectDuration,
+      scaleEffectCurve: scaleEffectCurve,
+      showPulseEffect: showPulseEffect,
+      showPulseEffectJiggle: showPulseEffectJiggle,
       pulseEffectColor: pulseEffectColor,
       pulseEffectExtent: pulseEffectExtent,
-      pulseAnimationDuration: pulseAnimationDuration,
-      pulseAnimationCurve: pulseAnimationCurve,
+      pulseEffectDuration: pulseEffectDuration,
+      pulseEffectCurve: pulseEffectCurve,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         return AnimatedContainer(
           width: width,
           height: effectiveHeight,
           padding: correctedPadding,
-          duration: effectiveHoverAnimationDuration,
-          curve: effectiveHoverAnimationCurve,
+          duration: effectiveHoverEffectDuration,
+          curve: effectiveHoverEffectCurve,
+          constraints: BoxConstraints(
+            minWidth: effectiveHeight,
+          ),
           decoration: BoxDecoration(
             color: isHovered || isFocused || isPressed ? hoverColor : backgroundColor,
             border: showBorder ? Border.all(color: effectiveBorderColor, width: effectiveBorderWidth) : null,
@@ -310,7 +318,10 @@ class MoonButton extends StatelessWidget {
                             child: leftIcon,
                           ),
                         ),
-                      if (label != null) Align(child: label),
+                      if (label != null)
+                        Align(
+                          child: label,
+                        ),
                       if (rightIcon != null)
                         Align(
                           alignment: Alignment.centerRight,
@@ -326,19 +337,15 @@ class MoonButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if (leftIcon != null)
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                            child: leftIcon,
-                          ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                          child: leftIcon,
                         ),
-                      if (label != null) Flexible(child: label!),
+                      if (label != null) label!,
                       if (rightIcon != null)
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                            child: rightIcon,
-                          ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                          child: rightIcon,
                         ),
                     ],
                   ),
