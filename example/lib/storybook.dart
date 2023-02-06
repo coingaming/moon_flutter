@@ -40,23 +40,6 @@ class StorybookPage extends StatelessWidget {
         Story(
           name: "Buttons",
           builder: (context) {
-            final buttonSizesKnob = context.knobs.options(
-              label: "Sizes",
-              initial: ButtonSize.md,
-              options: const [
-                Option(label: "XS", value: ButtonSize.xs),
-                Option(label: "SM", value: ButtonSize.sm),
-                Option(label: "MD", value: ButtonSize.md),
-                Option(label: "LG", value: ButtonSize.lg),
-                Option(label: "XL", value: ButtonSize.xl)
-              ],
-            );
-
-            final customTextInputKnob = context.knobs.text(
-              label: "Custom text input",
-              initial: "Button",
-            );
-
             final showLeftIconKnob = context.knobs.boolean(
               label: "Show left icon",
               initial: true,
@@ -71,42 +54,57 @@ class StorybookPage extends StatelessWidget {
               label: "Show right icon",
             );
 
+            final buttonSizesKnob = context.knobs.options(
+              label: "buttonSize",
+              description: "Button size variants.",
+              initial: ButtonSize.md,
+              options: const [
+                Option(label: "xs", value: ButtonSize.xs),
+                Option(label: "sm", value: ButtonSize.sm),
+                Option(label: "md", value: ButtonSize.md),
+                Option(label: "lg", value: ButtonSize.lg),
+                Option(label: "xl", value: ButtonSize.xl)
+              ],
+            );
+
             final setFullWidthKnob = context.knobs.boolean(
-              label: "Set full width",
+              label: "isFullWidth",
+              description: "Set button to full width.",
             );
 
             final showPulseEffectKnob = context.knobs.boolean(
-              label: "Show pulse animation",
+              label: "showPulseEffect",
+              description: "Show pulse animation.",
             );
 
             final showPulseEffectJiggleKnob = context.knobs.boolean(
-              label: "Show jiggling with pulse animation",
+              label: "showPulseEffectJiggle",
+              description: "Show jiggling with pulse animation.",
+            );
+
+            final customTextInputKnob = context.knobs.text(
+              label: "Custom label text",
+              initial: "MoonButton",
+            );
+
+            final showBorderRadiusKnob = context.knobs.sliderInt(
+              max: 28,
+              initial: 8,
+              label: "borderRadius",
+              description: "Button border radius.",
             );
 
             return Center(
               child: Column(
                 children: [
                   const SizedBox(height: 64),
-                  MoonButton(
-                    onTap: () {},
-                    borderRadius: BorderRadius.zero,
-                    buttonSize: buttonSizesKnob,
-                    isFullWidth: setFullWidthKnob,
-                    backgroundColor: context.moonTheme!.colors.bulma,
-                    showPulseEffect: showPulseEffectKnob,
-                    showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                    leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
-                    label: showLabelKnob ? Text(customTextInputKnob) : null,
-                    rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
-                  ),
-                  const SizedBox(height: 32),
                   MoonPrimaryButton(
                     onTap: () {},
                     buttonSize: buttonSizesKnob,
                     isFullWidth: setFullWidthKnob,
                     showPulseEffect: showPulseEffectKnob,
                     leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
-                    label: showLabelKnob ? Text(customTextInputKnob) : null,
+                    label: showLabelKnob ? const Text("MoonPrimaryButton") : null,
                     rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
                   ),
                   const SizedBox(height: 32),
@@ -116,7 +114,7 @@ class StorybookPage extends StatelessWidget {
                     isFullWidth: setFullWidthKnob,
                     showPulseEffect: showPulseEffectKnob,
                     leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
-                    label: showLabelKnob ? Text(customTextInputKnob) : null,
+                    label: showLabelKnob ? const Text("MoonSecondaryButton") : null,
                     rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
                   ),
                   const SizedBox(height: 32),
@@ -126,7 +124,7 @@ class StorybookPage extends StatelessWidget {
                     isFullWidth: setFullWidthKnob,
                     showPulseEffect: showPulseEffectKnob,
                     leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
-                    label: showLabelKnob ? Text(customTextInputKnob) : null,
+                    label: showLabelKnob ? const Text("MoonTertiaryButton") : null,
                     rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
                   ),
                   const SizedBox(height: 32),
@@ -135,6 +133,56 @@ class StorybookPage extends StatelessWidget {
                     buttonSize: buttonSizesKnob,
                     isFullWidth: setFullWidthKnob,
                     showPulseEffect: showPulseEffectKnob,
+                    leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                    label: showLabelKnob ? const Text("MoonGhostButton") : null,
+                    rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                  ),
+                  const SizedBox(height: 32),
+                  MoonButton(
+                    onTap: () {},
+                    height: 32,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    borderRadius: BorderRadius.circular(16),
+                    buttonSize: buttonSizesKnob,
+                    isFullWidth: setFullWidthKnob,
+                    backgroundColor: context.moonTheme!.colors.krillin100,
+                    showPulseEffect: showPulseEffectKnob,
+                    showPulseEffectJiggle: showPulseEffectJiggleKnob,
+                    leftIcon: showLeftIconKnob
+                        ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          )
+                        : null,
+                    label: showLabelKnob
+                        ? SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircleAvatar(
+                              backgroundColor: context.moonTheme!.colors.trunks,
+                              child: const Icon(
+                                Icons.person,
+                                size: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        : null,
+                    rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                  ),
+                  const SizedBox(height: 32),
+                  MoonButton(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(showBorderRadiusKnob.toDouble()),
+                    buttonSize: buttonSizesKnob,
+                    isFullWidth: setFullWidthKnob,
+                    backgroundColor: context.moonTheme!.colors.bulma,
+                    showPulseEffect: showPulseEffectKnob,
+                    showPulseEffectJiggle: showPulseEffectJiggleKnob,
                     leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
                     label: showLabelKnob ? Text(customTextInputKnob) : null,
                     rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,

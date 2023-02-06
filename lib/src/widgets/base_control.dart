@@ -233,7 +233,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   }
 
   Color getTextColor({required bool isDarkMode, required bool isHovered, required bool isFocused}) {
-    if (widget.textColor != null && (!isHovered || !isFocused)) return widget.textColor!;
+    if (widget.textColor != null && (!isHovered && !isFocused)) return widget.textColor!;
     if (widget.backgroundColor == null && isDarkMode) return MoonColors.dark.bulma;
     if (widget.backgroundColor == null && !isDarkMode) return MoonColors.light.bulma;
 
@@ -315,7 +315,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     final Color focusColor = getFocusColor(isDarkMode: context.isDarkMode, focusColor: effectiveFocusEffectColor);
 
     // Hover effect props
-    final Color effectivehoverEffectColor = widget.hoverEffectColor ??
+    final Color effectiveHoverEffectColor = widget.hoverEffectColor ??
         context.moonEffects?.buttonHoverEffect.primaryHoverColor ??
         MoonHoverEffects.lightButtonHoverEffect.primaryHoverColor;
 
@@ -327,7 +327,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
         context.moonEffects?.buttonHoverEffect.hoverDuration ??
         MoonHoverEffects.lightButtonHoverEffect.hoverDuration;
 
-    final Color hoverColor = Color.alphaBlend(effectivehoverEffectColor, widget.backgroundColor ?? Colors.transparent);
+    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, widget.backgroundColor ?? Colors.transparent);
 
     // Pulse effect props
     final Color effectivePulseEffectColor = widget.pulseEffectColor ??
