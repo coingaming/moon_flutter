@@ -1,22 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:moon_design/moon_design.dart';
+
+import 'package:moon_design/src/widgets/buttons/button.dart';
 
 class MoonSecondaryButton extends StatelessWidget {
+  /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
+
+  /// The callback that is called when the button is long-pressed.
   final VoidCallback? onLongPress;
+
+  /// The size of the button.
   final ButtonSize? buttonSize;
+
+  /// The focus node for the button.
   final FocusNode? focusNode;
+
+  /// The semantic label for the button.
   final String? semanticLabel;
+
+  /// The width of the button.
   final double? width;
+
+  /// The height of the button.
   final double? height;
+
+  /// The minimum size of the touch target.
   final double minTouchTargetSize;
+
+  /// Whether this button should ensure that it has a minimal touch target size.
   final bool ensureMinimalTouchTargetSize;
+
+  /// Whether this button should automatically be focused when it is mounted.
   final bool autofocus;
+
+  /// Whether this button should be focusable.
   final bool isFocusable;
+
+  /// Whether this button should be full width.
   final bool isFullWidth;
+
+  /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
-  final Widget? label;
+
+  /// The widget in the left icon slot of the button.
   final Widget? leftIcon;
+
+  /// The widget in the label slot of the button.
+  final Widget? label;
+
+  /// The widget in the right icon slot of the button.
   final Widget? rightIcon;
 
   const MoonSecondaryButton({

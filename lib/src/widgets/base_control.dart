@@ -1,8 +1,8 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
-
 import 'package:moon_design/src/theme/effects/controls_effects.dart';
 import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
@@ -22,76 +22,115 @@ typedef MoonBaseControlBuilder = Widget Function(
 );
 
 class MoonBaseControl extends StatefulWidget {
+  /// The callback that is called when the control is tapped or pressed.
   final VoidCallback? onTap;
 
+  /// The callback that is called when the control is long-pressed.
   final VoidCallback? onLongPress;
 
+  /// The focus node for this control.
   final FocusNode? focusNode;
 
+  /// Whether this control should autofocus when it is first added to the tree.
   final bool autofocus;
 
+  /// Whether this control should be focusable.
   final bool isFocusable;
 
+  /// Whether this control should ensure that it has a minimal touch target size.
   final bool ensureMinimalTouchTargetSize;
 
+  /// Whether this control should show a border.
   final bool showBorder;
 
+  /// Whether this control should show a focus effect.
   final bool showFocusEffect;
 
+  /// Whether this control should show a pulse effect.
   final bool showPulseEffect;
 
+  /// Whether this control should jiggle when the pulse effect is shown.
   final bool showPulseEffectJiggle;
 
+  /// Whether this control should show a scale animation.
   final bool showScaleAnimation;
 
+  /// Whether the semantic type of this control is button.
   final bool semanticTypeIsButton;
 
+  /// The semantic label for this control.
   final String? semanticLabel;
 
+  /// The minimum size of the touch target.
   final double minTouchTargetSize;
 
+  /// The height of the control.
+  final double? height;
+
+  /// The border width of the control.
   final double? borderWidth;
 
+  /// The opacity of the control when it is disabled.
   final double? disabledOpacityValue;
 
+  /// The extent of the focus effect.
   final double? focusEffectExtent;
 
+  /// The extent of the pulse effect.
   final double? pulseEffectExtent;
 
+  /// The scalar controlling the scaling of the scale effect.
   final double? scaleEffectScalar;
 
+  /// The background color of the control.
   final Color? backgroundColor;
 
+  /// The border color of the control.
   final Color? borderColor;
 
+  /// The text color of the control.
   final Color? textColor;
 
+  /// The color of the focus effect.
   final Color? focusEffectColor;
 
+  /// The color of the hover effect.
   final Color? hoverEffectColor;
 
+  /// The color of the pulse effect.
   final Color? pulseEffectColor;
 
+  /// The duration of the focus effect.
   final Duration? focusEffectDuration;
 
+  /// The duration of the hover effect.
   final Duration? hoverEffectDuration;
 
+  /// The duration of the scale effect.
   final Duration? scaleEffectDuration;
 
+  /// The duration of the pulse effect.
   final Duration? pulseEffectDuration;
 
+  /// The curve of the focus effect.
   final Curve? focusEffectCurve;
 
+  /// The curve of the hover effect.
   final Curve? hoverEffectCurve;
 
+  /// The curve of the pulse effect.
   final Curve? pulseEffectCurve;
 
+  /// The curve of the scale effect.
   final Curve? scaleEffectCurve;
 
+  /// The border radius of the control.
   final BorderRadius? borderRadius;
 
+  /// The mouse cursor of the control.
   final MouseCursor cursor;
 
+  /// The builder that builds the child of this control.
   final MoonBaseControlBuilder builder;
 
   const MoonBaseControl({
@@ -110,6 +149,7 @@ class MoonBaseControl extends StatefulWidget {
     this.semanticTypeIsButton = false,
     this.semanticLabel,
     this.minTouchTargetSize = 40.0,
+    this.height,
     this.borderWidth,
     this.disabledOpacityValue,
     this.focusEffectExtent,
@@ -285,7 +325,9 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   @override
   Widget build(BuildContext context) {
-    // Disabled opacity
+    final Color effectiveTextColor =
+        getTextColor(isDarkMode: context.isDarkMode, isHovered: _isHovered, isFocused: _isFocused);
+
     final double effectiveDisabledOpacityValue =
         widget.disabledOpacityValue ?? context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
 
@@ -367,9 +409,6 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
       _isPressed,
     );
 
-    final Color effectiveTextColor =
-        getTextColor(isDarkMode: context.isDarkMode, isHovered: _isHovered, isFocused: _isFocused);
-
     return RepaintBoundary(
       child: MergeSemantics(
         child: Semantics(
@@ -397,7 +436,9 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
               onShowFocusHighlight: _handleFocus,
               onFocusChange: _handleFocusChange,
               actions: _actions,
-              child: DefaultTextStyle(
+              child: AnimatedDefaultTextStyle(
+                duration: effectiveHoverEffectDuration,
+                curve: effectiveHoverEffectCurve,
                 style: TextStyle(color: effectiveTextColor),
                 child: TouchTargetPadding(
                   minSize: widget.ensureMinimalTouchTargetSize
@@ -420,6 +461,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
                         duration: const Duration(milliseconds: 150),
                         curve: Curves.easeInOut,
                         child: AnimatedContainer(
+                          height: widget.height,
                           duration: effectiveHoverEffectDuration,
                           curve: effectiveHoverEffectCurve,
                           decoration: ShapeDecoration(

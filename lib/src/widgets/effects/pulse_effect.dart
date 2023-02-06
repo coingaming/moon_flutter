@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moon_design/src/utils/max_border_radius.dart';
 
+import 'package:moon_design/src/utils/max_border_radius.dart';
 import 'package:moon_design/src/widgets/effects/painters/pulse_effect_painter.dart';
 
 class MoonPulseEffect extends StatefulWidget {

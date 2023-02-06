@@ -13,47 +13,130 @@ enum ButtonSize {
 }
 
 class MoonButton extends StatelessWidget {
+  /// The callback that is called when the control is tapped or pressed.
   final VoidCallback? onTap;
+
+  /// The callback that is called when the control is long-pressed.
   final VoidCallback? onLongPress;
+
+  /// The size of the button.
   final ButtonSize? buttonSize;
+
+  /// The focus node for the button.
   final FocusNode? focusNode;
+
+  /// The semantic label for the button.
   final String? semanticLabel;
+
+  /// The width of the button.
   final double? width;
+
+  /// The height of the button.
   final double? height;
+
+  /// The opacity value of the button when it is disabled.
   final double? disabledOpacityValue;
+
+  /// The border width of the button.
   final double? borderWidth;
+
+  /// The gap between the icon and the label.
   final double? gap;
+
+  /// The extent of the focus effect.
   final double? focusEffectExtent;
+
+  /// The extent of the pulse effect.
   final double? pulseEffectExtent;
+
+  /// The scalar controlling the scaling of the scale effect.
   final double? scaleEffectScalar;
+
+  /// The minimum size of the touch target.
   final double minTouchTargetSize;
+
+  /// Whether the button should automatically be focused when it is mounted.
   final bool autofocus;
+
+  /// Whether the button should be focusable.
   final bool isFocusable;
+
+  /// Whether the button should be full width.
   final bool isFullWidth;
+
+  /// Whether this button should ensure that it has a minimal touch target size.
   final bool ensureMinimalTouchTargetSize;
+
+  /// Whether the button should show a border.
   final bool showBorder;
+
+  /// Whether the button should show a focus effect.
   final bool showFocusEffect;
+
+  /// Whether the button should show a pulse effect.
   final bool showPulseEffect;
+
+  /// Whether the button should jiggle when the pulse effect is shown.
   final bool showPulseEffectJiggle;
+
+  /// Whether the button should show a scale animation.
   final bool showScaleAnimation;
+
+  /// The background color of the button.
   final Color? backgroundColor;
+
+  /// The border color of the button.
   final Color? borderColor;
+
+  /// The text color of the button.
   final Color? textColor;
+
+  /// The color of the focus effect.
   final Color? focusEffectColor;
+
+  /// The color of the hover effect.
   final Color? hoverEffectColor;
+
+  /// The color of the pulse effect.
   final Color? pulseEffectColor;
+
+  /// The duration of the focus effect.
   final Duration? focusEffectDuration;
+
+  /// The duration of the hover effect.
   final Duration? hoverEffectDuration;
+
+  /// The duration of the scale effect.
   final Duration? scaleEffectDuration;
+
+  /// The duration of the pulse effect.
   final Duration? pulseEffectDuration;
+
+  /// The curve of the focus effect.
   final Curve? focusEffectCurve;
+
+  /// The curve of the hover effect.
   final Curve? hoverEffectCurve;
+
+  /// The curve of the scale effect.
   final Curve? scaleEffectCurve;
+
+  /// The curve of the pulse effect.
   final Curve? pulseEffectCurve;
+
+  /// The padding of the button.
   final EdgeInsets? padding;
+
+  /// The border radius of the button.
   final BorderRadius? borderRadius;
-  final Widget? label;
+
+  /// The widget in the left icon slot of the button.
   final Widget? leftIcon;
+
+  /// The widget in the label slot of the button.
+  final Widget? label;
+
+  /// The widget in the right icon slot of the button.
   final Widget? rightIcon;
 
   const MoonButton({
@@ -151,6 +234,7 @@ class MoonButton extends StatelessWidget {
       showFocusEffect: showFocusEffect,
       backgroundColor: backgroundColor,
       borderColor: borderColor,
+      height: effectiveHeight,
       borderWidth: borderWidth,
       textColor: textColor,
       focusEffectColor: focusEffectColor,
