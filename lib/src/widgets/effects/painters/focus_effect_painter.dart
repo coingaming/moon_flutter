@@ -18,14 +18,14 @@ class FocusEffectPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (!animation.isDismissed) {
       final Rect rect = Rect.fromLTRB(0.0, 0.0, size.width, size.height);
-      final transformedColor = Color.lerp(Colors.transparent, color, animation.value)!;
-      final newWidth = rect.width + effectExtent;
-      final newHeight = rect.height + effectExtent;
-      final widthIncrease = newWidth / rect.width;
-      final heightIncrease = newHeight / rect.height;
-      final widthOffset = (widthIncrease - 1) / 2;
-      final heightOffset = (heightIncrease - 1) / 2;
-      final endBorderRadius = borderRadiusValue + (effectExtent / 2);
+      final Color transformedColor = Color.lerp(null, color, animation.value)!;
+      final double newWidth = rect.width + effectExtent;
+      final double newHeight = rect.height + effectExtent;
+      final double widthIncrease = newWidth / rect.width;
+      final double heightIncrease = newHeight / rect.height;
+      final double widthOffset = (widthIncrease - 1) / 2;
+      final double heightOffset = (heightIncrease - 1) / 2;
+      final double endBorderRadius = borderRadiusValue > 0 ? borderRadiusValue + (effectExtent / 2) : 0;
 
       final Paint paint = Paint()
         ..color = transformedColor

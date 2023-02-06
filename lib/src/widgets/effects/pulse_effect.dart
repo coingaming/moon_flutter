@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/utils/max_border_radius.dart';
 
 import 'package:moon_design/src/widgets/effects/painters/pulse_effect_painter.dart';
 
@@ -11,7 +10,7 @@ class MoonPulseEffect extends StatefulWidget {
   final Color effectColor;
   final Curve effectCurve;
   final Duration effectDuration;
-  final BorderRadius childBorderRadius;
+  final BorderRadius? childBorderRadius;
   final Widget child;
 
   const MoonPulseEffect({
@@ -22,7 +21,7 @@ class MoonPulseEffect extends StatefulWidget {
     required this.effectColor,
     required this.effectCurve,
     required this.effectDuration,
-    required this.childBorderRadius,
+    this.childBorderRadius,
     required this.child,
   });
 
@@ -37,17 +36,6 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
   late AnimationController _animationController;
   late CurvedAnimation _pulseAnimation;
   late Animation<double> _jiggleAnimation;
-
-  double maxBorderRadius() {
-    final maxRadiusValue = [
-      max(widget.childBorderRadius.topLeft.x, widget.childBorderRadius.topLeft.y),
-      max(widget.childBorderRadius.topRight.x, widget.childBorderRadius.topRight.y),
-      max(widget.childBorderRadius.bottomLeft.x, widget.childBorderRadius.bottomLeft.y),
-      max(widget.childBorderRadius.bottomRight.x, widget.childBorderRadius.bottomRight.y)
-    ].reduce(max);
-
-    return maxRadiusValue > 1 ? maxRadiusValue : 1;
-  }
 
   @override
   void initState() {
@@ -115,7 +103,7 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final pulseEffectEndBorderRadius = maxBorderRadius();
+    final double pulseEffectEndBorderRadius = maxBorderRadius(widget.childBorderRadius);
 
     // TODO: Review at a later date (when Impeller is stable?) if CurvedAnimation with Interval can be used. Currently
     //interval has a bug where the curve parameters curve.transform(t) internal method causes uneven buggy animation.
@@ -123,20 +111,22 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
     return RepaintBoundary(
       child: AnimatedBuilder(
         animation: _animationController,
-        builder: (context, child) => Transform.translate(
-          offset: Offset(widget.showJiggle ? _jiggleAnimation.value : 0.0, 0.0),
-          child: CustomPaint(
-            isComplex: true,
-            willChange: true,
-            painter: PulseEffectPainter(
-              color: widget.effectColor,
-              effectExtent: widget.effectExtent,
-              borderRadiusValue: pulseEffectEndBorderRadius,
-              animation: _pulseAnimation,
+        builder: (context, child) {
+          return Transform.translate(
+            offset: Offset(widget.showJiggle ? _jiggleAnimation.value : 0.0, 0.0),
+            child: CustomPaint(
+              isComplex: true,
+              willChange: true,
+              painter: PulseEffectPainter(
+                color: widget.effectColor,
+                effectExtent: widget.effectExtent,
+                borderRadiusValue: pulseEffectEndBorderRadius,
+                animation: _pulseAnimation,
+              ),
+              child: child,
             ),
-            child: child,
-          ),
-        ),
+          );
+        },
         child: widget.child,
       ),
     );

@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-double maxBorderRadius(BorderRadius borderRadius) {
+double maxBorderRadius(BorderRadius? borderRadius) {
+  if (borderRadius == null) return 0;
+
   final maxRadiusValue = [
     max(borderRadius.topLeft.x, borderRadius.topLeft.y),
     max(borderRadius.topRight.x, borderRadius.topRight.y),
