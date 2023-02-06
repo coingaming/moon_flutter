@@ -73,15 +73,23 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
   Widget build(BuildContext context) {
     final double focusEffectBorderRadius = maxBorderRadius(widget.childBorderRadius);
 
-    return CustomPaint(
-      willChange: true,
-      painter: FocusEffectPainter(
-        color: widget.effectColor,
-        effectExtent: widget.effectExtent,
-        borderRadiusValue: focusEffectBorderRadius,
-        animation: _focusAnimation,
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return CustomPaint(
+            willChange: true,
+            painter: FocusEffectPainter(
+              color: widget.effectColor,
+              effectExtent: widget.effectExtent,
+              borderRadiusValue: focusEffectBorderRadius,
+              animation: _focusAnimation,
+            ),
+            child: child,
+          );
+        },
+        child: widget.child,
       ),
-      child: widget.child,
     );
   }
 }

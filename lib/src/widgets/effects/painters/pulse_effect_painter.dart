@@ -47,7 +47,7 @@ class PulseEffectPainter extends CustomPainter {
       final Paint paint = Paint()
         ..color = transformedColor
         ..style = PaintingStyle.stroke
-        ..strokeWidth = rangeValue * effectExtent;
+        ..strokeWidth = rangeValue * effectExtent + 1; // +1 for squircle hairline border correction
 
       canvas.drawRRect(
         RRect.fromRectAndRadius(

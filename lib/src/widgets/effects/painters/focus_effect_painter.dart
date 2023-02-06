@@ -30,7 +30,7 @@ class FocusEffectPainter extends CustomPainter {
       final Paint paint = Paint()
         ..color = transformedColor
         ..style = PaintingStyle.stroke
-        ..strokeWidth = effectExtent;
+        ..strokeWidth = effectExtent + 1; // +1 for squircle hairline border correction
 
       canvas.drawRRect(
         RRect.fromRectAndRadius(
@@ -49,6 +49,6 @@ class FocusEffectPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(FocusEffectPainter oldDelegate) {
-    return false;
+    return animation != oldDelegate.animation || color != oldDelegate.color;
   }
 }

@@ -1,11 +1,7 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button_sizes.dart';
-import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/base_control.dart';
 
 enum ButtonSize {
@@ -123,31 +119,14 @@ class MoonButton extends StatelessWidget {
     }
   }
 
-  Color getTextColor({required bool isDarkMode, required bool isHovered, required bool isFocused}) {
-    if (textColor != null && (!isHovered || !isFocused)) return textColor!;
-    if (backgroundColor == null && isDarkMode) return MoonColors.dark.bulma;
-    if (backgroundColor == null && !isDarkMode) return MoonColors.light.bulma;
-
-    final backgroundLuminance = backgroundColor!.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final MoonButtonSizes effectiveButtonSize = getButtonSize(context, buttonSize);
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveButtonSize.borderRadius;
 
     final double effectiveGap = gap ?? effectiveButtonSize.gap;
     final double effectiveHeight = height ?? effectiveButtonSize.height;
     final EdgeInsets effectivePadding = padding ?? effectiveButtonSize.padding;
-
-    final Color effectiveBorderColor = borderColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
-    final double effectiveBorderWidth =
-        borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveButtonSize.borderRadius;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
       leftIcon == null && label != null ? effectivePadding.left : 0,
@@ -168,8 +147,12 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       autofocus: autofocus,
       isFocusable: isFocusable,
+      showBorder: showBorder,
       showFocusEffect: showFocusEffect,
       backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      borderWidth: borderWidth,
+      textColor: textColor,
       focusEffectColor: focusEffectColor,
       focusEffectExtent: focusEffectExtent,
       focusEffectDuration: focusEffectDuration,
@@ -188,48 +171,15 @@ class MoonButton extends StatelessWidget {
       pulseEffectDuration: pulseEffectDuration,
       pulseEffectCurve: pulseEffectCurve,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
-        final Color effectiveTextColor =
-            getTextColor(isDarkMode: context.isDarkMode, isHovered: isHovered, isFocused: isFocused);
-
         return AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           curve: Curves.easeInOut,
           width: width,
           height: effectiveHeight,
           padding: correctedPadding,
-          constraints: BoxConstraints(
-            minWidth: effectiveHeight,
-          ),
-          decoration: ShapeDecoration(
-            shape: SmoothRectangleBorder(
-              borderAlign: BorderAlign.outside,
-              side: BorderSide(
-                color: effectiveBorderColor,
-                width: effectiveBorderWidth,
-                style: showBorder ? BorderStyle.solid : BorderStyle.none,
-              ),
-              borderRadius: SmoothBorderRadius.only(
-                topLeft: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.topLeft.x,
-                  cornerSmoothing: 1,
-                ),
-                topRight: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.topRight.x,
-                  cornerSmoothing: 1,
-                ),
-                bottomLeft: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.bottomLeft.x,
-                  cornerSmoothing: 1,
-                ),
-                bottomRight: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.bottomRight.x,
-                  cornerSmoothing: 1,
-                ),
-              ),
-            ),
-          ),
+          constraints: BoxConstraints(minWidth: effectiveHeight),
           child: DefaultTextStyle.merge(
-            style: TextStyle(color: effectiveTextColor, fontSize: effectiveButtonSize.textStyle.fontSize),
+            style: TextStyle(fontSize: effectiveButtonSize.textStyle.fontSize),
             child: isFullWidth
                 ? Stack(
                     fit: StackFit.expand,
