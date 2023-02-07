@@ -3,7 +3,7 @@ description: Showcase Moon Design.
 
 publish_to: 'none' 
 
-version: 1.0.0+1
+version: 0.1.1
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   moon_design:
     path: ../
+  package_info_plus: ^3.0.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0
