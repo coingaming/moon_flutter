@@ -11,5 +11,4 @@ jobs:
         with:
           release-type: dart
           package-name: moon_design
-          extra-files: |
-            example/pubspec.yaml
+          extra-files: ./example/pubspec.yaml
