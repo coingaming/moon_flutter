@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/moon_design.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class MoonVersionWidget extends StatefulWidget {
   const MoonVersionWidget({super.key});
@@ -16,12 +17,10 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
 
-    final fileContent = await DefaultAssetBundle.of(context).loadString("../pubspec.lock");
-    final entry = fileContent.split("moon_design:")[1].split("version:")[1];
-    final version = RegExp('"(.*?)"').firstMatch(entry)?.group(0)?.replaceAll('"', "");
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     setState(() {
-      _version = version;
+      _version = packageInfo.version;
     });
   }
 
