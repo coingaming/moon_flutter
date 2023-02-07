@@ -8,6 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  figma_squircle: ^0.5.3
   flutter:
     sdk: flutter
 

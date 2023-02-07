@@ -1,83 +1,93 @@
-import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
 import 'package:moon_design/src/theme/borders.dart';
+import 'package:moon_design/src/theme/button_theme.dart';
 import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/hover_effects.dart';
+import 'package:moon_design/src/theme/effects/effects.dart';
+import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/transitions.dart';
 import 'package:moon_design/src/theme/typography.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
-    borders: const MoonBorders(),
+    buttonTheme: MoonButtonTheme.sizes,
+    borders: MoonBorders.borders,
     colors: MoonColors.light,
-    hoverEffects: MoonHoverEffects.light,
+    effects: MoonEffects.light,
+    opacity: MoonOpacity.opacities,
     shadows: MoonShadows.light,
-    sizes: const MoonSizes(),
-    transitions: const MoonTransitions(),
-    typography: const MoonTypography(),
+    sizes: MoonSizes.sizes,
+    typography: MoonTypography.textStyles,
   );
 
   static final dark = MoonTheme(
-    borders: const MoonBorders(),
+    buttonTheme: MoonButtonTheme.sizes,
+    borders: MoonBorders.borders,
     colors: MoonColors.dark,
-    hoverEffects: MoonHoverEffects.dark,
+    effects: MoonEffects.dark,
+    opacity: MoonOpacity.opacities,
     shadows: MoonShadows.dark,
-    sizes: const MoonSizes(),
-    transitions: const MoonTransitions(),
-    typography: const MoonTypography(),
+    sizes: MoonSizes.sizes,
+    typography: MoonTypography.textStyles,
   );
 
-  /// MDS borders.
+  /// Moon Design System borders.
   final MoonBorders borders;
 
-  /// MDS colors.
+  /// Moon Design System buttonTheme theming.
+  final MoonButtonTheme buttonTheme;
+
+  /// Moon Design System colors.
   final MoonColors colors;
 
-  /// MDS hover effects.
-  final MoonHoverEffects hoverEffects;
+  /// Moon Design System effects.
+  final MoonEffects effects;
 
-  /// MDS shadows.
+  /// Moon Design System opacities.
+  final MoonOpacity opacity;
+
+  /// Moon Design System shadows.
   final MoonShadows shadows;
 
-  /// MDS sizes.
+  /// Moon Design System sizes.
   final MoonSizes sizes;
 
-  /// MDS transitions.
-  final MoonTransitions transitions;
-
-  /// MDS typography.
+  /// Moon Design System typography.
   final MoonTypography typography;
 
   const MoonTheme({
     required this.borders,
+    required this.buttonTheme,
     required this.colors,
-    required this.hoverEffects,
+    required this.effects,
+    required this.opacity,
     required this.shadows,
     required this.sizes,
-    required this.transitions,
     required this.typography,
   });
 
   @override
   MoonTheme copyWith({
     MoonBorders? borders,
+    MoonButtonTheme? buttonTheme,
     MoonColors? colors,
-    MoonHoverEffects? hoverEffects,
+    MoonEffects? effects,
+    MoonOpacity? opacity,
     MoonShadows? shadows,
     MoonSizes? sizes,
-    MoonTransitions? transitions,
     MoonTypography? typography,
   }) {
     return MoonTheme(
       borders: borders ?? this.borders,
+      buttonTheme: buttonTheme ?? this.buttonTheme,
       colors: colors ?? this.colors,
-      hoverEffects: hoverEffects ?? this.hoverEffects,
+      effects: effects ?? this.effects,
+      opacity: opacity ?? this.opacity,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
-      transitions: transitions ?? this.transitions,
       typography: typography ?? this.typography,
     );
   }
@@ -88,11 +98,12 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
     return MoonTheme(
       borders: borders.lerp(other.borders, t),
+      buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       colors: colors.lerp(other.colors, t),
-      hoverEffects: hoverEffects.lerp(other.hoverEffects, t),
+      effects: effects.lerp(other.effects, t),
+      opacity: opacity.lerp(other.opacity, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
-      transitions: transitions.lerp(other.transitions, t),
       typography: typography.lerp(other.typography, t),
     );
   }
@@ -102,12 +113,25 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTheme"))
-      ..add(DiagnosticsProperty<MoonBorders>("moonBorders", borders))
+      ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
+      ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
       ..add(DiagnosticsProperty<MoonColors>("moonColors", colors))
-      ..add(DiagnosticsProperty<MoonHoverEffects>("moonHoverEffects", hoverEffects))
+      ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
+      ..add(DiagnosticsProperty<MoonOpacity>("moonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonShadows>("moonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("moonSizes", sizes))
-      ..add(DiagnosticsProperty<MoonTransitions>("moonTransitions", transitions))
       ..add(DiagnosticsProperty<MoonTypography>("moonTypography", typography));
   }
+}
+
+extension MoonThemeX on BuildContext {
+  MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
+  MoonBorders? get moonBorders => moonTheme?.borders;
+  MoonButtonTheme? get moonButtonTheme => moonTheme?.buttonTheme;
+  MoonColors? get moonColors => moonTheme?.colors;
+  MoonEffects? get moonEffects => moonTheme?.effects;
+  MoonOpacity? get moonOpacity => moonTheme?.opacity;
+  MoonShadows? get moonShadows => moonTheme?.shadows;
+  MoonSizes? get moonSizes => moonTheme?.sizes;
+  MoonTypography? get moonTypography => moonTheme?.typography;
 }

@@ -1,51 +1,64 @@
 import 'dart:ui';
 
-import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 @immutable
 class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
-  /// (5x) Extra small size, default value 4.
+  static const sizes = MoonSizes(
+    x5s: 4,
+    x4s: 8,
+    x3s: 12,
+    x2s: 16,
+    xs: 24,
+    sm: 32,
+    md: 40,
+    lg: 48,
+    xl: 56,
+    x2l: 64,
+  );
+
+  /// (5x) Extra small size.
   final double x5s;
 
-  /// (4x) Extra small size, default value 8.
+  /// (4x) Extra small size.
   final double x4s;
 
-  /// (3x) Extra small size, default value 12.
+  /// (3x) Extra small size.
   final double x3s;
 
-  /// (2x) Extra small size, default value 16.
+  /// (2x) Extra small size.
   final double x2s;
 
-  /// Extra small size, default value 24.
+  /// Extra small size.
   final double xs;
 
-  /// Small size, default value 32.
+  /// Small size.
   final double sm;
 
-  /// Medium size, default value 40.
+  /// Medium size.
   final double md;
 
-  /// Large size, default value 48.
+  /// Large size.
   final double lg;
 
-  /// Extra large size, default value 56.
+  /// Extra large size.
   final double xl;
 
-  /// (2x) Extra large size, default value 64.
+  /// (2x) Extra large size.
   final double x2l;
 
   const MoonSizes({
-    this.x5s = 4,
-    this.x4s = 8,
-    this.x3s = 12,
-    this.x2s = 16,
-    this.xs = 24,
-    this.sm = 32,
-    this.md = 40,
-    this.lg = 48,
-    this.xl = 56,
-    this.x2l = 64,
+    required this.x5s,
+    required this.x4s,
+    required this.x3s,
+    required this.x2s,
+    required this.xs,
+    required this.sm,
+    required this.md,
+    required this.lg,
+    required this.xl,
+    required this.x2l,
   });
 
   @override

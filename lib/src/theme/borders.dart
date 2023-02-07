@@ -1,71 +1,76 @@
 import 'dart:ui';
 
-import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 @immutable
 class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMixin {
+  static const borders = MoonBorders(
+    interactiveXs: BorderRadius.all(Radius.circular(4)),
+    interactiveSm: BorderRadius.all(Radius.circular(8)),
+    interactiveMd: BorderRadius.all(Radius.circular(12)),
+    surfaceXs: BorderRadius.all(Radius.circular(4)),
+    surfaceSm: BorderRadius.all(Radius.circular(8)),
+    surfaceMd: BorderRadius.all(Radius.circular(12)),
+    surfaceLg: BorderRadius.all(Radius.circular(16)),
+    borderWidth: 1,
+  );
+
   /// Interactive radius XS.
-  final Radius iXs;
+  final BorderRadius interactiveXs;
 
   /// Interactive radius SM.
-  final Radius iSm;
+  final BorderRadius interactiveSm;
 
   /// Interactive radius MD.
-  final Radius iMd;
+  final BorderRadius interactiveMd;
 
   /// Surface radius XS.
-  final Radius sXs;
+  final BorderRadius surfaceXs;
 
   /// Surface radius SM.
-  final Radius sSm;
+  final BorderRadius surfaceSm;
 
   /// Surface radius MD.
-  final Radius sMd;
+  final BorderRadius surfaceMd;
 
   /// Surface radius LG.
-  final Radius sLg;
+  final BorderRadius surfaceLg;
 
   /// Default border width.
-  final double borderDefault;
-
-  /// Interactive border width.
-  final double borderInteractive;
+  final double borderWidth;
 
   const MoonBorders({
-    this.iXs = const Radius.circular(4),
-    this.iSm = const Radius.circular(8),
-    this.iMd = const Radius.circular(12),
-    this.sXs = const Radius.circular(4),
-    this.sSm = const Radius.circular(8),
-    this.sMd = const Radius.circular(12),
-    this.sLg = const Radius.circular(16),
-    this.borderDefault = 1,
-    this.borderInteractive = 2,
+    required this.interactiveXs,
+    required this.interactiveSm,
+    required this.interactiveMd,
+    required this.surfaceXs,
+    required this.surfaceSm,
+    required this.surfaceMd,
+    required this.surfaceLg,
+    required this.borderWidth,
   });
 
   @override
   MoonBorders copyWith({
-    Radius? iXs,
-    Radius? iSm,
-    Radius? iMd,
-    Radius? sXs,
-    Radius? sSm,
-    Radius? sMd,
-    Radius? sLg,
-    double? borderDefault,
-    double? borderInteractive,
+    BorderRadius? interactiveXs,
+    BorderRadius? interactiveSm,
+    BorderRadius? interactiveMd,
+    BorderRadius? surfaceXs,
+    BorderRadius? surfaceSm,
+    BorderRadius? surfaceMd,
+    BorderRadius? surfaceLg,
+    double? borderWidth,
   }) {
     return MoonBorders(
-      iXs: iXs ?? this.iXs,
-      iSm: iSm ?? this.iSm,
-      iMd: iMd ?? this.iMd,
-      sXs: sXs ?? this.sXs,
-      sSm: sSm ?? this.sSm,
-      sMd: sMd ?? this.sMd,
-      sLg: sLg ?? this.sLg,
-      borderDefault: borderDefault ?? this.borderDefault,
-      borderInteractive: borderInteractive ?? this.borderInteractive,
+      interactiveXs: interactiveXs ?? this.interactiveXs,
+      interactiveSm: interactiveSm ?? this.interactiveSm,
+      interactiveMd: interactiveMd ?? this.interactiveMd,
+      surfaceXs: surfaceXs ?? this.surfaceXs,
+      surfaceSm: surfaceSm ?? this.surfaceSm,
+      surfaceMd: surfaceMd ?? this.surfaceMd,
+      surfaceLg: surfaceLg ?? this.surfaceLg,
+      borderWidth: borderWidth ?? this.borderWidth,
     );
   }
 
@@ -74,15 +79,14 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     if (other is! MoonBorders) return this;
 
     return MoonBorders(
-      iXs: Radius.lerp(iXs, other.iXs, t)!,
-      iSm: Radius.lerp(iSm, other.iSm, t)!,
-      iMd: Radius.lerp(iMd, other.iMd, t)!,
-      sXs: Radius.lerp(sXs, other.sXs, t)!,
-      sSm: Radius.lerp(sSm, other.sSm, t)!,
-      sMd: Radius.lerp(sMd, other.sMd, t)!,
-      sLg: Radius.lerp(sLg, other.sLg, t)!,
-      borderDefault: lerpDouble(borderDefault, other.borderDefault, t)!,
-      borderInteractive: lerpDouble(borderInteractive, other.borderInteractive, t)!,
+      interactiveXs: BorderRadius.lerp(interactiveXs, other.interactiveXs, t)!,
+      interactiveSm: BorderRadius.lerp(interactiveSm, other.interactiveSm, t)!,
+      interactiveMd: BorderRadius.lerp(interactiveMd, other.interactiveMd, t)!,
+      surfaceXs: BorderRadius.lerp(surfaceXs, other.surfaceXs, t)!,
+      surfaceSm: BorderRadius.lerp(surfaceSm, other.surfaceSm, t)!,
+      surfaceMd: BorderRadius.lerp(surfaceMd, other.surfaceMd, t)!,
+      surfaceLg: BorderRadius.lerp(surfaceLg, other.surfaceLg, t)!,
+      borderWidth: lerpDouble(borderWidth, other.borderWidth, t)!,
     );
   }
 
@@ -91,14 +95,13 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonBorders"))
-      ..add(DiagnosticsProperty<Radius>("iXs", iXs))
-      ..add(DiagnosticsProperty<Radius>("iSm", iSm))
-      ..add(DiagnosticsProperty<Radius>("iMd", iMd))
-      ..add(DiagnosticsProperty<Radius>("sXs", sXs))
-      ..add(DiagnosticsProperty<Radius>("sSm", sSm))
-      ..add(DiagnosticsProperty<Radius>("sMd", sMd))
-      ..add(DiagnosticsProperty<Radius>("sLg", sLg))
-      ..add(DoubleProperty("border", borderDefault))
-      ..add(DoubleProperty("borderInteractive", borderInteractive));
+      ..add(DiagnosticsProperty<BorderRadius>("interactiveXs", interactiveXs))
+      ..add(DiagnosticsProperty<BorderRadius>("interactiveSm", interactiveSm))
+      ..add(DiagnosticsProperty<BorderRadius>("interactiveMd", interactiveMd))
+      ..add(DiagnosticsProperty<BorderRadius>("surfaceXs", surfaceXs))
+      ..add(DiagnosticsProperty<BorderRadius>("surfaceSm", surfaceSm))
+      ..add(DiagnosticsProperty<BorderRadius>("surfaceMd", surfaceMd))
+      ..add(DiagnosticsProperty<BorderRadius>("surfaceLg", surfaceLg))
+      ..add(DoubleProperty("borderWidth", borderWidth));
   }
 }

@@ -22,3 +22,4 @@ analyzer:
 linter:
   rules:
     depend_on_referenced_packages: false
+    use_setters_to_change_properties: false
