@@ -4,6 +4,13 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 
+/// MDS primary button variant.
+///
+/// See also:
+///
+///   * [MoonSecondaryButton], MDS secondary button.
+///   * [MoonTertiaryButton], MDS tertiary button.
+///   * [MoonGhostButton], MDS ghost button.
 class MoonPrimaryButton extends StatelessWidget {
   /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;

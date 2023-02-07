@@ -51,6 +51,13 @@ class MoonSecondaryButton extends StatelessWidget {
   /// The widget in the right icon slot of the button.
   final Widget? rightIcon;
 
+  /// MDS secondary button variant.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonPrimaryButton], MDS primary button.
+  ///   * [MoonTertiaryButton], MDS tertiary button.
+  ///   * [MoonGhostButton], MDS ghost button.
   const MoonSecondaryButton({
     super.key,
     this.onTap,

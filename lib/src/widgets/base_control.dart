@@ -133,6 +133,7 @@ class MoonBaseControl extends StatefulWidget {
   /// The builder that builds the child of this control.
   final MoonBaseControlBuilder builder;
 
+  /// MDS base control widget.
   const MoonBaseControl({
     super.key,
     this.onTap,
