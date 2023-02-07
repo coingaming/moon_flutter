@@ -59,7 +59,7 @@ class StorybookPage extends StatelessWidget {
         ),
         const Align(
           alignment: Alignment.bottomCenter,
-          child: MoonVersionWidget(version: "0.1.0"),
+          child: MoonVersionWidget(),
         ),
       ],
     );
