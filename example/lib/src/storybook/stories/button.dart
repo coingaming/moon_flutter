@@ -17,9 +17,11 @@ class ButtonStory extends Story {
             final colorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for base MoonButton.",
-              initial: context.moonColors!.bulma,
-              options: colorOptions(context),
+              initial: 5, // bulma
+              options: colorOptions,
             );
+
+            final color = colorTable(context)[colorsKnob];
 
             final showBorderKnob = context.knobs.boolean(
               label: "showBorder",
@@ -105,7 +107,7 @@ class ButtonStory extends Story {
                         showBorder: showBorderKnob,
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
-                        backgroundColor: colorsKnob,
+                        backgroundColor: color,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
                         leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
