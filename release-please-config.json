@@ -1,0 +1,18 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "dart",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
+      "draft": false,
+      "prerelease": false,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "example/pubspec.yaml",
+          "jsonpath": "$.version"
+        }
+      ]
+    }
+  }
+}

@@ -9,9 +9,5 @@ jobs:
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
-          release-type: dart
-          extra-files: |
-            type: yaml
-            path: example/pubspec.yaml
-            jsonpath: $.version
+          command: manifest
 
