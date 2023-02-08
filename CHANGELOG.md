@@ -4,6 +4,13 @@
 
 - [MDS-351] Create Buttons ([57bf4cb](https://github.com/coingaming/moon_flutter/commit/57bf4cba1d41adc2d463a5f54b323c13645a94e0))
 
+## [0.1.4](https://github.com/coingaming/moon_flutter/compare/moon_design-v0.1.3...moon_design-v0.1.4) (2023-02-08)
+
+
+### Bug Fixes
+
+* release-please config changes ([393ec4a](https://github.com/coingaming/moon_flutter/commit/393ec4a93f7be23fcd235e24cb1063c613ad55fd))
+
 ## [0.1.3](https://github.com/coingaming/moon_flutter/compare/moon_design-v0.1.2...moon_design-v0.1.3) (2023-02-08)
 
 
