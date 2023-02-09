@@ -5,6 +5,13 @@
 
 * release-please config changes ([393ec4a](https://github.com/coingaming/moon_flutter/commit/393ec4a93f7be23fcd235e24cb1063c613ad55fd))
 
+## [0.1.5](https://github.com/coingaming/moon_flutter/compare/v0.1.4...v0.1.5) (2023-02-09)
+
+
+### Bug Fixes
+
+* [NO-TASK] Add MoonButton.icon constructor ([#16](https://github.com/coingaming/moon_flutter/issues/16)) ([a94f79d](https://github.com/coingaming/moon_flutter/commit/a94f79d0b1d9683296670c1591bb04fb9ad290ab))
+
 ## [0.1.3](https://github.com/coingaming/moon_flutter/compare/moon_design-v0.1.2...moon_design-v0.1.3) (2023-02-08)
 
 
