@@ -13,6 +13,7 @@ class AvatarClipper extends CustomClipper<Path> {
   final double badgeMarginValue;
   final double borderRadiusValue;
   final MoonBadgeAlignment badgeAlignment;
+  final TextDirection textDirection;
 
   AvatarClipper({
     required this.showBadge,
@@ -22,52 +23,98 @@ class AvatarClipper extends CustomClipper<Path> {
     required this.badgeMarginValue,
     required this.borderRadiusValue,
     required this.badgeAlignment,
+    required this.textDirection,
   });
 
   Path _getBadgePath() {
     final badgeRadius = badgeSize / 2;
 
-    switch (badgeAlignment) {
-      case MoonBadgeAlignment.topLeft:
-        return Path()
-          ..addOval(
-            Rect.fromCircle(
-              center: Offset(0 + badgeRadius, 0 + badgeRadius),
-              radius: badgeRadius + badgeMarginValue,
-            ),
-          );
-      case MoonBadgeAlignment.topRight:
-        return Path()
-          ..addOval(
-            Rect.fromCircle(
-              center: Offset(width - badgeRadius, 0 + badgeRadius),
-              radius: badgeRadius + badgeMarginValue,
-            ),
-          );
-      case MoonBadgeAlignment.bottomLeft:
-        return Path()
-          ..addOval(
-            Rect.fromCircle(
-              center: Offset(0 + badgeRadius, width - badgeRadius),
-              radius: badgeRadius + badgeMarginValue,
-            ),
-          );
-      case MoonBadgeAlignment.bottomRight:
-        return Path()
-          ..addOval(
-            Rect.fromCircle(
-              center: Offset(width - badgeRadius, width - badgeRadius),
-              radius: badgeRadius + badgeMarginValue,
-            ),
-          );
-      default:
-        return Path()
-          ..addOval(
-            Rect.fromCircle(
-              center: Offset(width - badgeRadius, width - badgeRadius),
-              radius: badgeRadius + badgeMarginValue,
-            ),
-          );
+    if (textDirection == TextDirection.rtl) {
+      switch (badgeAlignment) {
+        case MoonBadgeAlignment.topLeft:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(width - badgeRadius, 0 + badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+        case MoonBadgeAlignment.topRight:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(0 + badgeRadius, 0 + badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+        case MoonBadgeAlignment.bottomLeft:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(width - badgeRadius, width - badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+        case MoonBadgeAlignment.bottomRight:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(0 + badgeRadius, width - badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+        default:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(width - badgeRadius, width - badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+      }
+    } else {
+      switch (badgeAlignment) {
+        case MoonBadgeAlignment.topLeft:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(0 + badgeRadius, 0 + badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+        case MoonBadgeAlignment.topRight:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(width - badgeRadius, 0 + badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+        case MoonBadgeAlignment.bottomLeft:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(0 + badgeRadius, width - badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+        case MoonBadgeAlignment.bottomRight:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(width - badgeRadius, width - badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+        default:
+          return Path()
+            ..addOval(
+              Rect.fromCircle(
+                center: Offset(width - badgeRadius, width - badgeRadius),
+                radius: badgeRadius + badgeMarginValue,
+              ),
+            );
+      }
     }
   }
 

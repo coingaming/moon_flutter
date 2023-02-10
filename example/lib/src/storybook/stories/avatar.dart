@@ -23,6 +23,11 @@ class AvatarStory extends Story {
               ],
             );
 
+            final setRtlModeKnob = context.knobs.boolean(
+              label: "RTL mode",
+              description: "Switch between LTR and RTL modes.",
+            );
+
             final customLabelTextKnob = context.knobs.text(
               label: "Custom label text",
               initial: "MD",
@@ -72,39 +77,42 @@ class AvatarStory extends Story {
             final badgeColor = colorTable(context)[badgeColorKnob];
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  const TextDivider(text: "Customisable avatar"),
-                  const SizedBox(height: 32),
-                  MoonAvatar(
-                    avatarSize: avatarSizesKnob,
-                    borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                    backgroundColor: backgroundColor,
-                    showBadge: showBadgeKnob,
-                    badgeColor: badgeColor,
-                    badgeAlignment: avatarBadgeAlignmentKnob,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 1.0),
-                      child: Text(customLabelTextKnob),
+              child: Directionality(
+                textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 64),
+                    const TextDivider(text: "Customisable avatar"),
+                    const SizedBox(height: 32),
+                    MoonAvatar(
+                      avatarSize: avatarSizesKnob,
+                      borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                      backgroundColor: backgroundColor,
+                      showBadge: showBadgeKnob,
+                      badgeColor: badgeColor,
+                      badgeAlignment: avatarBadgeAlignmentKnob,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 1.0),
+                        child: Text(customLabelTextKnob),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  const TextDivider(text: "Preset avatar with picture background"),
-                  const SizedBox(height: 32),
-                  MoonAvatar(
-                    avatarSize: avatarSizesKnob,
-                    backgroundColor: backgroundColor,
-                    showBadge: showBadgeKnob,
-                    badgeColor: badgeColor,
-                    badgeAlignment: avatarBadgeAlignmentKnob,
-                    backgroundImage: const AssetImage(
-                      "assets/images/placeholder-640x359.png",
+                    const SizedBox(height: 40),
+                    const TextDivider(text: "Preset avatar with picture background"),
+                    const SizedBox(height: 32),
+                    MoonAvatar(
+                      avatarSize: avatarSizesKnob,
+                      backgroundColor: backgroundColor,
+                      showBadge: showBadgeKnob,
+                      badgeColor: badgeColor,
+                      badgeAlignment: avatarBadgeAlignmentKnob,
+                      backgroundImage: const AssetImage(
+                        "assets/images/placeholder-640x359.png",
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 64),
-                ],
+                    const SizedBox(height: 64),
+                  ],
+                ),
               ),
             );
           },
