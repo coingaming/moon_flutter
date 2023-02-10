@@ -59,7 +59,7 @@ class MoonGhostButton extends StatelessWidget {
   /// See also:
   ///
   ///   * [MoonPrimaryButton], MDS primary button.
-  ///   * [MoonTertiaryButton], MDS tertiary button.
+  ///   * [MoonSecondaryButton], MDS secondary button.
   ///   * [MoonTertiaryButton], MDS tertiary button.
   const MoonGhostButton({
     super.key,

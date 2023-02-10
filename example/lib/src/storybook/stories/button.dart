@@ -99,7 +99,7 @@ class ButtonStory extends Story {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 64),
-                      const TextDivider(text: "Base button"),
+                      const TextDivider(text: "Base button and icon button"),
                       const SizedBox(height: 32),
                       MoonButton(
                         onTap: showDisabledKnob ? null : () {},
@@ -113,6 +113,18 @@ class ButtonStory extends Story {
                         leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
                         rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                      ),
+                      const SizedBox(height: 32),
+                      MoonButton.icon(
+                        onTap: showDisabledKnob ? null : () {},
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                        showBorder: showBorderKnob,
+                        buttonSize: buttonSizesKnob,
+                        isFullWidth: setFullWidthKnob,
+                        backgroundColor: color,
+                        showPulseEffect: showPulseEffectKnob,
+                        showPulseEffectJiggle: showPulseEffectJiggleKnob,
+                        icon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Main buttons"),
