@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/coingaming/moon_flutter/compare/v0.2.4...v0.3.0) (2023-02-10)
+
+
+### Features
+
+* [MDS-379] Finalize the MoonTag ([#31](https://github.com/coingaming/moon_flutter/issues/31)) ([95ecf31](https://github.com/coingaming/moon_flutter/commit/95ecf31f7ee38a07fdbfc0782b6687b04dfa7369))
+
 ## [0.2.4](https://github.com/coingaming/moon_flutter/compare/v0.2.3...v0.2.4) (2023-02-10)
 
 
