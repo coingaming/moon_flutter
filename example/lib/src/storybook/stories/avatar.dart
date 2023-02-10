@@ -99,7 +99,9 @@ class AvatarStory extends Story {
                     showBadge: showBadgeKnob,
                     badgeColor: badgeColor,
                     badgeAlignment: avatarBadgeAlignmentKnob,
-                    backgroundImage: const AssetImage("images/placeholder-640x359.png"),
+                    backgroundImage: const AssetImage(
+                      "assets/images/placeholder-640x359.png",
+                    ),
                   ),
                   const SizedBox(height: 64),
                 ],
