@@ -1,16 +1,11 @@
-## [0.1.4](https://github.com/coingaming/moon_flutter/compare/v0.1.3...v0.1.4) (2023-02-08)
-
-
-### Bug Fixes
-
-* release-please config changes ([393ec4a](https://github.com/coingaming/moon_flutter/commit/393ec4a93f7be23fcd235e24cb1063c613ad55fd))
+# Changelog
 
 ## [0.2.1](https://github.com/coingaming/moon_flutter/compare/v0.2.0...v0.2.1) (2023-02-10)
 
 
 ### Bug Fixes
 
-* [NO-TASK] Fix placeholder asset path ([#24](https://github.com/coingaming/moon_flutter/issues/24)) ([e884b86](https://github.com/coingaming/moon_flutter/commit/e884b860e882cb83e71615de0c46f30c0572dfb1))
+* Fix placeholder asset path ([#24](https://github.com/coingaming/moon_flutter/issues/24)) ([e884b86](https://github.com/coingaming/moon_flutter/commit/e884b860e882cb83e71615de0c46f30c0572dfb1))
 
 ## [0.2.0](https://github.com/coingaming/moon_flutter/compare/v0.1.5...v0.2.0) (2023-02-10)
 
@@ -24,7 +19,14 @@
 
 ### Bug Fixes
 
-* [NO-TASK] Add MoonButton.icon constructor ([#16](https://github.com/coingaming/moon_flutter/issues/16)) ([a94f79d](https://github.com/coingaming/moon_flutter/commit/a94f79d0b1d9683296670c1591bb04fb9ad290ab))
+* Add MoonButton.icon constructor ([#16](https://github.com/coingaming/moon_flutter/issues/16)) ([a94f79d](https://github.com/coingaming/moon_flutter/commit/a94f79d0b1d9683296670c1591bb04fb9ad290ab))
+
+## [0.1.4](https://github.com/coingaming/moon_flutter/compare/v0.1.3...v0.1.4) (2023-02-08)
+
+
+### Bug Fixes
+
+* release-please config changes ([393ec4a](https://github.com/coingaming/moon_flutter/commit/393ec4a93f7be23fcd235e24cb1063c613ad55fd))
 
 ## [0.1.3](https://github.com/coingaming/moon_flutter/compare/moon_design-v0.1.2...moon_design-v0.1.3) (2023-02-08)
 
@@ -45,7 +47,7 @@
 
 ### Bug Fixes
 
-* [NO-TASK] Get MDS version dynamically ([#7](https://github.com/coingaming/moon_flutter/issues/7)) ([568092c](https://github.com/coingaming/moon_flutter/commit/568092c1adb846dfff00bdc72e3a270928136165))
+* Get MDS version dynamically ([#7](https://github.com/coingaming/moon_flutter/issues/7)) ([568092c](https://github.com/coingaming/moon_flutter/commit/568092c1adb846dfff00bdc72e3a270928136165))
 
 ## [0.1.0](https://github.com/coingaming/moon_flutter/pull/5) (2023-02-07)
 
@@ -54,6 +56,6 @@
 
 * [MDS-351] Create Buttons ([57bf4cb](https://github.com/coingaming/moon_flutter/commit/57bf4cba1d41adc2d463a5f54b323c13645a94e0))
 
-## 0.0.1
+## 0.0.1 (2023-01-16)
 
 * Initial project setup.
