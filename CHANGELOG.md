@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/coingaming/moon_flutter/compare/v0.2.2...v0.2.3) (2023-02-10)
+
+
+### Bug Fixes
+
+* RTL and web title fixes ([#28](https://github.com/coingaming/moon_flutter/issues/28)) ([25619e5](https://github.com/coingaming/moon_flutter/commit/25619e56d20c3adb60c14615c5c4b40e22466fe1))
+
 ## [0.2.2](https://github.com/coingaming/moon_flutter/compare/v0.2.1...v0.2.2) (2023-02-10)
 
 
