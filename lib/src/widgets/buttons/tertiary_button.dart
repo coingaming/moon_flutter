@@ -12,7 +12,7 @@ class MoonTertiaryButton extends StatelessWidget {
   final VoidCallback? onLongPress;
 
   /// The size of the button.
-  final ButtonSize? buttonSize;
+  final MoonButtonSize? buttonSize;
 
   /// The focus node for the button.
   final FocusNode? focusNode;
