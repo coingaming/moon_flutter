@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/coingaming/moon_flutter/compare/v0.2.3...v0.2.4) (2023-02-10)
+
+
+### Bug Fixes
+
+* hotfix page title in storybook ([8d1d24d](https://github.com/coingaming/moon_flutter/commit/8d1d24d8a2198bcab4ee7b3f441efa68fca35a76))
+
 ## [0.2.3](https://github.com/coingaming/moon_flutter/compare/v0.2.2...v0.2.3) (2023-02-10)
 
 
