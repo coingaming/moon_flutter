@@ -1,4 +1,5 @@
 import 'package:example/src/storybook/common/options.dart';
+import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -8,14 +9,9 @@ class AvatarStory extends Story {
       : super(
           name: "Avatar",
           builder: (context) {
-            final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
-              initial: "MDS",
-            );
-
             final avatarSizesKnob = context.knobs.options(
-              label: "MoonAvatarSize",
-              description: "MoonAvatar size variants.",
+              label: "avatarSize",
+              description: "Avatar size variants.",
               initial: MoonAvatarSize.md,
               options: const [
                 Option(label: "xs", value: MoonAvatarSize.xs),
@@ -27,9 +23,36 @@ class AvatarStory extends Story {
               ],
             );
 
+            final customLabelTextKnob = context.knobs.text(
+              label: "Custom label text",
+              initial: "MD",
+            );
+
+            final avatarBackgroundColorKnob = context.knobs.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for avatar background.",
+              initial: 5, // bulma
+              options: colorOptions,
+            );
+
+            final backgroundColor = colorTable(context)[avatarBackgroundColorKnob];
+
+            final borderRadiusKnob = context.knobs.sliderInt(
+              max: 32,
+              initial: 8,
+              label: "borderRadius",
+              description: "Border radius for the avatar.",
+            );
+
+            final showBadgeKnob = context.knobs.boolean(
+              label: "showBadge",
+              description: "Show avatar badge.",
+              initial: true,
+            );
+
             final avatarBadgeAlignmentKnob = context.knobs.options(
-              label: "Badge alignment",
-              description: "MoonAvatar badge alignment.",
+              label: "badgeAlignment",
+              description: "Avatar badge alignment.",
               initial: MoonBadgeAlignment.bottomRight,
               options: const [
                 Option(label: "topLeft", value: MoonBadgeAlignment.topLeft),
@@ -39,35 +62,46 @@ class AvatarStory extends Story {
               ],
             );
 
-            final showPictureKnob = context.knobs.boolean(
-              label: "Picture background",
-              description: "Show a picture as MoonAvatar background.",
-              initial: true,
-            );
-
-            final avatarBackgroundColorKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for MoonAvatar background.",
-              initial: 4, // gohan
+            final badgeColorKnob = context.knobs.options(
+              label: "badgeColor",
+              description: "MoonColors variants for the avatar badge.",
+              initial: 18, // roshi100
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[avatarBackgroundColorKnob];
+            final badgeColor = colorTable(context)[badgeColorKnob];
 
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MoonAvatar(
-                    //borderRadius: BorderRadius.all(Radius.circular(32)),
-                    backgroundColor: backgroundColor,
-                    showBadge: true,
-                    badgeAlignment: avatarBadgeAlignmentKnob,
-                    avatarSize: avatarSizesKnob,
-                    backgroundImage: showPictureKnob ? const AssetImage("images/placeholder-640x359.png") : null,
-                    //child: Text(customLabelTextKnob),
-                  ),
+                  const SizedBox(height: 64),
+                  const TextDivider(text: "Customisable avatar"),
                   const SizedBox(height: 32),
+                  MoonAvatar(
+                    avatarSize: avatarSizesKnob,
+                    borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                    backgroundColor: backgroundColor,
+                    showBadge: showBadgeKnob,
+                    badgeColor: badgeColor,
+                    badgeAlignment: avatarBadgeAlignmentKnob,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 1.0),
+                      child: Text(customLabelTextKnob),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  const TextDivider(text: "Preset avatar with picture background"),
+                  const SizedBox(height: 32),
+                  MoonAvatar(
+                    avatarSize: avatarSizesKnob,
+                    backgroundColor: backgroundColor,
+                    showBadge: showBadgeKnob,
+                    badgeColor: badgeColor,
+                    badgeAlignment: avatarBadgeAlignmentKnob,
+                    backgroundImage: const AssetImage("images/placeholder-640x359.png"),
+                  ),
+                  const SizedBox(height: 64),
                 ],
               ),
             );

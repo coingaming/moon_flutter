@@ -29,7 +29,7 @@ class ButtonStory extends Story {
               initial: true,
             );
 
-            final showBorderRadiusKnob = context.knobs.sliderInt(
+            final borderRadiusKnob = context.knobs.sliderInt(
               max: 28,
               initial: 8,
               label: "borderRadius",
@@ -103,7 +103,7 @@ class ButtonStory extends Story {
                       const SizedBox(height: 32),
                       MoonButton(
                         onTap: showDisabledKnob ? null : () {},
-                        borderRadius: BorderRadius.circular(showBorderRadiusKnob.toDouble()),
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
