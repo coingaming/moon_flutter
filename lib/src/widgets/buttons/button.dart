@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/button_sizes.dart';
+import 'package:moon_design/src/theme/button/button_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/base_control.dart';
 
@@ -298,10 +298,12 @@ class MoonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MoonButtonSizes effectiveMoonButtonSize = _getMoonButtonSize(context, buttonSize);
+
+    final double effectiveHeight = height ?? effectiveMoonButtonSize.height;
+    final double effectiveGap = gap ?? effectiveMoonButtonSize.gap;
+
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
 
-    final double effectiveGap = gap ?? effectiveMoonButtonSize.gap;
-    final double effectiveHeight = height ?? effectiveMoonButtonSize.height;
     final EdgeInsets effectivePadding = padding ?? effectiveMoonButtonSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(

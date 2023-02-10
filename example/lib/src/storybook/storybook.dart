@@ -1,6 +1,7 @@
 import 'package:example/src/storybook/common/widgets/version.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/button.dart';
+import 'package:example/src/storybook/stories/tag.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/moon_design.dart';
@@ -58,6 +59,7 @@ class StorybookPage extends StatelessWidget {
           stories: [
             AvatarStory(),
             ButtonStory(),
+            TagStory(),
           ],
         ),
         const Align(

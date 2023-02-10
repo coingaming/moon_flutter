@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/avatar_theme.dart';
+import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/button_theme.dart';
+import 'package:moon_design/src/theme/button/button_theme.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography.dart';
+import 'package:moon_design/src/theme/tag/tag_theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
@@ -22,6 +23,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
+    tagTheme: MoonTagTheme.sizes,
     typography: MoonTypography.textStyles,
   );
 
@@ -34,6 +36,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
+    tagTheme: MoonTagTheme.sizes,
     typography: MoonTypography.textStyles,
   );
 
@@ -61,6 +64,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System sizes.
   final MoonSizes sizes;
 
+  /// Moon Design System tag theming.
+  final MoonTagTheme tagTheme;
+
   /// Moon Design System typography.
   final MoonTypography typography;
 
@@ -73,6 +79,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.opacity,
     required this.shadows,
     required this.sizes,
+    required this.tagTheme,
     required this.typography,
   });
 
@@ -86,6 +93,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonOpacity? opacity,
     MoonShadows? shadows,
     MoonSizes? sizes,
+    MoonTagTheme? tagTheme,
     MoonTypography? typography,
   }) {
     return MoonTheme(
@@ -97,6 +105,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       opacity: opacity ?? this.opacity,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
+      tagTheme: tagTheme ?? this.tagTheme,
       typography: typography ?? this.typography,
     );
   }
@@ -114,6 +123,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       opacity: opacity.lerp(other.opacity, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
+      tagTheme: tagTheme.lerp(other.tagTheme, t),
       typography: typography.lerp(other.typography, t),
     );
   }
@@ -131,6 +141,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonOpacity>("moonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonShadows>("moonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("moonSizes", sizes))
+      ..add(DiagnosticsProperty<MoonTagTheme>("moonTagTheme", tagTheme))
       ..add(DiagnosticsProperty<MoonTypography>("moonTypography", typography));
   }
 }
@@ -145,5 +156,6 @@ extension MoonThemeX on BuildContext {
   MoonOpacity? get moonOpacity => moonTheme?.opacity;
   MoonShadows? get moonShadows => moonTheme?.shadows;
   MoonSizes? get moonSizes => moonTheme?.sizes;
+  MoonTagTheme? get moonTagTheme => moonTheme?.tagTheme;
   MoonTypography? get moonTypography => moonTheme?.typography;
 }

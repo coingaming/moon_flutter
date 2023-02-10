@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/avatar_sizes.dart';
+import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
 
 @immutable
 class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with DiagnosticableTreeMixin {
@@ -29,7 +29,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
   /// Extra large avatar properties.
   final MoonAvatarSizes xl;
 
-  /// 2x extra large avatar properties.
+  /// (2x) Extra large avatar properties.
   final MoonAvatarSizes x2l;
 
   const MoonAvatarTheme({

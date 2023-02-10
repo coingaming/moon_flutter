@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/avatar_sizes.dart';
+import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -48,6 +48,9 @@ class MoonAvatar extends StatelessWidget {
   /// The background color of the avatar.
   final Color? backgroundColor;
 
+  /// The text color of the avatar.
+  final Color? textColor;
+
   /// The size of the avatar.
   final MoonAvatarSize? avatarSize;
 
@@ -56,6 +59,9 @@ class MoonAvatar extends StatelessWidget {
 
   /// The background image of the avatar.
   final ImageProvider<Object>? backgroundImage;
+
+  /// The semantic label for the avatar.
+  final String? semanticLabel;
 
   /// The child of the avatar.
   final Widget? child;
@@ -70,9 +76,11 @@ class MoonAvatar extends StatelessWidget {
     this.showBadge = false,
     this.badgeColor,
     this.backgroundColor,
+    this.textColor,
     this.avatarSize,
     this.badgeAlignment = MoonBadgeAlignment.bottomRight,
     this.backgroundImage,
+    this.semanticLabel,
     this.child,
   });
 
@@ -152,55 +160,61 @@ class MoonAvatar extends StatelessWidget {
     final Color effectiveBadgeColor = badgeColor ?? context.moonColors?.roshi100 ?? MoonColors.light.roshi100;
 
     final Color effectiveTextColor =
-        _getTextColor(isDarkMode: context.isDarkMode, backgroundColor: effectiveBackgroundColor);
+        textColor ?? _getTextColor(isDarkMode: context.isDarkMode, backgroundColor: effectiveBackgroundColor);
 
-    return SizedBox(
-      width: effectiveAvatarWidth,
-      height: effectiveAvatarHeight,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: ClipPath(
-              clipper: AvatarClipper(
-                showBadge: showBadge,
-                width: effectiveAvatarWidth,
-                height: effectiveAvatarHeight,
-                borderRadiusValue: avatarBorderRadiusValue,
-                badgeSize: effectiveBadgeSize,
-                badgeMarginValue: effectiveBadgeMarginValue,
-                badgeAlignment: badgeAlignment,
-                textDirection: Directionality.of(context),
-              ),
-              child: DefaultTextStyle(
-                style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: effectiveBackgroundColor,
-                    image: backgroundImage != null
-                        ? DecorationImage(
-                            image: backgroundImage!,
-                            fit: BoxFit.cover,
-                          )
-                        : null,
+    return Semantics(
+      label: semanticLabel,
+      button: false,
+      focusable: false,
+      image: backgroundImage != null,
+      child: SizedBox(
+        width: effectiveAvatarWidth,
+        height: effectiveAvatarHeight,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: ClipPath(
+                clipper: AvatarClipper(
+                  showBadge: showBadge,
+                  width: effectiveAvatarWidth,
+                  height: effectiveAvatarHeight,
+                  borderRadiusValue: avatarBorderRadiusValue,
+                  badgeSize: effectiveBadgeSize,
+                  badgeMarginValue: effectiveBadgeMarginValue,
+                  badgeAlignment: badgeAlignment,
+                  textDirection: Directionality.of(context),
+                ),
+                child: DefaultTextStyle.merge(
+                  style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: effectiveBackgroundColor,
+                      image: backgroundImage != null
+                          ? DecorationImage(
+                              image: backgroundImage!,
+                              fit: BoxFit.cover,
+                            )
+                          : null,
+                    ),
+                    child: Center(child: child),
                   ),
-                  child: Center(child: child),
                 ),
               ),
             ),
-          ),
-          if (showBadge)
-            Align(
-              alignment: _avatarAlignmentMapper(context),
-              child: Container(
-                height: effectiveBadgeSize,
-                width: effectiveBadgeSize,
-                decoration: BoxDecoration(
-                  color: effectiveBadgeColor,
-                  borderRadius: BorderRadius.circular(effectiveBadgeSize / 2),
+            if (showBadge)
+              Align(
+                alignment: _avatarAlignmentMapper(context),
+                child: Container(
+                  height: effectiveBadgeSize,
+                  width: effectiveBadgeSize,
+                  decoration: BoxDecoration(
+                    color: effectiveBadgeColor,
+                    borderRadius: BorderRadius.circular(effectiveBadgeSize / 2),
+                  ),
                 ),
-              ),
-            )
-        ],
+              )
+          ],
+        ),
       ),
     );
   }

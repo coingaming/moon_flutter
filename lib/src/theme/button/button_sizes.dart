@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/text_styles.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
 
 @immutable
 class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with DiagnosticableTreeMixin {
