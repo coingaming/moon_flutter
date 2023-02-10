@@ -5,6 +5,13 @@
 
 * release-please config changes ([393ec4a](https://github.com/coingaming/moon_flutter/commit/393ec4a93f7be23fcd235e24cb1063c613ad55fd))
 
+## [0.2.1](https://github.com/coingaming/moon_flutter/compare/v0.2.0...v0.2.1) (2023-02-10)
+
+
+### Bug Fixes
+
+* [NO-TASK] Fix placeholder asset path ([#24](https://github.com/coingaming/moon_flutter/issues/24)) ([e884b86](https://github.com/coingaming/moon_flutter/commit/e884b860e882cb83e71615de0c46f30c0572dfb1))
+
 ## [0.2.0](https://github.com/coingaming/moon_flutter/compare/v0.1.5...v0.2.0) (2023-02-10)
 
 
