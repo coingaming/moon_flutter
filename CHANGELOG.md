@@ -5,6 +5,13 @@
 
 * release-please config changes ([393ec4a](https://github.com/coingaming/moon_flutter/commit/393ec4a93f7be23fcd235e24cb1063c613ad55fd))
 
+## [0.2.0](https://github.com/coingaming/moon_flutter/compare/v0.1.5...v0.2.0) (2023-02-10)
+
+
+### Features
+
+* [MDS-377] Create avatar widget ([#22](https://github.com/coingaming/moon_flutter/issues/22)) ([57d0a0d](https://github.com/coingaming/moon_flutter/commit/57d0a0d2db6afbb25193b4080b2166e59d718f70))
+
 ## [0.1.5](https://github.com/coingaming/moon_flutter/compare/v0.1.4...v0.1.5) (2023-02-09)
 
 
