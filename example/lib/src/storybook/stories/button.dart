@@ -37,15 +37,15 @@ class ButtonStory extends Story {
             );
 
             final buttonSizesKnob = context.knobs.options(
-              label: "buttonSize",
+              label: "MoonButtonSize",
               description: "Button size variants.",
-              initial: ButtonSize.md,
+              initial: MoonButtonSize.md,
               options: const [
-                Option(label: "xs", value: ButtonSize.xs),
-                Option(label: "sm", value: ButtonSize.sm),
-                Option(label: "md", value: ButtonSize.md),
-                Option(label: "lg", value: ButtonSize.lg),
-                Option(label: "xl", value: ButtonSize.xl)
+                Option(label: "xs", value: MoonButtonSize.xs),
+                Option(label: "sm", value: MoonButtonSize.sm),
+                Option(label: "md", value: MoonButtonSize.md),
+                Option(label: "lg", value: MoonButtonSize.lg),
+                Option(label: "xl", value: MoonButtonSize.xl)
               ],
             );
 
