@@ -1,15 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class MoonPlaceholderIcon extends StatelessWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final Color? iconColor;
   final Color? containerBackgroundColor;
 
   const MoonPlaceholderIcon({
     super.key,
-    this.width = 24,
-    this.height = 24,
+    this.width,
+    this.height,
     this.iconColor,
     this.containerBackgroundColor,
   });
@@ -17,7 +19,11 @@ class MoonPlaceholderIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStrokeColor = iconColor ?? DefaultTextStyle.of(context).style.color ?? Colors.black;
-    final effectiveSize = (DefaultTextStyle.of(context).style.fontSize ?? 14) <= 12 ? 20 : 24;
+    final effectiveSize = width != null && height != null
+        ? min(width!, height!)
+        : (DefaultTextStyle.of(context).style.fontSize ?? 14) <= 12
+            ? 20
+            : 24;
 
     return CustomPaint(
       size: Size(effectiveSize.toDouble(), effectiveSize.toDouble()),
