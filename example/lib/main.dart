@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Moon Design for Flutter',
+      color: Colors.white,
       home: HomePage(),
     );
   }
