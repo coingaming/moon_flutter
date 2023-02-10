@@ -29,7 +29,7 @@ class ButtonStory extends Story {
               initial: true,
             );
 
-            final showBorderRadiusKnob = context.knobs.sliderInt(
+            final borderRadiusKnob = context.knobs.sliderInt(
               max: 28,
               initial: 8,
               label: "borderRadius",
@@ -37,15 +37,15 @@ class ButtonStory extends Story {
             );
 
             final buttonSizesKnob = context.knobs.options(
-              label: "buttonSize",
+              label: "MoonButtonSize",
               description: "Button size variants.",
-              initial: ButtonSize.md,
+              initial: MoonButtonSize.md,
               options: const [
-                Option(label: "xs", value: ButtonSize.xs),
-                Option(label: "sm", value: ButtonSize.sm),
-                Option(label: "md", value: ButtonSize.md),
-                Option(label: "lg", value: ButtonSize.lg),
-                Option(label: "xl", value: ButtonSize.xl)
+                Option(label: "xs", value: MoonButtonSize.xs),
+                Option(label: "sm", value: MoonButtonSize.sm),
+                Option(label: "md", value: MoonButtonSize.md),
+                Option(label: "lg", value: MoonButtonSize.lg),
+                Option(label: "xl", value: MoonButtonSize.xl)
               ],
             );
 
@@ -103,7 +103,7 @@ class ButtonStory extends Story {
                       const SizedBox(height: 32),
                       MoonButton(
                         onTap: showDisabledKnob ? null : () {},
-                        borderRadius: BorderRadius.circular(showBorderRadiusKnob.toDouble()),
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
@@ -117,7 +117,7 @@ class ButtonStory extends Story {
                       const SizedBox(height: 32),
                       MoonButton.icon(
                         onTap: showDisabledKnob ? null : () {},
-                        borderRadius: BorderRadius.circular(showBorderRadiusKnob.toDouble()),
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
