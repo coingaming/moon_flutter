@@ -265,7 +265,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   void _handleVerticalDragEnd(DragEndDetails dragEndDetails) => _handleTapUp(null);
 
-  Color getFocusColor({required bool isDarkMode, required Color focusColor}) {
+  Color _getFocusColor({required bool isDarkMode, required Color focusColor}) {
     if (widget.backgroundColor != null) {
       return isDarkMode ? widget.backgroundColor!.withOpacity(0.8) : widget.backgroundColor!.withOpacity(0.2);
     } else {
@@ -273,7 +273,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     }
   }
 
-  Color getTextColor({required bool isDarkMode, required bool isHovered, required bool isFocused}) {
+  Color _getTextColor({required bool isDarkMode, required bool isHovered, required bool isFocused}) {
     if (widget.textColor != null && (!isHovered && !isFocused)) return widget.textColor!;
     if (widget.backgroundColor == null && isDarkMode) return MoonColors.dark.bulma;
     if (widget.backgroundColor == null && !isDarkMode) return MoonColors.light.bulma;
@@ -327,7 +327,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   @override
   Widget build(BuildContext context) {
     final Color effectiveTextColor =
-        getTextColor(isDarkMode: context.isDarkMode, isHovered: _isHovered, isFocused: _isFocused);
+        _getTextColor(isDarkMode: context.isDarkMode, isHovered: _isHovered, isFocused: _isFocused);
 
     final double effectiveDisabledOpacityValue =
         widget.disabledOpacityValue ?? context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
@@ -355,7 +355,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
         context.moonEffects?.controlFocusEffect.effectDuration ??
         MoonFocusEffects.lightFocusEffect.effectDuration;
 
-    final Color focusColor = getFocusColor(isDarkMode: context.isDarkMode, focusColor: effectiveFocusEffectColor);
+    final Color focusColor = _getFocusColor(isDarkMode: context.isDarkMode, focusColor: effectiveFocusEffectColor);
 
     // Hover effect props
     final Color effectiveHoverEffectColor = widget.hoverEffectColor ??

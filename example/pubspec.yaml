@@ -19,3 +19,5 @@ dev_dependencies:
   storybook_flutter: ^0.12.0
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
