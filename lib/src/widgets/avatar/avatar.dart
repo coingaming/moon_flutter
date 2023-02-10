@@ -76,18 +76,34 @@ class MoonAvatar extends StatelessWidget {
     this.child,
   });
 
-  Alignment _avatarAlignmentMapper() {
-    switch (badgeAlignment) {
-      case MoonBadgeAlignment.topLeft:
-        return Alignment.topLeft;
-      case MoonBadgeAlignment.topRight:
-        return Alignment.topRight;
-      case MoonBadgeAlignment.bottomLeft:
-        return Alignment.bottomLeft;
-      case MoonBadgeAlignment.bottomRight:
-        return Alignment.bottomRight;
-      default:
-        return Alignment.bottomLeft;
+  Alignment _avatarAlignmentMapper(BuildContext context) {
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
+    if (isRTL) {
+      switch (badgeAlignment) {
+        case MoonBadgeAlignment.topLeft:
+          return Alignment.topRight;
+        case MoonBadgeAlignment.topRight:
+          return Alignment.topLeft;
+        case MoonBadgeAlignment.bottomLeft:
+          return Alignment.bottomRight;
+        case MoonBadgeAlignment.bottomRight:
+          return Alignment.bottomLeft;
+        default:
+          return Alignment.bottomRight;
+      }
+    } else {
+      switch (badgeAlignment) {
+        case MoonBadgeAlignment.topLeft:
+          return Alignment.topLeft;
+        case MoonBadgeAlignment.topRight:
+          return Alignment.topRight;
+        case MoonBadgeAlignment.bottomLeft:
+          return Alignment.bottomLeft;
+        case MoonBadgeAlignment.bottomRight:
+          return Alignment.bottomRight;
+        default:
+          return Alignment.bottomRight;
+      }
     }
   }
 
@@ -153,6 +169,7 @@ class MoonAvatar extends StatelessWidget {
                 badgeSize: effectiveBadgeSize,
                 badgeMarginValue: effectiveBadgeMarginValue,
                 badgeAlignment: badgeAlignment,
+                textDirection: Directionality.of(context),
               ),
               child: DefaultTextStyle(
                 style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
@@ -173,7 +190,7 @@ class MoonAvatar extends StatelessWidget {
           ),
           if (showBadge)
             Align(
-              alignment: _avatarAlignmentMapper(),
+              alignment: _avatarAlignmentMapper(context),
               child: Container(
                 height: effectiveBadgeSize,
                 width: effectiveBadgeSize,

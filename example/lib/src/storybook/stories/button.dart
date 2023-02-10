@@ -120,7 +120,6 @@ class ButtonStory extends Story {
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         buttonSize: buttonSizesKnob,
-                        isFullWidth: setFullWidthKnob,
                         backgroundColor: color,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
