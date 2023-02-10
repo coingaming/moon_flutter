@@ -27,6 +27,7 @@ class StorybookPage extends StatelessWidget {
           initialStory: "Avatar",
           plugins: _plugins,
           wrapperBuilder: (context, child) => MaterialApp(
+            title: "Moon Design for Flutter",
             theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
             darkTheme: ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.dark]),
             useInheritedMediaQuery: true,
