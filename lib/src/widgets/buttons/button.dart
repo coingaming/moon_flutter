@@ -4,7 +4,7 @@ import 'package:moon_design/src/theme/button_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/base_control.dart';
 
-enum MoonButtonSize {
+enum ButtonSize {
   xs,
   sm,
   md,
@@ -20,7 +20,7 @@ class MoonButton extends StatelessWidget {
   final VoidCallback? onLongPress;
 
   /// The size of the button.
-  final MoonButtonSize? buttonSize;
+  final ButtonSize? buttonSize;
 
   /// The focus node for the button.
   final FocusNode? focusNode;
@@ -197,7 +197,7 @@ class MoonButton extends StatelessWidget {
   factory MoonButton.icon({
     VoidCallback? onTap,
     VoidCallback? onLongPress,
-    MoonButtonSize? buttonSize,
+    ButtonSize? buttonSize,
     FocusNode? focusNode,
     String? semanticLabel,
     double? width,
@@ -280,17 +280,17 @@ class MoonButton extends StatelessWidget {
     );
   }
 
-  MoonButtonSizes _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
-    switch (moonButtonSize) {
-      case MoonButtonSize.xs:
+  MoonButtonSizes getButtonSize(BuildContext context, ButtonSize? buttonSize) {
+    switch (buttonSize) {
+      case ButtonSize.xs:
         return context.moonTheme?.buttonTheme.xs ?? MoonButtonSizes.xs;
-      case MoonButtonSize.sm:
+      case ButtonSize.sm:
         return context.moonTheme?.buttonTheme.sm ?? MoonButtonSizes.sm;
-      case MoonButtonSize.md:
+      case ButtonSize.md:
         return context.moonTheme?.buttonTheme.md ?? MoonButtonSizes.md;
-      case MoonButtonSize.lg:
+      case ButtonSize.lg:
         return context.moonTheme?.buttonTheme.lg ?? MoonButtonSizes.lg;
-      case MoonButtonSize.xl:
+      case ButtonSize.xl:
         return context.moonTheme?.buttonTheme.xl ?? MoonButtonSizes.xl;
       default:
         return context.moonTheme?.buttonTheme.md ?? MoonButtonSizes.xs;
@@ -299,12 +299,12 @@ class MoonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonButtonSizes effectiveMoonButtonSize = _getMoonButtonSize(context, buttonSize);
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
+    final MoonButtonSizes effectiveButtonSize = getButtonSize(context, buttonSize);
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveButtonSize.borderRadius;
 
-    final double effectiveGap = gap ?? effectiveMoonButtonSize.gap;
-    final double effectiveHeight = height ?? effectiveMoonButtonSize.height;
-    final EdgeInsets effectivePadding = padding ?? effectiveMoonButtonSize.padding;
+    final double effectiveGap = gap ?? effectiveButtonSize.gap;
+    final double effectiveHeight = height ?? effectiveButtonSize.height;
+    final EdgeInsets effectivePadding = padding ?? effectiveButtonSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
       leftIcon == null && label != null ? effectivePadding.left : 0,
@@ -358,7 +358,7 @@ class MoonButton extends StatelessWidget {
           padding: correctedPadding,
           constraints: BoxConstraints(minWidth: effectiveHeight),
           child: DefaultTextStyle.merge(
-            style: TextStyle(fontSize: effectiveMoonButtonSize.textStyle.fontSize),
+            style: TextStyle(fontSize: effectiveButtonSize.textStyle.fontSize),
             child: isFullWidth
                 ? Stack(
                     fit: StackFit.expand,

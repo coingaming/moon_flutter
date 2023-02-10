@@ -13,7 +13,7 @@ class MoonGhostButton extends StatelessWidget {
   final VoidCallback? onLongPress;
 
   /// The size of the button.
-  final MoonButtonSize? buttonSize;
+  final ButtonSize? buttonSize;
 
   /// The focus node for the button.
   final FocusNode? focusNode;

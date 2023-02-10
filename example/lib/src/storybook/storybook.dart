@@ -1,5 +1,4 @@
 import 'package:example/src/storybook/common/widgets/version.dart';
-import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/button.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +23,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Avatar",
+          initialStory: "Buttons",
           plugins: _plugins,
           wrapperBuilder: (context, child) => MaterialApp(
             theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
@@ -44,7 +43,6 @@ class StorybookPage extends StatelessWidget {
                     child: Scaffold(
                       extendBody: true,
                       extendBodyBehindAppBar: true,
-                      backgroundColor: context.moonColors!.beerus,
                       body: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: child,
@@ -56,7 +54,6 @@ class StorybookPage extends StatelessWidget {
             ),
           ),
           stories: [
-            AvatarStory(),
             ButtonStory(),
           ],
         ),
