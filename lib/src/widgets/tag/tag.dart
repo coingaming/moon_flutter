@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 
@@ -125,9 +126,28 @@ class MoonTag extends StatelessWidget {
         height: effectiveHeight,
         padding: correctedPadding,
         constraints: BoxConstraints(minWidth: effectiveHeight),
-        decoration: BoxDecoration(
+        decoration: ShapeDecoration(
           color: effectiveBackgroundColor,
-          borderRadius: effectiveBorderRadius,
+          shape: SmoothRectangleBorder(
+            borderRadius: SmoothBorderRadius.only(
+              topLeft: SmoothRadius(
+                cornerRadius: effectiveBorderRadius.topLeft.x,
+                cornerSmoothing: 1,
+              ),
+              topRight: SmoothRadius(
+                cornerRadius: effectiveBorderRadius.topRight.x,
+                cornerSmoothing: 1,
+              ),
+              bottomLeft: SmoothRadius(
+                cornerRadius: effectiveBorderRadius.bottomLeft.x,
+                cornerSmoothing: 1,
+              ),
+              bottomRight: SmoothRadius(
+                cornerRadius: effectiveBorderRadius.bottomRight.x,
+                cornerSmoothing: 1,
+              ),
+            ),
+          ),
         ),
         child: DefaultTextStyle.merge(
           style: isUpperCase

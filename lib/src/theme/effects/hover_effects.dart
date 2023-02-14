@@ -5,14 +5,14 @@ import 'package:moon_design/src/theme/colors.dart';
 
 @immutable
 class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with DiagnosticableTreeMixin {
-  static final lightButtonHoverEffect = MoonHoverEffects(
+  static final lightHoverEffect = MoonHoverEffects(
     primaryHoverColor: MoonColors.light.heles,
     secondaryHoverColor: MoonColors.light.jiren,
     hoverCurve: Curves.easeInOut,
     hoverDuration: const Duration(milliseconds: 150),
   );
 
-  static final darkButtonHoverEffect = MoonHoverEffects(
+  static final darkHoverEffect = MoonHoverEffects(
     primaryHoverColor: MoonColors.dark.heles,
     secondaryHoverColor: MoonColors.dark.jiren,
     hoverCurve: Curves.easeInOut,

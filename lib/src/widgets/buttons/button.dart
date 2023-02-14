@@ -1,7 +1,12 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/borders.dart';
 
 import 'package:moon_design/src/theme/button/button_sizes.dart';
+import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/base_control.dart';
 
 enum MoonButtonSize {
@@ -13,10 +18,10 @@ enum MoonButtonSize {
 }
 
 class MoonButton extends StatelessWidget {
-  /// The callback that is called when the control is tapped or pressed.
+  /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
 
-  /// The callback that is called when the control is long-pressed.
+  /// The callback that is called when the button is long-pressed.
   final VoidCallback? onLongPress;
 
   /// The size of the button.
@@ -278,6 +283,8 @@ class MoonButton extends StatelessWidget {
     );
   }
 
+  bool get _isEnabled => onTap != null || onLongPress != null;
+
   MoonButtonSizes _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
     switch (moonButtonSize) {
       case MoonButtonSize.xs:
@@ -291,7 +298,20 @@ class MoonButton extends StatelessWidget {
       case MoonButtonSize.xl:
         return context.moonTheme?.buttonTheme.xl ?? MoonButtonSizes.xl;
       default:
-        return context.moonTheme?.buttonTheme.md ?? MoonButtonSizes.xs;
+        return context.moonTheme?.buttonTheme.md ?? MoonButtonSizes.md;
+    }
+  }
+
+  Color _getTextColor({required bool isDarkMode, required bool isHovered, required bool isFocused}) {
+    if (textColor != null && (!isHovered && !isFocused)) return textColor!;
+    if (backgroundColor == null && isDarkMode) return MoonColors.dark.bulma;
+    if (backgroundColor == null && !isDarkMode) return MoonColors.light.bulma;
+
+    final backgroundLuminance = backgroundColor!.computeLuminance();
+    if (backgroundLuminance > 0.5) {
+      return MoonColors.light.bulma;
+    } else {
+      return MoonColors.dark.bulma;
     }
   }
 
@@ -302,8 +322,6 @@ class MoonButton extends StatelessWidget {
     final double effectiveHeight = height ?? effectiveMoonButtonSize.height;
     final double effectiveGap = gap ?? effectiveMoonButtonSize.gap;
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
-
     final EdgeInsets effectivePadding = padding ?? effectiveMoonButtonSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
@@ -312,6 +330,25 @@ class MoonButton extends StatelessWidget {
       rightIcon == null && label != null ? effectivePadding.right : 0,
       effectivePadding.bottom,
     );
+
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
+    final Color effectiveBorderColor = borderColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
+    final double effectiveBorderWidth =
+        borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
+
+    final Color effectiveHoverEffectColor = hoverEffectColor ??
+        context.moonEffects?.controlHoverEffect.primaryHoverColor ??
+        MoonHoverEffects.lightHoverEffect.primaryHoverColor;
+
+    final Curve effectiveHoverEffectCurve = hoverEffectCurve ??
+        context.moonEffects?.controlHoverEffect.hoverCurve ??
+        MoonHoverEffects.lightHoverEffect.hoverCurve;
+
+    final Duration effectiveHoverEffectDuration = hoverEffectDuration ??
+        context.moonEffects?.controlHoverEffect.hoverDuration ??
+        MoonHoverEffects.lightHoverEffect.hoverDuration;
+
+    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, backgroundColor ?? Colors.transparent);
 
     return MoonBaseControl(
       onTap: onTap,
@@ -325,20 +362,12 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       autofocus: autofocus,
       isFocusable: isFocusable,
-      showBorder: showBorder,
       showFocusEffect: showFocusEffect,
       backgroundColor: backgroundColor,
-      borderColor: borderColor,
-      height: effectiveHeight,
-      borderWidth: borderWidth,
-      textColor: textColor,
       focusEffectColor: focusEffectColor,
       focusEffectExtent: focusEffectExtent,
       focusEffectDuration: focusEffectDuration,
       focusEffectCurve: focusEffectCurve,
-      hoverEffectColor: hoverEffectColor,
-      hoverEffectDuration: hoverEffectDuration,
-      hoverEffectCurve: hoverEffectCurve,
       showScaleAnimation: showScaleAnimation,
       scaleEffectScalar: scaleEffectScalar,
       scaleEffectDuration: scaleEffectDuration,
@@ -350,15 +379,50 @@ class MoonButton extends StatelessWidget {
       pulseEffectDuration: pulseEffectDuration,
       pulseEffectCurve: pulseEffectCurve,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+        final Color effectiveTextColor =
+            _getTextColor(isDarkMode: context.isDarkMode, isHovered: isHovered, isFocused: isFocused);
+
+        final bool canAnimateHover = _isEnabled && (isHovered || isFocused || isPressed);
+
         return AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          curve: Curves.easeInOut,
+          duration: effectiveHoverEffectDuration,
+          curve: effectiveHoverEffectCurve,
           width: width,
           height: effectiveHeight,
           padding: correctedPadding,
           constraints: BoxConstraints(minWidth: effectiveHeight),
-          child: DefaultTextStyle.merge(
-            style: TextStyle(fontSize: effectiveMoonButtonSize.textStyle.fontSize),
+          decoration: ShapeDecoration(
+            color: canAnimateHover ? hoverColor : backgroundColor,
+            shape: SmoothRectangleBorder(
+              side: BorderSide(
+                color: effectiveBorderColor,
+                width: showBorder ? effectiveBorderWidth : 0,
+                style: showBorder ? BorderStyle.solid : BorderStyle.none,
+              ),
+              borderRadius: SmoothBorderRadius.only(
+                topLeft: SmoothRadius(
+                  cornerRadius: effectiveBorderRadius.topLeft.x,
+                  cornerSmoothing: 1,
+                ),
+                topRight: SmoothRadius(
+                  cornerRadius: effectiveBorderRadius.topRight.x,
+                  cornerSmoothing: 1,
+                ),
+                bottomLeft: SmoothRadius(
+                  cornerRadius: effectiveBorderRadius.bottomLeft.x,
+                  cornerSmoothing: 1,
+                ),
+                bottomRight: SmoothRadius(
+                  cornerRadius: effectiveBorderRadius.bottomRight.x,
+                  cornerSmoothing: 1,
+                ),
+              ),
+            ),
+          ),
+          child: AnimatedDefaultTextStyle(
+            style: TextStyle(color: effectiveTextColor, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
+            duration: effectiveHoverEffectDuration,
+            curve: effectiveHoverEffectCurve,
             child: isFullWidth
                 ? Stack(
                     fit: StackFit.expand,
