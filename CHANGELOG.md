@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/coingaming/moon_flutter/compare/v0.4.1...v0.4.2) (2023-02-14)
+
+
+### Bug Fixes
+
+* Add semantics to MoonTag ([#36](https://github.com/coingaming/moon_flutter/issues/36)) ([e83bea2](https://github.com/coingaming/moon_flutter/commit/e83bea230801d6307b84a88aea35548c516e9211))
+
 ## [0.4.1](https://github.com/coingaming/moon_flutter/compare/v0.4.0...v0.4.1) (2023-02-14)
 
 
