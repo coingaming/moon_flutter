@@ -12,7 +12,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
   static final sm = MoonChipSizes(
     height: MoonSizes.sizes.sm,
     gap: MoonSizes.sizes.x5s,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
     borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text14,
   );
@@ -20,7 +20,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
   static final md = MoonChipSizes(
     height: MoonSizes.sizes.md,
     gap: MoonSizes.sizes.x4s,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
     borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
