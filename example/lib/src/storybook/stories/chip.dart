@@ -1,4 +1,5 @@
 import 'package:example/src/storybook/common/options.dart';
+import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -22,10 +23,14 @@ class ChipStory extends Story {
 
             final color = colorTable(context)[colorsKnob];
 
+            final isActiveKnob = context.knobs.boolean(
+              label: "isActive",
+              description: "Whether the chip is active/selected.",
+            );
+
             final showBorderKnob = context.knobs.boolean(
               label: "showBorder",
-              description: "Show border for the chip.",
-              initial: true,
+              description: "Show border when isActive.",
             );
 
             final borderRadiusKnob = context.knobs.sliderInt(
@@ -75,11 +80,41 @@ class ChipStory extends Story {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 64),
+                      const TextDivider(text: "Regular chip"),
+                      const SizedBox(height: 32),
                       MoonChip(
+                        isActive: isActiveKnob,
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         chipSize: chipSizesKnob,
                         backgroundColor: color,
+                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        label: showLabelKnob ? Text(customLabelTextKnob) : null,
+                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                      ),
+                      const SizedBox(height: 40),
+                      const TextDivider(text: "Ghost chip"),
+                      const SizedBox(height: 32),
+                      MoonGhostChip(
+                        isActive: isActiveKnob,
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                        showBorder: showBorderKnob,
+                        chipSize: chipSizesKnob,
+                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        label: showLabelKnob ? Text(customLabelTextKnob) : null,
+                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                      ),
+                      const SizedBox(height: 40),
+                      const TextDivider(text: "Preset chip"),
+                      const SizedBox(height: 32),
+                      MoonChip(
+                        isActive: isActiveKnob,
+                        activeColor: context.moonColors!.dodoria100,
+                        backgroundColor: context.moonColors!.krillin100,
+                        hoverEffectColor: context.moonColors!.chiChi10,
+                        borderWidth: 2,
+                        showBorder: showBorderKnob,
+                        chipSize: chipSizesKnob,
                         leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
                         rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,

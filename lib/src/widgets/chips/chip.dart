@@ -167,9 +167,11 @@ class MoonChip extends StatelessWidget {
     required bool isDarkMode,
     required Color backgroundColor,
     required Color activeColor,
+    required Color? textColor,
     required bool isActive,
   }) {
     if (isActive) return activeColor;
+    if (textColor != null) return textColor;
 
     final backgroundLuminance = backgroundColor.computeLuminance();
     if (backgroundLuminance > 0.5) {
@@ -210,8 +212,6 @@ class MoonChip extends StatelessWidget {
         context.moonEffects?.controlHoverEffect.secondaryHoverColor ??
         MoonHoverEffects.lightHoverEffect.secondaryHoverColor;
 
-    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, effectiveBackgroundColor);
-
     final Curve effectiveHoverEffectCurve = hoverEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
         MoonHoverEffects.lightHoverEffect.hoverCurve;
@@ -249,6 +249,7 @@ class MoonChip extends StatelessWidget {
           isDarkMode: context.isDarkMode,
           activeColor: effectiveActiveColor,
           backgroundColor: effectiveBackgroundColor,
+          textColor: textColor,
         );
 
         return AnimatedContainer(
