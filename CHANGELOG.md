@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/coingaming/moon_flutter/compare/v0.4.0...v0.4.1) (2023-02-14)
+
+
+### Bug Fixes
+
+* Correct MoonChip padding ([f14eb2d](https://github.com/coingaming/moon_flutter/commit/f14eb2d5444330cf5a89d911c541988c63cca8a9))
+
 ## [0.4.0](https://github.com/coingaming/moon_flutter/compare/v0.3.0...v0.4.0) (2023-02-14)
 
 
