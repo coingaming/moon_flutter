@@ -337,16 +337,16 @@ class MoonButton extends StatelessWidget {
         borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
 
     final Color effectiveHoverEffectColor = hoverEffectColor ??
-        context.moonEffects?.buttonHoverEffect.primaryHoverColor ??
-        MoonHoverEffects.lightButtonHoverEffect.primaryHoverColor;
+        context.moonEffects?.controlHoverEffect.primaryHoverColor ??
+        MoonHoverEffects.lightHoverEffect.primaryHoverColor;
 
     final Curve effectiveHoverEffectCurve = hoverEffectCurve ??
-        context.moonEffects?.buttonHoverEffect.hoverCurve ??
-        MoonHoverEffects.lightButtonHoverEffect.hoverCurve;
+        context.moonEffects?.controlHoverEffect.hoverCurve ??
+        MoonHoverEffects.lightHoverEffect.hoverCurve;
 
     final Duration effectiveHoverEffectDuration = hoverEffectDuration ??
-        context.moonEffects?.buttonHoverEffect.hoverDuration ??
-        MoonHoverEffects.lightButtonHoverEffect.hoverDuration;
+        context.moonEffects?.controlHoverEffect.hoverDuration ??
+        MoonHoverEffects.lightHoverEffect.hoverDuration;
 
     final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, backgroundColor ?? Colors.transparent);
 

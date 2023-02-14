@@ -6,7 +6,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 class TagStory extends Story {
   TagStory()
       : super(
-          name: "Tag",
+          name: "Tags",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "Custom label text",

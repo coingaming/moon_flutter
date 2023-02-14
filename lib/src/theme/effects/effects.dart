@@ -11,14 +11,14 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
     controlScaleEffect: MoonControlsEffects.controlScaleEffect,
     controlPulseEffect: MoonControlsEffects.controlPulseEffect,
     controlFocusEffect: MoonFocusEffects.lightFocusEffect,
-    buttonHoverEffect: MoonHoverEffects.lightButtonHoverEffect,
+    controlHoverEffect: MoonHoverEffects.lightHoverEffect,
   );
 
   static final dark = MoonEffects(
     controlScaleEffect: MoonControlsEffects.controlScaleEffect,
     controlPulseEffect: MoonControlsEffects.controlPulseEffect,
     controlFocusEffect: MoonFocusEffects.darkFocusEffect,
-    buttonHoverEffect: MoonHoverEffects.darkButtonHoverEffect,
+    controlHoverEffect: MoonHoverEffects.darkHoverEffect,
   );
 
   /// Control widgets scale effect.
@@ -30,14 +30,14 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
   /// Control widgets focus effect.
   final MoonFocusEffects controlFocusEffect;
 
-  /// Button hover effect.
-  final MoonHoverEffects buttonHoverEffect;
+  /// Control widgets hover effect.
+  final MoonHoverEffects controlHoverEffect;
 
   const MoonEffects({
     required this.controlScaleEffect,
     required this.controlPulseEffect,
     required this.controlFocusEffect,
-    required this.buttonHoverEffect,
+    required this.controlHoverEffect,
   });
 
   @override
@@ -45,13 +45,13 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
     MoonControlsEffects? controlScaleEffect,
     MoonControlsEffects? controlPulseEffect,
     MoonFocusEffects? controlFocusEffect,
-    MoonHoverEffects? buttonHoverEffect,
+    MoonHoverEffects? controlHoverEffect,
   }) {
     return MoonEffects(
       controlScaleEffect: controlScaleEffect ?? this.controlScaleEffect,
       controlPulseEffect: controlPulseEffect ?? this.controlPulseEffect,
       controlFocusEffect: controlFocusEffect ?? this.controlFocusEffect,
-      buttonHoverEffect: buttonHoverEffect ?? this.buttonHoverEffect,
+      controlHoverEffect: controlHoverEffect ?? this.controlHoverEffect,
     );
   }
 
@@ -63,7 +63,7 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
       controlScaleEffect: controlScaleEffect.lerp(other.controlScaleEffect, t),
       controlPulseEffect: controlPulseEffect.lerp(other.controlPulseEffect, t),
       controlFocusEffect: controlFocusEffect.lerp(other.controlFocusEffect, t),
-      buttonHoverEffect: buttonHoverEffect.lerp(other.buttonHoverEffect, t),
+      controlHoverEffect: controlHoverEffect.lerp(other.controlHoverEffect, t),
     );
   }
 
@@ -75,6 +75,6 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
       ..add(DiagnosticsProperty<MoonControlsEffects>("controlScaleEffect", controlScaleEffect))
       ..add(DiagnosticsProperty<MoonControlsEffects>("controlPulseEffect", controlPulseEffect))
       ..add(DiagnosticsProperty<MoonFocusEffects>("controlFocusEffect", controlFocusEffect))
-      ..add(DiagnosticsProperty<MoonHoverEffects>("buttonHoverEffect", buttonHoverEffect));
+      ..add(DiagnosticsProperty<MoonHoverEffects>("controlHoverEffect", controlHoverEffect));
   }
 }
