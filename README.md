@@ -11,3 +11,8 @@
 
 _Note: This project uses **[Release Please](https://github.com/googleapis/release-please)** and **[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)** spec, please follow the conventions or consider using **[Commitizen](https://github.com/commitizen/cz-cli)**
 to write commit messages._
+
+
+## Resources
+
+- 📖 [Documentation](https://flutter.moon.io)
