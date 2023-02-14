@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/coingaming/moon_flutter/compare/v0.3.0...v0.4.0) (2023-02-14)
+
+
+### Features
+
+* [MDS-378] Create Chip widget ([#33](https://github.com/coingaming/moon_flutter/issues/33)) ([4f41fcd](https://github.com/coingaming/moon_flutter/commit/4f41fcddef034d78c8b13c0a177d3f501c21ffa8))
+
 ## [0.3.0](https://github.com/coingaming/moon_flutter/compare/v0.2.4...v0.3.0) (2023-02-10)
 
 
