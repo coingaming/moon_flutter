@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.3](https://github.com/coingaming/moon_flutter/compare/v0.4.2...v0.4.3) (2023-02-15)
+
+
+### Bug Fixes
+
+* Add letter spacing to upper case MoonTag ([1454be1](https://github.com/coingaming/moon_flutter/commit/1454be18271f2838f0061d30ea7bf2fd2cf664f8))
+
 ## [0.4.2](https://github.com/coingaming/moon_flutter/compare/v0.4.1...v0.4.2) (2023-02-14)
 
 
