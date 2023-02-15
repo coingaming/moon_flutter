@@ -155,7 +155,7 @@ class MoonTag extends StatelessWidget {
           ),
           child: DefaultTextStyle.merge(
             style: isUpperCase
-                ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor)
+                ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor, letterSpacing: 1)
                 : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),
             child: Row(
               mainAxisSize: MainAxisSize.min,
