@@ -72,6 +72,8 @@ class ChipStory extends Story {
               description: "Show widget in the rightIcon slot.",
             );
 
+            final resolvedIconVariant = chipSizesKnob == MoonChipSize.md ? MoonIcons.frame24 : MoonIcons.frame16;
+
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
@@ -88,9 +90,9 @@ class ChipStory extends Story {
                         showBorder: showBorderKnob,
                         chipSize: chipSizesKnob,
                         backgroundColor: color,
-                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Ghost chip"),
@@ -100,9 +102,9 @@ class ChipStory extends Story {
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         chipSize: chipSizesKnob,
-                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Preset chip"),
@@ -115,9 +117,9 @@ class ChipStory extends Story {
                         borderWidth: 2,
                         showBorder: showBorderKnob,
                         chipSize: chipSizesKnob,
-                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 64),
                     ],

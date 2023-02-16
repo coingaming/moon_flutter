@@ -287,26 +287,29 @@ class MoonChip extends StatelessWidget {
               ),
             ),
           ),
-          child: AnimatedDefaultTextStyle(
-            duration: effectiveHoverEffectDuration,
-            curve: effectiveHoverEffectCurve,
-            style: TextStyle(fontSize: effectiveMoonChipSize.textStyle.fontSize, color: effectiveTextColor),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (leftIcon != null)
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                    child: leftIcon,
-                  ),
-                if (label != null) label!,
-                if (rightIcon != null)
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                    child: rightIcon,
-                  ),
-              ],
+          child: IconTheme(
+            data: IconThemeData(color: effectiveTextColor, size: effectiveMoonChipSize.iconSizeValue),
+            child: AnimatedDefaultTextStyle(
+              duration: effectiveHoverEffectDuration,
+              curve: effectiveHoverEffectCurve,
+              style: TextStyle(fontSize: effectiveMoonChipSize.textStyle.fontSize, color: effectiveTextColor),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (leftIcon != null)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                      child: leftIcon,
+                    ),
+                  if (label != null) label!,
+                  if (rightIcon != null)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                      child: rightIcon,
+                    ),
+                ],
+              ),
             ),
           ),
         );

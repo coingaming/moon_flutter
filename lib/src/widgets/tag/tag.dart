@@ -153,26 +153,33 @@ class MoonTag extends StatelessWidget {
               ),
             ),
           ),
-          child: DefaultTextStyle.merge(
-            style: isUpperCase
-                ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor, letterSpacing: 1)
-                : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (leftIcon != null)
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                    child: leftIcon,
-                  ),
-                if (label != null) label!,
-                if (rightIcon != null)
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                    child: rightIcon,
-                  ),
-              ],
+          child: IconTheme(
+            data: IconThemeData(color: effectiveTextColor, size: effectiveMoonTagSize.iconSizeValue),
+            child: DefaultTextStyle.merge(
+              style: isUpperCase
+                  ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor, letterSpacing: 1)
+                  : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (leftIcon != null)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                      child: leftIcon,
+                    ),
+                  if (label != null)
+                    Padding(
+                      padding: EdgeInsets.only(top: isUpperCase && (effectiveMoonTagSize == MoonTagSizes.xs) ? 2.7 : 0),
+                      child: label,
+                    ),
+                  if (rightIcon != null)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                      child: rightIcon,
+                    ),
+                ],
+              ),
             ),
           ),
         ),

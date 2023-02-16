@@ -18,7 +18,8 @@ dev_dependencies:
   lint: ^2.0.1
 
 flutter:
+  uses-material-design: true
   fonts:
-    - family:  MoonIcons
+    - family: MoonIcons
       fonts:
-      - asset: fonts/MoonIcons.ttf
+        - asset: fonts/MoonIcons.ttf
