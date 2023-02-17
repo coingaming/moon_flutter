@@ -63,8 +63,6 @@ class TagStory extends Story {
             final showRightIconKnob = context.knobs
                 .boolean(label: "Show rightIcon", description: "Show widget in the rightIcon slot.", initial: true);
 
-            final effectiveIconSize = tagSizesKnob == MoonTagSize.x2s ? 12.0 : 16.0;
-
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
@@ -77,21 +75,11 @@ class TagStory extends Story {
                       tagSize: tagSizesKnob,
                       isUpperCase: setUpperCase,
                       backgroundColor: color,
-                      leftIcon: showLeftIconKnob
-                          ? MoonPlaceholderIcon(
-                              height: effectiveIconSize,
-                              width: effectiveIconSize,
-                            )
-                          : null,
+                      leftIcon: showLeftIconKnob ? const Icon(MoonIcons.close_small16) : null,
                       label: showLabelKnob
                           ? Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob)
                           : null,
-                      rightIcon: showRightIconKnob
-                          ? MoonPlaceholderIcon(
-                              height: effectiveIconSize,
-                              width: effectiveIconSize,
-                            )
-                          : null,
+                      rightIcon: showRightIconKnob ? const Icon(MoonIcons.close_small16) : null,
                     ),
                     const SizedBox(height: 64),
                   ],

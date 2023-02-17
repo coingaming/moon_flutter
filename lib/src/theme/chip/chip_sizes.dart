@@ -12,6 +12,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
   static final sm = MoonChipSizes(
     height: MoonSizes.sizes.sm,
     gap: MoonSizes.sizes.x5s,
+    iconSizeValue: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
     borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text14,
@@ -20,6 +21,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
   static final md = MoonChipSizes(
     height: MoonSizes.sizes.md,
     gap: MoonSizes.sizes.x4s,
+    iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
     borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
@@ -30,6 +32,9 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
 
   /// Space between chip children.
   final double gap;
+
+  /// Chip icon size value.
+  final double iconSizeValue;
 
   /// Padding around chip children.
   final EdgeInsets padding;
@@ -43,6 +48,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
   const MoonChipSizes({
     required this.height,
     required this.gap,
+    required this.iconSizeValue,
     required this.padding,
     required this.borderRadius,
     required this.textStyle,
@@ -52,6 +58,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
   MoonChipSizes copyWith({
     double? height,
     double? gap,
+    double? iconSizeValue,
     EdgeInsets? padding,
     BorderRadius? borderRadius,
     TextStyle? textStyle,
@@ -59,6 +66,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
     return MoonChipSizes(
       height: height ?? this.height,
       gap: gap ?? this.gap,
+      iconSizeValue: iconSizeValue ?? this.iconSizeValue,
       padding: padding ?? this.padding,
       borderRadius: borderRadius ?? this.borderRadius,
       textStyle: textStyle ?? this.textStyle,
@@ -72,6 +80,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
     return MoonChipSizes(
       height: lerpDouble(height, other.height, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
+      iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
       padding: EdgeInsets.lerp(padding, other.padding, t)!,
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
@@ -85,6 +94,7 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
       ..add(DiagnosticsProperty("type", "MoonChipSizes"))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("iconSizeValue", iconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));

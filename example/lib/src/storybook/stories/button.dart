@@ -91,6 +91,8 @@ class ButtonStory extends Story {
               description: "Set button to full width.",
             );
 
+            final resolvedIconVariant = buttonSizesKnob == MoonButtonSize.md ? MoonIcons.frame24 : MoonIcons.frame16;
+
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
@@ -110,9 +112,9 @@ class ButtonStory extends Story {
                         backgroundColor: color,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 32),
                       MoonButton.icon(
@@ -123,7 +125,7 @@ class ButtonStory extends Story {
                         backgroundColor: color,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                        icon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        icon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Main buttons"),
@@ -133,9 +135,9 @@ class ButtonStory extends Story {
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
                         showPulseEffect: showPulseEffectKnob,
-                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonPrimaryButton") : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 32),
                       MoonSecondaryButton(
@@ -143,9 +145,9 @@ class ButtonStory extends Story {
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
                         showPulseEffect: showPulseEffectKnob,
-                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonSecondaryButton") : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 32),
                       MoonTertiaryButton(
@@ -153,9 +155,9 @@ class ButtonStory extends Story {
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
                         showPulseEffect: showPulseEffectKnob,
-                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonTertiaryButton") : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 32),
                       MoonGhostButton(
@@ -163,9 +165,9 @@ class ButtonStory extends Story {
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
                         showPulseEffect: showPulseEffectKnob,
-                        leftIcon: showLeftIconKnob ? const MoonPlaceholderIcon() : null,
+                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonGhostButton") : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Button with non-standard children"),
@@ -205,7 +207,7 @@ class ButtonStory extends Story {
                                 ),
                               )
                             : null,
-                        rightIcon: showRightIconKnob ? const MoonPlaceholderIcon() : null,
+                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 64),
                     ],

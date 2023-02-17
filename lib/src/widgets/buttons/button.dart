@@ -419,54 +419,57 @@ class MoonButton extends StatelessWidget {
               ),
             ),
           ),
-          child: AnimatedDefaultTextStyle(
-            style: TextStyle(color: effectiveTextColor, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
-            duration: effectiveHoverEffectDuration,
-            curve: effectiveHoverEffectCurve,
-            child: isFullWidth
-                ? Stack(
-                    fit: StackFit.expand,
-                    alignment: Alignment.center,
-                    children: [
-                      if (leftIcon != null)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
+          child: IconTheme(
+            data: IconThemeData(color: effectiveTextColor, size: effectiveMoonButtonSize.iconSizeValue),
+            child: AnimatedDefaultTextStyle(
+              style: TextStyle(color: effectiveTextColor, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
+              duration: effectiveHoverEffectDuration,
+              curve: effectiveHoverEffectCurve,
+              child: isFullWidth
+                  ? Stack(
+                      fit: StackFit.expand,
+                      alignment: Alignment.center,
+                      children: [
+                        if (leftIcon != null)
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                              child: leftIcon,
+                            ),
+                          ),
+                        if (label != null)
+                          Align(
+                            child: label,
+                          ),
+                        if (rightIcon != null)
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                              child: rightIcon,
+                            ),
+                          ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (leftIcon != null)
+                          Padding(
                             padding: EdgeInsets.symmetric(horizontal: effectiveGap),
                             child: leftIcon,
                           ),
-                        ),
-                      if (label != null)
-                        Align(
-                          child: label,
-                        ),
-                      if (rightIcon != null)
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
+                        if (label != null) label!,
+                        if (rightIcon != null)
+                          Padding(
                             padding: EdgeInsets.symmetric(horizontal: effectiveGap),
                             child: rightIcon,
                           ),
-                        ),
-                    ],
-                  )
-                : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (leftIcon != null)
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                          child: leftIcon,
-                        ),
-                      if (label != null) label!,
-                      if (rightIcon != null)
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                          child: rightIcon,
-                        ),
-                    ],
-                  ),
+                      ],
+                    ),
+            ),
           ),
         );
       },

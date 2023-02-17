@@ -12,6 +12,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
   static final x2s = MoonTagSizes(
     height: MoonSizes.sizes.x2s,
     gap: MoonSizes.sizes.x5s,
+    iconSizeValue: MoonSizes.sizes.x3s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.text.text10.copyWith(fontWeight: FontWeight.w400),
@@ -21,6 +22,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
   static final xs = MoonTagSizes(
     height: MoonSizes.sizes.xs,
     gap: MoonSizes.sizes.x5s,
+    iconSizeValue: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.text.text12.copyWith(fontWeight: FontWeight.w400),
@@ -32,6 +34,9 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
 
   /// Space between tag children.
   final double gap;
+
+  /// Tag icon size value.
+  final double iconSizeValue;
 
   /// Padding around tag children.
   final EdgeInsets padding;
@@ -48,6 +53,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
   const MoonTagSizes({
     required this.height,
     required this.gap,
+    required this.iconSizeValue,
     required this.padding,
     required this.borderRadius,
     required this.textStyle,
@@ -58,6 +64,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
   MoonTagSizes copyWith({
     double? height,
     double? gap,
+    double? iconSizeValue,
     EdgeInsets? padding,
     BorderRadius? borderRadius,
     TextStyle? textStyle,
@@ -66,6 +73,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
     return MoonTagSizes(
       height: height ?? this.height,
       gap: gap ?? this.gap,
+      iconSizeValue: iconSizeValue ?? this.iconSizeValue,
       padding: padding ?? this.padding,
       borderRadius: borderRadius ?? this.borderRadius,
       textStyle: textStyle ?? this.textStyle,
@@ -80,6 +88,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
     return MoonTagSizes(
       height: lerpDouble(height, other.height, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
+      iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
       padding: EdgeInsets.lerp(padding, other.padding, t)!,
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
@@ -94,6 +103,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
       ..add(DiagnosticsProperty("type", "MoonTagSizes"))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("iconSizeValue", iconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
