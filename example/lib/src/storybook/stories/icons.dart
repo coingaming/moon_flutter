@@ -18,7 +18,7 @@ class IconsStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     iconsList[index],
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 20),
                     Text(
                       iconsNameList[index],
                       style: TextStyle(fontSize: 10, color: context.moonColors!.trunks),
