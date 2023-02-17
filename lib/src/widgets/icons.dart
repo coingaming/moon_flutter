@@ -904,7 +904,7 @@ class MoonIcons {
   static const IconData room32 = IconData(0xeb83, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData round16 = IconData(0xeb84, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData round24 = IconData(0xeb85, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData round_default = IconData(0xeb86, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData round32 = IconData(0xeb86, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData rowing = IconData(0xeb87, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData rugby = IconData(0xeb88, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData sad16 = IconData(0xeb89, fontFamily: _kFontFam, fontPackage: _kFontPkg);
