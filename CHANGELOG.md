@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/coingaming/moon_flutter/compare/v0.4.3...v0.5.0) (2023-02-17)
+
+
+### Features
+
+* [MDS-387] Add/convert MDS icons to the project ([#39](https://github.com/coingaming/moon_flutter/issues/39)) ([2074f9a](https://github.com/coingaming/moon_flutter/commit/2074f9a01d5af650ed2227fcdf505003bdbd451c))
+
 ## [0.4.3](https://github.com/coingaming/moon_flutter/compare/v0.4.2...v0.4.3) (2023-02-15)
 
 
