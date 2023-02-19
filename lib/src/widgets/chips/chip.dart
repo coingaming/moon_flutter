@@ -6,7 +6,7 @@ import 'package:moon_design/src/theme/chip/chip_sizes.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/base_control.dart';
 
 enum MoonChipSize {
@@ -164,7 +164,6 @@ class MoonChip extends StatelessWidget {
   }
 
   Color _getTextColor({
-    required bool isDarkMode,
     required Color backgroundColor,
     required Color activeColor,
     required Color? textColor,
@@ -246,7 +245,6 @@ class MoonChip extends StatelessWidget {
 
         final Color effectiveTextColor = _getTextColor(
           isActive: canAnimate,
-          isDarkMode: context.isDarkMode,
           activeColor: effectiveActiveColor,
           backgroundColor: effectiveBackgroundColor,
           textColor: textColor,
@@ -287,8 +285,11 @@ class MoonChip extends StatelessWidget {
               ),
             ),
           ),
-          child: IconTheme(
-            data: IconThemeData(color: effectiveTextColor, size: effectiveMoonChipSize.iconSizeValue),
+          child: AnimatedIconTheme(
+            duration: effectiveHoverEffectDuration,
+            curve: effectiveHoverEffectCurve,
+            color: effectiveTextColor,
+            size: effectiveMoonChipSize.iconSizeValue,
             child: AnimatedDefaultTextStyle(
               duration: effectiveHoverEffectDuration,
               curve: effectiveHoverEffectCurve,
