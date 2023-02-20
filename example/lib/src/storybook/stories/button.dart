@@ -91,7 +91,24 @@ class ButtonStory extends Story {
               description: "Set button to full width.",
             );
 
-            final resolvedIconVariant = buttonSizesKnob == MoonButtonSize.md ? MoonIcons.frame24 : MoonIcons.frame16;
+            IconData resolveIconVariant(MoonButtonSize buttonSize) {
+              switch (buttonSize) {
+                case MoonButtonSize.xs:
+                  return MoonIcons.frame16;
+                case MoonButtonSize.sm:
+                  return MoonIcons.frame24;
+                case MoonButtonSize.md:
+                  return MoonIcons.frame24;
+                case MoonButtonSize.lg:
+                  return MoonIcons.frame24;
+                case MoonButtonSize.xl:
+                  return MoonIcons.frame24;
+                default:
+                  return MoonIcons.frame24;
+              }
+            }
+
+            final resolvedIconVariant = resolveIconVariant(buttonSizesKnob);
 
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,

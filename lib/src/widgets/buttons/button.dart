@@ -1,11 +1,12 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_design/src/theme/borders.dart';
 
+import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button/button_sizes.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/animated_icon_theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/base_control.dart';
 
@@ -193,8 +194,8 @@ class MoonButton extends StatelessWidget {
     this.pulseEffectCurve,
     this.padding,
     this.borderRadius,
-    this.label,
     this.leftIcon,
+    this.label,
     this.rightIcon,
   });
 
@@ -419,8 +420,11 @@ class MoonButton extends StatelessWidget {
               ),
             ),
           ),
-          child: IconTheme(
-            data: IconThemeData(color: effectiveTextColor, size: effectiveMoonButtonSize.iconSizeValue),
+          child: AnimatedIconTheme(
+            duration: effectiveHoverEffectDuration,
+            curve: effectiveHoverEffectCurve,
+            color: effectiveTextColor,
+            size: effectiveMoonButtonSize.iconSizeValue,
             child: AnimatedDefaultTextStyle(
               style: TextStyle(color: effectiveTextColor, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
               duration: effectiveHoverEffectDuration,
