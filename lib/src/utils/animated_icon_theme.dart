@@ -1,91 +1,67 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class AnimatedIconTheme extends StatefulWidget {
+class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
+  /// The target color for icon.
+  ///
+  /// The color must not be null.
+  ///
+  /// When this property is changed, the icon color will be animated over [duration] time.
   final Color color;
-  final double? size;
-  final Curve curve;
-  final Duration duration;
+
+  /// The target size for icon.
+  ///
+  /// The size must not be null.
+  ///
+  /// When this property is changed, the icon size will be animated over [duration] time.
+  final double size;
+
+  /// The widget below this widget in the tree.
+  ///
+  /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
 
+  /// Creates a widget that animates the icon properties implicitly.
+  ///
+  /// The [child], [color], [curve], and [duration]
+  /// arguments must not be null.
   const AnimatedIconTheme({
     super.key,
+    super.onEnd,
+    super.curve,
+    required super.duration,
     required this.color,
-    this.size,
-    required this.curve,
-    required this.duration,
+    required this.size,
     required this.child,
   });
 
   @override
-  State<AnimatedIconTheme> createState() => _AnimatedIconThemeState();
+  AnimatedWidgetBaseState<AnimatedIconTheme> createState() => _AnimatedIconThemeState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Color>('iconColor', color, defaultValue: null));
+    properties.add(DiagnosticsProperty<double>('iconSize', size, defaultValue: null));
+  }
 }
 
-class _AnimatedIconThemeState extends State<AnimatedIconTheme> with SingleTickerProviderStateMixin {
-  Color _initialColor = Colors.transparent;
-  Color _targetColor = Colors.transparent;
-
-  AnimationController get controller => _controller;
-  late final AnimationController _controller = AnimationController(
-    duration: widget.duration,
-    debugLabel: kDebugMode ? widget.toStringShort() : null,
-    vsync: this,
-  );
-
-  Animation<double> get animation => _animation;
-  late CurvedAnimation _animation = _createCurve();
-
-  CurvedAnimation _createCurve() {
-    return CurvedAnimation(parent: _controller, curve: widget.curve);
-  }
+class _AnimatedIconThemeState extends AnimatedWidgetBaseState<AnimatedIconTheme> {
+  ColorTween? _color;
+  SizeTween? _size;
 
   @override
-  void initState() {
-    super.initState();
-    _initialColor = widget.color;
-  }
-
-  @override
-  void didUpdateWidget(AnimatedIconTheme oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.curve != oldWidget.curve) {
-      _animation.dispose();
-      _animation = _createCurve();
-    }
-
-    _controller.duration = widget.duration;
-
-    if (widget.color != oldWidget.color) {
-      _targetColor = widget.color;
-      _initialColor = oldWidget.color;
-      _controller
-        ..value = 0.0
-        ..forward();
-    }
-  }
-
-  @override
-  void dispose() {
-    _animation.dispose();
-    _controller.dispose();
-    super.dispose();
+  void forEachTween(TweenVisitor<dynamic> visitor) {
+    _color = visitor(_color, widget.color, (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
+    _size = visitor(_size, Size(widget.size, widget.size), (dynamic value) => SizeTween(begin: value as Size))
+        as SizeTween?;
   }
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) => IconTheme(
-          data: IconThemeData.lerp(
-            IconThemeData(color: _initialColor, size: widget.size),
-            IconThemeData(color: _targetColor, size: widget.size),
-            _animation.value,
-          ),
-          child: child!,
-        ),
-        child: widget.child,
-      ),
+    return IconTheme(
+      data: IconThemeData(color: _color!.evaluate(animation), size: _size!.evaluate(animation)!.height),
+      child: widget.child,
     );
   }
 }
