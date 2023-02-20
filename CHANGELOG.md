@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.5](https://github.com/coingaming/moon_flutter/compare/v0.5.4...v0.5.5) (2023-02-20)
+
+
+### Bug Fixes
+
+* chip to Chip in Storybook [MDS-398] ([#48](https://github.com/coingaming/moon_flutter/issues/48)) ([0ef0871](https://github.com/coingaming/moon_flutter/commit/0ef08710852137e4958440319ff0ab100860d5b3))
+
 ## [0.5.4](https://github.com/coingaming/moon_flutter/compare/v0.5.3...v0.5.4) (2023-02-20)
 
 
