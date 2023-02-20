@@ -88,7 +88,7 @@ class ButtonStory extends Story {
 
             final setFullWidthKnob = context.knobs.boolean(
               label: "isFullWidth",
-              description: "Set button to full width.",
+              description: "Set Button to full width.",
             );
 
             IconData resolveIconVariant(MoonButtonSize buttonSize) {
@@ -118,7 +118,7 @@ class ButtonStory extends Story {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 64),
-                      const TextDivider(text: "Base button and icon button"),
+                      const TextDivider(text: "Base Button and Icon Button"),
                       const SizedBox(height: 32),
                       MoonButton(
                         onTap: showDisabledKnob ? null : () {},
