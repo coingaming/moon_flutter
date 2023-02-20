@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.4](https://github.com/coingaming/moon_flutter/compare/v0.5.3...v0.5.4) (2023-02-20)
+
+
+### Bug Fixes
+
+* Fix MDS logo ([#49](https://github.com/coingaming/moon_flutter/issues/49)) ([2eccb18](https://github.com/coingaming/moon_flutter/commit/2eccb18bf6195946ac708a3509a6d5d5665676a8))
+
 ## [0.5.3](https://github.com/coingaming/moon_flutter/compare/v0.5.2...v0.5.3) (2023-02-20)
 
 
