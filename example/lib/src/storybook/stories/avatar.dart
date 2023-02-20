@@ -35,7 +35,7 @@ class AvatarStory extends Story {
 
             final avatarBackgroundColorKnob = context.knobs.options(
               label: "backgroundColor",
-              description: "MoonColors variants for avatar background.",
+              description: "MoonColors variants for Avatar background.",
               initial: 5, // bulma
               options: colorOptions,
             );
@@ -46,12 +46,12 @@ class AvatarStory extends Story {
               max: 32,
               initial: 8,
               label: "borderRadius",
-              description: "Border radius for the avatar.",
+              description: "Border radius for the Avatar.",
             );
 
             final showBadgeKnob = context.knobs.boolean(
               label: "showBadge",
-              description: "Show avatar badge.",
+              description: "Show Avatar badge.",
               initial: true,
             );
 
@@ -69,7 +69,7 @@ class AvatarStory extends Story {
 
             final badgeColorKnob = context.knobs.options(
               label: "badgeColor",
-              description: "MoonColors variants for the avatar badge.",
+              description: "MoonColors variants for the Avatar badge.",
               initial: 18, // roshi100
               options: colorOptions,
             );
@@ -83,7 +83,7 @@ class AvatarStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
-                    const TextDivider(text: "Customisable avatar"),
+                    const TextDivider(text: "Customisable Avatar"),
                     const SizedBox(height: 32),
                     MoonAvatar(
                       avatarSize: avatarSizesKnob,
@@ -98,7 +98,7 @@ class AvatarStory extends Story {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Preset avatar with picture background"),
+                    const TextDivider(text: "Preset Avatar with picture background"),
                     const SizedBox(height: 32),
                     MoonAvatar(
                       avatarSize: avatarSizesKnob,
