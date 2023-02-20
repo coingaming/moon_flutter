@@ -6,7 +6,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 class TagStory extends Story {
   TagStory()
       : super(
-          name: "Tags",
+          name: "Tag",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "Custom label text",
@@ -15,7 +15,7 @@ class TagStory extends Story {
 
             final colorsKnob = context.knobs.options(
               label: "backgroundColor",
-              description: "MoonColors variants for tag.",
+              description: "MoonColors variants for Tag.",
               initial: 5, // bulma
               options: colorOptions,
             );
@@ -26,7 +26,7 @@ class TagStory extends Story {
               max: 12,
               initial: 4,
               label: "borderRadius",
-              description: "Border radius for tag.",
+              description: "Border radius for Tag.",
             );
 
             final tagSizesKnob = context.knobs.options(
@@ -46,7 +46,7 @@ class TagStory extends Story {
 
             final setUpperCase = context.knobs.boolean(
               label: "isUpperCase",
-              description: "Sets the text style of the tag to upper case.",
+              description: "Sets the text style of the Tag to upper case.",
             );
 
             final showLeftIconKnob = context.knobs.boolean(
