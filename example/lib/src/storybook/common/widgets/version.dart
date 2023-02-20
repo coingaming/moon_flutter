@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:moon_design/moon_design.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -33,7 +34,7 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const MoonBrandIcon(),
+            SvgPicture.asset("assets/svg/moon-logo-short.svg", width: 24.0, height: 24.0),
             const SizedBox(width: 8.0),
             Text(
               "Moon Design",
