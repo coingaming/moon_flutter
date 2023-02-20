@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/coingaming/moon_flutter/compare/v0.5.1...v0.5.2) (2023-02-20)
+
+
+### Bug Fixes
+
+* Convert AnimatedIconTheme to ImplicitlyAnimatedWidget ([#43](https://github.com/coingaming/moon_flutter/issues/43)) ([c1a5216](https://github.com/coingaming/moon_flutter/commit/c1a5216340f540ffde4e2e2d80d4b945021a4e27))
+
 ## [0.5.1](https://github.com/coingaming/moon_flutter/compare/v0.5.0...v0.5.1) (2023-02-19)
 
 
