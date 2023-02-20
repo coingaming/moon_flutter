@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.6](https://github.com/coingaming/moon_flutter/compare/v0.5.5...v0.5.6) (2023-02-20)
+
+
+### Bug Fixes
+
+* avatar and button to capitalize in Storybook ([#52](https://github.com/coingaming/moon_flutter/issues/52)) ([db95d21](https://github.com/coingaming/moon_flutter/commit/db95d21b39feb82e9a3b7eda3aa430b46000bf98))
+
 ## [0.5.5](https://github.com/coingaming/moon_flutter/compare/v0.5.4...v0.5.5) (2023-02-20)
 
 
