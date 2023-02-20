@@ -16,7 +16,7 @@ class ChipStory extends Story {
 
             final colorsKnob = context.knobs.options(
               label: "backgroundColor",
-              description: "MoonColors variants for the chip.",
+              description: "MoonColors variants for the Chip.",
               initial: 5, // bulma
               options: colorOptions,
             );
@@ -25,7 +25,7 @@ class ChipStory extends Story {
 
             final isActiveKnob = context.knobs.boolean(
               label: "isActive",
-              description: "Whether the chip is active/selected.",
+              description: "Whether the Chip is active/selected.",
             );
 
             final showBorderKnob = context.knobs.boolean(
@@ -37,7 +37,7 @@ class ChipStory extends Story {
               max: 28,
               initial: 8,
               label: "borderRadius",
-              description: "Border radius for the chip.",
+              description: "Border radius for the Chip.",
             );
 
             final chipSizesKnob = context.knobs.options(
@@ -82,7 +82,7 @@ class ChipStory extends Story {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 64),
-                      const TextDivider(text: "Regular chip"),
+                      const TextDivider(text: "Regular Chip"),
                       const SizedBox(height: 32),
                       MoonChip(
                         isActive: isActiveKnob,
@@ -95,7 +95,7 @@ class ChipStory extends Story {
                         rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
-                      const TextDivider(text: "Ghost chip"),
+                      const TextDivider(text: "Ghost Chip"),
                       const SizedBox(height: 32),
                       MoonGhostChip(
                         isActive: isActiveKnob,
@@ -107,7 +107,7 @@ class ChipStory extends Story {
                         rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
-                      const TextDivider(text: "Preset chip"),
+                      const TextDivider(text: "Preset Chip"),
                       const SizedBox(height: 32),
                       MoonChip(
                         isActive: isActiveKnob,
