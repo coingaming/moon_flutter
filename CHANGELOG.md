@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.3](https://github.com/coingaming/moon_flutter/compare/v0.5.2...v0.5.3) (2023-02-20)
+
+
+### Bug Fixes
+
+* Add AnimatedIconTheme to MoonButton ([#46](https://github.com/coingaming/moon_flutter/issues/46)) ([7c99334](https://github.com/coingaming/moon_flutter/commit/7c993341146b57be24ee288cd11a79b308f75f2a))
+
 ## [0.5.2](https://github.com/coingaming/moon_flutter/compare/v0.5.1...v0.5.2) (2023-02-20)
 
 
