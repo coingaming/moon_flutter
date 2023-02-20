@@ -21,7 +21,6 @@ export 'package:moon_design/src/theme/typography/typography.dart';
 export 'package:moon_design/src/utils/animated_icon_theme.dart';
 export 'package:moon_design/src/utils/extensions.dart';
 export 'package:moon_design/src/utils/measure_size.dart';
-export 'package:moon_design/src/utils/moon_icon.dart';
 export 'package:moon_design/src/utils/widget_surveyor.dart';
 export 'package:moon_design/src/widgets/avatar/avatar.dart';
 export 'package:moon_design/src/widgets/base_control.dart';
