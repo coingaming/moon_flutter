@@ -35,3 +35,4 @@ export 'package:moon_design/src/widgets/effects/focus_effect.dart';
 export 'package:moon_design/src/widgets/effects/pulse_effect.dart';
 export 'package:moon_design/src/widgets/icons.dart';
 export 'package:moon_design/src/widgets/tag/tag.dart';
+export 'package:moon_design/src/widgets/tooltip/tooltip.dart';
