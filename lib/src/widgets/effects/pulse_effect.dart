@@ -8,8 +8,8 @@ class MoonPulseEffect extends StatefulWidget {
   final bool showJiggle;
   final double effectExtent;
   final Color effectColor;
-  final Curve effectCurve;
   final Duration effectDuration;
+  final Curve effectCurve;
   final BorderRadius? childBorderRadius;
   final Widget child;
 
@@ -19,8 +19,8 @@ class MoonPulseEffect extends StatefulWidget {
     required this.showJiggle,
     required this.effectExtent,
     required this.effectColor,
-    required this.effectCurve,
     required this.effectDuration,
+    required this.effectCurve,
     this.childBorderRadius,
     required this.child,
   });

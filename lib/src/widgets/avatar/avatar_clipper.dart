@@ -132,10 +132,7 @@ class AvatarClipper extends CustomClipper<Path> {
             0,
             width,
             height,
-            SmoothRadius(
-              cornerRadius: min(borderRadiusValue, smallestDimension / 2),
-              cornerSmoothing: 1,
-            ),
+            SmoothRadius(cornerRadius: min(borderRadiusValue, smallestDimension / 2), cornerSmoothing: 1),
           ),
         ),
       // Badge shape properties

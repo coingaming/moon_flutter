@@ -382,7 +382,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
                     child: AnimatedOpacity(
                       opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
                       duration: const Duration(milliseconds: 150),
-                      curve: Curves.easeInOut,
+                      curve: Curves.easeInOutCubic,
                       child: MoonFocusEffect(
                         show: _canAnimateFocus,
                         effectColor: focusColor,

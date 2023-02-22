@@ -7,8 +7,8 @@ class MoonFocusEffect extends StatefulWidget {
   final bool show;
   final double effectExtent;
   final Color effectColor;
-  final Curve effectCurve;
   final Duration effectDuration;
+  final Curve effectCurve;
   final BorderRadius? childBorderRadius;
   final Widget child;
 
@@ -17,8 +17,8 @@ class MoonFocusEffect extends StatefulWidget {
     required this.show,
     required this.effectExtent,
     required this.effectColor,
-    required this.effectCurve,
     required this.effectDuration,
+    required this.effectCurve,
     this.childBorderRadius,
     required this.child,
   });

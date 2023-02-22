@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
+import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/widgets/tooltip/obfuscate_tooltip_item.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_content.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip_content_positioner.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_content_transition.dart';
+import 'package:moon_design/src/widgets/tooltip/tooltip_position_manager.dart';
 
 enum MoonTooltipDirection { up, down, right, left, horizontal, vertical }
 
@@ -24,11 +27,15 @@ class MoonTooltip extends StatefulWidget {
 
   /// Sets the content padding
   /// defautls to: `const EdgeInsets.symmetric(horizontal: 20, vertical: 16),`
-  final EdgeInsets contentPadding;
+  final EdgeInsets? contentPadding;
 
   /// sets the duration of the tooltip entrance animation
   /// defaults to [460] milliseconds
-  final Duration animationDuration;
+  final Duration? transitionDuration;
+
+  /// sets the duration of the tooltip entrance animation
+  /// defaults to [460] milliseconds
+  final Curve? transitionCurve;
 
   /// [minWidth], [minHeight], [maxWidth], [maxHeight] optional size constraints.
   /// If a constraint is not set the size will adjust to the content
@@ -39,11 +46,11 @@ class MoonTooltip extends StatefulWidget {
 
   ///
   /// The distance of the tip of the arrow's tip to the center of the target
-  final double arrowTipDistance;
+  final double? arrowTipDistance;
 
   ///
   /// The length of the Arrow
-  final double arrowLength;
+  final double? arrowLength;
 
   ///
   /// the stroke width of the border
@@ -55,11 +62,11 @@ class MoonTooltip extends StatefulWidget {
 
   ///
   /// The corder radii of the border
-  final double borderRadius;
+  final double? borderRadius;
 
   ///
   /// The width of the arrow at its base
-  final double arrowBaseWidth;
+  final double? arrowBaseWidth;
 
   ///
   /// The targetCenter where the arrow points to(if null,defaults to center)
@@ -71,12 +78,12 @@ class MoonTooltip extends StatefulWidget {
 
   ///
   /// The color of the border
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   ///
   /// Set a custom list of [BoxShadow]
   /// defaults to `const BoxShadow(color: const Color(0x45222222), blurRadius: 8, spreadRadius: 2),`
-  final List<BoxShadow> customShadows;
+  final List<BoxShadow>? tooltipShadows;
 
   ///
   /// Set a handler for listening to a `tap` event on the tooltip (This is the recommended way to put your logic for dismissing the tooltip)
@@ -95,31 +102,30 @@ class MoonTooltip extends StatefulWidget {
 
   const MoonTooltip({
     super.key,
-    required this.child,
     this.tooltipDirection = MoonTooltipDirection.up,
     required this.content,
     required this.show,
     this.targetCenter,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+    this.contentPadding,
     this.maxWidth,
     this.minWidth,
     this.maxHeight,
     this.minHeight,
-    this.arrowTipDistance = 6,
-    this.arrowLength = 20,
-    this.minimumOutSidePadding = 20.0,
-    this.arrowBaseWidth = 20.0,
-    this.borderRadius = 10,
-    this.borderWidth = 2.0,
-    this.borderColor = const Color(0xFF50FFFF),
-    this.animationDuration = const Duration(milliseconds: 460),
-    this.backgroundColor = const Color(0xFFFFFFFF),
-    this.customShadows = const [
-      BoxShadow(color: Color(0x45222222), blurRadius: 8, spreadRadius: 2),
-    ],
+    this.arrowTipDistance,
+    this.arrowLength,
+    this.minimumOutSidePadding = 8,
+    this.arrowBaseWidth,
+    this.borderRadius,
+    this.borderWidth = 0,
+    this.borderColor = Colors.transparent,
+    this.transitionDuration,
+    this.transitionCurve,
+    this.backgroundColor,
+    this.tooltipShadows,
     this.tooltipTap,
-    this.hideOnTooltipTap = false,
+    this.hideOnTooltipTap = true,
     this.routeObserver,
+    required this.child,
   });
 
   @override
@@ -127,28 +133,24 @@ class MoonTooltip extends StatefulWidget {
 }
 
 class MoonTooltipState extends State<MoonTooltip> with RouteAware {
-  bool _displaying = false;
-
+  // To avoid excessive rebuilds
+  final GlobalKey _positionManagerKey = GlobalKey();
   final LayerLink layerLink = LayerLink();
+  final List<ObfuscateTooltipItemState> _obfuscateItems = [];
 
-  bool get shouldShowTooltip => widget.show && !_isBeingObfuscated && _routeIsShowing;
-
-  // To avoid rebuild state of widget for each rebuild
-  GlobalKey _transitionKey = GlobalKey();
-  final GlobalKey _positionerKey = GlobalKey();
-
+  bool _displaying = false;
   bool _routeIsShowing = true;
-
   bool _isBeingObfuscated = false;
+  GlobalKey _transitionKey = GlobalKey();
+  TooltipContentSize? _contentSize;
 
   late OverlayEntry _overlayEntry;
 
-  final List<ObfuscateTooltipItemState> _obfuscateItems = [];
-  MoonTooltipContentSize? _contentSize;
+  bool get shouldShowTooltip => widget.show && !_isBeingObfuscated && _routeIsShowing;
 
   void addObfuscateItem(ObfuscateTooltipItemState item) {
     _obfuscateItems.add(item);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       doCheckForObfuscation();
       doShowOrHide();
     });
@@ -156,22 +158,101 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
 
   void removeObfuscatedItem(ObfuscateTooltipItemState item) {
     _obfuscateItems.remove(item);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       doCheckForObfuscation();
       doShowOrHide();
     });
   }
 
-  @override
-  void dispose() {
+  void _showTooltip({bool buildHidding = false}) {
+    if (_displaying || !mounted) return;
+
+    _overlayEntry = _buildOverlay(buildHidding: buildHidding);
+    Overlay.of(context).insert(_overlayEntry);
+    _displaying = true;
+  }
+
+  void _removeTooltip() {
+    if (!_displaying) return;
+
+    _overlayEntry.remove();
+    _displaying = false;
+  }
+
+  void doShowOrHide() {
+    final wasDisplaying = _displaying;
     _removeTooltip();
-    widget.routeObserver?.unsubscribe(this);
-    super.dispose();
+    if (shouldShowTooltip) {
+      _showTooltip();
+    } else if (wasDisplaying) {
+      _showTooltip(buildHidding: true);
+    }
+  }
+
+  void doCheckForObfuscation() {
+    if (_contentSize == null) return;
+
+    for (final obfuscateItem in _obfuscateItems) {
+      final d = obfuscateItem.getPositionAndSize()!;
+      final Rect obfuscateItemRect = d.globalPosition & d.size;
+      final Rect contentRect = _contentSize!.globalPosition & _contentSize!.size;
+      final bool overlaps = contentRect.overlaps(obfuscateItemRect);
+
+      if (overlaps) {
+        _isBeingObfuscated = true;
+        // no need to keep searching
+        return;
+      }
+    }
+
+    _isBeingObfuscated = false;
+  }
+
+  Color _getTextColor({required Color backgroundColor}) {
+    final backgroundLuminance = backgroundColor.computeLuminance();
+    if (backgroundLuminance > 0.5) {
+      return MoonColors.light.bulma;
+    } else {
+      return MoonColors.dark.bulma;
+    }
+  }
+
+  @override
+  void didPush() {
+    _routeIsShowing = true;
+    // Route was pushed onto navigator and is now topmost route.
+    if (shouldShowTooltip) {
+      _removeTooltip();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _showTooltip();
+      });
+    }
+  }
+
+  @override
+  void didPushNext() {
+    _routeIsShowing = false;
+    _removeTooltip();
+  }
+
+  @override
+  Future<void> didPopNext() async {
+    _routeIsShowing = true;
+
+    if (shouldShowTooltip) {
+      // Covering route was popped off the navigator.
+      _removeTooltip();
+      await Future.delayed(const Duration(milliseconds: 100), () {
+        if (mounted) _showTooltip();
+      });
+    }
   }
 
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (shouldShowTooltip) {
         _showTooltip();
@@ -195,7 +276,16 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
       }
       doShowOrHide();
     });
+
     super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _removeTooltip();
+    widget.routeObserver?.unsubscribe(this);
+
+    super.dispose();
   }
 
   @override
@@ -206,65 +296,13 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
     );
   }
 
-  void _showTooltip({
-    bool buildHidding = false,
-  }) {
-    if (_displaying || !mounted) {
-      return;
-    }
-    _overlayEntry = _buildOverlay(
-      buildHidding: buildHidding,
-    );
-    Overlay.of(context).insert(_overlayEntry);
-    _displaying = true;
-  }
-
-  void _removeTooltip() {
-    if (!_displaying) {
-      return;
-    }
-    _overlayEntry.remove();
-    _displaying = false;
-  }
-
-  void doShowOrHide() {
-    final wasDisplaying = _displaying;
-    _removeTooltip();
-    if (shouldShowTooltip) {
-      _showTooltip();
-    } else if (wasDisplaying) {
-      _showTooltip(buildHidding: true);
-    }
-  }
-
-  void doCheckForObfuscation() {
-    if (_contentSize == null) return;
-    for (final obfuscateItem in _obfuscateItems) {
-      final d = obfuscateItem.getPositionAndSize()!;
-
-      final Rect obfuscateItemRect = d.globalPosition & d.size;
-      final Rect contentRect = _contentSize!.globalPosition & _contentSize!.size;
-      final bool overlaps = contentRect.overlaps(obfuscateItemRect);
-      if (overlaps) {
-        _isBeingObfuscated = true;
-        // no need to keep searching
-        return;
-      }
-    }
-    _isBeingObfuscated = false;
-  }
-
-  OverlayEntry _buildOverlay({
-    bool buildHidding = false,
-  }) {
-    var direction = widget.tooltipDirection;
+  OverlayEntry _buildOverlay({bool buildHidding = false}) {
+    MoonTooltipDirection direction = widget.tooltipDirection;
 
     if (direction == MoonTooltipDirection.horizontal || direction == MoonTooltipDirection.vertical) {
-      // compute real direction based on target position
+      // Compute real direction based on target position
       final targetRenderBox = context.findRenderObject() as RenderBox?;
-      final overlayRenderBox = Overlay.of(
-        context,
-      ).context.findRenderObject() as RenderBox?;
+      final overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
 
       final targetGlobalCenter =
           targetRenderBox?.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox) ??
@@ -278,44 +316,83 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
               ? MoonTooltipDirection.right
               : MoonTooltipDirection.left);
     }
+    final double effectiveArrowBaseWidth = widget.arrowLength ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
+
+    final double effectiveArrowLength = widget.arrowLength ?? context.moonTooltipTheme?.arrowLength ?? 8;
+
+    final double effectiveArrowTipDistance = widget.arrowTipDistance ?? context.moonTooltipTheme?.arrowTipDistance ?? 8;
+
+    final Duration effectiveTransitionDuration =
+        widget.transitionDuration ?? context.moonTooltipTheme?.transitionDuration ?? const Duration(milliseconds: 150);
+
+    final Curve effectiveTransitionCurve =
+        widget.transitionCurve ?? context.moonTooltipTheme?.transitionCurve ?? Curves.easeInOutCubic;
+
+    final EdgeInsets effectiveContentPadding =
+        widget.contentPadding ?? context.moonTooltipTheme?.contentPadding ?? const EdgeInsets.all(12);
+
+    final double effectiveBorderRadius = widget.borderRadius ?? context.moonTooltipTheme?.borderRadius.topLeft.x ?? 4;
+
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonColors?.gohan ?? MoonColors.light.gohan;
+
+    final Color effectiveTextColor = _getTextColor(backgroundColor: effectiveBackgroundColor);
+
+    final TextStyle effectiveTextStyle = context.moonTooltipTheme?.textStyle.copyWith(color: effectiveTextColor) ??
+        MoonTextStyles.text.text12.copyWith(color: effectiveTextColor);
+
+    final List<BoxShadow> effectiveTooltipShadows = widget.tooltipShadows ??
+        context.moonShadows?.sm ??
+        const [
+          BoxShadow(
+            color: Color(0x66000000),
+            blurRadius: 1,
+          ),
+          BoxShadow(
+            color: Color(0x28000000),
+            blurRadius: 6,
+            offset: Offset(0, 6),
+          ),
+        ];
 
     return OverlayEntry(
       builder: (overlayContext) {
-        return MoonTooltipContentPositioner(
+        return TooltipPositionManager(
           context: context,
-          arrowLength: widget.arrowLength,
-          arrowTipDistance: widget.arrowTipDistance,
+          arrowLength: effectiveArrowLength,
+          arrowTipDistance: effectiveArrowTipDistance,
           outsidePadding: widget.minimumOutSidePadding,
-          key: _positionerKey,
+          key: _positionManagerKey,
           link: layerLink,
           tooltipDirection: direction,
           maxHeight: widget.maxHeight,
           minHeight: widget.minHeight,
           maxWidth: widget.maxWidth,
           minWidth: widget.minWidth,
-          child: MoonTooltipContentTransition(
+          child: TooltipContentTransition(
             key: _transitionKey,
-            duration: widget.animationDuration,
-            tooltipDirection: direction,
             hide: buildHidding,
-            animationEnd: (status) {
+            tooltipDirection: direction,
+            duration: effectiveTransitionDuration,
+            curve: effectiveTransitionCurve,
+            onTransitionFinished: (status) {
               if (status == AnimationStatus.dismissed) {
                 _removeTooltip();
               }
             },
-            child: MoonTooltipContent(
-              content: widget.content,
-              borderRadius: widget.borderRadius,
-              arrowBaseWidth: widget.arrowBaseWidth,
-              arrowLength: widget.arrowLength,
+            child: TooltipContent(
+              borderRadius: effectiveBorderRadius,
+              arrowBaseWidth: effectiveArrowBaseWidth,
+              arrowLength: effectiveArrowLength,
               targetCenter: widget.targetCenter,
-              arrowTipDistance: widget.arrowTipDistance,
-              contentPadding: widget.contentPadding,
+              arrowTipDistance: effectiveArrowTipDistance,
+              contentPadding: effectiveContentPadding,
               borderColor: widget.borderColor,
               borderWidth: widget.borderWidth,
               tooltipDirection: direction,
-              backgroundColor: widget.backgroundColor,
-              shadows: widget.customShadows,
+              backgroundColor: effectiveBackgroundColor,
+              shadows: effectiveTooltipShadows,
+              textStyle: effectiveTextStyle,
               onTap: () {
                 if (widget.hideOnTooltipTap) {
                   _removeTooltip();
@@ -330,40 +407,11 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
                 doCheckForObfuscation();
                 doShowOrHide();
               },
+              child: widget.content,
             ),
           ),
         );
       },
     );
-  }
-
-  @override
-  void didPush() {
-    _routeIsShowing = true;
-    // Route was pushed onto navigator and is now topmost route.
-    if (shouldShowTooltip) {
-      _removeTooltip();
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        if (!mounted) return;
-        _showTooltip();
-      });
-    }
-  }
-
-  @override
-  void didPushNext() {
-    _routeIsShowing = false;
-    _removeTooltip();
-  }
-
-  @override
-  Future<void> didPopNext() async {
-    _routeIsShowing = true;
-    if (shouldShowTooltip) {
-      // Covering route was popped off the navigator.
-      _removeTooltip();
-      await Future.delayed(const Duration(milliseconds: 100), () {});
-      if (mounted) _showTooltip();
-    }
   }
 }

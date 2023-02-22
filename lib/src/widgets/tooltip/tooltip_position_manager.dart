@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
-class MoonTooltipContentPositioner extends StatefulWidget {
+class TooltipPositionManager extends StatefulWidget {
   final BuildContext context;
   final MoonTooltipDirection tooltipDirection;
 
@@ -18,7 +18,7 @@ class MoonTooltipContentPositioner extends StatefulWidget {
   final double outsidePadding;
   final LayerLink link;
 
-  const MoonTooltipContentPositioner({
+  const TooltipPositionManager({
     super.key,
     required this.tooltipDirection,
     required this.arrowTipDistance,
@@ -34,10 +34,10 @@ class MoonTooltipContentPositioner extends StatefulWidget {
   });
 
   @override
-  _MoonTooltipContentPositionerState createState() => _MoonTooltipContentPositionerState();
+  _TooltipPositionManagerState createState() => _TooltipPositionManagerState();
 }
 
-class _MoonTooltipContentPositionerState extends State<MoonTooltipContentPositioner> {
+class _TooltipPositionManagerState extends State<TooltipPositionManager> {
   final GlobalKey _contentKey = GlobalKey();
 
   Size? _contentSize;
@@ -48,7 +48,7 @@ class _MoonTooltipContentPositionerState extends State<MoonTooltipContentPositio
   }
 
   @override
-  void didUpdateWidget(MoonTooltipContentPositioner oldWidget) {
+  void didUpdateWidget(TooltipPositionManager oldWidget) {
     if (widget.tooltipDirection != oldWidget.tooltipDirection) {
       // invalidate content size to perform recalculation
       _contentSize = null;
@@ -59,22 +59,20 @@ class _MoonTooltipContentPositionerState extends State<MoonTooltipContentPositio
   @override
   Widget build(BuildContext _) {
     final RenderBox? renderBox = widget.context.findRenderObject() as RenderBox?;
-    if (renderBox?.attached == false) {
-      return Container();
-    }
+    if (renderBox?.attached == false) return Container();
+
     final cOverlay = Overlay.of(widget.context);
-    if (!cOverlay.mounted) {
-      return Container();
-    }
+
+    if (!cOverlay.mounted) return Container();
+
     final RenderBox? overlay = cOverlay.context.findRenderObject() as RenderBox?;
 
-    if (overlay == null || renderBox?.hasSize == false) {
-      return Container();
-    }
+    if (overlay == null || renderBox?.hasSize == false) return Container();
 
     late Offset tipTarget;
 
     const Offset zeroOffset = Offset.zero;
+
     try {
       if (widget.tooltipDirection == MoonTooltipDirection.up) {
         tipTarget = renderBox!.size.topCenter(zeroOffset);
@@ -94,7 +92,7 @@ class _MoonTooltipContentPositionerState extends State<MoonTooltipContentPositio
       ancestor: overlay,
     );
 
-    final balloon = CustomSingleChildLayout(
+    final content = CustomSingleChildLayout(
       delegate: _PopupContentLayoutDelegate(
         arrowLength: widget.arrowLength,
         arrowTipDistance: widget.arrowTipDistance,
@@ -150,7 +148,7 @@ class _MoonTooltipContentPositionerState extends State<MoonTooltipContentPositio
                   offset: Offset.zero,
                   child: Container(
                     alignment: AlignmentDirectional.bottomStart,
-                    child: balloon,
+                    child: content,
                   ),
                 ),
               ),
@@ -177,18 +175,18 @@ class _MoonTooltipContentPositionerState extends State<MoonTooltipContentPositio
       final double yOffset = -halfH - widget.arrowLength - widget.arrowTipDistance;
       contentOffset = centerPosition.translate(0, yOffset);
       final maxXOffset = overlay.size.width;
-      final globalBalloonRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
-      if (globalBalloonRightBoundingOffset > maxXOffset) {
+      final globalcontentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
+      if (globalcontentRightBoundingOffset > maxXOffset) {
         contentOffset = contentOffset.translate(
-          maxXOffset - globalBalloonRightBoundingOffset - widget.outsidePadding,
+          maxXOffset - globalcontentRightBoundingOffset - widget.outsidePadding,
           0,
         );
       }
       const minXOffset = 0;
-      final globalBalloonLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
-      if (globalBalloonLeftBoundingOffset < minXOffset) {
+      final globalcontentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
+      if (globalcontentLeftBoundingOffset < minXOffset) {
         contentOffset = contentOffset.translate(
-          minXOffset - globalBalloonLeftBoundingOffset + widget.outsidePadding,
+          minXOffset - globalcontentLeftBoundingOffset + widget.outsidePadding,
           0,
         );
       }
@@ -199,10 +197,10 @@ class _MoonTooltipContentPositionerState extends State<MoonTooltipContentPositio
       final double xOffset = halfW + widget.arrowLength + widget.arrowTipDistance;
       contentOffset = centerPosition.translate(xOffset, 0);
       final maxXOffset = overlay.size.width;
-      final globalBalloonRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
-      if (globalBalloonRightBoundingOffset > maxXOffset) {
+      final globalcontentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
+      if (globalcontentRightBoundingOffset > maxXOffset) {
         contentOffset = contentOffset.translate(
-          maxXOffset - globalBalloonRightBoundingOffset - widget.outsidePadding,
+          maxXOffset - globalcontentRightBoundingOffset - widget.outsidePadding,
           0,
         );
       }
@@ -210,10 +208,10 @@ class _MoonTooltipContentPositionerState extends State<MoonTooltipContentPositio
       final double xOffset = -halfW - widget.arrowLength - widget.arrowTipDistance;
       contentOffset = centerPosition.translate(xOffset, 0);
       const minXOffset = 0;
-      final globalBalloonLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
-      if (globalBalloonLeftBoundingOffset < minXOffset) {
+      final globalcontentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
+      if (globalcontentLeftBoundingOffset < minXOffset) {
         contentOffset = contentOffset.translate(
-          minXOffset - globalBalloonLeftBoundingOffset + widget.outsidePadding,
+          minXOffset - globalcontentLeftBoundingOffset + widget.outsidePadding,
           0,
         );
       }

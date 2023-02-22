@@ -10,7 +10,7 @@ class TooltipStory extends Story {
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "Custom label text",
-              initial: "MoonTag",
+              initial: "This is a single line tooltip with no wrapping text and",
             );
 
             final colorsKnob = context.knobs.options(
@@ -43,10 +43,13 @@ class TooltipStory extends Story {
                     const SizedBox(height: 64),
                     MoonTooltip(
                       show: true,
-                      content: Text(
-                        customLabelTextKnob,
-                        style: context.moonTypography!.heading.text12,
-                      ),
+                      /* arrowBaseWidth: 16,
+                      arrowLength: 8,
+                      borderRadius: 4,
+                      borderWidth: 0, */
+                      content: Text(customLabelTextKnob
+                          /* style: context.moonTypography!.text.text12, */
+                          ),
                       child: MoonChip(label: Text("YO")),
                     ),
                     const SizedBox(height: 64),

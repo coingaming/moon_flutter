@@ -1,128 +1,136 @@
 import 'dart:math';
 
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
-class MoonTooltipContent extends StatefulWidget {
+class TooltipContent extends StatefulWidget {
+  final GestureTapCallback? onTap;
+  final void Function(TooltipContentSize) onSizeChange;
   final MoonTooltipDirection tooltipDirection;
   final Offset? targetCenter;
-  final double borderRadius;
   final double arrowBaseWidth;
-  final double arrowTipDistance;
-  final Color borderColor;
-  final double borderWidth;
   final double arrowLength;
-  final Widget content;
-  final EdgeInsets contentPadding;
+  final double arrowTipDistance;
+  final double borderRadius;
+  final double borderWidth;
   final Color backgroundColor;
+  final Color borderColor;
+  final EdgeInsets contentPadding;
   final List<BoxShadow> shadows;
-  final GestureTapCallback? onTap;
-  final void Function(MoonTooltipContentSize) onSizeChange;
+  final TextStyle textStyle;
+  final Widget child;
 
-  const MoonTooltipContent({
+  const TooltipContent({
     super.key,
-    this.targetCenter,
-    required this.tooltipDirection,
-    required this.borderRadius,
-    required this.arrowBaseWidth,
-    required this.arrowTipDistance,
-    required this.borderColor,
-    required this.borderWidth,
-    required this.arrowLength,
-    required this.content,
-    required this.contentPadding,
-    required this.backgroundColor,
-    required this.shadows,
     this.onTap,
     required this.onSizeChange,
+    required this.tooltipDirection,
+    this.targetCenter,
+    required this.arrowBaseWidth,
+    required this.arrowLength,
+    required this.arrowTipDistance,
+    required this.borderRadius,
+    required this.borderWidth,
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.contentPadding,
+    required this.shadows,
+    required this.textStyle,
+    required this.child,
   });
 
   @override
-  _MoonTooltipContentState createState() => _MoonTooltipContentState();
+  _TooltipContentState createState() => _TooltipContentState();
 }
 
-class _MoonTooltipContentState extends State<MoonTooltipContent> {
+class _TooltipContentState extends State<TooltipContent> {
   final GlobalKey _containerKey = GlobalKey();
 
-  MoonTooltipContentSize? _lastSizeNotified;
+  TooltipContentSize? _lastSizeNotified;
 
   @override
-  Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       final RenderBox? renderBox = _containerKey.currentContext!.findRenderObject() as RenderBox?;
+
       if (renderBox == null) return;
-      final Size size = renderBox.size;
       final position = renderBox.localToGlobal(Offset.zero);
+      final Size size = renderBox.size;
 
       if (_lastSizeNotified == null ||
           _lastSizeNotified!.size != size ||
           _lastSizeNotified!.globalPosition != position) {
-        final contentSize = MoonTooltipContentSize(
+        final contentSize = TooltipContentSize(
           size: size,
           globalPosition: position,
           context: context,
         );
+
         widget.onSizeChange(contentSize);
         _lastSizeNotified = contentSize;
       }
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: widget.onTap,
       child: DefaultTextStyle(
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 14,
-        ),
+        style: widget.textStyle,
         child: Container(
           key: _containerKey,
+          padding: widget.contentPadding,
           decoration: ShapeDecoration(
-            shadows: widget.shadows,
             color: widget.backgroundColor,
-            shape: _MoonTooltipContentShape(
-              widget.tooltipDirection,
-              widget.targetCenter,
-              widget.borderRadius,
-              widget.arrowBaseWidth,
-              widget.arrowTipDistance,
-              widget.borderColor,
-              widget.borderWidth,
-              widget.arrowLength,
+            shadows: widget.shadows,
+            shape: _TooltipContentShape(
+              tooltipDirection: widget.tooltipDirection,
+              targetCenter: widget.targetCenter,
+              arrowBaseWidth: widget.arrowBaseWidth,
+              arrowLength: widget.arrowLength,
+              arrowTipDistance: widget.arrowTipDistance,
+              borderColor: widget.borderColor,
+              borderRadius: widget.borderRadius,
+              borderWidth: widget.borderWidth,
             ),
           ),
-          padding: widget.contentPadding,
-          child: widget.content,
+          child: widget.child,
         ),
       ),
     );
   }
 }
 
-class _MoonTooltipContentShape extends ShapeBorder {
+class _TooltipContentShape extends ShapeBorder {
+  final MoonTooltipDirection tooltipDirection;
   final Offset? targetCenter;
   final double arrowBaseWidth;
+  final double arrowLength;
   final double arrowTipDistance;
   final double borderRadius;
-  final Color borderColor;
   final double borderWidth;
-  final MoonTooltipDirection tooltipDirection;
-  final double arrowLength;
+  final Color borderColor;
 
-  const _MoonTooltipContentShape(
-    this.tooltipDirection,
+  const _TooltipContentShape({
+    required this.tooltipDirection,
     this.targetCenter,
-    this.borderRadius,
-    this.arrowBaseWidth,
-    this.arrowTipDistance,
-    this.borderColor,
-    this.borderWidth,
-    this.arrowLength,
-  );
+    required this.arrowBaseWidth,
+    required this.arrowLength,
+    required this.arrowTipDistance,
+    required this.borderRadius,
+    required this.borderWidth,
+    required this.borderColor,
+  });
 
   @override
-  EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10.0);
+  EdgeInsetsGeometry get dimensions => EdgeInsets.zero;
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
@@ -142,11 +150,14 @@ class _MoonTooltipContentShape extends ShapeBorder {
       return Path()
         ..moveTo(rect.left, rect.bottom - bottomLeftRadius)
         ..lineTo(rect.left, rect.top + topLeftRadius)
-        ..arcToPoint(Offset(rect.left + topLeftRadius, rect.top), radius: Radius.circular(topLeftRadius))
+        ..arcToPoint(
+          Offset(rect.left + topLeftRadius, rect.top),
+          radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
+        )
         ..lineTo(rect.right - topRightRadius, rect.top)
         ..arcToPoint(
           Offset(rect.right, rect.top + topRightRadius),
-          radius: Radius.circular(topRightRadius),
+          radius: SmoothRadius(cornerRadius: topRightRadius, cornerSmoothing: 1),
         );
     }
 
@@ -156,13 +167,13 @@ class _MoonTooltipContentShape extends ShapeBorder {
         ..lineTo(rect.right - bottomRightRadius, rect.bottom)
         ..arcToPoint(
           Offset(rect.right, rect.bottom - bottomRightRadius),
-          radius: Radius.circular(bottomRightRadius),
+          radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
           clockwise: false,
         )
         ..lineTo(rect.right, rect.top + topRightRadius)
         ..arcToPoint(
           Offset(rect.right - topRightRadius, rect.top),
-          radius: Radius.circular(topRightRadius),
+          radius: SmoothRadius(cornerRadius: topRightRadius, cornerSmoothing: 1),
           clockwise: false,
         );
     }
@@ -173,6 +184,7 @@ class _MoonTooltipContentShape extends ShapeBorder {
     bottomRightRadius = borderRadius;
 
     Offset targetCenter = this.targetCenter ?? rect.center;
+
     if (tooltipDirection == MoonTooltipDirection.right) {
       targetCenter = rect.centerLeft.translate(-arrowLength, 0);
     } else if (tooltipDirection == MoonTooltipDirection.left) {
@@ -201,13 +213,13 @@ class _MoonTooltipContentShape extends ShapeBorder {
           ..lineTo(rect.left + topLeftRadius, rect.top)
           ..arcToPoint(
             Offset(rect.left, rect.top + topLeftRadius),
-            radius: Radius.circular(topLeftRadius),
+            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
             clockwise: false,
           )
           ..lineTo(rect.left, rect.bottom - bottomLeftRadius)
           ..arcToPoint(
             Offset(rect.left + bottomLeftRadius, rect.bottom),
-            radius: Radius.circular(bottomLeftRadius),
+            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
             clockwise: false,
           );
 
@@ -216,7 +228,7 @@ class _MoonTooltipContentShape extends ShapeBorder {
           ..lineTo(rect.right, rect.bottom - bottomRightRadius)
           ..arcToPoint(
             Offset(rect.right - bottomRightRadius, rect.bottom),
-            radius: Radius.circular(bottomRightRadius),
+            radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
           )
           ..lineTo(
             min(
@@ -240,12 +252,12 @@ class _MoonTooltipContentShape extends ShapeBorder {
           ..lineTo(rect.left + bottomLeftRadius, rect.bottom)
           ..arcToPoint(
             Offset(rect.left, rect.bottom - bottomLeftRadius),
-            radius: Radius.circular(bottomLeftRadius),
+            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
           )
           ..lineTo(rect.left, rect.top + topLeftRadius)
           ..arcToPoint(
             Offset(rect.left + topLeftRadius, rect.top),
-            radius: Radius.circular(topLeftRadius),
+            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
           );
 
       case MoonTooltipDirection.left:
@@ -263,12 +275,12 @@ class _MoonTooltipContentShape extends ShapeBorder {
           ..lineTo(rect.right, rect.bottom - borderRadius)
           ..arcToPoint(
             Offset(rect.right - bottomRightRadius, rect.bottom),
-            radius: Radius.circular(bottomRightRadius),
+            radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
           )
           ..lineTo(rect.left + bottomLeftRadius, rect.bottom)
           ..arcToPoint(
             Offset(rect.left, rect.bottom - bottomLeftRadius),
-            radius: Radius.circular(bottomLeftRadius),
+            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
           );
 
       case MoonTooltipDirection.right:
@@ -276,7 +288,7 @@ class _MoonTooltipContentShape extends ShapeBorder {
           ..lineTo(rect.left + topLeftRadius, rect.top)
           ..arcToPoint(
             Offset(rect.left, rect.top + topLeftRadius),
-            radius: Radius.circular(topLeftRadius),
+            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
             clockwise: false,
           )
           ..lineTo(
@@ -295,7 +307,7 @@ class _MoonTooltipContentShape extends ShapeBorder {
           ..lineTo(rect.left, rect.bottom - bottomLeftRadius)
           ..arcToPoint(
             Offset(rect.left + bottomLeftRadius, rect.bottom),
-            radius: Radius.circular(bottomLeftRadius),
+            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
             clockwise: false,
           );
 
@@ -318,26 +330,27 @@ class _MoonTooltipContentShape extends ShapeBorder {
 
   @override
   ShapeBorder scale(double t) {
-    return _MoonTooltipContentShape(
-      tooltipDirection,
-      targetCenter,
-      borderRadius,
-      arrowBaseWidth,
-      arrowTipDistance,
-      borderColor,
-      borderWidth,
-      arrowLength,
+    return _TooltipContentShape(
+      tooltipDirection: tooltipDirection,
+      targetCenter: targetCenter,
+      arrowBaseWidth: arrowBaseWidth,
+      arrowLength: arrowLength,
+      arrowTipDistance: arrowTipDistance,
+      borderRadius: borderRadius,
+      borderWidth: borderWidth,
+      borderColor: borderColor,
     );
   }
 }
 
-class MoonTooltipContentSize {
+class TooltipContentSize {
+  final BuildContext context;
   final Size size;
   final Offset globalPosition;
-  final BuildContext context;
-  MoonTooltipContentSize({
+
+  TooltipContentSize({
+    required this.context,
     required this.size,
     required this.globalPosition,
-    required this.context,
   });
 }

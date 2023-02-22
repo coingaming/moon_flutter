@@ -37,7 +37,7 @@ class ObfuscateTooltipItemState extends State<ObfuscateTooltipItem> with Widgets
       }
       _lastPositionSize = currentPositionSize;
     });
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _addToTooltips(widget.tooltipKeys);
     });
   }
