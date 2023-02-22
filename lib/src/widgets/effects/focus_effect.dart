@@ -28,26 +28,16 @@ class MoonFocusEffect extends StatefulWidget {
 }
 
 class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late CurvedAnimation _focusAnimation;
+  late final AnimationController _animationController = AnimationController(
+    vsync: this,
+    duration: widget.effectDuration,
+    debugLabel: "MoonFocusEffect animation controller",
+  );
 
-  @override
-  void initState() {
-    super.initState();
-
-    if (mounted) {
-      _animationController = AnimationController(
-        vsync: this,
-        duration: widget.effectDuration,
-        debugLabel: "MoonFocusEffect animation controller",
-      );
-
-      _focusAnimation = CurvedAnimation(
-        parent: _animationController,
-        curve: widget.effectCurve,
-      );
-    }
-  }
+  late final CurvedAnimation _focusAnimation = CurvedAnimation(
+    parent: _animationController,
+    curve: widget.effectCurve,
+  );
 
   @override
   void didUpdateWidget(MoonFocusEffect oldWidget) {
