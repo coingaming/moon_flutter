@@ -1,4 +1,3 @@
-import 'package:example/src/storybook/common/options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -10,23 +9,7 @@ class TooltipStory extends Story {
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "Custom label text",
-              initial: "This is a single line tooltip with no wrapping text and",
-            );
-
-            final colorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for Tag.",
-              initial: 5, // bulma
-              options: colorOptions,
-            );
-
-            final color = colorTable(context)[colorsKnob];
-
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 12,
-              initial: 4,
-              label: "borderRadius",
-              description: "Border radius for Tag.",
+              initial: "This",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -43,14 +26,16 @@ class TooltipStory extends Story {
                     const SizedBox(height: 64),
                     MoonTooltip(
                       show: true,
-                      /* arrowBaseWidth: 16,
+                      tooltipPosition: MoonTooltipPosition.bottom,
+                      //hasArrow: false,
                       arrowLength: 8,
-                      borderRadius: 4,
-                      borderWidth: 0, */
-                      content: Text(customLabelTextKnob
-                          /* style: context.moonTypography!.text.text12, */
-                          ),
-                      child: MoonChip(label: Text("YO")),
+                      content: Text(customLabelTextKnob),
+                      child: MoonChip(
+                        borderRadius: BorderRadius.circular(20),
+                        backgroundColor: context.moonColors!.hit,
+                        leftIcon: const Icon(MoonIcons.frame24),
+                        label: const Text("Moo"),
+                      ),
                     ),
                     const SizedBox(height: 64),
                   ],

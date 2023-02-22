@@ -3,128 +3,118 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/widgets/tooltip/obfuscate_tooltip_item.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_content.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_content_transition.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_position_manager.dart';
 
-enum MoonTooltipDirection { up, down, right, left, horizontal, vertical }
+enum MoonTooltipPosition { top, bottom, left, right, horizontal, vertical }
 
 class MoonTooltip extends StatefulWidget {
-  /// The [child] which the tooltip will target to
-  final Widget child;
+  /// Sets a handler for listening to a `tap` event on the tooltip.
+  final void Function()? onTooltipTap;
 
-  /// Sets the tooltip direction
-  /// defaults to [MoonTooltipDirection.up]
-  final MoonTooltipDirection tooltipDirection;
-
-  /// Defines the content that its placed inside the tooltip content.
-  final Widget content;
-
-  /// If true, it will display the tool , if false it will hide it
+  /// Controls the tooltip visibility.
   final bool show;
 
-  /// Sets the content padding
-  /// defautls to: `const EdgeInsets.symmetric(horizontal: 20, vertical: 16),`
-  final EdgeInsets? contentPadding;
+  /// Whether the tooltip has an arrow (tail).
+  final bool hasArrow;
 
-  /// sets the duration of the tooltip entrance animation
-  /// defaults to [460] milliseconds
-  final Duration? transitionDuration;
-
-  /// sets the duration of the tooltip entrance animation
-  /// defaults to [460] milliseconds
-  final Curve? transitionCurve;
-
-  /// [minWidth], [minHeight], [maxWidth], [maxHeight] optional size constraints.
-  /// If a constraint is not set the size will adjust to the content
-  final double? minWidth;
-  final double? minHeight;
-  final double? maxWidth;
-  final double? maxHeight;
-
-  ///
-  /// The distance of the tip of the arrow's tip to the center of the target
-  final double? arrowTipDistance;
-
-  ///
-  /// The length of the Arrow
-  final double? arrowLength;
-
-  ///
-  /// the stroke width of the border
-  final double borderWidth;
-
-  ///
-  /// The minium padding from the Tooltip to the screen limits
-  final double minimumOutSidePadding;
-
-  ///
-  /// The corder radii of the border
-  final double? borderRadius;
-
-  ///
-  /// The width of the arrow at its base
-  final double? arrowBaseWidth;
-
-  ///
-  /// The targetCenter where the arrow points to(if null,defaults to center)
-  final Offset? targetCenter;
-
-  ///
-  /// The color of the border
-  final Color borderColor;
-
-  ///
-  /// The color of the border
-  final Color? backgroundColor;
-
-  ///
-  /// Set a custom list of [BoxShadow]
-  /// defaults to `const BoxShadow(color: const Color(0x45222222), blurRadius: 8, spreadRadius: 2),`
-  final List<BoxShadow>? tooltipShadows;
-
-  ///
-  /// Set a handler for listening to a `tap` event on the tooltip (This is the recommended way to put your logic for dismissing the tooltip)
-  final void Function()? tooltipTap;
-
-  ///
-  /// If you want to automatically dismiss the tooltip whenever a user taps on it, set this flag to [true]
-  /// For more control on when to dismiss the tooltip please rely on the [show] property and [tooltipTap] handler
-  /// defaults to [false]
+  /// Whether the tooltip should be dismissed whenever a user taps on it. For more control when to dismiss the tooltip
+  /// rely on the [show] property and [onTooltipTap] handler.
+  /// Defaults to [true].
   final bool hideOnTooltipTap;
 
-  ///
-  /// Pass a `RouteObserver` so that the widget will listen for route transition and will hide tooltip when
-  /// the widget's route is not active
+  /// Sets the tooltip position relative to the target.
+  /// Defaults to [MoonTooltipPosition.top]
+  final MoonTooltipPosition tooltipPosition;
+
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? minWidth;
+
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? minHeight;
+
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? maxWidth;
+
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? maxHeight;
+
+  /// Padding around the tooltip content.
+  final EdgeInsets? contentPadding;
+
+  /// The width of the tooltip arrow (tail) at its base.
+  final double? arrowBaseWidth;
+
+  /// The length of the tooltip arrow (tail).
+  final double? arrowLength;
+
+  /// The offset of the tooltip arrow (tail) from the center of the tooltip.
+  final Offset? arrowOffset;
+
+  /// The distance from the tip of the tooltip arrow (tail) to the target widget.
+  final double? arrowTipDistance;
+
+  /// The width of the tooltip border.
+  final double borderWidth;
+
+  /// The border radius value of the tooltip.
+  final double? borderRadius;
+
+  /// The margin around tooltip. Used to prevent the tooltip from touching the edges of the viewport.
+  final double tooltipMargin;
+
+  /// The color of the tooltip border.
+  final Color borderColor;
+
+  /// The color of the tooltip background.
+  final Color? backgroundColor;
+
+  /// List of tooltip shadows.
+  final List<BoxShadow>? tooltipShadows;
+
+  /// Tooltip transition duration (fade in or out animation).
+  final Duration? transitionDuration;
+
+  /// Tooltip transition curve (fade in or out animation).
+  final Curve? transitionCurve;
+
+  /// `RouteObserver` used to listen for route changes that will hide the tooltip when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
+
+  /// The widget that its placed inside the tooltip and functions as its content.
+  final Widget content;
+
+  /// The [child] widget which the tooltip will target.
+  final Widget child;
 
   const MoonTooltip({
     super.key,
-    this.tooltipDirection = MoonTooltipDirection.up,
-    required this.content,
+    this.onTooltipTap,
     required this.show,
-    this.targetCenter,
-    this.contentPadding,
-    this.maxWidth,
+    this.hasArrow = true,
+    this.hideOnTooltipTap = true,
+    this.tooltipPosition = MoonTooltipPosition.top,
     this.minWidth,
-    this.maxHeight,
+    this.maxWidth,
     this.minHeight,
-    this.arrowTipDistance,
-    this.arrowLength,
-    this.minimumOutSidePadding = 8,
+    this.maxHeight,
+    this.contentPadding,
     this.arrowBaseWidth,
+    this.arrowLength,
+    this.arrowOffset,
+    this.arrowTipDistance,
     this.borderRadius,
     this.borderWidth = 0,
+    this.tooltipMargin = 8,
     this.borderColor = Colors.transparent,
+    this.backgroundColor,
     this.transitionDuration,
     this.transitionCurve,
-    this.backgroundColor,
     this.tooltipShadows,
-    this.tooltipTap,
-    this.hideOnTooltipTap = true,
     this.routeObserver,
+    required this.content,
     required this.child,
   });
 
@@ -257,7 +247,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
       if (shouldShowTooltip) {
         _showTooltip();
       }
-      widget.routeObserver?.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
+      widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     });
   }
 
@@ -265,10 +255,10 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
   void didUpdateWidget(MoonTooltip oldWidget) {
     if (oldWidget.routeObserver != widget.routeObserver) {
       oldWidget.routeObserver?.unsubscribe(this);
-      widget.routeObserver?.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
+      widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (oldWidget.tooltipDirection != widget.tooltipDirection || (oldWidget.show != widget.show && widget.show)) {
+      if (oldWidget.tooltipPosition != widget.tooltipPosition || (oldWidget.show != widget.show && widget.show)) {
         _transitionKey = GlobalKey();
       }
       if (!_routeIsShowing || _isBeingObfuscated) {
@@ -297,9 +287,9 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
   }
 
   OverlayEntry _buildOverlay({bool buildHidding = false}) {
-    MoonTooltipDirection direction = widget.tooltipDirection;
+    MoonTooltipPosition direction = widget.tooltipPosition;
 
-    if (direction == MoonTooltipDirection.horizontal || direction == MoonTooltipDirection.vertical) {
+    if (direction == MoonTooltipPosition.horizontal || direction == MoonTooltipPosition.vertical) {
       // Compute real direction based on target position
       final targetRenderBox = context.findRenderObject() as RenderBox?;
       final overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
@@ -308,17 +298,18 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
           targetRenderBox?.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox) ??
               Offset.zero;
 
-      direction = (direction == MoonTooltipDirection.vertical)
+      direction = (direction == MoonTooltipPosition.vertical)
           ? (targetGlobalCenter.dy < overlayRenderBox!.size.center(Offset.zero).dy
-              ? MoonTooltipDirection.down
-              : MoonTooltipDirection.up)
+              ? MoonTooltipPosition.bottom
+              : MoonTooltipPosition.top)
           : (targetGlobalCenter.dx < overlayRenderBox!.size.center(Offset.zero).dx
-              ? MoonTooltipDirection.right
-              : MoonTooltipDirection.left);
+              ? MoonTooltipPosition.right
+              : MoonTooltipPosition.left);
     }
     final double effectiveArrowBaseWidth = widget.arrowLength ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
 
-    final double effectiveArrowLength = widget.arrowLength ?? context.moonTooltipTheme?.arrowLength ?? 8;
+    final double effectiveArrowLength =
+        widget.hasArrow ? (widget.arrowLength ?? context.moonTooltipTheme?.arrowLength ?? 8) : 0;
 
     final double effectiveArrowTipDistance = widget.arrowTipDistance ?? context.moonTooltipTheme?.arrowTipDistance ?? 8;
 
@@ -358,21 +349,21 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
     return OverlayEntry(
       builder: (overlayContext) {
         return TooltipPositionManager(
+          key: _positionManagerKey,
           context: context,
           arrowLength: effectiveArrowLength,
           arrowTipDistance: effectiveArrowTipDistance,
-          outsidePadding: widget.minimumOutSidePadding,
-          key: _positionManagerKey,
-          link: layerLink,
-          tooltipDirection: direction,
           maxHeight: widget.maxHeight,
           minHeight: widget.minHeight,
           maxWidth: widget.maxWidth,
           minWidth: widget.minWidth,
+          tooltipPosition: direction,
+          tooltipMargin: widget.tooltipMargin,
+          link: layerLink,
           child: TooltipContentTransition(
             key: _transitionKey,
             hide: buildHidding,
-            tooltipDirection: direction,
+            tooltipPosition: direction,
             duration: effectiveTransitionDuration,
             curve: effectiveTransitionCurve,
             onTransitionFinished: (status) {
@@ -381,15 +372,15 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
               }
             },
             child: TooltipContent(
+              tooltipPosition: direction,
               borderRadius: effectiveBorderRadius,
               arrowBaseWidth: effectiveArrowBaseWidth,
               arrowLength: effectiveArrowLength,
-              targetCenter: widget.targetCenter,
+              arrowOffset: widget.arrowOffset,
               arrowTipDistance: effectiveArrowTipDistance,
               contentPadding: effectiveContentPadding,
-              borderColor: widget.borderColor,
               borderWidth: widget.borderWidth,
-              tooltipDirection: direction,
+              borderColor: widget.borderColor,
               backgroundColor: effectiveBackgroundColor,
               shadows: effectiveTooltipShadows,
               textStyle: effectiveTextStyle,
@@ -399,7 +390,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
                   _showTooltip(buildHidding: true);
                 }
 
-                widget.tooltipTap?.call();
+                widget.onTooltipTap?.call();
               },
               onSizeChange: (contentSize) {
                 if (!mounted) return;

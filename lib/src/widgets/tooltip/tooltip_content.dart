@@ -8,8 +8,8 @@ import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 class TooltipContent extends StatefulWidget {
   final GestureTapCallback? onTap;
   final void Function(TooltipContentSize) onSizeChange;
-  final MoonTooltipDirection tooltipDirection;
-  final Offset? targetCenter;
+  final MoonTooltipPosition tooltipPosition;
+  final Offset? arrowOffset;
   final double arrowBaseWidth;
   final double arrowLength;
   final double arrowTipDistance;
@@ -26,8 +26,8 @@ class TooltipContent extends StatefulWidget {
     super.key,
     this.onTap,
     required this.onSizeChange,
-    required this.tooltipDirection,
-    this.targetCenter,
+    required this.tooltipPosition,
+    this.arrowOffset,
     required this.arrowBaseWidth,
     required this.arrowLength,
     required this.arrowTipDistance,
@@ -91,8 +91,8 @@ class _TooltipContentState extends State<TooltipContent> {
             color: widget.backgroundColor,
             shadows: widget.shadows,
             shape: _TooltipContentShape(
-              tooltipDirection: widget.tooltipDirection,
-              targetCenter: widget.targetCenter,
+              tooltipPosition: widget.tooltipPosition,
+              arrowOffset: widget.arrowOffset,
               arrowBaseWidth: widget.arrowBaseWidth,
               arrowLength: widget.arrowLength,
               arrowTipDistance: widget.arrowTipDistance,
@@ -109,8 +109,8 @@ class _TooltipContentState extends State<TooltipContent> {
 }
 
 class _TooltipContentShape extends ShapeBorder {
-  final MoonTooltipDirection tooltipDirection;
-  final Offset? targetCenter;
+  final MoonTooltipPosition tooltipPosition;
+  final Offset? arrowOffset;
   final double arrowBaseWidth;
   final double arrowLength;
   final double arrowTipDistance;
@@ -119,8 +119,8 @@ class _TooltipContentShape extends ShapeBorder {
   final Color borderColor;
 
   const _TooltipContentShape({
-    required this.tooltipDirection,
-    this.targetCenter,
+    required this.tooltipPosition,
+    this.arrowOffset,
     required this.arrowBaseWidth,
     required this.arrowLength,
     required this.arrowTipDistance,
@@ -183,28 +183,28 @@ class _TooltipContentShape extends ShapeBorder {
     bottomLeftRadius = borderRadius;
     bottomRightRadius = borderRadius;
 
-    Offset targetCenter = this.targetCenter ?? rect.center;
+    Offset arrowOffset = this.arrowOffset ?? rect.center;
 
-    if (tooltipDirection == MoonTooltipDirection.right) {
-      targetCenter = rect.centerLeft.translate(-arrowLength, 0);
-    } else if (tooltipDirection == MoonTooltipDirection.left) {
-      targetCenter = rect.centerRight.translate(arrowLength, 0);
+    if (tooltipPosition == MoonTooltipPosition.right) {
+      arrowOffset = rect.centerLeft.translate(-arrowLength - arrowTipDistance, 0);
+    } else if (tooltipPosition == MoonTooltipPosition.left) {
+      arrowOffset = rect.centerRight.translate(arrowLength + arrowTipDistance, 0);
     }
 
-    switch (tooltipDirection) {
-      case MoonTooltipDirection.down:
+    switch (tooltipPosition) {
+      case MoonTooltipPosition.bottom:
         return getBottomRightPath(rect)
           ..lineTo(
             min(
-              max(targetCenter.dx + arrowBaseWidth / 2, rect.left + borderRadius + arrowBaseWidth),
+              max(arrowOffset.dx + arrowBaseWidth, rect.left + borderRadius + arrowBaseWidth),
               rect.right - topRightRadius,
             ),
             rect.top,
           )
-          ..lineTo(targetCenter.dx, rect.top - arrowLength) // up to arrow tip   \
+          ..lineTo(arrowOffset.dx, rect.top - arrowLength) // up to arrow tip   \
           ..lineTo(
             max(
-              min(targetCenter.dx - arrowBaseWidth / 2, rect.right - topLeftRadius - arrowBaseWidth),
+              min(arrowOffset.dx - arrowBaseWidth, rect.right - topLeftRadius - arrowBaseWidth),
               rect.left + topLeftRadius,
             ),
             rect.top,
@@ -223,7 +223,7 @@ class _TooltipContentShape extends ShapeBorder {
             clockwise: false,
           );
 
-      case MoonTooltipDirection.up:
+      case MoonTooltipPosition.top:
         return getLeftTopPath(rect)
           ..lineTo(rect.right, rect.bottom - bottomRightRadius)
           ..arcToPoint(
@@ -232,19 +232,19 @@ class _TooltipContentShape extends ShapeBorder {
           )
           ..lineTo(
             min(
-              max(targetCenter.dx + arrowBaseWidth / 2, rect.left + bottomLeftRadius + arrowBaseWidth),
+              max(arrowOffset.dx + arrowBaseWidth, rect.left + bottomLeftRadius + arrowBaseWidth),
               rect.right - bottomRightRadius,
             ),
             rect.bottom,
           )
 
           // up to arrow tip   \
-          ..lineTo(targetCenter.dx, rect.bottom + arrowLength)
+          ..lineTo(arrowOffset.dx, rect.bottom + arrowLength)
 
           //  down /
           ..lineTo(
             max(
-              min(targetCenter.dx - arrowBaseWidth / 2, rect.right - bottomRightRadius - arrowBaseWidth),
+              min(arrowOffset.dx - arrowBaseWidth, rect.right - bottomRightRadius - arrowBaseWidth),
               rect.left + bottomLeftRadius,
             ),
             rect.bottom,
@@ -260,18 +260,18 @@ class _TooltipContentShape extends ShapeBorder {
             radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
           );
 
-      case MoonTooltipDirection.left:
+      case MoonTooltipPosition.left:
         return getLeftTopPath(rect)
           ..lineTo(
             rect.right,
             max(
-              min(targetCenter.dy - arrowBaseWidth / 2, rect.bottom - bottomRightRadius - arrowBaseWidth),
+              min(arrowOffset.dy - arrowBaseWidth, rect.bottom - bottomRightRadius - arrowBaseWidth),
               rect.top + topRightRadius,
             ),
           )
-          ..lineTo(targetCenter.dx - arrowTipDistance, targetCenter.dy) // right to arrow tip   \
+          ..lineTo(arrowOffset.dx - arrowTipDistance, arrowOffset.dy) // right to arrow tip   \
           //  left /
-          ..lineTo(rect.right, min(targetCenter.dy + arrowBaseWidth / 2, rect.bottom - bottomRightRadius))
+          ..lineTo(rect.right, min(arrowOffset.dy + arrowBaseWidth, rect.bottom - bottomRightRadius))
           ..lineTo(rect.right, rect.bottom - borderRadius)
           ..arcToPoint(
             Offset(rect.right - bottomRightRadius, rect.bottom),
@@ -283,7 +283,7 @@ class _TooltipContentShape extends ShapeBorder {
             radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
           );
 
-      case MoonTooltipDirection.right:
+      case MoonTooltipPosition.right:
         return getBottomRightPath(rect)
           ..lineTo(rect.left + topLeftRadius, rect.top)
           ..arcToPoint(
@@ -294,16 +294,16 @@ class _TooltipContentShape extends ShapeBorder {
           ..lineTo(
             rect.left,
             max(
-              min(targetCenter.dy - arrowBaseWidth / 2, rect.bottom - bottomLeftRadius - arrowBaseWidth),
+              min(arrowOffset.dy - arrowBaseWidth, rect.bottom - bottomLeftRadius - arrowBaseWidth),
               rect.top + topLeftRadius,
             ),
           )
 
           //left to arrow tip   /
-          ..lineTo(targetCenter.dx + arrowTipDistance, targetCenter.dy)
+          ..lineTo(arrowOffset.dx + arrowTipDistance, arrowOffset.dy)
 
           //  right \
-          ..lineTo(rect.left, min(targetCenter.dy + arrowBaseWidth / 2, rect.bottom - bottomLeftRadius))
+          ..lineTo(rect.left, min(arrowOffset.dy + arrowBaseWidth, rect.bottom - bottomLeftRadius))
           ..lineTo(rect.left, rect.bottom - bottomLeftRadius)
           ..arcToPoint(
             Offset(rect.left + bottomLeftRadius, rect.bottom),
@@ -312,7 +312,7 @@ class _TooltipContentShape extends ShapeBorder {
           );
 
       default:
-        throw AssertionError(tooltipDirection);
+        throw AssertionError(tooltipPosition);
     }
   }
 
@@ -331,8 +331,8 @@ class _TooltipContentShape extends ShapeBorder {
   @override
   ShapeBorder scale(double t) {
     return _TooltipContentShape(
-      tooltipDirection: tooltipDirection,
-      targetCenter: targetCenter,
+      tooltipPosition: tooltipPosition,
+      arrowOffset: arrowOffset,
       arrowBaseWidth: arrowBaseWidth,
       arrowLength: arrowLength,
       arrowTipDistance: arrowTipDistance,

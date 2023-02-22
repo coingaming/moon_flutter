@@ -5,32 +5,30 @@ import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
 class TooltipPositionManager extends StatefulWidget {
   final BuildContext context;
-  final MoonTooltipDirection tooltipDirection;
-
+  final MoonTooltipPosition tooltipPosition;
   final double arrowTipDistance;
   final double arrowLength;
-
-  final Widget child;
   final double? maxWidth;
   final double? maxHeight;
   final double? minWidth;
   final double? minHeight;
-  final double outsidePadding;
+  final double tooltipMargin;
   final LayerLink link;
+  final Widget child;
 
   const TooltipPositionManager({
     super.key,
-    required this.tooltipDirection,
+    required this.context,
+    required this.tooltipPosition,
     required this.arrowTipDistance,
     required this.arrowLength,
-    required this.child,
     required this.maxWidth,
     required this.maxHeight,
     required this.minWidth,
     required this.minHeight,
-    required this.outsidePadding,
+    required this.tooltipMargin,
     required this.link,
-    required this.context,
+    required this.child,
   });
 
   @override
@@ -49,7 +47,7 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
 
   @override
   void didUpdateWidget(TooltipPositionManager oldWidget) {
-    if (widget.tooltipDirection != oldWidget.tooltipDirection) {
+    if (widget.tooltipPosition != oldWidget.tooltipPosition) {
       // invalidate content size to perform recalculation
       _contentSize = null;
     }
@@ -74,13 +72,13 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
     const Offset zeroOffset = Offset.zero;
 
     try {
-      if (widget.tooltipDirection == MoonTooltipDirection.up) {
+      if (widget.tooltipPosition == MoonTooltipPosition.top) {
         tipTarget = renderBox!.size.topCenter(zeroOffset);
-      } else if (widget.tooltipDirection == MoonTooltipDirection.down) {
+      } else if (widget.tooltipPosition == MoonTooltipPosition.bottom) {
         tipTarget = renderBox!.size.bottomCenter(zeroOffset);
-      } else if (widget.tooltipDirection == MoonTooltipDirection.right) {
+      } else if (widget.tooltipPosition == MoonTooltipPosition.right) {
         tipTarget = renderBox!.size.centerRight(zeroOffset);
-      } else if (widget.tooltipDirection == MoonTooltipDirection.left) {
+      } else if (widget.tooltipPosition == MoonTooltipPosition.left) {
         tipTarget = renderBox!.size.centerLeft(zeroOffset);
       }
     } catch (e) {
@@ -100,9 +98,9 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
         maxWidth: widget.maxWidth,
         minHeight: widget.minHeight,
         minWidth: widget.minWidth,
-        tooltipDirection: widget.tooltipDirection,
+        tooltipPosition: widget.tooltipPosition,
         tipTarget: globalTipTarget!,
-        outsidePadding: widget.outsidePadding,
+        tooltipMargin: widget.tooltipMargin,
       ),
       child: Stack(
         clipBehavior: Clip.none,
@@ -171,14 +169,14 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
     final double halfH = childSize.height / 2;
     final double halfW = childSize.width / 2;
     final Offset centerPosition = Offset(-halfW, -halfH);
-    if (widget.tooltipDirection == MoonTooltipDirection.up) {
+    if (widget.tooltipPosition == MoonTooltipPosition.top) {
       final double yOffset = -halfH - widget.arrowLength - widget.arrowTipDistance;
       contentOffset = centerPosition.translate(0, yOffset);
       final maxXOffset = overlay.size.width;
       final globalcontentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
       if (globalcontentRightBoundingOffset > maxXOffset) {
         contentOffset = contentOffset.translate(
-          maxXOffset - globalcontentRightBoundingOffset - widget.outsidePadding,
+          maxXOffset - globalcontentRightBoundingOffset - widget.tooltipMargin,
           0,
         );
       }
@@ -186,32 +184,32 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
       final globalcontentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
       if (globalcontentLeftBoundingOffset < minXOffset) {
         contentOffset = contentOffset.translate(
-          minXOffset - globalcontentLeftBoundingOffset + widget.outsidePadding,
+          minXOffset - globalcontentLeftBoundingOffset + widget.tooltipMargin,
           0,
         );
       }
-    } else if (widget.tooltipDirection == MoonTooltipDirection.down) {
+    } else if (widget.tooltipPosition == MoonTooltipPosition.bottom) {
       final double yOffset = halfH + widget.arrowLength + widget.arrowTipDistance;
       contentOffset = centerPosition.translate(0, yOffset);
-    } else if (widget.tooltipDirection == MoonTooltipDirection.right) {
+    } else if (widget.tooltipPosition == MoonTooltipPosition.right) {
       final double xOffset = halfW + widget.arrowLength + widget.arrowTipDistance;
       contentOffset = centerPosition.translate(xOffset, 0);
       final maxXOffset = overlay.size.width;
       final globalcontentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
       if (globalcontentRightBoundingOffset > maxXOffset) {
         contentOffset = contentOffset.translate(
-          maxXOffset - globalcontentRightBoundingOffset - widget.outsidePadding,
+          maxXOffset - globalcontentRightBoundingOffset - widget.tooltipMargin,
           0,
         );
       }
-    } else if (widget.tooltipDirection == MoonTooltipDirection.left) {
+    } else if (widget.tooltipPosition == MoonTooltipPosition.left) {
       final double xOffset = -halfW - widget.arrowLength - widget.arrowTipDistance;
       contentOffset = centerPosition.translate(xOffset, 0);
       const minXOffset = 0;
       final globalcontentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
       if (globalcontentLeftBoundingOffset < minXOffset) {
         contentOffset = contentOffset.translate(
-          minXOffset - globalcontentLeftBoundingOffset + widget.outsidePadding,
+          minXOffset - globalcontentLeftBoundingOffset + widget.tooltipMargin,
           0,
         );
       }
@@ -227,22 +225,22 @@ class _PopupContentLayoutDelegate extends SingleChildLayoutDelegate {
   final double? maxHeight;
   final double? minWidth;
   final double? minHeight;
-  final MoonTooltipDirection tooltipDirection;
+  final MoonTooltipPosition tooltipPosition;
   final double arrowTipDistance;
   final double arrowLength;
   final Offset tipTarget;
-  final double outsidePadding;
+  final double tooltipMargin;
 
   _PopupContentLayoutDelegate({
     required this.maxWidth,
     required this.maxHeight,
     required this.minWidth,
     required this.minHeight,
-    required this.tooltipDirection,
+    required this.tooltipPosition,
     required this.arrowLength,
     required this.arrowTipDistance,
     required this.tipTarget,
-    required this.outsidePadding,
+    required this.tooltipMargin,
   });
 
   @override
@@ -258,39 +256,39 @@ class _PopupContentLayoutDelegate extends SingleChildLayoutDelegate {
     double maxWidth = this.maxWidth ?? constraints.maxWidth;
     double maxHeight = this.maxHeight ?? constraints.maxHeight;
 
-    if (tooltipDirection == MoonTooltipDirection.up || tooltipDirection == MoonTooltipDirection.down) {
+    if (tooltipPosition == MoonTooltipPosition.top || tooltipPosition == MoonTooltipPosition.bottom) {
       maxWidth = max(
         min(
-          (constraints.maxWidth - tipTarget.dx).abs() * 2 - outsidePadding,
-          (tipTarget.dx).abs() * 2 - outsidePadding,
+          (constraints.maxWidth - tipTarget.dx).abs() * 2 - tooltipMargin,
+          (tipTarget.dx).abs() * 2 - tooltipMargin,
         ),
         0,
       );
       maxHeight = max(
-        constraints.maxHeight - outsidePadding,
+        constraints.maxHeight - tooltipMargin,
         0,
       );
-    } else if (tooltipDirection == MoonTooltipDirection.right) {
+    } else if (tooltipPosition == MoonTooltipPosition.right) {
       maxWidth = max(
-        (constraints.maxWidth - tipTarget.dx).abs() - outsidePadding - arrowLength - arrowTipDistance,
+        (constraints.maxWidth - tipTarget.dx).abs() - tooltipMargin - arrowLength - arrowTipDistance,
         0,
       );
       maxHeight = max(
-        constraints.maxHeight - outsidePadding,
+        constraints.maxHeight - tooltipMargin,
         0,
       );
-    } else if (tooltipDirection == MoonTooltipDirection.left) {
+    } else if (tooltipPosition == MoonTooltipPosition.left) {
       maxWidth = max(
         min(
           tipTarget.dx >= constraints.maxWidth
-              ? (constraints.maxWidth - tipTarget.dx).abs() - outsidePadding - arrowLength - arrowTipDistance
+              ? (constraints.maxWidth - tipTarget.dx).abs() - tooltipMargin - arrowLength - arrowTipDistance
               : maxWidth,
-          tipTarget.dx - (outsidePadding * 2) - arrowTipDistance,
+          tipTarget.dx - (tooltipMargin * 2) - arrowTipDistance,
         ),
         0,
       );
       maxHeight = max(
-        constraints.maxHeight - outsidePadding,
+        constraints.maxHeight - tooltipMargin,
         0,
       );
     }
