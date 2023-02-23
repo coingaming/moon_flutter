@@ -306,7 +306,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
               ? MoonTooltipPosition.right
               : MoonTooltipPosition.left);
     }
-    final double effectiveArrowBaseWidth = widget.arrowLength ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
+    final double effectiveArrowBaseWidth = widget.arrowBaseWidth ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
 
     final double effectiveArrowLength =
         widget.hasArrow ? (widget.arrowLength ?? context.moonTooltipTheme?.arrowLength ?? 8) : 0;

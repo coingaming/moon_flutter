@@ -24,11 +24,28 @@ class TooltipStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
-                    MoonTooltip(
+                    MoonChip(
+                      showTooltip: true,
+                      tooltipMessage: customLabelTextKnob,
+                      borderRadius: BorderRadius.circular(20),
+                      backgroundColor: context.moonColors!.hit,
+                      leftIcon: const Icon(MoonIcons.frame24),
+                      label: const Text("Moo"),
+                    ),
+                    const SizedBox(height: 32),
+                    MoonButton(
+                      showTooltip: true,
+                      tooltipMessage: customLabelTextKnob,
+                      label: const Text("Moo"),
+                      onTap: () {},
+                    ),
+
+                    /* MoonTooltip(
                       show: true,
                       tooltipPosition: MoonTooltipPosition.bottom,
-                      //hasArrow: false,
-                      arrowLength: 8,
+                      hasArrow: false,
+                      arrowLength: 24,
+                      arrowBaseWidth: 4,
                       content: Text(customLabelTextKnob),
                       child: MoonChip(
                         borderRadius: BorderRadius.circular(20),
@@ -36,7 +53,7 @@ class TooltipStory extends Story {
                         leftIcon: const Icon(MoonIcons.frame24),
                         label: const Text("Moo"),
                       ),
-                    ),
+                    ), */
                     const SizedBox(height: 64),
                   ],
                 ),

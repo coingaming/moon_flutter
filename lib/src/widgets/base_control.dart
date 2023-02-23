@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/effects/controls_effects.dart';
@@ -8,6 +10,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/effects/pulse_effect.dart';
+import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
 typedef MoonBaseControlBuilder = Widget Function(
   BuildContext context,
@@ -36,6 +39,9 @@ class MoonBaseControl extends StatefulWidget {
   /// Whether this control should ensure that it has a minimal touch target size.
   final bool ensureMinimalTouchTargetSize;
 
+  /// Whether this control should show a tooltip.
+  final bool showTooltip;
+
   /// Whether this control should show a focus effect.
   final bool showFocusEffect;
 
@@ -53,6 +59,9 @@ class MoonBaseControl extends StatefulWidget {
 
   /// The semantic label for this control.
   final String? semanticLabel;
+
+  /// The tooltip message for this control.
+  final String tooltipMessage;
 
   /// The minimum size of the touch target.
   final double minTouchTargetSize;
@@ -114,12 +123,14 @@ class MoonBaseControl extends StatefulWidget {
     this.autofocus = false,
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
+    this.showTooltip = false,
     this.showFocusEffect = true,
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
     this.showScaleAnimation = true,
     this.semanticTypeIsButton = false,
     this.semanticLabel,
+    this.tooltipMessage = "",
     this.minTouchTargetSize = 40.0,
     this.disabledOpacityValue,
     this.focusEffectExtent,
@@ -147,12 +158,14 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   bool _isFocused = false;
   bool _isHovered = false;
   bool _isPressed = false;
+  bool _isLongPressed = false;
 
   FocusNode? _focusNode;
 
   late Map<Type, Action<Intent>> _actions;
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
+  bool get _canShowTooltip => _isEnabled && widget.showTooltip && (_isFocused || _isHovered || _isLongPressed);
   bool get _canAnimateFocus => widget.showFocusEffect && _isEnabled && _isFocused;
   bool get _canAnimatePulse => widget.showPulseEffect && _isEnabled;
   bool get _canAnimateScale => widget.showScaleAnimation && _isEnabled && _isPressed;
@@ -200,6 +213,9 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     if (_isPressed && mounted) {
       setState(() => _isPressed = false);
     }
+    if (_isLongPressed && mounted) {
+      setState(() => _isLongPressed = false);
+    }
   }
 
   void _handleLongPress() {
@@ -209,14 +225,14 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   }
 
   void _handleLongPressDown(_) {
-    if (!_isPressed && mounted) {
-      setState(() => _isPressed = true);
+    if (!_isLongPressed && mounted) {
+      setState(() => _isLongPressed = true);
     }
   }
 
   void _handleLongPressUp() {
-    if (_isPressed && mounted) {
-      setState(() => _isPressed = false);
+    if (_isLongPressed && mounted) {
+      setState(() => _isLongPressed = false);
     }
   }
 
@@ -276,6 +292,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   @override
   Widget build(BuildContext context) {
+    log(_isLongPressed.toString());
     final double effectiveDisabledOpacityValue =
         widget.disabledOpacityValue ?? context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
 
@@ -336,61 +353,65 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
       _isPressed,
     );
 
-    return RepaintBoundary(
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.semanticLabel,
-          button: widget.semanticTypeIsButton,
-          enabled: _isEnabled,
-          focusable: _isEnabled,
-          focused: _isFocused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            onLongPress: _handleLongPress,
-            onLongPressDown: _handleLongPressDown,
-            onLongPressUp: _handleLongPressUp,
-            onHorizontalDragStart: _handleHorizontalDragStart,
-            onHorizontalDragEnd: _handleHorizontalDragEnd,
-            onVerticalDragStart: _handleVerticalDragStart,
-            onVerticalDragEnd: _handleVerticalDragEnd,
-            child: FocusableActionDetector(
-              enabled: _isEnabled && widget.isFocusable,
-              focusNode: _effectiveFocusNode,
-              autofocus: _isEnabled && widget.autofocus,
-              mouseCursor: _cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              child: TouchTargetPadding(
-                minSize: widget.ensureMinimalTouchTargetSize
-                    ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)
-                    : Size.zero,
-                child: AnimatedScale(
-                  scale: _canAnimateScale ? effectiveScaleEffectScalar : 1,
-                  duration: effectiveScaleEffectDuration,
-                  curve: effectiveScaleEffectCurve,
-                  child: MoonPulseEffect(
-                    show: _canAnimatePulse,
-                    showJiggle: widget.showPulseEffectJiggle,
-                    childBorderRadius: widget.borderRadius,
-                    effectColor: effectivePulseEffectColor,
-                    effectExtent: effectivePulseEffectExtent,
-                    effectCurve: effectivePulseEffectCurve,
-                    effectDuration: effectivePulseEffectDuration,
-                    child: AnimatedOpacity(
-                      opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
-                      duration: const Duration(milliseconds: 150),
-                      curve: Curves.easeInOutCubic,
-                      child: MoonFocusEffect(
-                        show: _canAnimateFocus,
-                        effectColor: focusColor,
-                        effectExtent: effectiveFocusEffectExtent,
-                        effectCurve: effectiveFocusEffectCurve,
-                        effectDuration: effectiveFocusEffectDuration,
-                        childBorderRadius: widget.borderRadius,
-                        child: child,
+    return MoonTooltip(
+      show: _canShowTooltip,
+      content: Text(widget.tooltipMessage),
+      child: RepaintBoundary(
+        child: MergeSemantics(
+          child: Semantics(
+            label: widget.semanticLabel,
+            button: widget.semanticTypeIsButton,
+            enabled: _isEnabled,
+            focusable: _isEnabled,
+            focused: _isFocused,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: _handleTap,
+              onLongPress: _handleLongPress,
+              onLongPressStart: _handleLongPressDown,
+              onLongPressUp: _handleLongPressUp,
+              onHorizontalDragStart: _handleHorizontalDragStart,
+              onHorizontalDragEnd: _handleHorizontalDragEnd,
+              onVerticalDragStart: _handleVerticalDragStart,
+              onVerticalDragEnd: _handleVerticalDragEnd,
+              child: FocusableActionDetector(
+                enabled: _isEnabled && widget.isFocusable,
+                focusNode: _effectiveFocusNode,
+                autofocus: _isEnabled && widget.autofocus,
+                mouseCursor: _cursor,
+                onShowHoverHighlight: _handleHover,
+                onShowFocusHighlight: _handleFocus,
+                onFocusChange: _handleFocusChange,
+                actions: _actions,
+                child: TouchTargetPadding(
+                  minSize: widget.ensureMinimalTouchTargetSize
+                      ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)
+                      : Size.zero,
+                  child: AnimatedScale(
+                    scale: _canAnimateScale ? effectiveScaleEffectScalar : 1,
+                    duration: effectiveScaleEffectDuration,
+                    curve: effectiveScaleEffectCurve,
+                    child: MoonPulseEffect(
+                      show: _canAnimatePulse,
+                      showJiggle: widget.showPulseEffectJiggle,
+                      childBorderRadius: widget.borderRadius,
+                      effectColor: effectivePulseEffectColor,
+                      effectExtent: effectivePulseEffectExtent,
+                      effectCurve: effectivePulseEffectCurve,
+                      effectDuration: effectivePulseEffectDuration,
+                      child: AnimatedOpacity(
+                        opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
+                        duration: const Duration(milliseconds: 150),
+                        curve: Curves.easeInOutCubic,
+                        child: MoonFocusEffect(
+                          show: _canAnimateFocus,
+                          effectColor: focusColor,
+                          effectExtent: effectiveFocusEffectExtent,
+                          effectCurve: effectiveFocusEffectCurve,
+                          effectDuration: effectiveFocusEffectDuration,
+                          childBorderRadius: widget.borderRadius,
+                          child: child,
+                        ),
                       ),
                     ),
                   ),

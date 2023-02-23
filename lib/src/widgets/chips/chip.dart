@@ -30,6 +30,9 @@ class MoonChip extends StatelessWidget {
   /// The semantic label for the chip.
   final String? semanticLabel;
 
+  /// The tooltip message for the chip.
+  final String tooltipMessage;
+
   /// The width of the chip.
   final double? width;
 
@@ -65,6 +68,9 @@ class MoonChip extends StatelessWidget {
 
   /// Whether the chip should show a border.
   final bool showBorder;
+
+  /// Whether the chip should show a tooltip.
+  final bool showTooltip;
 
   /// Whether the chip should show a focus effect.
   final bool showFocusEffect;
@@ -121,6 +127,7 @@ class MoonChip extends StatelessWidget {
     this.chipSize,
     this.focusNode,
     this.semanticLabel,
+    this.tooltipMessage = "",
     this.width,
     this.height,
     this.disabledOpacityValue,
@@ -133,6 +140,7 @@ class MoonChip extends StatelessWidget {
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
     this.showBorder = false,
+    this.showTooltip = false,
     this.showFocusEffect = true,
     this.backgroundColor,
     this.activeColor,
@@ -223,6 +231,7 @@ class MoonChip extends StatelessWidget {
       onTap: onTap ?? () {},
       onLongPress: onLongPress,
       semanticLabel: semanticLabel,
+      tooltipMessage: tooltipMessage,
       borderRadius: effectiveBorderRadius,
       disabledOpacityValue: disabledOpacityValue,
       minTouchTargetSize: minTouchTargetSize,
@@ -230,6 +239,7 @@ class MoonChip extends StatelessWidget {
       focusNode: focusNode,
       autofocus: autofocus,
       isFocusable: isFocusable,
+      showTooltip: showTooltip,
       showFocusEffect: showFocusEffect,
       backgroundColor: backgroundColor,
       focusEffectColor: focusEffectColor,
