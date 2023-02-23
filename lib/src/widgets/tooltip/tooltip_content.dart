@@ -265,13 +265,13 @@ class _TooltipContentShape extends ShapeBorder {
           ..lineTo(
             rect.right,
             max(
-              min(arrowOffset.dy - arrowBaseWidth, rect.bottom - bottomRightRadius - arrowBaseWidth),
+              min(arrowOffset.dy - arrowBaseWidth / 2, rect.bottom - bottomRightRadius - arrowBaseWidth),
               rect.top + topRightRadius,
             ),
           )
           ..lineTo(arrowOffset.dx - arrowTipDistance, arrowOffset.dy) // right to arrow tip   \
           //  left /
-          ..lineTo(rect.right, min(arrowOffset.dy + arrowBaseWidth, rect.bottom - bottomRightRadius))
+          ..lineTo(rect.right, min(arrowOffset.dy + arrowBaseWidth / 2, rect.bottom - bottomRightRadius))
           ..lineTo(rect.right, rect.bottom - borderRadius)
           ..arcToPoint(
             Offset(rect.right - bottomRightRadius, rect.bottom),
@@ -294,7 +294,7 @@ class _TooltipContentShape extends ShapeBorder {
           ..lineTo(
             rect.left,
             max(
-              min(arrowOffset.dy - arrowBaseWidth, rect.bottom - bottomLeftRadius - arrowBaseWidth),
+              min(arrowOffset.dy - arrowBaseWidth / 2, rect.bottom - bottomLeftRadius - arrowBaseWidth),
               rect.top + topLeftRadius,
             ),
           )
@@ -303,7 +303,7 @@ class _TooltipContentShape extends ShapeBorder {
           ..lineTo(arrowOffset.dx + arrowTipDistance, arrowOffset.dy)
 
           //  right \
-          ..lineTo(rect.left, min(arrowOffset.dy + arrowBaseWidth, rect.bottom - bottomLeftRadius))
+          ..lineTo(rect.left, min(arrowOffset.dy + arrowBaseWidth / 2, rect.bottom - bottomLeftRadius))
           ..lineTo(rect.left, rect.bottom - bottomLeftRadius)
           ..arcToPoint(
             Offset(rect.left + bottomLeftRadius, rect.bottom),

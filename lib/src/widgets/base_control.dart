@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/effects/controls_effects.dart';
@@ -165,10 +163,10 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   late Map<Type, Action<Intent>> _actions;
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
-  bool get _canShowTooltip => _isEnabled && widget.showTooltip && (_isFocused || _isHovered || _isLongPressed);
+  bool get _canShowTooltip => widget.showTooltip && _isEnabled && (_isFocused || _isHovered || _isLongPressed);
   bool get _canAnimateFocus => widget.showFocusEffect && _isEnabled && _isFocused;
   bool get _canAnimatePulse => widget.showPulseEffect && _isEnabled;
-  bool get _canAnimateScale => widget.showScaleAnimation && _isEnabled && _isPressed;
+  bool get _canAnimateScale => widget.showScaleAnimation && _isEnabled && (_isPressed || _isLongPressed);
 
   MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.forbidden;
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
@@ -209,12 +207,15 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     }
   }
 
+  void _handleTapDown(_) {
+    if (!_isPressed && mounted) {
+      setState(() => _isPressed = true);
+    }
+  }
+
   void _handleTapUp(_) {
     if (_isPressed && mounted) {
       setState(() => _isPressed = false);
-    }
-    if (_isLongPressed && mounted) {
-      setState(() => _isLongPressed = false);
     }
   }
 
@@ -224,9 +225,13 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     }
   }
 
-  void _handleLongPressDown(_) {
+  void _handleLongPressStart(_) {
     if (!_isLongPressed && mounted) {
       setState(() => _isLongPressed = true);
+    }
+
+    if (!_isPressed && mounted) {
+      setState(() => _isPressed = true);
     }
   }
 
@@ -234,13 +239,17 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     if (_isLongPressed && mounted) {
       setState(() => _isLongPressed = false);
     }
+
+    if (_isPressed && mounted) {
+      setState(() => _isPressed = false);
+    }
   }
 
-  void _handleHorizontalDragStart(DragStartDetails dragStartDetails) => _handleLongPressDown(null);
+  void _handleHorizontalDragStart(DragStartDetails dragStartDetails) => _handleTapDown(null);
 
   void _handleHorizontalDragEnd(DragEndDetails dragEndDetails) => _handleTapUp(null);
 
-  void _handleVerticalDragStart(DragStartDetails dragStartDetails) => _handleLongPressDown(null);
+  void _handleVerticalDragStart(DragStartDetails dragStartDetails) => _handleTapDown(null);
 
   void _handleVerticalDragEnd(DragEndDetails dragEndDetails) => _handleTapUp(null);
 
@@ -278,9 +287,9 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
     _effectiveFocusNode.canRequestFocus = _isEnabled;
 
-    if (_isPressed && mounted) {
+    /* if (_isPressed && mounted) {
       setState(() => _isPressed = false);
-    }
+    } */
   }
 
   @override
@@ -292,7 +301,6 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   @override
   Widget build(BuildContext context) {
-    log(_isLongPressed.toString());
     final double effectiveDisabledOpacityValue =
         widget.disabledOpacityValue ?? context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
 
@@ -367,8 +375,10 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: _handleTap,
+              onTapDown: _handleTapDown,
+              onTapUp: _handleTapUp,
               onLongPress: _handleLongPress,
-              onLongPressStart: _handleLongPressDown,
+              onLongPressStart: _handleLongPressStart,
               onLongPressUp: _handleLongPressUp,
               onHorizontalDragStart: _handleHorizontalDragStart,
               onHorizontalDragEnd: _handleHorizontalDragEnd,
