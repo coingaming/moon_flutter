@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/coingaming/moon_flutter/compare/v0.7.0...v0.8.0) (2023-02-23)
+
+
+### Features
+
+* [MDS-405] Create CircularProgress widget ([#58](https://github.com/coingaming/moon_flutter/issues/58)) ([03d8832](https://github.com/coingaming/moon_flutter/commit/03d88323e758e612d6834743d24bea91226360d5))
+
 ## [0.7.0](https://github.com/coingaming/moon_flutter/compare/v0.6.0...v0.7.0) (2023-02-23)
 
 
