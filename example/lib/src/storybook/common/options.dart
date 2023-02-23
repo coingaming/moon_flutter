@@ -47,6 +47,7 @@ List<Option<int>> colorOptions = const [
   Option(label: "whis100", value: 36),
   Option(label: "whis60", value: 37),
   Option(label: "whis10", value: 38),
+  Option(label: "none", value: 39),
 ];
 
 /// LUT for the color options.
@@ -90,4 +91,5 @@ List<Color> colorTable(BuildContext context) => [
       context.moonColors!.whis100,
       context.moonColors!.whis60,
       context.moonColors!.whis10,
+      Colors.transparent,
     ];

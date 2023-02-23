@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 @immutable
 class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
   static const sizes = MoonSizes(
+    x6s: 2,
     x5s: 4,
     x4s: 8,
     x3s: 12,
@@ -17,6 +18,9 @@ class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
     xl: 56,
     x2l: 64,
   );
+
+  /// (6x) Extra small size.
+  final double x6s;
 
   /// (5x) Extra small size.
   final double x5s;
@@ -49,6 +53,7 @@ class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
   final double x2l;
 
   const MoonSizes({
+    required this.x6s,
     required this.x5s,
     required this.x4s,
     required this.x3s,
@@ -63,6 +68,7 @@ class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
 
   @override
   MoonSizes copyWith({
+    double? x6s,
     double? x5s,
     double? x4s,
     double? x3s,
@@ -75,6 +81,7 @@ class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
     double? x2l,
   }) {
     return MoonSizes(
+      x6s: x6s ?? this.x6s,
       x5s: x5s ?? this.x5s,
       x4s: x4s ?? this.x4s,
       x3s: x3s ?? this.x3s,
@@ -93,6 +100,7 @@ class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
     if (other is! MoonSizes) return this;
 
     return MoonSizes(
+      x6s: lerpDouble(x6s, other.x6s, t)!,
       x5s: lerpDouble(x5s, other.x5s, t)!,
       x4s: lerpDouble(x4s, other.x4s, t)!,
       x3s: lerpDouble(x3s, other.x3s, t)!,
@@ -111,6 +119,7 @@ class MoonSizes extends ThemeExtension<MoonSizes> with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonSizes"))
+      ..add(DoubleProperty("x6s", x6s))
       ..add(DoubleProperty("x5s", x5s))
       ..add(DoubleProperty("x4s", x4s))
       ..add(DoubleProperty("x3s", x3s))

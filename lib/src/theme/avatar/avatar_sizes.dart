@@ -63,10 +63,10 @@ class MoonAvatarSizes extends ThemeExtension<MoonAvatarSizes> with Diagnosticabl
   /// Avatar size value.
   final double avatarSizeValue;
 
-  /// Avatar size value.
+  /// Avatar badge size value.
   final double badgeSizeValue;
 
-  /// Avatar size value.
+  /// Avatar badge margin value.
   final double badgeMarginValue;
 
   /// Avatar border radius.
