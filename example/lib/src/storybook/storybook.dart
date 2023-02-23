@@ -2,6 +2,7 @@ import 'package:example/src/storybook/common/widgets/version.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/button.dart';
 import 'package:example/src/storybook/stories/chip.dart';
+import 'package:example/src/storybook/stories/circular_progress.dart';
 import 'package:example/src/storybook/stories/icons.dart';
 import 'package:example/src/storybook/stories/loader.dart';
 import 'package:example/src/storybook/stories/tag.dart';
@@ -64,6 +65,7 @@ class StorybookPage extends StatelessWidget {
             AvatarStory(),
             ButtonStory(),
             ChipStory(),
+            CircularProgressStory(),
             IconsStory(),
             LoaderStory(),
             TagStory(),

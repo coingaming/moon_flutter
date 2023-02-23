@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button/button_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
+import 'package:moon_design/src/theme/circular_progress/circular_progress_theme.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/loader/loader_theme.dart';
@@ -22,6 +23,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.sizes,
     chipTheme: MoonChipTheme.sizes,
+    circularProgressTheme: MoonCircularProgressTheme.sizes,
     colors: MoonColors.light,
     effects: MoonEffects.light,
     loaderTheme: MoonLoaderTheme.sizes,
@@ -38,6 +40,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.sizes,
     chipTheme: MoonChipTheme.sizes,
+    circularProgressTheme: MoonCircularProgressTheme.sizes,
     colors: MoonColors.dark,
     effects: MoonEffects.dark,
     loaderTheme: MoonLoaderTheme.sizes,
@@ -60,6 +63,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   /// Moon Design System chip theming.
   final MoonChipTheme chipTheme;
+
+  /// Moon Design System circular progress theming.
+  final MoonCircularProgressTheme circularProgressTheme;
 
   /// Moon Design System colors.
   final MoonColors colors;
@@ -93,6 +99,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.borders,
     required this.buttonTheme,
     required this.chipTheme,
+    required this.circularProgressTheme,
     required this.colors,
     required this.effects,
     required this.loaderTheme,
@@ -110,6 +117,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonBorders? borders,
     MoonButtonTheme? buttonTheme,
     MoonChipTheme? chipTheme,
+    MoonCircularProgressTheme? circularProgressTheme,
     MoonColors? colors,
     MoonEffects? effects,
     MoonLoaderTheme? loaderTheme,
@@ -125,6 +133,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       borders: borders ?? this.borders,
       buttonTheme: buttonTheme ?? this.buttonTheme,
       chipTheme: chipTheme ?? this.chipTheme,
+      circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
       colors: colors ?? this.colors,
       effects: effects ?? this.effects,
       loaderTheme: loaderTheme ?? this.loaderTheme,
@@ -146,6 +155,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       borders: borders.lerp(other.borders, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       chipTheme: chipTheme.lerp(other.chipTheme, t),
+      circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
       colors: colors.lerp(other.colors, t),
       effects: effects.lerp(other.effects, t),
       loaderTheme: loaderTheme.lerp(other.loaderTheme, t),
@@ -167,6 +177,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
       ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
+      ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", colors))
       ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
       ..add(DiagnosticsProperty<MoonLoaderTheme>("MoonLoaderTheme", loaderTheme))
@@ -185,6 +196,7 @@ extension MoonThemeX on BuildContext {
   MoonBorders? get moonBorders => moonTheme?.borders;
   MoonButtonTheme? get moonButtonTheme => moonTheme?.buttonTheme;
   MoonChipTheme? get moonChipTheme => moonTheme?.chipTheme;
+  MoonCircularProgressTheme? get moonCircularProgressTheme => moonTheme?.circularProgressTheme;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonEffects? get moonEffects => moonTheme?.effects;
   MoonLoaderTheme? get moonLoaderTheme => moonTheme?.loaderTheme;
