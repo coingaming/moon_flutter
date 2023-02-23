@@ -9,7 +9,7 @@ class LoaderStory extends Story {
           name: "Loader",
           builder: (context) {
             final loaderSizesKnob = context.knobs.options(
-              label: "loaderSize",
+              label: "MoonLoaderSize",
               description: "Loader size variants.",
               initial: MoonLoaderSize.md,
               options: const [

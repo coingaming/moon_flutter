@@ -13,19 +13,19 @@ class MoonLoaderTheme extends ThemeExtension<MoonLoaderTheme> with Diagnosticabl
     lg: MoonLoaderSizes.lg,
   );
 
-  /// (2x) Extra small avatar properties.
+  /// (2x) Extra small loader properties.
   final MoonLoaderSizes x2s;
 
-  /// Extra small avatar properties.
+  /// Extra small loader properties.
   final MoonLoaderSizes xs;
 
-  /// Small avatar properties.
+  /// Small loader properties.
   final MoonLoaderSizes sm;
 
-  /// Medium avatar properties.
+  /// Medium loader properties.
   final MoonLoaderSizes md;
 
-  /// Large avatar properties.
+  /// Large loader properties.
   final MoonLoaderSizes lg;
 
   const MoonLoaderTheme({
