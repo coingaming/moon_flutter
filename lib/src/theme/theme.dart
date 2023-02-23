@@ -7,6 +7,7 @@ import 'package:moon_design/src/theme/button/button_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
+import 'package:moon_design/src/theme/loader/loader_theme.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
@@ -23,6 +24,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     chipTheme: MoonChipTheme.sizes,
     colors: MoonColors.light,
     effects: MoonEffects.light,
+    loaderTheme: MoonLoaderTheme.sizes,
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
@@ -38,6 +40,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     chipTheme: MoonChipTheme.sizes,
     colors: MoonColors.dark,
     effects: MoonEffects.dark,
+    loaderTheme: MoonLoaderTheme.sizes,
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
@@ -64,6 +67,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System effects.
   final MoonEffects effects;
 
+  /// Moon Design System loader theming.
+  final MoonLoaderTheme loaderTheme;
+
   /// Moon Design System opacities.
   final MoonOpacity opacity;
 
@@ -89,6 +95,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.chipTheme,
     required this.colors,
     required this.effects,
+    required this.loaderTheme,
     required this.opacity,
     required this.shadows,
     required this.sizes,
@@ -105,6 +112,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonChipTheme? chipTheme,
     MoonColors? colors,
     MoonEffects? effects,
+    MoonLoaderTheme? loaderTheme,
     MoonOpacity? opacity,
     MoonShadows? shadows,
     MoonSizes? sizes,
@@ -119,6 +127,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       chipTheme: chipTheme ?? this.chipTheme,
       colors: colors ?? this.colors,
       effects: effects ?? this.effects,
+      loaderTheme: loaderTheme ?? this.loaderTheme,
       opacity: opacity ?? this.opacity,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
@@ -139,6 +148,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       chipTheme: chipTheme.lerp(other.chipTheme, t),
       colors: colors.lerp(other.colors, t),
       effects: effects.lerp(other.effects, t),
+      loaderTheme: loaderTheme.lerp(other.loaderTheme, t),
       opacity: opacity.lerp(other.opacity, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
@@ -159,6 +169,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", colors))
       ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
+      ..add(DiagnosticsProperty<MoonLoaderTheme>("MoonLoaderTheme", loaderTheme))
       ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
@@ -176,6 +187,7 @@ extension MoonThemeX on BuildContext {
   MoonChipTheme? get moonChipTheme => moonTheme?.chipTheme;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonEffects? get moonEffects => moonTheme?.effects;
+  MoonLoaderTheme? get moonLoaderTheme => moonTheme?.loaderTheme;
   MoonOpacity? get moonOpacity => moonTheme?.opacity;
   MoonShadows? get moonShadows => moonTheme?.shadows;
   MoonSizes? get moonSizes => moonTheme?.sizes;

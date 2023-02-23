@@ -76,9 +76,9 @@ class AvatarStory extends Story {
 
             final badgeColor = colorTable(context)[badgeColorKnob];
 
-            return Center(
-              child: Directionality(
-                textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
+            return Directionality(
+              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
+              child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
