@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/coingaming/moon_flutter/compare/v0.5.6...v0.6.0) (2023-02-23)
+
+
+### Features
+
+* [MDS-390] Add MoonTooltip ([#53](https://github.com/coingaming/moon_flutter/issues/53)) ([96a13a6](https://github.com/coingaming/moon_flutter/commit/96a13a6529be9d055c83f1d0e084291bed737931))
+
 ## [0.5.6](https://github.com/coingaming/moon_flutter/compare/v0.5.5...v0.5.6) (2023-02-20)
 
 
