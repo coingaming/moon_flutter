@@ -11,6 +11,7 @@ import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
+import 'package:moon_design/src/theme/tooltip/tooltip.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 
 @immutable
@@ -26,6 +27,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
     tagTheme: MoonTagTheme.sizes,
+    tooltipTheme: MoonTooltipTheme.tooltip,
     typography: MoonTypography.textStyles,
   );
 
@@ -40,6 +42,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
     tagTheme: MoonTagTheme.sizes,
+    tooltipTheme: MoonTooltipTheme.tooltip,
     typography: MoonTypography.textStyles,
   );
 
@@ -73,6 +76,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System tag theming.
   final MoonTagTheme tagTheme;
 
+  /// Moon Design System tooltip theming.
+  final MoonTooltipTheme tooltipTheme;
+
   /// Moon Design System typography.
   final MoonTypography typography;
 
@@ -87,6 +93,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.shadows,
     required this.sizes,
     required this.tagTheme,
+    required this.tooltipTheme,
     required this.typography,
   });
 
@@ -102,6 +109,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonShadows? shadows,
     MoonSizes? sizes,
     MoonTagTheme? tagTheme,
+    MoonTooltipTheme? tooltipTheme,
     MoonTypography? typography,
   }) {
     return MoonTheme(
@@ -115,6 +123,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
       tagTheme: tagTheme ?? this.tagTheme,
+      tooltipTheme: tooltipTheme ?? this.tooltipTheme,
       typography: typography ?? this.typography,
     );
   }
@@ -134,6 +143,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
       tagTheme: tagTheme.lerp(other.tagTheme, t),
+      tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
       typography: typography.lerp(other.typography, t),
     );
   }
@@ -153,6 +163,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
+      ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme))
       ..add(DiagnosticsProperty<MoonTypography>("MoonTypography", typography));
   }
 }
@@ -169,5 +180,6 @@ extension MoonThemeX on BuildContext {
   MoonShadows? get moonShadows => moonTheme?.shadows;
   MoonSizes? get moonSizes => moonTheme?.sizes;
   MoonTagTheme? get moonTagTheme => moonTheme?.tagTheme;
+  MoonTooltipTheme? get moonTooltipTheme => moonTheme?.tooltipTheme;
   MoonTypography? get moonTypography => moonTheme?.typography;
 }

@@ -8,15 +8,15 @@ class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with Diagnostica
   static final lightHoverEffect = MoonHoverEffects(
     primaryHoverColor: MoonColors.light.heles,
     secondaryHoverColor: MoonColors.light.jiren,
-    hoverCurve: Curves.easeInOut,
     hoverDuration: const Duration(milliseconds: 150),
+    hoverCurve: Curves.easeInOutCubic,
   );
 
   static final darkHoverEffect = MoonHoverEffects(
     primaryHoverColor: MoonColors.dark.heles,
     secondaryHoverColor: MoonColors.dark.jiren,
-    hoverCurve: Curves.easeInOut,
     hoverDuration: const Duration(milliseconds: 150),
+    hoverCurve: Curves.easeInOutCubic,
   );
 
   /// Primary hover effect color.
@@ -25,31 +25,31 @@ class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with Diagnostica
   /// Secondary hover effect color.
   final Color secondaryHoverColor;
 
-  /// Hover effect curve.
-  final Curve hoverCurve;
-
   /// Hover effect duration.
   final Duration hoverDuration;
+
+  /// Hover effect curve.
+  final Curve hoverCurve;
 
   const MoonHoverEffects({
     required this.primaryHoverColor,
     required this.secondaryHoverColor,
-    required this.hoverCurve,
     required this.hoverDuration,
+    required this.hoverCurve,
   });
 
   @override
   MoonHoverEffects copyWith({
     Color? primaryHoverColor,
     Color? secondaryHoverColor,
-    Curve? hoverCurve,
     Duration? hoverDuration,
+    Curve? hoverCurve,
   }) {
     return MoonHoverEffects(
       primaryHoverColor: primaryHoverColor ?? this.primaryHoverColor,
       secondaryHoverColor: secondaryHoverColor ?? this.secondaryHoverColor,
-      hoverCurve: hoverCurve ?? this.hoverCurve,
       hoverDuration: hoverDuration ?? this.hoverDuration,
+      hoverCurve: hoverCurve ?? this.hoverCurve,
     );
   }
 
@@ -60,8 +60,8 @@ class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with Diagnostica
     return MoonHoverEffects(
       primaryHoverColor: Color.lerp(primaryHoverColor, other.primaryHoverColor, t)!,
       secondaryHoverColor: Color.lerp(secondaryHoverColor, other.secondaryHoverColor, t)!,
-      hoverCurve: other.hoverCurve,
       hoverDuration: lerpDuration(hoverDuration, other.hoverDuration, t),
+      hoverCurve: other.hoverCurve,
     );
   }
 
@@ -72,7 +72,7 @@ class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with Diagnostica
       ..add(DiagnosticsProperty("type", "MoonHoverEffects"))
       ..add(ColorProperty("primaryHoverColor", primaryHoverColor))
       ..add(ColorProperty("secondaryHoverColor", secondaryHoverColor))
-      ..add(DiagnosticsProperty<Curve>("hoverCurve", hoverCurve))
-      ..add(DiagnosticsProperty<Duration>("hoverDuration", hoverDuration));
+      ..add(DiagnosticsProperty<Duration>("hoverDuration", hoverDuration))
+      ..add(DiagnosticsProperty<Curve>("hoverCurve", hoverCurve));
   }
 }

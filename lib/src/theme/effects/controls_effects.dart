@@ -7,23 +7,23 @@ import 'package:moon_design/src/theme/colors.dart';
 @immutable
 class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with DiagnosticableTreeMixin {
   static const controlScaleEffect = MoonControlsEffects(
-    effectCurve: Curves.easeInOutCubic,
     effectDuration: Duration(milliseconds: 150),
+    effectCurve: Curves.easeInOutCubic,
     effectScalar: 0.95,
   );
 
   static final controlPulseEffect = MoonControlsEffects(
-    effectCurve: Curves.easeInOutCubic,
     effectDuration: const Duration(milliseconds: 1400),
+    effectCurve: Curves.easeInOutCubic,
     effectColor: MoonColors.light.piccolo,
     effectExtent: 24,
   );
 
-  /// Controls effect curve.
-  final Curve effectCurve;
-
   /// Controls effect duration.
   final Duration effectDuration;
+
+  /// Controls effect curve.
+  final Curve effectCurve;
 
   /// Controls effect color.
   final Color? effectColor;
@@ -35,8 +35,8 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
   final double? effectScalar;
 
   const MoonControlsEffects({
-    required this.effectCurve,
     required this.effectDuration,
+    required this.effectCurve,
     this.effectColor,
     this.effectExtent,
     this.effectScalar,
@@ -44,15 +44,15 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
 
   @override
   MoonControlsEffects copyWith({
-    Curve? effectCurve,
     Duration? effectDuration,
+    Curve? effectCurve,
     Color? effectColor,
     double? effectExtent,
     double? effectScalar,
   }) {
     return MoonControlsEffects(
-      effectCurve: effectCurve ?? this.effectCurve,
       effectDuration: effectDuration ?? this.effectDuration,
+      effectCurve: effectCurve ?? this.effectCurve,
       effectColor: effectColor ?? this.effectColor,
       effectExtent: effectExtent ?? this.effectExtent,
       effectScalar: effectScalar ?? this.effectScalar,
@@ -64,8 +64,8 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
     if (other is! MoonControlsEffects) return this;
 
     return MoonControlsEffects(
-      effectCurve: other.effectCurve,
       effectDuration: lerpDuration(effectDuration, other.effectDuration, t),
+      effectCurve: other.effectCurve,
       effectColor: Color.lerp(effectColor, other.effectColor, t),
       effectExtent: lerpDouble(effectExtent, other.effectExtent, t),
       effectScalar: lerpDouble(effectScalar, other.effectScalar, t),
@@ -77,8 +77,8 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonControlsEffects"))
-      ..add(DiagnosticsProperty<Curve>("effectCurve", effectCurve))
       ..add(DiagnosticsProperty<Duration>("effectDuration", effectDuration))
+      ..add(DiagnosticsProperty<Curve>("effectCurve", effectCurve))
       ..add(ColorProperty("effectColor", effectColor))
       ..add(DoubleProperty("effectExtent", effectExtent))
       ..add(DoubleProperty("transitionLowerBound", effectScalar));

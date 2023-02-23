@@ -21,6 +21,9 @@ class MoonGhostButton extends StatelessWidget {
   /// The semantic label for the button.
   final String? semanticLabel;
 
+  /// The tooltip message for the button.
+  final String tooltipMessage;
+
   /// The width of the button.
   final double? width;
 
@@ -41,6 +44,9 @@ class MoonGhostButton extends StatelessWidget {
 
   /// Whether this button should be full width.
   final bool isFullWidth;
+
+  /// Whether this button should show a tooltip.
+  final bool showTooltip;
 
   /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
@@ -68,6 +74,7 @@ class MoonGhostButton extends StatelessWidget {
     this.buttonSize,
     this.focusNode,
     this.semanticLabel,
+    this.tooltipMessage = "",
     this.width,
     this.height,
     this.minTouchTargetSize = 40,
@@ -75,6 +82,7 @@ class MoonGhostButton extends StatelessWidget {
     this.autofocus = false,
     this.isFocusable = true,
     this.isFullWidth = false,
+    this.showTooltip = false,
     this.showPulseEffect = false,
     this.label,
     this.leftIcon,
@@ -94,6 +102,7 @@ class MoonGhostButton extends StatelessWidget {
       buttonSize: buttonSize,
       focusNode: focusNode,
       semanticLabel: semanticLabel,
+      tooltipMessage: tooltipMessage,
       width: width,
       height: height,
       minTouchTargetSize: minTouchTargetSize,
@@ -102,6 +111,7 @@ class MoonGhostButton extends StatelessWidget {
       isFocusable: isFocusable,
       isFullWidth: isFullWidth,
       textColor: effectiveTextColor,
+      showTooltip: showTooltip,
       showPulseEffect: showPulseEffect,
       hoverEffectColor: effectiveHoverColor,
       focusEffectColor: effectiveFocusColor,

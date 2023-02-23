@@ -34,6 +34,9 @@ class MoonButton extends StatelessWidget {
   /// The semantic label for the button.
   final String? semanticLabel;
 
+  /// The tooltip message for the button.
+  final String tooltipMessage;
+
   /// The width of the button.
   final double? width;
 
@@ -75,6 +78,9 @@ class MoonButton extends StatelessWidget {
 
   /// Whether the button should show a border.
   final bool showBorder;
+
+  /// Whether the button should show a tooltip.
+  final bool showTooltip;
 
   /// Whether the button should show a focus effect.
   final bool showFocusEffect;
@@ -160,6 +166,7 @@ class MoonButton extends StatelessWidget {
     this.buttonSize,
     this.focusNode,
     this.semanticLabel,
+    this.tooltipMessage = "",
     this.width,
     this.height,
     this.disabledOpacityValue,
@@ -174,6 +181,7 @@ class MoonButton extends StatelessWidget {
     this.isFullWidth = false,
     this.ensureMinimalTouchTargetSize = false,
     this.showBorder = false,
+    this.showTooltip = false,
     this.showFocusEffect = true,
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
@@ -206,6 +214,7 @@ class MoonButton extends StatelessWidget {
     MoonButtonSize? buttonSize,
     FocusNode? focusNode,
     String? semanticLabel,
+    String tooltipMessage = "",
     double? width,
     double? height,
     double? disabledOpacityValue,
@@ -219,6 +228,7 @@ class MoonButton extends StatelessWidget {
     bool isFocusable = true,
     bool ensureMinimalTouchTargetSize = false,
     bool showBorder = false,
+    bool showTooltip = false,
     bool showFocusEffect = true,
     bool showPulseEffect = false,
     bool showPulseEffectJiggle = true,
@@ -247,6 +257,7 @@ class MoonButton extends StatelessWidget {
       buttonSize: buttonSize,
       focusNode: focusNode,
       semanticLabel: semanticLabel,
+      tooltipMessage: tooltipMessage,
       width: width,
       height: height,
       disabledOpacityValue: disabledOpacityValue,
@@ -260,6 +271,7 @@ class MoonButton extends StatelessWidget {
       isFocusable: isFocusable,
       ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       showBorder: showBorder,
+      showTooltip: showTooltip,
       showFocusEffect: showFocusEffect,
       showPulseEffect: showPulseEffect,
       showPulseEffectJiggle: showPulseEffectJiggle,
@@ -355,6 +367,7 @@ class MoonButton extends StatelessWidget {
       onTap: onTap,
       onLongPress: onLongPress,
       semanticLabel: semanticLabel,
+      tooltipMessage: tooltipMessage,
       semanticTypeIsButton: true,
       borderRadius: effectiveBorderRadius,
       disabledOpacityValue: disabledOpacityValue,
@@ -363,8 +376,9 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       autofocus: autofocus,
       isFocusable: isFocusable,
-      showFocusEffect: showFocusEffect,
       backgroundColor: backgroundColor,
+      showTooltip: showTooltip,
+      showFocusEffect: showFocusEffect,
       focusEffectColor: focusEffectColor,
       focusEffectExtent: focusEffectExtent,
       focusEffectDuration: focusEffectDuration,

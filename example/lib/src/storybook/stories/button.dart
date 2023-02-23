@@ -7,7 +7,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 class ButtonStory extends Story {
   ButtonStory()
       : super(
-          name: "Buttons",
+          name: "Button",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "Custom label text",

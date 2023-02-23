@@ -20,6 +20,9 @@ class MoonTertiaryButton extends StatelessWidget {
   /// The semantic label for the button.
   final String? semanticLabel;
 
+  /// The tooltip message for the button.
+  final String tooltipMessage;
+
   /// The width of the button.
   final double? width;
 
@@ -40,6 +43,9 @@ class MoonTertiaryButton extends StatelessWidget {
 
   /// Whether this button should be full width.
   final bool isFullWidth;
+
+  /// Whether the button should show a tooltip.
+  final bool showTooltip;
 
   /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
@@ -67,6 +73,7 @@ class MoonTertiaryButton extends StatelessWidget {
     this.buttonSize,
     this.focusNode,
     this.semanticLabel,
+    this.tooltipMessage = "",
     this.width,
     this.height,
     this.minTouchTargetSize = 40,
@@ -74,6 +81,7 @@ class MoonTertiaryButton extends StatelessWidget {
     this.autofocus = false,
     this.isFocusable = true,
     this.isFullWidth = false,
+    this.showTooltip = false,
     this.showPulseEffect = false,
     this.label,
     this.leftIcon,
@@ -93,6 +101,7 @@ class MoonTertiaryButton extends StatelessWidget {
       borderColor: effectiveBorderColor,
       focusNode: focusNode,
       semanticLabel: semanticLabel,
+      tooltipMessage: tooltipMessage,
       width: width,
       height: height,
       minTouchTargetSize: minTouchTargetSize,
@@ -100,6 +109,7 @@ class MoonTertiaryButton extends StatelessWidget {
       autofocus: autofocus,
       isFocusable: isFocusable,
       isFullWidth: isFullWidth,
+      showTooltip: showTooltip,
       showPulseEffect: showPulseEffect,
       label: label,
       leftIcon: leftIcon,

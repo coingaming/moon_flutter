@@ -20,6 +20,9 @@ class MoonGhostChip extends StatelessWidget {
   /// The semantic label for the chip.
   final String? semanticLabel;
 
+  /// The tooltip message for the button.
+  final String tooltipMessage;
+
   /// The width of the chip.
   final double? width;
 
@@ -55,6 +58,9 @@ class MoonGhostChip extends StatelessWidget {
 
   /// Whether the chip should show a border.
   final bool showBorder;
+
+  /// Whether the chip should show a tooltip.
+  final bool showTooltip;
 
   /// Whether the chip should show a focus effect.
   final bool showFocusEffect;
@@ -108,6 +114,7 @@ class MoonGhostChip extends StatelessWidget {
     this.chipSize,
     this.focusNode,
     this.semanticLabel,
+    this.tooltipMessage = "",
     this.width,
     this.height,
     this.disabledOpacityValue,
@@ -120,6 +127,7 @@ class MoonGhostChip extends StatelessWidget {
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
     this.showBorder = false,
+    this.showTooltip = false,
     this.showFocusEffect = true,
     this.activeColor,
     this.borderColor,
@@ -149,6 +157,8 @@ class MoonGhostChip extends StatelessWidget {
       height: height,
       gap: gap,
       padding: padding,
+      semanticLabel: semanticLabel,
+      tooltipMessage: tooltipMessage,
       isActive: isActive,
       activeColor: activeColor,
       backgroundColor: Colors.transparent,
@@ -156,6 +166,7 @@ class MoonGhostChip extends StatelessWidget {
       textColor: effectiveTextColor,
       chipSize: chipSize,
       showBorder: showBorder,
+      showTooltip: showTooltip,
       borderRadius: borderRadius,
       disabledOpacityValue: disabledOpacityValue,
       showFocusEffect: showFocusEffect,
@@ -171,7 +182,6 @@ class MoonGhostChip extends StatelessWidget {
       hoverEffectDuration: hoverEffectDuration,
       ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       minTouchTargetSize: minTouchTargetSize,
-      semanticLabel: semanticLabel,
       leftIcon: leftIcon,
       label: label,
       rightIcon: rightIcon,

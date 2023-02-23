@@ -8,15 +8,15 @@ class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with Diagnostica
   static const lightFocusEffect = MoonFocusEffects(
     effectColor: Colors.black26,
     effectExtent: 4,
-    effectCurve: Curves.easeInOut,
     effectDuration: Duration(milliseconds: 150),
+    effectCurve: Curves.easeInOutCubic,
   );
 
   static const darkFocusEffect = MoonFocusEffects(
     effectColor: Colors.white24,
     effectExtent: 4,
-    effectCurve: Curves.easeInOut,
     effectDuration: Duration(milliseconds: 150),
+    effectCurve: Curves.easeInOutCubic,
   );
 
   /// Focus effect color.
@@ -25,31 +25,31 @@ class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with Diagnostica
   /// Focus effect extent.
   final double effectExtent;
 
-  /// Focus effect curve.
-  final Curve effectCurve;
-
   /// Focus effect duration.
   final Duration effectDuration;
+
+  /// Focus effect curve.
+  final Curve effectCurve;
 
   const MoonFocusEffects({
     required this.effectColor,
     required this.effectExtent,
-    required this.effectCurve,
     required this.effectDuration,
+    required this.effectCurve,
   });
 
   @override
   MoonFocusEffects copyWith({
     Color? effectColor,
     double? effectExtent,
-    Curve? effectCurve,
     Duration? effectDuration,
+    Curve? effectCurve,
   }) {
     return MoonFocusEffects(
       effectColor: effectColor ?? this.effectColor,
       effectExtent: effectExtent ?? this.effectExtent,
-      effectCurve: effectCurve ?? this.effectCurve,
       effectDuration: effectDuration ?? this.effectDuration,
+      effectCurve: effectCurve ?? this.effectCurve,
     );
   }
 
@@ -60,8 +60,8 @@ class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with Diagnostica
     return MoonFocusEffects(
       effectColor: Color.lerp(effectColor, other.effectColor, t)!,
       effectExtent: lerpDouble(effectExtent, other.effectExtent, t)!,
-      effectCurve: other.effectCurve,
       effectDuration: lerpDuration(effectDuration, other.effectDuration, t),
+      effectCurve: other.effectCurve,
     );
   }
 
@@ -72,7 +72,7 @@ class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with Diagnostica
       ..add(DiagnosticsProperty("type", "MoonFocusEffects"))
       ..add(ColorProperty("effectColor", effectColor))
       ..add(DoubleProperty("effectExtent", effectExtent))
-      ..add(DiagnosticsProperty<Curve>("effectCurve", effectCurve))
-      ..add(DiagnosticsProperty<Duration>("effectDuration", effectDuration));
+      ..add(DiagnosticsProperty<Duration>("effectDuration", effectDuration))
+      ..add(DiagnosticsProperty<Curve>("effectCurve", effectCurve));
   }
 }
