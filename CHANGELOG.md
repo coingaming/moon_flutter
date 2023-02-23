@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/coingaming/moon_flutter/compare/v0.6.0...v0.7.0) (2023-02-23)
+
+
+### Features
+
+* [MDS-389] Create MoonLoader ([#56](https://github.com/coingaming/moon_flutter/issues/56)) ([1f5b025](https://github.com/coingaming/moon_flutter/commit/1f5b02565bd30cd82986c0f81a5af2befb8c63c0))
+
 ## [0.6.0](https://github.com/coingaming/moon_flutter/compare/v0.5.6...v0.6.0) (2023-02-23)
 
 
