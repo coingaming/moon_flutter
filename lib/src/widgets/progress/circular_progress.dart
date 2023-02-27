@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/circular_progress/circular_progress_sizes.dart';
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/progress/circular_progress_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
 
 enum MoonCircularProgressSize {
   x2s,
@@ -19,6 +20,7 @@ class MoonCircularProgress extends StatelessWidget {
   final double? strokeWidth;
   final Color? color;
   final Color? backgroundColor;
+  final StrokeCap? strokeCap;
 
   const MoonCircularProgress({
     super.key,
@@ -28,6 +30,7 @@ class MoonCircularProgress extends StatelessWidget {
     this.strokeWidth,
     this.color,
     this.backgroundColor,
+    this.strokeCap,
   });
 
   MoonCircularProgressSizes _getMoonCircularProgressSize(
@@ -55,18 +58,21 @@ class MoonCircularProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     final MoonCircularProgressSizes effectiveMoonCircularProgressSize =
         _getMoonCircularProgressSize(context, circularProgressSize);
-    final double effectiveSize = sizeValue ?? effectiveMoonCircularProgressSize.circularProgressSizeValue;
-    final double effectiveStrokeWidth = strokeWidth ?? effectiveMoonCircularProgressSize.circularProgressStrokeWidth;
+    final double effectiveSize = sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
+    final double effectiveStrokeWidth = strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
+    final Color effectiveColor = color ?? context.moonColors?.hit ?? MoonColors.light.hit;
     final Color effectiveBackgroundColor = backgroundColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
+    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 
     return SizedBox(
       height: effectiveSize,
       width: effectiveSize,
-      child: CircularProgressIndicator(
+      child: MoonCircularProgressIndicator(
         value: value,
         strokeWidth: effectiveStrokeWidth,
-        color: color,
+        color: effectiveColor,
         backgroundColor: effectiveBackgroundColor,
+        strokeCap: effectiveStrokeCap,
       ),
     );
   }

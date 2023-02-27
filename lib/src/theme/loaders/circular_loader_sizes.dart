@@ -6,59 +6,59 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 
 @immutable
-class MoonLoaderSizes extends ThemeExtension<MoonLoaderSizes> with DiagnosticableTreeMixin {
-  static final x2s = MoonLoaderSizes(
+class MoonCircularLoaderSizes extends ThemeExtension<MoonCircularLoaderSizes> with DiagnosticableTreeMixin {
+  static final x2s = MoonCircularLoaderSizes(
     loaderSizeValue: MoonSizes.sizes.x2s,
     loaderStrokeWidth: MoonSizes.sizes.x6s,
   );
 
-  static final xs = MoonLoaderSizes(
+  static final xs = MoonCircularLoaderSizes(
     loaderSizeValue: MoonSizes.sizes.xs,
     loaderStrokeWidth: MoonSizes.sizes.x6s,
   );
 
-  static final sm = MoonLoaderSizes(
+  static final sm = MoonCircularLoaderSizes(
     loaderSizeValue: MoonSizes.sizes.sm,
     loaderStrokeWidth: MoonSizes.sizes.x6s,
   );
 
-  static final md = MoonLoaderSizes(
+  static final md = MoonCircularLoaderSizes(
     loaderSizeValue: MoonSizes.sizes.md,
     loaderStrokeWidth: MoonSizes.sizes.x5s,
   );
 
-  static final lg = MoonLoaderSizes(
+  static final lg = MoonCircularLoaderSizes(
     loaderSizeValue: MoonSizes.sizes.lg,
     loaderStrokeWidth: MoonSizes.sizes.x5s,
   );
 
-  /// Loader size value.
+  /// Circular loader size value.
   final double loaderSizeValue;
 
-  /// Loader stroke width.
+  /// Circular loader stroke width.
   final double loaderStrokeWidth;
 
-  const MoonLoaderSizes({
+  const MoonCircularLoaderSizes({
     required this.loaderSizeValue,
     required this.loaderStrokeWidth,
   });
 
   @override
-  MoonLoaderSizes copyWith({
+  MoonCircularLoaderSizes copyWith({
     double? loaderSizeValue,
     double? loaderStrokeWidth,
   }) {
-    return MoonLoaderSizes(
+    return MoonCircularLoaderSizes(
       loaderSizeValue: loaderSizeValue ?? this.loaderSizeValue,
       loaderStrokeWidth: loaderStrokeWidth ?? this.loaderStrokeWidth,
     );
   }
 
   @override
-  MoonLoaderSizes lerp(ThemeExtension<MoonLoaderSizes>? other, double t) {
-    if (other is! MoonLoaderSizes) return this;
+  MoonCircularLoaderSizes lerp(ThemeExtension<MoonCircularLoaderSizes>? other, double t) {
+    if (other is! MoonCircularLoaderSizes) return this;
 
-    return MoonLoaderSizes(
+    return MoonCircularLoaderSizes(
       loaderSizeValue: lerpDouble(loaderSizeValue, other.loaderSizeValue, t)!,
       loaderStrokeWidth: lerpDouble(loaderStrokeWidth, other.loaderStrokeWidth, t)!,
     );
@@ -68,7 +68,7 @@ class MoonLoaderSizes extends ThemeExtension<MoonLoaderSizes> with Diagnosticabl
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonLoaderSizes"))
+      ..add(DiagnosticsProperty("type", "MoonCircularLoaderSizes"))
       ..add(DoubleProperty("loaderSizeValue", loaderSizeValue))
       ..add(DoubleProperty("loaderStrokeWidth", loaderStrokeWidth));
   }

@@ -6,7 +6,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 class CircularProgressStory extends Story {
   CircularProgressStory()
       : super(
-          name: "CircularProgress",
+          name: "Progress/CircularProgress",
           builder: (context) {
             final circularProgressSizesKnob = context.knobs.options(
               label: "MoonCircularProgressSize",
@@ -39,6 +39,17 @@ class CircularProgressStory extends Story {
 
             final backgroundColor = colorTable(context)[circularProgressBackgroundColorKnob];
 
+            final circularProgressStrokeCapKnob = context.knobs.options(
+              label: "strokeCap",
+              description: "CircularProgress stroke cap.",
+              initial: StrokeCap.round,
+              options: const [
+                Option(label: "round", value: StrokeCap.round),
+                Option(label: "square", value: StrokeCap.square),
+                Option(label: "butt", value: StrokeCap.butt),
+              ],
+            );
+
             final circularProgressValueKnob = context.knobs.slider(
               label: "value",
               description: "CircularProgress value.",
@@ -55,6 +66,7 @@ class CircularProgressStory extends Story {
                     color: color,
                     backgroundColor: backgroundColor,
                     circularProgressSize: circularProgressSizesKnob,
+                    strokeCap: circularProgressStrokeCapKnob,
                   ),
                   const SizedBox(height: 64),
                 ],

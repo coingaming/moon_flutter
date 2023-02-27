@@ -2,13 +2,14 @@ import 'package:example/src/storybook/common/widgets/version.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/button.dart';
 import 'package:example/src/storybook/stories/chip.dart';
+import 'package:example/src/storybook/stories/circular_loader.dart';
 import 'package:example/src/storybook/stories/circular_progress.dart';
 import 'package:example/src/storybook/stories/icons.dart';
-import 'package:example/src/storybook/stories/loader.dart';
+import 'package:example/src/storybook/stories/linear_loader.dart';
+import 'package:example/src/storybook/stories/linear_progress.dart';
 import 'package:example/src/storybook/stories/tag.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
@@ -65,9 +66,11 @@ class StorybookPage extends StatelessWidget {
             AvatarStory(),
             ButtonStory(),
             ChipStory(),
+            CircularLoaderStory(),
             CircularProgressStory(),
             IconsStory(),
-            LoaderStory(),
+            LinearLoaderStory(),
+            LinearProgressStory(),
             TagStory(),
             TooltipStory(),
           ],
