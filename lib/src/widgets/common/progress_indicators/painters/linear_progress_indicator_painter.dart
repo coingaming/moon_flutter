@@ -104,6 +104,7 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
         oldPainter.valueColor != valueColor ||
         oldPainter.value != value ||
         oldPainter.animationValue != animationValue ||
+        oldPainter.borderRadiusValue != borderRadiusValue ||
         oldPainter.textDirection != textDirection;
   }
 }

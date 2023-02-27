@@ -6,6 +6,7 @@ import 'package:example/src/storybook/stories/circular_loader.dart';
 import 'package:example/src/storybook/stories/circular_progress.dart';
 import 'package:example/src/storybook/stories/icons.dart';
 import 'package:example/src/storybook/stories/linear_loader.dart';
+import 'package:example/src/storybook/stories/linear_progress.dart';
 import 'package:example/src/storybook/stories/tag.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,7 @@ class StorybookPage extends StatelessWidget {
             CircularProgressStory(),
             IconsStory(),
             LinearLoaderStory(),
+            LinearProgressStory(),
             TagStory(),
             TooltipStory(),
           ],

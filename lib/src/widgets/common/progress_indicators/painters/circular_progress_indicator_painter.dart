@@ -66,6 +66,7 @@ class MoonCircularProgressIndicatorPainter extends CustomPainter {
         oldPainter.tailValue != tailValue ||
         oldPainter.offsetValue != offsetValue ||
         oldPainter.rotationValue != rotationValue ||
+        oldPainter.strokeCap != strokeCap ||
         oldPainter.strokeWidth != strokeWidth;
   }
 }
