@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/coingaming/moon_flutter/compare/v0.8.0...v0.9.0) (2023-02-27)
+
+
+### Features
+
+* [MDS-412] Create LinearProgress and LinearLoader widgets ([#60](https://github.com/coingaming/moon_flutter/issues/60)) ([000de10](https://github.com/coingaming/moon_flutter/commit/000de10f4e6479e42a22e64e758fd26195b86292))
+
 ## [0.8.0](https://github.com/coingaming/moon_flutter/compare/v0.7.0...v0.8.0) (2023-02-23)
 
 
