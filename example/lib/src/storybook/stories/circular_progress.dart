@@ -45,6 +45,17 @@ class CircularProgressStory extends Story {
               initial: 0.75,
             );
 
+            final circularProgressStrokeCapKnob = context.knobs.options(
+              label: "strokeCap",
+              description: "CircularProgress stroke cap.",
+              initial: StrokeCap.round,
+              options: const [
+                Option(label: "round", value: StrokeCap.round),
+                Option(label: "square", value: StrokeCap.square),
+                Option(label: "butt", value: StrokeCap.butt),
+              ],
+            );
+
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,6 +66,7 @@ class CircularProgressStory extends Story {
                     color: color,
                     backgroundColor: backgroundColor,
                     circularProgressSize: circularProgressSizesKnob,
+                    strokeCap: circularProgressStrokeCapKnob,
                   ),
                   const SizedBox(height: 64),
                 ],

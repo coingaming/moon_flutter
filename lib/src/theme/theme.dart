@@ -8,7 +8,8 @@ import 'package:moon_design/src/theme/chip/chip_theme.dart';
 import 'package:moon_design/src/theme/circular_progress/circular_progress_theme.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
-import 'package:moon_design/src/theme/loader/loader_theme.dart';
+import 'package:moon_design/src/theme/loaders/circular_loader_theme.dart';
+import 'package:moon_design/src/theme/loaders/linear_loader_theme.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
@@ -23,10 +24,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.sizes,
     chipTheme: MoonChipTheme.sizes,
+    circularLoaderTheme: MoonCircularLoaderTheme.sizes,
     circularProgressTheme: MoonCircularProgressTheme.sizes,
     colors: MoonColors.light,
     effects: MoonEffects.light,
-    loaderTheme: MoonLoaderTheme.sizes,
+    linearLoaderTheme: MoonLinearLoaderTheme.sizes,
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
@@ -40,10 +42,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.sizes,
     chipTheme: MoonChipTheme.sizes,
+    circularLoaderTheme: MoonCircularLoaderTheme.sizes,
     circularProgressTheme: MoonCircularProgressTheme.sizes,
     colors: MoonColors.dark,
     effects: MoonEffects.dark,
-    loaderTheme: MoonLoaderTheme.sizes,
+    linearLoaderTheme: MoonLinearLoaderTheme.sizes,
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
@@ -64,6 +67,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System chip theming.
   final MoonChipTheme chipTheme;
 
+  /// Moon Design System linear loader theming.
+  final MoonCircularLoaderTheme circularLoaderTheme;
+
   /// Moon Design System circular progress theming.
   final MoonCircularProgressTheme circularProgressTheme;
 
@@ -73,8 +79,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System effects.
   final MoonEffects effects;
 
-  /// Moon Design System loader theming.
-  final MoonLoaderTheme loaderTheme;
+  /// Moon Design System linear loader theming.
+  final MoonLinearLoaderTheme linearLoaderTheme;
 
   /// Moon Design System opacities.
   final MoonOpacity opacity;
@@ -99,10 +105,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.borders,
     required this.buttonTheme,
     required this.chipTheme,
+    required this.circularLoaderTheme,
     required this.circularProgressTheme,
     required this.colors,
     required this.effects,
-    required this.loaderTheme,
+    required this.linearLoaderTheme,
     required this.opacity,
     required this.shadows,
     required this.sizes,
@@ -117,10 +124,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonBorders? borders,
     MoonButtonTheme? buttonTheme,
     MoonChipTheme? chipTheme,
+    MoonCircularLoaderTheme? circularLoaderTheme,
     MoonCircularProgressTheme? circularProgressTheme,
     MoonColors? colors,
     MoonEffects? effects,
-    MoonLoaderTheme? loaderTheme,
+    MoonLinearLoaderTheme? linearLoaderTheme,
     MoonOpacity? opacity,
     MoonShadows? shadows,
     MoonSizes? sizes,
@@ -133,10 +141,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       borders: borders ?? this.borders,
       buttonTheme: buttonTheme ?? this.buttonTheme,
       chipTheme: chipTheme ?? this.chipTheme,
+      circularLoaderTheme: circularLoaderTheme ?? this.circularLoaderTheme,
       circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
       colors: colors ?? this.colors,
       effects: effects ?? this.effects,
-      loaderTheme: loaderTheme ?? this.loaderTheme,
+      linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
       opacity: opacity ?? this.opacity,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
@@ -155,10 +164,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       borders: borders.lerp(other.borders, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       chipTheme: chipTheme.lerp(other.chipTheme, t),
+      circularLoaderTheme: circularLoaderTheme.lerp(other.circularLoaderTheme, t),
       circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
       colors: colors.lerp(other.colors, t),
       effects: effects.lerp(other.effects, t),
-      loaderTheme: loaderTheme.lerp(other.loaderTheme, t),
+      linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
       opacity: opacity.lerp(other.opacity, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
@@ -177,10 +187,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
       ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
+      ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoaderTheme))
       ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", colors))
       ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
-      ..add(DiagnosticsProperty<MoonLoaderTheme>("MoonLoaderTheme", loaderTheme))
+      ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
       ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
@@ -196,10 +207,11 @@ extension MoonThemeX on BuildContext {
   MoonBorders? get moonBorders => moonTheme?.borders;
   MoonButtonTheme? get moonButtonTheme => moonTheme?.buttonTheme;
   MoonChipTheme? get moonChipTheme => moonTheme?.chipTheme;
+  MoonCircularLoaderTheme? get moonCircularLoaderTheme => moonTheme?.circularLoaderTheme;
   MoonCircularProgressTheme? get moonCircularProgressTheme => moonTheme?.circularProgressTheme;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonEffects? get moonEffects => moonTheme?.effects;
-  MoonLoaderTheme? get moonLoaderTheme => moonTheme?.loaderTheme;
+  MoonLinearLoaderTheme? get moonLinearLoaderTheme => moonTheme?.linearLoaderTheme;
   MoonOpacity? get moonOpacity => moonTheme?.opacity;
   MoonShadows? get moonShadows => moonTheme?.shadows;
   MoonSizes? get moonSizes => moonTheme?.sizes;

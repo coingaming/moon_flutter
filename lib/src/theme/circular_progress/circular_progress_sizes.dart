@@ -8,49 +8,49 @@ import 'package:moon_design/src/theme/sizes.dart';
 @immutable
 class MoonCircularProgressSizes extends ThemeExtension<MoonCircularProgressSizes> with DiagnosticableTreeMixin {
   static final x2s = MoonCircularProgressSizes(
-    circularProgressSizeValue: MoonSizes.sizes.x2s,
-    circularProgressStrokeWidth: MoonSizes.sizes.x6s,
+    progressSizeValue: MoonSizes.sizes.x2s,
+    progressStrokeWidth: MoonSizes.sizes.x6s,
   );
 
   static final xs = MoonCircularProgressSizes(
-    circularProgressSizeValue: MoonSizes.sizes.xs,
-    circularProgressStrokeWidth: MoonSizes.sizes.x6s,
+    progressSizeValue: MoonSizes.sizes.xs,
+    progressStrokeWidth: MoonSizes.sizes.x6s,
   );
 
   static final sm = MoonCircularProgressSizes(
-    circularProgressSizeValue: MoonSizes.sizes.sm,
-    circularProgressStrokeWidth: MoonSizes.sizes.x6s,
+    progressSizeValue: MoonSizes.sizes.sm,
+    progressStrokeWidth: MoonSizes.sizes.x6s,
   );
 
   static final md = MoonCircularProgressSizes(
-    circularProgressSizeValue: MoonSizes.sizes.md,
-    circularProgressStrokeWidth: MoonSizes.sizes.x5s,
+    progressSizeValue: MoonSizes.sizes.md,
+    progressStrokeWidth: MoonSizes.sizes.x5s,
   );
 
   static final lg = MoonCircularProgressSizes(
-    circularProgressSizeValue: MoonSizes.sizes.lg,
-    circularProgressStrokeWidth: MoonSizes.sizes.x5s,
+    progressSizeValue: MoonSizes.sizes.lg,
+    progressStrokeWidth: MoonSizes.sizes.x5s,
   );
 
   /// Circular progress size value.
-  final double circularProgressSizeValue;
+  final double progressSizeValue;
 
   /// Circular progress stroke width.
-  final double circularProgressStrokeWidth;
+  final double progressStrokeWidth;
 
   const MoonCircularProgressSizes({
-    required this.circularProgressSizeValue,
-    required this.circularProgressStrokeWidth,
+    required this.progressSizeValue,
+    required this.progressStrokeWidth,
   });
 
   @override
   MoonCircularProgressSizes copyWith({
-    double? circularProgressSizeValue,
-    double? circularProgressStrokeWidth,
+    double? progressSizeValue,
+    double? progressStrokeWidth,
   }) {
     return MoonCircularProgressSizes(
-      circularProgressSizeValue: circularProgressSizeValue ?? this.circularProgressSizeValue,
-      circularProgressStrokeWidth: circularProgressStrokeWidth ?? this.circularProgressStrokeWidth,
+      progressSizeValue: progressSizeValue ?? this.progressSizeValue,
+      progressStrokeWidth: progressStrokeWidth ?? this.progressStrokeWidth,
     );
   }
 
@@ -59,8 +59,8 @@ class MoonCircularProgressSizes extends ThemeExtension<MoonCircularProgressSizes
     if (other is! MoonCircularProgressSizes) return this;
 
     return MoonCircularProgressSizes(
-      circularProgressSizeValue: lerpDouble(circularProgressSizeValue, other.circularProgressSizeValue, t)!,
-      circularProgressStrokeWidth: lerpDouble(circularProgressStrokeWidth, other.circularProgressStrokeWidth, t)!,
+      progressSizeValue: lerpDouble(progressSizeValue, other.progressSizeValue, t)!,
+      progressStrokeWidth: lerpDouble(progressStrokeWidth, other.progressStrokeWidth, t)!,
     );
   }
 
@@ -69,7 +69,7 @@ class MoonCircularProgressSizes extends ThemeExtension<MoonCircularProgressSizes
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonCircularProgressSizes"))
-      ..add(DoubleProperty("circularProgressSizeValue", circularProgressSizeValue))
-      ..add(DoubleProperty("circularProgressStrokeWidth", circularProgressStrokeWidth));
+      ..add(DoubleProperty("progressSizeValue", progressSizeValue))
+      ..add(DoubleProperty("progressStrokeWidth", progressStrokeWidth));
   }
 }

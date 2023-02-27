@@ -7,7 +7,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/animated_icon_theme.dart';
-import 'package:moon_design/src/widgets/base_control.dart';
+import 'package:moon_design/src/widgets/common/base_control.dart';
 
 enum MoonChipSize {
   sm,
