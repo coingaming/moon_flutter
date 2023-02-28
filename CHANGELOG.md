@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/coingaming/moon_flutter/compare/v0.9.0...v0.9.1) (2023-02-28)
+
+
+### Bug Fixes
+
+* [MDS-407] Fix Chip not handling some colors with opacity properly ([#62](https://github.com/coingaming/moon_flutter/issues/62)) ([a62ba9b](https://github.com/coingaming/moon_flutter/commit/a62ba9b17bb9699e532ed525d9de565bf224a827))
+
 ## [0.9.0](https://github.com/coingaming/moon_flutter/compare/v0.8.0...v0.9.0) (2023-02-27)
 
 
