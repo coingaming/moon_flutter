@@ -14,7 +14,7 @@ enum MoonLinearProgressSize {
 }
 
 class MoonLinearProgress extends StatelessWidget {
-  final MoonLinearProgressSize? loaderSize;
+  final MoonLinearProgressSize? progressSize;
   final double value;
   final double? height;
   final Color? color;
@@ -23,7 +23,7 @@ class MoonLinearProgress extends StatelessWidget {
 
   const MoonLinearProgress({
     super.key,
-    this.loaderSize,
+    this.progressSize,
     required this.value,
     this.height,
     this.color,
@@ -31,7 +31,7 @@ class MoonLinearProgress extends StatelessWidget {
     this.borderRadiusValue,
   });
 
-  MoonLinearProgressSizes _getMoonLoaderSize(BuildContext context, MoonLinearProgressSize? moonProgressSize) {
+  MoonLinearProgressSizes _getMoonProgressSize(BuildContext context, MoonLinearProgressSize? moonProgressSize) {
     switch (moonProgressSize) {
       case MoonLinearProgressSize.x6s:
         return context.moonTheme?.linearProgressTheme.x6s ?? MoonLinearProgressSizes.x6s;
@@ -51,7 +51,7 @@ class MoonLinearProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonLinearProgressSizes effectiveProgressSize = _getMoonLoaderSize(context, loaderSize);
+    final MoonLinearProgressSizes effectiveProgressSize = _getMoonProgressSize(context, progressSize);
     final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveProgressSize.borderRadiusValue;
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
     final Color effectiveColor = color ?? context.moonColors?.hit ?? MoonColors.light.hit;
