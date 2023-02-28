@@ -267,10 +267,8 @@ class MoonChip extends StatelessWidget {
           curve: effectiveHoverEffectCurve,
           width: width,
           height: effectiveHeight,
-          //padding: correctedPadding,
           constraints: BoxConstraints(minWidth: effectiveHeight),
           decoration: ShapeDecoration(
-            //color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
             shape: SmoothRectangleBorder(
               side: BorderSide(
                 color: effectiveBorderColor,
