@@ -8,7 +8,7 @@ class LinearProgressStory extends Story {
       : super(
           name: "Progress/LinearProgress",
           builder: (context) {
-            final loaderSizesKnob = context.knobs.options(
+            final progressSizesKnob = context.knobs.options(
               label: "MoonLinearProgressSize",
               description: "LinearProgress size variants.",
               initial: MoonLinearProgressSize.x4s,
@@ -21,23 +21,23 @@ class LinearProgressStory extends Story {
               ],
             );
 
-            final loaderColorKnob = context.knobs.options(
+            final progressColorKnob = context.knobs.options(
               label: "color",
               description: "MoonColors variants for LinearProgress color.",
               initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final color = colorTable(context)[loaderColorKnob];
+            final color = colorTable(context)[progressColorKnob];
 
-            final loaderBackgroundColorKnob = context.knobs.options(
+            final progressBackgroundColorKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for LinearProgress background.",
               initial: 6, // trunks
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[loaderBackgroundColorKnob];
+            final backgroundColor = colorTable(context)[progressBackgroundColorKnob];
 
             final borderRadiusValueKnob = context.knobs.sliderInt(
               label: "bordeRadiusValue",
@@ -59,7 +59,7 @@ class LinearProgressStory extends Story {
                   const SizedBox(height: 64),
                   MoonLinearProgress(
                     value: linearProgressValueKnob,
-                    loaderSize: loaderSizesKnob,
+                    progressSize: progressSizesKnob,
                     color: color,
                     backgroundColor: backgroundColor,
                     borderRadiusValue: borderRadiusValueKnob.toDouble(),
