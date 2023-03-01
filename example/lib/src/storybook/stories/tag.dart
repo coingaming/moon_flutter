@@ -75,11 +75,11 @@ class TagStory extends Story {
                       tagSize: tagSizesKnob,
                       isUpperCase: setUpperCase,
                       backgroundColor: color,
-                      leftIcon: showLeftIconKnob ? const Icon(MoonIcons.close_small16) : null,
+                      leftIcon: showLeftIconKnob ? const Icon(MoonIconsControls.close_small16) : null,
                       label: showLabelKnob
                           ? Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob)
                           : null,
-                      rightIcon: showRightIconKnob ? const Icon(MoonIcons.close_small16) : null,
+                      rightIcon: showRightIconKnob ? const Icon(MoonIconsControls.close_small16) : null,
                     ),
                     const SizedBox(height: 64),
                   ],

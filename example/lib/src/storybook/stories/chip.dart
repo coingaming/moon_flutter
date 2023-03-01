@@ -72,7 +72,8 @@ class ChipStory extends Story {
               description: "Show widget in the rightIcon slot.",
             );
 
-            final resolvedIconVariant = chipSizesKnob == MoonChipSize.md ? MoonIcons.frame24 : MoonIcons.frame16;
+            final resolvedIconVariant =
+                chipSizesKnob == MoonChipSize.md ? MoonIconsOther.frame24 : MoonIconsOther.frame16;
 
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
