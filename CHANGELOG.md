@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.2](https://github.com/coingaming/moon_flutter/compare/v0.9.1...v0.9.2) (2023-03-01)
+
+
+### Bug Fixes
+
+* [MDS-411] Update icons and extract them to separate thematic fonts ([#64](https://github.com/coingaming/moon_flutter/issues/64)) ([39f7063](https://github.com/coingaming/moon_flutter/commit/39f7063d86ff786936a5bb31806ba86990720bfc))
+
 ## [0.9.1](https://github.com/coingaming/moon_flutter/compare/v0.9.0...v0.9.1) (2023-02-28)
 
 
