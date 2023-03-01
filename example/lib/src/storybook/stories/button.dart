@@ -94,17 +94,17 @@ class ButtonStory extends Story {
             IconData resolveIconVariant(MoonButtonSize buttonSize) {
               switch (buttonSize) {
                 case MoonButtonSize.xs:
-                  return MoonIcons.frame16;
+                  return MoonIconsOther.frame16;
                 case MoonButtonSize.sm:
-                  return MoonIcons.frame24;
+                  return MoonIconsOther.frame24;
                 case MoonButtonSize.md:
-                  return MoonIcons.frame24;
+                  return MoonIconsOther.frame24;
                 case MoonButtonSize.lg:
-                  return MoonIcons.frame24;
+                  return MoonIconsOther.frame24;
                 case MoonButtonSize.xl:
-                  return MoonIcons.frame24;
+                  return MoonIconsOther.frame24;
                 default:
-                  return MoonIcons.frame24;
+                  return MoonIconsOther.frame24;
               }
             }
 
