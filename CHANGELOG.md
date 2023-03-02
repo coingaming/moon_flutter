@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.3](https://github.com/coingaming/moon_flutter/compare/v0.9.2...v0.9.3) (2023-03-02)
+
+
+### Bug Fixes
+
+* [MDS-410] Button fullWidth property bugs out in some conditions ([#66](https://github.com/coingaming/moon_flutter/issues/66)) ([52ed9b7](https://github.com/coingaming/moon_flutter/commit/52ed9b74d9f4d4aa38ce9fe8fd39d8f8218025d1))
+
 ## [0.9.2](https://github.com/coingaming/moon_flutter/compare/v0.9.1...v0.9.2) (2023-03-01)
 
 
