@@ -47,8 +47,8 @@ export 'package:moon_design/src/widgets/common/progress_indicators/circular_prog
 export 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
 export 'package:moon_design/src/widgets/effects/focus_effect.dart';
 export 'package:moon_design/src/widgets/effects/pulse_effect.dart';
-export 'package:moon_design/src/widgets/loader/circular_loader.dart';
-export 'package:moon_design/src/widgets/loader/linear_loader.dart';
+export 'package:moon_design/src/widgets/loaders/circular_loader.dart';
+export 'package:moon_design/src/widgets/loaders/linear_loader.dart';
 export 'package:moon_design/src/widgets/progress/circular_progress.dart';
 export 'package:moon_design/src/widgets/progress/linear_progress.dart';
 export 'package:moon_design/src/widgets/tag/tag.dart';

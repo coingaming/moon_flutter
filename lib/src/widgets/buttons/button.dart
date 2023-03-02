@@ -404,7 +404,6 @@ class MoonButton extends StatelessWidget {
           curve: effectiveHoverEffectCurve,
           width: width,
           height: effectiveHeight,
-          padding: correctedPadding,
           constraints: BoxConstraints(minWidth: effectiveHeight),
           decoration: ShapeDecoration(
             color: canAnimateHover ? hoverColor : backgroundColor,
@@ -434,59 +433,61 @@ class MoonButton extends StatelessWidget {
               ),
             ),
           ),
-          child: AnimatedIconTheme(
-            duration: effectiveHoverEffectDuration,
-            curve: effectiveHoverEffectCurve,
-            color: effectiveTextColor,
-            size: effectiveMoonButtonSize.iconSizeValue,
-            child: AnimatedDefaultTextStyle(
-              style: TextStyle(color: effectiveTextColor, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
+          child: Padding(
+            padding: isFullWidth ? EdgeInsets.zero : correctedPadding,
+            child: AnimatedIconTheme(
               duration: effectiveHoverEffectDuration,
               curve: effectiveHoverEffectCurve,
-              child: isFullWidth
-                  ? Stack(
-                      fit: StackFit.expand,
-                      alignment: Alignment.center,
-                      children: [
-                        if (leftIcon != null)
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
+              color: effectiveTextColor,
+              size: effectiveMoonButtonSize.iconSizeValue,
+              child: AnimatedDefaultTextStyle(
+                style: TextStyle(color: effectiveTextColor, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
+                duration: effectiveHoverEffectDuration,
+                curve: effectiveHoverEffectCurve,
+                child: isFullWidth
+                    ? Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          if (leftIcon != null)
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: effectiveGap),
+                              alignment: Directionality.of(context) == TextDirection.ltr
+                                  ? Alignment.centerLeft
+                                  : Alignment.centerRight,
+                              child: leftIcon,
+                            ),
+                          if (label != null)
+                            Align(
+                              child: label,
+                            ),
+                          if (rightIcon != null)
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: effectiveGap),
+                              alignment: Directionality.of(context) == TextDirection.ltr
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              child: rightIcon,
+                            ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (leftIcon != null)
+                            Padding(
                               padding: EdgeInsets.symmetric(horizontal: effectiveGap),
                               child: leftIcon,
                             ),
-                          ),
-                        if (label != null)
-                          Align(
-                            child: label,
-                          ),
-                        if (rightIcon != null)
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
+                          if (label != null) label!,
+                          if (rightIcon != null)
+                            Padding(
                               padding: EdgeInsets.symmetric(horizontal: effectiveGap),
                               child: rightIcon,
                             ),
-                          ),
-                      ],
-                    )
-                  : Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (leftIcon != null)
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                            child: leftIcon,
-                          ),
-                        if (label != null) label!,
-                        if (rightIcon != null)
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                            child: rightIcon,
-                          ),
-                      ],
-                    ),
+                        ],
+                      ),
+              ),
             ),
           ),
         );
