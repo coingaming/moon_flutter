@@ -84,24 +84,28 @@ class _TooltipContentState extends State<TooltipContent> {
       onTap: widget.onTap,
       child: DefaultTextStyle(
         style: widget.textStyle,
-        child: Container(
-          key: _containerKey,
-          padding: widget.contentPadding,
-          decoration: ShapeDecoration(
-            color: widget.backgroundColor,
-            shadows: widget.shadows,
-            shape: _TooltipContentShape(
-              tooltipPosition: widget.tooltipPosition,
-              arrowOffset: widget.arrowOffset,
-              arrowBaseWidth: widget.arrowBaseWidth,
-              arrowLength: widget.arrowLength,
-              arrowTipDistance: widget.arrowTipDistance,
-              borderColor: widget.borderColor,
-              borderRadius: widget.borderRadius,
-              borderWidth: widget.borderWidth,
-            ),
+        child: CustomPaint(
+          //painter: ,
+          child: Container(
+            color: Colors.blue,
+            key: _containerKey,
+            padding: widget.contentPadding,
+            /* decoration: ShapeDecoration(
+              color: widget.backgroundColor,
+              shadows: widget.shadows,
+              shape: _TooltipContentShape(
+                tooltipPosition: widget.tooltipPosition,
+                arrowOffset: widget.arrowOffset,
+                arrowBaseWidth: widget.arrowBaseWidth,
+                arrowLength: widget.arrowLength,
+                arrowTipDistance: widget.arrowTipDistance,
+                borderColor: widget.borderColor,
+                borderRadius: widget.borderRadius,
+                borderWidth: widget.borderWidth,
+              ),
+            ), */
+            child: widget.child,
           ),
-          child: widget.child,
         ),
       ),
     );
@@ -224,6 +228,43 @@ class _TooltipContentShape extends ShapeBorder {
           );
 
       case MoonTooltipPosition.top:
+        return getLeftTopPath(rect)
+          ..lineTo(rect.right, rect.bottom - bottomRightRadius)
+          ..arcToPoint(
+            Offset(rect.right - bottomRightRadius, rect.bottom),
+            radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
+          )
+          ..lineTo(
+            min(
+              max(arrowOffset.dx + arrowBaseWidth / 2, rect.left + bottomLeftRadius + arrowBaseWidth),
+              rect.right - bottomRightRadius,
+            ),
+            rect.bottom,
+          )
+
+          // up to arrow tip   \
+          ..lineTo(arrowOffset.dx, rect.bottom + arrowLength)
+
+          //  down /
+          ..lineTo(
+            max(
+              min(arrowOffset.dx - arrowBaseWidth / 2, rect.right - bottomRightRadius - arrowBaseWidth),
+              rect.left + bottomLeftRadius,
+            ),
+            rect.bottom,
+          )
+          ..lineTo(rect.left + bottomLeftRadius, rect.bottom)
+          ..arcToPoint(
+            Offset(rect.left, rect.bottom - bottomLeftRadius),
+            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
+          )
+          ..lineTo(rect.left, rect.top + topLeftRadius)
+          ..arcToPoint(
+            Offset(rect.left + topLeftRadius, rect.top),
+            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
+          );
+
+      case MoonTooltipPosition.topLeft:
         return getLeftTopPath(rect)
           ..lineTo(rect.right, rect.bottom - bottomRightRadius)
           ..arcToPoint(

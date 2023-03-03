@@ -23,6 +23,10 @@ class TooltipStory extends Story {
                 Option(label: "bottom", value: MoonTooltipPosition.bottom),
                 Option(label: "left", value: MoonTooltipPosition.left),
                 Option(label: "right", value: MoonTooltipPosition.right),
+                Option(label: "topLeft", value: MoonTooltipPosition.topLeft),
+                Option(label: "topRight", value: MoonTooltipPosition.topRight),
+                Option(label: "bottomLeft", value: MoonTooltipPosition.bottomLeft),
+                Option(label: "bottomRight", value: MoonTooltipPosition.bottomRight),
               ],
             );
 
@@ -63,11 +67,13 @@ class TooltipStory extends Story {
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 64),
                     const TextDivider(text: "Customisable tooltip"),
                     const SizedBox(height: 32),
                     MoonTooltip(
+                      arrowBaseWidth: 32,
                       show: showTooltipKnob,
                       tooltipPosition: tooltipPositionsKnob,
                       hasArrow: showArrowKnob,
@@ -77,7 +83,7 @@ class TooltipStory extends Story {
                       child: MoonButton(
                         backgroundColor: context.moonColors!.bulma,
                         onTap: () {},
-                        label: const Text("MoonButton"),
+                        label: const Text("M"),
                       ),
                     ),
                     const SizedBox(height: 40),

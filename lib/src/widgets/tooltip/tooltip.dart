@@ -8,7 +8,18 @@ import 'package:moon_design/src/widgets/tooltip/tooltip_content.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_content_transition.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_position_manager.dart';
 
-enum MoonTooltipPosition { top, bottom, left, right, horizontal, vertical }
+enum MoonTooltipPosition {
+  top,
+  topLeft,
+  topRight,
+  bottom,
+  bottomLeft,
+  bottomRight,
+  left,
+  right,
+  horizontal,
+  vertical,
+}
 
 class MoonTooltip extends StatefulWidget {
   /// Sets a handler for listening to a `tap` event on the tooltip.
@@ -95,7 +106,7 @@ class MoonTooltip extends StatefulWidget {
     required this.show,
     this.hasArrow = true,
     this.hideOnTooltipTap = true,
-    this.tooltipPosition = MoonTooltipPosition.top,
+    this.tooltipPosition = MoonTooltipPosition.vertical,
     this.minWidth,
     this.maxWidth,
     this.minHeight,
@@ -287,10 +298,10 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
   }
 
   OverlayEntry _buildOverlay({bool buildHidding = false}) {
-    MoonTooltipPosition direction = widget.tooltipPosition;
+    MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
-    if (direction == MoonTooltipPosition.horizontal || direction == MoonTooltipPosition.vertical) {
-      // Compute real direction based on target position
+    if (tooltipPosition == MoonTooltipPosition.horizontal || tooltipPosition == MoonTooltipPosition.vertical) {
+      // Compute real tooltipPosition based on target position
       final targetRenderBox = context.findRenderObject() as RenderBox?;
       final overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
 
@@ -298,7 +309,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
           targetRenderBox?.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox) ??
               Offset.zero;
 
-      direction = (direction == MoonTooltipPosition.vertical)
+      tooltipPosition = (tooltipPosition == MoonTooltipPosition.vertical)
           ? (targetGlobalCenter.dy < overlayRenderBox!.size.center(Offset.zero).dy
               ? MoonTooltipPosition.bottom
               : MoonTooltipPosition.top)
@@ -347,7 +358,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
         ];
 
     return OverlayEntry(
-      builder: (overlayContext) {
+      builder: (_) {
         return TooltipPositionManager(
           key: _positionManagerKey,
           context: context,
@@ -357,13 +368,12 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
           minHeight: widget.minHeight,
           maxWidth: widget.maxWidth,
           minWidth: widget.minWidth,
-          tooltipPosition: direction,
+          tooltipPosition: tooltipPosition,
           tooltipMargin: widget.tooltipMargin,
           link: layerLink,
           child: TooltipContentTransition(
             key: _transitionKey,
             hide: buildHidding,
-            tooltipPosition: direction,
             duration: effectiveTransitionDuration,
             curve: effectiveTransitionCurve,
             onTransitionFinished: (status) {
@@ -372,7 +382,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
               }
             },
             child: TooltipContent(
-              tooltipPosition: direction,
+              tooltipPosition: tooltipPosition,
               borderRadius: effectiveBorderRadius,
               arrowBaseWidth: effectiveArrowBaseWidth,
               arrowLength: effectiveArrowLength,

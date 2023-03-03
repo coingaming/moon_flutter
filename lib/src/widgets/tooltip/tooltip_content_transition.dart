@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
-
 class TooltipContentTransition extends StatefulWidget {
   final void Function(AnimationStatus)? onTransitionFinished;
-  final MoonTooltipPosition tooltipPosition;
   final bool hide;
   final Duration duration;
   final Curve curve;
@@ -13,7 +10,6 @@ class TooltipContentTransition extends StatefulWidget {
   const TooltipContentTransition({
     super.key,
     this.onTransitionFinished,
-    required this.tooltipPosition,
     this.hide = false,
     required this.duration,
     required this.curve,

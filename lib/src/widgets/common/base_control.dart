@@ -8,7 +8,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/effects/pulse_effect.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
+import 'package:moon_design/src/widgets/tooltip/tooltip2.dart';
 
 typedef MoonBaseControlBuilder = Widget Function(
   BuildContext context,
@@ -286,10 +286,6 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     }
 
     _effectiveFocusNode.canRequestFocus = _isEnabled;
-
-    /* if (_isPressed && mounted) {
-      setState(() => _isPressed = false);
-    } */
   }
 
   @override
@@ -386,13 +382,13 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
               onVerticalDragEnd: _handleVerticalDragEnd,
               child: FocusableActionDetector(
                 enabled: _isEnabled && widget.isFocusable,
+                actions: _actions,
+                mouseCursor: _cursor,
                 focusNode: _effectiveFocusNode,
                 autofocus: _isEnabled && widget.autofocus,
-                mouseCursor: _cursor,
-                onShowHoverHighlight: _handleHover,
-                onShowFocusHighlight: _handleFocus,
                 onFocusChange: _handleFocusChange,
-                actions: _actions,
+                onShowFocusHighlight: _handleFocus,
+                onShowHoverHighlight: _handleHover,
                 child: TouchTargetPadding(
                   minSize: widget.ensureMinimalTouchTargetSize
                       ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)

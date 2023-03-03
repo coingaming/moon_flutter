@@ -40,9 +40,98 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
 
   Size? _contentSize;
 
-  @override
-  void initState() {
-    super.initState();
+  Offset getPositionForChild(
+    Size? childSize,
+    RenderBox overlay,
+    Offset globalTipTarget,
+  ) {
+    if (childSize == null) {
+      return Offset.zero;
+    }
+    Offset contentOffset;
+
+    final double halfH = childSize.height / 2;
+    final double halfW = childSize.width / 2;
+    final Offset centerPosition = Offset(-halfW, -halfH);
+    final Offset topLeftPosition = /* Offset(-childSize.width, -halfH) */ Offset.zero;
+
+    if (widget.tooltipPosition == MoonTooltipPosition.top) {
+      final double yOffset = -halfH - widget.arrowLength - widget.arrowTipDistance;
+      contentOffset = centerPosition.translate(0, yOffset);
+      final maxXOffset = overlay.size.width;
+      final globalContentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
+
+      if (globalContentRightBoundingOffset > maxXOffset) {
+        contentOffset = contentOffset.translate(
+          maxXOffset - globalContentRightBoundingOffset - widget.tooltipMargin,
+          0,
+        );
+      }
+
+      const minXOffset = 0;
+
+      final globalContentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
+
+      if (globalContentLeftBoundingOffset < minXOffset) {
+        contentOffset = contentOffset.translate(
+          minXOffset - globalContentLeftBoundingOffset + widget.tooltipMargin,
+          0,
+        );
+      }
+    } else if (widget.tooltipPosition == MoonTooltipPosition.topLeft) {
+      final double yOffset = -halfH - widget.arrowLength - widget.arrowTipDistance;
+      contentOffset = topLeftPosition.translate(halfW, yOffset);
+      final maxXOffset = overlay.size.width;
+      final globalContentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
+
+      if (globalContentRightBoundingOffset > maxXOffset) {
+        contentOffset = contentOffset.translate(
+          maxXOffset - globalContentRightBoundingOffset - widget.tooltipMargin,
+          0,
+        );
+      }
+
+      const minXOffset = 0;
+
+      final globalContentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
+
+      if (globalContentLeftBoundingOffset < minXOffset) {
+        contentOffset = contentOffset.translate(
+          minXOffset - globalContentLeftBoundingOffset + widget.tooltipMargin,
+          0,
+        );
+      }
+    } else if (widget.tooltipPosition == MoonTooltipPosition.bottom) {
+      final double yOffset = halfH + widget.arrowLength + widget.arrowTipDistance;
+      contentOffset = centerPosition.translate(0, yOffset);
+    } else if (widget.tooltipPosition == MoonTooltipPosition.right) {
+      final double xOffset = halfW + widget.arrowLength + widget.arrowTipDistance;
+      contentOffset = centerPosition.translate(xOffset, 0);
+      final maxXOffset = overlay.size.width;
+      final globalContentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
+
+      if (globalContentRightBoundingOffset > maxXOffset) {
+        contentOffset = contentOffset.translate(
+          maxXOffset - globalContentRightBoundingOffset - widget.tooltipMargin,
+          0,
+        );
+      }
+    } else if (widget.tooltipPosition == MoonTooltipPosition.left) {
+      final double xOffset = -halfW - widget.arrowLength - widget.arrowTipDistance;
+      contentOffset = centerPosition.translate(xOffset, 0);
+      const minXOffset = 0;
+      final globalContentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
+
+      if (globalContentLeftBoundingOffset < minXOffset) {
+        contentOffset = contentOffset.translate(
+          minXOffset - globalContentLeftBoundingOffset + widget.tooltipMargin,
+          0,
+        );
+      }
+    } else {
+      contentOffset = centerPosition;
+    }
+    return contentOffset;
   }
 
   @override
@@ -69,17 +158,23 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
 
     late Offset tipTarget;
 
-    const Offset zeroOffset = Offset.zero;
-
     try {
       if (widget.tooltipPosition == MoonTooltipPosition.top) {
-        tipTarget = renderBox!.size.topCenter(zeroOffset);
+        tipTarget = renderBox!.size.topCenter(Offset.zero);
+      } else if (widget.tooltipPosition == MoonTooltipPosition.topLeft) {
+        tipTarget = renderBox!.size.topCenter(Offset.zero);
+      } else if (widget.tooltipPosition == MoonTooltipPosition.topRight) {
+        tipTarget = renderBox!.size.topCenter(Offset.zero);
       } else if (widget.tooltipPosition == MoonTooltipPosition.bottom) {
-        tipTarget = renderBox!.size.bottomCenter(zeroOffset);
+        tipTarget = renderBox!.size.bottomCenter(Offset.zero);
+      } else if (widget.tooltipPosition == MoonTooltipPosition.bottomLeft) {
+        tipTarget = renderBox!.size.bottomCenter(Offset.zero);
+      } else if (widget.tooltipPosition == MoonTooltipPosition.bottomRight) {
+        tipTarget = renderBox!.size.bottomCenter(Offset.zero);
       } else if (widget.tooltipPosition == MoonTooltipPosition.right) {
-        tipTarget = renderBox!.size.centerRight(zeroOffset);
+        tipTarget = renderBox!.size.centerRight(Offset.zero);
       } else if (widget.tooltipPosition == MoonTooltipPosition.left) {
-        tipTarget = renderBox!.size.centerLeft(zeroOffset);
+        tipTarget = renderBox!.size.centerLeft(Offset.zero);
       }
     } catch (e) {
       return Container();
@@ -102,18 +197,7 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
         tipTarget: globalTipTarget!,
         tooltipMargin: widget.tooltipMargin,
       ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        fit: StackFit.passthrough,
-        children: <Widget>[
-          Positioned(
-            child: Container(
-              key: _contentKey,
-              child: widget.child,
-            ),
-          ),
-        ],
-      ),
+      child: widget.child,
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -132,91 +216,13 @@ class _TooltipPositionManagerState extends State<TooltipPositionManager> {
 
     final offset = getPositionForChild(_contentSize, overlay, globalTipTarget);
 
-    return Stack(
-      children: <Widget>[
-        CompositedTransformFollower(
-          link: widget.link,
-          showWhenUnlinked: false,
-          offset: tipTarget.translate(offset.dx, offset.dy), //
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: <Widget>[
-              Positioned(
-                child: Transform.translate(
-                  offset: Offset.zero,
-                  child: Container(
-                    alignment: AlignmentDirectional.bottomStart,
-                    child: content,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+    return CompositedTransformFollower(
+      link: widget.link,
+      showWhenUnlinked: false,
 
-  Offset getPositionForChild(
-    Size? childSize,
-    RenderBox overlay,
-    Offset globalTipTarget,
-  ) {
-    if (childSize == null) {
-      return Offset.zero;
-    }
-    Offset contentOffset;
-    final double halfH = childSize.height / 2;
-    final double halfW = childSize.width / 2;
-    final Offset centerPosition = Offset(-halfW, -halfH);
-    if (widget.tooltipPosition == MoonTooltipPosition.top) {
-      final double yOffset = -halfH - widget.arrowLength - widget.arrowTipDistance;
-      contentOffset = centerPosition.translate(0, yOffset);
-      final maxXOffset = overlay.size.width;
-      final globalcontentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
-      if (globalcontentRightBoundingOffset > maxXOffset) {
-        contentOffset = contentOffset.translate(
-          maxXOffset - globalcontentRightBoundingOffset - widget.tooltipMargin,
-          0,
-        );
-      }
-      const minXOffset = 0;
-      final globalcontentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
-      if (globalcontentLeftBoundingOffset < minXOffset) {
-        contentOffset = contentOffset.translate(
-          minXOffset - globalcontentLeftBoundingOffset + widget.tooltipMargin,
-          0,
-        );
-      }
-    } else if (widget.tooltipPosition == MoonTooltipPosition.bottom) {
-      final double yOffset = halfH + widget.arrowLength + widget.arrowTipDistance;
-      contentOffset = centerPosition.translate(0, yOffset);
-    } else if (widget.tooltipPosition == MoonTooltipPosition.right) {
-      final double xOffset = halfW + widget.arrowLength + widget.arrowTipDistance;
-      contentOffset = centerPosition.translate(xOffset, 0);
-      final maxXOffset = overlay.size.width;
-      final globalcontentRightBoundingOffset = globalTipTarget.dx + contentOffset.dx + childSize.width;
-      if (globalcontentRightBoundingOffset > maxXOffset) {
-        contentOffset = contentOffset.translate(
-          maxXOffset - globalcontentRightBoundingOffset - widget.tooltipMargin,
-          0,
-        );
-      }
-    } else if (widget.tooltipPosition == MoonTooltipPosition.left) {
-      final double xOffset = -halfW - widget.arrowLength - widget.arrowTipDistance;
-      contentOffset = centerPosition.translate(xOffset, 0);
-      const minXOffset = 0;
-      final globalcontentLeftBoundingOffset = globalTipTarget.dx + contentOffset.dx;
-      if (globalcontentLeftBoundingOffset < minXOffset) {
-        contentOffset = contentOffset.translate(
-          minXOffset - globalcontentLeftBoundingOffset + widget.tooltipMargin,
-          0,
-        );
-      }
-    } else {
-      contentOffset = centerPosition;
-    }
-    return contentOffset;
+      //offset: tipTarget.translate(offset.dx, offset.dy),
+      child: content,
+    );
   }
 }
 
