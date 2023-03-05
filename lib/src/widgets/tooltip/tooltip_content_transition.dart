@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TooltipContentTransition extends StatefulWidget {
   final void Function(AnimationStatus)? onTransitionFinished;
-  final bool hide;
+  final bool show;
   final Duration duration;
   final Curve curve;
   final Widget child;
@@ -10,7 +10,7 @@ class TooltipContentTransition extends StatefulWidget {
   const TooltipContentTransition({
     super.key,
     this.onTransitionFinished,
-    this.hide = false,
+    this.show = false,
     required this.duration,
     required this.curve,
     required this.child,
@@ -22,36 +22,30 @@ class TooltipContentTransition extends StatefulWidget {
 
 class TooltipContentTransitionState extends State<TooltipContentTransition> with SingleTickerProviderStateMixin {
   late AnimationController animationController = AnimationController(
-    vsync: this,
     duration: widget.duration,
+    vsync: this,
+    value: widget.show ? 0.0 : 1.0,
   );
 
   late CurvedAnimation curvedAnimation = CurvedAnimation(
-    curve: Curves.easeInOutCubic,
     parent: animationController,
+    curve: widget.curve,
   );
 
   @override
   void initState() {
     super.initState();
 
-    if (!widget.hide) {
+    if (widget.show) {
       animationController.forward();
     } else {
       animationController.reverse();
     }
-
-    animationController.addStatusListener((status) {
-      if ((status == AnimationStatus.completed || status == AnimationStatus.dismissed) &&
-          widget.onTransitionFinished != null) {
-        widget.onTransitionFinished!(status);
-      }
-    });
   }
 
   @override
   void didUpdateWidget(TooltipContentTransition oldWidget) {
-    if (widget.hide) {
+    if (!widget.show) {
       animationController.reverse();
     }
 

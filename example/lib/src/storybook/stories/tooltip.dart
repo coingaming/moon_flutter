@@ -27,6 +27,8 @@ class TooltipStory extends Story {
                 Option(label: "topRight", value: MoonTooltipPosition.topRight),
                 Option(label: "bottomLeft", value: MoonTooltipPosition.bottomLeft),
                 Option(label: "bottomRight", value: MoonTooltipPosition.bottomRight),
+                Option(label: "vertical", value: MoonTooltipPosition.vertical),
+                Option(label: "horizontal", value: MoonTooltipPosition.horizontal),
               ],
             );
 
@@ -66,14 +68,14 @@ class TooltipStory extends Story {
               textDirection: /* setRtlModeKnob ? TextDirection.rtl :  */ TextDirection.ltr,
               child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 64),
+                    /* const SizedBox(height: 64),
                     const TextDivider(text: "Customisable tooltip"),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 32), */
                     Padding(
-                      padding: EdgeInsets.only(right: 50),
+                      padding: EdgeInsets.only(left: 60),
                       child: MoonTooltip(
                         arrowBaseWidth: 10,
                         show: showTooltipKnob,

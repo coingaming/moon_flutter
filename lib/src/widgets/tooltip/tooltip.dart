@@ -373,7 +373,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
           link: layerLink,
           child: TooltipContentTransition(
             key: _transitionKey,
-            hide: buildHidding,
+            show: buildHidding,
             duration: effectiveTransitionDuration,
             curve: effectiveTransitionCurve,
             onTransitionFinished: (status) {
