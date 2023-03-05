@@ -130,7 +130,7 @@ class ButtonStory extends Story {
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
                         leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
-                        label: showLabelKnob ? Text(customLabelTextKnob) : null,
+                        label: showLabelKnob ? Container(color: Colors.red, child: Text(customLabelTextKnob)) : null,
                         rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 32),

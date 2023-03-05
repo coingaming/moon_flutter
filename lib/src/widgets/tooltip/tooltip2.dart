@@ -1,16 +1,12 @@
 import 'dart:developer' as dev;
 import 'dart:math';
 
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/widgets/tooltip/obfuscate_tooltip_item.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip_content.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip_content_transition.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip_position_manager.dart';
+import 'package:moon_design/src/widgets/tooltip/tooltip_content_shape.dart';
 
 enum MoonTooltipPosition {
   top,
@@ -21,8 +17,8 @@ enum MoonTooltipPosition {
   bottomRight,
   left,
   right,
-  horizontal,
   vertical,
+  horizontal,
 }
 
 class MoonTooltip extends StatefulWidget {
@@ -36,12 +32,10 @@ class MoonTooltip extends StatefulWidget {
   final bool hasArrow;
 
   /// Whether the tooltip should be dismissed whenever a user taps on it. For more control when to dismiss the tooltip
-  /// rely on the [show] property and [onTooltipTap] handler.
-  /// Defaults to [true].
+  /// rely on the [show] property and [onTooltipTap] handler. Defaults to [true].
   final bool hideOnTooltipTap;
 
-  /// Sets the tooltip position relative to the target.
-  /// Defaults to [MoonTooltipPosition.top]
+  /// Sets the tooltip position relative to the target. Defaults to [MoonTooltipPosition.vertical]
   final MoonTooltipPosition tooltipPosition;
 
   /// Optional size constraint. If a constraint is not set the size will adjust to the content.
@@ -341,23 +335,6 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
   OverlayEntry _createOverlayEntry() {
     MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
-    if (tooltipPosition == MoonTooltipPosition.horizontal || tooltipPosition == MoonTooltipPosition.vertical) {
-      // Compute real tooltipPosition based on target position
-      final targetRenderBox = context.findRenderObject() as RenderBox?;
-      final overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
-
-      final targetGlobalCenter =
-          targetRenderBox?.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox) ??
-              Offset.zero;
-
-      tooltipPosition = (tooltipPosition == MoonTooltipPosition.vertical)
-          ? (targetGlobalCenter.dy < overlayRenderBox!.size.center(Offset.zero).dy
-              ? MoonTooltipPosition.bottom
-              : MoonTooltipPosition.top)
-          : (targetGlobalCenter.dx < overlayRenderBox!.size.center(Offset.zero).dx
-              ? MoonTooltipPosition.right
-              : MoonTooltipPosition.left);
-    }
     final double effectiveArrowBaseWidth = widget.arrowBaseWidth ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
 
     final double effectiveArrowLength =
@@ -404,6 +381,41 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
       arrowLength: effectiveArrowLength,
     );
 
+    final targetRenderBox = context.findRenderObject()! as RenderBox;
+    final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
+
+    final targetBoxGlobalCenter =
+        targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
+
+    final targetBoxGlobalLeft =
+        targetRenderBox.localToGlobal(targetRenderBox.size.centerLeft(Offset.zero), ancestor: overlayRenderBox);
+
+    final targetBoxGlobalRight =
+        targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
+
+    if (tooltipPosition == MoonTooltipPosition.horizontal || tooltipPosition == MoonTooltipPosition.vertical) {
+      // Compute real tooltipPosition based on target position
+
+      tooltipPosition = (tooltipPosition == MoonTooltipPosition.vertical)
+          ? (targetBoxGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
+              ? MoonTooltipPosition.bottom
+              : MoonTooltipPosition.top)
+          : (targetBoxGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
+              ? MoonTooltipPosition.right
+              : MoonTooltipPosition.left);
+    }
+
+    final leftOrdinalPositionsWidth = overlayRenderBox.size.width - targetBoxGlobalLeft.dx;
+    final rightOrdinalPositionsWidth = overlayRenderBox.size.width - targetBoxGlobalRight.dx;
+    final leftCardinalPositionWidth = targetBoxGlobalLeft.dx - effectiveArrowLength - effectiveArrowTipDistance;
+    final rightCardinalPositionWidth =
+        overlayRenderBox.size.width - targetBoxGlobalRight.dx - effectiveArrowLength - effectiveArrowTipDistance;
+    final verticalPositionWidth =
+        overlayRenderBox.size.width - ((overlayRenderBox.size.width / 2 - targetBoxGlobalCenter.dx) * 2).abs();
+
+    print(overlayRenderBox.size.width / 2 - targetBoxGlobalCenter.dx);
+    print(verticalPositionWidth);
+
     return OverlayEntry(
       builder: (context) {
         return UnconstrainedBox(
@@ -419,11 +431,12 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
               child: DefaultTextStyle(
                 style: effectiveTextStyle,
                 child: Container(
+                  constraints: BoxConstraints(maxWidth: verticalPositionWidth),
                   padding: effectiveContentPadding,
                   decoration: ShapeDecoration(
                     color: effectiveBackgroundColor,
                     shadows: effectiveTooltipShadows,
-                    shape: _TooltipContentShape(
+                    shape: TooltipContentShape(
                       arrowBaseWidth: effectiveArrowBaseWidth,
                       arrowLength: effectiveArrowLength,
                       arrowOffset: widget.arrowOffset,
@@ -431,7 +444,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
                       borderColor: widget.borderColor,
                       borderRadius: effectiveBorderRadius,
                       borderWidth: widget.borderWidth,
-                      childWidth: _childWidth,
+                      childWidth: targetRenderBox.size.width,
                       tooltipPosition: widget.tooltipPosition,
                     ),
                   ),
@@ -447,8 +460,6 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
 
   @override
   Widget build(BuildContext context) {
-    _childWidth = context.findRenderObject()?.paintBounds.width ?? 0;
-    dev.log(_childWidth.toString());
     return CompositedTransformTarget(
       link: layerLink,
       child: widget.child,
@@ -466,380 +477,4 @@ class _TooltipPositionProperties {
     required this.followerAnchor,
     required this.targetAnchor,
   });
-}
-
-class _TooltipContentShape extends ShapeBorder {
-  final MoonTooltipPosition tooltipPosition;
-  final Offset? arrowOffset;
-  final double arrowBaseWidth;
-  final double arrowLength;
-  final double arrowTipDistance;
-  final double borderRadius;
-  final double borderWidth;
-  final double childWidth;
-  final Color borderColor;
-
-  const _TooltipContentShape({
-    required this.tooltipPosition,
-    this.arrowOffset,
-    required this.arrowBaseWidth,
-    required this.arrowLength,
-    required this.arrowTipDistance,
-    required this.borderRadius,
-    required this.borderWidth,
-    required this.childWidth,
-    required this.borderColor,
-  });
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.zero;
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return Path()
-      ..fillType = PathFillType.evenOdd
-      ..addPath(getOuterPath(rect), Offset.zero);
-  }
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    late double topLeftRadius;
-    late double topRightRadius;
-    late double bottomLeftRadius;
-    late double bottomRightRadius;
-
-    Path getLeftTopPath(Rect rect) {
-      return Path()
-        ..moveTo(rect.left, rect.bottom - bottomLeftRadius)
-        ..lineTo(rect.left, rect.top + topLeftRadius)
-        ..arcToPoint(
-          Offset(rect.left + topLeftRadius, rect.top),
-          radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
-        )
-        ..lineTo(rect.right - topRightRadius, rect.top)
-        ..arcToPoint(
-          Offset(rect.right, rect.top + topRightRadius),
-          radius: SmoothRadius(cornerRadius: topRightRadius, cornerSmoothing: 1),
-        );
-    }
-
-    Path getBottomRightPath(Rect rect) {
-      return Path()
-        ..moveTo(rect.left + bottomLeftRadius, rect.bottom)
-        ..lineTo(rect.right - bottomRightRadius, rect.bottom)
-        ..arcToPoint(
-          Offset(rect.right, rect.bottom - bottomRightRadius),
-          radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
-          clockwise: false,
-        )
-        ..lineTo(rect.right, rect.top + topRightRadius)
-        ..arcToPoint(
-          Offset(rect.right - topRightRadius, rect.top),
-          radius: SmoothRadius(cornerRadius: topRightRadius, cornerSmoothing: 1),
-          clockwise: false,
-        );
-    }
-
-    topLeftRadius = borderRadius;
-    topRightRadius = borderRadius;
-    bottomLeftRadius = borderRadius;
-    bottomRightRadius = borderRadius;
-
-    Offset arrowOffset = this.arrowOffset ?? rect.center;
-
-    if (tooltipPosition == MoonTooltipPosition.right) {
-      arrowOffset = rect.centerLeft.translate(-arrowLength - arrowTipDistance, 0);
-    } else if (tooltipPosition == MoonTooltipPosition.left) {
-      arrowOffset = rect.centerRight.translate(arrowLength + arrowTipDistance, 0);
-    }
-
-    switch (tooltipPosition) {
-      case MoonTooltipPosition.top:
-        return getLeftTopPath(rect)
-          ..lineTo(rect.right, rect.bottom - bottomRightRadius)
-          ..arcToPoint(
-            Offset(rect.right - bottomRightRadius, rect.bottom),
-            radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
-          )
-          ..lineTo(
-            min(
-              max(arrowOffset.dx + arrowBaseWidth / 2, rect.left + bottomLeftRadius + arrowBaseWidth),
-              rect.right - bottomRightRadius,
-            ),
-            rect.bottom,
-          )
-
-          // up to arrow tip   \
-          ..lineTo(arrowOffset.dx, rect.bottom + arrowLength)
-
-          //  down /
-          ..lineTo(
-            max(
-              min(arrowOffset.dx - arrowBaseWidth / 2, rect.right - bottomRightRadius - arrowBaseWidth),
-              rect.left + bottomLeftRadius,
-            ),
-            rect.bottom,
-          )
-          ..lineTo(rect.left + bottomLeftRadius, rect.bottom)
-          ..arcToPoint(
-            Offset(rect.left, rect.bottom - bottomLeftRadius),
-            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
-          )
-          ..lineTo(rect.left, rect.top + topLeftRadius)
-          ..arcToPoint(
-            Offset(rect.left + topLeftRadius, rect.top),
-            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
-          );
-
-      case MoonTooltipPosition.bottom:
-        return getBottomRightPath(rect)
-          ..lineTo(
-            min(
-              max(arrowOffset.dx + arrowBaseWidth / 2, rect.left + borderRadius + arrowBaseWidth),
-              rect.right - topRightRadius,
-            ),
-            rect.top,
-          )
-          ..lineTo(arrowOffset.dx, rect.top - arrowLength) // up to arrow tip   \
-          ..lineTo(
-            max(
-              min(arrowOffset.dx - arrowBaseWidth / 2, rect.right - topLeftRadius - arrowBaseWidth),
-              rect.left + topLeftRadius,
-            ),
-            rect.top,
-          ) //  down /
-
-          ..lineTo(rect.left + topLeftRadius, rect.top)
-          ..arcToPoint(
-            Offset(rect.left, rect.top + topLeftRadius),
-            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
-            clockwise: false,
-          )
-          ..lineTo(rect.left, rect.bottom - bottomLeftRadius)
-          ..arcToPoint(
-            Offset(rect.left + bottomLeftRadius, rect.bottom),
-            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
-            clockwise: false,
-          );
-
-      case MoonTooltipPosition.left:
-        return getLeftTopPath(rect)
-          ..lineTo(
-            rect.right,
-            max(
-              min(arrowOffset.dy - arrowBaseWidth / 2, rect.bottom - bottomRightRadius - arrowBaseWidth),
-              rect.top + topRightRadius,
-            ),
-          )
-          ..lineTo(arrowOffset.dx - arrowTipDistance, arrowOffset.dy) // right to arrow tip   \
-          //  left /
-          ..lineTo(rect.right, min(arrowOffset.dy + arrowBaseWidth / 2, rect.bottom - bottomRightRadius))
-          ..lineTo(rect.right, rect.bottom - borderRadius)
-          ..arcToPoint(
-            Offset(rect.right - bottomRightRadius, rect.bottom),
-            radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
-          )
-          ..lineTo(rect.left + bottomLeftRadius, rect.bottom)
-          ..arcToPoint(
-            Offset(rect.left, rect.bottom - bottomLeftRadius),
-            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
-          );
-
-      case MoonTooltipPosition.right:
-        return getBottomRightPath(rect)
-          ..lineTo(rect.left + topLeftRadius, rect.top)
-          ..arcToPoint(
-            Offset(rect.left, rect.top + topLeftRadius),
-            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
-            clockwise: false,
-          )
-          ..lineTo(
-            rect.left,
-            max(
-              min(arrowOffset.dy - arrowBaseWidth / 2, rect.bottom - bottomLeftRadius - arrowBaseWidth),
-              rect.top + topLeftRadius,
-            ),
-          )
-
-          //left to arrow tip   /
-          ..lineTo(arrowOffset.dx + arrowTipDistance, arrowOffset.dy)
-
-          //  right \
-          ..lineTo(rect.left, min(arrowOffset.dy + arrowBaseWidth / 2, rect.bottom - bottomLeftRadius))
-          ..lineTo(rect.left, rect.bottom - bottomLeftRadius)
-          ..arcToPoint(
-            Offset(rect.left + bottomLeftRadius, rect.bottom),
-            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
-            clockwise: false,
-          );
-
-      case MoonTooltipPosition.topLeft:
-        return getLeftTopPath(rect)
-          ..lineTo(rect.right, rect.bottom - bottomRightRadius)
-          ..arcToPoint(
-            Offset(rect.right - bottomRightRadius, rect.bottom),
-            radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
-          )
-          ..lineTo(
-            min(
-              //max(arrowOffset.dx + arrowBaseWidth / 2, rect.left + bottomLeftRadius + arrowBaseWidth),
-              rect.right - bottomRightRadius,
-              rect.right - (childWidth / 2) + (arrowBaseWidth / 2),
-            ),
-            rect.bottom,
-          )
-
-          // up to arrow tip   \
-          ..lineTo(rect.right - (childWidth / 2), rect.bottom + arrowLength)
-
-          //  down /
-          ..lineTo(
-            max(
-              //min(arrowOffset.dx - arrowBaseWidth / 2, rect.right - bottomRightRadius - arrowBaseWidth),
-              rect.right - (childWidth / 2) - (arrowBaseWidth / 2),
-              rect.left + bottomLeftRadius,
-            ),
-            rect.bottom,
-          )
-          ..lineTo(rect.left + bottomLeftRadius, rect.bottom)
-          ..arcToPoint(
-            Offset(rect.left, rect.bottom - bottomLeftRadius),
-            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
-          )
-          ..lineTo(rect.left, rect.top + topLeftRadius)
-          ..arcToPoint(
-            Offset(rect.left + topLeftRadius, rect.top),
-            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
-          );
-
-      case MoonTooltipPosition.topRight:
-        return getLeftTopPath(rect)
-          ..lineTo(rect.right, rect.bottom - bottomRightRadius)
-          ..arcToPoint(
-            Offset(rect.right - bottomRightRadius, rect.bottom),
-            radius: SmoothRadius(cornerRadius: bottomRightRadius, cornerSmoothing: 1),
-          )
-          ..lineTo(
-            min(
-              max(arrowOffset.dx + arrowBaseWidth / 2, rect.left + bottomLeftRadius + arrowBaseWidth),
-              rect.right - bottomRightRadius,
-            ),
-            rect.bottom,
-          )
-
-          // up to arrow tip   \
-          ..lineTo(arrowOffset.dx, rect.bottom + arrowLength)
-
-          //  down /
-          ..lineTo(
-            max(
-              min(arrowOffset.dx - arrowBaseWidth / 2, rect.right - bottomRightRadius - arrowBaseWidth),
-              rect.left + bottomLeftRadius,
-            ),
-            rect.bottom,
-          )
-          ..lineTo(rect.left + bottomLeftRadius, rect.bottom)
-          ..arcToPoint(
-            Offset(rect.left, rect.bottom - bottomLeftRadius),
-            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
-          )
-          ..lineTo(rect.left, rect.top + topLeftRadius)
-          ..arcToPoint(
-            Offset(rect.left + topLeftRadius, rect.top),
-            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
-          );
-
-      case MoonTooltipPosition.bottomLeft:
-        return getBottomRightPath(rect)
-          ..lineTo(
-            min(
-              max(arrowOffset.dx + arrowBaseWidth / 2, rect.left + borderRadius + arrowBaseWidth),
-              rect.right - topRightRadius,
-            ),
-            rect.top,
-          )
-          ..lineTo(arrowOffset.dx, rect.top - arrowLength) // up to arrow tip   \
-          ..lineTo(
-            max(
-              min(arrowOffset.dx - arrowBaseWidth / 2, rect.right - topLeftRadius - arrowBaseWidth),
-              rect.left + topLeftRadius,
-            ),
-            rect.top,
-          ) //  down /
-
-          ..lineTo(rect.left + topLeftRadius, rect.top)
-          ..arcToPoint(
-            Offset(rect.left, rect.top + topLeftRadius),
-            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
-            clockwise: false,
-          )
-          ..lineTo(rect.left, rect.bottom - bottomLeftRadius)
-          ..arcToPoint(
-            Offset(rect.left + bottomLeftRadius, rect.bottom),
-            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
-            clockwise: false,
-          );
-
-      case MoonTooltipPosition.bottomRight:
-        return getBottomRightPath(rect)
-          ..lineTo(
-            min(
-              max(arrowOffset.dx + arrowBaseWidth / 2, rect.left + borderRadius + arrowBaseWidth),
-              rect.right - topRightRadius,
-            ),
-            rect.top,
-          )
-          ..lineTo(arrowOffset.dx, rect.top - arrowLength) // up to arrow tip   \
-          ..lineTo(
-            max(
-              min(arrowOffset.dx - arrowBaseWidth / 2, rect.right - topLeftRadius - arrowBaseWidth),
-              rect.left + topLeftRadius,
-            ),
-            rect.top,
-          ) //  down /
-
-          ..lineTo(rect.left + topLeftRadius, rect.top)
-          ..arcToPoint(
-            Offset(rect.left, rect.top + topLeftRadius),
-            radius: SmoothRadius(cornerRadius: topLeftRadius, cornerSmoothing: 1),
-            clockwise: false,
-          )
-          ..lineTo(rect.left, rect.bottom - bottomLeftRadius)
-          ..arcToPoint(
-            Offset(rect.left + bottomLeftRadius, rect.bottom),
-            radius: SmoothRadius(cornerRadius: bottomLeftRadius, cornerSmoothing: 1),
-            clockwise: false,
-          );
-
-      default:
-        throw AssertionError(tooltipPosition);
-    }
-  }
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
-    final Paint paint = Paint()
-      // if borderWidth is set to 0, set the color to be transparent to avoid border to be visible because strange behavior
-      ..color = borderWidth == 0 ? Colors.transparent : borderColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = borderWidth;
-
-    canvas.drawPath(getOuterPath(rect), paint);
-    canvas.clipPath(getOuterPath(rect));
-  }
-
-  @override
-  ShapeBorder scale(double t) {
-    return _TooltipContentShape(
-      tooltipPosition: tooltipPosition,
-      arrowOffset: arrowOffset,
-      arrowBaseWidth: arrowBaseWidth,
-      arrowLength: arrowLength,
-      arrowTipDistance: arrowTipDistance,
-      borderRadius: borderRadius,
-      borderWidth: borderWidth,
-      childWidth: childWidth,
-      borderColor: borderColor,
-    );
-  }
 }
