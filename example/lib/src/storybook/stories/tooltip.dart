@@ -32,6 +32,15 @@ class TooltipStory extends Story {
               ],
             );
 
+            final colorsKnob = context.knobs.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for base MoonButton.",
+              initial: 4, // gohan
+              options: colorOptions,
+            );
+
+            final color = colorTable(context)[colorsKnob];
+
             final showTooltipKnob = context.knobs.boolean(
               label: "show",
               description: "Show the tooltip.",
@@ -50,22 +59,13 @@ class TooltipStory extends Story {
               initial: true,
             );
 
-            final colorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for base MoonButton.",
-              initial: 4, // gohan
-              options: colorOptions,
-            );
-
-            final color = colorTable(context)[colorsKnob];
-
-            /* final setRtlModeKnob = context.knobs.boolean(
+            final setRtlModeKnob = context.knobs.boolean(
               label: "RTL mode",
               description: "Switch between LTR and RTL modes.",
-            ); */
+            );
 
             return Directionality(
-              textDirection: /* setRtlModeKnob ? TextDirection.rtl :  */ TextDirection.ltr,
+              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

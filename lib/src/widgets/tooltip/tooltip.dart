@@ -420,7 +420,30 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     final tooltipGlobalRight =
         targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
 
-    if (tooltipPosition == MoonTooltipPosition.horizontal || tooltipPosition == MoonTooltipPosition.vertical) {
+    if (Directionality.of(context) == TextDirection.rtl) {
+      switch (tooltipPosition) {
+        case MoonTooltipPosition.left:
+          tooltipPosition = MoonTooltipPosition.right;
+          break;
+        case MoonTooltipPosition.right:
+          tooltipPosition = MoonTooltipPosition.left;
+          break;
+        case MoonTooltipPosition.topLeft:
+          tooltipPosition = MoonTooltipPosition.topRight;
+          break;
+        case MoonTooltipPosition.topRight:
+          tooltipPosition = MoonTooltipPosition.topLeft;
+          break;
+        case MoonTooltipPosition.bottomLeft:
+          tooltipPosition = MoonTooltipPosition.bottomRight;
+          break;
+        case MoonTooltipPosition.bottomRight:
+          tooltipPosition = MoonTooltipPosition.bottomLeft;
+          break;
+
+        default:
+      }
+    } else if (tooltipPosition == MoonTooltipPosition.horizontal || tooltipPosition == MoonTooltipPosition.vertical) {
       // Compute real tooltipPosition based on target position
       tooltipPosition = (tooltipPosition == MoonTooltipPosition.vertical)
           ? (tooltipGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
