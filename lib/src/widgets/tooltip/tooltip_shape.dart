@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
-class TooltipContentShape extends ShapeBorder {
+class TooltipShape extends ShapeBorder {
   final MoonTooltipPosition tooltipPosition;
   final Offset? arrowOffset;
   final double arrowBaseWidth;
@@ -16,7 +16,7 @@ class TooltipContentShape extends ShapeBorder {
   final double childWidth;
   final Color borderColor;
 
-  const TooltipContentShape({
+  const TooltipShape({
     required this.tooltipPosition,
     this.arrowOffset,
     required this.arrowBaseWidth,
@@ -377,7 +377,7 @@ class TooltipContentShape extends ShapeBorder {
 
   @override
   ShapeBorder scale(double t) {
-    return TooltipContentShape(
+    return TooltipShape(
       tooltipPosition: tooltipPosition,
       arrowOffset: arrowOffset,
       arrowBaseWidth: arrowBaseWidth,

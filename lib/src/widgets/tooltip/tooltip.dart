@@ -1,11 +1,9 @@
-import 'dart:developer' as dev;
-
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip_content_shape.dart';
+import 'package:moon_design/src/widgets/tooltip/tooltip_shape.dart';
 
 enum MoonTooltipPosition {
   top,
@@ -21,6 +19,9 @@ enum MoonTooltipPosition {
 }
 
 class MoonTooltip extends StatefulWidget {
+  // This is required so only one tooltip is shown at a time.
+  static final List<MoonTooltipState> _openedTooltips = [];
+
   /// Sets a handler for listening to a `tap` event on the tooltip.
   final void Function()? onTooltipTap;
 
@@ -126,6 +127,20 @@ class MoonTooltip extends StatefulWidget {
     required this.child,
   });
 
+  // Causes any current tooltips to be removed. Won't remove the supplied tooltip.
+  static void _removeOtherTooltips(MoonTooltipState current) {
+    if (_openedTooltips.isNotEmpty) {
+      // Avoid concurrent modification.
+      final List<MoonTooltipState> openedTooltips = _openedTooltips.toList();
+      for (final MoonTooltipState state in openedTooltips) {
+        if (state == current) {
+          continue;
+        }
+        state._clearOverlayEntry();
+      }
+    }
+  }
+
   @override
   MoonTooltipState createState() => MoonTooltipState();
 }
@@ -143,34 +158,42 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
   bool get shouldShowTooltip => widget.show && _routeIsShowing;
 
   void _showTooltip() {
-    _overlayEntry = _createOverlayEntry();
+    _overlayEntry = OverlayEntry(builder: (context) => _createOverlayContent());
     Overlay.of(context).insert(_overlayEntry!);
+
+    MoonTooltip._openedTooltips.add(this);
+    MoonTooltip._removeOtherTooltips(this);
+
+    animationController!.value = 0;
     animationController!.forward();
   }
 
-  void _removeTooltip({bool removeImmediately = false}) {
-    if (removeImmediately) {
+  void updateTooltip() {
+    _overlayEntry?.markNeedsBuild();
+  }
+
+  void _removeTooltip({bool immediately = false}) {
+    if (immediately) {
       _clearOverlayEntry();
     } else {
+      animationController!.value = 1;
       animationController!.reverse().then((value) => _clearOverlayEntry());
     }
   }
 
   void _clearOverlayEntry() {
     if (_overlayEntry != null) {
+      MoonTooltip._openedTooltips.remove(this);
       _overlayEntry!.remove();
-      _overlayEntry!.dispose();
       _overlayEntry = null;
     }
   }
 
-  void updateTooltip() {
-    dev.log("update");
-    _removeTooltip(removeImmediately: true);
-
-    if (shouldShowTooltip) {
-      _showTooltip();
+  void _handleTap() {
+    if (widget.hideOnTooltipTap) {
+      _removeTooltip();
     }
+    widget.onTooltipTap?.call();
   }
 
   Color _getTextColor({required Color backgroundColor}) {
@@ -180,13 +203,6 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     } else {
       return MoonColors.dark.bulma;
     }
-  }
-
-  void _handleTap() {
-    if (widget.hideOnTooltipTap) {
-      _removeTooltip();
-    }
-    widget.onTooltipTap?.call();
   }
 
   _TooltipPositionProperties _resolveTooltipPositionParameters({
@@ -322,20 +338,40 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!_routeIsShowing) return;
+      if (oldWidget.tooltipPosition != widget.tooltipPosition) {
+        _removeTooltip(immediately: true);
+        _showTooltip();
+      } else if (shouldShowTooltip && _overlayEntry == null) {
+        _showTooltip();
+      } else if (!shouldShowTooltip && _overlayEntry != null) {
+        _removeTooltip();
+      }
+
       updateTooltip();
     });
   }
 
   @override
+  void deactivate() {
+    if (_overlayEntry != null) {
+      _removeTooltip(immediately: true);
+    }
+
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
-    _removeTooltip(removeImmediately: true);
+    if (_overlayEntry != null) {
+      _removeTooltip(immediately: true);
+    }
+
     widget.routeObserver?.unsubscribe(this);
 
     super.dispose();
   }
 
-  OverlayEntry _createOverlayEntry() {
-    dev.log("create");
+  Widget _createOverlayContent() {
     MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
     final double effectiveArrowBaseWidth = widget.arrowBaseWidth ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
@@ -405,50 +441,46 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
       tooltipGlobalRight: tooltipGlobalRight.dx,
     );
 
-    return OverlayEntry(
-      builder: (context) {
-        return UnconstrainedBox(
-          child: CompositedTransformFollower(
-            link: layerLink,
-            showWhenUnlinked: false,
-            offset: tooltipPositionParameters.offset,
-            followerAnchor: tooltipPositionParameters.followerAnchor,
-            targetAnchor: tooltipPositionParameters.targetAnchor,
-            child: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: _handleTap,
-              child: RepaintBoundary(
-                child: FadeTransition(
-                  opacity: curvedAnimation!,
-                  child: DefaultTextStyle(
-                    style: effectiveTextStyle,
-                    child: Container(
-                      constraints: BoxConstraints(maxWidth: tooltipPositionParameters.toolTipMaxWidth),
-                      padding: effectiveContentPadding,
-                      decoration: ShapeDecoration(
-                        color: effectiveBackgroundColor,
-                        shadows: effectiveTooltipShadows,
-                        shape: TooltipContentShape(
-                          arrowBaseWidth: effectiveArrowBaseWidth,
-                          arrowLength: effectiveArrowLength,
-                          arrowOffset: widget.arrowOffset,
-                          arrowTipDistance: effectiveArrowTipDistance,
-                          borderColor: widget.borderColor,
-                          borderRadius: effectiveBorderRadius,
-                          borderWidth: widget.borderWidth,
-                          childWidth: targetRenderBox.size.width,
-                          tooltipPosition: tooltipPosition,
-                        ),
-                      ),
-                      child: widget.content,
+    return UnconstrainedBox(
+      child: CompositedTransformFollower(
+        link: layerLink,
+        showWhenUnlinked: false,
+        offset: tooltipPositionParameters.offset,
+        followerAnchor: tooltipPositionParameters.followerAnchor,
+        targetAnchor: tooltipPositionParameters.targetAnchor,
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: _handleTap,
+          child: RepaintBoundary(
+            child: FadeTransition(
+              opacity: curvedAnimation!,
+              child: DefaultTextStyle(
+                style: effectiveTextStyle,
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: tooltipPositionParameters.toolTipMaxWidth),
+                  padding: effectiveContentPadding,
+                  decoration: ShapeDecoration(
+                    color: effectiveBackgroundColor,
+                    shadows: effectiveTooltipShadows,
+                    shape: TooltipShape(
+                      arrowBaseWidth: effectiveArrowBaseWidth,
+                      arrowLength: effectiveArrowLength,
+                      arrowOffset: widget.arrowOffset,
+                      arrowTipDistance: effectiveArrowTipDistance,
+                      borderColor: widget.borderColor,
+                      borderRadius: effectiveBorderRadius,
+                      borderWidth: widget.borderWidth,
+                      childWidth: targetRenderBox.size.width,
+                      tooltipPosition: tooltipPosition,
                     ),
                   ),
+                  child: widget.content,
                 ),
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
