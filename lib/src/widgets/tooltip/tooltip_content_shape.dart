@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/widgets/tooltip/tooltip2.dart';
+import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
 class TooltipContentShape extends ShapeBorder {
   final MoonTooltipPosition tooltipPosition;

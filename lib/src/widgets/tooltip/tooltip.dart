@@ -1,12 +1,11 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/widgets/tooltip/obfuscate_tooltip_item.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip_content.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip_content_transition.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip_position_manager.dart';
+import 'package:moon_design/src/widgets/tooltip/tooltip_content_shape.dart';
 
 enum MoonTooltipPosition {
   top,
@@ -17,8 +16,8 @@ enum MoonTooltipPosition {
   bottomRight,
   left,
   right,
-  horizontal,
   vertical,
+  horizontal,
 }
 
 class MoonTooltip extends StatefulWidget {
@@ -32,12 +31,10 @@ class MoonTooltip extends StatefulWidget {
   final bool hasArrow;
 
   /// Whether the tooltip should be dismissed whenever a user taps on it. For more control when to dismiss the tooltip
-  /// rely on the [show] property and [onTooltipTap] handler.
-  /// Defaults to [true].
+  /// rely on the [show] property and [onTooltipTap] handler. Defaults to [true].
   final bool hideOnTooltipTap;
 
-  /// Sets the tooltip position relative to the target.
-  /// Defaults to [MoonTooltipPosition.top]
+  /// Sets the tooltip position relative to the target. Defaults to [MoonTooltipPosition.vertical]
   final MoonTooltipPosition tooltipPosition;
 
   /// Optional size constraint. If a constraint is not set the size will adjust to the content.
@@ -106,7 +103,7 @@ class MoonTooltip extends StatefulWidget {
     required this.show,
     this.hasArrow = true,
     this.hideOnTooltipTap = true,
-    this.tooltipPosition = MoonTooltipPosition.vertical,
+    this.tooltipPosition = MoonTooltipPosition.top,
     this.minWidth,
     this.maxWidth,
     this.minHeight,
@@ -133,80 +130,47 @@ class MoonTooltip extends StatefulWidget {
   MoonTooltipState createState() => MoonTooltipState();
 }
 
-class MoonTooltipState extends State<MoonTooltip> with RouteAware {
-  // To avoid excessive rebuilds
-  final GlobalKey _positionManagerKey = GlobalKey();
+class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerProviderStateMixin {
+  AnimationController? animationController;
+  CurvedAnimation? curvedAnimation;
+
   final LayerLink layerLink = LayerLink();
-  final List<ObfuscateTooltipItemState> _obfuscateItems = [];
 
-  bool _displaying = false;
   bool _routeIsShowing = true;
-  bool _isBeingObfuscated = false;
-  GlobalKey _transitionKey = GlobalKey();
-  TooltipContentSize? _contentSize;
 
-  late OverlayEntry _overlayEntry;
+  OverlayEntry? _overlayEntry;
 
-  bool get shouldShowTooltip => widget.show && !_isBeingObfuscated && _routeIsShowing;
+  bool get shouldShowTooltip => widget.show && _routeIsShowing;
 
-  void addObfuscateItem(ObfuscateTooltipItemState item) {
-    _obfuscateItems.add(item);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      doCheckForObfuscation();
-      doShowOrHide();
-    });
+  void _showTooltip() {
+    _overlayEntry = _createOverlayEntry();
+    Overlay.of(context).insert(_overlayEntry!);
+    animationController!.forward();
   }
 
-  void removeObfuscatedItem(ObfuscateTooltipItemState item) {
-    _obfuscateItems.remove(item);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      doCheckForObfuscation();
-      doShowOrHide();
-    });
+  void _removeTooltip({bool removeImmediately = false}) {
+    if (removeImmediately) {
+      _clearOverlayEntry();
+    } else {
+      animationController!.reverse().then((value) => _clearOverlayEntry());
+    }
   }
 
-  void _showTooltip({bool buildHidding = false}) {
-    if (_displaying || !mounted) return;
-
-    _overlayEntry = _buildOverlay(buildHidding: buildHidding);
-    Overlay.of(context).insert(_overlayEntry);
-    _displaying = true;
+  void _clearOverlayEntry() {
+    if (_overlayEntry != null) {
+      _overlayEntry!.remove();
+      _overlayEntry!.dispose();
+      _overlayEntry = null;
+    }
   }
 
-  void _removeTooltip() {
-    if (!_displaying) return;
+  void updateTooltip() {
+    dev.log("update");
+    _removeTooltip(removeImmediately: true);
 
-    _overlayEntry.remove();
-    _displaying = false;
-  }
-
-  void doShowOrHide() {
-    final wasDisplaying = _displaying;
-    _removeTooltip();
     if (shouldShowTooltip) {
       _showTooltip();
-    } else if (wasDisplaying) {
-      _showTooltip(buildHidding: true);
     }
-  }
-
-  void doCheckForObfuscation() {
-    if (_contentSize == null) return;
-
-    for (final obfuscateItem in _obfuscateItems) {
-      final d = obfuscateItem.getPositionAndSize()!;
-      final Rect obfuscateItemRect = d.globalPosition & d.size;
-      final Rect contentRect = _contentSize!.globalPosition & _contentSize!.size;
-      final bool overlaps = contentRect.overlaps(obfuscateItemRect);
-
-      if (overlaps) {
-        _isBeingObfuscated = true;
-        // no need to keep searching
-        return;
-      }
-    }
-
-    _isBeingObfuscated = false;
   }
 
   Color _getTextColor({required Color backgroundColor}) {
@@ -215,6 +179,94 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
       return MoonColors.light.bulma;
     } else {
       return MoonColors.dark.bulma;
+    }
+  }
+
+  void _handleTap() {
+    if (widget.hideOnTooltipTap) {
+      _removeTooltip();
+    }
+    widget.onTooltipTap?.call();
+  }
+
+  _TooltipPositionProperties _resolveTooltipPositionParameters({
+    required MoonTooltipPosition tooltipPosition,
+    required double arrowTipDistance,
+    required double arrowLength,
+    required double overlayWidth,
+    required double tooltipGlobalLeft,
+    required double tooltipGlobalCenter,
+    required double tooltipGlobalRight,
+  }) {
+    switch (tooltipPosition) {
+      case MoonTooltipPosition.top:
+        return _TooltipPositionProperties(
+          offset: Offset(0, -(arrowTipDistance + arrowLength)),
+          targetAnchor: Alignment.topCenter,
+          followerAnchor: Alignment.bottomCenter,
+          toolTipMaxWidth:
+              overlayWidth - ((overlayWidth / 2 - tooltipGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
+        );
+
+      case MoonTooltipPosition.bottom:
+        return _TooltipPositionProperties(
+          offset: Offset(0, arrowTipDistance + arrowLength),
+          targetAnchor: Alignment.bottomCenter,
+          followerAnchor: Alignment.topCenter,
+          toolTipMaxWidth:
+              overlayWidth - ((overlayWidth / 2 - tooltipGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
+        );
+
+      case MoonTooltipPosition.left:
+        return _TooltipPositionProperties(
+          offset: Offset(-(arrowTipDistance + arrowLength), 0),
+          targetAnchor: Alignment.centerLeft,
+          followerAnchor: Alignment.centerRight,
+          toolTipMaxWidth: tooltipGlobalLeft - arrowLength - arrowTipDistance - widget.tooltipMargin,
+        );
+
+      case MoonTooltipPosition.right:
+        return _TooltipPositionProperties(
+          offset: Offset(arrowTipDistance + arrowLength, 0),
+          targetAnchor: Alignment.centerRight,
+          followerAnchor: Alignment.centerLeft,
+          toolTipMaxWidth: overlayWidth - tooltipGlobalRight - arrowLength - arrowTipDistance - widget.tooltipMargin,
+        );
+
+      case MoonTooltipPosition.topLeft:
+        return _TooltipPositionProperties(
+          offset: Offset(0, -(arrowTipDistance + arrowLength)),
+          targetAnchor: Alignment.topRight,
+          followerAnchor: Alignment.bottomRight,
+          toolTipMaxWidth: tooltipGlobalRight - widget.tooltipMargin,
+        );
+
+      case MoonTooltipPosition.topRight:
+        return _TooltipPositionProperties(
+          offset: Offset(0, -(arrowTipDistance + arrowLength)),
+          targetAnchor: Alignment.topLeft,
+          followerAnchor: Alignment.bottomLeft,
+          toolTipMaxWidth: overlayWidth - tooltipGlobalLeft - widget.tooltipMargin,
+        );
+
+      case MoonTooltipPosition.bottomLeft:
+        return _TooltipPositionProperties(
+          offset: Offset(0, arrowTipDistance + arrowLength),
+          targetAnchor: Alignment.bottomRight,
+          followerAnchor: Alignment.topRight,
+          toolTipMaxWidth: tooltipGlobalRight - widget.tooltipMargin,
+        );
+
+      case MoonTooltipPosition.bottomRight:
+        return _TooltipPositionProperties(
+          offset: Offset(0, arrowTipDistance + arrowLength),
+          targetAnchor: Alignment.bottomLeft,
+          followerAnchor: Alignment.topLeft,
+          toolTipMaxWidth: overlayWidth - tooltipGlobalLeft - widget.tooltipMargin,
+        );
+
+      default:
+        throw AssertionError(tooltipPosition);
     }
   }
 
@@ -255,80 +307,43 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (shouldShowTooltip) {
-        _showTooltip();
-      }
       widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     });
   }
 
   @override
   void didUpdateWidget(MoonTooltip oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (oldWidget.routeObserver != widget.routeObserver) {
       oldWidget.routeObserver?.unsubscribe(this);
       widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     }
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (oldWidget.tooltipPosition != widget.tooltipPosition || (oldWidget.show != widget.show && widget.show)) {
-        _transitionKey = GlobalKey();
-      }
-      if (!_routeIsShowing || _isBeingObfuscated) {
-        return;
-      }
-      doShowOrHide();
-    });
 
-    super.didUpdateWidget(oldWidget);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_routeIsShowing) return;
+      updateTooltip();
+    });
   }
 
   @override
   void dispose() {
-    _removeTooltip();
+    _removeTooltip(removeImmediately: true);
     widget.routeObserver?.unsubscribe(this);
 
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return CompositedTransformTarget(
-      link: layerLink,
-      child: widget.child,
-    );
-  }
-
-  OverlayEntry _buildOverlay({bool buildHidding = false}) {
+  OverlayEntry _createOverlayEntry() {
+    dev.log("create");
     MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
-    if (tooltipPosition == MoonTooltipPosition.horizontal || tooltipPosition == MoonTooltipPosition.vertical) {
-      // Compute real tooltipPosition based on target position
-      final targetRenderBox = context.findRenderObject() as RenderBox?;
-      final overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
-
-      final targetGlobalCenter =
-          targetRenderBox?.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox) ??
-              Offset.zero;
-
-      tooltipPosition = (tooltipPosition == MoonTooltipPosition.vertical)
-          ? (targetGlobalCenter.dy < overlayRenderBox!.size.center(Offset.zero).dy
-              ? MoonTooltipPosition.bottom
-              : MoonTooltipPosition.top)
-          : (targetGlobalCenter.dx < overlayRenderBox!.size.center(Offset.zero).dx
-              ? MoonTooltipPosition.right
-              : MoonTooltipPosition.left);
-    }
     final double effectiveArrowBaseWidth = widget.arrowBaseWidth ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
 
     final double effectiveArrowLength =
         widget.hasArrow ? (widget.arrowLength ?? context.moonTooltipTheme?.arrowLength ?? 8) : 0;
 
     final double effectiveArrowTipDistance = widget.arrowTipDistance ?? context.moonTooltipTheme?.arrowTipDistance ?? 8;
-
-    final Duration effectiveTransitionDuration =
-        widget.transitionDuration ?? context.moonTooltipTheme?.transitionDuration ?? const Duration(milliseconds: 150);
-
-    final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTooltipTheme?.transitionCurve ?? Curves.easeInOutCubic;
 
     final EdgeInsets effectiveContentPadding =
         widget.contentPadding ?? context.moonTooltipTheme?.contentPadding ?? const EdgeInsets.all(12);
@@ -357,62 +372,121 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware {
           ),
         ];
 
-    return OverlayEntry(
-      builder: (_) {
-        return TooltipPositionManager(
-          key: _positionManagerKey,
-          context: context,
-          arrowLength: effectiveArrowLength,
-          arrowTipDistance: effectiveArrowTipDistance,
-          maxHeight: widget.maxHeight,
-          minHeight: widget.minHeight,
-          maxWidth: widget.maxWidth,
-          minWidth: widget.minWidth,
-          tooltipPosition: tooltipPosition,
-          tooltipMargin: widget.tooltipMargin,
-          link: layerLink,
-          child: TooltipContentTransition(
-            key: _transitionKey,
-            show: buildHidding,
-            duration: effectiveTransitionDuration,
-            curve: effectiveTransitionCurve,
-            onTransitionFinished: (status) {
-              if (status == AnimationStatus.dismissed) {
-                _removeTooltip();
-              }
-            },
-            child: TooltipContent(
-              tooltipPosition: tooltipPosition,
-              borderRadius: effectiveBorderRadius,
-              arrowBaseWidth: effectiveArrowBaseWidth,
-              arrowLength: effectiveArrowLength,
-              arrowOffset: widget.arrowOffset,
-              arrowTipDistance: effectiveArrowTipDistance,
-              contentPadding: effectiveContentPadding,
-              borderWidth: widget.borderWidth,
-              borderColor: widget.borderColor,
-              backgroundColor: effectiveBackgroundColor,
-              shadows: effectiveTooltipShadows,
-              textStyle: effectiveTextStyle,
-              onTap: () {
-                if (widget.hideOnTooltipTap) {
-                  _removeTooltip();
-                  _showTooltip(buildHidding: true);
-                }
+    final targetRenderBox = context.findRenderObject()! as RenderBox;
+    final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
-                widget.onTooltipTap?.call();
-              },
-              onSizeChange: (contentSize) {
-                if (!mounted) return;
-                _contentSize = contentSize;
-                doCheckForObfuscation();
-                doShowOrHide();
-              },
-              child: widget.content,
+    final tooltipGlobalCenter =
+        targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
+
+    final tooltipGlobalLeft =
+        targetRenderBox.localToGlobal(targetRenderBox.size.centerLeft(Offset.zero), ancestor: overlayRenderBox);
+
+    final tooltipGlobalRight =
+        targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
+
+    if (tooltipPosition == MoonTooltipPosition.horizontal || tooltipPosition == MoonTooltipPosition.vertical) {
+      // Compute real tooltipPosition based on target position
+      tooltipPosition = (tooltipPosition == MoonTooltipPosition.vertical)
+          ? (tooltipGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
+              ? MoonTooltipPosition.bottom
+              : MoonTooltipPosition.top)
+          : (tooltipGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
+              ? MoonTooltipPosition.right
+              : MoonTooltipPosition.left);
+    }
+
+    final tooltipPositionParameters = _resolveTooltipPositionParameters(
+      tooltipPosition: tooltipPosition,
+      arrowTipDistance: effectiveArrowTipDistance,
+      arrowLength: effectiveArrowLength,
+      overlayWidth: overlayRenderBox.size.width,
+      tooltipGlobalLeft: tooltipGlobalLeft.dx,
+      tooltipGlobalCenter: tooltipGlobalCenter.dx,
+      tooltipGlobalRight: tooltipGlobalRight.dx,
+    );
+
+    return OverlayEntry(
+      builder: (context) {
+        return UnconstrainedBox(
+          child: CompositedTransformFollower(
+            link: layerLink,
+            showWhenUnlinked: false,
+            offset: tooltipPositionParameters.offset,
+            followerAnchor: tooltipPositionParameters.followerAnchor,
+            targetAnchor: tooltipPositionParameters.targetAnchor,
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: _handleTap,
+              child: RepaintBoundary(
+                child: FadeTransition(
+                  opacity: curvedAnimation!,
+                  child: DefaultTextStyle(
+                    style: effectiveTextStyle,
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: tooltipPositionParameters.toolTipMaxWidth),
+                      padding: effectiveContentPadding,
+                      decoration: ShapeDecoration(
+                        color: effectiveBackgroundColor,
+                        shadows: effectiveTooltipShadows,
+                        shape: TooltipContentShape(
+                          arrowBaseWidth: effectiveArrowBaseWidth,
+                          arrowLength: effectiveArrowLength,
+                          arrowOffset: widget.arrowOffset,
+                          arrowTipDistance: effectiveArrowTipDistance,
+                          borderColor: widget.borderColor,
+                          borderRadius: effectiveBorderRadius,
+                          borderWidth: widget.borderWidth,
+                          childWidth: targetRenderBox.size.width,
+                          tooltipPosition: tooltipPosition,
+                        ),
+                      ),
+                      child: widget.content,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         );
       },
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final Duration effectiveTransitionDuration =
+        widget.transitionDuration ?? context.moonTooltipTheme?.transitionDuration ?? const Duration(milliseconds: 150);
+
+    final Curve effectiveTransitionCurve =
+        widget.transitionCurve ?? context.moonTooltipTheme?.transitionCurve ?? Curves.easeInOutCubic;
+
+    animationController ??= AnimationController(
+      duration: effectiveTransitionDuration,
+      vsync: this,
+    );
+
+    curvedAnimation ??= CurvedAnimation(
+      parent: animationController!,
+      curve: effectiveTransitionCurve,
+    );
+
+    return CompositedTransformTarget(
+      link: layerLink,
+      child: widget.child,
+    );
+  }
+}
+
+class _TooltipPositionProperties {
+  final Offset offset;
+  final Alignment followerAnchor;
+  final Alignment targetAnchor;
+  final double toolTipMaxWidth;
+
+  _TooltipPositionProperties({
+    required this.offset,
+    required this.followerAnchor,
+    required this.targetAnchor,
+    required this.toolTipMaxWidth,
+  });
 }

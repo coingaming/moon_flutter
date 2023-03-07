@@ -8,7 +8,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/effects/pulse_effect.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip2.dart';
+import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
 typedef MoonBaseControlBuilder = Widget Function(
   BuildContext context,

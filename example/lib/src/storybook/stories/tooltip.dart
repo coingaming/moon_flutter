@@ -68,12 +68,12 @@ class TooltipStory extends Story {
               textDirection: /* setRtlModeKnob ? TextDirection.rtl :  */ TextDirection.ltr,
               child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    /* const SizedBox(height: 64),
+                    const SizedBox(height: 64),
                     const TextDivider(text: "Customisable tooltip"),
-                    const SizedBox(height: 32), */
+                    const SizedBox(height: 32),
                     Padding(
                       padding: EdgeInsets.only(left: 60),
                       child: MoonTooltip(
