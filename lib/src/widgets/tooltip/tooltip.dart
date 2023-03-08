@@ -60,7 +60,7 @@ class MoonTooltip extends StatefulWidget {
   final double? arrowLength;
 
   /// The offset of the tooltip arrow (tail) from the center of the tooltip.
-  final Offset? arrowOffset;
+  final double arrowOffsetValue;
 
   /// The distance from the tip of the tooltip arrow (tail) to the target widget.
   final double? arrowTipDistance;
@@ -69,7 +69,7 @@ class MoonTooltip extends StatefulWidget {
   final double borderWidth;
 
   /// The border radius value of the tooltip.
-  final double? borderRadius;
+  final double? borderRadiusValue;
 
   /// The margin around tooltip. Used to prevent the tooltip from touching the edges of the viewport.
   final double tooltipMargin;
@@ -112,9 +112,9 @@ class MoonTooltip extends StatefulWidget {
     this.contentPadding,
     this.arrowBaseWidth,
     this.arrowLength,
-    this.arrowOffset,
+    this.arrowOffsetValue = 0,
     this.arrowTipDistance,
-    this.borderRadius,
+    this.borderRadiusValue,
     this.borderWidth = 0,
     this.tooltipMargin = 8,
     this.borderColor = Colors.transparent,
@@ -384,7 +384,8 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     final EdgeInsets effectiveContentPadding =
         widget.contentPadding ?? context.moonTooltipTheme?.contentPadding ?? const EdgeInsets.all(12);
 
-    final double effectiveBorderRadius = widget.borderRadius ?? context.moonTooltipTheme?.borderRadius.topLeft.x ?? 4;
+    final double effectiveBorderRadius =
+        widget.borderRadiusValue ?? context.moonTooltipTheme?.borderRadius.topLeft.x ?? 4;
 
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonColors?.gohan ?? MoonColors.light.gohan;
@@ -488,7 +489,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
                     shape: TooltipShape(
                       arrowBaseWidth: effectiveArrowBaseWidth,
                       arrowLength: effectiveArrowLength,
-                      arrowOffset: widget.arrowOffset,
+                      arrowOffset: widget.arrowOffsetValue,
                       arrowTipDistance: effectiveArrowTipDistance,
                       borderColor: widget.borderColor,
                       borderRadius: effectiveBorderRadius,

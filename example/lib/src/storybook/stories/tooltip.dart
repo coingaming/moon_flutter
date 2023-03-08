@@ -41,6 +41,14 @@ class TooltipStory extends Story {
 
             final color = colorTable(context)[colorsKnob];
 
+            final arrowOffsetKnob = context.knobs.slider(
+              label: "arrowOffsetValue",
+              description: "Set the offset of the tooltip arrow.",
+              initial: 0,
+              min: -100,
+              max: 100,
+            );
+
             final showTooltipKnob = context.knobs.boolean(
               label: "show",
               description: "Show the tooltip.",
@@ -78,6 +86,7 @@ class TooltipStory extends Story {
                       padding: EdgeInsets.only(left: 60),
                       child: MoonTooltip(
                         arrowBaseWidth: 10,
+                        arrowOffsetValue: arrowOffsetKnob,
                         show: showTooltipKnob,
                         tooltipPosition: tooltipPositionsKnob,
                         hasArrow: showArrowKnob,
