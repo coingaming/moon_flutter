@@ -108,7 +108,7 @@ class TooltipStory extends Story {
                       child: MoonButton(
                         backgroundColor: context.moonColors!.bulma,
                         onTap: () {},
-                        label: const Text("M"),
+                        label: const Text("MDS"),
                       ),
                     ),
                     const SizedBox(height: 40),
