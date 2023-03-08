@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.4](https://github.com/coingaming/moon_flutter/compare/v0.9.3...v0.9.4) (2023-03-08)
+
+
+### Bug Fixes
+
+* [MDS-408] Rewrite Tooltip to add ordinal directions functionality ([#68](https://github.com/coingaming/moon_flutter/issues/68)) ([5cbed50](https://github.com/coingaming/moon_flutter/commit/5cbed5021be69dadf555b1828e25d21cb4fe4de7))
+
 ## [0.9.3](https://github.com/coingaming/moon_flutter/compare/v0.9.2...v0.9.3) (2023-03-02)
 
 
