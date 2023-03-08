@@ -77,27 +77,23 @@ class TooltipStory extends Story {
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 64),
                     const TextDivider(text: "Customisable tooltip"),
                     const SizedBox(height: 32),
-                    Padding(
-                      padding: EdgeInsets.only(left: 60),
-                      child: MoonTooltip(
-                        arrowBaseWidth: 10,
-                        arrowOffsetValue: arrowOffsetKnob,
-                        show: showTooltipKnob,
-                        tooltipPosition: tooltipPositionsKnob,
-                        hasArrow: showArrowKnob,
-                        backgroundColor: color,
-                        tooltipShadows: showShadowKnob == true ? null : [],
-                        content: Text(customLabelTextKnob),
-                        child: MoonButton(
-                          backgroundColor: context.moonColors!.bulma,
-                          onTap: () {},
-                          label: const Text("M"),
-                        ),
+                    MoonTooltip(
+                      arrowBaseWidth: 20,
+                      arrowOffsetValue: arrowOffsetKnob,
+                      show: showTooltipKnob,
+                      tooltipPosition: tooltipPositionsKnob,
+                      hasArrow: showArrowKnob,
+                      backgroundColor: color,
+                      tooltipShadows: showShadowKnob == true ? null : [],
+                      content: Text(customLabelTextKnob),
+                      child: MoonButton(
+                        backgroundColor: context.moonColors!.bulma,
+                        onTap: () {},
+                        label: const Text("M"),
                       ),
                     ),
                     const SizedBox(height: 40),

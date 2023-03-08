@@ -168,7 +168,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     animationController!.forward();
   }
 
-  void updateTooltip() {
+  void _updateTooltip() {
     _overlayEntry?.markNeedsBuild();
   }
 
@@ -210,9 +210,9 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     required double arrowTipDistance,
     required double arrowLength,
     required double overlayWidth,
-    required double tooltipGlobalLeft,
-    required double tooltipGlobalCenter,
-    required double tooltipGlobalRight,
+    required double tooltipTargetGlobalLeft,
+    required double tooltipTargetGlobalCenter,
+    required double tooltipTargetGlobalRight,
   }) {
     switch (tooltipPosition) {
       case MoonTooltipPosition.top:
@@ -221,7 +221,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           targetAnchor: Alignment.topCenter,
           followerAnchor: Alignment.bottomCenter,
           toolTipMaxWidth:
-              overlayWidth - ((overlayWidth / 2 - tooltipGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
+              overlayWidth - ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
         );
 
       case MoonTooltipPosition.bottom:
@@ -230,7 +230,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           targetAnchor: Alignment.bottomCenter,
           followerAnchor: Alignment.topCenter,
           toolTipMaxWidth:
-              overlayWidth - ((overlayWidth / 2 - tooltipGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
+              overlayWidth - ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
         );
 
       case MoonTooltipPosition.left:
@@ -238,7 +238,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(-(arrowTipDistance + arrowLength), 0),
           targetAnchor: Alignment.centerLeft,
           followerAnchor: Alignment.centerRight,
-          toolTipMaxWidth: tooltipGlobalLeft - arrowLength - arrowTipDistance - widget.tooltipMargin,
+          toolTipMaxWidth: tooltipTargetGlobalLeft - arrowLength - arrowTipDistance - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.right:
@@ -246,7 +246,8 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(arrowTipDistance + arrowLength, 0),
           targetAnchor: Alignment.centerRight,
           followerAnchor: Alignment.centerLeft,
-          toolTipMaxWidth: overlayWidth - tooltipGlobalRight - arrowLength - arrowTipDistance - widget.tooltipMargin,
+          toolTipMaxWidth:
+              overlayWidth - tooltipTargetGlobalRight - arrowLength - arrowTipDistance - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.topLeft:
@@ -254,7 +255,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topRight,
           followerAnchor: Alignment.bottomRight,
-          toolTipMaxWidth: tooltipGlobalRight - widget.tooltipMargin,
+          toolTipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.topRight:
@@ -262,7 +263,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topLeft,
           followerAnchor: Alignment.bottomLeft,
-          toolTipMaxWidth: overlayWidth - tooltipGlobalLeft - widget.tooltipMargin,
+          toolTipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.bottomLeft:
@@ -270,7 +271,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomRight,
           followerAnchor: Alignment.topRight,
-          toolTipMaxWidth: tooltipGlobalRight - widget.tooltipMargin,
+          toolTipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.bottomRight:
@@ -278,7 +279,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomLeft,
           followerAnchor: Alignment.topLeft,
-          toolTipMaxWidth: overlayWidth - tooltipGlobalLeft - widget.tooltipMargin,
+          toolTipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
         );
 
       default:
@@ -347,7 +348,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
         _removeTooltip();
       }
 
-      updateTooltip();
+      _updateTooltip();
     });
   }
 
@@ -412,13 +413,13 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     final targetRenderBox = context.findRenderObject()! as RenderBox;
     final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
-    final tooltipGlobalCenter =
+    final tooltipTargetGlobalCenter =
         targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
 
-    final tooltipGlobalLeft =
+    final tooltipTargetGlobalLeft =
         targetRenderBox.localToGlobal(targetRenderBox.size.centerLeft(Offset.zero), ancestor: overlayRenderBox);
 
-    final tooltipGlobalRight =
+    final tooltipTargetGlobalRight =
         targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
 
     if (Directionality.of(context) == TextDirection.rtl) {
@@ -447,10 +448,10 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     } else if (tooltipPosition == MoonTooltipPosition.horizontal || tooltipPosition == MoonTooltipPosition.vertical) {
       // Compute real tooltipPosition based on target position
       tooltipPosition = (tooltipPosition == MoonTooltipPosition.vertical)
-          ? (tooltipGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
+          ? (tooltipTargetGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
               ? MoonTooltipPosition.bottom
               : MoonTooltipPosition.top)
-          : (tooltipGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
+          : (tooltipTargetGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
               ? MoonTooltipPosition.right
               : MoonTooltipPosition.left);
     }
@@ -460,9 +461,9 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
       arrowTipDistance: effectiveArrowTipDistance,
       arrowLength: effectiveArrowLength,
       overlayWidth: overlayRenderBox.size.width,
-      tooltipGlobalLeft: tooltipGlobalLeft.dx,
-      tooltipGlobalCenter: tooltipGlobalCenter.dx,
-      tooltipGlobalRight: tooltipGlobalRight.dx,
+      tooltipTargetGlobalLeft: tooltipTargetGlobalLeft.dx,
+      tooltipTargetGlobalCenter: tooltipTargetGlobalCenter.dx,
+      tooltipTargetGlobalRight: tooltipTargetGlobalRight.dx,
     );
 
     return UnconstrainedBox(
