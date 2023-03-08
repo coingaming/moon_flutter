@@ -49,6 +49,20 @@ class TooltipStory extends Story {
               max: 100,
             );
 
+            final arrowBaseWidthKnob = context.knobs.slider(
+              label: "arrowBaseWidth",
+              description: "Set the base width of the tooltip arrow.",
+              initial: 16,
+              max: 100,
+            );
+
+            final arrowLengthKnob = context.knobs.slider(
+              label: "arrowLength",
+              description: "Set the length of the tooltip arrow.",
+              initial: 8,
+              max: 100,
+            );
+
             final showTooltipKnob = context.knobs.boolean(
               label: "show",
               description: "Show the tooltip.",
@@ -82,7 +96,8 @@ class TooltipStory extends Story {
                     const TextDivider(text: "Customisable tooltip"),
                     const SizedBox(height: 32),
                     MoonTooltip(
-                      arrowBaseWidth: 20,
+                      arrowBaseWidth: arrowBaseWidthKnob,
+                      arrowLength: arrowLengthKnob,
                       arrowOffsetValue: arrowOffsetKnob,
                       show: showTooltipKnob,
                       tooltipPosition: tooltipPositionsKnob,
