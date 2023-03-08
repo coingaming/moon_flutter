@@ -286,10 +286,6 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     }
 
     _effectiveFocusNode.canRequestFocus = _isEnabled;
-
-    /* if (_isPressed && mounted) {
-      setState(() => _isPressed = false);
-    } */
   }
 
   @override
@@ -386,13 +382,13 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
               onVerticalDragEnd: _handleVerticalDragEnd,
               child: FocusableActionDetector(
                 enabled: _isEnabled && widget.isFocusable,
+                actions: _actions,
+                mouseCursor: _cursor,
                 focusNode: _effectiveFocusNode,
                 autofocus: _isEnabled && widget.autofocus,
-                mouseCursor: _cursor,
-                onShowHoverHighlight: _handleHover,
-                onShowFocusHighlight: _handleFocus,
                 onFocusChange: _handleFocusChange,
-                actions: _actions,
+                onShowFocusHighlight: _handleFocus,
+                onShowHoverHighlight: _handleHover,
                 child: TouchTargetPadding(
                   minSize: widget.ensureMinimalTouchTargetSize
                       ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)

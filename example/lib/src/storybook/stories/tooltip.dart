@@ -23,7 +23,44 @@ class TooltipStory extends Story {
                 Option(label: "bottom", value: MoonTooltipPosition.bottom),
                 Option(label: "left", value: MoonTooltipPosition.left),
                 Option(label: "right", value: MoonTooltipPosition.right),
+                Option(label: "topLeft", value: MoonTooltipPosition.topLeft),
+                Option(label: "topRight", value: MoonTooltipPosition.topRight),
+                Option(label: "bottomLeft", value: MoonTooltipPosition.bottomLeft),
+                Option(label: "bottomRight", value: MoonTooltipPosition.bottomRight),
+                Option(label: "vertical", value: MoonTooltipPosition.vertical),
+                Option(label: "horizontal", value: MoonTooltipPosition.horizontal),
               ],
+            );
+
+            final colorsKnob = context.knobs.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for base MoonButton.",
+              initial: 4, // gohan
+              options: colorOptions,
+            );
+
+            final color = colorTable(context)[colorsKnob];
+
+            final arrowOffsetKnob = context.knobs.slider(
+              label: "arrowOffsetValue",
+              description: "Set the offset of the tooltip arrow.",
+              initial: 0,
+              min: -100,
+              max: 100,
+            );
+
+            final arrowBaseWidthKnob = context.knobs.slider(
+              label: "arrowBaseWidth",
+              description: "Set the base width of the tooltip arrow.",
+              initial: 16,
+              max: 100,
+            );
+
+            final arrowLengthKnob = context.knobs.slider(
+              label: "arrowLength",
+              description: "Set the length of the tooltip arrow.",
+              initial: 8,
+              max: 100,
             );
 
             final showTooltipKnob = context.knobs.boolean(
@@ -44,22 +81,13 @@ class TooltipStory extends Story {
               initial: true,
             );
 
-            final colorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for base MoonButton.",
-              initial: 4, // gohan
-              options: colorOptions,
-            );
-
-            final color = colorTable(context)[colorsKnob];
-
-            /* final setRtlModeKnob = context.knobs.boolean(
+            final setRtlModeKnob = context.knobs.boolean(
               label: "RTL mode",
               description: "Switch between LTR and RTL modes.",
-            ); */
+            );
 
             return Directionality(
-              textDirection: /* setRtlModeKnob ? TextDirection.rtl :  */ TextDirection.ltr,
+              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -68,6 +96,9 @@ class TooltipStory extends Story {
                     const TextDivider(text: "Customisable tooltip"),
                     const SizedBox(height: 32),
                     MoonTooltip(
+                      arrowBaseWidth: arrowBaseWidthKnob,
+                      arrowLength: arrowLengthKnob,
+                      arrowOffsetValue: arrowOffsetKnob,
                       show: showTooltipKnob,
                       tooltipPosition: tooltipPositionsKnob,
                       hasArrow: showArrowKnob,
@@ -77,7 +108,7 @@ class TooltipStory extends Story {
                       child: MoonButton(
                         backgroundColor: context.moonColors!.bulma,
                         onTap: () {},
-                        label: const Text("MoonButton"),
+                        label: const Text("MDS"),
                       ),
                     ),
                     const SizedBox(height: 40),
