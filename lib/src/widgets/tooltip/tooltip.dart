@@ -375,26 +375,29 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
   Widget _createOverlayContent() {
     MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
-    final double effectiveArrowBaseWidth = widget.arrowBaseWidth ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
+    final double effectiveArrowBaseWidth =
+        widget.arrowBaseWidth ?? context.moonTheme?.tooltipTheme.arrowBaseWidth ?? 16;
 
     final double effectiveArrowLength =
-        widget.hasArrow ? (widget.arrowLength ?? context.moonTooltipTheme?.arrowLength ?? 8) : 0;
+        widget.hasArrow ? (widget.arrowLength ?? context.moonTheme?.tooltipTheme.arrowLength ?? 8) : 0;
 
-    final double effectiveArrowTipDistance = widget.arrowTipDistance ?? context.moonTooltipTheme?.arrowTipDistance ?? 8;
+    final double effectiveArrowTipDistance =
+        widget.arrowTipDistance ?? context.moonTheme?.tooltipTheme.arrowTipDistance ?? 8;
 
     final EdgeInsets effectiveContentPadding =
-        widget.contentPadding ?? context.moonTooltipTheme?.contentPadding ?? const EdgeInsets.all(12);
+        widget.contentPadding ?? context.moonTheme?.tooltipTheme.contentPadding ?? const EdgeInsets.all(12);
 
     final double effectiveBorderRadius =
-        widget.borderRadiusValue ?? context.moonTooltipTheme?.borderRadius.topLeft.x ?? 4;
+        widget.borderRadiusValue ?? context.moonTheme?.tooltipTheme.borderRadius.topLeft.x ?? 4;
 
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonColors?.gohan ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor = _getTextColor(backgroundColor: effectiveBackgroundColor);
 
-    final TextStyle effectiveTextStyle = context.moonTooltipTheme?.textStyle.copyWith(color: effectiveTextColor) ??
-        MoonTextStyles.text.text12.copyWith(color: effectiveTextColor);
+    final TextStyle effectiveTextStyle =
+        context.moonTheme?.tooltipTheme.textStyle.copyWith(color: effectiveTextColor) ??
+            MoonTextStyles.text.text12.copyWith(color: effectiveTextColor);
 
     final List<BoxShadow> effectiveTooltipShadows = widget.tooltipShadows ??
         context.moonShadows?.sm ??
@@ -511,11 +514,12 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
 
   @override
   Widget build(BuildContext context) {
-    final Duration effectiveTransitionDuration =
-        widget.transitionDuration ?? context.moonTooltipTheme?.transitionDuration ?? const Duration(milliseconds: 150);
+    final Duration effectiveTransitionDuration = widget.transitionDuration ??
+        context.moonTheme?.tooltipTheme.transitionDuration ??
+        const Duration(milliseconds: 150);
 
     final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTooltipTheme?.transitionCurve ?? Curves.easeInOutCubic;
+        widget.transitionCurve ?? context.moonTheme?.tooltipTheme.transitionCurve ?? Curves.easeInOutCubic;
 
     animationController ??= AnimationController(
       duration: effectiveTransitionDuration,

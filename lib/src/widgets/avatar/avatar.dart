@@ -118,24 +118,28 @@ class MoonAvatar extends StatelessWidget {
   MoonAvatarSizes _getMoonAvatarSize(BuildContext context, MoonAvatarSize? moonAvatarSize) {
     switch (moonAvatarSize) {
       case MoonAvatarSize.xs:
-        return context.moonTheme?.avatarTheme.xs ?? MoonAvatarSizes.xs;
+        return context.moonTheme?.avatar.xs ?? MoonAvatarSizes.xs;
       case MoonAvatarSize.sm:
-        return context.moonTheme?.avatarTheme.sm ?? MoonAvatarSizes.sm;
+        return context.moonTheme?.avatar.sm ?? MoonAvatarSizes.sm;
       case MoonAvatarSize.md:
-        return context.moonTheme?.avatarTheme.md ?? MoonAvatarSizes.md;
+        return context.moonTheme?.avatar.md ?? MoonAvatarSizes.md;
       case MoonAvatarSize.lg:
-        return context.moonTheme?.avatarTheme.lg ?? MoonAvatarSizes.lg;
+        return context.moonTheme?.avatar.lg ?? MoonAvatarSizes.lg;
       case MoonAvatarSize.xl:
-        return context.moonTheme?.avatarTheme.xl ?? MoonAvatarSizes.xl;
+        return context.moonTheme?.avatar.xl ?? MoonAvatarSizes.xl;
       case MoonAvatarSize.x2l:
-        return context.moonTheme?.avatarTheme.x2l ?? MoonAvatarSizes.x2l;
+        return context.moonTheme?.avatar.x2l ?? MoonAvatarSizes.x2l;
       default:
-        return context.moonTheme?.avatarTheme.md ?? MoonAvatarSizes.md;
+        return context.moonTheme?.avatar.md ?? MoonAvatarSizes.md;
     }
   }
 
-  Color _getTextColor({required bool isDarkMode, required Color backgroundColor}) {
-    final backgroundLuminance = backgroundColor.computeLuminance();
+  Color _getTextColor(BuildContext context, {required bool isDarkMode, required Color effectiveBackgroundColor}) {
+    if (backgroundColor == null && context.moonTheme != null) {
+      return context.moonTheme!.typography.colors.bodyPrimary;
+    }
+
+    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
     if (backgroundLuminance > 0.5) {
       return MoonColors.light.bulma;
     } else {
@@ -156,11 +160,13 @@ class MoonAvatar extends StatelessWidget {
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
     final double avatarBorderRadiusValue = maxBorderRadius(effectiveBorderRadius);
 
-    final Color effectiveBackgroundColor = backgroundColor ?? context.moonColors?.gohan ?? MoonColors.light.gohan;
-    final Color effectiveBadgeColor = badgeColor ?? context.moonColors?.roshi100 ?? MoonColors.light.roshi100;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.avatar.colors.backgroundColor ?? MoonColors.light.gohan;
+    final Color effectiveBadgeColor =
+        badgeColor ?? context.moonTheme?.avatar.colors.badgeColor ?? MoonColors.light.roshi100;
 
-    final Color effectiveTextColor =
-        textColor ?? _getTextColor(isDarkMode: context.isDarkMode, backgroundColor: effectiveBackgroundColor);
+    final Color effectiveTextColor = textColor ??
+        _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
 
     return Semantics(
       label: semanticLabel,

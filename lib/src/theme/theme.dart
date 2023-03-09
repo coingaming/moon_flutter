@@ -21,7 +21,7 @@ import 'package:moon_design/src/theme/typography/typography.dart';
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
-    avatarTheme: MoonAvatarTheme.sizes,
+    avatar: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.sizes,
     chipTheme: MoonChipTheme.sizes,
@@ -36,11 +36,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     sizes: MoonSizes.sizes,
     tagTheme: MoonTagTheme.sizes,
     tooltipTheme: MoonTooltipTheme.tooltip,
-    typography: MoonTypography.textStyles,
+    typography: MoonTypography.light,
   );
 
   static final dark = MoonTheme(
-    avatarTheme: MoonAvatarTheme.sizes,
+    avatar: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.sizes,
     chipTheme: MoonChipTheme.sizes,
@@ -55,11 +55,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     sizes: MoonSizes.sizes,
     tagTheme: MoonTagTheme.sizes,
     tooltipTheme: MoonTooltipTheme.tooltip,
-    typography: MoonTypography.textStyles,
+    typography: MoonTypography.dark,
   );
 
   /// Moon Design System avatar theming.
-  final MoonAvatarTheme avatarTheme;
+  final MoonAvatarTheme avatar;
 
   /// Moon Design System borders.
   final MoonBorders borders;
@@ -107,7 +107,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonTypography typography;
 
   const MoonTheme({
-    required this.avatarTheme,
+    required this.avatar,
     required this.borders,
     required this.buttonTheme,
     required this.chipTheme,
@@ -127,7 +127,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   @override
   MoonTheme copyWith({
-    MoonAvatarTheme? avatarTheme,
+    MoonAvatarTheme? avatar,
     MoonBorders? borders,
     MoonButtonTheme? buttonTheme,
     MoonChipTheme? chipTheme,
@@ -145,7 +145,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonTypography? typography,
   }) {
     return MoonTheme(
-      avatarTheme: avatarTheme ?? this.avatarTheme,
+      avatar: avatar ?? this.avatar,
       borders: borders ?? this.borders,
       buttonTheme: buttonTheme ?? this.buttonTheme,
       chipTheme: chipTheme ?? this.chipTheme,
@@ -169,7 +169,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     if (other is! MoonTheme) return this;
 
     return MoonTheme(
-      avatarTheme: avatarTheme.lerp(other.avatarTheme, t),
+      avatar: avatar.lerp(other.avatar, t),
       borders: borders.lerp(other.borders, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       chipTheme: chipTheme.lerp(other.chipTheme, t),
@@ -193,7 +193,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTheme"))
-      ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
+      ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatar))
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
       ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
@@ -214,20 +214,11 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
-  MoonAvatarTheme? get moonAvatarTheme => moonTheme?.avatarTheme;
   MoonBorders? get moonBorders => moonTheme?.borders;
-  MoonButtonTheme? get moonButtonTheme => moonTheme?.buttonTheme;
-  MoonChipTheme? get moonChipTheme => moonTheme?.chipTheme;
-  MoonCircularLoaderTheme? get moonCircularLoaderTheme => moonTheme?.circularLoaderTheme;
-  MoonCircularProgressTheme? get moonCircularProgressTheme => moonTheme?.circularProgressTheme;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonEffects? get moonEffects => moonTheme?.effects;
-  MoonLinearLoaderTheme? get moonLinearLoaderTheme => moonTheme?.linearLoaderTheme;
-  MoonLinearProgressTheme? get moonLinearProgressTheme => moonTheme?.linearProgressTheme;
   MoonOpacity? get moonOpacity => moonTheme?.opacity;
   MoonShadows? get moonShadows => moonTheme?.shadows;
   MoonSizes? get moonSizes => moonTheme?.sizes;
-  MoonTagTheme? get moonTagTheme => moonTheme?.tagTheme;
-  MoonTooltipTheme? get moonTooltipTheme => moonTheme?.tooltipTheme;
   MoonTypography? get moonTypography => moonTheme?.typography;
 }

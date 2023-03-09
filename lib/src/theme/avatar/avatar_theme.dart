@@ -1,17 +1,29 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/avatar/avatar_colors.dart';
 
 import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
 
 @immutable
 class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with DiagnosticableTreeMixin {
-  static final sizes = MoonAvatarTheme(
+  static final light = MoonAvatarTheme(
     xs: MoonAvatarSizes.xs,
     sm: MoonAvatarSizes.sm,
     md: MoonAvatarSizes.md,
     lg: MoonAvatarSizes.lg,
     xl: MoonAvatarSizes.xl,
     x2l: MoonAvatarSizes.x2l,
+    colors: MoonAvatarColors.light,
+  );
+
+  static final dark = MoonAvatarTheme(
+    xs: MoonAvatarSizes.xs,
+    sm: MoonAvatarSizes.sm,
+    md: MoonAvatarSizes.md,
+    lg: MoonAvatarSizes.lg,
+    xl: MoonAvatarSizes.xl,
+    x2l: MoonAvatarSizes.x2l,
+    colors: MoonAvatarColors.dark,
   );
 
   /// Extra small avatar properties.
@@ -32,6 +44,9 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
   /// (2x) Extra large avatar properties.
   final MoonAvatarSizes x2l;
 
+  /// Avatar colors.
+  final MoonAvatarColors colors;
+
   const MoonAvatarTheme({
     required this.xs,
     required this.sm,
@@ -39,6 +54,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
     required this.lg,
     required this.xl,
     required this.x2l,
+    required this.colors,
   });
 
   @override
@@ -49,6 +65,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
     MoonAvatarSizes? lg,
     MoonAvatarSizes? xl,
     MoonAvatarSizes? x2l,
+    MoonAvatarColors? colors,
   }) {
     return MoonAvatarTheme(
       xs: xs ?? this.xs,
@@ -57,6 +74,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
       lg: lg ?? this.lg,
       xl: xl ?? this.xl,
       x2l: x2l ?? this.x2l,
+      colors: colors ?? this.colors,
     );
   }
 
@@ -71,6 +89,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
       lg: lg.lerp(other.lg, t),
       xl: xl.lerp(other.xl, t),
       x2l: x2l.lerp(other.x2l, t),
+      colors: colors.lerp(other.colors, t),
     );
   }
 
@@ -84,6 +103,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
       ..add(DiagnosticsProperty<MoonAvatarSizes>("md", md))
       ..add(DiagnosticsProperty<MoonAvatarSizes>("lg", lg))
       ..add(DiagnosticsProperty<MoonAvatarSizes>("xl", xl))
-      ..add(DiagnosticsProperty<MoonAvatarSizes>("x2l", x2l));
+      ..add(DiagnosticsProperty<MoonAvatarSizes>("x2l", x2l))
+      ..add(DiagnosticsProperty<MoonAvatarColors>("colors", colors));
   }
 }

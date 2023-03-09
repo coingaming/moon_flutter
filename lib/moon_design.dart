@@ -1,30 +1,21 @@
 library moon_design;
 
-export 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
 export 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 export 'package:moon_design/src/theme/borders.dart';
-export 'package:moon_design/src/theme/button/button_sizes.dart';
 export 'package:moon_design/src/theme/button/button_theme.dart';
-export 'package:moon_design/src/theme/chip/chip_sizes.dart';
 export 'package:moon_design/src/theme/chip/chip_theme.dart';
 export 'package:moon_design/src/theme/colors.dart';
-export 'package:moon_design/src/theme/effects/controls_effects.dart';
 export 'package:moon_design/src/theme/effects/effects.dart';
-export 'package:moon_design/src/theme/effects/focus_effects.dart';
-export 'package:moon_design/src/theme/effects/hover_effects.dart';
-export 'package:moon_design/src/theme/loaders/circular_loader_sizes.dart';
 export 'package:moon_design/src/theme/loaders/circular_loader_theme.dart';
-export 'package:moon_design/src/theme/loaders/linear_loader_sizes.dart';
 export 'package:moon_design/src/theme/loaders/linear_loader_theme.dart';
 export 'package:moon_design/src/theme/opacity.dart';
-export 'package:moon_design/src/theme/progress/circular_progress_sizes.dart';
 export 'package:moon_design/src/theme/progress/circular_progress_theme.dart';
-export 'package:moon_design/src/theme/progress/linear_progress_sizes.dart';
 export 'package:moon_design/src/theme/progress/linear_progress_theme.dart';
 export 'package:moon_design/src/theme/shadows.dart';
 export 'package:moon_design/src/theme/sizes.dart';
 export 'package:moon_design/src/theme/theme.dart';
 export 'package:moon_design/src/theme/tooltip/tooltip.dart';
+export 'package:moon_design/src/theme/typography/text_colors.dart';
 export 'package:moon_design/src/theme/typography/text_styles.dart';
 export 'package:moon_design/src/theme/typography/typography.dart';
 
