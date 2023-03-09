@@ -56,14 +56,16 @@ class MoonCircularProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color effectiveColor = color ?? context.moonTheme?.circularProgress.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.circularProgress.colors.backgroundColor ?? MoonColors.light.trunks;
+
+    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
+
     final MoonCircularProgressSizeProperties effectiveMoonCircularProgressSize =
         _getMoonCircularProgressSize(context, circularProgressSize);
     final double effectiveSize = sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
     final double effectiveStrokeWidth = strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
-    final Color effectiveColor = color ?? context.moonTheme?.circularProgress.colors.color ?? MoonColors.light.piccolo;
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.circularProgress.colors.backgroundColor ?? MoonColors.light.trunks;
-    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 
     return SizedBox(
       height: effectiveSize,

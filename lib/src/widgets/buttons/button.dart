@@ -338,7 +338,6 @@ class MoonButton extends StatelessWidget {
 
     final double effectiveHeight = height ?? effectiveMoonButtonSize.height;
     final double effectiveGap = gap ?? effectiveMoonButtonSize.gap;
-
     final EdgeInsets effectivePadding = padding ?? effectiveMoonButtonSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
@@ -348,14 +347,18 @@ class MoonButton extends StatelessWidget {
       effectivePadding.bottom,
     );
 
+    final Color effectiveBorderColor =
+        borderColor ?? context.moonTheme?.button.colors.borderColor ?? MoonColors.light.trunks;
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
-    final Color effectiveBorderColor = borderColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
+
     final double effectiveBorderWidth =
         borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
 
     final Color effectiveHoverEffectColor = hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.primaryHoverColor ??
         MoonHoverEffects.lightHoverEffect.primaryHoverColor;
+
+    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, backgroundColor ?? Colors.transparent);
 
     final Curve effectiveHoverEffectCurve = hoverEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
@@ -364,8 +367,6 @@ class MoonButton extends StatelessWidget {
     final Duration effectiveHoverEffectDuration = hoverEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??
         MoonHoverEffects.lightHoverEffect.hoverDuration;
-
-    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, backgroundColor ?? Colors.transparent);
 
     return MoonBaseControl(
       onTap: onTap,

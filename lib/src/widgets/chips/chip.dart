@@ -194,11 +194,16 @@ class MoonChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color effectiveActiveColor =
+        activeColor ?? context.moonTheme?.chip.colors.activeColor ?? MoonColors.light.piccolo;
+
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.chip.colors.backgroundColor ?? MoonColors.light.gohan;
+
     final MoonChipSizeProperties effectiveMoonChipSize = _getMoonChipSize(context, chipSize);
 
     final double effectiveHeight = height ?? effectiveMoonChipSize.height;
     final double effectiveGap = gap ?? effectiveMoonChipSize.gap;
-
     final EdgeInsets effectivePadding = padding ?? effectiveMoonChipSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
@@ -209,14 +214,9 @@ class MoonChip extends StatelessWidget {
     );
 
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonChipSize.borderRadius;
+
     final double effectiveBorderWidth =
         borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
-
-    final Color effectiveActiveColor =
-        activeColor ?? context.moonTheme?.chip.colors.activeColor ?? MoonColors.light.piccolo;
-
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.chip.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveHoverEffectColor = hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.secondaryHoverColor ??

@@ -102,18 +102,17 @@ class MoonTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonTagSizeProperties effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
-
-    final double effectiveHeight = height ?? effectiveMoonTagSize.height;
-    final double effectiveGap = gap ?? effectiveMoonTagSize.gap;
-
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
-
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.tag.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor = textColor ??
         _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
+
+    final MoonTagSizeProperties effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
+    final double effectiveHeight = height ?? effectiveMoonTagSize.height;
+    final double effectiveGap = gap ?? effectiveMoonTagSize.gap;
+
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
 
     final EdgeInsets effectivePadding = padding ?? effectiveMoonTagSize.padding;
 

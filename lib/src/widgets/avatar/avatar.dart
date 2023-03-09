@@ -149,6 +149,15 @@ class MoonAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.avatar.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveBadgeColor =
+        badgeColor ?? context.moonTheme?.avatar.colors.badgeColor ?? MoonColors.light.roshi100;
+
+    final Color effectiveTextColor = textColor ??
+        _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
+
     final MoonAvatarSizeProperties effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
 
     final double effectiveAvatarWidth = width ?? effectiveMoonAvatarSize.avatarSizeValue;
@@ -159,14 +168,6 @@ class MoonAvatar extends StatelessWidget {
 
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
     final double avatarBorderRadiusValue = maxBorderRadius(effectiveBorderRadius);
-
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.avatar.colors.backgroundColor ?? MoonColors.light.gohan;
-    final Color effectiveBadgeColor =
-        badgeColor ?? context.moonTheme?.avatar.colors.badgeColor ?? MoonColors.light.roshi100;
-
-    final Color effectiveTextColor = textColor ??
-        _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
 
     return Semantics(
       label: semanticLabel,

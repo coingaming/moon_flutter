@@ -51,13 +51,15 @@ class MoonCircularLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonCircularLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
-    final double effectiveSize = sizeValue ?? effectiveLoaderSize.loaderSizeValue;
-    final double effectiveStrokeWidth = strokeWidth ?? effectiveLoaderSize.loaderStrokeWidth;
     final Color effectiveColor = color ?? context.moonTheme?.circularLoader.colors.color ?? MoonColors.light.hit;
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.circularLoader.colors.backgroundColor ?? MoonColors.light.trunks;
+
     final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
+
+    final MoonCircularLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
+    final double effectiveSize = sizeValue ?? effectiveLoaderSize.loaderSizeValue;
+    final double effectiveStrokeWidth = strokeWidth ?? effectiveLoaderSize.loaderStrokeWidth;
 
     return SizedBox(
       height: effectiveSize,

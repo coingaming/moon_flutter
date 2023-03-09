@@ -49,12 +49,13 @@ class MoonLinearLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonLinearLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
-    final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveLoaderSize.borderRadiusValue;
-    final double effectiveHeight = height ?? effectiveLoaderSize.loaderHeight;
     final Color effectiveColor = color ?? context.moonTheme?.linearLoader.colors.color ?? MoonColors.light.hit;
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.linearLoader.colors.backgroundColor ?? MoonColors.light.trunks;
+
+    final MoonLinearLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
+    final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveLoaderSize.borderRadiusValue;
+    final double effectiveHeight = height ?? effectiveLoaderSize.loaderHeight;
 
     return MoonLinearProgressIndicator(
       borderRadiusValue: effectiveBorderRadiusValue,

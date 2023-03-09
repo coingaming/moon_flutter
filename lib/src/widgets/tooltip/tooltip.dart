@@ -380,6 +380,11 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
   Widget _createOverlayContent() {
     MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonTheme?.tooltip.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveTextColor = _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
+
     final double effectiveArrowBaseWidth =
         widget.arrowBaseWidth ?? context.moonTheme?.tooltip.properties.arrowBaseWidth ?? 16;
 
@@ -394,11 +399,6 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
 
     final double effectiveBorderRadius =
         widget.borderRadiusValue ?? context.moonTheme?.tooltip.properties.borderRadius.topLeft.x ?? 4;
-
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.tooltip.colors.backgroundColor ?? MoonColors.light.gohan;
-
-    final Color effectiveTextColor = _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.tooltip.properties.textStyle.copyWith(color: effectiveTextColor) ??

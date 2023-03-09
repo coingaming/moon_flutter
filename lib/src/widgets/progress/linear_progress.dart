@@ -54,12 +54,13 @@ class MoonLinearProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, progressSize);
-    final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveProgressSize.borderRadiusValue;
-    final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
     final Color effectiveColor = color ?? context.moonTheme?.linearProgress.colors.color ?? MoonColors.light.piccolo;
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.linearProgress.colors.backgroundColor ?? MoonColors.light.trunks;
+
+    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, progressSize);
+    final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveProgressSize.borderRadiusValue;
+    final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 
     return MoonLinearProgressIndicator(
       value: value,
