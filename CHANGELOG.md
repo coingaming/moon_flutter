@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.5](https://github.com/coingaming/moon_flutter/compare/v0.9.4...v0.9.5) (2023-03-09)
+
+
+### Bug Fixes
+
+* [MDS-409] Improve theming ([#70](https://github.com/coingaming/moon_flutter/issues/70)) ([a8523a5](https://github.com/coingaming/moon_flutter/commit/a8523a5c92d37c8b92349690d8f82efcea44dc46))
+
 ## [0.9.4](https://github.com/coingaming/moon_flutter/compare/v0.9.3...v0.9.4) (2023-03-08)
 
 
