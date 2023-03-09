@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/progress/circular_progress_sizes.dart';
+import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
 
@@ -33,36 +33,39 @@ class MoonCircularProgress extends StatelessWidget {
     this.strokeCap,
   });
 
-  MoonCircularProgressSizes _getMoonCircularProgressSize(
+  MoonCircularProgressSizeProperties _getMoonCircularProgressSize(
     BuildContext context,
     MoonCircularProgressSize? moonCircularProgressSize,
   ) {
     switch (moonCircularProgressSize) {
       case MoonCircularProgressSize.x2s:
-        return context.moonTheme?.circularProgressTheme.x2s ?? MoonCircularProgressSizes.x2s;
+        return context.moonTheme?.circularProgress.sizes.x2s ?? MoonCircularProgressSizeProperties.x2s;
       case MoonCircularProgressSize.xs:
-        return context.moonTheme?.circularProgressTheme.xs ?? MoonCircularProgressSizes.xs;
+        return context.moonTheme?.circularProgress.sizes.xs ?? MoonCircularProgressSizeProperties.xs;
       case MoonCircularProgressSize.sm:
-        return context.moonTheme?.circularProgressTheme.sm ?? MoonCircularProgressSizes.sm;
+        return context.moonTheme?.circularProgress.sizes.sm ?? MoonCircularProgressSizeProperties.sm;
       case MoonCircularProgressSize.md:
-        return context.moonTheme?.circularProgressTheme.md ?? MoonCircularProgressSizes.md;
+        return context.moonTheme?.circularProgress.sizes.md ?? MoonCircularProgressSizeProperties.md;
       case MoonCircularProgressSize.lg:
-        return context.moonTheme?.circularProgressTheme.lg ?? MoonCircularProgressSizes.lg;
+        return context.moonTheme?.circularProgress.sizes.lg ?? MoonCircularProgressSizeProperties.lg;
 
       default:
-        return context.moonTheme?.circularProgressTheme.md ?? MoonCircularProgressSizes.md;
+        return context.moonTheme?.circularProgress.sizes.md ?? MoonCircularProgressSizeProperties.md;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final MoonCircularProgressSizes effectiveMoonCircularProgressSize =
+    final Color effectiveColor = color ?? context.moonTheme?.circularProgress.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.circularProgress.colors.backgroundColor ?? MoonColors.light.trunks;
+
+    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
+
+    final MoonCircularProgressSizeProperties effectiveMoonCircularProgressSize =
         _getMoonCircularProgressSize(context, circularProgressSize);
     final double effectiveSize = sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
     final double effectiveStrokeWidth = strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
-    final Color effectiveColor = color ?? context.moonColors?.hit ?? MoonColors.light.hit;
-    final Color effectiveBackgroundColor = backgroundColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
-    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 
     return SizedBox(
       height: effectiveSize,

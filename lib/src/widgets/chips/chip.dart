@@ -2,13 +2,13 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/chip/chip_sizes.dart';
+import 'package:moon_design/src/theme/chip/chip_size_properties.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/utils/animated_icon_theme.dart';
-import 'package:moon_design/src/utils/corrected_color_container.dart';
+import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
+import 'package:moon_design/src/widgets/common/corrected_color_container.dart';
 
 enum MoonChipSize {
   sm,
@@ -160,15 +160,15 @@ class MoonChip extends StatelessWidget {
     this.rightIcon,
   });
 
-  MoonChipSizes _getMoonChipSize(BuildContext context, MoonChipSize? moonChipSize) {
+  MoonChipSizeProperties _getMoonChipSize(BuildContext context, MoonChipSize? moonChipSize) {
     switch (moonChipSize) {
       case MoonChipSize.sm:
-        return context.moonTheme?.chipTheme.sm ?? MoonChipSizes.sm;
+        return context.moonTheme?.chip.sizes.sm ?? MoonChipSizeProperties.sm;
       case MoonChipSize.md:
-        return context.moonTheme?.chipTheme.md ?? MoonChipSizes.md;
+        return context.moonTheme?.chip.sizes.md ?? MoonChipSizeProperties.md;
 
       default:
-        return context.moonTheme?.chipTheme.md ?? MoonChipSizes.sm;
+        return context.moonTheme?.chip.sizes.md ?? MoonChipSizeProperties.sm;
     }
   }
 
@@ -194,11 +194,16 @@ class MoonChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonChipSizes effectiveMoonChipSize = _getMoonChipSize(context, chipSize);
+    final Color effectiveActiveColor =
+        activeColor ?? context.moonTheme?.chip.colors.activeColor ?? MoonColors.light.piccolo;
+
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.chip.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final MoonChipSizeProperties effectiveMoonChipSize = _getMoonChipSize(context, chipSize);
 
     final double effectiveHeight = height ?? effectiveMoonChipSize.height;
     final double effectiveGap = gap ?? effectiveMoonChipSize.gap;
-
     final EdgeInsets effectivePadding = padding ?? effectiveMoonChipSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
@@ -209,12 +214,9 @@ class MoonChip extends StatelessWidget {
     );
 
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonChipSize.borderRadius;
+
     final double effectiveBorderWidth =
         borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
-
-    final Color effectiveActiveColor = activeColor ?? context.moonColors?.piccolo ?? MoonColors.light.piccolo;
-
-    final Color effectiveBackgroundColor = backgroundColor ?? context.moonColors?.gohan ?? MoonColors.light.gohan;
 
     final Color effectiveHoverEffectColor = hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.secondaryHoverColor ??

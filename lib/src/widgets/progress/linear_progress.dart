@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/progress/linear_progress_sizes.dart';
+import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
 
@@ -31,31 +31,36 @@ class MoonLinearProgress extends StatelessWidget {
     this.borderRadiusValue,
   });
 
-  MoonLinearProgressSizes _getMoonProgressSize(BuildContext context, MoonLinearProgressSize? moonProgressSize) {
+  MoonLinearProgressSizeProperties _getMoonProgressSize(
+    BuildContext context,
+    MoonLinearProgressSize? moonProgressSize,
+  ) {
     switch (moonProgressSize) {
       case MoonLinearProgressSize.x6s:
-        return context.moonTheme?.linearProgressTheme.x6s ?? MoonLinearProgressSizes.x6s;
+        return context.moonTheme?.linearProgress.sizes.x6s ?? MoonLinearProgressSizeProperties.x6s;
       case MoonLinearProgressSize.x5s:
-        return context.moonTheme?.linearProgressTheme.x5s ?? MoonLinearProgressSizes.x5s;
+        return context.moonTheme?.linearProgress.sizes.x5s ?? MoonLinearProgressSizeProperties.x5s;
       case MoonLinearProgressSize.x4s:
-        return context.moonTheme?.linearProgressTheme.x4s ?? MoonLinearProgressSizes.x4s;
+        return context.moonTheme?.linearProgress.sizes.x4s ?? MoonLinearProgressSizeProperties.x4s;
       case MoonLinearProgressSize.x3s:
-        return context.moonTheme?.linearProgressTheme.x3s ?? MoonLinearProgressSizes.x3s;
+        return context.moonTheme?.linearProgress.sizes.x3s ?? MoonLinearProgressSizeProperties.x3s;
       case MoonLinearProgressSize.x2s:
-        return context.moonTheme?.linearProgressTheme.x2s ?? MoonLinearProgressSizes.x2s;
+        return context.moonTheme?.linearProgress.sizes.x2s ?? MoonLinearProgressSizeProperties.x2s;
 
       default:
-        return context.moonTheme?.linearProgressTheme.x4s ?? MoonLinearProgressSizes.x4s;
+        return context.moonTheme?.linearProgress.sizes.x4s ?? MoonLinearProgressSizeProperties.x4s;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final MoonLinearProgressSizes effectiveProgressSize = _getMoonProgressSize(context, progressSize);
+    final Color effectiveColor = color ?? context.moonTheme?.linearProgress.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.linearProgress.colors.backgroundColor ?? MoonColors.light.trunks;
+
+    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, progressSize);
     final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveProgressSize.borderRadiusValue;
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
-    final Color effectiveColor = color ?? context.moonColors?.hit ?? MoonColors.light.hit;
-    final Color effectiveBackgroundColor = backgroundColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
 
     return MoonLinearProgressIndicator(
       value: value,

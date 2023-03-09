@@ -3,75 +3,47 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableTreeMixin {
-  //static const _prefferredFont = "Averta";
-  //static const _preferredFontPackage = "moon_design";
   static const _semiBold = FontWeight.w600;
 
-  static const text = MoonTextStyles(
+  static const body = MoonTextStyles(
     text9: TextStyle(
       fontSize: 9,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text10: TextStyle(
       fontSize: 10,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text12: TextStyle(
       fontSize: 12,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text14: TextStyle(
       fontSize: 14,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text16: TextStyle(
       fontSize: 16,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text18: TextStyle(
       fontSize: 18,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text20: TextStyle(
       fontSize: 20,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text24: TextStyle(
       fontSize: 24,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text32: TextStyle(
       fontSize: 32,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text48: TextStyle(
       fontSize: 48,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text56: TextStyle(
       fontSize: 56,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text64: TextStyle(
       fontSize: 64,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text72: TextStyle(
       fontSize: 72,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
   );
 
@@ -79,80 +51,54 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     text9: TextStyle(
       fontSize: 9,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text10: TextStyle(
       fontSize: 10,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text12: TextStyle(
       fontSize: 12,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text14: TextStyle(
       fontSize: 14,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text16: TextStyle(
       fontSize: 16,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text18: TextStyle(
       fontSize: 18,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text20: TextStyle(
       fontSize: 20,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text24: TextStyle(
       fontSize: 24,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text32: TextStyle(
       fontSize: 32,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text48: TextStyle(
       fontSize: 48,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text56: TextStyle(
       fontSize: 56,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text64: TextStyle(
       fontSize: 64,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
     text72: TextStyle(
       fontSize: 72,
       fontWeight: _semiBold,
-      //fontFamily: _prefferredFont,
-      //package: _preferredFontPackage,
     ),
   );
 

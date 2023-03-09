@@ -1,102 +1,62 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
 
 @immutable
 class MoonAvatarSizes extends ThemeExtension<MoonAvatarSizes> with DiagnosticableTreeMixin {
-  static final _badgeToAvatarRatio = MoonSizes.sizes.x3s / MoonSizes.sizes.x2l;
-  static final _badgeMarginValueToAvatarRatio = MoonSizes.sizes.x5s / MoonSizes.sizes.x2l;
-
-  static final xs = MoonAvatarSizes(
-    avatarSizeValue: MoonSizes.sizes.xs,
-    badgeSizeValue: MoonSizes.sizes.xs * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.xs * _badgeMarginValueToAvatarRatio,
-    borderRadius: MoonBorders.borders.interactiveXs,
-    textStyle: MoonTextStyles.heading.text10,
+  static final sizes = MoonAvatarSizes(
+    xs: MoonAvatarSizeProperties.xs,
+    sm: MoonAvatarSizeProperties.sm,
+    md: MoonAvatarSizeProperties.md,
+    lg: MoonAvatarSizeProperties.lg,
+    xl: MoonAvatarSizeProperties.xl,
+    x2l: MoonAvatarSizeProperties.x2l,
   );
 
-  static final sm = MoonAvatarSizes(
-    avatarSizeValue: MoonSizes.sizes.sm,
-    badgeSizeValue: MoonSizes.sizes.sm * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.sm * _badgeMarginValueToAvatarRatio,
-    borderRadius: MoonBorders.borders.interactiveSm,
-    textStyle: MoonTextStyles.heading.text12,
-  );
+  /// Extra small avatar properties.
+  final MoonAvatarSizeProperties xs;
 
-  static final md = MoonAvatarSizes(
-    avatarSizeValue: MoonSizes.sizes.md,
-    badgeSizeValue: MoonSizes.sizes.md * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.md * _badgeMarginValueToAvatarRatio,
-    borderRadius: MoonBorders.borders.interactiveSm,
-    textStyle: MoonTextStyles.heading.text14,
-  );
+  /// Small avatar properties.
+  final MoonAvatarSizeProperties sm;
 
-  static final lg = MoonAvatarSizes(
-    avatarSizeValue: MoonSizes.sizes.lg,
-    badgeSizeValue: MoonSizes.sizes.lg * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.lg * _badgeMarginValueToAvatarRatio,
-    borderRadius: MoonBorders.borders.interactiveSm,
-    textStyle: MoonTextStyles.heading.text16,
-  );
+  /// Medium avatar properties.
+  final MoonAvatarSizeProperties md;
 
-  static final xl = MoonAvatarSizes(
-    avatarSizeValue: MoonSizes.sizes.xl,
-    badgeSizeValue: MoonSizes.sizes.xl * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.xl * _badgeMarginValueToAvatarRatio,
-    borderRadius: MoonBorders.borders.interactiveMd,
-    textStyle: MoonTextStyles.heading.text16,
-  );
+  /// Large avatar properties.
+  final MoonAvatarSizeProperties lg;
 
-  static final x2l = MoonAvatarSizes(
-    avatarSizeValue: MoonSizes.sizes.x2l,
-    badgeSizeValue: MoonSizes.sizes.x2l * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.x2l * _badgeMarginValueToAvatarRatio,
-    borderRadius: MoonBorders.borders.interactiveMd,
-    textStyle: MoonTextStyles.heading.text20,
-  );
+  /// Extra large avatar properties.
+  final MoonAvatarSizeProperties xl;
 
-  /// Avatar size value.
-  final double avatarSizeValue;
-
-  /// Avatar badge size value.
-  final double badgeSizeValue;
-
-  /// Avatar badge margin value.
-  final double badgeMarginValue;
-
-  /// Avatar border radius.
-  final BorderRadius borderRadius;
-
-  /// Avatar text style.
-  final TextStyle textStyle;
+  /// (2x) Extra large avatar properties.
+  final MoonAvatarSizeProperties x2l;
 
   const MoonAvatarSizes({
-    required this.avatarSizeValue,
-    required this.badgeSizeValue,
-    required this.badgeMarginValue,
-    required this.borderRadius,
-    required this.textStyle,
+    required this.xs,
+    required this.sm,
+    required this.md,
+    required this.lg,
+    required this.xl,
+    required this.x2l,
   });
 
   @override
   MoonAvatarSizes copyWith({
-    double? avatarSizeValue,
-    double? badgeSizeValue,
-    double? badgeMarginValue,
-    BorderRadius? borderRadius,
-    TextStyle? textStyle,
+    MoonAvatarSizeProperties? xs,
+    MoonAvatarSizeProperties? sm,
+    MoonAvatarSizeProperties? md,
+    MoonAvatarSizeProperties? lg,
+    MoonAvatarSizeProperties? xl,
+    MoonAvatarSizeProperties? x2l,
   }) {
     return MoonAvatarSizes(
-      avatarSizeValue: avatarSizeValue ?? this.avatarSizeValue,
-      badgeSizeValue: badgeSizeValue ?? this.badgeSizeValue,
-      badgeMarginValue: badgeMarginValue ?? this.badgeMarginValue,
-      borderRadius: borderRadius ?? this.borderRadius,
-      textStyle: textStyle ?? this.textStyle,
+      xs: xs ?? this.xs,
+      sm: sm ?? this.sm,
+      md: md ?? this.md,
+      lg: lg ?? this.lg,
+      xl: xl ?? this.xl,
+      x2l: x2l ?? this.x2l,
     );
   }
 
@@ -105,11 +65,12 @@ class MoonAvatarSizes extends ThemeExtension<MoonAvatarSizes> with Diagnosticabl
     if (other is! MoonAvatarSizes) return this;
 
     return MoonAvatarSizes(
-      avatarSizeValue: lerpDouble(avatarSizeValue, other.avatarSizeValue, t)!,
-      badgeSizeValue: lerpDouble(badgeSizeValue, other.badgeSizeValue, t)!,
-      badgeMarginValue: lerpDouble(badgeMarginValue, other.badgeMarginValue, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
-      textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
+      xs: xs.lerp(other.xs, t),
+      sm: sm.lerp(other.sm, t),
+      md: md.lerp(other.md, t),
+      lg: lg.lerp(other.lg, t),
+      xl: xl.lerp(other.xl, t),
+      x2l: x2l.lerp(other.x2l, t),
     );
   }
 
@@ -118,10 +79,11 @@ class MoonAvatarSizes extends ThemeExtension<MoonAvatarSizes> with Diagnosticabl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAvatarSizes"))
-      ..add(DoubleProperty("avatarSizeValue", avatarSizeValue))
-      ..add(DoubleProperty("badgeSizeValue", badgeSizeValue))
-      ..add(DoubleProperty("badgeMarginValue", badgeMarginValue))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
+      ..add(DiagnosticsProperty<MoonAvatarSizeProperties>("xs", xs))
+      ..add(DiagnosticsProperty<MoonAvatarSizeProperties>("sm", sm))
+      ..add(DiagnosticsProperty<MoonAvatarSizeProperties>("md", md))
+      ..add(DiagnosticsProperty<MoonAvatarSizeProperties>("lg", lg))
+      ..add(DiagnosticsProperty<MoonAvatarSizeProperties>("xl", xl))
+      ..add(DiagnosticsProperty<MoonAvatarSizeProperties>("x2l", x2l));
   }
 }

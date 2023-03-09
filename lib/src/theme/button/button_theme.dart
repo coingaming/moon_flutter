@@ -1,55 +1,40 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/button/button_colors.dart';
 
 import 'package:moon_design/src/theme/button/button_sizes.dart';
 
 @immutable
 class MoonButtonTheme extends ThemeExtension<MoonButtonTheme> with DiagnosticableTreeMixin {
-  static final sizes = MoonButtonTheme(
-    xs: MoonButtonSizes.xs,
-    sm: MoonButtonSizes.sm,
-    md: MoonButtonSizes.md,
-    lg: MoonButtonSizes.lg,
-    xl: MoonButtonSizes.xl,
+  static final light = MoonButtonTheme(
+    colors: MoonButtonColors.light,
+    sizes: MoonButtonSizes.sizes,
   );
 
-  /// Extra small button properties.
-  final MoonButtonSizes xs;
+  static final dark = MoonButtonTheme(
+    colors: MoonButtonColors.dark,
+    sizes: MoonButtonSizes.sizes,
+  );
 
-  /// Small button properties.
-  final MoonButtonSizes sm;
+  /// Button colors.
+  final MoonButtonColors colors;
 
-  /// Medium button properties.
-  final MoonButtonSizes md;
-
-  /// Large button properties.
-  final MoonButtonSizes lg;
-
-  /// Extra large button properties.
-  final MoonButtonSizes xl;
+  /// Button sizes.
+  final MoonButtonSizes sizes;
 
   const MoonButtonTheme({
-    required this.xs,
-    required this.sm,
-    required this.md,
-    required this.lg,
-    required this.xl,
+    required this.colors,
+    required this.sizes,
   });
 
   @override
   MoonButtonTheme copyWith({
-    MoonButtonSizes? xs,
-    MoonButtonSizes? sm,
-    MoonButtonSizes? md,
-    MoonButtonSizes? lg,
-    MoonButtonSizes? xl,
+    MoonButtonColors? colors,
+    MoonButtonSizes? sizes,
   }) {
     return MoonButtonTheme(
-      xs: xs ?? this.xs,
-      sm: sm ?? this.sm,
-      md: md ?? this.md,
-      lg: lg ?? this.lg,
-      xl: xl ?? this.xl,
+      colors: colors ?? this.colors,
+      sizes: sizes ?? this.sizes,
     );
   }
 
@@ -58,11 +43,8 @@ class MoonButtonTheme extends ThemeExtension<MoonButtonTheme> with Diagnosticabl
     if (other is! MoonButtonTheme) return this;
 
     return MoonButtonTheme(
-      xs: xs.lerp(other.xs, t),
-      sm: sm.lerp(other.sm, t),
-      md: md.lerp(other.md, t),
-      lg: lg.lerp(other.lg, t),
-      xl: xl.lerp(other.xl, t),
+      colors: colors.lerp(other.colors, t),
+      sizes: sizes.lerp(other.sizes, t),
     );
   }
 
@@ -71,10 +53,7 @@ class MoonButtonTheme extends ThemeExtension<MoonButtonTheme> with Diagnosticabl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonButtonTheme"))
-      ..add(DiagnosticsProperty<MoonButtonSizes>("xs", xs))
-      ..add(DiagnosticsProperty<MoonButtonSizes>("sm", sm))
-      ..add(DiagnosticsProperty<MoonButtonSizes>("md", md))
-      ..add(DiagnosticsProperty<MoonButtonSizes>("lg", lg))
-      ..add(DiagnosticsProperty<MoonButtonSizes>("xl", xl));
+      ..add(DiagnosticsProperty<MoonButtonColors>("colors", colors))
+      ..add(DiagnosticsProperty<MoonButtonSizes>("sizes", sizes));
   }
 }

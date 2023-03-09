@@ -1,34 +1,40 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/tag/tag_colors.dart';
 import 'package:moon_design/src/theme/tag/tag_sizes.dart';
 
 @immutable
 class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeMixin {
-  static final sizes = MoonTagTheme(
-    x2s: MoonTagSizes.x2s,
-    xs: MoonTagSizes.xs,
+  static final light = MoonTagTheme(
+    colors: MoonTagColors.light,
+    sizes: MoonTagSizes.sizes,
   );
 
-  /// (2x) Extra small tag properties.
-  final MoonTagSizes x2s;
+  static final dark = MoonTagTheme(
+    colors: MoonTagColors.dark,
+    sizes: MoonTagSizes.sizes,
+  );
 
-  /// Extra small tag properties.
-  final MoonTagSizes xs;
+  /// Tag colors.
+  final MoonTagColors colors;
+
+  /// Tag sizes.
+  final MoonTagSizes sizes;
 
   const MoonTagTheme({
-    required this.x2s,
-    required this.xs,
+    required this.colors,
+    required this.sizes,
   });
 
   @override
   MoonTagTheme copyWith({
-    MoonTagSizes? x2s,
-    MoonTagSizes? xs,
+    MoonTagColors? colors,
+    MoonTagSizes? sizes,
   }) {
     return MoonTagTheme(
-      x2s: x2s ?? this.x2s,
-      xs: xs ?? this.xs,
+      colors: colors ?? this.colors,
+      sizes: sizes ?? this.sizes,
     );
   }
 
@@ -37,8 +43,8 @@ class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeM
     if (other is! MoonTagTheme) return this;
 
     return MoonTagTheme(
-      x2s: x2s.lerp(other.x2s, t),
-      xs: xs.lerp(other.xs, t),
+      colors: colors.lerp(other.colors, t),
+      sizes: sizes.lerp(other.sizes, t),
     );
   }
 
@@ -47,7 +53,7 @@ class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeM
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTagTheme"))
-      ..add(DiagnosticsProperty<MoonTagSizes>("x2s", x2s))
-      ..add(DiagnosticsProperty<MoonTagSizes>("xs", xs));
+      ..add(DiagnosticsProperty<MoonTagColors>("colors", colors))
+      ..add(DiagnosticsProperty<MoonTagSizes>("sizes", sizes));
   }
 }

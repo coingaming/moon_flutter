@@ -7,74 +7,74 @@ import 'package:moon_design/src/theme/button/button_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
-import 'package:moon_design/src/theme/loaders/circular_loader_theme.dart';
-import 'package:moon_design/src/theme/loaders/linear_loader_theme.dart';
+import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
+import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
 import 'package:moon_design/src/theme/opacity.dart';
-import 'package:moon_design/src/theme/progress/circular_progress_theme.dart';
-import 'package:moon_design/src/theme/progress/linear_progress_theme.dart';
+import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
+import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
-import 'package:moon_design/src/theme/tooltip/tooltip.dart';
+import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
-    avatarTheme: MoonAvatarTheme.sizes,
+    avatar: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
-    buttonTheme: MoonButtonTheme.sizes,
-    chipTheme: MoonChipTheme.sizes,
-    circularLoaderTheme: MoonCircularLoaderTheme.sizes,
-    circularProgressTheme: MoonCircularProgressTheme.sizes,
+    button: MoonButtonTheme.light,
+    chip: MoonChipTheme.light,
+    circularLoader: MoonCircularLoaderTheme.light,
+    circularProgress: MoonCircularProgressTheme.light,
     colors: MoonColors.light,
     effects: MoonEffects.light,
-    linearLoaderTheme: MoonLinearLoaderTheme.sizes,
-    linearProgressTheme: MoonLinearProgressTheme.sizes,
+    linearLoader: MoonLinearLoaderTheme.light,
+    linearProgress: MoonLinearProgressTheme.light,
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
-    tagTheme: MoonTagTheme.sizes,
-    tooltipTheme: MoonTooltipTheme.tooltip,
-    typography: MoonTypography.textStyles,
+    tag: MoonTagTheme.light,
+    tooltip: MoonTooltipTheme.light,
+    typography: MoonTypography.light,
   );
 
   static final dark = MoonTheme(
-    avatarTheme: MoonAvatarTheme.sizes,
+    avatar: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
-    buttonTheme: MoonButtonTheme.sizes,
-    chipTheme: MoonChipTheme.sizes,
-    circularLoaderTheme: MoonCircularLoaderTheme.sizes,
-    circularProgressTheme: MoonCircularProgressTheme.sizes,
+    button: MoonButtonTheme.dark,
+    chip: MoonChipTheme.dark,
+    circularLoader: MoonCircularLoaderTheme.dark,
+    circularProgress: MoonCircularProgressTheme.dark,
     colors: MoonColors.dark,
     effects: MoonEffects.dark,
-    linearLoaderTheme: MoonLinearLoaderTheme.sizes,
-    linearProgressTheme: MoonLinearProgressTheme.sizes,
+    linearLoader: MoonLinearLoaderTheme.dark,
+    linearProgress: MoonLinearProgressTheme.dark,
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
-    tagTheme: MoonTagTheme.sizes,
-    tooltipTheme: MoonTooltipTheme.tooltip,
-    typography: MoonTypography.textStyles,
+    tag: MoonTagTheme.dark,
+    tooltip: MoonTooltipTheme.dark,
+    typography: MoonTypography.dark,
   );
 
   /// Moon Design System avatar theming.
-  final MoonAvatarTheme avatarTheme;
+  final MoonAvatarTheme avatar;
 
   /// Moon Design System borders.
   final MoonBorders borders;
 
   /// Moon Design System buttons theming.
-  final MoonButtonTheme buttonTheme;
+  final MoonButtonTheme button;
 
   /// Moon Design System chip theming.
-  final MoonChipTheme chipTheme;
+  final MoonChipTheme chip;
 
   /// Moon Design System circular loader theming.
-  final MoonCircularLoaderTheme circularLoaderTheme;
+  final MoonCircularLoaderTheme circularLoader;
 
   /// Moon Design System circular progress theming.
-  final MoonCircularProgressTheme circularProgressTheme;
+  final MoonCircularProgressTheme circularProgress;
 
   /// Moon Design System colors.
   final MoonColors colors;
@@ -83,10 +83,10 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonEffects effects;
 
   /// Moon Design System linear loader theming.
-  final MoonLinearLoaderTheme linearLoaderTheme;
+  final MoonLinearLoaderTheme linearLoader;
 
   /// Moon Design System linear progress theming.
-  final MoonLinearProgressTheme linearProgressTheme;
+  final MoonLinearProgressTheme linearProgress;
 
   /// Moon Design System opacities.
   final MoonOpacity opacity;
@@ -98,68 +98,68 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonSizes sizes;
 
   /// Moon Design System tag theming.
-  final MoonTagTheme tagTheme;
+  final MoonTagTheme tag;
 
   /// Moon Design System tooltip theming.
-  final MoonTooltipTheme tooltipTheme;
+  final MoonTooltipTheme tooltip;
 
   /// Moon Design System typography.
   final MoonTypography typography;
 
   const MoonTheme({
-    required this.avatarTheme,
+    required this.avatar,
     required this.borders,
-    required this.buttonTheme,
-    required this.chipTheme,
-    required this.circularLoaderTheme,
-    required this.circularProgressTheme,
+    required this.button,
+    required this.chip,
+    required this.circularLoader,
+    required this.circularProgress,
     required this.colors,
     required this.effects,
-    required this.linearLoaderTheme,
-    required this.linearProgressTheme,
+    required this.linearLoader,
+    required this.linearProgress,
     required this.opacity,
     required this.shadows,
     required this.sizes,
-    required this.tagTheme,
-    required this.tooltipTheme,
+    required this.tag,
+    required this.tooltip,
     required this.typography,
   });
 
   @override
   MoonTheme copyWith({
-    MoonAvatarTheme? avatarTheme,
+    MoonAvatarTheme? avatar,
     MoonBorders? borders,
-    MoonButtonTheme? buttonTheme,
-    MoonChipTheme? chipTheme,
-    MoonCircularLoaderTheme? circularLoaderTheme,
-    MoonCircularProgressTheme? circularProgressTheme,
+    MoonButtonTheme? button,
+    MoonChipTheme? chip,
+    MoonCircularLoaderTheme? circularLoader,
+    MoonCircularProgressTheme? circularProgress,
     MoonColors? colors,
     MoonEffects? effects,
-    MoonLinearLoaderTheme? linearLoaderTheme,
-    MoonLinearProgressTheme? linearProgressTheme,
+    MoonLinearLoaderTheme? linearLoader,
+    MoonLinearProgressTheme? linearProgress,
     MoonOpacity? opacity,
     MoonShadows? shadows,
     MoonSizes? sizes,
-    MoonTagTheme? tagTheme,
-    MoonTooltipTheme? tooltipTheme,
+    MoonTagTheme? tag,
+    MoonTooltipTheme? tooltip,
     MoonTypography? typography,
   }) {
     return MoonTheme(
-      avatarTheme: avatarTheme ?? this.avatarTheme,
+      avatar: avatar ?? this.avatar,
       borders: borders ?? this.borders,
-      buttonTheme: buttonTheme ?? this.buttonTheme,
-      chipTheme: chipTheme ?? this.chipTheme,
-      circularLoaderTheme: circularLoaderTheme ?? this.circularLoaderTheme,
-      circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
+      button: button ?? this.button,
+      chip: chip ?? this.chip,
+      circularLoader: circularLoader ?? this.circularLoader,
+      circularProgress: circularProgress ?? this.circularProgress,
       colors: colors ?? this.colors,
       effects: effects ?? this.effects,
-      linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
-      linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
+      linearLoader: linearLoader ?? this.linearLoader,
+      linearProgress: linearProgress ?? this.linearProgress,
       opacity: opacity ?? this.opacity,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
-      tagTheme: tagTheme ?? this.tagTheme,
-      tooltipTheme: tooltipTheme ?? this.tooltipTheme,
+      tag: tag ?? this.tag,
+      tooltip: tooltip ?? this.tooltip,
       typography: typography ?? this.typography,
     );
   }
@@ -169,21 +169,21 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     if (other is! MoonTheme) return this;
 
     return MoonTheme(
-      avatarTheme: avatarTheme.lerp(other.avatarTheme, t),
+      avatar: avatar.lerp(other.avatar, t),
       borders: borders.lerp(other.borders, t),
-      buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
-      chipTheme: chipTheme.lerp(other.chipTheme, t),
-      circularLoaderTheme: circularLoaderTheme.lerp(other.circularLoaderTheme, t),
-      circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
+      button: button.lerp(other.button, t),
+      chip: chip.lerp(other.chip, t),
+      circularLoader: circularLoader.lerp(other.circularLoader, t),
+      circularProgress: circularProgress.lerp(other.circularProgress, t),
       colors: colors.lerp(other.colors, t),
       effects: effects.lerp(other.effects, t),
-      linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
-      linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
+      linearLoader: linearLoader.lerp(other.linearLoader, t),
+      linearProgress: linearProgress.lerp(other.linearProgress, t),
       opacity: opacity.lerp(other.opacity, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
-      tagTheme: tagTheme.lerp(other.tagTheme, t),
-      tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
+      tag: tag.lerp(other.tag, t),
+      tooltip: tooltip.lerp(other.tooltip, t),
       typography: typography.lerp(other.typography, t),
     );
   }
@@ -193,41 +193,32 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTheme"))
-      ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
+      ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatar))
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
-      ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
-      ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
-      ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoaderTheme))
-      ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
+      ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", button))
+      ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chip))
+      ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoader))
+      ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgress))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", colors))
       ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
-      ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
-      ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
+      ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoader))
+      ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgress))
       ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
-      ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
-      ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme))
+      ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tag))
+      ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltip))
       ..add(DiagnosticsProperty<MoonTypography>("MoonTypography", typography));
   }
 }
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
-  MoonAvatarTheme? get moonAvatarTheme => moonTheme?.avatarTheme;
   MoonBorders? get moonBorders => moonTheme?.borders;
-  MoonButtonTheme? get moonButtonTheme => moonTheme?.buttonTheme;
-  MoonChipTheme? get moonChipTheme => moonTheme?.chipTheme;
-  MoonCircularLoaderTheme? get moonCircularLoaderTheme => moonTheme?.circularLoaderTheme;
-  MoonCircularProgressTheme? get moonCircularProgressTheme => moonTheme?.circularProgressTheme;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonEffects? get moonEffects => moonTheme?.effects;
-  MoonLinearLoaderTheme? get moonLinearLoaderTheme => moonTheme?.linearLoaderTheme;
-  MoonLinearProgressTheme? get moonLinearProgressTheme => moonTheme?.linearProgressTheme;
   MoonOpacity? get moonOpacity => moonTheme?.opacity;
   MoonShadows? get moonShadows => moonTheme?.shadows;
   MoonSizes? get moonSizes => moonTheme?.sizes;
-  MoonTagTheme? get moonTagTheme => moonTheme?.tagTheme;
-  MoonTooltipTheme? get moonTooltipTheme => moonTheme?.tooltipTheme;
   MoonTypography? get moonTypography => moonTheme?.typography;
 }

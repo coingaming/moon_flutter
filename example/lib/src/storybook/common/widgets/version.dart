@@ -38,10 +38,10 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
             const SizedBox(width: 8.0),
             Text(
               "Moon Design",
-              style: MoonTypography.textStyles.text.text16,
+              style: MoonTextStyles.heading.text16,
             ),
             const SizedBox(width: 6.0),
-            Text("v$_version", style: MoonTypography.textStyles.heading.text16),
+            Text("v$_version", style: MoonTextStyles.heading.text16),
           ],
         ),
       ),

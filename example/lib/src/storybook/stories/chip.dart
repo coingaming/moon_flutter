@@ -14,32 +14,6 @@ class ChipStory extends Story {
               initial: "MoonChip",
             );
 
-            final colorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for the Chip.",
-              initial: 5, // bulma
-              options: colorOptions,
-            );
-
-            final color = colorTable(context)[colorsKnob];
-
-            final isActiveKnob = context.knobs.boolean(
-              label: "isActive",
-              description: "Whether the Chip is active/selected.",
-            );
-
-            final showBorderKnob = context.knobs.boolean(
-              label: "showBorder",
-              description: "Show border when isActive.",
-            );
-
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 28,
-              initial: 8,
-              label: "borderRadius",
-              description: "Border radius for the Chip.",
-            );
-
             final chipSizesKnob = context.knobs.options(
               label: "MoonChipSize",
               description: "Chip size variants.",
@@ -50,9 +24,30 @@ class ChipStory extends Story {
               ],
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
+            final colorsKnob = context.knobs.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for the Chip.",
+              initial: 5, // bulma
+              options: colorOptions,
+            );
+
+            final color = colorTable(context)[colorsKnob];
+
+            final borderRadiusKnob = context.knobs.sliderInt(
+              max: 28,
+              initial: 8,
+              label: "borderRadius",
+              description: "Border radius for the Chip.",
+            );
+
+            final showBorderKnob = context.knobs.boolean(
+              label: "showBorder",
+              description: "Show border when isActive.",
+            );
+
+            final isActiveKnob = context.knobs.boolean(
+              label: "isActive",
+              description: "Whether the Chip is active/selected.",
             );
 
             final showLeftIconKnob = context.knobs.boolean(
@@ -70,6 +65,11 @@ class ChipStory extends Story {
             final showRightIconKnob = context.knobs.boolean(
               label: "Show rightIcon",
               description: "Show widget in the rightIcon slot.",
+            );
+
+            final setRtlModeKnob = context.knobs.boolean(
+              label: "RTL mode",
+              description: "Switch between LTR and RTL modes.",
             );
 
             final resolvedIconVariant =

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_shape.dart';
@@ -196,8 +197,12 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     widget.onTooltipTap?.call();
   }
 
-  Color _getTextColor({required Color backgroundColor}) {
-    final backgroundLuminance = backgroundColor.computeLuminance();
+  Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
+    if (widget.backgroundColor == null && context.moonTypography != null) {
+      return context.moonTypography!.colors.bodyPrimary;
+    }
+
+    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
     if (backgroundLuminance > 0.5) {
       return MoonColors.light.bulma;
     } else {
@@ -375,40 +380,32 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
   Widget _createOverlayContent() {
     MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
-    final double effectiveArrowBaseWidth = widget.arrowBaseWidth ?? context.moonTooltipTheme?.arrowBaseWidth ?? 16;
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonTheme?.tooltip.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveTextColor = _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
+
+    final double effectiveArrowBaseWidth =
+        widget.arrowBaseWidth ?? context.moonTheme?.tooltip.properties.arrowBaseWidth ?? 16;
 
     final double effectiveArrowLength =
-        widget.hasArrow ? (widget.arrowLength ?? context.moonTooltipTheme?.arrowLength ?? 8) : 0;
+        widget.hasArrow ? (widget.arrowLength ?? context.moonTheme?.tooltip.properties.arrowLength ?? 8) : 0;
 
-    final double effectiveArrowTipDistance = widget.arrowTipDistance ?? context.moonTooltipTheme?.arrowTipDistance ?? 8;
+    final double effectiveArrowTipDistance =
+        widget.arrowTipDistance ?? context.moonTheme?.tooltip.properties.arrowTipDistance ?? 8;
 
     final EdgeInsets effectiveContentPadding =
-        widget.contentPadding ?? context.moonTooltipTheme?.contentPadding ?? const EdgeInsets.all(12);
+        widget.contentPadding ?? context.moonTheme?.tooltip.properties.contentPadding ?? const EdgeInsets.all(12);
 
     final double effectiveBorderRadius =
-        widget.borderRadiusValue ?? context.moonTooltipTheme?.borderRadius.topLeft.x ?? 4;
+        widget.borderRadiusValue ?? context.moonTheme?.tooltip.properties.borderRadius.topLeft.x ?? 4;
 
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonColors?.gohan ?? MoonColors.light.gohan;
+    final TextStyle effectiveTextStyle =
+        context.moonTheme?.tooltip.properties.textStyle.copyWith(color: effectiveTextColor) ??
+            MoonTextStyles.body.text12.copyWith(color: effectiveTextColor);
 
-    final Color effectiveTextColor = _getTextColor(backgroundColor: effectiveBackgroundColor);
-
-    final TextStyle effectiveTextStyle = context.moonTooltipTheme?.textStyle.copyWith(color: effectiveTextColor) ??
-        MoonTextStyles.text.text12.copyWith(color: effectiveTextColor);
-
-    final List<BoxShadow> effectiveTooltipShadows = widget.tooltipShadows ??
-        context.moonShadows?.sm ??
-        const [
-          BoxShadow(
-            color: Color(0x66000000),
-            blurRadius: 1,
-          ),
-          BoxShadow(
-            color: Color(0x28000000),
-            blurRadius: 6,
-            offset: Offset(0, 6),
-          ),
-        ];
+    final List<BoxShadow> effectiveTooltipShadows =
+        widget.tooltipShadows ?? context.moonTheme?.tooltip.shadows.tooltipShadows ?? MoonShadows.light.sm;
 
     final targetRenderBox = context.findRenderObject()! as RenderBox;
     final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
@@ -511,11 +508,12 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
 
   @override
   Widget build(BuildContext context) {
-    final Duration effectiveTransitionDuration =
-        widget.transitionDuration ?? context.moonTooltipTheme?.transitionDuration ?? const Duration(milliseconds: 150);
+    final Duration effectiveTransitionDuration = widget.transitionDuration ??
+        context.moonTheme?.tooltip.properties.transitionDuration ??
+        const Duration(milliseconds: 150);
 
     final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTooltipTheme?.transitionCurve ?? Curves.easeInOutCubic;
+        widget.transitionCurve ?? context.moonTheme?.tooltip.properties.transitionCurve ?? Curves.easeInOutCubic;
 
     animationController ??= AnimationController(
       duration: effectiveTransitionDuration,
