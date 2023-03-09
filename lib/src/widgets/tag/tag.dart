@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 
-import 'package:moon_design/src/theme/tag/tag_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 
@@ -177,7 +176,8 @@ class MoonTag extends StatelessWidget {
                   if (label != null)
                     Padding(
                       padding: EdgeInsets.only(
-                          top: isUpperCase && (effectiveMoonTagSize == MoonTagSizeProperties.xs) ? 2.7 : 0),
+                        top: isUpperCase && (effectiveMoonTagSize == MoonTagSizeProperties.xs) ? 2.7 : 0,
+                      ),
                       child: label,
                     ),
                   if (rightIcon != null)

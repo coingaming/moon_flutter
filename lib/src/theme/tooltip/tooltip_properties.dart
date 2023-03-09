@@ -8,8 +8,8 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 
 @immutable
-class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with DiagnosticableTreeMixin {
-  static final tooltip = MoonTooltipTheme(
+class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with DiagnosticableTreeMixin {
+  static final properties = MoonTooltipProperties(
     arrowBaseWidth: MoonSizes.sizes.x2s,
     arrowLength: MoonSizes.sizes.x4s,
     arrowTipDistance: MoonSizes.sizes.x4s,
@@ -44,7 +44,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
   /// Tooltip body style.
   final TextStyle textStyle;
 
-  const MoonTooltipTheme({
+  const MoonTooltipProperties({
     required this.arrowBaseWidth,
     required this.arrowLength,
     required this.arrowTipDistance,
@@ -56,7 +56,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
   });
 
   @override
-  MoonTooltipTheme copyWith({
+  MoonTooltipProperties copyWith({
     double? arrowBaseWidth,
     double? arrowLength,
     double? arrowTipDistance,
@@ -66,7 +66,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
     Curve? transitionCurve,
     TextStyle? textStyle,
   }) {
-    return MoonTooltipTheme(
+    return MoonTooltipProperties(
       arrowBaseWidth: arrowBaseWidth ?? this.arrowBaseWidth,
       arrowLength: arrowLength ?? this.arrowLength,
       arrowTipDistance: arrowTipDistance ?? this.arrowTipDistance,
@@ -79,10 +79,10 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
   }
 
   @override
-  MoonTooltipTheme lerp(ThemeExtension<MoonTooltipTheme>? other, double t) {
-    if (other is! MoonTooltipTheme) return this;
+  MoonTooltipProperties lerp(ThemeExtension<MoonTooltipProperties>? other, double t) {
+    if (other is! MoonTooltipProperties) return this;
 
-    return MoonTooltipTheme(
+    return MoonTooltipProperties(
       arrowBaseWidth: lerpDouble(arrowBaseWidth, other.arrowBaseWidth, t)!,
       arrowLength: lerpDouble(arrowLength, other.arrowLength, t)!,
       arrowTipDistance: lerpDouble(arrowTipDistance, other.arrowTipDistance, t)!,
@@ -98,7 +98,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTooltipTheme"))
+      ..add(DiagnosticsProperty("type", "MoonTooltipProperties"))
       ..add(DoubleProperty("arrowBaseWidth", arrowBaseWidth))
       ..add(DoubleProperty("arrowLength", arrowLength))
       ..add(DoubleProperty("arrowTipDistance", arrowTipDistance))
