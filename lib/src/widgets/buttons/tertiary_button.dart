@@ -90,15 +90,13 @@ class MoonTertiaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveBackgroundColor = context.moonColors?.hit ?? MoonColors.light.hit;
-    final effectiveBorderColor = context.moonColors?.hit ?? MoonColors.light.hit;
+    final effectiveBackgroundColor = context.moonTheme?.button.colors.tertiaryBackgroundColor ?? MoonColors.light.hit;
 
     return MoonButton(
       onTap: onTap,
       onLongPress: onLongPress,
       buttonSize: buttonSize,
       backgroundColor: effectiveBackgroundColor,
-      borderColor: effectiveBorderColor,
       focusNode: focusNode,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,

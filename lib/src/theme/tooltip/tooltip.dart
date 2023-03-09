@@ -17,7 +17,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
     borderRadius: MoonBorders.borders.interactiveXs,
     transitionDuration: const Duration(milliseconds: 150),
     transitionCurve: Curves.easeInOutCubic,
-    textStyle: MoonTextStyles.text.text12,
+    textStyle: MoonTextStyles.body.text12,
   );
 
   /// The tooltip arrows base width.
@@ -41,7 +41,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
   /// Tooltip transition curve (fade in or out animation).
   final Curve transitionCurve;
 
-  /// Tooltip text style.
+  /// Tooltip body style.
   final TextStyle textStyle;
 
   const MoonTooltipTheme({

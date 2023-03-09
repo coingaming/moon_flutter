@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
+import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -115,28 +115,28 @@ class MoonAvatar extends StatelessWidget {
     }
   }
 
-  MoonAvatarSizes _getMoonAvatarSize(BuildContext context, MoonAvatarSize? moonAvatarSize) {
+  MoonAvatarSizeProperties _getMoonAvatarSize(BuildContext context, MoonAvatarSize? moonAvatarSize) {
     switch (moonAvatarSize) {
       case MoonAvatarSize.xs:
-        return context.moonTheme?.avatar.xs ?? MoonAvatarSizes.xs;
+        return context.moonTheme?.avatar.sizes.xs ?? MoonAvatarSizeProperties.xs;
       case MoonAvatarSize.sm:
-        return context.moonTheme?.avatar.sm ?? MoonAvatarSizes.sm;
+        return context.moonTheme?.avatar.sizes.sm ?? MoonAvatarSizeProperties.sm;
       case MoonAvatarSize.md:
-        return context.moonTheme?.avatar.md ?? MoonAvatarSizes.md;
+        return context.moonTheme?.avatar.sizes.md ?? MoonAvatarSizeProperties.md;
       case MoonAvatarSize.lg:
-        return context.moonTheme?.avatar.lg ?? MoonAvatarSizes.lg;
+        return context.moonTheme?.avatar.sizes.lg ?? MoonAvatarSizeProperties.lg;
       case MoonAvatarSize.xl:
-        return context.moonTheme?.avatar.xl ?? MoonAvatarSizes.xl;
+        return context.moonTheme?.avatar.sizes.xl ?? MoonAvatarSizeProperties.xl;
       case MoonAvatarSize.x2l:
-        return context.moonTheme?.avatar.x2l ?? MoonAvatarSizes.x2l;
+        return context.moonTheme?.avatar.sizes.x2l ?? MoonAvatarSizeProperties.x2l;
       default:
-        return context.moonTheme?.avatar.md ?? MoonAvatarSizes.md;
+        return context.moonTheme?.avatar.sizes.md ?? MoonAvatarSizeProperties.md;
     }
   }
 
   Color _getTextColor(BuildContext context, {required bool isDarkMode, required Color effectiveBackgroundColor}) {
-    if (backgroundColor == null && context.moonTheme != null) {
-      return context.moonTheme!.typography.colors.bodyPrimary;
+    if (backgroundColor == null && context.moonTypography != null) {
+      return context.moonTypography!.colors.bodyPrimary;
     }
 
     final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
@@ -149,7 +149,7 @@ class MoonAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonAvatarSizes effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
+    final MoonAvatarSizeProperties effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
 
     final double effectiveAvatarWidth = width ?? effectiveMoonAvatarSize.avatarSizeValue;
     final double effectiveAvatarHeight = height ?? effectiveMoonAvatarSize.avatarSizeValue;

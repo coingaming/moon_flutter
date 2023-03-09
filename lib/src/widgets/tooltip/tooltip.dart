@@ -397,7 +397,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.tooltipTheme.textStyle.copyWith(color: effectiveTextColor) ??
-            MoonTextStyles.text.text12.copyWith(color: effectiveTextColor);
+            MoonTextStyles.body.text12.copyWith(color: effectiveTextColor);
 
     final List<BoxShadow> effectiveTooltipShadows = widget.tooltipShadows ??
         context.moonShadows?.sm ??

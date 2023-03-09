@@ -7,40 +7,40 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 @immutable
 class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableTreeMixin {
   static final light = MoonTypography(
-    text: MoonTextStyles.text,
+    body: MoonTextStyles.body,
     heading: MoonTextStyles.heading,
     colors: MoonTextColors.light,
   );
 
   static final dark = MoonTypography(
-    text: MoonTextStyles.text,
+    body: MoonTextStyles.body,
     heading: MoonTextStyles.heading,
     colors: MoonTextColors.dark,
   );
 
-  /// Styles for text.
-  final MoonTextStyles text;
+  /// Styles for body text.
+  final MoonTextStyles body;
 
   /// Styles for headings.
   final MoonTextStyles heading;
 
-  /// Colors for text and icons.
+  /// Colors for body and icons.
   final MoonTextColors colors;
 
   const MoonTypography({
-    required this.text,
+    required this.body,
     required this.heading,
     required this.colors,
   });
 
   @override
   MoonTypography copyWith({
-    MoonTextStyles? text,
+    MoonTextStyles? body,
     MoonTextStyles? heading,
     MoonTextColors? colors,
   }) {
     return MoonTypography(
-      text: text ?? this.text,
+      body: body ?? this.body,
       heading: heading ?? this.heading,
       colors: colors ?? this.colors,
     );
@@ -51,7 +51,7 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
     if (other is! MoonTypography) return this;
 
     return MoonTypography(
-      text: text.lerp(other.text, t),
+      body: body.lerp(other.body, t),
       heading: heading.lerp(other.heading, t),
       colors: colors.lerp(other.colors, t),
     );
@@ -62,7 +62,7 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTypography"))
-      ..add(DiagnosticsProperty("text", text))
+      ..add(DiagnosticsProperty("body", body))
       ..add(DiagnosticsProperty("heading", heading))
       ..add(DiagnosticsProperty("colors", colors));
   }

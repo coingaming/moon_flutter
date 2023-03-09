@@ -23,7 +23,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
     avatar: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
-    button: MoonButtonTheme.sizes,
+    button: MoonButtonTheme.light,
     chipTheme: MoonChipTheme.sizes,
     circularLoaderTheme: MoonCircularLoaderTheme.sizes,
     circularProgressTheme: MoonCircularProgressTheme.sizes,
@@ -42,7 +42,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final dark = MoonTheme(
     avatar: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
-    button: MoonButtonTheme.sizes,
+    button: MoonButtonTheme.dark,
     chipTheme: MoonChipTheme.sizes,
     circularLoaderTheme: MoonCircularLoaderTheme.sizes,
     circularProgressTheme: MoonCircularProgressTheme.sizes,

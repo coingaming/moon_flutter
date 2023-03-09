@@ -15,7 +15,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
     iconSizeValue: MoonSizes.sizes.x3s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveXs,
-    textStyle: MoonTextStyles.text.text10.copyWith(fontWeight: FontWeight.w400),
+    textStyle: MoonTextStyles.body.text10.copyWith(fontWeight: FontWeight.w400),
     upperCaseTextStyle: MoonTextStyles.heading.text9.copyWith(fontWeight: FontWeight.w700),
   );
 
@@ -25,7 +25,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
     iconSizeValue: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveXs,
-    textStyle: MoonTextStyles.text.text12.copyWith(fontWeight: FontWeight.w400),
+    textStyle: MoonTextStyles.body.text12.copyWith(fontWeight: FontWeight.w400),
     upperCaseTextStyle: MoonTextStyles.heading.text10,
   );
 
@@ -44,10 +44,10 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
   /// Tag border radius.
   final BorderRadius borderRadius;
 
-  /// Tag text style.
+  /// Tag body style.
   final TextStyle textStyle;
 
-  /// Tag upper case text style.
+  /// Tag upper case body style.
   final TextStyle upperCaseTextStyle;
 
   const MoonTagSizes({

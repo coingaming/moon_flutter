@@ -2,7 +2,7 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/button/button_sizes.dart';
+import 'package:moon_design/src/theme/button/button_size_properties.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
@@ -298,20 +298,20 @@ class MoonButton extends StatelessWidget {
 
   bool get _isEnabled => onTap != null || onLongPress != null;
 
-  MoonButtonSizes _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
+  MoonButtonSizeProperties _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
     switch (moonButtonSize) {
       case MoonButtonSize.xs:
-        return context.moonTheme?.button.xs ?? MoonButtonSizes.xs;
+        return context.moonTheme?.button.sizes.xs ?? MoonButtonSizeProperties.xs;
       case MoonButtonSize.sm:
-        return context.moonTheme?.button.sm ?? MoonButtonSizes.sm;
+        return context.moonTheme?.button.sizes.sm ?? MoonButtonSizeProperties.sm;
       case MoonButtonSize.md:
-        return context.moonTheme?.button.md ?? MoonButtonSizes.md;
+        return context.moonTheme?.button.sizes.md ?? MoonButtonSizeProperties.md;
       case MoonButtonSize.lg:
-        return context.moonTheme?.button.lg ?? MoonButtonSizes.lg;
+        return context.moonTheme?.button.sizes.lg ?? MoonButtonSizeProperties.lg;
       case MoonButtonSize.xl:
-        return context.moonTheme?.button.xl ?? MoonButtonSizes.xl;
+        return context.moonTheme?.button.sizes.xl ?? MoonButtonSizeProperties.xl;
       default:
-        return context.moonTheme?.button.md ?? MoonButtonSizes.md;
+        return context.moonTheme?.button.sizes.md ?? MoonButtonSizeProperties.md;
     }
   }
 
@@ -334,7 +334,7 @@ class MoonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonButtonSizes effectiveMoonButtonSize = _getMoonButtonSize(context, buttonSize);
+    final MoonButtonSizeProperties effectiveMoonButtonSize = _getMoonButtonSize(context, buttonSize);
 
     final double effectiveHeight = height ?? effectiveMoonButtonSize.height;
     final double effectiveGap = gap ?? effectiveMoonButtonSize.gap;
