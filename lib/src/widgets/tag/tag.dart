@@ -1,6 +1,7 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 
 import 'package:moon_design/src/theme/tag/tag_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
@@ -76,19 +77,23 @@ class MoonTag extends StatelessWidget {
     this.rightIcon,
   });
 
-  MoonTagSizes _getMoonTagSize(BuildContext context, MoonTagSize? moonTagSize) {
+  MoonTagSizeProperties _getMoonTagSize(BuildContext context, MoonTagSize? moonTagSize) {
     switch (moonTagSize) {
       case MoonTagSize.x2s:
-        return context.moonTheme?.tagTheme.x2s ?? MoonTagSizes.x2s;
+        return context.moonTheme?.tag.sizes.x2s ?? MoonTagSizeProperties.x2s;
       case MoonTagSize.xs:
-        return context.moonTheme?.tagTheme.xs ?? MoonTagSizes.xs;
+        return context.moonTheme?.tag.sizes.xs ?? MoonTagSizeProperties.xs;
       default:
-        return context.moonTheme?.tagTheme.xs ?? MoonTagSizes.xs;
+        return context.moonTheme?.tag.sizes.xs ?? MoonTagSizeProperties.xs;
     }
   }
 
-  Color _getTextColor({required bool isDarkMode, required Color backgroundColor}) {
-    final backgroundLuminance = backgroundColor.computeLuminance();
+  Color _getTextColor(BuildContext context, {required bool isDarkMode, required Color effectiveBackgroundColor}) {
+    if (backgroundColor == null && context.moonTypography != null) {
+      return context.moonTypography!.colors.bodyPrimary;
+    }
+
+    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
     if (backgroundLuminance > 0.5) {
       return MoonColors.light.bulma;
     } else {
@@ -98,17 +103,18 @@ class MoonTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonTagSizes effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
+    final MoonTagSizeProperties effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
 
     final double effectiveHeight = height ?? effectiveMoonTagSize.height;
     final double effectiveGap = gap ?? effectiveMoonTagSize.gap;
 
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? context.moonColors?.gohan ?? MoonColors.light.gohan;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.tag.colors.backgroundColor ?? MoonColors.light.gohan;
 
-    final Color effectiveTextColor =
-        textColor ?? _getTextColor(isDarkMode: context.isDarkMode, backgroundColor: effectiveBackgroundColor);
+    final Color effectiveTextColor = textColor ??
+        _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
 
     final EdgeInsets effectivePadding = padding ?? effectiveMoonTagSize.padding;
 
@@ -170,7 +176,8 @@ class MoonTag extends StatelessWidget {
                     ),
                   if (label != null)
                     Padding(
-                      padding: EdgeInsets.only(top: isUpperCase && (effectiveMoonTagSize == MoonTagSizes.xs) ? 2.7 : 0),
+                      padding: EdgeInsets.only(
+                          top: isUpperCase && (effectiveMoonTagSize == MoonTagSizeProperties.xs) ? 2.7 : 0),
                       child: label,
                     ),
                   if (rightIcon != null)

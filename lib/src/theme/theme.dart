@@ -34,7 +34,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
-    tagTheme: MoonTagTheme.sizes,
+    tag: MoonTagTheme.light,
     tooltipTheme: MoonTooltipTheme.tooltip,
     typography: MoonTypography.light,
   );
@@ -53,7 +53,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     opacity: MoonOpacity.opacities,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
-    tagTheme: MoonTagTheme.sizes,
+    tag: MoonTagTheme.dark,
     tooltipTheme: MoonTooltipTheme.tooltip,
     typography: MoonTypography.dark,
   );
@@ -98,7 +98,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonSizes sizes;
 
   /// Moon Design System tag theming.
-  final MoonTagTheme tagTheme;
+  final MoonTagTheme tag;
 
   /// Moon Design System tooltip theming.
   final MoonTooltipTheme tooltipTheme;
@@ -120,7 +120,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.opacity,
     required this.shadows,
     required this.sizes,
-    required this.tagTheme,
+    required this.tag,
     required this.tooltipTheme,
     required this.typography,
   });
@@ -140,7 +140,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonOpacity? opacity,
     MoonShadows? shadows,
     MoonSizes? sizes,
-    MoonTagTheme? tagTheme,
+    MoonTagTheme? tag,
     MoonTooltipTheme? tooltipTheme,
     MoonTypography? typography,
   }) {
@@ -158,7 +158,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       opacity: opacity ?? this.opacity,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
-      tagTheme: tagTheme ?? this.tagTheme,
+      tag: tag ?? this.tag,
       tooltipTheme: tooltipTheme ?? this.tooltipTheme,
       typography: typography ?? this.typography,
     );
@@ -182,7 +182,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       opacity: opacity.lerp(other.opacity, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
-      tagTheme: tagTheme.lerp(other.tagTheme, t),
+      tag: tag.lerp(other.tag, t),
       tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
       typography: typography.lerp(other.typography, t),
     );
@@ -206,7 +206,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
-      ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
+      ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tag))
       ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme))
       ..add(DiagnosticsProperty<MoonTypography>("MoonTypography", typography));
   }
