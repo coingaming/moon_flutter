@@ -23,7 +23,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
     avatar: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
-    buttonTheme: MoonButtonTheme.sizes,
+    button: MoonButtonTheme.sizes,
     chipTheme: MoonChipTheme.sizes,
     circularLoaderTheme: MoonCircularLoaderTheme.sizes,
     circularProgressTheme: MoonCircularProgressTheme.sizes,
@@ -42,7 +42,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final dark = MoonTheme(
     avatar: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
-    buttonTheme: MoonButtonTheme.sizes,
+    button: MoonButtonTheme.sizes,
     chipTheme: MoonChipTheme.sizes,
     circularLoaderTheme: MoonCircularLoaderTheme.sizes,
     circularProgressTheme: MoonCircularProgressTheme.sizes,
@@ -65,7 +65,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonBorders borders;
 
   /// Moon Design System buttons theming.
-  final MoonButtonTheme buttonTheme;
+  final MoonButtonTheme button;
 
   /// Moon Design System chip theming.
   final MoonChipTheme chipTheme;
@@ -109,7 +109,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   const MoonTheme({
     required this.avatar,
     required this.borders,
-    required this.buttonTheme,
+    required this.button,
     required this.chipTheme,
     required this.circularLoaderTheme,
     required this.circularProgressTheme,
@@ -129,7 +129,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   MoonTheme copyWith({
     MoonAvatarTheme? avatar,
     MoonBorders? borders,
-    MoonButtonTheme? buttonTheme,
+    MoonButtonTheme? button,
     MoonChipTheme? chipTheme,
     MoonCircularLoaderTheme? circularLoaderTheme,
     MoonCircularProgressTheme? circularProgressTheme,
@@ -147,7 +147,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     return MoonTheme(
       avatar: avatar ?? this.avatar,
       borders: borders ?? this.borders,
-      buttonTheme: buttonTheme ?? this.buttonTheme,
+      button: button ?? this.button,
       chipTheme: chipTheme ?? this.chipTheme,
       circularLoaderTheme: circularLoaderTheme ?? this.circularLoaderTheme,
       circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
@@ -171,7 +171,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     return MoonTheme(
       avatar: avatar.lerp(other.avatar, t),
       borders: borders.lerp(other.borders, t),
-      buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
+      button: button.lerp(other.button, t),
       chipTheme: chipTheme.lerp(other.chipTheme, t),
       circularLoaderTheme: circularLoaderTheme.lerp(other.circularLoaderTheme, t),
       circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
@@ -195,7 +195,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty("type", "MoonTheme"))
       ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatar))
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
-      ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
+      ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", button))
       ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
       ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoaderTheme))
       ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))

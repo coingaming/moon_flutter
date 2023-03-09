@@ -301,24 +301,28 @@ class MoonButton extends StatelessWidget {
   MoonButtonSizes _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
     switch (moonButtonSize) {
       case MoonButtonSize.xs:
-        return context.moonTheme?.buttonTheme.xs ?? MoonButtonSizes.xs;
+        return context.moonTheme?.button.xs ?? MoonButtonSizes.xs;
       case MoonButtonSize.sm:
-        return context.moonTheme?.buttonTheme.sm ?? MoonButtonSizes.sm;
+        return context.moonTheme?.button.sm ?? MoonButtonSizes.sm;
       case MoonButtonSize.md:
-        return context.moonTheme?.buttonTheme.md ?? MoonButtonSizes.md;
+        return context.moonTheme?.button.md ?? MoonButtonSizes.md;
       case MoonButtonSize.lg:
-        return context.moonTheme?.buttonTheme.lg ?? MoonButtonSizes.lg;
+        return context.moonTheme?.button.lg ?? MoonButtonSizes.lg;
       case MoonButtonSize.xl:
-        return context.moonTheme?.buttonTheme.xl ?? MoonButtonSizes.xl;
+        return context.moonTheme?.button.xl ?? MoonButtonSizes.xl;
       default:
-        return context.moonTheme?.buttonTheme.md ?? MoonButtonSizes.md;
+        return context.moonTheme?.button.md ?? MoonButtonSizes.md;
     }
   }
 
-  Color _getTextColor({required bool isDarkMode, required bool isHovered, required bool isFocused}) {
+  Color _getTextColor(
+    BuildContext context, {
+    required bool isDarkMode,
+    required bool isHovered,
+    required bool isFocused,
+  }) {
     if (textColor != null && (!isHovered && !isFocused)) return textColor!;
-    if (backgroundColor == null && isDarkMode) return MoonColors.dark.bulma;
-    if (backgroundColor == null && !isDarkMode) return MoonColors.light.bulma;
+    if (backgroundColor == null && context.moonTypography != null) return context.moonTypography!.colors.bodyPrimary;
 
     final backgroundLuminance = backgroundColor!.computeLuminance();
     if (backgroundLuminance > 0.5) {
@@ -395,7 +399,7 @@ class MoonButton extends StatelessWidget {
       pulseEffectCurve: pulseEffectCurve,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         final Color effectiveTextColor =
-            _getTextColor(isDarkMode: context.isDarkMode, isHovered: isHovered, isFocused: isFocused);
+            _getTextColor(context, isDarkMode: context.isDarkMode, isHovered: isHovered, isFocused: isFocused);
 
         final bool canAnimateHover = _isEnabled && (isHovered || isFocused || isPressed);
 
