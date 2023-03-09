@@ -147,7 +147,7 @@ class MoonGhostChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTextColor = textColor ?? context.moonColors?.bulma ?? MoonColors.light.bulma;
+    final effectiveTextColor = textColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonColors.light.bulma;
 
     return MoonChip(
       key: key,

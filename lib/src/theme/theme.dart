@@ -24,7 +24,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     avatar: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
     button: MoonButtonTheme.light,
-    chipTheme: MoonChipTheme.sizes,
+    chip: MoonChipTheme.light,
     circularLoaderTheme: MoonCircularLoaderTheme.sizes,
     circularProgressTheme: MoonCircularProgressTheme.sizes,
     colors: MoonColors.light,
@@ -43,7 +43,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     avatar: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
     button: MoonButtonTheme.dark,
-    chipTheme: MoonChipTheme.sizes,
+    chip: MoonChipTheme.dark,
     circularLoaderTheme: MoonCircularLoaderTheme.sizes,
     circularProgressTheme: MoonCircularProgressTheme.sizes,
     colors: MoonColors.dark,
@@ -68,7 +68,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonButtonTheme button;
 
   /// Moon Design System chip theming.
-  final MoonChipTheme chipTheme;
+  final MoonChipTheme chip;
 
   /// Moon Design System circular loader theming.
   final MoonCircularLoaderTheme circularLoaderTheme;
@@ -110,7 +110,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.avatar,
     required this.borders,
     required this.button,
-    required this.chipTheme,
+    required this.chip,
     required this.circularLoaderTheme,
     required this.circularProgressTheme,
     required this.colors,
@@ -130,7 +130,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonAvatarTheme? avatar,
     MoonBorders? borders,
     MoonButtonTheme? button,
-    MoonChipTheme? chipTheme,
+    MoonChipTheme? chip,
     MoonCircularLoaderTheme? circularLoaderTheme,
     MoonCircularProgressTheme? circularProgressTheme,
     MoonColors? colors,
@@ -148,7 +148,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       avatar: avatar ?? this.avatar,
       borders: borders ?? this.borders,
       button: button ?? this.button,
-      chipTheme: chipTheme ?? this.chipTheme,
+      chip: chip ?? this.chip,
       circularLoaderTheme: circularLoaderTheme ?? this.circularLoaderTheme,
       circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
       colors: colors ?? this.colors,
@@ -172,7 +172,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       avatar: avatar.lerp(other.avatar, t),
       borders: borders.lerp(other.borders, t),
       button: button.lerp(other.button, t),
-      chipTheme: chipTheme.lerp(other.chipTheme, t),
+      chip: chip.lerp(other.chip, t),
       circularLoaderTheme: circularLoaderTheme.lerp(other.circularLoaderTheme, t),
       circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
       colors: colors.lerp(other.colors, t),
@@ -196,7 +196,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatar))
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", button))
-      ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
+      ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chip))
       ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoaderTheme))
       ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", colors))
