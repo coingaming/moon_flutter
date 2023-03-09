@@ -6,28 +6,29 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 
 @immutable
-class MoonLinearLoaderSizes extends ThemeExtension<MoonLinearLoaderSizes> with DiagnosticableTreeMixin {
-  static final x6s = MoonLinearLoaderSizes(
+class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSizeProperties>
+    with DiagnosticableTreeMixin {
+  static final x6s = MoonLinearLoaderSizeProperties(
     borderRadiusValue: MoonSizes.sizes.x6s,
     loaderHeight: MoonSizes.sizes.x6s,
   );
 
-  static final x5s = MoonLinearLoaderSizes(
+  static final x5s = MoonLinearLoaderSizeProperties(
     borderRadiusValue: MoonSizes.sizes.x5s,
     loaderHeight: MoonSizes.sizes.x5s,
   );
 
-  static final x4s = MoonLinearLoaderSizes(
+  static final x4s = MoonLinearLoaderSizeProperties(
     borderRadiusValue: MoonSizes.sizes.x4s,
     loaderHeight: MoonSizes.sizes.x4s,
   );
 
-  static final x3s = MoonLinearLoaderSizes(
+  static final x3s = MoonLinearLoaderSizeProperties(
     borderRadiusValue: MoonSizes.sizes.x3s,
     loaderHeight: MoonSizes.sizes.x3s,
   );
 
-  static final x2s = MoonLinearLoaderSizes(
+  static final x2s = MoonLinearLoaderSizeProperties(
     borderRadiusValue: MoonSizes.sizes.x2s,
     loaderHeight: MoonSizes.sizes.x2s,
   );
@@ -38,27 +39,27 @@ class MoonLinearLoaderSizes extends ThemeExtension<MoonLinearLoaderSizes> with D
   /// Linear loader height.
   final double loaderHeight;
 
-  const MoonLinearLoaderSizes({
+  const MoonLinearLoaderSizeProperties({
     required this.borderRadiusValue,
     required this.loaderHeight,
   });
 
   @override
-  MoonLinearLoaderSizes copyWith({
+  MoonLinearLoaderSizeProperties copyWith({
     double? borderRadiusValue,
     double? loaderHeight,
   }) {
-    return MoonLinearLoaderSizes(
+    return MoonLinearLoaderSizeProperties(
       borderRadiusValue: borderRadiusValue ?? this.borderRadiusValue,
       loaderHeight: loaderHeight ?? this.loaderHeight,
     );
   }
 
   @override
-  MoonLinearLoaderSizes lerp(ThemeExtension<MoonLinearLoaderSizes>? other, double t) {
-    if (other is! MoonLinearLoaderSizes) return this;
+  MoonLinearLoaderSizeProperties lerp(ThemeExtension<MoonLinearLoaderSizeProperties>? other, double t) {
+    if (other is! MoonLinearLoaderSizeProperties) return this;
 
-    return MoonLinearLoaderSizes(
+    return MoonLinearLoaderSizeProperties(
       borderRadiusValue: lerpDouble(borderRadiusValue, other.borderRadiusValue, t)!,
       loaderHeight: lerpDouble(loaderHeight, other.loaderHeight, t)!,
     );
@@ -68,7 +69,7 @@ class MoonLinearLoaderSizes extends ThemeExtension<MoonLinearLoaderSizes> with D
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonLinearLoaderSizes"))
+      ..add(DiagnosticsProperty("type", "MoonLinearLoaderSizeProperties"))
       ..add(DoubleProperty("borderRadiusValue", borderRadiusValue))
       ..add(DoubleProperty("loaderHeight", loaderHeight));
   }

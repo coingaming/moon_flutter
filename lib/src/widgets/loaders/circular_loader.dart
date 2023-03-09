@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/loaders/circular_loader_sizes.dart';
+import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
 
@@ -31,31 +31,32 @@ class MoonCircularLoader extends StatelessWidget {
     this.backgroundColor,
   });
 
-  MoonCircularLoaderSizes _getMoonLoaderSize(BuildContext context, MoonCircularLoaderSize? moonLoaderSize) {
+  MoonCircularLoaderSizeProperties _getMoonLoaderSize(BuildContext context, MoonCircularLoaderSize? moonLoaderSize) {
     switch (moonLoaderSize) {
       case MoonCircularLoaderSize.x2s:
-        return context.moonTheme?.circularLoaderTheme.x2s ?? MoonCircularLoaderSizes.x2s;
+        return context.moonTheme?.circularLoader.sizes.x2s ?? MoonCircularLoaderSizeProperties.x2s;
       case MoonCircularLoaderSize.xs:
-        return context.moonTheme?.circularLoaderTheme.xs ?? MoonCircularLoaderSizes.xs;
+        return context.moonTheme?.circularLoader.sizes.xs ?? MoonCircularLoaderSizeProperties.xs;
       case MoonCircularLoaderSize.sm:
-        return context.moonTheme?.circularLoaderTheme.sm ?? MoonCircularLoaderSizes.sm;
+        return context.moonTheme?.circularLoader.sizes.sm ?? MoonCircularLoaderSizeProperties.sm;
       case MoonCircularLoaderSize.md:
-        return context.moonTheme?.circularLoaderTheme.md ?? MoonCircularLoaderSizes.md;
+        return context.moonTheme?.circularLoader.sizes.md ?? MoonCircularLoaderSizeProperties.md;
       case MoonCircularLoaderSize.lg:
-        return context.moonTheme?.circularLoaderTheme.lg ?? MoonCircularLoaderSizes.lg;
+        return context.moonTheme?.circularLoader.sizes.lg ?? MoonCircularLoaderSizeProperties.lg;
 
       default:
-        return context.moonTheme?.circularLoaderTheme.md ?? MoonCircularLoaderSizes.md;
+        return context.moonTheme?.circularLoader.sizes.md ?? MoonCircularLoaderSizeProperties.md;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final MoonCircularLoaderSizes effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
+    final MoonCircularLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
     final double effectiveSize = sizeValue ?? effectiveLoaderSize.loaderSizeValue;
     final double effectiveStrokeWidth = strokeWidth ?? effectiveLoaderSize.loaderStrokeWidth;
-    final Color effectiveColor = color ?? context.moonColors?.hit ?? MoonColors.light.hit;
-    final Color effectiveBackgroundColor = backgroundColor ?? context.moonColors?.trunks ?? MoonColors.light.trunks;
+    final Color effectiveColor = color ?? context.moonTheme?.circularLoader.colors.color ?? MoonColors.light.hit;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.circularLoader.colors.backgroundColor ?? MoonColors.light.trunks;
     final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 
     return SizedBox(
