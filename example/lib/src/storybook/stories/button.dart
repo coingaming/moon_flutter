@@ -14,28 +14,6 @@ class ButtonStory extends Story {
               initial: "MoonButton",
             );
 
-            final colorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for base MoonButton.",
-              initial: 5, // bulma
-              options: colorOptions,
-            );
-
-            final color = colorTable(context)[colorsKnob];
-
-            final showBorderKnob = context.knobs.boolean(
-              label: "showBorder",
-              description: "Show border for base MoonButton.",
-              initial: true,
-            );
-
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 28,
-              initial: 8,
-              label: "borderRadius",
-              description: "Border radius for base MoonButton.",
-            );
-
             final buttonSizesKnob = context.knobs.options(
               label: "MoonButtonSize",
               description: "Button size variants.",
@@ -49,9 +27,46 @@ class ButtonStory extends Story {
               ],
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
+            final colorsKnob = context.knobs.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for base MoonButton.",
+              initial: 5, // bulma
+              options: colorOptions,
+            );
+
+            final color = colorTable(context)[colorsKnob];
+
+            final borderRadiusKnob = context.knobs.sliderInt(
+              max: 28,
+              initial: 8,
+              label: "borderRadius",
+              description: "Border radius for base MoonButton.",
+            );
+
+            final showBorderKnob = context.knobs.boolean(
+              label: "showBorder",
+              description: "Show border for base MoonButton.",
+              initial: true,
+            );
+
+            final showDisabledKnob = context.knobs.boolean(
+              label: "Disabled",
+              description: "onTap() or onLongPress() is null.",
+            );
+
+            final setFullWidthKnob = context.knobs.boolean(
+              label: "isFullWidth",
+              description: "Set Button to full width.",
+            );
+
+            final showPulseEffectKnob = context.knobs.boolean(
+              label: "showPulseEffect",
+              description: "Show pulse animation.",
+            );
+
+            final showPulseEffectJiggleKnob = context.knobs.boolean(
+              label: "showPulseEffectJiggle",
+              description: "Show jiggling with pulse animation.",
             );
 
             final showLeftIconKnob = context.knobs.boolean(
@@ -71,24 +86,9 @@ class ButtonStory extends Story {
               description: "Show widget in the rightIcon slot.",
             );
 
-            final showPulseEffectKnob = context.knobs.boolean(
-              label: "showPulseEffect",
-              description: "Show pulse animation.",
-            );
-
-            final showPulseEffectJiggleKnob = context.knobs.boolean(
-              label: "showPulseEffectJiggle",
-              description: "Show jiggling with pulse animation.",
-            );
-
-            final showDisabledKnob = context.knobs.boolean(
-              label: "Disabled",
-              description: "onTap() or onLongPress() is null.",
-            );
-
-            final setFullWidthKnob = context.knobs.boolean(
-              label: "isFullWidth",
-              description: "Set Button to full width.",
+            final setRtlModeKnob = context.knobs.boolean(
+              label: "RTL mode",
+              description: "Switch between LTR and RTL modes.",
             );
 
             IconData resolveIconVariant(MoonButtonSize buttonSize) {

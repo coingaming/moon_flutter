@@ -9,6 +9,11 @@ class AvatarStory extends Story {
       : super(
           name: "Avatar",
           builder: (context) {
+            final customLabelTextKnob = context.knobs.text(
+              label: "Custom label text",
+              initial: "MD",
+            );
+
             final avatarSizesKnob = context.knobs.options(
               label: "avatarSize",
               description: "Avatar size variants.",
@@ -23,16 +28,6 @@ class AvatarStory extends Story {
               ],
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
-            );
-
-            final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
-              initial: "MD",
-            );
-
             final avatarBackgroundColorKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for Avatar background.",
@@ -41,6 +36,27 @@ class AvatarStory extends Story {
             );
 
             final backgroundColor = colorTable(context)[avatarBackgroundColorKnob];
+
+            final badgeColorKnob = context.knobs.options(
+              label: "badgeColor",
+              description: "MoonColors variants for the Avatar badge.",
+              initial: 18, // roshi100
+              options: colorOptions,
+            );
+
+            final badgeColor = colorTable(context)[badgeColorKnob];
+
+            final avatarBadgeAlignmentKnob = context.knobs.options(
+              label: "badgeAlignment",
+              description: "Avatar badge alignment.",
+              initial: MoonBadgeAlignment.bottomRight,
+              options: const [
+                Option(label: "topLeft", value: MoonBadgeAlignment.topLeft),
+                Option(label: "topRight", value: MoonBadgeAlignment.topRight),
+                Option(label: "bottomLeft", value: MoonBadgeAlignment.bottomLeft),
+                Option(label: "bottomRight", value: MoonBadgeAlignment.bottomRight),
+              ],
+            );
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 32,
@@ -55,26 +71,10 @@ class AvatarStory extends Story {
               initial: true,
             );
 
-            final avatarBadgeAlignmentKnob = context.knobs.options(
-              label: "badgeAlignment",
-              description: "Avatar badge alignment.",
-              initial: MoonBadgeAlignment.bottomRight,
-              options: const [
-                Option(label: "topLeft", value: MoonBadgeAlignment.topLeft),
-                Option(label: "topRight", value: MoonBadgeAlignment.topRight),
-                Option(label: "bottomLeft", value: MoonBadgeAlignment.bottomLeft),
-                Option(label: "bottomRight", value: MoonBadgeAlignment.bottomRight),
-              ],
+            final setRtlModeKnob = context.knobs.boolean(
+              label: "RTL mode",
+              description: "Switch between LTR and RTL modes.",
             );
-
-            final badgeColorKnob = context.knobs.options(
-              label: "badgeColor",
-              description: "MoonColors variants for the Avatar badge.",
-              initial: 18, // roshi100
-              options: colorOptions,
-            );
-
-            final badgeColor = colorTable(context)[badgeColorKnob];
 
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,

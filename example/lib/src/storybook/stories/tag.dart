@@ -13,6 +13,16 @@ class TagStory extends Story {
               initial: "MoonTag",
             );
 
+            final tagSizesKnob = context.knobs.options(
+              label: "tagSize",
+              description: "Tag size variants.",
+              initial: MoonTagSize.xs,
+              options: const [
+                Option(label: "x2s", value: MoonTagSize.x2s),
+                Option(label: "xs", value: MoonTagSize.xs),
+              ],
+            );
+
             final colorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for Tag.",
@@ -27,21 +37,6 @@ class TagStory extends Story {
               initial: 4,
               label: "borderRadius",
               description: "Border radius for Tag.",
-            );
-
-            final tagSizesKnob = context.knobs.options(
-              label: "tagSize",
-              description: "Tag size variants.",
-              initial: MoonTagSize.xs,
-              options: const [
-                Option(label: "x2s", value: MoonTagSize.x2s),
-                Option(label: "xs", value: MoonTagSize.xs),
-              ],
-            );
-
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
             );
 
             final setUpperCase = context.knobs.boolean(
@@ -60,8 +55,16 @@ class TagStory extends Story {
               initial: true,
             );
 
-            final showRightIconKnob = context.knobs
-                .boolean(label: "Show rightIcon", description: "Show widget in the rightIcon slot.", initial: true);
+            final showRightIconKnob = context.knobs.boolean(
+              label: "Show rightIcon",
+              description: "Show widget in the rightIcon slot.",
+              initial: true,
+            );
+
+            final setRtlModeKnob = context.knobs.boolean(
+              label: "RTL mode",
+              description: "Switch between LTR and RTL modes.",
+            );
 
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
