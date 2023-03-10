@@ -225,7 +225,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topCenter,
           followerAnchor: Alignment.bottomCenter,
-          toolTipMaxWidth:
+          tooltipMaxWidth:
               overlayWidth - ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
         );
 
@@ -234,7 +234,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomCenter,
           followerAnchor: Alignment.topCenter,
-          toolTipMaxWidth:
+          tooltipMaxWidth:
               overlayWidth - ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
         );
 
@@ -243,7 +243,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(-(arrowTipDistance + arrowLength), 0),
           targetAnchor: Alignment.centerLeft,
           followerAnchor: Alignment.centerRight,
-          toolTipMaxWidth: tooltipTargetGlobalLeft - arrowLength - arrowTipDistance - widget.tooltipMargin,
+          tooltipMaxWidth: tooltipTargetGlobalLeft - arrowLength - arrowTipDistance - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.right:
@@ -251,7 +251,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(arrowTipDistance + arrowLength, 0),
           targetAnchor: Alignment.centerRight,
           followerAnchor: Alignment.centerLeft,
-          toolTipMaxWidth:
+          tooltipMaxWidth:
               overlayWidth - tooltipTargetGlobalRight - arrowLength - arrowTipDistance - widget.tooltipMargin,
         );
 
@@ -260,7 +260,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topRight,
           followerAnchor: Alignment.bottomRight,
-          toolTipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
+          tooltipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.topRight:
@@ -268,7 +268,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topLeft,
           followerAnchor: Alignment.bottomLeft,
-          toolTipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
+          tooltipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.bottomLeft:
@@ -276,7 +276,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomRight,
           followerAnchor: Alignment.topRight,
-          toolTipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
+          tooltipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.bottomRight:
@@ -284,7 +284,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomLeft,
           followerAnchor: Alignment.topLeft,
-          toolTipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
+          tooltipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
         );
 
       default:
@@ -479,7 +479,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
               child: DefaultTextStyle.merge(
                 style: effectiveTextStyle,
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: tooltipPositionParameters.toolTipMaxWidth),
+                  constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
                   padding: effectiveContentPadding,
                   decoration: ShapeDecoration(
                     color: effectiveBackgroundColor,
@@ -536,12 +536,12 @@ class _TooltipPositionProperties {
   final Offset offset;
   final Alignment followerAnchor;
   final Alignment targetAnchor;
-  final double toolTipMaxWidth;
+  final double tooltipMaxWidth;
 
   _TooltipPositionProperties({
     required this.offset,
     required this.followerAnchor,
     required this.targetAnchor,
-    required this.toolTipMaxWidth,
+    required this.tooltipMaxWidth,
   });
 }

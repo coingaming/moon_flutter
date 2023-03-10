@@ -6,24 +6,24 @@ import 'package:moon_design/src/theme/shadows.dart';
 @immutable
 class MoonPopoverShadows extends ThemeExtension<MoonPopoverShadows> with DiagnosticableTreeMixin {
   static final light = MoonPopoverShadows(
-    tooltipShadows: MoonShadows.light.sm,
+    popoverShadows: MoonShadows.light.sm,
   );
 
   static final dark = MoonPopoverShadows(
-    tooltipShadows: MoonShadows.dark.sm,
+    popoverShadows: MoonShadows.dark.sm,
   );
 
   /// Popover shadows.
-  final List<BoxShadow> tooltipShadows;
+  final List<BoxShadow> popoverShadows;
 
   const MoonPopoverShadows({
-    required this.tooltipShadows,
+    required this.popoverShadows,
   });
 
   @override
-  MoonPopoverShadows copyWith({List<BoxShadow>? tooltipShadows}) {
+  MoonPopoverShadows copyWith({List<BoxShadow>? popoverShadows}) {
     return MoonPopoverShadows(
-      tooltipShadows: tooltipShadows ?? this.tooltipShadows,
+      popoverShadows: popoverShadows ?? this.popoverShadows,
     );
   }
 
@@ -32,7 +32,7 @@ class MoonPopoverShadows extends ThemeExtension<MoonPopoverShadows> with Diagnos
     if (other is! MoonPopoverShadows) return this;
 
     return MoonPopoverShadows(
-      tooltipShadows: BoxShadow.lerpList(tooltipShadows, other.tooltipShadows, t)!,
+      popoverShadows: BoxShadow.lerpList(popoverShadows, other.popoverShadows, t)!,
     );
   }
 
@@ -41,6 +41,6 @@ class MoonPopoverShadows extends ThemeExtension<MoonPopoverShadows> with Diagnos
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonPopoverShadows"))
-      ..add(DiagnosticsProperty<List<BoxShadow>>("shadows", tooltipShadows));
+      ..add(DiagnosticsProperty<List<BoxShadow>>("shadows", popoverShadows));
   }
 }

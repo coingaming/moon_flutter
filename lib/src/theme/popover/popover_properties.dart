@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -7,25 +9,30 @@ import 'package:moon_design/src/theme/sizes.dart';
 @immutable
 class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with DiagnosticableTreeMixin {
   static final properties = MoonPopoverProperties(
+    distanceToTarget: MoonSizes.sizes.x4s,
     contentPadding: EdgeInsets.all(MoonSizes.sizes.x3s),
     borderRadius: MoonBorders.borders.interactiveXs,
     transitionDuration: const Duration(milliseconds: 150),
     transitionCurve: Curves.easeInOutCubic,
   );
 
+  /// Popover distance to target child widget.
+  final double distanceToTarget;
+
   /// Padding around popover content.
   final EdgeInsets contentPadding;
 
-  /// Tooltip border radius.
+  /// Popover border radius.
   final BorderRadius borderRadius;
 
-  /// Tooltip transition duration (fade in or out animation).
+  /// Popover transition duration (fade in or out animation).
   final Duration transitionDuration;
 
-  /// Tooltip transition curve (fade in or out animation).
+  /// Popover transition curve (fade in or out animation).
   final Curve transitionCurve;
 
   const MoonPopoverProperties({
+    required this.distanceToTarget,
     required this.contentPadding,
     required this.borderRadius,
     required this.transitionDuration,
@@ -34,12 +41,14 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
 
   @override
   MoonPopoverProperties copyWith({
+    double? distanceToTarget,
     EdgeInsets? contentPadding,
     BorderRadius? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
   }) {
     return MoonPopoverProperties(
+      distanceToTarget: distanceToTarget ?? this.distanceToTarget,
       contentPadding: contentPadding ?? this.contentPadding,
       borderRadius: borderRadius ?? this.borderRadius,
       transitionDuration: transitionDuration ?? this.transitionDuration,
@@ -52,6 +61,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
     if (other is! MoonPopoverProperties) return this;
 
     return MoonPopoverProperties(
+      distanceToTarget: lerpDouble(distanceToTarget, other.distanceToTarget, t)!,
       contentPadding: EdgeInsets.lerp(contentPadding, other.contentPadding, t)!,
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
@@ -64,6 +74,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonPopoverProperties"))
+      ..add(DoubleProperty("distanceToTarget", distanceToTarget))
       ..add(DiagnosticsProperty<EdgeInsets>("contentPadding", contentPadding))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
