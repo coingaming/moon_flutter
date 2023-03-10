@@ -40,14 +40,14 @@ class ChipStory extends Story {
               description: "Border radius for the Chip.",
             );
 
-            final showBorderKnob = context.knobs.boolean(
-              label: "showBorder",
-              description: "Show border when isActive.",
-            );
-
             final isActiveKnob = context.knobs.boolean(
               label: "isActive",
               description: "Whether the Chip is active/selected.",
+            );
+
+            final showBorderKnob = context.knobs.boolean(
+              label: "showBorder",
+              description: "Show border when isActive.",
             );
 
             final showLeftIconKnob = context.knobs.boolean(
