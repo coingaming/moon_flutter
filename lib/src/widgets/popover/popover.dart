@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
 
 enum MoonPopoverPosition {
   top,
