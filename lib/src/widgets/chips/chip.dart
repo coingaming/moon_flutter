@@ -6,9 +6,9 @@ import 'package:moon_design/src/theme/chip/chip_size_properties.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
-import 'package:moon_design/src/widgets/common/corrected_color_container.dart';
 
 enum MoonChipSize {
   sm,
@@ -264,13 +264,16 @@ class MoonChip extends StatelessWidget {
         );
 
         return AnimatedContainer(
-          clipBehavior: Clip.antiAlias,
-          duration: effectiveHoverEffectDuration,
-          curve: effectiveHoverEffectCurve,
           width: width,
           height: effectiveHeight,
+          padding: correctedPadding,
+          duration: effectiveHoverEffectDuration,
+          curve: effectiveHoverEffectCurve,
           constraints: BoxConstraints(minWidth: effectiveHeight),
-          decoration: ShapeDecoration(
+          // TODO: Remove this once Impeller becomes the default render engine (see ShapeDecorationWithPremultipliedAlpha
+          // doc comment for more info).
+          decoration: ShapeDecorationWithPremultipliedAlpha(
+            color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
             shape: SmoothRectangleBorder(
               side: BorderSide(
                 color: effectiveBorderColor,
@@ -297,37 +300,32 @@ class MoonChip extends StatelessWidget {
               ),
             ),
           ),
-          // TODO: Remove this once Impeller becomes the default render engine (see CorrectedColorContainer doc comment
-          // for more info).
-          child: CorrectedColorContainer(
-            color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
-            padding: correctedPadding,
-            child: AnimatedIconTheme(
+
+          child: AnimatedIconTheme(
+            duration: effectiveHoverEffectDuration,
+            curve: effectiveHoverEffectCurve,
+            color: effectiveTextColor,
+            size: effectiveMoonChipSize.iconSizeValue,
+            child: AnimatedDefaultTextStyle(
               duration: effectiveHoverEffectDuration,
               curve: effectiveHoverEffectCurve,
-              color: effectiveTextColor,
-              size: effectiveMoonChipSize.iconSizeValue,
-              child: AnimatedDefaultTextStyle(
-                duration: effectiveHoverEffectDuration,
-                curve: effectiveHoverEffectCurve,
-                style: TextStyle(fontSize: effectiveMoonChipSize.textStyle.fontSize, color: effectiveTextColor),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (leftIcon != null)
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                        child: leftIcon,
-                      ),
-                    if (label != null) label!,
-                    if (rightIcon != null)
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                        child: rightIcon,
-                      ),
-                  ],
-                ),
+              style: TextStyle(fontSize: effectiveMoonChipSize.textStyle.fontSize, color: effectiveTextColor),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (leftIcon != null)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                      child: leftIcon,
+                    ),
+                  if (label != null) label!,
+                  if (rightIcon != null)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                      child: rightIcon,
+                    ),
+                ],
               ),
             ),
           ),
