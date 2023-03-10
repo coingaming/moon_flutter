@@ -476,7 +476,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           child: RepaintBoundary(
             child: FadeTransition(
               opacity: curvedAnimation!,
-              child: DefaultTextStyle(
+              child: DefaultTextStyle.merge(
                 style: effectiveTextStyle,
                 child: Container(
                   constraints: BoxConstraints(maxWidth: tooltipPositionParameters.toolTipMaxWidth),
