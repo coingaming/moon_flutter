@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.6](https://github.com/coingaming/moon_flutter/compare/v0.9.5...v0.9.6) (2023-03-10)
+
+
+### Bug Fixes
+
+* [MDS-430] Fix Chip border properties inconsistencies ([#72](https://github.com/coingaming/moon_flutter/issues/72)) ([781d0e8](https://github.com/coingaming/moon_flutter/commit/781d0e86ef13de85c6ba305c3e7fd830ab7eaf27))
+
 ## [0.9.5](https://github.com/coingaming/moon_flutter/compare/v0.9.4...v0.9.5) (2023-03-09)
 
 
