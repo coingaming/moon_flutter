@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/coingaming/moon_flutter/compare/v0.9.6...v0.10.0) (2023-03-11)
+
+
+### Features
+
+* [MDS-429] Create Popover component ([#74](https://github.com/coingaming/moon_flutter/issues/74)) ([33ec0c9](https://github.com/coingaming/moon_flutter/commit/33ec0c9dfed52148af61dd6a074142ef510617ef))
+
 ## [0.9.6](https://github.com/coingaming/moon_flutter/compare/v0.9.5...v0.9.6) (2023-03-10)
 
 
