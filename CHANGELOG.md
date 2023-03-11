@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/coingaming/moon_flutter/compare/v0.10.0...v0.10.1) (2023-03-11)
+
+
+### Bug Fixes
+
+* Hotfix Tooltip and Popover RTL position error ([270b4eb](https://github.com/coingaming/moon_flutter/commit/270b4ebcc410a1cd628e6109229aba3163c509c9))
+
 ## [0.10.0](https://github.com/coingaming/moon_flutter/compare/v0.9.6...v0.10.0) (2023-03-11)
 
 
