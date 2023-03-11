@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
@@ -21,18 +22,8 @@ class MoonPopover extends StatefulWidget {
   // This is required so only one popover is shown at a time.
   static final List<MoonPopoverState> _openedPopovers = [];
 
-  /// Sets a handler for listening to a `tap` event on the popover.
-  final void Function()? onPopoverTap;
-
   /// Controls the popover visibility.
   final bool show;
-
-  /// Whether the popover has an arrow (tail).
-  final bool hasArrow;
-
-  /// Whether the popover should be dismissed whenever a user taps on it. For more control when to dismiss the popover
-  /// rely on the [show] property and [onPopoverTap] handler. Defaults to [true].
-  final bool hideOnPopoverTap;
 
   /// Sets the popover position relative to the target. Defaults to [MoonPopoverPosition.vertical]
   final MoonPopoverPosition popoverPosition;
@@ -52,23 +43,14 @@ class MoonPopover extends StatefulWidget {
   /// Padding around the popover content.
   final EdgeInsets? contentPadding;
 
-  /// The width of the popover arrow (tail) at its base.
-  final double? arrowBaseWidth;
-
-  /// The length of the popover arrow (tail).
-  final double? arrowLength;
-
-  /// The offset of the popover arrow (tail) from the center of the popover.
-  final double arrowOffsetValue;
-
   /// The distance from the tip of the popover arrow (tail) to the target widget.
   final double? distanceToTarget;
 
   /// The width of the popover border.
   final double borderWidth;
 
-  /// The border radius value of the popover.
-  final double? borderRadiusValue;
+  /// The border radius of the popover.
+  final BorderRadius? borderRadius;
 
   /// The margin around popover. Used to prevent the popover from touching the edges of the viewport.
   final double popoverMargin;
@@ -99,21 +81,15 @@ class MoonPopover extends StatefulWidget {
 
   const MoonPopover({
     super.key,
-    this.onPopoverTap,
     required this.show,
-    this.hasArrow = true,
-    this.hideOnPopoverTap = true,
     this.popoverPosition = MoonPopoverPosition.top,
     this.minWidth,
     this.maxWidth,
     this.minHeight,
     this.maxHeight,
     this.contentPadding,
-    this.arrowBaseWidth,
-    this.arrowLength,
-    this.arrowOffsetValue = 0,
     this.distanceToTarget,
-    this.borderRadiusValue,
+    this.borderRadius,
     this.borderWidth = 0,
     this.popoverMargin = 8,
     this.borderColor = Colors.transparent,
@@ -145,10 +121,11 @@ class MoonPopover extends StatefulWidget {
 }
 
 class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerProviderStateMixin {
-  AnimationController? animationController;
-  CurvedAnimation? curvedAnimation;
+  final GlobalKey _popoverKey = GlobalKey();
+  final LayerLink _layerLink = LayerLink();
 
-  final LayerLink layerLink = LayerLink();
+  AnimationController? _animationController;
+  CurvedAnimation? _curvedAnimation;
 
   bool _routeIsShowing = true;
 
@@ -163,8 +140,8 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     MoonPopover._openedPopovers.add(this);
     MoonPopover._removeOtherPopovers(this);
 
-    animationController!.value = 0;
-    animationController!.forward();
+    _animationController!.value = 0;
+    _animationController!.forward();
   }
 
   void _updatePopover() {
@@ -175,8 +152,8 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     if (immediately) {
       _clearOverlayEntry();
     } else {
-      animationController!.value = 1;
-      animationController!.reverse().then((value) => _clearOverlayEntry());
+      _animationController!.value = 1;
+      _animationController!.reverse().then((value) => _clearOverlayEntry());
     }
   }
 
@@ -186,13 +163,6 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       _overlayEntry!.remove();
       _overlayEntry = null;
     }
-  }
-
-  void _handleTap() {
-    if (widget.hideOnPopoverTap) {
-      _removePopover();
-    }
-    widget.onPopoverTap?.call();
   }
 
   Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
@@ -285,6 +255,16 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
 
       default:
         throw AssertionError(popoverPosition);
+    }
+  }
+
+  void _handleTap(TapDownDetails details) {
+    final RenderBox? tooltipRenderBox = _popoverKey.currentContext?.findRenderObject() as RenderBox?;
+    final RenderBox? overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
+    final tooltipPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
+
+    if (tooltipPosition != null && !tooltipRenderBox!.size.contains(details.localPosition - tooltipPosition)) {
+      _removePopover();
     }
   }
 
@@ -387,8 +367,8 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final EdgeInsets effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.popover.properties.contentPadding ?? const EdgeInsets.all(12);
 
-    final double effectiveBorderRadius =
-        widget.borderRadiusValue ?? context.moonTheme?.popover.properties.borderRadius.topLeft.x ?? 4;
+    final BorderRadius effectiveBorderRadius =
+        widget.borderRadius ?? context.moonTheme?.popover.properties.borderRadius ?? BorderRadius.circular(12);
 
     final List<BoxShadow> effectivePopoverShadows =
         widget.popoverShadows ?? context.moonTheme?.popover.shadows.popoverShadows ?? MoonShadows.light.sm;
@@ -448,27 +428,48 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       popoverTargetGlobalRight: popoverTargetGlobalRight.dx,
     );
 
-    return UnconstrainedBox(
-      child: CompositedTransformFollower(
-        link: layerLink,
-        showWhenUnlinked: false,
-        offset: popoverPositionParameters.offset,
-        followerAnchor: popoverPositionParameters.followerAnchor,
-        targetAnchor: popoverPositionParameters.targetAnchor,
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: _handleTap,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTapDown: _handleTap,
+      child: UnconstrainedBox(
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: popoverPositionParameters.offset,
+          followerAnchor: popoverPositionParameters.followerAnchor,
+          targetAnchor: popoverPositionParameters.targetAnchor,
           child: RepaintBoundary(
             child: FadeTransition(
-              opacity: curvedAnimation!,
-              child: DefaultTextStyle.merge(
+              opacity: _curvedAnimation!,
+              child: DefaultTextStyle(
                 style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
                 child: Container(
+                  key: _popoverKey,
                   constraints: BoxConstraints(maxWidth: popoverPositionParameters.toolTipMaxWidth),
                   padding: effectiveContentPadding,
-                  decoration: BoxDecoration(
+                  decoration: ShapeDecoration(
                     color: effectiveBackgroundColor,
-                    boxShadow: effectivePopoverShadows,
+                    shadows: effectivePopoverShadows,
+                    shape: SmoothRectangleBorder(
+                      borderRadius: SmoothBorderRadius.only(
+                        topLeft: SmoothRadius(
+                          cornerRadius: effectiveBorderRadius.topLeft.x,
+                          cornerSmoothing: 1,
+                        ),
+                        topRight: SmoothRadius(
+                          cornerRadius: effectiveBorderRadius.topRight.x,
+                          cornerSmoothing: 1,
+                        ),
+                        bottomLeft: SmoothRadius(
+                          cornerRadius: effectiveBorderRadius.bottomLeft.x,
+                          cornerSmoothing: 1,
+                        ),
+                        bottomRight: SmoothRadius(
+                          cornerRadius: effectiveBorderRadius.bottomRight.x,
+                          cornerSmoothing: 1,
+                        ),
+                      ),
+                    ),
                   ),
                   child: widget.content,
                 ),
@@ -489,18 +490,18 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final Curve effectiveTransitionCurve =
         widget.transitionCurve ?? context.moonTheme?.popover.properties.transitionCurve ?? Curves.easeInOutCubic;
 
-    animationController ??= AnimationController(
+    _animationController ??= AnimationController(
       duration: effectiveTransitionDuration,
       vsync: this,
     );
 
-    curvedAnimation ??= CurvedAnimation(
-      parent: animationController!,
+    _curvedAnimation ??= CurvedAnimation(
+      parent: _animationController!,
       curve: effectiveTransitionCurve,
     );
 
     return CompositedTransformTarget(
-      link: layerLink,
+      link: _layerLink,
       child: widget.child,
     );
   }

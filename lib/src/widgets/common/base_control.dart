@@ -220,6 +220,8 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   }
 
   void _handleLongPress() {
+    if (widget.onLongPress == null) return;
+
     if (_isEnabled) {
       widget.onLongPress?.call();
     }
@@ -236,6 +238,10 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   }
 
   void _handleLongPressUp() {
+    if (widget.onLongPress == null) {
+      widget.onTap?.call();
+    }
+
     if (_isLongPressed && mounted) {
       setState(() => _isLongPressed = false);
     }

@@ -11,7 +11,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
   static final properties = MoonPopoverProperties(
     distanceToTarget: MoonSizes.sizes.x4s,
     contentPadding: EdgeInsets.all(MoonSizes.sizes.x3s),
-    borderRadius: MoonBorders.borders.interactiveXs,
+    borderRadius: MoonBorders.borders.interactiveMd,
     transitionDuration: const Duration(milliseconds: 150),
     transitionCurve: Curves.easeInOutCubic,
   );
