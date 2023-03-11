@@ -15,6 +15,7 @@ import 'package:moon_design/src/theme/progress/circular_progress/circular_progre
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
+import 'package:moon_design/src/theme/switch/switch_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
@@ -36,6 +37,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     popover: MoonPopoverTheme.light,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
+    switchTheme: MoonSwitchTheme.light,
     tag: MoonTagTheme.light,
     tooltip: MoonTooltipTheme.light,
     typography: MoonTypography.light,
@@ -56,27 +58,28 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     popover: MoonPopoverTheme.dark,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
+    switchTheme: MoonSwitchTheme.dark,
     tag: MoonTagTheme.dark,
     tooltip: MoonTooltipTheme.dark,
     typography: MoonTypography.dark,
   );
 
-  /// Moon Design System avatar theming.
+  /// Moon Design System MoonAvatar widget theming.
   final MoonAvatarTheme avatar;
 
   /// Moon Design System borders.
   final MoonBorders borders;
 
-  /// Moon Design System buttons theming.
+  /// Moon Design System MoonButton widgets theming.
   final MoonButtonTheme button;
 
-  /// Moon Design System chip theming.
+  /// Moon Design System MoonChip widgets theming.
   final MoonChipTheme chip;
 
-  /// Moon Design System circular loader theming.
+  /// Moon Design System MoonCircularLoader widget theming.
   final MoonCircularLoaderTheme circularLoader;
 
-  /// Moon Design System circular progress theming.
+  /// Moon Design System MoonCircularProgress widget theming.
   final MoonCircularProgressTheme circularProgress;
 
   /// Moon Design System colors.
@@ -85,16 +88,16 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System effects.
   final MoonEffects effects;
 
-  /// Moon Design System linear loader theming.
+  /// Moon Design System MoonLinearLoader widget theming.
   final MoonLinearLoaderTheme linearLoader;
 
-  /// Moon Design System linear progress theming.
+  /// Moon Design System MoonLinearProgress widget theming.
   final MoonLinearProgressTheme linearProgress;
 
   /// Moon Design System opacities.
   final MoonOpacity opacity;
 
-  /// Moon Design System popover theming.
+  /// Moon Design System MoonPopover widget theming.
   final MoonPopoverTheme popover;
 
   /// Moon Design System shadows.
@@ -103,10 +106,13 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System sizes.
   final MoonSizes sizes;
 
-  /// Moon Design System tag theming.
+  /// Moon Design System MoonSwitch widget theming.
+  final MoonSwitchTheme switchTheme;
+
+  /// Moon Design System MoonTag widget theming.
   final MoonTagTheme tag;
 
-  /// Moon Design System tooltip theming.
+  /// Moon Design System MoonTooltip widget theming.
   final MoonTooltipTheme tooltip;
 
   /// Moon Design System typography.
@@ -127,6 +133,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.popover,
     required this.shadows,
     required this.sizes,
+    required this.switchTheme,
     required this.tag,
     required this.tooltip,
     required this.typography,
@@ -148,6 +155,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonPopoverTheme? popover,
     MoonShadows? shadows,
     MoonSizes? sizes,
+    MoonSwitchTheme? switchTheme,
     MoonTagTheme? tag,
     MoonTooltipTheme? tooltip,
     MoonTypography? typography,
@@ -167,6 +175,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       popover: popover ?? this.popover,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
+      switchTheme: switchTheme ?? this.switchTheme,
       tag: tag ?? this.tag,
       tooltip: tooltip ?? this.tooltip,
       typography: typography ?? this.typography,
@@ -192,6 +201,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       popover: popover.lerp(other.popover, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
+      switchTheme: switchTheme.lerp(other.switchTheme, t),
       tag: tag.lerp(other.tag, t),
       tooltip: tooltip.lerp(other.tooltip, t),
       typography: typography.lerp(other.typography, t),
@@ -217,6 +227,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popover))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
+      ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tag))
       ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltip))
       ..add(DiagnosticsProperty<MoonTypography>("MoonTypography", typography));
