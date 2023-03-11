@@ -261,9 +261,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   void _handleTap(TapDownDetails details) {
     final RenderBox? tooltipRenderBox = _popoverKey.currentContext?.findRenderObject() as RenderBox?;
     final RenderBox? overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
-    final tooltipPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
+    final popoverPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
 
-    if (tooltipPosition != null && !tooltipRenderBox!.size.contains(details.localPosition - tooltipPosition)) {
+    if (popoverPosition != null && !tooltipRenderBox!.size.contains(details.localPosition - popoverPosition)) {
       _removePopover();
     }
   }
@@ -385,7 +385,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final popoverTargetGlobalRight =
         targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
 
-    if (Directionality.of(context) == TextDirection.rtl) {
+    if (Directionality.of(context) == TextDirection.rtl ||
+        popoverPosition == MoonPopoverPosition.horizontal ||
+        popoverPosition == MoonPopoverPosition.vertical) {
       switch (popoverPosition) {
         case MoonPopoverPosition.left:
           popoverPosition = MoonPopoverPosition.right;
@@ -405,18 +407,19 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
         case MoonPopoverPosition.bottomRight:
           popoverPosition = MoonPopoverPosition.bottomLeft;
           break;
-
-        default:
-      }
-    } else if (popoverPosition == MoonPopoverPosition.horizontal || popoverPosition == MoonPopoverPosition.vertical) {
-      // Compute real popoverPosition based on target position
-      popoverPosition = (popoverPosition == MoonPopoverPosition.vertical)
-          ? (popoverTargetGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
+        case MoonPopoverPosition.vertical:
+          popoverPosition = popoverTargetGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
               ? MoonPopoverPosition.bottom
-              : MoonPopoverPosition.top)
-          : (popoverTargetGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
+              : MoonPopoverPosition.top;
+          break;
+        case MoonPopoverPosition.horizontal:
+          popoverPosition = popoverTargetGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
               ? MoonPopoverPosition.right
-              : MoonPopoverPosition.left);
+              : MoonPopoverPosition.left;
+          break;
+        default:
+          break;
+      }
     }
 
     final popoverPositionParameters = _resolvePopoverPositionParameters(
