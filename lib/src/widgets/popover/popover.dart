@@ -429,7 +429,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     );
 
     return GestureDetector(
-      behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.translucent,
       onTapDown: _handleTap,
       child: UnconstrainedBox(
         child: CompositedTransformFollower(

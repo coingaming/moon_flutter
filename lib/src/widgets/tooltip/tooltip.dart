@@ -471,7 +471,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     );
 
     return GestureDetector(
-      behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.translucent,
       onTapDown: _handleTap,
       child: UnconstrainedBox(
         child: CompositedTransformFollower(
