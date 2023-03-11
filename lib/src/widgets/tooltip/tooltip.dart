@@ -147,10 +147,11 @@ class MoonTooltip extends StatefulWidget {
 }
 
 class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerProviderStateMixin {
-  AnimationController? animationController;
-  CurvedAnimation? curvedAnimation;
+  final GlobalKey _tooltipKey = GlobalKey();
+  final LayerLink _layerLink = LayerLink();
 
-  final LayerLink layerLink = LayerLink();
+  AnimationController? _animationController;
+  CurvedAnimation? _curvedAnimation;
 
   bool _routeIsShowing = true;
 
@@ -165,8 +166,8 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     MoonTooltip._openedTooltips.add(this);
     MoonTooltip._removeOtherTooltips(this);
 
-    animationController!.value = 0;
-    animationController!.forward();
+    _animationController!.value = 0;
+    _animationController!.forward();
   }
 
   void _updateTooltip() {
@@ -177,8 +178,8 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     if (immediately) {
       _clearOverlayEntry();
     } else {
-      animationController!.value = 1;
-      animationController!.reverse().then((value) => _clearOverlayEntry());
+      _animationController!.value = 1;
+      _animationController!.reverse().then((value) => _clearOverlayEntry());
     }
   }
 
@@ -190,10 +191,16 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     }
   }
 
-  void _handleTap() {
-    if (widget.hideOnTooltipTap) {
+  void _handleTap(TapDownDetails details) {
+    final RenderBox? tooltipRenderBox = _tooltipKey.currentContext?.findRenderObject() as RenderBox?;
+    final RenderBox? overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
+    final tooltipPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
+
+    if (widget.hideOnTooltipTap ||
+        tooltipPosition != null && !tooltipRenderBox!.size.contains(details.localPosition - tooltipPosition)) {
       _removeTooltip();
     }
+
     widget.onTooltipTap?.call();
   }
 
@@ -225,7 +232,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topCenter,
           followerAnchor: Alignment.bottomCenter,
-          toolTipMaxWidth:
+          tooltipMaxWidth:
               overlayWidth - ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
         );
 
@@ -234,7 +241,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomCenter,
           followerAnchor: Alignment.topCenter,
-          toolTipMaxWidth:
+          tooltipMaxWidth:
               overlayWidth - ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
         );
 
@@ -243,7 +250,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(-(arrowTipDistance + arrowLength), 0),
           targetAnchor: Alignment.centerLeft,
           followerAnchor: Alignment.centerRight,
-          toolTipMaxWidth: tooltipTargetGlobalLeft - arrowLength - arrowTipDistance - widget.tooltipMargin,
+          tooltipMaxWidth: tooltipTargetGlobalLeft - arrowLength - arrowTipDistance - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.right:
@@ -251,7 +258,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(arrowTipDistance + arrowLength, 0),
           targetAnchor: Alignment.centerRight,
           followerAnchor: Alignment.centerLeft,
-          toolTipMaxWidth:
+          tooltipMaxWidth:
               overlayWidth - tooltipTargetGlobalRight - arrowLength - arrowTipDistance - widget.tooltipMargin,
         );
 
@@ -260,7 +267,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topRight,
           followerAnchor: Alignment.bottomRight,
-          toolTipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
+          tooltipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.topRight:
@@ -268,7 +275,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topLeft,
           followerAnchor: Alignment.bottomLeft,
-          toolTipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
+          tooltipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.bottomLeft:
@@ -276,7 +283,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomRight,
           followerAnchor: Alignment.topRight,
-          toolTipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
+          tooltipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
         );
 
       case MoonTooltipPosition.bottomRight:
@@ -284,7 +291,7 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomLeft,
           followerAnchor: Alignment.topLeft,
-          toolTipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
+          tooltipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
         );
 
       default:
@@ -463,23 +470,24 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
       tooltipTargetGlobalRight: tooltipTargetGlobalRight.dx,
     );
 
-    return UnconstrainedBox(
-      child: CompositedTransformFollower(
-        link: layerLink,
-        showWhenUnlinked: false,
-        offset: tooltipPositionParameters.offset,
-        followerAnchor: tooltipPositionParameters.followerAnchor,
-        targetAnchor: tooltipPositionParameters.targetAnchor,
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: _handleTap,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTapDown: _handleTap,
+      child: UnconstrainedBox(
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: tooltipPositionParameters.offset,
+          followerAnchor: tooltipPositionParameters.followerAnchor,
+          targetAnchor: tooltipPositionParameters.targetAnchor,
           child: RepaintBoundary(
             child: FadeTransition(
-              opacity: curvedAnimation!,
+              opacity: _curvedAnimation!,
               child: DefaultTextStyle(
                 style: effectiveTextStyle,
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: tooltipPositionParameters.toolTipMaxWidth),
+                  key: _tooltipKey,
+                  constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
                   padding: effectiveContentPadding,
                   decoration: ShapeDecoration(
                     color: effectiveBackgroundColor,
@@ -515,18 +523,18 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     final Curve effectiveTransitionCurve =
         widget.transitionCurve ?? context.moonTheme?.tooltip.properties.transitionCurve ?? Curves.easeInOutCubic;
 
-    animationController ??= AnimationController(
+    _animationController ??= AnimationController(
       duration: effectiveTransitionDuration,
       vsync: this,
     );
 
-    curvedAnimation ??= CurvedAnimation(
-      parent: animationController!,
+    _curvedAnimation ??= CurvedAnimation(
+      parent: _animationController!,
       curve: effectiveTransitionCurve,
     );
 
     return CompositedTransformTarget(
-      link: layerLink,
+      link: _layerLink,
       child: widget.child,
     );
   }
@@ -536,12 +544,12 @@ class _TooltipPositionProperties {
   final Offset offset;
   final Alignment followerAnchor;
   final Alignment targetAnchor;
-  final double toolTipMaxWidth;
+  final double tooltipMaxWidth;
 
   _TooltipPositionProperties({
     required this.offset,
     required this.followerAnchor,
     required this.targetAnchor,
-    required this.toolTipMaxWidth,
+    required this.tooltipMaxWidth,
   });
 }

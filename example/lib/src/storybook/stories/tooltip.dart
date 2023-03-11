@@ -34,50 +34,58 @@ class TooltipStory extends Story {
 
             final colorsKnob = context.knobs.options(
               label: "backgroundColor",
-              description: "MoonColors variants for base MoonButton.",
+              description: "MoonColors variants for Tooltip background.",
               initial: 4, // gohan
               options: colorOptions,
             );
 
             final color = colorTable(context)[colorsKnob];
 
+            final borderRadiusKnob = context.knobs.sliderInt(
+              max: 20,
+              initial: 8,
+              label: "borderRadius",
+              description: "Border radius for Tooltip.",
+            );
+
             final arrowOffsetKnob = context.knobs.slider(
               label: "arrowOffsetValue",
-              description: "Set the offset of the tooltip arrow.",
+              description: "Set the offset of the Tooltip arrow.",
               initial: 0,
               min: -100,
               max: 100,
             );
 
+            final arrowTipDistanceKnob = context.knobs.slider(
+              label: "arrowTipDistance",
+              description: "Set the distance to target child widget.",
+              initial: 8,
+              max: 100,
+            );
+
             final arrowBaseWidthKnob = context.knobs.slider(
               label: "arrowBaseWidth",
-              description: "Set the base width of the tooltip arrow.",
+              description: "Set the base width of the Tooltip arrow.",
               initial: 16,
               max: 100,
             );
 
             final arrowLengthKnob = context.knobs.slider(
               label: "arrowLength",
-              description: "Set the length of the tooltip arrow.",
+              description: "Set the length of the Tooltip arrow.",
               initial: 8,
               max: 100,
             );
 
-            final showTooltipKnob = context.knobs.boolean(
-              label: "show",
-              description: "Show the tooltip.",
+            final showShadowKnob = context.knobs.boolean(
+              label: "Show shadow",
+              description: "Show shadows under the Tooltip.",
               initial: true,
             );
 
             final showArrowKnob = context.knobs.boolean(
               label: "hasArrow",
-              description: "Does tooltip have an arrow (tail).",
-              initial: true,
-            );
-
-            final showShadowKnob = context.knobs.boolean(
-              label: "Show shadow",
-              description: "Show shadows under the tooltip.",
+              description: "Does Tooltip have an arrow (tail).",
               initial: true,
             );
 
@@ -85,6 +93,8 @@ class TooltipStory extends Story {
               label: "RTL mode",
               description: "Switch between LTR and RTL modes.",
             );
+
+            bool show = true;
 
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
@@ -95,21 +105,29 @@ class TooltipStory extends Story {
                     const SizedBox(height: 64),
                     const TextDivider(text: "Customisable tooltip"),
                     const SizedBox(height: 32),
-                    MoonTooltip(
-                      arrowBaseWidth: arrowBaseWidthKnob,
-                      arrowLength: arrowLengthKnob,
-                      arrowOffsetValue: arrowOffsetKnob,
-                      show: showTooltipKnob,
-                      tooltipPosition: tooltipPositionsKnob,
-                      hasArrow: showArrowKnob,
-                      backgroundColor: color,
-                      tooltipShadows: showShadowKnob == true ? null : [],
-                      content: Text(customLabelTextKnob),
-                      child: MoonButton(
-                        backgroundColor: context.moonColors!.bulma,
-                        onTap: () {},
-                        label: const Text("MDS"),
-                      ),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return MoonTooltip(
+                          show: show,
+                          backgroundColor: color,
+                          borderRadiusValue: borderRadiusKnob.toDouble(),
+                          tooltipPosition: tooltipPositionsKnob,
+                          hasArrow: showArrowKnob,
+                          arrowBaseWidth: arrowBaseWidthKnob,
+                          arrowLength: arrowLengthKnob,
+                          arrowOffsetValue: arrowOffsetKnob,
+                          arrowTipDistance: arrowTipDistanceKnob,
+                          tooltipShadows: showShadowKnob == true ? null : [],
+                          content: Text(customLabelTextKnob),
+                          child: MoonButton(
+                            backgroundColor: context.moonColors!.bulma,
+                            onTap: () {
+                              setState(() => show = true);
+                            },
+                            label: const Text("MDS"),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 40),
                     const TextDivider(text: "Default tooltip"),

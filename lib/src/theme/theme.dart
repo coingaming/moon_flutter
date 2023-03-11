@@ -10,6 +10,7 @@ import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
 import 'package:moon_design/src/theme/opacity.dart';
+import 'package:moon_design/src/theme/popover/popover_theme.dart';
 import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
@@ -32,6 +33,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     linearLoader: MoonLinearLoaderTheme.light,
     linearProgress: MoonLinearProgressTheme.light,
     opacity: MoonOpacity.opacities,
+    popover: MoonPopoverTheme.light,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
     tag: MoonTagTheme.light,
@@ -51,6 +53,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     linearLoader: MoonLinearLoaderTheme.dark,
     linearProgress: MoonLinearProgressTheme.dark,
     opacity: MoonOpacity.opacities,
+    popover: MoonPopoverTheme.dark,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
     tag: MoonTagTheme.dark,
@@ -91,6 +94,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System opacities.
   final MoonOpacity opacity;
 
+  /// Moon Design System popover theming.
+  final MoonPopoverTheme popover;
+
   /// Moon Design System shadows.
   final MoonShadows shadows;
 
@@ -118,6 +124,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.linearLoader,
     required this.linearProgress,
     required this.opacity,
+    required this.popover,
     required this.shadows,
     required this.sizes,
     required this.tag,
@@ -138,6 +145,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonLinearLoaderTheme? linearLoader,
     MoonLinearProgressTheme? linearProgress,
     MoonOpacity? opacity,
+    MoonPopoverTheme? popover,
     MoonShadows? shadows,
     MoonSizes? sizes,
     MoonTagTheme? tag,
@@ -156,6 +164,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       linearLoader: linearLoader ?? this.linearLoader,
       linearProgress: linearProgress ?? this.linearProgress,
       opacity: opacity ?? this.opacity,
+      popover: popover ?? this.popover,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
       tag: tag ?? this.tag,
@@ -180,6 +189,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       linearLoader: linearLoader.lerp(other.linearLoader, t),
       linearProgress: linearProgress.lerp(other.linearProgress, t),
       opacity: opacity.lerp(other.opacity, t),
+      popover: popover.lerp(other.popover, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
       tag: tag.lerp(other.tag, t),
@@ -204,6 +214,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoader))
       ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgress))
       ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
+      ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popover))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tag))
