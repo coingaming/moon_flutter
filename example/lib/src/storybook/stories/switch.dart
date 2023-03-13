@@ -1,5 +1,6 @@
 import 'package:example/src/storybook/common/options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -75,6 +76,8 @@ class SwitchStory extends Story {
             /* final resolvedIconVariant =
                 chipSizesKnob == MoonSwitchSize.md ? MoonIconsOther.frame24 : MoonIconsOther.frame16; */
 
+            bool value = true;
+
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
@@ -84,7 +87,28 @@ class SwitchStory extends Story {
                     const SizedBox(height: 64),
                     const TextDivider(text: "Regular Switch"),
                     const SizedBox(height: 32),
-                    MoonSwitch(),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return MoonSwitch(
+                          activeThumbWidget: Icon(MoonIconsGeneric.check_alternative24),
+                          inactiveThumbWidget: Icon(MoonIconsControls.close24),
+                          value: value,
+                          onChanged: (newValue) => setState(() => value = newValue),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 32),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return CupertinoSwitch(value: value, onChanged: (newValue) => setState(() => value = newValue));
+                      },
+                    ),
+                    const SizedBox(height: 32),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return Switch(value: value, onChanged: (newValue) => setState(() => value = newValue));
+                      },
+                    ),
                     const SizedBox(height: 64),
                   ],
                 ),

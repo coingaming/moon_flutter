@@ -6,34 +6,42 @@ import 'package:moon_design/src/theme/colors.dart';
 @immutable
 class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with DiagnosticableTreeMixin {
   static final light = MoonSwitchColors(
-    activeColor: MoonColors.light.piccolo,
-    backgroundColor: MoonColors.light.gohan,
+    activeTrackColor: MoonColors.light.piccolo,
+    inactiveTrackColor: MoonColors.light.beerus,
+    thumbColor: MoonColors.light.goten,
   );
 
   static final dark = MoonSwitchColors(
-    activeColor: MoonColors.dark.piccolo,
-    backgroundColor: MoonColors.dark.gohan,
+    activeTrackColor: MoonColors.dark.piccolo,
+    inactiveTrackColor: MoonColors.dark.beerus,
+    thumbColor: MoonColors.dark.goten,
   );
 
-  /// Chip active color.
-  final Color activeColor;
+  /// Switch active track color.
+  final Color activeTrackColor;
 
-  /// Chip background color.
-  final Color backgroundColor;
+  /// Switch inactive track color.
+  final Color inactiveTrackColor;
+
+  /// Switch thumbcolor.
+  final Color thumbColor;
 
   const MoonSwitchColors({
-    required this.activeColor,
-    required this.backgroundColor,
+    required this.activeTrackColor,
+    required this.inactiveTrackColor,
+    required this.thumbColor,
   });
 
   @override
   MoonSwitchColors copyWith({
-    Color? activeColor,
-    Color? backgroundColor,
+    Color? activeTrackColor,
+    Color? inactiveTrackColor,
+    Color? thumbColor,
   }) {
     return MoonSwitchColors(
-      activeColor: activeColor ?? this.activeColor,
-      backgroundColor: backgroundColor ?? this.backgroundColor,
+      activeTrackColor: activeTrackColor ?? this.activeTrackColor,
+      inactiveTrackColor: inactiveTrackColor ?? this.inactiveTrackColor,
+      thumbColor: thumbColor ?? this.thumbColor,
     );
   }
 
@@ -42,8 +50,9 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
     if (other is! MoonSwitchColors) return this;
 
     return MoonSwitchColors(
-      activeColor: Color.lerp(activeColor, other.activeColor, t)!,
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
+      activeTrackColor: Color.lerp(activeTrackColor, other.activeTrackColor, t)!,
+      inactiveTrackColor: Color.lerp(inactiveTrackColor, other.inactiveTrackColor, t)!,
+      thumbColor: Color.lerp(thumbColor, other.thumbColor, t)!,
     );
   }
 
@@ -52,7 +61,8 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonSwitchColors"))
-      ..add(ColorProperty("activeColor", activeColor))
-      ..add(ColorProperty("backgroundColor", backgroundColor));
+      ..add(ColorProperty("activeTrackColor", activeTrackColor))
+      ..add(ColorProperty("inactiveTrackColor", inactiveTrackColor))
+      ..add(ColorProperty("thumbColor", thumbColor));
   }
 }
