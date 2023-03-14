@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/coingaming/moon_flutter/compare/v0.10.1...v0.11.0) (2023-03-14)
+
+
+### Features
+
+* [MDS-431] Create Switch widget ([#77](https://github.com/coingaming/moon_flutter/issues/77)) ([434fb73](https://github.com/coingaming/moon_flutter/commit/434fb73bb36095adcff7948fe1228ff4f031390c))
+
 ## [0.10.1](https://github.com/coingaming/moon_flutter/compare/v0.10.0...v0.10.1) (2023-03-11)
 
 
