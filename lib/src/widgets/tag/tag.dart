@@ -128,6 +128,7 @@ class MoonTag extends StatelessWidget {
       button: false,
       focusable: false,
       child: GestureDetector(
+        excludeFromSemantics: true,
         onTap: onTap,
         onLongPress: onLongPress,
         child: Container(

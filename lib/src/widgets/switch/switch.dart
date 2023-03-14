@@ -1,11 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/effects/focus_effects.dart';
+import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
+import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 
 enum MoonSwitchSize {
   x2s,
@@ -44,12 +47,6 @@ class MoonSwitch extends StatefulWidget {
   /// The color of the thumb.
   final Color? thumbColor;
 
-  /// The border of the switch.
-  final BoxBorder? trackBorder;
-
-  /// The border of the thumb.
-  final BoxBorder? thumbBorder;
-
   /// The padding of the switch.
   final EdgeInsets? padding;
 
@@ -58,6 +55,9 @@ class MoonSwitch extends StatefulWidget {
 
   /// The curve for the switch animation.
   final Curve? curve;
+
+  /// The focus node for the switch.
+  final FocusNode? focusNode;
 
   /// The widget to display when the switch is on (left slot).
   final Widget? activeTrackWidget;
@@ -83,11 +83,10 @@ class MoonSwitch extends StatefulWidget {
     this.activeTrackColor,
     this.inactiveTrackColor,
     this.thumbColor,
-    this.trackBorder,
-    this.thumbBorder,
     this.padding,
     this.duration,
     this.curve,
+    this.focusNode,
     this.activeTrackWidget,
     this.inactiveTrackWidget,
     this.activeThumbWidget,
@@ -101,14 +100,28 @@ class MoonSwitch extends StatefulWidget {
 class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateMixin {
   AnimationController? _animationController;
   CurvedAnimation? _curvedAnimation;
-  Animation<Alignment>? _alignmentAnimation;
-  Animation<Decoration>? _trackDecorationAnimation;
+  CurvedAnimation? _curvedAnimationWithOvershoot;
+  Animation<double>? _thumbFadeAnimation;
+  Animation<double>? _activeTrackWidgetFadeAnimation;
+  Animation<double>? _inactiveTrackWidgetFadeAnimation;
 
-  bool get isInteractive => widget.onChanged != null;
+  late Animation<Alignment>? _alignmentAnimation;
+  late Animation<Decoration>? _trackDecorationAnimation;
+
+  late final Map<Type, Action<Intent>> _actions = {
+    ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
+  };
+
+  FocusNode? _focusNode;
 
   // A non-null boolean value that changes to true at the end of a drag if the
-  // switch must be animated to the _curvedAnimation indicated by the widget's value.
-  bool needsPositionAnimation = false;
+  // switch must be animated to the _curvedAnimationWithOvershoot indicated by the widget's value.
+  bool _needsPositionAnimation = false;
+
+  bool _isFocused = false;
+
+  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+  bool get _isInteractive => widget.onChanged != null;
 
   MoonSwitchSizeProperties _getMoonSwitchSize(BuildContext context, MoonSwitchSize? moonSwitchSize) {
     switch (moonSwitchSize) {
@@ -123,16 +136,26 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     }
   }
 
-  // `isLinear` must be true if the _curvedAnimation animation is trying to move the
+  Color _getTextOrIconColor({required Color backgroundColor}) {
+    final backgroundLuminance = backgroundColor.computeLuminance();
+
+    if (backgroundLuminance > 0.5) {
+      return MoonColors.light.bulma;
+    } else {
+      return MoonColors.dark.bulma;
+    }
+  }
+
+  // `isLinear` must be true if the _curvedAnimationWithOvershoot animation is trying to move the
   // thumb to the closest end after the most recent drag animation, so the curve
   // does not change when the controller's value is not 0 or 1.
   //
   // It can be set to false when it's an implicit animation triggered by
   // widget.value changes.
   void _resumePositionAnimation({bool isLinear = true}) {
-    needsPositionAnimation = false;
+    _needsPositionAnimation = false;
 
-    _curvedAnimation!
+    _curvedAnimationWithOvershoot!
       ..curve = isLinear ? Curves.linear : Curves.ease
       ..reverseCurve = isLinear ? Curves.linear : Curves.ease.flipped;
 
@@ -143,28 +166,40 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     }
   }
 
+  void _handleFocus(bool focus) {
+    if (focus != _isFocused && mounted) {
+      setState(() => _isFocused = focus);
+    }
+  }
+
+  void _handleFocusChange(bool hasFocus) {
+    setState(() {
+      _isFocused = hasFocus;
+    });
+  }
+
   void _handleTapDown(TapDownDetails details) {
-    if (isInteractive) {
-      needsPositionAnimation = false;
+    if (_isInteractive) {
+      _needsPositionAnimation = false;
     }
   }
 
   void _handleTap() {
-    if (isInteractive) {
+    if (_isInteractive) {
       widget.onChanged!(!widget.value);
       _emitVibration();
     }
   }
 
   void _handleTapUp(TapUpDetails details) {
-    if (isInteractive) {
-      needsPositionAnimation = false;
+    if (_isInteractive) {
+      _needsPositionAnimation = false;
     }
   }
 
   void _handleDragStart(DragStartDetails details) {
-    if (isInteractive) {
-      needsPositionAnimation = false;
+    if (_isInteractive) {
+      _needsPositionAnimation = false;
       _emitVibration();
     }
   }
@@ -175,19 +210,19 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     required double thumbSizeValue,
     required EdgeInsets padding,
   }) {
-    if (isInteractive) {
-      _curvedAnimation!
+    if (_isInteractive) {
+      _curvedAnimationWithOvershoot!
         ..curve = Curves.linear
         ..reverseCurve = Curves.linear;
 
-      final double delta = details.primaryDelta! / (switchWidth - (thumbSizeValue + padding.right + padding.left));
-
       switch (Directionality.of(context)) {
         case TextDirection.rtl:
-          _animationController!.value -= delta;
+          _animationController!.value +=
+              -details.primaryDelta! / (switchWidth - (thumbSizeValue + padding.right + padding.left));
           break;
         case TextDirection.ltr:
-          _animationController!.value += delta;
+          _animationController!.value +=
+              details.primaryDelta! / (switchWidth - (thumbSizeValue + padding.right + padding.left));
           break;
       }
     }
@@ -196,10 +231,10 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   void _handleDragEnd(DragEndDetails details) {
     // Deferring the animation to the next build phase.
     setState(() {
-      needsPositionAnimation = true;
+      _needsPositionAnimation = true;
     });
     // Call onChanged when the user's intent to change value is clear.
-    if (_curvedAnimation!.value >= 0.5 != widget.value) {
+    if (_curvedAnimationWithOvershoot!.value >= 0.5 != widget.value) {
       widget.onChanged!(!widget.value);
     }
   }
@@ -214,12 +249,12 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   void didUpdateWidget(MoonSwitch oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (needsPositionAnimation || oldWidget.value != widget.value) {
-      _resumePositionAnimation(isLinear: needsPositionAnimation);
+    if (_needsPositionAnimation || oldWidget.value != widget.value) {
+      _resumePositionAnimation(isLinear: _needsPositionAnimation);
     }
 
-    if (_curvedAnimation!.value == 0.0 || _curvedAnimation!.value == 1.0) {
-      _curvedAnimation!
+    if (_curvedAnimationWithOvershoot!.value == 0.0 || _curvedAnimationWithOvershoot!.value == 1.0) {
+      _curvedAnimationWithOvershoot!
         ..curve = Curves.easeOutBack
         ..reverseCurve = Curves.easeOutBack.flipped;
     }
@@ -233,7 +268,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    if (needsPositionAnimation) {
+    if (_needsPositionAnimation) {
       _resumePositionAnimation();
     }
 
@@ -243,6 +278,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     final double effectiveHeight = widget.height ?? effectiveMoonSwitchSize.height;
     final double effectiveThumbSizeValue = widget.thumbSizeValue ?? effectiveMoonSwitchSize.thumbSizeValue;
     final EdgeInsets effectivePadding = widget.padding ?? effectiveMoonSwitchSize.padding;
+    final BorderRadius effectiveBorderRadius = BorderRadius.circular(effectiveThumbSizeValue / 2);
 
     final Color effectiveActiveTrackColor =
         widget.activeTrackColor ?? context.moonTheme?.switchTheme.colors.activeTrackColor ?? MoonColors.light.piccolo;
@@ -257,12 +293,23 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     final List<BoxShadow> effectiveThumbShadow =
         context.moonTheme?.switchTheme.shadows.thumbShadows ?? MoonShadows.light.sm;
 
+    final double effectiveDisabledOpacity = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+
     final Duration effectiveDuration = widget.duration ??
         context.moonTheme?.switchTheme.properties.transitionDuration ??
         const Duration(milliseconds: 200);
 
     final Curve effectiveCurve =
         widget.curve ?? context.moonTheme?.switchTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+
+    final Color effectiveFocusEffectColor =
+        context.moonEffects?.controlFocusEffect.effectColor ?? MoonFocusEffects.lightFocusEffect.effectColor;
+
+    final Curve effectiveFocusEffectCurve =
+        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
+
+    final Duration effectiveFocusEffectDuration =
+        context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
 
     _animationController ??= AnimationController(
       vsync: this,
@@ -275,12 +322,17 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
       curve: effectiveCurve,
     );
 
-    _alignmentAnimation ??= AlignmentTween(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-    ).animate(_curvedAnimation!);
+    _curvedAnimationWithOvershoot ??= CurvedAnimation(
+      parent: _animationController!,
+      curve: effectiveCurve,
+    );
 
-    _trackDecorationAnimation ??= DecorationTween(
+    _alignmentAnimation = AlignmentTween(
+      begin: Directionality.of(context) == TextDirection.ltr ? Alignment.centerLeft : Alignment.centerRight,
+      end: Directionality.of(context) == TextDirection.ltr ? Alignment.centerRight : Alignment.centerLeft,
+    ).animate(_curvedAnimationWithOvershoot!);
+
+    _trackDecorationAnimation = DecorationTween(
       begin: BoxDecoration(
         borderRadius: BorderRadius.circular(effectiveHeight / 2),
         color: effectiveInactiveTrackColor,
@@ -291,71 +343,153 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
       ),
     ).animate(_curvedAnimation!);
 
-    log("width $effectiveWidth");
-    log("height $effectiveHeight");
-
-    return GestureDetector(
-      onTap: _handleTap,
-      onTapDown: _handleTapDown,
-      onTapUp: _handleTapUp,
-      onHorizontalDragStart: _handleDragStart,
-      onHorizontalDragUpdate: (DragUpdateDetails details) => _handleDragUpdate(
-        details: details,
-        switchWidth: effectiveWidth,
-        thumbSizeValue: effectiveThumbSizeValue,
-        padding: effectivePadding,
+    _thumbFadeAnimation ??= TweenSequence<double>([
+      TweenSequenceItem<double>(
+        tween: Tween<double>(begin: 1.0, end: 0.0),
+        weight: 50.0,
       ),
-      onHorizontalDragEnd: _handleDragEnd,
-      child: AnimatedBuilder(
-        animation: _animationController!,
-        builder: (context, child) {
-          return AnimatedOpacity(
-            opacity: isInteractive ? 1 : 0.32,
-            duration: effectiveDuration,
-            curve: effectiveCurve,
-            child: SizedBox(
-              width: effectiveWidth,
-              height: effectiveHeight,
-              child: DecoratedBoxTransition(
-                decoration: _trackDecorationAnimation!,
-                child: Padding(
-                  padding: effectivePadding,
-                  child: Stack(
-                    children: <Widget>[
-                      Align(
-                        alignment: _alignmentAnimation!.value,
-                        child: Container(
-                          width: widget.thumbSizeValue,
-                          height: widget.thumbSizeValue,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(effectiveThumbSizeValue / 2),
-                            color: effectiveThumbColor,
-                            boxShadow: effectiveThumbShadow,
-                          ),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              FadeTransition(
-                                opacity: _curvedAnimation!,
-                                child:
-                                    _curvedAnimation!.value > 0.5 ? FittedBox(child: widget.activeThumbWidget) : null,
+      TweenSequenceItem<double>(
+        tween: Tween<double>(begin: 0.0, end: 1.0),
+        weight: 50.0,
+      ),
+    ]).animate(_curvedAnimation!);
+
+    _activeTrackWidgetFadeAnimation ??= Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController!,
+        curve: const Interval(0.7, 1.0),
+      ),
+    );
+
+    _inactiveTrackWidgetFadeAnimation ??= Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: _animationController!,
+        curve: const Interval(0.0, 0.3),
+      ),
+    );
+
+    final Color iconColor = _getTextOrIconColor(backgroundColor: effectiveThumbColor);
+    final Color activeTextColor = _getTextOrIconColor(backgroundColor: effectiveActiveTrackColor);
+    final Color inactiveTextColor = _getTextOrIconColor(backgroundColor: effectiveInactiveTrackColor);
+
+    return Semantics(
+      toggled: widget.value,
+      child: FocusableActionDetector(
+        enabled: _isInteractive,
+        actions: _actions,
+        focusNode: _effectiveFocusNode,
+        onFocusChange: _handleFocusChange,
+        onShowFocusHighlight: _handleFocus,
+        mouseCursor: _isInteractive ? MouseCursor.defer : SystemMouseCursors.forbidden,
+        child: GestureDetector(
+          excludeFromSemantics: true,
+          onTap: _handleTap,
+          onTapDown: _handleTapDown,
+          onTapUp: _handleTapUp,
+          onHorizontalDragStart: _handleDragStart,
+          onHorizontalDragUpdate: (DragUpdateDetails details) => _handleDragUpdate(
+            details: details,
+            switchWidth: effectiveWidth,
+            thumbSizeValue: effectiveThumbSizeValue,
+            padding: effectivePadding,
+          ),
+          onHorizontalDragEnd: _handleDragEnd,
+          child: RepaintBoundary(
+            child: AnimatedBuilder(
+              animation: _animationController!,
+              builder: (context, child) {
+                return AnimatedOpacity(
+                  opacity: _isInteractive ? 1 : effectiveDisabledOpacity,
+                  duration: effectiveDuration,
+                  curve: effectiveCurve,
+                  child: SizedBox(
+                    width: effectiveWidth,
+                    height: effectiveHeight,
+                    child: DecoratedBoxTransition(
+                      decoration: _trackDecorationAnimation!,
+                      child: Padding(
+                        padding: effectivePadding,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconTheme(
+                                  data: IconThemeData(color: activeTextColor),
+                                  child: AnimatedDefaultTextStyle(
+                                    style: TextStyle(color: activeTextColor),
+                                    duration: effectiveDuration,
+                                    child: Expanded(
+                                      child: FadeTransition(
+                                        opacity: _activeTrackWidgetFadeAnimation!,
+                                        child: widget.activeTrackWidget ?? const SizedBox.shrink(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: effectivePadding.left),
+                                IconTheme(
+                                  data: IconThemeData(color: inactiveTextColor),
+                                  child: AnimatedDefaultTextStyle(
+                                    style: TextStyle(color: inactiveTextColor),
+                                    duration: effectiveDuration,
+                                    child: Expanded(
+                                      child: FadeTransition(
+                                        opacity: _inactiveTrackWidgetFadeAnimation!,
+                                        child: widget.inactiveTrackWidget ?? const SizedBox.shrink(),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Align(
+                              alignment: _alignmentAnimation!.value,
+                              child: AnimatedIconTheme(
+                                color: iconColor,
+                                duration: effectiveDuration,
+                                size: effectiveThumbSizeValue,
+                                child: AnimatedDefaultTextStyle(
+                                  style: TextStyle(color: inactiveTextColor),
+                                  duration: effectiveDuration,
+                                  child: MoonFocusEffect(
+                                    show: _isFocused,
+                                    effectExtent: effectivePadding.top * 1.5,
+                                    effectColor: effectiveFocusEffectColor,
+                                    effectCurve: effectiveFocusEffectCurve,
+                                    effectDuration: effectiveFocusEffectDuration,
+                                    childBorderRadius: effectiveBorderRadius,
+                                    child: Container(
+                                      width: effectiveThumbSizeValue,
+                                      height: effectiveThumbSizeValue,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius: effectiveBorderRadius,
+                                        color: effectiveThumbColor,
+                                        boxShadow: effectiveThumbShadow,
+                                      ),
+                                      child: FadeTransition(
+                                        opacity: _thumbFadeAnimation!,
+                                        child: _curvedAnimation!.value > 0.5
+                                            ? widget.activeThumbWidget
+                                            : widget.inactiveThumbWidget,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                              FadeTransition(
-                                opacity: Tween<double>(begin: 1, end: 0).animate(_curvedAnimation!),
-                                child:
-                                    _curvedAnimation!.value < 0.5 ? FittedBox(child: widget.inactiveThumbWidget) : null,
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

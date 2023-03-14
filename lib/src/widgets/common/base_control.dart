@@ -313,7 +313,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
     final double effectiveFocusEffectExtent = widget.focusEffectExtent ??
         context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonFocusEffects.darkFocusEffect.effectExtent;
+        MoonFocusEffects.lightFocusEffect.effectExtent;
 
     final Curve effectiveFocusEffectCurve = widget.focusEffectCurve ??
         context.moonEffects?.controlFocusEffect.effectCurve ??
@@ -374,27 +374,28 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
             enabled: _isEnabled,
             focusable: _isEnabled,
             focused: _isFocused,
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: _handleTap,
-              onTapDown: _handleTapDown,
-              onTapUp: _handleTapUp,
-              onLongPress: _handleLongPress,
-              onLongPressStart: _handleLongPressStart,
-              onLongPressUp: _handleLongPressUp,
-              onHorizontalDragStart: _handleHorizontalDragStart,
-              onHorizontalDragEnd: _handleHorizontalDragEnd,
-              onVerticalDragStart: _handleVerticalDragStart,
-              onVerticalDragEnd: _handleVerticalDragEnd,
-              child: FocusableActionDetector(
-                enabled: _isEnabled && widget.isFocusable,
-                actions: _actions,
-                mouseCursor: _cursor,
-                focusNode: _effectiveFocusNode,
-                autofocus: _isEnabled && widget.autofocus,
-                onFocusChange: _handleFocusChange,
-                onShowFocusHighlight: _handleFocus,
-                onShowHoverHighlight: _handleHover,
+            child: FocusableActionDetector(
+              enabled: _isEnabled && widget.isFocusable,
+              actions: _actions,
+              mouseCursor: _cursor,
+              focusNode: _effectiveFocusNode,
+              autofocus: _isEnabled && widget.autofocus,
+              onFocusChange: _handleFocusChange,
+              onShowFocusHighlight: _handleFocus,
+              onShowHoverHighlight: _handleHover,
+              child: GestureDetector(
+                excludeFromSemantics: true,
+                behavior: HitTestBehavior.opaque,
+                onTap: _handleTap,
+                onTapDown: _handleTapDown,
+                onTapUp: _handleTapUp,
+                onLongPress: _handleLongPress,
+                onLongPressStart: _handleLongPressStart,
+                onLongPressUp: _handleLongPressUp,
+                onHorizontalDragStart: _handleHorizontalDragStart,
+                onHorizontalDragEnd: _handleHorizontalDragEnd,
+                onVerticalDragStart: _handleVerticalDragStart,
+                onVerticalDragEnd: _handleVerticalDragEnd,
                 child: TouchTargetPadding(
                   minSize: widget.ensureMinimalTouchTargetSize
                       ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)

@@ -33,7 +33,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Switch",
+          initialStory: "Avatar",
           plugins: _plugins,
           wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",

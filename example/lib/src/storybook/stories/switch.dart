@@ -5,78 +5,60 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
+bool value = false;
+
 class SwitchStory extends Story {
   SwitchStory()
       : super(
           name: "Switch",
           builder: (context) {
-            final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
-              initial: "MoonSwitch",
-            );
-
-            /* final chipSizesKnob = context.knobs.options(
+            final switchSizesKnob = context.knobs.options(
               label: "MoonSwitchSize",
               description: "Switch size variants.",
-              initial: MoonSwitchSize.md,
+              initial: MoonSwitchSize.xs,
               options: const [
+                Option(label: "x2s", value: MoonSwitchSize.x2s),
+                Option(label: "xs", value: MoonSwitchSize.xs),
                 Option(label: "sm", value: MoonSwitchSize.sm),
-                Option(label: "md", value: MoonSwitchSize.md),
               ],
-            ); */
+            );
 
-            final colorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for the Switch.",
-              initial: 5, // bulma
+            final thumbColorsKnob = context.knobs.options(
+              label: "thumbColor",
+              description: "MoonColors variants for the Switch thumb.",
+              initial: 7, // goten
               options: colorOptions,
             );
 
-            final color = colorTable(context)[colorsKnob];
+            final thumbColor = colorTable(context)[thumbColorsKnob];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 28,
-              initial: 8,
-              label: "borderRadius",
-              description: "Border radius for the Switch.",
+            final activeTrackColorsKnob = context.knobs.options(
+              label: "activeTrackColor",
+              description: "MoonColors variants for the active Switch track.",
+              initial: 0, // piccolo
+              options: colorOptions,
             );
 
-            final isActiveKnob = context.knobs.boolean(
-              label: "isActive",
-              description: "Whether the Switch is active/selected.",
+            final activeTrackColor = colorTable(context)[activeTrackColorsKnob];
+
+            final inactiveTrackColorsKnob = context.knobs.options(
+              label: "inactiveTrackColor",
+              description: "MoonColors variants for the active Switch track.",
+              initial: 2, // beerus
+              options: colorOptions,
             );
 
-            final showBorderKnob = context.knobs.boolean(
-              label: "showBorder",
-              description: "Show border when isActive.",
-            );
+            final inactiveTrackColor = colorTable(context)[inactiveTrackColorsKnob];
 
-            final showLeftIconKnob = context.knobs.boolean(
-              label: "Show leftIcon",
-              description: "Show widget in the leftIcon slot.",
-              initial: true,
-            );
-
-            final showLabelKnob = context.knobs.boolean(
-              label: "Show label",
-              description: "Show widget in the label slot.",
-              initial: true,
-            );
-
-            final showRightIconKnob = context.knobs.boolean(
-              label: "Show rightIcon",
-              description: "Show widget in the rightIcon slot.",
+            final isDisabled = context.knobs.boolean(
+              label: "Disabled",
+              description: "onChanged() is null.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
               label: "RTL mode",
               description: "Switch between LTR and RTL modes.",
             );
-
-            /* final resolvedIconVariant =
-                chipSizesKnob == MoonSwitchSize.md ? MoonIconsOther.frame24 : MoonIconsOther.frame16; */
-
-            bool value = true;
 
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
@@ -85,13 +67,44 @@ class SwitchStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
-                    const TextDivider(text: "Regular Switch"),
+                    const TextDivider(text: "Customisable Switch"),
                     const SizedBox(height: 32),
                     StatefulBuilder(
                       builder: (context, setState) {
                         return MoonSwitch(
-                          activeThumbWidget: Icon(MoonIconsGeneric.check_alternative24),
-                          inactiveThumbWidget: Icon(MoonIconsControls.close24),
+                          switchSize: switchSizesKnob,
+                          thumbColor: thumbColor,
+                          activeTrackColor: activeTrackColor,
+                          inactiveTrackColor: inactiveTrackColor,
+                          value: value,
+                          onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 40),
+                    const TextDivider(text: "Switches with custom children"),
+                    const SizedBox(height: 32),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return MoonSwitch(
+                          activeThumbWidget: const Icon(
+                            MoonIconsGeneric.check_alternative24,
+                            size: 14,
+                          ),
+                          inactiveThumbWidget: const Icon(
+                            MoonIconsControls.close24,
+                            size: 12,
+                          ),
+                          activeTrackWidget: const Text(
+                            "ON",
+                            style: TextStyle(fontSize: 8),
+                            textAlign: TextAlign.center,
+                          ),
+                          inactiveTrackWidget: const Text(
+                            "OFF",
+                            style: TextStyle(fontSize: 8),
+                            textAlign: TextAlign.center,
+                          ),
                           value: value,
                           onChanged: (newValue) => setState(() => value = newValue),
                         );
@@ -100,13 +113,18 @@ class SwitchStory extends Story {
                     const SizedBox(height: 32),
                     StatefulBuilder(
                       builder: (context, setState) {
-                        return CupertinoSwitch(value: value, onChanged: (newValue) => setState(() => value = newValue));
-                      },
-                    ),
-                    const SizedBox(height: 32),
-                    StatefulBuilder(
-                      builder: (context, setState) {
-                        return Switch(value: value, onChanged: (newValue) => setState(() => value = newValue));
+                        return MoonSwitch(
+                          activeTrackWidget: const Icon(
+                            MoonIconsGeneric.check_alternative24,
+                            size: 14,
+                          ),
+                          inactiveTrackWidget: const Icon(
+                            MoonIconsControls.close24,
+                            size: 12,
+                          ),
+                          value: value,
+                          onChanged: (newValue) => setState(() => value = newValue),
+                        );
                       },
                     ),
                     const SizedBox(height: 64),
