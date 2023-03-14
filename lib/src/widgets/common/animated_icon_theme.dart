@@ -7,14 +7,14 @@ class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
   /// The color must not be null.
   ///
   /// When this property is changed, the icon color will be animated over [duration] time.
-  final Color color;
+  final Color? color;
 
   /// The target size for icon.
   ///
   /// The size must not be null.
   ///
   /// When this property is changed, the icon size will be animated over [duration] time.
-  final double size;
+  final double? size;
 
   /// The widget below this widget in the tree.
   ///
@@ -30,8 +30,8 @@ class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
     super.onEnd,
     super.curve,
     required super.duration,
-    required this.color,
-    required this.size,
+    this.color,
+    this.size,
     required this.child,
   });
 
@@ -53,7 +53,7 @@ class _AnimatedIconThemeState extends AnimatedWidgetBaseState<AnimatedIconTheme>
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
     _color = visitor(_color, widget.color, (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
-    _size = visitor(_size, Size(widget.size, widget.size), (dynamic value) => SizeTween(begin: value as Size))
+    _size = visitor(_size, Size(widget.size ?? 0, widget.size ?? 0), (dynamic value) => SizeTween(begin: value as Size))
         as SizeTween?;
   }
 

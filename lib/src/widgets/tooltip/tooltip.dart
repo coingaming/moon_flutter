@@ -93,6 +93,9 @@ class MoonTooltip extends StatefulWidget {
   /// `RouteObserver` used to listen for route changes that will hide the tooltip when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
+  /// The semantic label for the tooltip.
+  final String? semanticLabel;
+
   /// The widget that its placed inside the tooltip and functions as its content.
   final Widget content;
 
@@ -124,6 +127,7 @@ class MoonTooltip extends StatefulWidget {
     this.transitionCurve,
     this.tooltipShadows,
     this.routeObserver,
+    this.semanticLabel,
     required this.content,
     required this.child,
   });
@@ -473,41 +477,45 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
       tooltipTargetGlobalRight: tooltipTargetGlobalRight.dx,
     );
 
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTapDown: _handleTap,
-      child: UnconstrainedBox(
-        child: CompositedTransformFollower(
-          link: _layerLink,
-          showWhenUnlinked: false,
-          offset: tooltipPositionParameters.offset,
-          followerAnchor: tooltipPositionParameters.followerAnchor,
-          targetAnchor: tooltipPositionParameters.targetAnchor,
-          child: RepaintBoundary(
-            child: FadeTransition(
-              opacity: _curvedAnimation!,
-              child: DefaultTextStyle(
-                style: effectiveTextStyle,
-                child: Container(
-                  key: _tooltipKey,
-                  constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
-                  padding: effectiveContentPadding,
-                  decoration: ShapeDecoration(
-                    color: effectiveBackgroundColor,
-                    shadows: effectiveTooltipShadows,
-                    shape: TooltipShape(
-                      arrowBaseWidth: effectiveArrowBaseWidth,
-                      arrowLength: effectiveArrowLength,
-                      arrowOffset: widget.arrowOffsetValue,
-                      arrowTipDistance: effectiveArrowTipDistance,
-                      borderColor: widget.borderColor,
-                      borderRadius: effectiveBorderRadius,
-                      borderWidth: widget.borderWidth,
-                      childWidth: targetRenderBox.size.width,
-                      tooltipPosition: tooltipPosition,
+    return Semantics(
+      label: widget.semanticLabel,
+      child: GestureDetector(
+        excludeFromSemantics: true,
+        behavior: HitTestBehavior.translucent,
+        onTapDown: _handleTap,
+        child: UnconstrainedBox(
+          child: CompositedTransformFollower(
+            link: _layerLink,
+            showWhenUnlinked: false,
+            offset: tooltipPositionParameters.offset,
+            followerAnchor: tooltipPositionParameters.followerAnchor,
+            targetAnchor: tooltipPositionParameters.targetAnchor,
+            child: RepaintBoundary(
+              child: FadeTransition(
+                opacity: _curvedAnimation!,
+                child: DefaultTextStyle(
+                  style: effectiveTextStyle,
+                  child: Container(
+                    key: _tooltipKey,
+                    constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
+                    padding: effectiveContentPadding,
+                    decoration: ShapeDecoration(
+                      color: effectiveBackgroundColor,
+                      shadows: effectiveTooltipShadows,
+                      shape: TooltipShape(
+                        arrowBaseWidth: effectiveArrowBaseWidth,
+                        arrowLength: effectiveArrowLength,
+                        arrowOffset: widget.arrowOffsetValue,
+                        arrowTipDistance: effectiveArrowTipDistance,
+                        borderColor: widget.borderColor,
+                        borderRadius: effectiveBorderRadius,
+                        borderWidth: widget.borderWidth,
+                        childWidth: targetRenderBox.size.width,
+                        tooltipPosition: tooltipPosition,
+                      ),
                     ),
+                    child: widget.content,
                   ),
-                  child: widget.content,
                 ),
               ),
             ),

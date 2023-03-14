@@ -303,12 +303,10 @@ class MoonChip extends StatelessWidget {
 
           child: AnimatedIconTheme(
             duration: effectiveHoverEffectDuration,
-            curve: effectiveHoverEffectCurve,
             color: effectiveTextColor,
             size: effectiveMoonChipSize.iconSizeValue,
             child: AnimatedDefaultTextStyle(
               duration: effectiveHoverEffectDuration,
-              curve: effectiveHoverEffectCurve,
               style: TextStyle(fontSize: effectiveMoonChipSize.textStyle.fontSize, color: effectiveTextColor),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

@@ -442,13 +442,11 @@ class MoonButton extends StatelessWidget {
             padding: isFullWidth ? EdgeInsets.zero : correctedPadding,
             child: AnimatedIconTheme(
               duration: effectiveHoverEffectDuration,
-              curve: effectiveHoverEffectCurve,
               color: effectiveTextColor,
               size: effectiveMoonButtonSize.iconSizeValue,
               child: AnimatedDefaultTextStyle(
                 style: TextStyle(color: effectiveTextColor, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
                 duration: effectiveHoverEffectDuration,
-                curve: effectiveHoverEffectCurve,
                 child: isFullWidth
                     ? Stack(
                         fit: StackFit.expand,
