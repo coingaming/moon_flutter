@@ -118,19 +118,19 @@ class MoonAvatar extends StatelessWidget {
   MoonAvatarSizeProperties _getMoonAvatarSize(BuildContext context, MoonAvatarSize? moonAvatarSize) {
     switch (moonAvatarSize) {
       case MoonAvatarSize.xs:
-        return context.moonTheme?.avatar.sizes.xs ?? MoonAvatarSizeProperties.xs;
+        return context.moonTheme?.avatarTheme.sizes.xs ?? MoonAvatarSizeProperties.xs;
       case MoonAvatarSize.sm:
-        return context.moonTheme?.avatar.sizes.sm ?? MoonAvatarSizeProperties.sm;
+        return context.moonTheme?.avatarTheme.sizes.sm ?? MoonAvatarSizeProperties.sm;
       case MoonAvatarSize.md:
-        return context.moonTheme?.avatar.sizes.md ?? MoonAvatarSizeProperties.md;
+        return context.moonTheme?.avatarTheme.sizes.md ?? MoonAvatarSizeProperties.md;
       case MoonAvatarSize.lg:
-        return context.moonTheme?.avatar.sizes.lg ?? MoonAvatarSizeProperties.lg;
+        return context.moonTheme?.avatarTheme.sizes.lg ?? MoonAvatarSizeProperties.lg;
       case MoonAvatarSize.xl:
-        return context.moonTheme?.avatar.sizes.xl ?? MoonAvatarSizeProperties.xl;
+        return context.moonTheme?.avatarTheme.sizes.xl ?? MoonAvatarSizeProperties.xl;
       case MoonAvatarSize.x2l:
-        return context.moonTheme?.avatar.sizes.x2l ?? MoonAvatarSizeProperties.x2l;
+        return context.moonTheme?.avatarTheme.sizes.x2l ?? MoonAvatarSizeProperties.x2l;
       default:
-        return context.moonTheme?.avatar.sizes.md ?? MoonAvatarSizeProperties.md;
+        return context.moonTheme?.avatarTheme.sizes.md ?? MoonAvatarSizeProperties.md;
     }
   }
 
@@ -150,10 +150,10 @@ class MoonAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.avatar.colors.backgroundColor ?? MoonColors.light.gohan;
+        backgroundColor ?? context.moonTheme?.avatarTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveBadgeColor =
-        badgeColor ?? context.moonTheme?.avatar.colors.badgeColor ?? MoonColors.light.roshi100;
+        badgeColor ?? context.moonTheme?.avatarTheme.colors.badgeColor ?? MoonColors.light.roshi100;
 
     final Color effectiveTextColor = textColor ??
         _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);

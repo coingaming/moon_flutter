@@ -23,64 +23,64 @@ import 'package:moon_design/src/theme/typography/typography.dart';
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
-    avatar: MoonAvatarTheme.light,
+    avatarTheme: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
-    button: MoonButtonTheme.light,
-    chip: MoonChipTheme.light,
-    circularLoader: MoonCircularLoaderTheme.light,
-    circularProgress: MoonCircularProgressTheme.light,
+    buttonTheme: MoonButtonTheme.light,
+    chipTheme: MoonChipTheme.light,
+    circularLoaderTheme: MoonCircularLoaderTheme.light,
+    circularProgressTheme: MoonCircularProgressTheme.light,
     colors: MoonColors.light,
     effects: MoonEffects.light,
-    linearLoader: MoonLinearLoaderTheme.light,
-    linearProgress: MoonLinearProgressTheme.light,
+    linearLoaderTheme: MoonLinearLoaderTheme.light,
+    linearProgressTheme: MoonLinearProgressTheme.light,
     opacity: MoonOpacity.opacities,
-    popover: MoonPopoverTheme.light,
+    popoverTheme: MoonPopoverTheme.light,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
     switchTheme: MoonSwitchTheme.light,
-    tag: MoonTagTheme.light,
-    tooltip: MoonTooltipTheme.light,
+    tagTheme: MoonTagTheme.light,
+    tooltipTheme: MoonTooltipTheme.light,
     typography: MoonTypography.light,
   );
 
   static final dark = MoonTheme(
-    avatar: MoonAvatarTheme.dark,
+    avatarTheme: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
-    button: MoonButtonTheme.dark,
-    chip: MoonChipTheme.dark,
-    circularLoader: MoonCircularLoaderTheme.dark,
-    circularProgress: MoonCircularProgressTheme.dark,
+    buttonTheme: MoonButtonTheme.dark,
+    chipTheme: MoonChipTheme.dark,
+    circularLoaderTheme: MoonCircularLoaderTheme.dark,
+    circularProgressTheme: MoonCircularProgressTheme.dark,
     colors: MoonColors.dark,
     effects: MoonEffects.dark,
-    linearLoader: MoonLinearLoaderTheme.dark,
-    linearProgress: MoonLinearProgressTheme.dark,
+    linearLoaderTheme: MoonLinearLoaderTheme.dark,
+    linearProgressTheme: MoonLinearProgressTheme.dark,
     opacity: MoonOpacity.opacities,
-    popover: MoonPopoverTheme.dark,
+    popoverTheme: MoonPopoverTheme.dark,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
     switchTheme: MoonSwitchTheme.dark,
-    tag: MoonTagTheme.dark,
-    tooltip: MoonTooltipTheme.dark,
+    tagTheme: MoonTagTheme.dark,
+    tooltipTheme: MoonTooltipTheme.dark,
     typography: MoonTypography.dark,
   );
 
   /// Moon Design System MoonAvatar widget theming.
-  final MoonAvatarTheme avatar;
+  final MoonAvatarTheme avatarTheme;
 
   /// Moon Design System borders.
   final MoonBorders borders;
 
   /// Moon Design System MoonButton widgets theming.
-  final MoonButtonTheme button;
+  final MoonButtonTheme buttonTheme;
 
   /// Moon Design System MoonChip widgets theming.
-  final MoonChipTheme chip;
+  final MoonChipTheme chipTheme;
 
   /// Moon Design System MoonCircularLoader widget theming.
-  final MoonCircularLoaderTheme circularLoader;
+  final MoonCircularLoaderTheme circularLoaderTheme;
 
   /// Moon Design System MoonCircularProgress widget theming.
-  final MoonCircularProgressTheme circularProgress;
+  final MoonCircularProgressTheme circularProgressTheme;
 
   /// Moon Design System colors.
   final MoonColors colors;
@@ -89,16 +89,16 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonEffects effects;
 
   /// Moon Design System MoonLinearLoader widget theming.
-  final MoonLinearLoaderTheme linearLoader;
+  final MoonLinearLoaderTheme linearLoaderTheme;
 
   /// Moon Design System MoonLinearProgress widget theming.
-  final MoonLinearProgressTheme linearProgress;
+  final MoonLinearProgressTheme linearProgressTheme;
 
   /// Moon Design System opacities.
   final MoonOpacity opacity;
 
   /// Moon Design System MoonPopover widget theming.
-  final MoonPopoverTheme popover;
+  final MoonPopoverTheme popoverTheme;
 
   /// Moon Design System shadows.
   final MoonShadows shadows;
@@ -110,74 +110,74 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonSwitchTheme switchTheme;
 
   /// Moon Design System MoonTag widget theming.
-  final MoonTagTheme tag;
+  final MoonTagTheme tagTheme;
 
   /// Moon Design System MoonTooltip widget theming.
-  final MoonTooltipTheme tooltip;
+  final MoonTooltipTheme tooltipTheme;
 
   /// Moon Design System typography.
   final MoonTypography typography;
 
   const MoonTheme({
-    required this.avatar,
+    required this.avatarTheme,
     required this.borders,
-    required this.button,
-    required this.chip,
-    required this.circularLoader,
-    required this.circularProgress,
+    required this.buttonTheme,
+    required this.chipTheme,
+    required this.circularLoaderTheme,
+    required this.circularProgressTheme,
     required this.colors,
     required this.effects,
-    required this.linearLoader,
-    required this.linearProgress,
+    required this.linearLoaderTheme,
+    required this.linearProgressTheme,
     required this.opacity,
-    required this.popover,
+    required this.popoverTheme,
     required this.shadows,
     required this.sizes,
     required this.switchTheme,
-    required this.tag,
-    required this.tooltip,
+    required this.tagTheme,
+    required this.tooltipTheme,
     required this.typography,
   });
 
   @override
   MoonTheme copyWith({
-    MoonAvatarTheme? avatar,
+    MoonAvatarTheme? avatarTheme,
     MoonBorders? borders,
-    MoonButtonTheme? button,
-    MoonChipTheme? chip,
-    MoonCircularLoaderTheme? circularLoader,
-    MoonCircularProgressTheme? circularProgress,
+    MoonButtonTheme? buttonTheme,
+    MoonChipTheme? chipTheme,
+    MoonCircularLoaderTheme? circularLoaderTheme,
+    MoonCircularProgressTheme? circularProgressTheme,
     MoonColors? colors,
     MoonEffects? effects,
-    MoonLinearLoaderTheme? linearLoader,
-    MoonLinearProgressTheme? linearProgress,
+    MoonLinearLoaderTheme? linearLoaderTheme,
+    MoonLinearProgressTheme? linearProgressTheme,
     MoonOpacity? opacity,
-    MoonPopoverTheme? popover,
+    MoonPopoverTheme? popoverTheme,
     MoonShadows? shadows,
     MoonSizes? sizes,
     MoonSwitchTheme? switchTheme,
-    MoonTagTheme? tag,
-    MoonTooltipTheme? tooltip,
+    MoonTagTheme? tagTheme,
+    MoonTooltipTheme? tooltipTheme,
     MoonTypography? typography,
   }) {
     return MoonTheme(
-      avatar: avatar ?? this.avatar,
+      avatarTheme: avatarTheme ?? this.avatarTheme,
       borders: borders ?? this.borders,
-      button: button ?? this.button,
-      chip: chip ?? this.chip,
-      circularLoader: circularLoader ?? this.circularLoader,
-      circularProgress: circularProgress ?? this.circularProgress,
+      buttonTheme: buttonTheme ?? this.buttonTheme,
+      chipTheme: chipTheme ?? this.chipTheme,
+      circularLoaderTheme: circularLoaderTheme ?? this.circularLoaderTheme,
+      circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
       colors: colors ?? this.colors,
       effects: effects ?? this.effects,
-      linearLoader: linearLoader ?? this.linearLoader,
-      linearProgress: linearProgress ?? this.linearProgress,
+      linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
+      linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
       opacity: opacity ?? this.opacity,
-      popover: popover ?? this.popover,
+      popoverTheme: popoverTheme ?? this.popoverTheme,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
       switchTheme: switchTheme ?? this.switchTheme,
-      tag: tag ?? this.tag,
-      tooltip: tooltip ?? this.tooltip,
+      tagTheme: tagTheme ?? this.tagTheme,
+      tooltipTheme: tooltipTheme ?? this.tooltipTheme,
       typography: typography ?? this.typography,
     );
   }
@@ -187,23 +187,23 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     if (other is! MoonTheme) return this;
 
     return MoonTheme(
-      avatar: avatar.lerp(other.avatar, t),
+      avatarTheme: avatarTheme.lerp(other.avatarTheme, t),
       borders: borders.lerp(other.borders, t),
-      button: button.lerp(other.button, t),
-      chip: chip.lerp(other.chip, t),
-      circularLoader: circularLoader.lerp(other.circularLoader, t),
-      circularProgress: circularProgress.lerp(other.circularProgress, t),
+      buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
+      chipTheme: chipTheme.lerp(other.chipTheme, t),
+      circularLoaderTheme: circularLoaderTheme.lerp(other.circularLoaderTheme, t),
+      circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
       colors: colors.lerp(other.colors, t),
       effects: effects.lerp(other.effects, t),
-      linearLoader: linearLoader.lerp(other.linearLoader, t),
-      linearProgress: linearProgress.lerp(other.linearProgress, t),
+      linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
+      linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
       opacity: opacity.lerp(other.opacity, t),
-      popover: popover.lerp(other.popover, t),
+      popoverTheme: popoverTheme.lerp(other.popoverTheme, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
       switchTheme: switchTheme.lerp(other.switchTheme, t),
-      tag: tag.lerp(other.tag, t),
-      tooltip: tooltip.lerp(other.tooltip, t),
+      tagTheme: tagTheme.lerp(other.tagTheme, t),
+      tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
       typography: typography.lerp(other.typography, t),
     );
   }
@@ -213,23 +213,23 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTheme"))
-      ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatar))
+      ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
-      ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", button))
-      ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chip))
-      ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoader))
-      ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgress))
+      ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
+      ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
+      ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoaderTheme))
+      ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", colors))
       ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
-      ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoader))
-      ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgress))
+      ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
+      ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
       ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
-      ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popover))
+      ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popoverTheme))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
       ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
-      ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tag))
-      ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltip))
+      ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
+      ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme))
       ..add(DiagnosticsProperty<MoonTypography>("MoonTypography", typography));
   }
 }
