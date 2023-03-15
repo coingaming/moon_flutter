@@ -12,41 +12,46 @@ class CheckboxStory extends Story {
       : super(
           name: "Checkbox",
           builder: (context) {
-            final thumbColorsKnob = context.knobs.options(
-              label: "thumbColor",
-              description: "MoonColors variants for the Checkbox thumb.",
+            final checkColorsKnob = context.knobs.options(
+              label: "checkColor",
+              description: "MoonColors variants for the Checkbox icon.",
               initial: 7, // goten
               options: colorOptions,
             );
 
-            final thumbColor = colorTable(context)[thumbColorsKnob];
+            final checkColor = colorTable(context)[checkColorsKnob];
 
-            final activeTrackColorsKnob = context.knobs.options(
-              label: "activeTrackColor",
-              description: "MoonColors variants for the active Checkbox track.",
+            final activeColorsKnob = context.knobs.options(
+              label: "activeColor",
+              description: "MoonColors variants for when Checkbox is checked.",
               initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final activeTrackColor = colorTable(context)[activeTrackColorsKnob];
+            final activeColor = colorTable(context)[activeColorsKnob];
 
-            final inactiveTrackColorsKnob = context.knobs.options(
-              label: "inactiveTrackColor",
-              description: "MoonColors variants for the active Checkbox track.",
-              initial: 2, // beerus
+            final fillColorsKnob = context.knobs.options(
+              label: "fillColor",
+              description: "MoonColors variants for when Checkbox is unchecked.",
+              initial: 39, // transparent
               options: colorOptions,
             );
 
-            final inactiveTrackColor = colorTable(context)[inactiveTrackColorsKnob];
+            final fillColor = colorTable(context)[fillColorsKnob];
 
             final isDisabled = context.knobs.boolean(
               label: "Disabled",
               description: "onChanged() is null.",
             );
 
+            final isTristate = context.knobs.boolean(
+              label: "tristate",
+              description: "Whether the checkbox uses tristate.",
+            );
+
             final setRtlModeKnob = context.knobs.boolean(
               label: "RTL mode",
-              description: "Checkbox between LTR and RTL modes.",
+              description: "Switch between LTR and RTL modes.",
             );
 
             return Directionality(
@@ -56,11 +61,34 @@ class CheckboxStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
+                    const TextDivider(text: "Customisable Checkbox"),
+                    const SizedBox(height: 32),
                     StatefulBuilder(
                       builder: (context, setState) {
                         return MoonCheckbox(
+                          checkColor: checkColor,
+                          activeColor: activeColor,
+                          fillColor: fillColor,
+                          tristate: isTristate,
                           value: value,
                           onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 40),
+                    const TextDivider(text: "Checkbox with clickable text"),
+                    const SizedBox(height: 32),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return MoonCheckbox.withLabel(
+                          context,
+                          checkColor: checkColor,
+                          activeColor: activeColor,
+                          fillColor: fillColor,
+                          tristate: isTristate,
+                          value: value,
+                          onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
+                          label: "With label",
                         );
                       },
                     ),

@@ -75,6 +75,7 @@ class TagStory extends Story {
                     const SizedBox(height: 64),
                     MoonTag(
                       borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                      onTap: () {},
                       tagSize: tagSizesKnob,
                       isUpperCase: setUpperCase,
                       backgroundColor: color,

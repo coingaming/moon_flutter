@@ -25,10 +25,10 @@ class MoonBaseControl extends StatefulWidget {
   /// The callback that is called when the control is long-pressed.
   final VoidCallback? onLongPress;
 
-  /// The focus node for this control.
+  /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
-  /// Whether this control should autofocus when it is first added to the tree.
+  /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
   /// Whether this control should be focusable.
@@ -144,7 +144,7 @@ class MoonBaseControl extends StatefulWidget {
     this.pulseEffectCurve,
     this.scaleEffectCurve,
     this.borderRadius = BorderRadius.zero,
-    this.cursor = MouseCursor.defer,
+    this.cursor = SystemMouseCursors.click,
     required this.builder,
   });
 
@@ -168,7 +168,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   bool get _canAnimatePulse => widget.showPulseEffect && _isEnabled;
   bool get _canAnimateScale => widget.showScaleAnimation && _isEnabled && (_isPressed || _isLongPressed);
 
-  MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.forbidden;
+  MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.basic;
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
   void _handleHover(bool hover) {

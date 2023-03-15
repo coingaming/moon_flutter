@@ -26,6 +26,9 @@ class MoonSwitch extends StatefulWidget {
   /// The size of the switch.
   final MoonSwitchSize? switchSize;
 
+  /// {@macro flutter.widgets.Focus.autofocus}
+  final bool autofocus;
+
   /// Whether the switch has haptic feedback (vibration) when toggled.
   final bool hasHapticFeedback;
 
@@ -56,7 +59,7 @@ class MoonSwitch extends StatefulWidget {
   /// The curve for the switch animation.
   final Curve? curve;
 
-  /// The focus node for the switch.
+  /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
   /// The widget to display when the switch is on (left slot).
@@ -71,11 +74,13 @@ class MoonSwitch extends StatefulWidget {
   /// The widget inside the thumb when the switch is off.
   final Widget? inactiveThumbWidget;
 
+  /// MDS switch widget.
   const MoonSwitch({
     super.key,
     required this.value,
     this.onChanged,
     this.switchSize,
+    this.autofocus = false,
     this.width,
     this.height,
     this.thumbSizeValue,
@@ -293,14 +298,17 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     final List<BoxShadow> effectiveThumbShadow =
         context.moonTheme?.switchTheme.shadows.thumbShadows ?? MoonShadows.light.sm;
 
-    final double effectiveDisabledOpacity = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
     final Duration effectiveDuration = widget.duration ??
         context.moonTheme?.switchTheme.properties.transitionDuration ??
         const Duration(milliseconds: 200);
 
-    final Curve effectiveCurve =
+    final Curve effectiveTransitionCurve =
         widget.curve ?? context.moonTheme?.switchTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+
+    final double effectiveFocusEffectExtent =
+        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
 
     final Color effectiveFocusEffectColor =
         context.moonEffects?.controlFocusEffect.effectColor ?? MoonFocusEffects.lightFocusEffect.effectColor;
@@ -319,12 +327,12 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
 
     _curvedAnimation ??= CurvedAnimation(
       parent: _animationController!,
-      curve: effectiveCurve,
+      curve: effectiveTransitionCurve,
     );
 
     _curvedAnimationWithOvershoot ??= CurvedAnimation(
       parent: _animationController!,
-      curve: effectiveCurve,
+      curve: effectiveTransitionCurve,
     );
 
     _alignmentAnimation = AlignmentTween(
@@ -377,10 +385,11 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
       child: FocusableActionDetector(
         enabled: _isInteractive,
         actions: _actions,
+        autofocus: widget.autofocus,
         focusNode: _effectiveFocusNode,
         onFocusChange: _handleFocusChange,
         onShowFocusHighlight: _handleFocus,
-        mouseCursor: _isInteractive ? MouseCursor.defer : SystemMouseCursors.forbidden,
+        mouseCursor: _isInteractive ? SystemMouseCursors.click : SystemMouseCursors.basic,
         child: GestureDetector(
           excludeFromSemantics: true,
           onTap: _handleTap,
@@ -399,9 +408,9 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
               animation: _animationController!,
               builder: (context, child) {
                 return AnimatedOpacity(
-                  opacity: _isInteractive ? 1 : effectiveDisabledOpacity,
+                  opacity: _isInteractive ? 1 : effectiveDisabledOpacityValue,
                   duration: effectiveDuration,
-                  curve: effectiveCurve,
+                  curve: effectiveTransitionCurve,
                   child: SizedBox(
                     width: effectiveWidth,
                     height: effectiveHeight,
@@ -455,7 +464,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                                   duration: effectiveDuration,
                                   child: MoonFocusEffect(
                                     show: _isFocused,
-                                    effectExtent: effectivePadding.top * 1.5,
+                                    effectExtent: effectiveFocusEffectExtent,
                                     effectColor: effectiveFocusEffectColor,
                                     effectCurve: effectiveFocusEffectCurve,
                                     effectDuration: effectiveFocusEffectDuration,

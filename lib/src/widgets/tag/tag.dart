@@ -57,6 +57,7 @@ class MoonTag extends StatelessWidget {
   /// The widget in the right icon slot of the tag.
   final Widget? rightIcon;
 
+  /// MDS tag widget.
   const MoonTag({
     super.key,
     this.onTap,
@@ -131,55 +132,58 @@ class MoonTag extends StatelessWidget {
         excludeFromSemantics: true,
         onTap: onTap,
         onLongPress: onLongPress,
-        child: Container(
-          height: effectiveHeight,
-          padding: correctedPadding,
-          constraints: BoxConstraints(minWidth: effectiveHeight),
-          decoration: ShapeDecoration(
-            color: effectiveBackgroundColor,
-            shape: SmoothRectangleBorder(
-              borderRadius: SmoothBorderRadius.only(
-                topLeft: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.topLeft.x,
-                  cornerSmoothing: 1,
-                ),
-                topRight: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.topRight.x,
-                  cornerSmoothing: 1,
-                ),
-                bottomLeft: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.bottomLeft.x,
-                  cornerSmoothing: 1,
-                ),
-                bottomRight: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.bottomRight.x,
-                  cornerSmoothing: 1,
+        child: MouseRegion(
+          cursor: onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+          child: Container(
+            height: effectiveHeight,
+            padding: correctedPadding,
+            constraints: BoxConstraints(minWidth: effectiveHeight),
+            decoration: ShapeDecoration(
+              color: effectiveBackgroundColor,
+              shape: SmoothRectangleBorder(
+                borderRadius: SmoothBorderRadius.only(
+                  topLeft: SmoothRadius(
+                    cornerRadius: effectiveBorderRadius.topLeft.x,
+                    cornerSmoothing: 1,
+                  ),
+                  topRight: SmoothRadius(
+                    cornerRadius: effectiveBorderRadius.topRight.x,
+                    cornerSmoothing: 1,
+                  ),
+                  bottomLeft: SmoothRadius(
+                    cornerRadius: effectiveBorderRadius.bottomLeft.x,
+                    cornerSmoothing: 1,
+                  ),
+                  bottomRight: SmoothRadius(
+                    cornerRadius: effectiveBorderRadius.bottomRight.x,
+                    cornerSmoothing: 1,
+                  ),
                 ),
               ),
             ),
-          ),
-          child: IconTheme(
-            data: IconThemeData(color: effectiveTextColor, size: effectiveMoonTagSize.iconSizeValue),
-            child: DefaultTextStyle.merge(
-              style: isUpperCase
-                  ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor)
-                  : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (leftIcon != null)
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                      child: leftIcon,
-                    ),
-                  if (label != null) label!,
-                  if (rightIcon != null)
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                      child: rightIcon,
-                    ),
-                ],
+            child: IconTheme(
+              data: IconThemeData(color: effectiveTextColor, size: effectiveMoonTagSize.iconSizeValue),
+              child: DefaultTextStyle.merge(
+                style: isUpperCase
+                    ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor)
+                    : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (leftIcon != null)
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                        child: leftIcon,
+                      ),
+                    if (label != null) label!,
+                    if (rightIcon != null)
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+                        child: rightIcon,
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
