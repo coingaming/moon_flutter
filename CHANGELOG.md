@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/coingaming/moon_flutter/compare/v0.11.0...v0.11.1) (2023-03-15)
+
+
+### Bug Fixes
+
+* [MDS-437 Fix specific components theming naming and Storybook story weights ([#79](https://github.com/coingaming/moon_flutter/issues/79)) ([f01999f](https://github.com/coingaming/moon_flutter/commit/f01999f7f0af6fffa428d97cea4da26ff3e9472b))
+
 ## [0.11.0](https://github.com/coingaming/moon_flutter/compare/v0.10.1...v0.11.0) (2023-03-14)
 
 
