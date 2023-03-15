@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/coingaming/moon_flutter/compare/v0.11.1...v0.12.0) (2023-03-15)
+
+
+### Features
+
+* [MDS-436] Create Checkbox component ([#81](https://github.com/coingaming/moon_flutter/issues/81)) ([21a66dd](https://github.com/coingaming/moon_flutter/commit/21a66dddad90942864ebe6fa8b4621d935b7563c))
+
 ## [0.11.1](https://github.com/coingaming/moon_flutter/compare/v0.11.0...v0.11.1) (2023-03-15)
 
 
