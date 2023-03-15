@@ -31,6 +31,7 @@ export 'package:moon_design/src/widgets/buttons/ghost_button.dart';
 export 'package:moon_design/src/widgets/buttons/primary_button.dart';
 export 'package:moon_design/src/widgets/buttons/secondary_button.dart';
 export 'package:moon_design/src/widgets/buttons/tertiary_button.dart';
+export 'package:moon_design/src/widgets/checkbox/checkbox.dart';
 export 'package:moon_design/src/widgets/chips/chip.dart';
 export 'package:moon_design/src/widgets/chips/ghost_chip.dart';
 export 'package:moon_design/src/widgets/common/animated_icon_theme.dart';

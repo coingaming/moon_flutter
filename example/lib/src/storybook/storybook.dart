@@ -1,6 +1,7 @@
 import 'package:example/src/storybook/common/widgets/version.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/button.dart';
+import 'package:example/src/storybook/stories/checkbox.dart';
 import 'package:example/src/storybook/stories/chip.dart';
 import 'package:example/src/storybook/stories/circular_loader.dart';
 import 'package:example/src/storybook/stories/circular_progress.dart';
@@ -33,7 +34,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Avatar",
+          initialStory: "Checkbox",
           plugins: _plugins,
           wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",
@@ -67,6 +68,7 @@ class StorybookPage extends StatelessWidget {
           stories: [
             AvatarStory(),
             ButtonStory(),
+            CheckboxStory(),
             ChipStory(),
             CircularLoaderStory(),
             CircularProgressStory(),
