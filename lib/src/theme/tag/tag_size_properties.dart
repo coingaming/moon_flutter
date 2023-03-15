@@ -16,7 +16,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.body.text10.copyWith(fontWeight: FontWeight.w400),
-    upperCaseTextStyle: MoonTextStyles.heading.text9.copyWith(fontWeight: FontWeight.w700),
+    upperCaseTextStyle: MoonTextStyles.caption.text9,
   );
 
   static final xs = MoonTagSizeProperties(
@@ -26,7 +26,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.body.text12.copyWith(fontWeight: FontWeight.w400),
-    upperCaseTextStyle: MoonTextStyles.heading.text10,
+    upperCaseTextStyle: MoonTextStyles.caption.text10,
   );
 
   /// Tag height.

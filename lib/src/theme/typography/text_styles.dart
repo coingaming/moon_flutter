@@ -6,6 +6,12 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
   static const _semiBold = FontWeight.w600;
 
   static const body = MoonTextStyles(
+    text6: TextStyle(
+      fontSize: 6,
+    ),
+    text8: TextStyle(
+      fontSize: 8,
+    ),
     text9: TextStyle(
       fontSize: 9,
     ),
@@ -48,6 +54,14 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
   );
 
   static const heading = MoonTextStyles(
+    text6: TextStyle(
+      fontSize: 6,
+      fontWeight: _semiBold,
+    ),
+    text8: TextStyle(
+      fontSize: 8,
+      fontWeight: _semiBold,
+    ),
     text9: TextStyle(
       fontSize: 9,
       fontWeight: _semiBold,
@@ -102,6 +116,105 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     ),
   );
 
+  static const caption = MoonTextStyles(
+    text6: TextStyle(
+      fontSize: 6,
+      height: 1.1,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text8: TextStyle(
+      fontSize: 8,
+      height: 1.1,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text9: TextStyle(
+      fontSize: 9,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text10: TextStyle(
+      fontSize: 10,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text12: TextStyle(
+      fontSize: 12,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text14: TextStyle(
+      fontSize: 14,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text16: TextStyle(
+      fontSize: 16,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text18: TextStyle(
+      fontSize: 18,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text20: TextStyle(
+      fontSize: 20,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text24: TextStyle(
+      fontSize: 24,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text32: TextStyle(
+      fontSize: 32,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text48: TextStyle(
+      fontSize: 48,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text56: TextStyle(
+      fontSize: 56,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text64: TextStyle(
+      fontSize: 64,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+    text72: TextStyle(
+      fontSize: 72,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
+  );
+
+  /// Text size 9.
+  final TextStyle text6;
+
+  /// Text size 9.
+  final TextStyle text8;
+
   /// Text size 9.
   final TextStyle text9;
 
@@ -142,6 +255,8 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
   final TextStyle text72;
 
   const MoonTextStyles({
+    required this.text6,
+    required this.text8,
     required this.text9,
     required this.text10,
     required this.text12,
@@ -159,6 +274,8 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
 
   @override
   MoonTextStyles copyWith({
+    TextStyle? text6,
+    TextStyle? text8,
     TextStyle? text9,
     TextStyle? text10,
     TextStyle? text12,
@@ -174,6 +291,8 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     TextStyle? text72,
   }) {
     return MoonTextStyles(
+      text6: text6 ?? this.text6,
+      text8: text8 ?? this.text8,
       text9: text9 ?? this.text9,
       text10: text10 ?? this.text10,
       text12: text12 ?? this.text12,
@@ -195,6 +314,8 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     if (other is! MoonTextStyles) return this;
 
     return MoonTextStyles(
+      text6: TextStyle.lerp(text6, other.text6, t)!,
+      text8: TextStyle.lerp(text8, other.text8, t)!,
       text9: TextStyle.lerp(text9, other.text9, t)!,
       text10: TextStyle.lerp(text10, other.text10, t)!,
       text12: TextStyle.lerp(text12, other.text12, t)!,
@@ -216,6 +337,8 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTextStyles"))
+      ..add(DiagnosticsProperty<TextStyle>("text6", text6))
+      ..add(DiagnosticsProperty<TextStyle>("text8", text8))
       ..add(DiagnosticsProperty<TextStyle>("text9", text9))
       ..add(DiagnosticsProperty<TextStyle>("text10", text10))
       ..add(DiagnosticsProperty<TextStyle>("text12", text12))
