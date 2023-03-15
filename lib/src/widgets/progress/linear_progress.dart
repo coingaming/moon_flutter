@@ -37,26 +37,27 @@ class MoonLinearProgress extends StatelessWidget {
   ) {
     switch (moonProgressSize) {
       case MoonLinearProgressSize.x6s:
-        return context.moonTheme?.linearProgress.sizes.x6s ?? MoonLinearProgressSizeProperties.x6s;
+        return context.moonTheme?.linearProgressTheme.sizes.x6s ?? MoonLinearProgressSizeProperties.x6s;
       case MoonLinearProgressSize.x5s:
-        return context.moonTheme?.linearProgress.sizes.x5s ?? MoonLinearProgressSizeProperties.x5s;
+        return context.moonTheme?.linearProgressTheme.sizes.x5s ?? MoonLinearProgressSizeProperties.x5s;
       case MoonLinearProgressSize.x4s:
-        return context.moonTheme?.linearProgress.sizes.x4s ?? MoonLinearProgressSizeProperties.x4s;
+        return context.moonTheme?.linearProgressTheme.sizes.x4s ?? MoonLinearProgressSizeProperties.x4s;
       case MoonLinearProgressSize.x3s:
-        return context.moonTheme?.linearProgress.sizes.x3s ?? MoonLinearProgressSizeProperties.x3s;
+        return context.moonTheme?.linearProgressTheme.sizes.x3s ?? MoonLinearProgressSizeProperties.x3s;
       case MoonLinearProgressSize.x2s:
-        return context.moonTheme?.linearProgress.sizes.x2s ?? MoonLinearProgressSizeProperties.x2s;
+        return context.moonTheme?.linearProgressTheme.sizes.x2s ?? MoonLinearProgressSizeProperties.x2s;
 
       default:
-        return context.moonTheme?.linearProgress.sizes.x4s ?? MoonLinearProgressSizeProperties.x4s;
+        return context.moonTheme?.linearProgressTheme.sizes.x4s ?? MoonLinearProgressSizeProperties.x4s;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor = color ?? context.moonTheme?.linearProgress.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveColor =
+        color ?? context.moonTheme?.linearProgressTheme.colors.color ?? MoonColors.light.piccolo;
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.linearProgress.colors.backgroundColor ?? MoonColors.light.trunks;
+        backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
     final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, progressSize);
     final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveProgressSize.borderRadiusValue;

@@ -357,21 +357,21 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     MoonPopoverPosition popoverPosition = widget.popoverPosition;
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.popover.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.popoverTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor = _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
 
     final double effectiveDistanceToTarget =
-        widget.distanceToTarget ?? context.moonTheme?.popover.properties.distanceToTarget ?? 8;
+        widget.distanceToTarget ?? context.moonTheme?.popoverTheme.properties.distanceToTarget ?? 8;
 
     final EdgeInsets effectiveContentPadding =
-        widget.contentPadding ?? context.moonTheme?.popover.properties.contentPadding ?? const EdgeInsets.all(12);
+        widget.contentPadding ?? context.moonTheme?.popoverTheme.properties.contentPadding ?? const EdgeInsets.all(12);
 
     final BorderRadius effectiveBorderRadius =
-        widget.borderRadius ?? context.moonTheme?.popover.properties.borderRadius ?? BorderRadius.circular(12);
+        widget.borderRadius ?? context.moonTheme?.popoverTheme.properties.borderRadius ?? BorderRadius.circular(12);
 
     final List<BoxShadow> effectivePopoverShadows =
-        widget.popoverShadows ?? context.moonTheme?.popover.shadows.popoverShadows ?? MoonShadows.light.sm;
+        widget.popoverShadows ?? context.moonTheme?.popoverTheme.shadows.popoverShadows ?? MoonShadows.light.sm;
 
     final targetRenderBox = context.findRenderObject()! as RenderBox;
     final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
@@ -487,11 +487,11 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   @override
   Widget build(BuildContext context) {
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
-        context.moonTheme?.popover.properties.transitionDuration ??
+        context.moonTheme?.popoverTheme.properties.transitionDuration ??
         const Duration(milliseconds: 150);
 
     final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.popover.properties.transitionCurve ?? Curves.easeInOutCubic;
+        widget.transitionCurve ?? context.moonTheme?.popoverTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
     _animationController ??= AnimationController(
       duration: effectiveTransitionDuration,

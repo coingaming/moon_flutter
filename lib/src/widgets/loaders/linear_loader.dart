@@ -32,26 +32,26 @@ class MoonLinearLoader extends StatelessWidget {
   MoonLinearLoaderSizeProperties _getMoonLoaderSize(BuildContext context, MoonLinearLoaderSize? moonLoaderSize) {
     switch (moonLoaderSize) {
       case MoonLinearLoaderSize.x6s:
-        return context.moonTheme?.linearLoader.sizes.x6s ?? MoonLinearLoaderSizeProperties.x6s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x6s ?? MoonLinearLoaderSizeProperties.x6s;
       case MoonLinearLoaderSize.x5s:
-        return context.moonTheme?.linearLoader.sizes.x5s ?? MoonLinearLoaderSizeProperties.x5s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x5s ?? MoonLinearLoaderSizeProperties.x5s;
       case MoonLinearLoaderSize.x4s:
-        return context.moonTheme?.linearLoader.sizes.x4s ?? MoonLinearLoaderSizeProperties.x4s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x4s ?? MoonLinearLoaderSizeProperties.x4s;
       case MoonLinearLoaderSize.x3s:
-        return context.moonTheme?.linearLoader.sizes.x3s ?? MoonLinearLoaderSizeProperties.x3s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x3s ?? MoonLinearLoaderSizeProperties.x3s;
       case MoonLinearLoaderSize.x2s:
-        return context.moonTheme?.linearLoader.sizes.x2s ?? MoonLinearLoaderSizeProperties.x2s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x2s ?? MoonLinearLoaderSizeProperties.x2s;
 
       default:
-        return context.moonTheme?.linearLoader.sizes.x4s ?? MoonLinearLoaderSizeProperties.x4s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x4s ?? MoonLinearLoaderSizeProperties.x4s;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor = color ?? context.moonTheme?.linearLoader.colors.color ?? MoonColors.light.hit;
+    final Color effectiveColor = color ?? context.moonTheme?.linearLoaderTheme.colors.color ?? MoonColors.light.hit;
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.linearLoader.colors.backgroundColor ?? MoonColors.light.trunks;
+        backgroundColor ?? context.moonTheme?.linearLoaderTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
     final MoonLinearLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
     final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveLoaderSize.borderRadiusValue;

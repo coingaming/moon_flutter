@@ -88,21 +88,21 @@ class SwitchStory extends Story {
                       builder: (context, setState) {
                         return MoonSwitch(
                           activeThumbWidget: const Icon(
-                            MoonIconsGeneric.check_alternative24,
+                            MoonIconsGeneric.check_alternative16,
                             size: 14,
                           ),
                           inactiveThumbWidget: const Icon(
-                            MoonIconsControls.close24,
+                            MoonIconsControls.close16,
                             size: 12,
                           ),
-                          activeTrackWidget: const Text(
+                          activeTrackWidget: Text(
                             "ON",
-                            style: TextStyle(fontSize: 8),
+                            style: MoonTextStyles.caption.text8.copyWith(letterSpacing: 0.5),
                             textAlign: TextAlign.center,
                           ),
-                          inactiveTrackWidget: const Text(
+                          inactiveTrackWidget: Text(
                             "OFF",
-                            style: TextStyle(fontSize: 8),
+                            style: MoonTextStyles.caption.text8.copyWith(letterSpacing: 0.5),
                             textAlign: TextAlign.center,
                           ),
                           value: value,
@@ -115,11 +115,11 @@ class SwitchStory extends Story {
                       builder: (context, setState) {
                         return MoonSwitch(
                           activeTrackWidget: const Icon(
-                            MoonIconsGeneric.check_alternative24,
+                            MoonIconsGeneric.check_alternative16,
                             size: 14,
                           ),
                           inactiveTrackWidget: const Icon(
-                            MoonIconsControls.close24,
+                            MoonIconsControls.close16,
                             size: 12,
                           ),
                           value: value,

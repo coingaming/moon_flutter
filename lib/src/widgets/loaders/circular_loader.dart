@@ -34,26 +34,26 @@ class MoonCircularLoader extends StatelessWidget {
   MoonCircularLoaderSizeProperties _getMoonLoaderSize(BuildContext context, MoonCircularLoaderSize? moonLoaderSize) {
     switch (moonLoaderSize) {
       case MoonCircularLoaderSize.x2s:
-        return context.moonTheme?.circularLoader.sizes.x2s ?? MoonCircularLoaderSizeProperties.x2s;
+        return context.moonTheme?.circularLoaderTheme.sizes.x2s ?? MoonCircularLoaderSizeProperties.x2s;
       case MoonCircularLoaderSize.xs:
-        return context.moonTheme?.circularLoader.sizes.xs ?? MoonCircularLoaderSizeProperties.xs;
+        return context.moonTheme?.circularLoaderTheme.sizes.xs ?? MoonCircularLoaderSizeProperties.xs;
       case MoonCircularLoaderSize.sm:
-        return context.moonTheme?.circularLoader.sizes.sm ?? MoonCircularLoaderSizeProperties.sm;
+        return context.moonTheme?.circularLoaderTheme.sizes.sm ?? MoonCircularLoaderSizeProperties.sm;
       case MoonCircularLoaderSize.md:
-        return context.moonTheme?.circularLoader.sizes.md ?? MoonCircularLoaderSizeProperties.md;
+        return context.moonTheme?.circularLoaderTheme.sizes.md ?? MoonCircularLoaderSizeProperties.md;
       case MoonCircularLoaderSize.lg:
-        return context.moonTheme?.circularLoader.sizes.lg ?? MoonCircularLoaderSizeProperties.lg;
+        return context.moonTheme?.circularLoaderTheme.sizes.lg ?? MoonCircularLoaderSizeProperties.lg;
 
       default:
-        return context.moonTheme?.circularLoader.sizes.md ?? MoonCircularLoaderSizeProperties.md;
+        return context.moonTheme?.circularLoaderTheme.sizes.md ?? MoonCircularLoaderSizeProperties.md;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor = color ?? context.moonTheme?.circularLoader.colors.color ?? MoonColors.light.hit;
+    final Color effectiveColor = color ?? context.moonTheme?.circularLoaderTheme.colors.color ?? MoonColors.light.hit;
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.circularLoader.colors.backgroundColor ?? MoonColors.light.trunks;
+        backgroundColor ?? context.moonTheme?.circularLoaderTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
     final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 

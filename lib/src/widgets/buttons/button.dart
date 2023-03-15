@@ -301,17 +301,17 @@ class MoonButton extends StatelessWidget {
   MoonButtonSizeProperties _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
     switch (moonButtonSize) {
       case MoonButtonSize.xs:
-        return context.moonTheme?.button.sizes.xs ?? MoonButtonSizeProperties.xs;
+        return context.moonTheme?.buttonTheme.sizes.xs ?? MoonButtonSizeProperties.xs;
       case MoonButtonSize.sm:
-        return context.moonTheme?.button.sizes.sm ?? MoonButtonSizeProperties.sm;
+        return context.moonTheme?.buttonTheme.sizes.sm ?? MoonButtonSizeProperties.sm;
       case MoonButtonSize.md:
-        return context.moonTheme?.button.sizes.md ?? MoonButtonSizeProperties.md;
+        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizeProperties.md;
       case MoonButtonSize.lg:
-        return context.moonTheme?.button.sizes.lg ?? MoonButtonSizeProperties.lg;
+        return context.moonTheme?.buttonTheme.sizes.lg ?? MoonButtonSizeProperties.lg;
       case MoonButtonSize.xl:
-        return context.moonTheme?.button.sizes.xl ?? MoonButtonSizeProperties.xl;
+        return context.moonTheme?.buttonTheme.sizes.xl ?? MoonButtonSizeProperties.xl;
       default:
-        return context.moonTheme?.button.sizes.md ?? MoonButtonSizeProperties.md;
+        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizeProperties.md;
     }
   }
 
@@ -348,7 +348,7 @@ class MoonButton extends StatelessWidget {
     );
 
     final Color effectiveBorderColor =
-        borderColor ?? context.moonTheme?.button.colors.borderColor ?? MoonColors.light.trunks;
+        borderColor ?? context.moonTheme?.buttonTheme.colors.borderColor ?? MoonColors.light.trunks;
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
 
     final double effectiveBorderWidth =

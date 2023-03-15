@@ -39,26 +39,27 @@ class MoonCircularProgress extends StatelessWidget {
   ) {
     switch (moonCircularProgressSize) {
       case MoonCircularProgressSize.x2s:
-        return context.moonTheme?.circularProgress.sizes.x2s ?? MoonCircularProgressSizeProperties.x2s;
+        return context.moonTheme?.circularProgressTheme.sizes.x2s ?? MoonCircularProgressSizeProperties.x2s;
       case MoonCircularProgressSize.xs:
-        return context.moonTheme?.circularProgress.sizes.xs ?? MoonCircularProgressSizeProperties.xs;
+        return context.moonTheme?.circularProgressTheme.sizes.xs ?? MoonCircularProgressSizeProperties.xs;
       case MoonCircularProgressSize.sm:
-        return context.moonTheme?.circularProgress.sizes.sm ?? MoonCircularProgressSizeProperties.sm;
+        return context.moonTheme?.circularProgressTheme.sizes.sm ?? MoonCircularProgressSizeProperties.sm;
       case MoonCircularProgressSize.md:
-        return context.moonTheme?.circularProgress.sizes.md ?? MoonCircularProgressSizeProperties.md;
+        return context.moonTheme?.circularProgressTheme.sizes.md ?? MoonCircularProgressSizeProperties.md;
       case MoonCircularProgressSize.lg:
-        return context.moonTheme?.circularProgress.sizes.lg ?? MoonCircularProgressSizeProperties.lg;
+        return context.moonTheme?.circularProgressTheme.sizes.lg ?? MoonCircularProgressSizeProperties.lg;
 
       default:
-        return context.moonTheme?.circularProgress.sizes.md ?? MoonCircularProgressSizeProperties.md;
+        return context.moonTheme?.circularProgressTheme.sizes.md ?? MoonCircularProgressSizeProperties.md;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor = color ?? context.moonTheme?.circularProgress.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveColor =
+        color ?? context.moonTheme?.circularProgressTheme.colors.color ?? MoonColors.light.piccolo;
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.circularProgress.colors.backgroundColor ?? MoonColors.light.trunks;
+        backgroundColor ?? context.moonTheme?.circularProgressTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
     final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 

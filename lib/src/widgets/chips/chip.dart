@@ -163,12 +163,12 @@ class MoonChip extends StatelessWidget {
   MoonChipSizeProperties _getMoonChipSize(BuildContext context, MoonChipSize? moonChipSize) {
     switch (moonChipSize) {
       case MoonChipSize.sm:
-        return context.moonTheme?.chip.sizes.sm ?? MoonChipSizeProperties.sm;
+        return context.moonTheme?.chipTheme.sizes.sm ?? MoonChipSizeProperties.sm;
       case MoonChipSize.md:
-        return context.moonTheme?.chip.sizes.md ?? MoonChipSizeProperties.md;
+        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizeProperties.md;
 
       default:
-        return context.moonTheme?.chip.sizes.md ?? MoonChipSizeProperties.sm;
+        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizeProperties.sm;
     }
   }
 
@@ -195,10 +195,10 @@ class MoonChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color effectiveActiveColor =
-        activeColor ?? context.moonTheme?.chip.colors.activeColor ?? MoonColors.light.piccolo;
+        activeColor ?? context.moonTheme?.chipTheme.colors.activeColor ?? MoonColors.light.piccolo;
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.chip.colors.backgroundColor ?? MoonColors.light.gohan;
+        backgroundColor ?? context.moonTheme?.chipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final MoonChipSizeProperties effectiveMoonChipSize = _getMoonChipSize(context, chipSize);
 
