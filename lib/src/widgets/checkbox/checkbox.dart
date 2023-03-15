@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MoonCheckbox extends StatelessWidget {
-  /// Determines if the switch is on or off.
+  /// Determines if the checkbox is toggled on or off.
   final bool? value;
 
   /// Callback when the switch is toggled on or off.
@@ -15,6 +15,10 @@ class MoonCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Checkbox(value: value, onChanged: onChanged);
+    return Checkbox(
+      value: value,
+      onChanged: onChanged,
+      splashRadius: 0,
+    );
   }
 }
