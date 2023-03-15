@@ -28,7 +28,7 @@ class MoonButton extends StatelessWidget {
   /// The size of the button.
   final MoonButtonSize? buttonSize;
 
-  /// The focus node for the button.
+  /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
   /// The semantic label for the button.
@@ -64,7 +64,7 @@ class MoonButton extends StatelessWidget {
   /// The minimum size of the touch target.
   final double minTouchTargetSize;
 
-  /// Whether the button should automatically be focused when it is mounted.
+  /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
   /// Whether the button should be focusable.

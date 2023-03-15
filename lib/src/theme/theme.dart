@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button/button_theme.dart';
+import 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
@@ -26,6 +27,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     avatarTheme: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.light,
+    checkboxTheme: MoonCheckboxTheme.light,
     chipTheme: MoonChipTheme.light,
     circularLoaderTheme: MoonCircularLoaderTheme.light,
     circularProgressTheme: MoonCircularProgressTheme.light,
@@ -47,6 +49,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     avatarTheme: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.dark,
+    checkboxTheme: MoonCheckboxTheme.dark,
     chipTheme: MoonChipTheme.dark,
     circularLoaderTheme: MoonCircularLoaderTheme.dark,
     circularProgressTheme: MoonCircularProgressTheme.dark,
@@ -72,6 +75,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   /// Moon Design System MoonButton widgets theming.
   final MoonButtonTheme buttonTheme;
+
+  /// Moon Design System MoonCheckbox widget theming.
+  final MoonCheckboxTheme checkboxTheme;
 
   /// Moon Design System MoonChip widgets theming.
   final MoonChipTheme chipTheme;
@@ -122,6 +128,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.avatarTheme,
     required this.borders,
     required this.buttonTheme,
+    required this.checkboxTheme,
     required this.chipTheme,
     required this.circularLoaderTheme,
     required this.circularProgressTheme,
@@ -144,6 +151,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonAvatarTheme? avatarTheme,
     MoonBorders? borders,
     MoonButtonTheme? buttonTheme,
+    MoonCheckboxTheme? checkboxTheme,
     MoonChipTheme? chipTheme,
     MoonCircularLoaderTheme? circularLoaderTheme,
     MoonCircularProgressTheme? circularProgressTheme,
@@ -164,6 +172,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       avatarTheme: avatarTheme ?? this.avatarTheme,
       borders: borders ?? this.borders,
       buttonTheme: buttonTheme ?? this.buttonTheme,
+      checkboxTheme: checkboxTheme ?? this.checkboxTheme,
       chipTheme: chipTheme ?? this.chipTheme,
       circularLoaderTheme: circularLoaderTheme ?? this.circularLoaderTheme,
       circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
@@ -190,6 +199,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       avatarTheme: avatarTheme.lerp(other.avatarTheme, t),
       borders: borders.lerp(other.borders, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
+      checkboxTheme: checkboxTheme.lerp(other.checkboxTheme, t),
       chipTheme: chipTheme.lerp(other.chipTheme, t),
       circularLoaderTheme: circularLoaderTheme.lerp(other.circularLoaderTheme, t),
       circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
@@ -216,6 +226,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
+      ..add(DiagnosticsProperty<MoonCheckboxTheme>("MoonCheckboxTheme", checkboxTheme))
       ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
       ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoaderTheme))
       ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))

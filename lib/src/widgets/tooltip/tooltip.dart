@@ -102,6 +102,7 @@ class MoonTooltip extends StatefulWidget {
   /// The [child] widget which the tooltip will target.
   final Widget child;
 
+  /// MDS tooltip widget.
   const MoonTooltip({
     super.key,
     this.onTooltipTap,

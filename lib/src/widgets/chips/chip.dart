@@ -25,7 +25,7 @@ class MoonChip extends StatelessWidget {
   /// The size of the chip.
   final MoonChipSize? chipSize;
 
-  /// The focus node for the chip.
+  /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
   /// The semantic label for the chip.
@@ -55,7 +55,7 @@ class MoonChip extends StatelessWidget {
   /// The minimum size of the touch target.
   final double minTouchTargetSize;
 
-  /// Whether the chip should automatically be focused when it is mounted.
+  /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
   /// Whether the chip is active/selected.
@@ -121,6 +121,7 @@ class MoonChip extends StatelessWidget {
   /// The widget in the right icon slot of the chip.
   final Widget? rightIcon;
 
+  /// MDS chip widget
   const MoonChip({
     super.key,
     this.onTap,

@@ -79,6 +79,7 @@ class MoonPopover extends StatefulWidget {
   /// The [child] widget which the popover will target.
   final Widget child;
 
+  /// MDS popover widget.
   const MoonPopover({
     super.key,
     required this.show,

@@ -1,6 +1,7 @@
 import 'package:example/src/storybook/common/options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -97,12 +98,12 @@ class SwitchStory extends Story {
                           ),
                           activeTrackWidget: Text(
                             "ON",
-                            style: MoonTextStyles.caption.text8.copyWith(letterSpacing: 0.5),
+                            style: MoonTextStyles.caption.text8.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
                             textAlign: TextAlign.center,
                           ),
                           inactiveTrackWidget: Text(
                             "OFF",
-                            style: MoonTextStyles.caption.text8.copyWith(letterSpacing: 0.5),
+                            style: MoonTextStyles.caption.text8.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
                             textAlign: TextAlign.center,
                           ),
                           value: value,

@@ -66,6 +66,7 @@ class MoonAvatar extends StatelessWidget {
   /// The child of the avatar.
   final Widget? child;
 
+  /// MDS avatar widget.
   const MoonAvatar({
     super.key,
     this.width,
