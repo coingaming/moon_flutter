@@ -7,15 +7,15 @@ import 'package:moon_design/src/theme/colors.dart';
 class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with DiagnosticableTreeMixin {
   static final light = MoonCheckboxColors(
     activeColor: MoonColors.light.piccolo,
+    checkColor: MoonColors.light.goten,
     fillColor: Colors.transparent,
-    iconColor: MoonColors.light.goten,
     borderColor: MoonColors.light.trunks,
   );
 
   static final dark = MoonCheckboxColors(
     activeColor: MoonColors.dark.piccolo,
+    checkColor: MoonColors.dark.goten,
     fillColor: Colors.transparent,
-    iconColor: MoonColors.dark.goten,
     borderColor: MoonColors.dark.trunks,
   );
 
@@ -25,31 +25,31 @@ class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with Diagnos
   /// Checkbox border color.
   final Color borderColor;
 
+  /// Checkbox icon color.
+  final Color checkColor;
+
   /// Checkbox fill (inactive) color.
   final Color fillColor;
-
-  /// Checkbox icon color.
-  final Color iconColor;
 
   const MoonCheckboxColors({
     required this.activeColor,
     required this.borderColor,
+    required this.checkColor,
     required this.fillColor,
-    required this.iconColor,
   });
 
   @override
   MoonCheckboxColors copyWith({
     Color? activeColor,
     Color? borderColor,
+    Color? checkColor,
     Color? fillColor,
-    Color? iconColor,
   }) {
     return MoonCheckboxColors(
       activeColor: activeColor ?? this.activeColor,
       borderColor: borderColor ?? this.borderColor,
+      checkColor: checkColor ?? this.checkColor,
       fillColor: fillColor ?? this.fillColor,
-      iconColor: iconColor ?? this.iconColor,
     );
   }
 
@@ -60,8 +60,8 @@ class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with Diagnos
     return MoonCheckboxColors(
       activeColor: Color.lerp(activeColor, other.activeColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
+      checkColor: Color.lerp(checkColor, other.checkColor, t)!,
       fillColor: Color.lerp(fillColor, other.fillColor, t)!,
-      iconColor: Color.lerp(iconColor, other.iconColor, t)!,
     );
   }
 
@@ -72,7 +72,7 @@ class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with Diagnos
       ..add(DiagnosticsProperty("type", "MoonCheckboxColors"))
       ..add(ColorProperty("activeColor", activeColor))
       ..add(ColorProperty("borderColor", borderColor))
-      ..add(ColorProperty("fillColor", fillColor))
-      ..add(ColorProperty("iconColor", iconColor));
+      ..add(ColorProperty("checkColor", checkColor))
+      ..add(ColorProperty("fillColor", fillColor));
   }
 }

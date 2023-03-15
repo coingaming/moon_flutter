@@ -3,6 +3,7 @@ library moon_design;
 export 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 export 'package:moon_design/src/theme/borders.dart';
 export 'package:moon_design/src/theme/button/button_theme.dart';
+export 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 export 'package:moon_design/src/theme/chip/chip_theme.dart';
 export 'package:moon_design/src/theme/colors.dart';
 export 'package:moon_design/src/theme/effects/effects.dart';
