@@ -36,7 +36,7 @@ class MoonAccordion extends StatefulWidget {
   final Color? backgroundColor;
 
   /// The background color of the accordion when collapsed.
-  final Color? collapsedBackgroundColor;
+  final Color? expandedBackgroundColor;
 
   /// The color of the border of the accordion.
   final Color? borderColor;
@@ -48,7 +48,7 @@ class MoonAccordion extends StatefulWidget {
   final Color? iconColor;
 
   /// The icon color of accordion's expansion arrow icon when the accordion is collapsed.
-  final Color? collapsedIconColor;
+  final Color? expandedIconColor;
 
   /// The color of the accordion's titles when the accordion is expanded.
   final Color? textColor;
@@ -155,10 +155,10 @@ class MoonAccordion extends StatefulWidget {
     this.accordionSize,
     this.borderColor,
     this.backgroundColor,
-    this.collapsedBackgroundColor,
+    this.expandedBackgroundColor,
     this.dividerColor,
     this.iconColor,
-    this.collapsedIconColor,
+    this.expandedIconColor,
     this.textColor,
     this.showBorder = false,
     this.showDivider = true,
@@ -196,15 +196,11 @@ class _MoonAccordionState extends State<MoonAccordion> with SingleTickerProvider
     ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
   };
 
-  final ColorTween _iconColorTween = ColorTween();
-  final ColorTween _backgroundColorTween = ColorTween();
-
   AnimationController? _animationController;
-  Animatable<double>? _transitionTween;
-  Animation<double>? _iconTurns;
-  Animation<double>? _heightFactor;
-  Animation<Color?>? _iconColor;
-  Animation<Color?>? _backgroundColor;
+  CurvedAnimation? _curvedAnimation;
+
+  Animation<Color?>? _iconColorAnimation;
+  Animation<Color?>? _backgroundColorAnimation;
 
   bool _isExpanded = false;
   bool _isFocused = false;
@@ -291,33 +287,6 @@ class _MoonAccordionState extends State<MoonAccordion> with SingleTickerProvider
   }
 
   @override
-  void didChangeDependencies() {
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.accordionTheme.colors.backgroundColor ?? MoonColors.light.gohan;
-
-    final Color effectiveCollapsedBackgroundColor = widget.collapsedBackgroundColor ??
-        context.moonTheme?.accordionTheme.colors.collapsedBackgroundColor ??
-        MoonColors.light.gohan;
-
-    final Color effectiveIconColor = widget.iconColor ??
-        context.moonTheme?.accordionTheme.colors.iconColor ??
-        _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
-
-    final Color effectiveCollapsedIconColor =
-        widget.collapsedIconColor ?? context.moonTheme?.accordionTheme.colors.collapsedIconColor ?? effectiveIconColor;
-
-    _iconColorTween
-      ..begin = effectiveCollapsedIconColor
-      ..end = effectiveIconColor;
-
-    _backgroundColorTween
-      ..begin = effectiveBackgroundColor
-      ..end = effectiveCollapsedBackgroundColor;
-
-    super.didChangeDependencies();
-  }
-
-  @override
   void dispose() {
     _animationController!.dispose();
     super.dispose();
@@ -326,18 +295,38 @@ class _MoonAccordionState extends State<MoonAccordion> with SingleTickerProvider
   Widget? _buildIcon(BuildContext context) {
     final double iconSize = _getMoonAccordionSize(context, widget.accordionSize).iconSizeValue;
 
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonTheme?.accordionTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveIconColor = widget.iconColor ??
+        context.moonTheme?.accordionTheme.colors.iconColor ??
+        _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
+
+    final Color effectiveExpandedIconColor =
+        widget.expandedIconColor ?? context.moonTheme?.accordionTheme.colors.expandedIconColor ?? effectiveIconColor;
+
+    _iconColorAnimation =
+        ColorTween(begin: effectiveIconColor, end: effectiveExpandedIconColor).animate(_curvedAnimation!);
+
     return IconTheme(
-      data: IconThemeData(color: _iconColor!.value),
+      data: IconThemeData(color: _iconColorAnimation?.value),
       child: RotationTransition(
-        turns: _iconTurns!,
+        turns: _halfTween.animate(_curvedAnimation!),
         child: Icon(MoonIconsControls.chevron_down24, size: iconSize),
       ),
     );
   }
 
   Widget _buildChildren(BuildContext context, Widget? child) {
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonTheme?.accordionTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveExpandedBackgroundColor = widget.expandedBackgroundColor ??
+        context.moonTheme?.accordionTheme.colors.expandedBackgroundColor ??
+        MoonColors.light.gohan;
+
     final Color effectiveTextColor =
-        _getTextColor(context, effectiveBackgroundColor: _backgroundColor?.value ?? Colors.transparent);
+        _getTextColor(context, effectiveBackgroundColor: _backgroundColorAnimation?.value ?? Colors.transparent);
 
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.accordionTheme.colors.borderColor ?? MoonColors.light.beerus;
@@ -388,15 +377,14 @@ class _MoonAccordionState extends State<MoonAccordion> with SingleTickerProvider
         );
 
     _animationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
-    _transitionTween ??= CurveTween(curve: effectiveTransitionCurve);
-    _heightFactor ??= _animationController!.drive(_transitionTween!);
-    _iconTurns ??= _animationController!.drive(_halfTween.chain(_transitionTween!));
-    _iconColor ??= _animationController!.drive(_iconColorTween.chain(_transitionTween!));
-    _backgroundColor ??= _animationController!.drive(_backgroundColorTween.chain(_transitionTween!));
+    _curvedAnimation ??= CurvedAnimation(parent: _animationController!, curve: effectiveTransitionCurve);
+
+    _backgroundColorAnimation =
+        ColorTween(begin: effectiveBackgroundColor, end: effectiveExpandedBackgroundColor).animate(_curvedAnimation!);
 
     final Color? resolvedBackgroundColor = _isHovered || _isFocused
-        ? Color.alphaBlend(effectiveHoverEffectColor, _backgroundColor!.value!)
-        : _backgroundColor!.value;
+        ? Color.alphaBlend(effectiveHoverEffectColor, _backgroundColorAnimation!.value!)
+        : _backgroundColorAnimation!.value;
 
     return FocusableActionDetector(
       actions: _actions,
@@ -459,7 +447,7 @@ class _MoonAccordionState extends State<MoonAccordion> with SingleTickerProvider
                       children: [
                         Align(
                           alignment: widget.expandedAlignment ?? Alignment.topCenter,
-                          heightFactor: _heightFactor!.value,
+                          heightFactor: _curvedAnimation!.value,
                           child: child,
                         ),
                       ],
@@ -492,15 +480,17 @@ class _MoonAccordionState extends State<MoonAccordion> with SingleTickerProvider
       offstage: closed,
       child: TickerMode(
         enabled: !closed,
-        child: Padding(
-          padding: widget.childrenPadding ?? EdgeInsets.zero,
-          child: Column(
-            crossAxisAlignment: widget.expandedCrossAxisAlignment ?? CrossAxisAlignment.center,
-            children: [
-              if (widget.showDivider) Container(height: 1, color: effectiveDividerColor),
-              ...widget.children,
-            ],
-          ),
+        child: Column(
+          children: [
+            if (widget.showDivider) Container(height: 1, color: effectiveDividerColor),
+            Padding(
+              padding: widget.childrenPadding ?? EdgeInsets.zero,
+              child: Column(
+                crossAxisAlignment: widget.expandedCrossAxisAlignment ?? CrossAxisAlignment.center,
+                children: widget.children,
+              ),
+            ),
+          ],
         ),
       ),
     );

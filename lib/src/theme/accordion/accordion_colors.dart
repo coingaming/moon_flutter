@@ -7,27 +7,27 @@ import 'package:moon_design/src/theme/colors.dart';
 class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with DiagnosticableTreeMixin {
   static final light = MoonAccordionColors(
     backgroundColor: MoonColors.light.gohan,
-    collapsedBackgroundColor: MoonColors.light.gohan,
+    expandedBackgroundColor: MoonColors.light.gohan,
     borderColor: MoonColors.light.beerus,
     dividerColor: MoonColors.light.beerus,
-    iconColor: MoonColors.light.bulma,
-    collapsedIconColor: MoonColors.light.trunks,
+    expandedIconColor: MoonColors.light.bulma,
+    iconColor: MoonColors.light.trunks,
   );
 
   static final dark = MoonAccordionColors(
     backgroundColor: MoonColors.dark.gohan,
-    collapsedBackgroundColor: MoonColors.dark.gohan,
+    expandedBackgroundColor: MoonColors.dark.gohan,
     borderColor: MoonColors.dark.beerus,
     dividerColor: MoonColors.dark.beerus,
-    iconColor: MoonColors.dark.bulma,
-    collapsedIconColor: MoonColors.dark.trunks,
+    iconColor: MoonColors.dark.trunks,
+    expandedIconColor: MoonColors.dark.bulma,
   );
 
   /// Accordion background color.
   final Color backgroundColor;
 
-  /// Accordion background color.
-  final Color collapsedBackgroundColor;
+  /// Expanded accordion background color.
+  final Color expandedBackgroundColor;
 
   /// Accordion border color.
   final Color borderColor;
@@ -38,34 +38,34 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
   /// Accordion icon color.
   final Color iconColor;
 
-  /// Accordion collapsed icon color.
-  final Color collapsedIconColor;
+  /// Expanded accordion  icon color.
+  final Color expandedIconColor;
 
   const MoonAccordionColors({
     required this.backgroundColor,
-    required this.collapsedBackgroundColor,
+    required this.expandedBackgroundColor,
     required this.borderColor,
     required this.dividerColor,
+    required this.expandedIconColor,
     required this.iconColor,
-    required this.collapsedIconColor,
   });
 
   @override
   MoonAccordionColors copyWith({
     Color? backgroundColor,
-    Color? collapsedBackgroundColor,
+    Color? expandedBackgroundColor,
     Color? borderColor,
     Color? dividerColor,
+    Color? expandedIconColor,
     Color? iconColor,
-    Color? collapsedIconColor,
   }) {
     return MoonAccordionColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
-      collapsedBackgroundColor: collapsedBackgroundColor ?? this.collapsedBackgroundColor,
+      expandedBackgroundColor: expandedBackgroundColor ?? this.expandedBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
       dividerColor: dividerColor ?? this.dividerColor,
+      expandedIconColor: expandedIconColor ?? this.expandedIconColor,
       iconColor: iconColor ?? this.iconColor,
-      collapsedIconColor: collapsedIconColor ?? this.collapsedIconColor,
     );
   }
 
@@ -75,11 +75,11 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
 
     return MoonAccordionColors(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
-      collapsedBackgroundColor: Color.lerp(collapsedBackgroundColor, other.collapsedBackgroundColor, t)!,
+      expandedBackgroundColor: Color.lerp(expandedBackgroundColor, other.expandedBackgroundColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
       dividerColor: Color.lerp(dividerColor, other.dividerColor, t)!,
+      expandedIconColor: Color.lerp(expandedIconColor, other.expandedIconColor, t)!,
       iconColor: Color.lerp(iconColor, other.iconColor, t)!,
-      collapsedIconColor: Color.lerp(collapsedIconColor, other.collapsedIconColor, t)!,
     );
   }
 
@@ -89,10 +89,10 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
     properties
       ..add(DiagnosticsProperty("type", "MoonAccordionColors"))
       ..add(ColorProperty("backgroundColor", backgroundColor))
-      ..add(ColorProperty("collapsedBackgroundColor", collapsedBackgroundColor))
+      ..add(ColorProperty("expandedBackgroundColor", expandedBackgroundColor))
       ..add(ColorProperty("borderColor", borderColor))
       ..add(ColorProperty("dividerColor", dividerColor))
-      ..add(ColorProperty("iconColor", iconColor))
-      ..add(ColorProperty("collapsedIconColor", collapsedIconColor));
+      ..add(ColorProperty("expandedIconColor", expandedIconColor))
+      ..add(ColorProperty("iconColor", iconColor));
   }
 }
