@@ -3,82 +3,69 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 
 @immutable
 class MoonAccordionSizeProperties extends ThemeExtension<MoonAccordionSizeProperties> with DiagnosticableTreeMixin {
   static final sm = MoonAccordionSizeProperties(
-    height: MoonSizes.sizes.sm,
+    headerHeight: MoonSizes.sizes.sm,
     iconSizeValue: MoonSizes.sizes.x2s,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    borderRadius: MoonBorders.borders.interactiveSm,
+    headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     textStyle: MoonTextStyles.heading.text12,
   );
 
   static final md = MoonAccordionSizeProperties(
-    height: MoonSizes.sizes.md,
+    headerHeight: MoonSizes.sizes.md,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    borderRadius: MoonBorders.borders.interactiveSm,
+    headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final lg = MoonAccordionSizeProperties(
-    height: MoonSizes.sizes.lg,
+    headerHeight: MoonSizes.sizes.lg,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    borderRadius: MoonBorders.borders.interactiveSm,
+    headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final xl = MoonAccordionSizeProperties(
-    height: MoonSizes.sizes.xl,
+    headerHeight: MoonSizes.sizes.xl,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    borderRadius: MoonBorders.borders.interactiveSm,
+    headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
     textStyle: MoonTextStyles.heading.text16,
   );
 
-  /// Accordion height.
-  final double height;
-
-  /// Space between button children.
+  /// Accordion header height.
+  final double headerHeight;
 
   /// Accordion icon size value.
   final double iconSizeValue;
 
   /// Padding around accordion title and icon.
-  final EdgeInsets padding;
-
-  /// Accordion border radius.
-  final BorderRadius borderRadius;
+  final EdgeInsets headerPadding;
 
   /// Accordion text style.
   final TextStyle textStyle;
 
   const MoonAccordionSizeProperties({
-    required this.height,
+    required this.headerHeight,
     required this.iconSizeValue,
-    required this.padding,
-    required this.borderRadius,
+    required this.headerPadding,
     required this.textStyle,
   });
 
   @override
   MoonAccordionSizeProperties copyWith({
-    double? height,
+    double? headerHeight,
     double? iconSizeValue,
-    EdgeInsets? padding,
-    BorderRadius? borderRadius,
+    EdgeInsets? headerPadding,
     TextStyle? textStyle,
   }) {
     return MoonAccordionSizeProperties(
-      height: height ?? this.height,
+      headerHeight: headerHeight ?? this.headerHeight,
       iconSizeValue: iconSizeValue ?? this.iconSizeValue,
-      padding: padding ?? this.padding,
-      borderRadius: borderRadius ?? this.borderRadius,
+      headerPadding: headerPadding ?? this.headerPadding,
       textStyle: textStyle ?? this.textStyle,
     );
   }
@@ -88,10 +75,9 @@ class MoonAccordionSizeProperties extends ThemeExtension<MoonAccordionSizeProper
     if (other is! MoonAccordionSizeProperties) return this;
 
     return MoonAccordionSizeProperties(
-      height: lerpDouble(height, other.height, t)!,
+      headerHeight: lerpDouble(headerHeight, other.headerHeight, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
-      padding: EdgeInsets.lerp(padding, other.padding, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      headerPadding: EdgeInsets.lerp(headerPadding, other.headerPadding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -101,10 +87,9 @@ class MoonAccordionSizeProperties extends ThemeExtension<MoonAccordionSizeProper
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAccordionSizeProperties"))
-      ..add(DoubleProperty("height", height))
+      ..add(DoubleProperty("headerHeight", headerHeight))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
-      ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<EdgeInsets>("headerPadding", headerPadding))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }
