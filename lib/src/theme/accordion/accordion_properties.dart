@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,21 +7,15 @@ import 'package:moon_design/src/theme/borders.dart';
 @immutable
 class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> with DiagnosticableTreeMixin {
   static final properties = MoonAccordionProperties(
-    dividerWidth: 1,
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
-    shapeBorder: SmoothRectangleBorder(
-      borderRadius: SmoothBorderRadius.all(
-        SmoothRadius(
-          cornerRadius: MoonBorders.borders.interactiveSm.topLeft.x,
-          cornerSmoothing: 1,
-        ),
+    borderRadius: SmoothBorderRadius.all(
+      SmoothRadius(
+        cornerRadius: MoonBorders.borders.interactiveSm.topLeft.x,
+        cornerSmoothing: 1,
       ),
     ),
   );
-
-  /// Accordion divider width.
-  final double dividerWidth;
 
   /// Accordion transition duration.
   final Duration transitionDuration;
@@ -31,28 +23,25 @@ class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> wi
   /// Accordion transition curve.
   final Curve transitionCurve;
 
-  /// Accordion shape border.
-  final ShapeBorder shapeBorder;
+  /// Accordion border radius.
+  final SmoothBorderRadius borderRadius;
 
   const MoonAccordionProperties({
-    required this.dividerWidth,
-    required this.shapeBorder,
+    required this.borderRadius,
     required this.transitionDuration,
     required this.transitionCurve,
   });
 
   @override
   MoonAccordionProperties copyWith({
-    double? dividerWidth,
     Duration? transitionDuration,
     Curve? transitionCurve,
-    ShapeBorder? shapeBorder,
+    SmoothBorderRadius? borderRadius,
   }) {
     return MoonAccordionProperties(
-      dividerWidth: dividerWidth ?? this.dividerWidth,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
-      shapeBorder: shapeBorder ?? this.shapeBorder,
+      borderRadius: borderRadius ?? this.borderRadius,
     );
   }
 
@@ -61,10 +50,9 @@ class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> wi
     if (other is! MoonAccordionProperties) return this;
 
     return MoonAccordionProperties(
-      dividerWidth: lerpDouble(dividerWidth, other.dividerWidth, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      shapeBorder: ShapeBorder.lerp(shapeBorder, other.shapeBorder, t)!,
+      borderRadius: SmoothBorderRadius.lerp(borderRadius, other.borderRadius, t)!,
     );
   }
 
@@ -73,9 +61,8 @@ class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> wi
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAccordionProperties"))
-      ..add(DiagnosticsProperty<double>("dividerWidth", dividerWidth))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<ShapeBorder>("shapeBorder", shapeBorder));
+      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius));
   }
 }
