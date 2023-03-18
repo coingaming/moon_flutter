@@ -38,7 +38,7 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
   /// Accordion icon color.
   final Color iconColor;
 
-  /// Expanded accordion  icon color.
+  /// Expanded accordion icon color.
   final Color expandedIconColor;
 
   const MoonAccordionColors({
