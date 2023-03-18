@@ -78,7 +78,7 @@ class TooltipStory extends Story {
             );
 
             final showShadowKnob = context.knobs.boolean(
-              label: "Show shadow",
+              label: "Show shadows",
               description: "Show shadows under the Tooltip.",
               initial: true,
             );
