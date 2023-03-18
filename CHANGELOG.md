@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/coingaming/moon_flutter/compare/v0.12.0...v0.13.0) (2023-03-18)
+
+
+### Features
+
+* [MDS-404] Create Accordion widget ([#83](https://github.com/coingaming/moon_flutter/issues/83)) ([3170b92](https://github.com/coingaming/moon_flutter/commit/3170b929d0ec44d649697e1dc6ba5193d38baa13))
+
 ## [0.12.0](https://github.com/coingaming/moon_flutter/compare/v0.11.1...v0.12.0) (2023-03-15)
 
 
