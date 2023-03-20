@@ -269,7 +269,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
-  MoonAccordionTheme? get moonAccordionTheme => moonTheme?.accordionTheme;
   MoonBorders? get moonBorders => moonTheme?.borders;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonEffects? get moonEffects => moonTheme?.effects;

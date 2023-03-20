@@ -30,14 +30,23 @@ class CheckboxStory extends Story {
 
             final activeColor = colorTable(context)[activeColorsKnob];
 
-            final fillColorsKnob = context.knobs.options(
-              label: "fillColor",
+            final inactiveColorsKnob = context.knobs.options(
+              label: "inactiveColor",
               description: "MoonColors variants for when Checkbox is unchecked.",
               initial: 39, // transparent
               options: colorOptions,
             );
 
-            final fillColor = colorTable(context)[fillColorsKnob];
+            final inactiveColor = colorTable(context)[inactiveColorsKnob];
+
+            final borderColorsKnob = context.knobs.options(
+              label: "borderColor",
+              description: "MoonColors variants for Checkbox border.",
+              initial: 6, // trunks
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorsKnob];
 
             final isDisabled = context.knobs.boolean(
               label: "Disabled",
@@ -46,7 +55,7 @@ class CheckboxStory extends Story {
 
             final isTristate = context.knobs.boolean(
               label: "tristate",
-              description: "Whether the checkbox uses tristate.",
+              description: "Whether the Checkbox uses tristate.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -66,9 +75,10 @@ class CheckboxStory extends Story {
                     StatefulBuilder(
                       builder: (context, setState) {
                         return MoonCheckbox(
-                          checkColor: checkColor,
                           activeColor: activeColor,
-                          fillColor: fillColor,
+                          borderColor: borderColor,
+                          checkColor: checkColor,
+                          inactiveColor: inactiveColor,
                           tristate: isTristate,
                           value: value,
                           onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
@@ -84,7 +94,7 @@ class CheckboxStory extends Story {
                           context,
                           checkColor: checkColor,
                           activeColor: activeColor,
-                          fillColor: fillColor,
+                          inactiveColor: inactiveColor,
                           tristate: isTristate,
                           value: value,
                           onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),

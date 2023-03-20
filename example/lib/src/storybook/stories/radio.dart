@@ -1,57 +1,44 @@
 import 'package:example/src/storybook/common/options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-enum Choice { first, second }
+enum ChoiceCustom { first, second }
 
-Choice? value = Choice.first;
+enum ChoiceLabel { first, second }
+
+ChoiceCustom? valueCustom = ChoiceCustom.first;
+ChoiceLabel? valueLabel = ChoiceLabel.first;
 
 class RadioStory extends Story {
   RadioStory()
       : super(
           name: "Radio",
           builder: (context) {
-            final switchSizesKnob = context.knobs.options(
-              label: "MoonSwitchSize",
-              description: "Switch size variants.",
-              initial: MoonSwitchSize.xs,
-              options: const [
-                Option(label: "x2s", value: MoonSwitchSize.x2s),
-                Option(label: "xs", value: MoonSwitchSize.xs),
-                Option(label: "sm", value: MoonSwitchSize.sm),
-              ],
-            );
-
-            final thumbColorsKnob = context.knobs.options(
-              label: "thumbColor",
-              description: "MoonColors variants for the Switch thumb.",
-              initial: 7, // goten
-              options: colorOptions,
-            );
-
-            final thumbColor = colorTable(context)[thumbColorsKnob];
-
-            final activeTrackColorsKnob = context.knobs.options(
-              label: "activeTrackColor",
-              description: "MoonColors variants for the active Switch track.",
+            final activeColorsKnob = context.knobs.options(
+              label: "activeColor",
+              description: "MoonColors variants for when Radio is checked.",
               initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final activeTrackColor = colorTable(context)[activeTrackColorsKnob];
+            final activeColor = colorTable(context)[activeColorsKnob];
 
-            final inactiveTrackColorsKnob = context.knobs.options(
-              label: "inactiveTrackColor",
-              description: "MoonColors variants for the active Switch track.",
-              initial: 2, // beerus
+            final inactiveColorsKnob = context.knobs.options(
+              label: "inactiveColor",
+              description: "MoonColors variants for when Radio is unchecked.",
+              initial: 6, // trunks
               options: colorOptions,
             );
 
-            final inactiveTrackColor = colorTable(context)[inactiveTrackColorsKnob];
+            final inactiveColor = colorTable(context)[inactiveColorsKnob];
+
+            final isToggleable = context.knobs.boolean(
+              label: "toggleable",
+              description: "Whether the selected Radio can be unselected.",
+            );
 
             final isDisabled = context.knobs.boolean(
               label: "Disabled",
@@ -72,16 +59,42 @@ class RadioStory extends Story {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(height: 64),
-                        MoonRadio(
-                          value: Choice.first,
-                          groupValue: value,
-                          onChanged: (choice) => setState(() => value = choice),
-                        ),
+                        const TextDivider(text: "Customisable Radio buttons"),
                         const SizedBox(height: 32),
                         MoonRadio(
-                          value: Choice.second,
-                          groupValue: value,
-                          onChanged: (choice) => setState(() => value = choice),
+                          value: ChoiceCustom.first,
+                          groupValue: valueCustom,
+                          onChanged: isDisabled ? null : (ChoiceCustom? choice) => setState(() => valueCustom = choice),
+                          activeColor: activeColor,
+                          inactiveColor: inactiveColor,
+                          toggleable: isToggleable,
+                        ),
+                        const SizedBox(height: 8),
+                        MoonRadio(
+                          value: ChoiceCustom.second,
+                          groupValue: valueCustom,
+                          onChanged: isDisabled ? null : (ChoiceCustom? choice) => setState(() => valueCustom = choice),
+                          activeColor: activeColor,
+                          inactiveColor: inactiveColor,
+                          toggleable: isToggleable,
+                        ),
+                        const SizedBox(height: 40),
+                        const TextDivider(text: "Radios with clickable text"),
+                        const SizedBox(height: 32),
+                        MoonRadio.withLabel(
+                          context,
+                          value: ChoiceLabel.first,
+                          groupValue: valueLabel,
+                          label: "With label #1",
+                          onChanged: isDisabled ? null : (ChoiceLabel? choice) => setState(() => valueLabel = choice),
+                        ),
+                        const SizedBox(height: 8),
+                        MoonRadio.withLabel(
+                          context,
+                          value: ChoiceLabel.second,
+                          groupValue: valueLabel,
+                          label: "With label #2",
+                          onChanged: isDisabled ? null : (ChoiceLabel? choice) => setState(() => valueLabel = choice),
                         ),
                         const SizedBox(height: 64),
                       ],

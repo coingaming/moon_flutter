@@ -6,34 +6,34 @@ import 'package:moon_design/src/theme/colors.dart';
 @immutable
 class MoonRadioColors extends ThemeExtension<MoonRadioColors> with DiagnosticableTreeMixin {
   static final light = MoonRadioColors(
-    selectedColor: MoonColors.light.piccolo,
-    unselectedColor: MoonColors.light.trunks,
+    activeColor: MoonColors.light.piccolo,
+    inactiveColor: MoonColors.light.trunks,
   );
 
   static final dark = MoonRadioColors(
-    selectedColor: MoonColors.dark.piccolo,
-    unselectedColor: MoonColors.dark.trunks,
+    activeColor: MoonColors.dark.piccolo,
+    inactiveColor: MoonColors.dark.trunks,
   );
 
-  /// Radio selected track color.
-  final Color selectedColor;
+  /// Radio active color.
+  final Color activeColor;
 
-  /// Radio unselected track color.
-  final Color unselectedColor;
+  /// Radio inactive color.
+  final Color inactiveColor;
 
   const MoonRadioColors({
-    required this.selectedColor,
-    required this.unselectedColor,
+    required this.activeColor,
+    required this.inactiveColor,
   });
 
   @override
   MoonRadioColors copyWith({
-    Color? selectedColor,
-    Color? unselectedColor,
+    Color? activeColor,
+    Color? inactiveColor,
   }) {
     return MoonRadioColors(
-      selectedColor: selectedColor ?? this.selectedColor,
-      unselectedColor: unselectedColor ?? this.unselectedColor,
+      activeColor: activeColor ?? this.activeColor,
+      inactiveColor: inactiveColor ?? this.inactiveColor,
     );
   }
 
@@ -42,8 +42,8 @@ class MoonRadioColors extends ThemeExtension<MoonRadioColors> with Diagnosticabl
     if (other is! MoonRadioColors) return this;
 
     return MoonRadioColors(
-      selectedColor: Color.lerp(selectedColor, other.selectedColor, t)!,
-      unselectedColor: Color.lerp(unselectedColor, other.unselectedColor, t)!,
+      activeColor: Color.lerp(activeColor, other.activeColor, t)!,
+      inactiveColor: Color.lerp(inactiveColor, other.inactiveColor, t)!,
     );
   }
 
@@ -52,7 +52,7 @@ class MoonRadioColors extends ThemeExtension<MoonRadioColors> with Diagnosticabl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonRadioColors"))
-      ..add(ColorProperty("selectedColor", selectedColor))
-      ..add(ColorProperty("unselectedColor", unselectedColor));
+      ..add(ColorProperty("activeColor", activeColor))
+      ..add(ColorProperty("inactiveColor", inactiveColor));
   }
 }

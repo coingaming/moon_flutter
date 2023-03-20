@@ -1,10 +1,13 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/moon_design.dart';
+import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/focus_effects.dart';
+import 'package:moon_design/src/theme/opacity.dart';
+import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/checkbox/checkbox_painter.dart';
+import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 
 class MoonCheckbox extends StatefulWidget {
   /// Whether this checkbox is checked.
@@ -43,7 +46,7 @@ class MoonCheckbox extends StatefulWidget {
   final Color? checkColor;
 
   /// The color to use for the checkbox's background when the checkbox is not checked.
-  final Color? fillColor;
+  final Color? inactiveColor;
 
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
@@ -51,6 +54,7 @@ class MoonCheckbox extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
+  /// MDS checkbox widget.
   const MoonCheckbox({
     super.key,
     required this.value,
@@ -60,7 +64,7 @@ class MoonCheckbox extends StatefulWidget {
     this.activeColor,
     this.borderColor,
     this.checkColor,
-    this.fillColor,
+    this.inactiveColor,
     this.focusNode,
     this.autofocus = false,
   });
@@ -69,13 +73,13 @@ class MoonCheckbox extends StatefulWidget {
     BuildContext context, {
     Key? key,
     required bool? value,
-    required void Function(bool?)? onChanged,
+    required ValueChanged<bool?>? onChanged,
     bool tristate = false,
     double tapAreaSizeValue = 40,
     Color? activeColor,
     Color? borderColor,
     Color? checkColor,
-    Color? fillColor,
+    Color? inactiveColor,
     FocusNode? focusNode,
     bool autofocus = false,
     required String label,
@@ -111,7 +115,7 @@ class MoonCheckbox extends StatefulWidget {
                 activeColor: activeColor,
                 borderColor: borderColor,
                 checkColor: checkColor,
-                fillColor: fillColor,
+                inactiveColor: inactiveColor,
                 focusNode: focusNode,
                 autofocus: autofocus,
               ),
@@ -186,11 +190,11 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     final Color effectiveActiveColor =
         widget.activeColor ?? context.moonTheme?.checkboxTheme.colors.activeColor ?? MoonColors.light.piccolo;
 
+    final Color effectiveInactiveColor =
+        widget.inactiveColor ?? context.moonTheme?.checkboxTheme.colors.inactiveColor ?? Colors.transparent;
+
     final Color effectiveCheckColor =
         widget.checkColor ?? context.moonTheme?.checkboxTheme.colors.checkColor ?? MoonColors.light.goten;
-
-    final Color effectiveFillColor =
-        widget.fillColor ?? context.moonTheme?.checkboxTheme.colors.fillColor ?? Colors.transparent;
 
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.checkboxTheme.colors.borderColor ?? MoonColors.light.trunks;
@@ -245,19 +249,8 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
               size: size,
               painter: _painter
                 ..position = position
-                ..reaction = reaction
-                ..reactionFocusFade = reactionFocusFade
-                ..reactionHoverFade = reactionHoverFade
-                ..inactiveReactionColor = Colors.transparent
-                ..reactionColor = Colors.transparent
-                ..hoverColor = Colors.transparent
-                ..focusColor = effectiveFocusEffectColor
-                ..splashRadius = 0
-                ..downPosition = downPosition
-                ..isFocused = states.contains(MaterialState.focused)
-                ..isHovered = states.contains(MaterialState.hovered)
                 ..activeColor = effectiveActiveColor
-                ..inactiveColor = effectiveFillColor
+                ..inactiveColor = effectiveInactiveColor
                 ..checkColor = effectiveCheckColor
                 ..value = value
                 ..previousValue = _previousValue
