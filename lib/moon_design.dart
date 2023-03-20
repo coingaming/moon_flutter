@@ -14,6 +14,7 @@ export 'package:moon_design/src/theme/opacity.dart';
 export 'package:moon_design/src/theme/popover/popover_theme.dart';
 export 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
 export 'package:moon_design/src/theme/progress/linear_progress/linear_progress_theme.dart';
+export 'package:moon_design/src/theme/radio/radio_theme.dart';
 export 'package:moon_design/src/theme/shadows.dart';
 export 'package:moon_design/src/theme/sizes.dart';
 export 'package:moon_design/src/theme/switch/switch_theme.dart';
