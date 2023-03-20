@@ -1,4 +1,3 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
@@ -6,46 +5,62 @@ import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
-import 'package:moon_design/src/widgets/checkbox/checkbox_painter.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
+import 'package:moon_design/src/widgets/radio/radio_painter.dart';
 
-class MoonCheckbox extends StatefulWidget {
-  /// Whether this checkbox is checked.
-  ///
-  /// When [tristate] is true, a value of null corresponds to the mixed state.
-  /// When [tristate] is false, this value must not be null.
-  final bool? value;
+class MoonRadio<T> extends StatefulWidget {
+  /// The value represented by this radio button.
+  final T value;
 
-  /// Callback for when the checkbox value changes.
-  final ValueChanged<bool?>? onChanged;
+  /// The currently selected value for a group of radio buttons.
+  ///
+  /// This radio button is considered selected if its [value] matches the
+  /// [groupValue].
+  final T? groupValue;
 
-  /// If true the checkbox's [value] can be true, false, or null.
+  /// Called when the user selects this radio button.
   ///
-  /// [Checkbox] displays a dash when its value is null.
+  /// The radio button passes [value] as a parameter to this callback. The radio
+  /// button does not actually change state until the parent widget rebuilds the
+  /// radio button with the new [groupValue].
   ///
-  /// When a tri-state checkbox ([tristate] is true) is tapped, its [onChanged]
-  /// callback will be applied to true if the current value is false, to null if
-  /// value is true, and to false if value is null (i.e. it cycles through false
-  /// => true => null => false when tapped).
+  /// If null, the radio button will be displayed as disabled.
   ///
-  /// If tristate is false (the default), [value] must not be null.
-  final bool tristate;
+  /// The provided callback will not be invoked if this radio button is already
+  /// selected.
+  ///
+  /// The callback provided to [onChanged] should update the state of the parent
+  /// [StatefulWidget] using the [State.setState] method, so that the parent
+  /// gets rebuilt.
+  final ValueChanged<T?>? onChanged;
 
-  /// The size of the checkbox's tap target.
+  /// Set to true if this radio button is allowed to be returned to an
+  /// indeterminate state by selecting it again when selected.
+  ///
+  /// To indicate returning to an indeterminate state, [onChanged] will be
+  /// called with null.
+  ///
+  /// If true, [onChanged] can be called with [value] when selected while
+  /// [groupValue] != [value], or with null when selected again while
+  /// [groupValue] == [value].
+  ///
+  /// If false, [onChanged] will be called with [value] when it is selected
+  /// while [groupValue] != [value], and only by selecting another radio button
+  /// in the group (i.e. changing the value of [groupValue]) can this radio
+  /// button be unselected.
+  ///
+  /// Defaults to false.
+  final bool toggleable;
+
+  /// The size of the radio's tap target.
   ///
   /// Defaults to 40.
   final double tapAreaSizeValue;
 
-  /// The color to use when this checkbox is checked.
+  /// The color to use when this radio is checked.
   final Color? activeColor;
 
-  /// The color to use when this checkbox is checked.
-  final Color? borderColor;
-
-  /// The color to use for the check icon when this checkbox is checked.
-  final Color? checkColor;
-
-  /// The color to use for the checkbox's background when the checkbox is not checked.
+  /// The color to use for the radio's background when the radio is not checked.
   final Color? inactiveColor;
 
   /// {@macro flutter.widgets.Focus.focusNode}.
@@ -54,31 +69,29 @@ class MoonCheckbox extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// MDS checkbox widget.
-  const MoonCheckbox({
+  /// MDS radio widget.
+  const MoonRadio({
     super.key,
     required this.value,
+    required this.groupValue,
     required this.onChanged,
-    this.tristate = false,
+    this.toggleable = false,
     this.tapAreaSizeValue = 40,
     this.activeColor,
-    this.borderColor,
-    this.checkColor,
     this.inactiveColor,
     this.focusNode,
     this.autofocus = false,
   });
 
-  static Widget withLabel(
+  static Widget withLabel<T>(
     BuildContext context, {
     Key? key,
-    required bool? value,
-    required ValueChanged<bool?>? onChanged,
-    bool tristate = false,
+    required T value,
+    required T? groupValue,
+    required ValueChanged<T?>? onChanged,
+    bool toggleable = false,
     double tapAreaSizeValue = 40,
     Color? activeColor,
-    Color? borderColor,
-    Color? checkColor,
     Color? inactiveColor,
     FocusNode? focusNode,
     bool autofocus = false,
@@ -98,7 +111,7 @@ class MoonCheckbox extends StatefulWidget {
     final bool isInteractive = onChanged != null;
 
     return GestureDetector(
-      onTap: () => onChanged?.call(!value!),
+      onTap: () => onChanged?.call(value),
       child: MouseRegion(
         cursor: isInteractive ? SystemMouseCursors.click : SystemMouseCursors.basic,
         child: ConstrainedBox(
@@ -106,15 +119,14 @@ class MoonCheckbox extends StatefulWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              MoonCheckbox(
+              MoonRadio<T>(
                 key: key,
                 value: value,
+                groupValue: groupValue,
                 onChanged: onChanged,
-                tristate: tristate,
+                toggleable: toggleable,
                 tapAreaSizeValue: 0,
                 activeColor: activeColor,
-                borderColor: borderColor,
-                checkColor: checkColor,
                 inactiveColor: inactiveColor,
                 focusNode: focusNode,
                 autofocus: autofocus,
@@ -135,44 +147,29 @@ class MoonCheckbox extends StatefulWidget {
     );
   }
 
+  bool get _selected => value == groupValue;
+
   @override
-  State<MoonCheckbox> createState() => _MoonCheckboxState();
+  State<MoonRadio<T>> createState() => _RadioState<T>();
 }
 
-class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMixin, ToggleableStateMixin {
-  final MoonCheckboxPainter _painter = MoonCheckboxPainter();
-  bool? _previousValue;
+class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, ToggleableStateMixin {
+  final MoonRadioPainter _painter = MoonRadioPainter();
 
-  @override
-  ValueChanged<bool?>? get onChanged => widget.onChanged;
-
-  @override
-  bool get tristate => widget.tristate;
-
-  @override
-  bool? get value => widget.value;
-
-  BorderSide? _resolveSide(BorderSide? side) {
-    if (side is MaterialStateBorderSide) {
-      return MaterialStateProperty.resolveAs<BorderSide?>(side, states);
+  void _handleChanged(bool? selected) {
+    if (selected == null) {
+      widget.onChanged!(null);
+      return;
     }
-    if (!states.contains(MaterialState.selected)) {
-      return side;
+    if (selected) {
+      widget.onChanged!(widget.value);
     }
-    return null;
   }
 
   @override
-  void initState() {
-    super.initState();
-    _previousValue = widget.value;
-  }
-
-  @override
-  void didUpdateWidget(MoonCheckbox oldWidget) {
+  void didUpdateWidget(MoonRadio<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.value != widget.value) {
-      _previousValue = oldWidget.value;
+    if (widget._selected != oldWidget._selected) {
       animateToValue();
     }
   }
@@ -184,20 +181,23 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
   }
 
   @override
+  ValueChanged<bool?>? get onChanged => widget.onChanged != null ? _handleChanged : null;
+
+  @override
+  bool get tristate => widget.toggleable;
+
+  @override
+  bool? get value => widget._selected;
+
+  @override
   Widget build(BuildContext context) {
     const Size size = Size(16, 16);
 
     final Color effectiveActiveColor =
-        widget.activeColor ?? context.moonTheme?.checkboxTheme.colors.activeColor ?? MoonColors.light.piccolo;
+        widget.activeColor ?? context.moonTheme?.radioTheme.colors.activeColor ?? MoonColors.light.piccolo;
 
     final Color effectiveInactiveColor =
-        widget.inactiveColor ?? context.moonTheme?.checkboxTheme.colors.inactiveColor ?? Colors.transparent;
-
-    final Color effectiveCheckColor =
-        widget.checkColor ?? context.moonTheme?.checkboxTheme.colors.checkColor ?? MoonColors.light.goten;
-
-    final Color effectiveBorderColor =
-        widget.borderColor ?? context.moonTheme?.checkboxTheme.colors.borderColor ?? MoonColors.light.trunks;
+        widget.inactiveColor ?? context.moonTheme?.radioTheme.colors.inactiveColor ?? MoonColors.light.trunks;
 
     final double effectiveFocusEffectExtent =
         context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
@@ -211,16 +211,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
 
-    final double effectiveBorderRadiusValue = context.moonTheme?.checkboxTheme.properties.borderRadiusValue ?? 4;
-
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
-
-    final SmoothBorderRadius resolvedBorderRadius = SmoothBorderRadius.all(
-      SmoothRadius(
-        cornerRadius: effectiveBorderRadiusValue,
-        cornerSmoothing: 1,
-      ),
-    );
 
     final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
         MaterialStateProperty.resolveWith<MouseCursor>((Set<MaterialState> states) {
@@ -228,14 +219,14 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     });
 
     return Semantics(
-      checked: widget.value ?? false,
-      mixed: widget.tristate ? widget.value == null : null,
+      inMutuallyExclusiveGroup: true,
+      checked: widget._selected,
       child: TouchTargetPadding(
         minSize: Size(widget.tapAreaSizeValue, widget.tapAreaSizeValue),
         child: MoonFocusEffect(
           show: states.contains(MaterialState.focused),
           effectExtent: effectiveFocusEffectExtent,
-          childBorderRadius: resolvedBorderRadius,
+          childBorderRadius: BorderRadius.circular(8),
           effectColor: effectiveFocusEffectColor,
           effectCurve: effectiveFocusEffectCurve,
           effectDuration: effectiveFocusEffectDuration,
@@ -243,19 +234,14 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
             opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,
             duration: effectiveFocusEffectDuration,
             child: buildToggleable(
-              mouseCursor: effectiveMouseCursor,
               focusNode: widget.focusNode,
               autofocus: widget.autofocus,
+              mouseCursor: effectiveMouseCursor,
               size: size,
               painter: _painter
                 ..position = position
                 ..activeColor = effectiveActiveColor
-                ..inactiveColor = effectiveInactiveColor
-                ..checkColor = effectiveCheckColor
-                ..value = value
-                ..previousValue = _previousValue
-                ..shape = SmoothRectangleBorder(borderRadius: resolvedBorderRadius)
-                ..side = _resolveSide(BorderSide(color: effectiveBorderColor)),
+                ..inactiveColor = effectiveInactiveColor,
             ),
           ),
         ),

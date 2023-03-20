@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-const double _kEdgeSize = 16;
-const double _kStrokeWidth = 1.0;
-
 class MoonCheckboxPainter extends ToggleablePainter {
+  static const double _kEdgeSize = 16;
+  static const double _kStrokeWidth = 1.0;
+
   Color get checkColor => _checkColor!;
   Color? _checkColor;
   set checkColor(Color value) {
@@ -54,14 +54,8 @@ class MoonCheckboxPainter extends ToggleablePainter {
     notifyListeners();
   }
 
-  // The square outer bounds of the checkbox at t, with the specified origin.
-  // At t == 0.0, the outer rect's size is _kEdgeSize (Checkbox.width)
-  // At t == 0.5, .. is _kEdgeSize - _kStrokeWidth
-  // At t == 1.0, .. is _kEdgeSize
   Rect _outerRectAt(Offset origin, double t) {
-    final double inset = 1.0 - (t - 0.5).abs() * 2.0;
-    final double size = _kEdgeSize - inset * _kStrokeWidth;
-    final Rect rect = Rect.fromLTWH(origin.dx + inset, origin.dy + inset, size, size);
+    final Rect rect = Rect.fromLTWH(origin.dx, origin.dy, _kEdgeSize, _kEdgeSize);
     return rect;
   }
 
@@ -142,7 +136,7 @@ class MoonCheckboxPainter extends ToggleablePainter {
       final Paint paint = Paint()..color = _colorAt(t);
 
       if (t <= 0.5) {
-        final BorderSide border = side ?? BorderSide(width: 2, color: paint.color);
+        final BorderSide border = side ?? BorderSide(color: paint.color);
         _drawBox(canvas, outer, paint, border, true); // only paint the border
       } else {
         _drawBox(canvas, outer, paint, side, true);

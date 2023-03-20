@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 
+import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button/button_theme.dart';
@@ -15,6 +15,7 @@ import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/popover/popover_theme.dart';
 import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_theme.dart';
+import 'package:moon_design/src/theme/radio/radio_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
@@ -39,6 +40,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     linearProgressTheme: MoonLinearProgressTheme.light,
     opacity: MoonOpacity.opacities,
     popoverTheme: MoonPopoverTheme.light,
+    radioTheme: MoonRadioTheme.light,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
     switchTheme: MoonSwitchTheme.light,
@@ -62,6 +64,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     linearProgressTheme: MoonLinearProgressTheme.dark,
     opacity: MoonOpacity.opacities,
     popoverTheme: MoonPopoverTheme.dark,
+    radioTheme: MoonRadioTheme.dark,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
     switchTheme: MoonSwitchTheme.dark,
@@ -112,6 +115,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonPopover widget theming.
   final MoonPopoverTheme popoverTheme;
 
+  /// Moon Design System Radio widget theming.
+  final MoonRadioTheme radioTheme;
+
   /// Moon Design System shadows.
   final MoonShadows shadows;
 
@@ -145,6 +151,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.linearProgressTheme,
     required this.opacity,
     required this.popoverTheme,
+    required this.radioTheme,
     required this.shadows,
     required this.sizes,
     required this.switchTheme,
@@ -169,6 +176,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonLinearProgressTheme? linearProgressTheme,
     MoonOpacity? opacity,
     MoonPopoverTheme? popoverTheme,
+    MoonRadioTheme? radioTheme,
     MoonShadows? shadows,
     MoonSizes? sizes,
     MoonSwitchTheme? switchTheme,
@@ -191,6 +199,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
       opacity: opacity ?? this.opacity,
       popoverTheme: popoverTheme ?? this.popoverTheme,
+      radioTheme: radioTheme ?? this.radioTheme,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
       switchTheme: switchTheme ?? this.switchTheme,
@@ -219,6 +228,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
       opacity: opacity.lerp(other.opacity, t),
       popoverTheme: popoverTheme.lerp(other.popoverTheme, t),
+      radioTheme: radioTheme.lerp(other.radioTheme, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
       switchTheme: switchTheme.lerp(other.switchTheme, t),
@@ -247,6 +257,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
       ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popoverTheme))
+      ..add(DiagnosticsProperty<MoonRadioTheme>("MoonRadioTheme", radioTheme))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
       ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
@@ -258,7 +269,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
-  MoonAccordionTheme? get moonAccordionTheme => moonTheme?.accordionTheme;
   MoonBorders? get moonBorders => moonTheme?.borders;
   MoonColors? get moonColors => moonTheme?.colors;
   MoonEffects? get moonEffects => moonTheme?.effects;
