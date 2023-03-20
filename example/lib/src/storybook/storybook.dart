@@ -10,6 +10,7 @@ import 'package:example/src/storybook/stories/icons.dart';
 import 'package:example/src/storybook/stories/linear_loader.dart';
 import 'package:example/src/storybook/stories/linear_progress.dart';
 import 'package:example/src/storybook/stories/popover.dart';
+import 'package:example/src/storybook/stories/radio.dart';
 import 'package:example/src/storybook/stories/switch.dart';
 import 'package:example/src/storybook/stories/tag.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
@@ -35,7 +36,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Accordion",
+          initialStory: "Radio",
           plugins: _plugins,
           wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",
@@ -78,6 +79,7 @@ class StorybookPage extends StatelessWidget {
             LinearLoaderStory(),
             LinearProgressStory(),
             PopoverStory(),
+            RadioStory(),
             SwitchStory(),
             TagStory(),
             TooltipStory(),
