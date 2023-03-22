@@ -11,6 +11,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
+import 'package:moon_design/src/theme/modal/modal_theme.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/popover/popover_theme.dart';
 import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
@@ -38,6 +39,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     effects: MoonEffects.light,
     linearLoaderTheme: MoonLinearLoaderTheme.light,
     linearProgressTheme: MoonLinearProgressTheme.light,
+    modalTheme: MoonModalTheme.light,
     opacity: MoonOpacity.opacities,
     popoverTheme: MoonPopoverTheme.light,
     radioTheme: MoonRadioTheme.light,
@@ -62,6 +64,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     effects: MoonEffects.dark,
     linearLoaderTheme: MoonLinearLoaderTheme.dark,
     linearProgressTheme: MoonLinearProgressTheme.dark,
+    modalTheme: MoonModalTheme.dark,
     opacity: MoonOpacity.opacities,
     popoverTheme: MoonPopoverTheme.dark,
     radioTheme: MoonRadioTheme.dark,
@@ -109,6 +112,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonLinearProgress widget theming.
   final MoonLinearProgressTheme linearProgressTheme;
 
+  /// Moon Design System MoonModal widget theming.
+  final MoonModalTheme modalTheme;
+
   /// Moon Design System opacities.
   final MoonOpacity opacity;
 
@@ -149,6 +155,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.effects,
     required this.linearLoaderTheme,
     required this.linearProgressTheme,
+    required this.modalTheme,
     required this.opacity,
     required this.popoverTheme,
     required this.radioTheme,
@@ -174,6 +181,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonEffects? effects,
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
+    MoonModalTheme? modalTheme,
     MoonOpacity? opacity,
     MoonPopoverTheme? popoverTheme,
     MoonRadioTheme? radioTheme,
@@ -197,6 +205,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       effects: effects ?? this.effects,
       linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
       linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
+      modalTheme: modalTheme ?? this.modalTheme,
       opacity: opacity ?? this.opacity,
       popoverTheme: popoverTheme ?? this.popoverTheme,
       radioTheme: radioTheme ?? this.radioTheme,
@@ -226,6 +235,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       effects: effects.lerp(other.effects, t),
       linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
       linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
+      modalTheme: modalTheme.lerp(other.modalTheme, t),
       opacity: opacity.lerp(other.opacity, t),
       popoverTheme: popoverTheme.lerp(other.popoverTheme, t),
       radioTheme: radioTheme.lerp(other.radioTheme, t),
@@ -255,6 +265,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
       ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
       ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
+      ..add(DiagnosticsProperty<MoonModalTheme>("MoonModalTheme", modalTheme))
       ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
       ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popoverTheme))
       ..add(DiagnosticsProperty<MoonRadioTheme>("MoonRadioTheme", radioTheme))
