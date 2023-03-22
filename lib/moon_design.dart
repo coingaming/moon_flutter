@@ -10,6 +10,7 @@ export 'package:moon_design/src/theme/colors.dart';
 export 'package:moon_design/src/theme/effects/effects.dart';
 export 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 export 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
+export 'package:moon_design/src/theme/modal/modal_theme.dart';
 export 'package:moon_design/src/theme/opacity.dart';
 export 'package:moon_design/src/theme/popover/popover_theme.dart';
 export 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
@@ -47,6 +48,7 @@ export 'package:moon_design/src/widgets/common/progress_indicators/circular_prog
 export 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
 export 'package:moon_design/src/widgets/loaders/circular_loader.dart';
 export 'package:moon_design/src/widgets/loaders/linear_loader.dart';
+export 'package:moon_design/src/widgets/modal/modal.dart';
 export 'package:moon_design/src/widgets/popover/popover.dart';
 export 'package:moon_design/src/widgets/progress/circular_progress.dart';
 export 'package:moon_design/src/widgets/progress/linear_progress.dart';
