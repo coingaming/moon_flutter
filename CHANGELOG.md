@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/coingaming/moon_flutter/compare/v0.14.0...v0.15.0) (2023-03-22)
+
+
+### Features
+
+* [MDS-448] Create Modal widget ([#87](https://github.com/coingaming/moon_flutter/issues/87)) ([1eb9562](https://github.com/coingaming/moon_flutter/commit/1eb95620e9175c6199e354d268d7461c267f97db))
+
 ## [0.14.0](https://github.com/coingaming/moon_flutter/compare/v0.13.0...v0.14.0) (2023-03-20)
 
 
