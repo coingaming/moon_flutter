@@ -37,7 +37,7 @@ export 'package:moon_design/src/widgets/buttons/outlined_button.dart';
 export 'package:moon_design/src/widgets/buttons/text_button.dart';
 export 'package:moon_design/src/widgets/checkbox/checkbox.dart';
 export 'package:moon_design/src/widgets/chips/chip.dart';
-export 'package:moon_design/src/widgets/chips/ghost_chip.dart';
+export 'package:moon_design/src/widgets/chips/text_chip.dart';
 export 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 export 'package:moon_design/src/widgets/common/base_control.dart';
 export 'package:moon_design/src/widgets/common/effects/focus_effect.dart';

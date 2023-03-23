@@ -96,9 +96,9 @@ class ChipStory extends Story {
                         rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
-                      const TextDivider(text: "Ghost Chip"),
+                      const TextDivider(text: "Text Chip"),
                       const SizedBox(height: 32),
-                      MoonGhostChip(
+                      MoonTextChip(
                         isActive: isActiveKnob,
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,

@@ -4,7 +4,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/chips/chip.dart';
 
-class MoonGhostChip extends StatelessWidget {
+class MoonTextChip extends StatelessWidget {
   /// The callback that is called when the chip is tapped or pressed.
   final VoidCallback? onTap;
 
@@ -107,8 +107,8 @@ class MoonGhostChip extends StatelessWidget {
   /// The widget in the right icon slot of the chip.
   final Widget? rightIcon;
 
-  /// MDS ghost chip widget.
-  const MoonGhostChip({
+  /// MDS text chip widget.
+  const MoonTextChip({
     super.key,
     this.onTap,
     this.onLongPress,
