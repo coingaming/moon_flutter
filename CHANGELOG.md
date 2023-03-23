@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.2](https://github.com/coingaming/moon_flutter/compare/v0.15.1...v0.15.2) (2023-03-23)
+
+
+### Bug Fixes
+
+* [MDS-451] Button types should be separated via intrinsic properties ([#91](https://github.com/coingaming/moon_flutter/issues/91)) ([a87dadc](https://github.com/coingaming/moon_flutter/commit/a87dadcd780ffb609c9e81086b58f17aa75aef4e))
+
 ## [0.15.1](https://github.com/coingaming/moon_flutter/compare/v0.15.0...v0.15.1) (2023-03-23)
 
 
