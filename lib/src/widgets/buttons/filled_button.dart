@@ -62,13 +62,12 @@ class MoonFilledButton extends StatelessWidget {
   /// The widget in the right icon slot of the button.
   final Widget? rightIcon;
 
-  /// MDS primary button variant.
+  /// MDS filled button variant.
   ///
   /// See also:
   ///
-  ///   * [MoonOutlinedButton], MDS secondary button.
-  ///   * [MoonTertiaryButton], MDS tertiary button.
-  ///   * [MoonTextButton], MDS ghost button.
+  ///   * [MoonOutlinedButton], MDS outlined button.
+  ///   * [MoonTextButton], MDS text button.
   const MoonFilledButton({
     super.key,
     this.onTap,

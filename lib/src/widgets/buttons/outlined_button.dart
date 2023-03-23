@@ -57,13 +57,12 @@ class MoonOutlinedButton extends StatelessWidget {
   /// The widget in the right icon slot of the button.
   final Widget? rightIcon;
 
-  /// MDS secondary button variant.
+  /// MDS outlined button variant.
   ///
   /// See also:
   ///
-  ///   * [MoonFilledButton], MDS primary button.
-  ///   * [MoonTertiaryButton], MDS tertiary button.
-  ///   * [MoonTextButton], MDS ghost button.
+  ///   * [MoonFilledButton], MDS filled button.
+  ///   * [MoonTextButton], MDS text button.
   const MoonOutlinedButton({
     super.key,
     this.onTap,
