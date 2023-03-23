@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.3](https://github.com/coingaming/moon_flutter/compare/v0.15.2...v0.15.3) (2023-03-23)
+
+
+### Bug Fixes
+
+* [MDS-453] Chip types should be separated via intrinsic properties ([#93](https://github.com/coingaming/moon_flutter/issues/93)) ([99d0c08](https://github.com/coingaming/moon_flutter/commit/99d0c08d91fd4bf5a946059d4186f0a867646cbd))
+
 ## [0.15.2](https://github.com/coingaming/moon_flutter/compare/v0.15.1...v0.15.2) (2023-03-23)
 
 
