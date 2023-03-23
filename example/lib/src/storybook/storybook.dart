@@ -37,7 +37,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Modal",
+          initialStory: "Accordion",
           plugins: _plugins,
           wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",
