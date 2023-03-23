@@ -29,7 +29,7 @@ export 'package:moon_design/src/utils/extensions.dart';
 export 'package:moon_design/src/utils/measure_size.dart';
 export 'package:moon_design/src/utils/widget_surveyor.dart';
 
-export 'package:moon_design/src/widgets/accordion/accordion.dart';
+export 'package:moon_design/src/widgets/accordion/accordion_item.dart';
 export 'package:moon_design/src/widgets/avatar/avatar.dart';
 export 'package:moon_design/src/widgets/buttons/button.dart';
 export 'package:moon_design/src/widgets/buttons/ghost_button.dart';

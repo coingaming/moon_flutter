@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/borders.dart';
 
 @immutable
-class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonAccordionProperties(
+class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProperties> with DiagnosticableTreeMixin {
+  static final properties = MoonAccordionItemProperties(
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
     borderRadius: SmoothBorderRadius.all(
@@ -17,28 +17,28 @@ class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> wi
     ),
   );
 
-  /// Accordion transition duration.
+  /// Accordion item transition duration.
   final Duration transitionDuration;
 
-  /// Accordion transition curve.
+  /// Accordion item transition curve.
   final Curve transitionCurve;
 
-  /// Accordion border radius.
+  /// Accordion item border radius.
   final SmoothBorderRadius borderRadius;
 
-  const MoonAccordionProperties({
+  const MoonAccordionItemProperties({
     required this.borderRadius,
     required this.transitionDuration,
     required this.transitionCurve,
   });
 
   @override
-  MoonAccordionProperties copyWith({
+  MoonAccordionItemProperties copyWith({
     Duration? transitionDuration,
     Curve? transitionCurve,
     SmoothBorderRadius? borderRadius,
   }) {
-    return MoonAccordionProperties(
+    return MoonAccordionItemProperties(
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
       borderRadius: borderRadius ?? this.borderRadius,
@@ -46,10 +46,10 @@ class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> wi
   }
 
   @override
-  MoonAccordionProperties lerp(ThemeExtension<MoonAccordionProperties>? other, double t) {
-    if (other is! MoonAccordionProperties) return this;
+  MoonAccordionItemProperties lerp(ThemeExtension<MoonAccordionItemProperties>? other, double t) {
+    if (other is! MoonAccordionItemProperties) return this;
 
-    return MoonAccordionProperties(
+    return MoonAccordionItemProperties(
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
       borderRadius: SmoothBorderRadius.lerp(borderRadius, other.borderRadius, t)!,
@@ -60,7 +60,7 @@ class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> wi
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonAccordionProperties"))
+      ..add(DiagnosticsProperty("type", "MoonAccordionItemProperties"))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius));

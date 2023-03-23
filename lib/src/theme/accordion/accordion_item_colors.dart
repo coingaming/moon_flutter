@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 
 @immutable
-class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with DiagnosticableTreeMixin {
-  static final light = MoonAccordionColors(
+class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> with DiagnosticableTreeMixin {
+  static final light = MoonAccordionItemColors(
     backgroundColor: MoonColors.light.gohan,
     expandedBackgroundColor: MoonColors.light.gohan,
     borderColor: MoonColors.light.beerus,
@@ -14,7 +14,7 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
     iconColor: MoonColors.light.trunks,
   );
 
-  static final dark = MoonAccordionColors(
+  static final dark = MoonAccordionItemColors(
     backgroundColor: MoonColors.dark.gohan,
     expandedBackgroundColor: MoonColors.dark.gohan,
     borderColor: MoonColors.dark.beerus,
@@ -23,25 +23,25 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
     expandedIconColor: MoonColors.dark.bulma,
   );
 
-  /// Accordion background color.
+  /// Accordion item background color.
   final Color backgroundColor;
 
-  /// Expanded accordion background color.
+  /// Expanded accordion item background color.
   final Color expandedBackgroundColor;
 
-  /// Accordion border color.
+  /// Accordion item border color.
   final Color borderColor;
 
-  /// Accordion divider color.
+  /// Accordion item divider color.
   final Color dividerColor;
 
-  /// Accordion icon color.
+  /// Accordion item icon color.
   final Color iconColor;
 
-  /// Expanded accordion icon color.
+  /// Expanded accordion item icon color.
   final Color expandedIconColor;
 
-  const MoonAccordionColors({
+  const MoonAccordionItemColors({
     required this.backgroundColor,
     required this.expandedBackgroundColor,
     required this.borderColor,
@@ -51,7 +51,7 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
   });
 
   @override
-  MoonAccordionColors copyWith({
+  MoonAccordionItemColors copyWith({
     Color? backgroundColor,
     Color? expandedBackgroundColor,
     Color? borderColor,
@@ -59,7 +59,7 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
     Color? expandedIconColor,
     Color? iconColor,
   }) {
-    return MoonAccordionColors(
+    return MoonAccordionItemColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       expandedBackgroundColor: expandedBackgroundColor ?? this.expandedBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
@@ -70,10 +70,10 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
   }
 
   @override
-  MoonAccordionColors lerp(ThemeExtension<MoonAccordionColors>? other, double t) {
-    if (other is! MoonAccordionColors) return this;
+  MoonAccordionItemColors lerp(ThemeExtension<MoonAccordionItemColors>? other, double t) {
+    if (other is! MoonAccordionItemColors) return this;
 
-    return MoonAccordionColors(
+    return MoonAccordionItemColors(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
       expandedBackgroundColor: Color.lerp(expandedBackgroundColor, other.expandedBackgroundColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
@@ -87,7 +87,7 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonAccordionColors"))
+      ..add(DiagnosticsProperty("type", "MoonAccordionItemColors"))
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("expandedBackgroundColor", expandedBackgroundColor))
       ..add(ColorProperty("borderColor", borderColor))
