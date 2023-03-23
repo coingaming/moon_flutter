@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.1](https://github.com/coingaming/moon_flutter/compare/v0.15.0...v0.15.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* [MDS-450] Accordion functionality fixes ([#89](https://github.com/coingaming/moon_flutter/issues/89)) ([2f84351](https://github.com/coingaming/moon_flutter/commit/2f8435109b1382020657bd1d3c0ef636f8e7f1d8))
+
 ## [0.15.0](https://github.com/coingaming/moon_flutter/compare/v0.14.0...v0.15.0) (2023-03-22)
 
 
