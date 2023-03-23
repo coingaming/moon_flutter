@@ -74,7 +74,7 @@ class AccordionStory extends Story {
                     children: [
                       const SizedBox(height: 64),
                       const TextDivider(text: "Grouped accordion"),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 32),
                       MoonAccordionItem<AccordionItems>(
                         identityValue: AccordionItems.first,
                         groupIdentityValue: currentlyOpenAccordionItem,
@@ -86,6 +86,7 @@ class AccordionStory extends Story {
                         shadows: showShadowKnob == true ? null : [],
                         childrenPadding: const EdgeInsets.all(12),
                         onExpansionChanged: (value) => setState(() => currentlyOpenAccordionItem = value),
+                        leading: const Icon(MoonIconsOther.frame24),
                         title: const Text("Grouped accordion item #1"),
                         children: const [
                           Text(
@@ -106,6 +107,7 @@ class AccordionStory extends Story {
                         shadows: showShadowKnob == true ? null : [],
                         childrenPadding: const EdgeInsets.all(12),
                         onExpansionChanged: (value) => setState(() => currentlyOpenAccordionItem = value),
+                        leading: const Icon(MoonIconsOther.frame24),
                         title: const Text("Grouped accordion item #2"),
                         children: const [
                           Text(
@@ -115,7 +117,7 @@ class AccordionStory extends Story {
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Ungrouped accordion with content outside"),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 32),
                       MoonAccordionItem<AccordionItems>(
                         accordionSize: accordionSizesKnob,
                         backgroundColor: backgroundColor,

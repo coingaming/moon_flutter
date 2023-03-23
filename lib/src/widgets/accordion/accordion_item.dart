@@ -445,16 +445,16 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         ? Color.alphaBlend(effectiveHoverEffectColor, _backgroundColorAnimation!.value!)
         : _backgroundColorAnimation!.value;
 
-    return FocusableActionDetector(
-      actions: _actions,
-      focusNode: _effectiveFocusNode,
-      autofocus: widget.autofocus,
-      onFocusChange: _handleFocusChange,
-      onShowFocusHighlight: _handleFocus,
-      onShowHoverHighlight: _handleHover,
-      child: Semantics(
-        enabled: _isExpanded,
-        focused: _isFocused,
+    return Semantics(
+      enabled: _isExpanded,
+      focused: _isFocused,
+      child: FocusableActionDetector(
+        actions: _actions,
+        focusNode: _effectiveFocusNode,
+        autofocus: widget.autofocus,
+        onFocusChange: _handleFocusChange,
+        onShowFocusHighlight: _handleFocus,
+        onShowHoverHighlight: _handleHover,
         child: RepaintBoundary(
           child: MoonFocusEffect(
             show: _isFocused,
@@ -463,29 +463,29 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
             effectDuration: effectiveFocusEffectDuration,
             effectCurve: effectiveFocusEffectCurve,
             childBorderRadius: effectiveBorderRadius,
-            child: AnimatedContainer(
-              duration: effectiveHoverEffectDuration,
-              curve: effectiveHoverEffectCurve,
-              clipBehavior: widget.clipBehavior ?? Clip.none,
-              decoration: !widget.hasContentOutside
-                  ? ShapeDecoration(
-                      color: resolvedBackgroundColor,
-                      shadows: effectiveShadows,
-                      shape: SmoothRectangleBorder(
-                        side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                        borderRadius: effectiveBorderRadius,
-                      ),
-                    )
-                  : null,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: _handleTap,
-                      child: AnimatedContainer(
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _handleTap,
+                child: AnimatedContainer(
+                  duration: effectiveHoverEffectDuration,
+                  curve: effectiveHoverEffectCurve,
+                  clipBehavior: widget.clipBehavior ?? Clip.none,
+                  decoration: !widget.hasContentOutside
+                      ? ShapeDecoration(
+                          color: resolvedBackgroundColor,
+                          shadows: effectiveShadows,
+                          shape: SmoothRectangleBorder(
+                            side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                            borderRadius: effectiveBorderRadius,
+                          ),
+                        )
+                      : null,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      AnimatedContainer(
                         height: effectiveHeaderHeight,
                         padding: effectiveHeaderPadding,
                         duration: effectiveHoverEffectDuration,
@@ -502,7 +502,16 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                             : null,
                         child: Row(
                           children: [
-                            if (widget.leading != null) widget.leading!,
+                            if (widget.leading != null)
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  right:
+                                      Directionality.of(context) == TextDirection.ltr ? effectiveHeaderPadding.left : 0,
+                                  left:
+                                      Directionality.of(context) == TextDirection.rtl ? effectiveHeaderPadding.left : 0,
+                                ),
+                                child: widget.leading,
+                              ),
                             AnimatedDefaultTextStyle(
                               style: effectiveMoonAccordionSize.textStyle.copyWith(color: effectiveTextColor),
                               duration: effectiveTransitionDuration,
@@ -513,20 +522,20 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                  ClipRect(
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: widget.expandedAlignment ?? Alignment.topCenter,
-                          heightFactor: _curvedAnimation!.value,
-                          child: child,
+                      ClipRect(
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: widget.expandedAlignment ?? Alignment.topCenter,
+                              heightFactor: _curvedAnimation!.value,
+                              child: child,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

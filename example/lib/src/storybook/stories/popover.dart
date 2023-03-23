@@ -101,7 +101,7 @@ class PopoverStory extends Story {
                                   ],
                                 ),
                                 const SizedBox(height: 16),
-                                MoonPrimaryButton(
+                                MoonFilledButton(
                                   buttonSize: MoonButtonSize.sm,
                                   isFullWidth: true,
                                   onTap: () {

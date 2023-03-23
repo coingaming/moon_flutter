@@ -75,7 +75,7 @@ class ModalStory extends Story {
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
-                              child: MoonPrimaryButton(
+                              child: MoonFilledButton(
                                 label: const Text("Okay"),
                                 isFullWidth: true,
                                 onTap: () => Navigator.of(context).pop(),
@@ -99,7 +99,7 @@ class ModalStory extends Story {
                     const SizedBox(height: 64),
                     Builder(
                       builder: (context) {
-                        return MoonPrimaryButton(
+                        return MoonFilledButton(
                           label: const Text("Open Modal"),
                           onTap: () => modalBuilder(context),
                         );

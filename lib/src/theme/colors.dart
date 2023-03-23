@@ -110,10 +110,10 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   /// Secondary body text and icon color.
   final Color trunks;
 
-  /// Primary button text and icon color.
+  /// filled button text and icon color.
   final Color goten;
 
-  /// Secondary button text and icon color.
+  /// outlined button text and icon color.
   final Color popo;
 
   /// Secondary hover effect color.
