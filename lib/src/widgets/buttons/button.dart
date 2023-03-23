@@ -155,10 +155,10 @@ class MoonButton extends StatelessWidget {
   ///
   /// See also:
   ///
-  ///   * [MoonPrimaryButton], MDS primary button.
-  ///   * [MoonSecondaryButton], MDS secondary button.
+  ///   * [MoonFilledButton], MDS primary button.
+  ///   * [MoonOutlinedButton], MDS secondary button.
   ///   * [MoonTertiaryButton], MDS tertiary button.
-  ///   * [MoonGhostButton], MDS ghost button.
+  ///   * [MoonTextButton], MDS ghost button.
   const MoonButton({
     super.key,
     this.onTap,

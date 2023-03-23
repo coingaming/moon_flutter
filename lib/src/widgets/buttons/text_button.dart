@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 
-class MoonSecondaryButton extends StatelessWidget {
+class MoonTextButton extends StatelessWidget {
   /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
 
@@ -42,7 +45,7 @@ class MoonSecondaryButton extends StatelessWidget {
   /// Whether this button should be full width.
   final bool isFullWidth;
 
-  /// Whether the button should show a tooltip.
+  /// Whether this button should show a tooltip.
   final bool showTooltip;
 
   /// Whether this button should show a pulse effect.
@@ -57,14 +60,14 @@ class MoonSecondaryButton extends StatelessWidget {
   /// The widget in the right icon slot of the button.
   final Widget? rightIcon;
 
-  /// MDS secondary button variant.
+  /// MDS ghost button variant.
   ///
   /// See also:
   ///
-  ///   * [MoonPrimaryButton], MDS primary button.
+  ///   * [MoonFilledButton], MDS primary button.
+  ///   * [MoonOutlinedButton], MDS secondary button.
   ///   * [MoonTertiaryButton], MDS tertiary button.
-  ///   * [MoonGhostButton], MDS ghost button.
-  const MoonSecondaryButton({
+  const MoonTextButton({
     super.key,
     this.onTap,
     this.onLongPress,
@@ -88,6 +91,12 @@ class MoonSecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final effectiveTextColor = context.moonTheme?.buttonTheme.colors.textVariantTextColor ?? MoonColors.light.trunks;
+    final effectiveHoverColor = context.moonTheme?.buttonTheme.colors.textVariantHoverColor ?? MoonColors.light.jiren;
+    final effectiveFocusColor =
+        context.moonTheme?.buttonTheme.colors.textVariantFocusColor.withOpacity(context.isDarkMode ? 0.8 : 0.2) ??
+            MoonColors.light.piccolo.withOpacity(context.isDarkMode ? 0.8 : 0.2);
+
     return MoonButton(
       onTap: onTap,
       onLongPress: onLongPress,
@@ -102,9 +111,11 @@ class MoonSecondaryButton extends StatelessWidget {
       autofocus: autofocus,
       isFocusable: isFocusable,
       isFullWidth: isFullWidth,
+      textColor: effectiveTextColor,
       showTooltip: showTooltip,
       showPulseEffect: showPulseEffect,
-      showBorder: true,
+      hoverEffectColor: effectiveHoverColor,
+      focusEffectColor: effectiveFocusColor,
       label: label,
       leftIcon: leftIcon,
       rightIcon: rightIcon,

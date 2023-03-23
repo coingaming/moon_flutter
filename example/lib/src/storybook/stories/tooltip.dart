@@ -132,11 +132,11 @@ class TooltipStory extends Story {
                     const SizedBox(height: 40),
                     const TextDivider(text: "Default tooltip"),
                     const SizedBox(height: 32),
-                    MoonPrimaryButton(
+                    MoonFilledButton(
                       showTooltip: true,
                       tooltipMessage: customLabelTextKnob,
                       onTap: () {},
-                      label: const Text("MoonPrimaryButton"),
+                      label: const Text("MoonFilledButton"),
                     ),
                     const SizedBox(height: 32),
                     MoonChip(

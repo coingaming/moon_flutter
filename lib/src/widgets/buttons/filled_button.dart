@@ -4,7 +4,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 
-class MoonPrimaryButton extends StatelessWidget {
+class MoonFilledButton extends StatelessWidget {
   /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
 
@@ -50,6 +50,9 @@ class MoonPrimaryButton extends StatelessWidget {
   /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
 
+  /// The background color of the button.
+  final Color? backgroundColor;
+
   /// The widget in the left icon slot of the button.
   final Widget? leftIcon;
 
@@ -63,10 +66,10 @@ class MoonPrimaryButton extends StatelessWidget {
   ///
   /// See also:
   ///
-  ///   * [MoonSecondaryButton], MDS secondary button.
+  ///   * [MoonOutlinedButton], MDS secondary button.
   ///   * [MoonTertiaryButton], MDS tertiary button.
-  ///   * [MoonGhostButton], MDS ghost button.
-  const MoonPrimaryButton({
+  ///   * [MoonTextButton], MDS ghost button.
+  const MoonFilledButton({
     super.key,
     this.onTap,
     this.onLongPress,
@@ -83,15 +86,17 @@ class MoonPrimaryButton extends StatelessWidget {
     this.isFullWidth = false,
     this.showTooltip = false,
     this.showPulseEffect = false,
-    this.label,
+    this.backgroundColor,
     this.leftIcon,
+    this.label,
     this.rightIcon,
   });
 
   @override
   Widget build(BuildContext context) {
-    final effectiveBackgroundColor =
-        context.moonTheme?.buttonTheme.colors.primaryBackgroundColor ?? MoonColors.light.piccolo;
+    final effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.buttonTheme.colors.filledVariantBackgroundColor ??
+        MoonColors.light.piccolo;
 
     return MoonButton(
       onTap: onTap,

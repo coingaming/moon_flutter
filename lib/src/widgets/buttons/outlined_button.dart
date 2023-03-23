@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 
-class MoonTertiaryButton extends StatelessWidget {
+class MoonOutlinedButton extends StatelessWidget {
   /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
 
@@ -59,14 +57,14 @@ class MoonTertiaryButton extends StatelessWidget {
   /// The widget in the right icon slot of the button.
   final Widget? rightIcon;
 
-  /// MDS tertiary button variant.
+  /// MDS secondary button variant.
   ///
   /// See also:
   ///
-  ///   * [MoonPrimaryButton], MDS primary button.
-  ///   * [MoonSecondaryButton], MDS secondary button.
-  ///   * [MoonGhostButton], MDS ghost button.
-  const MoonTertiaryButton({
+  ///   * [MoonFilledButton], MDS primary button.
+  ///   * [MoonTertiaryButton], MDS tertiary button.
+  ///   * [MoonTextButton], MDS ghost button.
+  const MoonOutlinedButton({
     super.key,
     this.onTap,
     this.onLongPress,
@@ -90,14 +88,10 @@ class MoonTertiaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveBackgroundColor =
-        context.moonTheme?.buttonTheme.colors.tertiaryBackgroundColor ?? MoonColors.light.hit;
-
     return MoonButton(
       onTap: onTap,
       onLongPress: onLongPress,
       buttonSize: buttonSize,
-      backgroundColor: effectiveBackgroundColor,
       focusNode: focusNode,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,
@@ -110,6 +104,7 @@ class MoonTertiaryButton extends StatelessWidget {
       isFullWidth: isFullWidth,
       showTooltip: showTooltip,
       showPulseEffect: showPulseEffect,
+      showBorder: true,
       label: label,
       leftIcon: leftIcon,
       rightIcon: rightIcon,

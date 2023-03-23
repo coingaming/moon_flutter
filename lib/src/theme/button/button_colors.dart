@@ -6,65 +6,57 @@ import 'package:moon_design/src/theme/colors.dart';
 class MoonButtonColors extends ThemeExtension<MoonButtonColors> with DiagnosticableTreeMixin {
   static final light = MoonButtonColors(
     borderColor: MoonColors.light.trunks,
-    primaryBackgroundColor: MoonColors.light.piccolo,
-    tertiaryBackgroundColor: MoonColors.light.hit,
-    ghostTextColor: MoonColors.light.trunks,
-    ghostFocusColor: MoonColors.light.piccolo,
-    ghostHoverColor: MoonColors.light.jiren,
+    filledVariantBackgroundColor: MoonColors.light.piccolo,
+    textVariantTextColor: MoonColors.light.trunks,
+    textVariantFocusColor: MoonColors.light.piccolo,
+    textVariantHoverColor: MoonColors.light.jiren,
   );
 
   static final dark = MoonButtonColors(
     borderColor: MoonColors.dark.trunks,
-    primaryBackgroundColor: MoonColors.dark.piccolo,
-    tertiaryBackgroundColor: MoonColors.dark.hit,
-    ghostTextColor: MoonColors.dark.trunks,
-    ghostFocusColor: MoonColors.dark.piccolo,
-    ghostHoverColor: MoonColors.dark.jiren,
+    filledVariantBackgroundColor: MoonColors.dark.piccolo,
+    textVariantTextColor: MoonColors.dark.trunks,
+    textVariantFocusColor: MoonColors.dark.piccolo,
+    textVariantHoverColor: MoonColors.dark.jiren,
   );
 
   /// Button border color.
   final Color borderColor;
 
-  /// Primary button background color.
-  final Color primaryBackgroundColor;
+  /// Filled button background color.
+  final Color filledVariantBackgroundColor;
 
-  /// Tertiary button background color.
-  final Color tertiaryBackgroundColor;
+  /// Text button text color.
+  final Color textVariantTextColor;
 
-  /// Ghost button text color.
-  final Color ghostTextColor;
+  /// Text button focus effect color.
+  final Color textVariantFocusColor;
 
-  /// Ghost button focus effect color.
-  final Color ghostFocusColor;
-
-  /// Ghost button hover effect color.
-  final Color ghostHoverColor;
+  /// Text button hover effect color.
+  final Color textVariantHoverColor;
 
   const MoonButtonColors({
     required this.borderColor,
-    required this.primaryBackgroundColor,
-    required this.tertiaryBackgroundColor,
-    required this.ghostTextColor,
-    required this.ghostFocusColor,
-    required this.ghostHoverColor,
+    required this.filledVariantBackgroundColor,
+    required this.textVariantTextColor,
+    required this.textVariantFocusColor,
+    required this.textVariantHoverColor,
   });
 
   @override
   MoonButtonColors copyWith({
     Color? borderColor,
-    Color? primaryBackgroundColor,
-    Color? tertiaryBackgroundColor,
-    Color? ghostTextColor,
-    Color? ghostFocusColor,
-    Color? ghostHoverColor,
+    Color? filledVariantBackgroundColor,
+    Color? textVariantTextColor,
+    Color? textVariantFocusColor,
+    Color? textVariantHoverColor,
   }) {
     return MoonButtonColors(
       borderColor: borderColor ?? this.borderColor,
-      primaryBackgroundColor: primaryBackgroundColor ?? this.primaryBackgroundColor,
-      tertiaryBackgroundColor: tertiaryBackgroundColor ?? this.tertiaryBackgroundColor,
-      ghostTextColor: ghostTextColor ?? this.ghostTextColor,
-      ghostFocusColor: ghostFocusColor ?? this.ghostFocusColor,
-      ghostHoverColor: ghostHoverColor ?? this.ghostHoverColor,
+      filledVariantBackgroundColor: filledVariantBackgroundColor ?? this.filledVariantBackgroundColor,
+      textVariantTextColor: textVariantTextColor ?? this.textVariantTextColor,
+      textVariantFocusColor: textVariantFocusColor ?? this.textVariantFocusColor,
+      textVariantHoverColor: textVariantHoverColor ?? this.textVariantHoverColor,
     );
   }
 
@@ -74,11 +66,10 @@ class MoonButtonColors extends ThemeExtension<MoonButtonColors> with Diagnostica
 
     return MoonButtonColors(
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
-      primaryBackgroundColor: Color.lerp(primaryBackgroundColor, other.primaryBackgroundColor, t)!,
-      tertiaryBackgroundColor: Color.lerp(tertiaryBackgroundColor, other.tertiaryBackgroundColor, t)!,
-      ghostTextColor: Color.lerp(ghostTextColor, other.ghostTextColor, t)!,
-      ghostFocusColor: Color.lerp(ghostFocusColor, other.ghostFocusColor, t)!,
-      ghostHoverColor: Color.lerp(ghostHoverColor, other.ghostHoverColor, t)!,
+      filledVariantBackgroundColor: Color.lerp(filledVariantBackgroundColor, other.filledVariantBackgroundColor, t)!,
+      textVariantTextColor: Color.lerp(textVariantTextColor, other.textVariantTextColor, t)!,
+      textVariantFocusColor: Color.lerp(textVariantFocusColor, other.textVariantFocusColor, t)!,
+      textVariantHoverColor: Color.lerp(textVariantHoverColor, other.textVariantHoverColor, t)!,
     );
   }
 
@@ -88,10 +79,9 @@ class MoonButtonColors extends ThemeExtension<MoonButtonColors> with Diagnostica
     properties
       ..add(DiagnosticsProperty("type", "MoonButtonColors"))
       ..add(ColorProperty("borderColor", borderColor))
-      ..add(ColorProperty("primaryBackgroundColor", primaryBackgroundColor))
-      ..add(ColorProperty("tertiaryBackgroundColor", tertiaryBackgroundColor))
-      ..add(ColorProperty("ghostTextColor", ghostTextColor))
-      ..add(ColorProperty("ghostFocusColor", ghostFocusColor))
-      ..add(ColorProperty("ghostHoverColor", ghostHoverColor));
+      ..add(ColorProperty("filledVariantBackgroundColor", filledVariantBackgroundColor))
+      ..add(ColorProperty("textVariantTextColor", textVariantTextColor))
+      ..add(ColorProperty("textVariantFocusColor", textVariantFocusColor))
+      ..add(ColorProperty("textVariantHoverColor", textVariantHoverColor));
   }
 }
