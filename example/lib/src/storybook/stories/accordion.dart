@@ -74,7 +74,7 @@ class AccordionStory extends Story {
                     children: [
                       const SizedBox(height: 64),
                       const TextDivider(text: "Grouped accordion"),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 24),
                       MoonAccordionItem<AccordionItems>(
                         identityValue: AccordionItems.first,
                         groupIdentityValue: currentlyOpenAccordionItem,
@@ -115,16 +115,17 @@ class AccordionStory extends Story {
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Ungrouped accordion with content outside"),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 24),
                       MoonAccordionItem<AccordionItems>(
                         accordionSize: accordionSizesKnob,
                         backgroundColor: backgroundColor,
                         initiallyExpanded: true,
+                        hasContentOutside: true,
                         expandedBackgroundColor: expandedBackgroundColor,
                         showBorder: showBorderKnob,
                         showDivider: showDividerKnob,
                         shadows: showShadowKnob == true ? null : [],
-                        childrenPadding: const EdgeInsets.all(12),
+                        childrenPadding: const EdgeInsets.symmetric(vertical: 12),
                         title: const Text("Ungrouped accordion item #1"),
                         children: const [
                           Text(
@@ -136,11 +137,12 @@ class AccordionStory extends Story {
                       MoonAccordionItem<AccordionItems>(
                         accordionSize: accordionSizesKnob,
                         backgroundColor: backgroundColor,
+                        hasContentOutside: true,
                         expandedBackgroundColor: expandedBackgroundColor,
                         showBorder: showBorderKnob,
                         showDivider: showDividerKnob,
                         shadows: showShadowKnob == true ? null : [],
-                        childrenPadding: const EdgeInsets.all(12),
+                        childrenPadding: const EdgeInsets.symmetric(vertical: 12),
                         title: const Text("Ungrouped accordion item #2"),
                         children: const [
                           Text(

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +37,9 @@ class MoonAccordionItem<T> extends StatefulWidget {
   ///
   /// If [identityValue] matches [groupIdentityValue], this parameter is ignored.
   final bool initiallyExpanded;
+
+  /// Whether the accordion content is outside
+  final bool hasContentOutside;
 
   /// The size of the accordion.
   final MoonAccordionItemSize? accordionSize;
@@ -165,6 +166,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
     this.groupIdentityValue,
     this.onExpansionChanged,
     this.initiallyExpanded = false,
+    this.hasContentOutside = false,
     this.accordionSize,
     this.borderColor,
     this.backgroundColor,
@@ -301,8 +303,6 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     _isExpanded =
         PageStorage.maybeOf(context)?.readState(context) as bool? ?? widget.initiallyExpanded || widget._selected;
 
-    log(_isExpanded.toString());
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
 
@@ -316,7 +316,6 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   void didUpdateWidget(MoonAccordionItem<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.identityValue == null && widget.groupIdentityValue == null) return;
-    log('didUpdateWidget: ${widget.groupIdentityValue}');
 
     if (widget._selected) {
       _isExpanded = true;
@@ -468,14 +467,16 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
               duration: effectiveHoverEffectDuration,
               curve: effectiveHoverEffectCurve,
               clipBehavior: widget.clipBehavior ?? Clip.none,
-              decoration: ShapeDecoration(
-                color: resolvedBackgroundColor,
-                shadows: effectiveShadows,
-                shape: SmoothRectangleBorder(
-                  side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                  borderRadius: effectiveBorderRadius,
-                ),
-              ),
+              decoration: !widget.hasContentOutside
+                  ? ShapeDecoration(
+                      color: resolvedBackgroundColor,
+                      shadows: effectiveShadows,
+                      shape: SmoothRectangleBorder(
+                        side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                        borderRadius: effectiveBorderRadius,
+                      ),
+                    )
+                  : null,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -484,9 +485,21 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                     child: GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: _handleTap,
-                      child: Container(
+                      child: AnimatedContainer(
                         height: effectiveHeaderHeight,
                         padding: effectiveHeaderPadding,
+                        duration: effectiveHoverEffectDuration,
+                        curve: effectiveHoverEffectCurve,
+                        decoration: widget.hasContentOutside
+                            ? ShapeDecoration(
+                                color: resolvedBackgroundColor,
+                                shadows: effectiveShadows,
+                                shape: SmoothRectangleBorder(
+                                  side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                                  borderRadius: effectiveBorderRadius,
+                                ),
+                              )
+                            : null,
                         child: Row(
                           children: [
                             if (widget.leading != null) widget.leading!,
@@ -542,7 +555,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         enabled: !closed,
         child: Column(
           children: [
-            if (widget.showDivider) Container(height: 1, color: effectiveDividerColor),
+            if (widget.showDivider && !widget.hasContentOutside) Container(height: 1, color: effectiveDividerColor),
             Padding(
               padding: widget.childrenPadding ?? EdgeInsets.zero,
               child: Column(
