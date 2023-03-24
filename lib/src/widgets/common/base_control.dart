@@ -219,6 +219,12 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     }
   }
 
+  void _handleTapCancel() {
+    if (_isPressed && mounted) {
+      setState(() => _isPressed = false);
+    }
+  }
+
   void _handleLongPress() {
     if (widget.onLongPress == null) return;
 
@@ -392,6 +398,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
                 onLongPress: _handleLongPress,
                 onLongPressStart: _handleLongPressStart,
                 onLongPressUp: _handleLongPressUp,
+                onTapCancel: _handleTapCancel,
                 onHorizontalDragStart: _handleHorizontalDragStart,
                 onHorizontalDragEnd: _handleHorizontalDragEnd,
                 onVerticalDragStart: _handleVerticalDragStart,

@@ -1,8 +1,10 @@
-import 'package:example/src/storybook/common/options.dart';
+import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
+
+bool show = false;
 
 class TooltipStory extends Story {
   TooltipStory()
@@ -94,8 +96,6 @@ class TooltipStory extends Story {
               description: "Switch between LTR and RTL modes.",
             );
 
-            bool show = true;
-
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
@@ -119,18 +119,17 @@ class TooltipStory extends Story {
                           arrowTipDistance: arrowTipDistanceKnob,
                           tooltipShadows: showShadowKnob == true ? null : [],
                           content: Text(customLabelTextKnob),
-                          child: MoonButton(
-                            backgroundColor: context.moonColors!.bulma,
+                          child: MoonFilledButton(
                             onTap: () {
                               setState(() => show = true);
                             },
-                            label: const Text("MDS"),
+                            label: const Text("Tap me"),
                           ),
                         );
                       },
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Default tooltip"),
+                    const TextDivider(text: "Default on hover tooltip"),
                     const SizedBox(height: 32),
                     MoonFilledButton(
                       showTooltip: true,
