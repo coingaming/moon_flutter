@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.4](https://github.com/coingaming/moon_flutter/compare/v0.15.3...v0.15.4) (2023-03-24)
+
+
+### Bug Fixes
+
+* [MDS-460] Various minor bug fixes ([#95](https://github.com/coingaming/moon_flutter/issues/95)) ([4e1772b](https://github.com/coingaming/moon_flutter/commit/4e1772bd9b6ce18f632d44bc929cea57b1a0c6ab))
+
 ## [0.15.3](https://github.com/coingaming/moon_flutter/compare/v0.15.2...v0.15.3) (2023-03-23)
 
 
