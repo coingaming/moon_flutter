@@ -1,7 +1,9 @@
-import 'package:example/src/storybook/common/options.dart';
+import 'package:example/src/storybook/common/color_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
+
+bool show = false;
 
 class PopoverStory extends Story {
   PopoverStory()
@@ -65,8 +67,6 @@ class PopoverStory extends Story {
               description: "Switch between LTR and RTL modes.",
             );
 
-            bool show = true;
-
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
@@ -112,12 +112,11 @@ class PopoverStory extends Story {
                               ],
                             ),
                           ),
-                          child: MoonButton(
-                            backgroundColor: context.moonColors!.bulma,
+                          child: MoonFilledButton(
                             onTap: () {
                               setState(() => show = true);
                             },
-                            label: const Text("MDS"),
+                            label: const Text("Tap me"),
                           ),
                         );
                       },

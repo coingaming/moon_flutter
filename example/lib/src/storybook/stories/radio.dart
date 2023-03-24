@@ -1,4 +1,4 @@
-import 'package:example/src/storybook/common/options.dart';
+import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

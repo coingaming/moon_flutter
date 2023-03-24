@@ -1,4 +1,4 @@
-import 'package:example/src/storybook/common/options.dart';
+import 'package:example/src/storybook/common/color_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -69,7 +69,7 @@ class ModalStory extends Story {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
                               child: Text(
-                                "Reopen the modal to see the new knob value changes.",
+                                "Reopen the modal to view the updated knob value.",
                                 style: context.moonTypography!.body.text14,
                               ),
                             ),
@@ -100,7 +100,7 @@ class ModalStory extends Story {
                     Builder(
                       builder: (context) {
                         return MoonFilledButton(
-                          label: const Text("Open Modal"),
+                          label: const Text("Tap me"),
                           onTap: () => modalBuilder(context),
                         );
                       },
