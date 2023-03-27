@@ -1,6 +1,7 @@
 library moon_design;
 
 export 'package:moon_design/src/theme/accordion/accordion_theme.dart';
+export 'package:moon_design/src/theme/alert/alert_theme.dart';
 export 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 export 'package:moon_design/src/theme/borders.dart';
 export 'package:moon_design/src/theme/button/button_theme.dart';
