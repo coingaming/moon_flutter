@@ -1,10 +1,12 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/checkbox/checkbox_painter.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
@@ -211,16 +213,10 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
 
-    final double effectiveBorderRadiusValue = context.moonTheme?.checkboxTheme.properties.borderRadiusValue ?? 4;
+    final BorderRadius effectiveBorderRadius =
+        context.moonTheme?.checkboxTheme.properties.borderRadius ?? MoonBorders.borders.interactiveXs;
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
-
-    final SmoothBorderRadius resolvedBorderRadius = SmoothBorderRadius.all(
-      SmoothRadius(
-        cornerRadius: effectiveBorderRadiusValue,
-        cornerSmoothing: 1,
-      ),
-    );
 
     final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
         MaterialStateProperty.resolveWith<MouseCursor>((Set<MaterialState> states) {
@@ -235,7 +231,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
         child: MoonFocusEffect(
           show: states.contains(MaterialState.focused),
           effectExtent: effectiveFocusEffectExtent,
-          childBorderRadius: resolvedBorderRadius,
+          childBorderRadius: effectiveBorderRadius,
           effectColor: effectiveFocusEffectColor,
           effectCurve: effectiveFocusEffectCurve,
           effectDuration: effectiveFocusEffectDuration,
@@ -254,7 +250,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
                 ..checkColor = effectiveCheckColor
                 ..value = value
                 ..previousValue = _previousValue
-                ..shape = SmoothRectangleBorder(borderRadius: resolvedBorderRadius)
+                ..shape = SmoothRectangleBorder(borderRadius: effectiveBorderRadius.smoothBorderRadius)
                 ..side = _resolveSide(BorderSide(color: effectiveBorderColor)),
             ),
           ),

@@ -1,28 +1,27 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:moon_design/src/theme/borders.dart';
 
 @immutable
 class MoonCheckboxProperties extends ThemeExtension<MoonCheckboxProperties> with DiagnosticableTreeMixin {
   static final properties = MoonCheckboxProperties(
-    borderRadiusValue: MoonBorders.borders.interactiveXs.topLeft.x,
+    borderRadius: MoonBorders.borders.interactiveXs,
   );
 
-  /// Checkbox border radius value.
-  final double borderRadiusValue;
+  /// Checkbox border radius.
+  final BorderRadius borderRadius;
 
   const MoonCheckboxProperties({
-    required this.borderRadiusValue,
+    required this.borderRadius,
   });
 
   @override
   MoonCheckboxProperties copyWith({
-    double? borderRadiusValue,
+    BorderRadius? borderRadius,
   }) {
     return MoonCheckboxProperties(
-      borderRadiusValue: borderRadiusValue ?? this.borderRadiusValue,
+      borderRadius: borderRadius ?? this.borderRadius,
     );
   }
 
@@ -31,7 +30,7 @@ class MoonCheckboxProperties extends ThemeExtension<MoonCheckboxProperties> with
     if (other is! MoonCheckboxProperties) return this;
 
     return MoonCheckboxProperties(
-      borderRadiusValue: lerpDouble(borderRadiusValue, other.borderRadiusValue, t)!,
+      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
     );
   }
 
@@ -40,6 +39,6 @@ class MoonCheckboxProperties extends ThemeExtension<MoonCheckboxProperties> with
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonCheckboxProperties"))
-      ..add(DiagnosticsProperty<double>("borderRadiusValue", borderRadiusValue));
+      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius));
   }
 }

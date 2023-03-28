@@ -1,4 +1,3 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -9,12 +8,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
   static final properties = MoonAccordionItemProperties(
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
-    borderRadius: SmoothBorderRadius.all(
-      SmoothRadius(
-        cornerRadius: MoonBorders.borders.interactiveSm.topLeft.x,
-        cornerSmoothing: 1,
-      ),
-    ),
+    borderRadius: MoonBorders.borders.interactiveSm,
   );
 
   /// Accordion item transition duration.
@@ -24,7 +18,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
   final Curve transitionCurve;
 
   /// Accordion item border radius.
-  final SmoothBorderRadius borderRadius;
+  final BorderRadius borderRadius;
 
   const MoonAccordionItemProperties({
     required this.borderRadius,
@@ -36,7 +30,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
   MoonAccordionItemProperties copyWith({
     Duration? transitionDuration,
     Curve? transitionCurve,
-    SmoothBorderRadius? borderRadius,
+    BorderRadius? borderRadius,
   }) {
     return MoonAccordionItemProperties(
       transitionDuration: transitionDuration ?? this.transitionDuration,
@@ -52,7 +46,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
     return MoonAccordionItemProperties(
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      borderRadius: SmoothBorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
     );
   }
 

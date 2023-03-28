@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
 
 enum MoonPopoverPosition {
   top,
@@ -455,24 +456,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                     color: effectiveBackgroundColor,
                     shadows: effectivePopoverShadows,
                     shape: SmoothRectangleBorder(
-                      borderRadius: SmoothBorderRadius.only(
-                        topLeft: SmoothRadius(
-                          cornerRadius: effectiveBorderRadius.topLeft.x,
-                          cornerSmoothing: 1,
-                        ),
-                        topRight: SmoothRadius(
-                          cornerRadius: effectiveBorderRadius.topRight.x,
-                          cornerSmoothing: 1,
-                        ),
-                        bottomLeft: SmoothRadius(
-                          cornerRadius: effectiveBorderRadius.bottomLeft.x,
-                          cornerSmoothing: 1,
-                        ),
-                        bottomRight: SmoothRadius(
-                          cornerRadius: effectiveBorderRadius.bottomRight.x,
-                          cornerSmoothing: 1,
-                        ),
-                      ),
+                      borderRadius: effectiveBorderRadius.smoothBorderRadius,
                     ),
                   ),
                   child: widget.content,

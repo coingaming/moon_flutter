@@ -51,24 +51,7 @@ class MoonModal extends StatelessWidget {
             decoration: ShapeDecoration(
               color: effectiveBackgroundColor,
               shape: SmoothRectangleBorder(
-                borderRadius: SmoothBorderRadius.only(
-                  topLeft: SmoothRadius(
-                    cornerRadius: effectiveBorderRadius.topLeft.x,
-                    cornerSmoothing: 1,
-                  ),
-                  topRight: SmoothRadius(
-                    cornerRadius: effectiveBorderRadius.topRight.x,
-                    cornerSmoothing: 1,
-                  ),
-                  bottomLeft: SmoothRadius(
-                    cornerRadius: effectiveBorderRadius.bottomLeft.x,
-                    cornerSmoothing: 1,
-                  ),
-                  bottomRight: SmoothRadius(
-                    cornerRadius: effectiveBorderRadius.bottomRight.x,
-                    cornerSmoothing: 1,
-                  ),
-                ),
+                borderRadius: effectiveBorderRadius.smoothBorderRadius,
               ),
             ),
             child: child,
