@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/borders.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
@@ -69,8 +70,8 @@ class MoonTooltip extends StatefulWidget {
   /// The width of the tooltip border.
   final double borderWidth;
 
-  /// The border radius value of the tooltip.
-  final double? borderRadiusValue;
+  /// The border radius of the tooltip.
+  final BorderRadius? borderRadius;
 
   /// The margin around tooltip. Used to prevent the tooltip from touching the edges of the viewport.
   final double tooltipMargin;
@@ -119,7 +120,7 @@ class MoonTooltip extends StatefulWidget {
     this.arrowLength,
     this.arrowOffsetValue = 0,
     this.arrowTipDistance,
-    this.borderRadiusValue,
+    this.borderRadius,
     this.borderWidth = 0,
     this.tooltipMargin = 8,
     this.borderColor = Colors.transparent,
@@ -409,8 +410,9 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     final EdgeInsets effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.tooltipTheme.properties.contentPadding ?? const EdgeInsets.all(12);
 
-    final double effectiveBorderRadius =
-        widget.borderRadiusValue ?? context.moonTheme?.tooltipTheme.properties.borderRadius.topLeft.x ?? 4;
+    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
+        context.moonTheme?.tooltipTheme.properties.borderRadius ??
+        MoonBorders.borders.interactiveXs;
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.tooltipTheme.properties.textStyle.copyWith(color: effectiveTextColor) ??

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.5](https://github.com/coingaming/moon_flutter/compare/v0.15.4...v0.15.5) (2023-03-28)
+
+
+### Bug Fixes
+
+* [MDS-461] Make widgets accept BorderRadius instead of SmoothBorderRadius ([#98](https://github.com/coingaming/moon_flutter/issues/98)) ([f855f70](https://github.com/coingaming/moon_flutter/commit/f855f7046558b43780c8936d29ab5e35340ec0e5))
+
 ## [0.15.4](https://github.com/coingaming/moon_flutter/compare/v0.15.3...v0.15.4) (2023-03-24)
 
 
