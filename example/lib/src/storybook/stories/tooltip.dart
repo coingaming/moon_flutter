@@ -110,7 +110,7 @@ class TooltipStory extends Story {
                         return MoonTooltip(
                           show: show,
                           backgroundColor: color,
-                          borderRadiusValue: borderRadiusKnob.toDouble(),
+                          borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                           tooltipPosition: tooltipPositionsKnob,
                           hasArrow: showArrowKnob,
                           arrowBaseWidth: arrowBaseWidthKnob,

@@ -6,6 +6,7 @@ import 'package:moon_design/src/theme/chip/chip_size_properties.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
@@ -281,24 +282,7 @@ class MoonChip extends StatelessWidget {
                 width: showBorder ? effectiveBorderWidth : 0,
                 style: showBorder ? BorderStyle.solid : BorderStyle.none,
               ),
-              borderRadius: SmoothBorderRadius.only(
-                topLeft: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.topLeft.x,
-                  cornerSmoothing: 1,
-                ),
-                topRight: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.topRight.x,
-                  cornerSmoothing: 1,
-                ),
-                bottomLeft: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.bottomLeft.x,
-                  cornerSmoothing: 1,
-                ),
-                bottomRight: SmoothRadius(
-                  cornerRadius: effectiveBorderRadius.bottomRight.x,
-                  cornerSmoothing: 1,
-                ),
-              ),
+              borderRadius: effectiveBorderRadius.smoothBorderRadius,
             ),
           ),
 
