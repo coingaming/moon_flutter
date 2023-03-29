@@ -35,7 +35,7 @@ class MoonTextChip extends StatelessWidget {
   /// The border width of the chip.
   final double? borderWidth;
 
-  /// The gap between the icon and the label.
+  /// The gap between the leading or trailing and the label widgets.
   final double? gap;
 
   /// The extent of the focus effect.
@@ -98,14 +98,14 @@ class MoonTextChip extends StatelessWidget {
   /// The border radius of the chip.
   final BorderRadius? borderRadius;
 
-  /// The widget in the left icon slot of the chip.
-  final Widget? leftIcon;
+  /// The widget in the leading slot of the chip.
+  final Widget? leading;
 
   /// The widget in the label slot of the chip.
   final Widget? label;
 
-  /// The widget in the right icon slot of the chip.
-  final Widget? rightIcon;
+  /// The widget in the trailing slot of the chip.
+  final Widget? trailing;
 
   /// MDS text chip widget.
   const MoonTextChip({
@@ -142,8 +142,8 @@ class MoonTextChip extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.label,
-    this.leftIcon,
-    this.rightIcon,
+    this.leading,
+    this.trailing,
   });
 
   @override
@@ -183,9 +183,9 @@ class MoonTextChip extends StatelessWidget {
       hoverEffectDuration: hoverEffectDuration,
       ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       minTouchTargetSize: minTouchTargetSize,
-      leftIcon: leftIcon,
+      leading: leading,
       label: label,
-      rightIcon: rightIcon,
+      trailing: trailing,
     );
   }
 }

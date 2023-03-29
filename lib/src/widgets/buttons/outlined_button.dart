@@ -48,14 +48,14 @@ class MoonOutlinedButton extends StatelessWidget {
   /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
 
-  /// The widget in the left icon slot of the button.
-  final Widget? leftIcon;
+  /// The widget in the leading slot of the button.
+  final Widget? leading;
 
   /// The widget in the label slot of the button.
   final Widget? label;
 
-  /// The widget in the right icon slot of the button.
-  final Widget? rightIcon;
+  /// The widget in the trailing slot of the button.
+  final Widget? trailing;
 
   /// MDS outlined button variant.
   ///
@@ -81,8 +81,8 @@ class MoonOutlinedButton extends StatelessWidget {
     this.showTooltip = false,
     this.showPulseEffect = false,
     this.label,
-    this.leftIcon,
-    this.rightIcon,
+    this.leading,
+    this.trailing,
   });
 
   @override
@@ -105,8 +105,8 @@ class MoonOutlinedButton extends StatelessWidget {
       showPulseEffect: showPulseEffect,
       showBorder: true,
       label: label,
-      leftIcon: leftIcon,
-      rightIcon: rightIcon,
+      leading: leading,
+      trailing: trailing,
     );
   }
 }

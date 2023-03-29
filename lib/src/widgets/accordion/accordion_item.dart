@@ -9,6 +9,7 @@ import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/common/icons/icons.dart';
 
@@ -25,8 +26,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
 
   /// The currently selected identity value for a group of accordions.
   ///
-  /// This accordion is considered selected if its [identityValue] matches the
-  /// [groupIdentityValue].
+  /// This accordion is considered selected if its [identityValue] matches the [groupIdentityValue].
   final T? groupIdentityValue;
 
   /// Called when the accordion expands or collapses.
@@ -217,8 +217,8 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   AnimationController? _animationController;
   CurvedAnimation? _curvedAnimation;
 
-  Animation<Color?>? _iconColorAnimation;
-  Animation<Color?>? _backgroundColorAnimation;
+  late Animation<Color?>? _iconColorAnimation;
+  late Animation<Color?>? _backgroundColorAnimation;
 
   bool _isExpanded = false;
   bool _isFocused = false;
@@ -285,9 +285,9 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   }
 
   Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
-    if (widget.backgroundColor == null && context.moonTypography != null) {
+    /* if (effectiveBackgroundColor == null && context.moonTypography != null) {
       return context.moonTypography!.colors.bodyPrimary;
-    }
+    } */
 
     final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
     if (backgroundLuminance > 0.5) {
@@ -383,9 +383,6 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         context.moonTheme?.accordionTheme.itemColors.expandedBackgroundColor ??
         MoonColors.light.gohan;
 
-    final Color effectiveTextColor =
-        _getTextColor(context, effectiveBackgroundColor: _backgroundColorAnimation?.value ?? Colors.transparent);
-
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.accordionTheme.itemColors.borderColor ?? MoonColors.light.beerus;
 
@@ -441,6 +438,9 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         ? Color.alphaBlend(effectiveHoverEffectColor, _backgroundColorAnimation!.value!)
         : _backgroundColorAnimation!.value;
 
+    final Color effectiveTextColor =
+        _getTextColor(context, effectiveBackgroundColor: resolvedBackgroundColor ?? effectiveBackgroundColor);
+
     return Semantics(
       enabled: _isExpanded,
       focused: _isFocused,
@@ -464,72 +464,75 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: _handleTap,
-                child: AnimatedContainer(
-                  duration: effectiveHoverEffectDuration,
-                  curve: effectiveHoverEffectCurve,
-                  clipBehavior: widget.clipBehavior ?? Clip.none,
-                  decoration: !widget.hasContentOutside
-                      ? ShapeDecoration(
-                          color: resolvedBackgroundColor,
-                          shadows: effectiveShadows,
-                          shape: SmoothRectangleBorder(
-                            side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                            borderRadius: effectiveBorderRadius.smoothBorderRadius,
-                          ),
-                        )
-                      : null,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      AnimatedContainer(
-                        height: effectiveHeaderHeight,
-                        padding: effectiveHeaderPadding,
-                        duration: effectiveHoverEffectDuration,
-                        curve: effectiveHoverEffectCurve,
-                        decoration: widget.hasContentOutside
-                            ? ShapeDecoration(
-                                color: resolvedBackgroundColor,
-                                shadows: effectiveShadows,
-                                shape: SmoothRectangleBorder(
-                                  side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                  borderRadius: effectiveBorderRadius.smoothBorderRadius,
-                                ),
-                              )
-                            : null,
-                        child: Row(
-                          children: [
-                            if (widget.leading != null)
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  right:
-                                      Directionality.of(context) == TextDirection.ltr ? effectiveHeaderPadding.left : 0,
-                                  left:
-                                      Directionality.of(context) == TextDirection.rtl ? effectiveHeaderPadding.left : 0,
-                                ),
-                                child: widget.leading,
+                child: AnimatedIconTheme(
+                  duration: effectiveTransitionDuration,
+                  color: effectiveTextColor,
+                  child: AnimatedDefaultTextStyle(
+                    style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
+                    duration: effectiveTransitionDuration,
+                    child: AnimatedContainer(
+                      duration: effectiveHoverEffectDuration,
+                      curve: effectiveHoverEffectCurve,
+                      clipBehavior: widget.clipBehavior ?? Clip.none,
+                      decoration: !widget.hasContentOutside
+                          ? ShapeDecoration(
+                              color: resolvedBackgroundColor,
+                              shadows: effectiveShadows,
+                              shape: SmoothRectangleBorder(
+                                side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                                borderRadius: effectiveBorderRadius.smoothBorderRadius,
                               ),
-                            AnimatedDefaultTextStyle(
-                              style: effectiveMoonAccordionSize.textStyle.copyWith(color: effectiveTextColor),
-                              duration: effectiveTransitionDuration,
-                              curve: effectiveTransitionCurve,
-                              child: Expanded(child: widget.title),
+                            )
+                          : null,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          AnimatedContainer(
+                            height: effectiveHeaderHeight,
+                            padding: effectiveHeaderPadding,
+                            duration: effectiveHoverEffectDuration,
+                            curve: effectiveHoverEffectCurve,
+                            decoration: widget.hasContentOutside
+                                ? ShapeDecoration(
+                                    color: resolvedBackgroundColor,
+                                    shadows: effectiveShadows,
+                                    shape: SmoothRectangleBorder(
+                                      side:
+                                          widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                                      borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                                    ),
+                                  )
+                                : null,
+                            child: Row(
+                              children: [
+                                if (widget.leading != null)
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.only(end: effectiveHeaderPadding.left),
+                                    child: widget.leading,
+                                  ),
+                                AnimatedDefaultTextStyle(
+                                  style: effectiveMoonAccordionSize.textStyle.copyWith(color: effectiveTextColor),
+                                  duration: effectiveTransitionDuration,
+                                  child: Expanded(child: widget.title),
+                                ),
+                                widget.trailing ?? _buildIcon(context)!,
+                              ],
                             ),
-                            widget.trailing ?? _buildIcon(context)!,
-                          ],
-                        ),
-                      ),
-                      ClipRect(
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: widget.expandedAlignment ?? Alignment.topCenter,
-                              heightFactor: _curvedAnimation!.value,
-                              child: child,
+                          ),
+                          ClipRect(
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: widget.expandedAlignment ?? Alignment.topCenter,
+                                  heightFactor: _curvedAnimation!.value,
+                                  child: child,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),

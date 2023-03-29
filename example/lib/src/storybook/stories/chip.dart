@@ -50,9 +50,9 @@ class ChipStory extends Story {
               description: "Show border when isActive.",
             );
 
-            final showLeftIconKnob = context.knobs.boolean(
-              label: "Show leftIcon",
-              description: "Show widget in the leftIcon slot.",
+            final showleadingKnob = context.knobs.boolean(
+              label: "Show leading",
+              description: "Show widget in the leading slot.",
               initial: true,
             );
 
@@ -62,9 +62,9 @@ class ChipStory extends Story {
               initial: true,
             );
 
-            final showRightIconKnob = context.knobs.boolean(
-              label: "Show rightIcon",
-              description: "Show widget in the rightIcon slot.",
+            final showtrailingKnob = context.knobs.boolean(
+              label: "Show trailing",
+              description: "Show widget in the trailing slot.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -91,9 +91,9 @@ class ChipStory extends Story {
                         showBorder: showBorderKnob,
                         chipSize: chipSizesKnob,
                         backgroundColor: color,
-                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
+                        leading: showleadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
+                        trailing: showtrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Text Chip"),
@@ -103,9 +103,9 @@ class ChipStory extends Story {
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         chipSize: chipSizesKnob,
-                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
+                        leading: showleadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
+                        trailing: showtrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Preset Chip"),
@@ -118,9 +118,9 @@ class ChipStory extends Story {
                         borderWidth: 2,
                         showBorder: showBorderKnob,
                         chipSize: chipSizesKnob,
-                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
+                        leading: showleadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
+                        trailing: showtrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 64),
                     ],

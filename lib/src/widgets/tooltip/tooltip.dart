@@ -25,7 +25,7 @@ class MoonTooltip extends StatefulWidget {
   static final List<MoonTooltipState> _openedTooltips = [];
 
   /// Sets a handler for listening to a `tap` event on the tooltip.
-  final void Function()? onTooltipTap;
+  final VoidCallback? onTap;
 
   /// Controls the tooltip visibility.
   final bool show;
@@ -34,8 +34,8 @@ class MoonTooltip extends StatefulWidget {
   final bool hasArrow;
 
   /// Whether the tooltip should be dismissed whenever a user taps on it. For more control when to dismiss the tooltip
-  /// rely on the [show] property and [onTooltipTap] handler. Defaults to [true].
-  final bool hideOnTooltipTap;
+  /// rely on the [show] property and [onTap] handler. Defaults to [true].
+  final bool hideOnTap;
 
   /// Sets the tooltip position relative to the target. Defaults to [MoonTooltipPosition.vertical]
   final MoonTooltipPosition tooltipPosition;
@@ -106,10 +106,10 @@ class MoonTooltip extends StatefulWidget {
   /// MDS tooltip widget.
   const MoonTooltip({
     super.key,
-    this.onTooltipTap,
+    this.onTap,
     required this.show,
     this.hasArrow = true,
-    this.hideOnTooltipTap = true,
+    this.hideOnTap = true,
     this.tooltipPosition = MoonTooltipPosition.top,
     this.minWidth,
     this.maxWidth,
@@ -202,12 +202,12 @@ class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerP
     final RenderBox? overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
     final tooltipPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
 
-    if (widget.hideOnTooltipTap ||
+    if (widget.hideOnTap ||
         tooltipPosition != null && !tooltipRenderBox!.size.contains(details.localPosition - tooltipPosition)) {
       _removeTooltip();
     }
 
-    widget.onTooltipTap?.call();
+    widget.onTap?.call();
   }
 
   Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
