@@ -285,10 +285,6 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   }
 
   Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
-    /* if (effectiveBackgroundColor == null && context.moonTypography != null) {
-      return context.moonTypography!.colors.bodyPrimary;
-    } */
-
     final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
     if (backgroundLuminance > 0.5) {
       return MoonColors.light.bulma;
