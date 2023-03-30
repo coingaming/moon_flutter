@@ -23,8 +23,7 @@ class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
 
   /// Creates a widget that animates the icon properties implicitly.
   ///
-  /// The [child], [color], [curve], and [duration]
-  /// arguments must not be null.
+  /// The [child] and [duration] arguments must not be null.
   const AnimatedIconTheme({
     super.key,
     super.onEnd,
@@ -52,15 +51,23 @@ class _AnimatedIconThemeState extends AnimatedWidgetBaseState<AnimatedIconTheme>
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _color = visitor(_color, widget.color, (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
-    _size = visitor(_size, Size(widget.size ?? 0, widget.size ?? 0), (dynamic value) => SizeTween(begin: value as Size))
-        as SizeTween?;
+    if (widget.color != null) {
+      _color = visitor(_color, widget.color, (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
+    }
+
+    if (widget.size != null) {
+      _size = visitor(_size, Size(widget.size!, widget.size!), (dynamic value) => SizeTween(begin: value as Size))
+          as SizeTween?;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return IconTheme(
-      data: IconThemeData(color: _color!.evaluate(animation), size: _size!.evaluate(animation)!.height),
+      data: IconThemeData(
+        color: _color != null ? _color!.evaluate(animation) : null,
+        size: _size != null ? _size!.evaluate(animation)!.height : null,
+      ),
       child: widget.child,
     );
   }

@@ -47,7 +47,7 @@ class MoonChip extends StatelessWidget {
   /// The border width of the chip.
   final double? borderWidth;
 
-  /// The gap between the icon and the label.
+  /// The gap between the leading or trailing and the label widgets.
   final double? gap;
 
   /// The extent of the focus effect.
@@ -113,14 +113,14 @@ class MoonChip extends StatelessWidget {
   /// The border radius of the chip.
   final BorderRadius? borderRadius;
 
-  /// The widget in the left icon slot of the chip.
-  final Widget? leftIcon;
+  /// The widget in the leading slot of the chip.
+  final Widget? leading;
 
   /// The widget in the label slot of the chip.
   final Widget? label;
 
-  /// The widget in the right icon slot of the chip.
-  final Widget? rightIcon;
+  /// The widget in the trailing slot of the chip.
+  final Widget? trailing;
 
   /// MDS chip widget
   const MoonChip({
@@ -158,8 +158,8 @@ class MoonChip extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.label,
-    this.leftIcon,
-    this.rightIcon,
+    this.leading,
+    this.trailing,
   });
 
   MoonChipSizeProperties _getMoonChipSize(BuildContext context, MoonChipSize? moonChipSize) {
@@ -209,9 +209,9 @@ class MoonChip extends StatelessWidget {
     final EdgeInsets effectivePadding = padding ?? effectiveMoonChipSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
-      leftIcon == null && label != null ? effectivePadding.left : 0,
+      leading == null && label != null ? effectivePadding.left : 0,
       effectivePadding.top,
-      rightIcon == null && label != null ? effectivePadding.right : 0,
+      trailing == null && label != null ? effectivePadding.right : 0,
       effectivePadding.bottom,
     );
 
@@ -297,16 +297,16 @@ class MoonChip extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (leftIcon != null)
+                  if (leading != null)
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                      child: leftIcon,
+                      child: leading,
                     ),
                   if (label != null) label!,
-                  if (rightIcon != null)
+                  if (trailing != null)
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                      child: rightIcon,
+                      child: trailing,
                     ),
                 ],
               ),

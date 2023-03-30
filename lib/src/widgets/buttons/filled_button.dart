@@ -53,14 +53,14 @@ class MoonFilledButton extends StatelessWidget {
   /// The background color of the button.
   final Color? backgroundColor;
 
-  /// The widget in the left icon slot of the button.
-  final Widget? leftIcon;
+  /// The widget in the leading slot of the button.
+  final Widget? leading;
 
   /// The widget in the label slot of the button.
   final Widget? label;
 
-  /// The widget in the right icon slot of the button.
-  final Widget? rightIcon;
+  /// The widget in the trailing slot of the button.
+  final Widget? trailing;
 
   /// MDS filled button variant.
   ///
@@ -86,9 +86,9 @@ class MoonFilledButton extends StatelessWidget {
     this.showTooltip = false,
     this.showPulseEffect = false,
     this.backgroundColor,
-    this.leftIcon,
+    this.leading,
     this.label,
-    this.rightIcon,
+    this.trailing,
   });
 
   @override
@@ -115,8 +115,8 @@ class MoonFilledButton extends StatelessWidget {
       showTooltip: showTooltip,
       showPulseEffect: showPulseEffect,
       label: label,
-      leftIcon: leftIcon,
-      rightIcon: rightIcon,
+      leading: leading,
+      trailing: trailing,
     );
   }
 }

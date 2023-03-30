@@ -49,7 +49,7 @@ class MoonButton extends StatelessWidget {
   /// The border width of the button.
   final double? borderWidth;
 
-  /// The gap between the icon and the label.
+  /// The gap between the leading or trailing and the label widgets.
   final double? gap;
 
   /// The extent of the focus effect.
@@ -142,14 +142,14 @@ class MoonButton extends StatelessWidget {
   /// The border radius of the button.
   final BorderRadius? borderRadius;
 
-  /// The widget in the left icon slot of the button.
-  final Widget? leftIcon;
+  /// The widget in the leading slot of the button.
+  final Widget? leading;
 
   /// The widget in the label slot of the button.
   final Widget? label;
 
-  /// The widget in the right icon slot of the button.
-  final Widget? rightIcon;
+  /// The widget in the trailing slot of the button.
+  final Widget? trailing;
 
   /// MDS base button.
   ///
@@ -201,9 +201,9 @@ class MoonButton extends StatelessWidget {
     this.pulseEffectCurve,
     this.padding,
     this.borderRadius,
-    this.leftIcon,
+    this.leading,
     this.label,
-    this.rightIcon,
+    this.trailing,
   });
 
   /// Constructor for creating explicit icon button.
@@ -291,7 +291,7 @@ class MoonButton extends StatelessWidget {
       pulseEffectCurve: pulseEffectCurve,
       padding: padding,
       borderRadius: borderRadius,
-      leftIcon: icon,
+      leading: icon,
     );
   }
 
@@ -340,9 +340,9 @@ class MoonButton extends StatelessWidget {
     final EdgeInsets effectivePadding = padding ?? effectiveMoonButtonSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
-      leftIcon == null && label != null ? effectivePadding.left : 0,
+      leading == null && label != null ? effectivePadding.left : 0,
       effectivePadding.top,
-      rightIcon == null && label != null ? effectivePadding.right : 0,
+      trailing == null && label != null ? effectivePadding.right : 0,
       effectivePadding.bottom,
     );
 
@@ -433,25 +433,25 @@ class MoonButton extends StatelessWidget {
                     ? Stack(
                         fit: StackFit.expand,
                         children: [
-                          if (leftIcon != null)
+                          if (leading != null)
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: effectiveGap),
                               alignment: Directionality.of(context) == TextDirection.ltr
                                   ? Alignment.centerLeft
                                   : Alignment.centerRight,
-                              child: leftIcon,
+                              child: leading,
                             ),
                           if (label != null)
                             Align(
                               child: label,
                             ),
-                          if (rightIcon != null)
+                          if (trailing != null)
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: effectiveGap),
                               alignment: Directionality.of(context) == TextDirection.ltr
                                   ? Alignment.centerRight
                                   : Alignment.centerLeft,
-                              child: rightIcon,
+                              child: trailing,
                             ),
                         ],
                       )
@@ -459,16 +459,16 @@ class MoonButton extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          if (leftIcon != null)
+                          if (leading != null)
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                              child: leftIcon,
+                              child: leading,
                             ),
                           if (label != null) label!,
-                          if (rightIcon != null)
+                          if (trailing != null)
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                              child: rightIcon,
+                              child: trailing,
                             ),
                         ],
                       ),

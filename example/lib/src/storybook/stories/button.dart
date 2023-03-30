@@ -69,9 +69,9 @@ class ButtonStory extends Story {
               description: "Show jiggling with pulse animation.",
             );
 
-            final showLeftIconKnob = context.knobs.boolean(
-              label: "Show leftIcon",
-              description: "Show widget in the leftIcon slot.",
+            final showLeadingKnob = context.knobs.boolean(
+              label: "Show leading",
+              description: "Show widget in the leading slot.",
               initial: true,
             );
 
@@ -81,9 +81,9 @@ class ButtonStory extends Story {
               initial: true,
             );
 
-            final showRightIconKnob = context.knobs.boolean(
-              label: "Show rightIcon",
-              description: "Show widget in the rightIcon slot.",
+            final showTrailingKnob = context.knobs.boolean(
+              label: "Show trailing",
+              description: "Show widget in the trailing slot.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -129,9 +129,9 @@ class ButtonStory extends Story {
                         backgroundColor: color,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
+                        leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
+                        trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 32),
                       MoonButton.icon(
@@ -142,7 +142,7 @@ class ButtonStory extends Story {
                         backgroundColor: color,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                        icon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
+                        icon: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Button variants"),
@@ -152,9 +152,9 @@ class ButtonStory extends Story {
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
                         showPulseEffect: showPulseEffectKnob,
-                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
+                        leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonFilledButton") : null,
-                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
+                        trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 32),
                       MoonOutlinedButton(
@@ -162,9 +162,9 @@ class ButtonStory extends Story {
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
                         showPulseEffect: showPulseEffectKnob,
-                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
+                        leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonOutlinedButton") : null,
-                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
+                        trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 32),
                       MoonTextButton(
@@ -172,9 +172,9 @@ class ButtonStory extends Story {
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
                         showPulseEffect: showPulseEffectKnob,
-                        leftIcon: showLeftIconKnob ? Icon(resolvedIconVariant) : null,
+                        leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonTextButton") : null,
-                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
+                        trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
                       const TextDivider(text: "Button with non-standard children"),
@@ -189,7 +189,7 @@ class ButtonStory extends Story {
                         backgroundColor: context.moonTheme!.colors.krillin100,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                        leftIcon: showLeftIconKnob
+                        leading: showLeadingKnob
                             ? Container(
                                 width: 24,
                                 height: 24,
@@ -214,7 +214,7 @@ class ButtonStory extends Story {
                                 ),
                               )
                             : null,
-                        rightIcon: showRightIconKnob ? Icon(resolvedIconVariant) : null,
+                        trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 64),
                     ],
