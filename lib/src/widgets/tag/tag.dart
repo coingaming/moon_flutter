@@ -30,7 +30,7 @@ class MoonTag extends StatelessWidget {
   /// The height of the tag.
   final double? height;
 
-  /// The gap between the icon and the label.
+  /// The gap between the leading or trailing and the label widgets.
   final double? gap;
 
   /// The background color of the tag.
@@ -48,14 +48,14 @@ class MoonTag extends StatelessWidget {
   /// Whether the tag should use upper case text style.
   final bool isUpperCase;
 
-  /// The widget in the left icon slot of the tag.
-  final Widget? leftIcon;
+  /// The widget in the leading slot of the tag.
+  final Widget? leading;
 
   /// The widget in the label slot of the tag.
   final Widget? label;
 
-  /// The widget in the right icon slot of the tag.
-  final Widget? rightIcon;
+  /// The widget in the trailing slot of the tag.
+  final Widget? trailing;
 
   /// MDS tag widget.
   const MoonTag({
@@ -72,9 +72,9 @@ class MoonTag extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.isUpperCase = true,
-    this.leftIcon,
+    this.leading,
     this.label,
-    this.rightIcon,
+    this.trailing,
   });
 
   MoonTagSizeProperties _getMoonTagSize(BuildContext context, MoonTagSize? moonTagSize) {
@@ -118,9 +118,9 @@ class MoonTag extends StatelessWidget {
     final EdgeInsets effectivePadding = padding ?? effectiveMoonTagSize.padding;
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
-      leftIcon == null && label != null ? effectivePadding.left : 0,
+      leading == null && label != null ? effectivePadding.left : 0,
       effectivePadding.top,
-      rightIcon == null && label != null ? effectivePadding.right : 0,
+      trailing == null && label != null ? effectivePadding.right : 0,
       effectivePadding.bottom,
     );
 
@@ -154,16 +154,16 @@ class MoonTag extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (leftIcon != null)
+                    if (leading != null)
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                        child: leftIcon,
+                        child: leading,
                       ),
                     if (label != null) label!,
-                    if (rightIcon != null)
+                    if (trailing != null)
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                        child: rightIcon,
+                        child: trailing,
                       ),
                   ],
                 ),
