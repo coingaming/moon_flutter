@@ -44,7 +44,7 @@ class TagStory extends Story {
               description: "Sets the text style of the Tag to upper case.",
             );
 
-            final showleadingKnob = context.knobs.boolean(
+            final showLeadingKnob = context.knobs.boolean(
               label: "Show leading",
               description: "Show widget in the leading slot.",
             );
@@ -55,7 +55,7 @@ class TagStory extends Story {
               initial: true,
             );
 
-            final showtrailingKnob = context.knobs.boolean(
+            final showTrailingKnob = context.knobs.boolean(
               label: "Show trailing",
               description: "Show widget in the trailing slot.",
               initial: true,
@@ -79,11 +79,11 @@ class TagStory extends Story {
                       tagSize: tagSizesKnob,
                       isUpperCase: setUpperCase,
                       backgroundColor: color,
-                      leading: showleadingKnob ? const Icon(MoonIconsControls.close_small16) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIconsControls.close_small16) : null,
                       label: showLabelKnob
                           ? Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob)
                           : null,
-                      trailing: showtrailingKnob ? const Icon(MoonIconsControls.close_small16) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIconsControls.close_small16) : null,
                     ),
                     const SizedBox(height: 64),
                   ],
