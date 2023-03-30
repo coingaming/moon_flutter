@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.6](https://github.com/coingaming/moon_flutter/compare/v0.15.5...v0.15.6) (2023-03-30)
+
+
+### Bug Fixes
+
+* [MDS-465] Fix Accordion disappearing titles and color transitions ([#100](https://github.com/coingaming/moon_flutter/issues/100)) ([9392330](https://github.com/coingaming/moon_flutter/commit/939233073621afd67cef9556a7ad957f8a7b5549))
+
 ## [0.15.5](https://github.com/coingaming/moon_flutter/compare/v0.15.4...v0.15.5) (2023-03-28)
 
 
