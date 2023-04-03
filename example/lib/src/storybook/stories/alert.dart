@@ -1,64 +1,93 @@
 import 'package:example/src/storybook/common/color_options.dart';
+import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
+
+bool showAlert = true;
 
 class AlertStory extends Story {
   AlertStory()
       : super(
           name: "Alert",
           builder: (context) {
-            final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
-              initial: "MoonTag",
-            );
-
-            final tagSizesKnob = context.knobs.options(
-              label: "tagSize",
-              description: "Tag size variants.",
-              initial: MoonTagSize.xs,
-              options: const [
-                Option(label: "x2s", value: MoonTagSize.x2s),
-                Option(label: "xs", value: MoonTagSize.xs),
-              ],
-            );
-
-            final colorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Tag.",
-              initial: 5, // bulma
+              description: "MoonColors variants for background.",
+              initial: 4, // Gohan
               options: colorOptions,
             );
 
-            final color = colorTable(context)[colorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+
+            final textColorsKnob = context.knobs.options(
+              label: "textColor",
+              description: "MoonColors variants for text.",
+              initial: 5, // Bulma
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob];
+
+            final leadingColorsKnob = context.knobs.options(
+              label: "leadingColor",
+              description: "MoonColors variants for leading.",
+              initial: 5, // Bulma
+              options: colorOptions,
+            );
+
+            final leadingColor = colorTable(context)[leadingColorsKnob];
+
+            final trailingColorsKnob = context.knobs.options(
+              label: "trailingColor",
+              description: "MoonColors variants for trailing.",
+              initial: 5, // Bulma
+              options: colorOptions,
+            );
+
+            final trailingColor = colorTable(context)[trailingColorsKnob];
+
+            final borderColorsKnob = context.knobs.options(
+              label: "borderColor",
+              description: "MoonColors variants for border.",
+              initial: 5, // Bulma
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorsKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 12,
-              initial: 4,
+              initial: 8,
               label: "borderRadius",
-              description: "Border radius for Tag.",
+              description: "Border radius for Alert.",
             );
 
-            final setUpperCase = context.knobs.boolean(
-              label: "isUpperCase",
-              description: "Sets the text style of the Tag to upper case.",
+            final showBorderKnob = context.knobs.boolean(
+              label: "showBorder",
+              description: "Show border for Alert.",
             );
 
-            final showLeftIconKnob = context.knobs.boolean(
-              label: "Show leftIcon",
-              description: "Show widget in the leftIcon slot.",
-            );
-
-            final showLabelKnob = context.knobs.boolean(
-              label: "Show label",
-              description: "Show widget in the label slot.",
+            final showLeadingKnob = context.knobs.boolean(
+              label: "leading",
+              description: "Show widget in the leading slot.",
               initial: true,
             );
 
-            final showRightIconKnob = context.knobs.boolean(
-              label: "Show rightIcon",
-              description: "Show widget in the rightIcon slot.",
+            final showBodyKnob = context.knobs.boolean(
+              label: "body",
+              description: "Show widget in the body slot.",
+            );
+
+            final showTrailingKnob = context.knobs.boolean(
+              label: "trailing",
+              description: "Show widget in the trailing slot.",
               initial: true,
+            );
+
+            final showDisabledKnob = context.knobs.boolean(
+              label: "Disabled",
+              description: "onTrailingTap() is null.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -69,13 +98,153 @@ class AlertStory extends Story {
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    MoonAlert(title: Text("Alert title")),
-                    const SizedBox(height: 64),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 64),
+                      const TextDivider(text: "Base Alert"),
+                      const SizedBox(height: 32),
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return Column(
+                            children: [
+                              MoonAlert(
+                                show: showAlert,
+                                title: const SizedBox(
+                                  height: 24,
+                                  child: Align(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: Text("Base Alert"),
+                                  ),
+                                ),
+                                borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                                leading: showLeadingKnob ? const Icon(MoonIconsOther.frame24) : null,
+                                trailing: showTrailingKnob
+                                    ? MoonButton.icon(
+                                        buttonSize: MoonButtonSize.xs,
+                                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                                        disabledOpacityValue: 1,
+                                        icon: Icon(
+                                          MoonIconsControls.close_small24,
+                                          color: trailingColor,
+                                          size: 24,
+                                        ),
+                                        gap: 0,
+                                        onTap: showDisabledKnob
+                                            ? null
+                                            : () {
+                                                setState(() => showAlert = !showAlert);
+                                              },
+                                      )
+                                    : null,
+                                backgroundColor: backgroundColor,
+                                showBorder: showBorderKnob,
+                                leadingColor: leadingColor,
+                                trailingColor: trailingColor,
+                                textColor: textColor,
+                                borderColor: borderColor,
+                                body: showBodyKnob
+                                    ? const SizedBox(
+                                        height: 24,
+                                        child: Align(
+                                          alignment: AlignmentDirectional.centerStart,
+                                          child: Text("Here goes Alert body"),
+                                        ),
+                                      )
+                                    : null,
+                              ),
+                              const SizedBox(height: 16),
+                              MoonFilledButton(
+                                label: const Text("Show/Hide Alert"),
+                                backgroundColor: MoonColors.light.gohan,
+                                onTap: () {
+                                  setState(() => showAlert = !showAlert);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 40),
+                      const TextDivider(text: "Filled Alert Variant"),
+                      const SizedBox(height: 32),
+                      MoonFilledAlert(
+                        show: true,
+                        title: const Text("Filled error Alert"),
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                        leading: showLeadingKnob ? const Icon(MoonIconsNotifications.alert24) : null,
+                        color: MoonColors.light.chiChi100,
+                        body: showBodyKnob
+                            ? const SizedBox(
+                                height: 24,
+                                child: Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text("Here goes Alert body"),
+                                ),
+                              )
+                            : null,
+                        onTrailingTap: () {},
+                      ),
+                      const SizedBox(height: 16),
+                      MoonFilledAlert(
+                        show: true,
+                        title: const Text("Filled warning Alert"),
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                        leading: showLeadingKnob ? const Icon(MoonIconsGeneric.alarm24) : null,
+                        color: MoonColors.light.krillin100,
+                        body: showBodyKnob
+                            ? const SizedBox(
+                                height: 24,
+                                child: Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text("Here goes Alert body"),
+                                ),
+                              )
+                            : null,
+                        onTrailingTap: () {},
+                      ),
+                      const SizedBox(height: 40),
+                      const TextDivider(text: "Outlined Alert Variant"),
+                      const SizedBox(height: 32),
+                      MoonOutlinedAlert(
+                        show: true,
+                        title: const Text("Outlined success Alert"),
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                        leading: showLeadingKnob ? const Icon(MoonIconsGeneric.check_rounded24) : null,
+                        color: MoonColors.light.roshi100,
+                        body: showBodyKnob
+                            ? const SizedBox(
+                                height: 24,
+                                child: Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text("Here goes Alert body"),
+                                ),
+                              )
+                            : null,
+                        onTrailingTap: () {},
+                      ),
+                      const SizedBox(height: 16),
+                      MoonOutlinedAlert(
+                        show: true,
+                        title: const Text('Outlined info Alert'),
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                        leading: showLeadingKnob ? const Icon(MoonIconsNotifications.alert24) : null,
+                        color: MoonColors.light.whis100,
+                        body: showBodyKnob
+                            ? const SizedBox(
+                                height: 24,
+                                child: Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text("Here goes Alert body"),
+                                ),
+                              )
+                            : null,
+                        onTrailingTap: () {},
+                      ),
+                      const SizedBox(height: 64),
+                    ],
+                  ),
                 ),
               ),
             );
