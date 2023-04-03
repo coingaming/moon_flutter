@@ -157,7 +157,7 @@ class AlertStory extends Story {
                               const SizedBox(height: 16),
                               MoonFilledButton(
                                 label: const Text("Show/Hide Alert"),
-                                backgroundColor: MoonColors.light.gohan,
+                                backgroundColor: context.moonColors!.piccolo,
                                 onTap: () {
                                   setState(() => showAlert = !showAlert);
                                 },
@@ -167,14 +167,14 @@ class AlertStory extends Story {
                         },
                       ),
                       const SizedBox(height: 40),
-                      const TextDivider(text: "Filled Alert Variant"),
+                      const TextDivider(text: "Filled Alert variant"),
                       const SizedBox(height: 32),
                       MoonFilledAlert(
                         show: true,
                         title: const Text("Filled error Alert"),
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         leading: showLeadingKnob ? const Icon(MoonIconsNotifications.alert24) : null,
-                        color: MoonColors.light.chiChi100,
+                        color: context.moonColors!.chiChi100,
                         body: showBodyKnob
                             ? const SizedBox(
                                 height: 24,
@@ -192,7 +192,7 @@ class AlertStory extends Story {
                         title: const Text("Filled warning Alert"),
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         leading: showLeadingKnob ? const Icon(MoonIconsGeneric.alarm24) : null,
-                        color: MoonColors.light.krillin100,
+                        color: context.moonColors!.krillin100,
                         body: showBodyKnob
                             ? const SizedBox(
                                 height: 24,
@@ -205,14 +205,14 @@ class AlertStory extends Story {
                         onTrailingTap: () {},
                       ),
                       const SizedBox(height: 40),
-                      const TextDivider(text: "Outlined Alert Variant"),
+                      const TextDivider(text: "Outlined Alert variant"),
                       const SizedBox(height: 32),
                       MoonOutlinedAlert(
                         show: true,
                         title: const Text("Outlined success Alert"),
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         leading: showLeadingKnob ? const Icon(MoonIconsGeneric.check_rounded24) : null,
-                        color: MoonColors.light.roshi100,
+                        color: context.moonColors!.roshi100,
                         body: showBodyKnob
                             ? const SizedBox(
                                 height: 24,
@@ -230,7 +230,7 @@ class AlertStory extends Story {
                         title: const Text('Outlined info Alert'),
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         leading: showLeadingKnob ? const Icon(MoonIconsNotifications.alert24) : null,
-                        color: MoonColors.light.whis100,
+                        color: context.moonColors!.whis100,
                         body: showBodyKnob
                             ? const SizedBox(
                                 height: 24,

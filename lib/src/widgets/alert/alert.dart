@@ -7,6 +7,7 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
 class MoonAlert extends StatefulWidget {
   /// Controls whether the alert is shown.
@@ -33,9 +34,6 @@ class MoonAlert extends StatefulWidget {
   /// The color of the widget in trailing slot of the alert.
   final Color? trailingColor;
 
-  /// Alert transition curve (show and hide animation).
-  final Curve? transitionCurve;
-
   /// The border width of the alert.
   final double? borderWidth;
 
@@ -50,6 +48,9 @@ class MoonAlert extends StatefulWidget {
 
   /// Alert transition duration (show and hide animation).
   final Duration? transitionDuration;
+
+  /// Alert transition curve (show and hide animation).
+  final Curve? transitionCurve;
 
   /// The padding of the alert.
   final EdgeInsets? padding;
@@ -75,7 +76,12 @@ class MoonAlert extends StatefulWidget {
   /// The widget in the trailing slot of the alert.
   final Widget? trailing;
 
-  /// MDS alert widget
+  /// MDS base alert.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonFilledAlert], MDS filled alert.
+  ///   * [MoonOutlinedAlert], MDS outlined alert.
   const MoonAlert({
     super.key,
     this.show = false,
@@ -86,12 +92,12 @@ class MoonAlert extends StatefulWidget {
     this.leadingColor,
     this.textColor,
     this.trailingColor,
-    this.transitionCurve,
     this.borderWidth,
     this.horizontalGap,
     this.minimumHeight,
     this.verticalGap,
     this.transitionDuration,
+    this.transitionCurve,
     this.padding,
     this.semanticLabel,
     this.bodyTextStyle,
@@ -108,22 +114,46 @@ class MoonAlert extends StatefulWidget {
 
 class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMixin {
   bool _isVisible = true;
+
   AnimationController? _animationController;
   Animation<double>? _curvedAnimation;
 
+  Color _getElementColor({required Color effectiveBackgroundColor, required Color? elementColor}) {
+    if (elementColor != null) return elementColor;
+
+    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
+    if (backgroundLuminance > 0.5) {
+      return MoonColors.light.bulma;
+    } else {
+      return MoonColors.dark.bulma;
+    }
+  }
+
+  TextStyle _getTextStyle({required BuildContext context}) {
+    if (widget.titleTextStyle != null) return widget.titleTextStyle!;
+
+    if (widget.body != null) {
+      return context.moonTheme?.alertTheme.properties.titleTextStyle ?? MoonTextStyles.heading.text14;
+    } else {
+      return context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTextStyles.body.text14;
+    }
+  }
+
+  void _showAlert() {
+    if (!mounted) return;
+    _animationController!.forward();
+
+    setState(() => _isVisible = true);
+  }
+
   void _hideAlert() {
+    if (!mounted) return;
+
     _animationController!.reverse().then<void>((void value) {
       if (!mounted) return;
 
       setState(() => _isVisible = false);
     });
-  }
-
-  void _showAlert() {
-    _animationController!.forward();
-    if (!mounted) return;
-
-    setState(() => _isVisible = true);
   }
 
   @override
@@ -158,27 +188,6 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
     super.dispose();
   }
 
-  Color _getTextColor({required Color effectiveBackgroundColor}) {
-    if (widget.textColor != null) return widget.textColor!;
-
-    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
-    }
-  }
-
-  TextStyle _getTextStyle({required BuildContext context}) {
-    if (widget.titleTextStyle != null) return widget.titleTextStyle!;
-
-    if (widget.body != null) {
-      return context.moonTheme?.alertTheme.properties.titleTextStyle ?? MoonTextStyles.heading.text14;
-    } else {
-      return context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTextStyles.body.text14;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final EdgeInsets effectivePadding =
@@ -207,12 +216,13 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
         widget.backgroundColor ?? context.moonTheme?.alertTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveLeadingColor =
-        widget.leadingColor ?? context.moonTheme?.alertTheme.colors.leadingColor ?? MoonColors.light.bulma;
+        _getElementColor(effectiveBackgroundColor: effectiveBackgroundColor, elementColor: widget.leadingColor);
 
     final Color effectiveTrailingColor =
-        widget.trailingColor ?? context.moonTheme?.alertTheme.colors.trailingColor ?? MoonColors.light.bulma;
+        _getElementColor(effectiveBackgroundColor: effectiveBackgroundColor, elementColor: widget.trailingColor);
 
-    final Color effectiveTextColor = _getTextColor(effectiveBackgroundColor: effectiveBackgroundColor);
+    final Color effectiveTextColor =
+        _getElementColor(effectiveBackgroundColor: effectiveBackgroundColor, elementColor: widget.textColor);
 
     final TextStyle effectiveTitleTextStyle = _getTextStyle(context: context);
 
@@ -238,74 +248,75 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
     return Visibility(
       visible: _isVisible,
-      child: FadeTransition(
-        opacity: _curvedAnimation!,
-        child: Semantics(
-          label: widget.semanticLabel,
-          child: Container(
-            padding: effectivePadding,
-            constraints: BoxConstraints(minHeight: effectiveMinimumHeight),
-            decoration: ShapeDecoration(
-              color: effectiveBackgroundColor,
-              shape: SmoothRectangleBorder(
-                side: BorderSide(
-                  color: effectiveBorderColor,
-                  width: widget.showBorder ? effectiveBorderWidth : 0,
-                  style: widget.showBorder ? BorderStyle.solid : BorderStyle.none,
-                ),
-                borderRadius: effectiveBorderRadius.smoothBorderRadius,
-              ),
-            ),
-            child: DefaultTextStyle(
-              style: TextStyle(color: effectiveTextColor),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      if (widget.leading != null)
-                        IconTheme(
-                          data: IconThemeData(
-                            color: effectiveLeadingColor,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.only(end: effectiveHorizontalGap),
-                            child: widget.leading,
-                          ),
-                        ),
-                      DefaultTextStyle.merge(
-                        style: effectiveTitleTextStyle,
-                        child: Expanded(
-                          child: widget.title,
-                        ),
-                      ),
-                      if (widget.trailing != null)
-                        IconTheme(
-                          data: IconThemeData(
-                            color: effectiveTrailingColor,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.only(start: effectiveHorizontalGap),
-                            child: widget.trailing,
-                          ),
-                        ),
-                    ],
+      child: Semantics(
+        label: widget.semanticLabel,
+        child: RepaintBoundary(
+          child: FadeTransition(
+            opacity: _curvedAnimation!,
+            child: Container(
+              padding: effectivePadding,
+              constraints: BoxConstraints(minHeight: effectiveMinimumHeight),
+              decoration: ShapeDecoration(
+                color: effectiveBackgroundColor,
+                shape: SmoothRectangleBorder(
+                  side: BorderSide(
+                    color: effectiveBorderColor,
+                    width: widget.showBorder ? effectiveBorderWidth : 0,
+                    style: widget.showBorder ? BorderStyle.solid : BorderStyle.none,
                   ),
-                  if (widget.body != null)
+                  borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                ),
+              ),
+              child: AnimatedDefaultTextStyle(
+                duration: effectiveTransitionDuration,
+                style: TextStyle(color: effectiveTextColor),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     Row(
                       children: [
-                        DefaultTextStyle.merge(
-                          style: effectiveBodyTextStyle,
-                          child: Expanded(
+                        if (widget.leading != null)
+                          AnimatedIconTheme(
+                            duration: effectiveTransitionDuration,
+                            color: effectiveLeadingColor,
                             child: Padding(
-                              padding: EdgeInsetsDirectional.only(top: effectiveVerticalGap),
-                              child: widget.body,
+                              padding: EdgeInsetsDirectional.only(end: effectiveHorizontalGap),
+                              child: widget.leading,
                             ),
                           ),
+                        DefaultTextStyle.merge(
+                          style: effectiveTitleTextStyle,
+                          child: Expanded(
+                            child: widget.title,
+                          ),
                         ),
+                        if (widget.trailing != null)
+                          AnimatedIconTheme(
+                            duration: effectiveTransitionDuration,
+                            color: effectiveTrailingColor,
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.only(start: effectiveHorizontalGap),
+                              child: widget.trailing,
+                            ),
+                          ),
                       ],
                     ),
-                ],
+                    if (widget.body != null)
+                      Row(
+                        children: [
+                          DefaultTextStyle.merge(
+                            style: effectiveBodyTextStyle,
+                            child: Expanded(
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.only(top: effectiveVerticalGap),
+                                child: widget.body,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

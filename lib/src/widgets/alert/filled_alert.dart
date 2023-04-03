@@ -34,7 +34,6 @@ class MoonFilledAlert extends StatelessWidget {
   /// See also:
   ///
   ///   * [MoonOutlinedAlert], MDS outlined button.
-
   const MoonFilledAlert({
     super.key,
     this.show = false,

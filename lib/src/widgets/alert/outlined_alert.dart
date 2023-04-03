@@ -39,7 +39,6 @@ class MoonOutlinedAlert extends StatelessWidget {
   /// See also:
   ///
   ///   * [MoonFilledAlert], MDS filled button.
-
   const MoonOutlinedAlert({
     super.key,
     this.show = false,
@@ -55,7 +54,8 @@ class MoonOutlinedAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTextColor = color ?? context.moonTheme?.alertTheme.colors.textColor ?? MoonColors.light.bulma;
+    final effectiveElementColor =
+        color ?? context.moonTheme?.alertTheme.colors.outlinedVariantColor ?? MoonColors.light.bulma;
 
     final effectiveTrailing = MoonButton.icon(
       onTap: onTrailingTap,
@@ -65,7 +65,7 @@ class MoonOutlinedAlert extends StatelessWidget {
       disabledOpacityValue: 1,
       icon: Icon(
         MoonIconsControls.close_small24,
-        color: color,
+        color: effectiveElementColor,
         size: 24,
       ),
       gap: 0,
@@ -83,9 +83,8 @@ class MoonOutlinedAlert extends StatelessWidget {
       body: body,
       backgroundColor: Colors.transparent,
       borderColor: color,
-      leadingColor: color,
-      textColor: effectiveTextColor,
-      trailingColor: color,
+      leadingColor: effectiveElementColor,
+      textColor: effectiveElementColor,
     );
   }
 }
