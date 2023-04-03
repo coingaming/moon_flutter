@@ -1,6 +1,7 @@
 library moon_design;
 
 export 'package:moon_design/src/theme/accordion/accordion_theme.dart';
+export 'package:moon_design/src/theme/alert/alert_theme.dart';
 export 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 export 'package:moon_design/src/theme/borders.dart';
 export 'package:moon_design/src/theme/button/button_theme.dart';
@@ -30,6 +31,9 @@ export 'package:moon_design/src/utils/measure_size.dart';
 export 'package:moon_design/src/utils/widget_surveyor.dart';
 
 export 'package:moon_design/src/widgets/accordion/accordion_item.dart';
+export 'package:moon_design/src/widgets/alert/alert.dart';
+export 'package:moon_design/src/widgets/alert/filled_alert.dart';
+export 'package:moon_design/src/widgets/alert/outlined_alert.dart';
 export 'package:moon_design/src/widgets/avatar/avatar.dart';
 export 'package:moon_design/src/widgets/buttons/button.dart';
 export 'package:moon_design/src/widgets/buttons/filled_button.dart';

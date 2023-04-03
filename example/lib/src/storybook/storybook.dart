@@ -1,5 +1,6 @@
 import 'package:example/src/storybook/common/widgets/version.dart';
 import 'package:example/src/storybook/stories/accordion.dart';
+import 'package:example/src/storybook/stories/alert.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/button.dart';
 import 'package:example/src/storybook/stories/checkbox.dart';
@@ -70,6 +71,7 @@ class StorybookPage extends StatelessWidget {
           ),
           stories: [
             AccordionStory(),
+            AlertStory(),
             AvatarStory(),
             ButtonStory(),
             CheckboxStory(),

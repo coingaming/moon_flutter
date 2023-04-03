@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
+import 'package:moon_design/src/theme/alert/alert_theme.dart';
 import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button/button_theme.dart';
@@ -28,6 +29,7 @@ import 'package:moon_design/src/theme/typography/typography.dart';
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
     accordionTheme: MoonAccordionTheme.light,
+    alertTheme: MoonAlertTheme.light,
     avatarTheme: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.light,
@@ -53,6 +55,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   static final dark = MoonTheme(
     accordionTheme: MoonAccordionTheme.dark,
+    alertTheme: MoonAlertTheme.dark,
     avatarTheme: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.dark,
@@ -78,6 +81,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   /// Moon Design System MoonAccordion widget theming.
   final MoonAccordionTheme accordionTheme;
+
+  /// Moon Design System MoonAlert widget theming.
+  final MoonAlertTheme alertTheme;
 
   /// Moon Design System MoonAvatar widget theming.
   final MoonAvatarTheme avatarTheme;
@@ -144,6 +150,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   const MoonTheme({
     required this.accordionTheme,
+    required this.alertTheme,
     required this.avatarTheme,
     required this.borders,
     required this.buttonTheme,
@@ -170,6 +177,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   @override
   MoonTheme copyWith({
     MoonAccordionTheme? accordionTheme,
+    MoonAlertTheme? alertTheme,
     MoonAvatarTheme? avatarTheme,
     MoonBorders? borders,
     MoonButtonTheme? buttonTheme,
@@ -194,6 +202,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   }) {
     return MoonTheme(
       accordionTheme: accordionTheme ?? this.accordionTheme,
+      alertTheme: alertTheme ?? this.alertTheme,
       avatarTheme: avatarTheme ?? this.avatarTheme,
       borders: borders ?? this.borders,
       buttonTheme: buttonTheme ?? this.buttonTheme,
@@ -224,6 +233,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
     return MoonTheme(
       accordionTheme: accordionTheme.lerp(other.accordionTheme, t),
+      alertTheme: alertTheme.lerp(other.alertTheme, t),
       avatarTheme: avatarTheme.lerp(other.avatarTheme, t),
       borders: borders.lerp(other.borders, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
@@ -254,6 +264,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty("type", "MoonTheme"))
       ..add(DiagnosticsProperty<MoonAccordionTheme>("MoonAccordionTheme", accordionTheme))
+      ..add(DiagnosticsProperty<MoonAlertTheme>("MoonAlertTheme", alertTheme))
       ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
