@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/coingaming/moon_flutter/compare/v0.15.6...v0.16.0) (2023-04-03)
+
+
+### Features
+
+* [MDS-463] Create Alert widget ([#97](https://github.com/coingaming/moon_flutter/issues/97)) ([a491dc7](https://github.com/coingaming/moon_flutter/commit/a491dc735b1717b2e4099c0a53f8b7c9c81a33b7))
+
 ## [0.15.6](https://github.com/coingaming/moon_flutter/compare/v0.15.5...v0.15.6) (2023-03-30)
 
 
