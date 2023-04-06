@@ -20,60 +20,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   fonts:
-    - family: MoonIconsArrows
+    - family: MoonIcons
       fonts:
-        - asset: fonts/MoonIconsArrows.ttf
-    - family: MoonIconsCharts
-      fonts:
-        - asset: fonts/MoonIconsCharts.ttf
-    - family: MoonIconsChat
-      fonts:
-        - asset: fonts/MoonIconsChat.ttf
-    - family: MoonIconsControls
-      fonts:
-        - asset: fonts/MoonIconsControls.ttf
-    - family: MoonIconsDevices
-      fonts:
-        - asset: fonts/MoonIconsDevices.ttf
-    - family: MoonIconsFiles
-      fonts:
-        - asset: fonts/MoonIconsFiles.ttf
-    - family: MoonIconsGeneric
-      fonts:
-        - asset: fonts/MoonIconsGeneric.ttf
-    - family: MoonIconsMail
-      fonts:
-        - asset: fonts/MoonIconsMail.ttf
-    - family: MoonIconsMaps
-      fonts:
-        - asset: fonts/MoonIconsMaps.ttf
-    - family: MoonIconsMedia
-      fonts:
-        - asset: fonts/MoonIconsMedia.ttf
-    - family: MoonIconsNotifications
-      fonts:
-        - asset: fonts/MoonIconsNotifications.ttf
-    - family: MoonIconsOther
-      fonts:
-        - asset: fonts/MoonIconsOther.ttf
-    - family: MoonIconsSecurity
-      fonts:
-        - asset: fonts/MoonIconsSecurity.ttf
-    - family: MoonIconsShop
-      fonts:
-        - asset: fonts/MoonIconsShop.ttf
-    - family: MoonIconsSoftware
-      fonts:
-        - asset: fonts/MoonIconsSoftware.ttf
-    - family: MoonIconsSports
-      fonts:
-        - asset: fonts/MoonIconsSports.ttf
-    - family: MoonIconsTextEdit
-      fonts:
-        - asset: fonts/MoonIconsTextEdit.ttf
-    - family: MoonIconsTime
-      fonts:
-        - asset: fonts/MoonIconsTime.ttf
-    - family: MoonIconsTravel
-      fonts:
-        - asset: fonts/MoonIconsTravel.ttf
+        - asset: fonts/MoonIcons.ttf

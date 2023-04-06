@@ -72,8 +72,7 @@ class ChipStory extends Story {
               description: "Switch between LTR and RTL modes.",
             );
 
-            final resolvedIconVariant =
-                chipSizesKnob == MoonChipSize.md ? MoonIconsOther.frame24 : MoonIconsOther.frame16;
+            final resolvedIconVariant = chipSizesKnob == MoonChipSize.md ? MoonIcons.frame_24 : MoonIcons.frame_16;
 
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,

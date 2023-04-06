@@ -119,14 +119,14 @@ class AlertStory extends Story {
                                   ),
                                 ),
                                 borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                                leading: showLeadingKnob ? const Icon(MoonIconsOther.frame24) : null,
+                                leading: showLeadingKnob ? const Icon(MoonIcons.frame_24) : null,
                                 trailing: showTrailingKnob
                                     ? MoonButton.icon(
                                         buttonSize: MoonButtonSize.xs,
                                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                                         disabledOpacityValue: 1,
                                         icon: Icon(
-                                          MoonIconsControls.close_small24,
+                                          MoonIcons.close_small_24,
                                           color: trailingColor,
                                           size: 24,
                                         ),
@@ -173,7 +173,7 @@ class AlertStory extends Story {
                         show: true,
                         title: const Text("Filled error Alert"),
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                        leading: showLeadingKnob ? const Icon(MoonIconsNotifications.alert24) : null,
+                        leading: showLeadingKnob ? const Icon(MoonIcons.alert_24) : null,
                         color: context.moonColors!.chiChi100,
                         body: showBodyKnob
                             ? const SizedBox(
@@ -191,7 +191,7 @@ class AlertStory extends Story {
                         show: true,
                         title: const Text("Filled warning Alert"),
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                        leading: showLeadingKnob ? const Icon(MoonIconsGeneric.alarm24) : null,
+                        leading: showLeadingKnob ? const Icon(MoonIcons.alarm_round_24) : null,
                         color: context.moonColors!.krillin100,
                         body: showBodyKnob
                             ? const SizedBox(
@@ -211,7 +211,7 @@ class AlertStory extends Story {
                         show: true,
                         title: const Text("Outlined success Alert"),
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                        leading: showLeadingKnob ? const Icon(MoonIconsGeneric.check_rounded24) : null,
+                        leading: showLeadingKnob ? const Icon(MoonIcons.check_rounded_24) : null,
                         color: context.moonColors!.roshi100,
                         body: showBodyKnob
                             ? const SizedBox(
@@ -229,7 +229,7 @@ class AlertStory extends Story {
                         show: true,
                         title: const Text('Outlined info Alert'),
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                        leading: showLeadingKnob ? const Icon(MoonIconsNotifications.alert24) : null,
+                        leading: showLeadingKnob ? const Icon(MoonIcons.alert_24) : null,
                         color: context.moonColors!.whis100,
                         body: showBodyKnob
                             ? const SizedBox(

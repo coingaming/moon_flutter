@@ -143,7 +143,7 @@ class TooltipStory extends Story {
                       tooltipMessage: customLabelTextKnob,
                       borderRadius: BorderRadius.circular(20),
                       backgroundColor: context.moonColors!.hit,
-                      leading: const Icon(MoonIconsOther.frame24),
+                      leading: const Icon(MoonIcons.frame_24),
                       label: const Text("MoonChip"),
                     ),
                     const SizedBox(height: 64),
