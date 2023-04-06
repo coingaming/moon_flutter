@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class SnackBarStory extends Story {
-  SnackBarStory()
+class ToastStory extends Story {
+  ToastStory()
       : super(
-          name: "Snackbar",
+          name: "Toast",
           builder: (context) {
             final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Snackbar background.",
+              description: "MoonColors variants for Toast background.",
               initial: 40, // null
               options: colorOptions,
             );
@@ -19,7 +19,7 @@ class SnackBarStory extends Story {
 
             final barrierColorsKnob = context.knobs.options(
               label: "barrierColor",
-              description: "MoonColors variants for Snackbar barrier.",
+              description: "MoonColors variants for Toast barrier.",
               initial: 40, // null
               options: colorOptions,
             );
@@ -30,7 +30,7 @@ class SnackBarStory extends Story {
               max: 20,
               initial: 8,
               label: "borderRadius",
-              description: "Border radius for Snackbar.",
+              description: "Border radius for Toast.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -38,13 +38,13 @@ class SnackBarStory extends Story {
               description: "Switch between LTR and RTL modes.",
             );
 
-            /* Future<void> SnackbarBuilder(BuildContext context) {
-              return showMoonSnackbar<void>(
+            /* Future<void> ToastBuilder(BuildContext context) {
+              return showMoonToast<void>(
                 context: context,
                 useRootNavigator: false,
                 barrierColor: barrierColor,
                 builder: (_) {
-                  return MoonSnackbar(
+                  return MoonToast(
                     backgroundColor: backgroundColor,
                     borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                     child: Directionality(
@@ -58,7 +58,7 @@ class SnackBarStory extends Story {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
                               child: Text(
-                                "Snackbar title",
+                                "Toast title",
                                 style: context.moonTypography!.heading.text18,
                               ),
                             ),
@@ -69,7 +69,7 @@ class SnackBarStory extends Story {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
                               child: Text(
-                                "Reopen the Snackbar to view the updated knob value.",
+                                "Reopen the Toast to view the updated knob value.",
                                 style: context.moonTypography!.body.text14,
                               ),
                             ),
@@ -101,11 +101,9 @@ class SnackBarStory extends Story {
                       builder: (context) {
                         return MoonFilledButton(
                             label: const Text("Tap me"),
-                            onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                                  MoonSnackbar(
-                                    content: Text("Hello"),
-                                  ),
-                                ));
+                            onTap: () {MoonToast().show()
+                              showFlash(context: context, builder: (context, controller) => Text("YOOOO"));
+                            });
                       },
                     ),
                     const SizedBox(height: 64),

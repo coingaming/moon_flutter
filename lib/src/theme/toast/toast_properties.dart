@@ -1,3 +1,4 @@
+
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -7,8 +8,8 @@ import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 
 @immutable
-class MoonSnackbarProperties extends ThemeExtension<MoonSnackbarProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonSnackbarProperties(
+class MoonToastProperties extends ThemeExtension<MoonToastProperties> with DiagnosticableTreeMixin {
+  static final properties = MoonToastProperties(
     borderRadius: MoonBorders.borders.surfaceSm,
     contentPadding: EdgeInsets.all(MoonSizes.sizes.x2s),
     gap: MoonSizes.sizes.x2s,
@@ -17,25 +18,25 @@ class MoonSnackbarProperties extends ThemeExtension<MoonSnackbarProperties> with
     transitionCurve: Curves.easeInOutCubic,
   );
 
-  /// Snackbar border radius.
+  /// Toast border radius.
   final BorderRadius borderRadius;
 
-  /// Padding around snackbar content.
+  /// Padding around toast content.
   final EdgeInsets contentPadding;
 
-  /// Space between snackbar children.
+  /// Space between toast children.
   final double gap;
 
-  /// Snackbar display duration.
+  /// Toast display duration.
   final Duration displayDuration;
 
-  /// Snackbar transition duration.
+  /// Toast transition duration.
   final Duration transitionDuration;
 
-  /// Snackbar transition curve.
+  /// Toast transition curve.
   final Curve transitionCurve;
 
-  const MoonSnackbarProperties({
+  const MoonToastProperties({
     required this.borderRadius,
     required this.contentPadding,
     required this.gap,
@@ -45,7 +46,7 @@ class MoonSnackbarProperties extends ThemeExtension<MoonSnackbarProperties> with
   });
 
   @override
-  MoonSnackbarProperties copyWith({
+  MoonToastProperties copyWith({
     BorderRadius? borderRadius,
     EdgeInsets? contentPadding,
     double? gap,
@@ -53,7 +54,7 @@ class MoonSnackbarProperties extends ThemeExtension<MoonSnackbarProperties> with
     Duration? transitionDuration,
     Curve? transitionCurve,
   }) {
-    return MoonSnackbarProperties(
+    return MoonToastProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       contentPadding: contentPadding ?? this.contentPadding,
       gap: gap ?? this.gap,
@@ -64,10 +65,10 @@ class MoonSnackbarProperties extends ThemeExtension<MoonSnackbarProperties> with
   }
 
   @override
-  MoonSnackbarProperties lerp(ThemeExtension<MoonSnackbarProperties>? other, double t) {
-    if (other is! MoonSnackbarProperties) return this;
+  MoonToastProperties lerp(ThemeExtension<MoonToastProperties>? other, double t) {
+    if (other is! MoonToastProperties) return this;
 
-    return MoonSnackbarProperties(
+    return MoonToastProperties(
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       contentPadding: EdgeInsets.lerp(contentPadding, other.contentPadding, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
@@ -81,7 +82,7 @@ class MoonSnackbarProperties extends ThemeExtension<MoonSnackbarProperties> with
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonSnackbarProperties"))
+      ..add(DiagnosticsProperty("type", "MoonToastProperties"))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<EdgeInsets>("contentPadding", contentPadding))
       ..add(DoubleProperty("gap", gap))

@@ -261,11 +261,11 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   }
 
   void _handleTap(TapDownDetails details) {
-    final RenderBox? tooltipRenderBox = _popoverKey.currentContext?.findRenderObject() as RenderBox?;
+    final RenderBox? popoverRenderBox = _popoverKey.currentContext?.findRenderObject() as RenderBox?;
     final RenderBox? overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
-    final popoverPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
+    final popoverPosition = popoverRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
 
-    if (popoverPosition != null && !tooltipRenderBox!.size.contains(details.localPosition - popoverPosition)) {
+    if (popoverPosition != null && !popoverRenderBox!.size.contains(details.localPosition - popoverPosition)) {
       _removePopover();
     }
   }

@@ -19,7 +19,7 @@ import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_t
 import 'package:moon_design/src/theme/radio/radio_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/snackbar/snackbar_theme.dart';
+import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
@@ -46,7 +46,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     radioTheme: MoonRadioTheme.light,
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
-    snackbarTheme: MoonSnackbarTheme.light,
+    toastTheme: MoonToastTheme.light,
     switchTheme: MoonSwitchTheme.light,
     tagTheme: MoonTagTheme.light,
     tooltipTheme: MoonTooltipTheme.light,
@@ -72,7 +72,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     radioTheme: MoonRadioTheme.dark,
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
-    snackbarTheme: MoonSnackbarTheme.dark,
+    toastTheme: MoonToastTheme.dark,
     switchTheme: MoonSwitchTheme.dark,
     tagTheme: MoonTagTheme.dark,
     tooltipTheme: MoonTooltipTheme.dark,
@@ -133,8 +133,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System sizes.
   final MoonSizes sizes;
 
-  /// Moon Design System MoonSnackbar widget theming.
-  final MoonSnackbarTheme snackbarTheme;
+  /// Moon Design System MoonToast widget theming.
+  final MoonToastTheme toastTheme;
 
   /// Moon Design System MoonSwitch widget theming.
   final MoonSwitchTheme switchTheme;
@@ -167,7 +167,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.radioTheme,
     required this.shadows,
     required this.sizes,
-    required this.snackbarTheme,
+    required this.toastTheme,
     required this.switchTheme,
     required this.tagTheme,
     required this.tooltipTheme,
@@ -194,7 +194,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonRadioTheme? radioTheme,
     MoonShadows? shadows,
     MoonSizes? sizes,
-    MoonSnackbarTheme? snackbarTheme,
+    MoonToastTheme? toastTheme,
     MoonSwitchTheme? switchTheme,
     MoonTagTheme? tagTheme,
     MoonTooltipTheme? tooltipTheme,
@@ -219,7 +219,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       radioTheme: radioTheme ?? this.radioTheme,
       shadows: shadows ?? this.shadows,
       sizes: sizes ?? this.sizes,
-      snackbarTheme: snackbarTheme ?? this.snackbarTheme,
+      toastTheme: toastTheme ?? this.toastTheme,
       switchTheme: switchTheme ?? this.switchTheme,
       tagTheme: tagTheme ?? this.tagTheme,
       tooltipTheme: tooltipTheme ?? this.tooltipTheme,
@@ -250,7 +250,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       radioTheme: radioTheme.lerp(other.radioTheme, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
-      snackbarTheme: snackbarTheme.lerp(other.snackbarTheme, t),
+      toastTheme: toastTheme.lerp(other.toastTheme, t),
       switchTheme: switchTheme.lerp(other.switchTheme, t),
       tagTheme: tagTheme.lerp(other.tagTheme, t),
       tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
@@ -281,7 +281,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonRadioTheme>("MoonRadioTheme", radioTheme))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
-      ..add(DiagnosticsProperty<MoonSnackbarTheme>("MoonSnackbarTheme", snackbarTheme))
+      ..add(DiagnosticsProperty<MoonToastTheme>("MoonToastTheme", toastTheme))
       ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
       ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme))

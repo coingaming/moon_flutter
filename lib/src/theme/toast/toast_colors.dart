@@ -4,44 +4,44 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 
 @immutable
-class MoonSnackbarColors extends ThemeExtension<MoonSnackbarColors> with DiagnosticableTreeMixin {
-  static final light = MoonSnackbarColors(
+class MoonToastColors extends ThemeExtension<MoonToastColors> with DiagnosticableTreeMixin {
+  static final light = MoonToastColors(
     lightVariantBackgroundColor: MoonColors.light.gohan,
     darkVariantBackgroundColor: MoonColors.dark.gohan,
   );
 
-  static final dark = MoonSnackbarColors(
+  static final dark = MoonToastColors(
     lightVariantBackgroundColor: MoonColors.dark.gohan,
     darkVariantBackgroundColor: MoonColors.light.gohan,
   );
 
-  /// Snackbar light varian background color.
+  /// Toast light varian background color.
   final Color lightVariantBackgroundColor;
 
-  /// Snackbar dark variant background color.
+  /// Toast dark variant background color.
   final Color darkVariantBackgroundColor;
 
-  const MoonSnackbarColors({
+  const MoonToastColors({
     required this.lightVariantBackgroundColor,
     required this.darkVariantBackgroundColor,
   });
 
   @override
-  MoonSnackbarColors copyWith({
+  MoonToastColors copyWith({
     Color? lightVariantBackgroundColor,
     Color? darkVariantBackgroundColor,
   }) {
-    return MoonSnackbarColors(
+    return MoonToastColors(
       lightVariantBackgroundColor: lightVariantBackgroundColor ?? this.lightVariantBackgroundColor,
       darkVariantBackgroundColor: darkVariantBackgroundColor ?? this.darkVariantBackgroundColor,
     );
   }
 
   @override
-  MoonSnackbarColors lerp(ThemeExtension<MoonSnackbarColors>? other, double t) {
-    if (other is! MoonSnackbarColors) return this;
+  MoonToastColors lerp(ThemeExtension<MoonToastColors>? other, double t) {
+    if (other is! MoonToastColors) return this;
 
-    return MoonSnackbarColors(
+    return MoonToastColors(
       lightVariantBackgroundColor: Color.lerp(lightVariantBackgroundColor, other.lightVariantBackgroundColor, t)!,
       darkVariantBackgroundColor: Color.lerp(darkVariantBackgroundColor, other.darkVariantBackgroundColor, t)!,
     );
@@ -51,7 +51,7 @@ class MoonSnackbarColors extends ThemeExtension<MoonSnackbarColors> with Diagnos
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonSnackbarColors"))
+      ..add(DiagnosticsProperty("type", "MoonToastColors"))
       ..add(ColorProperty("lightVariantBackgroundColor", lightVariantBackgroundColor))
       ..add(ColorProperty("darkVariantBackgroundColor", darkVariantBackgroundColor));
   }
