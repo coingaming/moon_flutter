@@ -100,10 +100,11 @@ class ToastStory extends Story {
                     Builder(
                       builder: (context) {
                         return MoonFilledButton(
-                            label: const Text("Tap me"),
-                            onTap: () {MoonToast().show()
-                              showFlash(context: context, builder: (context, controller) => Text("YOOOO"));
-                            });
+                          label: const Text("Tap me"),
+                          onTap: () {
+                            showMoonToast(context: context, toast: MoonToast(label: Text("YOOOO")));
+                          },
+                        );
                       },
                     ),
                     const SizedBox(height: 64),
