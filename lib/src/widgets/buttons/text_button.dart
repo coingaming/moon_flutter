@@ -66,7 +66,6 @@ class MoonTextButton extends StatelessWidget {
   ///
   ///   * [MoonFilledButton], MDS filled button.
   ///   * [MoonOutlinedButton], MDS outlined button.
-
   const MoonTextButton({
     super.key,
     this.onTap,
