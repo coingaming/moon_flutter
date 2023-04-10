@@ -78,13 +78,13 @@ class MoonToast {
     /// Toast transition curve (show animation).
     Curve? transitionCurve,
 
-    /// The widget in the leading slot of the alert.
+    /// The widget in the leading slot of the toast.
     Widget? leading,
 
-    /// The widget in the title slot of the alert.
+    /// The widget in the title slot of the toast.
     required Widget title,
 
-    /// The widget in the trailing slot of the alert.
+    /// The widget in the trailing slot of the toast.
     Widget? trailing,
   }) {
     Color getElementColor({required Color effectiveBackgroundColor}) {
