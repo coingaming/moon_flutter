@@ -31,7 +31,7 @@ class IconsStory extends Story {
 
 class _IconsGridWithTitle extends StatelessWidget {
   final String title;
-  final List<Icon> iconsList;
+  final List<IconData> iconsList;
   final List<String> iconsNameList;
 
   const _IconsGridWithTitle({
@@ -57,7 +57,15 @@ class _IconsGridWithTitle extends StatelessWidget {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                iconsList[index],
+                if (iconsNameList[index].contains("16"))
+                  Icon(iconsList[index], size: 16)
+                else if (iconsNameList[index].contains("24"))
+                  Icon(
+                    iconsList[index],
+                    size: 24,
+                  )
+                else
+                  Icon(iconsList[index], size: 32),
                 const SizedBox(height: 20),
                 Text(
                   iconsNameList[index],
