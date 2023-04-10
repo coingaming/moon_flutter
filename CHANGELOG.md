@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.1](https://github.com/coingaming/moon_flutter/compare/v0.16.0...v0.16.1) (2023-04-10)
+
+
+### Bug Fixes
+
+* [MDS-488] Recreate icon font due to glyphs being slightly off-center ([#104](https://github.com/coingaming/moon_flutter/issues/104)) ([01e5bf2](https://github.com/coingaming/moon_flutter/commit/01e5bf206d7f762d673a5fdf5930bca6f72e8f1d))
+
 ## [0.16.0](https://github.com/coingaming/moon_flutter/compare/v0.15.6...v0.16.0) (2023-04-03)
 
 
