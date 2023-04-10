@@ -57,7 +57,7 @@ class MoonFilledAlert extends StatelessWidget {
       borderRadius: borderRadius,
       disabledOpacityValue: 1,
       icon: Icon(
-        MoonIconsControls.close_small24,
+        MoonIcons.close_small_24,
         color: color,
         size: 24,
       ),

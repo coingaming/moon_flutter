@@ -365,7 +365,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
       data: IconThemeData(color: _iconColorAnimation?.value),
       child: RotationTransition(
         turns: _halfTween.animate(_curvedAnimation!),
-        child: Icon(MoonIconsControls.chevron_down_small16, size: iconSize),
+        child: Icon(MoonIcons.chevron_down_small_16, size: iconSize),
       ),
     );
   }
