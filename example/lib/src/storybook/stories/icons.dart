@@ -56,14 +56,12 @@ class _IconsGridWithTitle extends StatelessWidget {
           itemBuilder: (context, index) {
             return Column(
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (iconsNameList[index].contains("16"))
                   Icon(iconsList[index], size: 16)
                 else if (iconsNameList[index].contains("24"))
-                  Icon(
-                    iconsList[index],
-                    size: 24,
-                  )
+                  Icon(iconsList[index], size: 24)
                 else
                   Icon(iconsList[index], size: 32),
                 const SizedBox(height: 20),
