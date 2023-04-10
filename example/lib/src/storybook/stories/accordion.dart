@@ -86,7 +86,7 @@ class AccordionStory extends Story {
                         shadows: showShadowKnob == true ? null : [],
                         childrenPadding: const EdgeInsets.all(12),
                         onExpansionChanged: (value) => setState(() => currentlyOpenAccordionItem = value),
-                        leading: const Icon(MoonIconsOther.frame24),
+                        leading: const Icon(MoonIcons.frame_24),
                         title: const Text("Grouped accordion item #1"),
                         children: const [
                           Text(
@@ -107,7 +107,7 @@ class AccordionStory extends Story {
                         shadows: showShadowKnob == true ? null : [],
                         childrenPadding: const EdgeInsets.all(12),
                         onExpansionChanged: (value) => setState(() => currentlyOpenAccordionItem = value),
-                        leading: const Icon(MoonIconsOther.frame24),
+                        leading: const Icon(MoonIcons.frame_24),
                         title: const Text("Grouped accordion item #2"),
                         children: const [
                           Text(

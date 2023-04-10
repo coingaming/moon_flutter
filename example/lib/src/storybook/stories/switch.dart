@@ -89,11 +89,11 @@ class SwitchStory extends Story {
                       builder: (context, setState) {
                         return MoonSwitch(
                           activeThumbWidget: const Icon(
-                            MoonIconsGeneric.check_alternative16,
+                            MoonIcons.check_alternative_16,
                             size: 14,
                           ),
                           inactiveThumbWidget: const Icon(
-                            MoonIconsControls.close16,
+                            MoonIcons.close_16,
                             size: 12,
                           ),
                           activeTrackWidget: Text(
@@ -116,11 +116,11 @@ class SwitchStory extends Story {
                       builder: (context, setState) {
                         return MoonSwitch(
                           activeTrackWidget: const Icon(
-                            MoonIconsGeneric.check_alternative16,
+                            MoonIcons.check_alternative_16,
                             size: 14,
                           ),
                           inactiveTrackWidget: const Icon(
-                            MoonIconsControls.close16,
+                            MoonIcons.close_16,
                             size: 12,
                           ),
                           value: value,
