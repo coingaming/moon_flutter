@@ -6,7 +6,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 class ToastStory extends Story {
   ToastStory()
       : super(
-          name: "Moon",
+          name: "Toast",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "Custom label text",
