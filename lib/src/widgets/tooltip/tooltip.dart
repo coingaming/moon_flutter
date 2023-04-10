@@ -22,7 +22,7 @@ enum MoonTooltipPosition {
 
 class MoonTooltip extends StatefulWidget {
   // This is required so only one tooltip is shown at a time.
-  static final List<MoonTooltipState> _openedTooltips = [];
+  static final List<_MoonTooltipState> _openedTooltips = [];
 
   /// Sets a handler for listening to a `tap` event on the tooltip.
   final VoidCallback? onTap;
@@ -135,11 +135,11 @@ class MoonTooltip extends StatefulWidget {
   });
 
   // Causes any current tooltips to be removed. Won't remove the supplied tooltip.
-  static void _removeOtherTooltips(MoonTooltipState current) {
+  static void _removeOtherTooltips(_MoonTooltipState current) {
     if (_openedTooltips.isNotEmpty) {
       // Avoid concurrent modification.
-      final List<MoonTooltipState> openedTooltips = _openedTooltips.toList();
-      for (final MoonTooltipState state in openedTooltips) {
+      final List<_MoonTooltipState> openedTooltips = _openedTooltips.toList();
+      for (final _MoonTooltipState state in openedTooltips) {
         if (state == current) {
           continue;
         }
@@ -149,10 +149,10 @@ class MoonTooltip extends StatefulWidget {
   }
 
   @override
-  MoonTooltipState createState() => MoonTooltipState();
+  _MoonTooltipState createState() => _MoonTooltipState();
 }
 
-class MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerProviderStateMixin {
+class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerProviderStateMixin {
   final GlobalKey _tooltipKey = GlobalKey();
   final LayerLink _layerLink = LayerLink();
 

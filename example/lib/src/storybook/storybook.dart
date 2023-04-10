@@ -15,6 +15,7 @@ import 'package:example/src/storybook/stories/popover.dart';
 import 'package:example/src/storybook/stories/radio.dart';
 import 'package:example/src/storybook/stories/switch.dart';
 import 'package:example/src/storybook/stories/tag.dart';
+import 'package:example/src/storybook/stories/toast.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
@@ -86,6 +87,7 @@ class StorybookPage extends StatelessWidget {
             RadioStory(),
             SwitchStory(),
             TagStory(),
+            ToastStory(),
             TooltipStory(),
           ],
         ),
