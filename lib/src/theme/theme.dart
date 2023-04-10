@@ -20,9 +20,9 @@ import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_t
 import 'package:moon_design/src/theme/radio/radio_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
+import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 

@@ -8,6 +8,20 @@ class ToastStory extends Story {
       : super(
           name: "Toast",
           builder: (context) {
+            final customLabelTextKnob = context.knobs.text(
+              label: "Custom label text",
+              initial: "This is a custom toast text",
+            );
+
+            final toastPositionKnob = context.knobs.options(
+              label: "MoonToastPosition",
+              description: "The position of the toast.",
+              initial: MoonToastPosition.bottom,
+              options: const [
+                Option(label: "top", value: MoonToastPosition.top),
+                Option(label: "bottom", value: MoonToastPosition.bottom),
+              ],
+            );
             final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for Toast background.",
@@ -17,14 +31,13 @@ class ToastStory extends Story {
 
             final backgroundColor = colorTable(context)[backgroundColorsKnob];
 
-            final barrierColorsKnob = context.knobs.options(
-              label: "barrierColor",
-              description: "MoonColors variants for Toast barrier.",
-              initial: 40, // null
-              options: colorOptions,
+            final displayDurationKnob = context.knobs.sliderInt(
+              min: 1,
+              max: 10,
+              initial: 5,
+              label: "displayDuration",
+              description: "The duration to show the toast.",
             );
-
-            final barrierColor = colorTable(context)[barrierColorsKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 20,
@@ -38,58 +51,6 @@ class ToastStory extends Story {
               description: "Switch between LTR and RTL modes.",
             );
 
-            /* Future<void> ToastBuilder(BuildContext context) {
-              return showMoonToast<void>(
-                context: context,
-                useRootNavigator: false,
-                barrierColor: barrierColor,
-                builder: (_) {
-                  return MoonToast(
-                    backgroundColor: backgroundColor,
-                    borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                    child: Directionality(
-                      textDirection: Directionality.of(context),
-                      child: SizedBox(
-                        width: 300,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
-                              child: Text(
-                                "Toast title",
-                                style: context.moonTypography!.heading.text18,
-                              ),
-                            ),
-                            Container(
-                              height: 1,
-                              color: context.moonColors!.trunks,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
-                              child: Text(
-                                "Reopen the Toast to view the updated knob value.",
-                                style: context.moonTypography!.body.text14,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
-                              child: MoonFilledButton(
-                                label: const Text("Okay"),
-                                isFullWidth: true,
-                                onTap: () => Navigator.of(context).pop(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            } */
-
             return Directionality(
               textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
               child: Center(
@@ -102,7 +63,16 @@ class ToastStory extends Story {
                         return MoonFilledButton(
                           label: const Text("Tap me"),
                           onTap: () {
-                            showMoonToast(context: context, toast: MoonToast(label: Text("YOOOO")));
+                            MoonToast().show(
+                              context,
+                              position: toastPositionKnob,
+                              backgroundColor: backgroundColor,
+                              displayDuration: Duration(seconds: displayDurationKnob),
+                              borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                              leading: const Icon(MoonIconsGeneric.info24),
+                              title: Text(customLabelTextKnob),
+                              trailing: const Icon(MoonIconsControls.close_small24),
+                            );
                           },
                         );
                       },

@@ -1,5 +1,3 @@
-// ignore_for_file: annotate_overrides, overridden_fields
-
 import 'dart:async';
 
 import 'package:figma_squircle/figma_squircle.dart';
@@ -11,157 +9,238 @@ import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
-/// MoonToastPosition
-/// Used to define the position of the Toast on the screen
 enum MoonToastPosition {
   top,
   bottom,
-  center,
-  left,
-  topRight,
-  bottomLeft,
-  bottomRight,
-  centerLeft,
-  centerRight,
-  snackbar,
-  none
 }
 
-class MoonToast extends StatefulWidget {
-  static final List<_MoonToastState> _toastQueue = [];
+class MoonToast {
+  static const double _toastTravelDistance = 64.0;
+  static const Duration _timeBetweenToasts = Duration(milliseconds: 200);
+  static final MoonToast _singleton = MoonToast._internal();
 
-  final Widget label;
+  final _toastQueue = <_ToastEntry>[];
 
-  final Color? backgroundColor;
+  Timer? _timer;
+  OverlayEntry? _entry;
 
-  final BorderRadius? borderRadius;
-
-  final EdgeInsets? padding;
-
-  final double? gap;
-
-  final List<BoxShadow>? toastShadows;
-
-  final Duration? transitionDuration;
-
-  final Curve? transitionCurve;
-
-  const MoonToast({
-    super.key,
-    required this.label,
-    this.backgroundColor,
-    this.borderRadius,
-    this.padding,
-    this.gap,
-    this.toastShadows,
-    this.transitionDuration,
-    this.transitionCurve,
-  });
-
-  @override
-  State<MoonToast> createState() => _MoonToastState();
-}
-
-class _MoonToastState extends State<MoonToast> {
-  bool _isVisible = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isVisible = true;
+  /// MDS toast.
+  factory MoonToast() {
+    return _singleton;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final Color effectiveBackgroundColor = widget.backgroundColor ??
-        context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ??
-        MoonColors.light.gohan;
+  MoonToast._internal();
+
+  /// Shows a toast.
+  void show(
+    BuildContext context, {
+    /// The position of the toast.
+    MoonToastPosition position = MoonToastPosition.bottom,
+
+    /// The background color of the toast.
+    Color? backgroundColor,
+
+    /// The border radius of the toast.
+    BorderRadius? borderRadius,
+
+    /// Whether the toast is persistent (attaches to root navigator).
+    bool isPersistent = true,
+
+    /// The margin around toast.
+    EdgeInsets? margin,
+
+    ///The padding around toast children.
+    EdgeInsets? padding,
+
+    /// The horizontal space between toast children.
+    double? gap,
+
+    /// Toast shadows.
+    List<BoxShadow>? toastShadows,
+
+    /// Toast display duration.
+    Duration? displayDuration,
+
+    /// Toast transition duration (show animation).
+    Duration? transitionDuration,
+
+    /// Toast transition curve (show animation).
+    Curve? transitionCurve,
+
+    /// The widget in the leading slot of the alert.
+    Widget? leading,
+
+    /// The widget in the title slot of the alert.
+    required Widget title,
+
+    /// The widget in the trailing slot of the alert.
+    Widget? trailing,
+  }) {
+    Color getElementColor({required Color effectiveBackgroundColor}) {
+      final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
+
+      if (backgroundLuminance > 0.5) {
+        return MoonColors.light.bulma;
+      } else {
+        return MoonColors.dark.bulma;
+      }
+    }
+
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveElementColor = getElementColor(effectiveBackgroundColor: effectiveBackgroundColor);
 
     final BorderRadius effectiveBorderRadius =
-        widget.borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
+        borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
-    final EdgeInsets effectiveContentPadding = widget.padding ??
-        context.moonTheme?.toastTheme.properties.contentPadding ??
-        EdgeInsets.all(MoonSizes.sizes.x2s);
+    final EdgeInsets effectiveContentPadding =
+        padding ?? context.moonTheme?.toastTheme.properties.contentPadding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
-    final double effectiveGap = widget.gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
+    final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
 
     final List<BoxShadow> effectiveToastShadows =
-        widget.toastShadows ?? context.moonTheme?.toastTheme.shadows.toastShadows ?? MoonShadows.light.lg;
+        toastShadows ?? context.moonTheme?.toastTheme.shadows.toastShadows ?? MoonShadows.light.lg;
 
-    final Duration effectiveTransitionDuration = widget.transitionDuration ??
+    final Duration effectiveDisplayDuration = displayDuration ??
+        context.moonTheme?.toastTheme.properties.displayDuration ??
+        const Duration(milliseconds: 5000);
+
+    final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.toastTheme.properties.transitionDuration ??
         const Duration(milliseconds: 200);
 
     final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.toastTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+        transitionCurve ?? context.moonTheme?.toastTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
-    return TweenAnimationBuilder(
-      duration: effectiveTransitionDuration,
-      curve: effectiveTransitionCurve,
-      tween: Tween(begin: 0.0, end: _isVisible ? 1.0 : 0.0),
-      builder: (context, progress, child) {
-        return Align(
-          alignment: Alignment.bottomCenter,
-          child: Transform(
-            transform: Matrix4.translationValues(0, (1 - progress) * 100, 0),
-            child: Opacity(
-              opacity: progress,
-              child: child,
+    final CapturedThemes themes = InheritedTheme.capture(
+      from: context,
+      to: Navigator.of(context, rootNavigator: isPersistent).context,
+    );
+
+    final OverlayEntry entry = OverlayEntry(
+      builder: (_) {
+        return TweenAnimationBuilder(
+          duration: effectiveTransitionDuration,
+          curve: effectiveTransitionCurve,
+          tween: Tween(begin: 0.0, end: 1.0),
+          builder: (context, progress, child) {
+            return Align(
+              alignment: position == MoonToastPosition.bottom ? Alignment.bottomCenter : Alignment.topCenter,
+              child: Transform(
+                transform: Matrix4.translationValues(
+                  0,
+                  position == MoonToastPosition.bottom
+                      ? ((1 - progress) * _toastTravelDistance)
+                      : (-_toastTravelDistance + progress * _toastTravelDistance),
+                  0,
+                ),
+                child: Opacity(
+                  opacity: progress,
+                  child: child,
+                ),
+              ),
+            );
+          },
+          child: themes.wrap(
+            AnimatedIconTheme(
+              duration: effectiveTransitionDuration,
+              color: effectiveElementColor,
+              child: AnimatedDefaultTextStyle(
+                duration: effectiveTransitionDuration,
+                style: DefaultTextStyle.of(context).style.copyWith(color: effectiveElementColor),
+                child: Container(
+                  margin: margin ?? effectiveContentPadding,
+                  padding: effectiveContentPadding,
+                  decoration: ShapeDecoration(
+                    color: effectiveBackgroundColor,
+                    shadows: effectiveToastShadows,
+                    shape: SmoothRectangleBorder(
+                      borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    textDirection: Directionality.of(context),
+                    children: [
+                      if (leading != null) ...[
+                        leading,
+                        SizedBox(width: effectiveGap),
+                      ],
+                      title,
+                      if (trailing != null) ...[
+                        SizedBox(width: effectiveGap),
+                        trailing,
+                      ],
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         );
       },
-      child: Container(
-        margin: EdgeInsets.only(bottom: 16),
-        padding: effectiveContentPadding,
-        decoration: ShapeDecoration(
-          color: effectiveBackgroundColor,
-          shadows: effectiveToastShadows,
-          shape: SmoothRectangleBorder(
-            borderRadius: effectiveBorderRadius.smoothBorderRadius,
-          ),
-        ),
-        child: widget.label,
-      ),
     );
+
+    final toastEntry = _ToastEntry(
+      buildContext: context,
+      overlayEntry: entry,
+    );
+
+    _toastQueue.add(toastEntry);
+
+    if (_timer == null) _showToastOverlay(duration: effectiveDisplayDuration);
+  }
+
+  void _showToastOverlay({
+    required Duration duration,
+    bool isPersistent = false,
+  }) {
+    if (_toastQueue.isEmpty) {
+      _entry = null;
+      return;
+    }
+
+    final toastEntry = _toastQueue.removeAt(0);
+
+    _entry = toastEntry.overlayEntry;
+    _timer = Timer(duration, () => _removeToastOverlay(duration: duration));
+
+    Future.delayed(_timeBetweenToasts, () {
+      OverlayState? overlay;
+
+      if (isPersistent) {
+        overlay = Navigator.of(
+          toastEntry.buildContext,
+          rootNavigator: true,
+        ).overlay;
+      } else {
+        overlay = Overlay.of(toastEntry.buildContext);
+      }
+
+      overlay?.insert(_entry!);
+    });
+  }
+
+  void _removeToastOverlay({required Duration duration}) {
+    _timer?.cancel();
+    _timer = null;
+
+    _entry?.remove();
+    _entry = null;
+
+    _showToastOverlay(duration: duration);
   }
 }
 
-void showMoonToast({
-  required BuildContext context,
-  required MoonToast toast,
-  Duration transitionDuration = const Duration(milliseconds: 200),
-  Duration displayDuration = const Duration(seconds: 1),
-  bool isPersistent = false,
-}) {
-  final CapturedThemes themes = InheritedTheme.capture(
-    from: context,
-    to: Navigator.of(
-      context,
-      rootNavigator: isPersistent,
-    ).context,
-  );
+class _ToastEntry {
+  final BuildContext buildContext;
+  final OverlayEntry overlayEntry;
 
-  OverlayState? overlay;
-
-  if (isPersistent) {
-    overlay = Navigator.of(
-      context,
-      rootNavigator: true,
-    ).overlay;
-  } else {
-    overlay = Overlay.of(context);
-  }
-
-  final OverlayEntry entry = OverlayEntry(
-    builder: (context) {
-      return themes.wrap(toast);
-    },
-  );
-
-  overlay?.insert(entry);
-
-  Timer(displayDuration, () => entry.remove());
+  _ToastEntry({
+    required this.buildContext,
+    required this.overlayEntry,
+  });
 }
