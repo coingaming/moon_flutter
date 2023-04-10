@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.0](https://github.com/coingaming/moon_flutter/compare/v0.16.1...v0.17.0) (2023-04-10)
+
+
+### Features
+
+* [MDS-447] Create Toast component ([#103](https://github.com/coingaming/moon_flutter/issues/103)) ([191fc13](https://github.com/coingaming/moon_flutter/commit/191fc1374c5624ecd4ac7eff5e719c3313a58636))
+
 ## [0.16.1](https://github.com/coingaming/moon_flutter/compare/v0.16.0...v0.16.1) (2023-04-10)
 
 
