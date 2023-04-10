@@ -15,7 +15,7 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
     darkVariantBackgroundColor: MoonColors.light.gohan,
   );
 
-  /// Toast light varian background color.
+  /// Toast light variant background color.
   final Color lightVariantBackgroundColor;
 
   /// Toast dark variant background color.

@@ -6,16 +6,16 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 class ToastStory extends Story {
   ToastStory()
       : super(
-          name: "Toast",
+          name: "Moon",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "Custom label text",
-              initial: "This is a custom toast text",
+              initial: "This is a custom MoonToast text",
             );
 
             final toastPositionKnob = context.knobs.options(
               label: "MoonToastPosition",
-              description: "The position of the toast.",
+              description: "The position of the MoonToast.",
               initial: MoonToastPosition.bottom,
               options: const [
                 Option(label: "top", value: MoonToastPosition.top),
@@ -25,7 +25,7 @@ class ToastStory extends Story {
 
             final toastVariantKnob = context.knobs.options(
               label: "MoonToastVariant",
-              description: "The color variant of the toast.",
+              description: "The color variant of the MoonToast.",
               initial: MoonToastVariant.original,
               options: const [
                 Option(label: "original", value: MoonToastVariant.original),
@@ -35,7 +35,7 @@ class ToastStory extends Story {
 
             final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Toast background.",
+              description: "MoonColors variants for MoonToast background.",
               initial: 40, // null
               options: colorOptions,
             );
@@ -47,14 +47,14 @@ class ToastStory extends Story {
               max: 10,
               initial: 5,
               label: "displayDuration",
-              description: "The duration to show the toast.",
+              description: "The duration to show the MoonToast.",
             );
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 20,
               initial: 8,
               label: "borderRadius",
-              description: "Border radius for Toast.",
+              description: "Border radius for MoonToast.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
