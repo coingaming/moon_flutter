@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.1](https://github.com/coingaming/moon_flutter/compare/v0.17.0...v0.17.1) (2023-04-10)
+
+
+### Bug Fixes
+
+* [NO-TASK] Resize Icons story icons ([#107](https://github.com/coingaming/moon_flutter/issues/107)) ([acdcc9d](https://github.com/coingaming/moon_flutter/commit/acdcc9d8c491d1d972ea4dd9b0c039b201037eee))
+
 ## [0.17.0](https://github.com/coingaming/moon_flutter/compare/v0.16.1...v0.17.0) (2023-04-10)
 
 
