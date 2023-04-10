@@ -69,9 +69,9 @@ class ToastStory extends Story {
                               backgroundColor: backgroundColor,
                               displayDuration: Duration(seconds: displayDurationKnob),
                               borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                              leading: const Icon(MoonIconsGeneric.info24),
+                              leading: const Icon(MoonIcons.info_24),
                               title: Text(customLabelTextKnob),
-                              trailing: const Icon(MoonIconsControls.close_small24),
+                              trailing: const Icon(MoonIcons.star_24),
                             );
                           },
                         );
