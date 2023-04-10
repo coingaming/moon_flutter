@@ -22,6 +22,17 @@ class ToastStory extends Story {
                 Option(label: "bottom", value: MoonToastPosition.bottom),
               ],
             );
+
+            final toastVariantKnob = context.knobs.options(
+              label: "MoonToastVariant",
+              description: "The color variant of the toast.",
+              initial: MoonToastVariant.original,
+              options: const [
+                Option(label: "original", value: MoonToastVariant.original),
+                Option(label: "inverted", value: MoonToastVariant.inverted),
+              ],
+            );
+
             final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for Toast background.",
@@ -66,6 +77,7 @@ class ToastStory extends Story {
                             MoonToast().show(
                               context,
                               position: toastPositionKnob,
+                              variant: toastVariantKnob,
                               backgroundColor: backgroundColor,
                               displayDuration: Duration(seconds: displayDurationKnob),
                               borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),

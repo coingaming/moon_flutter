@@ -16,6 +16,11 @@ enum MoonToastPosition {
   bottom,
 }
 
+enum MoonToastVariant {
+  original,
+  inverted,
+}
+
 class MoonToast {
   static const double _toastTravelDistance = 64.0;
   static const Duration _timeBetweenToasts = Duration(milliseconds: 200);
@@ -38,6 +43,10 @@ class MoonToast {
     BuildContext context, {
     /// The position of the toast.
     MoonToastPosition position = MoonToastPosition.bottom,
+
+    /// The variant of the toast. Inverted variant flips the color scheme from theming, eg instead of light colors,
+    /// uses dark colors.
+    MoonToastVariant variant = MoonToastVariant.original,
 
     /// The background color of the toast.
     Color? backgroundColor,
@@ -88,8 +97,10 @@ class MoonToast {
       }
     }
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.gohan;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        (variant == MoonToastVariant.original
+            ? (context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.gohan)
+            : (context.moonTheme?.toastTheme.colors.darkVariantBackgroundColor ?? MoonColors.dark.gohan));
 
     final Color effectiveElementColor = getElementColor(effectiveBackgroundColor: effectiveBackgroundColor);
 
