@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.1](https://github.com/coingaming/moon_flutter/compare/v0.18.0...v0.18.1) (2023-04-14)
+
+
+### Bug Fixes
+
+* [MDS-498] Add missing Semantics and semanticLabels ([#135](https://github.com/coingaming/moon_flutter/issues/135)) ([10478f4](https://github.com/coingaming/moon_flutter/commit/10478f4454cd8913c82f1b97c1d1a72d0393e02b))
+
 ## [0.18.0](https://github.com/coingaming/moon_flutter/compare/v0.17.1...v0.18.0) (2023-04-12)
 
 
