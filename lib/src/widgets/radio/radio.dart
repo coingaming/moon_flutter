@@ -69,6 +69,9 @@ class MoonRadio<T> extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
+  /// The semantic label for the radio.
+  final String? semanticLabel;
+
   /// MDS radio widget.
   const MoonRadio({
     super.key,
@@ -81,6 +84,7 @@ class MoonRadio<T> extends StatefulWidget {
     this.inactiveColor,
     this.focusNode,
     this.autofocus = false,
+    this.semanticLabel,
   });
 
   static Widget withLabel<T>(
@@ -219,6 +223,7 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
     });
 
     return Semantics(
+      label: widget.semanticLabel,
       inMutuallyExclusiveGroup: true,
       checked: widget._selected,
       child: TouchTargetPadding(
