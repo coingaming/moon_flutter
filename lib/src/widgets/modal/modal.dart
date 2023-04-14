@@ -7,14 +7,23 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 
 class MoonModal extends StatelessWidget {
+  /// The background color of the modal.
   final Color? backgroundColor;
+
+  /// The border radius of the modal.
   final BorderRadius? borderRadius;
+
+  /// The semantic label for the modal.
+  final String? semanticLabel;
+
+  /// The child of the modal.
   final Widget child;
 
   const MoonModal({
     super.key,
     this.backgroundColor,
     this.borderRadius,
+    this.semanticLabel,
     required this.child,
   });
 
@@ -42,19 +51,22 @@ class MoonModal extends StatelessWidget {
     final BorderRadius effectiveBorderRadius =
         borderRadius ?? context.moonTheme?.modalTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
-    return IconTheme(
-      data: IconThemeData(color: effectiveTextColor),
-      child: DefaultTextStyle(
-        style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
-        child: Center(
-          child: Container(
-            decoration: ShapeDecoration(
-              color: effectiveBackgroundColor,
-              shape: SmoothRectangleBorder(
-                borderRadius: effectiveBorderRadius.smoothBorderRadius,
+    return Semantics(
+      label: semanticLabel,
+      child: IconTheme(
+        data: IconThemeData(color: effectiveTextColor),
+        child: DefaultTextStyle(
+          style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
+          child: Center(
+            child: Container(
+              decoration: ShapeDecoration(
+                color: effectiveBackgroundColor,
+                shape: SmoothRectangleBorder(
+                  borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                ),
               ),
+              child: child,
             ),
-            child: child,
           ),
         ),
       ),

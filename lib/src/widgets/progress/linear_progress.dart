@@ -17,20 +17,23 @@ class MoonLinearProgress extends StatelessWidget {
   /// Size of the linear progress widget.
   final MoonLinearProgressSize? progressSize;
 
-  /// Value of the progress widget.
+  /// Value of the linear progress widget.
   final double value;
 
-  /// Height of the progress widget.
+  /// Height of the linear progress widget.
   final double? height;
 
-  /// Color of the progress widget.
+  /// Color of the linear progress widget.
   final Color? color;
 
-  /// Background color of the progress widget.
+  /// Background color of the linear progress widget.
   final Color? backgroundColor;
 
-  /// Border radius value of the progress widget.
+  /// Border radius value of the linear progress widget.
   final double? borderRadiusValue;
+
+  /// The semantic label for the linear progress widget.
+  final String? semanticLabel;
 
   /// MDS linear progress widget.
   const MoonLinearProgress({
@@ -41,6 +44,7 @@ class MoonLinearProgress extends StatelessWidget {
     this.color,
     this.backgroundColor,
     this.borderRadiusValue,
+    this.semanticLabel,
   });
 
   MoonLinearProgressSizeProperties _getMoonProgressSize(
@@ -75,12 +79,16 @@ class MoonLinearProgress extends StatelessWidget {
     final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveProgressSize.borderRadiusValue;
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 
-    return MoonLinearProgressIndicator(
-      value: value,
-      borderRadiusValue: effectiveBorderRadiusValue,
-      minHeight: effectiveHeight,
-      color: effectiveColor,
-      backgroundColor: effectiveBackgroundColor,
+    return Semantics(
+      label: semanticLabel,
+      value: "${value * 100}%",
+      child: MoonLinearProgressIndicator(
+        value: value,
+        borderRadiusValue: effectiveBorderRadiusValue,
+        minHeight: effectiveHeight,
+        color: effectiveColor,
+        backgroundColor: effectiveBackgroundColor,
+      ),
     );
   }
 }

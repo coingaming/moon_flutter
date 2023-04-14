@@ -74,6 +74,9 @@ class MoonPopover extends StatefulWidget {
   /// `RouteObserver` used to listen for route changes that will hide the popover when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
+  /// The semantic label for the popover.
+  final String? semanticLabel;
+
   /// The widget that its placed inside the popover and functions as its content.
   final Widget content;
 
@@ -100,6 +103,7 @@ class MoonPopover extends StatefulWidget {
     this.transitionCurve,
     this.popoverShadows,
     this.routeObserver,
+    this.semanticLabel,
     required this.content,
     required this.child,
   });
@@ -433,33 +437,36 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       popoverTargetGlobalRight: popoverTargetGlobalRight.dx,
     );
 
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTapDown: _handleTap,
-      child: UnconstrainedBox(
-        child: CompositedTransformFollower(
-          link: _layerLink,
-          showWhenUnlinked: false,
-          offset: popoverPositionParameters.offset,
-          followerAnchor: popoverPositionParameters.followerAnchor,
-          targetAnchor: popoverPositionParameters.targetAnchor,
-          child: RepaintBoundary(
-            child: FadeTransition(
-              opacity: _curvedAnimation!,
-              child: DefaultTextStyle(
-                style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
-                child: Container(
-                  key: _popoverKey,
-                  constraints: BoxConstraints(maxWidth: popoverPositionParameters.toolTipMaxWidth),
-                  padding: effectiveContentPadding,
-                  decoration: ShapeDecoration(
-                    color: effectiveBackgroundColor,
-                    shadows: effectivePopoverShadows,
-                    shape: SmoothRectangleBorder(
-                      borderRadius: effectiveBorderRadius.smoothBorderRadius,
+    return Semantics(
+      label: widget.semanticLabel,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTapDown: _handleTap,
+        child: UnconstrainedBox(
+          child: CompositedTransformFollower(
+            link: _layerLink,
+            showWhenUnlinked: false,
+            offset: popoverPositionParameters.offset,
+            followerAnchor: popoverPositionParameters.followerAnchor,
+            targetAnchor: popoverPositionParameters.targetAnchor,
+            child: RepaintBoundary(
+              child: FadeTransition(
+                opacity: _curvedAnimation!,
+                child: DefaultTextStyle(
+                  style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
+                  child: Container(
+                    key: _popoverKey,
+                    constraints: BoxConstraints(maxWidth: popoverPositionParameters.toolTipMaxWidth),
+                    padding: effectiveContentPadding,
+                    decoration: ShapeDecoration(
+                      color: effectiveBackgroundColor,
+                      shadows: effectivePopoverShadows,
+                      shape: SmoothRectangleBorder(
+                        borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                      ),
                     ),
+                    child: widget.content,
                   ),
-                  child: widget.content,
                 ),
               ),
             ),

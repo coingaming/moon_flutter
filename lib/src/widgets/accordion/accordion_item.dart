@@ -138,6 +138,9 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
+  /// The semantic label for the accordion.
+  final String? semanticLabel;
+
   /// A widget to display before the title.
   ///
   /// Typically a [CircleAvatar] widget.
@@ -191,6 +194,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
     this.transitionCurve,
     this.autofocus = false,
     this.focusNode,
+    this.semanticLabel,
     this.leading,
     required this.title,
     this.trailing,
@@ -438,6 +442,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         _getTextColor(context, effectiveBackgroundColor: resolvedBackgroundColor ?? effectiveBackgroundColor);
 
     return Semantics(
+      label: widget.semanticLabel,
       enabled: _isExpanded,
       focused: _isFocused,
       child: FocusableActionDetector(

@@ -56,6 +56,9 @@ class MoonCheckbox extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
+  /// The semantic label for the checkbox.
+  final String? semanticLabel;
+
   /// MDS checkbox widget.
   const MoonCheckbox({
     super.key,
@@ -69,6 +72,7 @@ class MoonCheckbox extends StatefulWidget {
     this.inactiveColor,
     this.focusNode,
     this.autofocus = false,
+    this.semanticLabel,
   });
 
   static Widget withLabel(
@@ -224,6 +228,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     });
 
     return Semantics(
+      label: widget.semanticLabel,
       checked: widget.value ?? false,
       mixed: widget.tristate ? widget.value == null : null,
       child: TouchTargetPadding(

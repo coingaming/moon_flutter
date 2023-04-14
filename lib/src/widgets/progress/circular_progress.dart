@@ -35,6 +35,9 @@ class MoonCircularProgress extends StatelessWidget {
   /// Stroke cap of the circular progress widget.
   final StrokeCap? strokeCap;
 
+  /// The semantic label for the circular progress widget.
+  final String? semanticLabel;
+
   /// MDS circular progress widget.
   const MoonCircularProgress({
     super.key,
@@ -45,6 +48,7 @@ class MoonCircularProgress extends StatelessWidget {
     this.color,
     this.backgroundColor,
     this.strokeCap,
+    this.semanticLabel,
   });
 
   MoonCircularProgressSizeProperties _getMoonCircularProgressSize(
@@ -82,15 +86,19 @@ class MoonCircularProgress extends StatelessWidget {
     final double effectiveSize = sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
     final double effectiveStrokeWidth = strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
 
-    return SizedBox(
-      height: effectiveSize,
-      width: effectiveSize,
-      child: MoonCircularProgressIndicator(
-        value: value,
-        strokeWidth: effectiveStrokeWidth,
-        color: effectiveColor,
-        backgroundColor: effectiveBackgroundColor,
-        strokeCap: effectiveStrokeCap,
+    return Semantics(
+      label: semanticLabel,
+      value: "${value * 100}%",
+      child: SizedBox(
+        height: effectiveSize,
+        width: effectiveSize,
+        child: MoonCircularProgressIndicator(
+          value: value,
+          strokeWidth: effectiveStrokeWidth,
+          color: effectiveColor,
+          backgroundColor: effectiveBackgroundColor,
+          strokeCap: effectiveStrokeCap,
+        ),
       ),
     );
   }
