@@ -3,54 +3,55 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 
 @immutable
 class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgressSizeProperties>
     with DiagnosticableTreeMixin {
   static final x6s = MoonLinearProgressSizeProperties(
-    borderRadiusValue: MoonSizes.sizes.x6s,
+    borderRadius: MoonBorders.borders.surfaceXs,
     progressHeight: MoonSizes.sizes.x6s,
   );
 
   static final x5s = MoonLinearProgressSizeProperties(
-    borderRadiusValue: MoonSizes.sizes.x5s,
+    borderRadius: MoonBorders.borders.surfaceXs,
     progressHeight: MoonSizes.sizes.x5s,
   );
 
   static final x4s = MoonLinearProgressSizeProperties(
-    borderRadiusValue: MoonSizes.sizes.x4s,
+    borderRadius: MoonBorders.borders.surfaceSm,
     progressHeight: MoonSizes.sizes.x4s,
   );
 
   static final x3s = MoonLinearProgressSizeProperties(
-    borderRadiusValue: MoonSizes.sizes.x3s,
+    borderRadius: MoonBorders.borders.surfaceMd,
     progressHeight: MoonSizes.sizes.x3s,
   );
 
   static final x2s = MoonLinearProgressSizeProperties(
-    borderRadiusValue: MoonSizes.sizes.x2s,
+    borderRadius: MoonBorders.borders.surfaceLg,
     progressHeight: MoonSizes.sizes.x2s,
   );
 
-  /// Linear progress border radius value.
-  final double borderRadiusValue;
+  /// Linear progress border radius.
+  final BorderRadius borderRadius;
 
   /// Linear progress height.
   final double progressHeight;
 
   const MoonLinearProgressSizeProperties({
-    required this.borderRadiusValue,
+    required this.borderRadius,
     required this.progressHeight,
   });
 
   @override
   MoonLinearProgressSizeProperties copyWith({
-    double? borderRadiusValue,
+    BorderRadius? borderRadius,
     double? progressHeight,
   }) {
     return MoonLinearProgressSizeProperties(
-      borderRadiusValue: borderRadiusValue ?? this.borderRadiusValue,
+      borderRadius: borderRadius ?? this.borderRadius,
       progressHeight: progressHeight ?? this.progressHeight,
     );
   }
@@ -60,7 +61,7 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
     if (other is! MoonLinearProgressSizeProperties) return this;
 
     return MoonLinearProgressSizeProperties(
-      borderRadiusValue: lerpDouble(borderRadiusValue, other.borderRadiusValue, t)!,
+      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       progressHeight: lerpDouble(progressHeight, other.progressHeight, t)!,
     );
   }
@@ -70,7 +71,7 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonLinearProgressSizeProperties"))
-      ..add(DoubleProperty("borderRadiusValue", borderRadiusValue))
+      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DoubleProperty("progressHeight", progressHeight));
   }
 }

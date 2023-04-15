@@ -39,9 +39,9 @@ class LinearProgressStory extends Story {
 
             final backgroundColor = colorTable(context)[progressBackgroundColorKnob];
 
-            final borderRadiusValueKnob = context.knobs.sliderInt(
-              label: "bordeRadiusValue",
-              description: "LinearProgress border radius value.",
+            final borderRadiusKnob = context.knobs.sliderInt(
+              label: "borderRadius",
+              description: "LinearProgress border radius.",
               initial: 8,
               max: 12,
             );
@@ -62,7 +62,7 @@ class LinearProgressStory extends Story {
                     progressSize: progressSizesKnob,
                     color: color,
                     backgroundColor: backgroundColor,
-                    borderRadiusValue: borderRadiusValueKnob.toDouble(),
+                    borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                   ),
                   const SizedBox(height: 64),
                 ],

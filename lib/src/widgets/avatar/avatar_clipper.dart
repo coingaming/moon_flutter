@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/rendering.dart';
 
@@ -11,7 +9,7 @@ class AvatarClipper extends CustomClipper<Path> {
   final double height;
   final double badgeSize;
   final double badgeMarginValue;
-  final double borderRadiusValue;
+  final BorderRadius borderRadius;
   final MoonBadgeAlignment badgeAlignment;
   final TextDirection textDirection;
 
@@ -21,7 +19,7 @@ class AvatarClipper extends CustomClipper<Path> {
     required this.height,
     required this.badgeSize,
     required this.badgeMarginValue,
-    required this.borderRadiusValue,
+    required this.borderRadius,
     required this.badgeAlignment,
     required this.textDirection,
   });
@@ -120,19 +118,20 @@ class AvatarClipper extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    final smallestDimension = min(width, height);
-
     final pathWithBadge = Path.combine(
       PathOperation.difference,
       // Avatar shape properties
       Path()
         ..addRRect(
-          RRect.fromLTRBR(
+          RRect.fromLTRBAndCorners(
             0,
             0,
             width,
             height,
-            SmoothRadius(cornerRadius: min(borderRadiusValue, smallestDimension / 2), cornerSmoothing: 1),
+            topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
+            topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
+            bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
+            bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
           ),
         ),
       // Badge shape properties
@@ -141,15 +140,15 @@ class AvatarClipper extends CustomClipper<Path> {
 
     final pathWithoutBadge = Path()
       ..addRRect(
-        RRect.fromLTRBR(
+        RRect.fromLTRBAndCorners(
           0,
           0,
           width,
           height,
-          SmoothRadius(
-            cornerRadius: min(borderRadiusValue, smallestDimension / 2),
-            cornerSmoothing: 1,
-          ),
+          topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
+          topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
+          bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
+          bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
         ),
       );
 
