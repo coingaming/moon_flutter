@@ -113,7 +113,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
       ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
-      ..add(DiagnosticsProperty<TextStyle>("contentTextStyle", bodyTextStyle))
+      ..add(DiagnosticsProperty<TextStyle>("bodyTextStyle", bodyTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("titleTextStyle", titleTextStyle));
   }
 }

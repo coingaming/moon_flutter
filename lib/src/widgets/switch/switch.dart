@@ -62,6 +62,9 @@ class MoonSwitch extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
+  /// The semantic label for the switch.
+  final String? semanticLabel;
+
   /// The widget to display when the switch is on (left slot).
   final Widget? activeTrackWidget;
 
@@ -92,6 +95,7 @@ class MoonSwitch extends StatefulWidget {
     this.duration,
     this.curve,
     this.focusNode,
+    this.semanticLabel,
     this.activeTrackWidget,
     this.inactiveTrackWidget,
     this.activeThumbWidget,
@@ -381,6 +385,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     final Color inactiveTextColor = _getTextOrIconColor(backgroundColor: effectiveInactiveTrackColor);
 
     return Semantics(
+      label: widget.semanticLabel,
       toggled: widget.value,
       child: FocusableActionDetector(
         enabled: _isInteractive,

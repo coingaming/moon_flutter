@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 import 'package:moon_design/src/theme/alert/alert_theme.dart';
+import 'package:moon_design/src/theme/authcode/authcode_theme.dart';
 import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button/button_theme.dart';
@@ -31,6 +31,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final light = MoonTheme(
     accordionTheme: MoonAccordionTheme.light,
     alertTheme: MoonAlertTheme.light,
+    authCodeTheme: MoonAuthCodeTheme.light,
     avatarTheme: MoonAvatarTheme.light,
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.light,
@@ -58,6 +59,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   static final dark = MoonTheme(
     accordionTheme: MoonAccordionTheme.dark,
     alertTheme: MoonAlertTheme.dark,
+    authCodeTheme: MoonAuthCodeTheme.dark,
     avatarTheme: MoonAvatarTheme.dark,
     borders: MoonBorders.borders,
     buttonTheme: MoonButtonTheme.dark,
@@ -87,6 +89,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   /// Moon Design System MoonAlert widget theming.
   final MoonAlertTheme alertTheme;
+
+  /// Moon Design System MoonAuthCode widget theming.
+  final MoonAuthCodeTheme authCodeTheme;
 
   /// Moon Design System MoonAvatar widget theming.
   final MoonAvatarTheme avatarTheme;
@@ -157,6 +162,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   const MoonTheme({
     required this.accordionTheme,
     required this.alertTheme,
+    required this.authCodeTheme,
     required this.avatarTheme,
     required this.borders,
     required this.buttonTheme,
@@ -185,6 +191,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   MoonTheme copyWith({
     MoonAccordionTheme? accordionTheme,
     MoonAlertTheme? alertTheme,
+    MoonAuthCodeTheme? authCodeTheme,
     MoonAvatarTheme? avatarTheme,
     MoonBorders? borders,
     MoonButtonTheme? buttonTheme,
@@ -211,6 +218,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     return MoonTheme(
       accordionTheme: accordionTheme ?? this.accordionTheme,
       alertTheme: alertTheme ?? this.alertTheme,
+      authCodeTheme: authCodeTheme ?? this.authCodeTheme,
       avatarTheme: avatarTheme ?? this.avatarTheme,
       borders: borders ?? this.borders,
       buttonTheme: buttonTheme ?? this.buttonTheme,
@@ -243,6 +251,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     return MoonTheme(
       accordionTheme: accordionTheme.lerp(other.accordionTheme, t),
       alertTheme: alertTheme.lerp(other.alertTheme, t),
+      authCodeTheme: authCodeTheme.lerp(other.authCodeTheme, t),
       avatarTheme: avatarTheme.lerp(other.avatarTheme, t),
       borders: borders.lerp(other.borders, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
@@ -275,6 +284,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty("type", "MoonTheme"))
       ..add(DiagnosticsProperty<MoonAccordionTheme>("MoonAccordionTheme", accordionTheme))
       ..add(DiagnosticsProperty<MoonAlertTheme>("MoonAlertTheme", alertTheme))
+      ..add(DiagnosticsProperty<MoonAuthCodeTheme>("MoonAuthCodeTheme", authCodeTheme))
       ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
@@ -302,11 +312,18 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
+
   MoonBorders? get moonBorders => moonTheme?.borders;
+
   MoonColors? get moonColors => moonTheme?.colors;
+
   MoonEffects? get moonEffects => moonTheme?.effects;
+
   MoonOpacity? get moonOpacity => moonTheme?.opacity;
+
   MoonShadows? get moonShadows => moonTheme?.shadows;
+
   MoonSizes? get moonSizes => moonTheme?.sizes;
+
   MoonTypography? get moonTypography => moonTheme?.typography;
 }

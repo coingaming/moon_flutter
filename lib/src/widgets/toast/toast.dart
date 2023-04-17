@@ -78,6 +78,9 @@ class MoonToast {
     /// Toast transition curve (show animation).
     Curve? transitionCurve,
 
+    /// The semantic label for the toast.
+    String? semanticLabel,
+
     /// The widget in the leading slot of the toast.
     Widget? leading,
 
@@ -156,36 +159,39 @@ class MoonToast {
             );
           },
           child: themes.wrap(
-            AnimatedIconTheme(
-              duration: effectiveTransitionDuration,
-              color: effectiveElementColor,
-              child: AnimatedDefaultTextStyle(
+            Semantics(
+              label: semanticLabel,
+              child: AnimatedIconTheme(
                 duration: effectiveTransitionDuration,
-                style: DefaultTextStyle.of(context).style.copyWith(color: effectiveElementColor),
-                child: Container(
-                  margin: margin ?? effectiveContentPadding,
-                  padding: effectiveContentPadding,
-                  decoration: ShapeDecoration(
-                    color: effectiveBackgroundColor,
-                    shadows: effectiveToastShadows,
-                    shape: SmoothRectangleBorder(
-                      borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                color: effectiveElementColor,
+                child: AnimatedDefaultTextStyle(
+                  duration: effectiveTransitionDuration,
+                  style: DefaultTextStyle.of(context).style.copyWith(color: effectiveElementColor),
+                  child: Container(
+                    margin: margin ?? effectiveContentPadding,
+                    padding: effectiveContentPadding,
+                    decoration: ShapeDecoration(
+                      color: effectiveBackgroundColor,
+                      shadows: effectiveToastShadows,
+                      shape: SmoothRectangleBorder(
+                        borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                      ),
                     ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    textDirection: Directionality.of(context),
-                    children: [
-                      if (leading != null) ...[
-                        leading,
-                        SizedBox(width: effectiveGap),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      textDirection: Directionality.of(context),
+                      children: [
+                        if (leading != null) ...[
+                          leading,
+                          SizedBox(width: effectiveGap),
+                        ],
+                        title,
+                        if (trailing != null) ...[
+                          SizedBox(width: effectiveGap),
+                          trailing,
+                        ],
                       ],
-                      title,
-                      if (trailing != null) ...[
-                        SizedBox(width: effectiveGap),
-                        trailing,
-                      ],
-                    ],
+                    ),
                   ),
                 ),
               ),
