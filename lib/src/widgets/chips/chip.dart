@@ -108,7 +108,7 @@ class MoonChip extends StatelessWidget {
   final Curve? hoverEffectCurve;
 
   /// The padding of the chip.
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The border radius of the chip.
   final BorderRadius? borderRadius;
@@ -205,14 +205,18 @@ class MoonChip extends StatelessWidget {
     final MoonChipSizeProperties effectiveMoonChipSize = _getMoonChipSize(context, chipSize);
 
     final double effectiveHeight = height ?? effectiveMoonChipSize.height;
+
     final double effectiveGap = gap ?? effectiveMoonChipSize.gap;
-    final EdgeInsets effectivePadding = padding ?? effectiveMoonChipSize.padding;
+
+    final EdgeInsetsGeometry effectivePadding = padding ?? effectiveMoonChipSize.padding;
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
-      leading == null && label != null ? effectivePadding.left : 0,
-      effectivePadding.top,
-      trailing == null && label != null ? effectivePadding.right : 0,
-      effectivePadding.bottom,
+      leading == null && label != null ? resolvedDirectionalPadding.left : 0,
+      resolvedDirectionalPadding.top,
+      trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
+      resolvedDirectionalPadding.bottom,
     );
 
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonChipSize.borderRadius;

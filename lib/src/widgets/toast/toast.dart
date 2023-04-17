@@ -58,10 +58,10 @@ class MoonToast {
     bool isPersistent = true,
 
     /// The margin around toast.
-    EdgeInsets? margin,
+    EdgeInsetsGeometry? margin,
 
     ///The padding around toast children.
-    EdgeInsets? padding,
+    EdgeInsetsGeometry? padding,
 
     /// The horizontal space between toast children.
     double? gap,
@@ -107,7 +107,7 @@ class MoonToast {
     final BorderRadius effectiveBorderRadius =
         borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
-    final EdgeInsets effectiveContentPadding =
+    final EdgeInsetsGeometry effectiveContentPadding =
         padding ?? context.moonTheme?.toastTheme.properties.contentPadding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
     final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;

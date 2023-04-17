@@ -83,7 +83,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
   final double? headerHeight;
 
   /// Specifies padding for the accordion header.
-  final EdgeInsets? headerPadding;
+  final EdgeInsetsGeometry? headerPadding;
 
   /// Specifies padding for [children].
   final EdgeInsetsGeometry? childrenPadding;
@@ -102,7 +102,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// To align each child within [children], see [expandedCrossAxisAlignment].
   ///
   /// The width of the column is the width of the widest child widget in [children].
-  final Alignment? expandedAlignment;
+  final AlignmentGeometry? expandedAlignment;
 
   /// Specifies the alignment of each child within [children] when the accordion is expanded.
   ///
@@ -386,7 +386,10 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         _getMoonAccordionItemSize(context, widget.accordionSize);
 
     final double effectiveHeaderHeight = widget.headerHeight ?? effectiveMoonAccordionSize.headerHeight;
-    final EdgeInsets effectiveHeaderPadding = widget.headerPadding ?? effectiveMoonAccordionSize.headerPadding;
+
+    final EdgeInsetsGeometry effectiveHeaderPadding = widget.headerPadding ?? effectiveMoonAccordionSize.headerPadding;
+
+    final EdgeInsets resolvedDirectionalHeaderPadding = effectiveHeaderPadding.resolve(Directionality.of(context));
 
     final List<BoxShadow> effectiveShadows =
         widget.shadows ?? context.moonTheme?.accordionTheme.itemShadows.shadows ?? MoonShadows.light.sm;
@@ -485,7 +488,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                         children: <Widget>[
                           AnimatedContainer(
                             height: effectiveHeaderHeight,
-                            padding: effectiveHeaderPadding,
+                            padding: resolvedDirectionalHeaderPadding,
                             duration: effectiveHoverEffectDuration,
                             curve: effectiveHoverEffectCurve,
                             decoration: widget.hasContentOutside
@@ -503,7 +506,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                               children: [
                                 if (widget.leading != null)
                                   Padding(
-                                    padding: EdgeInsetsDirectional.only(end: effectiveHeaderPadding.left),
+                                    padding: EdgeInsetsDirectional.only(end: resolvedDirectionalHeaderPadding.left),
                                     child: widget.leading,
                                   ),
                                 AnimatedDefaultTextStyle(

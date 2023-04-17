@@ -40,7 +40,7 @@ class MoonTag extends StatelessWidget {
   final Color? textColor;
 
   /// The padding of the tag.
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The border radius of the tag.
   final BorderRadius? borderRadius;
@@ -110,18 +110,22 @@ class MoonTag extends StatelessWidget {
         _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
 
     final MoonTagSizeProperties effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
+
     final double effectiveHeight = height ?? effectiveMoonTagSize.height;
+
     final double effectiveGap = gap ?? effectiveMoonTagSize.gap;
 
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
 
-    final EdgeInsets effectivePadding = padding ?? effectiveMoonTagSize.padding;
+    final EdgeInsetsGeometry effectivePadding = padding ?? effectiveMoonTagSize.padding;
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
-      leading == null && label != null ? effectivePadding.left : 0,
-      effectivePadding.top,
-      trailing == null && label != null ? effectivePadding.right : 0,
-      effectivePadding.bottom,
+      leading == null && label != null ? resolvedDirectionalPadding.left : 0,
+      resolvedDirectionalPadding.top,
+      trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
+      resolvedDirectionalPadding.bottom,
     );
 
     return Semantics(

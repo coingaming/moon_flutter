@@ -44,7 +44,7 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
   final double iconSizeValue;
 
   /// Padding around accordion title and icon.
-  final EdgeInsets headerPadding;
+  final EdgeInsetsGeometry headerPadding;
 
   /// Accordion text style.
   final TextStyle textStyle;
@@ -60,7 +60,7 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
   MoonAccordionItemSizeProperties copyWith({
     double? headerHeight,
     double? iconSizeValue,
-    EdgeInsets? headerPadding,
+    EdgeInsetsGeometry? headerPadding,
     TextStyle? textStyle,
   }) {
     return MoonAccordionItemSizeProperties(
@@ -78,7 +78,7 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     return MoonAccordionItemSizeProperties(
       headerHeight: lerpDouble(headerHeight, other.headerHeight, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
-      headerPadding: EdgeInsets.lerp(headerPadding, other.headerPadding, t)!,
+      headerPadding: EdgeInsetsGeometry.lerp(headerPadding, other.headerPadding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -90,7 +90,7 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
       ..add(DiagnosticsProperty("type", "MoonAccordionItemSizeProperties"))
       ..add(DoubleProperty("headerHeight", headerHeight))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
-      ..add(DiagnosticsProperty<EdgeInsets>("headerPadding", headerPadding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("headerPadding", headerPadding))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

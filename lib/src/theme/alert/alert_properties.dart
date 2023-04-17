@@ -39,7 +39,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
   final Curve transitionCurve;
 
   /// Alert padding.
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Alert body text style.
   final TextStyle bodyTextStyle;
@@ -67,7 +67,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
     double? verticalGap,
     Duration? transitionDuration,
     Curve? transitionCurve,
-    EdgeInsets? padding,
+    EdgeInsetsGeometry? padding,
     TextStyle? bodyTextStyle,
     TextStyle? titleTextStyle,
   }) {
@@ -95,7 +95,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
       verticalGap: lerpDouble(verticalGap, other.verticalGap, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      padding: EdgeInsets.lerp(padding, other.padding, t)!,
+      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       bodyTextStyle: TextStyle.lerp(bodyTextStyle, other.bodyTextStyle, t)!,
       titleTextStyle: TextStyle.lerp(titleTextStyle, other.titleTextStyle, t)!,
     );
@@ -112,7 +112,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
       ..add(DiagnosticsProperty<double>("verticalGap", verticalGap))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
       ..add(DiagnosticsProperty<TextStyle>("bodyTextStyle", bodyTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("titleTextStyle", titleTextStyle));
   }
