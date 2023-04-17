@@ -38,7 +38,7 @@ class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties> 
   final double thumbSizeValue;
 
   /// Switch track padding.
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   const MoonSwitchSizeProperties({
     required this.width,
@@ -52,7 +52,7 @@ class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties> 
     double? width,
     double? height,
     double? thumbSizeValue,
-    EdgeInsets? padding,
+    EdgeInsetsGeometry? padding,
   }) {
     return MoonSwitchSizeProperties(
       width: width ?? this.width,
@@ -70,7 +70,7 @@ class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties> 
       width: lerpDouble(width, other.width, t)!,
       height: lerpDouble(height, other.height, t)!,
       thumbSizeValue: lerpDouble(thumbSizeValue, other.thumbSizeValue, t)!,
-      padding: EdgeInsets.lerp(padding, other.padding, t)!,
+      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
     );
   }
 
@@ -82,6 +82,6 @@ class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties> 
       ..add(DoubleProperty("width", width))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("thumbSizeValue", thumbSizeValue))
-      ..add(DiagnosticsProperty<EdgeInsets>("padding", padding));
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding));
   }
 }

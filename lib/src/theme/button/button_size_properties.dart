@@ -64,7 +64,7 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
   final double iconSizeValue;
 
   /// Padding around button children.
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Button border radius.
   final BorderRadius borderRadius;
@@ -86,7 +86,7 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
     double? height,
     double? gap,
     double? iconSizeValue,
-    EdgeInsets? padding,
+    EdgeInsetsGeometry? padding,
     BorderRadius? borderRadius,
     TextStyle? textStyle,
   }) {
@@ -108,7 +108,7 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
       height: lerpDouble(height, other.height, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
-      padding: EdgeInsets.lerp(padding, other.padding, t)!,
+      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
@@ -122,7 +122,7 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
-      ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }

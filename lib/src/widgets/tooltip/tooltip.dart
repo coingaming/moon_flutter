@@ -53,7 +53,7 @@ class MoonTooltip extends StatefulWidget {
   final double? maxHeight;
 
   /// Padding around the tooltip content.
-  final EdgeInsets? contentPadding;
+  final EdgeInsetsGeometry? contentPadding;
 
   /// The width of the tooltip arrow (tail) at its base.
   final double? arrowBaseWidth;
@@ -407,7 +407,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     final double effectiveArrowTipDistance =
         widget.arrowTipDistance ?? context.moonTheme?.tooltipTheme.properties.arrowTipDistance ?? 8;
 
-    final EdgeInsets effectiveContentPadding =
+    final EdgeInsetsGeometry effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.tooltipTheme.properties.contentPadding ?? const EdgeInsets.all(12);
 
     final BorderRadius effectiveBorderRadius = widget.borderRadius ??

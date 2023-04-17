@@ -93,6 +93,12 @@ class StorybookPage extends StatelessWidget {
             TooltipStory(),
           ],
         ),
+
+        // hack for preloading the unicode character
+        const SizedBox(
+          height: 0,
+          child: Text('﹡'),
+        ),
         const Align(
           alignment: Alignment.bottomCenter,
           child: MoonVersionWidget(),

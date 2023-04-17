@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-final StreamController<ErrorAnimationType> errorController = StreamController<ErrorAnimationType>();
+// Broadcast is used as a hack to overcome Storybook stale state
+final StreamController<ErrorAnimationType> errorStreamController = StreamController<ErrorAnimationType>.broadcast();
 
 class AuthCodeStory extends Story {
   AuthCodeStory()
@@ -156,7 +157,7 @@ class AuthCodeStory extends Story {
                         gap: gapKnob.toDouble(),
                         authFieldShape: shapeKnob,
                         obscureText: obscuringKnob,
-                        obscuringCharacter: '*',
+                        obscuringCharacter: '﹡',
                         peekWhenObscuring: peekWhenObscuringKnob,
                         validator: (String? value) => null,
                         errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
@@ -178,7 +179,7 @@ class AuthCodeStory extends Story {
                         gap: gapKnob.toDouble(),
                         authFieldShape: shapeKnob,
                         obscureText: obscuringKnob,
-                        obscuringCharacter: '*',
+                        obscuringCharacter: '﹡',
                         peekWhenObscuring: peekWhenObscuringKnob,
                         validator: (String? value) => null,
                         errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
@@ -193,7 +194,7 @@ class AuthCodeStory extends Story {
                           authInputFieldCount: 4,
                           mainAxisAlignment: mainAxisAlignmentKnob,
                           borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                          errorStreamController: errorController,
+                          errorStreamController: errorStreamController,
                           selectedFillColor: selectedFillColor,
                           activeFillColor: activeFillColor,
                           inactiveFillColor: inactiveFillColor,
@@ -203,11 +204,11 @@ class AuthCodeStory extends Story {
                           gap: gapKnob.toDouble(),
                           authFieldShape: shapeKnob,
                           obscureText: obscuringKnob,
-                          obscuringCharacter: '*',
+                          obscuringCharacter: '﹡',
                           peekWhenObscuring: peekWhenObscuringKnob,
                           onCompleted: (pin) {
                             if (pin != '9921') {
-                              errorController.add(
+                              errorStreamController.add(
                                 errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
                               );
                             }

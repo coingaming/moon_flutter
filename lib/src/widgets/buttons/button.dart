@@ -137,7 +137,7 @@ class MoonButton extends StatelessWidget {
   final Curve? pulseEffectCurve;
 
   /// The padding of the button.
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The border radius of the button.
   final BorderRadius? borderRadius;
@@ -246,7 +246,7 @@ class MoonButton extends StatelessWidget {
     Curve? hoverEffectCurve,
     Curve? scaleEffectCurve,
     Curve? pulseEffectCurve,
-    EdgeInsets? padding,
+    EdgeInsetsGeometry? padding,
     BorderRadius? borderRadius,
     Widget? icon,
   }) {
@@ -336,14 +336,18 @@ class MoonButton extends StatelessWidget {
     final MoonButtonSizeProperties effectiveMoonButtonSize = _getMoonButtonSize(context, buttonSize);
 
     final double effectiveHeight = height ?? effectiveMoonButtonSize.height;
+
     final double effectiveGap = gap ?? effectiveMoonButtonSize.gap;
-    final EdgeInsets effectivePadding = padding ?? effectiveMoonButtonSize.padding;
+
+    final EdgeInsetsGeometry effectivePadding = padding ?? effectiveMoonButtonSize.padding;
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
 
     final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
-      leading == null && label != null ? effectivePadding.left : 0,
-      effectivePadding.top,
-      trailing == null && label != null ? effectivePadding.right : 0,
-      effectivePadding.bottom,
+      leading == null && label != null ? resolvedDirectionalPadding.left : 0,
+      resolvedDirectionalPadding.top,
+      trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
+      resolvedDirectionalPadding.bottom,
     );
 
     final Color effectiveBorderColor =

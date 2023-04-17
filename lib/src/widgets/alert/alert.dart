@@ -53,7 +53,7 @@ class MoonAlert extends StatefulWidget {
   final Curve? transitionCurve;
 
   /// The padding of the alert.
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The semantic label for the alert.
   final String? semanticLabel;
@@ -190,7 +190,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final EdgeInsets effectivePadding =
+    final EdgeInsetsGeometry effectivePadding =
         widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
     final double effectiveHorizontalGap =

@@ -39,7 +39,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
   final double iconSizeValue;
 
   /// Padding around tag children.
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Tag border radius.
   final BorderRadius borderRadius;
@@ -65,7 +65,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     double? height,
     double? gap,
     double? iconSizeValue,
-    EdgeInsets? padding,
+    EdgeInsetsGeometry? padding,
     BorderRadius? borderRadius,
     TextStyle? textStyle,
     TextStyle? upperCaseTextStyle,
@@ -89,7 +89,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
       height: lerpDouble(height, other.height, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
-      padding: EdgeInsets.lerp(padding, other.padding, t)!,
+      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
       upperCaseTextStyle: TextStyle.lerp(upperCaseTextStyle, other.upperCaseTextStyle, t)!,
@@ -104,7 +104,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
-      ..add(DiagnosticsProperty<EdgeInsets>("padding", padding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
       ..add(DiagnosticsProperty<TextStyle>("upperCaseTextStyle", upperCaseTextStyle));

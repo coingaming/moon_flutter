@@ -199,6 +199,7 @@ class MoonAuthCode extends StatefulWidget {
   /// Overrides the [obscuringCharacter].
   final Widget? obscuringWidget;
 
+  /// MDS authcode widget.
   const MoonAuthCode({
     super.key,
     this.authFieldShape = AuthFieldShape.box,
@@ -284,11 +285,11 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   late TextStyle _effectiveTextStyle;
   late TextStyle _effectiveErrorTextStyle;
 
-  late StreamSubscription<ErrorAnimationType> _errorAnimationSubscription;
   late TextEditingController _textEditingController;
   late AnimationController _cursorController;
   late Animation<double> _cursorAnimation;
 
+  StreamSubscription<ErrorAnimationType>? _errorAnimationSubscription;
   AnimationController? _errorAnimationController;
   Animation<Offset>? _errorOffsetAnimation;
   Duration? _peekDuration;
@@ -387,7 +388,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
           }
           _setState(() => _isInErrorMode = true);
 
-          if(widget.useHapticFeedback) HapticFeedback.vibrate();
+          if (widget.useHapticFeedback) HapticFeedback.vibrate();
         });
       }
     });
@@ -528,7 +529,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     _errorAnimationController!.dispose();
     _cursorController.dispose();
     _focusNode.dispose();
-    _errorAnimationSubscription.cancel();
+    _errorAnimationSubscription?.cancel();
 
     super.dispose();
   }
@@ -791,7 +792,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
                 child: Stack(
                   children: <Widget>[
                     AbsorbPointer(
-                      // child: AutofillGroup(child: textField),
                       child: AutofillGroup(child: _getTextFormField()),
                     ),
                     Positioned(

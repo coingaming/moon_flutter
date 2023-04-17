@@ -20,7 +20,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
   final double distanceToTarget;
 
   /// Padding around popover content.
-  final EdgeInsets contentPadding;
+  final EdgeInsetsGeometry contentPadding;
 
   /// Popover border radius.
   final BorderRadius borderRadius;
@@ -42,7 +42,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
   @override
   MoonPopoverProperties copyWith({
     double? distanceToTarget,
-    EdgeInsets? contentPadding,
+    EdgeInsetsGeometry? contentPadding,
     BorderRadius? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
@@ -62,7 +62,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
 
     return MoonPopoverProperties(
       distanceToTarget: lerpDouble(distanceToTarget, other.distanceToTarget, t)!,
-      contentPadding: EdgeInsets.lerp(contentPadding, other.contentPadding, t)!,
+      contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
@@ -75,7 +75,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
     properties
       ..add(DiagnosticsProperty("type", "MoonPopoverProperties"))
       ..add(DoubleProperty("distanceToTarget", distanceToTarget))
-      ..add(DiagnosticsProperty<EdgeInsets>("contentPadding", contentPadding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
