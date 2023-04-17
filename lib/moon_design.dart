@@ -21,15 +21,18 @@ export 'package:moon_design/src/theme/radio/radio_theme.dart';
 export 'package:moon_design/src/theme/shadows.dart';
 export 'package:moon_design/src/theme/sizes.dart';
 export 'package:moon_design/src/theme/switch/switch_theme.dart';
+export 'package:moon_design/src/theme/textarea/textarea_theme.dart';
 export 'package:moon_design/src/theme/theme.dart';
 export 'package:moon_design/src/theme/toast/toast_theme.dart';
 export 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 export 'package:moon_design/src/theme/typography/text_colors.dart';
 export 'package:moon_design/src/theme/typography/text_styles.dart';
 export 'package:moon_design/src/theme/typography/typography.dart';
+
 export 'package:moon_design/src/utils/extensions.dart';
 export 'package:moon_design/src/utils/measure_size.dart';
 export 'package:moon_design/src/utils/widget_surveyor.dart';
+
 export 'package:moon_design/src/widgets/accordion/accordion_item.dart';
 export 'package:moon_design/src/widgets/alert/alert.dart';
 export 'package:moon_design/src/widgets/alert/filled_alert.dart';
@@ -59,6 +62,6 @@ export 'package:moon_design/src/widgets/progress/linear_progress.dart';
 export 'package:moon_design/src/widgets/radio/radio.dart';
 export 'package:moon_design/src/widgets/switch/switch.dart';
 export 'package:moon_design/src/widgets/tag/tag.dart';
-export 'package:moon_design/src/widgets/text_area/text_area.dart';
+export 'package:moon_design/src/widgets/textarea/textarea.dart';
 export 'package:moon_design/src/widgets/toast/toast.dart';
 export 'package:moon_design/src/widgets/tooltip/tooltip.dart';
