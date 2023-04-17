@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.18.2](https://github.com/coingaming/moon_flutter/compare/v0.18.1...v0.18.2) (2023-04-17)
+
+
+### Bug Fixes
+
+* [MDS-499] Refactor EdgeInsets and Alignment to use Geometry variants ([#138](https://github.com/coingaming/moon_flutter/issues/138)) ([7b88df7](https://github.com/coingaming/moon_flutter/commit/7b88df7f1c6ed55e7959fae234aafbe04b8ed3a7))
+* [MDS-500] Convert borderRadiusValue usage to BorderRadius ([#137](https://github.com/coingaming/moon_flutter/issues/137)) ([755bbb9](https://github.com/coingaming/moon_flutter/commit/755bbb9a154ad038e2b071de736a984d178e600e))
+
 ## [0.18.1](https://github.com/coingaming/moon_flutter/compare/v0.18.0...v0.18.1) (2023-04-14)
 
 
