@@ -10,7 +10,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
     borderRadius: MoonBorders.borders.interactiveSm,
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
-    textStyle: MoonTextStyles.body.text24,
+    textStyle: MoonTextStyles.body.text16,
     errorTextStyle: MoonTextStyles.body.text12,
   );
 
