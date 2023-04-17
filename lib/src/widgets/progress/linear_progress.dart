@@ -30,7 +30,7 @@ class MoonLinearProgress extends StatelessWidget {
   final Color? backgroundColor;
 
   /// Border radius value of the linear progress widget.
-  final double? borderRadiusValue;
+  final BorderRadius? borderRadius;
 
   /// The semantic label for the linear progress widget.
   final String? semanticLabel;
@@ -43,7 +43,7 @@ class MoonLinearProgress extends StatelessWidget {
     this.height,
     this.color,
     this.backgroundColor,
-    this.borderRadiusValue,
+    this.borderRadius,
     this.semanticLabel,
   });
 
@@ -76,7 +76,7 @@ class MoonLinearProgress extends StatelessWidget {
         backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
     final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, progressSize);
-    final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveProgressSize.borderRadiusValue;
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 
     return Semantics(
@@ -84,7 +84,7 @@ class MoonLinearProgress extends StatelessWidget {
       value: "${value * 100}%",
       child: MoonLinearProgressIndicator(
         value: value,
-        borderRadiusValue: effectiveBorderRadiusValue,
+        borderRadius: effectiveBorderRadius,
         minHeight: effectiveHeight,
         color: effectiveColor,
         backgroundColor: effectiveBackgroundColor,
