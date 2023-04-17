@@ -88,7 +88,7 @@ class StorybookPage extends StatelessWidget {
             RadioStory(),
             SwitchStory(),
             TagStory(),
-            TextareaStory(),
+            TextAreaStory(),
             ToastStory(),
             TooltipStory(),
           ],

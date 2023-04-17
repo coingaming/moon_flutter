@@ -59,5 +59,6 @@ export 'package:moon_design/src/widgets/progress/linear_progress.dart';
 export 'package:moon_design/src/widgets/radio/radio.dart';
 export 'package:moon_design/src/widgets/switch/switch.dart';
 export 'package:moon_design/src/widgets/tag/tag.dart';
+export 'package:moon_design/src/widgets/text_area/text_area.dart';
 export 'package:moon_design/src/widgets/toast/toast.dart';
 export 'package:moon_design/src/widgets/tooltip/tooltip.dart';

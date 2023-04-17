@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class TextareaStory extends Story {
-  TextareaStory()
+class TextAreaStory extends Story {
+  TextAreaStory()
       : super(
           name: "Textarea",
           builder: (context) {
@@ -69,19 +69,7 @@ class TextareaStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
-                    SizedBox(
-                      height: 300,
-                      child: TextField(
-                        expands: true,
-                        textAlignVertical: TextAlignVertical.top,
-                        maxLines: null,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your text here',
-                          border: OutlineInputBorder(), // Adds a border around the TextField
-                        ),
-                      ),
-                    ),
+                    MoonTextArea(),
                     const SizedBox(height: 64),
                   ],
                 ),
