@@ -58,12 +58,12 @@ class MoonAccordionItem<T> extends StatefulWidget {
   final Color? dividerColor;
 
   /// The icon color of accordion's expansion arrow icon when the accordion is expanded.
-  final Color? iconColor;
+  final Color? trailingIconColor;
 
   /// The icon color of accordion's expansion arrow icon when the accordion is collapsed.
-  final Color? expandedIconColor;
+  final Color? expandedTrailingIconColor;
 
-  /// The color of the accordion's titles when the accordion is expanded.
+  /// The color of the accordion's title.
   final Color? textColor;
 
   /// Whether to show a border around the accordion.
@@ -176,8 +176,8 @@ class MoonAccordionItem<T> extends StatefulWidget {
     this.backgroundColor,
     this.expandedBackgroundColor,
     this.dividerColor,
-    this.iconColor,
-    this.expandedIconColor,
+    this.trailingIconColor,
+    this.expandedTrailingIconColor,
     this.textColor,
     this.showBorder = false,
     this.showDivider = true,
@@ -354,12 +354,12 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         context.moonTheme?.accordionTheme.itemColors.backgroundColor ??
         MoonColors.light.gohan;
 
-    final Color effectiveIconColor = widget.iconColor ??
-        context.moonTheme?.accordionTheme.itemColors.iconColor ??
+    final Color effectiveIconColor = widget.trailingIconColor ??
+        context.moonTheme?.accordionTheme.itemColors.trailingIconColor ??
         _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
 
-    final Color effectiveExpandedIconColor = widget.expandedIconColor ??
-        context.moonTheme?.accordionTheme.itemColors.expandedIconColor ??
+    final Color effectiveExpandedIconColor = widget.expandedTrailingIconColor ??
+        context.moonTheme?.accordionTheme.itemColors.expandedTrailingIconColor ??
         effectiveIconColor;
 
     _iconColorAnimation =
@@ -438,7 +438,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         ? Color.alphaBlend(effectiveHoverEffectColor, _backgroundColorAnimation!.value!)
         : _backgroundColorAnimation!.value;
 
-    final Color effectiveTextColor =
+    final Color effectiveTextColor = widget.textColor ??
         _getTextColor(context, effectiveBackgroundColor: resolvedBackgroundColor ?? effectiveBackgroundColor);
 
     return Semantics(

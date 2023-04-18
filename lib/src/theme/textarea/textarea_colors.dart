@@ -10,7 +10,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     activeBorderColor: MoonColors.light.piccolo,
     inactiveBorderColor: MoonColors.light.beerus,
     errorBorderColor: MoonColors.light.chiChi100,
-    focusBorderColor: MoonColors.light.piccolo,
     hintTextColor: MoonColors.light.trunks,
   );
 
@@ -19,7 +18,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     activeBorderColor: MoonColors.dark.piccolo,
     inactiveBorderColor: MoonColors.dark.beerus,
     errorBorderColor: MoonColors.dark.chiChi100,
-    focusBorderColor: MoonColors.dark.piccolo,
     hintTextColor: MoonColors.dark.trunks,
   );
 
@@ -35,9 +33,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
   /// TextArea error border color.
   final Color errorBorderColor;
 
-  /// TextArea focused border color.
-  final Color focusBorderColor;
-
   /// TextArea hint text color.
   final Color hintTextColor;
 
@@ -46,7 +41,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     required this.activeBorderColor,
     required this.inactiveBorderColor,
     required this.errorBorderColor,
-    required this.focusBorderColor,
     required this.hintTextColor,
   });
 
@@ -56,7 +50,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? errorBorderColor,
-    Color? focusBorderColor,
     Color? hoverBorderColor,
     Color? hintTextColor,
   }) {
@@ -65,7 +58,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
       errorBorderColor: errorBorderColor ?? this.errorBorderColor,
-      focusBorderColor: focusBorderColor ?? this.focusBorderColor,
       hintTextColor: hintTextColor ?? this.hintTextColor,
     );
   }
@@ -79,7 +71,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
       activeBorderColor: Color.lerp(activeBorderColor, other.activeBorderColor, t)!,
       inactiveBorderColor: Color.lerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
       errorBorderColor: Color.lerp(errorBorderColor, other.errorBorderColor, t)!,
-      focusBorderColor: Color.lerp(focusBorderColor, other.focusBorderColor, t)!,
       hintTextColor: Color.lerp(hintTextColor, other.hintTextColor, t)!,
     );
   }
@@ -93,7 +84,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
       ..add(ColorProperty("errorBorderColor", errorBorderColor))
-      ..add(ColorProperty("focusBorderColor", focusBorderColor))
       ..add(ColorProperty("hintTextColor", hintTextColor));
   }
 }
