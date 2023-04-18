@@ -408,7 +408,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
                       color: effectiveActiveBorderColor,
                       width: 2,
                     ),
-                  ), // Adds a border around the TextField
+                  ),
                 ),
               ),
               if (_errorText != null && widget.errorBuilder != null)
