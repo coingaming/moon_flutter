@@ -93,17 +93,19 @@ class _MoonCircularProgressIndicatorState extends State<MoonCircularProgressIndi
           minWidth: _kMinMoonCircularProgressIndicatorSize,
           minHeight: _kMinMoonCircularProgressIndicatorSize,
         ),
-        child: CustomPaint(
-          painter: MoonCircularProgressIndicatorPainter(
-            backgroundColor: widget.backgroundColor,
-            valueColor: widget.color,
-            value: widget.value, // may be null
-            headValue: headValue, // remaining arguments are ignored if widget.value is not null
-            tailValue: tailValue,
-            offsetValue: offsetValue,
-            rotationValue: rotationValue,
-            strokeWidth: widget.strokeWidth,
-            strokeCap: widget.strokeCap,
+        child: RepaintBoundary(
+          child: CustomPaint(
+            painter: MoonCircularProgressIndicatorPainter(
+              backgroundColor: widget.backgroundColor,
+              valueColor: widget.color,
+              value: widget.value, // may be null
+              headValue: headValue, // remaining arguments are ignored if widget.value is not null
+              tailValue: tailValue,
+              offsetValue: offsetValue,
+              rotationValue: rotationValue,
+              strokeWidth: widget.strokeWidth,
+              strokeCap: widget.strokeCap,
+            ),
           ),
         ),
       ),

@@ -5,13 +5,13 @@ class FocusEffectPainter extends CustomPainter {
   final Color color;
   final Animation<double> animation;
   final double effectExtent;
-  final double borderRadiusValue;
+  final BorderRadius borderRadius;
 
   FocusEffectPainter({
     required this.color,
     required this.animation,
     required this.effectExtent,
-    required this.borderRadiusValue,
+    required this.borderRadius,
   }) : super(repaint: animation);
 
   @override
@@ -25,7 +25,7 @@ class FocusEffectPainter extends CustomPainter {
       final double heightIncrease = newHeight / rect.height;
       final double widthOffset = (widthIncrease - 1) / 2;
       final double heightOffset = (heightIncrease - 1) / 2;
-      final double endBorderRadius = borderRadiusValue > 0 ? borderRadiusValue + (effectExtent / 2) : 0;
+      final double resolvedExtent = borderRadius != BorderRadius.zero ? (effectExtent / 2) : 0;
 
       final Paint paint = Paint()
         ..color = transformedColor
@@ -33,14 +33,17 @@ class FocusEffectPainter extends CustomPainter {
         ..strokeWidth = effectExtent + 1; // +1 for squircle hairline border correction
 
       canvas.drawRRect(
-        RRect.fromRectAndRadius(
+        RRect.fromRectAndCorners(
           Rect.fromLTWH(
             -rect.width * widthOffset,
             -rect.height * heightOffset,
             rect.width * widthIncrease,
             rect.height * heightIncrease,
           ),
-          SmoothRadius(cornerRadius: endBorderRadius, cornerSmoothing: 1),
+          topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x + resolvedExtent, cornerSmoothing: 1),
+          topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x + resolvedExtent, cornerSmoothing: 1),
+          bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x + resolvedExtent, cornerSmoothing: 1),
+          bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x + resolvedExtent, cornerSmoothing: 1),
         ),
         paint,
       );

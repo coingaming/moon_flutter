@@ -18,10 +18,7 @@ enum AuthFieldShape { box, underline, circle }
 
 enum ErrorAnimationType { noAnimation, shake }
 
-typedef MoonAuthCodeBuilder = Widget Function(
-  BuildContext context,
-  String? errorText,
-);
+typedef MoonAuthCodeErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
 class MoonAuthCode extends StatefulWidget {
   /// Shape of auth input field.
@@ -144,7 +141,7 @@ class MoonAuthCode extends StatefulWidget {
   final MainAxisAlignment mainAxisAlignment;
 
   /// Builder for the error widget.
-  final MoonAuthCodeBuilder errorBuilder;
+  final MoonAuthCodeErrorBuilder errorBuilder;
 
   /// Displays a hint or a placeholder in the input field if it's value is empty.
   final String? hintCharacter;
@@ -199,6 +196,7 @@ class MoonAuthCode extends StatefulWidget {
   /// Overrides the [obscuringCharacter].
   final Widget? obscuringWidget;
 
+  /// MDS authcode widget.
   const MoonAuthCode({
     super.key,
     this.authFieldShape = AuthFieldShape.box,
@@ -284,11 +282,11 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   late TextStyle _effectiveTextStyle;
   late TextStyle _effectiveErrorTextStyle;
 
-  late StreamSubscription<ErrorAnimationType> _errorAnimationSubscription;
   late TextEditingController _textEditingController;
   late AnimationController _cursorController;
   late Animation<double> _cursorAnimation;
 
+  StreamSubscription<ErrorAnimationType>? _errorAnimationSubscription;
   AnimationController? _errorAnimationController;
   Animation<Offset>? _errorOffsetAnimation;
   Duration? _peekDuration;
@@ -387,7 +385,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
           }
           _setState(() => _isInErrorMode = true);
 
-          if(widget.useHapticFeedback) HapticFeedback.vibrate();
+          if (widget.useHapticFeedback) HapticFeedback.vibrate();
         });
       }
     });
@@ -528,7 +526,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     _errorAnimationController!.dispose();
     _cursorController.dispose();
     _focusNode.dispose();
-    _errorAnimationSubscription.cancel();
+    _errorAnimationSubscription?.cancel();
 
     super.dispose();
   }
@@ -791,7 +789,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
                 child: Stack(
                   children: <Widget>[
                     AbsorbPointer(
-                      // child: AutofillGroup(child: textField),
                       child: AutofillGroup(child: _getTextFormField()),
                     ),
                     Positioned(

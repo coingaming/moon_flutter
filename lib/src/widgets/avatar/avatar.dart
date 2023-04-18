@@ -4,7 +4,6 @@ import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
-import 'package:moon_design/src/utils/max_border_radius.dart';
 import 'package:moon_design/src/widgets/avatar/avatar_clipper.dart';
 
 enum MoonAvatarSize {
@@ -168,7 +167,6 @@ class MoonAvatar extends StatelessWidget {
     final double effectiveBadgeMarginValue = badgeMarginValue ?? effectiveMoonAvatarSize.badgeMarginValue;
 
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
-    final double avatarBorderRadiusValue = maxBorderRadius(effectiveBorderRadius);
 
     return Semantics(
       label: semanticLabel,
@@ -186,7 +184,7 @@ class MoonAvatar extends StatelessWidget {
                   showBadge: showBadge,
                   width: effectiveAvatarWidth,
                   height: effectiveAvatarHeight,
-                  borderRadiusValue: avatarBorderRadiusValue,
+                  borderRadius: effectiveBorderRadius,
                   badgeSize: effectiveBadgeSize,
                   badgeMarginValue: effectiveBadgeMarginValue,
                   badgeAlignment: badgeAlignment,

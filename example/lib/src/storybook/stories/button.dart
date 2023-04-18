@@ -177,13 +177,16 @@ class ButtonStory extends Story {
                         trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                       ),
                       const SizedBox(height: 40),
-                      const TextDivider(text: "Button with non-standard children"),
+                      const TextDivider(text: "Custom Button with non-standard children"),
                       const SizedBox(height: 32),
                       MoonButton(
                         onTap: showDisabledKnob ? null : () {},
                         height: 40,
                         padding: const EdgeInsets.symmetric(horizontal: 8),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
                         backgroundColor: context.moonTheme!.colors.krillin100,

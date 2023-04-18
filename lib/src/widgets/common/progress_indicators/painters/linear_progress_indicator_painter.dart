@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
@@ -35,7 +36,7 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
   final Color valueColor;
   final double? value;
   final double animationValue;
-  final double borderRadiusValue;
+  final BorderRadius borderRadius;
   final TextDirection textDirection;
 
   const MoonLinearProgressIndicatorPainter({
@@ -43,7 +44,7 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
     required this.valueColor,
     this.value,
     required this.animationValue,
-    required this.borderRadiusValue,
+    required this.borderRadius,
     required this.textDirection,
   });
 
@@ -53,9 +54,12 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
       ..color = backgroundColor
       ..style = PaintingStyle.fill;
 
-    final containerRect = RRect.fromRectAndRadius(
+    final containerRect = RRect.fromRectAndCorners(
       Offset.zero & size,
-      Radius.circular(borderRadiusValue),
+      topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
+      topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
+      bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
+      bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
     );
     canvas.drawRRect(containerRect, paint);
 
@@ -76,9 +80,12 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
           break;
       }
 
-      final progressRect = RRect.fromRectAndRadius(
+      final progressRect = RRect.fromRectAndCorners(
         Offset(left, 0.0) & Size(width, size.height),
-        Radius.circular(borderRadiusValue),
+        topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
+        topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
+        bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
+        bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
       );
 
       canvas.drawRRect(progressRect, paint);
@@ -104,7 +111,7 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
         oldPainter.valueColor != valueColor ||
         oldPainter.value != value ||
         oldPainter.animationValue != animationValue ||
-        oldPainter.borderRadiusValue != borderRadiusValue ||
+        oldPainter.borderRadius != borderRadius ||
         oldPainter.textDirection != textDirection;
   }
 }

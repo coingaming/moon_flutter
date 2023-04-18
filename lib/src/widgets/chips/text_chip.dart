@@ -93,7 +93,7 @@ class MoonTextChip extends StatelessWidget {
   final Curve? hoverEffectCurve;
 
   /// The padding of the chip.
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The border radius of the chip.
   final BorderRadius? borderRadius;

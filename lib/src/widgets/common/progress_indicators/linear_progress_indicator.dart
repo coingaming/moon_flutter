@@ -8,7 +8,7 @@ class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
   final double minHeight;
 
   /// The border radius of the linear progress indicator.
-  final double borderRadiusValue;
+  final BorderRadius borderRadius;
 
   /// Creates a linear progress indicator.
   const MoonLinearProgressIndicator({
@@ -18,7 +18,7 @@ class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
     required super.color,
     super.valueColor,
     this.minHeight = 4,
-    this.borderRadiusValue = 24,
+    this.borderRadius = BorderRadius.zero,
     super.semanticsLabel,
     super.semanticsValue,
   }) : assert(minHeight > 0);
@@ -72,14 +72,16 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
           minWidth: double.infinity,
           minHeight: widget.minHeight,
         ),
-        child: CustomPaint(
-          painter: MoonLinearProgressIndicatorPainter(
-            backgroundColor: widget.backgroundColor,
-            valueColor: widget.color,
-            value: widget.value, // may be null
-            animationValue: animationValue, // ignored if widget.value is not null
-            borderRadiusValue: widget.borderRadiusValue,
-            textDirection: textDirection,
+        child: RepaintBoundary(
+          child: CustomPaint(
+            painter: MoonLinearProgressIndicatorPainter(
+              backgroundColor: widget.backgroundColor,
+              valueColor: widget.color,
+              value: widget.value, // may be null
+              animationValue: animationValue, // ignored if widget.value is not null
+              borderRadius: widget.borderRadius,
+              textDirection: textDirection,
+            ),
           ),
         ),
       ),

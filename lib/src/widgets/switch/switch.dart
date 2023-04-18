@@ -51,7 +51,7 @@ class MoonSwitch extends StatefulWidget {
   final Color? thumbColor;
 
   /// The padding of the switch.
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The duration for the switch animation.
   final Duration? duration;
@@ -130,6 +130,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   bool _isFocused = false;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+
   bool get _isInteractive => widget.onChanged != null;
 
   MoonSwitchSizeProperties _getMoonSwitchSize(BuildContext context, MoonSwitchSize? moonSwitchSize) {
@@ -176,15 +177,13 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   }
 
   void _handleFocus(bool focus) {
-    if (focus != _isFocused && mounted) {
+    if (focus != _isFocused) {
       setState(() => _isFocused = focus);
     }
   }
 
   void _handleFocusChange(bool hasFocus) {
-    setState(() {
-      _isFocused = hasFocus;
-    });
+    setState(() => _isFocused = hasFocus);
   }
 
   void _handleTapDown(TapDownDetails details) {
@@ -284,9 +283,15 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     final MoonSwitchSizeProperties effectiveMoonSwitchSize = _getMoonSwitchSize(context, widget.switchSize);
 
     final double effectiveWidth = widget.width ?? effectiveMoonSwitchSize.width;
+
     final double effectiveHeight = widget.height ?? effectiveMoonSwitchSize.height;
+
     final double effectiveThumbSizeValue = widget.thumbSizeValue ?? effectiveMoonSwitchSize.thumbSizeValue;
-    final EdgeInsets effectivePadding = widget.padding ?? effectiveMoonSwitchSize.padding;
+
+    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonSwitchSize.padding;
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
+
     final BorderRadius effectiveBorderRadius = BorderRadius.circular(effectiveThumbSizeValue / 2);
 
     final Color effectiveActiveTrackColor =
@@ -405,7 +410,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
             details: details,
             switchWidth: effectiveWidth,
             thumbSizeValue: effectiveThumbSizeValue,
-            padding: effectivePadding,
+            padding: resolvedDirectionalPadding,
           ),
           onHorizontalDragEnd: _handleDragEnd,
           child: RepaintBoundary(
@@ -422,7 +427,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                     child: DecoratedBoxTransition(
                       decoration: _trackDecorationAnimation!,
                       child: Padding(
-                        padding: effectivePadding,
+                        padding: resolvedDirectionalPadding,
                         child: Stack(
                           alignment: Alignment.center,
                           children: <Widget>[
@@ -442,7 +447,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                                     ),
                                   ),
                                 ),
-                                SizedBox(width: effectivePadding.left),
+                                SizedBox(width: resolvedDirectionalPadding.left),
                                 IconTheme(
                                   data: IconThemeData(color: inactiveTextColor),
                                   child: AnimatedDefaultTextStyle(

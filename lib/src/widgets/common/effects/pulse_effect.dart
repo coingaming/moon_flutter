@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/utils/max_border_radius.dart';
 import 'package:moon_design/src/widgets/common/effects/painters/pulse_effect_painter.dart';
 
 class MoonPulseEffect extends StatefulWidget {
@@ -92,16 +91,14 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final double pulseEffectEndBorderRadius = maxBorderRadius(widget.childBorderRadius);
-
     // TODO: Review at a later date (when Impeller is stable?) if CurvedAnimation with Interval can be used. Currently
     //interval has a bug where the curve parameters curve.transform(t) internal method causes uneven buggy animation.
 
-    return RepaintBoundary(
-      child: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          return Transform.translate(
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) {
+        return RepaintBoundary(
+          child: Transform.translate(
             offset: Offset(widget.showJiggle ? _jiggleAnimation.value : 0.0, 0.0),
             child: CustomPaint(
               isComplex: true,
@@ -109,15 +106,15 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
               painter: PulseEffectPainter(
                 color: widget.effectColor,
                 effectExtent: widget.effectExtent,
-                borderRadiusValue: pulseEffectEndBorderRadius,
+                borderRadius: widget.childBorderRadius ?? BorderRadius.zero,
                 animation: _pulseAnimation,
               ),
               child: child,
             ),
-          );
-        },
-        child: widget.child,
-      ),
+          ),
+        );
+      },
+      child: widget.child,
     );
   }
 }

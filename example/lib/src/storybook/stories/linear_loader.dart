@@ -39,9 +39,9 @@ class LinearLoaderStory extends Story {
 
             final backgroundColor = colorTable(context)[loaderBackgroundColorKnob];
 
-            final borderRadiusValueKnob = context.knobs.sliderInt(
-              label: "bordeRadiusValue",
-              description: "LinearLoader border radius value.",
+            final borderRadiusKnob = context.knobs.sliderInt(
+              label: "borderRadius",
+              description: "LinearLoader border radius.",
               initial: 8,
               max: 12,
             );
@@ -55,7 +55,7 @@ class LinearLoaderStory extends Story {
                     loaderSize: loaderSizesKnob,
                     color: color,
                     backgroundColor: backgroundColor,
-                    borderRadiusValue: borderRadiusValueKnob.toDouble(),
+                    borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                   ),
                   const SizedBox(height: 64),
                 ],

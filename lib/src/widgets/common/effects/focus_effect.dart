@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/utils/max_border_radius.dart';
 import 'package:moon_design/src/widgets/common/effects/painters/focus_effect_painter.dart';
 
 class MoonFocusEffect extends StatefulWidget {
@@ -43,12 +42,10 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
   void didUpdateWidget(MoonFocusEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (mounted) {
-      if (widget.show) {
-        _animationController.forward();
-      } else {
-        _animationController.reverse();
-      }
+    if (widget.show) {
+      _animationController.forward();
+    } else {
+      _animationController.reverse();
     }
   }
 
@@ -61,25 +58,23 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final double focusEffectBorderRadius = maxBorderRadius(widget.childBorderRadius);
-
-    return RepaintBoundary(
-      child: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          return CustomPaint(
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) {
+        return RepaintBoundary(
+          child: CustomPaint(
             willChange: true,
             painter: FocusEffectPainter(
               color: widget.effectColor,
               effectExtent: widget.effectExtent,
-              borderRadiusValue: focusEffectBorderRadius,
+              borderRadius: widget.childBorderRadius ?? BorderRadius.zero,
               animation: _focusAnimation,
             ),
             child: child,
-          );
-        },
-        child: widget.child,
-      ),
+          ),
+        );
+      },
+      child: widget.child,
     );
   }
 }

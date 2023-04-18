@@ -30,7 +30,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
   final double arrowTipDistance;
 
   /// Padding around tooltip content.
-  final EdgeInsets contentPadding;
+  final EdgeInsetsGeometry contentPadding;
 
   /// Tooltip border radius.
   final BorderRadius borderRadius;
@@ -60,7 +60,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
     double? arrowBaseWidth,
     double? arrowLength,
     double? arrowTipDistance,
-    EdgeInsets? contentPadding,
+    EdgeInsetsGeometry? contentPadding,
     BorderRadius? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
@@ -86,7 +86,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
       arrowBaseWidth: lerpDouble(arrowBaseWidth, other.arrowBaseWidth, t)!,
       arrowLength: lerpDouble(arrowLength, other.arrowLength, t)!,
       arrowTipDistance: lerpDouble(arrowTipDistance, other.arrowTipDistance, t)!,
-      contentPadding: EdgeInsets.lerp(contentPadding, other.contentPadding, t)!,
+      contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
@@ -102,7 +102,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
       ..add(DoubleProperty("arrowBaseWidth", arrowBaseWidth))
       ..add(DoubleProperty("arrowLength", arrowLength))
       ..add(DoubleProperty("arrowTipDistance", arrowTipDistance))
-      ..add(DiagnosticsProperty<EdgeInsets>("contentPadding", contentPadding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))

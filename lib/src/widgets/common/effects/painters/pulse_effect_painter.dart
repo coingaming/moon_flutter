@@ -10,13 +10,13 @@ class PulseEffectPainter extends CustomPainter {
   final Color color;
   final Animation<double> animation;
   final double effectExtent;
-  final double borderRadiusValue;
+  final BorderRadius borderRadius;
 
   PulseEffectPainter({
     required this.color,
     required this.animation,
     required this.effectExtent,
-    required this.borderRadiusValue,
+    required this.borderRadius,
   }) : super(repaint: animation);
 
   double animationRange({
@@ -41,8 +41,15 @@ class PulseEffectPainter extends CustomPainter {
       final double heightIncrease = newHeight / rect.height;
       final double widthOffset = (widthIncrease - 1) / 2;
       final double heightOffset = (heightIncrease - 1) / 2;
-      final double endBorderRadius = borderRadiusValue > 0 ? borderRadiusValue + (effectExtent / 2) : 0;
-      final double borderValueLerp = lerpDouble(borderRadiusValue, endBorderRadius, rangeValue)!;
+      final double resolvedExtent = borderRadius != BorderRadius.zero ? (effectExtent / 2) : 0;
+      final double topLeftLerp =
+          lerpDouble(borderRadius.topLeft.x, borderRadius.topLeft.x + resolvedExtent, rangeValue)!;
+      final double topRightLerp =
+          lerpDouble(borderRadius.topRight.x, borderRadius.topRight.x + resolvedExtent, rangeValue)!;
+      final double bottomLeftLerp =
+          lerpDouble(borderRadius.bottomLeft.x, borderRadius.bottomLeft.x + resolvedExtent, rangeValue)!;
+      final double bottomRightLerp =
+          lerpDouble(borderRadius.bottomRight.x, borderRadius.bottomRight.x + resolvedExtent, rangeValue)!;
 
       final Paint paint = Paint()
         ..color = transformedColor
@@ -50,14 +57,17 @@ class PulseEffectPainter extends CustomPainter {
         ..strokeWidth = rangeValue * effectExtent + 1; // +1 for squircle hairline border correction
 
       canvas.drawRRect(
-        RRect.fromRectAndRadius(
+        RRect.fromRectAndCorners(
           Rect.fromLTWH(
             -rect.width * widthOffset,
             -rect.height * heightOffset,
             rect.width * widthIncrease,
             rect.height * heightIncrease,
           ),
-          SmoothRadius(cornerRadius: borderValueLerp, cornerSmoothing: 1),
+          topLeft: SmoothRadius(cornerRadius: topLeftLerp, cornerSmoothing: 1),
+          topRight: SmoothRadius(cornerRadius: topRightLerp, cornerSmoothing: 1),
+          bottomLeft: SmoothRadius(cornerRadius: bottomLeftLerp, cornerSmoothing: 1),
+          bottomRight: SmoothRadius(cornerRadius: bottomRightLerp, cornerSmoothing: 1),
         ),
         paint,
       );

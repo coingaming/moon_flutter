@@ -42,7 +42,7 @@ class MoonPopover extends StatefulWidget {
   final double? maxHeight;
 
   /// Padding around the popover content.
-  final EdgeInsets? contentPadding;
+  final EdgeInsetsGeometry? contentPadding;
 
   /// The distance from the tip of the popover arrow (tail) to the target widget.
   final double? distanceToTarget;
@@ -370,7 +370,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final double effectiveDistanceToTarget =
         widget.distanceToTarget ?? context.moonTheme?.popoverTheme.properties.distanceToTarget ?? 8;
 
-    final EdgeInsets effectiveContentPadding =
+    final EdgeInsetsGeometry effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.popoverTheme.properties.contentPadding ?? const EdgeInsets.all(12);
 
     final BorderRadius effectiveBorderRadius =

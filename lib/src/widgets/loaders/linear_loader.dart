@@ -26,8 +26,8 @@ class MoonLinearLoader extends StatelessWidget {
   /// Background color of the linear loader widget.
   final Color? backgroundColor;
 
-  /// Border radius value of the linear loader widget.
-  final double? borderRadiusValue;
+  /// Border radius of the linear loader widget.
+  final BorderRadius? borderRadius;
 
   /// MDS linear loader widget.
   const MoonLinearLoader({
@@ -36,7 +36,7 @@ class MoonLinearLoader extends StatelessWidget {
     this.height,
     this.color,
     this.backgroundColor,
-    this.borderRadiusValue,
+    this.borderRadius,
   });
 
   MoonLinearLoaderSizeProperties _getMoonLoaderSize(BuildContext context, MoonLinearLoaderSize? moonLoaderSize) {
@@ -64,11 +64,11 @@ class MoonLinearLoader extends StatelessWidget {
         backgroundColor ?? context.moonTheme?.linearLoaderTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
     final MoonLinearLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
-    final double effectiveBorderRadiusValue = borderRadiusValue ?? effectiveLoaderSize.borderRadiusValue;
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveLoaderSize.borderRadius;
     final double effectiveHeight = height ?? effectiveLoaderSize.loaderHeight;
 
     return MoonLinearProgressIndicator(
-      borderRadiusValue: effectiveBorderRadiusValue,
+      borderRadius: effectiveBorderRadius,
       minHeight: effectiveHeight,
       color: effectiveColor,
       backgroundColor: effectiveBackgroundColor,

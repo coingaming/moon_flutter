@@ -58,10 +58,10 @@ class MoonToast {
     bool isPersistent = true,
 
     /// The margin around toast.
-    EdgeInsets? margin,
+    EdgeInsetsGeometry? margin,
 
     ///The padding around toast children.
-    EdgeInsets? padding,
+    EdgeInsetsGeometry? padding,
 
     /// The horizontal space between toast children.
     double? gap,
@@ -110,7 +110,7 @@ class MoonToast {
     final BorderRadius effectiveBorderRadius =
         borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
-    final EdgeInsets effectiveContentPadding =
+    final EdgeInsetsGeometry effectiveContentPadding =
         padding ?? context.moonTheme?.toastTheme.properties.contentPadding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
     final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
@@ -143,17 +143,19 @@ class MoonToast {
           builder: (context, progress, child) {
             return Align(
               alignment: position == MoonToastPosition.bottom ? Alignment.bottomCenter : Alignment.topCenter,
-              child: Transform(
-                transform: Matrix4.translationValues(
-                  0,
-                  position == MoonToastPosition.bottom
-                      ? ((1 - progress) * _toastTravelDistance)
-                      : (-_toastTravelDistance + progress * _toastTravelDistance),
-                  0,
-                ),
-                child: Opacity(
-                  opacity: progress,
-                  child: child,
+              child: RepaintBoundary(
+                child: Transform(
+                  transform: Matrix4.translationValues(
+                    0,
+                    position == MoonToastPosition.bottom
+                        ? ((1 - progress) * _toastTravelDistance)
+                        : (-_toastTravelDistance + progress * _toastTravelDistance),
+                    0,
+                  ),
+                  child: Opacity(
+                    opacity: progress,
+                    child: child,
+                  ),
                 ),
               ),
             );
