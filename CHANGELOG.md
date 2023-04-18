@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.3](https://github.com/coingaming/moon_flutter/compare/v0.18.2...v0.18.3) (2023-04-18)
+
+
+### Bug Fixes
+
+* [MDS-501] RepaintBoundary and mounted usage ([#141](https://github.com/coingaming/moon_flutter/issues/141)) ([a7e555f](https://github.com/coingaming/moon_flutter/commit/a7e555fd7d0b106432bf172565ce105f1b50a10b))
+
 ## [0.18.2](https://github.com/coingaming/moon_flutter/compare/v0.18.1...v0.18.2) (2023-04-17)
 
 
