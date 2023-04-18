@@ -140,6 +140,9 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.services.AutofillConfiguration.autofillHints}
   final Iterable<String>? autofillHints;
 
+  /// Used to set the auto validation mode.
+  final AutovalidateMode autovalidateMode;
+
   /// The appearance of the keyboard.
   ///
   /// This setting is only honored on iOS devices.
@@ -238,6 +241,7 @@ class MoonTextArea extends StatefulWidget {
     this.maxLengthEnforcement,
     this.inputFormatters,
     this.autofillHints,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.keyboardAppearance,
     this.scrollPadding = const EdgeInsets.all(20.0),
     this.transitionDuration,
@@ -342,7 +346,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
                 autocorrect: widget.autocorrect,
                 autofillHints: widget.autofillHints,
                 autofocus: widget.autofocus,
-                autovalidateMode: AutovalidateMode.disabled,
+                autovalidateMode: widget.autovalidateMode,
                 controller: widget.controller,
                 cursorColor: effectiveTextColor,
                 enabled: widget.enabled,

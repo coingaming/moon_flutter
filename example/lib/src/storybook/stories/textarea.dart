@@ -8,15 +8,6 @@ class TextAreaStory extends Story {
       : super(
           name: "TextArea",
           builder: (context) {
-            final backgroundColorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for MoonTextArea background.",
-              initial: 40, // null
-              options: colorOptions,
-            );
-
-            final backgroundColor = colorTable(context)[backgroundColorsKnob];
-
             final textColorsKnob = context.knobs.options(
               label: "textColor",
               description: "MoonColors variants for MoonTextArea text.",
@@ -34,6 +25,15 @@ class TextAreaStory extends Story {
             );
 
             final hintTextColor = colorTable(context)[hintTextColorsKnob];
+
+            final backgroundColorsKnob = context.knobs.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for MoonTextArea background.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final backgroundColor = colorTable(context)[backgroundColorsKnob];
 
             final activeBorderColorsKnob = context.knobs.options(
               label: "activeBorderColor",
@@ -63,10 +63,10 @@ class TextAreaStory extends Story {
             final errorBorderColor = colorTable(context)[errorBorderColorsKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
-              max: 20,
+              max: 32,
               initial: 8,
               label: "borderRadius",
-              description: "Border radius for MoonToast.",
+              description: "Border radius for MoonTextArea.",
             );
 
             final enabledKnob = context.knobs.boolean(

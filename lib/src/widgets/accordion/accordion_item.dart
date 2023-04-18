@@ -57,10 +57,10 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// The color of the divider between the header and the body.
   final Color? dividerColor;
 
-  /// The icon color of accordion's expansion arrow icon when the accordion is expanded.
+  /// The color of accordion's trailing icon (downward caret by default) when the accordion is collapsed.
   final Color? trailingIconColor;
 
-  /// The icon color of accordion's expansion arrow icon when the accordion is collapsed.
+  /// The color of accordion's trailing icon (downward caret by default) when the accordion is expanded.
   final Color? expandedTrailingIconColor;
 
   /// The color of the accordion's title.
