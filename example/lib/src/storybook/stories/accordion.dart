@@ -25,10 +25,29 @@ class AccordionStory extends Story {
               ],
             );
 
+            final iconColorsKnob = context.knobs.options(
+              label: "iconColor",
+              description: "MoonColors variants for Accordion icon.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final iconColor = colorTable(context)[iconColorsKnob];
+
+
+            final expandedIconColorsKnob = context.knobs.options(
+              label: "expandedIconColor",
+              description: "MoonColors variants for expanded Accordion icon.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final expandedIconColor = colorTable(context)[expandedIconColorsKnob];
+
             final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for Accordion background.",
-              initial: 4, // gohan
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -37,11 +56,18 @@ class AccordionStory extends Story {
             final expandedBackgroundColorsKnob = context.knobs.options(
               label: "expandedBackgroundColor",
               description: "MoonColors variants for expanded Accordion background.",
-              initial: 4, // gohan
+              initial: 40, // null
               options: colorOptions,
             );
 
             final expandedBackgroundColor = colorTable(context)[expandedBackgroundColorsKnob];
+
+            final borderRadiusKnob = context.knobs.sliderInt(
+              max: 12,
+              initial: 8,
+              label: "borderRadius",
+              description: "Border radius for Accordion.",
+            );
 
             final showDividerKnob = context.knobs.boolean(
               label: "showDivider",
@@ -79,8 +105,11 @@ class AccordionStory extends Story {
                         identityValue: AccordionItems.first,
                         groupIdentityValue: currentlyOpenAccordionItem,
                         accordionSize: accordionSizesKnob,
+                        iconColor: iconColor,
                         backgroundColor: backgroundColor,
+                        expandedIconColor: expandedIconColor,
                         expandedBackgroundColor: expandedBackgroundColor,
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         showDivider: showDividerKnob,
                         shadows: showShadowKnob == true ? null : [],
@@ -100,8 +129,11 @@ class AccordionStory extends Story {
                         groupIdentityValue: currentlyOpenAccordionItem,
                         initiallyExpanded: true,
                         accordionSize: accordionSizesKnob,
+                        iconColor: iconColor,
                         backgroundColor: backgroundColor,
+                        expandedIconColor: expandedIconColor,
                         expandedBackgroundColor: expandedBackgroundColor,
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         showDivider: showDividerKnob,
                         shadows: showShadowKnob == true ? null : [],
@@ -120,10 +152,13 @@ class AccordionStory extends Story {
                       const SizedBox(height: 32),
                       MoonAccordionItem<AccordionItems>(
                         accordionSize: accordionSizesKnob,
-                        backgroundColor: backgroundColor,
                         initiallyExpanded: true,
                         hasContentOutside: true,
+                        iconColor: iconColor,
+                        backgroundColor: backgroundColor,
+                        expandedIconColor: expandedIconColor,
                         expandedBackgroundColor: expandedBackgroundColor,
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         showDivider: showDividerKnob,
                         shadows: showShadowKnob == true ? null : [],
@@ -141,6 +176,7 @@ class AccordionStory extends Story {
                         backgroundColor: backgroundColor,
                         hasContentOutside: true,
                         expandedBackgroundColor: expandedBackgroundColor,
+                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         showDivider: showDividerKnob,
                         shadows: showShadowKnob == true ? null : [],
