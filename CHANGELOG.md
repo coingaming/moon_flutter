@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.0](https://github.com/coingaming/moon_flutter/compare/v0.18.3...v0.19.0) (2023-04-18)
+
+
+### Features
+
+* [MDS-491] Create TextArea widget ([#140](https://github.com/coingaming/moon_flutter/issues/140)) ([6c00719](https://github.com/coingaming/moon_flutter/commit/6c00719de846f68bb60d84b08c02d349d526afae))
+
 ## [0.18.3](https://github.com/coingaming/moon_flutter/compare/v0.18.2...v0.18.3) (2023-04-18)
 
 
