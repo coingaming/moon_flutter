@@ -229,24 +229,23 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   bool _isHovered = false;
 
   FocusNode? _focusNode;
+
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
   void _handleHover(bool hover) {
-    if (hover != _isHovered && mounted) {
+    if (hover != _isHovered) {
       setState(() => _isHovered = hover);
     }
   }
 
   void _handleFocus(bool focus) {
-    if (focus != _isFocused && mounted) {
+    if (focus != _isFocused) {
       setState(() => _isFocused = focus);
     }
   }
 
   void _handleFocusChange(bool hasFocus) {
-    setState(() {
-      _isFocused = hasFocus;
-    });
+    setState(() => _isFocused = hasFocus);
   }
 
   void _handleTap() {
@@ -256,9 +255,8 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         _animationController!.forward();
       } else {
         _animationController!.reverse().then<void>((void value) {
-          if (!mounted) {
-            return;
-          }
+          if (!mounted) return;
+
           setState(() {
             // Rebuild without widget.children.
           });
@@ -316,6 +314,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   @override
   void didUpdateWidget(MoonAccordionItem<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (widget.identityValue == null && widget.groupIdentityValue == null) return;
 
     if (widget._selected) {
@@ -329,9 +328,8 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         _animationController!.forward();
       } else {
         _animationController!.reverse().then<void>((void value) {
-          if (!mounted) {
-            return;
-          }
+          if (!mounted) return;
+
           setState(() {
             // Rebuild without widget.children.
           });
@@ -344,6 +342,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   @override
   void dispose() {
     _animationController!.dispose();
+
     super.dispose();
   }
 
@@ -455,25 +454,25 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         onFocusChange: _handleFocusChange,
         onShowFocusHighlight: _handleFocus,
         onShowHoverHighlight: _handleHover,
-        child: RepaintBoundary(
-          child: MoonFocusEffect(
-            show: _isFocused,
-            effectExtent: effectiveFocusEffectExtent,
-            effectColor: effectiveFocusEffectColor,
-            effectDuration: effectiveFocusEffectDuration,
-            effectCurve: effectiveFocusEffectCurve,
-            childBorderRadius: effectiveBorderRadius,
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: _handleTap,
-                child: AnimatedIconTheme(
+        child: MoonFocusEffect(
+          show: _isFocused,
+          effectExtent: effectiveFocusEffectExtent,
+          effectColor: effectiveFocusEffectColor,
+          effectDuration: effectiveFocusEffectDuration,
+          effectCurve: effectiveFocusEffectCurve,
+          childBorderRadius: effectiveBorderRadius,
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: _handleTap,
+              child: AnimatedIconTheme(
+                duration: effectiveTransitionDuration,
+                color: effectiveTextColor,
+                child: AnimatedDefaultTextStyle(
+                  style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
                   duration: effectiveTransitionDuration,
-                  color: effectiveTextColor,
-                  child: AnimatedDefaultTextStyle(
-                    style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
-                    duration: effectiveTransitionDuration,
+                  child: RepaintBoundary(
                     child: AnimatedContainer(
                       duration: effectiveHoverEffectDuration,
                       curve: effectiveHoverEffectCurve,
