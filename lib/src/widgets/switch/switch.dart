@@ -130,6 +130,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   bool _isFocused = false;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+
   bool get _isInteractive => widget.onChanged != null;
 
   MoonSwitchSizeProperties _getMoonSwitchSize(BuildContext context, MoonSwitchSize? moonSwitchSize) {
@@ -176,15 +177,13 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   }
 
   void _handleFocus(bool focus) {
-    if (focus != _isFocused && mounted) {
+    if (focus != _isFocused) {
       setState(() => _isFocused = focus);
     }
   }
 
   void _handleFocusChange(bool hasFocus) {
-    setState(() {
-      _isFocused = hasFocus;
-    });
+    setState(() => _isFocused = hasFocus);
   }
 
   void _handleTapDown(TapDownDetails details) {

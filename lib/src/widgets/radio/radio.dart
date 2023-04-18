@@ -235,18 +235,20 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
           effectColor: effectiveFocusEffectColor,
           effectCurve: effectiveFocusEffectCurve,
           effectDuration: effectiveFocusEffectDuration,
-          child: AnimatedOpacity(
-            opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,
-            duration: effectiveFocusEffectDuration,
-            child: buildToggleable(
-              focusNode: widget.focusNode,
-              autofocus: widget.autofocus,
-              mouseCursor: effectiveMouseCursor,
-              size: size,
-              painter: _painter
-                ..position = position
-                ..activeColor = effectiveActiveColor
-                ..inactiveColor = effectiveInactiveColor,
+          child: RepaintBoundary(
+            child: AnimatedOpacity(
+              opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,
+              duration: effectiveFocusEffectDuration,
+              child: buildToggleable(
+                focusNode: widget.focusNode,
+                autofocus: widget.autofocus,
+                mouseCursor: effectiveMouseCursor,
+                size: size,
+                painter: _painter
+                  ..position = position
+                  ..activeColor = effectiveActiveColor
+                  ..inactiveColor = effectiveInactiveColor,
+              ),
             ),
           ),
         ),

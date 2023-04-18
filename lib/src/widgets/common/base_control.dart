@@ -163,22 +163,27 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   late Map<Type, Action<Intent>> _actions;
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
+
   bool get _canShowTooltip => widget.showTooltip && _isEnabled && (_isFocused || _isHovered || _isLongPressed);
+
   bool get _canAnimateFocus => widget.showFocusEffect && _isEnabled && _isFocused;
+
   bool get _canAnimatePulse => widget.showPulseEffect && _isEnabled;
+
   bool get _canAnimateScale => widget.showScaleAnimation && _isEnabled && (_isPressed || _isLongPressed);
 
   MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.basic;
+
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
   void _handleHover(bool hover) {
-    if (hover != _isHovered && mounted) {
+    if (hover != _isHovered) {
       setState(() => _isHovered = hover);
     }
   }
 
   void _handleFocus(bool focus) {
-    if (focus != _isFocused && mounted) {
+    if (focus != _isFocused) {
       setState(() => _isFocused = focus);
     }
   }
@@ -193,34 +198,30 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     });
   }
 
-  Future<void> _handleTap() async {
+  void _handleTap() {
     if (_isEnabled) {
-      if (mounted) {
-        setState(() => _isPressed = true);
-      }
+      setState(() => _isPressed = true);
 
       widget.onTap?.call();
 
-      if (mounted) {
-        setState(() => _isPressed = false);
-      }
+      setState(() => _isPressed = false);
     }
   }
 
   void _handleTapDown(_) {
-    if (!_isPressed && mounted) {
+    if (!_isPressed) {
       setState(() => _isPressed = true);
     }
   }
 
   void _handleTapUp(_) {
-    if (_isPressed && mounted) {
+    if (_isPressed) {
       setState(() => _isPressed = false);
     }
   }
 
   void _handleTapCancel() {
-    if (_isPressed && mounted) {
+    if (_isPressed) {
       setState(() => _isPressed = false);
     }
   }
@@ -234,11 +235,11 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   }
 
   void _handleLongPressStart(_) {
-    if (!_isLongPressed && mounted) {
+    if (!_isLongPressed) {
       setState(() => _isLongPressed = true);
     }
 
-    if (!_isPressed && mounted) {
+    if (!_isPressed) {
       setState(() => _isPressed = true);
     }
   }
@@ -248,11 +249,11 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
       widget.onTap?.call();
     }
 
-    if (_isLongPressed && mounted) {
+    if (_isLongPressed) {
       setState(() => _isLongPressed = false);
     }
 
-    if (_isPressed && mounted) {
+    if (_isPressed) {
       setState(() => _isPressed = false);
     }
   }
@@ -372,41 +373,41 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     return MoonTooltip(
       show: _canShowTooltip,
       content: Text(widget.tooltipMessage),
-      child: RepaintBoundary(
-        child: MergeSemantics(
-          child: Semantics(
-            label: widget.semanticLabel,
-            button: widget.semanticTypeIsButton,
-            enabled: _isEnabled,
-            focusable: _isEnabled,
-            focused: _isFocused,
-            child: FocusableActionDetector(
-              enabled: _isEnabled && widget.isFocusable,
-              actions: _actions,
-              mouseCursor: _cursor,
-              focusNode: _effectiveFocusNode,
-              autofocus: _isEnabled && widget.autofocus,
-              onFocusChange: _handleFocusChange,
-              onShowFocusHighlight: _handleFocus,
-              onShowHoverHighlight: _handleHover,
-              child: GestureDetector(
-                excludeFromSemantics: true,
-                behavior: HitTestBehavior.opaque,
-                onTap: _handleTap,
-                onTapDown: _handleTapDown,
-                onTapUp: _handleTapUp,
-                onLongPress: _handleLongPress,
-                onLongPressStart: _handleLongPressStart,
-                onLongPressUp: _handleLongPressUp,
-                onTapCancel: _handleTapCancel,
-                onHorizontalDragStart: _handleHorizontalDragStart,
-                onHorizontalDragEnd: _handleHorizontalDragEnd,
-                onVerticalDragStart: _handleVerticalDragStart,
-                onVerticalDragEnd: _handleVerticalDragEnd,
-                child: TouchTargetPadding(
-                  minSize: widget.ensureMinimalTouchTargetSize
-                      ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)
-                      : Size.zero,
+      child: MergeSemantics(
+        child: Semantics(
+          label: widget.semanticLabel,
+          button: widget.semanticTypeIsButton,
+          enabled: _isEnabled,
+          focusable: _isEnabled,
+          focused: _isFocused,
+          child: FocusableActionDetector(
+            enabled: _isEnabled && widget.isFocusable,
+            actions: _actions,
+            mouseCursor: _cursor,
+            focusNode: _effectiveFocusNode,
+            autofocus: _isEnabled && widget.autofocus,
+            onFocusChange: _handleFocusChange,
+            onShowFocusHighlight: _handleFocus,
+            onShowHoverHighlight: _handleHover,
+            child: GestureDetector(
+              excludeFromSemantics: true,
+              behavior: HitTestBehavior.opaque,
+              onTap: _handleTap,
+              onTapDown: _handleTapDown,
+              onTapUp: _handleTapUp,
+              onLongPress: _handleLongPress,
+              onLongPressStart: _handleLongPressStart,
+              onLongPressUp: _handleLongPressUp,
+              onTapCancel: _handleTapCancel,
+              onHorizontalDragStart: _handleHorizontalDragStart,
+              onHorizontalDragEnd: _handleHorizontalDragEnd,
+              onVerticalDragStart: _handleVerticalDragStart,
+              onVerticalDragEnd: _handleVerticalDragEnd,
+              child: TouchTargetPadding(
+                minSize: widget.ensureMinimalTouchTargetSize
+                    ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)
+                    : Size.zero,
+                child: RepaintBoundary(
                   child: AnimatedScale(
                     scale: _canAnimateScale ? effectiveScaleEffectScalar : 1,
                     duration: effectiveScaleEffectDuration,
