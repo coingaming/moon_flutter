@@ -10,7 +10,8 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
     activeBorderColor: MoonColors.light.piccolo,
     inactiveBorderColor: MoonColors.light.beerus,
     errorBorderColor: MoonColors.light.chiChi100,
-    hintTextColor: MoonColors.light.trunks,
+    labelTextColor: MoonColors.light.trunks,
+    supportingTextColor: MoonColors.light.trunks,
   );
 
   static final dark = MoonInputColors(
@@ -18,7 +19,8 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
     activeBorderColor: MoonColors.dark.piccolo,
     inactiveBorderColor: MoonColors.dark.beerus,
     errorBorderColor: MoonColors.dark.chiChi100,
-    hintTextColor: MoonColors.dark.trunks,
+    labelTextColor: MoonColors.dark.trunks,
+    supportingTextColor: MoonColors.dark.trunks,
   );
 
   /// Input background color.
@@ -34,14 +36,18 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
   final Color errorBorderColor;
 
   /// Input hint text color.
-  final Color hintTextColor;
+  final Color labelTextColor;
+
+  /// Input hint text color.
+  final Color supportingTextColor;
 
   const MoonInputColors({
     required this.backgroundColor,
     required this.activeBorderColor,
     required this.inactiveBorderColor,
     required this.errorBorderColor,
-    required this.hintTextColor,
+    required this.labelTextColor,
+    required this.supportingTextColor,
   });
 
   @override
@@ -51,14 +57,16 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
     Color? inactiveBorderColor,
     Color? errorBorderColor,
     Color? hoverBorderColor,
-    Color? hintTextColor,
+    Color? labelTextColor,
+    Color? supportingTextColor,
   }) {
     return MoonInputColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
       errorBorderColor: errorBorderColor ?? this.errorBorderColor,
-      hintTextColor: hintTextColor ?? this.hintTextColor,
+      labelTextColor: labelTextColor ?? this.labelTextColor,
+      supportingTextColor: supportingTextColor ?? this.supportingTextColor,
     );
   }
 
@@ -71,7 +79,8 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
       activeBorderColor: Color.lerp(activeBorderColor, other.activeBorderColor, t)!,
       inactiveBorderColor: Color.lerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
       errorBorderColor: Color.lerp(errorBorderColor, other.errorBorderColor, t)!,
-      hintTextColor: Color.lerp(hintTextColor, other.hintTextColor, t)!,
+      labelTextColor: Color.lerp(labelTextColor, other.labelTextColor, t)!,
+      supportingTextColor: Color.lerp(supportingTextColor, other.supportingTextColor, t)!,
     );
   }
 
@@ -84,6 +93,7 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
       ..add(ColorProperty("errorBorderColor", errorBorderColor))
-      ..add(ColorProperty("hintTextColor", hintTextColor));
+      ..add(ColorProperty("labelTextColor", labelTextColor))
+      ..add(ColorProperty("supportingTextColor", supportingTextColor));
   }
 }

@@ -11,10 +11,10 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> with DiagnosticableTreeMixin {
   static final sm = MoonInputSizeProperties(
     height: MoonSizes.sizes.sm,
-    gap: MoonSizes.sizes.x5s,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    borderRadius: MoonBorders.borders.interactiveSm,
+    gap: MoonSizes.sizes.x4s,
+    iconSizeValue: MoonSizes.sizes.x2s,
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
+    borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text14,
   );
 
@@ -22,14 +22,23 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
     height: MoonSizes.sizes.md,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final lg = MoonInputSizeProperties(
     height: MoonSizes.sizes.lg,
-    gap: MoonSizes.sizes.x3s,
+    gap: MoonSizes.sizes.x4s,
+    iconSizeValue: MoonSizes.sizes.xs,
+    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
+    borderRadius: MoonBorders.borders.interactiveSm,
+    textStyle: MoonTextStyles.heading.text16,
+  );
+
+  static final xl = MoonInputSizeProperties(
+    height: MoonSizes.sizes.xl,
+    gap: MoonSizes.sizes.x2s,
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
     borderRadius: MoonBorders.borders.interactiveSm,

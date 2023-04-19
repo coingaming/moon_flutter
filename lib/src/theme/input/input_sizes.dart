@@ -9,6 +9,7 @@ class MoonInputSizes extends ThemeExtension<MoonInputSizes> with DiagnosticableT
     sm: MoonInputSizeProperties.sm,
     md: MoonInputSizeProperties.md,
     lg: MoonInputSizeProperties.lg,
+    xl: MoonInputSizeProperties.xl,
   );
 
   /// Small input properties.
@@ -20,10 +21,14 @@ class MoonInputSizes extends ThemeExtension<MoonInputSizes> with DiagnosticableT
   /// Large input properties.
   final MoonInputSizeProperties lg;
 
+  /// Extra large (floating) input properties.
+  final MoonInputSizeProperties xl;
+
   const MoonInputSizes({
     required this.sm,
     required this.md,
     required this.lg,
+    required this.xl,
   });
 
   @override
@@ -31,11 +36,13 @@ class MoonInputSizes extends ThemeExtension<MoonInputSizes> with DiagnosticableT
     MoonInputSizeProperties? sm,
     MoonInputSizeProperties? md,
     MoonInputSizeProperties? lg,
+    MoonInputSizeProperties? xl,
   }) {
     return MoonInputSizes(
       sm: sm ?? this.sm,
       md: md ?? this.md,
       lg: lg ?? this.lg,
+      xl: xl ?? this.xl,
     );
   }
 
@@ -47,6 +54,7 @@ class MoonInputSizes extends ThemeExtension<MoonInputSizes> with DiagnosticableT
       sm: sm.lerp(other.sm, t),
       md: md.lerp(other.md, t),
       lg: lg.lerp(other.lg, t),
+      xl: xl.lerp(other.xl, t),
     );
   }
 
@@ -57,6 +65,7 @@ class MoonInputSizes extends ThemeExtension<MoonInputSizes> with DiagnosticableT
       ..add(DiagnosticsProperty("type", "MoonInputSizes"))
       ..add(DiagnosticsProperty<MoonInputSizeProperties>("sm", sm))
       ..add(DiagnosticsProperty<MoonInputSizeProperties>("md", md))
-      ..add(DiagnosticsProperty<MoonInputSizeProperties>("lg", lg));
+      ..add(DiagnosticsProperty<MoonInputSizeProperties>("lg", lg))
+      ..add(DiagnosticsProperty<MoonInputSizeProperties>("xl", xl));
   }
 }

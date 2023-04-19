@@ -7,19 +7,11 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 @immutable
 class MoonInputProperties extends ThemeExtension<MoonInputProperties> with DiagnosticableTreeMixin {
   static final properties = MoonInputProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    textPadding: const EdgeInsets.all(16),
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
-    textStyle: MoonTextStyles.body.text16,
-    errorTextStyle: MoonTextStyles.body.text12,
+    labelTextStyle: MoonTextStyles.body.text12,
+    supportingTextStyle: MoonTextStyles.body.text12,
   );
-
-  /// Input border radius.
-  final BorderRadius borderRadius;
-
-  /// Input text padding.
-  final EdgeInsetsGeometry textPadding;
 
   /// Input transition duration.
   final Duration transitionDuration;
@@ -27,37 +19,31 @@ class MoonInputProperties extends ThemeExtension<MoonInputProperties> with Diagn
   /// Input transition curve.
   final Curve transitionCurve;
 
-  /// Input text style.
-  final TextStyle textStyle;
+  /// Input label text style.
+  final TextStyle labelTextStyle;
 
-  /// Input error text style.
-  final TextStyle errorTextStyle;
+  /// Input supporting text style.
+  final TextStyle supportingTextStyle;
 
   const MoonInputProperties({
-    required this.borderRadius,
-    required this.textPadding,
     required this.transitionDuration,
     required this.transitionCurve,
-    required this.textStyle,
-    required this.errorTextStyle,
+    required this.labelTextStyle,
+    required this.supportingTextStyle,
   });
 
   @override
   MoonInputProperties copyWith({
-    BorderRadius? borderRadius,
-    EdgeInsetsGeometry? textPadding,
     Duration? transitionDuration,
     Curve? transitionCurve,
-    TextStyle? textStyle,
-    TextStyle? errorTextStyle,
+    TextStyle? labelTextStyle,
+    TextStyle? supportingTextStyle,
   }) {
     return MoonInputProperties(
-      borderRadius: borderRadius ?? this.borderRadius,
-      textPadding: textPadding ?? this.textPadding,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
-      textStyle: textStyle ?? this.textStyle,
-      errorTextStyle: errorTextStyle ?? this.errorTextStyle,
+      labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+      supportingTextStyle: supportingTextStyle ?? this.supportingTextStyle,
     );
   }
 
@@ -66,12 +52,10 @@ class MoonInputProperties extends ThemeExtension<MoonInputProperties> with Diagn
     if (other is! MoonInputProperties) return this;
 
     return MoonInputProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
-      textPadding: EdgeInsetsGeometry.lerp(textPadding, other.textPadding, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
-      errorTextStyle: TextStyle.lerp(errorTextStyle, other.errorTextStyle, t)!,
+      labelTextStyle: TextStyle.lerp(labelTextStyle, other.labelTextStyle, t)!,
+      supportingTextStyle: TextStyle.lerp(supportingTextStyle, other.supportingTextStyle, t)!,
     );
   }
 
@@ -80,11 +64,9 @@ class MoonInputProperties extends ThemeExtension<MoonInputProperties> with Diagn
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonInputProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("textPadding", textPadding))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
-      ..add(DiagnosticsProperty<TextStyle>("errorTextStyle", errorTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("labelTextStyle", labelTextStyle))
+      ..add(DiagnosticsProperty<TextStyle>("supportingTextStyle", supportingTextStyle));
   }
 }
