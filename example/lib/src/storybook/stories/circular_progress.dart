@@ -9,7 +9,7 @@ class CircularProgressStory extends Story {
           name: "Progress/CircularProgress",
           builder: (context) {
             final circularProgressSizesKnob = context.knobs.options(
-              label: "MoonCircularProgressSize",
+              label: "circularProgressSize",
               description: "CircularProgress size variants.",
               initial: MoonCircularProgressSize.md,
               options: const [
@@ -24,7 +24,7 @@ class CircularProgressStory extends Story {
             final circularProgressColorKnob = context.knobs.options(
               label: "color",
               description: "MoonColors variants for CircularProgress color.",
-              initial: 0, // piccolo
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -33,7 +33,7 @@ class CircularProgressStory extends Story {
             final circularProgressBackgroundColorKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for CircularProgress background.",
-              initial: 6, // trunks
+              initial: 40, // null
               options: colorOptions,
             );
 

@@ -9,7 +9,7 @@ class CircularLoaderStory extends Story {
           name: "Loader/CircularLoader",
           builder: (context) {
             final loaderSizesKnob = context.knobs.options(
-              label: "MoonCircularLoaderSize",
+              label: "circularLoaderSize",
               description: "CircularLoader size variants.",
               initial: MoonCircularLoaderSize.md,
               options: const [
@@ -24,7 +24,7 @@ class CircularLoaderStory extends Story {
             final loaderColorKnob = context.knobs.options(
               label: "color",
               description: "MoonColors variants for CircularLoader color.",
-              initial: 1, // hit
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -33,7 +33,7 @@ class CircularLoaderStory extends Story {
             final loaderBackgroundColorKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for CircularLoader background.",
-              initial: 39, // none
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -58,7 +58,7 @@ class CircularLoaderStory extends Story {
                   MoonCircularLoader(
                     color: color,
                     backgroundColor: backgroundColor,
-                    loaderSize: loaderSizesKnob,
+                    circularLoaderSize: loaderSizesKnob,
                     strokeCap: loaderStrokeCapKnob,
                   ),
                   const SizedBox(height: 64),

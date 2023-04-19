@@ -463,6 +463,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                       shadows: effectivePopoverShadows,
                       shape: SmoothRectangleBorder(
                         borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                        side: BorderSide(color: widget.borderColor),
                       ),
                     ),
                     child: widget.content,

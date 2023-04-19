@@ -234,7 +234,6 @@ class MoonButton extends StatelessWidget {
     bool showScaleAnimation = true,
     Color? backgroundColor,
     Color? borderColor,
-    Color? textColor,
     Color? focusEffectColor,
     Color? hoverEffectColor,
     Color? pulseEffectColor,
@@ -277,7 +276,6 @@ class MoonButton extends StatelessWidget {
       showScaleAnimation: showScaleAnimation,
       backgroundColor: backgroundColor,
       borderColor: borderColor,
-      textColor: textColor,
       focusEffectColor: focusEffectColor,
       hoverEffectColor: hoverEffectColor,
       pulseEffectColor: pulseEffectColor,
@@ -319,9 +317,18 @@ class MoonButton extends StatelessWidget {
     required bool isDarkMode,
     required bool isHovered,
     required bool isFocused,
+    required Color? backgroundColor,
   }) {
     if (textColor != null && (!isHovered && !isFocused)) return textColor!;
     if (backgroundColor == null && context.moonTypography != null) return context.moonTypography!.colors.bodyPrimary;
+
+    if (backgroundColor == Colors.transparent) {
+      if (isDarkMode) {
+        return MoonColors.dark.bulma;
+      } else {
+        return MoonColors.light.bulma;
+      }
+    }
 
     final backgroundLuminance = backgroundColor!.computeLuminance();
     if (backgroundLuminance > 0.5) {
@@ -350,8 +357,13 @@ class MoonButton extends StatelessWidget {
       resolvedDirectionalPadding.bottom,
     );
 
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.buttonTheme.colors.filledVariantBackgroundColor ??
+        MoonColors.light.piccolo;
+
     final Color effectiveBorderColor =
         borderColor ?? context.moonTheme?.buttonTheme.colors.borderColor ?? MoonColors.light.trunks;
+
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
 
     final double effectiveBorderWidth =
@@ -361,7 +373,7 @@ class MoonButton extends StatelessWidget {
         context.moonEffects?.controlHoverEffect.primaryHoverColor ??
         MoonHoverEffects.lightHoverEffect.primaryHoverColor;
 
-    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, backgroundColor ?? Colors.transparent);
+    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, effectiveBackgroundColor);
 
     final Curve effectiveHoverEffectCurve = hoverEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
@@ -384,7 +396,7 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       autofocus: autofocus,
       isFocusable: isFocusable,
-      backgroundColor: backgroundColor,
+      backgroundColor: effectiveBackgroundColor,
       showTooltip: showTooltip,
       showFocusEffect: showFocusEffect,
       focusEffectColor: focusEffectColor,
@@ -402,8 +414,13 @@ class MoonButton extends StatelessWidget {
       pulseEffectDuration: pulseEffectDuration,
       pulseEffectCurve: pulseEffectCurve,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
-        final Color effectiveTextColor =
-            _getTextColor(context, isDarkMode: context.isDarkMode, isHovered: isHovered, isFocused: isFocused);
+        final Color effectiveTextColor = _getTextColor(
+          context,
+          isDarkMode: context.isDarkMode,
+          isHovered: isHovered,
+          isFocused: isFocused,
+          backgroundColor: effectiveBackgroundColor,
+        );
 
         final bool canAnimateHover = _isEnabled && (isHovered || isFocused || isPressed);
 
@@ -414,7 +431,7 @@ class MoonButton extends StatelessWidget {
           height: effectiveHeight,
           constraints: BoxConstraints(minWidth: effectiveHeight),
           decoration: ShapeDecoration(
-            color: canAnimateHover ? hoverColor : backgroundColor,
+            color: canAnimateHover ? hoverColor : effectiveBackgroundColor,
             shape: SmoothRectangleBorder(
               side: BorderSide(
                 color: effectiveBorderColor,

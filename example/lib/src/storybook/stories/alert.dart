@@ -14,7 +14,7 @@ class AlertStory extends Story {
             final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for background.",
-              initial: 4, // Gohan
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -23,7 +23,7 @@ class AlertStory extends Story {
             final textColorsKnob = context.knobs.options(
               label: "textColor",
               description: "MoonColors variants for text.",
-              initial: 5, // Bulma
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -32,7 +32,7 @@ class AlertStory extends Story {
             final leadingColorsKnob = context.knobs.options(
               label: "leadingColor",
               description: "MoonColors variants for leading.",
-              initial: 5, // Bulma
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -41,7 +41,7 @@ class AlertStory extends Story {
             final trailingColorsKnob = context.knobs.options(
               label: "trailingColor",
               description: "MoonColors variants for trailing.",
-              initial: 5, // Bulma
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -50,7 +50,7 @@ class AlertStory extends Story {
             final borderColorsKnob = context.knobs.options(
               label: "borderColor",
               description: "MoonColors variants for border.",
-              initial: 5, // Bulma
+              initial: 40, // null
               options: colorOptions,
             );
 

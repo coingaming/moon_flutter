@@ -11,7 +11,7 @@ class PopoverStory extends Story {
           name: "Popover",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "label text",
               initial: "Custom popover text",
             );
 
@@ -33,14 +33,23 @@ class PopoverStory extends Story {
               ],
             );
 
-            final colorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for Popover background.",
-              initial: 4, // gohan
+              initial: 40, // null
               options: colorOptions,
             );
 
-            final color = colorTable(context)[colorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+
+            final borderColorsKnob = context.knobs.options(
+              label: "borderColor",
+              description: "MoonColors variants for Popover border.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorsKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 20,
@@ -78,7 +87,8 @@ class PopoverStory extends Story {
                       builder: (context, setState) {
                         return MoonPopover(
                           show: show,
-                          backgroundColor: color,
+                          borderColor: borderColor ?? Colors.transparent,
+                          backgroundColor: backgroundColor,
                           borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                           distanceToTarget: distanceToTargetKnob,
                           popoverPosition: popoverPositionsKnob,
@@ -94,7 +104,7 @@ class PopoverStory extends Story {
                                   children: [
                                     MoonAvatar(
                                       backgroundColor: context.moonColors?.heles,
-                                      child: const Icon(MoonIcons.rocket_24),
+                                      content: const Icon(MoonIcons.rocket_24),
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(child: Text(customLabelTextKnob)),

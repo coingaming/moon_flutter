@@ -9,7 +9,7 @@ class LinearProgressStory extends Story {
           name: "Progress/LinearProgress",
           builder: (context) {
             final progressSizesKnob = context.knobs.options(
-              label: "MoonLinearProgressSize",
+              label: "linearProgressSize",
               description: "LinearProgress size variants.",
               initial: MoonLinearProgressSize.x4s,
               options: const [
@@ -24,7 +24,7 @@ class LinearProgressStory extends Story {
             final progressColorKnob = context.knobs.options(
               label: "color",
               description: "MoonColors variants for LinearProgress color.",
-              initial: 0, // piccolo
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -33,17 +33,17 @@ class LinearProgressStory extends Story {
             final progressBackgroundColorKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for LinearProgress background.",
-              initial: 6, // trunks
+              initial: 40, // null
               options: colorOptions,
             );
 
             final backgroundColor = colorTable(context)[progressBackgroundColorKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
+              max: 12,
+              initial: 8,
               label: "borderRadius",
               description: "LinearProgress border radius.",
-              initial: 8,
-              max: 12,
             );
 
             final linearProgressValueKnob = context.knobs.slider(
@@ -59,7 +59,7 @@ class LinearProgressStory extends Story {
                   const SizedBox(height: 64),
                   MoonLinearProgress(
                     value: linearProgressValueKnob,
-                    progressSize: progressSizesKnob,
+                    linearProgressSize: progressSizesKnob,
                     color: color,
                     backgroundColor: backgroundColor,
                     borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),

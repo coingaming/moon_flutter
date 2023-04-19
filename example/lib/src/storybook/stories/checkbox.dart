@@ -15,7 +15,7 @@ class CheckboxStory extends Story {
             final checkColorsKnob = context.knobs.options(
               label: "checkColor",
               description: "MoonColors variants for the Checkbox icon.",
-              initial: 7, // goten
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -23,8 +23,8 @@ class CheckboxStory extends Story {
 
             final activeColorsKnob = context.knobs.options(
               label: "activeColor",
-              description: "MoonColors variants for when Checkbox is checked.",
-              initial: 0, // piccolo
+              description: "MoonColors variants for the checked Checkbox.",
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -32,8 +32,8 @@ class CheckboxStory extends Story {
 
             final inactiveColorsKnob = context.knobs.options(
               label: "inactiveColor",
-              description: "MoonColors variants for when Checkbox is unchecked.",
-              initial: 39, // transparent
+              description: "MoonColors variants for the unchecked Checkbox.",
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -42,20 +42,20 @@ class CheckboxStory extends Story {
             final borderColorsKnob = context.knobs.options(
               label: "borderColor",
               description: "MoonColors variants for Checkbox border.",
-              initial: 6, // trunks
+              initial: 40, // null
               options: colorOptions,
             );
 
             final borderColor = colorTable(context)[borderColorsKnob];
 
-            final isDisabled = context.knobs.boolean(
-              label: "Disabled",
-              description: "onChanged() is null.",
-            );
-
             final isTristate = context.knobs.boolean(
               label: "tristate",
               description: "Whether the Checkbox uses tristate.",
+            );
+
+            final isDisabled = context.knobs.boolean(
+              label: "Disabled",
+              description: "onChanged() is null.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -76,9 +76,9 @@ class CheckboxStory extends Story {
                       builder: (context, setState) {
                         return MoonCheckbox(
                           activeColor: activeColor,
-                          borderColor: borderColor,
-                          checkColor: checkColor,
                           inactiveColor: inactiveColor,
+                          checkColor: checkColor,
+                          borderColor: borderColor,
                           tristate: isTristate,
                           value: value,
                           onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
@@ -92,13 +92,13 @@ class CheckboxStory extends Story {
                       builder: (context, setState) {
                         return MoonCheckbox.withLabel(
                           context,
-                          checkColor: checkColor,
+                          label: "With label",
                           activeColor: activeColor,
                           inactiveColor: inactiveColor,
+                          checkColor: checkColor,
                           tristate: isTristate,
                           value: value,
                           onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
-                          label: "With label",
                         );
                       },
                     ),

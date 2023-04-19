@@ -41,7 +41,7 @@ class AuthCodeStory extends Story {
 
             final selectedFillColorsKnob = context.knobs.options(
               label: "selectedFillColor",
-              description: "MoonColors variants for MoonAuthCode.",
+              description: "MoonColors variants for selected auth input field.",
               initial: 40, // null
               options: colorOptions,
             );
@@ -50,7 +50,7 @@ class AuthCodeStory extends Story {
 
             final activeFillColorsKnob = context.knobs.options(
               label: "activeFillColor",
-              description: "MoonColors variants for MoonAuthCode.",
+              description: "MoonColors variants for active auth input fields.",
               initial: 40, // null
               options: colorOptions,
             );
@@ -59,7 +59,7 @@ class AuthCodeStory extends Story {
 
             final inactiveFillColorsKnob = context.knobs.options(
               label: "inactiveFillColor",
-              description: "MoonColors variants for MoonAuthCode.",
+              description: "MoonColors variants for inactive auth input fields.",
               initial: 40, // null
               options: colorOptions,
             );
@@ -68,7 +68,7 @@ class AuthCodeStory extends Story {
 
             final selectedBorderColorsKnob = context.knobs.options(
               label: "selectedBorderColor",
-              description: "MoonColors variants for MoonAuthCode.",
+              description: "MoonColors variants for selected auth input field border.",
               initial: 40, // null
               options: colorOptions,
             );
@@ -77,7 +77,7 @@ class AuthCodeStory extends Story {
 
             final activeBorderColorsKnob = context.knobs.options(
               label: "activeBorderColor",
-              description: "MoonColors variants for MoonAuthCode.",
+              description: "MoonColors variants for active auth input fields borders.",
               initial: 40, // null
               options: colorOptions,
             );
@@ -86,7 +86,7 @@ class AuthCodeStory extends Story {
 
             final inactiveBorderColorsKnob = context.knobs.options(
               label: "inactiveBorderColor",
-              description: "MoonColors variants for MoonAuthCode.",
+              description: "MoonColors variants for inactive auth input fields borders.",
               initial: 40, // null
               options: colorOptions,
             );

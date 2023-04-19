@@ -12,7 +12,7 @@ class TooltipStory extends Story {
           name: "Tooltip",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "label text",
               initial: "Custom tooltip text",
             );
 
@@ -34,14 +34,23 @@ class TooltipStory extends Story {
               ],
             );
 
-            final colorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for Tooltip background.",
-              initial: 4, // gohan
+              initial: 40, // null
               options: colorOptions,
             );
 
-            final color = colorTable(context)[colorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+
+            final borderColorsKnob = context.knobs.options(
+              label: "borderColor",
+              description: "MoonColors variants for Tooltip border.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorsKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 20,
@@ -51,36 +60,36 @@ class TooltipStory extends Story {
             );
 
             final arrowOffsetKnob = context.knobs.slider(
+              max: 100,
+              min: -100,
+              initial: 0,
               label: "arrowOffsetValue",
               description: "Set the offset of the Tooltip arrow.",
-              initial: 0,
-              min: -100,
-              max: 100,
             );
 
             final arrowTipDistanceKnob = context.knobs.slider(
+              max: 100,
+              initial: 8,
               label: "arrowTipDistance",
               description: "Set the distance to target child widget.",
-              initial: 8,
-              max: 100,
             );
 
             final arrowBaseWidthKnob = context.knobs.slider(
+              max: 100,
+              initial: 16,
               label: "arrowBaseWidth",
               description: "Set the base width of the Tooltip arrow.",
-              initial: 16,
-              max: 100,
             );
 
             final arrowLengthKnob = context.knobs.slider(
+              max: 100,
+              initial: 8,
               label: "arrowLength",
               description: "Set the length of the Tooltip arrow.",
-              initial: 8,
-              max: 100,
             );
 
             final showShadowKnob = context.knobs.boolean(
-              label: "Show shadows",
+              label: "tooltipShadows",
               description: "Show shadows under the Tooltip.",
               initial: true,
             );
@@ -109,7 +118,9 @@ class TooltipStory extends Story {
                       builder: (context, setState) {
                         return MoonTooltip(
                           show: show,
-                          backgroundColor: color,
+                          backgroundColor: backgroundColor,
+                          borderWidth: 1,
+                          borderColor: borderColor ?? Colors.transparent,
                           borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                           tooltipPosition: tooltipPositionsKnob,
                           hasArrow: showArrowKnob,

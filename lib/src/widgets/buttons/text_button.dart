@@ -115,6 +115,7 @@ class MoonTextButton extends StatelessWidget {
       showPulseEffect: showPulseEffect,
       hoverEffectColor: effectiveHoverColor,
       focusEffectColor: effectiveFocusColor,
+      backgroundColor: Colors.transparent,
       label: label,
       leading: leading,
       trailing: trailing,

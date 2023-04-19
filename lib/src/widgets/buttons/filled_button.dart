@@ -53,6 +53,9 @@ class MoonFilledButton extends StatelessWidget {
   /// The background color of the button.
   final Color? backgroundColor;
 
+  /// The text color of the button.
+  final Color? textColor;
+
   /// The widget in the leading slot of the button.
   final Widget? leading;
 
@@ -86,6 +89,7 @@ class MoonFilledButton extends StatelessWidget {
     this.showTooltip = false,
     this.showPulseEffect = false,
     this.backgroundColor,
+    this.textColor,
     this.leading,
     this.label,
     this.trailing,
@@ -102,6 +106,7 @@ class MoonFilledButton extends StatelessWidget {
       onLongPress: onLongPress,
       buttonSize: buttonSize,
       backgroundColor: effectiveBackgroundColor,
+      textColor: textColor,
       focusNode: focusNode,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,
