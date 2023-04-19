@@ -72,14 +72,16 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
           minWidth: double.infinity,
           minHeight: widget.minHeight,
         ),
-        child: CustomPaint(
-          painter: MoonLinearProgressIndicatorPainter(
-            backgroundColor: widget.backgroundColor,
-            valueColor: widget.color,
-            value: widget.value, // may be null
-            animationValue: animationValue, // ignored if widget.value is not null
-            borderRadius: widget.borderRadius,
-            textDirection: textDirection,
+        child: RepaintBoundary(
+          child: CustomPaint(
+            painter: MoonLinearProgressIndicatorPainter(
+              backgroundColor: widget.backgroundColor,
+              valueColor: widget.color,
+              value: widget.value, // may be null
+              animationValue: animationValue, // ignored if widget.value is not null
+              borderRadius: widget.borderRadius,
+              textDirection: textDirection,
+            ),
           ),
         ),
       ),

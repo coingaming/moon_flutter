@@ -140,15 +140,12 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
   }
 
   void _showAlert() {
-    if (!mounted) return;
     _animationController!.forward();
 
     setState(() => _isVisible = true);
   }
 
   void _hideAlert() {
-    if (!mounted) return;
-
     _animationController!.reverse().then<void>((void value) {
       if (!mounted) return;
 
@@ -159,6 +156,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
 
@@ -171,13 +169,12 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
   @override
   void didUpdateWidget(MoonAlert oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (mounted) {
-      if (oldWidget.show != widget.show) {
-        if (widget.show) {
-          _showAlert();
-        } else {
-          _hideAlert();
-        }
+
+    if (oldWidget.show != widget.show) {
+      if (widget.show) {
+        _showAlert();
+      } else {
+        _hideAlert();
       }
     }
   }

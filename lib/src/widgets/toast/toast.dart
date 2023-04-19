@@ -143,17 +143,19 @@ class MoonToast {
           builder: (context, progress, child) {
             return Align(
               alignment: position == MoonToastPosition.bottom ? Alignment.bottomCenter : Alignment.topCenter,
-              child: Transform(
-                transform: Matrix4.translationValues(
-                  0,
-                  position == MoonToastPosition.bottom
-                      ? ((1 - progress) * _toastTravelDistance)
-                      : (-_toastTravelDistance + progress * _toastTravelDistance),
-                  0,
-                ),
-                child: Opacity(
-                  opacity: progress,
-                  child: child,
+              child: RepaintBoundary(
+                child: Transform(
+                  transform: Matrix4.translationValues(
+                    0,
+                    position == MoonToastPosition.bottom
+                        ? ((1 - progress) * _toastTravelDistance)
+                        : (-_toastTravelDistance + progress * _toastTravelDistance),
+                    0,
+                  ),
+                  child: Opacity(
+                    opacity: progress,
+                    child: child,
+                  ),
                 ),
               ),
             );

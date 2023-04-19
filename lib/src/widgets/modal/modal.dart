@@ -174,12 +174,14 @@ class MoonModalRoute<T> extends RawDialogRoute<T> {
           },
           transitionBuilder:
               (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-            return FadeTransition(
-              opacity: CurvedAnimation(
-                parent: animation,
-                curve: transitionCurve,
+            return RepaintBoundary(
+              child: FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: transitionCurve,
+                ),
+                child: child,
               ),
-              child: child,
             );
           },
         );

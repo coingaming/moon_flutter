@@ -56,6 +56,20 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
   /// AuthCode error text style.
   final TextStyle errorTextStyle;
 
+  const MoonAuthCodeProperties({
+    required this.borderRadius,
+    required this.gap,
+    required this.height,
+    required this.width,
+    required this.animationDuration,
+    required this.errorAnimationDuration,
+    required this.peekDuration,
+    required this.animationCurve,
+    required this.errorAnimationCurve,
+    required this.textStyle,
+    required this.errorTextStyle,
+  });
+
   @override
   MoonAuthCodeProperties copyWith({
     BorderRadius? borderRadius,
@@ -103,20 +117,6 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
       errorTextStyle: TextStyle.lerp(errorTextStyle, other.errorTextStyle, t)!,
     );
   }
-
-  const MoonAuthCodeProperties({
-    required this.borderRadius,
-    required this.gap,
-    required this.height,
-    required this.width,
-    required this.animationDuration,
-    required this.errorAnimationDuration,
-    required this.peekDuration,
-    required this.animationCurve,
-    required this.errorAnimationCurve,
-    required this.textStyle,
-    required this.errorTextStyle,
-  });
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

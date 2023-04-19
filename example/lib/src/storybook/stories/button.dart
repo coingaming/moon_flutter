@@ -27,19 +27,10 @@ class ButtonStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.options(
-              label: "textColor",
-              description: "MoonColors variants for MoonButton text.",
-              initial: 40, // null
-              options: colorOptions,
-            );
-
-            final textColor = colorTable(context)[textColorsKnob];
-
             final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for base MoonButton background.",
-              initial: 40, // null
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
@@ -151,7 +142,6 @@ class ButtonStory extends Story {
                         tooltipMessage: 'This is tooltip',
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
-                        textColor: textColor,
                         backgroundColor: backgroundColor,
                         borderColor: borderColor,
                         showPulseEffect: showPulseEffectKnob,
@@ -180,10 +170,8 @@ class ButtonStory extends Story {
                       MoonFilledButton(
                         onTap: showDisabledKnob ? null : () {},
                         buttonSize: buttonSizesKnob,
-                        textColor: textColor,
                         isFullWidth: setFullWidthKnob,
                         showTooltip: showTooltipKnob,
-                        backgroundColor: backgroundColor,
                         tooltipMessage: 'This is tooltip',
                         showPulseEffect: showPulseEffectKnob,
                         leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
@@ -199,7 +187,6 @@ class ButtonStory extends Story {
                         tooltipMessage: 'This is tooltip',
                         showPulseEffect: showPulseEffectKnob,
                         borderColor: borderColor,
-                        textColor: textColor,
                         leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonOutlinedButton") : null,
                         trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,

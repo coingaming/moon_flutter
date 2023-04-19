@@ -126,12 +126,14 @@ class MoonCheckbox extends StatefulWidget {
                 autofocus: autofocus,
               ),
               const SizedBox(width: 12),
-              AnimatedOpacity(
-                opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
-                duration: effectiveFocusEffectDuration,
-                child: Text(
-                  label,
-                  style: effectiveTextStyle,
+              RepaintBoundary(
+                child: AnimatedOpacity(
+                  opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
+                  duration: effectiveFocusEffectDuration,
+                  child: Text(
+                    label,
+                    style: effectiveTextStyle,
+                  ),
                 ),
               ),
             ],
@@ -171,12 +173,14 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
+
     _previousValue = widget.value;
   }
 
   @override
   void didUpdateWidget(MoonCheckbox oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (oldWidget.value != widget.value) {
       _previousValue = oldWidget.value;
       animateToValue();
@@ -186,6 +190,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
   @override
   void dispose() {
     _painter.dispose();
+
     super.dispose();
   }
 
@@ -240,23 +245,25 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
           effectColor: effectiveFocusEffectColor,
           effectCurve: effectiveFocusEffectCurve,
           effectDuration: effectiveFocusEffectDuration,
-          child: AnimatedOpacity(
-            opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,
-            duration: effectiveFocusEffectDuration,
-            child: buildToggleable(
-              mouseCursor: effectiveMouseCursor,
-              focusNode: widget.focusNode,
-              autofocus: widget.autofocus,
-              size: size,
-              painter: _painter
-                ..position = position
-                ..activeColor = effectiveActiveColor
-                ..inactiveColor = effectiveInactiveColor
-                ..checkColor = effectiveCheckColor
-                ..value = value
-                ..previousValue = _previousValue
-                ..shape = SmoothRectangleBorder(borderRadius: effectiveBorderRadius.smoothBorderRadius)
-                ..side = _resolveSide(BorderSide(color: effectiveBorderColor)),
+          child: RepaintBoundary(
+            child: AnimatedOpacity(
+              opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,
+              duration: effectiveFocusEffectDuration,
+              child: buildToggleable(
+                mouseCursor: effectiveMouseCursor,
+                focusNode: widget.focusNode,
+                autofocus: widget.autofocus,
+                size: size,
+                painter: _painter
+                  ..position = position
+                  ..activeColor = effectiveActiveColor
+                  ..inactiveColor = effectiveInactiveColor
+                  ..checkColor = effectiveCheckColor
+                  ..value = value
+                  ..previousValue = _previousValue
+                  ..shape = SmoothRectangleBorder(borderRadius: effectiveBorderRadius.smoothBorderRadius)
+                  ..side = _resolveSide(BorderSide(color: effectiveBorderColor)),
+              ),
             ),
           ),
         ),

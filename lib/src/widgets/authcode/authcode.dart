@@ -18,10 +18,7 @@ enum AuthFieldShape { box, underline, circle }
 
 enum ErrorAnimationType { noAnimation, shake }
 
-typedef MoonAuthCodeBuilder = Widget Function(
-  BuildContext context,
-  String? errorText,
-);
+typedef MoonAuthCodeErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
 class MoonAuthCode extends StatefulWidget {
   /// Shape of auth input field.
@@ -144,7 +141,7 @@ class MoonAuthCode extends StatefulWidget {
   final MainAxisAlignment mainAxisAlignment;
 
   /// Builder for the error widget.
-  final MoonAuthCodeBuilder errorBuilder;
+  final MoonAuthCodeErrorBuilder errorBuilder;
 
   /// Displays a hint or a placeholder in the input field if it's value is empty.
   final String? hintCharacter;

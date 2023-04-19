@@ -10,8 +10,8 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     expandedBackgroundColor: MoonColors.light.gohan,
     borderColor: MoonColors.light.beerus,
     dividerColor: MoonColors.light.beerus,
-    expandedIconColor: MoonColors.light.bulma,
-    iconColor: MoonColors.light.trunks,
+    trailingIconColor: MoonColors.light.trunks,
+    expandedTrailingIconColor: MoonColors.light.bulma,
   );
 
   static final dark = MoonAccordionItemColors(
@@ -19,8 +19,8 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     expandedBackgroundColor: MoonColors.dark.gohan,
     borderColor: MoonColors.dark.beerus,
     dividerColor: MoonColors.dark.beerus,
-    iconColor: MoonColors.dark.trunks,
-    expandedIconColor: MoonColors.dark.bulma,
+    trailingIconColor: MoonColors.dark.trunks,
+    expandedTrailingIconColor: MoonColors.dark.bulma,
   );
 
   /// Accordion item background color.
@@ -35,19 +35,19 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   /// Accordion item divider color.
   final Color dividerColor;
 
-  /// Accordion item icon color.
-  final Color iconColor;
+  /// Accordion item trailing icon color.
+  final Color trailingIconColor;
 
-  /// Expanded accordion item icon color.
-  final Color expandedIconColor;
+  /// Expanded accordion item trailing icon color.
+  final Color expandedTrailingIconColor;
 
   const MoonAccordionItemColors({
     required this.backgroundColor,
     required this.expandedBackgroundColor,
     required this.borderColor,
     required this.dividerColor,
-    required this.expandedIconColor,
-    required this.iconColor,
+    required this.trailingIconColor,
+    required this.expandedTrailingIconColor,
   });
 
   @override
@@ -56,16 +56,16 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     Color? expandedBackgroundColor,
     Color? borderColor,
     Color? dividerColor,
-    Color? expandedIconColor,
-    Color? iconColor,
+    Color? trailingIconColor,
+    Color? expandedTrailingIconColor,
   }) {
     return MoonAccordionItemColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       expandedBackgroundColor: expandedBackgroundColor ?? this.expandedBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
       dividerColor: dividerColor ?? this.dividerColor,
-      expandedIconColor: expandedIconColor ?? this.expandedIconColor,
-      iconColor: iconColor ?? this.iconColor,
+      trailingIconColor: trailingIconColor ?? this.trailingIconColor,
+      expandedTrailingIconColor: expandedTrailingIconColor ?? this.expandedTrailingIconColor,
     );
   }
 
@@ -78,8 +78,8 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
       expandedBackgroundColor: Color.lerp(expandedBackgroundColor, other.expandedBackgroundColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
       dividerColor: Color.lerp(dividerColor, other.dividerColor, t)!,
-      expandedIconColor: Color.lerp(expandedIconColor, other.expandedIconColor, t)!,
-      iconColor: Color.lerp(iconColor, other.iconColor, t)!,
+      trailingIconColor: Color.lerp(trailingIconColor, other.trailingIconColor, t)!,
+      expandedTrailingIconColor: Color.lerp(expandedTrailingIconColor, other.expandedTrailingIconColor, t)!,
     );
   }
 
@@ -92,7 +92,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
       ..add(ColorProperty("expandedBackgroundColor", expandedBackgroundColor))
       ..add(ColorProperty("borderColor", borderColor))
       ..add(ColorProperty("dividerColor", dividerColor))
-      ..add(ColorProperty("expandedIconColor", expandedIconColor))
-      ..add(ColorProperty("iconColor", iconColor));
+      ..add(ColorProperty("trailingIconColor", trailingIconColor))
+      ..add(ColorProperty("expandedTrailingIconColor", expandedTrailingIconColor));
   }
 }
