@@ -48,6 +48,9 @@ class MoonOutlinedButton extends StatelessWidget {
   /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
 
+  /// The border color of the button.
+  final Color? borderColor;
+
   /// The widget in the leading slot of the button.
   final Widget? leading;
 
@@ -80,6 +83,7 @@ class MoonOutlinedButton extends StatelessWidget {
     this.isFullWidth = false,
     this.showTooltip = false,
     this.showPulseEffect = false,
+    this.borderColor,
     this.label,
     this.leading,
     this.trailing,
@@ -103,6 +107,7 @@ class MoonOutlinedButton extends StatelessWidget {
       isFullWidth: isFullWidth,
       showTooltip: showTooltip,
       showPulseEffect: showPulseEffect,
+      borderColor: borderColor,
       showBorder: true,
       label: label,
       leading: leading,

@@ -10,7 +10,7 @@ class AvatarStory extends Story {
           name: "Avatar",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "content",
               initial: "MD",
             );
 
@@ -28,10 +28,19 @@ class AvatarStory extends Story {
               ],
             );
 
+            final avatarTextColorKnob = context.knobs.options(
+              label: "textColor",
+              description: "MoonColors variants for Avatar text.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[avatarTextColorKnob];
+
             final avatarBackgroundColorKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for Avatar background.",
-              initial: 5, // bulma
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -40,7 +49,7 @@ class AvatarStory extends Story {
             final badgeColorKnob = context.knobs.options(
               label: "badgeColor",
               description: "MoonColors variants for the Avatar badge.",
-              initial: 18, // roshi100
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -65,6 +74,20 @@ class AvatarStory extends Story {
               description: "Border radius for the Avatar.",
             );
 
+            final badgeMarginKnob = context.knobs.sliderInt(
+              max: 8,
+              initial: 4,
+              label: "badgeMarginValue",
+              description: "Badge margin value for the Avatar.",
+            );
+
+            final badgeSizeKnob = context.knobs.sliderInt(
+              max: 16,
+              initial: 8,
+              label: "badgeSize",
+              description: "Badge Size for the Avatar.",
+            );
+
             final showBadgeKnob = context.knobs.boolean(
               label: "showBadge",
               description: "Show Avatar badge.",
@@ -86,13 +109,16 @@ class AvatarStory extends Story {
                     const TextDivider(text: "Customisable Avatar"),
                     const SizedBox(height: 32),
                     MoonAvatar(
+                      textColor: textColor,
                       avatarSize: avatarSizesKnob,
+                      badgeSize: badgeSizeKnob.toDouble(),
                       borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                      badgeMarginValue: badgeMarginKnob.toDouble(),
                       backgroundColor: backgroundColor,
                       showBadge: showBadgeKnob,
                       badgeColor: badgeColor,
                       badgeAlignment: avatarBadgeAlignmentKnob,
-                      child: Padding(
+                      content: Padding(
                         padding: const EdgeInsets.only(top: 1.0),
                         child: Text(customLabelTextKnob),
                       ),
@@ -102,6 +128,9 @@ class AvatarStory extends Story {
                     const SizedBox(height: 32),
                     MoonAvatar(
                       avatarSize: avatarSizesKnob,
+                      badgeSize: badgeSizeKnob.toDouble(),
+                      borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                      badgeMarginValue: badgeMarginKnob.toDouble(),
                       backgroundColor: backgroundColor,
                       showBadge: showBadgeKnob,
                       badgeColor: badgeColor,

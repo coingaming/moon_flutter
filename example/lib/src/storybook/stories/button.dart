@@ -10,13 +10,13 @@ class ButtonStory extends Story {
           name: "Button",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "label text",
               initial: "MoonButton",
             );
 
             final buttonSizesKnob = context.knobs.options(
-              label: "MoonButtonSize",
-              description: "Button size variants.",
+              label: "buttonSize",
+              description: "MoonButton size variants.",
               initial: MoonButtonSize.md,
               options: const [
                 Option(label: "xs", value: MoonButtonSize.xs),
@@ -27,14 +27,23 @@ class ButtonStory extends Story {
               ],
             );
 
-            final colorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.options(
               label: "backgroundColor",
-              description: "MoonColors variants for base MoonButton.",
-              initial: 5, // bulma
+              description: "MoonColors variants for base MoonButton background.",
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final color = colorTable(context)[colorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+
+            final borderColorsKnob = context.knobs.options(
+              label: "borderColor",
+              description: "MoonColors variants for MoonButton border.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorsKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 28,
@@ -49,14 +58,9 @@ class ButtonStory extends Story {
               initial: true,
             );
 
-            final showDisabledKnob = context.knobs.boolean(
-              label: "Disabled",
-              description: "onTap() or onLongPress() is null.",
-            );
-
-            final setFullWidthKnob = context.knobs.boolean(
-              label: "isFullWidth",
-              description: "Set Button to full width.",
+            final showTooltipKnob = context.knobs.boolean(
+              label: "showTooltip",
+              description: "Show tooltip for MoonButton.",
             );
 
             final showPulseEffectKnob = context.knobs.boolean(
@@ -70,20 +74,30 @@ class ButtonStory extends Story {
             );
 
             final showLeadingKnob = context.knobs.boolean(
-              label: "Show leading",
+              label: "leading",
               description: "Show widget in the leading slot.",
               initial: true,
             );
 
             final showLabelKnob = context.knobs.boolean(
-              label: "Show label",
+              label: "label",
               description: "Show widget in the label slot.",
               initial: true,
             );
 
             final showTrailingKnob = context.knobs.boolean(
-              label: "Show trailing",
+              label: "trailing",
               description: "Show widget in the trailing slot.",
+            );
+
+            final setFullWidthKnob = context.knobs.boolean(
+              label: "isFullWidth",
+              description: "Set Button to full width.",
+            );
+
+            final showDisabledKnob = context.knobs.boolean(
+              label: "Disabled",
+              description: "onTap() or onLongPress() is null.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -124,9 +138,12 @@ class ButtonStory extends Story {
                         onTap: showDisabledKnob ? null : () {},
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
+                        showTooltip: showTooltipKnob,
+                        tooltipMessage: 'This is tooltip',
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
-                        backgroundColor: color,
+                        backgroundColor: backgroundColor,
+                        borderColor: borderColor,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
                         leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
@@ -138,8 +155,11 @@ class ButtonStory extends Story {
                         onTap: showDisabledKnob ? null : () {},
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
+                        showTooltip: showTooltipKnob,
+                        tooltipMessage: 'This is tooltip',
                         buttonSize: buttonSizesKnob,
-                        backgroundColor: color,
+                        backgroundColor: backgroundColor,
+                        borderColor: borderColor,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,
                         icon: showLeadingKnob ? Icon(resolvedIconVariant) : null,
@@ -151,6 +171,8 @@ class ButtonStory extends Story {
                         onTap: showDisabledKnob ? null : () {},
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
+                        showTooltip: showTooltipKnob,
+                        tooltipMessage: 'This is tooltip',
                         showPulseEffect: showPulseEffectKnob,
                         leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonFilledButton") : null,
@@ -161,7 +183,10 @@ class ButtonStory extends Story {
                         onTap: showDisabledKnob ? null : () {},
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
+                        showTooltip: showTooltipKnob,
+                        tooltipMessage: 'This is tooltip',
                         showPulseEffect: showPulseEffectKnob,
+                        borderColor: borderColor,
                         leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonOutlinedButton") : null,
                         trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
@@ -171,6 +196,8 @@ class ButtonStory extends Story {
                         onTap: showDisabledKnob ? null : () {},
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
+                        showTooltip: showTooltipKnob,
+                        tooltipMessage: 'This is tooltip',
                         showPulseEffect: showPulseEffectKnob,
                         leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? const Text("MoonTextButton") : null,
@@ -189,6 +216,8 @@ class ButtonStory extends Story {
                         ),
                         buttonSize: buttonSizesKnob,
                         isFullWidth: setFullWidthKnob,
+                        showTooltip: showTooltipKnob,
+                        tooltipMessage: 'This is tooltip',
                         backgroundColor: context.moonTheme!.colors.krillin100,
                         showPulseEffect: showPulseEffectKnob,
                         showPulseEffectJiggle: showPulseEffectJiggleKnob,

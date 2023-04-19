@@ -10,12 +10,12 @@ class ChipStory extends Story {
           name: "Chip",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "label text",
               initial: "MoonChip",
             );
 
             final chipSizesKnob = context.knobs.options(
-              label: "MoonChipSize",
+              label: "chipSize",
               description: "Chip size variants.",
               initial: MoonChipSize.md,
               options: const [
@@ -24,14 +24,41 @@ class ChipStory extends Story {
               ],
             );
 
-            final colorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for the Chip.",
-              initial: 5, // bulma
+            final textColorsKnob = context.knobs.options(
+              label: "textColor",
+              description: "MoonColors variants for Chip text.",
+              initial: 40, // null
               options: colorOptions,
             );
 
-            final color = colorTable(context)[colorsKnob];
+            final textColor = colorTable(context)[textColorsKnob];
+
+            final activeColorsKnob = context.knobs.options(
+              label: "activeColor",
+              description: "MoonColors variants for the active Chip.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final activeColor = colorTable(context)[activeColorsKnob];
+
+            final backgroundColorsKnob = context.knobs.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for the Chip background.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+
+            final borderColorsKnob = context.knobs.options(
+              label: "borderColor",
+              description: "MoonColors variants for Chip border.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorsKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 28,
@@ -40,30 +67,30 @@ class ChipStory extends Story {
               description: "Border radius for the Chip.",
             );
 
-            final isActiveKnob = context.knobs.boolean(
-              label: "isActive",
-              description: "Whether the Chip is active/selected.",
-            );
-
             final showBorderKnob = context.knobs.boolean(
               label: "showBorder",
               description: "Show border when isActive.",
             );
 
+            final isActiveKnob = context.knobs.boolean(
+              label: "isActive",
+              description: "Whether the Chip is active/selected.",
+            );
+
             final showLeadingKnob = context.knobs.boolean(
-              label: "Show leading",
+              label: "leading",
               description: "Show widget in the leading slot.",
               initial: true,
             );
 
             final showLabelKnob = context.knobs.boolean(
-              label: "Show label",
+              label: "label",
               description: "Show widget in the label slot.",
               initial: true,
             );
 
             final showTrailingKnob = context.knobs.boolean(
-              label: "Show trailing",
+              label: "trailing",
               description: "Show widget in the trailing slot.",
             );
 
@@ -82,14 +109,17 @@ class ChipStory extends Story {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 64),
-                      const TextDivider(text: "Regular Chip"),
+                      const TextDivider(text: "Default Chip"),
                       const SizedBox(height: 32),
                       MoonChip(
+                        activeColor: activeColor,
+                        textColor: textColor,
+                        borderColor: borderColor,
                         isActive: isActiveKnob,
                         borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
                         showBorder: showBorderKnob,
                         chipSize: chipSizesKnob,
-                        backgroundColor: color,
+                        backgroundColor: backgroundColor,
                         leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                         label: showLabelKnob ? Text(customLabelTextKnob) : null,
                         trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,

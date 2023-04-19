@@ -9,12 +9,12 @@ class ToastStory extends Story {
           name: "Toast",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "label text",
               initial: "This is a custom MoonToast text",
             );
 
             final toastPositionKnob = context.knobs.options(
-              label: "MoonToastPosition",
+              label: "position",
               description: "The position of the MoonToast.",
               initial: MoonToastPosition.bottom,
               options: const [
@@ -24,7 +24,7 @@ class ToastStory extends Story {
             );
 
             final toastVariantKnob = context.knobs.options(
-              label: "MoonToastVariant",
+              label: "variant",
               description: "The color variant of the MoonToast.",
               initial: MoonToastVariant.original,
               options: const [
@@ -42,19 +42,19 @@ class ToastStory extends Story {
 
             final backgroundColor = colorTable(context)[backgroundColorsKnob];
 
+            final borderRadiusKnob = context.knobs.sliderInt(
+              max: 20,
+              initial: 8,
+              label: "borderRadius",
+              description: "Border radius for MoonToast.",
+            );
+
             final displayDurationKnob = context.knobs.sliderInt(
               min: 1,
               max: 10,
               initial: 5,
               label: "displayDuration",
               description: "The duration to show the MoonToast.",
-            );
-
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 20,
-              initial: 8,
-              label: "borderRadius",
-              description: "Border radius for MoonToast.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(

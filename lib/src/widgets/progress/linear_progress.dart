@@ -15,7 +15,7 @@ enum MoonLinearProgressSize {
 
 class MoonLinearProgress extends StatelessWidget {
   /// Size of the linear progress widget.
-  final MoonLinearProgressSize? progressSize;
+  final MoonLinearProgressSize? linearProgressSize;
 
   /// Value of the linear progress widget.
   final double value;
@@ -38,7 +38,7 @@ class MoonLinearProgress extends StatelessWidget {
   /// MDS linear progress widget.
   const MoonLinearProgress({
     super.key,
-    this.progressSize,
+    this.linearProgressSize,
     required this.value,
     this.height,
     this.color,
@@ -75,7 +75,7 @@ class MoonLinearProgress extends StatelessWidget {
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
-    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, progressSize);
+    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, linearProgressSize);
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 

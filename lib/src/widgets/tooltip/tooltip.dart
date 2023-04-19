@@ -76,7 +76,7 @@ class MoonTooltip extends StatefulWidget {
   /// The margin around tooltip. Used to prevent the tooltip from touching the edges of the viewport.
   final double tooltipMargin;
 
-  /// The color of the tooltip border.
+  /// The color of the tooltip border. Is shown when [borderWidth] is larger than 0.
   final Color borderColor;
 
   /// The color of the tooltip background.

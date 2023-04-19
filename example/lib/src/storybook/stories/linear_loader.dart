@@ -9,7 +9,7 @@ class LinearLoaderStory extends Story {
           name: "Loader/LinearLoader",
           builder: (context) {
             final loaderSizesKnob = context.knobs.options(
-              label: "MoonLinearLoaderSize",
+              label: "linearLoaderSize",
               description: "LinearLoader size variants.",
               initial: MoonLinearLoaderSize.x4s,
               options: const [
@@ -24,7 +24,7 @@ class LinearLoaderStory extends Story {
             final loaderColorKnob = context.knobs.options(
               label: "color",
               description: "MoonColors variants for LinearLoader color.",
-              initial: 1, // hit
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -33,17 +33,17 @@ class LinearLoaderStory extends Story {
             final loaderBackgroundColorKnob = context.knobs.options(
               label: "backgroundColor",
               description: "MoonColors variants for LinearLoader background.",
-              initial: 39, // none
+              initial: 40, // null
               options: colorOptions,
             );
 
             final backgroundColor = colorTable(context)[loaderBackgroundColorKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
+              max: 12,
+              initial: 8,
               label: "borderRadius",
               description: "LinearLoader border radius.",
-              initial: 8,
-              max: 12,
             );
 
             return Center(
@@ -52,7 +52,7 @@ class LinearLoaderStory extends Story {
                 children: [
                   const SizedBox(height: 64),
                   MoonLinearLoader(
-                    loaderSize: loaderSizesKnob,
+                    linearLoaderSize: loaderSizesKnob,
                     color: color,
                     backgroundColor: backgroundColor,
                     borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),

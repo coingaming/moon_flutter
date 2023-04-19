@@ -234,7 +234,6 @@ class MoonButton extends StatelessWidget {
     bool showScaleAnimation = true,
     Color? backgroundColor,
     Color? borderColor,
-    Color? textColor,
     Color? focusEffectColor,
     Color? hoverEffectColor,
     Color? pulseEffectColor,
@@ -277,7 +276,6 @@ class MoonButton extends StatelessWidget {
       showScaleAnimation: showScaleAnimation,
       backgroundColor: backgroundColor,
       borderColor: borderColor,
-      textColor: textColor,
       focusEffectColor: focusEffectColor,
       hoverEffectColor: hoverEffectColor,
       pulseEffectColor: pulseEffectColor,
@@ -352,6 +350,7 @@ class MoonButton extends StatelessWidget {
 
     final Color effectiveBorderColor =
         borderColor ?? context.moonTheme?.buttonTheme.colors.borderColor ?? MoonColors.light.trunks;
+
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
 
     final double effectiveBorderWidth =

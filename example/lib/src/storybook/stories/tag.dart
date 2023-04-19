@@ -9,7 +9,7 @@ class TagStory extends Story {
           name: "Tag",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "label text",
               initial: "MoonTag",
             );
 
@@ -23,14 +23,23 @@ class TagStory extends Story {
               ],
             );
 
-            final colorsKnob = context.knobs.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for Tag.",
-              initial: 5, // bulma
+            final textColorsKnob = context.knobs.options(
+              label: "textColor",
+              description: "MoonColors variants for Tag text.",
+              initial: 40, // null
               options: colorOptions,
             );
 
-            final color = colorTable(context)[colorsKnob];
+            final textColor = colorTable(context)[textColorsKnob];
+
+            final backgroundColorsKnob = context.knobs.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for Tag background.",
+              initial: 40, // null
+              options: colorOptions,
+            );
+
+            final backgroundColor = colorTable(context)[backgroundColorsKnob];
 
             final borderRadiusKnob = context.knobs.sliderInt(
               max: 12,
@@ -39,26 +48,26 @@ class TagStory extends Story {
               description: "Border radius for Tag.",
             );
 
-            final setUpperCase = context.knobs.boolean(
-              label: "isUpperCase",
-              description: "Sets the text style of the Tag to upper case.",
-            );
-
             final showLeadingKnob = context.knobs.boolean(
-              label: "Show leading",
+              label: "leading",
               description: "Show widget in the leading slot.",
             );
 
             final showLabelKnob = context.knobs.boolean(
-              label: "Show label",
+              label: "label",
               description: "Show widget in the label slot.",
               initial: true,
             );
 
             final showTrailingKnob = context.knobs.boolean(
-              label: "Show trailing",
+              label: "trailing",
               description: "Show widget in the trailing slot.",
               initial: true,
+            );
+
+            final setUpperCase = context.knobs.boolean(
+              label: "isUpperCase",
+              description: "Sets the text style of the Tag to upper case.",
             );
 
             final setRtlModeKnob = context.knobs.boolean(
@@ -78,7 +87,8 @@ class TagStory extends Story {
                       onTap: () {},
                       tagSize: tagSizesKnob,
                       isUpperCase: setUpperCase,
-                      backgroundColor: color,
+                      textColor: textColor,
+                      backgroundColor: backgroundColor,
                       leading: showLeadingKnob ? const Icon(MoonIcons.close_small_16) : null,
                       label: showLabelKnob
                           ? Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob)

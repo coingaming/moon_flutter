@@ -62,8 +62,8 @@ class MoonAvatar extends StatelessWidget {
   /// The semantic label for the avatar.
   final String? semanticLabel;
 
-  /// The child of the avatar.
-  final Widget? child;
+  /// The content of the avatar.
+  final Widget? content;
 
   /// MDS avatar widget.
   const MoonAvatar({
@@ -81,7 +81,7 @@ class MoonAvatar extends StatelessWidget {
     this.badgeAlignment = MoonBadgeAlignment.bottomRight,
     this.backgroundImage,
     this.semanticLabel,
-    this.child,
+    this.content,
   });
 
   Alignment _avatarAlignmentMapper(BuildContext context) {
@@ -202,7 +202,7 @@ class MoonAvatar extends StatelessWidget {
                             )
                           : null,
                     ),
-                    child: Center(child: child),
+                    child: Center(child: content),
                   ),
                 ),
               ),

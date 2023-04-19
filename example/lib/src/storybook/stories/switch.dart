@@ -14,7 +14,7 @@ class SwitchStory extends Story {
           name: "Switch",
           builder: (context) {
             final switchSizesKnob = context.knobs.options(
-              label: "MoonSwitchSize",
+              label: "switchSize",
               description: "Switch size variants.",
               initial: MoonSwitchSize.xs,
               options: const [
@@ -27,7 +27,7 @@ class SwitchStory extends Story {
             final thumbColorsKnob = context.knobs.options(
               label: "thumbColor",
               description: "MoonColors variants for the Switch thumb.",
-              initial: 7, // goten
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -36,7 +36,7 @@ class SwitchStory extends Story {
             final activeTrackColorsKnob = context.knobs.options(
               label: "activeTrackColor",
               description: "MoonColors variants for the active Switch track.",
-              initial: 0, // piccolo
+              initial: 40, // null
               options: colorOptions,
             );
 
@@ -44,8 +44,8 @@ class SwitchStory extends Story {
 
             final inactiveTrackColorsKnob = context.knobs.options(
               label: "inactiveTrackColor",
-              description: "MoonColors variants for the active Switch track.",
-              initial: 2, // beerus
+              description: "MoonColors variants for the inactive Switch track.",
+              initial: 40, // null
               options: colorOptions,
             );
 
