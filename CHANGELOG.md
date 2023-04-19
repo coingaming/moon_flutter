@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.1](https://github.com/coingaming/moon_flutter/compare/v0.19.0...v0.19.1) (2023-04-19)
+
+
+### Bug Fixes
+
+* [MDS-502] Add additional storybook knobs to components ([#145](https://github.com/coingaming/moon_flutter/issues/145)) ([53523fe](https://github.com/coingaming/moon_flutter/commit/53523fe82353a812b731ec83b40dd98a61910293))
+
 ## [0.19.0](https://github.com/coingaming/moon_flutter/compare/v0.18.3...v0.19.0) (2023-04-18)
 
 
