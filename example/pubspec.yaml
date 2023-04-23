@@ -18,7 +18,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   lint: ^2.0.1
-  storybook_flutter: ^0.12.0
+  storybook_flutter:
+    git:
+      url: https://github.com/coingaming/storybook_flutter.git
+      path: packages/storybook_flutter
 flutter:
   uses-material-design: true
   assets:

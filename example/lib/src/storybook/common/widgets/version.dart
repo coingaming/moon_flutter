@@ -28,22 +28,19 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset("assets/svg/moon-logo-short.svg", width: 24.0, height: 24.0),
-            const SizedBox(width: 8.0),
-            Text(
-              "Moon Design",
-              style: MoonTextStyles.heading.text16,
-            ),
-            const SizedBox(width: 6.0),
-            Text("v$_version", style: MoonTextStyles.heading.text16),
-          ],
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset("assets/svg/moon-logo-short.svg", width: 24.0, height: 24.0),
+          const SizedBox(width: 8.0),
+          Text(
+            "Moon Design",
+            style: MoonTextStyles.heading.text16,
+          ),
+          const SizedBox(width: 6.0),
+          Text("v$_version", style: MoonTextStyles.heading.text16),
+        ],
       ),
     );
   }

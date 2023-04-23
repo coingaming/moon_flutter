@@ -15,9 +15,10 @@ class PopoverStory extends Story {
               initial: "Custom popover text",
             );
 
-            final popoverPositionsKnob = context.knobs.options(
+            final popoverPositionsKnob = context.knobs.nullable.options(
               label: "popoverPosition",
               description: "Popover position variants.",
+              enabled: false,
               initial: MoonPopoverPosition.top,
               options: const [
                 Option(label: "top", value: MoonPopoverPosition.top),
@@ -33,34 +34,38 @@ class PopoverStory extends Story {
               ],
             );
 
-            final backgroundColorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for Popover background.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
 
-            final borderColorsKnob = context.knobs.options(
+            final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
               description: "MoonColors variants for Popover border.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final borderColor = colorTable(context)[borderColorsKnob];
+            final borderColor = colorTable(context)[borderColorsKnob ?? 40];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 20,
-              initial: 8,
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for Popover.",
+              enabled: false,
+              initial: 8,
+              max: 32,
             );
 
-            final distanceToTargetKnob = context.knobs.slider(
+            final distanceToTargetKnob = context.knobs.nullable.slider(
               label: "distanceToTarget",
               description: "Set the distance to target child widget.",
+              enabled: false,
               initial: 8,
               max: 100,
             );
@@ -71,69 +76,62 @@ class PopoverStory extends Story {
               initial: true,
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
-            );
-
-            return Directionality(
-              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    StatefulBuilder(
-                      builder: (context, setState) {
-                        return MoonPopover(
-                          show: show,
-                          borderColor: borderColor ?? Colors.transparent,
-                          backgroundColor: backgroundColor,
-                          borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                          distanceToTarget: distanceToTargetKnob,
-                          popoverPosition: popoverPositionsKnob,
-                          popoverShadows: showShadowKnob == true ? null : [],
-                          content: ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 190),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
-                                  textDirection: Directionality.of(context),
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    MoonAvatar(
-                                      backgroundColor: context.moonColors?.heles,
-                                      content: const Icon(MoonIcons.rocket_24),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Expanded(child: Text(customLabelTextKnob)),
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                MoonFilledButton(
-                                  buttonSize: MoonButtonSize.sm,
-                                  isFullWidth: true,
-                                  onTap: () {
-                                    setState(() => show = false);
-                                  },
-                                  label: const Text("Close"),
-                                ),
-                              ],
-                            ),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 64),
+                  StatefulBuilder(
+                    builder: (context, setState) {
+                      return MoonPopover(
+                        show: show,
+                        borderColor: borderColor ?? Colors.transparent,
+                        backgroundColor: backgroundColor,
+                        borderRadius:
+                            borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                        distanceToTarget: distanceToTargetKnob,
+                        popoverPosition: popoverPositionsKnob ?? MoonPopoverPosition.top,
+                        popoverShadows: showShadowKnob == true ? null : [],
+                        content: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 190),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                textDirection: Directionality.of(context),
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  MoonAvatar(
+                                    backgroundColor: context.moonColors?.heles,
+                                    content: const Icon(MoonIcons.rocket_24),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(child: Text(customLabelTextKnob)),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              MoonFilledButton(
+                                buttonSize: MoonButtonSize.sm,
+                                isFullWidth: true,
+                                onTap: () {
+                                  setState(() => show = false);
+                                },
+                                label: const Text("Close"),
+                              ),
+                            ],
                           ),
-                          child: MoonFilledButton(
-                            onTap: () {
-                              setState(() => show = true);
-                            },
-                            label: const Text("Tap me"),
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 64),
-                  ],
-                ),
+                        ),
+                        child: MoonFilledButton(
+                          onTap: () {
+                            setState(() => show = true);
+                          },
+                          label: const Text("Tap me"),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 64),
+                ],
               ),
             );
           },

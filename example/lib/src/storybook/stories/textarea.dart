@@ -8,65 +8,72 @@ class TextAreaStory extends Story {
       : super(
           name: "TextArea",
           builder: (context) {
-            final textColorsKnob = context.knobs.options(
+            final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
               description: "MoonColors variants for MoonTextArea text.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob];
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
 
-            final hintTextColorsKnob = context.knobs.options(
+            final hintTextColorsKnob = context.knobs.nullable.options(
               label: "hintTextColor",
               description: "MoonColors variants for MoonTextArea hint text.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final hintTextColor = colorTable(context)[hintTextColorsKnob];
+            final hintTextColor = colorTable(context)[hintTextColorsKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonTextArea background.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
 
-            final activeBorderColorsKnob = context.knobs.options(
+            final activeBorderColorsKnob = context.knobs.nullable.options(
               label: "activeBorderColor",
               description: "MoonColors variants for MoonTextArea active border.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final activeBorderColor = colorTable(context)[activeBorderColorsKnob];
+            final activeBorderColor = colorTable(context)[activeBorderColorsKnob ?? 40];
 
-            final inactiveBorderColorsKnob = context.knobs.options(
+            final inactiveBorderColorsKnob = context.knobs.nullable.options(
               label: "inactiveBorderColor",
               description: "MoonColors variants for MoonTextArea inactive border.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final inactiveBorderColor = colorTable(context)[inactiveBorderColorsKnob];
+            final inactiveBorderColor = colorTable(context)[inactiveBorderColorsKnob ?? 40];
 
-            final errorBorderColorsKnob = context.knobs.options(
+            final errorBorderColorsKnob = context.knobs.nullable.options(
               label: "errorBorderColor",
               description: "MoonColors variants for MoonTextArea error border.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final errorBorderColor = colorTable(context)[errorBorderColorsKnob];
+            final errorBorderColor = colorTable(context)[errorBorderColorsKnob ?? 40];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 32,
-              initial: 8,
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for MoonTextArea.",
+              enabled: false,
+              initial: 8,
+              max: 32,
             );
 
             final enabledKnob = context.knobs.boolean(
@@ -75,52 +82,45 @@ class TextAreaStory extends Story {
               initial: true,
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
-            );
-
-            return Directionality(
-              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    Form(
-                      child: Builder(
-                        builder: (context) {
-                          return Column(
-                            children: [
-                              MoonTextArea(
-                                enabled: enabledKnob,
-                                height: 300,
-                                textColor: textColor,
-                                hintTextColor: hintTextColor,
-                                backgroundColor: backgroundColor,
-                                activeBorderColor: activeBorderColor,
-                                inactiveBorderColor: inactiveBorderColor,
-                                errorBorderColor: errorBorderColor,
-                                borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                                hintText: "Enter your text here...",
-                                validator: (value) => value?.length != null && value!.length < 10
-                                    ? "The text should be longer than 10 characters."
-                                    : null,
-                                errorBuilder: (context, errorText) => Text(errorText!),
-                              ),
-                              const SizedBox(height: 16),
-                              MoonFilledButton(
-                                label: const Text("Submit"),
-                                onTap: () => Form.of(context).validate(),
-                              )
-                            ],
-                          );
-                        },
-                      ),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 64),
+                  Form(
+                    child: Builder(
+                      builder: (context) {
+                        return Column(
+                          children: [
+                            MoonTextArea(
+                              enabled: enabledKnob,
+                              height: 300,
+                              textColor: textColor,
+                              hintTextColor: hintTextColor,
+                              backgroundColor: backgroundColor,
+                              activeBorderColor: activeBorderColor,
+                              inactiveBorderColor: inactiveBorderColor,
+                              errorBorderColor: errorBorderColor,
+                              borderRadius:
+                                  borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                              hintText: "Enter your text here...",
+                              validator: (value) => value?.length != null && value!.length < 10
+                                  ? "The text should be longer than 10 characters."
+                                  : null,
+                              errorBuilder: (context, errorText) => Text(errorText!),
+                            ),
+                            const SizedBox(height: 16),
+                            MoonFilledButton(
+                              label: const Text("Submit"),
+                              onTap: () => Form.of(context).validate(),
+                            )
+                          ],
+                        );
+                      },
                     ),
-                    const SizedBox(height: 64),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 64),
+                ],
               ),
             );
           },

@@ -43,33 +43,33 @@ class StorybookPage extends StatelessWidget {
         Storybook(
           initialStory: "Accordion",
           plugins: _plugins,
+          brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",
             theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
             darkTheme: ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.dark]),
             useInheritedMediaQuery: true,
-            home: Builder(
-              builder: (context) {
-                return Focus(
-                  focusNode: _storyPanelFocusNode,
-                  descendantsAreFocusable: true,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.deferToChild,
-                    onTap: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      _storyPanelFocusNode.requestFocus();
-                    },
-                    child: Scaffold(
-                      extendBody: true,
-                      extendBodyBehindAppBar: true,
-                      body: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: child,
-                      ),
+            home: Directionality(
+              textDirection: Directionality.of(context),
+              child: Focus(
+                focusNode: _storyPanelFocusNode,
+                descendantsAreFocusable: true,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.deferToChild,
+                  onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    _storyPanelFocusNode.requestFocus();
+                  },
+                  child: Scaffold(
+                    extendBody: true,
+                    extendBodyBehindAppBar: true,
+                    body: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: child,
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ),
           stories: [
@@ -100,10 +100,6 @@ class StorybookPage extends StatelessWidget {
         const SizedBox(
           height: 0,
           child: Text('﹡'),
-        ),
-        const Align(
-          alignment: Alignment.bottomCenter,
-          child: MoonVersionWidget(),
         ),
       ],
     );

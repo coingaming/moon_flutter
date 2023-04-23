@@ -14,9 +14,10 @@ class AuthCodeStory extends Story {
       : super(
           name: "AuthCode",
           builder: (context) {
-            final mainAxisAlignmentKnob = context.knobs.options(
+            final mainAxisAlignmentKnob = context.knobs.nullable.options(
               label: "mainAxisAlignment",
               description: "Horizontal alignment of auth input fields.",
+              enabled: false,
               initial: MainAxisAlignment.center,
               options: const [
                 Option(label: "start", value: MainAxisAlignment.start),
@@ -28,9 +29,10 @@ class AuthCodeStory extends Story {
               ],
             );
 
-            final shapeKnob = context.knobs.options(
+            final shapeKnob = context.knobs.nullable.options(
               label: "shape",
               description: "Shape of the auth input fields.",
+              enabled: false,
               initial: AuthFieldShape.box,
               options: const [
                 Option(label: "box", value: AuthFieldShape.box),
@@ -39,72 +41,80 @@ class AuthCodeStory extends Story {
               ],
             );
 
-            final selectedFillColorsKnob = context.knobs.options(
+            final selectedFillColorsKnob = context.knobs.nullable.options(
               label: "selectedFillColor",
               description: "MoonColors variants for selected auth input field.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final selectedFillColor = colorTable(context)[selectedFillColorsKnob];
+            final selectedFillColor = colorTable(context)[selectedFillColorsKnob ?? 40];
 
-            final activeFillColorsKnob = context.knobs.options(
+            final activeFillColorsKnob = context.knobs.nullable.options(
               label: "activeFillColor",
               description: "MoonColors variants for active auth input fields.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final activeFillColor = colorTable(context)[activeFillColorsKnob];
+            final activeFillColor = colorTable(context)[activeFillColorsKnob ?? 40];
 
-            final inactiveFillColorsKnob = context.knobs.options(
+            final inactiveFillColorsKnob = context.knobs.nullable.options(
               label: "inactiveFillColor",
               description: "MoonColors variants for inactive auth input fields.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final inactiveFillColor = colorTable(context)[inactiveFillColorsKnob];
+            final inactiveFillColor = colorTable(context)[inactiveFillColorsKnob ?? 40];
 
-            final selectedBorderColorsKnob = context.knobs.options(
+            final selectedBorderColorsKnob = context.knobs.nullable.options(
               label: "selectedBorderColor",
               description: "MoonColors variants for selected auth input field border.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final selectedBorderColor = colorTable(context)[selectedBorderColorsKnob];
+            final selectedBorderColor = colorTable(context)[selectedBorderColorsKnob ?? 40];
 
-            final activeBorderColorsKnob = context.knobs.options(
+            final activeBorderColorsKnob = context.knobs.nullable.options(
               label: "activeBorderColor",
               description: "MoonColors variants for active auth input fields borders.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final activeBorderColor = colorTable(context)[activeBorderColorsKnob];
+            final activeBorderColor = colorTable(context)[activeBorderColorsKnob ?? 40];
 
-            final inactiveBorderColorsKnob = context.knobs.options(
+            final inactiveBorderColorsKnob = context.knobs.nullable.options(
               label: "inactiveBorderColor",
               description: "MoonColors variants for inactive auth input fields borders.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final inactiveBorderColor = colorTable(context)[inactiveBorderColorsKnob];
+            final inactiveBorderColor = colorTable(context)[inactiveBorderColorsKnob ?? 40];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 12,
-              initial: 8,
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for auth input fields.",
+              enabled: false,
+              initial: 8,
+              max: 32,
             );
 
-            final gapKnob = context.knobs.sliderInt(
-              max: 12,
-              initial: 8,
+            final gapKnob = context.knobs.nullable.sliderInt(
               label: "gap",
               description: "Gap between auth input fields.",
+              enabled: false,
+              initial: 8,
+              max: 12,
             );
 
             final enableKnob = context.knobs.boolean(
@@ -127,111 +137,106 @@ class AuthCodeStory extends Story {
               description: "Show error with shake animation (ErrorAnimationType.shake).",
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
-            );
-
             return StatefulBuilder(
               builder: (context, setState) {
-                return Directionality(
-                  textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 64),
-                      const TextDivider(text: "Disabled MoonAuthCode"),
-                      const SizedBox(height: 32),
-                      MoonAuthCode(
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 64),
+                    const TextDivider(text: "Disabled MoonAuthCode"),
+                    const SizedBox(height: 32),
+                    MoonAuthCode(
+                      enableInputFill: true,
+                      authInputFieldCount: 4,
+                      mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+                      borderRadius:
+                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      selectedFillColor: selectedFillColor,
+                      activeFillColor: activeFillColor,
+                      inactiveFillColor: inactiveFillColor,
+                      selectedBorderColor: selectedBorderColor,
+                      activeBorderColor: activeBorderColor,
+                      inactiveBorderColor: inactiveBorderColor,
+                      enabled: enableKnob,
+                      gap: gapKnob?.toDouble(),
+                      authFieldShape: shapeKnob,
+                      obscureText: obscuringKnob,
+                      obscuringCharacter: '﹡',
+                      peekWhenObscuring: peekWhenObscuringKnob,
+                      validator: (String? value) => null,
+                      errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
+                    ),
+                    const SizedBox(height: 32),
+                    const TextDivider(text: "Active MoonAuthCode"),
+                    const SizedBox(height: 32),
+                    MoonAuthCode(
+                      autoFocus: true,
+                      enableInputFill: true,
+                      mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+                      borderRadius:
+                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      selectedFillColor: selectedFillColor,
+                      activeFillColor: activeFillColor,
+                      inactiveFillColor: inactiveFillColor,
+                      selectedBorderColor: selectedBorderColor,
+                      activeBorderColor: activeBorderColor,
+                      inactiveBorderColor: inactiveBorderColor,
+                      gap: gapKnob?.toDouble(),
+                      authFieldShape: shapeKnob,
+                      obscureText: obscuringKnob,
+                      obscuringCharacter: '﹡',
+                      peekWhenObscuring: peekWhenObscuringKnob,
+                      validator: (String? value) => null,
+                      errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
+                    ),
+                    const SizedBox(height: 32),
+                    const TextDivider(text: "Error MoonAuthCode"),
+                    const SizedBox(height: 32),
+                    SizedBox(
+                      height: 95,
+                      child: MoonAuthCode(
                         enableInputFill: true,
                         authInputFieldCount: 4,
-                        mainAxisAlignment: mainAxisAlignmentKnob,
-                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                        mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+                        borderRadius:
+                            borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                        errorStreamController: errorStreamController,
                         selectedFillColor: selectedFillColor,
                         activeFillColor: activeFillColor,
                         inactiveFillColor: inactiveFillColor,
                         selectedBorderColor: selectedBorderColor,
                         activeBorderColor: activeBorderColor,
                         inactiveBorderColor: inactiveBorderColor,
-                        enabled: enableKnob,
-                        gap: gapKnob.toDouble(),
+                        gap: gapKnob?.toDouble(),
                         authFieldShape: shapeKnob,
                         obscureText: obscuringKnob,
                         obscuringCharacter: '﹡',
                         peekWhenObscuring: peekWhenObscuringKnob,
-                        validator: (String? value) => null,
-                        errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
-                      ),
-                      const SizedBox(height: 32),
-                      const TextDivider(text: "Active MoonAuthCode"),
-                      const SizedBox(height: 32),
-                      MoonAuthCode(
-                        autoFocus: true,
-                        enableInputFill: true,
-                        mainAxisAlignment: mainAxisAlignmentKnob,
-                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                        selectedFillColor: selectedFillColor,
-                        activeFillColor: activeFillColor,
-                        inactiveFillColor: inactiveFillColor,
-                        selectedBorderColor: selectedBorderColor,
-                        activeBorderColor: activeBorderColor,
-                        inactiveBorderColor: inactiveBorderColor,
-                        gap: gapKnob.toDouble(),
-                        authFieldShape: shapeKnob,
-                        obscureText: obscuringKnob,
-                        obscuringCharacter: '﹡',
-                        peekWhenObscuring: peekWhenObscuringKnob,
-                        validator: (String? value) => null,
-                        errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
-                      ),
-                      const SizedBox(height: 32),
-                      const TextDivider(text: "Error MoonAuthCode"),
-                      const SizedBox(height: 32),
-                      SizedBox(
-                        height: 95,
-                        child: MoonAuthCode(
-                          enableInputFill: true,
-                          authInputFieldCount: 4,
-                          mainAxisAlignment: mainAxisAlignmentKnob,
-                          borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                          errorStreamController: errorStreamController,
-                          selectedFillColor: selectedFillColor,
-                          activeFillColor: activeFillColor,
-                          inactiveFillColor: inactiveFillColor,
-                          selectedBorderColor: selectedBorderColor,
-                          activeBorderColor: activeBorderColor,
-                          inactiveBorderColor: inactiveBorderColor,
-                          gap: gapKnob.toDouble(),
-                          authFieldShape: shapeKnob,
-                          obscureText: obscuringKnob,
-                          obscuringCharacter: '﹡',
-                          peekWhenObscuring: peekWhenObscuringKnob,
-                          onCompleted: (pin) {
-                            if (pin != '9921') {
-                              errorStreamController.add(
-                                errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
-                              );
-                            }
-                          },
-                          validator: (pin) {
-                            if (pin?.length == 4 && pin != '9921') {
-                              return 'Invalid authentication code. Please try again.';
-                            }
-                            return null;
-                          },
-                          errorBuilder: (context, errorText) {
-                            return Align(
-                              child: Container(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Text(errorText ?? ''),
-                              ),
+                        onCompleted: (pin) {
+                          if (pin != '9921') {
+                            errorStreamController.add(
+                              errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
                             );
-                          },
-                        ),
+                          }
+                        },
+                        validator: (pin) {
+                          if (pin?.length == 4 && pin != '9921') {
+                            return 'Invalid authentication code. Please try again.';
+                          }
+                          return null;
+                        },
+                        errorBuilder: (context, errorText) {
+                          return Align(
+                            child: Container(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Text(errorText ?? ''),
+                            ),
+                          );
+                        },
                       ),
-                      const SizedBox(height: 64),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 64),
+                  ],
                 );
               },
             );

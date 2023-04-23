@@ -48,7 +48,6 @@ List<Option<int>> colorOptions = const [
   Option(label: "whis60", value: 37),
   Option(label: "whis10", value: 38),
   Option(label: "transparent", value: 39),
-  Option(label: "null", value: 40),
 ];
 
 /// LUT for the color options.

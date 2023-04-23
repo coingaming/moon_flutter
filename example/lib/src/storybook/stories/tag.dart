@@ -13,9 +13,10 @@ class TagStory extends Story {
               initial: "MoonTag",
             );
 
-            final tagSizesKnob = context.knobs.options(
+            final tagSizesKnob = context.knobs.nullable.options(
               label: "tagSize",
               description: "Tag size variants.",
+              enabled: false,
               initial: MoonTagSize.xs,
               options: const [
                 Option(label: "x2s", value: MoonTagSize.x2s),
@@ -23,29 +24,32 @@ class TagStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.options(
+            final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
               description: "MoonColors variants for Tag text.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob];
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for Tag background.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 12,
-              initial: 4,
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for Tag.",
+              enabled: false,
+              initial: 4,
+              max: 32,
             );
 
             final showLeadingKnob = context.knobs.boolean(
@@ -70,34 +74,26 @@ class TagStory extends Story {
               description: "Sets the text style of the Tag to upper case.",
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
-            );
-
-            return Directionality(
-              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    MoonTag(
-                      borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                      onTap: () {},
-                      tagSize: tagSizesKnob,
-                      isUpperCase: setUpperCase,
-                      textColor: textColor,
-                      backgroundColor: backgroundColor,
-                      leading: showLeadingKnob ? const Icon(MoonIcons.close_small_16) : null,
-                      label: showLabelKnob
-                          ? Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob)
-                          : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.close_small_16) : null,
-                    ),
-                    const SizedBox(height: 64),
-                  ],
-                ),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 64),
+                  MoonTag(
+                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                    onTap: () {},
+                    tagSize: tagSizesKnob,
+                    isUpperCase: setUpperCase,
+                    textColor: textColor,
+                    backgroundColor: backgroundColor,
+                    leading: showLeadingKnob ? const Icon(MoonIcons.close_small_16) : null,
+                    label: showLabelKnob
+                        ? Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob)
+                        : null,
+                    trailing: showTrailingKnob ? const Icon(MoonIcons.close_small_16) : null,
+                  ),
+                  const SizedBox(height: 64),
+                ],
               ),
             );
           },
