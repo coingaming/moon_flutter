@@ -24,13 +24,15 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class StorybookPage extends StatelessWidget {
+  static bool isLargeScreen = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width > 1000;
   const StorybookPage({super.key});
 
   static final _storyPanelFocusNode = FocusNode();
 
   static final _plugins = initializePlugins(
-    contentsSidePanel: true,
-    knobsSidePanel: true,
+    contentsSidePanel: isLargeScreen,
+    knobsSidePanel: isLargeScreen,
+    enableDeviceFrame: isLargeScreen,
     initialDeviceFrameData: DeviceFrameData(
       device: Devices.ios.iPhone13,
     ),

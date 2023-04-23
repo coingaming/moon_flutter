@@ -1,3 +1,4 @@
+import 'package:example/src/storybook/storybook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -27,20 +28,27 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset("assets/svg/moon-logo-short.svg", width: 24.0, height: 24.0),
-          const SizedBox(width: 8.0),
-          Text(
-            "Moon Design",
-            style: MoonTextStyles.heading.text16,
+    return IgnorePointer(
+      child: Material(
+        color: Colors.transparent,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: StorybookPage.isLargeScreen ? MainAxisAlignment.center : MainAxisAlignment.end,
+            children: [
+              SvgPicture.asset("assets/svg/moon-logo-short.svg", width: 24.0, height: 24.0),
+              if (StorybookPage.isLargeScreen) ...[
+                const SizedBox(width: 8.0),
+                Text(
+                  "Moon Design",
+                  style: MoonTextStyles.heading.text16,
+                ),
+              ],
+              const SizedBox(width: 6.0),
+              Text("v$_version", style: MoonTextStyles.heading.text16),
+            ],
           ),
-          const SizedBox(width: 6.0),
-          Text("v$_version", style: MoonTextStyles.heading.text16),
-        ],
+        ),
       ),
     );
   }
