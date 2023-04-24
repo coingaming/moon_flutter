@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.3](https://github.com/coingaming/moon_flutter/compare/v0.19.2...v0.19.3) (2023-04-24)
+
+
+### Bug Fixes
+
+* [MDS-509] Fix Avatar clipping with uneven height and width combinations ([#150](https://github.com/coingaming/moon_flutter/issues/150)) ([87f8b72](https://github.com/coingaming/moon_flutter/commit/87f8b72f3d8f5042370e4ecbacfda4b335fac96d))
+
 ## [0.19.2](https://github.com/coingaming/moon_flutter/compare/v0.19.1...v0.19.2) (2023-04-24)
 
 
