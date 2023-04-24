@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.2](https://github.com/coingaming/moon_flutter/compare/v0.19.1...v0.19.2) (2023-04-24)
+
+
+### Bug Fixes
+
+* [MDS-504] Fork storybook_flutter, create extra functionality and add it as dependency. ([#148](https://github.com/coingaming/moon_flutter/issues/148)) ([c92a516](https://github.com/coingaming/moon_flutter/commit/c92a5167dee698da8366c5a9d43ae0a89fdc6cca))
+
 ## [0.19.1](https://github.com/coingaming/moon_flutter/compare/v0.19.0...v0.19.1) (2023-04-19)
 
 
