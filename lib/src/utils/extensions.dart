@@ -14,8 +14,8 @@ extension DarkModeX on BuildContext {
 extension BorderRadiusX on BorderRadius {
   /// Returns SmoothBorderRadius.
   SmoothBorderRadius get smoothBorderRadius {
-    // FIXME: CornerSmoothing of 1 creates null pointer dereference error for some reason with SmoothRectangleBorder
-    // for some reason. So we use 0.999 instead.
+    // FIXME: CornerSmoothing of 1 creates null pointer dereference error with SmoothRectangleBorder for some reason.
+    // So we use 0.999 instead.
     return SmoothBorderRadius.only(
       topLeft: SmoothRadius(
         cornerRadius: topLeft.x,
