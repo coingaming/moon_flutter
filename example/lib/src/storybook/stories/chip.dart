@@ -14,9 +14,10 @@ class ChipStory extends Story {
               initial: "MoonChip",
             );
 
-            final chipSizesKnob = context.knobs.options(
+            final chipSizesKnob = context.knobs.nullable.options(
               label: "chipSize",
               description: "Chip size variants.",
+              enabled: false,
               initial: MoonChipSize.md,
               options: const [
                 Option(label: "sm", value: MoonChipSize.sm),
@@ -24,47 +25,52 @@ class ChipStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.options(
+            final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
               description: "MoonColors variants for Chip text.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob];
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
 
-            final activeColorsKnob = context.knobs.options(
+            final activeColorsKnob = context.knobs.nullable.options(
               label: "activeColor",
               description: "MoonColors variants for the active Chip.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final activeColor = colorTable(context)[activeColorsKnob];
+            final activeColor = colorTable(context)[activeColorsKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for the Chip background.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
 
-            final borderColorsKnob = context.knobs.options(
+            final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
               description: "MoonColors variants for Chip border.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final borderColor = colorTable(context)[borderColorsKnob];
+            final borderColor = colorTable(context)[borderColorsKnob ?? 40];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 28,
-              initial: 8,
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for the Chip.",
+              enabled: false,
+              initial: 8,
+              max: 32,
             );
 
             final showBorderKnob = context.knobs.boolean(
@@ -94,66 +100,60 @@ class ChipStory extends Story {
               description: "Show widget in the trailing slot.",
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
-            );
-
             final resolvedIconVariant = chipSizesKnob == MoonChipSize.md ? MoonIcons.frame_24 : MoonIcons.frame_16;
 
-            return Directionality(
-              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 64),
-                      const TextDivider(text: "Default Chip"),
-                      const SizedBox(height: 32),
-                      MoonChip(
-                        activeColor: activeColor,
-                        textColor: textColor,
-                        borderColor: borderColor,
-                        isActive: isActiveKnob,
-                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                        showBorder: showBorderKnob,
-                        chipSize: chipSizesKnob,
-                        backgroundColor: backgroundColor,
-                        leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
-                        label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
-                      ),
-                      const SizedBox(height: 40),
-                      const TextDivider(text: "Text Chip"),
-                      const SizedBox(height: 32),
-                      MoonTextChip(
-                        isActive: isActiveKnob,
-                        borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                        showBorder: showBorderKnob,
-                        chipSize: chipSizesKnob,
-                        leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
-                        label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
-                      ),
-                      const SizedBox(height: 40),
-                      const TextDivider(text: "Preset Chip"),
-                      const SizedBox(height: 32),
-                      MoonChip(
-                        isActive: isActiveKnob,
-                        activeColor: context.moonColors!.dodoria100,
-                        backgroundColor: context.moonColors!.krillin100,
-                        hoverEffectColor: context.moonColors!.chiChi10,
-                        borderWidth: 2,
-                        showBorder: showBorderKnob,
-                        chipSize: chipSizesKnob,
-                        leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
-                        label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                        trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
-                      ),
-                      const SizedBox(height: 64),
-                    ],
-                  ),
+            return Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 64),
+                    const TextDivider(text: "Default Chip"),
+                    const SizedBox(height: 32),
+                    MoonChip(
+                      activeColor: activeColor,
+                      textColor: textColor,
+                      borderColor: borderColor,
+                      isActive: isActiveKnob,
+                      borderRadius:
+                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      showBorder: showBorderKnob,
+                      chipSize: chipSizesKnob,
+                      backgroundColor: backgroundColor,
+                      leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
+                      label: showLabelKnob ? Text(customLabelTextKnob) : null,
+                      trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
+                    ),
+                    const SizedBox(height: 40),
+                    const TextDivider(text: "Text Chip"),
+                    const SizedBox(height: 32),
+                    MoonTextChip(
+                      isActive: isActiveKnob,
+                      borderRadius:
+                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      showBorder: showBorderKnob,
+                      chipSize: chipSizesKnob,
+                      leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
+                      label: showLabelKnob ? Text(customLabelTextKnob) : null,
+                      trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
+                    ),
+                    const SizedBox(height: 40),
+                    const TextDivider(text: "Preset Chip"),
+                    const SizedBox(height: 32),
+                    MoonChip(
+                      isActive: isActiveKnob,
+                      activeColor: context.moonColors!.dodoria100,
+                      backgroundColor: context.moonColors!.krillin100,
+                      hoverEffectColor: context.moonColors!.chiChi10,
+                      borderWidth: 2,
+                      showBorder: showBorderKnob,
+                      chipSize: chipSizesKnob,
+                      leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
+                      label: showLabelKnob ? Text(customLabelTextKnob) : null,
+                      trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
+                    ),
+                    const SizedBox(height: 64),
+                  ],
                 ),
               ),
             );

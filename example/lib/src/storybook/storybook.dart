@@ -24,13 +24,15 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class StorybookPage extends StatelessWidget {
+  static bool isLargeScreen = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width > 1000;
   const StorybookPage({super.key});
 
   static final _storyPanelFocusNode = FocusNode();
 
   static final _plugins = initializePlugins(
-    contentsSidePanel: true,
-    knobsSidePanel: true,
+    contentsSidePanel: isLargeScreen,
+    knobsSidePanel: isLargeScreen,
+    enableDeviceFrame: isLargeScreen,
     initialDeviceFrameData: DeviceFrameData(
       device: Devices.ios.iPhone13,
     ),
@@ -43,33 +45,33 @@ class StorybookPage extends StatelessWidget {
         Storybook(
           initialStory: "Accordion",
           plugins: _plugins,
+          brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",
             theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
             darkTheme: ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.dark]),
             useInheritedMediaQuery: true,
-            home: Builder(
-              builder: (context) {
-                return Focus(
-                  focusNode: _storyPanelFocusNode,
-                  descendantsAreFocusable: true,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.deferToChild,
-                    onTap: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      _storyPanelFocusNode.requestFocus();
-                    },
-                    child: Scaffold(
-                      extendBody: true,
-                      extendBodyBehindAppBar: true,
-                      body: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: child,
-                      ),
+            home: Directionality(
+              textDirection: Directionality.of(context),
+              child: Focus(
+                focusNode: _storyPanelFocusNode,
+                descendantsAreFocusable: true,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.deferToChild,
+                  onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    _storyPanelFocusNode.requestFocus();
+                  },
+                  child: Scaffold(
+                    extendBody: true,
+                    extendBodyBehindAppBar: true,
+                    body: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: child,
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ),
           stories: [
@@ -100,10 +102,6 @@ class StorybookPage extends StatelessWidget {
         const SizedBox(
           height: 0,
           child: Text('﹡'),
-        ),
-        const Align(
-          alignment: Alignment.bottomCenter,
-          child: MoonVersionWidget(),
         ),
       ],
     );
