@@ -92,7 +92,7 @@ class AvatarClipper extends CustomClipper<Path> {
           return Path()
             ..addOval(
               Rect.fromCircle(
-                center: Offset(0 + badgeRadius, width - badgeRadius),
+                center: Offset(0 + badgeRadius, height - badgeRadius),
                 radius: badgeRadius + badgeMarginValue,
               ),
             );
@@ -100,7 +100,7 @@ class AvatarClipper extends CustomClipper<Path> {
           return Path()
             ..addOval(
               Rect.fromCircle(
-                center: Offset(width - badgeRadius, width - badgeRadius),
+                center: Offset(width - badgeRadius, height - badgeRadius),
                 radius: badgeRadius + badgeMarginValue,
               ),
             );

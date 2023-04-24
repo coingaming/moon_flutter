@@ -139,104 +139,109 @@ class AuthCodeStory extends Story {
 
             return StatefulBuilder(
               builder: (context, setState) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    const TextDivider(text: "Disabled MoonAuthCode"),
-                    const SizedBox(height: 32),
-                    MoonAuthCode(
-                      enableInputFill: true,
-                      authInputFieldCount: 4,
-                      mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                      selectedFillColor: selectedFillColor,
-                      activeFillColor: activeFillColor,
-                      inactiveFillColor: inactiveFillColor,
-                      selectedBorderColor: selectedBorderColor,
-                      activeBorderColor: activeBorderColor,
-                      inactiveBorderColor: inactiveBorderColor,
-                      enabled: enableKnob,
-                      gap: gapKnob?.toDouble(),
-                      authFieldShape: shapeKnob,
-                      obscureText: obscuringKnob,
-                      obscuringCharacter: '﹡',
-                      peekWhenObscuring: peekWhenObscuringKnob,
-                      validator: (String? value) => null,
-                      errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
+                return Center(
+                  child: SingleChildScrollView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 64),
+                        const TextDivider(text: "Disabled MoonAuthCode"),
+                        const SizedBox(height: 32),
+                        MoonAuthCode(
+                          enableInputFill: true,
+                          authInputFieldCount: 4,
+                          mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+                          borderRadius:
+                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          selectedFillColor: selectedFillColor,
+                          activeFillColor: activeFillColor,
+                          inactiveFillColor: inactiveFillColor,
+                          selectedBorderColor: selectedBorderColor,
+                          activeBorderColor: activeBorderColor,
+                          inactiveBorderColor: inactiveBorderColor,
+                          enabled: enableKnob,
+                          gap: gapKnob?.toDouble(),
+                          authFieldShape: shapeKnob,
+                          obscureText: obscuringKnob,
+                          obscuringCharacter: '﹡',
+                          peekWhenObscuring: peekWhenObscuringKnob,
+                          validator: (String? value) => null,
+                          errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
+                        ),
+                        const SizedBox(height: 32),
+                        const TextDivider(text: "Active MoonAuthCode"),
+                        const SizedBox(height: 32),
+                        MoonAuthCode(
+                          autoFocus: true,
+                          enableInputFill: true,
+                          mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+                          borderRadius:
+                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          selectedFillColor: selectedFillColor,
+                          activeFillColor: activeFillColor,
+                          inactiveFillColor: inactiveFillColor,
+                          selectedBorderColor: selectedBorderColor,
+                          activeBorderColor: activeBorderColor,
+                          inactiveBorderColor: inactiveBorderColor,
+                          gap: gapKnob?.toDouble(),
+                          authFieldShape: shapeKnob,
+                          obscureText: obscuringKnob,
+                          obscuringCharacter: '﹡',
+                          peekWhenObscuring: peekWhenObscuringKnob,
+                          validator: (String? value) => null,
+                          errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
+                        ),
+                        const SizedBox(height: 32),
+                        const TextDivider(text: "Error MoonAuthCode"),
+                        const SizedBox(height: 32),
+                        SizedBox(
+                          height: 95,
+                          child: MoonAuthCode(
+                            enableInputFill: true,
+                            authInputFieldCount: 4,
+                            mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+                            borderRadius:
+                                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                            errorStreamController: errorStreamController,
+                            selectedFillColor: selectedFillColor,
+                            activeFillColor: activeFillColor,
+                            inactiveFillColor: inactiveFillColor,
+                            selectedBorderColor: selectedBorderColor,
+                            activeBorderColor: activeBorderColor,
+                            inactiveBorderColor: inactiveBorderColor,
+                            gap: gapKnob?.toDouble(),
+                            authFieldShape: shapeKnob,
+                            obscureText: obscuringKnob,
+                            obscuringCharacter: '﹡',
+                            peekWhenObscuring: peekWhenObscuringKnob,
+                            onCompleted: (pin) {
+                              if (pin != '9921') {
+                                errorStreamController.add(
+                                  errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
+                                );
+                              }
+                            },
+                            validator: (pin) {
+                              if (pin?.length == 4 && pin != '9921') {
+                                return 'Invalid authentication code. Please try again.';
+                              }
+                              return null;
+                            },
+                            errorBuilder: (context, errorText) {
+                              return Align(
+                                child: Container(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: Text(errorText ?? ''),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 64),
+                      ],
                     ),
-                    const SizedBox(height: 32),
-                    const TextDivider(text: "Active MoonAuthCode"),
-                    const SizedBox(height: 32),
-                    MoonAuthCode(
-                      autoFocus: true,
-                      enableInputFill: true,
-                      mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                      selectedFillColor: selectedFillColor,
-                      activeFillColor: activeFillColor,
-                      inactiveFillColor: inactiveFillColor,
-                      selectedBorderColor: selectedBorderColor,
-                      activeBorderColor: activeBorderColor,
-                      inactiveBorderColor: inactiveBorderColor,
-                      gap: gapKnob?.toDouble(),
-                      authFieldShape: shapeKnob,
-                      obscureText: obscuringKnob,
-                      obscuringCharacter: '﹡',
-                      peekWhenObscuring: peekWhenObscuringKnob,
-                      validator: (String? value) => null,
-                      errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
-                    ),
-                    const SizedBox(height: 32),
-                    const TextDivider(text: "Error MoonAuthCode"),
-                    const SizedBox(height: 32),
-                    SizedBox(
-                      height: 95,
-                      child: MoonAuthCode(
-                        enableInputFill: true,
-                        authInputFieldCount: 4,
-                        mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
-                        borderRadius:
-                            borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                        errorStreamController: errorStreamController,
-                        selectedFillColor: selectedFillColor,
-                        activeFillColor: activeFillColor,
-                        inactiveFillColor: inactiveFillColor,
-                        selectedBorderColor: selectedBorderColor,
-                        activeBorderColor: activeBorderColor,
-                        inactiveBorderColor: inactiveBorderColor,
-                        gap: gapKnob?.toDouble(),
-                        authFieldShape: shapeKnob,
-                        obscureText: obscuringKnob,
-                        obscuringCharacter: '﹡',
-                        peekWhenObscuring: peekWhenObscuringKnob,
-                        onCompleted: (pin) {
-                          if (pin != '9921') {
-                            errorStreamController.add(
-                              errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
-                            );
-                          }
-                        },
-                        validator: (pin) {
-                          if (pin?.length == 4 && pin != '9921') {
-                            return 'Invalid authentication code. Please try again.';
-                          }
-                          return null;
-                        },
-                        errorBuilder: (context, errorText) {
-                          return Align(
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Text(errorText ?? ''),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 64),
-                  ],
+                  ),
                 );
               },
             );
