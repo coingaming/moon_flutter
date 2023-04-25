@@ -14,14 +14,8 @@ enum MoonLinearProgressSize {
 }
 
 class MoonLinearProgress extends StatelessWidget {
-  /// Size of the linear progress widget.
-  final MoonLinearProgressSize? linearProgressSize;
-
-  /// Value of the linear progress widget.
-  final double value;
-
-  /// Height of the linear progress widget.
-  final double? height;
+  /// Border radius value of the linear progress widget.
+  final BorderRadius? borderRadius;
 
   /// Color of the linear progress widget.
   final Color? color;
@@ -29,8 +23,14 @@ class MoonLinearProgress extends StatelessWidget {
   /// Background color of the linear progress widget.
   final Color? backgroundColor;
 
-  /// Border radius value of the linear progress widget.
-  final BorderRadius? borderRadius;
+  /// Height of the linear progress widget.
+  final double? height;
+
+  /// Value of the linear progress widget.
+  final double value;
+
+  /// Size of the linear progress widget.
+  final MoonLinearProgressSize? linearProgressSize;
 
   /// The semantic label for the linear progress widget.
   final String? semanticLabel;
@@ -38,12 +38,12 @@ class MoonLinearProgress extends StatelessWidget {
   /// MDS linear progress widget.
   const MoonLinearProgress({
     super.key,
-    this.linearProgressSize,
-    required this.value,
-    this.height,
+    this.borderRadius,
     this.color,
     this.backgroundColor,
-    this.borderRadius,
+    this.height,
+    required this.value,
+    this.linearProgressSize,
     this.semanticLabel,
   });
 
@@ -70,24 +70,27 @@ class MoonLinearProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, linearProgressSize);
+
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
+
     final Color effectiveColor =
         color ?? context.moonTheme?.linearProgressTheme.colors.color ?? MoonColors.light.piccolo;
+
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
-    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, linearProgressSize);
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 
     return Semantics(
       label: semanticLabel,
       value: "${value * 100}%",
       child: MoonLinearProgressIndicator(
-        value: value,
         borderRadius: effectiveBorderRadius,
-        minHeight: effectiveHeight,
+        value: value,
         color: effectiveColor,
         backgroundColor: effectiveBackgroundColor,
+        minHeight: effectiveHeight,
       ),
     );
   }

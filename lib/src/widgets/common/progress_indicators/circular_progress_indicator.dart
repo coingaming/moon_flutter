@@ -17,10 +17,10 @@ class MoonCircularProgressIndicator extends MoonBaseProgressIndicator {
     required super.backgroundColor,
     required super.color,
     super.valueColor,
-    this.strokeWidth = 4.0,
-    this.strokeCap = StrokeCap.round,
     super.semanticsLabel,
     super.semanticsValue,
+    this.strokeWidth = 4.0,
+    this.strokeCap = StrokeCap.round,
   });
 
   /// Color of the circular track being filled by the circular indicator.
@@ -98,8 +98,10 @@ class _MoonCircularProgressIndicatorState extends State<MoonCircularProgressIndi
             painter: MoonCircularProgressIndicatorPainter(
               backgroundColor: widget.backgroundColor,
               valueColor: widget.color,
-              value: widget.value, // may be null
-              headValue: headValue, // remaining arguments are ignored if widget.value is not null
+              value: widget.value,
+              // may be null
+              headValue: headValue,
+              // remaining arguments are ignored if widget.value is not null
               tailValue: tailValue,
               offsetValue: offsetValue,
               rotationValue: rotationValue,

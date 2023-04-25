@@ -12,14 +12,8 @@ import 'package:moon_design/src/widgets/checkbox/checkbox_painter.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 
 class MoonCheckbox extends StatefulWidget {
-  /// Whether this checkbox is checked.
-  ///
-  /// When [tristate] is true, a value of null corresponds to the mixed state.
-  /// When [tristate] is false, this value must not be null.
-  final bool? value;
-
-  /// Callback for when the checkbox value changes.
-  final ValueChanged<bool?>? onChanged;
+  /// {@macro flutter.widgets.Focus.autofocus}
+  final bool autofocus;
 
   /// If true the checkbox's [value] can be true, false, or null.
   ///
@@ -33,10 +27,11 @@ class MoonCheckbox extends StatefulWidget {
   /// If tristate is false (the default), [value] must not be null.
   final bool tristate;
 
-  /// The size of the checkbox's tap target.
+  /// Whether this checkbox is checked.
   ///
-  /// Defaults to 40.
-  final double tapAreaSizeValue;
+  /// When [tristate] is true, a value of null corresponds to the mixed state.
+  /// When [tristate] is false, this value must not be null.
+  final bool? value;
 
   /// The color to use when this checkbox is checked.
   final Color? activeColor;
@@ -50,58 +45,63 @@ class MoonCheckbox extends StatefulWidget {
   /// The color to use for the checkbox's background when the checkbox is not checked.
   final Color? inactiveColor;
 
+  /// The size of the checkbox's tap target.
+  ///
+  /// Defaults to 40.
+  final double tapAreaSizeValue;
+
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
-
-  /// {@macro flutter.widgets.Focus.autofocus}
-  final bool autofocus;
 
   /// The semantic label for the checkbox.
   final String? semanticLabel;
 
+  /// Callback for when the checkbox value changes.
+  final ValueChanged<bool?>? onChanged;
+
   /// MDS checkbox widget.
   const MoonCheckbox({
     super.key,
-    required this.value,
-    required this.onChanged,
+    this.autofocus = false,
     this.tristate = false,
-    this.tapAreaSizeValue = 40,
+    required this.value,
     this.activeColor,
     this.borderColor,
     this.checkColor,
     this.inactiveColor,
+    this.tapAreaSizeValue = 40,
     this.focusNode,
-    this.autofocus = false,
     this.semanticLabel,
+    required this.onChanged,
   });
 
   static Widget withLabel(
     BuildContext context, {
     Key? key,
-    required bool? value,
-    required ValueChanged<bool?>? onChanged,
+    bool autofocus = false,
     bool tristate = false,
-    double tapAreaSizeValue = 40,
+    required bool? value,
     Color? activeColor,
     Color? borderColor,
     Color? checkColor,
     Color? inactiveColor,
+    double tapAreaSizeValue = 40,
     FocusNode? focusNode,
-    bool autofocus = false,
     required String label,
+    required ValueChanged<bool?>? onChanged,
   }) {
+    final bool isInteractive = onChanged != null;
+
     final Color effectiveTextColor = context.moonColors?.bulma ?? MoonColors.light.bulma;
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.typography.body.text14.copyWith(color: effectiveTextColor) ??
             TextStyle(fontSize: 14, color: effectiveTextColor);
 
-    final Duration effectiveFocusEffectDuration =
-        context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
-
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
-    final bool isInteractive = onChanged != null;
+    final Duration effectiveFocusEffectDuration =
+        context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
 
     return GestureDetector(
       onTap: () => onChanged?.call(!value!),
@@ -114,16 +114,16 @@ class MoonCheckbox extends StatefulWidget {
             children: [
               MoonCheckbox(
                 key: key,
-                value: value,
-                onChanged: onChanged,
+                autofocus: autofocus,
                 tristate: tristate,
-                tapAreaSizeValue: 0,
+                value: value,
                 activeColor: activeColor,
                 borderColor: borderColor,
                 checkColor: checkColor,
                 inactiveColor: inactiveColor,
+                tapAreaSizeValue: 0,
                 focusNode: focusNode,
-                autofocus: autofocus,
+                onChanged: onChanged,
               ),
               const SizedBox(width: 12),
               RepaintBoundary(
@@ -149,6 +149,7 @@ class MoonCheckbox extends StatefulWidget {
 
 class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMixin, ToggleableStateMixin {
   final MoonCheckboxPainter _painter = MoonCheckboxPainter();
+
   bool? _previousValue;
 
   @override
@@ -198,6 +199,9 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
   Widget build(BuildContext context) {
     const Size size = Size(16, 16);
 
+    final BorderRadius effectiveBorderRadius =
+        context.moonTheme?.checkboxTheme.properties.borderRadius ?? MoonBorders.borders.interactiveXs;
+
     final Color effectiveActiveColor =
         widget.activeColor ?? context.moonTheme?.checkboxTheme.colors.activeColor ?? MoonColors.light.piccolo;
 
@@ -210,20 +214,17 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.checkboxTheme.colors.borderColor ?? MoonColors.light.trunks;
 
-    final double effectiveFocusEffectExtent =
-        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
-
     final Color effectiveFocusEffectColor =
         context.moonEffects?.controlFocusEffect.effectColor ?? MoonFocusEffects.lightFocusEffect.effectColor;
-
-    final Curve effectiveFocusEffectCurve =
-        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
 
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
 
-    final BorderRadius effectiveBorderRadius =
-        context.moonTheme?.checkboxTheme.properties.borderRadius ?? MoonBorders.borders.interactiveXs;
+    final Curve effectiveFocusEffectCurve =
+        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
+
+    final double effectiveFocusEffectExtent =
+        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
@@ -240,11 +241,11 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
         minSize: Size(widget.tapAreaSizeValue, widget.tapAreaSizeValue),
         child: MoonFocusEffect(
           show: states.contains(MaterialState.focused),
-          effectExtent: effectiveFocusEffectExtent,
           childBorderRadius: effectiveBorderRadius,
           effectColor: effectiveFocusEffectColor,
           effectCurve: effectiveFocusEffectCurve,
           effectDuration: effectiveFocusEffectDuration,
+          effectExtent: effectiveFocusEffectExtent,
           child: RepaintBoundary(
             child: AnimatedOpacity(
               opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,

@@ -124,9 +124,9 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
     properties
       ..add(DiagnosticsProperty("type", "MoonAuthCodeProperties"))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
-      ..add(DiagnosticsProperty<double>("gap", gap))
-      ..add(DiagnosticsProperty<double>("height", height))
-      ..add(DiagnosticsProperty<double>("width", width))
+      ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("height", height))
+      ..add(DoubleProperty("width", width))
       ..add(DiagnosticsProperty<Duration>("animationDuration", animationDuration))
       ..add(DiagnosticsProperty<Duration>("errorAnimationDuration", errorAnimationDuration))
       ..add(DiagnosticsProperty<Duration>("peekDuration", peekDuration))

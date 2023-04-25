@@ -41,33 +41,17 @@ class MoonToast {
   /// Shows a toast.
   void show(
     BuildContext context, {
-    /// The position of the toast.
-    MoonToastPosition position = MoonToastPosition.bottom,
-
-    /// The variant of the toast. Inverted variant flips the color scheme from theming, eg instead of light colors,
-    /// uses dark colors.
-    MoonToastVariant variant = MoonToastVariant.original,
-
-    /// The background color of the toast.
-    Color? backgroundColor,
+    /// Whether the toast is persistent (attaches to root navigator).
+    bool isPersistent = true,
 
     /// The border radius of the toast.
     BorderRadius? borderRadius,
 
-    /// Whether the toast is persistent (attaches to root navigator).
-    bool isPersistent = true,
-
-    /// The margin around toast.
-    EdgeInsetsGeometry? margin,
-
-    ///The padding around toast children.
-    EdgeInsetsGeometry? padding,
+    /// The background color of the toast.
+    Color? backgroundColor,
 
     /// The horizontal space between toast children.
     double? gap,
-
-    /// Toast shadows.
-    List<BoxShadow>? toastShadows,
 
     /// Toast display duration.
     Duration? displayDuration,
@@ -77,6 +61,22 @@ class MoonToast {
 
     /// Toast transition curve (show animation).
     Curve? transitionCurve,
+
+    /// The margin around toast.
+    EdgeInsetsGeometry? margin,
+
+    ///The padding around toast children.
+    EdgeInsetsGeometry? padding,
+
+    /// Toast shadows.
+    List<BoxShadow>? toastShadows,
+
+    /// The position of the toast.
+    MoonToastPosition position = MoonToastPosition.bottom,
+
+    /// The variant of the toast. Inverted variant flips the color scheme from theming, eg instead of light colors,
+    /// uses dark colors.
+    MoonToastVariant variant = MoonToastVariant.original,
 
     /// The semantic label for the toast.
     String? semanticLabel,
@@ -100,6 +100,9 @@ class MoonToast {
       }
     }
 
+    final BorderRadius effectiveBorderRadius =
+        borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
+
     final Color effectiveBackgroundColor = backgroundColor ??
         (variant == MoonToastVariant.original
             ? (context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.gohan)
@@ -107,16 +110,7 @@ class MoonToast {
 
     final Color effectiveElementColor = getElementColor(effectiveBackgroundColor: effectiveBackgroundColor);
 
-    final BorderRadius effectiveBorderRadius =
-        borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
-
-    final EdgeInsetsGeometry effectiveContentPadding =
-        padding ?? context.moonTheme?.toastTheme.properties.contentPadding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
-
     final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
-
-    final List<BoxShadow> effectiveToastShadows =
-        toastShadows ?? context.moonTheme?.toastTheme.shadows.toastShadows ?? MoonShadows.light.lg;
 
     final Duration effectiveDisplayDuration = displayDuration ??
         context.moonTheme?.toastTheme.properties.displayDuration ??
@@ -128,6 +122,12 @@ class MoonToast {
 
     final Curve effectiveTransitionCurve =
         transitionCurve ?? context.moonTheme?.toastTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+
+    final EdgeInsetsGeometry effectiveContentPadding =
+        padding ?? context.moonTheme?.toastTheme.properties.contentPadding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
+
+    final List<BoxShadow> effectiveToastShadows =
+        toastShadows ?? context.moonTheme?.toastTheme.shadows.toastShadows ?? MoonShadows.light.lg;
 
     final CapturedThemes themes = InheritedTheme.capture(
       from: context,

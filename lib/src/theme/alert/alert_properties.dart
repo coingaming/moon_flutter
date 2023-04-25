@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -107,9 +108,9 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
     properties
       ..add(DiagnosticsProperty("type", "MoonAlertProperties"))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
-      ..add(DiagnosticsProperty<double>("horizontalGap", horizontalGap))
-      ..add(DiagnosticsProperty<double>("minimumHeight", minimumHeight))
-      ..add(DiagnosticsProperty<double>("verticalGap", verticalGap))
+      ..add(DoubleProperty("horizontalGap", horizontalGap))
+      ..add(DoubleProperty("minimumHeight", minimumHeight))
+      ..add(DoubleProperty("verticalGap", verticalGap))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))

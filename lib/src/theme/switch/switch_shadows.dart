@@ -41,6 +41,6 @@ class MoonSwitchShadows extends ThemeExtension<MoonSwitchShadows> with Diagnosti
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonSwitchShadows"))
-      ..add(DiagnosticsProperty<List<BoxShadow>>("shadows", thumbShadows));
+      ..add(DiagnosticsProperty<List<BoxShadow>>("thumbShadows", thumbShadows));
   }
 }

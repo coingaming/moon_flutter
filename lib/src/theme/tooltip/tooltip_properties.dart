@@ -10,15 +10,18 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 @immutable
 class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with DiagnosticableTreeMixin {
   static final properties = MoonTooltipProperties(
+    borderRadius: MoonBorders.borders.interactiveXs,
     arrowBaseWidth: MoonSizes.sizes.x2s,
     arrowLength: MoonSizes.sizes.x4s,
     arrowTipDistance: MoonSizes.sizes.x4s,
-    contentPadding: EdgeInsets.all(MoonSizes.sizes.x3s),
-    borderRadius: MoonBorders.borders.interactiveXs,
     transitionDuration: const Duration(milliseconds: 150),
     transitionCurve: Curves.easeInOutCubic,
+    contentPadding: EdgeInsets.all(MoonSizes.sizes.x3s),
     textStyle: MoonTextStyles.body.text12,
   );
+
+  /// Tooltip border radius.
+  final BorderRadius borderRadius;
 
   /// The tooltip arrows base width.
   final double arrowBaseWidth;
@@ -29,51 +32,48 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
   /// The distance between the tooltip arrow and the widget it is attached to.
   final double arrowTipDistance;
 
-  /// Padding around tooltip content.
-  final EdgeInsetsGeometry contentPadding;
-
-  /// Tooltip border radius.
-  final BorderRadius borderRadius;
-
   /// Tooltip transition duration (fade in or out animation).
   final Duration transitionDuration;
 
   /// Tooltip transition curve (fade in or out animation).
   final Curve transitionCurve;
 
+  /// Padding around tooltip content.
+  final EdgeInsetsGeometry contentPadding;
+
   /// Tooltip body style.
   final TextStyle textStyle;
 
   const MoonTooltipProperties({
+    required this.borderRadius,
     required this.arrowBaseWidth,
     required this.arrowLength,
     required this.arrowTipDistance,
-    required this.contentPadding,
-    required this.borderRadius,
     required this.transitionDuration,
     required this.transitionCurve,
+    required this.contentPadding,
     required this.textStyle,
   });
 
   @override
   MoonTooltipProperties copyWith({
+    BorderRadius? borderRadius,
     double? arrowBaseWidth,
     double? arrowLength,
     double? arrowTipDistance,
-    EdgeInsetsGeometry? contentPadding,
-    BorderRadius? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
+    EdgeInsetsGeometry? contentPadding,
     TextStyle? textStyle,
   }) {
     return MoonTooltipProperties(
+      borderRadius: borderRadius ?? this.borderRadius,
       arrowBaseWidth: arrowBaseWidth ?? this.arrowBaseWidth,
       arrowLength: arrowLength ?? this.arrowLength,
       arrowTipDistance: arrowTipDistance ?? this.arrowTipDistance,
-      contentPadding: contentPadding ?? this.contentPadding,
-      borderRadius: borderRadius ?? this.borderRadius,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
+      contentPadding: contentPadding ?? this.contentPadding,
       textStyle: textStyle ?? this.textStyle,
     );
   }
@@ -83,13 +83,13 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
     if (other is! MoonTooltipProperties) return this;
 
     return MoonTooltipProperties(
+      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       arrowBaseWidth: lerpDouble(arrowBaseWidth, other.arrowBaseWidth, t)!,
       arrowLength: lerpDouble(arrowLength, other.arrowLength, t)!,
       arrowTipDistance: lerpDouble(arrowTipDistance, other.arrowTipDistance, t)!,
-      contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
+      contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -99,13 +99,13 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTooltipProperties"))
+      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DoubleProperty("arrowBaseWidth", arrowBaseWidth))
       ..add(DoubleProperty("arrowLength", arrowLength))
       ..add(DoubleProperty("arrowTipDistance", arrowTipDistance))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

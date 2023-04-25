@@ -6,26 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
 class TooltipShape extends ShapeBorder {
-  final MoonTooltipPosition tooltipPosition;
+  final BorderRadius borderRadius;
+  final Color borderColor;
+  final double borderWidth;
   final double arrowOffset;
   final double arrowBaseWidth;
   final double arrowLength;
   final double arrowTipDistance;
-  final BorderRadius borderRadius;
-  final double borderWidth;
   final double childWidth;
-  final Color borderColor;
+  final MoonTooltipPosition tooltipPosition;
 
   const TooltipShape({
-    required this.tooltipPosition,
+    required this.borderRadius,
+    required this.borderColor,
+    required this.borderWidth,
     this.arrowOffset = 0,
     required this.arrowBaseWidth,
     required this.arrowLength,
     required this.arrowTipDistance,
-    required this.borderRadius,
-    required this.borderWidth,
     required this.childWidth,
-    required this.borderColor,
+    required this.tooltipPosition,
   });
 
   @override

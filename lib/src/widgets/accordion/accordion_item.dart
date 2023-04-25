@@ -21,76 +21,6 @@ enum MoonAccordionItemSize {
 }
 
 class MoonAccordionItem<T> extends StatefulWidget {
-  /// The identity value represented by this accordion.
-  final T? identityValue;
-
-  /// The currently selected identity value for a group of accordions.
-  ///
-  /// This accordion is considered selected if its [identityValue] matches the [groupIdentityValue].
-  final T? groupIdentityValue;
-
-  /// Called when the accordion expands or collapses.
-  ///
-  /// When the accordion expansion changes, this function is called with the [identityValue].
-  final ValueChanged<T?>? onExpansionChanged;
-
-  /// Specifies if the accordion is initially expanded (true) or collapsed (false, the default).
-  ///
-  /// If [identityValue] matches [groupIdentityValue], this parameter is ignored.
-  final bool initiallyExpanded;
-
-  /// Whether the accordion content is outside
-  final bool hasContentOutside;
-
-  /// The size of the accordion.
-  final MoonAccordionItemSize? accordionSize;
-
-  /// The background color of the accordion when expanded.
-  final Color? backgroundColor;
-
-  /// The background color of the accordion when collapsed.
-  final Color? expandedBackgroundColor;
-
-  /// The color of the border of the accordion.
-  final Color? borderColor;
-
-  /// The color of the divider between the header and the body.
-  final Color? dividerColor;
-
-  /// The color of accordion's trailing icon (downward caret by default) when the accordion is collapsed.
-  final Color? trailingIconColor;
-
-  /// The color of accordion's trailing icon (downward caret by default) when the accordion is expanded.
-  final Color? expandedTrailingIconColor;
-
-  /// The color of the accordion's title.
-  final Color? textColor;
-
-  /// Whether to show a border around the accordion.
-  final bool showBorder;
-
-  /// Whether to show a divider between the header and the body.
-  final bool showDivider;
-
-  /// Specifies whether the state of the children is maintained when the accordion expands and collapses.
-  ///
-  /// When true, the children are kept in the tree while the accordion is collapsed.
-  /// When false (default), the children are removed from the tree when the accordion is
-  /// collapsed and recreated upon expansion.
-  final bool maintainState;
-
-  /// The height of the accordion header.
-  final double? headerHeight;
-
-  /// Specifies padding for the accordion header.
-  final EdgeInsetsGeometry? headerPadding;
-
-  /// Specifies padding for [children].
-  final EdgeInsetsGeometry? childrenPadding;
-
-  /// The accordion's border radius.
-  final BorderRadius? borderRadius;
-
   /// Specifies the alignment of [children], which are arranged in a column when
   /// the accordion is expanded.
   /// The internals of the expanded accordion make use of a [Column] widget for
@@ -120,11 +50,59 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// When the value is null, the value of [expandedCrossAxisAlignment] is [CrossAxisAlignment.center].
   final CrossAxisAlignment? expandedCrossAxisAlignment;
 
+  /// {@macro flutter.widgets.Focus.autofocus}
+  final bool autofocus;
+
+  /// Whether the accordion content is outside
+  final bool hasContentOutside;
+
+  /// Specifies if the accordion is initially expanded (true) or collapsed (false, the default).
+  ///
+  /// If [identityValue] matches [groupIdentityValue], this parameter is ignored.
+  final bool initiallyExpanded;
+
+  /// Specifies whether the state of the children is maintained when the accordion expands and collapses.
+  ///
+  /// When true, the children are kept in the tree while the accordion is collapsed.
+  /// When false (default), the children are removed from the tree when the accordion is
+  /// collapsed and recreated upon expansion.
+  final bool maintainState;
+
+  /// Whether to show a border around the accordion.
+  final bool showBorder;
+
+  /// Whether to show a divider between the header and the body.
+  final bool showDivider;
+
+  /// The accordion's border radius.
+  final BorderRadius? borderRadius;
+
   /// {@macro flutter.material.Material.clipBehavior}
   final Clip? clipBehavior;
 
-  /// Accordion shadows.
-  final List<BoxShadow>? shadows;
+  /// The background color of the accordion when expanded.
+  final Color? backgroundColor;
+
+  /// The background color of the accordion when collapsed.
+  final Color? expandedBackgroundColor;
+
+  /// The color of the border of the accordion.
+  final Color? borderColor;
+
+  /// The color of the divider between the header and the body.
+  final Color? dividerColor;
+
+  /// The color of accordion's trailing icon (downward caret by default) when the accordion is collapsed.
+  final Color? trailingIconColor;
+
+  /// The color of accordion's trailing icon (downward caret by default) when the accordion is expanded.
+  final Color? expandedTrailingIconColor;
+
+  /// The color of the accordion's title.
+  final Color? textColor;
+
+  /// The height of the accordion header.
+  final double? headerHeight;
 
   /// Accordion transition duration (expand or collapse animation).
   final Duration? transitionDuration;
@@ -132,14 +110,39 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// Accordion transition curve (expand or collapse animation).
   final Curve? transitionCurve;
 
-  /// {@macro flutter.widgets.Focus.autofocus}
-  final bool autofocus;
+  /// Specifies padding for [children].
+  final EdgeInsetsGeometry? childrenPadding;
+
+  /// Specifies padding for the accordion header.
+  final EdgeInsetsGeometry? headerPadding;
 
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
+  /// Accordion shadows.
+  final List<BoxShadow>? shadows;
+
+  /// The widgets that are displayed when the accordion expands.
+  final List<Widget> children;
+
+  /// The size of the accordion.
+  final MoonAccordionItemSize? accordionSize;
+
   /// The semantic label for the accordion.
   final String? semanticLabel;
+
+  /// The identity value represented by this accordion.
+  final T? identityValue;
+
+  /// The currently selected identity value for a group of accordions.
+  ///
+  /// This accordion is considered selected if its [identityValue] matches the [groupIdentityValue].
+  final T? groupIdentityValue;
+
+  /// Called when the accordion expands or collapses.
+  ///
+  /// When the accordion expansion changes, this function is called with the [identityValue].
+  final ValueChanged<T?>? onExpansionChanged;
 
   /// A widget to display before the title.
   ///
@@ -160,45 +163,42 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// may replace the rotating expansion arrow icon.
   final Widget? trailing;
 
-  /// The widgets that are displayed when the accordion expands.
-  final List<Widget> children;
-
   /// MDS accordion widget.
   const MoonAccordionItem({
     super.key,
-    this.identityValue,
-    this.groupIdentityValue,
-    this.onExpansionChanged,
-    this.initiallyExpanded = false,
+    this.expandedAlignment,
+    this.expandedCrossAxisAlignment,
+    this.autofocus = false,
     this.hasContentOutside = false,
-    this.accordionSize,
-    this.borderColor,
+    this.initiallyExpanded = false,
+    this.maintainState = false,
+    this.showBorder = false,
+    this.showDivider = true,
+    this.borderRadius,
+    this.clipBehavior,
     this.backgroundColor,
     this.expandedBackgroundColor,
+    this.borderColor,
     this.dividerColor,
     this.trailingIconColor,
     this.expandedTrailingIconColor,
     this.textColor,
-    this.showBorder = false,
-    this.showDivider = true,
-    this.maintainState = false,
     this.headerHeight,
-    this.headerPadding,
-    this.childrenPadding,
-    this.borderRadius,
-    this.expandedAlignment,
-    this.expandedCrossAxisAlignment,
-    this.clipBehavior,
-    this.shadows,
     this.transitionDuration,
     this.transitionCurve,
-    this.autofocus = false,
+    this.childrenPadding,
+    this.headerPadding,
     this.focusNode,
+    this.shadows,
+    this.children = const <Widget>[],
+    this.accordionSize,
     this.semanticLabel,
+    this.identityValue,
+    this.groupIdentityValue,
+    this.onExpansionChanged,
     this.leading,
     required this.title,
     this.trailing,
-    this.children = const <Widget>[],
   }) : assert(
           expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
           'CrossAxisAlignment.baseline is not supported since the expanded children '
@@ -218,17 +218,18 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
   };
 
+  late Animation<Color?>? _iconColorAnimation;
+  late Animation<Color?>? _backgroundColorAnimation;
+
   AnimationController? _animationController;
   CurvedAnimation? _curvedAnimation;
 
-  late Animation<Color?>? _iconColorAnimation;
-  late Animation<Color?>? _backgroundColorAnimation;
+  FocusNode? _focusNode;
 
   bool _isExpanded = false;
   bool _isFocused = false;
   bool _isHovered = false;
 
-  FocusNode? _focusNode;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
@@ -374,6 +375,13 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   }
 
   Widget _buildChildren(BuildContext context, Widget? child) {
+    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
+        context.moonTheme?.accordionTheme.itemProperties.borderRadius ??
+        MoonBorders.borders.interactiveSm;
+
+    final Color effectiveBorderColor =
+        widget.borderColor ?? context.moonTheme?.accordionTheme.itemColors.borderColor ?? MoonColors.light.beerus;
+
     final Color effectiveBackgroundColor = widget.backgroundColor ??
         context.moonTheme?.accordionTheme.itemColors.backgroundColor ??
         MoonColors.light.gohan;
@@ -381,9 +389,6 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     final Color effectiveExpandedBackgroundColor = widget.expandedBackgroundColor ??
         context.moonTheme?.accordionTheme.itemColors.expandedBackgroundColor ??
         MoonColors.light.gohan;
-
-    final Color effectiveBorderColor =
-        widget.borderColor ?? context.moonTheme?.accordionTheme.itemColors.borderColor ?? MoonColors.light.beerus;
 
     final MoonAccordionItemSizeProperties effectiveMoonAccordionSize =
         _getMoonAccordionItemSize(context, widget.accordionSize);
@@ -411,24 +416,20 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     final Color effectiveFocusEffectColor =
         context.moonEffects?.controlFocusEffect.effectColor ?? MoonFocusEffects.lightFocusEffect.effectColor;
 
-    final Curve effectiveFocusEffectCurve =
-        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
-
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
+
+    final Curve effectiveFocusEffectCurve =
+        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
 
     final Color effectiveHoverEffectColor = context.moonEffects?.controlHoverEffect.primaryHoverColor ??
         MoonHoverEffects.lightHoverEffect.primaryHoverColor;
 
-    final Curve effectiveHoverEffectCurve =
-        context.moonEffects?.controlHoverEffect.hoverCurve ?? MoonHoverEffects.lightHoverEffect.hoverCurve;
-
     final Duration effectiveHoverEffectDuration =
         context.moonEffects?.controlHoverEffect.hoverDuration ?? MoonHoverEffects.lightHoverEffect.hoverDuration;
 
-    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
-        context.moonTheme?.accordionTheme.itemProperties.borderRadius ??
-        MoonBorders.borders.interactiveSm;
+    final Curve effectiveHoverEffectCurve =
+        context.moonEffects?.controlHoverEffect.hoverCurve ?? MoonHoverEffects.lightHoverEffect.hoverCurve;
 
     _animationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
     _curvedAnimation ??= CurvedAnimation(parent: _animationController!, curve: effectiveTransitionCurve);
@@ -456,11 +457,11 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         onShowHoverHighlight: _handleHover,
         child: MoonFocusEffect(
           show: _isFocused,
-          effectExtent: effectiveFocusEffectExtent,
+          childBorderRadius: effectiveBorderRadius,
           effectColor: effectiveFocusEffectColor,
           effectDuration: effectiveFocusEffectDuration,
           effectCurve: effectiveFocusEffectCurve,
-          childBorderRadius: effectiveBorderRadius,
+          effectExtent: effectiveFocusEffectExtent,
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(

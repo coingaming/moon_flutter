@@ -9,6 +9,44 @@ import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/radio/radio_painter.dart';
 
 class MoonRadio<T> extends StatefulWidget {
+  /// {@macro flutter.widgets.Focus.autofocus}
+  final bool autofocus;
+
+  /// Set to true if this radio button is allowed to be returned to an
+  /// indeterminate state by selecting it again when selected.
+  ///
+  /// To indicate returning to an indeterminate state, [onChanged] will be
+  /// called with null.
+  ///
+  /// If true, [onChanged] can be called with [value] when selected while
+  /// [groupValue] != [value], or with null when selected again while
+  /// [groupValue] == [value].
+  ///
+  /// If false, [onChanged] will be called with [value] when it is selected
+  /// while [groupValue] != [value], and only by selecting another radio button
+  /// in the group (i.e. changing the value of [groupValue]) can this radio
+  /// button be unselected.
+  ///
+  /// Defaults to false.
+  final bool toggleable;
+
+  /// The color to use when this radio is checked.
+  final Color? activeColor;
+
+  /// The color to use for the radio's background when the radio is not checked.
+  final Color? inactiveColor;
+
+  /// The size of the radio's tap target.
+  ///
+  /// Defaults to 40.
+  final double tapAreaSizeValue;
+
+  /// {@macro flutter.widgets.Focus.focusNode}.
+  final FocusNode? focusNode;
+
+  /// The semantic label for the radio.
+  final String? semanticLabel;
+
   /// The value represented by this radio button.
   final T value;
 
@@ -34,85 +72,47 @@ class MoonRadio<T> extends StatefulWidget {
   /// gets rebuilt.
   final ValueChanged<T?>? onChanged;
 
-  /// Set to true if this radio button is allowed to be returned to an
-  /// indeterminate state by selecting it again when selected.
-  ///
-  /// To indicate returning to an indeterminate state, [onChanged] will be
-  /// called with null.
-  ///
-  /// If true, [onChanged] can be called with [value] when selected while
-  /// [groupValue] != [value], or with null when selected again while
-  /// [groupValue] == [value].
-  ///
-  /// If false, [onChanged] will be called with [value] when it is selected
-  /// while [groupValue] != [value], and only by selecting another radio button
-  /// in the group (i.e. changing the value of [groupValue]) can this radio
-  /// button be unselected.
-  ///
-  /// Defaults to false.
-  final bool toggleable;
-
-  /// The size of the radio's tap target.
-  ///
-  /// Defaults to 40.
-  final double tapAreaSizeValue;
-
-  /// The color to use when this radio is checked.
-  final Color? activeColor;
-
-  /// The color to use for the radio's background when the radio is not checked.
-  final Color? inactiveColor;
-
-  /// {@macro flutter.widgets.Focus.focusNode}.
-  final FocusNode? focusNode;
-
-  /// {@macro flutter.widgets.Focus.autofocus}
-  final bool autofocus;
-
-  /// The semantic label for the radio.
-  final String? semanticLabel;
-
   /// MDS radio widget.
   const MoonRadio({
     super.key,
+    this.autofocus = false,
+    this.toggleable = false,
+    this.activeColor,
+    this.inactiveColor,
+    this.tapAreaSizeValue = 40,
+    this.focusNode,
+    this.semanticLabel,
     required this.value,
     required this.groupValue,
     required this.onChanged,
-    this.toggleable = false,
-    this.tapAreaSizeValue = 40,
-    this.activeColor,
-    this.inactiveColor,
-    this.focusNode,
-    this.autofocus = false,
-    this.semanticLabel,
   });
 
   static Widget withLabel<T>(
     BuildContext context, {
     Key? key,
+    bool autofocus = false,
+    bool toggleable = false,
+    Color? activeColor,
+    Color? inactiveColor,
+    double tapAreaSizeValue = 40,
+    FocusNode? focusNode,
+    required String label,
     required T value,
     required T? groupValue,
     required ValueChanged<T?>? onChanged,
-    bool toggleable = false,
-    double tapAreaSizeValue = 40,
-    Color? activeColor,
-    Color? inactiveColor,
-    FocusNode? focusNode,
-    bool autofocus = false,
-    required String label,
   }) {
+    final bool isInteractive = onChanged != null;
+
     final Color effectiveTextColor = context.moonColors?.bulma ?? MoonColors.light.bulma;
 
-    final TextStyle effectiveTextStyle =
-        context.moonTheme?.typography.body.text14.copyWith(color: effectiveTextColor) ??
-            TextStyle(fontSize: 14, color: effectiveTextColor);
+    final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
 
-    final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
-
-    final bool isInteractive = onChanged != null;
+    final TextStyle effectiveTextStyle =
+        context.moonTheme?.typography.body.text14.copyWith(color: effectiveTextColor) ??
+            TextStyle(fontSize: 14, color: effectiveTextColor);
 
     return GestureDetector(
       onTap: () => onChanged?.call(value),
@@ -203,17 +203,17 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
     final Color effectiveInactiveColor =
         widget.inactiveColor ?? context.moonTheme?.radioTheme.colors.inactiveColor ?? MoonColors.light.trunks;
 
-    final double effectiveFocusEffectExtent =
-        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
-
     final Color effectiveFocusEffectColor =
         context.moonEffects?.controlFocusEffect.effectColor ?? MoonFocusEffects.lightFocusEffect.effectColor;
 
-    final Curve effectiveFocusEffectCurve =
-        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
+    final double effectiveFocusEffectExtent =
+        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
 
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
+
+    final Curve effectiveFocusEffectCurve =
+        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 

@@ -14,11 +14,8 @@ enum MoonLinearLoaderSize {
 }
 
 class MoonLinearLoader extends StatelessWidget {
-  /// Size of the linear loader widget.
-  final MoonLinearLoaderSize? linearLoaderSize;
-
-  /// Height of the linear loader widget.
-  final double? height;
+  /// Border radius of the linear loader widget.
+  final BorderRadius? borderRadius;
 
   /// Color of the linear loader widget.
   final Color? color;
@@ -26,17 +23,20 @@ class MoonLinearLoader extends StatelessWidget {
   /// Background color of the linear loader widget.
   final Color? backgroundColor;
 
-  /// Border radius of the linear loader widget.
-  final BorderRadius? borderRadius;
+  /// Height of the linear loader widget.
+  final double? height;
+
+  /// Size of the linear loader widget.
+  final MoonLinearLoaderSize? linearLoaderSize;
 
   /// MDS linear loader widget.
   const MoonLinearLoader({
     super.key,
-    this.linearLoaderSize,
-    this.height,
+    this.borderRadius,
     this.color,
     this.backgroundColor,
-    this.borderRadius,
+    this.height,
+    this.linearLoaderSize,
   });
 
   MoonLinearLoaderSizeProperties _getMoonLoaderSize(BuildContext context, MoonLinearLoaderSize? moonLoaderSize) {
@@ -59,19 +59,22 @@ class MoonLinearLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MoonLinearLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, linearLoaderSize);
+
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveLoaderSize.borderRadius;
+
     final Color effectiveColor = color ?? context.moonTheme?.linearLoaderTheme.colors.color ?? MoonColors.light.hit;
+
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.linearLoaderTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
-    final MoonLinearLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, linearLoaderSize);
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveLoaderSize.borderRadius;
     final double effectiveHeight = height ?? effectiveLoaderSize.loaderHeight;
 
     return MoonLinearProgressIndicator(
-      borderRadius: effectiveBorderRadius,
-      minHeight: effectiveHeight,
       color: effectiveColor,
       backgroundColor: effectiveBackgroundColor,
+      borderRadius: effectiveBorderRadius,
+      minHeight: effectiveHeight,
     );
   }
 }

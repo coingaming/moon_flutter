@@ -10,55 +10,58 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 @immutable
 class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> with DiagnosticableTreeMixin {
   static final xs = MoonButtonSizeProperties(
-    height: MoonSizes.sizes.xs,
+    borderRadius: MoonBorders.borders.interactiveXs,
     gap: MoonSizes.sizes.x5s,
+    height: MoonSizes.sizes.xs,
     iconSizeValue: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text12,
   );
 
   static final sm = MoonButtonSizeProperties(
-    height: MoonSizes.sizes.sm,
+    borderRadius: MoonBorders.borders.interactiveSm,
     gap: MoonSizes.sizes.x5s,
+    height: MoonSizes.sizes.sm,
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final md = MoonButtonSizeProperties(
-    height: MoonSizes.sizes.md,
+    borderRadius: MoonBorders.borders.interactiveSm,
     gap: MoonSizes.sizes.x4s,
+    height: MoonSizes.sizes.md,
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final lg = MoonButtonSizeProperties(
-    height: MoonSizes.sizes.lg,
+    borderRadius: MoonBorders.borders.interactiveSm,
     gap: MoonSizes.sizes.x3s,
+    height: MoonSizes.sizes.lg,
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text16,
   );
 
   static final xl = MoonButtonSizeProperties(
-    height: MoonSizes.sizes.xl,
+    borderRadius: MoonBorders.borders.interactiveMd,
     gap: MoonSizes.sizes.x2s,
+    height: MoonSizes.sizes.xl,
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.xs),
-    borderRadius: MoonBorders.borders.interactiveMd,
     textStyle: MoonTextStyles.heading.text16,
   );
 
-  /// Button height.
-  final double height;
+  /// Button border radius.
+  final BorderRadius borderRadius;
 
   /// Space between button children.
   final double gap;
+
+  /// Button height.
+  final double height;
 
   /// Button icon size value.
   final double iconSizeValue;
@@ -66,36 +69,33 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
   /// Padding around button children.
   final EdgeInsetsGeometry padding;
 
-  /// Button border radius.
-  final BorderRadius borderRadius;
-
   /// Button text style.
   final TextStyle textStyle;
 
   const MoonButtonSizeProperties({
-    required this.height,
+    required this.borderRadius,
     required this.gap,
+    required this.height,
     required this.iconSizeValue,
     required this.padding,
-    required this.borderRadius,
     required this.textStyle,
   });
 
   @override
   MoonButtonSizeProperties copyWith({
-    double? height,
+    BorderRadius? borderRadius,
     double? gap,
+    double? height,
     double? iconSizeValue,
     EdgeInsetsGeometry? padding,
-    BorderRadius? borderRadius,
     TextStyle? textStyle,
   }) {
     return MoonButtonSizeProperties(
-      height: height ?? this.height,
+      borderRadius: borderRadius ?? this.borderRadius,
       gap: gap ?? this.gap,
+      height: height ?? this.height,
       iconSizeValue: iconSizeValue ?? this.iconSizeValue,
       padding: padding ?? this.padding,
-      borderRadius: borderRadius ?? this.borderRadius,
       textStyle: textStyle ?? this.textStyle,
     );
   }
@@ -105,11 +105,11 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
     if (other is! MoonButtonSizeProperties) return this;
 
     return MoonButtonSizeProperties(
-      height: lerpDouble(height, other.height, t)!,
+      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
+      height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -119,11 +119,11 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonButtonSizeProperties"))
-      ..add(DoubleProperty("height", height))
+      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

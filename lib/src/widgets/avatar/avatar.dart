@@ -23,41 +23,41 @@ enum MoonBadgeAlignment {
 }
 
 class MoonAvatar extends StatelessWidget {
-  /// The height of the avatar.
-  final double? width;
-
-  /// The width of the avatar.
-  final double? height;
+  /// Whether to show the avatar badge or not.
+  final bool showBadge;
 
   /// The border radius of the avatar.
   final BorderRadius? borderRadius;
 
-  /// The size of the avatars badge.
-  final double? badgeSize;
-
-  /// The margin value of the avatars badge.
-  final double? badgeMarginValue;
-
-  /// Whether to show the avatar badge or not.
-  final bool showBadge;
+  /// The background color of the avatar.
+  final Color? backgroundColor;
 
   /// The color of the avatar badge.
   final Color? badgeColor;
 
-  /// The background color of the avatar.
-  final Color? backgroundColor;
-
   /// The text color of the avatar.
   final Color? textColor;
+
+  /// The margin value of the avatars badge.
+  final double? badgeMarginValue;
+
+  /// The size of the avatars badge.
+  final double? badgeSize;
+
+  /// The width of the avatar.
+  final double? height;
+
+  /// The height of the avatar.
+  final double? width;
+
+  /// The background image of the avatar.
+  final ImageProvider<Object>? backgroundImage;
 
   /// The size of the avatar.
   final MoonAvatarSize? avatarSize;
 
   /// The alignment of the avatar badge.
   final MoonBadgeAlignment badgeAlignment;
-
-  /// The background image of the avatar.
-  final ImageProvider<Object>? backgroundImage;
 
   /// The semantic label for the avatar.
   final String? semanticLabel;
@@ -68,18 +68,18 @@ class MoonAvatar extends StatelessWidget {
   /// MDS avatar widget.
   const MoonAvatar({
     super.key,
-    this.width,
-    this.height,
-    this.borderRadius,
-    this.badgeSize,
-    this.badgeMarginValue,
     this.showBadge = false,
-    this.badgeColor,
+    this.borderRadius,
     this.backgroundColor,
+    this.badgeColor,
     this.textColor,
+    this.badgeMarginValue,
+    this.badgeSize,
+    this.height,
+    this.width,
+    this.backgroundImage,
     this.avatarSize,
     this.badgeAlignment = MoonBadgeAlignment.bottomRight,
-    this.backgroundImage,
     this.semanticLabel,
     this.content,
   });
@@ -149,6 +149,10 @@ class MoonAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MoonAvatarSizeProperties effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
+
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
+
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.avatarTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
@@ -158,15 +162,13 @@ class MoonAvatar extends StatelessWidget {
     final Color effectiveTextColor = textColor ??
         _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
 
-    final MoonAvatarSizeProperties effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
-
-    final double effectiveAvatarWidth = width ?? effectiveMoonAvatarSize.avatarSizeValue;
     final double effectiveAvatarHeight = height ?? effectiveMoonAvatarSize.avatarSizeValue;
 
-    final double effectiveBadgeSize = badgeSize ?? effectiveMoonAvatarSize.badgeSizeValue;
+    final double effectiveAvatarWidth = width ?? effectiveMoonAvatarSize.avatarSizeValue;
+
     final double effectiveBadgeMarginValue = badgeMarginValue ?? effectiveMoonAvatarSize.badgeMarginValue;
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
+    final double effectiveBadgeSize = badgeSize ?? effectiveMoonAvatarSize.badgeSizeValue;
 
     return Semantics(
       label: semanticLabel,

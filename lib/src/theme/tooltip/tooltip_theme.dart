@@ -9,41 +9,41 @@ import 'package:moon_design/src/theme/tooltip/tooltip_shadows.dart';
 class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with DiagnosticableTreeMixin {
   static final light = MoonTooltipTheme(
     colors: MoonTooltipColors.light,
-    shadows: MoonTooltipShadows.light,
     properties: MoonTooltipProperties.properties,
+    shadows: MoonTooltipShadows.light,
   );
 
   static final dark = MoonTooltipTheme(
     colors: MoonTooltipColors.dark,
-    shadows: MoonTooltipShadows.dark,
     properties: MoonTooltipProperties.properties,
+    shadows: MoonTooltipShadows.dark,
   );
 
   /// Tooltip colors.
   final MoonTooltipColors colors;
 
-  /// Tooltip shadows.
-  final MoonTooltipShadows shadows;
-
   /// Tooltip properties.
   final MoonTooltipProperties properties;
 
+  /// Tooltip shadows.
+  final MoonTooltipShadows shadows;
+
   const MoonTooltipTheme({
     required this.colors,
-    required this.shadows,
     required this.properties,
+    required this.shadows,
   });
 
   @override
   MoonTooltipTheme copyWith({
     MoonTooltipColors? colors,
-    MoonTooltipShadows? shadows,
     MoonTooltipProperties? properties,
+    MoonTooltipShadows? shadows,
   }) {
     return MoonTooltipTheme(
       colors: colors ?? this.colors,
-      shadows: shadows ?? this.shadows,
       properties: properties ?? this.properties,
+      shadows: shadows ?? this.shadows,
     );
   }
 
@@ -53,8 +53,8 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
 
     return MoonTooltipTheme(
       colors: colors.lerp(other.colors, t),
-      shadows: shadows.lerp(other.shadows, t),
       properties: properties.lerp(other.properties, t),
+      shadows: shadows.lerp(other.shadows, t),
     );
   }
 
@@ -64,7 +64,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonTooltipTheme"))
       ..add(DiagnosticsProperty<MoonTooltipColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonTooltipShadows>("shadows", shadows))
-      ..add(DiagnosticsProperty<MoonTooltipProperties>("properties", properties));
+      ..add(DiagnosticsProperty<MoonTooltipProperties>("properties", properties))
+      ..add(DiagnosticsProperty<MoonTooltipShadows>("shadows", shadows));
   }
 }
