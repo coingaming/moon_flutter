@@ -13,64 +13,64 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
   static final _badgeMarginValueToAvatarRatio = MoonSizes.sizes.x5s / MoonSizes.sizes.x2l;
 
   static final xs = MoonAvatarSizeProperties(
-    avatarSizeValue: MoonSizes.sizes.xs,
-    badgeSizeValue: MoonSizes.sizes.xs * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.xs * _badgeMarginValueToAvatarRatio,
     borderRadius: MoonBorders.borders.interactiveXs,
+    avatarSizeValue: MoonSizes.sizes.xs,
+    badgeMarginValue: MoonSizes.sizes.xs * _badgeMarginValueToAvatarRatio,
+    badgeSizeValue: MoonSizes.sizes.xs * _badgeToAvatarRatio,
     textStyle: MoonTextStyles.heading.text10,
   );
 
   static final sm = MoonAvatarSizeProperties(
-    avatarSizeValue: MoonSizes.sizes.sm,
-    badgeSizeValue: MoonSizes.sizes.sm * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.sm * _badgeMarginValueToAvatarRatio,
     borderRadius: MoonBorders.borders.interactiveSm,
+    avatarSizeValue: MoonSizes.sizes.sm,
+    badgeMarginValue: MoonSizes.sizes.sm * _badgeMarginValueToAvatarRatio,
+    badgeSizeValue: MoonSizes.sizes.sm * _badgeToAvatarRatio,
     textStyle: MoonTextStyles.heading.text12,
   );
 
   static final md = MoonAvatarSizeProperties(
-    avatarSizeValue: MoonSizes.sizes.md,
-    badgeSizeValue: MoonSizes.sizes.md * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.md * _badgeMarginValueToAvatarRatio,
     borderRadius: MoonBorders.borders.interactiveSm,
+    avatarSizeValue: MoonSizes.sizes.md,
+    badgeMarginValue: MoonSizes.sizes.md * _badgeMarginValueToAvatarRatio,
+    badgeSizeValue: MoonSizes.sizes.md * _badgeToAvatarRatio,
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final lg = MoonAvatarSizeProperties(
-    avatarSizeValue: MoonSizes.sizes.lg,
-    badgeSizeValue: MoonSizes.sizes.lg * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.lg * _badgeMarginValueToAvatarRatio,
     borderRadius: MoonBorders.borders.interactiveSm,
+    avatarSizeValue: MoonSizes.sizes.lg,
+    badgeMarginValue: MoonSizes.sizes.lg * _badgeMarginValueToAvatarRatio,
+    badgeSizeValue: MoonSizes.sizes.lg * _badgeToAvatarRatio,
     textStyle: MoonTextStyles.heading.text16,
   );
 
   static final xl = MoonAvatarSizeProperties(
-    avatarSizeValue: MoonSizes.sizes.xl,
-    badgeSizeValue: MoonSizes.sizes.xl * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.xl * _badgeMarginValueToAvatarRatio,
     borderRadius: MoonBorders.borders.interactiveMd,
+    avatarSizeValue: MoonSizes.sizes.xl,
+    badgeMarginValue: MoonSizes.sizes.xl * _badgeMarginValueToAvatarRatio,
+    badgeSizeValue: MoonSizes.sizes.xl * _badgeToAvatarRatio,
     textStyle: MoonTextStyles.heading.text16,
   );
 
   static final x2l = MoonAvatarSizeProperties(
-    avatarSizeValue: MoonSizes.sizes.x2l,
-    badgeSizeValue: MoonSizes.sizes.x2l * _badgeToAvatarRatio,
-    badgeMarginValue: MoonSizes.sizes.x2l * _badgeMarginValueToAvatarRatio,
     borderRadius: MoonBorders.borders.interactiveMd,
+    avatarSizeValue: MoonSizes.sizes.x2l,
+    badgeMarginValue: MoonSizes.sizes.x2l * _badgeMarginValueToAvatarRatio,
+    badgeSizeValue: MoonSizes.sizes.x2l * _badgeToAvatarRatio,
     textStyle: MoonTextStyles.heading.text20,
   );
+
+  /// Avatar border radius.
+  final BorderRadius borderRadius;
 
   /// Avatar size value.
   final double avatarSizeValue;
 
-  /// Avatar badge size value.
-  final double badgeSizeValue;
-
   /// Avatar badge margin value.
   final double badgeMarginValue;
 
-  /// Avatar border radius.
-  final BorderRadius borderRadius;
+  /// Avatar badge size value.
+  final double badgeSizeValue;
 
   /// Avatar text style.
   final TextStyle textStyle;
@@ -85,17 +85,17 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
 
   @override
   MoonAvatarSizeProperties copyWith({
-    double? avatarSizeValue,
-    double? badgeSizeValue,
-    double? badgeMarginValue,
     BorderRadius? borderRadius,
+    double? avatarSizeValue,
+    double? badgeMarginValue,
+    double? badgeSizeValue,
     TextStyle? textStyle,
   }) {
     return MoonAvatarSizeProperties(
-      avatarSizeValue: avatarSizeValue ?? this.avatarSizeValue,
-      badgeSizeValue: badgeSizeValue ?? this.badgeSizeValue,
-      badgeMarginValue: badgeMarginValue ?? this.badgeMarginValue,
       borderRadius: borderRadius ?? this.borderRadius,
+      avatarSizeValue: avatarSizeValue ?? this.avatarSizeValue,
+      badgeMarginValue: badgeMarginValue ?? this.badgeMarginValue,
+      badgeSizeValue: badgeSizeValue ?? this.badgeSizeValue,
       textStyle: textStyle ?? this.textStyle,
     );
   }
@@ -105,10 +105,10 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
     if (other is! MoonAvatarSizeProperties) return this;
 
     return MoonAvatarSizeProperties(
-      avatarSizeValue: lerpDouble(avatarSizeValue, other.avatarSizeValue, t)!,
-      badgeSizeValue: lerpDouble(badgeSizeValue, other.badgeSizeValue, t)!,
-      badgeMarginValue: lerpDouble(badgeMarginValue, other.badgeMarginValue, t)!,
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      avatarSizeValue: lerpDouble(avatarSizeValue, other.avatarSizeValue, t)!,
+      badgeMarginValue: lerpDouble(badgeMarginValue, other.badgeMarginValue, t)!,
+      badgeSizeValue: lerpDouble(badgeSizeValue, other.badgeSizeValue, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -118,10 +118,10 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAvatarSizeProperties"))
-      ..add(DoubleProperty("avatarSizeValue", avatarSizeValue))
-      ..add(DoubleProperty("badgeSizeValue", badgeSizeValue))
-      ..add(DoubleProperty("badgeMarginValue", badgeMarginValue))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DoubleProperty("avatarSizeValue", avatarSizeValue))
+      ..add(DoubleProperty("badgeMarginValue", badgeMarginValue))
+      ..add(DoubleProperty("badgeSizeValue", badgeSizeValue))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

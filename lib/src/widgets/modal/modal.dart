@@ -7,11 +7,11 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 
 class MoonModal extends StatelessWidget {
-  /// The background color of the modal.
-  final Color? backgroundColor;
-
   /// The border radius of the modal.
   final BorderRadius? borderRadius;
+
+  /// The background color of the modal.
+  final Color? backgroundColor;
 
   /// The semantic label for the modal.
   final String? semanticLabel;
@@ -21,8 +21,8 @@ class MoonModal extends StatelessWidget {
 
   const MoonModal({
     super.key,
-    this.backgroundColor,
     this.borderRadius,
+    this.backgroundColor,
     this.semanticLabel,
     required this.child,
   });
@@ -42,14 +42,14 @@ class MoonModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BorderRadius effectiveBorderRadius =
+        borderRadius ?? context.moonTheme?.modalTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
+
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
         _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
-
-    final BorderRadius effectiveBorderRadius =
-        borderRadius ?? context.moonTheme?.modalTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
     return Semantics(
       label: semanticLabel,

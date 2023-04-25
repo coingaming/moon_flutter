@@ -19,15 +19,6 @@ typedef MoonBaseControlBuilder = Widget Function(
 );
 
 class MoonBaseControl extends StatefulWidget {
-  /// The callback that is called when the control is tapped or pressed.
-  final VoidCallback? onTap;
-
-  /// The callback that is called when the control is long-pressed.
-  final VoidCallback? onLongPress;
-
-  /// {@macro flutter.widgets.Focus.focusNode}.
-  final FocusNode? focusNode;
-
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
@@ -37,8 +28,8 @@ class MoonBaseControl extends StatefulWidget {
   /// Whether this control should ensure that it has a minimal touch target size.
   final bool ensureMinimalTouchTargetSize;
 
-  /// Whether this control should show a tooltip.
-  final bool showTooltip;
+  /// Whether the semantic type of this control is button.
+  final bool semanticTypeIsButton;
 
   /// Whether this control should show a focus effect.
   final bool showFocusEffect;
@@ -52,29 +43,11 @@ class MoonBaseControl extends StatefulWidget {
   /// Whether this control should show a scale animation.
   final bool showScaleAnimation;
 
-  /// Whether the semantic type of this control is button.
-  final bool semanticTypeIsButton;
+  /// Whether this control should show a tooltip.
+  final bool showTooltip;
 
-  /// The semantic label for this control.
-  final String? semanticLabel;
-
-  /// The tooltip message for this control.
-  final String tooltipMessage;
-
-  /// The minimum size of the touch target.
-  final double minTouchTargetSize;
-
-  /// The opacity of the control when it is disabled.
-  final double? disabledOpacityValue;
-
-  /// The extent of the focus effect.
-  final double? focusEffectExtent;
-
-  /// The extent of the pulse effect.
-  final double? pulseEffectExtent;
-
-  /// The scalar controlling the scaling of the scale effect.
-  final double? scaleEffectScalar;
+  /// The border radius of the control.
+  final BorderRadius? borderRadius;
 
   /// The background color of the control.
   final Color? backgroundColor;
@@ -85,14 +58,29 @@ class MoonBaseControl extends StatefulWidget {
   /// The color of the pulse effect.
   final Color? pulseEffectColor;
 
+  /// The opacity of the control when it is disabled.
+  final double? disabledOpacityValue;
+
+  /// The minimum size of the touch target.
+  final double minTouchTargetSize;
+
+  /// The extent of the focus effect.
+  final double? focusEffectExtent;
+
+  /// The extent of the pulse effect.
+  final double? pulseEffectExtent;
+
+  /// The scalar controlling the scaling of the scale effect.
+  final double? scaleEffectScalar;
+
   /// The duration of the focus effect.
   final Duration? focusEffectDuration;
 
-  /// The duration of the scale effect.
-  final Duration? scaleEffectDuration;
-
   /// The duration of the pulse effect.
   final Duration? pulseEffectDuration;
+
+  /// The duration of the scale effect.
+  final Duration? scaleEffectDuration;
 
   /// The curve of the focus effect.
   final Curve? focusEffectCurve;
@@ -103,49 +91,61 @@ class MoonBaseControl extends StatefulWidget {
   /// The curve of the scale effect.
   final Curve? scaleEffectCurve;
 
-  /// The border radius of the control.
-  final BorderRadius? borderRadius;
-
-  /// The mouse cursor of the control.
-  final MouseCursor cursor;
+  /// {@macro flutter.widgets.Focus.focusNode}.
+  final FocusNode? focusNode;
 
   /// The builder that builds the child of this control.
   final MoonBaseControlBuilder builder;
 
+  /// The mouse cursor of the control.
+  final MouseCursor cursor;
+
+  /// The semantic label for this control.
+  final String? semanticLabel;
+
+  /// The tooltip message for this control.
+  final String tooltipMessage;
+
+  /// The callback that is called when the control is tapped or pressed.
+  final VoidCallback? onTap;
+
+  /// The callback that is called when the control is long-pressed.
+  final VoidCallback? onLongPress;
+
   /// MDS base control widget.
   const MoonBaseControl({
     super.key,
-    this.onTap,
-    this.onLongPress,
-    this.focusNode,
     this.autofocus = false,
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
-    this.showTooltip = false,
+    this.semanticTypeIsButton = false,
     this.showFocusEffect = true,
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
     this.showScaleAnimation = true,
-    this.semanticTypeIsButton = false,
-    this.semanticLabel,
-    this.tooltipMessage = "",
-    this.minTouchTargetSize = 40.0,
-    this.disabledOpacityValue,
-    this.focusEffectExtent,
-    this.pulseEffectExtent,
-    this.scaleEffectScalar,
+    this.showTooltip = false,
+    this.borderRadius = BorderRadius.zero,
     this.backgroundColor,
     this.focusEffectColor,
     this.pulseEffectColor,
+    this.disabledOpacityValue,
+    this.minTouchTargetSize = 40.0,
+    this.focusEffectExtent,
+    this.pulseEffectExtent,
+    this.scaleEffectScalar,
     this.focusEffectDuration,
     this.pulseEffectDuration,
     this.scaleEffectDuration,
     this.focusEffectCurve,
     this.pulseEffectCurve,
     this.scaleEffectCurve,
-    this.borderRadius = BorderRadius.zero,
-    this.cursor = SystemMouseCursors.click,
+    this.focusNode,
     required this.builder,
+    this.cursor = SystemMouseCursors.click,
+    this.semanticLabel,
+    this.tooltipMessage = "",
+    this.onTap,
+    this.onLongPress,
   });
 
   @override
@@ -153,14 +153,14 @@ class MoonBaseControl extends StatefulWidget {
 }
 
 class _MoonBaseControlState extends State<MoonBaseControl> {
+  late Map<Type, Action<Intent>> _actions;
+
+  FocusNode? _focusNode;
+
   bool _isFocused = false;
   bool _isHovered = false;
   bool _isPressed = false;
   bool _isLongPressed = false;
-
-  FocusNode? _focusNode;
-
-  late Map<Type, Action<Intent>> _actions;
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
 
@@ -318,19 +318,19 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
         context.moonEffects?.controlFocusEffect.effectColor ??
         MoonFocusEffects.lightFocusEffect.effectColor;
 
+    final Color focusColor = _getFocusColor(isDarkMode: context.isDarkMode, focusColor: effectiveFocusEffectColor);
+
     final double effectiveFocusEffectExtent = widget.focusEffectExtent ??
         context.moonEffects?.controlFocusEffect.effectExtent ??
         MoonFocusEffects.lightFocusEffect.effectExtent;
-
-    final Curve effectiveFocusEffectCurve = widget.focusEffectCurve ??
-        context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonFocusEffects.lightFocusEffect.effectCurve;
 
     final Duration effectiveFocusEffectDuration = widget.focusEffectDuration ??
         context.moonEffects?.controlFocusEffect.effectDuration ??
         MoonFocusEffects.lightFocusEffect.effectDuration;
 
-    final Color focusColor = _getFocusColor(isDarkMode: context.isDarkMode, focusColor: effectiveFocusEffectColor);
+    final Curve effectiveFocusEffectCurve = widget.focusEffectCurve ??
+        context.moonEffects?.controlFocusEffect.effectCurve ??
+        MoonFocusEffects.lightFocusEffect.effectCurve;
 
     // Pulse effect props
     final Color effectivePulseEffectColor = widget.pulseEffectColor ??

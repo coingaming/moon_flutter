@@ -5,50 +5,8 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/chips/chip.dart';
 
 class MoonTextChip extends StatelessWidget {
-  /// The callback that is called when the chip is tapped or pressed.
-  final VoidCallback? onTap;
-
-  /// The callback that is called when the chip is long-pressed.
-  final VoidCallback? onLongPress;
-
-  /// The size of the chip.
-  final MoonChipSize? chipSize;
-
-  /// {@macro flutter.widgets.Focus.focusNode}.
-  final FocusNode? focusNode;
-
-  /// The semantic label for the chip.
-  final String? semanticLabel;
-
-  /// The tooltip message for the button.
-  final String tooltipMessage;
-
-  /// The width of the chip.
-  final double? width;
-
-  /// The height of the chip.
-  final double? height;
-
-  /// The opacity value of the chip when it is disabled.
-  final double? disabledOpacityValue;
-
-  /// The border width of the chip.
-  final double? borderWidth;
-
-  /// The gap between the leading or trailing and the label widgets.
-  final double? gap;
-
-  /// The extent of the focus effect.
-  final double? focusEffectExtent;
-
-  /// The minimum size of the touch target.
-  final double minTouchTargetSize;
-
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
-
-  /// Whether the chip is active/selected.
-  final bool isActive;
 
   /// Whether the chip should be focusable.
   final bool isFocusable;
@@ -56,14 +14,20 @@ class MoonTextChip extends StatelessWidget {
   /// Whether this chip should ensure that it has a minimal touch target size.
   final bool ensureMinimalTouchTargetSize;
 
+  /// Whether the chip is active/selected.
+  final bool isActive;
+
   /// Whether the chip should show a border.
   final bool showBorder;
+
+  /// Whether the chip should show a focus effect.
+  final bool showFocusEffect;
 
   /// Whether the chip should show a tooltip.
   final bool showTooltip;
 
-  /// Whether the chip should show a focus effect.
-  final bool showFocusEffect;
+  /// The border radius of the chip.
+  final BorderRadius? borderRadius;
 
   /// The border and text color of the active/selected chip.
   final Color? activeColor;
@@ -71,14 +35,35 @@ class MoonTextChip extends StatelessWidget {
   /// The border color of the  chip.
   final Color? borderColor;
 
-  /// The text color of the chip.
-  final Color? textColor;
-
   /// The color of the focus effect.
   final Color? focusEffectColor;
 
   /// The color of the hover effect.
   final Color? hoverEffectColor;
+
+  /// The text color of the chip.
+  final Color? textColor;
+
+  /// The border width of the chip.
+  final double? borderWidth;
+
+  /// The opacity value of the chip when it is disabled.
+  final double? disabledOpacityValue;
+
+  /// The extent of the focus effect.
+  final double? focusEffectExtent;
+
+  /// The gap between the leading or trailing and the label widgets.
+  final double? gap;
+
+  /// The height of the chip.
+  final double? height;
+
+  /// The width of the chip.
+  final double? width;
+
+  /// The minimum size of the touch target.
+  final double minTouchTargetSize;
 
   /// The duration of the focus effect.
   final Duration? focusEffectDuration;
@@ -95,8 +80,23 @@ class MoonTextChip extends StatelessWidget {
   /// The padding of the chip.
   final EdgeInsetsGeometry? padding;
 
-  /// The border radius of the chip.
-  final BorderRadius? borderRadius;
+  /// {@macro flutter.widgets.Focus.focusNode}.
+  final FocusNode? focusNode;
+
+  /// The size of the chip.
+  final MoonChipSize? chipSize;
+
+  /// The semantic label for the chip.
+  final String? semanticLabel;
+
+  /// The tooltip message for the button.
+  final String tooltipMessage;
+
+  /// The callback that is called when the chip is tapped or pressed.
+  final VoidCallback? onTap;
+
+  /// The callback that is called when the chip is long-pressed.
+  final VoidCallback? onLongPress;
 
   /// The widget in the leading slot of the chip.
   final Widget? leading;
@@ -110,37 +110,37 @@ class MoonTextChip extends StatelessWidget {
   /// MDS text chip widget.
   const MoonTextChip({
     super.key,
-    this.onTap,
-    this.onLongPress,
-    this.chipSize,
-    this.focusNode,
-    this.semanticLabel,
-    this.tooltipMessage = "",
-    this.width,
-    this.height,
-    this.disabledOpacityValue,
-    this.borderWidth,
-    this.gap,
-    this.focusEffectExtent,
-    this.minTouchTargetSize = 40,
     this.autofocus = false,
-    this.isActive = false,
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
+    this.isActive = false,
     this.showBorder = false,
-    this.showTooltip = false,
     this.showFocusEffect = true,
+    this.showTooltip = false,
+    this.borderRadius,
     this.activeColor,
     this.borderColor,
-    this.textColor,
     this.focusEffectColor,
     this.hoverEffectColor,
+    this.textColor,
+    this.borderWidth,
+    this.disabledOpacityValue,
+    this.focusEffectExtent,
+    this.gap,
+    this.height,
+    this.width,
+    this.minTouchTargetSize = 40,
     this.focusEffectDuration,
     this.hoverEffectDuration,
     this.focusEffectCurve,
     this.hoverEffectCurve,
     this.padding,
-    this.borderRadius,
+    this.focusNode,
+    this.chipSize,
+    this.semanticLabel,
+    this.tooltipMessage = "",
+    this.onTap,
+    this.onLongPress,
     this.label,
     this.leading,
     this.trailing,
@@ -152,37 +152,37 @@ class MoonTextChip extends StatelessWidget {
 
     return MoonChip(
       key: key,
-      onTap: onTap,
-      onLongPress: onLongPress,
-      width: width,
-      height: height,
-      gap: gap,
-      padding: padding,
-      semanticLabel: semanticLabel,
-      tooltipMessage: tooltipMessage,
+      autofocus: autofocus,
+      isFocusable: isFocusable,
       isActive: isActive,
+      ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
+      showBorder: showBorder,
+      showFocusEffect: showFocusEffect,
+      showTooltip: showTooltip,
+      borderRadius: borderRadius,
       activeColor: activeColor,
       backgroundColor: Colors.transparent,
       borderColor: borderColor,
-      textColor: effectiveTextColor,
-      chipSize: chipSize,
-      showBorder: showBorder,
-      showTooltip: showTooltip,
-      borderRadius: borderRadius,
-      disabledOpacityValue: disabledOpacityValue,
-      showFocusEffect: showFocusEffect,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      isFocusable: isFocusable,
       focusEffectColor: focusEffectColor,
-      focusEffectCurve: focusEffectCurve,
-      focusEffectDuration: focusEffectDuration,
-      focusEffectExtent: focusEffectExtent,
       hoverEffectColor: hoverEffectColor,
-      hoverEffectCurve: hoverEffectCurve,
-      hoverEffectDuration: hoverEffectDuration,
-      ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
+      textColor: effectiveTextColor,
+      disabledOpacityValue: disabledOpacityValue,
+      focusEffectExtent: focusEffectExtent,
+      gap: gap,
+      height: height,
+      width: width,
       minTouchTargetSize: minTouchTargetSize,
+      focusEffectDuration: focusEffectDuration,
+      hoverEffectDuration: hoverEffectDuration,
+      focusEffectCurve: focusEffectCurve,
+      hoverEffectCurve: hoverEffectCurve,
+      padding: padding,
+      focusNode: focusNode,
+      chipSize: chipSize,
+      semanticLabel: semanticLabel,
+      tooltipMessage: tooltipMessage,
+      onTap: onTap,
+      onLongPress: onLongPress,
       leading: leading,
       label: label,
       trailing: trailing,

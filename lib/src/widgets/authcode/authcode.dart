@@ -45,11 +45,11 @@ class MoonAuthCode extends StatefulWidget {
   /// Controls whether typed character should be briefly shown before being obscured.
   final bool peekWhenObscuring;
 
-  /// Controls if haptic feedback is used.
-  final bool useHapticFeedback;
-
   /// Controls if cursor in selected auth input field should be shown.
   final bool showAuthFieldCursor;
+
+  /// Controls if haptic feedback is used.
+  final bool useHapticFeedback;
 
   /// Border radius of auth input field.
   final BorderRadius? borderRadius;
@@ -646,23 +646,26 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
       child: SizedBox(
         height: _effectiveHeight,
         child: TextFormField(
-          textInputAction: widget.textInputAction,
-          controller: _textEditingController,
-          focusNode: _focusNode,
-          enabled: widget.enabled,
+          autocorrect: false,
           autofocus: widget.autoFocus,
-          keyboardType: widget.keyboardType,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          inputFormatters: [LengthLimitingTextInputFormatter(widget.authInputFieldCount)],
-          onFieldSubmitted: widget.onSubmitted,
-          onEditingComplete: widget.onEditingComplete,
-          onChanged: widget.onChanged,
+          controller: _textEditingController,
+          cursorWidth: 0.01,
+          enabled: widget.enabled,
           enableInteractiveSelection: false,
           enableSuggestions: false,
-          autocorrect: false,
+          focusNode: _focusNode,
+          inputFormatters: [LengthLimitingTextInputFormatter(widget.authInputFieldCount)],
+          keyboardType: widget.keyboardType,
+          onChanged: widget.onChanged,
+          onEditingComplete: widget.onEditingComplete,
+          onFieldSubmitted: widget.onSubmitted,
+          obscureText: widget.obscureText,
+          obscuringCharacter: widget.obscuringCharacter,
+          scrollPadding: const EdgeInsets.all(24.0),
           showCursor: true,
           smartDashesType: SmartDashesType.disabled,
-          cursorWidth: 0.01,
+          textInputAction: widget.textInputAction,
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.zero,
             border: InputBorder.none,
@@ -672,12 +675,9 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
           ),
           style: const TextStyle(
             color: Colors.transparent,
-            height: .01,
             fontSize: kIsWeb ? 1 : 0.01,
+            height: .01,
           ),
-          scrollPadding: const EdgeInsets.all(24.0),
-          obscureText: widget.obscureText,
-          obscuringCharacter: widget.obscuringCharacter,
         ),
       ),
     );
@@ -691,11 +691,11 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
 
     _effectiveBorderWidth = widget.borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
 
+    _effectiveGap = widget.gap ?? context.moonTheme?.authCodeTheme.properties.gap ?? MoonSizes.sizes.x4s;
+
     _effectiveHeight = widget.height ?? context.moonTheme?.authCodeTheme.properties.height ?? MoonSizes.sizes.xl;
 
     _effectiveWidth = widget.width ?? context.moonTheme?.authCodeTheme.properties.width ?? MoonSizes.sizes.lg;
-
-    _effectiveGap = widget.gap ?? context.moonTheme?.authCodeTheme.properties.gap ?? MoonSizes.sizes.x4s;
 
     _effectiveSelectedBorderColor = widget.selectedBorderColor ??
         context.moonTheme?.authCodeTheme.colors.selectedBorderColor ??

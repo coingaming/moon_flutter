@@ -17,29 +17,14 @@ enum MoonSwitchSize {
 }
 
 class MoonSwitch extends StatefulWidget {
-  /// Determines if the switch is on or off.
-  final bool value;
-
-  /// Callback when the switch is toggled on or off.
-  final ValueChanged<bool>? onChanged;
-
-  /// The size of the switch.
-  final MoonSwitchSize? switchSize;
-
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
   /// Whether the switch has haptic feedback (vibration) when toggled.
   final bool hasHapticFeedback;
 
-  /// The width of the switch.
-  final double? width;
-
-  /// The height of the switch.
-  final double? height;
-
-  /// The size of the thumb.
-  final double? thumbSizeValue;
+  /// Determines if the switch is on or off.
+  final bool value;
 
   /// The color to use on the switch when the switch is on.
   final Color? activeTrackColor;
@@ -50,8 +35,14 @@ class MoonSwitch extends StatefulWidget {
   /// The color of the thumb.
   final Color? thumbColor;
 
-  /// The padding of the switch.
-  final EdgeInsetsGeometry? padding;
+  /// The height of the switch.
+  final double? height;
+
+  /// The width of the switch.
+  final double? width;
+
+  /// The size of the thumb.
+  final double? thumbSizeValue;
 
   /// The duration for the switch animation.
   final Duration? duration;
@@ -59,11 +50,20 @@ class MoonSwitch extends StatefulWidget {
   /// The curve for the switch animation.
   final Curve? curve;
 
+  /// The padding of the switch.
+  final EdgeInsetsGeometry? padding;
+
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
+  /// The size of the switch.
+  final MoonSwitchSize? switchSize;
+
   /// The semantic label for the switch.
   final String? semanticLabel;
+
+  /// Callback when the switch is toggled on or off.
+  final ValueChanged<bool>? onChanged;
 
   /// The widget to display when the switch is on (left slot).
   final Widget? activeTrackWidget;
@@ -80,22 +80,22 @@ class MoonSwitch extends StatefulWidget {
   /// MDS switch widget.
   const MoonSwitch({
     super.key,
-    required this.value,
-    this.onChanged,
-    this.switchSize,
     this.autofocus = false,
-    this.width,
-    this.height,
-    this.thumbSizeValue,
     this.hasHapticFeedback = true,
+    required this.value,
     this.activeTrackColor,
     this.inactiveTrackColor,
     this.thumbColor,
-    this.padding,
+    this.height,
+    this.width,
+    this.thumbSizeValue,
     this.duration,
     this.curve,
+    this.padding,
     this.focusNode,
+    this.switchSize,
     this.semanticLabel,
+    this.onChanged,
     this.activeTrackWidget,
     this.inactiveTrackWidget,
     this.activeThumbWidget,
@@ -107,27 +107,27 @@ class MoonSwitch extends StatefulWidget {
 }
 
 class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateMixin {
-  AnimationController? _animationController;
-  CurvedAnimation? _curvedAnimation;
-  CurvedAnimation? _curvedAnimationWithOvershoot;
-  Animation<double>? _thumbFadeAnimation;
-  Animation<double>? _activeTrackWidgetFadeAnimation;
-  Animation<double>? _inactiveTrackWidgetFadeAnimation;
-
-  late Animation<Alignment>? _alignmentAnimation;
-  late Animation<Decoration>? _trackDecorationAnimation;
-
   late final Map<Type, Action<Intent>> _actions = {
     ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
   };
 
+  late Animation<Alignment>? _alignmentAnimation;
+  late Animation<Decoration>? _trackDecorationAnimation;
+
+  AnimationController? _animationController;
+  Animation<double>? _thumbFadeAnimation;
+  Animation<double>? _activeTrackWidgetFadeAnimation;
+  Animation<double>? _inactiveTrackWidgetFadeAnimation;
+  CurvedAnimation? _curvedAnimation;
+  CurvedAnimation? _curvedAnimationWithOvershoot;
+
   FocusNode? _focusNode;
+
+  bool _isFocused = false;
 
   // A non-null boolean value that changes to true at the end of a drag if the
   // switch must be animated to the _curvedAnimationWithOvershoot indicated by the widget's value.
   bool _needsPositionAnimation = false;
-
-  bool _isFocused = false;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
@@ -282,18 +282,6 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
 
     final MoonSwitchSizeProperties effectiveMoonSwitchSize = _getMoonSwitchSize(context, widget.switchSize);
 
-    final double effectiveWidth = widget.width ?? effectiveMoonSwitchSize.width;
-
-    final double effectiveHeight = widget.height ?? effectiveMoonSwitchSize.height;
-
-    final double effectiveThumbSizeValue = widget.thumbSizeValue ?? effectiveMoonSwitchSize.thumbSizeValue;
-
-    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonSwitchSize.padding;
-
-    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
-
-    final BorderRadius effectiveBorderRadius = BorderRadius.circular(effectiveThumbSizeValue / 2);
-
     final Color effectiveActiveTrackColor =
         widget.activeTrackColor ?? context.moonTheme?.switchTheme.colors.activeTrackColor ?? MoonColors.light.piccolo;
 
@@ -304,10 +292,22 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     final Color effectiveThumbColor =
         widget.thumbColor ?? context.moonTheme?.switchTheme.colors.thumbColor ?? MoonColors.light.goten;
 
-    final List<BoxShadow> effectiveThumbShadow =
-        context.moonTheme?.switchTheme.shadows.thumbShadows ?? MoonShadows.light.sm;
+    final double effectiveHeight = widget.height ?? effectiveMoonSwitchSize.height;
+
+    final double effectiveWidth = widget.width ?? effectiveMoonSwitchSize.width;
+
+    final double effectiveThumbSizeValue = widget.thumbSizeValue ?? effectiveMoonSwitchSize.thumbSizeValue;
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+
+    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonSwitchSize.padding;
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
+
+    final BorderRadius effectiveBorderRadius = BorderRadius.circular(effectiveThumbSizeValue / 2);
+
+    final List<BoxShadow> effectiveThumbShadow =
+        context.moonTheme?.switchTheme.shadows.thumbShadows ?? MoonShadows.light.sm;
 
     final Duration effectiveDuration = widget.duration ??
         context.moonTheme?.switchTheme.properties.transitionDuration ??
@@ -322,11 +322,11 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     final Color effectiveFocusEffectColor =
         context.moonEffects?.controlFocusEffect.effectColor ?? MoonFocusEffects.lightFocusEffect.effectColor;
 
-    final Curve effectiveFocusEffectCurve =
-        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
-
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
+
+    final Curve effectiveFocusEffectCurve =
+        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
 
     _animationController ??= AnimationController(
       vsync: this,
@@ -386,7 +386,9 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     );
 
     final Color iconColor = _getTextOrIconColor(backgroundColor: effectiveThumbColor);
+
     final Color activeTextColor = _getTextOrIconColor(backgroundColor: effectiveActiveTrackColor);
+
     final Color inactiveTextColor = _getTextOrIconColor(backgroundColor: effectiveInactiveTrackColor);
 
     return Semantics(
@@ -474,11 +476,11 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                                   duration: effectiveDuration,
                                   child: MoonFocusEffect(
                                     show: _isFocused,
-                                    effectExtent: effectiveFocusEffectExtent,
                                     effectColor: effectiveFocusEffectColor,
-                                    effectCurve: effectiveFocusEffectCurve,
-                                    effectDuration: effectiveFocusEffectDuration,
                                     childBorderRadius: effectiveBorderRadius,
+                                    effectExtent: effectiveFocusEffectExtent,
+                                    effectDuration: effectiveFocusEffectDuration,
+                                    effectCurve: effectiveFocusEffectCurve,
                                     child: Container(
                                       width: effectiveThumbSizeValue,
                                       height: effectiveThumbSizeValue,

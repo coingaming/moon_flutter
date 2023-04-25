@@ -26,44 +26,35 @@ class MoonPopover extends StatefulWidget {
   /// Controls the popover visibility.
   final bool show;
 
-  /// Sets the popover position relative to the target. Defaults to [MoonPopoverPosition.vertical]
-  final MoonPopoverPosition popoverPosition;
+  /// The border radius of the popover.
+  final BorderRadius? borderRadius;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
-  final double? minWidth;
+  /// The color of the popover background.
+  final Color? backgroundColor;
+
+  /// The color of the popover border.
+  final Color borderColor;
+
+  /// The width of the popover border.
+  final double borderWidth;
+
+  /// The distance from the tip of the popover arrow (tail) to the target widget.
+  final double? distanceToTarget;
 
   /// Optional size constraint. If a constraint is not set the size will adjust to the content.
   final double? minHeight;
 
   /// Optional size constraint. If a constraint is not set the size will adjust to the content.
-  final double? maxWidth;
+  final double? minWidth;
 
   /// Optional size constraint. If a constraint is not set the size will adjust to the content.
   final double? maxHeight;
 
-  /// Padding around the popover content.
-  final EdgeInsetsGeometry? contentPadding;
-
-  /// The distance from the tip of the popover arrow (tail) to the target widget.
-  final double? distanceToTarget;
-
-  /// The width of the popover border.
-  final double borderWidth;
-
-  /// The border radius of the popover.
-  final BorderRadius? borderRadius;
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? maxWidth;
 
   /// The margin around popover. Used to prevent the popover from touching the edges of the viewport.
   final double popoverMargin;
-
-  /// The color of the popover border.
-  final Color borderColor;
-
-  /// The color of the popover background.
-  final Color? backgroundColor;
-
-  /// List of popover shadows.
-  final List<BoxShadow>? popoverShadows;
 
   /// Popover transition duration (fade in or out animation).
   final Duration? transitionDuration;
@@ -71,41 +62,50 @@ class MoonPopover extends StatefulWidget {
   /// Popover transition curve (fade in or out animation).
   final Curve? transitionCurve;
 
+  /// Padding around the popover content.
+  final EdgeInsetsGeometry? contentPadding;
+
+  /// List of popover shadows.
+  final List<BoxShadow>? popoverShadows;
+
+  /// Sets the popover position relative to the target. Defaults to [MoonPopoverPosition.vertical]
+  final MoonPopoverPosition popoverPosition;
+
   /// `RouteObserver` used to listen for route changes that will hide the popover when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
   /// The semantic label for the popover.
   final String? semanticLabel;
 
-  /// The widget that its placed inside the popover and functions as its content.
-  final Widget content;
-
   /// The [child] widget which the popover will target.
   final Widget child;
+
+  /// The widget that its placed inside the popover and functions as its content.
+  final Widget content;
 
   /// MDS popover widget.
   const MoonPopover({
     super.key,
     required this.show,
-    this.popoverPosition = MoonPopoverPosition.top,
-    this.minWidth,
-    this.maxWidth,
-    this.minHeight,
-    this.maxHeight,
-    this.contentPadding,
-    this.distanceToTarget,
     this.borderRadius,
-    this.borderWidth = 0,
-    this.popoverMargin = 8,
-    this.borderColor = Colors.transparent,
     this.backgroundColor,
+    this.borderColor = Colors.transparent,
+    this.borderWidth = 0,
+    this.distanceToTarget,
+    this.minHeight,
+    this.minWidth,
+    this.maxHeight,
+    this.maxWidth,
+    this.popoverMargin = 8,
     this.transitionDuration,
     this.transitionCurve,
+    this.contentPadding,
     this.popoverShadows,
+    this.popoverPosition = MoonPopoverPosition.top,
     this.routeObserver,
     this.semanticLabel,
-    required this.content,
     required this.child,
+    required this.content,
   });
 
   // Causes any current popovers to be removed. Won't remove the supplied popover.
@@ -133,9 +133,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   AnimationController? _animationController;
   CurvedAnimation? _curvedAnimation;
 
-  bool _routeIsShowing = true;
-
   OverlayEntry? _overlayEntry;
+
+  bool _routeIsShowing = true;
 
   bool get shouldShowPopover => widget.show && _routeIsShowing;
 
@@ -362,6 +362,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   Widget _createOverlayContent() {
     MoonPopoverPosition popoverPosition = widget.popoverPosition;
 
+    final BorderRadius effectiveBorderRadius =
+        widget.borderRadius ?? context.moonTheme?.popoverTheme.properties.borderRadius ?? BorderRadius.circular(12);
+
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.popoverTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
@@ -373,14 +376,12 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final EdgeInsetsGeometry effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.popoverTheme.properties.contentPadding ?? const EdgeInsets.all(12);
 
-    final BorderRadius effectiveBorderRadius =
-        widget.borderRadius ?? context.moonTheme?.popoverTheme.properties.borderRadius ?? BorderRadius.circular(12);
-
     final List<BoxShadow> effectivePopoverShadows =
         widget.popoverShadows ?? context.moonTheme?.popoverTheme.shadows.popoverShadows ?? MoonShadows.light.sm;
 
-    final targetRenderBox = context.findRenderObject()! as RenderBox;
     final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
+
+    final targetRenderBox = context.findRenderObject()! as RenderBox;
 
     final popoverTargetGlobalCenter =
         targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
@@ -504,15 +505,15 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
 }
 
 class _PopoverPositionProperties {
-  final Offset offset;
   final Alignment followerAnchor;
   final Alignment targetAnchor;
   final double toolTipMaxWidth;
+  final Offset offset;
 
   _PopoverPositionProperties({
-    required this.offset,
     required this.followerAnchor,
     required this.targetAnchor,
     required this.toolTipMaxWidth,
+    required this.offset,
   });
 }

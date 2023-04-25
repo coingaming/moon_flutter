@@ -10,39 +10,39 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 @immutable
 class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with DiagnosticableTreeMixin {
   static final x2s = MoonTagSizeProperties(
-    height: MoonSizes.sizes.x2s,
+    borderRadius: MoonBorders.borders.interactiveXs,
     gap: MoonSizes.sizes.x5s,
+    height: MoonSizes.sizes.x2s,
     iconSizeValue: MoonSizes.sizes.x3s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.body.text10.copyWith(fontWeight: FontWeight.w400),
     upperCaseTextStyle: MoonTextStyles.caption.text9,
   );
 
   static final xs = MoonTagSizeProperties(
-    height: MoonSizes.sizes.xs,
+    borderRadius: MoonBorders.borders.interactiveXs,
     gap: MoonSizes.sizes.x5s,
+    height: MoonSizes.sizes.xs,
     iconSizeValue: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.body.text12.copyWith(fontWeight: FontWeight.w400),
     upperCaseTextStyle: MoonTextStyles.caption.text10,
   );
 
-  /// Tag height.
-  final double height;
+  /// Tag border radius.
+  final BorderRadius borderRadius;
 
   /// Space between tag children.
   final double gap;
+
+  /// Tag height.
+  final double height;
 
   /// Tag icon size value.
   final double iconSizeValue;
 
   /// Padding around tag children.
   final EdgeInsetsGeometry padding;
-
-  /// Tag border radius.
-  final BorderRadius borderRadius;
 
   /// Tag body style.
   final TextStyle textStyle;
@@ -51,31 +51,31 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
   final TextStyle upperCaseTextStyle;
 
   const MoonTagSizeProperties({
-    required this.height,
+    required this.borderRadius,
     required this.gap,
+    required this.height,
     required this.iconSizeValue,
     required this.padding,
-    required this.borderRadius,
     required this.textStyle,
     required this.upperCaseTextStyle,
   });
 
   @override
   MoonTagSizeProperties copyWith({
-    double? height,
+    BorderRadius? borderRadius,
     double? gap,
+    double? height,
     double? iconSizeValue,
     EdgeInsetsGeometry? padding,
-    BorderRadius? borderRadius,
     TextStyle? textStyle,
     TextStyle? upperCaseTextStyle,
   }) {
     return MoonTagSizeProperties(
-      height: height ?? this.height,
+      borderRadius: borderRadius ?? this.borderRadius,
       gap: gap ?? this.gap,
+      height: height ?? this.height,
       iconSizeValue: iconSizeValue ?? this.iconSizeValue,
       padding: padding ?? this.padding,
-      borderRadius: borderRadius ?? this.borderRadius,
       textStyle: textStyle ?? this.textStyle,
       upperCaseTextStyle: upperCaseTextStyle ?? this.upperCaseTextStyle,
     );
@@ -86,11 +86,11 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     if (other is! MoonTagSizeProperties) return this;
 
     return MoonTagSizeProperties(
-      height: lerpDouble(height, other.height, t)!,
+      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
+      height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
       upperCaseTextStyle: TextStyle.lerp(upperCaseTextStyle, other.upperCaseTextStyle, t)!,
     );
@@ -101,11 +101,11 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTagSizeProperties"))
-      ..add(DoubleProperty("height", height))
+      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
       ..add(DiagnosticsProperty<TextStyle>("upperCaseTextStyle", upperCaseTextStyle));
   }

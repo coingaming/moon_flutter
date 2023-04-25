@@ -10,14 +10,50 @@ import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 typedef MoonTextAreaErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
 class MoonTextArea extends StatefulWidget {
-  /// Controls the text being edited.
-  final TextEditingController? controller;
+  /// Used to set the auto validation mode.
+  final AutovalidateMode autovalidateMode;
 
-  /// {@macro flutter.widgets.editableText.scrollController}
-  final ScrollController? scrollController;
+  /// {@macro flutter.widgets.editableText.autocorrect}
+  final bool autocorrect;
 
-  /// {@macro flutter.widgets.editableText.scrollPhysics}
-  final ScrollPhysics? scrollPhysics;
+  /// {@macro flutter.widgets.editableText.autofocus}
+  final bool autofocus;
+
+  /// If false the widget is "disabled": it ignores taps and has a reduced opacity.
+  final bool enabled;
+
+  /// {@macro flutter.services.TextInputConfiguration.enableIMEPersonalizedLearning}
+  final bool enableIMEPersonalizedLearning;
+
+  /// {@macro flutter.widgets.editableText.enableInteractiveSelection}
+  final bool? enableInteractiveSelection;
+
+  /// {@macro flutter.services.TextInputConfiguration.enableSuggestions}
+  final bool enableSuggestions;
+
+  /// {@macro flutter.widgets.editableText.scribbleEnabled}
+  final bool scribbleEnabled;
+
+  /// {@macro flutter.widgets.editableText.readOnly}
+  final bool readOnly;
+
+  /// {@macro flutter.widgets.editableText.showCursor}
+  final bool? showCursor;
+
+  /// The border radius of the text area.
+  final BorderRadius? borderRadius;
+
+  /// The appearance of the keyboard.
+  ///
+  /// This setting is only honored on iOS devices.
+  ///
+  /// If unset, defaults to [ThemeData.brightness].
+  final Brightness? keyboardAppearance;
+
+  /// {@macro flutter.material.Material.clipBehavior}
+  ///
+  /// Defaults to [Clip.hardEdge].
+  final Clip? clipBehavior;
 
   /// The background color of the text area.
   final Color? backgroundColor;
@@ -37,58 +73,58 @@ class MoonTextArea extends StatefulWidget {
   /// The text color of the hint in text area.
   final Color? hintTextColor;
 
-  /// The type of action button to use for the keyboard.
-  ///
-  /// Defaults to [TextInputAction.newline] if [keyboardType] is
-  /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
-  final TextInputAction? textInputAction;
-
-  /// {@macro flutter.widgets.editableText.textCapitalization}
-  final TextCapitalization textCapitalization;
-
-  /// {@macro flutter.widgets.editableText.textAlign}
-  final TextAlign textAlign;
-
-  /// {@macro flutter.widgets.editableText.textDirection}
-  final TextDirection? textDirection;
-
-  /// The style to use for the text being edited.
-  ///
-  /// This text style is also used as the base style for the [decoration].
-  final TextStyle? textStyle;
-
-  /// The style to use for the error state text.
-  final TextStyle? errorTextStyle;
-
-  /// {@macro flutter.widgets.editableText.strutStyle}
-  final StrutStyle? strutStyle;
-
-  /// {@macro flutter.widgets.editableText.autocorrect}
-  final bool autocorrect;
-
-  /// If false the widget is "disabled": it ignores taps and it has a reduced opacity.
-  final bool enabled;
-
-  /// {@macro flutter.services.TextInputConfiguration.enableIMEPersonalizedLearning}
-  final bool enableIMEPersonalizedLearning;
-
-  /// {@macro flutter.widgets.editableText.enableInteractiveSelection}
-  final bool? enableInteractiveSelection;
-
-  /// {@macro flutter.services.TextInputConfiguration.enableSuggestions}
-  final bool enableSuggestions;
-
-  /// {@macro flutter.widgets.editableText.readOnly}
-  final bool readOnly;
-
-  /// {@macro flutter.widgets.editableText.scribbleEnabled}
-  final bool scribbleEnabled;
-
-  /// {@macro flutter.widgets.editableText.showCursor}
-  final bool? showCursor;
-
   /// The height of the text area (this does not include the space taken by [MoonTextArea.errorBuilder]).
   final double? height;
+
+  /// The transition duration for disable animation.
+  final Duration? transitionDuration;
+
+  /// The transition curve for disable animation.
+  final Curve? transitionCurve;
+
+  /// {@macro flutter.widgets.editableText.scrollPadding}
+  final EdgeInsets scrollPadding;
+
+  /// The padding around the text content.
+  final EdgeInsetsGeometry? textPadding;
+
+  /// {@macro flutter.widgets.Focus.focusNode}.
+  final FocusNode? focusNode;
+
+  /// Validator for the text area widget.
+  final FormFieldValidator<String>? validator;
+
+  /// The maximum number of characters (Unicode grapheme clusters) to allow in the text area.
+  ///
+  /// {@macro flutter.services.lengthLimitingTextInputFormatter.maxLength}
+  final int? maxLength;
+
+  /// {@macro flutter.widgets.editableText.minLines}
+  ///  * [expands], which determines whether the field should fill the height of its parent.
+  final int? minLines;
+
+  /// {@macro flutter.widgets.editableText.autofillHints}
+  /// {@macro flutter.services.AutofillConfiguration.autofillHints}
+  final Iterable<String>? autofillHints;
+
+  /// {@macro flutter.widgets.editableText.inputFormatters}
+  final List<TextInputFormatter>? inputFormatters;
+
+  /// Determines how the [maxLength] limit should be enforced.
+  ///
+  /// {@macro flutter.services.textFormatter.effectiveMaxLengthEnforcement}
+  ///
+  /// {@macro flutter.services.textFormatter.maxLengthEnforcement}
+  final MaxLengthEnforcement? maxLengthEnforcement;
+
+  /// Builder for the error widget.
+  final MoonTextAreaErrorBuilder? errorBuilder;
+
+  /// {@macro flutter.widgets.editableText.scrollController}
+  final ScrollController? scrollController;
+
+  /// {@macro flutter.widgets.editableText.scrollPhysics}
+  final ScrollPhysics? scrollPhysics;
 
   /// The text for the hint.
   final String? hintText;
@@ -106,67 +142,43 @@ class MoonTextArea extends StatefulWidget {
   /// {@endtemplate}
   final String? restorationId;
 
-  /// The border radius of the text area.
-  final BorderRadius? borderRadius;
-
-  /// {@macro flutter.material.Material.clipBehavior}
-  ///
-  /// Defaults to [Clip.hardEdge].
-  final Clip? clipBehavior;
-
-  /// The padding around the text content.
-  final EdgeInsetsGeometry? textPadding;
-
-  /// {@macro flutter.widgets.editableText.minLines}
-  ///  * [expands], which determines whether the field should fill the height of its parent.
-  final int? minLines;
-
-  /// The maximum number of characters (Unicode grapheme clusters) to allow in the text area.
-  ///
-  /// {@macro flutter.services.lengthLimitingTextInputFormatter.maxLength}
-  final int? maxLength;
-
-  /// Determines how the [maxLength] limit should be enforced.
-  ///
-  /// {@macro flutter.services.textFormatter.effectiveMaxLengthEnforcement}
-  ///
-  /// {@macro flutter.services.textFormatter.maxLengthEnforcement}
-  final MaxLengthEnforcement? maxLengthEnforcement;
-
-  /// {@macro flutter.widgets.editableText.inputFormatters}
-  final List<TextInputFormatter>? inputFormatters;
-
-  /// {@macro flutter.widgets.editableText.autofillHints}
-  /// {@macro flutter.services.AutofillConfiguration.autofillHints}
-  final Iterable<String>? autofillHints;
-
-  /// Used to set the auto validation mode.
-  final AutovalidateMode autovalidateMode;
-
-  /// The appearance of the keyboard.
-  ///
-  /// This setting is only honored on iOS devices.
-  ///
-  /// If unset, defaults to [ThemeData.brightness].
-  final Brightness? keyboardAppearance;
-
-  /// {@macro flutter.widgets.editableText.scrollPadding}
-  final EdgeInsets scrollPadding;
-
-  /// The transition duration for disable animation.
-  final Duration? transitionDuration;
-
-  /// The transition curve for disable animation.
-  final Curve? transitionCurve;
-
-  /// {@macro flutter.widgets.editableText.autofocus}
-  final bool autofocus;
-
-  /// {@macro flutter.widgets.Focus.focusNode}.
-  final FocusNode? focusNode;
-
   /// The semantic label for the widget.
   final String? semanticLabel;
+
+  /// {@macro flutter.widgets.editableText.strutStyle}
+  final StrutStyle? strutStyle;
+
+  /// {@macro flutter.widgets.editableText.textAlign}
+  final TextAlign textAlign;
+
+  /// {@macro flutter.widgets.editableText.textDirection}
+  final TextDirection? textDirection;
+
+  /// {@macro flutter.widgets.editableText.textCapitalization}
+  final TextCapitalization textCapitalization;
+
+  /// Controls the text being edited.
+  final TextEditingController? controller;
+
+  /// The type of action button to use for the keyboard.
+  ///
+  /// Defaults to [TextInputAction.newline] if [keyboardType] is
+  /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
+  final TextInputAction? textInputAction;
+
+  /// The style to use for the text being edited.
+  ///
+  /// This text style is also used as the base style for the [decoration].
+  final TextStyle? textStyle;
+
+  /// The style to use for the error state text.
+  final TextStyle? errorTextStyle;
+
+  /// A callback that is called when the user taps the text area widget.
+  final GestureTapCallback? onTap;
+
+  /// A callback that is called when the user taps outside the text area widget.
+  final TapRegionCallback? onTapOutside;
 
   /// {@macro flutter.widgets.editableText.onChanged}
   ///
@@ -191,72 +203,60 @@ class MoonTextArea extends StatefulWidget {
   ///    focusable item when the user is done editing.
   final ValueChanged<String>? onSubmitted;
 
-  /// A callback that is called when the user taps the text area widget.
-  final GestureTapCallback? onTap;
-
-  /// A callback that is called when the user taps outside the text area widget.
-  final TapRegionCallback? onTapOutside;
-
-  /// Validator for the text area widget.
-  final FormFieldValidator<String>? validator;
-
-  /// Builder for the error widget.
-  final MoonTextAreaErrorBuilder? errorBuilder;
-
   const MoonTextArea({
     super.key,
-    this.controller,
-    this.scrollController,
-    this.scrollPhysics,
+    this.autovalidateMode = AutovalidateMode.disabled,
+    this.autocorrect = true,
+    this.autofocus = false,
+    this.enabled = true,
+    this.enableIMEPersonalizedLearning = true,
+    this.enableInteractiveSelection,
+    this.enableSuggestions = true,
+    this.scribbleEnabled = true,
+    this.readOnly = false,
+    this.showCursor,
+    this.borderRadius,
+    this.keyboardAppearance,
+    this.clipBehavior,
     this.backgroundColor,
     this.activeBorderColor,
     this.inactiveBorderColor,
     this.errorBorderColor,
     this.textColor,
     this.hintTextColor,
-    this.textInputAction,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
-    this.textDirection,
-    this.textStyle,
-    this.errorTextStyle,
-    this.strutStyle,
-    this.autocorrect = true,
-    this.enabled = true,
-    this.enableIMEPersonalizedLearning = true,
-    this.enableInteractiveSelection,
-    this.enableSuggestions = true,
-    this.readOnly = false,
-    this.scribbleEnabled = true,
-    this.showCursor,
     this.height,
+    this.transitionDuration,
+    this.transitionCurve,
+    this.scrollPadding = const EdgeInsets.all(24.0),
+    this.textPadding,
+    this.focusNode,
+    this.validator,
+    this.maxLength,
+    this.minLines,
+    this.autofillHints,
+    this.inputFormatters,
+    this.maxLengthEnforcement,
+    this.errorBuilder,
+    this.scrollController,
+    this.scrollPhysics,
     this.hintText,
     this.initialValue,
     this.restorationId,
-    this.borderRadius,
-    this.clipBehavior,
-    this.textPadding,
-    this.minLines,
-    this.maxLength,
-    this.maxLengthEnforcement,
-    this.inputFormatters,
-    this.autofillHints,
-    this.autovalidateMode = AutovalidateMode.disabled,
-    this.keyboardAppearance,
-    this.scrollPadding = const EdgeInsets.all(20.0),
-    this.transitionDuration,
-    this.transitionCurve,
-    this.autofocus = false,
-    this.focusNode,
     this.semanticLabel,
+    this.strutStyle,
+    this.textAlign = TextAlign.start,
+    this.textDirection,
+    this.textCapitalization = TextCapitalization.none,
+    this.controller,
+    this.textInputAction,
+    this.textStyle,
+    this.errorTextStyle,
+    this.onTap,
+    this.onTapOutside,
     this.onChanged,
     this.onEditingComplete,
     this.onSaved,
     this.onSubmitted,
-    this.onTap,
-    this.onTapOutside,
-    this.validator,
-    this.errorBuilder,
   });
 
   @override
@@ -284,6 +284,9 @@ class _MoonTextAreaState extends State<MoonTextArea> {
 
   @override
   Widget build(BuildContext context) {
+    final BorderRadius effectiveBorderRadius =
+        widget.borderRadius ?? context.moonTheme?.textAreaTheme.properties.borderRadius ?? BorderRadius.circular(8);
+
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.textAreaTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
@@ -305,13 +308,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
     final Color effectiveHintTextColor =
         widget.hintTextColor ?? context.moonTheme?.textAreaTheme.colors.hintTextColor ?? MoonColors.light.trunks;
 
-    final BorderRadius effectiveBorderRadius =
-        widget.borderRadius ?? context.moonTheme?.textAreaTheme.properties.borderRadius ?? BorderRadius.circular(8);
-
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
-
-    final EdgeInsetsGeometry effectiveTextPadding =
-        widget.textPadding ?? context.moonTheme?.textAreaTheme.properties.textPadding ?? const EdgeInsets.all(16);
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.textAreaTheme.properties.transitionDuration ??
@@ -319,6 +316,9 @@ class _MoonTextAreaState extends State<MoonTextArea> {
 
     final Curve effectiveTransitionCurve =
         widget.transitionCurve ?? context.moonTheme?.textAreaTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+
+    final EdgeInsetsGeometry effectiveTextPadding =
+        widget.textPadding ?? context.moonTheme?.textAreaTheme.properties.textPadding ?? const EdgeInsets.all(16);
 
     final TextStyle effectiveTextStyle =
         widget.textStyle ?? context.moonTheme?.textAreaTheme.properties.textStyle ?? const TextStyle(fontSize: 16);
