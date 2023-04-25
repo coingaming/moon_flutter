@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
@@ -180,20 +181,25 @@ class MoonAvatar extends StatelessWidget {
           children: [
             Positioned.fill(
               child: ClipPath(
-                clipper: AvatarClipper(
-                  showBadge: showBadge,
-                  width: effectiveAvatarWidth,
-                  height: effectiveAvatarHeight,
-                  borderRadius: effectiveBorderRadius,
-                  badgeSize: effectiveBadgeSize,
-                  badgeMarginValue: effectiveBadgeMarginValue,
-                  badgeAlignment: badgeAlignment,
-                  textDirection: Directionality.of(context),
-                ),
+                // TODO: Since clipper does not work properly on mobile web/PWA, we are disabling it. Remove this check
+                // when it has been fixed from Flutter side.
+                clipper: kIsWeb && MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width < 500
+                    ? null
+                    : AvatarClipper(
+                        showBadge: showBadge,
+                        width: effectiveAvatarWidth,
+                        height: effectiveAvatarHeight,
+                        borderRadius: effectiveBorderRadius,
+                        badgeSize: effectiveBadgeSize,
+                        badgeMarginValue: effectiveBadgeMarginValue,
+                        badgeAlignment: badgeAlignment,
+                        textDirection: Directionality.of(context),
+                      ),
                 child: DefaultTextStyle.merge(
                   style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
+                      borderRadius: effectiveBorderRadius,
                       color: effectiveBackgroundColor,
                       image: backgroundImage != null
                           ? DecorationImage(
