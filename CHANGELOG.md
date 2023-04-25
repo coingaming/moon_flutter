@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.4](https://github.com/coingaming/moon_flutter/compare/v0.19.3...v0.19.4) (2023-04-25)
+
+
+### Bug Fixes
+
+* [MDS-511] Fix disappearing widgets in mobile web / PWA ([#152](https://github.com/coingaming/moon_flutter/issues/152)) ([7b96ea5](https://github.com/coingaming/moon_flutter/commit/7b96ea54d0b6105cf5fe8af2f48142f97707a958))
+
 ## [0.19.3](https://github.com/coingaming/moon_flutter/compare/v0.19.2...v0.19.3) (2023-04-24)
 
 
