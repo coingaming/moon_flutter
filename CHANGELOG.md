@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.5](https://github.com/coingaming/moon_flutter/compare/v0.19.4...v0.19.5) (2023-04-25)
+
+
+### Bug Fixes
+
+* [MDS-508] Props check and ordering ([#154](https://github.com/coingaming/moon_flutter/issues/154)) ([cc6025f](https://github.com/coingaming/moon_flutter/commit/cc6025f27cffac02b48cb708da83c7b4aecac5bf))
+
 ## [0.19.4](https://github.com/coingaming/moon_flutter/compare/v0.19.3...v0.19.4) (2023-04-25)
 
 
