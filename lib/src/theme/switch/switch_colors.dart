@@ -23,7 +23,7 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
   /// Switch inactive track color.
   final Color inactiveTrackColor;
 
-  /// Switch thumbcolor.
+  /// Switch thumbColor.
   final Color thumbColor;
 
   const MoonSwitchColors({

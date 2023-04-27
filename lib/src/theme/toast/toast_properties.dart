@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -11,18 +10,15 @@ import 'package:moon_design/src/theme/sizes.dart';
 class MoonToastProperties extends ThemeExtension<MoonToastProperties> with DiagnosticableTreeMixin {
   static final properties = MoonToastProperties(
     borderRadius: MoonBorders.borders.surfaceSm,
-    contentPadding: EdgeInsets.all(MoonSizes.sizes.x2s),
     gap: MoonSizes.sizes.x2s,
     displayDuration: const Duration(seconds: 5),
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
+    contentPadding: EdgeInsets.all(MoonSizes.sizes.x2s),
   );
 
   /// Toast border radius.
   final BorderRadius borderRadius;
-
-  /// Padding around toast content.
-  final EdgeInsetsGeometry contentPadding;
 
   /// Space between toast children.
   final double gap;
@@ -36,31 +32,34 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
   /// Toast transition curve.
   final Curve transitionCurve;
 
+  /// Padding around toast content.
+  final EdgeInsetsGeometry contentPadding;
+
   const MoonToastProperties({
     required this.borderRadius,
-    required this.contentPadding,
     required this.gap,
     required this.displayDuration,
     required this.transitionDuration,
     required this.transitionCurve,
+    required this.contentPadding,
   });
 
   @override
   MoonToastProperties copyWith({
     BorderRadius? borderRadius,
-    EdgeInsetsGeometry? contentPadding,
     double? gap,
     Duration? displayDuration,
     Duration? transitionDuration,
     Curve? transitionCurve,
+    EdgeInsetsGeometry? contentPadding,
   }) {
     return MoonToastProperties(
       borderRadius: borderRadius ?? this.borderRadius,
-      contentPadding: contentPadding ?? this.contentPadding,
       gap: gap ?? this.gap,
       displayDuration: displayDuration ?? this.displayDuration,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
+      contentPadding: contentPadding ?? this.contentPadding,
     );
   }
 
@@ -70,11 +69,11 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
 
     return MoonToastProperties(
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
-      contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       displayDuration: lerpDuration(displayDuration, other.displayDuration, t),
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
+      contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
     );
   }
 
@@ -84,10 +83,10 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
     properties
       ..add(DiagnosticsProperty("type", "MoonToastProperties"))
       ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding))
       ..add(DoubleProperty("gap", gap))
       ..add(DiagnosticsProperty<Duration>("displayDuration", displayDuration))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
+      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding));
   }
 }

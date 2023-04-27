@@ -8,9 +8,10 @@ class LinearProgressStory extends Story {
       : super(
           name: "Progress/LinearProgress",
           builder: (context) {
-            final progressSizesKnob = context.knobs.options(
-              label: "MoonLinearProgressSize",
-              description: "LinearProgress size variants.",
+            final progressSizesKnob = context.knobs.nullable.options(
+              label: "linearProgressSize",
+              description: "Size variants for LinearProgress.",
+              enabled: false,
               initial: MoonLinearProgressSize.x4s,
               options: const [
                 Option(label: "x6s", value: MoonLinearProgressSize.x6s),
@@ -21,34 +22,37 @@ class LinearProgressStory extends Story {
               ],
             );
 
-            final progressColorKnob = context.knobs.options(
+            final progressColorKnob = context.knobs.nullable.options(
               label: "color",
               description: "MoonColors variants for LinearProgress color.",
+              enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final color = colorTable(context)[progressColorKnob];
+            final color = colorTable(context)[progressColorKnob ?? 40];
 
-            final progressBackgroundColorKnob = context.knobs.options(
+            final progressBackgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for LinearProgress background.",
-              initial: 6, // trunks
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[progressBackgroundColorKnob];
+            final backgroundColor = colorTable(context)[progressBackgroundColorKnob ?? 40];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "LinearProgress border radius.",
+              description: "Border radius for LinearProgress.",
+              enabled: false,
               initial: 8,
-              max: 12,
+              max: 32,
             );
 
             final linearProgressValueKnob = context.knobs.slider(
               label: "value",
-              description: "LinearProgress value.",
+              description: "Value for LinearProgress.",
               initial: 0.5,
             );
 
@@ -59,10 +63,10 @@ class LinearProgressStory extends Story {
                   const SizedBox(height: 64),
                   MoonLinearProgress(
                     value: linearProgressValueKnob,
-                    progressSize: progressSizesKnob,
+                    linearProgressSize: progressSizesKnob,
                     color: color,
                     backgroundColor: backgroundColor,
-                    borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                   ),
                   const SizedBox(height: 64),
                 ],

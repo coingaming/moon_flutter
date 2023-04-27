@@ -12,26 +12,11 @@ enum MoonTagSize {
 }
 
 class MoonTag extends StatelessWidget {
-  /// The callback that is called when the tag is tapped or pressed.
-  final VoidCallback? onTap;
+  /// Whether the tag should use upper case text style.
+  final bool isUpperCase;
 
-  /// The callback that is called when the tag is long-pressed.
-  final VoidCallback? onLongPress;
-
-  /// The size of the tag.
-  final MoonTagSize? tagSize;
-
-  /// The semantic label for the tag.
-  final String? semanticLabel;
-
-  /// The width of the tag.
-  final double? width;
-
-  /// The height of the tag.
-  final double? height;
-
-  /// The gap between the leading or trailing and the label widgets.
-  final double? gap;
+  /// The border radius of the tag.
+  final BorderRadius? borderRadius;
 
   /// The background color of the tag.
   final Color? backgroundColor;
@@ -39,14 +24,29 @@ class MoonTag extends StatelessWidget {
   /// The text color of the tag.
   final Color? textColor;
 
+  /// The height of the tag.
+  final double? height;
+
+  /// The width of the tag.
+  final double? width;
+
+  /// The gap between the leading or trailing and the label widgets.
+  final double? gap;
+
   /// The padding of the tag.
   final EdgeInsetsGeometry? padding;
 
-  /// The border radius of the tag.
-  final BorderRadius? borderRadius;
+  /// The size of the tag.
+  final MoonTagSize? tagSize;
 
-  /// Whether the tag should use upper case text style.
-  final bool isUpperCase;
+  /// The semantic label for the tag.
+  final String? semanticLabel;
+
+  /// The callback that is called when the tag is tapped or pressed.
+  final VoidCallback? onTap;
+
+  /// The callback that is called when the tag is long-pressed.
+  final VoidCallback? onLongPress;
 
   /// The widget in the leading slot of the tag.
   final Widget? leading;
@@ -60,18 +60,18 @@ class MoonTag extends StatelessWidget {
   /// MDS tag widget.
   const MoonTag({
     super.key,
-    this.onTap,
-    this.onLongPress,
-    this.tagSize,
-    this.semanticLabel,
-    this.width,
-    this.height,
-    this.gap,
+    this.isUpperCase = true,
+    this.borderRadius,
     this.backgroundColor,
     this.textColor,
+    this.height,
+    this.width,
+    this.gap,
     this.padding,
-    this.borderRadius,
-    this.isUpperCase = true,
+    this.tagSize,
+    this.semanticLabel,
+    this.onTap,
+    this.onLongPress,
     this.leading,
     this.label,
     this.trailing,
@@ -103,19 +103,19 @@ class MoonTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MoonTagSizeProperties effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
+
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
+
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.tagTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor = textColor ??
         _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
 
-    final MoonTagSizeProperties effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
-
     final double effectiveHeight = height ?? effectiveMoonTagSize.height;
 
     final double effectiveGap = gap ?? effectiveMoonTagSize.gap;
-
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
 
     final EdgeInsetsGeometry effectivePadding = padding ?? effectiveMoonTagSize.padding;
 

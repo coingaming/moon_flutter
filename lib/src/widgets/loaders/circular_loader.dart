@@ -14,8 +14,11 @@ enum MoonCircularLoaderSize {
 }
 
 class MoonCircularLoader extends StatelessWidget {
-  /// Size of the circular loader widget.
-  final MoonCircularLoaderSize? loaderSize;
+  /// Color of the circular loader widget.
+  final Color? color;
+
+  /// Background color of the circular loader widget.
+  final Color? backgroundColor;
 
   /// Size value of the circular loader widget.
   final double? sizeValue;
@@ -23,24 +26,21 @@ class MoonCircularLoader extends StatelessWidget {
   /// Stroke width of the circular loader widget.
   final double? strokeWidth;
 
+  /// Size of the circular loader widget.
+  final MoonCircularLoaderSize? circularLoaderSize;
+
   /// Stroke cap of the circular loader widget.
   final StrokeCap? strokeCap;
-
-  /// Color of the circular loader widget.
-  final Color? color;
-
-  /// Background color of the circular loader widget.
-  final Color? backgroundColor;
 
   /// MDS circular loader widget.
   const MoonCircularLoader({
     super.key,
-    this.loaderSize,
-    this.sizeValue,
-    this.strokeWidth,
-    this.strokeCap,
     this.color,
     this.backgroundColor,
+    this.sizeValue,
+    this.strokeWidth,
+    this.circularLoaderSize,
+    this.strokeCap,
   });
 
   MoonCircularLoaderSizeProperties _getMoonLoaderSize(BuildContext context, MoonCircularLoaderSize? moonLoaderSize) {
@@ -63,24 +63,27 @@ class MoonCircularLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MoonCircularLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, circularLoaderSize);
+
     final Color effectiveColor = color ?? context.moonTheme?.circularLoaderTheme.colors.color ?? MoonColors.light.hit;
+
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.circularLoaderTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
-    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
-
-    final MoonCircularLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, loaderSize);
     final double effectiveSize = sizeValue ?? effectiveLoaderSize.loaderSizeValue;
+
     final double effectiveStrokeWidth = strokeWidth ?? effectiveLoaderSize.loaderStrokeWidth;
+
+    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 
     return SizedBox(
       height: effectiveSize,
       width: effectiveSize,
       child: MoonCircularProgressIndicator(
-        strokeWidth: effectiveStrokeWidth,
-        strokeCap: effectiveStrokeCap,
         color: effectiveColor,
         backgroundColor: effectiveBackgroundColor,
+        strokeWidth: effectiveStrokeWidth,
+        strokeCap: effectiveStrokeCap,
       ),
     );
   }

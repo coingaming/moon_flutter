@@ -4,11 +4,11 @@ import 'package:moon_design/src/widgets/common/progress_indicators/base_progress
 import 'package:moon_design/src/widgets/common/progress_indicators/painters/linear_progress_indicator_painter.dart';
 
 class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
-  /// The minimum height of the linear progress indicator.
-  final double minHeight;
-
   /// The border radius of the linear progress indicator.
   final BorderRadius borderRadius;
+
+  /// The minimum height of the linear progress indicator.
+  final double minHeight;
 
   /// Creates a linear progress indicator.
   const MoonLinearProgressIndicator({
@@ -17,10 +17,10 @@ class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
     required super.backgroundColor,
     required super.color,
     super.valueColor,
-    this.minHeight = 4,
-    this.borderRadius = BorderRadius.zero,
     super.semanticsLabel,
     super.semanticsValue,
+    this.minHeight = 4,
+    this.borderRadius = BorderRadius.zero,
   }) : assert(minHeight > 0);
 
   /// Color of the track being filled by the linear indicator.
@@ -77,8 +77,10 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
             painter: MoonLinearProgressIndicatorPainter(
               backgroundColor: widget.backgroundColor,
               valueColor: widget.color,
-              value: widget.value, // may be null
-              animationValue: animationValue, // ignored if widget.value is not null
+              value: widget.value,
+              // may be null
+              animationValue: animationValue,
+              // ignored if widget.value is not null
               borderRadius: widget.borderRadius,
               textDirection: textDirection,
             ),

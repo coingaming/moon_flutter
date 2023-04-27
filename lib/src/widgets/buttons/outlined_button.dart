@@ -3,17 +3,41 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 
 class MoonOutlinedButton extends StatelessWidget {
-  /// The callback that is called when the button is tapped or pressed.
-  final VoidCallback? onTap;
+  /// {@macro flutter.widgets.Focus.autofocus}
+  final bool autofocus;
 
-  /// The callback that is called when the button is long-pressed.
-  final VoidCallback? onLongPress;
+  /// Whether this button should be focusable.
+  final bool isFocusable;
 
-  /// The size of the button.
-  final MoonButtonSize? buttonSize;
+  /// Whether this button should ensure that it has a minimal touch target size.
+  final bool ensureMinimalTouchTargetSize;
+
+  /// Whether this button should be full width.
+  final bool isFullWidth;
+
+  /// Whether this button should show a pulse effect.
+  final bool showPulseEffect;
+
+  /// Whether the button should show a tooltip.
+  final bool showTooltip;
+
+  /// The border color of the button.
+  final Color? borderColor;
+
+  /// The height of the button.
+  final double? height;
+
+  /// The width of the button.
+  final double? width;
+
+  /// The minimum size of the touch target.
+  final double minTouchTargetSize;
 
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
+
+  /// The size of the button.
+  final MoonButtonSize? buttonSize;
 
   /// The semantic label for the button.
   final String? semanticLabel;
@@ -21,32 +45,11 @@ class MoonOutlinedButton extends StatelessWidget {
   /// The tooltip message for the button.
   final String tooltipMessage;
 
-  /// The width of the button.
-  final double? width;
+  /// The callback that is called when the button is tapped or pressed.
+  final VoidCallback? onTap;
 
-  /// The height of the button.
-  final double? height;
-
-  /// The minimum size of the touch target.
-  final double minTouchTargetSize;
-
-  /// Whether this button should ensure that it has a minimal touch target size.
-  final bool ensureMinimalTouchTargetSize;
-
-  /// {@macro flutter.widgets.Focus.autofocus}
-  final bool autofocus;
-
-  /// Whether this button should be focusable.
-  final bool isFocusable;
-
-  /// Whether this button should be full width.
-  final bool isFullWidth;
-
-  /// Whether the button should show a tooltip.
-  final bool showTooltip;
-
-  /// Whether this button should show a pulse effect.
-  final bool showPulseEffect;
+  /// The callback that is called when the button is long-pressed.
+  final VoidCallback? onLongPress;
 
   /// The widget in the leading slot of the button.
   final Widget? leading;
@@ -65,21 +68,22 @@ class MoonOutlinedButton extends StatelessWidget {
   ///   * [MoonTextButton], MDS text button.
   const MoonOutlinedButton({
     super.key,
-    this.onTap,
-    this.onLongPress,
-    this.buttonSize,
-    this.focusNode,
-    this.semanticLabel,
-    this.tooltipMessage = "",
-    this.width,
-    this.height,
-    this.minTouchTargetSize = 40,
-    this.ensureMinimalTouchTargetSize = false,
     this.autofocus = false,
     this.isFocusable = true,
+    this.ensureMinimalTouchTargetSize = false,
     this.isFullWidth = false,
-    this.showTooltip = false,
     this.showPulseEffect = false,
+    this.showTooltip = false,
+    this.borderColor,
+    this.height,
+    this.width,
+    this.minTouchTargetSize = 40,
+    this.focusNode,
+    this.buttonSize,
+    this.semanticLabel,
+    this.tooltipMessage = "",
+    this.onTap,
+    this.onLongPress,
     this.label,
     this.leading,
     this.trailing,
@@ -88,22 +92,23 @@ class MoonOutlinedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MoonButton(
-      onTap: onTap,
-      onLongPress: onLongPress,
-      buttonSize: buttonSize,
-      focusNode: focusNode,
-      semanticLabel: semanticLabel,
-      tooltipMessage: tooltipMessage,
-      width: width,
-      height: height,
-      minTouchTargetSize: minTouchTargetSize,
-      ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       autofocus: autofocus,
       isFocusable: isFocusable,
+      ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       isFullWidth: isFullWidth,
-      showTooltip: showTooltip,
       showPulseEffect: showPulseEffect,
+      showTooltip: showTooltip,
       showBorder: true,
+      borderColor: borderColor,
+      height: height,
+      width: width,
+      minTouchTargetSize: minTouchTargetSize,
+      focusNode: focusNode,
+      buttonSize: buttonSize,
+      semanticLabel: semanticLabel,
+      tooltipMessage: tooltipMessage,
+      onTap: onTap,
+      onLongPress: onLongPress,
       label: label,
       leading: leading,
       trailing: trailing,

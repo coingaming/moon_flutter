@@ -9,13 +9,14 @@ class ToastStory extends Story {
           name: "Toast",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "label text",
               initial: "This is a custom MoonToast text",
             );
 
-            final toastPositionKnob = context.knobs.options(
-              label: "MoonToastPosition",
-              description: "The position of the MoonToast.",
+            final toastPositionKnob = context.knobs.nullable.options(
+              label: "position",
+              description: "The position of MoonToast.",
+              enabled: false,
               initial: MoonToastPosition.bottom,
               options: const [
                 Option(label: "top", value: MoonToastPosition.top),
@@ -23,9 +24,10 @@ class ToastStory extends Story {
               ],
             );
 
-            final toastVariantKnob = context.knobs.options(
-              label: "MoonToastVariant",
-              description: "The color variant of the MoonToast.",
+            final toastVariantKnob = context.knobs.nullable.options(
+              label: "variant",
+              description: "The color variant of MoonToast.",
+              enabled: false,
               initial: MoonToastVariant.original,
               options: const [
                 Option(label: "original", value: MoonToastVariant.original),
@@ -33,65 +35,62 @@ class ToastStory extends Story {
               ],
             );
 
-            final backgroundColorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonToast background.",
-              initial: 40, // null
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
 
-            final displayDurationKnob = context.knobs.sliderInt(
-              min: 1,
-              max: 10,
-              initial: 5,
-              label: "displayDuration",
-              description: "The duration to show the MoonToast.",
-            );
-
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 20,
-              initial: 8,
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for MoonToast.",
+              enabled: false,
+              initial: 8,
+              max: 32,
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
+            final displayDurationKnob = context.knobs.nullable.sliderInt(
+              label: "displayDuration",
+              description: "The duration of showing MoonToast.",
+              enabled: false,
+              initial: 5,
+              min: 1,
+              max: 10,
             );
 
-            return Directionality(
-              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    Builder(
-                      builder: (context) {
-                        return MoonFilledButton(
-                          label: const Text("Tap me"),
-                          onTap: () {
-                            MoonToast().show(
-                              context,
-                              position: toastPositionKnob,
-                              variant: toastVariantKnob,
-                              backgroundColor: backgroundColor,
-                              displayDuration: Duration(seconds: displayDurationKnob),
-                              borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                              leading: const Icon(MoonIcons.info_24),
-                              title: Text(customLabelTextKnob),
-                              trailing: const Icon(MoonIcons.star_24),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 64),
-                  ],
-                ),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 64),
+                  Builder(
+                    builder: (context) {
+                      return MoonFilledButton(
+                        label: const Text("Tap me"),
+                        onTap: () {
+                          MoonToast().show(
+                            context,
+                            position: toastPositionKnob ?? MoonToastPosition.bottom,
+                            variant: toastVariantKnob ?? MoonToastVariant.original,
+                            backgroundColor: backgroundColor,
+                            displayDuration:
+                                displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
+                            borderRadius:
+                                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                            leading: const Icon(MoonIcons.info_24),
+                            title: Text(customLabelTextKnob),
+                            trailing: const Icon(MoonIcons.star_24),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 64),
+                ],
               ),
             );
           },

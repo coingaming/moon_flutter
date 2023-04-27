@@ -8,9 +8,10 @@ class LinearLoaderStory extends Story {
       : super(
           name: "Loader/LinearLoader",
           builder: (context) {
-            final loaderSizesKnob = context.knobs.options(
-              label: "MoonLinearLoaderSize",
-              description: "LinearLoader size variants.",
+            final loaderSizesKnob = context.knobs.nullable.options(
+              label: "linearLoaderSize",
+              description: "Size variants for LinearLoader.",
+              enabled: false,
               initial: MoonLinearLoaderSize.x4s,
               options: const [
                 Option(label: "x6s", value: MoonLinearLoaderSize.x6s),
@@ -21,29 +22,32 @@ class LinearLoaderStory extends Story {
               ],
             );
 
-            final loaderColorKnob = context.knobs.options(
+            final loaderColorKnob = context.knobs.nullable.options(
               label: "color",
               description: "MoonColors variants for LinearLoader color.",
-              initial: 1, // hit
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final color = colorTable(context)[loaderColorKnob];
+            final color = colorTable(context)[loaderColorKnob ?? 40];
 
-            final loaderBackgroundColorKnob = context.knobs.options(
+            final loaderBackgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for LinearLoader background.",
-              initial: 39, // none
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[loaderBackgroundColorKnob];
+            final backgroundColor = colorTable(context)[loaderBackgroundColorKnob ?? 40];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "LinearLoader border radius.",
+              description: "Border radius for LinearLoader.",
+              enabled: false,
               initial: 8,
-              max: 12,
+              max: 32,
             );
 
             return Center(
@@ -52,10 +56,10 @@ class LinearLoaderStory extends Story {
                 children: [
                   const SizedBox(height: 64),
                   MoonLinearLoader(
-                    loaderSize: loaderSizesKnob,
+                    linearLoaderSize: loaderSizesKnob,
                     color: color,
                     backgroundColor: backgroundColor,
-                    borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                   ),
                   const SizedBox(height: 64),
                 ],

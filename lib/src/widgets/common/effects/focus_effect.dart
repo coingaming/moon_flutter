@@ -4,21 +4,21 @@ import 'package:moon_design/src/widgets/common/effects/painters/focus_effect_pai
 
 class MoonFocusEffect extends StatefulWidget {
   final bool show;
-  final double effectExtent;
+  final BorderRadius? childBorderRadius;
   final Color effectColor;
+  final double effectExtent;
   final Duration effectDuration;
   final Curve effectCurve;
-  final BorderRadius? childBorderRadius;
   final Widget child;
 
   const MoonFocusEffect({
     super.key,
     required this.show,
-    required this.effectExtent,
+    this.childBorderRadius,
     required this.effectColor,
+    required this.effectExtent,
     required this.effectDuration,
     required this.effectCurve,
-    this.childBorderRadius,
     required this.child,
   });
 

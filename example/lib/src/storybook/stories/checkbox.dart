@@ -12,99 +12,99 @@ class CheckboxStory extends Story {
       : super(
           name: "Checkbox",
           builder: (context) {
-            final checkColorsKnob = context.knobs.options(
+            final checkColorsKnob = context.knobs.nullable.options(
               label: "checkColor",
-              description: "MoonColors variants for the Checkbox icon.",
-              initial: 7, // goten
+              description: "MoonColors variants for MoonCheckbox icon.",
+              enabled: false,
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final checkColor = colorTable(context)[checkColorsKnob];
+            final checkColor = colorTable(context)[checkColorsKnob ?? 40];
 
-            final activeColorsKnob = context.knobs.options(
+            final activeColorsKnob = context.knobs.nullable.options(
               label: "activeColor",
-              description: "MoonColors variants for when Checkbox is checked.",
-              initial: 0, // piccolo
+              description: "MoonColors variants for checked MoonCheckbox.",
+              enabled: false,
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final activeColor = colorTable(context)[activeColorsKnob];
+            final activeColor = colorTable(context)[activeColorsKnob ?? 40];
 
-            final inactiveColorsKnob = context.knobs.options(
+            final inactiveColorsKnob = context.knobs.nullable.options(
               label: "inactiveColor",
-              description: "MoonColors variants for when Checkbox is unchecked.",
-              initial: 39, // transparent
+              description: "MoonColors variants for unchecked MoonCheckbox.",
+              enabled: false,
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final inactiveColor = colorTable(context)[inactiveColorsKnob];
+            final inactiveColor = colorTable(context)[inactiveColorsKnob ?? 40];
 
-            final borderColorsKnob = context.knobs.options(
+            final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
-              description: "MoonColors variants for Checkbox border.",
-              initial: 6, // trunks
+              description: "MoonColors variants for MoonCheckbox border.",
+              enabled: false,
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final borderColor = colorTable(context)[borderColorsKnob];
+            final borderColor = colorTable(context)[borderColorsKnob ?? 40];
+
+            final isTristate = context.knobs.boolean(
+              label: "tristate",
+              description: "Whether MoonCheckbox uses tristate.",
+            );
 
             final isDisabled = context.knobs.boolean(
               label: "Disabled",
               description: "onChanged() is null.",
             );
 
-            final isTristate = context.knobs.boolean(
-              label: "tristate",
-              description: "Whether the Checkbox uses tristate.",
-            );
-
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
-            );
-
-            return Directionality(
-              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    const TextDivider(text: "Customisable Checkbox"),
-                    const SizedBox(height: 32),
-                    StatefulBuilder(
-                      builder: (context, setState) {
-                        return MoonCheckbox(
-                          activeColor: activeColor,
-                          borderColor: borderColor,
-                          checkColor: checkColor,
-                          inactiveColor: inactiveColor,
-                          tristate: isTristate,
-                          value: value,
-                          onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 40),
-                    const TextDivider(text: "Checkbox with clickable text"),
-                    const SizedBox(height: 32),
-                    StatefulBuilder(
-                      builder: (context, setState) {
-                        return MoonCheckbox.withLabel(
-                          context,
-                          checkColor: checkColor,
-                          activeColor: activeColor,
-                          inactiveColor: inactiveColor,
-                          tristate: isTristate,
-                          value: value,
-                          onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
-                          label: "With label",
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 64),
-                  ],
-                ),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 64),
+                  const TextDivider(text: "Customisable MoonCheckbox"),
+                  const SizedBox(height: 32),
+                  StatefulBuilder(
+                    builder: (context, setState) {
+                      return MoonCheckbox(
+                        activeColor: activeColor,
+                        inactiveColor: inactiveColor,
+                        checkColor: checkColor,
+                        borderColor: borderColor,
+                        tristate: isTristate,
+                        value: value,
+                        onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 40),
+                  const TextDivider(text: "MoonCheckbox with clickable text"),
+                  const SizedBox(height: 32),
+                  StatefulBuilder(
+                    builder: (context, setState) {
+                      return MoonCheckbox.withLabel(
+                        context,
+                        label: "With label",
+                        activeColor: activeColor,
+                        inactiveColor: inactiveColor,
+                        checkColor: checkColor,
+                        tristate: isTristate,
+                        value: value,
+                        onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 64),
+                ],
               ),
             );
           },

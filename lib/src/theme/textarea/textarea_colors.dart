@@ -50,7 +50,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? errorBorderColor,
-    Color? hoverBorderColor,
     Color? hintTextColor,
   }) {
     return MoonTextAreaColors(

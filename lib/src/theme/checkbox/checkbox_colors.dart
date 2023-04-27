@@ -7,16 +7,16 @@ import 'package:moon_design/src/theme/colors.dart';
 class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with DiagnosticableTreeMixin {
   static final light = MoonCheckboxColors(
     activeColor: MoonColors.light.piccolo,
+    borderColor: MoonColors.light.trunks,
     checkColor: MoonColors.light.goten,
     inactiveColor: Colors.transparent,
-    borderColor: MoonColors.light.trunks,
   );
 
   static final dark = MoonCheckboxColors(
     activeColor: MoonColors.dark.piccolo,
+    borderColor: MoonColors.dark.trunks,
     checkColor: MoonColors.dark.goten,
     inactiveColor: Colors.transparent,
-    borderColor: MoonColors.dark.trunks,
   );
 
   /// Checkbox active color.

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moon_design/src/theme/borders.dart';
 
+import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
@@ -24,12 +24,6 @@ class MoonTooltip extends StatefulWidget {
   // This is required so only one tooltip is shown at a time.
   static final List<_MoonTooltipState> _openedTooltips = [];
 
-  /// Sets a handler for listening to a `tap` event on the tooltip.
-  final VoidCallback? onTap;
-
-  /// Controls the tooltip visibility.
-  final bool show;
-
   /// Whether the tooltip has an arrow (tail).
   final bool hasArrow;
 
@@ -37,23 +31,17 @@ class MoonTooltip extends StatefulWidget {
   /// rely on the [show] property and [onTap] handler. Defaults to [true].
   final bool hideOnTap;
 
-  /// Sets the tooltip position relative to the target. Defaults to [MoonTooltipPosition.vertical]
-  final MoonTooltipPosition tooltipPosition;
+  /// Controls the tooltip visibility.
+  final bool show;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
-  final double? minWidth;
+  /// The border radius of the tooltip.
+  final BorderRadius? borderRadius;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
-  final double? minHeight;
+  /// The color of the tooltip background.
+  final Color? backgroundColor;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
-  final double? maxWidth;
-
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
-  final double? maxHeight;
-
-  /// Padding around the tooltip content.
-  final EdgeInsetsGeometry? contentPadding;
+  /// The color of the tooltip border. Is shown when [borderWidth] is larger than 0.
+  final Color borderColor;
 
   /// The width of the tooltip arrow (tail) at its base.
   final double? arrowBaseWidth;
@@ -70,20 +58,20 @@ class MoonTooltip extends StatefulWidget {
   /// The width of the tooltip border.
   final double borderWidth;
 
-  /// The border radius of the tooltip.
-  final BorderRadius? borderRadius;
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? minHeight;
+
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? minWidth;
+
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? maxHeight;
+
+  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  final double? maxWidth;
 
   /// The margin around tooltip. Used to prevent the tooltip from touching the edges of the viewport.
   final double tooltipMargin;
-
-  /// The color of the tooltip border.
-  final Color borderColor;
-
-  /// The color of the tooltip background.
-  final Color? backgroundColor;
-
-  /// List of tooltip shadows.
-  final List<BoxShadow>? tooltipShadows;
 
   /// Tooltip transition duration (fade in or out animation).
   final Duration? transitionDuration;
@@ -91,47 +79,59 @@ class MoonTooltip extends StatefulWidget {
   /// Tooltip transition curve (fade in or out animation).
   final Curve? transitionCurve;
 
+  /// Padding around the tooltip content.
+  final EdgeInsetsGeometry? contentPadding;
+
+  /// List of tooltip shadows.
+  final List<BoxShadow>? tooltipShadows;
+
+  /// Sets the tooltip position relative to the target. Defaults to [MoonTooltipPosition.vertical]
+  final MoonTooltipPosition tooltipPosition;
+
   /// `RouteObserver` used to listen for route changes that will hide the tooltip when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
   /// The semantic label for the tooltip.
   final String? semanticLabel;
 
-  /// The widget that its placed inside the tooltip and functions as its content.
-  final Widget content;
+  /// Sets a handler for listening to a `tap` event on the tooltip.
+  final VoidCallback? onTap;
 
   /// The [child] widget which the tooltip will target.
   final Widget child;
 
+  /// The widget that its placed inside the tooltip and functions as its content.
+  final Widget content;
+
   /// MDS tooltip widget.
   const MoonTooltip({
     super.key,
-    this.onTap,
-    required this.show,
     this.hasArrow = true,
     this.hideOnTap = true,
-    this.tooltipPosition = MoonTooltipPosition.top,
-    this.minWidth,
-    this.maxWidth,
-    this.minHeight,
-    this.maxHeight,
-    this.contentPadding,
+    required this.show,
+    this.borderRadius,
+    this.backgroundColor,
+    this.borderColor = Colors.transparent,
     this.arrowBaseWidth,
     this.arrowLength,
     this.arrowOffsetValue = 0,
     this.arrowTipDistance,
-    this.borderRadius,
     this.borderWidth = 0,
+    this.minHeight,
+    this.minWidth,
+    this.maxHeight,
+    this.maxWidth,
     this.tooltipMargin = 8,
-    this.borderColor = Colors.transparent,
-    this.backgroundColor,
     this.transitionDuration,
     this.transitionCurve,
+    this.contentPadding,
     this.tooltipShadows,
+    this.tooltipPosition = MoonTooltipPosition.top,
     this.routeObserver,
     this.semanticLabel,
-    required this.content,
+    this.onTap,
     required this.child,
+    required this.content,
   });
 
   // Causes any current tooltips to be removed. Won't remove the supplied tooltip.
@@ -159,9 +159,9 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   AnimationController? _animationController;
   CurvedAnimation? _curvedAnimation;
 
-  bool _routeIsShowing = true;
-
   OverlayEntry? _overlayEntry;
+
+  bool _routeIsShowing = true;
 
   bool get shouldShowTooltip => widget.show && _routeIsShowing;
 
@@ -393,6 +393,10 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   Widget _createOverlayContent() {
     MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
+    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
+        context.moonTheme?.tooltipTheme.properties.borderRadius ??
+        MoonBorders.borders.interactiveXs;
+
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
@@ -410,19 +414,16 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     final EdgeInsetsGeometry effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.tooltipTheme.properties.contentPadding ?? const EdgeInsets.all(12);
 
-    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
-        context.moonTheme?.tooltipTheme.properties.borderRadius ??
-        MoonBorders.borders.interactiveXs;
+    final List<BoxShadow> effectiveTooltipShadows =
+        widget.tooltipShadows ?? context.moonTheme?.tooltipTheme.shadows.tooltipShadows ?? MoonShadows.light.sm;
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.tooltipTheme.properties.textStyle.copyWith(color: effectiveTextColor) ??
             MoonTextStyles.body.text12.copyWith(color: effectiveTextColor);
 
-    final List<BoxShadow> effectiveTooltipShadows =
-        widget.tooltipShadows ?? context.moonTheme?.tooltipTheme.shadows.tooltipShadows ?? MoonShadows.light.sm;
+    final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
     final targetRenderBox = context.findRenderObject()! as RenderBox;
-    final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
     final tooltipTargetGlobalCenter =
         targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);

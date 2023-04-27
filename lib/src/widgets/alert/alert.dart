@@ -64,9 +64,6 @@ class MoonAlert extends StatefulWidget {
   /// The text style for title
   final TextStyle? titleTextStyle;
 
-  /// The widget in the body slot of the alert.
-  final Widget? body;
-
   /// The widget in the leading slot of the alert.
   final Widget? leading;
 
@@ -75,6 +72,9 @@ class MoonAlert extends StatefulWidget {
 
   /// The widget in the trailing slot of the alert.
   final Widget? trailing;
+
+  /// The widget in the body slot of the alert.
+  final Widget? body;
 
   /// MDS base alert.
   ///
@@ -102,10 +102,10 @@ class MoonAlert extends StatefulWidget {
     this.semanticLabel,
     this.bodyTextStyle,
     this.titleTextStyle,
-    this.body,
     this.leading,
     required this.title,
     this.trailing,
+    this.body,
   });
 
   @override
@@ -187,8 +187,12 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final EdgeInsetsGeometry effectivePadding =
-        widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
+    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
+        context.moonTheme?.alertTheme.properties.borderRadius ??
+        MoonBorders.borders.interactiveSm;
+
+    final double effectiveBorderWidth =
+        widget.borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
 
     final double effectiveHorizontalGap =
         widget.horizontalGap ?? context.moonTheme?.alertTheme.properties.horizontalGap ?? MoonSizes.sizes.x3s;
@@ -199,18 +203,11 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
     final double effectiveMinimumHeight =
         widget.minimumHeight ?? context.moonTheme?.alertTheme.properties.minimumHeight ?? MoonSizes.sizes.xl;
 
-    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
-        context.moonTheme?.alertTheme.properties.borderRadius ??
-        MoonBorders.borders.interactiveSm;
-
-    final double effectiveBorderWidth =
-        widget.borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonTheme?.alertTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.alertTheme.colors.borderColor ?? MoonColors.light.bulma;
-
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.alertTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveLeadingColor =
         _getElementColor(effectiveBackgroundColor: effectiveBackgroundColor, elementColor: widget.leadingColor);
@@ -220,6 +217,9 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
     final Color effectiveTextColor =
         _getElementColor(effectiveBackgroundColor: effectiveBackgroundColor, elementColor: widget.textColor);
+
+    final EdgeInsetsGeometry effectivePadding =
+        widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
     final TextStyle effectiveTitleTextStyle = _getTextStyle(context: context);
 

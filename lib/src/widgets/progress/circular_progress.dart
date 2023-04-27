@@ -14,11 +14,11 @@ enum MoonCircularProgressSize {
 }
 
 class MoonCircularProgress extends StatelessWidget {
-  /// Size of the circular progress widget.
-  final MoonCircularProgressSize? circularProgressSize;
+  /// Color of the circular progress widget.
+  final Color? color;
 
-  /// Value of the circular progress widget.
-  final double value;
+  /// Background color of the circular progress widget.
+  final Color? backgroundColor;
 
   /// Size value of the circular progress widget.
   final double? sizeValue;
@@ -26,29 +26,29 @@ class MoonCircularProgress extends StatelessWidget {
   /// Stroke width of the circular progress widget.
   final double? strokeWidth;
 
-  /// Color of the circular progress widget.
-  final Color? color;
+  /// Value of the circular progress widget.
+  final double value;
 
-  /// Background color of the circular progress widget.
-  final Color? backgroundColor;
-
-  /// Stroke cap of the circular progress widget.
-  final StrokeCap? strokeCap;
+  /// Size of the circular progress widget.
+  final MoonCircularProgressSize? circularProgressSize;
 
   /// The semantic label for the circular progress widget.
   final String? semanticLabel;
 
+  /// Stroke cap of the circular progress widget.
+  final StrokeCap? strokeCap;
+
   /// MDS circular progress widget.
   const MoonCircularProgress({
     super.key,
-    this.circularProgressSize,
-    required this.value,
-    this.sizeValue,
-    this.strokeWidth,
     this.color,
     this.backgroundColor,
-    this.strokeCap,
+    this.sizeValue,
+    this.strokeWidth,
+    required this.value,
+    this.circularProgressSize,
     this.semanticLabel,
+    this.strokeCap,
   });
 
   MoonCircularProgressSizeProperties _getMoonCircularProgressSize(
@@ -76,15 +76,18 @@ class MoonCircularProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color effectiveColor =
         color ?? context.moonTheme?.circularProgressTheme.colors.color ?? MoonColors.light.piccolo;
+
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.circularProgressTheme.colors.backgroundColor ?? MoonColors.light.trunks;
 
-    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
-
     final MoonCircularProgressSizeProperties effectiveMoonCircularProgressSize =
         _getMoonCircularProgressSize(context, circularProgressSize);
+
     final double effectiveSize = sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
+
     final double effectiveStrokeWidth = strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
+
+    final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 
     return Semantics(
       label: semanticLabel,
@@ -93,10 +96,10 @@ class MoonCircularProgress extends StatelessWidget {
         height: effectiveSize,
         width: effectiveSize,
         child: MoonCircularProgressIndicator(
-          value: value,
-          strokeWidth: effectiveStrokeWidth,
           color: effectiveColor,
           backgroundColor: effectiveBackgroundColor,
+          strokeWidth: effectiveStrokeWidth,
+          value: value,
           strokeCap: effectiveStrokeCap,
         ),
       ),

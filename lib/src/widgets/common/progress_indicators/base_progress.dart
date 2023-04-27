@@ -7,6 +7,23 @@ import 'package:flutter/material.dart';
 /// indicator, see [MoonLinearProgressIndicator]. For a circular progress indicator,
 /// see [MoonCircularProgressIndicator].
 abstract class MoonBaseProgressIndicator extends StatefulWidget {
+  /// The progress indicator's color as an animated value.
+  final Animation<Color?>? valueColor;
+
+  /// The [SemanticsProperties.label] for this progress indicator.
+  ///
+  /// This value indicates the purpose of the progress bar, and will be
+  /// read out by screen readers to indicate the purpose of this progress
+  /// indicator.
+  /// The progress indicator's background color.
+  ///
+  /// It is up to the subclass to implement this in whatever way makes sense
+  /// for the given use case. See the subclass documentation for details.
+  final Color backgroundColor;
+
+  /// The progress indicator's color.
+  final Color color;
+
   /// If non-null, the value of this progress indicator.
   ///
   /// A value of 0.0 means no progress and 1.0 means that progress is complete.
@@ -17,23 +34,6 @@ abstract class MoonBaseProgressIndicator extends StatefulWidget {
   /// much actual progress is being made.
   final double? value;
 
-  /// The progress indicator's background color.
-  ///
-  /// It is up to the subclass to implement this in whatever way makes sense
-  /// for the given use case. See the subclass documentation for details.
-  final Color backgroundColor;
-
-  /// The progress indicator's color.
-  final Color color;
-
-  /// The progress indicator's color as an animated value.
-  final Animation<Color?>? valueColor;
-
-  /// The [SemanticsProperties.label] for this progress indicator.
-  ///
-  /// This value indicates the purpose of the progress bar, and will be
-  /// read out by screen readers to indicate the purpose of this progress
-  /// indicator.
   final String? semanticsLabel;
 
   /// The [SemanticsProperties.value] for this progress indicator.
@@ -61,10 +61,10 @@ abstract class MoonBaseProgressIndicator extends StatefulWidget {
   /// for determinate progress indicators to indicate how much progress has been made.
   const MoonBaseProgressIndicator({
     super.key,
-    this.value,
+    this.valueColor,
     required this.backgroundColor,
     required this.color,
-    this.valueColor,
+    this.value,
     this.semanticsLabel,
     this.semanticsValue,
   });

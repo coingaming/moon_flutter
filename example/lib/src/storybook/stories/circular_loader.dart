@@ -8,9 +8,10 @@ class CircularLoaderStory extends Story {
       : super(
           name: "Loader/CircularLoader",
           builder: (context) {
-            final loaderSizesKnob = context.knobs.options(
-              label: "MoonCircularLoaderSize",
-              description: "CircularLoader size variants.",
+            final loaderSizesKnob = context.knobs.nullable.options(
+              label: "circularLoaderSize",
+              description: "Size variants for CircularLoader.",
+              enabled: false,
               initial: MoonCircularLoaderSize.md,
               options: const [
                 Option(label: "x2s", value: MoonCircularLoaderSize.x2s),
@@ -21,27 +22,30 @@ class CircularLoaderStory extends Story {
               ],
             );
 
-            final loaderColorKnob = context.knobs.options(
+            final loaderColorKnob = context.knobs.nullable.options(
               label: "color",
               description: "MoonColors variants for CircularLoader color.",
-              initial: 1, // hit
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final color = colorTable(context)[loaderColorKnob];
+            final color = colorTable(context)[loaderColorKnob ?? 40];
 
-            final loaderBackgroundColorKnob = context.knobs.options(
+            final loaderBackgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for CircularLoader background.",
-              initial: 39, // none
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[loaderBackgroundColorKnob];
+            final backgroundColor = colorTable(context)[loaderBackgroundColorKnob ?? 40];
 
-            final loaderStrokeCapKnob = context.knobs.options(
+            final loaderStrokeCapKnob = context.knobs.nullable.options(
               label: "strokeCap",
-              description: "CircularLoader stroke cap.",
+              description: "Stroke gap for CircularLoader.",
+              enabled: false,
               initial: StrokeCap.round,
               options: const [
                 Option(label: "round", value: StrokeCap.round),
@@ -58,7 +62,7 @@ class CircularLoaderStory extends Story {
                   MoonCircularLoader(
                     color: color,
                     backgroundColor: backgroundColor,
-                    loaderSize: loaderSizesKnob,
+                    circularLoaderSize: loaderSizesKnob,
                     strokeCap: loaderStrokeCapKnob,
                   ),
                   const SizedBox(height: 64),

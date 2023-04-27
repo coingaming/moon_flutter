@@ -8,34 +8,32 @@ class ModalStory extends Story {
       : super(
           name: "Modal",
           builder: (context) {
-            final backgroundColorsKnob = context.knobs.options(
+            final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Modal background.",
-              initial: 40, // null
+              description: "MoonColors variants for MoonModal background.",
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob];
+            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
 
-            final barrierColorsKnob = context.knobs.options(
+            final barrierColorsKnob = context.knobs.nullable.options(
               label: "barrierColor",
-              description: "MoonColors variants for Modal barrier.",
-              initial: 40, // null
+              description: "MoonColors variants for MoonModal barrier.",
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final barrierColor = colorTable(context)[barrierColorsKnob];
+            final barrierColor = colorTable(context)[barrierColorsKnob ?? 40];
 
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 20,
-              initial: 8,
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for Modal.",
-            );
-
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
+              description: "Border radius for MoonModal.",
+              enabled: false,
+              initial: 8,
+              max: 32,
             );
 
             Future<void> modalBuilder(BuildContext context) {
@@ -46,7 +44,7 @@ class ModalStory extends Story {
                 builder: (_) {
                   return MoonModal(
                     backgroundColor: backgroundColor,
-                    borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
+                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                     child: Directionality(
                       textDirection: Directionality.of(context),
                       child: SizedBox(
@@ -58,7 +56,7 @@ class ModalStory extends Story {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
                               child: Text(
-                                "Modal title",
+                                "MoonModal title",
                                 style: context.moonTypography!.heading.text18,
                               ),
                             ),
@@ -69,7 +67,7 @@ class ModalStory extends Story {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
                               child: Text(
-                                "Reopen the modal to view the updated knob value.",
+                                "Reopen the MoonModal to view the updated knob value.",
                                 style: context.moonTypography!.body.text14,
                               ),
                             ),
@@ -90,24 +88,21 @@ class ModalStory extends Story {
               );
             }
 
-            return Directionality(
-              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    Builder(
-                      builder: (context) {
-                        return MoonFilledButton(
-                          label: const Text("Tap me"),
-                          onTap: () => modalBuilder(context),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 64),
-                  ],
-                ),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 64),
+                  Builder(
+                    builder: (context) {
+                      return MoonFilledButton(
+                        label: const Text("Tap me"),
+                        onTap: () => modalBuilder(context),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 64),
+                ],
               ),
             );
           },

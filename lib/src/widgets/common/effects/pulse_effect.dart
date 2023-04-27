@@ -5,22 +5,22 @@ import 'package:moon_design/src/widgets/common/effects/painters/pulse_effect_pai
 class MoonPulseEffect extends StatefulWidget {
   final bool show;
   final bool showJiggle;
-  final double effectExtent;
+  final BorderRadius? childBorderRadius;
   final Color effectColor;
+  final double effectExtent;
   final Duration effectDuration;
   final Curve effectCurve;
-  final BorderRadius? childBorderRadius;
   final Widget child;
 
   const MoonPulseEffect({
     super.key,
     required this.show,
     required this.showJiggle,
-    required this.effectExtent,
+    this.childBorderRadius,
     required this.effectColor,
+    required this.effectExtent,
     required this.effectDuration,
     required this.effectCurve,
-    this.childBorderRadius,
     required this.child,
   });
 

@@ -5,21 +5,21 @@ import 'package:moon_design/src/widgets/avatar/avatar.dart';
 
 class AvatarClipper extends CustomClipper<Path> {
   final bool showBadge;
-  final double width;
-  final double height;
-  final double badgeSize;
-  final double badgeMarginValue;
   final BorderRadius borderRadius;
+  final double height;
+  final double width;
+  final double badgeMarginValue;
+  final double badgeSize;
   final MoonBadgeAlignment badgeAlignment;
   final TextDirection textDirection;
 
   AvatarClipper({
     required this.showBadge,
-    required this.width,
-    required this.height,
-    required this.badgeSize,
-    required this.badgeMarginValue,
     required this.borderRadius,
+    required this.height,
+    required this.width,
+    required this.badgeMarginValue,
+    required this.badgeSize,
     required this.badgeAlignment,
     required this.textDirection,
   });
@@ -92,7 +92,7 @@ class AvatarClipper extends CustomClipper<Path> {
           return Path()
             ..addOval(
               Rect.fromCircle(
-                center: Offset(0 + badgeRadius, width - badgeRadius),
+                center: Offset(0 + badgeRadius, height - badgeRadius),
                 radius: badgeRadius + badgeMarginValue,
               ),
             );
@@ -100,7 +100,7 @@ class AvatarClipper extends CustomClipper<Path> {
           return Path()
             ..addOval(
               Rect.fromCircle(
-                center: Offset(width - badgeRadius, width - badgeRadius),
+                center: Offset(width - badgeRadius, height - badgeRadius),
                 radius: badgeRadius + badgeMarginValue,
               ),
             );

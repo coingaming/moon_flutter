@@ -1,5 +1,47 @@
 # Changelog
 
+## [0.19.6](https://github.com/coingaming/moon_flutter/compare/v0.19.5...v0.19.6) (2023-04-27)
+
+
+### Bug Fixes
+
+* [MDS-512] Storybook naming ([#156](https://github.com/coingaming/moon_flutter/issues/156)) ([6dc9cbd](https://github.com/coingaming/moon_flutter/commit/6dc9cbdb5dfe88e6e664d847a9bf5a871f1b0607))
+
+## [0.19.5](https://github.com/coingaming/moon_flutter/compare/v0.19.4...v0.19.5) (2023-04-25)
+
+
+### Bug Fixes
+
+* [MDS-508] Props check and ordering ([#154](https://github.com/coingaming/moon_flutter/issues/154)) ([cc6025f](https://github.com/coingaming/moon_flutter/commit/cc6025f27cffac02b48cb708da83c7b4aecac5bf))
+
+## [0.19.4](https://github.com/coingaming/moon_flutter/compare/v0.19.3...v0.19.4) (2023-04-25)
+
+
+### Bug Fixes
+
+* [MDS-511] Fix disappearing widgets in mobile web / PWA ([#152](https://github.com/coingaming/moon_flutter/issues/152)) ([7b96ea5](https://github.com/coingaming/moon_flutter/commit/7b96ea54d0b6105cf5fe8af2f48142f97707a958))
+
+## [0.19.3](https://github.com/coingaming/moon_flutter/compare/v0.19.2...v0.19.3) (2023-04-24)
+
+
+### Bug Fixes
+
+* [MDS-509] Fix Avatar clipping with uneven height and width combinations ([#150](https://github.com/coingaming/moon_flutter/issues/150)) ([87f8b72](https://github.com/coingaming/moon_flutter/commit/87f8b72f3d8f5042370e4ecbacfda4b335fac96d))
+
+## [0.19.2](https://github.com/coingaming/moon_flutter/compare/v0.19.1...v0.19.2) (2023-04-24)
+
+
+### Bug Fixes
+
+* [MDS-504] Fork storybook_flutter, create extra functionality and add it as dependency. ([#148](https://github.com/coingaming/moon_flutter/issues/148)) ([c92a516](https://github.com/coingaming/moon_flutter/commit/c92a5167dee698da8366c5a9d43ae0a89fdc6cca))
+
+## [0.19.1](https://github.com/coingaming/moon_flutter/compare/v0.19.0...v0.19.1) (2023-04-19)
+
+
+### Bug Fixes
+
+* [MDS-502] Add additional storybook knobs to components ([#145](https://github.com/coingaming/moon_flutter/issues/145)) ([53523fe](https://github.com/coingaming/moon_flutter/commit/53523fe82353a812b731ec83b40dd98a61910293))
+
 ## [0.19.0](https://github.com/coingaming/moon_flutter/compare/v0.18.3...v0.19.0) (2023-04-18)
 
 

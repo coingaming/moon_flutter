@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
@@ -23,32 +24,35 @@ enum MoonBadgeAlignment {
 }
 
 class MoonAvatar extends StatelessWidget {
-  /// The height of the avatar.
-  final double? width;
-
-  /// The width of the avatar.
-  final double? height;
+  /// Whether to show the avatar badge or not.
+  final bool showBadge;
 
   /// The border radius of the avatar.
   final BorderRadius? borderRadius;
 
-  /// The size of the avatars badge.
-  final double? badgeSize;
-
-  /// The margin value of the avatars badge.
-  final double? badgeMarginValue;
-
-  /// Whether to show the avatar badge or not.
-  final bool showBadge;
+  /// The background color of the avatar.
+  final Color? backgroundColor;
 
   /// The color of the avatar badge.
   final Color? badgeColor;
 
-  /// The background color of the avatar.
-  final Color? backgroundColor;
-
   /// The text color of the avatar.
   final Color? textColor;
+
+  /// The margin value of the avatars badge.
+  final double? badgeMarginValue;
+
+  /// The size of the avatars badge.
+  final double? badgeSize;
+
+  /// The width of the avatar.
+  final double? height;
+
+  /// The height of the avatar.
+  final double? width;
+
+  /// The background image of the avatar.
+  final ImageProvider<Object>? backgroundImage;
 
   /// The size of the avatar.
   final MoonAvatarSize? avatarSize;
@@ -56,32 +60,29 @@ class MoonAvatar extends StatelessWidget {
   /// The alignment of the avatar badge.
   final MoonBadgeAlignment badgeAlignment;
 
-  /// The background image of the avatar.
-  final ImageProvider<Object>? backgroundImage;
-
   /// The semantic label for the avatar.
   final String? semanticLabel;
 
-  /// The child of the avatar.
-  final Widget? child;
+  /// The content of the avatar.
+  final Widget? content;
 
   /// MDS avatar widget.
   const MoonAvatar({
     super.key,
-    this.width,
-    this.height,
-    this.borderRadius,
-    this.badgeSize,
-    this.badgeMarginValue,
     this.showBadge = false,
-    this.badgeColor,
+    this.borderRadius,
     this.backgroundColor,
+    this.badgeColor,
     this.textColor,
+    this.badgeMarginValue,
+    this.badgeSize,
+    this.height,
+    this.width,
+    this.backgroundImage,
     this.avatarSize,
     this.badgeAlignment = MoonBadgeAlignment.bottomRight,
-    this.backgroundImage,
     this.semanticLabel,
-    this.child,
+    this.content,
   });
 
   Alignment _avatarAlignmentMapper(BuildContext context) {
@@ -149,6 +150,10 @@ class MoonAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MoonAvatarSizeProperties effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
+
+    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
+
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.avatarTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
@@ -158,15 +163,13 @@ class MoonAvatar extends StatelessWidget {
     final Color effectiveTextColor = textColor ??
         _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
 
-    final MoonAvatarSizeProperties effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
-
-    final double effectiveAvatarWidth = width ?? effectiveMoonAvatarSize.avatarSizeValue;
     final double effectiveAvatarHeight = height ?? effectiveMoonAvatarSize.avatarSizeValue;
 
-    final double effectiveBadgeSize = badgeSize ?? effectiveMoonAvatarSize.badgeSizeValue;
+    final double effectiveAvatarWidth = width ?? effectiveMoonAvatarSize.avatarSizeValue;
+
     final double effectiveBadgeMarginValue = badgeMarginValue ?? effectiveMoonAvatarSize.badgeMarginValue;
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
+    final double effectiveBadgeSize = badgeSize ?? effectiveMoonAvatarSize.badgeSizeValue;
 
     return Semantics(
       label: semanticLabel,
@@ -180,20 +183,25 @@ class MoonAvatar extends StatelessWidget {
           children: [
             Positioned.fill(
               child: ClipPath(
-                clipper: AvatarClipper(
-                  showBadge: showBadge,
-                  width: effectiveAvatarWidth,
-                  height: effectiveAvatarHeight,
-                  borderRadius: effectiveBorderRadius,
-                  badgeSize: effectiveBadgeSize,
-                  badgeMarginValue: effectiveBadgeMarginValue,
-                  badgeAlignment: badgeAlignment,
-                  textDirection: Directionality.of(context),
-                ),
+                // TODO: Since clipper does not work properly on mobile web/PWA, we are disabling it. Remove this check
+                // when it has been fixed from Flutter side.
+                clipper: kIsWeb && MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width < 500
+                    ? null
+                    : AvatarClipper(
+                        showBadge: showBadge,
+                        width: effectiveAvatarWidth,
+                        height: effectiveAvatarHeight,
+                        borderRadius: effectiveBorderRadius,
+                        badgeSize: effectiveBadgeSize,
+                        badgeMarginValue: effectiveBadgeMarginValue,
+                        badgeAlignment: badgeAlignment,
+                        textDirection: Directionality.of(context),
+                      ),
                 child: DefaultTextStyle.merge(
                   style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
+                      borderRadius: effectiveBorderRadius,
                       color: effectiveBackgroundColor,
                       image: backgroundImage != null
                           ? DecorationImage(
@@ -202,7 +210,7 @@ class MoonAvatar extends StatelessWidget {
                             )
                           : null,
                     ),
-                    child: Center(child: child),
+                    child: Center(child: content),
                   ),
                 ),
               ),

@@ -10,28 +10,31 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 @immutable
 class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with DiagnosticableTreeMixin {
   static final sm = MoonChipSizeProperties(
-    height: MoonSizes.sizes.sm,
+    borderRadius: MoonBorders.borders.interactiveXs,
     gap: MoonSizes.sizes.x5s,
+    height: MoonSizes.sizes.sm,
     iconSizeValue: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text14,
   );
 
   static final md = MoonChipSizeProperties(
-    height: MoonSizes.sizes.md,
+    borderRadius: MoonBorders.borders.interactiveSm,
     gap: MoonSizes.sizes.x4s,
+    height: MoonSizes.sizes.md,
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
 
-  /// Chip height.
-  final double height;
+  /// Chip border radius.
+  final BorderRadius borderRadius;
 
   /// Space between chip children.
   final double gap;
+
+  /// Chip height.
+  final double height;
 
   /// Chip icon size value.
   final double iconSizeValue;
@@ -39,36 +42,33 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
   /// Padding around chip children.
   final EdgeInsetsGeometry padding;
 
-  /// Chip border radius.
-  final BorderRadius borderRadius;
-
   /// Chip text style.
   final TextStyle textStyle;
 
   const MoonChipSizeProperties({
-    required this.height,
+    required this.borderRadius,
     required this.gap,
+    required this.height,
     required this.iconSizeValue,
     required this.padding,
-    required this.borderRadius,
     required this.textStyle,
   });
 
   @override
   MoonChipSizeProperties copyWith({
-    double? height,
+    BorderRadius? borderRadius,
     double? gap,
+    double? height,
     double? iconSizeValue,
     EdgeInsetsGeometry? padding,
-    BorderRadius? borderRadius,
     TextStyle? textStyle,
   }) {
     return MoonChipSizeProperties(
-      height: height ?? this.height,
+      borderRadius: borderRadius ?? this.borderRadius,
       gap: gap ?? this.gap,
+      height: height ?? this.height,
       iconSizeValue: iconSizeValue ?? this.iconSizeValue,
       padding: padding ?? this.padding,
-      borderRadius: borderRadius ?? this.borderRadius,
       textStyle: textStyle ?? this.textStyle,
     );
   }
@@ -78,11 +78,11 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
     if (other is! MoonChipSizeProperties) return this;
 
     return MoonChipSizeProperties(
-      height: lerpDouble(height, other.height, t)!,
+      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
+      height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -92,11 +92,11 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonChipSizeProperties"))
-      ..add(DoubleProperty("height", height))
+      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

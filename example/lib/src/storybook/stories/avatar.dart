@@ -10,13 +10,14 @@ class AvatarStory extends Story {
           name: "Avatar",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "Custom label text",
+              label: "content",
               initial: "MD",
             );
 
-            final avatarSizesKnob = context.knobs.options(
+            final avatarSizesKnob = context.knobs.nullable.options(
               label: "avatarSize",
-              description: "Avatar size variants.",
+              description: "Size variants for MoonAvatar.",
+              enabled: false,
               initial: MoonAvatarSize.md,
               options: const [
                 Option(label: "xs", value: MoonAvatarSize.xs),
@@ -28,27 +29,43 @@ class AvatarStory extends Story {
               ],
             );
 
-            final avatarBackgroundColorKnob = context.knobs.options(
+            final avatarTextColorKnob = context.knobs.nullable.options(
+              label: "textColor",
+              description: "MoonColors variants for MoonAvatar text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[avatarTextColorKnob ?? 40];
+
+            final avatarBackgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Avatar background.",
-              initial: 5, // bulma
+              description: "MoonColors variants for MoonAvatar background.",
+              enabled: false,
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[avatarBackgroundColorKnob];
+            final backgroundColor = colorTable(context)[avatarBackgroundColorKnob ?? 40];
 
-            final badgeColorKnob = context.knobs.options(
+            final badgeColorKnob = context.knobs.nullable.options(
               label: "badgeColor",
-              description: "MoonColors variants for the Avatar badge.",
-              initial: 18, // roshi100
+              description: "MoonColors variants for MoonAvatar badge.",
+              enabled: false,
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final badgeColor = colorTable(context)[badgeColorKnob];
+            final badgeColor = colorTable(context)[badgeColorKnob ?? 40];
 
-            final avatarBadgeAlignmentKnob = context.knobs.options(
+            final avatarBadgeAlignmentKnob = context.knobs.nullable.options(
               label: "badgeAlignment",
-              description: "Avatar badge alignment.",
+              description: "Badge alignment for MoonAvatar.",
+              enabled: false,
               initial: MoonBadgeAlignment.bottomRight,
               options: const [
                 Option(label: "topLeft", value: MoonBadgeAlignment.topLeft),
@@ -58,61 +75,74 @@ class AvatarStory extends Story {
               ],
             );
 
-            final borderRadiusKnob = context.knobs.sliderInt(
-              max: 32,
-              initial: 8,
+            final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for the Avatar.",
+              description: "Border radius for MoonAvatar.",
+              enabled: false,
+              initial: 8,
+              max: 32,
+            );
+
+            final badgeMarginKnob = context.knobs.nullable.sliderInt(
+              label: "badgeMarginValue",
+              description: "Badge margin value for MoonAvatar.",
+              enabled: false,
+              initial: 4,
+              max: 8,
+            );
+
+            final badgeSizeKnob = context.knobs.nullable.sliderInt(
+              label: "badgeSize",
+              description: "Badge size for MoonAvatar.",
+              enabled: false,
+              initial: 8,
+              max: 16,
             );
 
             final showBadgeKnob = context.knobs.boolean(
               label: "showBadge",
-              description: "Show Avatar badge.",
+              description: "Show MoonAvatar badge.",
               initial: true,
             );
 
-            final setRtlModeKnob = context.knobs.boolean(
-              label: "RTL mode",
-              description: "Switch between LTR and RTL modes.",
-            );
-
-            return Directionality(
-              textDirection: setRtlModeKnob ? TextDirection.rtl : TextDirection.ltr,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    const TextDivider(text: "Customisable Avatar"),
-                    const SizedBox(height: 32),
-                    MoonAvatar(
-                      avatarSize: avatarSizesKnob,
-                      borderRadius: BorderRadius.circular(borderRadiusKnob.toDouble()),
-                      backgroundColor: backgroundColor,
-                      showBadge: showBadgeKnob,
-                      badgeColor: badgeColor,
-                      badgeAlignment: avatarBadgeAlignmentKnob,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 1.0),
-                        child: Text(customLabelTextKnob),
-                      ),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 64),
+                  const TextDivider(text: "Customisable MoonAvatar"),
+                  const SizedBox(height: 32),
+                  MoonAvatar(
+                    textColor: textColor,
+                    avatarSize: avatarSizesKnob,
+                    badgeSize: badgeSizeKnob?.toDouble(),
+                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                    badgeMarginValue: badgeMarginKnob?.toDouble(),
+                    backgroundColor: backgroundColor,
+                    showBadge: showBadgeKnob,
+                    badgeColor: badgeColor,
+                    badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
+                    content: Padding(
+                      padding: const EdgeInsets.only(top: 1.0),
+                      child: Text(customLabelTextKnob),
                     ),
-                    const SizedBox(height: 40),
-                    const TextDivider(text: "Preset Avatar with picture background"),
-                    const SizedBox(height: 32),
-                    MoonAvatar(
-                      avatarSize: avatarSizesKnob,
-                      backgroundColor: backgroundColor,
-                      showBadge: showBadgeKnob,
-                      badgeColor: badgeColor,
-                      badgeAlignment: avatarBadgeAlignmentKnob,
-                      backgroundImage: const AssetImage(
-                        "assets/images/placeholder-640x359.png",
-                      ),
-                    ),
-                    const SizedBox(height: 64),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 40),
+                  const TextDivider(text: "Preset MoonAvatar with image background"),
+                  const SizedBox(height: 32),
+                  MoonAvatar(
+                    avatarSize: avatarSizesKnob,
+                    badgeSize: badgeSizeKnob?.toDouble(),
+                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                    badgeMarginValue: badgeMarginKnob?.toDouble(),
+                    backgroundColor: backgroundColor,
+                    showBadge: showBadgeKnob,
+                    badgeColor: badgeColor,
+                    badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
+                    backgroundImage: const AssetImage("assets/images/placeholder-640x359.png"),
+                  ),
+                  const SizedBox(height: 64),
+                ],
               ),
             );
           },

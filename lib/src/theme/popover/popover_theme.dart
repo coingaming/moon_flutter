@@ -9,41 +9,41 @@ import 'package:moon_design/src/theme/popover/popover_shadows.dart';
 class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme> with DiagnosticableTreeMixin {
   static final light = MoonPopoverTheme(
     colors: MoonPopoverColors.light,
-    shadows: MoonPopoverShadows.light,
     properties: MoonPopoverProperties.properties,
+    shadows: MoonPopoverShadows.light,
   );
 
   static final dark = MoonPopoverTheme(
     colors: MoonPopoverColors.dark,
-    shadows: MoonPopoverShadows.dark,
     properties: MoonPopoverProperties.properties,
+    shadows: MoonPopoverShadows.dark,
   );
 
   /// Popover colors.
   final MoonPopoverColors colors;
 
-  /// Popover shadows.
-  final MoonPopoverShadows shadows;
-
   /// Popover properties.
   final MoonPopoverProperties properties;
 
+  /// Popover shadows.
+  final MoonPopoverShadows shadows;
+
   const MoonPopoverTheme({
     required this.colors,
-    required this.shadows,
     required this.properties,
+    required this.shadows,
   });
 
   @override
   MoonPopoverTheme copyWith({
     MoonPopoverColors? colors,
-    MoonPopoverShadows? shadows,
     MoonPopoverProperties? properties,
+    MoonPopoverShadows? shadows,
   }) {
     return MoonPopoverTheme(
       colors: colors ?? this.colors,
-      shadows: shadows ?? this.shadows,
       properties: properties ?? this.properties,
+      shadows: shadows ?? this.shadows,
     );
   }
 
@@ -53,8 +53,8 @@ class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme> with Diagnostica
 
     return MoonPopoverTheme(
       colors: colors.lerp(other.colors, t),
-      shadows: shadows.lerp(other.shadows, t),
       properties: properties.lerp(other.properties, t),
+      shadows: shadows.lerp(other.shadows, t),
     );
   }
 
@@ -64,7 +64,7 @@ class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme> with Diagnostica
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonPopoverTheme"))
       ..add(DiagnosticsProperty<MoonPopoverColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonPopoverShadows>("shadows", shadows))
-      ..add(DiagnosticsProperty<MoonPopoverProperties>("properties", properties));
+      ..add(DiagnosticsProperty<MoonPopoverProperties>("properties", properties))
+      ..add(DiagnosticsProperty<MoonPopoverShadows>("shadows", shadows));
   }
 }

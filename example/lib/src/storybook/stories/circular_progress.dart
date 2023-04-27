@@ -8,9 +8,10 @@ class CircularProgressStory extends Story {
       : super(
           name: "Progress/CircularProgress",
           builder: (context) {
-            final circularProgressSizesKnob = context.knobs.options(
-              label: "MoonCircularProgressSize",
-              description: "CircularProgress size variants.",
+            final circularProgressSizesKnob = context.knobs.nullable.options(
+              label: "circularProgressSize",
+              description: "Size variants for CircularProgress.",
+              enabled: false,
               initial: MoonCircularProgressSize.md,
               options: const [
                 Option(label: "x2s", value: MoonCircularProgressSize.x2s),
@@ -21,27 +22,30 @@ class CircularProgressStory extends Story {
               ],
             );
 
-            final circularProgressColorKnob = context.knobs.options(
+            final circularProgressColorKnob = context.knobs.nullable.options(
               label: "color",
               description: "MoonColors variants for CircularProgress color.",
+              enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final color = colorTable(context)[circularProgressColorKnob];
+            final color = colorTable(context)[circularProgressColorKnob ?? 40];
 
-            final circularProgressBackgroundColorKnob = context.knobs.options(
+            final circularProgressBackgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for CircularProgress background.",
-              initial: 6, // trunks
+              enabled: false,
+              initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[circularProgressBackgroundColorKnob];
+            final backgroundColor = colorTable(context)[circularProgressBackgroundColorKnob ?? 40];
 
-            final circularProgressStrokeCapKnob = context.knobs.options(
+            final circularProgressStrokeCapKnob = context.knobs.nullable.options(
               label: "strokeCap",
-              description: "CircularProgress stroke cap.",
+              description: "Stroke gap for CircularProgress.",
+              enabled: false,
               initial: StrokeCap.round,
               options: const [
                 Option(label: "round", value: StrokeCap.round),
@@ -52,7 +56,7 @@ class CircularProgressStory extends Story {
 
             final circularProgressValueKnob = context.knobs.slider(
               label: "value",
-              description: "CircularProgress value.",
+              description: "Value for CircularProgress.",
               initial: 0.75,
             );
 

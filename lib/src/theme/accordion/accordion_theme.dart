@@ -11,15 +11,15 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
   static final light = MoonAccordionTheme(
     itemColors: MoonAccordionItemColors.light,
     itemProperties: MoonAccordionItemProperties.properties,
-    itemSizes: MoonAccordionItemSizes.sizes,
     itemShadows: MoonAccordionItemShadows.light,
+    itemSizes: MoonAccordionItemSizes.sizes,
   );
 
   static final dark = MoonAccordionTheme(
     itemColors: MoonAccordionItemColors.dark,
     itemProperties: MoonAccordionItemProperties.properties,
-    itemSizes: MoonAccordionItemSizes.sizes,
     itemShadows: MoonAccordionItemShadows.dark,
+    itemSizes: MoonAccordionItemSizes.sizes,
   );
 
   /// Accordion item colors.
@@ -28,31 +28,31 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
   /// Accordion item properties.
   final MoonAccordionItemProperties itemProperties;
 
-  /// Accordion item sizes.
-  final MoonAccordionItemSizes itemSizes;
-
   /// Accordion item shadows.
   final MoonAccordionItemShadows itemShadows;
+
+  /// Accordion item sizes.
+  final MoonAccordionItemSizes itemSizes;
 
   const MoonAccordionTheme({
     required this.itemColors,
     required this.itemProperties,
-    required this.itemSizes,
     required this.itemShadows,
+    required this.itemSizes,
   });
 
   @override
   MoonAccordionTheme copyWith({
     MoonAccordionItemColors? itemColors,
     MoonAccordionItemProperties? itemProperties,
-    MoonAccordionItemSizes? itemSizes,
     MoonAccordionItemShadows? itemShadows,
+    MoonAccordionItemSizes? itemSizes,
   }) {
     return MoonAccordionTheme(
       itemColors: itemColors ?? this.itemColors,
       itemProperties: itemProperties ?? this.itemProperties,
-      itemSizes: itemSizes ?? this.itemSizes,
       itemShadows: itemShadows ?? this.itemShadows,
+      itemSizes: itemSizes ?? this.itemSizes,
     );
   }
 
@@ -63,8 +63,8 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
     return MoonAccordionTheme(
       itemColors: itemColors.lerp(other.itemColors, t),
       itemProperties: itemProperties.lerp(other.itemProperties, t),
-      itemSizes: itemSizes.lerp(other.itemSizes, t),
       itemShadows: itemShadows.lerp(other.itemShadows, t),
+      itemSizes: itemSizes.lerp(other.itemSizes, t),
     );
   }
 
@@ -75,7 +75,7 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
       ..add(DiagnosticsProperty("type", "MoonAccordionTheme"))
       ..add(DiagnosticsProperty<MoonAccordionItemColors>("itemColors", itemColors))
       ..add(DiagnosticsProperty<MoonAccordionItemProperties>("itemProperties", itemProperties))
-      ..add(DiagnosticsProperty<MoonAccordionItemSizes>("itemSizes", itemSizes))
-      ..add(DiagnosticsProperty<MoonAccordionItemShadows>("itemShadows", itemShadows));
+      ..add(DiagnosticsProperty<MoonAccordionItemShadows>("itemShadows", itemShadows))
+      ..add(DiagnosticsProperty<MoonAccordionItemSizes>("itemSizes", itemSizes));
   }
 }

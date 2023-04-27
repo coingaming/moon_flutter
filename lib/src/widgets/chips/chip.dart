@@ -17,50 +17,8 @@ enum MoonChipSize {
 }
 
 class MoonChip extends StatelessWidget {
-  /// The callback that is called when the chip is tapped or pressed.
-  final VoidCallback? onTap;
-
-  /// The callback that is called when the chip is long-pressed.
-  final VoidCallback? onLongPress;
-
-  /// The size of the chip.
-  final MoonChipSize? chipSize;
-
-  /// {@macro flutter.widgets.Focus.focusNode}.
-  final FocusNode? focusNode;
-
-  /// The semantic label for the chip.
-  final String? semanticLabel;
-
-  /// The tooltip message for the chip.
-  final String tooltipMessage;
-
-  /// The width of the chip.
-  final double? width;
-
-  /// The height of the chip.
-  final double? height;
-
-  /// The opacity value of the chip when it is disabled.
-  final double? disabledOpacityValue;
-
-  /// The border width of the chip.
-  final double? borderWidth;
-
-  /// The gap between the leading or trailing and the label widgets.
-  final double? gap;
-
-  /// The extent of the focus effect.
-  final double? focusEffectExtent;
-
-  /// The minimum size of the touch target.
-  final double minTouchTargetSize;
-
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
-
-  /// Whether the chip is active/selected.
-  final bool isActive;
 
   /// Whether the chip should be focusable.
   final bool isFocusable;
@@ -68,32 +26,59 @@ class MoonChip extends StatelessWidget {
   /// Whether this chip should ensure that it has a minimal touch target size.
   final bool ensureMinimalTouchTargetSize;
 
+  /// Whether the chip is active/selected.
+  final bool isActive;
+
   /// Whether the chip should show a border.
   final bool showBorder;
-
-  /// Whether the chip should show a tooltip.
-  final bool showTooltip;
 
   /// Whether the chip should show a focus effect.
   final bool showFocusEffect;
 
-  /// The background color of the chip.
-  final Color? backgroundColor;
+  /// Whether the chip should show a tooltip.
+  final bool showTooltip;
+
+  /// The border radius of the chip.
+  final BorderRadius? borderRadius;
 
   /// The border and text color of the active/selected chip.
   final Color? activeColor;
 
+  /// The background color of the chip.
+  final Color? backgroundColor;
+
   /// The border color of the  chip.
   final Color? borderColor;
-
-  /// The text color of the chip.
-  final Color? textColor;
 
   /// The color of the focus effect.
   final Color? focusEffectColor;
 
   /// The color of the hover effect.
   final Color? hoverEffectColor;
+
+  /// The text color of the chip.
+  final Color? textColor;
+
+  /// The border width of the chip.
+  final double? borderWidth;
+
+  /// The opacity value of the chip when it is disabled.
+  final double? disabledOpacityValue;
+
+  /// The extent of the focus effect.
+  final double? focusEffectExtent;
+
+  /// The gap between the leading or trailing and the label widgets.
+  final double? gap;
+
+  /// The height of the chip.
+  final double? height;
+
+  /// The width of the chip.
+  final double? width;
+
+  /// The minimum size of the touch target.
+  final double minTouchTargetSize;
 
   /// The duration of the focus effect.
   final Duration? focusEffectDuration;
@@ -110,8 +95,23 @@ class MoonChip extends StatelessWidget {
   /// The padding of the chip.
   final EdgeInsetsGeometry? padding;
 
-  /// The border radius of the chip.
-  final BorderRadius? borderRadius;
+  /// {@macro flutter.widgets.Focus.focusNode}.
+  final FocusNode? focusNode;
+
+  /// The size of the chip.
+  final MoonChipSize? chipSize;
+
+  /// The semantic label for the chip.
+  final String? semanticLabel;
+
+  /// The tooltip message for the chip.
+  final String tooltipMessage;
+
+  /// The callback that is called when the chip is tapped or pressed.
+  final VoidCallback? onTap;
+
+  /// The callback that is called when the chip is long-pressed.
+  final VoidCallback? onLongPress;
 
   /// The widget in the leading slot of the chip.
   final Widget? leading;
@@ -125,38 +125,38 @@ class MoonChip extends StatelessWidget {
   /// MDS chip widget
   const MoonChip({
     super.key,
-    this.onTap,
-    this.onLongPress,
-    this.chipSize,
-    this.focusNode,
-    this.semanticLabel,
-    this.tooltipMessage = "",
-    this.width,
-    this.height,
-    this.disabledOpacityValue,
-    this.borderWidth,
-    this.gap,
-    this.focusEffectExtent,
-    this.minTouchTargetSize = 40,
     this.autofocus = false,
-    this.isActive = false,
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
+    this.isActive = false,
     this.showBorder = false,
-    this.showTooltip = false,
     this.showFocusEffect = true,
-    this.backgroundColor,
+    this.showTooltip = false,
+    this.borderRadius,
     this.activeColor,
+    this.backgroundColor,
     this.borderColor,
-    this.textColor,
     this.focusEffectColor,
     this.hoverEffectColor,
+    this.textColor,
+    this.borderWidth,
+    this.disabledOpacityValue,
+    this.focusEffectExtent,
+    this.gap,
+    this.height,
+    this.width,
+    this.minTouchTargetSize = 40,
     this.focusEffectDuration,
     this.hoverEffectDuration,
     this.focusEffectCurve,
     this.hoverEffectCurve,
     this.padding,
-    this.borderRadius,
+    this.focusNode,
+    this.chipSize,
+    this.semanticLabel,
+    this.tooltipMessage = "",
+    this.onTap,
+    this.onLongPress,
     this.label,
     this.leading,
     this.trailing,
@@ -175,10 +175,10 @@ class MoonChip extends StatelessWidget {
   }
 
   Color _getTextColor({
-    required Color backgroundColor,
-    required Color activeColor,
-    required Color? textColor,
     required bool isActive,
+    required Color activeColor,
+    required Color backgroundColor,
+    required Color? textColor,
   }) {
     if (isActive) return activeColor;
     if (textColor != null) return textColor;
@@ -196,33 +196,22 @@ class MoonChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveActiveColor =
-        activeColor ?? context.moonTheme?.chipTheme.colors.activeColor ?? MoonColors.light.piccolo;
-
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.chipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
-
     final MoonChipSizeProperties effectiveMoonChipSize = _getMoonChipSize(context, chipSize);
-
-    final double effectiveHeight = height ?? effectiveMoonChipSize.height;
-
-    final double effectiveGap = gap ?? effectiveMoonChipSize.gap;
-
-    final EdgeInsetsGeometry effectivePadding = padding ?? effectiveMoonChipSize.padding;
-
-    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
-
-    final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
-      leading == null && label != null ? resolvedDirectionalPadding.left : 0,
-      resolvedDirectionalPadding.top,
-      trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
-      resolvedDirectionalPadding.bottom,
-    );
 
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonChipSize.borderRadius;
 
     final double effectiveBorderWidth =
         borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
+
+    final double effectiveHeight = height ?? effectiveMoonChipSize.height;
+
+    final double effectiveGap = gap ?? effectiveMoonChipSize.gap;
+
+    final Color effectiveActiveColor =
+        activeColor ?? context.moonTheme?.chipTheme.colors.activeColor ?? MoonColors.light.piccolo;
+
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? context.moonTheme?.chipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveHoverEffectColor = hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.secondaryHoverColor ??
@@ -236,26 +225,36 @@ class MoonChip extends StatelessWidget {
         context.moonEffects?.controlHoverEffect.hoverDuration ??
         MoonHoverEffects.lightHoverEffect.hoverDuration;
 
+    final EdgeInsetsGeometry effectivePadding = padding ?? effectiveMoonChipSize.padding;
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
+
+    final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
+      leading == null && label != null ? resolvedDirectionalPadding.left : 0,
+      resolvedDirectionalPadding.top,
+      trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
+      resolvedDirectionalPadding.bottom,
+    );
     return MoonBaseControl(
-      onTap: onTap ?? () {},
-      onLongPress: onLongPress,
-      semanticLabel: semanticLabel,
-      tooltipMessage: tooltipMessage,
-      borderRadius: effectiveBorderRadius,
-      disabledOpacityValue: disabledOpacityValue,
-      minTouchTargetSize: minTouchTargetSize,
-      ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
-      focusNode: focusNode,
       autofocus: autofocus,
       isFocusable: isFocusable,
-      showTooltip: showTooltip,
+      ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       showFocusEffect: showFocusEffect,
+      showScaleAnimation: false,
+      showTooltip: showTooltip,
+      borderRadius: effectiveBorderRadius,
       backgroundColor: backgroundColor,
       focusEffectColor: focusEffectColor,
+      disabledOpacityValue: disabledOpacityValue,
+      minTouchTargetSize: minTouchTargetSize,
       focusEffectExtent: focusEffectExtent,
       focusEffectDuration: focusEffectDuration,
       focusEffectCurve: focusEffectCurve,
-      showScaleAnimation: false,
+      focusNode: focusNode,
+      tooltipMessage: tooltipMessage,
+      semanticLabel: semanticLabel,
+      onTap: onTap ?? () {},
+      onLongPress: onLongPress,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         final bool canAnimate = isActive || isHovered || isFocused;
 
