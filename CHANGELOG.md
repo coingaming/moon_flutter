@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.6](https://github.com/coingaming/moon_flutter/compare/v0.19.5...v0.19.6) (2023-04-27)
+
+
+### Bug Fixes
+
+* [MDS-512] Storybook naming ([#156](https://github.com/coingaming/moon_flutter/issues/156)) ([6dc9cbd](https://github.com/coingaming/moon_flutter/commit/6dc9cbdb5dfe88e6e664d847a9bf5a871f1b0607))
+
 ## [0.19.5](https://github.com/coingaming/moon_flutter/compare/v0.19.4...v0.19.5) (2023-04-25)
 
 
