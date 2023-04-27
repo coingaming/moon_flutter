@@ -16,7 +16,7 @@ class AvatarStory extends Story {
 
             final avatarSizesKnob = context.knobs.nullable.options(
               label: "avatarSize",
-              description: "Avatar size variants.",
+              description: "Size variants for MoonAvatar.",
               enabled: false,
               initial: MoonAvatarSize.md,
               options: const [
@@ -31,9 +31,10 @@ class AvatarStory extends Story {
 
             final avatarTextColorKnob = context.knobs.nullable.options(
               label: "textColor",
-              description: "MoonColors variants for Avatar text.",
+              description: "MoonColors variants for MoonAvatar text.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -41,9 +42,10 @@ class AvatarStory extends Story {
 
             final avatarBackgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Avatar background.",
+              description: "MoonColors variants for MoonAvatar background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -51,9 +53,10 @@ class AvatarStory extends Story {
 
             final badgeColorKnob = context.knobs.nullable.options(
               label: "badgeColor",
-              description: "MoonColors variants for the Avatar badge.",
+              description: "MoonColors variants for MoonAvatar badge.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -61,7 +64,7 @@ class AvatarStory extends Story {
 
             final avatarBadgeAlignmentKnob = context.knobs.nullable.options(
               label: "badgeAlignment",
-              description: "Avatar badge alignment.",
+              description: "Badge alignment for MoonAvatar.",
               enabled: false,
               initial: MoonBadgeAlignment.bottomRight,
               options: const [
@@ -74,7 +77,7 @@ class AvatarStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for the Avatar.",
+              description: "Border radius for MoonAvatar.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -82,7 +85,7 @@ class AvatarStory extends Story {
 
             final badgeMarginKnob = context.knobs.nullable.sliderInt(
               label: "badgeMarginValue",
-              description: "Badge margin value for the Avatar.",
+              description: "Badge margin value for MoonAvatar.",
               enabled: false,
               initial: 4,
               max: 8,
@@ -90,7 +93,7 @@ class AvatarStory extends Story {
 
             final badgeSizeKnob = context.knobs.nullable.sliderInt(
               label: "badgeSize",
-              description: "Badge Size for the Avatar.",
+              description: "Badge size for MoonAvatar.",
               enabled: false,
               initial: 8,
               max: 16,
@@ -98,7 +101,7 @@ class AvatarStory extends Story {
 
             final showBadgeKnob = context.knobs.boolean(
               label: "showBadge",
-              description: "Show Avatar badge.",
+              description: "Show MoonAvatar badge.",
               initial: true,
             );
 
@@ -107,7 +110,7 @@ class AvatarStory extends Story {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 64),
-                  const TextDivider(text: "Customisable Avatar"),
+                  const TextDivider(text: "Customisable MoonAvatar"),
                   const SizedBox(height: 32),
                   MoonAvatar(
                     textColor: textColor,
@@ -125,7 +128,7 @@ class AvatarStory extends Story {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  const TextDivider(text: "Preset Avatar with picture background"),
+                  const TextDivider(text: "Preset MoonAvatar with image background"),
                   const SizedBox(height: 32),
                   MoonAvatar(
                     avatarSize: avatarSizesKnob,

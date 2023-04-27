@@ -15,7 +15,7 @@ class SwitchStory extends Story {
           builder: (context) {
             final switchSizesKnob = context.knobs.nullable.options(
               label: "switchSize",
-              description: "Switch size variants.",
+              description: "Size variants for MoonSwitch.",
               enabled: false,
               initial: MoonSwitchSize.xs,
               options: const [
@@ -27,7 +27,7 @@ class SwitchStory extends Story {
 
             final thumbColorsKnob = context.knobs.nullable.options(
               label: "thumbColor",
-              description: "MoonColors variants for the Switch thumb.",
+              description: "MoonColors variants for MoonSwitch thumb.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -37,7 +37,7 @@ class SwitchStory extends Story {
 
             final activeTrackColorsKnob = context.knobs.nullable.options(
               label: "activeTrackColor",
-              description: "MoonColors variants for the active Switch track.",
+              description: "MoonColors variants for active MoonSwitch track.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -47,7 +47,7 @@ class SwitchStory extends Story {
 
             final inactiveTrackColorsKnob = context.knobs.nullable.options(
               label: "inactiveTrackColor",
-              description: "MoonColors variants for the inactive Switch track.",
+              description: "MoonColors variants for inactive MoonSwitch track.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -65,7 +65,7 @@ class SwitchStory extends Story {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 64),
-                  const TextDivider(text: "Customisable Switch"),
+                  const TextDivider(text: "Customisable MoonSwitch"),
                   const SizedBox(height: 32),
                   StatefulBuilder(
                     builder: (context, setState) {
@@ -80,7 +80,7 @@ class SwitchStory extends Story {
                     },
                   ),
                   const SizedBox(height: 40),
-                  const TextDivider(text: "Switches with custom children"),
+                  const TextDivider(text: "MoonSwitches with custom children"),
                   const SizedBox(height: 32),
                   StatefulBuilder(
                     builder: (context, setState) {

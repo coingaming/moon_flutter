@@ -16,7 +16,7 @@ class AuthCodeStory extends Story {
           builder: (context) {
             final mainAxisAlignmentKnob = context.knobs.nullable.options(
               label: "mainAxisAlignment",
-              description: "Horizontal alignment of auth input fields.",
+              description: "Horizontal alignment of MoonAuthCode input fields.",
               enabled: false,
               initial: MainAxisAlignment.center,
               options: const [
@@ -31,7 +31,7 @@ class AuthCodeStory extends Story {
 
             final shapeKnob = context.knobs.nullable.options(
               label: "shape",
-              description: "Shape of the auth input fields.",
+              description: "Shape of the MoonAuthCode input fields.",
               enabled: false,
               initial: AuthFieldShape.box,
               options: const [
@@ -43,7 +43,7 @@ class AuthCodeStory extends Story {
 
             final selectedFillColorsKnob = context.knobs.nullable.options(
               label: "selectedFillColor",
-              description: "MoonColors variants for selected auth input field.",
+              description: "MoonColors variants for selected MoonAuthCode input field.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -53,7 +53,7 @@ class AuthCodeStory extends Story {
 
             final activeFillColorsKnob = context.knobs.nullable.options(
               label: "activeFillColor",
-              description: "MoonColors variants for active auth input fields.",
+              description: "MoonColors variants for active MoonAuthCode input fields.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -63,7 +63,7 @@ class AuthCodeStory extends Story {
 
             final inactiveFillColorsKnob = context.knobs.nullable.options(
               label: "inactiveFillColor",
-              description: "MoonColors variants for inactive auth input fields.",
+              description: "MoonColors variants for inactive MoonAuthCode input fields.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -73,7 +73,7 @@ class AuthCodeStory extends Story {
 
             final selectedBorderColorsKnob = context.knobs.nullable.options(
               label: "selectedBorderColor",
-              description: "MoonColors variants for selected auth input field border.",
+              description: "MoonColors variants for selected MoonAuthCode input field border.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -83,7 +83,7 @@ class AuthCodeStory extends Story {
 
             final activeBorderColorsKnob = context.knobs.nullable.options(
               label: "activeBorderColor",
-              description: "MoonColors variants for active auth input fields borders.",
+              description: "MoonColors variants for active MoonAuthCode input fields borders.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -93,7 +93,7 @@ class AuthCodeStory extends Story {
 
             final inactiveBorderColorsKnob = context.knobs.nullable.options(
               label: "inactiveBorderColor",
-              description: "MoonColors variants for inactive auth input fields borders.",
+              description: "MoonColors variants for inactive MoonAuthCode input fields borders.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -103,7 +103,7 @@ class AuthCodeStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for auth input fields.",
+              description: "Border radius for MoonAuthCode input fields.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -111,7 +111,7 @@ class AuthCodeStory extends Story {
 
             final gapKnob = context.knobs.nullable.sliderInt(
               label: "gap",
-              description: "Gap between auth input fields.",
+              description: "Gap between MoonAuthCode input fields.",
               enabled: false,
               initial: 8,
               max: 12,
@@ -119,12 +119,12 @@ class AuthCodeStory extends Story {
 
             final enableKnob = context.knobs.boolean(
               label: "enabled",
-              description: "Enable AuthCode.",
+              description: "Enable MoonAuthCode.",
             );
 
             final obscuringKnob = context.knobs.boolean(
               label: "obscureText",
-              description: "Obscure auth input fields.",
+              description: "Obscure MoonAuthCode input fields.",
             );
 
             final peekWhenObscuringKnob = context.knobs.boolean(

@@ -12,12 +12,12 @@ class PopoverStory extends Story {
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "label text",
-              initial: "Custom popover text",
+              initial: "Custom MoonPopover text",
             );
 
             final popoverPositionsKnob = context.knobs.nullable.options(
               label: "popoverPosition",
-              description: "Popover position variants.",
+              description: "Position variants for MoonPopover.",
               enabled: false,
               initial: MoonPopoverPosition.top,
               options: const [
@@ -36,7 +36,7 @@ class PopoverStory extends Story {
 
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Popover background.",
+              description: "MoonColors variants for MoonPopover background.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -46,7 +46,7 @@ class PopoverStory extends Story {
 
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
-              description: "MoonColors variants for Popover border.",
+              description: "MoonColors variants for MoonPopover border.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -56,7 +56,7 @@ class PopoverStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for Popover.",
+              description: "Border radius for MoonPopover.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -72,7 +72,7 @@ class PopoverStory extends Story {
 
             final showShadowKnob = context.knobs.boolean(
               label: "Show shadow",
-              description: "Show shadows under the Popover.",
+              description: "Show shadows under MoonPopover.",
               initial: true,
             );
 

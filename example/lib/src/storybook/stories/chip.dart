@@ -16,7 +16,7 @@ class ChipStory extends Story {
 
             final chipSizesKnob = context.knobs.nullable.options(
               label: "chipSize",
-              description: "Chip size variants.",
+              description: "Size variants for MoonChip.",
               enabled: false,
               initial: MoonChipSize.md,
               options: const [
@@ -27,9 +27,10 @@ class ChipStory extends Story {
 
             final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
-              description: "MoonColors variants for Chip text.",
+              description: "MoonColors variants for MoonChip text.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -37,9 +38,10 @@ class ChipStory extends Story {
 
             final activeColorsKnob = context.knobs.nullable.options(
               label: "activeColor",
-              description: "MoonColors variants for the active Chip.",
+              description: "MoonColors variants for active MoonChip.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -47,9 +49,10 @@ class ChipStory extends Story {
 
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for the Chip background.",
+              description: "MoonColors variants for MoonChip background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -57,9 +60,10 @@ class ChipStory extends Story {
 
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
-              description: "MoonColors variants for Chip border.",
+              description: "MoonColors variants for MoonChip border.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -67,7 +71,7 @@ class ChipStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for the Chip.",
+              description: "Border radius for MoonChip.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -80,24 +84,24 @@ class ChipStory extends Story {
 
             final isActiveKnob = context.knobs.boolean(
               label: "isActive",
-              description: "Whether the Chip is active/selected.",
+              description: "Whether MoonChip is active/selected.",
             );
 
             final showLeadingKnob = context.knobs.boolean(
               label: "leading",
-              description: "Show widget in the leading slot.",
+              description: "Show widget in MoonChip leading slot.",
               initial: true,
             );
 
             final showLabelKnob = context.knobs.boolean(
               label: "label",
-              description: "Show widget in the label slot.",
+              description: "Show widget in MoonChip label slot.",
               initial: true,
             );
 
             final showTrailingKnob = context.knobs.boolean(
               label: "trailing",
-              description: "Show widget in the trailing slot.",
+              description: "Show widget in MoonChip trailing slot.",
             );
 
             final resolvedIconVariant = chipSizesKnob == MoonChipSize.md ? MoonIcons.frame_24 : MoonIcons.frame_16;
@@ -108,7 +112,7 @@ class ChipStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
-                    const TextDivider(text: "Default Chip"),
+                    const TextDivider(text: "Default MoonChip"),
                     const SizedBox(height: 32),
                     MoonChip(
                       activeColor: activeColor,
@@ -125,7 +129,7 @@ class ChipStory extends Story {
                       trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Text Chip"),
+                    const TextDivider(text: "Text MoonChip"),
                     const SizedBox(height: 32),
                     MoonTextChip(
                       isActive: isActiveKnob,
@@ -138,7 +142,7 @@ class ChipStory extends Story {
                       trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Preset Chip"),
+                    const TextDivider(text: "Preset MoonChip"),
                     const SizedBox(height: 32),
                     MoonChip(
                       isActive: isActiveKnob,

@@ -10,7 +10,7 @@ class CircularLoaderStory extends Story {
           builder: (context) {
             final loaderSizesKnob = context.knobs.nullable.options(
               label: "circularLoaderSize",
-              description: "CircularLoader size variants.",
+              description: "Size variants for CircularLoader.",
               enabled: false,
               initial: MoonCircularLoaderSize.md,
               options: const [
@@ -44,7 +44,7 @@ class CircularLoaderStory extends Story {
 
             final loaderStrokeCapKnob = context.knobs.nullable.options(
               label: "strokeCap",
-              description: "CircularLoader stroke cap.",
+              description: "Stroke gap for CircularLoader.",
               enabled: false,
               initial: StrokeCap.round,
               options: const [
