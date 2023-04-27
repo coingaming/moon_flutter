@@ -10,7 +10,7 @@ class LinearProgressStory extends Story {
           builder: (context) {
             final progressSizesKnob = context.knobs.nullable.options(
               label: "linearProgressSize",
-              description: "LinearProgress size variants.",
+              description: "Size variants for LinearProgress.",
               enabled: false,
               initial: MoonLinearProgressSize.x4s,
               options: const [
@@ -44,7 +44,7 @@ class LinearProgressStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "LinearProgress border radius.",
+              description: "Border radius for LinearProgress.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -52,7 +52,7 @@ class LinearProgressStory extends Story {
 
             final linearProgressValueKnob = context.knobs.slider(
               label: "value",
-              description: "LinearProgress value.",
+              description: "Value for LinearProgress.",
               initial: 0.5,
             );
 

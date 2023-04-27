@@ -15,7 +15,7 @@ class TagStory extends Story {
 
             final tagSizesKnob = context.knobs.nullable.options(
               label: "tagSize",
-              description: "Tag size variants.",
+              description: "Size variants for MoonTag.",
               enabled: false,
               initial: MoonTagSize.xs,
               options: const [
@@ -26,7 +26,7 @@ class TagStory extends Story {
 
             final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
-              description: "MoonColors variants for Tag text.",
+              description: "MoonColors variants for MoonTag text.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -36,7 +36,7 @@ class TagStory extends Story {
 
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Tag background.",
+              description: "MoonColors variants for MoonTag background.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -46,7 +46,7 @@ class TagStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for Tag.",
+              description: "Border radius for MoonTag.",
               enabled: false,
               initial: 4,
               max: 32,
@@ -54,24 +54,24 @@ class TagStory extends Story {
 
             final showLeadingKnob = context.knobs.boolean(
               label: "leading",
-              description: "Show widget in the leading slot.",
+              description: "Show widget in MoonTag leading slot.",
             );
 
             final showLabelKnob = context.knobs.boolean(
               label: "label",
-              description: "Show widget in the label slot.",
+              description: "Show widget in MoonTag label slot.",
               initial: true,
             );
 
             final showTrailingKnob = context.knobs.boolean(
               label: "trailing",
-              description: "Show widget in the trailing slot.",
+              description: "Show widget in MoonTag trailing slot.",
               initial: true,
             );
 
             final setUpperCase = context.knobs.boolean(
               label: "isUpperCase",
-              description: "Sets the text style of the Tag to upper case.",
+              description: "Sets the text style of MoonTag to upper case.",
             );
 
             return Center(

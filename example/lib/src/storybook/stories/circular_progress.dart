@@ -10,7 +10,7 @@ class CircularProgressStory extends Story {
           builder: (context) {
             final circularProgressSizesKnob = context.knobs.nullable.options(
               label: "circularProgressSize",
-              description: "CircularProgress size variants.",
+              description: "Size variants for CircularProgress.",
               enabled: false,
               initial: MoonCircularProgressSize.md,
               options: const [
@@ -44,7 +44,7 @@ class CircularProgressStory extends Story {
 
             final circularProgressStrokeCapKnob = context.knobs.nullable.options(
               label: "strokeCap",
-              description: "CircularProgress stroke cap.",
+              description: "Stroke gap for CircularProgress.",
               enabled: false,
               initial: StrokeCap.round,
               options: const [
@@ -56,7 +56,7 @@ class CircularProgressStory extends Story {
 
             final circularProgressValueKnob = context.knobs.slider(
               label: "value",
-              description: "CircularProgress value.",
+              description: "Value for CircularProgress.",
               initial: 0.75,
             );
 

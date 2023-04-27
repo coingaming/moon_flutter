@@ -13,12 +13,12 @@ class TooltipStory extends Story {
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
               label: "label text",
-              initial: "Custom tooltip text",
+              initial: "Custom MoonTooltip text",
             );
 
             final tooltipPositionsKnob = context.knobs.nullable.options(
               label: "tooltipPosition",
-              description: "Tooltip position variants.",
+              description: "Position variants for MoonTooltip.",
               enabled: false,
               initial: MoonTooltipPosition.top,
               options: const [
@@ -37,9 +37,10 @@ class TooltipStory extends Story {
 
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Tooltip background.",
+              description: "MoonColors variants for MoonTooltip background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -47,9 +48,10 @@ class TooltipStory extends Story {
 
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
-              description: "MoonColors variants for Tooltip border.",
+              description: "MoonColors variants for MoonTooltip border.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -57,7 +59,7 @@ class TooltipStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for Tooltip.",
+              description: "Border radius for MoonTooltip.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -65,7 +67,7 @@ class TooltipStory extends Story {
 
             final arrowOffsetKnob = context.knobs.nullable.slider(
               label: "arrowOffsetValue",
-              description: "Set the offset of the Tooltip arrow.",
+              description: "Set the offset of MoonTooltip arrow.",
               enabled: false,
               initial: 0,
               min: -100,
@@ -82,14 +84,14 @@ class TooltipStory extends Story {
 
             final arrowBaseWidthKnob = context.knobs.nullable.slider(
               label: "arrowBaseWidth",
-              description: "Set the base width of the Tooltip arrow.",
+              description: "Set the base width of MoonTooltip arrow.",
               enabled: false,
               initial: 16,
               max: 100,
             );
 
             final arrowLengthKnob = context.knobs.nullable.slider(
-              description: "Set the length of the Tooltip arrow.",
+              description: "Set the length of MoonTooltip arrow.",
               label: "arrowLength",
               enabled: false,
               initial: 8,
@@ -98,13 +100,13 @@ class TooltipStory extends Story {
 
             final showShadowKnob = context.knobs.boolean(
               label: "tooltipShadows",
-              description: "Show shadows under the Tooltip.",
+              description: "Show shadows under MoonTooltip.",
               initial: true,
             );
 
             final showArrowKnob = context.knobs.boolean(
               label: "hasArrow",
-              description: "Does Tooltip have an arrow (tail).",
+              description: "Show MoonTooltip with an arrow (tail).",
               initial: true,
             );
 
@@ -113,7 +115,7 @@ class TooltipStory extends Story {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 64),
-                  const TextDivider(text: "Customisable tooltip"),
+                  const TextDivider(text: "Customisable MoonTooltip"),
                   const SizedBox(height: 32),
                   StatefulBuilder(
                     builder: (context, setState) {
@@ -142,7 +144,7 @@ class TooltipStory extends Story {
                     },
                   ),
                   const SizedBox(height: 40),
-                  const TextDivider(text: "Default on hover tooltip"),
+                  const TextDivider(text: "Default on hover MoonTooltip"),
                   const SizedBox(height: 32),
                   MoonFilledButton(
                     showTooltip: true,

@@ -19,7 +19,7 @@ class RadioStory extends Story {
           builder: (context) {
             final activeColorsKnob = context.knobs.nullable.options(
               label: "activeColor",
-              description: "MoonColors variants for checked Radio.",
+              description: "MoonColors variants for checked MoonRadio.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -29,7 +29,7 @@ class RadioStory extends Story {
 
             final inactiveColorsKnob = context.knobs.nullable.options(
               label: "inactiveColor",
-              description: "MoonColors variants for unchecked Radio.",
+              description: "MoonColors variants for unchecked MoonRadio.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -39,7 +39,7 @@ class RadioStory extends Story {
 
             final isToggleable = context.knobs.boolean(
               label: "toggleable",
-              description: "Whether the selected Radio can be unselected.",
+              description: "Whether the selected MoonRadio can be unselected.",
             );
 
             final isDisabled = context.knobs.boolean(
@@ -54,7 +54,7 @@ class RadioStory extends Story {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 64),
-                      const TextDivider(text: "Customisable Radio buttons"),
+                      const TextDivider(text: "Customisable MoonRadio buttons"),
                       const SizedBox(height: 32),
                       MoonRadio(
                         value: ChoiceCustom.first,
@@ -74,7 +74,7 @@ class RadioStory extends Story {
                         toggleable: isToggleable,
                       ),
                       const SizedBox(height: 40),
-                      const TextDivider(text: "Radios with clickable text"),
+                      const TextDivider(text: "MoonRadio buttons with clickable text"),
                       const SizedBox(height: 32),
                       MoonRadio.withLabel(
                         context,

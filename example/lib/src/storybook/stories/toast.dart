@@ -15,7 +15,7 @@ class ToastStory extends Story {
 
             final toastPositionKnob = context.knobs.nullable.options(
               label: "position",
-              description: "The position of the MoonToast.",
+              description: "The position of MoonToast.",
               enabled: false,
               initial: MoonToastPosition.bottom,
               options: const [
@@ -26,7 +26,7 @@ class ToastStory extends Story {
 
             final toastVariantKnob = context.knobs.nullable.options(
               label: "variant",
-              description: "The color variant of the MoonToast.",
+              description: "The color variant of MoonToast.",
               enabled: false,
               initial: MoonToastVariant.original,
               options: const [
@@ -55,7 +55,7 @@ class ToastStory extends Story {
 
             final displayDurationKnob = context.knobs.nullable.sliderInt(
               label: "displayDuration",
-              description: "The duration to show the MoonToast.",
+              description: "The duration of showing MoonToast.",
               enabled: false,
               initial: 5,
               min: 1,

@@ -13,9 +13,10 @@ class AlertStory extends Story {
           builder: (context) {
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for background.",
+              description: "MoonColors variants for MoonAlert background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -23,9 +24,10 @@ class AlertStory extends Story {
 
             final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
-              description: "MoonColors variants for text.",
+              description: "MoonColors variants for MoonAlert text.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -33,9 +35,10 @@ class AlertStory extends Story {
 
             final leadingColorsKnob = context.knobs.nullable.options(
               label: "leadingColor",
-              description: "MoonColors variants for leading.",
+              description: "MoonColors variants for MoonAlert leading.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -43,9 +46,10 @@ class AlertStory extends Story {
 
             final trailingColorsKnob = context.knobs.nullable.options(
               label: "trailingColor",
-              description: "MoonColors variants for trailing.",
+              description: "MoonColors variants for MoonAlert trailing.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -53,9 +57,10 @@ class AlertStory extends Story {
 
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
-              description: "MoonColors variants for border.",
+              description: "MoonColors variants for MoonAlert border.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -63,7 +68,7 @@ class AlertStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for Alert.",
+              description: "Border radius for MoonAlert.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -71,23 +76,23 @@ class AlertStory extends Story {
 
             final showBorderKnob = context.knobs.boolean(
               label: "showBorder",
-              description: "Show border for Alert.",
+              description: "Show border for MoonAlert.",
             );
 
             final showLeadingKnob = context.knobs.boolean(
               label: "leading",
-              description: "Show widget in the leading slot.",
+              description: "Show widget in MoonAlert leading slot.",
               initial: true,
             );
 
             final showBodyKnob = context.knobs.boolean(
               label: "body",
-              description: "Show widget in the body slot.",
+              description: "Show widget in MoonAlert body slot.",
             );
 
             final showTrailingKnob = context.knobs.boolean(
               label: "trailing",
-              description: "Show widget in the trailing slot.",
+              description: "Show widget in MoonAlert trailing slot.",
               initial: true,
             );
 
@@ -102,7 +107,7 @@ class AlertStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
-                    const TextDivider(text: "Base Alert"),
+                    const TextDivider(text: "Base MoonAlert"),
                     const SizedBox(height: 32),
                     StatefulBuilder(
                       builder: (context, setState) {
@@ -114,7 +119,7 @@ class AlertStory extends Story {
                                 height: 24,
                                 child: Align(
                                   alignment: AlignmentDirectional.centerStart,
-                                  child: Text("Base Alert"),
+                                  child: Text("Base MoonAlert"),
                                 ),
                               ),
                               borderRadius:
@@ -151,14 +156,14 @@ class AlertStory extends Story {
                                       height: 24,
                                       child: Align(
                                         alignment: AlignmentDirectional.centerStart,
-                                        child: Text("Here goes Alert body"),
+                                        child: Text("Here goes MoonAlert body"),
                                       ),
                                     )
                                   : null,
                             ),
                             const SizedBox(height: 16),
                             MoonFilledButton(
-                              label: const Text("Show/Hide Alert"),
+                              label: const Text("Show/Hide MoonAlert"),
                               backgroundColor: context.moonColors!.piccolo,
                               onTap: () {
                                 setState(() => showAlert = !showAlert);
@@ -169,11 +174,11 @@ class AlertStory extends Story {
                       },
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Filled Alert variant"),
+                    const TextDivider(text: "Filled MoonAlert variant"),
                     const SizedBox(height: 32),
                     MoonFilledAlert(
                       show: true,
-                      title: const Text("Filled error Alert"),
+                      title: const Text("Filled error MoonAlert"),
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       leading: showLeadingKnob ? const Icon(MoonIcons.alert_24) : null,
@@ -183,7 +188,7 @@ class AlertStory extends Story {
                               height: 24,
                               child: Align(
                                 alignment: AlignmentDirectional.centerStart,
-                                child: Text("Here goes Alert body"),
+                                child: Text("Here goes MoonAlert body"),
                               ),
                             )
                           : null,
@@ -192,7 +197,7 @@ class AlertStory extends Story {
                     const SizedBox(height: 16),
                     MoonFilledAlert(
                       show: true,
-                      title: const Text("Filled warning Alert"),
+                      title: const Text("Filled warning MoonAlert"),
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       leading: showLeadingKnob ? const Icon(MoonIcons.alarm_round_24) : null,
@@ -202,18 +207,18 @@ class AlertStory extends Story {
                               height: 24,
                               child: Align(
                                 alignment: AlignmentDirectional.centerStart,
-                                child: Text("Here goes Alert body"),
+                                child: Text("Here goes MoonAlert body"),
                               ),
                             )
                           : null,
                       onTrailingTap: () {},
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Outlined Alert variant"),
+                    const TextDivider(text: "Outlined MoonAlert variant"),
                     const SizedBox(height: 32),
                     MoonOutlinedAlert(
                       show: true,
-                      title: const Text("Outlined success Alert"),
+                      title: const Text("Outlined success MoonAlert"),
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       leading: showLeadingKnob ? const Icon(MoonIcons.check_rounded_24) : null,
@@ -223,7 +228,7 @@ class AlertStory extends Story {
                               height: 24,
                               child: Align(
                                 alignment: AlignmentDirectional.centerStart,
-                                child: Text("Here goes Alert body"),
+                                child: Text("Here goes MoonAlert body"),
                               ),
                             )
                           : null,
@@ -232,7 +237,7 @@ class AlertStory extends Story {
                     const SizedBox(height: 16),
                     MoonOutlinedAlert(
                       show: true,
-                      title: const Text('Outlined info Alert'),
+                      title: const Text('Outlined info MoonAlert'),
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       leading: showLeadingKnob ? const Icon(MoonIcons.alert_24) : null,
@@ -242,7 +247,7 @@ class AlertStory extends Story {
                               height: 24,
                               child: Align(
                                 alignment: AlignmentDirectional.centerStart,
-                                child: Text("Here goes Alert body"),
+                                child: Text("Here goes MoonAlert body"),
                               ),
                             )
                           : null,

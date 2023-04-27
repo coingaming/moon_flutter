@@ -10,7 +10,7 @@ class ModalStory extends Story {
           builder: (context) {
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Modal background.",
+              description: "MoonColors variants for MoonModal background.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -20,7 +20,7 @@ class ModalStory extends Story {
 
             final barrierColorsKnob = context.knobs.nullable.options(
               label: "barrierColor",
-              description: "MoonColors variants for Modal barrier.",
+              description: "MoonColors variants for MoonModal barrier.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
@@ -30,7 +30,7 @@ class ModalStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for Modal.",
+              description: "Border radius for MoonModal.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -56,7 +56,7 @@ class ModalStory extends Story {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
                               child: Text(
-                                "Modal title",
+                                "MoonModal title",
                                 style: context.moonTypography!.heading.text18,
                               ),
                             ),
@@ -67,7 +67,7 @@ class ModalStory extends Story {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
                               child: Text(
-                                "Reopen the modal to view the updated knob value.",
+                                "Reopen the MoonModal to view the updated knob value.",
                                 style: context.moonTypography!.body.text14,
                               ),
                             ),

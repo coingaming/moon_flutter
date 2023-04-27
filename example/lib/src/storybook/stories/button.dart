@@ -16,7 +16,7 @@ class ButtonStory extends Story {
 
             final buttonSizesKnob = context.knobs.nullable.options(
               label: "buttonSize",
-              description: "MoonButton size variants.",
+              description: "Size variants for MoonButton.",
               enabled: false,
               initial: MoonButtonSize.md,
               options: const [
@@ -32,7 +32,8 @@ class ButtonStory extends Story {
               label: "backgroundColor",
               description: "MoonColors variants for base MoonButton background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -42,7 +43,8 @@ class ButtonStory extends Story {
               label: "borderColor",
               description: "MoonColors variants for MoonButton border.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -64,7 +66,7 @@ class ButtonStory extends Story {
 
             final showTooltipKnob = context.knobs.boolean(
               label: "showTooltip",
-              description: "Show tooltip for MoonButton.",
+              description: "Show MoonTooltip for MoonButton.",
             );
 
             final showPulseEffectKnob = context.knobs.boolean(
@@ -79,24 +81,24 @@ class ButtonStory extends Story {
 
             final showLeadingKnob = context.knobs.boolean(
               label: "leading",
-              description: "Show widget in the leading slot.",
+              description: "Show widget in MoonButton leading slot.",
               initial: true,
             );
 
             final showLabelKnob = context.knobs.boolean(
               label: "label",
-              description: "Show widget in the label slot.",
+              description: "Show widget in MoonButton label slot.",
               initial: true,
             );
 
             final showTrailingKnob = context.knobs.boolean(
               label: "trailing",
-              description: "Show widget in the trailing slot.",
+              description: "Show widget in MoonButton trailing slot.",
             );
 
             final setFullWidthKnob = context.knobs.boolean(
               label: "isFullWidth",
-              description: "Set Button to full width.",
+              description: "Set MoonButton to full width.",
             );
 
             final showDisabledKnob = context.knobs.boolean(
@@ -129,7 +131,7 @@ class ButtonStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
-                    const TextDivider(text: "Base Button and Icon Button"),
+                    const TextDivider(text: "Base and Icon MoonButton"),
                     const SizedBox(height: 32),
                     MoonButton(
                       onTap: showDisabledKnob ? null : () {},
@@ -137,7 +139,7 @@ class ButtonStory extends Story {
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       showBorder: showBorderKnob,
                       showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is tooltip',
+                      tooltipMessage: 'This is MoonTooltip',
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
                       backgroundColor: backgroundColor,
@@ -155,7 +157,7 @@ class ButtonStory extends Story {
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       showBorder: showBorderKnob,
                       showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is tooltip',
+                      tooltipMessage: 'This is MoonTooltip',
                       buttonSize: buttonSizesKnob,
                       backgroundColor: backgroundColor,
                       borderColor: borderColor,
@@ -164,14 +166,14 @@ class ButtonStory extends Story {
                       icon: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Button variants"),
+                    const TextDivider(text: "MoonButton variants"),
                     const SizedBox(height: 32),
                     MoonFilledButton(
                       onTap: showDisabledKnob ? null : () {},
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
                       showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is tooltip',
+                      tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
                       leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                       label: showLabelKnob ? const Text("MoonFilledButton") : null,
@@ -183,7 +185,7 @@ class ButtonStory extends Story {
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
                       showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is tooltip',
+                      tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
                       borderColor: borderColor,
                       leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
@@ -196,14 +198,14 @@ class ButtonStory extends Story {
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
                       showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is tooltip',
+                      tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
                       leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
                       label: showLabelKnob ? const Text("MoonTextButton") : null,
                       trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Custom Button with non-standard children"),
+                    const TextDivider(text: "Custom MoonButton with non-standard children"),
                     const SizedBox(height: 32),
                     MoonButton(
                       onTap: showDisabledKnob ? null : () {},
@@ -216,7 +218,7 @@ class ButtonStory extends Story {
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
                       showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is tooltip',
+                      tooltipMessage: 'This is MoonTooltip',
                       backgroundColor: context.moonTheme!.colors.krillin100,
                       showPulseEffect: showPulseEffectKnob,
                       showPulseEffectJiggle: showPulseEffectJiggleKnob,

@@ -10,7 +10,7 @@ class LinearLoaderStory extends Story {
           builder: (context) {
             final loaderSizesKnob = context.knobs.nullable.options(
               label: "linearLoaderSize",
-              description: "LinearLoader size variants.",
+              description: "Size variants for LinearLoader.",
               enabled: false,
               initial: MoonLinearLoaderSize.x4s,
               options: const [
@@ -44,7 +44,7 @@ class LinearLoaderStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "LinearLoader border radius.",
+              description: "Border radius for LinearLoader.",
               enabled: false,
               initial: 8,
               max: 32,

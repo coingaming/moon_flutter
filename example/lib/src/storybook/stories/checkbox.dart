@@ -14,9 +14,10 @@ class CheckboxStory extends Story {
           builder: (context) {
             final checkColorsKnob = context.knobs.nullable.options(
               label: "checkColor",
-              description: "MoonColors variants for the Checkbox icon.",
+              description: "MoonColors variants for MoonCheckbox icon.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -24,9 +25,10 @@ class CheckboxStory extends Story {
 
             final activeColorsKnob = context.knobs.nullable.options(
               label: "activeColor",
-              description: "MoonColors variants for the checked Checkbox.",
+              description: "MoonColors variants for checked MoonCheckbox.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -34,9 +36,10 @@ class CheckboxStory extends Story {
 
             final inactiveColorsKnob = context.knobs.nullable.options(
               label: "inactiveColor",
-              description: "MoonColors variants for the unchecked Checkbox.",
+              description: "MoonColors variants for unchecked MoonCheckbox.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -44,9 +47,10 @@ class CheckboxStory extends Story {
 
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
-              description: "MoonColors variants for Checkbox border.",
+              description: "MoonColors variants for MoonCheckbox border.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -54,7 +58,7 @@ class CheckboxStory extends Story {
 
             final isTristate = context.knobs.boolean(
               label: "tristate",
-              description: "Whether the Checkbox uses tristate.",
+              description: "Whether MoonCheckbox uses tristate.",
             );
 
             final isDisabled = context.knobs.boolean(
@@ -67,7 +71,7 @@ class CheckboxStory extends Story {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 64),
-                  const TextDivider(text: "Customisable Checkbox"),
+                  const TextDivider(text: "Customisable MoonCheckbox"),
                   const SizedBox(height: 32),
                   StatefulBuilder(
                     builder: (context, setState) {
@@ -83,7 +87,7 @@ class CheckboxStory extends Story {
                     },
                   ),
                   const SizedBox(height: 40),
-                  const TextDivider(text: "Checkbox with clickable text"),
+                  const TextDivider(text: "MoonCheckbox with clickable text"),
                   const SizedBox(height: 32),
                   StatefulBuilder(
                     builder: (context, setState) {

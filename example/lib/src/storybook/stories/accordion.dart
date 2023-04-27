@@ -15,7 +15,7 @@ class AccordionStory extends Story {
           builder: (context) {
             final accordionSizesKnob = context.knobs.nullable.options(
               label: "accordionSize",
-              description: "Accordion size variants.",
+              description: "Size variants for MoonAccordion.",
               enabled: false,
               initial: MoonAccordionItemSize.md,
               options: const [
@@ -28,9 +28,10 @@ class AccordionStory extends Story {
 
             final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
-              description: "MoonColors variants for Accordion text.",
+              description: "MoonColors variants for MoonAccordion text.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -38,9 +39,10 @@ class AccordionStory extends Story {
 
             final iconColorsKnob = context.knobs.nullable.options(
               label: "iconColor",
-              description: "MoonColors variants for Accordion trailing icon.",
+              description: "MoonColors variants for MoonAccordion trailing icon.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -48,9 +50,10 @@ class AccordionStory extends Story {
 
             final expandedIconColorsKnob = context.knobs.nullable.options(
               label: "expandedIconColor",
-              description: "MoonColors variants for expanded Accordion trailing icon.",
+              description: "MoonColors variants for expanded MoonAccordion trailing icon.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -58,9 +61,10 @@ class AccordionStory extends Story {
 
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for Accordion background.",
+              description: "MoonColors variants for MoonAccordion background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -68,9 +72,10 @@ class AccordionStory extends Story {
 
             final expandedBackgroundColorsKnob = context.knobs.nullable.options(
               label: "expandedBackgroundColor",
-              description: "MoonColors variants for expanded Accordion background.",
+              description: "MoonColors variants for expanded MoonAccordion background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -78,9 +83,10 @@ class AccordionStory extends Story {
 
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
-              description: "MoonColors variants for Accordion border.",
+              description: "MoonColors variants for MoonAccordion border.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -88,9 +94,10 @@ class AccordionStory extends Story {
 
             final dividerColorsKnob = context.knobs.nullable.options(
               label: "dividerColor",
-              description: "MoonColors variants for expanded Accordion divider.",
+              description: "MoonColors variants for expanded MoonAccordion divider.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -98,7 +105,7 @@ class AccordionStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for Accordion.",
+              description: "Border radius for MoonAccordion.",
               enabled: false,
               initial: 8,
               max: 32,
@@ -106,18 +113,18 @@ class AccordionStory extends Story {
 
             final showBorderKnob = context.knobs.boolean(
               label: "showBorder",
-              description: "Show border around the Accordion.",
+              description: "Show border around MoonAccordion.",
             );
 
             final showDividerKnob = context.knobs.boolean(
               label: "showDivider",
-              description: "Show divider between Accordion header and body.",
+              description: "Show divider between MoonAccordion header and body.",
               initial: true,
             );
 
             final showShadowKnob = context.knobs.boolean(
               label: "Show shadows",
-              description: "Show shadows under the Accordion.",
+              description: "Show shadows under MoonAccordion.",
               initial: true,
             );
 
@@ -127,7 +134,7 @@ class AccordionStory extends Story {
                   clipBehavior: Clip.none,
                   children: [
                     const SizedBox(height: 64),
-                    const TextDivider(text: "Grouped accordion"),
+                    const TextDivider(text: "Grouped MoonAccordion"),
                     const SizedBox(height: 32),
                     MoonAccordionItem<AccordionItems>(
                       identityValue: AccordionItems.first,
@@ -148,7 +155,7 @@ class AccordionStory extends Story {
                       childrenPadding: const EdgeInsets.all(12),
                       onExpansionChanged: (value) => setState(() => currentlyOpenAccordionItem = value),
                       leading: const Icon(MoonIcons.frame_24),
-                      title: const Text("Grouped accordion item #1"),
+                      title: const Text("Grouped MoonAccordion item #1"),
                       children: const [
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -176,7 +183,7 @@ class AccordionStory extends Story {
                       childrenPadding: const EdgeInsets.all(12),
                       onExpansionChanged: (value) => setState(() => currentlyOpenAccordionItem = value),
                       leading: const Icon(MoonIcons.frame_24),
-                      title: const Text("Grouped accordion item #2"),
+                      title: const Text("Grouped MoonAccordion item #2"),
                       children: const [
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -184,7 +191,7 @@ class AccordionStory extends Story {
                       ],
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Ungrouped accordion with content outside"),
+                    const TextDivider(text: "Ungrouped MoonAccordion with content outside"),
                     const SizedBox(height: 32),
                     MoonAccordionItem<AccordionItems>(
                       accordionSize: accordionSizesKnob,
@@ -201,7 +208,7 @@ class AccordionStory extends Story {
                       showBorder: showBorderKnob,
                       shadows: showShadowKnob == true ? null : [],
                       childrenPadding: const EdgeInsets.symmetric(vertical: 12),
-                      title: const Text("Ungrouped accordion item #1"),
+                      title: const Text("Ungrouped MoonAccordion item #1"),
                       children: const [
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -224,7 +231,7 @@ class AccordionStory extends Story {
                       showBorder: showBorderKnob,
                       shadows: showShadowKnob == true ? null : [],
                       childrenPadding: const EdgeInsets.symmetric(vertical: 12),
-                      title: const Text("Ungrouped accordion item #2"),
+                      title: const Text("Ungrouped MoonAccordion item #2"),
                       children: const [
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
