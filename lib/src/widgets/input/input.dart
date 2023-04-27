@@ -301,15 +301,15 @@ class _MoonInputState extends State<MoonInput> {
         widget.textColor ?? _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
 
     final Color effectiveHintTextColor =
-        widget.hintTextColor ?? context.moonTheme?.inputTheme.colors.hintTextColor ?? MoonColors.light.trunks;
+        /* widget.hintTextColor ?? context.moonTheme?.inputTheme.colors.hintTextColor ?? */ MoonColors.light.trunks;
 
     final BorderRadius effectiveBorderRadius =
-        widget.borderRadius ?? context.moonTheme?.inputTheme.properties.borderRadius ?? BorderRadius.circular(8);
+        /* widget.borderRadius ?? context.moonTheme?.inputTheme.properties.borderRadius ?? */ BorderRadius.circular(8);
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
     final EdgeInsetsGeometry effectiveTextPadding =
-        widget.textPadding ?? context.moonTheme?.inputTheme.properties.textPadding ?? const EdgeInsets.all(16);
+        /* widget.textPadding ?? context.moonTheme?.inputTheme.properties.textPadding ?? */ const EdgeInsets.all(16);
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.inputTheme.properties.transitionDuration ??
@@ -319,10 +319,11 @@ class _MoonInputState extends State<MoonInput> {
         widget.transitionCurve ?? context.moonTheme?.inputTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
     final TextStyle effectiveTextStyle =
-        widget.textStyle ?? context.moonTheme?.inputTheme.properties.textStyle ?? const TextStyle(fontSize: 16);
+        /* widget.textStyle ?? context.moonTheme?.inputTheme.properties.textStyle ?? */ const TextStyle(fontSize: 16);
 
-    final TextStyle effectiveErrorTextStyle = widget.errorTextStyle ??
-        context.moonTheme?.inputTheme.properties.errorTextStyle ??
+    final TextStyle
+        effectiveErrorTextStyle = /* widget.errorTextStyle ??
+        context.moonTheme?.inputTheme.properties.errorTextStyle ?? */
         const TextStyle(fontSize: 12);
 
     final OutlineInputBorder defaultBorder = OutlineInputBorder(
