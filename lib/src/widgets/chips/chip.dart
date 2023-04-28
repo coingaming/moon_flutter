@@ -39,7 +39,7 @@ class MoonChip extends StatelessWidget {
   final bool showTooltip;
 
   /// The border radius of the chip.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The border and text color of the active/selected chip.
   final Color? activeColor;
@@ -198,7 +198,7 @@ class MoonChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final MoonChipSizeProperties effectiveMoonChipSize = _getMoonChipSize(context, chipSize);
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonChipSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveMoonChipSize.borderRadius;
 
     final double effectiveBorderWidth =
         borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
@@ -285,7 +285,7 @@ class MoonChip extends StatelessWidget {
                 width: showBorder ? effectiveBorderWidth : 0,
                 style: showBorder ? BorderStyle.solid : BorderStyle.none,
               ),
-              borderRadius: effectiveBorderRadius.smoothBorderRadius,
+              borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
             ),
           ),
 

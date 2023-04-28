@@ -9,7 +9,7 @@ class MoonFilledAlert extends StatelessWidget {
   final bool show;
 
   /// The border radius of the alert.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The color of the alert.
   final Color? color;

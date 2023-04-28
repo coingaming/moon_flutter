@@ -75,7 +75,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
   final bool showDivider;
 
   /// The accordion's border radius.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// {@macro flutter.material.Material.clipBehavior}
   final Clip? clipBehavior;
@@ -375,7 +375,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   }
 
   Widget _buildChildren(BuildContext context, Widget? child) {
-    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
+    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ??
         context.moonTheme?.accordionTheme.itemProperties.borderRadius ??
         MoonBorders.borders.interactiveSm;
 
@@ -484,7 +484,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                               shadows: effectiveShadows,
                               shape: SmoothRectangleBorder(
                                 side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                                borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                               ),
                             )
                           : null,
@@ -503,7 +503,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                                     shape: SmoothRectangleBorder(
                                       side:
                                           widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                      borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                                      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                                     ),
                                   )
                                 : null,

@@ -24,7 +24,7 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
   );
 
   /// Border radius of the auth input field.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Horizontal space between auth input fields.
   final double gap;
@@ -72,7 +72,7 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
 
   @override
   MoonAuthCodeProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? gap,
     double? height,
     double? width,
@@ -104,7 +104,7 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
     if (other is! MoonAuthCodeProperties) return this;
 
     return MoonAuthCodeProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       height: lerpDouble(height, other.height, t)!,
       width: lerpDouble(width, other.width, t)!,
@@ -123,7 +123,7 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAuthCodeProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("width", width))

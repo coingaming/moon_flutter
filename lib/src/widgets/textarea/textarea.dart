@@ -41,7 +41,7 @@ class MoonTextArea extends StatefulWidget {
   final bool? showCursor;
 
   /// The border radius of the text area.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The appearance of the keyboard.
   ///
@@ -284,7 +284,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadius effectiveBorderRadius =
+    final BorderRadiusGeometry effectiveBorderRadius =
         widget.borderRadius ?? context.moonTheme?.textAreaTheme.properties.borderRadius ?? BorderRadius.circular(8);
 
     final Color effectiveBackgroundColor =
@@ -328,7 +328,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
         const TextStyle(fontSize: 12);
 
     final OutlineInputBorder defaultBorder = OutlineInputBorder(
-      borderRadius: effectiveBorderRadius.smoothBorderRadius,
+      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
       borderSide: BorderSide(color: effectiveInactiveBorderColor),
     );
 
@@ -400,14 +400,14 @@ class _MoonTextAreaState extends State<MoonTextArea> {
                   enabledBorder: defaultBorder,
                   disabledBorder: defaultBorder,
                   errorBorder: OutlineInputBorder(
-                    borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                    borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                     borderSide: BorderSide(
                       color: effectiveErrorBorderColor,
                       width: 2,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                    borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                     borderSide: BorderSide(
                       color: effectiveActiveBorderColor,
                       width: 2,

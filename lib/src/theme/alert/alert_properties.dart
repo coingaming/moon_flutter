@@ -22,7 +22,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
   );
 
   /// Border radius for alert.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Horizontal space between alert leading, trailing and title.
   final double horizontalGap;
@@ -62,7 +62,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
 
   @override
   MoonAlertProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? horizontalGap,
     double? minimumHeight,
     double? verticalGap,
@@ -90,7 +90,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
     if (other is! MoonAlertProperties) return this;
 
     return MoonAlertProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       horizontalGap: lerpDouble(horizontalGap, other.horizontalGap, t)!,
       minimumHeight: lerpDouble(minimumHeight, other.minimumHeight, t)!,
       verticalGap: lerpDouble(verticalGap, other.verticalGap, t)!,
@@ -107,7 +107,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAlertProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("horizontalGap", horizontalGap))
       ..add(DoubleProperty("minimumHeight", minimumHeight))
       ..add(DoubleProperty("verticalGap", verticalGap))

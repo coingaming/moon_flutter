@@ -52,7 +52,7 @@ class MoonAuthCode extends StatefulWidget {
   final bool useHapticFeedback;
 
   /// Border radius of auth input field.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// Color of the auth input field cursor.
   final Color? authFieldCursorColor;
@@ -264,7 +264,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   late FocusNode _focusNode;
   late List<String> _inputList;
 
-  late BorderRadius _effectiveBorderRadius;
+  late BorderRadiusGeometry _effectiveBorderRadius;
   late Color _effectiveSelectedBorderColor;
   late Color _effectiveActiveBorderColor;
   late Color _effectiveInactiveBorderColor;
@@ -487,7 +487,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         return Border(bottom: borderSide);
       default:
         return SmoothRectangleBorder(
-          borderRadius: _effectiveBorderRadius.smoothBorderRadius,
+          borderRadius: _effectiveBorderRadius.smoothBorderRadius(context),
           side: borderSide,
         );
     }

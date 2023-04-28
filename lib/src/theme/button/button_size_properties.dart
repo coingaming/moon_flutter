@@ -55,7 +55,7 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
   );
 
   /// Button border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Space between button children.
   final double gap;
@@ -83,7 +83,7 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
 
   @override
   MoonButtonSizeProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? gap,
     double? height,
     double? iconSizeValue,
@@ -105,7 +105,7 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
     if (other is! MoonButtonSizeProperties) return this;
 
     return MoonButtonSizeProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
@@ -119,7 +119,7 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonButtonSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))

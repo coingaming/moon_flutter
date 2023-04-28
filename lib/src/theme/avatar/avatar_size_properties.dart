@@ -61,7 +61,7 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
   );
 
   /// Avatar border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Avatar size value.
   final double avatarSizeValue;
@@ -85,7 +85,7 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
 
   @override
   MoonAvatarSizeProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? avatarSizeValue,
     double? badgeMarginValue,
     double? badgeSizeValue,
@@ -105,7 +105,7 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
     if (other is! MoonAvatarSizeProperties) return this;
 
     return MoonAvatarSizeProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       avatarSizeValue: lerpDouble(avatarSizeValue, other.avatarSizeValue, t)!,
       badgeMarginValue: lerpDouble(badgeMarginValue, other.badgeMarginValue, t)!,
       badgeSizeValue: lerpDouble(badgeSizeValue, other.badgeSizeValue, t)!,
@@ -118,7 +118,7 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAvatarSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("avatarSizeValue", avatarSizeValue))
       ..add(DoubleProperty("badgeMarginValue", badgeMarginValue))
       ..add(DoubleProperty("badgeSizeValue", badgeSizeValue))

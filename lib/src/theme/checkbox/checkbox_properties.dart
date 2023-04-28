@@ -10,7 +10,7 @@ class MoonCheckboxProperties extends ThemeExtension<MoonCheckboxProperties> with
   );
 
   /// Checkbox border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   const MoonCheckboxProperties({
     required this.borderRadius,
@@ -18,7 +18,7 @@ class MoonCheckboxProperties extends ThemeExtension<MoonCheckboxProperties> with
 
   @override
   MoonCheckboxProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
   }) {
     return MoonCheckboxProperties(
       borderRadius: borderRadius ?? this.borderRadius,
@@ -30,7 +30,7 @@ class MoonCheckboxProperties extends ThemeExtension<MoonCheckboxProperties> with
     if (other is! MoonCheckboxProperties) return this;
 
     return MoonCheckboxProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
     );
   }
 
@@ -39,6 +39,6 @@ class MoonCheckboxProperties extends ThemeExtension<MoonCheckboxProperties> with
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonCheckboxProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius));
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius));
   }
 }

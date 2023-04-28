@@ -35,7 +35,7 @@ class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSize
   );
 
   /// Linear loader border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Linear loader height.
   final double loaderHeight;
@@ -47,7 +47,7 @@ class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSize
 
   @override
   MoonLinearLoaderSizeProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? loaderHeight,
   }) {
     return MoonLinearLoaderSizeProperties(
@@ -61,7 +61,7 @@ class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSize
     if (other is! MoonLinearLoaderSizeProperties) return this;
 
     return MoonLinearLoaderSizeProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       loaderHeight: lerpDouble(loaderHeight, other.loaderHeight, t)!,
     );
   }
@@ -71,7 +71,7 @@ class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSize
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonLinearLoaderSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("loaderHeight", loaderHeight));
   }
 }

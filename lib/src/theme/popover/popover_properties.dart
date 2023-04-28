@@ -17,7 +17,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
   );
 
   /// Popover border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Popover distance to target child widget.
   final double distanceToTarget;
@@ -41,7 +41,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
 
   @override
   MoonPopoverProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? distanceToTarget,
     Duration? transitionDuration,
     Curve? transitionCurve,
@@ -61,7 +61,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
     if (other is! MoonPopoverProperties) return this;
 
     return MoonPopoverProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       distanceToTarget: lerpDouble(distanceToTarget, other.distanceToTarget, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
@@ -74,7 +74,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonPopoverProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("distanceToTarget", distanceToTarget))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
