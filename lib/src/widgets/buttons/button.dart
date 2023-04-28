@@ -50,7 +50,7 @@ class MoonButton extends StatelessWidget {
   final bool showTooltip;
 
   /// The border radius of the button.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The background color of the button.
   final Color? backgroundColor;
@@ -217,7 +217,7 @@ class MoonButton extends StatelessWidget {
     bool showPulseEffectJiggle = true,
     bool showScaleAnimation = true,
     bool showTooltip = false,
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     Color? backgroundColor,
     Color? borderColor,
     Color? focusEffectColor,
@@ -333,7 +333,7 @@ class MoonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final MoonButtonSizeProperties effectiveMoonButtonSize = _getMoonButtonSize(context, buttonSize);
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
 
     final Color effectiveBorderColor =
         borderColor ?? context.moonTheme?.buttonTheme.colors.borderColor ?? MoonColors.light.trunks;
@@ -420,7 +420,7 @@ class MoonButton extends StatelessWidget {
                 width: showBorder ? effectiveBorderWidth : 0,
                 style: showBorder ? BorderStyle.solid : BorderStyle.none,
               ),
-              borderRadius: effectiveBorderRadius.smoothBorderRadius,
+              borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
             ),
           ),
           child: Padding(

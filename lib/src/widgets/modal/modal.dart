@@ -8,7 +8,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 
 class MoonModal extends StatelessWidget {
   /// The border radius of the modal.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The background color of the modal.
   final Color? backgroundColor;
@@ -42,7 +42,7 @@ class MoonModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadius effectiveBorderRadius =
+    final BorderRadiusGeometry effectiveBorderRadius =
         borderRadius ?? context.moonTheme?.modalTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
     final Color effectiveBackgroundColor =
@@ -62,7 +62,7 @@ class MoonModal extends StatelessWidget {
               decoration: ShapeDecoration(
                 color: effectiveBackgroundColor,
                 shape: SmoothRectangleBorder(
-                  borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                  borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                 ),
               ),
               child: child,

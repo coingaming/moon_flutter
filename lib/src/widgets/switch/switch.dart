@@ -304,7 +304,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
 
     final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
 
-    final BorderRadius effectiveBorderRadius = BorderRadius.circular(effectiveThumbSizeValue / 2);
+    final BorderRadiusGeometry effectiveBorderRadius = BorderRadius.circular(effectiveThumbSizeValue / 2);
 
     final List<BoxShadow> effectiveThumbShadow =
         context.moonTheme?.switchTheme.shadows.thumbShadows ?? MoonShadows.light.sm;

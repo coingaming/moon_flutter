@@ -16,7 +16,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
   );
 
   /// TextArea border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// TextArea transition duration.
   final Duration transitionDuration;
@@ -44,7 +44,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
 
   @override
   MoonTextAreaProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
     EdgeInsetsGeometry? textPadding,
@@ -66,7 +66,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
     if (other is! MoonTextAreaProperties) return this;
 
     return MoonTextAreaProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
       textPadding: EdgeInsetsGeometry.lerp(textPadding, other.textPadding, t)!,
@@ -80,7 +80,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTextAreaProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("textPadding", textPadding))

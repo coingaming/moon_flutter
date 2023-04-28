@@ -12,7 +12,7 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
   );
 
   /// Modal border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Modal transition duration.
   final Duration transitionDuration;
@@ -28,7 +28,7 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
 
   @override
   MoonModalProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
   }) {
@@ -44,7 +44,7 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
     if (other is! MoonModalProperties) return this;
 
     return MoonModalProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
     );
@@ -55,7 +55,7 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonModalProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
   }

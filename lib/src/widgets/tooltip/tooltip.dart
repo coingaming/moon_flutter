@@ -35,7 +35,7 @@ class MoonTooltip extends StatefulWidget {
   final bool show;
 
   /// The border radius of the tooltip.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The color of the tooltip background.
   final Color? backgroundColor;
@@ -393,9 +393,11 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   Widget _createOverlayContent() {
     MoonTooltipPosition tooltipPosition = widget.tooltipPosition;
 
-    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
+    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ??
         context.moonTheme?.tooltipTheme.properties.borderRadius ??
         MoonBorders.borders.interactiveXs;
+
+    final resolvedBorderRadius = effectiveBorderRadius.resolve(Directionality.of(context));
 
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
@@ -512,7 +514,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
                         arrowOffset: widget.arrowOffsetValue,
                         arrowTipDistance: effectiveArrowTipDistance,
                         borderColor: widget.borderColor,
-                        borderRadius: effectiveBorderRadius,
+                        borderRadius: resolvedBorderRadius,
                         borderWidth: widget.borderWidth,
                         childWidth: targetRenderBox.size.width,
                         tooltipPosition: tooltipPosition,

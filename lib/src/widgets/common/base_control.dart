@@ -47,7 +47,7 @@ class MoonBaseControl extends StatefulWidget {
   final bool showTooltip;
 
   /// The border radius of the control.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The background color of the control.
   final Color? backgroundColor;

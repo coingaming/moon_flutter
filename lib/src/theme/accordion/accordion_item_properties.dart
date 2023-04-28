@@ -12,7 +12,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
   );
 
   /// Accordion item border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Accordion item transition duration.
   final Duration transitionDuration;
@@ -28,7 +28,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
 
   @override
   MoonAccordionItemProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
   }) {
@@ -44,7 +44,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
     if (other is! MoonAccordionItemProperties) return this;
 
     return MoonAccordionItemProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
     );
@@ -55,7 +55,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAccordionItemProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
   }

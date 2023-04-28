@@ -30,7 +30,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
   );
 
   /// Tag border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Space between tag children.
   final double gap;
@@ -62,7 +62,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
 
   @override
   MoonTagSizeProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? gap,
     double? height,
     double? iconSizeValue,
@@ -86,7 +86,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     if (other is! MoonTagSizeProperties) return this;
 
     return MoonTagSizeProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
@@ -101,7 +101,7 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTagSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))

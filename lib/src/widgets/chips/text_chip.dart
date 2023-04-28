@@ -27,7 +27,7 @@ class MoonTextChip extends StatelessWidget {
   final bool showTooltip;
 
   /// The border radius of the chip.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The border and text color of the active/selected chip.
   final Color? activeColor;

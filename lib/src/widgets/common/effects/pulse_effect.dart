@@ -5,7 +5,7 @@ import 'package:moon_design/src/widgets/common/effects/painters/pulse_effect_pai
 class MoonPulseEffect extends StatefulWidget {
   final bool show;
   final bool showJiggle;
-  final BorderRadius? childBorderRadius;
+  final BorderRadiusGeometry? childBorderRadius;
   final Color effectColor;
   final double effectExtent;
   final Duration effectDuration;
@@ -94,6 +94,8 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
     // TODO: Review at a later date (when Impeller is stable?) if CurvedAnimation with Interval can be used. Currently
     //interval has a bug where the curve parameters curve.transform(t) internal method causes uneven buggy animation.
 
+    final resolvedBorderRadius = widget.childBorderRadius?.resolve(Directionality.of(context)) ?? BorderRadius.zero;
+
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
@@ -106,7 +108,7 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
               painter: PulseEffectPainter(
                 color: widget.effectColor,
                 effectExtent: widget.effectExtent,
-                borderRadius: widget.childBorderRadius ?? BorderRadius.zero,
+                borderRadius: resolvedBorderRadius,
                 animation: _pulseAnimation,
               ),
               child: child,

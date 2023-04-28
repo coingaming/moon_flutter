@@ -21,7 +21,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
   );
 
   /// Tooltip border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// The tooltip arrows base width.
   final double arrowBaseWidth;
@@ -57,7 +57,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
 
   @override
   MoonTooltipProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? arrowBaseWidth,
     double? arrowLength,
     double? arrowTipDistance,
@@ -83,7 +83,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
     if (other is! MoonTooltipProperties) return this;
 
     return MoonTooltipProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       arrowBaseWidth: lerpDouble(arrowBaseWidth, other.arrowBaseWidth, t)!,
       arrowLength: lerpDouble(arrowLength, other.arrowLength, t)!,
       arrowTipDistance: lerpDouble(arrowTipDistance, other.arrowTipDistance, t)!,
@@ -99,7 +99,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTooltipProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("arrowBaseWidth", arrowBaseWidth))
       ..add(DoubleProperty("arrowLength", arrowLength))
       ..add(DoubleProperty("arrowTipDistance", arrowTipDistance))

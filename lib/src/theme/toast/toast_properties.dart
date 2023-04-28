@@ -18,7 +18,7 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
   );
 
   /// Toast border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Space between toast children.
   final double gap;
@@ -46,7 +46,7 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
 
   @override
   MoonToastProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? gap,
     Duration? displayDuration,
     Duration? transitionDuration,
@@ -68,7 +68,7 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
     if (other is! MoonToastProperties) return this;
 
     return MoonToastProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       displayDuration: lerpDuration(displayDuration, other.displayDuration, t),
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
@@ -82,7 +82,7 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonToastProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("gap", gap))
       ..add(DiagnosticsProperty<Duration>("displayDuration", displayDuration))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
