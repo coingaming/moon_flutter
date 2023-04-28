@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.7](https://github.com/coingaming/moon_flutter/compare/v0.19.6...v0.19.7) (2023-04-28)
+
+
+### Bug Fixes
+
+* [MDS-513] Replace BorderRadius with BorderRadiusGeometry ([#158](https://github.com/coingaming/moon_flutter/issues/158)) ([d91418f](https://github.com/coingaming/moon_flutter/commit/d91418f6012e4a7b16f32496a348af39b2e80d4b))
+
 ## [0.19.6](https://github.com/coingaming/moon_flutter/compare/v0.19.5...v0.19.6) (2023-04-27)
 
 
