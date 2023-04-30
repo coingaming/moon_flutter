@@ -9,7 +9,6 @@ import 'package:example/src/storybook/stories/chip.dart';
 import 'package:example/src/storybook/stories/circular_loader.dart';
 import 'package:example/src/storybook/stories/circular_progress.dart';
 import 'package:example/src/storybook/stories/icons.dart';
-import 'package:example/src/storybook/stories/input.dart';
 import 'package:example/src/storybook/stories/linear_loader.dart';
 import 'package:example/src/storybook/stories/linear_progress.dart';
 import 'package:example/src/storybook/stories/modal.dart';
@@ -17,7 +16,8 @@ import 'package:example/src/storybook/stories/popover.dart';
 import 'package:example/src/storybook/stories/radio.dart';
 import 'package:example/src/storybook/stories/switch.dart';
 import 'package:example/src/storybook/stories/tag.dart';
-import 'package:example/src/storybook/stories/textarea.dart';
+import 'package:example/src/storybook/stories/text_area.dart';
+import 'package:example/src/storybook/stories/text_input.dart';
 import 'package:example/src/storybook/stories/toast.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Input",
+          initialStory: "TextInput",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (context, child) => MaterialApp(
@@ -86,7 +86,7 @@ class StorybookPage extends StatelessWidget {
             CircularLoaderStory(),
             CircularProgressStory(),
             IconsStory(),
-            InputStory(),
+            TextInputStory(),
             LinearLoaderStory(),
             LinearProgressStory(),
             ModalStory(),

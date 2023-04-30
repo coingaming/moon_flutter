@@ -11,7 +11,6 @@ import 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
-import 'package:moon_design/src/theme/input/input_theme.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
 import 'package:moon_design/src/theme/modal/modal_theme.dart';
@@ -24,7 +23,8 @@ import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
-import 'package:moon_design/src/theme/textarea/textarea_theme.dart';
+import 'package:moon_design/src/theme/text_area/text_area_theme.dart';
+import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
 import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
@@ -44,7 +44,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     circularProgressTheme: MoonCircularProgressTheme.light,
     colors: MoonColors.light,
     effects: MoonEffects.light,
-    inputTheme: MoonInputTheme.light,
     linearLoaderTheme: MoonLinearLoaderTheme.light,
     linearProgressTheme: MoonLinearProgressTheme.light,
     modalTheme: MoonModalTheme.light,
@@ -56,6 +55,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     switchTheme: MoonSwitchTheme.light,
     tagTheme: MoonTagTheme.light,
     textAreaTheme: MoonTextAreaTheme.light,
+    textInputTheme: MoonTextInputTheme.light,
     toastTheme: MoonToastTheme.light,
     tooltipTheme: MoonTooltipTheme.light,
     typography: MoonTypography.light,
@@ -74,7 +74,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     circularProgressTheme: MoonCircularProgressTheme.dark,
     colors: MoonColors.dark,
     effects: MoonEffects.dark,
-    inputTheme: MoonInputTheme.dark,
     linearLoaderTheme: MoonLinearLoaderTheme.dark,
     linearProgressTheme: MoonLinearProgressTheme.dark,
     modalTheme: MoonModalTheme.dark,
@@ -86,6 +85,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     switchTheme: MoonSwitchTheme.dark,
     tagTheme: MoonTagTheme.dark,
     textAreaTheme: MoonTextAreaTheme.dark,
+    textInputTheme: MoonTextInputTheme.dark,
     toastTheme: MoonToastTheme.dark,
     tooltipTheme: MoonTooltipTheme.dark,
     typography: MoonTypography.dark,
@@ -127,9 +127,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System effects.
   final MoonEffects effects;
 
-  /// Moon Design System MoonInput widget theming.
-  final MoonInputTheme inputTheme;
-
   /// Moon Design System MoonLinearLoader widget theming.
   final MoonLinearLoaderTheme linearLoaderTheme;
 
@@ -163,6 +160,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonTextArea widget theming.
   final MoonTextAreaTheme textAreaTheme;
 
+  /// Moon Design System MoonTextInput widget theming.
+  final MoonTextInputTheme textInputTheme;
+
   /// Moon Design System MoonToast widget theming.
   final MoonToastTheme toastTheme;
 
@@ -185,7 +185,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.circularProgressTheme,
     required this.colors,
     required this.effects,
-    required this.inputTheme,
     required this.linearLoaderTheme,
     required this.linearProgressTheme,
     required this.modalTheme,
@@ -197,6 +196,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.switchTheme,
     required this.tagTheme,
     required this.textAreaTheme,
+    required this.textInputTheme,
     required this.toastTheme,
     required this.tooltipTheme,
     required this.typography,
@@ -216,7 +216,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonCircularProgressTheme? circularProgressTheme,
     MoonColors? colors,
     MoonEffects? effects,
-    MoonInputTheme? inputTheme,
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
     MoonModalTheme? modalTheme,
@@ -228,6 +227,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonSwitchTheme? switchTheme,
     MoonTagTheme? tagTheme,
     MoonTextAreaTheme? textAreaTheme,
+    MoonTextInputTheme? textInputTheme,
     MoonToastTheme? toastTheme,
     MoonTooltipTheme? tooltipTheme,
     MoonTypography? typography,
@@ -245,7 +245,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
       colors: colors ?? this.colors,
       effects: effects ?? this.effects,
-      inputTheme: inputTheme ?? this.inputTheme,
       linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
       linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
       modalTheme: modalTheme ?? this.modalTheme,
@@ -257,6 +256,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       switchTheme: switchTheme ?? this.switchTheme,
       tagTheme: tagTheme ?? this.tagTheme,
       textAreaTheme: textAreaTheme ?? this.textAreaTheme,
+      textInputTheme: textInputTheme ?? this.textInputTheme,
       toastTheme: toastTheme ?? this.toastTheme,
       tooltipTheme: tooltipTheme ?? this.tooltipTheme,
       typography: typography ?? this.typography,
@@ -280,7 +280,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
       colors: colors.lerp(other.colors, t),
       effects: effects.lerp(other.effects, t),
-      inputTheme: inputTheme.lerp(other.inputTheme, t),
       linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
       linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
       modalTheme: modalTheme.lerp(other.modalTheme, t),
@@ -292,6 +291,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       switchTheme: switchTheme.lerp(other.switchTheme, t),
       tagTheme: tagTheme.lerp(other.tagTheme, t),
       textAreaTheme: textAreaTheme.lerp(other.textAreaTheme, t),
+      textInputTheme: textInputTheme.lerp(other.textInputTheme, t),
       toastTheme: toastTheme.lerp(other.toastTheme, t),
       tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
       typography: typography.lerp(other.typography, t),
@@ -315,7 +315,6 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", colors))
       ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
-      ..add(DiagnosticsProperty<MoonInputTheme>("MoonInputTheme", inputTheme))
       ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
       ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
       ..add(DiagnosticsProperty<MoonModalTheme>("MoonModalTheme", modalTheme))
@@ -327,6 +326,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
       ..add(DiagnosticsProperty<MoonTextAreaTheme>("MoonTextAreaTheme", textAreaTheme))
+      ..add(DiagnosticsProperty<MoonTextInputTheme>("MoonTextInputTheme", textInputTheme))
       ..add(DiagnosticsProperty<MoonToastTheme>("MoonToastTheme", toastTheme))
       ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme))
       ..add(DiagnosticsProperty<MoonTypography>("MoonTypography", typography));

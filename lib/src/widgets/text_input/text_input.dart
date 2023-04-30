@@ -3,13 +3,22 @@ import 'package:flutter/services.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/opacity.dart';
+import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
-typedef MoonInputErrorBuilder = Widget Function(BuildContext context, String? errorText);
+typedef MoonTextInputErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
-class MoonInput extends StatefulWidget {
+enum MoonTextInputSize {
+  xs,
+  sm,
+  md,
+  lg,
+  xl,
+}
+
+class MoonTextInput extends StatefulWidget {
   /// Controls the text being edited.
   final TextEditingController? controller;
 
@@ -87,7 +96,7 @@ class MoonInput extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
 
-  /// The height of the input (this does not include the space taken by [MoonInput.errorBuilder]).
+  /// The height of the input (this does not include the space taken by [MoonTextInput.errorBuilder]).
   final double? height;
 
   /// The text for the hint.
@@ -168,6 +177,15 @@ class MoonInput extends StatefulWidget {
   /// The semantic label for the widget.
   final String? semanticLabel;
 
+  /// The size of the text input.
+  final MoonTextInputSize? textInputSize;
+
+  /// The gap between the leading or trailing and the label widgets.
+  final double? gap;
+
+  /// The padding of the text input.
+  final EdgeInsetsGeometry? padding;
+
   /// {@macro flutter.widgets.editableText.onChanged}
   ///
   /// See also:
@@ -201,9 +219,9 @@ class MoonInput extends StatefulWidget {
   final FormFieldValidator<String>? validator;
 
   /// Builder for the error widget.
-  final MoonInputErrorBuilder? errorBuilder;
+  final MoonTextInputErrorBuilder? errorBuilder;
 
-  const MoonInput({
+  const MoonTextInput({
     super.key,
     this.controller,
     this.scrollController,
@@ -249,6 +267,9 @@ class MoonInput extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.semanticLabel,
+    this.textInputSize,
+    this.gap,
+    this.padding,
     this.onChanged,
     this.onEditingComplete,
     this.onSaved,
@@ -260,17 +281,25 @@ class MoonInput extends StatefulWidget {
   });
 
   @override
-  State<MoonInput> createState() => _MoonInputState();
+  State<MoonTextInput> createState() => _MoonTextInputState();
 }
 
-class _MoonInputState extends State<MoonInput> {
+class _MoonTextInputState extends State<MoonTextInput> {
   String? _errorText;
 
-  String? _validateInput(String? value) {
-    final validationResult = widget.validator?.call(value);
-    _errorText = validationResult;
-
-    return validationResult;
+  MoonTextInputSizeProperties _getMoonTextInputSize(BuildContext context, MoonTextInputSize? moonTextInputSize) {
+    switch (moonTextInputSize) {
+      case MoonTextInputSize.sm:
+        return context.moonTheme?.textInputTheme.sizes.sm ?? MoonTextInputSizeProperties.sm;
+      case MoonTextInputSize.md:
+        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizeProperties.md;
+      case MoonTextInputSize.lg:
+        return context.moonTheme?.textInputTheme.sizes.lg ?? MoonTextInputSizeProperties.lg;
+      case MoonTextInputSize.xl:
+        return context.moonTheme?.textInputTheme.sizes.xl ?? MoonTextInputSizeProperties.xl;
+      default:
+        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizeProperties.md;
+    }
   }
 
   Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
@@ -282,48 +311,62 @@ class _MoonInputState extends State<MoonInput> {
     }
   }
 
+  String? _validateInput(String? value) {
+    final validationResult = widget.validator?.call(value);
+    _errorText = validationResult;
+
+    return validationResult;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.inputTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+    final MoonTextInputSizeProperties effectiveMoonTextInputSize = _getMoonTextInputSize(context, widget.textInputSize);
 
-    final Color effectiveActiveBorderColor =
-        widget.activeBorderColor ?? context.moonTheme?.inputTheme.colors.activeBorderColor ?? MoonColors.light.piccolo;
+    final BorderRadius effectiveBorderRadius = widget.borderRadius ?? effectiveMoonTextInputSize.borderRadius;
+
+    final double effectiveHeight = widget.height ?? effectiveMoonTextInputSize.height;
+
+    final double effectiveGap = widget.gap ?? effectiveMoonTextInputSize.gap;
+
+    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonTextInputSize.padding;
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
+
+    final TextStyle effectiveTextStyle = widget.textStyle ?? effectiveMoonTextInputSize.textStyle;
+
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonTheme?.textInputTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveActiveBorderColor = widget.activeBorderColor ??
+        context.moonTheme?.textInputTheme.colors.activeBorderColor ??
+        MoonColors.light.piccolo;
 
     final Color effectiveInactiveBorderColor = widget.inactiveBorderColor ??
-        context.moonTheme?.inputTheme.colors.inactiveBorderColor ??
+        context.moonTheme?.textInputTheme.colors.inactiveBorderColor ??
         MoonColors.light.beerus;
 
-    final Color effectiveErrorBorderColor =
-        widget.errorBorderColor ?? context.moonTheme?.inputTheme.colors.errorBorderColor ?? MoonColors.light.chiChi100;
+    final Color effectiveErrorBorderColor = widget.errorBorderColor ??
+        context.moonTheme?.textInputTheme.colors.errorBorderColor ??
+        MoonColors.light.chiChi100;
 
     final Color effectiveTextColor =
         widget.textColor ?? _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
 
     final Color effectiveHintTextColor =
-        /* widget.hintTextColor ?? context.moonTheme?.inputTheme.colors.hintTextColor ?? */ MoonColors.light.trunks;
-
-    final BorderRadius effectiveBorderRadius =
-        /* widget.borderRadius ?? context.moonTheme?.inputTheme.properties.borderRadius ?? */ BorderRadius.circular(8);
+        /* widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.hintTextColor ?? */ MoonColors.light.trunks;
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
-    final EdgeInsetsGeometry effectiveTextPadding =
-        /* widget.textPadding ?? context.moonTheme?.inputTheme.properties.textPadding ?? */ const EdgeInsets.all(16);
-
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
-        context.moonTheme?.inputTheme.properties.transitionDuration ??
+        context.moonTheme?.textInputTheme.properties.transitionDuration ??
         const Duration(milliseconds: 200);
 
     final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.inputTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
-
-    final TextStyle effectiveTextStyle =
-        /* widget.textStyle ?? context.moonTheme?.inputTheme.properties.textStyle ?? */ const TextStyle(fontSize: 16);
+        widget.transitionCurve ?? context.moonTheme?.textInputTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
     final TextStyle
         effectiveErrorTextStyle = /* widget.errorTextStyle ??
-        context.moonTheme?.inputTheme.properties.errorTextStyle ?? */
+        context.moonTheme?.textInputTheme.properties.errorTextStyle ?? */
         const TextStyle(fontSize: 12);
 
     final OutlineInputBorder defaultBorder = OutlineInputBorder(
@@ -352,16 +395,15 @@ class _MoonInputState extends State<MoonInput> {
                 enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
                 enableInteractiveSelection: widget.enableInteractiveSelection,
                 enableSuggestions: widget.enableSuggestions,
-                expands: true,
                 focusNode: widget.focusNode,
                 initialValue: widget.initialValue,
                 inputFormatters: widget.inputFormatters,
                 keyboardAppearance: widget.keyboardAppearance,
-                keyboardType: TextInputType.multiline,
-                maxLength: widget.maxLength,
+                //keyboardType: TextInputType.multiline,
+                /* maxLength: widget.maxLength,
                 maxLengthEnforcement: widget.maxLengthEnforcement,
-                maxLines: null,
-                minLines: widget.minLines,
+                minLines: widget.minLines, */
+
                 onChanged: widget.onChanged,
                 onEditingComplete: widget.onEditingComplete,
                 onFieldSubmitted: widget.onSubmitted,
@@ -383,14 +425,15 @@ class _MoonInputState extends State<MoonInput> {
                 textInputAction: widget.textInputAction,
                 validator: _validateInput,
                 decoration: InputDecoration(
-                  contentPadding: effectiveTextPadding,
+                  contentPadding: resolvedDirectionalPadding,
                   filled: true,
+                  isDense: true,
                   hintText: widget.hintText,
                   hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
                   errorStyle: const TextStyle(height: 0, fontSize: 0),
                   constraints: BoxConstraints(
-                    minHeight: widget.height ?? 0.0,
-                    maxHeight: widget.height ?? double.infinity,
+                    minHeight: effectiveHeight,
+                    maxHeight: effectiveHeight,
                   ),
                   fillColor: effectiveBackgroundColor,
                   focusColor: effectiveActiveBorderColor,

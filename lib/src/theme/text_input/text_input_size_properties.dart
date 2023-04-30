@@ -8,8 +8,8 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 
 @immutable
-class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> with DiagnosticableTreeMixin {
-  static final sm = MoonInputSizeProperties(
+class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProperties> with DiagnosticableTreeMixin {
+  static final sm = MoonTextInputSizeProperties(
     height: MoonSizes.sizes.sm,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.x2s,
@@ -18,7 +18,7 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
     textStyle: MoonTextStyles.heading.text14,
   );
 
-  static final md = MoonInputSizeProperties(
+  static final md = MoonTextInputSizeProperties(
     height: MoonSizes.sizes.md,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.xs,
@@ -27,7 +27,7 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
     textStyle: MoonTextStyles.heading.text14,
   );
 
-  static final lg = MoonInputSizeProperties(
+  static final lg = MoonTextInputSizeProperties(
     height: MoonSizes.sizes.lg,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.xs,
@@ -36,7 +36,7 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
     textStyle: MoonTextStyles.heading.text16,
   );
 
-  static final xl = MoonInputSizeProperties(
+  static final xl = MoonTextInputSizeProperties(
     height: MoonSizes.sizes.xl,
     gap: MoonSizes.sizes.x2s,
     iconSizeValue: MoonSizes.sizes.xs,
@@ -45,25 +45,25 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
     textStyle: MoonTextStyles.heading.text16,
   );
 
-  /// Input height.
+  /// TextInput height.
   final double height;
 
-  /// Space between input children.
+  /// Space between TextInput children.
   final double gap;
 
-  /// Input icon size value.
+  /// TextInput icon size value.
   final double iconSizeValue;
 
-  /// Padding around input children.
+  /// Padding around TextInput children.
   final EdgeInsetsGeometry padding;
 
-  /// Input border radius.
+  /// TextInput border radius.
   final BorderRadius borderRadius;
 
-  /// Input text style.
+  /// TextInput text style.
   final TextStyle textStyle;
 
-  const MoonInputSizeProperties({
+  const MoonTextInputSizeProperties({
     required this.height,
     required this.gap,
     required this.iconSizeValue,
@@ -73,7 +73,7 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
   });
 
   @override
-  MoonInputSizeProperties copyWith({
+  MoonTextInputSizeProperties copyWith({
     double? height,
     double? gap,
     double? iconSizeValue,
@@ -81,7 +81,7 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
     BorderRadius? borderRadius,
     TextStyle? textStyle,
   }) {
-    return MoonInputSizeProperties(
+    return MoonTextInputSizeProperties(
       height: height ?? this.height,
       gap: gap ?? this.gap,
       iconSizeValue: iconSizeValue ?? this.iconSizeValue,
@@ -92,10 +92,10 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
   }
 
   @override
-  MoonInputSizeProperties lerp(ThemeExtension<MoonInputSizeProperties>? other, double t) {
-    if (other is! MoonInputSizeProperties) return this;
+  MoonTextInputSizeProperties lerp(ThemeExtension<MoonTextInputSizeProperties>? other, double t) {
+    if (other is! MoonTextInputSizeProperties) return this;
 
-    return MoonInputSizeProperties(
+    return MoonTextInputSizeProperties(
       height: lerpDouble(height, other.height, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
@@ -109,7 +109,7 @@ class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties> wi
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonInputSizeProperties"))
+      ..add(DiagnosticsProperty("type", "MoonTextInputSizeProperties"))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))

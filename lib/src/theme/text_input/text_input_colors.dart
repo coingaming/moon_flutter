@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 
 @immutable
-class MoonInputColors extends ThemeExtension<MoonInputColors> with DiagnosticableTreeMixin {
-  static final light = MoonInputColors(
+class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with DiagnosticableTreeMixin {
+  static final light = MoonTextInputColors(
     backgroundColor: MoonColors.light.gohan,
     activeBorderColor: MoonColors.light.piccolo,
     inactiveBorderColor: MoonColors.light.beerus,
@@ -14,7 +14,7 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
     supportingTextColor: MoonColors.light.trunks,
   );
 
-  static final dark = MoonInputColors(
+  static final dark = MoonTextInputColors(
     backgroundColor: MoonColors.dark.gohan,
     activeBorderColor: MoonColors.dark.piccolo,
     inactiveBorderColor: MoonColors.dark.beerus,
@@ -23,25 +23,25 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
     supportingTextColor: MoonColors.dark.trunks,
   );
 
-  /// Input background color.
+  /// TextInput background color.
   final Color backgroundColor;
 
-  /// Input active border color.
+  /// TextInput active border color.
   final Color activeBorderColor;
 
-  /// Input inactive border color.
+  /// TextInput inactive border color.
   final Color inactiveBorderColor;
 
-  /// Input error border color.
+  /// TextInput error border color.
   final Color errorBorderColor;
 
-  /// Input hint text color.
+  /// TextInput hint text color.
   final Color labelTextColor;
 
-  /// Input hint text color.
+  /// TextInput hint text color.
   final Color supportingTextColor;
 
-  const MoonInputColors({
+  const MoonTextInputColors({
     required this.backgroundColor,
     required this.activeBorderColor,
     required this.inactiveBorderColor,
@@ -51,7 +51,7 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
   });
 
   @override
-  MoonInputColors copyWith({
+  MoonTextInputColors copyWith({
     Color? backgroundColor,
     Color? activeBorderColor,
     Color? inactiveBorderColor,
@@ -60,7 +60,7 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
     Color? labelTextColor,
     Color? supportingTextColor,
   }) {
-    return MoonInputColors(
+    return MoonTextInputColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
@@ -71,10 +71,10 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
   }
 
   @override
-  MoonInputColors lerp(ThemeExtension<MoonInputColors>? other, double t) {
-    if (other is! MoonInputColors) return this;
+  MoonTextInputColors lerp(ThemeExtension<MoonTextInputColors>? other, double t) {
+    if (other is! MoonTextInputColors) return this;
 
-    return MoonInputColors(
+    return MoonTextInputColors(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
       activeBorderColor: Color.lerp(activeBorderColor, other.activeBorderColor, t)!,
       inactiveBorderColor: Color.lerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
@@ -88,7 +88,7 @@ class MoonInputColors extends ThemeExtension<MoonInputColors> with Diagnosticabl
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonInputColors"))
+      ..add(DiagnosticsProperty("type", "MoonTextInputColors"))
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
