@@ -8,6 +8,19 @@ class TextInputStory extends Story {
       : super(
           name: "TextInput",
           builder: (context) {
+            final textInputSizesKnob = context.knobs.nullable.options(
+              label: "textInputSize",
+              description: "Size variants for MoonTextInput.",
+              enabled: false,
+              initial: MoonTextInputSize.md,
+              options: const [
+                Option(label: "sm", value: MoonTextInputSize.sm),
+                Option(label: "md", value: MoonTextInputSize.md),
+                Option(label: "lg", value: MoonTextInputSize.lg),
+                Option(label: "xl", value: MoonTextInputSize.xl)
+              ],
+            );
+
             final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
               description: "MoonColors variants for MoonTextInput text.",
@@ -92,22 +105,26 @@ class TextInputStory extends Story {
                       builder: (context) {
                         return Column(
                           children: [
-                            MoonTextInput(
-                              enabled: enabledKnob,
-                              height: 300,
-                              textColor: textColor,
-                              hintTextColor: hintTextColor,
-                              backgroundColor: backgroundColor,
-                              activeBorderColor: activeBorderColor,
-                              inactiveBorderColor: inactiveBorderColor,
-                              errorBorderColor: errorBorderColor,
-                              borderRadius:
-                                  borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                              hintText: "Enter your text here...",
-                              validator: (value) => value?.length != null && value!.length < 10
-                                  ? "The text should be longer than 10 characters."
-                                  : null,
-                              errorBuilder: (context, errorText) => Text(errorText!),
+                            SizedBox(
+                              height: 96,
+                              child: MoonTextInput(
+                                textInputSize: textInputSizesKnob,
+                                enabled: enabledKnob,
+                                textColor: textColor,
+                                hintTextColor: hintTextColor,
+                                backgroundColor: backgroundColor,
+                                activeBorderColor: activeBorderColor,
+                                inactiveBorderColor: inactiveBorderColor,
+                                errorBorderColor: errorBorderColor,
+                                borderRadius: borderRadiusKnob != null
+                                    ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                                    : null,
+                                hintText: "Enter your text here...",
+                                validator: (value) => value?.length != null && value!.length < 10
+                                    ? "The text should be longer than 10 characters."
+                                    : null,
+                                errorBuilder: (context, errorText) => Text(errorText!),
+                              ),
                             ),
                             const SizedBox(height: 16),
                             MoonFilledButton(

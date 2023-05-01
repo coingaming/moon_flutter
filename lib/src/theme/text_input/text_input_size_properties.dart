@@ -13,7 +13,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     height: MoonSizes.sizes.sm,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.x2s,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
+    padding: EdgeInsets.all(MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text14,
   );
@@ -22,7 +22,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     height: MoonSizes.sizes.md,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
+    padding: EdgeInsets.all(MoonSizes.sizes.x3s),
     borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text14,
   );
@@ -31,7 +31,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     height: MoonSizes.sizes.lg,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
+    padding: EdgeInsets.all(MoonSizes.sizes.x3s),
     borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text16,
   );
@@ -40,7 +40,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     height: MoonSizes.sizes.xl,
     gap: MoonSizes.sizes.x2s,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
+    padding: EdgeInsets.all(MoonSizes.sizes.x2s),
     borderRadius: MoonBorders.borders.interactiveSm,
     textStyle: MoonTextStyles.heading.text16,
   );

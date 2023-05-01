@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,8 +9,6 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
-typedef MoonTextInputErrorBuilder = Widget Function(BuildContext context, String? errorText);
-
 enum MoonTextInputSize {
   xs,
   sm,
@@ -17,6 +16,8 @@ enum MoonTextInputSize {
   lg,
   xl,
 }
+
+typedef MoonTextInputErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
 class MoonTextInput extends StatefulWidget {
   /// Controls the text being edited.
@@ -285,6 +286,7 @@ class MoonTextInput extends StatefulWidget {
 }
 
 class _MoonTextInputState extends State<MoonTextInput> {
+  bool _hasFocus = false;
   String? _errorText;
 
   MoonTextInputSizeProperties _getMoonTextInputSize(BuildContext context, MoonTextInputSize? moonTextInputSize) {
@@ -309,6 +311,12 @@ class _MoonTextInputState extends State<MoonTextInput> {
     } else {
       return MoonColors.dark.bulma;
     }
+  }
+
+  void _toggleFocus(bool hasFocus) {
+    setState(() {
+      _hasFocus = hasFocus;
+    });
   }
 
   String? _validateInput(String? value) {
@@ -353,7 +361,7 @@ class _MoonTextInputState extends State<MoonTextInput> {
         widget.textColor ?? _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
 
     final Color effectiveHintTextColor =
-        /* widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.hintTextColor ?? */ MoonColors.light.trunks;
+        widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.supportingTextColor ?? MoonColors.light.trunks;
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
@@ -364,15 +372,17 @@ class _MoonTextInputState extends State<MoonTextInput> {
     final Curve effectiveTransitionCurve =
         widget.transitionCurve ?? context.moonTheme?.textInputTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
-    final TextStyle
-        effectiveErrorTextStyle = /* widget.errorTextStyle ??
-        context.moonTheme?.textInputTheme.properties.errorTextStyle ?? */
+    final TextStyle effectiveErrorTextStyle = widget.errorTextStyle ??
+        context.moonTheme?.textInputTheme.properties.supportingTextStyle ??
         const TextStyle(fontSize: 12);
 
-    final OutlineInputBorder defaultBorder = OutlineInputBorder(
-      borderRadius: effectiveBorderRadius.smoothBorderRadius,
-      borderSide: BorderSide(color: effectiveInactiveBorderColor),
-    );
+    final Color resolvedBorderColor = _errorText != null
+        ? effectiveErrorBorderColor
+        : _hasFocus
+            ? effectiveActiveBorderColor
+            : effectiveInactiveBorderColor;
+
+    final double resolvedBorderWidth = _errorText != null || _hasFocus ? 2 : 1;
 
     return Semantics(
       label: widget.semanticLabel,
@@ -384,75 +394,88 @@ class _MoonTextInputState extends State<MoonTextInput> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextFormField(
-                autocorrect: widget.autocorrect,
-                autofillHints: widget.autofillHints,
-                autofocus: widget.autofocus,
-                autovalidateMode: widget.autovalidateMode,
-                controller: widget.controller,
-                cursorColor: effectiveTextColor,
-                enabled: widget.enabled,
-                enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
-                enableInteractiveSelection: widget.enableInteractiveSelection,
-                enableSuggestions: widget.enableSuggestions,
-                focusNode: widget.focusNode,
-                initialValue: widget.initialValue,
-                inputFormatters: widget.inputFormatters,
-                keyboardAppearance: widget.keyboardAppearance,
-                //keyboardType: TextInputType.multiline,
-                /* maxLength: widget.maxLength,
-                maxLengthEnforcement: widget.maxLengthEnforcement,
-                minLines: widget.minLines, */
-
-                onChanged: widget.onChanged,
-                onEditingComplete: widget.onEditingComplete,
-                onFieldSubmitted: widget.onSubmitted,
-                onSaved: widget.onSaved,
-                onTap: widget.onTap,
-                onTapOutside: widget.onTapOutside,
-                readOnly: widget.readOnly,
-                restorationId: widget.restorationId,
-                scrollController: widget.scrollController,
-                scrollPadding: widget.scrollPadding,
-                scrollPhysics: widget.scrollPhysics,
-                showCursor: widget.showCursor,
-                strutStyle: widget.strutStyle,
-                style: effectiveTextStyle.copyWith(color: effectiveTextColor),
-                textAlign: widget.textAlign,
-                textAlignVertical: TextAlignVertical.top,
-                textCapitalization: widget.textCapitalization,
-                textDirection: widget.textDirection,
-                textInputAction: widget.textInputAction,
-                validator: _validateInput,
-                decoration: InputDecoration(
-                  contentPadding: resolvedDirectionalPadding,
-                  filled: true,
-                  isDense: true,
-                  hintText: widget.hintText,
-                  hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
-                  errorStyle: const TextStyle(height: 0, fontSize: 0),
-                  constraints: BoxConstraints(
-                    minHeight: effectiveHeight,
-                    maxHeight: effectiveHeight,
-                  ),
-                  fillColor: effectiveBackgroundColor,
-                  focusColor: effectiveActiveBorderColor,
-                  hoverColor: Colors.transparent,
-                  border: defaultBorder,
-                  enabledBorder: defaultBorder,
-                  disabledBorder: defaultBorder,
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: effectiveBorderRadius.smoothBorderRadius,
-                    borderSide: BorderSide(
-                      color: effectiveErrorBorderColor,
-                      width: 2,
+              MouseRegion(
+                cursor: widget.enabled ? SystemMouseCursors.text : SystemMouseCursors.basic,
+                child: DecoratedBox(
+                  decoration: ShapeDecoration(
+                    color: effectiveBackgroundColor,
+                    shape: SmoothRectangleBorder(
+                      borderRadius: effectiveBorderRadius.smoothBorderRadius,
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: effectiveBorderRadius.smoothBorderRadius,
-                    borderSide: BorderSide(
-                      color: effectiveActiveBorderColor,
-                      width: 2,
+                  child: AnimatedContainer(
+                    duration: effectiveTransitionDuration,
+                    curve: effectiveTransitionCurve,
+                    height: effectiveHeight,
+                    //padding: resolvedDirectionalPadding,
+                    decoration: ShapeDecoration(
+                      shape: SmoothRectangleBorder(
+                        borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                        side: BorderSide(
+                          color: resolvedBorderColor,
+                          width: resolvedBorderWidth,
+                        ),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: FocusScope(
+                      onFocusChange: _toggleFocus,
+                      child: TextFormField(
+                        autocorrect: widget.autocorrect,
+                        autofillHints: widget.autofillHints,
+                        autofocus: widget.autofocus,
+                        autovalidateMode: widget.autovalidateMode,
+                        controller: widget.controller,
+                        cursorColor: effectiveTextColor,
+                        enabled: widget.enabled,
+                        enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
+                        enableInteractiveSelection: widget.enableInteractiveSelection,
+                        enableSuggestions: widget.enableSuggestions,
+                        focusNode: widget.focusNode,
+                        initialValue: widget.initialValue,
+                        inputFormatters: widget.inputFormatters,
+                        keyboardAppearance: widget.keyboardAppearance,
+                        //keyboardType: TextInputType.multiline,
+                        /* maxLength: widget.maxLength,
+                      maxLengthEnforcement: widget.maxLengthEnforcement,
+                      minLines: widget.minLines, */
+
+                        onChanged: widget.onChanged,
+                        onEditingComplete: widget.onEditingComplete,
+                        onFieldSubmitted: widget.onSubmitted,
+                        onSaved: widget.onSaved,
+                        onTap: widget.onTap,
+                        onTapOutside: widget.onTapOutside,
+                        readOnly: widget.readOnly,
+                        restorationId: widget.restorationId,
+                        scrollController: widget.scrollController,
+                        scrollPadding: widget.scrollPadding,
+                        scrollPhysics: widget.scrollPhysics,
+                        showCursor: widget.showCursor,
+                        strutStyle: widget.strutStyle,
+                        style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                        textAlign: widget.textAlign,
+                        textAlignVertical: TextAlignVertical.center,
+                        textCapitalization: widget.textCapitalization,
+                        textDirection: widget.textDirection,
+                        textInputAction: widget.textInputAction,
+                        validator: _validateInput,
+                        decoration: InputDecoration(
+                          filled: false,
+                          isDense: true,
+                          isCollapsed: true,
+                          contentPadding: resolvedDirectionalPadding,
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          hintText: widget.hintText,
+                          hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
+                          errorStyle: const TextStyle(height: 0.1, fontSize: 0),
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                        ),
+                      ),
                     ),
                   ),
                 ),
