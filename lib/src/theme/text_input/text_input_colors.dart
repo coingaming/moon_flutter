@@ -56,7 +56,6 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? errorBorderColor,
-    Color? hoverBorderColor,
     Color? labelTextColor,
     Color? supportingTextColor,
   }) {

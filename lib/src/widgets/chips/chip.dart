@@ -201,7 +201,7 @@ class MoonChip extends StatelessWidget {
     final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonChipSize.borderRadius;
 
     final double effectiveBorderWidth =
-        borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
+        borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
     final double effectiveHeight = height ?? effectiveMoonChipSize.height;
 

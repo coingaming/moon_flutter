@@ -339,7 +339,7 @@ class MoonButton extends StatelessWidget {
         borderColor ?? context.moonTheme?.buttonTheme.colors.borderColor ?? MoonColors.light.trunks;
 
     final double effectiveBorderWidth =
-        borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
+        borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
     final Color effectiveHoverEffectColor = hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.primaryHoverColor ??

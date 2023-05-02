@@ -13,7 +13,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     surfaceSm: BorderRadius.all(Radius.circular(8)),
     surfaceMd: BorderRadius.all(Radius.circular(12)),
     surfaceLg: BorderRadius.all(Radius.circular(16)),
-    borderWidth: 1,
+    defaultBorderWidth: 1,
+    activeBorderWidth: 2,
   );
 
   /// Interactive radius XS.
@@ -38,7 +39,10 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
   final BorderRadius surfaceLg;
 
   /// Default border width.
-  final double borderWidth;
+  final double defaultBorderWidth;
+
+  /// Active border width.
+  final double activeBorderWidth;
 
   const MoonBorders({
     required this.interactiveXs,
@@ -48,7 +52,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     required this.surfaceSm,
     required this.surfaceMd,
     required this.surfaceLg,
-    required this.borderWidth,
+    required this.defaultBorderWidth,
+    required this.activeBorderWidth,
   });
 
   @override
@@ -60,7 +65,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     BorderRadius? surfaceSm,
     BorderRadius? surfaceMd,
     BorderRadius? surfaceLg,
-    double? borderWidth,
+    double? defaultBorderWidth,
+    double? activeBorderWidth,
   }) {
     return MoonBorders(
       interactiveXs: interactiveXs ?? this.interactiveXs,
@@ -70,7 +76,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       surfaceSm: surfaceSm ?? this.surfaceSm,
       surfaceMd: surfaceMd ?? this.surfaceMd,
       surfaceLg: surfaceLg ?? this.surfaceLg,
-      borderWidth: borderWidth ?? this.borderWidth,
+      defaultBorderWidth: defaultBorderWidth ?? this.defaultBorderWidth,
+      activeBorderWidth: activeBorderWidth ?? this.activeBorderWidth,
     );
   }
 
@@ -86,7 +93,8 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       surfaceSm: BorderRadius.lerp(surfaceSm, other.surfaceSm, t)!,
       surfaceMd: BorderRadius.lerp(surfaceMd, other.surfaceMd, t)!,
       surfaceLg: BorderRadius.lerp(surfaceLg, other.surfaceLg, t)!,
-      borderWidth: lerpDouble(borderWidth, other.borderWidth, t)!,
+      defaultBorderWidth: lerpDouble(defaultBorderWidth, other.defaultBorderWidth, t)!,
+      activeBorderWidth: lerpDouble(activeBorderWidth, other.activeBorderWidth, t)!,
     );
   }
 
@@ -102,6 +110,7 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
       ..add(DiagnosticsProperty<BorderRadius>("surfaceSm", surfaceSm))
       ..add(DiagnosticsProperty<BorderRadius>("surfaceMd", surfaceMd))
       ..add(DiagnosticsProperty<BorderRadius>("surfaceLg", surfaceLg))
-      ..add(DoubleProperty("borderWidth", borderWidth));
+      ..add(DoubleProperty("defaultBorderWidth", defaultBorderWidth))
+      ..add(DoubleProperty("activeBorderWidth", activeBorderWidth));
   }
 }

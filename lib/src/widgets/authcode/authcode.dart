@@ -689,7 +689,8 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         context.moonTheme?.authCodeTheme.properties.borderRadius ??
         MoonBorders.borders.interactiveSm;
 
-    _effectiveBorderWidth = widget.borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
+    _effectiveBorderWidth =
+        widget.borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
     _effectiveGap = widget.gap ?? context.moonTheme?.authCodeTheme.properties.gap ?? MoonSizes.sizes.x4s;
 
