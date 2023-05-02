@@ -326,6 +326,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
+//
     final double effectiveSupportingGap =
         widget.supportingGap ?? context.moonTheme?.textInputTheme.properties.supportingGap ?? MoonSizes.sizes.x4s;
 
