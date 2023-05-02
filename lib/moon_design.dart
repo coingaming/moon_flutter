@@ -51,6 +51,7 @@ export 'package:moon_design/src/widgets/common/base_control.dart';
 export 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 export 'package:moon_design/src/widgets/common/effects/pulse_effect.dart';
 export 'package:moon_design/src/widgets/common/icons/icons.dart';
+export 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
 export 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
 export 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
 export 'package:moon_design/src/widgets/loaders/circular_loader.dart';

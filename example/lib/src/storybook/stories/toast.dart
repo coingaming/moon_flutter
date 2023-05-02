@@ -81,9 +81,9 @@ class ToastStory extends Story {
                                 displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
                             borderRadius:
                                 borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                            leading: const Icon(MoonIcons.info_24),
+                            leading: const MoonIcon(MoonIcons.info_24),
                             title: Text(customLabelTextKnob),
-                            trailing: const Icon(MoonIcons.star_24),
+                            trailing: const MoonIcon(MoonIcons.star_24),
                           );
                         },
                       );
