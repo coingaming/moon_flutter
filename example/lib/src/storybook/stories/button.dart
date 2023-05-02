@@ -131,7 +131,7 @@ class ButtonStory extends Story {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 64),
-                    const TextDivider(text: "Base and Icon MoonButton"),
+                    const TextDivider(text: "Base and MoonIcon MoonButton"),
                     const SizedBox(height: 32),
                     MoonButton(
                       onTap: showDisabledKnob ? null : () {},
@@ -146,9 +146,9 @@ class ButtonStory extends Story {
                       borderColor: borderColor,
                       showPulseEffect: showPulseEffectKnob,
                       showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                      leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
+                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
                       label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                      trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 32),
                     MoonButton.icon(
@@ -163,7 +163,7 @@ class ButtonStory extends Story {
                       borderColor: borderColor,
                       showPulseEffect: showPulseEffectKnob,
                       showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                      icon: showLeadingKnob ? Icon(resolvedIconVariant) : null,
+                      icon: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 40),
                     const TextDivider(text: "MoonButton variants"),
@@ -175,9 +175,9 @@ class ButtonStory extends Story {
                       showTooltip: showTooltipKnob,
                       tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
-                      leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
+                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
                       label: showLabelKnob ? const Text("MoonFilledButton") : null,
-                      trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 32),
                     MoonOutlinedButton(
@@ -188,9 +188,9 @@ class ButtonStory extends Story {
                       tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
                       borderColor: borderColor,
-                      leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
+                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
                       label: showLabelKnob ? const Text("MoonOutlinedButton") : null,
-                      trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 32),
                     MoonTextButton(
@@ -200,9 +200,9 @@ class ButtonStory extends Story {
                       showTooltip: showTooltipKnob,
                       tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
-                      leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
+                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
                       label: showLabelKnob ? const Text("MoonTextButton") : null,
-                      trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 40),
                     const TextDivider(text: "Custom MoonButton with non-standard children"),
@@ -239,7 +239,7 @@ class ButtonStory extends Story {
                               height: 20,
                               child: CircleAvatar(
                                 backgroundColor: context.moonTheme!.colors.trunks,
-                                child: const Icon(
+                                child: const MoonIcon(
                                   Icons.person,
                                   size: 16,
                                   color: Colors.white,
@@ -247,7 +247,7 @@ class ButtonStory extends Story {
                               ),
                             )
                           : null,
-                      trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 64),
                   ],

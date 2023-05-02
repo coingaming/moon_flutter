@@ -86,11 +86,14 @@ class TagStory extends Story {
                     isUpperCase: setUpperCase,
                     textColor: textColor,
                     backgroundColor: backgroundColor,
-                    leading: showLeadingKnob ? const Icon(MoonIcons.close_small_16) : null,
+                    leading: showLeadingKnob ? const MoonIcon(MoonIcons.close_small_16) : null,
                     label: showLabelKnob
-                        ? Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob)
+                        ? Padding(
+                            padding: EdgeInsets.only(top: setUpperCase ? 1.5 : 0),
+                            child: Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob),
+                          )
                         : null,
-                    trailing: showTrailingKnob ? const Icon(MoonIcons.close_small_16) : null,
+                    trailing: showTrailingKnob ? const MoonIcon(MoonIcons.close_small_16) : null,
                   ),
                   const SizedBox(height: 64),
                 ],

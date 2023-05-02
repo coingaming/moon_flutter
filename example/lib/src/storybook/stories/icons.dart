@@ -59,11 +59,11 @@ class _IconsGridWithTitle extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (iconsNameList[index].contains("16"))
-                  Icon(iconsList[index], size: 16)
+                  MoonIcon(iconsList[index], size: 16)
                 else if (iconsNameList[index].contains("24"))
-                  Icon(iconsList[index], size: 24)
+                  MoonIcon(iconsList[index], size: 24)
                 else
-                  Icon(iconsList[index], size: 32),
+                  MoonIcon(iconsList[index], size: 32),
                 const SizedBox(height: 20),
                 Text(
                   iconsNameList[index],

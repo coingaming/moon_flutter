@@ -103,7 +103,7 @@ class PopoverStory extends Story {
                                 children: [
                                   MoonAvatar(
                                     backgroundColor: context.moonColors?.heles,
-                                    content: const Icon(MoonIcons.rocket_24),
+                                    content: const MoonIcon(MoonIcons.rocket_24),
                                   ),
                                   const SizedBox(width: 12),
                                   Expanded(child: Text(customLabelTextKnob)),
