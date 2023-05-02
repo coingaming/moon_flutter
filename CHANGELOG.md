@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.8](https://github.com/coingaming/moon_flutter/compare/v0.19.7...v0.19.8) (2023-05-02)
+
+
+### Bug Fixes
+
+* [NO-TASK] Add icon font config.json ([4ca90f4](https://github.com/coingaming/moon_flutter/commit/4ca90f47e5e31e0eb39e9d5ce8817c40fd717472))
+
 ## [0.19.7](https://github.com/coingaming/moon_flutter/compare/v0.19.6...v0.19.7) (2023-04-28)
 
 
