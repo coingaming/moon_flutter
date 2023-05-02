@@ -7,20 +7,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
     steps:
       - uses: actions/checkout@v3
+
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+
       - name: Install Dependencies
         run: flutter pub get
         working-directory: ./example
+
+      - name: Run static analysis
+        run: flutter analyze .
+
+      - name: Run tests
+        run: flutter test
+
       - name: Build Web
         run: flutter build web
         working-directory: ./example
+        
       - name: Deploy
         uses: reggionick/s3-deploy@v3
         with:
