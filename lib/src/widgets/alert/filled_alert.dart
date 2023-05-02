@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/widgets/alert/alert.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 import 'package:moon_design/src/widgets/common/icons/icons.dart';
+import 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
 
 class MoonFilledAlert extends StatelessWidget {
   /// Controls whether the alert is shown.
   final bool show;
 
   /// The border radius of the alert.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The color of the alert.
   final Color? color;
@@ -56,7 +57,7 @@ class MoonFilledAlert extends StatelessWidget {
       buttonSize: MoonButtonSize.xs,
       borderRadius: borderRadius,
       disabledOpacityValue: 1,
-      icon: Icon(
+      icon: MoonIcon(
         MoonIcons.close_small_24,
         color: color,
         size: 24,

@@ -16,7 +16,7 @@ class MoonTag extends StatelessWidget {
   final bool isUpperCase;
 
   /// The border radius of the tag.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The background color of the tag.
   final Color? backgroundColor;
@@ -105,7 +105,7 @@ class MoonTag extends StatelessWidget {
   Widget build(BuildContext context) {
     final MoonTagSizeProperties effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
 
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.tagTheme.colors.backgroundColor ?? MoonColors.light.gohan;
@@ -145,7 +145,7 @@ class MoonTag extends StatelessWidget {
             decoration: ShapeDecoration(
               color: effectiveBackgroundColor,
               shape: SmoothRectangleBorder(
-                borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
               ),
             ),
             child: IconTheme(

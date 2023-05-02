@@ -15,7 +15,7 @@ enum MoonLinearLoaderSize {
 
 class MoonLinearLoader extends StatelessWidget {
   /// Border radius of the linear loader widget.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// Color of the linear loader widget.
   final Color? color;
@@ -61,7 +61,7 @@ class MoonLinearLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     final MoonLinearLoaderSizeProperties effectiveLoaderSize = _getMoonLoaderSize(context, linearLoaderSize);
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveLoaderSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveLoaderSize.borderRadius;
 
     final Color effectiveColor = color ?? context.moonTheme?.linearLoaderTheme.colors.color ?? MoonColors.light.hit;
 

@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.19.9](https://github.com/coingaming/moon_flutter/compare/v0.19.8...v0.19.9) (2023-05-02)
+
+
+### Bug Fixes
+
+* [MDS-514] Recreate icon font once more and fix scaling and platform alignment problems ([#161](https://github.com/coingaming/moon_flutter/issues/161)) ([1fd1c47](https://github.com/coingaming/moon_flutter/commit/1fd1c474ab623727deae39dc6b280c17dfcbf493))
+
+## [0.19.8](https://github.com/coingaming/moon_flutter/compare/v0.19.7...v0.19.8) (2023-05-02)
+
+
+### Bug Fixes
+
+* [NO-TASK] Add icon font config.json ([4ca90f4](https://github.com/coingaming/moon_flutter/commit/4ca90f47e5e31e0eb39e9d5ce8817c40fd717472))
+
+## [0.19.7](https://github.com/coingaming/moon_flutter/compare/v0.19.6...v0.19.7) (2023-04-28)
+
+
+### Bug Fixes
+
+* [MDS-513] Replace BorderRadius with BorderRadiusGeometry ([#158](https://github.com/coingaming/moon_flutter/issues/158)) ([d91418f](https://github.com/coingaming/moon_flutter/commit/d91418f6012e4a7b16f32496a348af39b2e80d4b))
+
 ## [0.19.6](https://github.com/coingaming/moon_flutter/compare/v0.19.5...v0.19.6) (2023-04-27)
 
 

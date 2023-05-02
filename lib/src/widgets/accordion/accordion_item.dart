@@ -12,6 +12,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/common/icons/icons.dart';
+import 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
 
 enum MoonAccordionItemSize {
   sm,
@@ -75,7 +76,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
   final bool showDivider;
 
   /// The accordion's border radius.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// {@macro flutter.material.Material.clipBehavior}
   final Clip? clipBehavior;
@@ -230,7 +231,6 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   bool _isFocused = false;
   bool _isHovered = false;
 
-
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
   void _handleHover(bool hover) {
@@ -369,13 +369,16 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
       data: IconThemeData(color: _iconColorAnimation?.value),
       child: RotationTransition(
         turns: _halfTween.animate(_curvedAnimation!),
-        child: Icon(MoonIcons.chevron_down_small_16, size: iconSize),
+        child: MoonIcon(
+          MoonIcons.chevron_down_small_16,
+          size: iconSize,
+        ),
       ),
     );
   }
 
   Widget _buildChildren(BuildContext context, Widget? child) {
-    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
+    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ??
         context.moonTheme?.accordionTheme.itemProperties.borderRadius ??
         MoonBorders.borders.interactiveSm;
 
@@ -484,7 +487,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                               shadows: effectiveShadows,
                               shape: SmoothRectangleBorder(
                                 side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                                borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                               ),
                             )
                           : null,
@@ -503,7 +506,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                                     shape: SmoothRectangleBorder(
                                       side:
                                           widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                      borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                                      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                                     ),
                                   )
                                 : null,

@@ -124,7 +124,7 @@ class AlertStory extends Story {
                               ),
                               borderRadius:
                                   borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                              leading: showLeadingKnob ? const Icon(MoonIcons.frame_24) : null,
+                              leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                               trailing: showTrailingKnob
                                   ? MoonButton.icon(
                                       buttonSize: MoonButtonSize.xs,
@@ -132,7 +132,7 @@ class AlertStory extends Story {
                                           ? BorderRadius.circular(borderRadiusKnob.toDouble())
                                           : null,
                                       disabledOpacityValue: 1,
-                                      icon: Icon(
+                                      icon: MoonIcon(
                                         MoonIcons.close_small_24,
                                         color: trailingColor,
                                         size: 24,
@@ -181,7 +181,7 @@ class AlertStory extends Story {
                       title: const Text("Filled error MoonAlert"),
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                      leading: showLeadingKnob ? const Icon(MoonIcons.alert_24) : null,
+                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.alert_24) : null,
                       color: context.moonColors!.chiChi100,
                       body: showBodyKnob
                           ? const SizedBox(
@@ -200,7 +200,7 @@ class AlertStory extends Story {
                       title: const Text("Filled warning MoonAlert"),
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                      leading: showLeadingKnob ? const Icon(MoonIcons.alarm_round_24) : null,
+                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.alarm_round_24) : null,
                       color: context.moonColors!.krillin100,
                       body: showBodyKnob
                           ? const SizedBox(
@@ -221,7 +221,7 @@ class AlertStory extends Story {
                       title: const Text("Outlined success MoonAlert"),
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                      leading: showLeadingKnob ? const Icon(MoonIcons.check_rounded_24) : null,
+                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.check_rounded_24) : null,
                       color: context.moonColors!.roshi100,
                       body: showBodyKnob
                           ? const SizedBox(
@@ -240,7 +240,7 @@ class AlertStory extends Story {
                       title: const Text('Outlined info MoonAlert'),
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                      leading: showLeadingKnob ? const Icon(MoonIcons.alert_24) : null,
+                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.alert_24) : null,
                       color: context.moonColors!.whis100,
                       body: showBodyKnob
                           ? const SizedBox(

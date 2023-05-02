@@ -23,6 +23,9 @@ class MoonFilledButton extends StatelessWidget {
   /// Whether this button should show a tooltip.
   final bool showTooltip;
 
+  /// The border radius of the button.
+  final BorderRadiusGeometry? borderRadius;
+
   /// The background color of the button.
   final Color? backgroundColor;
 
@@ -76,6 +79,7 @@ class MoonFilledButton extends StatelessWidget {
     this.isFullWidth = false,
     this.showPulseEffect = false,
     this.showTooltip = false,
+    this.borderRadius,
     this.backgroundColor,
     this.height,
     this.width,
@@ -104,6 +108,7 @@ class MoonFilledButton extends StatelessWidget {
       isFullWidth: isFullWidth,
       showPulseEffect: showPulseEffect,
       showTooltip: showTooltip,
+      borderRadius: borderRadius,
       backgroundColor: effectiveBackgroundColor,
       height: height,
       width: width,

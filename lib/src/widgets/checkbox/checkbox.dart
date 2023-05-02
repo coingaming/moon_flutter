@@ -199,7 +199,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
   Widget build(BuildContext context) {
     const Size size = Size(16, 16);
 
-    final BorderRadius effectiveBorderRadius =
+    final BorderRadiusGeometry effectiveBorderRadius =
         context.moonTheme?.checkboxTheme.properties.borderRadius ?? MoonBorders.borders.interactiveXs;
 
     final Color effectiveActiveColor =
@@ -262,7 +262,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
                   ..checkColor = effectiveCheckColor
                   ..value = value
                   ..previousValue = _previousValue
-                  ..shape = SmoothRectangleBorder(borderRadius: effectiveBorderRadius.smoothBorderRadius)
+                  ..shape = SmoothRectangleBorder(borderRadius: effectiveBorderRadius.smoothBorderRadius(context))
                   ..side = _resolveSide(BorderSide(color: effectiveBorderColor)),
               ),
             ),

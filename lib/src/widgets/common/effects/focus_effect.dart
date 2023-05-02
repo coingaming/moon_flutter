@@ -4,7 +4,7 @@ import 'package:moon_design/src/widgets/common/effects/painters/focus_effect_pai
 
 class MoonFocusEffect extends StatefulWidget {
   final bool show;
-  final BorderRadius? childBorderRadius;
+  final BorderRadiusGeometry? childBorderRadius;
   final Color effectColor;
   final double effectExtent;
   final Duration effectDuration;
@@ -58,6 +58,8 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
+    final resolvedBorderRadius = widget.childBorderRadius?.resolve(Directionality.of(context)) ?? BorderRadius.zero;
+
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
@@ -67,7 +69,7 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
             painter: FocusEffectPainter(
               color: widget.effectColor,
               effectExtent: widget.effectExtent,
-              borderRadius: widget.childBorderRadius ?? BorderRadius.zero,
+              borderRadius: resolvedBorderRadius,
               animation: _focusAnimation,
             ),
             child: child,

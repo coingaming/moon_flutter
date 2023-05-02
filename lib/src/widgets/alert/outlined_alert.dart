@@ -5,13 +5,14 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/alert/alert.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 import 'package:moon_design/src/widgets/common/icons/icons.dart';
+import 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
 
 class MoonOutlinedAlert extends StatelessWidget {
   /// Controls whether the alert is shown.
   final bool show;
 
   /// The border radius of the alert.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The border color of the alert.
   final Color? color;
@@ -63,7 +64,7 @@ class MoonOutlinedAlert extends StatelessWidget {
       buttonSize: MoonButtonSize.xs,
       borderRadius: borderRadius,
       disabledOpacityValue: 1,
-      icon: Icon(
+      icon: MoonIcon(
         MoonIcons.close_small_24,
         color: effectiveElementColor,
         size: 24,

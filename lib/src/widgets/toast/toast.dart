@@ -45,7 +45,7 @@ class MoonToast {
     bool isPersistent = true,
 
     /// The border radius of the toast.
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
 
     /// The background color of the toast.
     Color? backgroundColor,
@@ -100,7 +100,7 @@ class MoonToast {
       }
     }
 
-    final BorderRadius effectiveBorderRadius =
+    final BorderRadiusGeometry effectiveBorderRadius =
         borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
     final Color effectiveBackgroundColor = backgroundColor ??
@@ -176,7 +176,7 @@ class MoonToast {
                       color: effectiveBackgroundColor,
                       shadows: effectiveToastShadows,
                       shape: SmoothRectangleBorder(
-                        borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                        borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                       ),
                     ),
                     child: Row(

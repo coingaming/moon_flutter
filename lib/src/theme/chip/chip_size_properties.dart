@@ -28,7 +28,7 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
   );
 
   /// Chip border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// Space between chip children.
   final double gap;
@@ -56,7 +56,7 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
 
   @override
   MoonChipSizeProperties copyWith({
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     double? gap,
     double? height,
     double? iconSizeValue,
@@ -78,7 +78,7 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
     if (other is! MoonChipSizeProperties) return this;
 
     return MoonChipSizeProperties(
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
@@ -92,7 +92,7 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonChipSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))

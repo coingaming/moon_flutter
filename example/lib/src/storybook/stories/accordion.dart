@@ -154,7 +154,7 @@ class AccordionStory extends Story {
                       shadows: showShadowKnob == true ? null : [],
                       childrenPadding: const EdgeInsets.all(12),
                       onExpansionChanged: (value) => setState(() => currentlyOpenAccordionItem = value),
-                      leading: const Icon(MoonIcons.frame_24),
+                      leading: const MoonIcon(MoonIcons.frame_24),
                       title: const Text("Grouped MoonAccordion item #1"),
                       children: const [
                         Text(
@@ -182,7 +182,7 @@ class AccordionStory extends Story {
                       shadows: showShadowKnob == true ? null : [],
                       childrenPadding: const EdgeInsets.all(12),
                       onExpansionChanged: (value) => setState(() => currentlyOpenAccordionItem = value),
-                      leading: const Icon(MoonIcons.frame_24),
+                      leading: const MoonIcon(MoonIcons.frame_24),
                       title: const Text("Grouped MoonAccordion item #2"),
                       children: const [
                         Text(

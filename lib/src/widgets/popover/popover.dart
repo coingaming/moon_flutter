@@ -27,7 +27,7 @@ class MoonPopover extends StatefulWidget {
   final bool show;
 
   /// The border radius of the popover.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The color of the popover background.
   final Color? backgroundColor;
@@ -362,7 +362,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   Widget _createOverlayContent() {
     MoonPopoverPosition popoverPosition = widget.popoverPosition;
 
-    final BorderRadius effectiveBorderRadius =
+    final BorderRadiusGeometry effectiveBorderRadius =
         widget.borderRadius ?? context.moonTheme?.popoverTheme.properties.borderRadius ?? BorderRadius.circular(12);
 
     final Color effectiveBackgroundColor =
@@ -463,7 +463,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                       color: effectiveBackgroundColor,
                       shadows: effectivePopoverShadows,
                       shape: SmoothRectangleBorder(
-                        borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                        borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                         side: BorderSide(color: widget.borderColor),
                       ),
                     ),

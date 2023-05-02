@@ -17,7 +17,7 @@ class MoonAlert extends StatefulWidget {
   final bool showBorder;
 
   /// The border radius of the alert.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The background color of the alert.
   final Color? backgroundColor;
@@ -187,7 +187,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadius effectiveBorderRadius = widget.borderRadius ??
+    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ??
         context.moonTheme?.alertTheme.properties.borderRadius ??
         MoonBorders.borders.interactiveSm;
 
@@ -261,7 +261,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                     width: widget.showBorder ? effectiveBorderWidth : 0,
                     style: widget.showBorder ? BorderStyle.solid : BorderStyle.none,
                   ),
-                  borderRadius: effectiveBorderRadius.smoothBorderRadius,
+                  borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                 ),
               ),
               child: AnimatedDefaultTextStyle(

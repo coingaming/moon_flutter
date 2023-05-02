@@ -11,27 +11,29 @@ extension DarkModeX on BuildContext {
   }
 }
 
-extension BorderRadiusX on BorderRadius {
+extension BorderRadiusX on BorderRadiusGeometry {
   /// Returns SmoothBorderRadius.
-  SmoothBorderRadius get smoothBorderRadius {
+  SmoothBorderRadius smoothBorderRadius(BuildContext context) {
     // FIXME: CornerSmoothing of 1 creates null pointer dereference error with SmoothRectangleBorder on mobile web/PWA
-    // for some reason. So we use 0.999 instead.
+    // for some reason. So we use 0.94 instead.
+    final borderRadius = resolve(Directionality.of(context));
+
     return SmoothBorderRadius.only(
       topLeft: SmoothRadius(
-        cornerRadius: topLeft.x,
-        cornerSmoothing: 0.999,
+        cornerRadius: borderRadius.topLeft.x,
+        cornerSmoothing: 0.94,
       ),
       topRight: SmoothRadius(
-        cornerRadius: topRight.x,
-        cornerSmoothing: 0.999,
+        cornerRadius: borderRadius.topRight.x,
+        cornerSmoothing: 0.94,
       ),
       bottomLeft: SmoothRadius(
-        cornerRadius: bottomLeft.x,
-        cornerSmoothing: 0.999,
+        cornerRadius: borderRadius.bottomLeft.x,
+        cornerSmoothing: 0.94,
       ),
       bottomRight: SmoothRadius(
-        cornerRadius: bottomRight.x,
-        cornerSmoothing: 0.999,
+        cornerRadius: borderRadius.bottomRight.x,
+        cornerSmoothing: 0.94,
       ),
     );
   }

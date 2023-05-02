@@ -85,11 +85,11 @@ class SwitchStory extends Story {
                   StatefulBuilder(
                     builder: (context, setState) {
                       return MoonSwitch(
-                        activeThumbWidget: const Icon(
+                        activeThumbWidget: const MoonIcon(
                           MoonIcons.check_alternative_16,
                           size: 14,
                         ),
-                        inactiveThumbWidget: const Icon(
+                        inactiveThumbWidget: const MoonIcon(
                           MoonIcons.close_16,
                           size: 12,
                         ),
@@ -112,11 +112,11 @@ class SwitchStory extends Story {
                   StatefulBuilder(
                     builder: (context, setState) {
                       return MoonSwitch(
-                        activeTrackWidget: const Icon(
+                        activeTrackWidget: const MoonIcon(
                           MoonIcons.check_alternative_16,
                           size: 14,
                         ),
-                        inactiveTrackWidget: const Icon(
+                        inactiveTrackWidget: const MoonIcon(
                           MoonIcons.close_16,
                           size: 12,
                         ),

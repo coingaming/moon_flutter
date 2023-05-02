@@ -28,7 +28,7 @@ class MoonAvatar extends StatelessWidget {
   final bool showBadge;
 
   /// The border radius of the avatar.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The background color of the avatar.
   final Color? backgroundColor;
@@ -152,7 +152,9 @@ class MoonAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final MoonAvatarSizeProperties effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
+
+    final resolvedBorderRadius = effectiveBorderRadius.resolve(Directionality.of(context));
 
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.avatarTheme.colors.backgroundColor ?? MoonColors.light.gohan;
@@ -191,7 +193,7 @@ class MoonAvatar extends StatelessWidget {
                         showBadge: showBadge,
                         width: effectiveAvatarWidth,
                         height: effectiveAvatarHeight,
-                        borderRadius: effectiveBorderRadius,
+                        borderRadius: resolvedBorderRadius,
                         badgeSize: effectiveBadgeSize,
                         badgeMarginValue: effectiveBadgeMarginValue,
                         badgeAlignment: badgeAlignment,
@@ -201,7 +203,7 @@ class MoonAvatar extends StatelessWidget {
                   style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      borderRadius: effectiveBorderRadius,
+                      borderRadius: resolvedBorderRadius,
                       color: effectiveBackgroundColor,
                       image: backgroundImage != null
                           ? DecorationImage(

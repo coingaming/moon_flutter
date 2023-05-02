@@ -15,7 +15,7 @@ enum MoonLinearProgressSize {
 
 class MoonLinearProgress extends StatelessWidget {
   /// Border radius value of the linear progress widget.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// Color of the linear progress widget.
   final Color? color;
@@ -72,7 +72,7 @@ class MoonLinearProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, linearProgressSize);
 
-    final BorderRadius effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
 
     final Color effectiveColor =
         color ?? context.moonTheme?.linearProgressTheme.colors.color ?? MoonColors.light.piccolo;
