@@ -1,23 +1,18 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_design/src/theme/sizes.dart';
 
+import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 
 @immutable
 class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> with DiagnosticableTreeMixin {
   static final properties = MoonTextInputProperties(
-    supportingGap: MoonSizes.sizes.x4s,
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
+    supportingPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s),
     labelTextStyle: MoonTextStyles.body.text12,
     supportingTextStyle: MoonTextStyles.body.text12,
   );
-
-  /// The gap between TextInput and supporting or error builder.
-  final double supportingGap;
 
   /// TextInput transition duration.
   final Duration transitionDuration;
@@ -25,32 +20,35 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
   /// TextInput transition curve.
   final Curve transitionCurve;
 
+  /// The padding around TextInput supporting widget or error builder.
+  final EdgeInsetsGeometry supportingPadding;
+
   /// TextInput label text style.
   final TextStyle labelTextStyle;
 
-  /// TextInput supporting text style.
+  /// TextInput supporting or error text style.
   final TextStyle supportingTextStyle;
 
   const MoonTextInputProperties({
-    required this.supportingGap,
     required this.transitionDuration,
     required this.transitionCurve,
+    required this.supportingPadding,
     required this.labelTextStyle,
     required this.supportingTextStyle,
   });
 
   @override
   MoonTextInputProperties copyWith({
-    double? supportingGap,
     Duration? transitionDuration,
     Curve? transitionCurve,
+    EdgeInsetsGeometry? supportingPadding,
     TextStyle? labelTextStyle,
     TextStyle? supportingTextStyle,
   }) {
     return MoonTextInputProperties(
-      supportingGap: supportingGap ?? this.supportingGap,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
+      supportingPadding: supportingPadding ?? this.supportingPadding,
       labelTextStyle: labelTextStyle ?? this.labelTextStyle,
       supportingTextStyle: supportingTextStyle ?? this.supportingTextStyle,
     );
@@ -61,9 +59,9 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
     if (other is! MoonTextInputProperties) return this;
 
     return MoonTextInputProperties(
-      supportingGap: lerpDouble(supportingGap, other.supportingGap, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
+      supportingPadding: EdgeInsetsGeometry.lerp(supportingPadding, other.supportingPadding, t)!,
       labelTextStyle: TextStyle.lerp(labelTextStyle, other.labelTextStyle, t)!,
       supportingTextStyle: TextStyle.lerp(supportingTextStyle, other.supportingTextStyle, t)!,
     );
@@ -74,9 +72,9 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTextInputProperties"))
-      ..add(DoubleProperty("supportingGap", supportingGap))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("supportingPadding", supportingPadding))
       ..add(DiagnosticsProperty<TextStyle>("labelTextStyle", labelTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("supportingTextStyle", supportingTextStyle));
   }

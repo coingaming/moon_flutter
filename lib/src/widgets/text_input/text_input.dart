@@ -73,7 +73,7 @@ class MoonTextInput extends StatefulWidget {
   final TextStyle? textStyle;
 
   /// The style to use for the error state text.
-  final TextStyle? errorTextStyle;
+  final TextStyle? supportingTextStyle;
 
   /// {@macro flutter.widgets.editableText.strutStyle}
   final StrutStyle? strutStyle;
@@ -128,9 +128,6 @@ class MoonTextInput extends StatefulWidget {
   ///
   /// Defaults to [Clip.hardEdge].
   final Clip? clipBehavior;
-
-  /// The padding around the text content.
-  final EdgeInsetsGeometry? textPadding;
 
   /// {@macro flutter.widgets.editableText.minLines}
   ///  * [expands], which determines whether the field should fill the height of its parent.
@@ -195,6 +192,9 @@ class MoonTextInput extends StatefulWidget {
   /// The padding of the text input.
   final EdgeInsetsGeometry? padding;
 
+  /// The padding around supporting widget or error builder.
+  final EdgeInsetsGeometry? supportingPadding;
+
   /// {@macro flutter.widgets.editableText.onChanged}
   ///
   /// See also:
@@ -236,6 +236,9 @@ class MoonTextInput extends StatefulWidget {
   /// The widget in the trailing slot of the text input.
   final Widget? trailing;
 
+  /// The widget in the supporting slot of the text area.
+  final Widget? supporting;
+
   const MoonTextInput({
     super.key,
     this.controller,
@@ -253,7 +256,7 @@ class MoonTextInput extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.textDirection,
     this.textStyle,
-    this.errorTextStyle,
+    this.supportingTextStyle,
     this.strutStyle,
     this.autocorrect = true,
     this.enabled = true,
@@ -269,7 +272,6 @@ class MoonTextInput extends StatefulWidget {
     this.restorationId,
     this.borderRadius,
     this.clipBehavior,
-    this.textPadding,
     this.minLines,
     this.maxLength,
     this.maxLengthEnforcement,
@@ -287,6 +289,7 @@ class MoonTextInput extends StatefulWidget {
     this.gap,
     this.supportingGap,
     this.padding,
+    this.supportingPadding,
     this.onChanged,
     this.onEditingComplete,
     this.onSaved,
@@ -297,6 +300,7 @@ class MoonTextInput extends StatefulWidget {
     this.errorBuilder,
     this.leading,
     this.trailing,
+    this.supporting,
   });
 
   @override
@@ -353,19 +357,6 @@ class _MoonTextInputState extends State<MoonTextInput> {
 
     final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ?? effectiveMoonTextInputSize.borderRadius;
 
-    final double effectiveHeight = widget.height ?? effectiveMoonTextInputSize.height;
-
-    final double effectiveGap = widget.gap ?? effectiveMoonTextInputSize.gap;
-
-    final double effectiveSupportingGap =
-        widget.supportingGap ?? context.moonTheme?.textInputTheme.properties.supportingGap ?? MoonSizes.sizes.x4s;
-
-    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonTextInputSize.padding;
-
-    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
-
-    final TextStyle effectiveTextStyle = widget.textStyle ?? effectiveMoonTextInputSize.textStyle;
-
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.textInputTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
@@ -384,9 +375,6 @@ class _MoonTextInputState extends State<MoonTextInput> {
     final Color effectiveHoverBorderColor =
         widget.hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
 
-    final double effectiveFocusEffectExtent =
-        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
-
     final Color focusEffectColor =
         context.isDarkMode ? effectiveActiveBorderColor.withOpacity(0.4) : effectiveActiveBorderColor.withOpacity(0.2);
 
@@ -399,7 +387,14 @@ class _MoonTextInputState extends State<MoonTextInput> {
     final Color effectiveHintTextColor =
         widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.supportingTextColor ?? MoonColors.light.trunks;
 
+    final double effectiveGap = widget.gap ?? effectiveMoonTextInputSize.gap;
+
+    final double effectiveHeight = widget.height ?? effectiveMoonTextInputSize.height;
+
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+
+    final double effectiveFocusEffectExtent =
+        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.textInputTheme.properties.transitionDuration ??
@@ -408,7 +403,17 @@ class _MoonTextInputState extends State<MoonTextInput> {
     final Curve effectiveTransitionCurve =
         widget.transitionCurve ?? context.moonTheme?.textInputTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
-    final TextStyle effectiveErrorTextStyle = widget.errorTextStyle ??
+    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonTextInputSize.padding;
+
+    final EdgeInsetsGeometry effectiveSupportingPadding = widget.supportingPadding ??
+        context.moonTheme?.textInputTheme.properties.supportingPadding ??
+        EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
+
+    final TextStyle effectiveTextStyle = widget.textStyle ?? effectiveMoonTextInputSize.textStyle;
+
+    final TextStyle effectiveSupportingTextStyle = widget.supportingTextStyle ??
         context.moonTheme?.textInputTheme.properties.supportingTextStyle ??
         const TextStyle(fontSize: 12);
 
@@ -422,7 +427,11 @@ class _MoonTextInputState extends State<MoonTextInput> {
 
     final double resolvedLeadingWidth = widget.leading != null
         ? effectiveMoonTextInputSize.iconSizeValue + resolvedDirectionalPadding.left + effectiveGap
-        : 0;
+        : resolvedDirectionalPadding.left;
+
+    final double resolvedTrailingWidth = widget.trailing != null
+        ? effectiveMoonTextInputSize.iconSizeValue + resolvedDirectionalPadding.right + effectiveGap
+        : resolvedDirectionalPadding.right;
 
     final OutlineInputBorder focusBorder = OutlineInputBorder(
       borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
@@ -449,6 +458,7 @@ class _MoonTextInputState extends State<MoonTextInput> {
           duration: effectiveTransitionDuration,
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MoonFocusEffect(
                 show: _isFocused,
@@ -463,91 +473,107 @@ class _MoonTextInputState extends State<MoonTextInput> {
                   child: Focus(
                     canRequestFocus: false,
                     onFocusChange: _setFocusStatus,
-                    child: TextFormField(
-                      autocorrect: widget.autocorrect,
-                      autofillHints: widget.autofillHints,
-                      autofocus: widget.autofocus,
-                      autovalidateMode: widget.autovalidateMode,
-                      controller: widget.controller,
-                      cursorColor: effectiveTextColor,
-                      enabled: widget.enabled,
-                      enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
-                      enableInteractiveSelection: widget.enableInteractiveSelection,
-                      enableSuggestions: widget.enableSuggestions,
-                      focusNode: widget.focusNode,
-                      initialValue: widget.initialValue,
-                      inputFormatters: widget.inputFormatters,
-                      keyboardAppearance: widget.keyboardAppearance,
-                      onChanged: widget.onChanged,
-                      onEditingComplete: widget.onEditingComplete,
-                      onFieldSubmitted: widget.onSubmitted,
-                      onSaved: widget.onSaved,
-                      onTap: widget.onTap,
-                      onTapOutside: widget.onTapOutside,
-                      readOnly: widget.readOnly,
-                      restorationId: widget.restorationId,
-                      scrollController: widget.scrollController,
-                      scrollPadding: widget.scrollPadding,
-                      scrollPhysics: widget.scrollPhysics,
-                      showCursor: widget.showCursor,
-                      strutStyle: widget.strutStyle,
-                      style: effectiveTextStyle.copyWith(color: effectiveTextColor),
-                      textAlign: widget.textAlign,
-                      textAlignVertical: TextAlignVertical.center,
-                      textCapitalization: widget.textCapitalization,
-                      textDirection: widget.textDirection,
-                      textInputAction: widget.textInputAction,
-                      validator: _validateInput,
-                      decoration: InputDecoration(
-                        prefixIcon: widget.leading != null
-                            ? Padding(
-                                padding: EdgeInsetsDirectional.only(
-                                  start: resolvedDirectionalPadding.left,
-                                  end: effectiveGap,
-                                ),
-                                child: widget.leading,
-                              )
-                            : null,
-                        prefixIconColor: effectiveTextColor,
-                        prefixStyle: effectiveTextStyle.copyWith(color: effectiveTextColor),
-                        prefixIconConstraints: BoxConstraints(
-                          minWidth: resolvedLeadingWidth,
-                          maxWidth: resolvedLeadingWidth,
-                          minHeight: effectiveMoonTextInputSize.iconSizeValue,
-                          maxHeight: effectiveMoonTextInputSize.iconSizeValue,
+                    child: SizedBox(
+                      child: TextFormField(
+                        autocorrect: widget.autocorrect,
+                        autofillHints: widget.autofillHints,
+                        autofocus: widget.autofocus,
+                        autovalidateMode: widget.autovalidateMode,
+                        controller: widget.controller,
+                        cursorColor: effectiveTextColor,
+                        enabled: widget.enabled,
+                        enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
+                        enableInteractiveSelection: widget.enableInteractiveSelection,
+                        enableSuggestions: widget.enableSuggestions,
+                        focusNode: widget.focusNode,
+                        initialValue: widget.initialValue,
+                        inputFormatters: widget.inputFormatters,
+                        keyboardAppearance: widget.keyboardAppearance,
+                        onChanged: widget.onChanged,
+                        onEditingComplete: widget.onEditingComplete,
+                        onFieldSubmitted: widget.onSubmitted,
+                        onSaved: widget.onSaved,
+                        onTap: widget.onTap,
+                        onTapOutside: widget.onTapOutside,
+                        readOnly: widget.readOnly,
+                        restorationId: widget.restorationId,
+                        scrollController: widget.scrollController,
+                        scrollPadding: widget.scrollPadding,
+                        scrollPhysics: widget.scrollPhysics,
+                        showCursor: widget.showCursor,
+                        strutStyle: widget.strutStyle,
+                        style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                        textAlign: widget.textAlign,
+                        textAlignVertical: TextAlignVertical.center,
+                        textCapitalization: widget.textCapitalization,
+                        textDirection: widget.textDirection,
+                        textInputAction: widget.textInputAction,
+                        validator: _validateInput,
+                        decoration: InputDecoration(
+                          filled: true,
+                          isCollapsed: true,
+                          fillColor: effectiveBackgroundColor,
+                          focusColor: effectiveActiveBorderColor,
+                          hoverColor: Colors.transparent,
+                          border: defaultBorder,
+                          enabledBorder: defaultBorder,
+                          disabledBorder: defaultBorder,
+                          focusedBorder: focusBorder,
+                          errorBorder: errorBorder,
+                          focusedErrorBorder: errorBorder,
+                          constraints: BoxConstraints.tightFor(height: effectiveHeight),
+                          hintText: widget.hintText,
+                          hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
+                          errorStyle: const TextStyle(height: 0.1, fontSize: 0),
+                          prefixStyle: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                          prefixIconColor: effectiveTextColor,
+                          prefixIconConstraints: BoxConstraints.tightFor(width: resolvedLeadingWidth),
+                          prefixIcon: widget.leading != null
+                              ? Padding(
+                                  padding: EdgeInsetsDirectional.only(
+                                    start: resolvedDirectionalPadding.left,
+                                    end: effectiveGap,
+                                  ),
+                                  child: widget.leading,
+                                )
+                              : const SizedBox.expand(),
+                          suffixStyle: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                          suffixIconColor: effectiveTextColor,
+                          suffixIconConstraints: BoxConstraints.tightFor(width: resolvedTrailingWidth),
+                          suffixIcon: widget.trailing != null
+                              ? Padding(
+                                  padding: EdgeInsetsDirectional.only(
+                                    start: effectiveGap,
+                                    end: resolvedDirectionalPadding.right,
+                                  ),
+                                  child: widget.trailing,
+                                )
+                              : const SizedBox.expand(),
                         ),
-                        suffixIcon: widget.trailing,
-                        filled: true,
-                        contentPadding: resolvedDirectionalPadding,
-                        hintText: widget.hintText,
-                        hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
-                        errorStyle: const TextStyle(height: 0.1, fontSize: 0),
-                        constraints: BoxConstraints(minHeight: effectiveHeight, maxHeight: effectiveHeight),
-                        fillColor: effectiveBackgroundColor,
-                        focusColor: effectiveActiveBorderColor,
-                        hoverColor: Colors.transparent,
-                        border: defaultBorder,
-                        enabledBorder: defaultBorder,
-                        disabledBorder: defaultBorder,
-                        focusedBorder: focusBorder,
-                        errorBorder: errorBorder,
-                        focusedErrorBorder: errorBorder,
                       ),
                     ),
                   ),
                 ),
               ),
-              if (_errorText != null && widget.errorBuilder != null)
+              if (widget.supporting != null || (_errorText != null && widget.errorBuilder != null))
                 RepaintBoundary(
                   child: AnimatedIconTheme(
-                    color: effectiveErrorBorderColor,
+                    color: _errorText != null && widget.errorBuilder != null
+                        ? effectiveErrorBorderColor
+                        : effectiveHintTextColor,
                     duration: effectiveTransitionDuration,
                     child: AnimatedDefaultTextStyle(
-                      style: effectiveErrorTextStyle.copyWith(color: effectiveErrorBorderColor),
+                      style: effectiveSupportingTextStyle.copyWith(
+                        color: _errorText != null && widget.errorBuilder != null
+                            ? effectiveErrorBorderColor
+                            : effectiveHintTextColor,
+                      ),
                       duration: effectiveTransitionDuration,
                       child: Padding(
-                        padding: EdgeInsets.only(top: effectiveSupportingGap),
-                        child: widget.errorBuilder!(context, _errorText),
+                        padding: effectiveSupportingPadding,
+                        child: _errorText != null && widget.errorBuilder != null
+                            ? widget.errorBuilder!(context, _errorText)
+                            : widget.supporting,
                       ),
                     ),
                   ),

@@ -94,7 +94,7 @@ class TextAreaStory extends Story {
                           children: [
                             MoonTextArea(
                               enabled: enabledKnob,
-                              height: 300,
+                              //height: 300,
                               textColor: textColor,
                               hintTextColor: hintTextColor,
                               backgroundColor: backgroundColor,
