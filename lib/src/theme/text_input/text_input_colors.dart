@@ -10,6 +10,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
     activeBorderColor: MoonColors.light.piccolo,
     inactiveBorderColor: MoonColors.light.beerus,
     errorBorderColor: MoonColors.light.chiChi100,
+    hoverBorderColor: MoonColors.light.beerus,
     labelTextColor: MoonColors.light.trunks,
     supportingTextColor: MoonColors.light.trunks,
   );
@@ -19,6 +20,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
     activeBorderColor: MoonColors.dark.piccolo,
     inactiveBorderColor: MoonColors.dark.beerus,
     errorBorderColor: MoonColors.dark.chiChi100,
+    hoverBorderColor: MoonColors.dark.beerus,
     labelTextColor: MoonColors.dark.trunks,
     supportingTextColor: MoonColors.dark.trunks,
   );
@@ -35,6 +37,9 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
   /// TextInput error border color.
   final Color errorBorderColor;
 
+  /// TextInput hover border color.
+  final Color hoverBorderColor;
+
   /// TextInput hint text color.
   final Color labelTextColor;
 
@@ -46,6 +51,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
     required this.activeBorderColor,
     required this.inactiveBorderColor,
     required this.errorBorderColor,
+    required this.hoverBorderColor,
     required this.labelTextColor,
     required this.supportingTextColor,
   });
@@ -56,6 +62,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? errorBorderColor,
+    Color? hoverBorderColor,
     Color? labelTextColor,
     Color? supportingTextColor,
   }) {
@@ -64,6 +71,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
       errorBorderColor: errorBorderColor ?? this.errorBorderColor,
+      hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,
       labelTextColor: labelTextColor ?? this.labelTextColor,
       supportingTextColor: supportingTextColor ?? this.supportingTextColor,
     );
@@ -78,6 +86,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
       activeBorderColor: Color.lerp(activeBorderColor, other.activeBorderColor, t)!,
       inactiveBorderColor: Color.lerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
       errorBorderColor: Color.lerp(errorBorderColor, other.errorBorderColor, t)!,
+      hoverBorderColor: Color.lerp(hoverBorderColor, other.hoverBorderColor, t)!,
       labelTextColor: Color.lerp(labelTextColor, other.labelTextColor, t)!,
       supportingTextColor: Color.lerp(supportingTextColor, other.supportingTextColor, t)!,
     );
@@ -92,6 +101,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
       ..add(ColorProperty("errorBorderColor", errorBorderColor))
+      ..add(ColorProperty("hoverBorderColor", hoverBorderColor))
       ..add(ColorProperty("labelTextColor", labelTextColor))
       ..add(ColorProperty("supportingTextColor", supportingTextColor));
   }

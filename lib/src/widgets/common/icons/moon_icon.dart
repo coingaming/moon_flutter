@@ -204,6 +204,7 @@ class MoonIcon extends StatelessWidget {
 
     Widget iconWidget = RichText(
       overflow: TextOverflow.visible, // Never clip.
+      textAlign: TextAlign.center,
       textDirection: textDirection, // Since we already fetched it for the assert...
       text: TextSpan(
         text: String.fromCharCode(icon!.codePoint),
@@ -217,6 +218,7 @@ class MoonIcon extends StatelessWidget {
           inherit: false,
           color: iconColor,
           fontSize: iconSize,
+          height: 1,
           fontFamily: icon!.fontFamily,
           package: icon!.fontPackage,
           shadows: iconShadows,
@@ -242,7 +244,7 @@ class MoonIcon extends StatelessWidget {
     return Semantics(
       label: semanticLabel,
       child: ExcludeSemantics(
-        child: iconWidget,
+        child: Center(child: SizedBox.square(dimension: iconSize, child: iconWidget)),
       ),
     );
   }

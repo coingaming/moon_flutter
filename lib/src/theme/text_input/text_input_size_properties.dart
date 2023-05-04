@@ -12,7 +12,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
   static final sm = MoonTextInputSizeProperties(
     height: MoonSizes.sizes.sm,
     gap: MoonSizes.sizes.x4s,
-    iconSizeValue: MoonSizes.sizes.x2s,
+    iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
     borderRadius: MoonBorders.borders.interactiveXs,
     textStyle: MoonTextStyles.heading.text14,
@@ -58,7 +58,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
   final EdgeInsetsGeometry padding;
 
   /// TextInput border radius.
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// TextInput text style.
   final TextStyle textStyle;
@@ -78,7 +78,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     double? gap,
     double? iconSizeValue,
     EdgeInsetsGeometry? padding,
-    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     TextStyle? textStyle,
   }) {
     return MoonTextInputSizeProperties(
@@ -100,7 +100,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
       gap: lerpDouble(gap, other.gap, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -114,7 +114,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
-      ..add(DiagnosticsProperty<BorderRadius>("borderRadius", borderRadius))
+      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

@@ -14,7 +14,7 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     surfaceMd: BorderRadius.all(Radius.circular(12)),
     surfaceLg: BorderRadius.all(Radius.circular(16)),
     defaultBorderWidth: 1,
-    activeBorderWidth: 2,
+    activeBorderWidth: 1.5,
   );
 
   /// Interactive radius XS.

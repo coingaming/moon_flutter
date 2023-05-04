@@ -95,6 +95,17 @@ class TextInputStory extends Story {
               initial: true,
             );
 
+            final showLeadingKnob = context.knobs.boolean(
+              label: "leading",
+              description: "Show widget in MoonTextInput leading slot.",
+              initial: true,
+            );
+
+            final showTrailingKnob = context.knobs.boolean(
+              label: "trailing",
+              description: "Show widget in MoonTextInput trailing slot.",
+            );
+
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -124,6 +135,13 @@ class TextInputStory extends Story {
                                     ? "The text should be longer than 10 characters."
                                     : null,
                                 errorBuilder: (context, errorText) => Text(errorText!),
+                                leading: showLeadingKnob
+                                    ? const MoonIcon(
+                                        MoonIcons.frame_24,
+                                        size: 24,
+                                      )
+                                    : null,
+                                trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                               ),
                             ),
                             const SizedBox(height: 16),
