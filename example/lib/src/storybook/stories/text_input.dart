@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
+TextEditingController _textEditingController = TextEditingController();
+
 class TextInputStory extends Story {
   TextInputStory()
       : super(
@@ -104,6 +106,12 @@ class TextInputStory extends Story {
             final showTrailingKnob = context.knobs.boolean(
               label: "trailing",
               description: "Show widget in MoonTextInput trailing slot.",
+              initial: true,
+            );
+
+            final showSupportingKnob = context.knobs.boolean(
+              label: "supporting",
+              description: "Show widget in MoonTextInput supporting slot.",
             );
 
             return Center(
@@ -117,8 +125,9 @@ class TextInputStory extends Story {
                         return Column(
                           children: [
                             SizedBox(
-                              height: 96,
+                              height: 86,
                               child: MoonTextInput(
+                                controller: _textEditingController,
                                 textInputSize: textInputSizesKnob,
                                 enabled: enabledKnob,
                                 textColor: textColor,
@@ -134,17 +143,22 @@ class TextInputStory extends Story {
                                 validator: (value) => value?.length != null && value!.length < 10
                                     ? "The text should be longer than 10 characters."
                                     : null,
-                                errorBuilder: (context, errorText) => Text(errorText!),
-                                leading: showLeadingKnob
-                                    ? const MoonIcon(
-                                        MoonIcons.frame_24,
-                                        size: 24,
+                                leading: showLeadingKnob ? const MoonIcon(MoonIcons.search_24) : null,
+                                trailing: showTrailingKnob
+                                    ? MoonButton.icon(
+                                        icon: MoonIcon(
+                                          MoonIcons.close_24,
+                                          color: DefaultTextStyle.of(context).style.color,
+                                        ),
+                                        buttonSize: MoonButtonSize.xs,
+                                        onTap: () => _textEditingController.clear(),
                                       )
                                     : null,
-                                trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                                supporting: showSupportingKnob ? const Text("Supporting text") : null,
+                                errorBuilder: (context, errorText) => Text(errorText!),
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 8),
                             MoonFilledButton(
                               label: const Text("Submit"),
                               onTap: () => Form.of(context).validate(),
