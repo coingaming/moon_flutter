@@ -35,17 +35,17 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.services.TextInputConfiguration.enableSuggestions}
   final bool enableSuggestions;
 
-  /// {@macro flutter.widgets.editableText.scribbleEnabled}
-  final bool scribbleEnabled;
-
   /// {@macro flutter.widgets.editableText.readOnly}
   final bool readOnly;
+
+  /// {@macro flutter.widgets.editableText.scribbleEnabled}
+  final bool scribbleEnabled;
 
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
 
   /// The border radius of the text area.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The appearance of the keyboard.
   ///
@@ -101,9 +101,6 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
 
-  /// Validator for the text area widget.
-  final FormFieldValidator<String>? validator;
-
   /// The maximum number of characters (Unicode grapheme clusters) to allow in the text area.
   ///
   /// {@macro flutter.services.lengthLimitingTextInputFormatter.maxLength}
@@ -158,11 +155,11 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.textAlign}
   final TextAlign textAlign;
 
-  /// {@macro flutter.widgets.editableText.textDirection}
-  final TextDirection? textDirection;
-
   /// {@macro flutter.widgets.editableText.textCapitalization}
   final TextCapitalization textCapitalization;
+
+  /// {@macro flutter.widgets.editableText.textDirection}
+  final TextDirection? textDirection;
 
   /// Controls the text being edited.
   final TextEditingController? controller;
@@ -180,6 +177,9 @@ class MoonTextArea extends StatefulWidget {
 
   /// The text style to use for the supporting or error state text.
   final TextStyle? supportingTextStyle;
+
+  /// Validator for the text area widget.
+  final FormFieldValidator<String>? validator;
 
   /// A callback that is called when the user taps the text area widget.
   final GestureTapCallback? onTap;
@@ -200,7 +200,7 @@ class MoonTextArea extends StatefulWidget {
   final VoidCallback? onEditingComplete;
 
   /// [FormState.save].
-  final void Function(String?)? onSaved;
+  final ValueChanged<String?>? onSaved;
 
   /// {@macro flutter.widgets.editableText.onSubmitted}
   ///
@@ -226,8 +226,8 @@ class MoonTextArea extends StatefulWidget {
     this.enableIMEPersonalizedLearning = true,
     this.enableInteractiveSelection,
     this.enableSuggestions = true,
-    this.scribbleEnabled = true,
     this.readOnly = false,
+    this.scribbleEnabled = true,
     this.showCursor,
     this.borderRadius,
     this.keyboardAppearance,
@@ -260,8 +260,8 @@ class MoonTextArea extends StatefulWidget {
     this.semanticLabel,
     this.strutStyle,
     this.textAlign = TextAlign.start,
-    this.textDirection,
     this.textCapitalization = TextCapitalization.none,
+    this.textDirection,
     this.controller,
     this.textInputAction,
     this.textStyle,
@@ -418,67 +418,65 @@ class _MoonTextAreaState extends State<MoonTextArea> {
                   child: Focus(
                     canRequestFocus: false,
                     onFocusChange: _setFocusStatus,
-                    child: Container(
-                      child: TextFormField(
-                        autocorrect: widget.autocorrect,
-                        autofillHints: widget.autofillHints,
-                        autofocus: widget.autofocus,
-                        autovalidateMode: widget.autovalidateMode,
-                        controller: widget.controller,
-                        cursorColor: effectiveTextColor,
-                        enabled: widget.enabled,
-                        enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
-                        enableInteractiveSelection: widget.enableInteractiveSelection,
-                        enableSuggestions: widget.enableSuggestions,
-                        expands: true,
-                        focusNode: widget.focusNode,
-                        initialValue: widget.initialValue,
-                        inputFormatters: widget.inputFormatters,
-                        keyboardAppearance: widget.keyboardAppearance,
-                        keyboardType: TextInputType.multiline,
-                        maxLength: widget.maxLength,
-                        maxLengthEnforcement: widget.maxLengthEnforcement,
-                        maxLines: null,
-                        minLines: widget.minLines,
-                        onChanged: widget.onChanged,
-                        onEditingComplete: widget.onEditingComplete,
-                        onFieldSubmitted: widget.onSubmitted,
-                        onSaved: widget.onSaved,
-                        onTap: widget.onTap,
-                        onTapOutside: widget.onTapOutside,
-                        readOnly: widget.readOnly,
-                        restorationId: widget.restorationId,
-                        scrollController: widget.scrollController,
-                        scrollPadding: widget.scrollPadding,
-                        scrollPhysics: widget.scrollPhysics,
-                        showCursor: widget.showCursor,
-                        strutStyle: widget.strutStyle,
-                        style: effectiveTextStyle.copyWith(color: effectiveTextColor),
-                        textAlign: widget.textAlign,
-                        textAlignVertical: TextAlignVertical.top,
-                        textCapitalization: widget.textCapitalization,
-                        textDirection: widget.textDirection,
-                        textInputAction: widget.textInputAction,
-                        validator: _validateInput,
-                        decoration: InputDecoration(
-                          filled: true,
-                          contentPadding: effectiveTextPadding,
-                          hintText: widget.hintText,
-                          hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
-                          errorStyle: const TextStyle(height: 0.1, fontSize: 0),
-                          constraints: BoxConstraints(
-                            minHeight: widget.height ?? 24,
-                            maxHeight: widget.height ?? 120,
-                          ),
-                          fillColor: effectiveBackgroundColor,
-                          focusColor: effectiveActiveBorderColor,
-                          hoverColor: Colors.transparent,
-                          border: defaultBorder,
-                          enabledBorder: defaultBorder,
-                          disabledBorder: defaultBorder,
-                          focusedBorder: focusBorder,
-                          errorBorder: errorBorder,
-                          focusedErrorBorder: errorBorder,
+                    child: TextFormField(
+                      autocorrect: widget.autocorrect,
+                      autofillHints: widget.autofillHints,
+                      autofocus: widget.autofocus,
+                      autovalidateMode: widget.autovalidateMode,
+                      controller: widget.controller,
+                      cursorColor: effectiveTextColor,
+                      enabled: widget.enabled,
+                      enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
+                      enableInteractiveSelection: widget.enableInteractiveSelection,
+                      enableSuggestions: widget.enableSuggestions,
+                      expands: true,
+                      focusNode: widget.focusNode,
+                      initialValue: widget.initialValue,
+                      inputFormatters: widget.inputFormatters,
+                      keyboardAppearance: widget.keyboardAppearance,
+                      keyboardType: TextInputType.multiline,
+                      maxLength: widget.maxLength,
+                      maxLengthEnforcement: widget.maxLengthEnforcement,
+                      maxLines: null,
+                      minLines: widget.minLines,
+                      onChanged: widget.onChanged,
+                      onEditingComplete: widget.onEditingComplete,
+                      onFieldSubmitted: widget.onSubmitted,
+                      onSaved: widget.onSaved,
+                      onTap: widget.onTap,
+                      onTapOutside: widget.onTapOutside,
+                      readOnly: widget.readOnly,
+                      restorationId: widget.restorationId,
+                      scrollController: widget.scrollController,
+                      scrollPadding: widget.scrollPadding,
+                      scrollPhysics: widget.scrollPhysics,
+                      showCursor: widget.showCursor,
+                      strutStyle: widget.strutStyle,
+                      style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                      textAlign: widget.textAlign,
+                      textAlignVertical: TextAlignVertical.top,
+                      textCapitalization: widget.textCapitalization,
+                      textDirection: widget.textDirection,
+                      textInputAction: widget.textInputAction,
+                      validator: _validateInput,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: effectiveBackgroundColor,
+                        focusColor: effectiveActiveBorderColor,
+                        hoverColor: Colors.transparent,
+                        contentPadding: effectiveTextPadding,
+                        border: defaultBorder,
+                        enabledBorder: defaultBorder,
+                        disabledBorder: defaultBorder,
+                        focusedBorder: focusBorder,
+                        errorBorder: errorBorder,
+                        focusedErrorBorder: errorBorder,
+                        hintText: widget.hintText,
+                        hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
+                        errorStyle: const TextStyle(height: 0.1, fontSize: 0),
+                        constraints: BoxConstraints(
+                          minHeight: widget.height ?? 24,
+                          maxHeight: widget.height ?? 120,
                         ),
                       ),
                     ),

@@ -12,8 +12,6 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 
-typedef MoonTextInputErrorBuilder = Widget Function(BuildContext context, String? errorText);
-
 enum MoonTextInputSize {
   sm,
   md,
@@ -21,65 +19,17 @@ enum MoonTextInputSize {
   xl,
 }
 
+typedef MoonTextInputErrorBuilder = Widget Function(BuildContext context, String? errorText);
+
 class MoonTextInput extends StatefulWidget {
-  /// Controls the text being edited.
-  final TextEditingController? controller;
-
-  /// {@macro flutter.widgets.editableText.scrollController}
-  final ScrollController? scrollController;
-
-  /// {@macro flutter.widgets.editableText.scrollPhysics}
-  final ScrollPhysics? scrollPhysics;
-
-  /// The background color of the input.
-  final Color? backgroundColor;
-
-  /// The border color of the active or focused input.
-  final Color? activeBorderColor;
-
-  /// The border color of the inactive input.
-  final Color? inactiveBorderColor;
-
-  /// The border color of the error input.
-  final Color? errorBorderColor;
-
-  /// The border color of the hovered input.
-  final Color? hoverBorderColor;
-
-  /// The text color of the input.
-  final Color? textColor;
-
-  /// The text color of the hint in input.
-  final Color? hintTextColor;
-
-  /// The type of action button to use for the keyboard.
-  ///
-  /// Defaults to [TextInputAction.newline] if [keyboardType] is
-  /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
-  final TextInputAction? textInputAction;
-
-  /// {@macro flutter.widgets.editableText.textCapitalization}
-  final TextCapitalization textCapitalization;
-
-  /// {@macro flutter.widgets.editableText.textAlign}
-  final TextAlign textAlign;
-
-  /// {@macro flutter.widgets.editableText.textDirection}
-  final TextDirection? textDirection;
-
-  /// The style to use for the text being edited.
-  ///
-  /// This text style is also used as the base style for the [decoration].
-  final TextStyle? textStyle;
-
-  /// The style to use for the error state text.
-  final TextStyle? supportingTextStyle;
-
-  /// {@macro flutter.widgets.editableText.strutStyle}
-  final StrutStyle? strutStyle;
+  /// Used to set the auto validation mode.
+  final AutovalidateMode autovalidateMode;
 
   /// {@macro flutter.widgets.editableText.autocorrect}
   final bool autocorrect;
+
+  /// {@macro flutter.widgets.editableText.autofocus}
+  final bool autofocus;
 
   /// If false the widget is "disabled": it ignores taps and it has a reduced opacity.
   final bool enabled;
@@ -102,8 +52,97 @@ class MoonTextInput extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
 
+  /// The border radius of the input.
+  final BorderRadiusGeometry? borderRadius;
+
+  /// The appearance of the keyboard.
+  ///
+  /// This setting is only honored on iOS devices.
+  ///
+  /// If unset, defaults to [ThemeData.brightness].
+  final Brightness? keyboardAppearance;
+
+  /// {@macro flutter.material.Material.clipBehavior}
+  ///
+  /// Defaults to [Clip.hardEdge].
+  final Clip? clipBehavior;
+
+  /// The background color of the input.
+  final Color? backgroundColor;
+
+  /// The border color of the active or focused input.
+  final Color? activeBorderColor;
+
+  /// The border color of the inactive input.
+  final Color? inactiveBorderColor;
+
+  /// The border color of the error input.
+  final Color? errorBorderColor;
+
+  /// The border color of the hovered input.
+  final Color? hoverBorderColor;
+
+  /// The text color of the input.
+  final Color? textColor;
+
+  /// The text color of the hint in input.
+  final Color? hintTextColor;
+
+  /// The gap between the leading or trailing and the label widgets.
+  final double? gap;
+
   /// The height of the input (this does not include the space taken by [MoonTextInput.errorBuilder]).
   final double? height;
+
+  /// The transition duration for disable animation.
+  final Duration? transitionDuration;
+
+  /// The transition curve for disable animation.
+  final Curve? transitionCurve;
+
+  /// {@macro flutter.widgets.editableText.scrollPadding}
+  final EdgeInsets scrollPadding;
+
+  /// The padding of the text input.
+  final EdgeInsetsGeometry? padding;
+
+  /// The padding around supporting widget or error builder.
+  final EdgeInsetsGeometry? supportingPadding;
+
+  /// {@macro flutter.widgets.Focus.focusNode}.
+  final FocusNode? focusNode;
+
+  /// The maximum number of characters (Unicode grapheme clusters) to allow in the input.
+  ///
+  /// {@macro flutter.services.lengthLimitingTextInputFormatter.maxLength}
+  final int? maxLength;
+
+  /// {@macro flutter.widgets.editableText.minLines}
+  ///  * [expands], which determines whether the field should fill the height of its parent.
+  final int? minLines;
+
+  /// {@macro flutter.widgets.editableText.autofillHints}
+  /// {@macro flutter.services.AutofillConfiguration.autofillHints}
+  final Iterable<String>? autofillHints;
+
+  /// {@macro flutter.widgets.editableText.inputFormatters}
+  final List<TextInputFormatter>? inputFormatters;
+
+  /// Determines how the [maxLength] limit should be enforced.
+  ///
+  /// {@macro flutter.services.textFormatter.effectiveMaxLengthEnforcement}
+  ///
+  /// {@macro flutter.services.textFormatter.maxLengthEnforcement}
+  final MaxLengthEnforcement? maxLengthEnforcement;
+
+  /// The size of the text input.
+  final MoonTextInputSize? textInputSize;
+
+  /// {@macro flutter.widgets.editableText.scrollController}
+  final ScrollController? scrollController;
+
+  /// {@macro flutter.widgets.editableText.scrollPhysics}
+  final ScrollPhysics? scrollPhysics;
 
   /// The text for the hint.
   final String? hintText;
@@ -121,79 +160,46 @@ class MoonTextInput extends StatefulWidget {
   /// {@endtemplate}
   final String? restorationId;
 
-  /// The border radius of the input.
-  final BorderRadiusGeometry? borderRadius;
-
-  /// {@macro flutter.material.Material.clipBehavior}
-  ///
-  /// Defaults to [Clip.hardEdge].
-  final Clip? clipBehavior;
-
-  /// {@macro flutter.widgets.editableText.minLines}
-  ///  * [expands], which determines whether the field should fill the height of its parent.
-  final int? minLines;
-
-  /// The maximum number of characters (Unicode grapheme clusters) to allow in the input.
-  ///
-  /// {@macro flutter.services.lengthLimitingTextInputFormatter.maxLength}
-  final int? maxLength;
-
-  /// Determines how the [maxLength] limit should be enforced.
-  ///
-  /// {@macro flutter.services.textFormatter.effectiveMaxLengthEnforcement}
-  ///
-  /// {@macro flutter.services.textFormatter.maxLengthEnforcement}
-  final MaxLengthEnforcement? maxLengthEnforcement;
-
-  /// {@macro flutter.widgets.editableText.inputFormatters}
-  final List<TextInputFormatter>? inputFormatters;
-
-  /// {@macro flutter.widgets.editableText.autofillHints}
-  /// {@macro flutter.services.AutofillConfiguration.autofillHints}
-  final Iterable<String>? autofillHints;
-
-  /// Used to set the auto validation mode.
-  final AutovalidateMode autovalidateMode;
-
-  /// The appearance of the keyboard.
-  ///
-  /// This setting is only honored on iOS devices.
-  ///
-  /// If unset, defaults to [ThemeData.brightness].
-  final Brightness? keyboardAppearance;
-
-  /// {@macro flutter.widgets.editableText.scrollPadding}
-  final EdgeInsets scrollPadding;
-
-  /// The transition duration for disable animation.
-  final Duration? transitionDuration;
-
-  /// The transition curve for disable animation.
-  final Curve? transitionCurve;
-
-  /// {@macro flutter.widgets.editableText.autofocus}
-  final bool autofocus;
-
-  /// {@macro flutter.widgets.Focus.focusNode}.
-  final FocusNode? focusNode;
-
   /// The semantic label for the widget.
   final String? semanticLabel;
 
-  /// The size of the text input.
-  final MoonTextInputSize? textInputSize;
+  /// {@macro flutter.widgets.editableText.strutStyle}
+  final StrutStyle? strutStyle;
 
-  /// The gap between the leading or trailing and the label widgets.
-  final double? gap;
+  /// {@macro flutter.widgets.editableText.textAlign}
+  final TextAlign textAlign;
 
-  /// The gap between the text input widget and supporting widget builder.
-  final double? supportingGap;
+  /// {@macro flutter.widgets.editableText.textCapitalization}
+  final TextCapitalization textCapitalization;
 
-  /// The padding of the text input.
-  final EdgeInsetsGeometry? padding;
+  /// {@macro flutter.widgets.editableText.textDirection}
+  final TextDirection? textDirection;
 
-  /// The padding around supporting widget or error builder.
-  final EdgeInsetsGeometry? supportingPadding;
+  /// Controls the text being edited.
+  final TextEditingController? controller;
+
+  /// The type of action button to use for the keyboard.
+  ///
+  /// Defaults to [TextInputAction.newline] if [keyboardType] is
+  /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
+  final TextInputAction? textInputAction;
+
+  /// The style to use for the text being edited.
+  ///
+  /// This text style is also used as the base style for the [decoration].
+  final TextStyle? textStyle;
+
+  /// The style to use for the error state text.
+  final TextStyle? supportingTextStyle;
+
+  /// Validator for the input widget.
+  final FormFieldValidator<String>? validator;
+
+  /// A callback that is called when the user taps the input widget.
+  final GestureTapCallback? onTap;
+
+  /// A callback that is called when the user taps outside the input widget.
+  final TapRegionCallback? onTapOutside;
 
   /// {@macro flutter.widgets.editableText.onChanged}
   ///
@@ -208,7 +214,7 @@ class MoonTextInput extends StatefulWidget {
   final VoidCallback? onEditingComplete;
 
   /// [FormState.save].
-  final void Function(String?)? onSaved;
+  final ValueChanged<String?>? onSaved;
 
   /// {@macro flutter.widgets.editableText.onSubmitted}
   ///
@@ -217,15 +223,6 @@ class MoonTextInput extends StatefulWidget {
   ///  * [TextInputAction.next] and [TextInputAction.previous], which automatically shift the focus to the next/previous
   ///    focusable item when the user is done editing.
   final ValueChanged<String>? onSubmitted;
-
-  /// A callback that is called when the user taps the input widget.
-  final GestureTapCallback? onTap;
-
-  /// A callback that is called when the user taps outside the input widget.
-  final TapRegionCallback? onTapOutside;
-
-  /// Validator for the input widget.
-  final FormFieldValidator<String>? validator;
 
   /// Builder for the error widget.
   final MoonTextInputErrorBuilder? errorBuilder;
@@ -241,24 +238,9 @@ class MoonTextInput extends StatefulWidget {
 
   const MoonTextInput({
     super.key,
-    this.controller,
-    this.scrollController,
-    this.scrollPhysics,
-    this.backgroundColor,
-    this.activeBorderColor,
-    this.inactiveBorderColor,
-    this.errorBorderColor,
-    this.hoverBorderColor,
-    this.textColor,
-    this.hintTextColor,
-    this.textInputAction,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
-    this.textDirection,
-    this.textStyle,
-    this.supportingTextStyle,
-    this.strutStyle,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.autocorrect = true,
+    this.autofocus = false,
     this.enabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.enableInteractiveSelection,
@@ -266,37 +248,51 @@ class MoonTextInput extends StatefulWidget {
     this.readOnly = false,
     this.scribbleEnabled = true,
     this.showCursor,
+    this.borderRadius,
+    this.keyboardAppearance,
+    this.clipBehavior,
+    this.backgroundColor,
+    this.activeBorderColor,
+    this.inactiveBorderColor,
+    this.errorBorderColor,
+    this.hoverBorderColor,
+    this.textColor,
+    this.hintTextColor,
+    this.gap,
     this.height,
+    this.transitionDuration,
+    this.transitionCurve,
+    this.scrollPadding = const EdgeInsets.all(20.0),
+    this.padding,
+    this.supportingPadding,
+    this.focusNode,
+    this.maxLength,
+    this.minLines,
+    this.autofillHints,
+    this.inputFormatters,
+    this.maxLengthEnforcement,
+    this.textInputSize,
+    this.scrollController,
+    this.scrollPhysics,
     this.hintText,
     this.initialValue,
     this.restorationId,
-    this.borderRadius,
-    this.clipBehavior,
-    this.minLines,
-    this.maxLength,
-    this.maxLengthEnforcement,
-    this.inputFormatters,
-    this.autofillHints,
-    this.autovalidateMode = AutovalidateMode.disabled,
-    this.keyboardAppearance,
-    this.scrollPadding = const EdgeInsets.all(20.0),
-    this.transitionDuration,
-    this.transitionCurve,
-    this.autofocus = false,
-    this.focusNode,
     this.semanticLabel,
-    this.textInputSize,
-    this.gap,
-    this.supportingGap,
-    this.padding,
-    this.supportingPadding,
+    this.strutStyle,
+    this.textAlign = TextAlign.start,
+    this.textCapitalization = TextCapitalization.none,
+    this.textDirection,
+    this.controller,
+    this.textInputAction,
+    this.textStyle,
+    this.supportingTextStyle,
+    this.validator,
+    this.onTap,
+    this.onTapOutside,
     this.onChanged,
     this.onEditingComplete,
     this.onSaved,
     this.onSubmitted,
-    this.onTap,
-    this.onTapOutside,
-    this.validator,
     this.errorBuilder,
     this.leading,
     this.trailing,
