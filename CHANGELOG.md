@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.0](https://github.com/coingaming/moon_flutter/compare/v0.19.9...v0.20.0) (2023-05-05)
+
+
+### Features
+
+* [MDS-503] Create Input widget ([#144](https://github.com/coingaming/moon_flutter/issues/144)) ([fc5cd2a](https://github.com/coingaming/moon_flutter/commit/fc5cd2a7514097b688ffe3fe088447f4eb8156b9))
+
 ## [0.19.9](https://github.com/coingaming/moon_flutter/compare/v0.19.8...v0.19.9) (2023-05-02)
 
 
