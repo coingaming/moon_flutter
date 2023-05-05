@@ -16,7 +16,8 @@ import 'package:example/src/storybook/stories/popover.dart';
 import 'package:example/src/storybook/stories/radio.dart';
 import 'package:example/src/storybook/stories/switch.dart';
 import 'package:example/src/storybook/stories/tag.dart';
-import 'package:example/src/storybook/stories/textarea.dart';
+import 'package:example/src/storybook/stories/text_area.dart';
+import 'package:example/src/storybook/stories/text_input.dart';
 import 'package:example/src/storybook/stories/toast.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Accordion",
+          initialStory: "TextInput",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (context, child) => MaterialApp(
@@ -93,6 +94,7 @@ class StorybookPage extends StatelessWidget {
             SwitchStory(),
             TagStory(),
             TextAreaStory(),
+            TextInputStory(),
             ToastStory(),
             TooltipStory(),
           ],

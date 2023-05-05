@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/opacity.dart';
+import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
+import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 
 typedef MoonTextAreaErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
@@ -31,11 +35,11 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.services.TextInputConfiguration.enableSuggestions}
   final bool enableSuggestions;
 
-  /// {@macro flutter.widgets.editableText.scribbleEnabled}
-  final bool scribbleEnabled;
-
   /// {@macro flutter.widgets.editableText.readOnly}
   final bool readOnly;
+
+  /// {@macro flutter.widgets.editableText.scribbleEnabled}
+  final bool scribbleEnabled;
 
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
@@ -67,6 +71,9 @@ class MoonTextArea extends StatefulWidget {
   /// The border color of the error text area.
   final Color? errorBorderColor;
 
+  /// The border color of the hovered text area.
+  final Color? hoverBorderColor;
+
   /// The text color of the text area.
   final Color? textColor;
 
@@ -85,14 +92,14 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.scrollPadding}
   final EdgeInsets scrollPadding;
 
+  /// The padding around supporting widget or error builder.
+  final EdgeInsetsGeometry? supportingPadding;
+
   /// The padding around the text content.
   final EdgeInsetsGeometry? textPadding;
 
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
-
-  /// Validator for the text area widget.
-  final FormFieldValidator<String>? validator;
 
   /// The maximum number of characters (Unicode grapheme clusters) to allow in the text area.
   ///
@@ -116,9 +123,6 @@ class MoonTextArea extends StatefulWidget {
   ///
   /// {@macro flutter.services.textFormatter.maxLengthEnforcement}
   final MaxLengthEnforcement? maxLengthEnforcement;
-
-  /// Builder for the error widget.
-  final MoonTextAreaErrorBuilder? errorBuilder;
 
   /// {@macro flutter.widgets.editableText.scrollController}
   final ScrollController? scrollController;
@@ -151,11 +155,11 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.textAlign}
   final TextAlign textAlign;
 
-  /// {@macro flutter.widgets.editableText.textDirection}
-  final TextDirection? textDirection;
-
   /// {@macro flutter.widgets.editableText.textCapitalization}
   final TextCapitalization textCapitalization;
+
+  /// {@macro flutter.widgets.editableText.textDirection}
+  final TextDirection? textDirection;
 
   /// Controls the text being edited.
   final TextEditingController? controller;
@@ -166,13 +170,16 @@ class MoonTextArea extends StatefulWidget {
   /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
   final TextInputAction? textInputAction;
 
-  /// The style to use for the text being edited.
+  /// The text style to use for the text being edited.
   ///
   /// This text style is also used as the base style for the [decoration].
   final TextStyle? textStyle;
 
-  /// The style to use for the error state text.
-  final TextStyle? errorTextStyle;
+  /// The text style to use for the supporting or error state text.
+  final TextStyle? supportingTextStyle;
+
+  /// Validator for the text area widget.
+  final FormFieldValidator<String>? validator;
 
   /// A callback that is called when the user taps the text area widget.
   final GestureTapCallback? onTap;
@@ -193,7 +200,7 @@ class MoonTextArea extends StatefulWidget {
   final VoidCallback? onEditingComplete;
 
   /// [FormState.save].
-  final void Function(String?)? onSaved;
+  final ValueChanged<String?>? onSaved;
 
   /// {@macro flutter.widgets.editableText.onSubmitted}
   ///
@@ -203,6 +210,13 @@ class MoonTextArea extends StatefulWidget {
   ///    focusable item when the user is done editing.
   final ValueChanged<String>? onSubmitted;
 
+  /// Builder for the error widget.
+  final MoonTextAreaErrorBuilder? errorBuilder;
+
+  /// The widget in the supporting slot of the text area.
+  final Widget? supporting;
+
+  /// MDS TextArea widget
   const MoonTextArea({
     super.key,
     this.autovalidateMode = AutovalidateMode.disabled,
@@ -212,8 +226,8 @@ class MoonTextArea extends StatefulWidget {
     this.enableIMEPersonalizedLearning = true,
     this.enableInteractiveSelection,
     this.enableSuggestions = true,
-    this.scribbleEnabled = true,
     this.readOnly = false,
+    this.scribbleEnabled = true,
     this.showCursor,
     this.borderRadius,
     this.keyboardAppearance,
@@ -222,12 +236,14 @@ class MoonTextArea extends StatefulWidget {
     this.activeBorderColor,
     this.inactiveBorderColor,
     this.errorBorderColor,
+    this.hoverBorderColor,
     this.textColor,
     this.hintTextColor,
     this.height,
     this.transitionDuration,
     this.transitionCurve,
     this.scrollPadding = const EdgeInsets.all(24.0),
+    this.supportingPadding,
     this.textPadding,
     this.focusNode,
     this.validator,
@@ -236,7 +252,6 @@ class MoonTextArea extends StatefulWidget {
     this.autofillHints,
     this.inputFormatters,
     this.maxLengthEnforcement,
-    this.errorBuilder,
     this.scrollController,
     this.scrollPhysics,
     this.hintText,
@@ -245,18 +260,20 @@ class MoonTextArea extends StatefulWidget {
     this.semanticLabel,
     this.strutStyle,
     this.textAlign = TextAlign.start,
-    this.textDirection,
     this.textCapitalization = TextCapitalization.none,
+    this.textDirection,
     this.controller,
     this.textInputAction,
     this.textStyle,
-    this.errorTextStyle,
+    this.supportingTextStyle,
     this.onTap,
     this.onTapOutside,
     this.onChanged,
     this.onEditingComplete,
     this.onSaved,
     this.onSubmitted,
+    this.errorBuilder,
+    this.supporting,
   });
 
   @override
@@ -264,14 +281,9 @@ class MoonTextArea extends StatefulWidget {
 }
 
 class _MoonTextAreaState extends State<MoonTextArea> {
+  bool _isFocused = false;
+  bool _isHovered = false;
   String? _errorText;
-
-  String? _validateInput(String? value) {
-    final validationResult = widget.validator?.call(value);
-    _errorText = validationResult;
-
-    return validationResult;
-  }
 
   Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
     final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
@@ -280,6 +292,21 @@ class _MoonTextAreaState extends State<MoonTextArea> {
     } else {
       return MoonColors.dark.bulma;
     }
+  }
+
+  void _setFocusStatus(bool isFocused) {
+    setState(() => _isFocused = isFocused);
+  }
+
+  void _setHoverStatus(bool isHovered) {
+    setState(() => _isHovered = isHovered);
+  }
+
+  String? _validateInput(String? value) {
+    final validationResult = widget.validator?.call(value);
+    _errorText = validationResult;
+
+    return validationResult;
   }
 
   @override
@@ -302,6 +329,18 @@ class _MoonTextAreaState extends State<MoonTextArea> {
         context.moonTheme?.textAreaTheme.colors.errorBorderColor ??
         MoonColors.light.chiChi100;
 
+    final Color effectiveHoverBorderColor =
+        widget.hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
+
+    final double effectiveFocusEffectExtent =
+        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
+
+    final Color focusEffectColor =
+        context.isDarkMode ? effectiveActiveBorderColor.withOpacity(0.4) : effectiveActiveBorderColor.withOpacity(0.2);
+
+    final Color errorFocusEffectColor =
+        context.isDarkMode ? effectiveErrorBorderColor.withOpacity(0.4) : effectiveErrorBorderColor.withOpacity(0.2);
+
     final Color effectiveTextColor =
         widget.textColor ?? _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
 
@@ -317,19 +356,42 @@ class _MoonTextAreaState extends State<MoonTextArea> {
     final Curve effectiveTransitionCurve =
         widget.transitionCurve ?? context.moonTheme?.textAreaTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
+    final EdgeInsetsGeometry effectiveSupportingPadding = widget.supportingPadding ??
+        context.moonTheme?.textInputTheme.properties.supportingPadding ??
+        EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
+
     final EdgeInsetsGeometry effectiveTextPadding =
         widget.textPadding ?? context.moonTheme?.textAreaTheme.properties.textPadding ?? const EdgeInsets.all(16);
 
     final TextStyle effectiveTextStyle =
         widget.textStyle ?? context.moonTheme?.textAreaTheme.properties.textStyle ?? const TextStyle(fontSize: 16);
 
-    final TextStyle effectiveErrorTextStyle = widget.errorTextStyle ??
-        context.moonTheme?.textAreaTheme.properties.errorTextStyle ??
+    final TextStyle effectiveSupportingTextStyle = widget.supportingTextStyle ??
+        context.moonTheme?.textAreaTheme.properties.supportingTextStyle ??
         const TextStyle(fontSize: 12);
 
     final OutlineInputBorder defaultBorder = OutlineInputBorder(
       borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-      borderSide: BorderSide(color: effectiveInactiveBorderColor),
+      borderSide: BorderSide(
+        color: _isHovered ? effectiveHoverBorderColor : effectiveInactiveBorderColor,
+        width: _isHovered ? MoonBorders.borders.activeBorderWidth : MoonBorders.borders.defaultBorderWidth,
+      ),
+    );
+
+    final OutlineInputBorder focusBorder = OutlineInputBorder(
+      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+      borderSide: BorderSide(
+        color: effectiveActiveBorderColor,
+        width: MoonBorders.borders.activeBorderWidth,
+      ),
+    );
+
+    final OutlineInputBorder errorBorder = OutlineInputBorder(
+      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+      borderSide: BorderSide(
+        color: effectiveErrorBorderColor,
+        width: MoonBorders.borders.activeBorderWidth,
+      ),
     );
 
     return Semantics(
@@ -341,89 +403,106 @@ class _MoonTextAreaState extends State<MoonTextArea> {
           duration: effectiveTransitionDuration,
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                autocorrect: widget.autocorrect,
-                autofillHints: widget.autofillHints,
-                autofocus: widget.autofocus,
-                autovalidateMode: widget.autovalidateMode,
-                controller: widget.controller,
-                cursorColor: effectiveTextColor,
-                enabled: widget.enabled,
-                enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
-                enableInteractiveSelection: widget.enableInteractiveSelection,
-                enableSuggestions: widget.enableSuggestions,
-                expands: true,
-                focusNode: widget.focusNode,
-                initialValue: widget.initialValue,
-                inputFormatters: widget.inputFormatters,
-                keyboardAppearance: widget.keyboardAppearance,
-                keyboardType: TextInputType.multiline,
-                maxLength: widget.maxLength,
-                maxLengthEnforcement: widget.maxLengthEnforcement,
-                maxLines: null,
-                minLines: widget.minLines,
-                onChanged: widget.onChanged,
-                onEditingComplete: widget.onEditingComplete,
-                onFieldSubmitted: widget.onSubmitted,
-                onSaved: widget.onSaved,
-                onTap: widget.onTap,
-                onTapOutside: widget.onTapOutside,
-                readOnly: widget.readOnly,
-                restorationId: widget.restorationId,
-                scrollController: widget.scrollController,
-                scrollPadding: widget.scrollPadding,
-                scrollPhysics: widget.scrollPhysics,
-                showCursor: widget.showCursor,
-                strutStyle: widget.strutStyle,
-                style: effectiveTextStyle.copyWith(color: effectiveTextColor),
-                textAlign: widget.textAlign,
-                textAlignVertical: TextAlignVertical.top,
-                textCapitalization: widget.textCapitalization,
-                textDirection: widget.textDirection,
-                textInputAction: widget.textInputAction,
-                validator: _validateInput,
-                decoration: InputDecoration(
-                  contentPadding: effectiveTextPadding,
-                  filled: true,
-                  hintText: widget.hintText,
-                  hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
-                  errorStyle: const TextStyle(height: 0, fontSize: 0),
-                  constraints: BoxConstraints(
-                    minHeight: widget.height ?? 0.0,
-                    maxHeight: widget.height ?? double.infinity,
-                  ),
-                  fillColor: effectiveBackgroundColor,
-                  focusColor: effectiveActiveBorderColor,
-                  hoverColor: Colors.transparent,
-                  border: defaultBorder,
-                  enabledBorder: defaultBorder,
-                  disabledBorder: defaultBorder,
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-                    borderSide: BorderSide(
-                      color: effectiveErrorBorderColor,
-                      width: 2,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-                    borderSide: BorderSide(
-                      color: effectiveActiveBorderColor,
-                      width: 2,
+              MoonFocusEffect(
+                show: _isFocused,
+                effectExtent: effectiveFocusEffectExtent,
+                effectColor: _errorText == null ? focusEffectColor : errorFocusEffectColor,
+                childBorderRadius: effectiveBorderRadius,
+                effectDuration: effectiveTransitionDuration,
+                effectCurve: effectiveTransitionCurve,
+                child: MouseRegion(
+                  onEnter: (_) => _setHoverStatus(true),
+                  onExit: (_) => _setHoverStatus(false),
+                  child: Focus(
+                    canRequestFocus: false,
+                    onFocusChange: _setFocusStatus,
+                    child: TextFormField(
+                      autocorrect: widget.autocorrect,
+                      autofillHints: widget.autofillHints,
+                      autofocus: widget.autofocus,
+                      autovalidateMode: widget.autovalidateMode,
+                      controller: widget.controller,
+                      cursorColor: effectiveTextColor,
+                      enabled: widget.enabled,
+                      enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
+                      enableInteractiveSelection: widget.enableInteractiveSelection,
+                      enableSuggestions: widget.enableSuggestions,
+                      expands: true,
+                      focusNode: widget.focusNode,
+                      initialValue: widget.initialValue,
+                      inputFormatters: widget.inputFormatters,
+                      keyboardAppearance: widget.keyboardAppearance,
+                      keyboardType: TextInputType.multiline,
+                      maxLength: widget.maxLength,
+                      maxLengthEnforcement: widget.maxLengthEnforcement,
+                      maxLines: null,
+                      minLines: widget.minLines,
+                      onChanged: widget.onChanged,
+                      onEditingComplete: widget.onEditingComplete,
+                      onFieldSubmitted: widget.onSubmitted,
+                      onSaved: widget.onSaved,
+                      onTap: widget.onTap,
+                      onTapOutside: widget.onTapOutside,
+                      readOnly: widget.readOnly,
+                      restorationId: widget.restorationId,
+                      scrollController: widget.scrollController,
+                      scrollPadding: widget.scrollPadding,
+                      scrollPhysics: widget.scrollPhysics,
+                      showCursor: widget.showCursor,
+                      strutStyle: widget.strutStyle,
+                      style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                      textAlign: widget.textAlign,
+                      textAlignVertical: TextAlignVertical.top,
+                      textCapitalization: widget.textCapitalization,
+                      textDirection: widget.textDirection,
+                      textInputAction: widget.textInputAction,
+                      validator: _validateInput,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: effectiveBackgroundColor,
+                        focusColor: effectiveActiveBorderColor,
+                        hoverColor: Colors.transparent,
+                        contentPadding: effectiveTextPadding,
+                        border: defaultBorder,
+                        enabledBorder: defaultBorder,
+                        disabledBorder: defaultBorder,
+                        focusedBorder: focusBorder,
+                        errorBorder: errorBorder,
+                        focusedErrorBorder: errorBorder,
+                        hintText: widget.hintText,
+                        hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
+                        errorStyle: const TextStyle(height: 0.1, fontSize: 0),
+                        constraints: BoxConstraints(
+                          minHeight: widget.height ?? 24,
+                          maxHeight: widget.height ?? 120,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-              if (_errorText != null && widget.errorBuilder != null)
+              if (widget.supporting != null || (_errorText != null && widget.errorBuilder != null))
                 RepaintBoundary(
                   child: AnimatedIconTheme(
-                    color: effectiveErrorBorderColor,
+                    color: _errorText != null && widget.errorBuilder != null
+                        ? effectiveErrorBorderColor
+                        : effectiveHintTextColor,
                     duration: effectiveTransitionDuration,
                     child: AnimatedDefaultTextStyle(
-                      style: effectiveErrorTextStyle.copyWith(color: effectiveErrorBorderColor),
+                      style: effectiveSupportingTextStyle.copyWith(
+                        color: _errorText != null && widget.errorBuilder != null
+                            ? effectiveErrorBorderColor
+                            : effectiveHintTextColor,
+                      ),
                       duration: effectiveTransitionDuration,
-                      child: widget.errorBuilder!(context, _errorText),
+                      child: Padding(
+                        padding: effectiveSupportingPadding,
+                        child: _errorText != null && widget.errorBuilder != null
+                            ? widget.errorBuilder!(context, _errorText)
+                            : widget.supporting,
+                      ),
                     ),
                   ),
                 ),

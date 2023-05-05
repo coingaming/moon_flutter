@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/textarea/textarea_colors.dart';
-import 'package:moon_design/src/theme/textarea/textarea_properties.dart';
+import 'package:moon_design/src/theme/text_area/text_area_colors.dart';
+import 'package:moon_design/src/theme/text_area/text_area_properties.dart';
 
 @immutable
 class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme> with DiagnosticableTreeMixin {

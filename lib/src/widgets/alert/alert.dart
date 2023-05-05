@@ -192,7 +192,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
         MoonBorders.borders.interactiveSm;
 
     final double effectiveBorderWidth =
-        widget.borderWidth ?? context.moonBorders?.borderWidth ?? MoonBorders.borders.borderWidth;
+        widget.borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
     final double effectiveHorizontalGap =
         widget.horizontalGap ?? context.moonTheme?.alertTheme.properties.horizontalGap ?? MoonSizes.sizes.x3s;

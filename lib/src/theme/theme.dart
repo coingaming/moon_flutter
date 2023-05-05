@@ -23,7 +23,8 @@ import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
-import 'package:moon_design/src/theme/textarea/textarea_theme.dart';
+import 'package:moon_design/src/theme/text_area/text_area_theme.dart';
+import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
 import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
@@ -54,6 +55,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     switchTheme: MoonSwitchTheme.light,
     tagTheme: MoonTagTheme.light,
     textAreaTheme: MoonTextAreaTheme.light,
+    textInputTheme: MoonTextInputTheme.light,
     toastTheme: MoonToastTheme.light,
     tooltipTheme: MoonTooltipTheme.light,
     typography: MoonTypography.light,
@@ -83,6 +85,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     switchTheme: MoonSwitchTheme.dark,
     tagTheme: MoonTagTheme.dark,
     textAreaTheme: MoonTextAreaTheme.dark,
+    textInputTheme: MoonTextInputTheme.dark,
     toastTheme: MoonToastTheme.dark,
     tooltipTheme: MoonTooltipTheme.dark,
     typography: MoonTypography.dark,
@@ -157,6 +160,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonTextArea widget theming.
   final MoonTextAreaTheme textAreaTheme;
 
+  /// Moon Design System MoonTextInput widget theming.
+  final MoonTextInputTheme textInputTheme;
+
   /// Moon Design System MoonToast widget theming.
   final MoonToastTheme toastTheme;
 
@@ -190,6 +196,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     required this.switchTheme,
     required this.tagTheme,
     required this.textAreaTheme,
+    required this.textInputTheme,
     required this.toastTheme,
     required this.tooltipTheme,
     required this.typography,
@@ -220,6 +227,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonSwitchTheme? switchTheme,
     MoonTagTheme? tagTheme,
     MoonTextAreaTheme? textAreaTheme,
+    MoonTextInputTheme? textInputTheme,
     MoonToastTheme? toastTheme,
     MoonTooltipTheme? tooltipTheme,
     MoonTypography? typography,
@@ -248,6 +256,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       switchTheme: switchTheme ?? this.switchTheme,
       tagTheme: tagTheme ?? this.tagTheme,
       textAreaTheme: textAreaTheme ?? this.textAreaTheme,
+      textInputTheme: textInputTheme ?? this.textInputTheme,
       toastTheme: toastTheme ?? this.toastTheme,
       tooltipTheme: tooltipTheme ?? this.tooltipTheme,
       typography: typography ?? this.typography,
@@ -282,6 +291,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       switchTheme: switchTheme.lerp(other.switchTheme, t),
       tagTheme: tagTheme.lerp(other.tagTheme, t),
       textAreaTheme: textAreaTheme.lerp(other.textAreaTheme, t),
+      textInputTheme: textInputTheme.lerp(other.textInputTheme, t),
       toastTheme: toastTheme.lerp(other.toastTheme, t),
       tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
       typography: typography.lerp(other.typography, t),
@@ -316,6 +326,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
       ..add(DiagnosticsProperty<MoonTextAreaTheme>("MoonTextAreaTheme", textAreaTheme))
+      ..add(DiagnosticsProperty<MoonTextInputTheme>("MoonTextInputTheme", textInputTheme))
       ..add(DiagnosticsProperty<MoonToastTheme>("MoonToastTheme", toastTheme))
       ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme))
       ..add(DiagnosticsProperty<MoonTypography>("MoonTypography", typography));
