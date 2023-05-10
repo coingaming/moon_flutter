@@ -66,6 +66,7 @@ class StorybookPage extends StatelessWidget {
                   child: Scaffold(
                     extendBody: true,
                     extendBodyBehindAppBar: true,
+                    resizeToAvoidBottomInset: false,
                     body: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: child,

@@ -91,10 +91,11 @@ class TextAreaStory extends Story {
                     child: Builder(
                       builder: (context) {
                         return Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             MoonTextArea(
                               enabled: enabledKnob,
-                              height: 300,
+                              height: 200,
                               textColor: textColor,
                               hintTextColor: hintTextColor,
                               backgroundColor: backgroundColor,

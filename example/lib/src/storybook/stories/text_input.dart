@@ -97,6 +97,11 @@ class TextInputStory extends Story {
               initial: true,
             );
 
+            final enableFloatingLabelKnob = context.knobs.boolean(
+              label: "hasFloatingLabel",
+              description: "Whether MoonTextInput has floating label.",
+            );
+
             final showLeadingKnob = context.knobs.boolean(
               label: "leading",
               description: "Show widget in MoonTextInput leading slot.",
@@ -124,12 +129,14 @@ class TextInputStory extends Story {
                       builder: (context) {
                         return Column(
                           children: [
-                            SizedBox(
+                            Container(
                               height: 86,
+                              alignment: Alignment.topCenter,
                               child: MoonTextInput(
                                 controller: _textEditingController,
                                 textInputSize: textInputSizesKnob,
                                 enabled: enabledKnob,
+                                hasFloatingLabel: enableFloatingLabelKnob,
                                 textColor: textColor,
                                 hintTextColor: hintTextColor,
                                 backgroundColor: backgroundColor,
@@ -140,18 +147,29 @@ class TextInputStory extends Story {
                                     ? BorderRadius.circular(borderRadiusKnob.toDouble())
                                     : null,
                                 hintText: "Enter your text here...",
-                                validator: (value) => value?.length != null && value!.length < 10
+                                /* validator: (value) => value?.length != null && value!.length < 10
                                     ? "The text should be longer than 10 characters."
+                                    : null, */
+                                leading: showLeadingKnob
+                                    ? const MoonIcon(
+                                        MoonIcons.search_24,
+                                        size: 24,
+                                      )
                                     : null,
-                                leading: showLeadingKnob ? const MoonIcon(MoonIcons.search_24) : null,
                                 trailing: showTrailingKnob
-                                    ? MoonButton.icon(
-                                        icon: MoonIcon(
-                                          MoonIcons.close_24,
-                                          color: DefaultTextStyle.of(context).style.color,
-                                        ),
-                                        buttonSize: MoonButtonSize.xs,
-                                        onTap: () => _textEditingController.clear(),
+                                    ? Builder(
+                                        builder: (context) {
+                                          return SizedBox(
+                                            child: MoonButton.icon(
+                                              icon: MoonIcon(
+                                                MoonIcons.close_24,
+                                                color: IconTheme.of(context).color,
+                                              ),
+                                              buttonSize: MoonButtonSize.xs,
+                                              onTap: () => _textEditingController.clear(),
+                                            ),
+                                          );
+                                        },
                                       )
                                     : null,
                                 supporting: showSupportingKnob ? const Text("Supporting text") : null,
