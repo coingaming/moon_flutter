@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
 import 'package:flutter/cupertino.dart';
@@ -17,8 +16,9 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
-import 'package:moon_design/src/widgets/common/text/input_decorator.dart';
+import 'package:moon_design/src/widgets/common/input_decorator.dart';
 
 export 'package:flutter/services.dart'
     show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
@@ -32,48 +32,33 @@ enum MoonTextInputSize {
 
 typedef MoonTextInputErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
-/// Signature for the [MoonTextInput.buildCounter] callback.
-typedef MoonInputCounterWidgetBuilder = Widget? Function(
-  /// The build context for the MoonTextInput.
-  BuildContext context, {
-  /// The length of the string currently in the input.
-  required int currentLength,
-
-  /// The maximum string length that can be entered into the MoonTextInput.
-  required int? maxLength,
-
-  /// Whether or not the MoonTextInput is currently focused. Mainly provided for
-  /// the [liveRegion] parameter in the [Semantics] widget for accessibility.
-  required bool isFocused,
-});
-
-/// A Material Design text field.
+/// A Moon Design text input.
 ///
-/// A text field lets the user enter text, either with hardware keyboard or with
+/// A text input lets the user enter text, either with hardware keyboard or with
 /// an onscreen keyboard.
 ///
-/// The text field calls the [onChanged] callback whenever the user changes the
+/// The text input calls the [onChanged] callback whenever the user changes the
 /// text in the field. If the user indicates that they are done typing in the
-/// field (e.g., by pressing a button on the soft keyboard), the text field
+/// field (e.g., by pressing a button on the soft keyboard), the text input
 /// calls the [onSubmitted] callback.
 ///
-/// To control the text that is displayed in the text field, use the
-/// [controller]. For example, to set the initial value of the text field, use
+/// To control the text that is displayed in the text input, use the
+/// [controller]. For example, to set the initial value of the text input, use
 /// a [controller] that already contains some text. The [controller] can also
 /// control the selection and composing region (and to observe changes to the
 /// text, selection, and composing region).
 ///
-/// By default, a text field has a [decoration] that draws a divider below the
-/// text field. You can use the [decoration] property to control the decoration,
+/// By default, a text input has a [decoration] that draws a divider below the
+/// text input. You can use the [decoration] property to control the decoration,
 /// for example by adding a label or an icon. If you set the [decoration]
 /// property to null, the decoration will be removed entirely, including the
 /// extra padding introduced by the decoration to save space for the labels.
 ///
-/// If [decoration] is non-null (which is the default), the text field requires
+/// If [decoration] is non-null (which is the default), the text input requires
 /// one of its ancestors to be a [Material] widget.
 ///
 /// To integrate the [MoonTextInput] into a [Form] with other [FormField] widgets,
-/// consider using [TextFormField].
+/// consider using [MoonFormTextInput].
 ///
 /// {@template flutter.material.textfield.wantKeepAlive}
 /// When the widget has focus, it will prevent itself from disposing via its
@@ -86,36 +71,11 @@ typedef MoonInputCounterWidgetBuilder = Widget? Function(
 /// when it is no longer needed. This will ensure we discard any resources used
 /// by the object.
 ///
-/// {@tool snippet}
-/// This example shows how to create a [MoonTextInput] that will obscure input. The
-/// [InputDecoration] surrounds the field in a border using [OutlineInputBorder]
-/// and adds a label.
-///
-/// ![](https://flutter.github.io/assets-for-api-docs/assets/material/text_field.png)
-///
-/// ```dart
-/// const MoonTextInput(
-///   obscureText: true,
-///   decoration: InputDecoration(
-///     border: OutlineInputBorder(),
-///     labelText: 'Password',
-///   ),
-/// )
-/// ```
-/// {@end-tool}
-///
 /// ## Reading values
 ///
 /// A common way to read a value from a MoonTextInput is to use the [onSubmitted]
-/// callback. This callback is applied to the text field's current value when
+/// callback. This callback is applied to the text input's current value when
 /// the user finishes editing.
-///
-/// {@tool dartpad}
-/// This sample shows how to get a value from a MoonTextInput via the [onSubmitted]
-/// callback.
-///
-/// ** See code in examples/api/lib/material/text_field/text_field.1.dart **
-/// {@end-tool}
 ///
 /// {@macro flutter.widgets.EditableText.lifeCycle}
 ///
@@ -142,22 +102,11 @@ typedef MoonInputCounterWidgetBuilder = Widget? Function(
 /// {@macro flutter.widgets.editableText.showCaretOnScreen}
 ///
 /// {@macro flutter.widgets.editableText.accessibility}
-///
-/// See also:
-///
-///  * [TextFormField], which integrates with the [Form] widget.
-///  * [InputDecorator], which shows the labels and other visual elements that
-///    surround the actual text editing widget.
-///  * [EditableText], which is the raw text editing control at the heart of a
-///    [MoonTextInput]. The [EditableText] widget is rarely used directly unless
-///    you are implementing an entirely different design language, such as
-///    Cupertino.
-///  * <https://material.io/design/components/text-fields.html>
-///  * Cookbook: [Create and textStyle a text field](https://flutter.dev/docs/cookbook/forms/text-input)
-///  * Cookbook: [Handle changes to a text field](https://flutter.dev/docs/cookbook/forms/text-field-changes)
-///  * Cookbook: [Retrieve the value of a text field](https://flutter.dev/docs/cookbook/forms/retrieve-input)
-///  * Cookbook: [Focus and text fields](https://flutter.dev/docs/cookbook/forms/focus)
 class MoonTextInput extends StatefulWidget {
+  /// If [maxLength] is set to this value, only the "current input length"
+  /// part of the character counter is shown.
+  static const int noMaxLength = -1;
+
   // Moon Design props
 
   /// Whether the text input has floating label.
@@ -208,18 +157,16 @@ class MoonTextInput extends StatefulWidget {
   /// The size of the text input.
   final MoonTextInputSize? textInputSize;
 
+  /// The text for the error
+  final String? errorText;
+
   /// The text for the hint.
   final String? hintText;
 
   /// The initial value of the input.
   final String? initialValue;
 
-  /// The semantic label for the widget.
-  final String? semanticLabel;
-
   /// The textStyle to use for the text being edited.
-  ///
-  /// This text textStyle is also used as the base textStyle for the [decoration].
   final TextStyle? textStyle;
 
   /// The textStyle to use for the error state text.
@@ -237,9 +184,7 @@ class MoonTextInput extends StatefulWidget {
   /// The widget in the supporting slot of the text area.
   final Widget? supporting;
 
-  //
-  // Flutter default props
-  //
+  // Flutter props
 
   /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.intro}
   ///
@@ -252,7 +197,7 @@ class MoonTextInput extends StatefulWidget {
   /// suppress the magnifier, consider passing [TextMagnifierConfiguration.disabled].
   ///
   /// {@tool dartpad}
-  /// This sample demonstrates how to customize the magnifier that this text field uses.
+  /// This sample demonstrates how to customize the magnifier that this text input uses.
   ///
   /// ** See code in examples/api/lib/widgets/text_magnifier/text_magnifier.0.dart **
   /// {@end-tool}
@@ -293,7 +238,7 @@ class MoonTextInput extends StatefulWidget {
   ///
   /// On Android, the user can hide the keyboard - without changing the focus -
   /// with the system back button. They can restore the keyboard's visibility
-  /// by tapping on a text field. The user might hide the keyboard and
+  /// by tapping on a text input. The user might hide the keyboard and
   /// switch to a physical keyboard, or they might just need to get it
   /// out of the way for a moment, to expose something it's
   /// obscuring. In this case requesting the focus again will not
@@ -367,12 +312,8 @@ class MoonTextInput extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
 
-  /// If [maxLength] is set to this value, only the "current input length"
-  /// part of the character counter is shown.
-  static const int noMaxLength = -1;
-
   /// The maximum number of characters (Unicode grapheme clusters) to allow in
-  /// the text field.
+  /// the text input.
   ///
   /// If set, a character counter will be displayed below the
   /// field showing how many characters have been entered. If set to a number
@@ -383,7 +324,7 @@ class MoonTextInput extends StatefulWidget {
   /// is ignored, unless [maxLengthEnforcement] is set to
   /// [MaxLengthEnforcement.none].
   ///
-  /// The text field enforces the length with a [LengthLimitingTextInputFormatter],
+  /// The text input enforces the length with a [LengthLimitingTextInputFormatter],
   /// which is evaluated after the supplied [inputFormatters], if any.
   ///
   /// This value must be either null, [MoonTextInput.noMaxLength], or greater than 0.
@@ -437,7 +378,7 @@ class MoonTextInput extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.inputFormatters}
   final List<TextInputFormatter>? inputFormatters;
 
-  /// If false the text field is "disabled": it ignores taps and its
+  /// If false the text input is "disabled": it ignores taps and its
   /// [decoration] is rendered in grey.
   ///
   /// If non-null this property overrides the [decoration]'s
@@ -500,37 +441,26 @@ class MoonTextInput extends StatefulWidget {
   /// {@template flutter.material.textfield.onTap}
   /// Called for each distinct tap except for every second tap of a double tap.
   ///
-  /// The text field builds a [GestureDetector] to handle input events like tap,
+  /// The text input builds a [GestureDetector] to handle input events like tap,
   /// to trigger focus requests, to move the caret, adjust the selection, etc.
-  /// Handling some of those events by wrapping the text field with a competing
+  /// Handling some of those events by wrapping the text input with a competing
   /// GestureDetector is problematic.
   ///
-  /// To unconditionally handle taps, without interfering with the text field's
+  /// To unconditionally handle taps, without interfering with the text input's
   /// internal gesture detector, provide this callback.
   ///
-  /// If the text field is created with [enabled] false, taps will not be
+  /// If the text input is created with [enabled] false, taps will not be
   /// recognized.
   ///
-  /// To be notified when the text field gains or loses the focus, provide a
+  /// To be notified when the text input gains or loses the focus, provide a
   /// [focusNode] and add a listener to that.
   ///
   /// To listen to arbitrary pointer events without competing with the
-  /// text field's internal gesture detector, use a [Listener].
+  /// text input's internal gesture detector, use a [Listener].
   /// {@endtemplate}
   final GestureTapCallback? onTap;
 
   /// {@macro flutter.widgets.editableText.onTapOutside}
-  ///
-  /// {@tool dartpad}
-  /// This example shows how to use a `TextFieldTapRegion` to wrap a set of
-  /// "spinner" buttons that increment and decrement a value in the [MoonTextInput]
-  /// without causing the text field to lose keyboard focus.
-  ///
-  /// This example includes a generic `SpinnerField<T>` class that you can copy
-  /// into your own project and customize.
-  ///
-  /// ** See code in examples/api/lib/widgets/tap_region/text_field_tap_region.0.dart **
-  /// {@end-tool}
   ///
   /// See also:
   ///
@@ -556,38 +486,6 @@ class MoonTextInput extends StatefulWidget {
   /// the editing position.
   final MouseCursor? mouseCursor;
 
-  /// Callback that generates a custom [InputDecoration.counter] widget.
-  ///
-  /// See [MoonInputCounterWidgetBuilder] for an explanation of the passed in
-  /// arguments. The returned widget will be placed below the line in place of
-  /// the default widget built when [InputDecoration.counterText] is specified.
-  ///
-  /// The returned widget will be wrapped in a [Semantics] widget for
-  /// accessibility, but it also needs to be accessible itself. For example,
-  /// if returning a Text widget, set the [Text.semanticsLabel] property.
-  ///
-  /// {@tool snippet}
-  /// ```dart
-  /// Widget counter(
-  ///   BuildContext context,
-  ///   {
-  ///     required int currentLength,
-  ///     required int? maxLength,
-  ///     required bool isFocused,
-  ///   }
-  /// ) {
-  ///   return Text(
-  ///     '$currentLength of $maxLength characters',
-  ///     semanticsLabel: 'character count',
-  ///   );
-  /// }
-  /// ```
-  /// {@end-tool}
-  ///
-  /// If buildCounter returns null, then no counter and no Semantics widget will
-  /// be created at all.
-  final MoonInputCounterWidgetBuilder? buildCounter;
-
   /// {@macro flutter.widgets.editableText.scrollPhysics}
   final ScrollPhysics? scrollPhysics;
 
@@ -604,11 +502,11 @@ class MoonTextInput extends StatefulWidget {
   final Clip clipBehavior;
 
   /// {@template flutter.material.textfield.restorationId}
-  /// Restoration ID to save and restore the state of the text field.
+  /// Restoration ID to save and restore the state of the text input.
   ///
-  /// If non-null, the text field will persist and restore its current scroll
+  /// If non-null, the text input will persist and restore its current scroll
   /// offset and - if no [controller] has been provided - the content of the
-  /// text field. If a [controller] has been provided, it is the responsibility
+  /// text input. If a [controller] has been provided, it is the responsibility
   /// of the owner of that controller to persist and restore it, e.g. by using
   /// a [RestorableTextEditingController].
   ///
@@ -649,21 +547,14 @@ class MoonTextInput extends StatefulWidget {
   /// configuration, then [materialMisspelledTextStyle] is used by default.
   final SpellCheckConfiguration? spellCheckConfiguration;
 
-  /// Creates a Material Design text field.
-  ///
-  /// If [decoration] is non-null (which is the default), the text field requires
-  /// one of its ancestors to be a [Material] widget.
-  ///
-  /// To remove the decoration entirely (including the extra padding introduced
-  /// by the decoration to save space for the labels), set the [decoration] to
-  /// null.
+  /// Creates a Moon Design text input.
   ///
   /// The [maxLines] property can be set to null to remove the restriction on
   /// the number of lines. By default, it is one, meaning this is a single-line
-  /// text field. [maxLines] must not be zero.
+  /// text input. [maxLines] must not be zero.
   ///
   /// The [maxLength] property is set to null by default, which means the
-  /// number of characters allowed in the text field is not restricted. If
+  /// number of characters allowed in the text input is not restricted. If
   /// [maxLength] is set a character counter will be displayed below the
   /// field showing how many characters have been entered. If the value is
   /// set to a positive integer it will also display the maximum allowed
@@ -673,7 +564,7 @@ class MoonTextInput extends StatefulWidget {
   /// After [maxLength] characters have been input, additional input
   /// is ignored, unless [maxLengthEnforcement] is set to
   /// [MaxLengthEnforcement.none].
-  /// The text field enforces the length with a [LengthLimitingTextInputFormatter],
+  /// The text input enforces the length with a [LengthLimitingTextInputFormatter],
   /// which is evaluated after the supplied [inputFormatters], if any.
   /// The [maxLength] value must be either null or greater than zero.
   ///
@@ -701,8 +592,8 @@ class MoonTextInput extends StatefulWidget {
   ///    characters" and how it may differ from the intuitive meaning.
   const MoonTextInput({
     super.key,
-    // Moon design props
 
+    // Moon Design props
     this.hasFloatingLabel = false,
     this.borderRadius,
     this.backgroundColor,
@@ -719,9 +610,9 @@ class MoonTextInput extends StatefulWidget {
     this.padding,
     this.supportingPadding,
     this.textInputSize,
+    this.errorText,
     this.hintText,
     this.initialValue,
-    this.semanticLabel,
     this.textStyle,
     this.supportingTextStyle,
     this.errorBuilder,
@@ -729,8 +620,7 @@ class MoonTextInput extends StatefulWidget {
     this.trailing,
     this.supporting,
 
-    // Flutter default props
-
+    // Flutter props
     this.controller,
     this.focusNode,
     TextInputType? keyboardType,
@@ -774,7 +664,6 @@ class MoonTextInput extends StatefulWidget {
     this.onTap,
     this.onTapOutside,
     this.mouseCursor,
-    this.buildCounter,
     this.scrollController,
     this.scrollPhysics,
     this.autofillHints = const <String>[],
@@ -907,43 +796,29 @@ class MoonTextInput extends StatefulWidget {
 class _MoonTextInputState extends State<MoonTextInput>
     with RestorationMixin
     implements TextSelectionGestureDetectorBuilderDelegate, AutofillClient {
+  late _TextFieldSelectionGestureDetectorBuilder _selectionGestureDetectorBuilder;
+
+  bool _isHovering = false;
+  bool _showSelectionHandles = false;
+
   RestorableTextEditingController? _controller;
   TextEditingController get _effectiveController => widget.controller ?? _controller!.value;
 
   FocusNode? _focusNode;
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
-  MaxLengthEnforcement get _effectiveMaxLengthEnforcement =>
-      widget.maxLengthEnforcement ??
-      LengthLimitingTextInputFormatter.getDefaultMaxLengthEnforcement(Theme.of(context).platform);
+  EditableTextState? get _editableText => editableTextKey.currentState;
 
-  bool _isHovering = false;
-
-  bool _showSelectionHandles = false;
-
-  late _TextFieldSelectionGestureDetectorBuilder _selectionGestureDetectorBuilder;
-
-  // API for TextSelectionGestureDetectorBuilderDelegate.
-  @override
-  late bool forcePressEnabled;
-
-  @override
-  final GlobalKey<EditableTextState> editableTextKey = GlobalKey<EditableTextState>();
-
-  @override
-  bool get selectionEnabled => widget.selectionEnabled;
-  // End of API for TextSelectionGestureDetectorBuilderDelegate.
+  int get _currentLength => _effectiveController.value.text.characters.length;
 
   bool get _isEnabled => widget.enabled;
 
-  int get _currentLength => _effectiveController.value.text.characters.length;
+  bool get _hasError => _hasIntrinsicError;
 
   bool get _hasIntrinsicError =>
       widget.maxLength != null &&
       widget.maxLength! > 0 &&
       _effectiveController.value.text.characters.length > widget.maxLength!;
-
-  bool get _hasError => _hasIntrinsicError;
 
   bool get _canRequestFocus {
     final NavigationMode mode = MediaQuery.maybeOf(context)?.navigationMode ?? NavigationMode.traditional;
@@ -954,6 +829,10 @@ class _MoonTextInputState extends State<MoonTextInput>
         return true;
     }
   }
+
+  MaxLengthEnforcement get _effectiveMaxLengthEnforcement =>
+      widget.maxLengthEnforcement ??
+      LengthLimitingTextInputFormatter.getDefaultMaxLengthEnforcement(Theme.of(context).platform);
 
   void _registerController() {
     assert(_controller != null);
@@ -968,14 +847,12 @@ class _MoonTextInputState extends State<MoonTextInput>
     }
   }
 
-  EditableTextState? get _editableText => editableTextKey.currentState;
-
   void _requestKeyboard() {
     _editableText?.requestKeyboard();
   }
 
   bool _shouldShowSelectionHandles(SelectionChangedCause? cause) {
-    // When the text field is activated by something that doesn't trigger the
+    // When the text input is activated by something that doesn't trigger the
     // selection overlay, we shouldn't show the handles either.
     if (!_selectionGestureDetectorBuilder.shouldShowSelectionToolbar) {
       return false;
@@ -1086,16 +963,6 @@ class _MoonTextInputState extends State<MoonTextInput>
     }
   }
 
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    if (_controller != null) {
-      _registerController();
-    }
-  }
-
-  @override
-  String? get restorationId => widget.restorationId;
-
   // AutofillClient implementation start.
   @override
   String get autofillId => _editableText!.autofillId;
@@ -1118,6 +985,27 @@ class _MoonTextInputState extends State<MoonTextInput>
     return _editableText!.textInputConfiguration.copyWith(autofillConfiguration: autofillConfiguration);
   }
   // AutofillClient implementation end.
+
+  @override
+  String? get restorationId => widget.restorationId;
+
+  // API for TextSelectionGestureDetectorBuilderDelegate.
+  @override
+  late bool forcePressEnabled;
+
+  @override
+  final GlobalKey<EditableTextState> editableTextKey = GlobalKey<EditableTextState>();
+
+  @override
+  bool get selectionEnabled => widget.selectionEnabled;
+  // End of API for TextSelectionGestureDetectorBuilderDelegate.
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    if (_controller != null) {
+      _registerController();
+    }
+  }
 
   @override
   void initState() {
@@ -1181,107 +1069,29 @@ class _MoonTextInputState extends State<MoonTextInput>
       'inherit false textStyle must supply fontSize and textBaseline',
     );
 
-    final ThemeData theme = Theme.of(context);
-    final DefaultSelectionStyle selectionStyle = DefaultSelectionStyle.of(context);
-    final Brightness keyboardAppearance = widget.keyboardAppearance ?? theme.brightness;
-    final TextEditingController controller = _effectiveController;
-    final FocusNode focusNode = _effectiveFocusNode;
-    final List<TextInputFormatter> formatters = <TextInputFormatter>[
-      ...?widget.inputFormatters,
-      if (widget.maxLength != null)
-        LengthLimitingTextInputFormatter(
-          widget.maxLength,
-          maxLengthEnforcement: _effectiveMaxLengthEnforcement,
-        ),
-    ];
-
-    // Set configuration as disabled if not otherwise specified. If specified,
-    // ensure that configuration uses Material text textStyle for misspelled words
-    // unless a custom textStyle is specified.
-    final SpellCheckConfiguration spellCheckConfiguration = widget.spellCheckConfiguration != null &&
-            widget.spellCheckConfiguration != const SpellCheckConfiguration.disabled()
-        ? widget.spellCheckConfiguration!.copyWith(
-            misspelledTextStyle:
-                widget.spellCheckConfiguration!.misspelledTextStyle ?? MoonTextInput.materialMisspelledTextStyle,
-          )
-        : const SpellCheckConfiguration.disabled();
-
-    TextSelectionControls? textSelectionControls = widget.selectionControls;
-    final bool paintCursorAboveText;
-    final bool cursorOpacityAnimates;
-    Offset? cursorOffset;
-    final Color cursorColor;
-    final Color selectionColor;
     Color? autocorrectionTextRectColor;
+    Offset? cursorOffset;
     Radius? cursorRadius = widget.cursorRadius;
+    TextSelectionControls? textSelectionControls = widget.selectionControls;
     VoidCallback? handleDidGainAccessibilityFocus;
 
-    switch (theme.platform) {
-      case TargetPlatform.iOS:
-        final CupertinoThemeData cupertinoTheme = CupertinoTheme.of(context);
-        forcePressEnabled = true;
-        textSelectionControls ??= cupertinoTextSelectionControls;
-        paintCursorAboveText = true;
-        cursorOpacityAnimates = true;
-        cursorColor = widget.cursorColor ?? selectionStyle.cursorColor ?? cupertinoTheme.primaryColor;
-        selectionColor = selectionStyle.selectionColor ?? cupertinoTheme.primaryColor.withOpacity(0.40);
-        cursorRadius ??= const Radius.circular(2.0);
-        cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.of(context).devicePixelRatio, 0);
-        autocorrectionTextRectColor = selectionColor;
-        break;
+    final ThemeData theme = Theme.of(context);
 
-      case TargetPlatform.macOS:
-        final CupertinoThemeData cupertinoTheme = CupertinoTheme.of(context);
-        forcePressEnabled = false;
-        textSelectionControls ??= cupertinoDesktopTextSelectionControls;
-        paintCursorAboveText = true;
-        cursorOpacityAnimates = false;
-        cursorColor = widget.cursorColor ?? selectionStyle.cursorColor ?? cupertinoTheme.primaryColor;
-        selectionColor = selectionStyle.selectionColor ?? cupertinoTheme.primaryColor.withOpacity(0.40);
-        cursorRadius ??= const Radius.circular(2.0);
-        cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.of(context).devicePixelRatio, 0);
-        handleDidGainAccessibilityFocus = () {
-          // Automatically activate the MoonTextInput when it receives accessibility focus.
-          if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
-            _effectiveFocusNode.requestFocus();
-          }
-        };
-        break;
+    final bool cursorOpacityAnimates;
 
-      case TargetPlatform.android:
-      case TargetPlatform.fuchsia:
-        forcePressEnabled = false;
-        textSelectionControls ??= materialTextSelectionControls;
-        paintCursorAboveText = false;
-        cursorOpacityAnimates = false;
-        cursorColor = widget.cursorColor ?? selectionStyle.cursorColor ?? theme.colorScheme.primary;
-        selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
-        break;
+    final bool paintCursorAboveText;
 
-      case TargetPlatform.linux:
-        forcePressEnabled = false;
-        textSelectionControls ??= desktopTextSelectionControls;
-        paintCursorAboveText = false;
-        cursorOpacityAnimates = false;
-        cursorColor = widget.cursorColor ?? selectionStyle.cursorColor ?? theme.colorScheme.primary;
-        selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
-        break;
+    final Brightness keyboardAppearance = widget.keyboardAppearance ?? theme.brightness;
 
-      case TargetPlatform.windows:
-        forcePressEnabled = false;
-        textSelectionControls ??= desktopTextSelectionControls;
-        paintCursorAboveText = false;
-        cursorOpacityAnimates = false;
-        cursorColor = widget.cursorColor ?? selectionStyle.cursorColor ?? theme.colorScheme.primary;
-        selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
-        handleDidGainAccessibilityFocus = () {
-          // Automatically activate the MoonTextInput when it receives accessibility focus.
-          if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
-            _effectiveFocusNode.requestFocus();
-          }
-        };
-        break;
-    }
+    final Color cursorColor;
+
+    final Color selectionColor;
+
+    final DefaultSelectionStyle selectionStyle = DefaultSelectionStyle.of(context);
+
+    final FocusNode focusNode = _effectiveFocusNode;
+
+    final TextEditingController controller = _effectiveController;
 
     final MoonTextInputSizeProperties effectiveMoonTextInputSize = _getMoonTextInputSize(context, widget.textInputSize);
 
@@ -1374,11 +1184,98 @@ class _MoonTextInputState extends State<MoonTextInput>
       ),
     );
 
-    final RoundedRectangleBorder resolvedBorder = _hasError
+    final RoundedRectangleBorder resolvedBorder = widget.errorText != null
         ? errorBorder
         : _effectiveFocusNode.hasFocus
             ? focusBorder
             : defaultBorder;
+
+    final List<TextInputFormatter> formatters = <TextInputFormatter>[
+      ...?widget.inputFormatters,
+      if (widget.maxLength != null)
+        LengthLimitingTextInputFormatter(
+          widget.maxLength,
+          maxLengthEnforcement: _effectiveMaxLengthEnforcement,
+        ),
+    ];
+
+    // Set configuration as disabled if not otherwise specified. If specified,
+    // ensure that configuration uses Material text textStyle for misspelled words
+    // unless a custom textStyle is specified.
+    final SpellCheckConfiguration spellCheckConfiguration = widget.spellCheckConfiguration != null &&
+            widget.spellCheckConfiguration != const SpellCheckConfiguration.disabled()
+        ? widget.spellCheckConfiguration!.copyWith(
+            misspelledTextStyle:
+                widget.spellCheckConfiguration!.misspelledTextStyle ?? MoonTextInput.materialMisspelledTextStyle,
+          )
+        : const SpellCheckConfiguration.disabled();
+
+    switch (theme.platform) {
+      case TargetPlatform.iOS:
+        final CupertinoThemeData cupertinoTheme = CupertinoTheme.of(context);
+        forcePressEnabled = true;
+        textSelectionControls ??= cupertinoTextSelectionControls;
+        paintCursorAboveText = true;
+        cursorOpacityAnimates = true;
+        cursorColor = widget.cursorColor ?? effectiveTextColor;
+        selectionColor = selectionStyle.selectionColor ?? cupertinoTheme.primaryColor.withOpacity(0.40);
+        cursorRadius ??= const Radius.circular(2.0);
+        cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.of(context).devicePixelRatio, 0);
+        autocorrectionTextRectColor = selectionColor;
+        break;
+
+      case TargetPlatform.macOS:
+        final CupertinoThemeData cupertinoTheme = CupertinoTheme.of(context);
+        forcePressEnabled = false;
+        textSelectionControls ??= cupertinoDesktopTextSelectionControls;
+        paintCursorAboveText = true;
+        cursorOpacityAnimates = false;
+        cursorColor = widget.cursorColor ?? effectiveTextColor;
+        selectionColor = selectionStyle.selectionColor ?? cupertinoTheme.primaryColor.withOpacity(0.40);
+        cursorRadius ??= const Radius.circular(2.0);
+        cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.of(context).devicePixelRatio, 0);
+        handleDidGainAccessibilityFocus = () {
+          // Automatically activate the MoonTextInput when it receives accessibility focus.
+          if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
+            _effectiveFocusNode.requestFocus();
+          }
+        };
+        break;
+
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+        forcePressEnabled = false;
+        textSelectionControls ??= materialTextSelectionControls;
+        paintCursorAboveText = false;
+        cursorOpacityAnimates = false;
+        cursorColor = widget.cursorColor ?? effectiveTextColor;
+        selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
+        break;
+
+      case TargetPlatform.linux:
+        forcePressEnabled = false;
+        textSelectionControls ??= desktopTextSelectionControls;
+        paintCursorAboveText = false;
+        cursorOpacityAnimates = false;
+        cursorColor = widget.cursorColor ?? effectiveTextColor;
+        selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
+        break;
+
+      case TargetPlatform.windows:
+        forcePressEnabled = false;
+        textSelectionControls ??= desktopTextSelectionControls;
+        paintCursorAboveText = false;
+        cursorOpacityAnimates = false;
+        cursorColor = widget.cursorColor ?? effectiveTextColor;
+        selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
+        handleDidGainAccessibilityFocus = () {
+          // Automatically activate the MoonTextInput when it receives accessibility focus.
+          if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
+            _effectiveFocusNode.requestFocus();
+          }
+        };
+        break;
+    }
 
     final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor>(
       widget.mouseCursor ?? MaterialStateMouseCursor.textable,
@@ -1398,8 +1295,6 @@ class _MoonTextInputState extends State<MoonTextInput>
     } else {
       semanticsMaxValueLength = null;
     }
-
-    log(effectiveHeight.toString());
 
     Widget child = RepaintBoundary(
       child: UnmanagedRestorationScope(
@@ -1450,7 +1345,7 @@ class _MoonTextInputState extends State<MoonTextInput>
           scrollController: widget.scrollController,
           scrollPadding: widget.scrollPadding,
           scrollPhysics: widget.scrollPhysics,
-          // Only show the selection highlight when the text field is focused.
+          // Only show the selection highlight when the text input is focused.
           selectionColor: focusNode.hasFocus ? selectionColor : null,
           selectionControls: widget.selectionEnabled ? textSelectionControls : null,
           selectionHeightStyle: widget.selectionHeightStyle,
@@ -1484,6 +1379,7 @@ class _MoonTextInputState extends State<MoonTextInput>
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: resolvedDirectionalPadding,
+            //errorStyle: const TextStyle(height: 0.1, fontSize: 0),
             floatingLabelAlignment: FloatingLabelAlignment.start,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             floatingLabelStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
@@ -1526,27 +1422,54 @@ class _MoonTextInputState extends State<MoonTextInput>
       opacity: widget.enabled ? 1.0 : effectiveDisabledOpacityValue,
       curve: effectiveTransitionCurve,
       duration: effectiveTransitionDuration,
-      child: MoonFocusEffect(
-        show: _effectiveFocusNode.hasFocus,
-        effectExtent: effectiveFocusEffectExtent,
-        effectColor: _hasError ? focusEffectColor : errorFocusEffectColor,
-        childBorderRadius: effectiveBorderRadius,
-        effectDuration: effectiveTransitionDuration,
-        effectCurve: effectiveTransitionCurve,
-        child: AnimatedContainer(
-          height: effectiveHeight,
-          duration: effectiveTransitionDuration,
-          decoration: ShapeDecoration(
-            shape: resolvedBorder,
-          ),
-          child: DecoratedBox(
-            decoration: ShapeDecoration(
-              color: effectiveBackgroundColor,
-              shape: resolvedBorder.copyWith(side: BorderSide.none),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MoonFocusEffect(
+            show: _effectiveFocusNode.hasFocus,
+            effectExtent: effectiveFocusEffectExtent,
+            effectColor: widget.errorText == null ? focusEffectColor : errorFocusEffectColor,
+            childBorderRadius: effectiveBorderRadius,
+            effectDuration: effectiveTransitionDuration,
+            effectCurve: effectiveTransitionCurve,
+            child: AnimatedContainer(
+              height: effectiveHeight,
+              duration: effectiveTransitionDuration,
+              decoration: ShapeDecoration(shape: resolvedBorder),
+              child: DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: effectiveBackgroundColor,
+                  shape: resolvedBorder.copyWith(side: BorderSide.none),
+                ),
+                child: child,
+              ),
             ),
-            child: child,
           ),
-        ),
+          if (widget.supporting != null || (widget.errorText != null && widget.errorBuilder != null))
+            RepaintBoundary(
+              child: AnimatedIconTheme(
+                color: widget.errorText != null && widget.errorBuilder != null
+                    ? effectiveErrorBorderColor
+                    : effectiveHintTextColor,
+                duration: effectiveTransitionDuration,
+                child: AnimatedDefaultTextStyle(
+                  style: effectiveSupportingTextStyle.copyWith(
+                    color: widget.errorText != null && widget.errorBuilder != null
+                        ? effectiveErrorBorderColor
+                        : effectiveHintTextColor,
+                  ),
+                  duration: effectiveTransitionDuration,
+                  child: Padding(
+                    padding: effectiveSupportingPadding,
+                    child: widget.errorText != null && widget.errorBuilder != null
+                        ? widget.errorBuilder!(context, widget.errorText)
+                        : widget.supporting,
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
     );
 
@@ -1577,7 +1500,9 @@ class _MoonTextInputState extends State<MoonTextInput>
               );
             },
             child: _selectionGestureDetectorBuilder.buildGestureDetector(
-                behavior: HitTestBehavior.translucent, child: child),
+              behavior: HitTestBehavior.translucent,
+              child: child,
+            ),
           ),
         ),
       ),

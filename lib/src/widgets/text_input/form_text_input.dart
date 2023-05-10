@@ -1,18 +1,21 @@
-/* // Copyright 2014 The Flutter Authors. All rights reserved.
+// Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart'
     hide InputDecoration, InputDecorator, FloatingLabelAlignment, FloatingLabelBehavior;
 import 'package:flutter/services.dart';
-import 'package:moon_design/src/widgets/common/text/input_decorator.dart';
-import 'package:moon_design/src/widgets/common/text/text_field.dart';
+
+import 'package:moon_design/src/widgets/common/input_decorator.dart';
+import 'package:moon_design/src/widgets/text_input/text_input.dart';
 
 export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType;
 
-/// A [FormField] that contains a [MoonTextField].
+/// A [FormField] that contains a [MoonTextInput].
 ///
-/// This is a convenience widget that wraps a [MoonTextField] widget in a
+/// This is a convenience widget that wraps a [MoonTextInput] widget in a
 /// [FormField].
 ///
 /// A [Form] ancestor is not required. The [Form] simply makes it easier to
@@ -36,27 +39,21 @@ export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType;
 /// when it is no longer needed. This will ensure any resources used by the object
 /// are discarded.
 ///
-/// By default, `decoration` will apply the [ThemeData.inputDecorationTheme] for
-/// the current context to the [InputDecoration], see
-/// [InputDecoration.applyDefaults].
-///
-/// For a documentation about the various parameters, see [MoonTextField].
+/// For a documentation about the various parameters, see [MoonTextInput].
 ///
 /// {@tool snippet}
 ///
-/// Creates a [MoonTextFormField] with an [InputDecoration] and validator function.
+/// Creates a [MoonFormTextInput] with an [InputDecoration] and validator function.
 ///
-/// ![If the user enters valid text, the MoonTextField appears normally without any warnings to the user](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field.png)
+/// ![If the user enters valid text, the MoonTextInput appears normally without any warnings to the user](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field.png)
 ///
 /// ![If the user enters invalid text, the error message returned from the validator function is displayed in dark red underneath the input](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field_error.png)
 ///
 /// ```dart
-/// MoonTextFormField(
-///   decoration: const InputDecoration(
-///     icon: Icon(Icons.person),
-///     hintText: 'What do people call you?',
-///     labelText: 'Name *',
-///   ),
+/// MoonFormTextInput(
+///   leading: Icon(Icons.person),
+///   hintText: 'What do people call you?',
+///   labelText: 'Name *',
 ///   onSaved: (String? value) {
 ///     // This optional block of code can be used to run
 ///     // code when the user saves the form.
@@ -78,75 +75,100 @@ export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType;
 /// See also:
 ///
 ///  * <https://material.io/design/components/text-fields.html>
-///  * [MoonTextField], which is the underlying text field without the [Form]
+///  * [MoonTextInput], which is the underlying text field without the [Form]
 ///    integration.
-///  * [InputDecorator], which shows the labels and other visual elements that
-///    surround the actual text editing widget.
-///  * Learn how to use a [TextEditingController] in one of our [cookbook recipes](https://flutter.dev/docs/cookbook/forms/text-field-changes#2-use-a-texteditingcontroller).
-class MoonTextFormField extends FormField<String> {
-  /// Creates a [FormField] that contains a [MoonTextField].
+class MoonFormTextInput extends FormField<String> {
+  /// Creates a [FormField] that contains a [MoonTextInput].
   ///
   /// When a [controller] is specified, [initialValue] must be null (the
   /// default). If [controller] is null, then a [TextEditingController]
   /// will be constructed automatically and its `text` will be initialized
   /// to [initialValue] or the empty string.
   ///
-  /// For documentation about the various parameters, see the [MoonTextField] class
-  /// and [MoonTextField.new], the constructor.
-  MoonTextFormField({
+  /// For documentation about the various parameters, see the [MoonTextInput] class.
+  MoonFormTextInput({
     super.key,
-    this.controller,
-    String? initialValue,
-    FocusNode? focusNode,
-    InputDecoration? decoration = const InputDecoration(),
-    TextInputType? keyboardType,
-    TextCapitalization textCapitalization = TextCapitalization.none,
-    TextInputAction? textInputAction,
-    TextStyle? style,
-    StrutStyle? strutStyle,
-    TextDirection? textDirection,
-    TextAlign textAlign = TextAlign.start,
-    TextAlignVertical? textAlignVertical,
-    bool autofocus = false,
-    bool readOnly = false,
-    bool? showCursor,
-    String obscuringCharacter = '•',
-    bool obscureText = false,
-    bool autocorrect = true,
-    SmartDashesType? smartDashesType,
-    SmartQuotesType? smartQuotesType,
-    bool enableSuggestions = true,
-    MaxLengthEnforcement? maxLengthEnforcement,
-    int? maxLines = 1,
-    int? minLines,
-    bool expands = false,
-    int? maxLength,
-    ValueChanged<String>? onChanged,
-    GestureTapCallback? onTap,
-    TapRegionCallback? onTapOutside,
-    VoidCallback? onEditingComplete,
-    ValueChanged<String>? onFieldSubmitted,
     super.onSaved,
+    super.restorationId,
     super.validator,
-    List<TextInputFormatter>? inputFormatters,
+    this.controller,
+    AppPrivateCommandCallback? onAppPrivateCommand,
+    AutovalidateMode? autovalidateMode,
+    bool autocorrect = true,
+    bool autofocus = false,
+    bool enableIMEPersonalizedLearning = true,
+    bool enableSuggestions = true,
+    bool expands = false,
+    bool hasFloatingLabel = false,
+    bool obscureText = false,
+    bool readOnly = false,
+    bool scribbleEnabled = true,
     bool? enabled,
+    bool? enableInteractiveSelection,
+    bool? showCursor,
+    BorderRadiusGeometry? borderRadius,
+    Brightness? keyboardAppearance,
+    Clip clipBehavior = Clip.hardEdge,
+    Color? activeBorderColor,
+    Color? backgroundColor,
+    Color? cursorColor,
+    Color? errorBorderColor,
+    Color? hintTextColor,
+    Color? hoverBorderColor,
+    Color? inactiveBorderColor,
+    Color? textColor,
+    Curve? transitionCurve,
     double cursorWidth = 2.0,
     double? cursorHeight,
-    Radius? cursorRadius,
-    Color? cursorColor,
-    Brightness? keyboardAppearance,
+    double? gap,
+    double? height,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    Duration? transitionDuration,
     EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
-    bool? enableInteractiveSelection,
-    TextSelectionControls? selectionControls,
-    InputCounterWidgetBuilder? buildCounter,
-    ScrollPhysics? scrollPhysics,
-    Iterable<String>? autofillHints,
-    AutovalidateMode? autovalidateMode,
-    ScrollController? scrollController,
-    super.restorationId,
-    bool enableIMEPersonalizedLearning = true,
-    MouseCursor? mouseCursor,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? supportingPadding,
     EditableTextContextMenuBuilder? contextMenuBuilder = _defaultContextMenuBuilder,
+    FocusNode? focusNode,
+    GestureTapCallback? onTap,
+    InputDecoration? decoration = const InputDecoration(),
+    int? maxLength,
+    int? maxLines = 1,
+    int? minLines,
+    Iterable<String>? autofillHints,
+    List<TextInputFormatter>? inputFormatters,
+    MaxLengthEnforcement? maxLengthEnforcement,
+    MoonTextInputErrorBuilder? errorBuilder,
+    MoonTextInputSize? textInputSize,
+    MouseCursor? mouseCursor,
+    Radius? cursorRadius,
+    ScrollController? scrollController,
+    ScrollPhysics? scrollPhysics,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
+    SpellCheckConfiguration? spellCheckConfiguration,
+    String obscuringCharacter = '•',
+    String? hintText,
+    String? initialValue,
+    StrutStyle? strutStyle,
+    TapRegionCallback? onTapOutside,
+    TextAlign textAlign = TextAlign.start,
+    TextAlignVertical? textAlignVertical,
+    TextCapitalization textCapitalization = TextCapitalization.none,
+    TextDirection? textDirection,
+    TextInputAction? textInputAction,
+    TextInputType? keyboardType,
+    TextMagnifierConfiguration? magnifierConfiguration,
+    TextSelectionControls? selectionControls,
+    TextStyle? style,
+    TextStyle? supportingTextStyle,
+    ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
+    ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onFieldSubmitted,
+    VoidCallback? onEditingComplete,
+    Widget? leading,
+    Widget? supporting,
+    Widget? trailing,
   })  : assert(initialValue == null || controller == null),
         assert(obscuringCharacter.length == 1),
         assert(maxLines == null || maxLines > 0),
@@ -160,15 +182,14 @@ class MoonTextFormField extends FormField<String> {
           'minLines and maxLines must be null when expands is true.',
         ),
         assert(!obscureText || maxLines == 1, 'Obscured fields cannot be multiline.'),
-        assert(maxLength == null || maxLength == MoonTextField.noMaxLength || maxLength > 0),
+        assert(maxLength == null || maxLength == MoonTextInput.noMaxLength || maxLength > 0),
         super(
           initialValue: controller != null ? controller.text : (initialValue ?? ''),
           enabled: enabled ?? decoration?.enabled ?? true,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
           builder: (FormFieldState<String> field) {
             final _TextFormFieldState state = field as _TextFormFieldState;
-            final InputDecoration effectiveDecoration =
-                (decoration ?? const InputDecoration()).applyDefaults(Theme.of(field.context).inputDecorationTheme);
+
             void onChangedHandler(String value) {
               field.didChange(value);
               if (onChanged != null) {
@@ -178,55 +199,85 @@ class MoonTextFormField extends FormField<String> {
 
             return UnmanagedRestorationScope(
               bucket: field.bucket,
-              child: MoonTextField(
-                restorationId: restorationId,
-                controller: state._effectiveController,
-                focusNode: focusNode,
-                decoration: effectiveDecoration.copyWith(errorText: field.errorText),
-                keyboardType: keyboardType,
-                textInputAction: textInputAction,
-                style: style,
-                strutStyle: strutStyle,
-                textAlign: textAlign,
-                textAlignVertical: textAlignVertical,
-                textDirection: textDirection,
-                textCapitalization: textCapitalization,
-                autofocus: autofocus,
-                readOnly: readOnly,
-                showCursor: showCursor,
-                obscuringCharacter: obscuringCharacter,
-                obscureText: obscureText,
+              child: MoonTextInput(
+                activeBorderColor: activeBorderColor,
                 autocorrect: autocorrect,
-                smartDashesType: smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-                smartQuotesType: smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+                autofillHints: autofillHints,
+                autofocus: autofocus,
+                backgroundColor: backgroundColor,
+                borderRadius: borderRadius,
+                clipBehavior: clipBehavior,
+                contextMenuBuilder: contextMenuBuilder,
+                controller: state._effectiveController,
+                cursorColor: cursorColor,
+                cursorHeight: cursorHeight,
+                cursorRadius: cursorRadius,
+                cursorWidth: cursorWidth,
+                dragStartBehavior: dragStartBehavior,
+                enabled: enabled ?? decoration?.enabled ?? true,
+                enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+                enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
                 enableSuggestions: enableSuggestions,
+                errorBorderColor: errorBorderColor,
+                errorBuilder: errorBuilder,
+                errorText: field.errorText,
+                expands: expands,
+                focusNode: focusNode,
+                gap: gap,
+                hasFloatingLabel: hasFloatingLabel,
+                height: height,
+                hintText: hintText,
+                hintTextColor: hintTextColor,
+                hoverBorderColor: hoverBorderColor,
+                inactiveBorderColor: inactiveBorderColor,
+                initialValue: initialValue,
+                inputFormatters: inputFormatters,
+                keyboardAppearance: keyboardAppearance,
+                keyboardType: keyboardType,
+                leading: leading,
+                magnifierConfiguration: magnifierConfiguration,
+                maxLength: maxLength,
                 maxLengthEnforcement: maxLengthEnforcement,
                 maxLines: maxLines,
                 minLines: minLines,
-                expands: expands,
-                maxLength: maxLength,
+                mouseCursor: mouseCursor,
+                obscureText: obscureText,
+                obscuringCharacter: obscuringCharacter,
+                onAppPrivateCommand: onAppPrivateCommand,
                 onChanged: onChangedHandler,
-                onTap: onTap,
-                onTapOutside: onTapOutside,
                 onEditingComplete: onEditingComplete,
                 onSubmitted: onFieldSubmitted,
-                inputFormatters: inputFormatters,
-                enabled: enabled ?? decoration?.enabled ?? true,
-                cursorWidth: cursorWidth,
-                cursorHeight: cursorHeight,
-                cursorRadius: cursorRadius,
-                cursorColor: cursorColor,
+                onTap: onTap,
+                onTapOutside: onTapOutside,
+                padding: padding,
+                readOnly: readOnly,
+                restorationId: restorationId,
+                scribbleEnabled: scribbleEnabled,
+                scrollController: scrollController,
                 scrollPadding: scrollPadding,
                 scrollPhysics: scrollPhysics,
-                keyboardAppearance: keyboardAppearance,
-                enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
                 selectionControls: selectionControls,
-                buildCounter: buildCounter,
-                autofillHints: autofillHints,
-                scrollController: scrollController,
-                enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-                mouseCursor: mouseCursor,
-                contextMenuBuilder: contextMenuBuilder,
+                selectionHeightStyle: selectionHeightStyle,
+                selectionWidthStyle: selectionWidthStyle,
+                showCursor: showCursor,
+                smartDashesType: smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+                smartQuotesType: smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+                spellCheckConfiguration: spellCheckConfiguration,
+                strutStyle: strutStyle,
+                supporting: supporting,
+                supportingPadding: supportingPadding,
+                supportingTextStyle: supportingTextStyle,
+                textAlign: textAlign,
+                textAlignVertical: textAlignVertical,
+                textCapitalization: textCapitalization,
+                textColor: textColor,
+                textDirection: textDirection,
+                textInputAction: textInputAction,
+                textInputSize: textInputSize,
+                textStyle: style,
+                trailing: trailing,
+                transitionCurve: transitionCurve,
+                transitionDuration: transitionDuration,
               ),
             );
           },
@@ -253,7 +304,7 @@ class _TextFormFieldState extends FormFieldState<String> {
 
   TextEditingController get _effectiveController => _textFormField.controller ?? _controller!.value;
 
-  MoonTextFormField get _textFormField => super.widget as MoonTextFormField;
+  MoonFormTextInput get _textFormField => super.widget as MoonFormTextInput;
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
@@ -290,7 +341,7 @@ class _TextFormFieldState extends FormFieldState<String> {
   }
 
   @override
-  void didUpdateWidget(MoonTextFormField oldWidget) {
+  void didUpdateWidget(MoonFormTextInput oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (_textFormField.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_handleControllerChanged);
@@ -348,4 +399,3 @@ class _TextFormFieldState extends FormFieldState<String> {
     }
   }
 }
- */

@@ -132,7 +132,7 @@ class TextInputStory extends Story {
                             Container(
                               height: 86,
                               alignment: Alignment.topCenter,
-                              child: MoonTextInput(
+                              child: MoonFormTextInput(
                                 controller: _textEditingController,
                                 textInputSize: textInputSizesKnob,
                                 enabled: enabledKnob,
@@ -147,9 +147,9 @@ class TextInputStory extends Story {
                                     ? BorderRadius.circular(borderRadiusKnob.toDouble())
                                     : null,
                                 hintText: "Enter your text here...",
-                                /* validator: (value) => value?.length != null && value!.length < 10
+                                validator: (value) => value?.length != null && value!.length < 10
                                     ? "The text should be longer than 10 characters."
-                                    : null, */
+                                    : null,
                                 leading: showLeadingKnob
                                     ? const MoonIcon(
                                         MoonIcons.search_24,
