@@ -130,7 +130,6 @@ class MoonFormTextInput extends FormField<String> {
     EditableTextContextMenuBuilder? contextMenuBuilder = _defaultContextMenuBuilder,
     FocusNode? focusNode,
     GestureTapCallback? onTap,
-    InputDecoration? decoration = const InputDecoration(),
     int? maxLength,
     int? maxLines = 1,
     int? minLines,
@@ -185,7 +184,7 @@ class MoonFormTextInput extends FormField<String> {
         assert(maxLength == null || maxLength == MoonTextInput.noMaxLength || maxLength > 0),
         super(
           initialValue: controller != null ? controller.text : (initialValue ?? ''),
-          enabled: enabled ?? decoration?.enabled ?? true,
+          enabled: enabled ?? true,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
           builder: (FormFieldState<String> field) {
             final _TextFormFieldState state = field as _TextFormFieldState;
@@ -214,7 +213,7 @@ class MoonFormTextInput extends FormField<String> {
                 cursorRadius: cursorRadius,
                 cursorWidth: cursorWidth,
                 dragStartBehavior: dragStartBehavior,
-                enabled: enabled ?? decoration?.enabled ?? true,
+                enabled: enabled ?? true,
                 enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
                 enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
                 enableSuggestions: enableSuggestions,

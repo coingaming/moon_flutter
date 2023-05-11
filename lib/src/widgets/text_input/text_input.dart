@@ -112,6 +112,11 @@ class MoonTextInput extends StatefulWidget {
   /// Whether the text input has floating label.
   final bool hasFloatingLabel;
 
+  /// Whether the input is dense ie takes less space.
+  ///
+  /// This property is true by default.
+  final bool isDense;
+
   /// The border radius of the input.
   final BorderRadiusGeometry? borderRadius;
 
@@ -595,6 +600,7 @@ class MoonTextInput extends StatefulWidget {
 
     // Moon Design props
     this.hasFloatingLabel = false,
+    this.isDense = true,
     this.borderRadius,
     this.backgroundColor,
     this.activeBorderColor,
@@ -1375,7 +1381,7 @@ class _MoonTextInputState extends State<MoonTextInput>
           isFocused: focusNode.hasFocus,
           isHovering: _isHovering,
           textAlign: widget.textAlign,
-          textAlignVertical: TextAlignVertical.center,
+          textAlignVertical: widget.textAlignVertical,
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: resolvedDirectionalPadding,
@@ -1385,7 +1391,7 @@ class _MoonTextInputState extends State<MoonTextInput>
             floatingLabelStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
             hintStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
             hintText: widget.hasFloatingLabel ? null : widget.hintText,
-            isDense: true,
+            isDense: widget.isDense,
             labelStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
             labelText: widget.hasFloatingLabel ? widget.hintText : null,
             prefixStyle: effectiveTextStyle.copyWith(color: effectiveTextColor),
