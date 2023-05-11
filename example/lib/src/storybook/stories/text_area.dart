@@ -82,6 +82,16 @@ class TextAreaStory extends Story {
               initial: true,
             );
 
+            final growableKnob = context.knobs.boolean(
+              label: "Growable",
+              description: "Whether the MoonTextArea has no fixed height and is growable",
+            );
+
+            final showSupportingKnob = context.knobs.boolean(
+              label: "supporting",
+              description: "Show widget in MoonTextArea supporting slot.",
+            );
+
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -95,7 +105,7 @@ class TextAreaStory extends Story {
                           children: [
                             MoonTextArea(
                               enabled: enabledKnob,
-                              height: 200,
+                              height: growableKnob ? null : 200,
                               textColor: textColor,
                               hintTextColor: hintTextColor,
                               backgroundColor: backgroundColor,
@@ -108,6 +118,7 @@ class TextAreaStory extends Story {
                               validator: (value) => value?.length != null && value!.length < 10
                                   ? "The text should be longer than 10 characters."
                                   : null,
+                              helper: showSupportingKnob ? const Text("Supporting text") : null,
                               errorBuilder: (context, errorText) => Text(errorText!),
                             ),
                             const SizedBox(height: 16),

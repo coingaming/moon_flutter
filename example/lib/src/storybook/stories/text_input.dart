@@ -115,8 +115,8 @@ class TextInputStory extends Story {
             );
 
             final showSupportingKnob = context.knobs.boolean(
-              label: "supporting",
-              description: "Show widget in MoonTextInput supporting slot.",
+              label: "helper",
+              description: "Show widget in MoonTextInput helper slot.",
             );
 
             return Center(
@@ -172,7 +172,7 @@ class TextInputStory extends Story {
                                         },
                                       )
                                     : null,
-                                supporting: showSupportingKnob ? const Text("Supporting text") : null,
+                                helper: showSupportingKnob ? const Text("Supporting text") : null,
                                 errorBuilder: (context, errorText) => Text(errorText!),
                               ),
                             ),

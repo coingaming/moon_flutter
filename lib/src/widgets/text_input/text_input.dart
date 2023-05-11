@@ -156,8 +156,8 @@ class MoonTextInput extends StatefulWidget {
   /// The padding of the text input.
   final EdgeInsetsGeometry? padding;
 
-  /// The padding around supporting widget or error builder.
-  final EdgeInsetsGeometry? supportingPadding;
+  /// The padding around helper widget or error builder.
+  final EdgeInsetsGeometry? helperPadding;
 
   /// The size of the text input.
   final MoonTextInputSize? textInputSize;
@@ -175,7 +175,7 @@ class MoonTextInput extends StatefulWidget {
   final TextStyle? textStyle;
 
   /// The textStyle to use for the error state text.
-  final TextStyle? supportingTextStyle;
+  final TextStyle? helperTextStyle;
 
   /// Builder for the error widget.
   final MoonTextInputErrorBuilder? errorBuilder;
@@ -186,8 +186,8 @@ class MoonTextInput extends StatefulWidget {
   /// The widget in the trailing slot of the text input.
   final Widget? trailing;
 
-  /// The widget in the supporting slot of the text area.
-  final Widget? supporting;
+  /// The widget in the helper slot of the text area.
+  final Widget? helper;
 
   // Flutter props
 
@@ -272,7 +272,7 @@ class MoonTextInput extends StatefulWidget {
   final TextAlign textAlign;
 
   /// {@macro flutter.material.InputDecorator.textAlignVertical}
-  final TextAlignVertical? textAlignVertical;
+  final TextAlignVertical textAlignVertical;
 
   /// {@macro flutter.widgets.editableText.textDirection}
   final TextDirection? textDirection;
@@ -614,17 +614,17 @@ class MoonTextInput extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
-    this.supportingPadding,
+    this.helperPadding,
     this.textInputSize,
     this.errorText,
     this.hintText,
     this.initialValue,
     this.textStyle,
-    this.supportingTextStyle,
+    this.helperTextStyle,
     this.errorBuilder,
     this.leading,
     this.trailing,
-    this.supporting,
+    this.helper,
 
     // Flutter props
     this.controller,
@@ -634,7 +634,7 @@ class MoonTextInput extends StatefulWidget {
     this.textCapitalization = TextCapitalization.none,
     this.strutStyle,
     this.textAlign = TextAlign.start,
-    this.textAlignVertical,
+    this.textAlignVertical = TextAlignVertical.center,
     this.textDirection,
     this.readOnly = false,
     this.showCursor,
@@ -1151,16 +1151,16 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonTextInputSize.padding;
 
-    final EdgeInsetsGeometry effectiveSupportingPadding = widget.supportingPadding ??
-        context.moonTheme?.textInputTheme.properties.supportingPadding ??
+    final EdgeInsetsGeometry effectiveHelperPadding = widget.helperPadding ??
+        context.moonTheme?.textInputTheme.properties.helperPadding ??
         EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
 
     final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
 
     final TextStyle effectiveTextStyle = widget.textStyle ?? effectiveMoonTextInputSize.textStyle;
 
-    final TextStyle effectiveSupportingTextStyle = widget.supportingTextStyle ??
-        context.moonTheme?.textInputTheme.properties.supportingTextStyle ??
+    final TextStyle effectiveHelperTextStyle = widget.helperTextStyle ??
+        context.moonTheme?.textInputTheme.properties.helperTextStyle ??
         const TextStyle(fontSize: 12);
 
     final RoundedRectangleBorder defaultBorder = RoundedRectangleBorder(
@@ -1440,7 +1440,7 @@ class _MoonTextInputState extends State<MoonTextInput>
             effectDuration: effectiveTransitionDuration,
             effectCurve: effectiveTransitionCurve,
             child: AnimatedContainer(
-              height: effectiveHeight,
+              height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
               duration: effectiveTransitionDuration,
               decoration: ShapeDecoration(shape: resolvedBorder),
               child: DecoratedBox(
@@ -1452,7 +1452,7 @@ class _MoonTextInputState extends State<MoonTextInput>
               ),
             ),
           ),
-          if (widget.supporting != null || (widget.errorText != null && widget.errorBuilder != null))
+          if (widget.helper != null || (widget.errorText != null && widget.errorBuilder != null))
             RepaintBoundary(
               child: AnimatedIconTheme(
                 color: widget.errorText != null && widget.errorBuilder != null
@@ -1460,17 +1460,17 @@ class _MoonTextInputState extends State<MoonTextInput>
                     : effectiveHintTextColor,
                 duration: effectiveTransitionDuration,
                 child: AnimatedDefaultTextStyle(
-                  style: effectiveSupportingTextStyle.copyWith(
+                  style: effectiveHelperTextStyle.copyWith(
                     color: widget.errorText != null && widget.errorBuilder != null
                         ? effectiveErrorBorderColor
                         : effectiveHintTextColor,
                   ),
                   duration: effectiveTransitionDuration,
                   child: Padding(
-                    padding: effectiveSupportingPadding,
+                    padding: effectiveHelperPadding,
                     child: widget.errorText != null && widget.errorBuilder != null
                         ? widget.errorBuilder!(context, widget.errorText)
-                        : widget.supporting,
+                        : widget.helper,
                   ),
                 ),
               ),

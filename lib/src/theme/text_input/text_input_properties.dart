@@ -9,9 +9,9 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
   static final properties = MoonTextInputProperties(
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
-    supportingPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s),
+    helperPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s),
     labelTextStyle: MoonTextStyles.body.text12,
-    supportingTextStyle: MoonTextStyles.body.text12,
+    helperTextStyle: MoonTextStyles.body.text12,
   );
 
   /// TextInput transition duration.
@@ -20,37 +20,37 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
   /// TextInput transition curve.
   final Curve transitionCurve;
 
-  /// The padding around TextInput supporting widget or error builder.
-  final EdgeInsetsGeometry supportingPadding;
+  /// The padding around TextInput helper widget or error builder.
+  final EdgeInsetsGeometry helperPadding;
 
   /// TextInput label text style.
   final TextStyle labelTextStyle;
 
-  /// TextInput supporting or error text style.
-  final TextStyle supportingTextStyle;
+  /// TextInput helper or error text style.
+  final TextStyle helperTextStyle;
 
   const MoonTextInputProperties({
     required this.transitionDuration,
     required this.transitionCurve,
-    required this.supportingPadding,
+    required this.helperPadding,
     required this.labelTextStyle,
-    required this.supportingTextStyle,
+    required this.helperTextStyle,
   });
 
   @override
   MoonTextInputProperties copyWith({
     Duration? transitionDuration,
     Curve? transitionCurve,
-    EdgeInsetsGeometry? supportingPadding,
+    EdgeInsetsGeometry? helperPadding,
     TextStyle? labelTextStyle,
-    TextStyle? supportingTextStyle,
+    TextStyle? helperTextStyle,
   }) {
     return MoonTextInputProperties(
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
-      supportingPadding: supportingPadding ?? this.supportingPadding,
+      helperPadding: helperPadding ?? this.helperPadding,
       labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-      supportingTextStyle: supportingTextStyle ?? this.supportingTextStyle,
+      helperTextStyle: helperTextStyle ?? this.helperTextStyle,
     );
   }
 
@@ -61,9 +61,9 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
     return MoonTextInputProperties(
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      supportingPadding: EdgeInsetsGeometry.lerp(supportingPadding, other.supportingPadding, t)!,
+      helperPadding: EdgeInsetsGeometry.lerp(helperPadding, other.helperPadding, t)!,
       labelTextStyle: TextStyle.lerp(labelTextStyle, other.labelTextStyle, t)!,
-      supportingTextStyle: TextStyle.lerp(supportingTextStyle, other.supportingTextStyle, t)!,
+      helperTextStyle: TextStyle.lerp(helperTextStyle, other.helperTextStyle, t)!,
     );
   }
 
@@ -74,8 +74,8 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
       ..add(DiagnosticsProperty("type", "MoonTextInputProperties"))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("supportingPadding", supportingPadding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("helperPadding", helperPadding))
       ..add(DiagnosticsProperty<TextStyle>("labelTextStyle", labelTextStyle))
-      ..add(DiagnosticsProperty<TextStyle>("supportingTextStyle", supportingTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle));
   }
 }
