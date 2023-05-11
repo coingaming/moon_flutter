@@ -9,7 +9,7 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
   static final properties = MoonTextInputProperties(
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
-    helperPadding: EdgeInsets.symmetric(vertical: MoonSizes.sizes.x4s),
+    helperPadding: EdgeInsets.only(top: MoonSizes.sizes.x4s),
     labelTextStyle: MoonTextStyles.body.text12,
     helperTextStyle: MoonTextStyles.body.text12,
   );

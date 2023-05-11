@@ -11,8 +11,8 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
     borderRadius: MoonBorders.borders.interactiveSm,
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
-    supportingPadding: EdgeInsets.symmetric(vertical: MoonSizes.sizes.x4s),
-    textPadding: const EdgeInsets.all(16),
+    supportingPadding: EdgeInsets.only(top: MoonSizes.sizes.x4s),
+    textPadding: EdgeInsets.all(MoonSizes.sizes.x2s),
     textStyle: MoonTextStyles.body.text16,
     helperTextStyle: MoonTextStyles.body.text12,
   );
