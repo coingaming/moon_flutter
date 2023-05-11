@@ -1385,7 +1385,6 @@ class _MoonTextInputState extends State<MoonTextInput>
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: resolvedDirectionalPadding,
-            //errorStyle: const TextStyle(height: 0.1, fontSize: 0),
             floatingLabelAlignment: FloatingLabelAlignment.start,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             floatingLabelStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
@@ -1434,9 +1433,9 @@ class _MoonTextInputState extends State<MoonTextInput>
         children: [
           MoonFocusEffect(
             show: _effectiveFocusNode.hasFocus,
-            effectExtent: effectiveFocusEffectExtent,
-            effectColor: widget.errorText == null ? focusEffectColor : errorFocusEffectColor,
             childBorderRadius: effectiveBorderRadius,
+            effectColor: widget.errorText == null ? focusEffectColor : errorFocusEffectColor,
+            effectExtent: effectiveFocusEffectExtent,
             effectDuration: effectiveTransitionDuration,
             effectCurve: effectiveTransitionCurve,
             child: AnimatedContainer(
