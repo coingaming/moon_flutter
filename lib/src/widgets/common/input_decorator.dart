@@ -2047,7 +2047,11 @@ class _InputDecoratorState extends State<InputDecorator> with TickerProviderStat
     final TextStyle? style = MaterialStateProperty.resolveAs(decoration.floatingLabelStyle, materialState) ??
         MaterialStateProperty.resolveAs(themeData.inputDecorationTheme.floatingLabelStyle, materialState);
 
-    return themeData.textTheme.titleMedium!.merge(widget.baseStyle).merge(defaultTextStyle).merge(style);
+    return themeData.textTheme.titleMedium!
+        .merge(widget.baseStyle)
+        .merge(defaultTextStyle)
+        .merge(style)
+        .copyWith(height: 1);
   }
 
   TextStyle _getHelperStyle(ThemeData themeData, InputDecorationTheme defaults) {

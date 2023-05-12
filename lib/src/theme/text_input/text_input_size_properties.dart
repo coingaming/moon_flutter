@@ -18,7 +18,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
       horizontal: MoonSizes.sizes.x4s,
       vertical: MoonSizes.sizes.x6s,
     ),
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.body.text14,
   );
 
   static final md = MoonTextInputSizeProperties(
@@ -28,9 +28,9 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(
       horizontal: MoonSizes.sizes.x3s,
-      vertical: MoonSizes.sizes.x5s,
+      vertical: 6,
     ),
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.body.text14,
   );
 
   static final lg = MoonTextInputSizeProperties(
@@ -40,9 +40,9 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(
       horizontal: MoonSizes.sizes.x3s,
-      vertical: 6,
+      vertical: MoonSizes.sizes.x4s,
     ),
-    textStyle: MoonTextStyles.heading.text16,
+    textStyle: MoonTextStyles.body.text16,
   );
 
   static final xl = MoonTextInputSizeProperties(
@@ -52,9 +52,9 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(
       horizontal: MoonSizes.sizes.x2s,
-      vertical: 10,
+      vertical: MoonSizes.sizes.x3s,
     ),
-    textStyle: MoonTextStyles.heading.text16,
+    textStyle: MoonTextStyles.body.text16,
   );
 
   /// TextInput border radius.

@@ -157,19 +157,13 @@ class TextInputStory extends Story {
                                       )
                                     : null,
                                 trailing: showTrailingKnob
-                                    ? Builder(
-                                        builder: (context) {
-                                          return SizedBox(
-                                            child: MoonButton.icon(
-                                              icon: MoonIcon(
-                                                MoonIcons.close_24,
-                                                color: IconTheme.of(context).color,
-                                              ),
-                                              buttonSize: MoonButtonSize.xs,
-                                              onTap: () => _textEditingController.clear(),
-                                            ),
-                                          );
-                                        },
+                                    ? GestureDetector(
+                                        child: MoonIcon(
+                                          MoonIcons.close_small_24,
+                                          size: 24,
+                                          color: IconTheme.of(context).color,
+                                        ),
+                                        onTap: () => _textEditingController.clear(),
                                       )
                                     : null,
                                 helper: showSupportingKnob ? const Text("Supporting text") : null,

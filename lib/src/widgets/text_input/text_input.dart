@@ -1157,6 +1157,11 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
 
+    final EdgeInsets correctedPadding = resolvedDirectionalPadding.copyWith(
+      left: widget.leading != null ? 0 : resolvedDirectionalPadding.left,
+      right: widget.trailing != null ? 0 : resolvedDirectionalPadding.right,
+    );
+
     final TextStyle effectiveTextStyle = widget.textStyle ?? effectiveMoonTextInputSize.textStyle;
 
     final TextStyle effectiveHelperTextStyle = widget.helperTextStyle ??
@@ -1310,6 +1315,7 @@ class _MoonTextInputState extends State<MoonTextInput>
           autocorrect: widget.autocorrect,
           autocorrectionTextRectColor: autocorrectionTextRectColor,
           autofillClient: this,
+          autofillHints: widget.autofillHints,
           autofocus: widget.autofocus,
           backgroundCursorColor: CupertinoColors.inactiveGray,
           clipBehavior: widget.clipBehavior,
@@ -1384,7 +1390,7 @@ class _MoonTextInputState extends State<MoonTextInput>
           textAlignVertical: widget.textAlignVertical,
           decoration: InputDecoration(
             border: InputBorder.none,
-            contentPadding: resolvedDirectionalPadding,
+            contentPadding: correctedPadding,
             floatingLabelAlignment: FloatingLabelAlignment.start,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             floatingLabelStyle: effectiveTextStyle.copyWith(color: effectiveHintTextColor),
@@ -1410,9 +1416,7 @@ class _MoonTextInputState extends State<MoonTextInput>
             suffixIconConstraints: BoxConstraints.tightFor(height: effectiveHeight),
             suffixIcon: widget.trailing != null
                 ? Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      end: resolvedDirectionalPadding.right,
-                    ),
+                    padding: EdgeInsetsDirectional.only(start: effectiveGap, end: resolvedDirectionalPadding.right),
                     child: widget.trailing,
                   )
                 : SizedBox(height: effectiveHeight),
@@ -1438,17 +1442,11 @@ class _MoonTextInputState extends State<MoonTextInput>
             effectExtent: effectiveFocusEffectExtent,
             effectDuration: effectiveTransitionDuration,
             effectCurve: effectiveTransitionCurve,
-            child: AnimatedContainer(
+            // FIXME: Make the borders animate properly with theme animation fix ticket in near future
+            child: Container(
               height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
-              duration: effectiveTransitionDuration,
-              decoration: ShapeDecoration(shape: resolvedBorder),
-              child: DecoratedBox(
-                decoration: ShapeDecoration(
-                  color: effectiveBackgroundColor,
-                  shape: resolvedBorder.copyWith(side: BorderSide.none),
-                ),
-                child: child,
-              ),
+              decoration: ShapeDecoration(color: effectiveBackgroundColor, shape: resolvedBorder),
+              child: child,
             ),
           ),
           if (widget.helper != null || (widget.errorText != null && widget.errorBuilder != null))
