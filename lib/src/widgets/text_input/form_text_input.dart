@@ -2,7 +2,7 @@ import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart'
-    hide InputDecoration, InputDecorator, FloatingLabelAlignment, FloatingLabelBehavior;
+    hide FloatingLabelAlignment, FloatingLabelBehavior, InputDecoration, InputDecorator;
 import 'package:flutter/services.dart';
 
 import 'package:moon_design/src/widgets/common/input_decorator.dart';

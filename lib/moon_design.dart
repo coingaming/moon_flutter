@@ -1,3 +1,4 @@
+/// Moon Design for Flutter
 library moon_design;
 
 export 'package:moon_design/src/theme/accordion/accordion_theme.dart';
