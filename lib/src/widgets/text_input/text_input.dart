@@ -1,5 +1,6 @@
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -111,6 +112,9 @@ class MoonTextInput extends StatefulWidget {
 
   /// Whether the text input has floating label.
   final bool hasFloatingLabel;
+
+  /// Whether the focus effect is enabled.
+  final bool hasFocusEffect;
 
   /// Whether the input is dense ie takes less space.
   ///
@@ -600,6 +604,7 @@ class MoonTextInput extends StatefulWidget {
 
     // Moon Design props
     this.hasFloatingLabel = false,
+    this.hasFocusEffect = true,
     this.isDense = true,
     this.borderRadius,
     this.backgroundColor,
@@ -1168,34 +1173,31 @@ class _MoonTextInputState extends State<MoonTextInput>
         context.moonTheme?.textInputTheme.properties.helperTextStyle ??
         const TextStyle(fontSize: 12);
 
-    final RoundedRectangleBorder defaultBorder = RoundedRectangleBorder(
+    final SmoothRectangleBorder defaultBorder = SmoothRectangleBorder(
       borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
       side: BorderSide(
         color: _isHovering ? effectiveHoverBorderColor : effectiveInactiveBorderColor,
-        strokeAlign: BorderSide.strokeAlignOutside,
         width: _isHovering ? MoonBorders.borders.activeBorderWidth : MoonBorders.borders.defaultBorderWidth,
       ),
     );
 
-    final RoundedRectangleBorder focusBorder = RoundedRectangleBorder(
+    final SmoothRectangleBorder focusBorder = SmoothRectangleBorder(
       borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
       side: BorderSide(
         color: effectiveActiveBorderColor,
-        strokeAlign: BorderSide.strokeAlignOutside,
         width: MoonBorders.borders.activeBorderWidth,
       ),
     );
 
-    final RoundedRectangleBorder errorBorder = RoundedRectangleBorder(
+    final SmoothRectangleBorder errorBorder = SmoothRectangleBorder(
       borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
       side: BorderSide(
         color: effectiveErrorBorderColor,
-        strokeAlign: BorderSide.strokeAlignOutside,
         width: MoonBorders.borders.activeBorderWidth,
       ),
     );
 
-    final RoundedRectangleBorder resolvedBorder = widget.errorText != null
+    final SmoothRectangleBorder resolvedBorder = widget.errorText != null
         ? errorBorder
         : _effectiveFocusNode.hasFocus
             ? focusBorder
@@ -1436,8 +1438,8 @@ class _MoonTextInputState extends State<MoonTextInput>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MoonFocusEffect(
-            show: _effectiveFocusNode.hasFocus,
-            childBorderRadius: effectiveBorderRadius,
+            show: widget.hasFocusEffect && _effectiveFocusNode.hasFocus,
+            childBorderRadius: effectiveBorderRadius.smoothBorderRadius(context),
             effectColor: widget.errorText == null ? focusEffectColor : errorFocusEffectColor,
             effectExtent: effectiveFocusEffectExtent,
             effectDuration: effectiveTransitionDuration,
@@ -1445,7 +1447,11 @@ class _MoonTextInputState extends State<MoonTextInput>
             // FIXME: Make the borders animate properly with theme animation fix ticket in near future
             child: Container(
               height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
-              decoration: ShapeDecoration(color: effectiveBackgroundColor, shape: resolvedBorder),
+              decoration: ShapeDecoration(
+                color: effectiveBackgroundColor,
+                shape: resolvedBorder.copyWith(side: BorderSide.none),
+              ),
+              foregroundDecoration: ShapeDecoration(shape: resolvedBorder),
               child: child,
             ),
           ),
