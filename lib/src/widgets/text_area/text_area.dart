@@ -30,6 +30,9 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.services.TextInputConfiguration.enableSuggestions}
   final bool enableSuggestions;
 
+  /// Whether the focus effect is enabled.
+  final bool hasFocusEffect;
+
   /// {@macro flutter.widgets.editableText.readOnly}
   final bool readOnly;
 
@@ -221,6 +224,7 @@ class MoonTextArea extends StatefulWidget {
     this.enableIMEPersonalizedLearning = true,
     this.enableInteractiveSelection,
     this.enableSuggestions = true,
+    this.hasFocusEffect = true,
     this.readOnly = false,
     this.scribbleEnabled = true,
     this.showCursor,
@@ -353,6 +357,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
       errorBuilder: widget.errorBuilder,
       expands: widget.height != null,
       focusNode: widget.focusNode,
+      hasFocusEffect: widget.hasFocusEffect,
       height: widget.height,
       helper: widget.helper,
       helperPadding: effectiveHelperPadding,

@@ -1197,9 +1197,9 @@ class _MoonTextInputState extends State<MoonTextInput>
       ),
     );
 
-    final SmoothRectangleBorder resolvedBorder = widget.errorText != null
+    final SmoothRectangleBorder resolvedBorder = widget.errorText != null && !widget.readOnly
         ? errorBorder
-        : _effectiveFocusNode.hasFocus
+        : _effectiveFocusNode.hasFocus && !widget.readOnly
             ? focusBorder
             : defaultBorder;
 
@@ -1438,7 +1438,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MoonFocusEffect(
-            show: widget.hasFocusEffect && _effectiveFocusNode.hasFocus,
+            show: widget.hasFocusEffect && _effectiveFocusNode.hasFocus && !widget.readOnly,
             childBorderRadius: effectiveBorderRadius.smoothBorderRadius(context),
             effectColor: widget.errorText == null ? focusEffectColor : errorFocusEffectColor,
             effectExtent: effectiveFocusEffectExtent,

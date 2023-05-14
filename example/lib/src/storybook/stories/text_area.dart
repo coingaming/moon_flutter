@@ -1,4 +1,5 @@
 import 'package:example/src/storybook/common/color_options.dart';
+import 'package:example/src/storybook/common/widgets/error.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -87,9 +88,15 @@ class TextAreaStory extends Story {
               description: "Whether the MoonTextArea has no fixed height and is growable",
             );
 
-            final showSupportingKnob = context.knobs.boolean(
-              label: "supporting",
-              description: "Show widget in MoonTextArea supporting slot.",
+            final hasFocusEffectKnob = context.knobs.boolean(
+              label: "hasFocusEffect",
+              description: "Whether to display focus effect around MoonTextInput.",
+              initial: true,
+            );
+
+            final showHelperKnob = context.knobs.boolean(
+              label: "helper",
+              description: "Show widget in MoonTextArea helper slot.",
             );
 
             return Center(
@@ -105,6 +112,7 @@ class TextAreaStory extends Story {
                           children: [
                             MoonTextArea(
                               enabled: enabledKnob,
+                              hasFocusEffect: hasFocusEffectKnob,
                               height: growableKnob ? null : 200,
                               textColor: textColor,
                               hintTextColor: hintTextColor,
@@ -118,8 +126,8 @@ class TextAreaStory extends Story {
                               validator: (value) => value?.length != null && value!.length < 10
                                   ? "The text should be longer than 10 characters."
                                   : null,
-                              helper: showSupportingKnob ? const Text("Supporting text") : null,
-                              errorBuilder: (context, errorText) => Text(errorText!),
+                              helper: showHelperKnob ? const Text("Supporting text") : null,
+                              errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
                             ),
                             const SizedBox(height: 16),
                             MoonFilledButton(
