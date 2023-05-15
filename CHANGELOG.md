@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.1](https://github.com/coingaming/moon_flutter/compare/v0.20.0...v0.20.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* [MDS-517] Fix TextInput and TextArea bugs ([#164](https://github.com/coingaming/moon_flutter/issues/164)) ([abcb01c](https://github.com/coingaming/moon_flutter/commit/abcb01c04d019a357566f35dc333abcc85bfad3a))
+
 ## [0.20.0](https://github.com/coingaming/moon_flutter/compare/v0.19.9...v0.20.0) (2023-05-05)
 
 
