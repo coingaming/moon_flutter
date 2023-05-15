@@ -1,3 +1,4 @@
+/// Moon Design for Flutter
 library moon_design;
 
 export 'package:moon_design/src/theme/accordion/accordion_theme.dart';
@@ -65,6 +66,7 @@ export 'package:moon_design/src/widgets/radio/radio.dart';
 export 'package:moon_design/src/widgets/switch/switch.dart';
 export 'package:moon_design/src/widgets/tag/tag.dart';
 export 'package:moon_design/src/widgets/text_area/text_area.dart';
+export 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 export 'package:moon_design/src/widgets/text_input/text_input.dart';
 export 'package:moon_design/src/widgets/toast/toast.dart';
 export 'package:moon_design/src/widgets/tooltip/tooltip.dart';

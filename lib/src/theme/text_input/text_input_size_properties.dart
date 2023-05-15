@@ -14,8 +14,11 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     height: MoonSizes.sizes.sm,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    textStyle: MoonTextStyles.heading.text14,
+    padding: EdgeInsets.symmetric(
+      horizontal: MoonSizes.sizes.x4s,
+      vertical: MoonSizes.sizes.x6s,
+    ),
+    textStyle: MoonTextStyles.body.text14,
   );
 
   static final md = MoonTextInputSizeProperties(
@@ -23,8 +26,11 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     height: MoonSizes.sizes.md,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.text14,
+    padding: EdgeInsets.symmetric(
+      horizontal: MoonSizes.sizes.x3s,
+      vertical: 6,
+    ),
+    textStyle: MoonTextStyles.body.text14,
   );
 
   static final lg = MoonTextInputSizeProperties(
@@ -32,8 +38,11 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     height: MoonSizes.sizes.lg,
     gap: MoonSizes.sizes.x4s,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.text16,
+    padding: EdgeInsets.symmetric(
+      horizontal: MoonSizes.sizes.x3s,
+      vertical: MoonSizes.sizes.x4s,
+    ),
+    textStyle: MoonTextStyles.body.text16,
   );
 
   static final xl = MoonTextInputSizeProperties(
@@ -41,8 +50,11 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
     height: MoonSizes.sizes.xl,
     gap: MoonSizes.sizes.x2s,
     iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.heading.text16,
+    padding: EdgeInsets.symmetric(
+      horizontal: MoonSizes.sizes.x2s,
+      vertical: MoonSizes.sizes.x3s,
+    ),
+    textStyle: MoonTextStyles.body.text16,
   );
 
   /// TextInput border radius.

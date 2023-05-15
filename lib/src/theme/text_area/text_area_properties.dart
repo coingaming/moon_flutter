@@ -11,10 +11,10 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
     borderRadius: MoonBorders.borders.interactiveSm,
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
-    supportingPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s),
-    textPadding: const EdgeInsets.all(16),
+    supportingPadding: EdgeInsets.only(top: MoonSizes.sizes.x4s),
+    textPadding: EdgeInsets.all(MoonSizes.sizes.x2s),
     textStyle: MoonTextStyles.body.text16,
-    supportingTextStyle: MoonTextStyles.body.text12,
+    helperTextStyle: MoonTextStyles.body.text12,
   );
 
   /// TextArea border radius.
@@ -26,7 +26,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
   /// TextArea transition curve.
   final Curve transitionCurve;
 
-  /// The padding around TextArea supporting widget or error builder.
+  /// The padding around TextArea helper widget or error builder.
   final EdgeInsetsGeometry supportingPadding;
 
   /// TextArea text padding.
@@ -35,8 +35,8 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
   /// TextArea text style.
   final TextStyle textStyle;
 
-  /// TextArea supporting or error text style.
-  final TextStyle supportingTextStyle;
+  /// TextArea helper or error text style.
+  final TextStyle helperTextStyle;
 
   const MoonTextAreaProperties({
     required this.borderRadius,
@@ -45,7 +45,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
     required this.supportingPadding,
     required this.textPadding,
     required this.textStyle,
-    required this.supportingTextStyle,
+    required this.helperTextStyle,
   });
 
   @override
@@ -56,7 +56,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
     EdgeInsetsGeometry? supportingPadding,
     EdgeInsetsGeometry? textPadding,
     TextStyle? textStyle,
-    TextStyle? supportingTextStyle,
+    TextStyle? helperTextStyle,
   }) {
     return MoonTextAreaProperties(
       borderRadius: borderRadius ?? this.borderRadius,
@@ -65,7 +65,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
       supportingPadding: supportingPadding ?? this.supportingPadding,
       textPadding: textPadding ?? this.textPadding,
       textStyle: textStyle ?? this.textStyle,
-      supportingTextStyle: supportingTextStyle ?? this.supportingTextStyle,
+      helperTextStyle: helperTextStyle ?? this.helperTextStyle,
     );
   }
 
@@ -80,7 +80,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
       supportingPadding: EdgeInsetsGeometry.lerp(supportingPadding, other.supportingPadding, t)!,
       textPadding: EdgeInsetsGeometry.lerp(textPadding, other.textPadding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
-      supportingTextStyle: TextStyle.lerp(supportingTextStyle, other.supportingTextStyle, t)!,
+      helperTextStyle: TextStyle.lerp(helperTextStyle, other.helperTextStyle, t)!,
     );
   }
 
@@ -95,6 +95,6 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("supportingPadding", supportingPadding))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("textPadding", textPadding))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
-      ..add(DiagnosticsProperty<TextStyle>("supportingTextStyle", supportingTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle));
   }
 }

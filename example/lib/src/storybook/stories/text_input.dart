@@ -1,9 +1,13 @@
 import 'package:example/src/storybook/common/color_options.dart';
+import 'package:example/src/storybook/common/widgets/error.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-TextEditingController _textEditingController = TextEditingController();
+TextEditingController _textController = TextEditingController();
+TextEditingController _passwordController = TextEditingController();
+
+bool _hidePassword = true;
 
 class TextInputStory extends Story {
   TextInputStory()
@@ -97,6 +101,17 @@ class TextInputStory extends Story {
               initial: true,
             );
 
+            final hasFocusEffectKnob = context.knobs.boolean(
+              label: "hasFocusEffect",
+              description: "Whether to display focus effect around MoonTextInput.",
+              initial: true,
+            );
+
+            final hasFloatingLabelKnob = context.knobs.boolean(
+              label: "hasFloatingLabel",
+              description: "Whether MoonTextInput has floating label.",
+            );
+
             final showLeadingKnob = context.knobs.boolean(
               label: "leading",
               description: "Show widget in MoonTextInput leading slot.",
@@ -109,9 +124,9 @@ class TextInputStory extends Story {
               initial: true,
             );
 
-            final showSupportingKnob = context.knobs.boolean(
-              label: "supporting",
-              description: "Show widget in MoonTextInput supporting slot.",
+            final showHelperKnob = context.knobs.boolean(
+              label: "helper",
+              description: "Show widget in MoonTextInput helper slot.",
             );
 
             return Center(
@@ -124,41 +139,98 @@ class TextInputStory extends Story {
                       builder: (context) {
                         return Column(
                           children: [
-                            SizedBox(
-                              height: 86,
-                              child: MoonTextInput(
-                                controller: _textEditingController,
-                                textInputSize: textInputSizesKnob,
-                                enabled: enabledKnob,
-                                textColor: textColor,
-                                hintTextColor: hintTextColor,
-                                backgroundColor: backgroundColor,
-                                activeBorderColor: activeBorderColor,
-                                inactiveBorderColor: inactiveBorderColor,
-                                errorBorderColor: errorBorderColor,
-                                borderRadius: borderRadiusKnob != null
-                                    ? BorderRadius.circular(borderRadiusKnob.toDouble())
-                                    : null,
-                                hintText: "Enter your text here...",
-                                validator: (value) => value?.length != null && value!.length < 10
-                                    ? "The text should be longer than 10 characters."
-                                    : null,
-                                leading: showLeadingKnob ? const MoonIcon(MoonIcons.search_24) : null,
-                                trailing: showTrailingKnob
-                                    ? MoonButton.icon(
-                                        icon: MoonIcon(
-                                          MoonIcons.close_24,
-                                          color: DefaultTextStyle.of(context).style.color,
+                            MoonFormTextInput(
+                              controller: _textController,
+                              enabled: enabledKnob,
+                              textInputSize: textInputSizesKnob,
+                              hasFocusEffect: hasFocusEffectKnob,
+                              hasFloatingLabel: hasFloatingLabelKnob,
+                              textColor: textColor,
+                              hintTextColor: hintTextColor,
+                              backgroundColor: backgroundColor,
+                              activeBorderColor: activeBorderColor,
+                              inactiveBorderColor: inactiveBorderColor,
+                              errorBorderColor: errorBorderColor,
+                              borderRadius:
+                                  borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                              hintText: "Enter your text here (over 10 characters)",
+                              validator: (value) => value?.length != null && value!.length < 10
+                                  ? "The text should be longer than 10 characters."
+                                  : null,
+                              leading: showLeadingKnob
+                                  ? const MoonIcon(
+                                      MoonIcons.search_24,
+                                      size: 24,
+                                    )
+                                  : null,
+                              trailing: showTrailingKnob
+                                  ? MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: GestureDetector(
+                                        child: const MoonIcon(
+                                          MoonIcons.close_small_24,
+                                          size: 24,
                                         ),
-                                        buttonSize: MoonButtonSize.xs,
-                                        onTap: () => _textEditingController.clear(),
-                                      )
-                                    : null,
-                                supporting: showSupportingKnob ? const Text("Supporting text") : null,
-                                errorBuilder: (context, errorText) => Text(errorText!),
-                              ),
+                                        onTap: () => _textController.clear(),
+                                      ),
+                                    )
+                                  : null,
+                              helper: showHelperKnob ? const Text("Supporting text") : null,
+                              errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 16),
+                            StatefulBuilder(
+                              builder: (context, setState) {
+                                return MoonFormTextInput(
+                                  controller: _passwordController,
+                                  enabled: enabledKnob,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: _hidePassword,
+                                  textInputSize: textInputSizesKnob,
+                                  hasFocusEffect: hasFocusEffectKnob,
+                                  hasFloatingLabel: hasFloatingLabelKnob,
+                                  textColor: textColor,
+                                  hintTextColor: hintTextColor,
+                                  backgroundColor: backgroundColor,
+                                  activeBorderColor: activeBorderColor,
+                                  inactiveBorderColor: inactiveBorderColor,
+                                  errorBorderColor: errorBorderColor,
+                                  borderRadius: borderRadiusKnob != null
+                                      ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                                      : null,
+                                  hintText: "Enter password (123abc)",
+                                  validator: (value) => value != "123abc" ? "Wrong password." : null,
+                                  leading: showLeadingKnob
+                                      ? const MoonIcon(
+                                          MoonIcons.search_24,
+                                          size: 24,
+                                        )
+                                      : null,
+                                  trailing: showTrailingKnob
+                                      ? MouseRegion(
+                                          cursor: SystemMouseCursors.click,
+                                          child: GestureDetector(
+                                            child: IntrinsicWidth(
+                                              child: Align(
+                                                alignment: Alignment.centerRight,
+                                                child: Text(
+                                                  _hidePassword ? "Show" : "Hide",
+                                                  style: DefaultTextStyle.of(context)
+                                                      .style
+                                                      .copyWith(decoration: TextDecoration.underline),
+                                                ),
+                                              ),
+                                            ),
+                                            onTap: () => setState(() => _hidePassword = !_hidePassword),
+                                          ),
+                                        )
+                                      : null,
+                                  helper: showHelperKnob ? const Text("Supporting text") : null,
+                                  errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 24),
                             MoonFilledButton(
                               label: const Text("Submit"),
                               onTap: () => Form.of(context).validate(),
