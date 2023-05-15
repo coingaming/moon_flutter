@@ -19,7 +19,7 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
-import 'package:moon_design/src/widgets/common/input_decorator.dart';
+import 'package:moon_design/src/widgets/text_input/input_decorator.dart';
 
 export 'package:flutter/services.dart'
     show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;

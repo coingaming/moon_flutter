@@ -5,7 +5,7 @@ import 'package:flutter/material.dart'
     hide FloatingLabelAlignment, FloatingLabelBehavior, InputDecoration, InputDecorator;
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/widgets/common/input_decorator.dart';
+import 'package:moon_design/src/widgets/text_input/input_decorator.dart';
 import 'package:moon_design/src/widgets/text_input/text_input.dart';
 
 export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType;
