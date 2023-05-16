@@ -229,12 +229,14 @@ class MoonChip extends StatelessWidget {
 
     final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
 
-    final EdgeInsetsDirectional correctedPadding = EdgeInsetsDirectional.fromSTEB(
-      leading == null && label != null ? resolvedDirectionalPadding.left : 0,
-      resolvedDirectionalPadding.top,
-      trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
-      resolvedDirectionalPadding.bottom,
-    );
+    final EdgeInsetsGeometry correctedPadding = padding == null
+        ? EdgeInsetsDirectional.fromSTEB(
+            leading == null && label != null ? resolvedDirectionalPadding.left : 0,
+            resolvedDirectionalPadding.top,
+            trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
+            resolvedDirectionalPadding.bottom,
+          )
+        : resolvedDirectionalPadding;
     return MoonBaseControl(
       autofocus: autofocus,
       isFocusable: isFocusable,

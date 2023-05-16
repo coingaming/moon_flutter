@@ -416,6 +416,8 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     final EdgeInsetsGeometry effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.tooltipTheme.properties.contentPadding ?? const EdgeInsets.all(12);
 
+    final EdgeInsets resolvedContentPadding = effectiveContentPadding.resolve(Directionality.of(context));
+
     final List<BoxShadow> effectiveTooltipShadows =
         widget.tooltipShadows ?? context.moonTheme?.tooltipTheme.shadows.tooltipShadows ?? MoonShadows.light.sm;
 
@@ -504,7 +506,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
                   child: Container(
                     key: _tooltipKey,
                     constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
-                    padding: effectiveContentPadding,
+                    padding: resolvedContentPadding,
                     decoration: ShapeDecoration(
                       color: effectiveBackgroundColor,
                       shadows: effectiveTooltipShadows,
