@@ -126,6 +126,8 @@ class MoonToast {
     final EdgeInsetsGeometry effectiveContentPadding =
         padding ?? context.moonTheme?.toastTheme.properties.contentPadding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
+    final EdgeInsets resolvedContentPadding = effectiveContentPadding.resolve(Directionality.of(context));
+
     final List<BoxShadow> effectiveToastShadows =
         toastShadows ?? context.moonTheme?.toastTheme.shadows.toastShadows ?? MoonShadows.light.lg;
 
@@ -170,8 +172,8 @@ class MoonToast {
                   duration: effectiveTransitionDuration,
                   style: DefaultTextStyle.of(context).style.copyWith(color: effectiveElementColor),
                   child: Container(
-                    margin: margin ?? effectiveContentPadding,
-                    padding: effectiveContentPadding,
+                    margin: margin ?? resolvedContentPadding,
+                    padding: resolvedContentPadding,
                     decoration: ShapeDecoration(
                       color: effectiveBackgroundColor,
                       shadows: effectiveToastShadows,

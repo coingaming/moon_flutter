@@ -366,6 +366,8 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final EdgeInsetsGeometry effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.popoverTheme.properties.contentPadding ?? const EdgeInsets.all(12);
 
+    final EdgeInsets resolvedContentPadding = effectiveContentPadding.resolve(Directionality.of(context));
+
     final List<BoxShadow> effectivePopoverShadows =
         widget.popoverShadows ?? context.moonTheme?.popoverTheme.shadows.popoverShadows ?? MoonShadows.light.sm;
 
@@ -448,7 +450,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                   child: Container(
                     key: _popoverKey,
                     constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),
-                    padding: effectiveContentPadding,
+                    padding: resolvedContentPadding,
                     decoration: ShapeDecoration(
                       color: effectiveBackgroundColor,
                       shadows: effectivePopoverShadows,
