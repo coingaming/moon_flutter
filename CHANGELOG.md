@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.2](https://github.com/coingaming/moon_flutter/compare/v0.20.1...v0.20.2) (2023-05-17)
+
+
+### Bug Fixes
+
+* [MDS-526] Replace custom outside Popover tapping logic with inbuilt TapRegion ([#167](https://github.com/coingaming/moon_flutter/issues/167)) ([8717282](https://github.com/coingaming/moon_flutter/commit/871728255401d7b2527b5fc7049b9a6c349c6005))
+
 ## [0.20.1](https://github.com/coingaming/moon_flutter/compare/v0.20.0...v0.20.1) (2023-05-15)
 
 

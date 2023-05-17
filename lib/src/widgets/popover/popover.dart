@@ -198,7 +198,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           offset: Offset(0, -distanceToTarget),
           targetAnchor: Alignment.topCenter,
           followerAnchor: Alignment.bottomCenter,
-          toolTipMaxWidth:
+          popoverMaxWidth:
               overlayWidth - ((overlayWidth / 2 - popoverTargetGlobalCenter) * 2).abs() - widget.popoverMargin * 2,
         );
 
@@ -207,7 +207,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           offset: Offset(0, distanceToTarget),
           targetAnchor: Alignment.bottomCenter,
           followerAnchor: Alignment.topCenter,
-          toolTipMaxWidth:
+          popoverMaxWidth:
               overlayWidth - ((overlayWidth / 2 - popoverTargetGlobalCenter) * 2).abs() - widget.popoverMargin * 2,
         );
 
@@ -216,7 +216,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           offset: Offset(-distanceToTarget, 0),
           targetAnchor: Alignment.centerLeft,
           followerAnchor: Alignment.centerRight,
-          toolTipMaxWidth: popoverTargetGlobalLeft - distanceToTarget - widget.popoverMargin,
+          popoverMaxWidth: popoverTargetGlobalLeft - distanceToTarget - widget.popoverMargin,
         );
 
       case MoonPopoverPosition.right:
@@ -224,7 +224,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           offset: Offset(distanceToTarget, 0),
           targetAnchor: Alignment.centerRight,
           followerAnchor: Alignment.centerLeft,
-          toolTipMaxWidth: overlayWidth - popoverTargetGlobalRight - distanceToTarget - widget.popoverMargin,
+          popoverMaxWidth: overlayWidth - popoverTargetGlobalRight - distanceToTarget - widget.popoverMargin,
         );
 
       case MoonPopoverPosition.topLeft:
@@ -232,7 +232,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           offset: Offset(0, -distanceToTarget),
           targetAnchor: Alignment.topRight,
           followerAnchor: Alignment.bottomRight,
-          toolTipMaxWidth: popoverTargetGlobalRight - widget.popoverMargin,
+          popoverMaxWidth: popoverTargetGlobalRight - widget.popoverMargin,
         );
 
       case MoonPopoverPosition.topRight:
@@ -240,7 +240,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           offset: Offset(0, -distanceToTarget),
           targetAnchor: Alignment.topLeft,
           followerAnchor: Alignment.bottomLeft,
-          toolTipMaxWidth: overlayWidth - popoverTargetGlobalLeft - widget.popoverMargin,
+          popoverMaxWidth: overlayWidth - popoverTargetGlobalLeft - widget.popoverMargin,
         );
 
       case MoonPopoverPosition.bottomLeft:
@@ -248,7 +248,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           offset: Offset(0, distanceToTarget),
           targetAnchor: Alignment.bottomRight,
           followerAnchor: Alignment.topRight,
-          toolTipMaxWidth: popoverTargetGlobalRight - widget.popoverMargin,
+          popoverMaxWidth: popoverTargetGlobalRight - widget.popoverMargin,
         );
 
       case MoonPopoverPosition.bottomRight:
@@ -256,21 +256,11 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           offset: Offset(0, distanceToTarget),
           targetAnchor: Alignment.bottomLeft,
           followerAnchor: Alignment.topLeft,
-          toolTipMaxWidth: overlayWidth - popoverTargetGlobalLeft - widget.popoverMargin,
+          popoverMaxWidth: overlayWidth - popoverTargetGlobalLeft - widget.popoverMargin,
         );
 
       default:
         throw AssertionError(popoverPosition);
-    }
-  }
-
-  void _handleTap(TapDownDetails details) {
-    final RenderBox? popoverRenderBox = _popoverKey.currentContext?.findRenderObject() as RenderBox?;
-    final RenderBox? overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
-    final popoverPosition = popoverRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
-
-    if (popoverPosition != null && !popoverRenderBox!.size.contains(details.localPosition - popoverPosition)) {
-      _removePopover();
     }
   }
 
@@ -442,16 +432,16 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
 
     return Semantics(
       label: widget.semanticLabel,
-      child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTapDown: _handleTap,
-        child: UnconstrainedBox(
-          child: CompositedTransformFollower(
-            link: _layerLink,
-            showWhenUnlinked: false,
-            offset: popoverPositionParameters.offset,
-            followerAnchor: popoverPositionParameters.followerAnchor,
-            targetAnchor: popoverPositionParameters.targetAnchor,
+      child: UnconstrainedBox(
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: popoverPositionParameters.offset,
+          followerAnchor: popoverPositionParameters.followerAnchor,
+          targetAnchor: popoverPositionParameters.targetAnchor,
+          child: TapRegion(
+            behavior: HitTestBehavior.translucent,
+            onTapOutside: (_) => _removePopover(),
             child: RepaintBoundary(
               child: FadeTransition(
                 opacity: _curvedAnimation!,
@@ -459,7 +449,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                   style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
                   child: Container(
                     key: _popoverKey,
-                    constraints: BoxConstraints(maxWidth: popoverPositionParameters.toolTipMaxWidth),
+                    constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),
                     padding: resolvedContentPadding,
                     decoration: ShapeDecoration(
                       color: effectiveBackgroundColor,
@@ -509,13 +499,13 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
 class _PopoverPositionProperties {
   final Alignment followerAnchor;
   final Alignment targetAnchor;
-  final double toolTipMaxWidth;
+  final double popoverMaxWidth;
   final Offset offset;
 
   _PopoverPositionProperties({
     required this.followerAnchor,
     required this.targetAnchor,
-    required this.toolTipMaxWidth,
+    required this.popoverMaxWidth,
     required this.offset,
   });
 }
