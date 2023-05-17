@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.3](https://github.com/coingaming/moon_flutter/compare/v0.20.2...v0.20.3) (2023-05-17)
+
+
+### Bug Fixes
+
+* [MDS-525] Fix EdgeInsetsGeometry behaviour that is passed in as props ([#166](https://github.com/coingaming/moon_flutter/issues/166)) ([c7552e3](https://github.com/coingaming/moon_flutter/commit/c7552e3164ed2362a58e88e7c24526c2bcbd9464))
+
 ## [0.20.2](https://github.com/coingaming/moon_flutter/compare/v0.20.1...v0.20.2) (2023-05-17)
 
 
