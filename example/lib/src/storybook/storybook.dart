@@ -14,6 +14,7 @@ import 'package:example/src/storybook/stories/linear_progress.dart';
 import 'package:example/src/storybook/stories/modal.dart';
 import 'package:example/src/storybook/stories/popover.dart';
 import 'package:example/src/storybook/stories/radio.dart';
+import 'package:example/src/storybook/stories/segmented_control.dart';
 import 'package:example/src/storybook/stories/switch.dart';
 import 'package:example/src/storybook/stories/tag.dart';
 import 'package:example/src/storybook/stories/text_area.dart';
@@ -26,6 +27,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 
 class StorybookPage extends StatelessWidget {
   static bool isLargeScreen = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width > 1000;
+
   const StorybookPage({super.key});
 
   static final _storyPanelFocusNode = FocusNode();
@@ -92,6 +94,7 @@ class StorybookPage extends StatelessWidget {
             ModalStory(),
             PopoverStory(),
             RadioStory(),
+            SegmentedControlStory(),
             SwitchStory(),
             TagStory(),
             TextAreaStory(),

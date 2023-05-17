@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/theme/chip/chip_size_properties.dart';
 
 @immutable
@@ -23,11 +22,8 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
 
   @override
   MoonChipSizes copyWith({
-    MoonChipSizeProperties? xs,
     MoonChipSizeProperties? sm,
     MoonChipSizeProperties? md,
-    MoonChipSizeProperties? lg,
-    MoonChipSizeProperties? xl,
   }) {
     return MoonChipSizes(
       sm: sm ?? this.sm,
