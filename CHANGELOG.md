@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/coingaming/moon_flutter/compare/v0.20.3...v0.21.0) (2023-05-17)
+
+
+### Features
+
+* [MDS-518] Create MoonSegmentedControl component ([#170](https://github.com/coingaming/moon_flutter/issues/170)) ([04cb654](https://github.com/coingaming/moon_flutter/commit/04cb654ace91bb96fbd1f616f4237f11fd3ce750))
+
 ## [0.20.3](https://github.com/coingaming/moon_flutter/compare/v0.20.2...v0.20.3) (2023-05-17)
 
 
