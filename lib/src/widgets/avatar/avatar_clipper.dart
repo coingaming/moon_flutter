@@ -1,6 +1,6 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 import 'package:moon_design/src/widgets/avatar/avatar.dart';
 
 class AvatarClipper extends CustomClipper<Path> {
@@ -128,10 +128,10 @@ class AvatarClipper extends CustomClipper<Path> {
             0,
             width,
             height,
-            topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
-            topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
-            bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
-            bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
+            topLeft: SquircleRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
+            topRight: SquircleRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
+            bottomLeft: SquircleRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
+            bottomRight: SquircleRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
           ),
         ),
       // Badge shape properties
@@ -145,10 +145,10 @@ class AvatarClipper extends CustomClipper<Path> {
           0,
           width,
           height,
-          topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
-          topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
-          bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
-          bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
+          topLeft: SquircleRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
+          topRight: SquircleRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
+          bottomLeft: SquircleRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
+          bottomRight: SquircleRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
         ),
       );
 

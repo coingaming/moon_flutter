@@ -193,7 +193,7 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
       decoration: widget.shapeDecoration ??
           BoxDecoration(
             color: effectiveBackgroundColor,
-            borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+            borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
           ),
       child: BaseSegmentedTabBar(
         selectedIndex: widget.selectedIndex,
@@ -301,7 +301,7 @@ class _SegmentBuilder extends StatelessWidget {
       focusNode: segment.focusNode,
       isFocusable: segment.isFocusable,
       semanticLabel: segment.semanticLabel,
-      borderRadius: effectiveSegmentBorderRadius.smoothBorderRadius(context),
+      borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
       cursor: isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         final bool isActive = isSelected || isHovered || isPressed;
@@ -321,7 +321,7 @@ class _SegmentBuilder extends StatelessWidget {
           curve: transitionCurve,
           decoration: BoxDecoration(
             color: isActive ? effectiveSelectedSegmentColor : backgroundColor,
-            borderRadius: effectiveSegmentBorderRadius.smoothBorderRadius(context),
+            borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
           ),
           child: AnimatedIconTheme(
             size: moonSegmentedControlSizeProperties.iconSizeValue,

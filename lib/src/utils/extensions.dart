@@ -1,7 +1,9 @@
 import 'dart:ui';
 
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
+import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 extension DarkModeX on BuildContext {
   /// Is dark mode currently active.
@@ -12,26 +14,26 @@ extension DarkModeX on BuildContext {
 }
 
 extension BorderRadiusX on BorderRadiusGeometry {
-  /// Returns SmoothBorderRadius.
-  SmoothBorderRadius smoothBorderRadius(BuildContext context) {
-    // FIXME: CornerSmoothing of 1 creates null pointer dereference error with SmoothRectangleBorder on mobile web/PWA
+  /// Returns SquircleBorderRadius.
+  SquircleBorderRadius squircleBorderRadius(BuildContext context) {
+    // FIXME: CornerSmoothing of 1 creates null pointer dereference error with SquircleBorder on mobile web/PWA
     // for some reason. So we use 0.94 instead.
     final borderRadius = resolve(Directionality.of(context));
 
-    return SmoothBorderRadius.only(
-      topLeft: SmoothRadius(
+    return SquircleBorderRadius.only(
+      topLeft: SquircleRadius(
         cornerRadius: borderRadius.topLeft.x,
         cornerSmoothing: 0.94,
       ),
-      topRight: SmoothRadius(
+      topRight: SquircleRadius(
         cornerRadius: borderRadius.topRight.x,
         cornerSmoothing: 0.94,
       ),
-      bottomLeft: SmoothRadius(
+      bottomLeft: SquircleRadius(
         cornerRadius: borderRadius.bottomLeft.x,
         cornerSmoothing: 0.94,
       ),
-      bottomRight: SmoothRadius(
+      bottomRight: SquircleRadius(
         cornerRadius: borderRadius.bottomRight.x,
         cornerSmoothing: 0.94,
       ),

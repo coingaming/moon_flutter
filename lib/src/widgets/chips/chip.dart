@@ -1,4 +1,3 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
@@ -8,6 +7,7 @@ import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
 
@@ -281,13 +281,13 @@ class MoonChip extends StatelessWidget {
           // doc comment for more info).
           decoration: ShapeDecorationWithPremultipliedAlpha(
             color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
-            shape: SmoothRectangleBorder(
+            shape: SquircleBorder(
               side: BorderSide(
                 color: effectiveBorderColor,
                 width: showBorder ? effectiveBorderWidth : 0,
                 style: showBorder ? BorderStyle.solid : BorderStyle.none,
               ),
-              borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+              borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
             ),
           ),
 

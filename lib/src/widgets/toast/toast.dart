@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
@@ -9,6 +8,7 @@ import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
 enum MoonToastPosition {
@@ -177,8 +177,8 @@ class MoonToast {
                     decoration: ShapeDecoration(
                       color: effectiveBackgroundColor,
                       shadows: effectiveToastShadows,
-                      shape: SmoothRectangleBorder(
-                        borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                      shape: SquircleBorder(
+                        borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                       ),
                     ),
                     child: Row(

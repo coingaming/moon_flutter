@@ -1,6 +1,5 @@
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -17,6 +16,7 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/text_input/input_decorator.dart';
@@ -1173,31 +1173,31 @@ class _MoonTextInputState extends State<MoonTextInput>
         context.moonTheme?.textInputTheme.properties.helperTextStyle ??
         const TextStyle(fontSize: 12);
 
-    final SmoothRectangleBorder defaultBorder = SmoothRectangleBorder(
-      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+    final SquircleBorder defaultBorder = SquircleBorder(
+      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
         color: _isHovering ? effectiveHoverBorderColor : effectiveInactiveBorderColor,
         width: _isHovering ? MoonBorders.borders.activeBorderWidth : MoonBorders.borders.defaultBorderWidth,
       ),
     );
 
-    final SmoothRectangleBorder focusBorder = SmoothRectangleBorder(
-      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+    final SquircleBorder focusBorder = SquircleBorder(
+      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
         color: effectiveActiveBorderColor,
         width: MoonBorders.borders.activeBorderWidth,
       ),
     );
 
-    final SmoothRectangleBorder errorBorder = SmoothRectangleBorder(
-      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+    final SquircleBorder errorBorder = SquircleBorder(
+      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
         color: effectiveErrorBorderColor,
         width: MoonBorders.borders.activeBorderWidth,
       ),
     );
 
-    final SmoothRectangleBorder resolvedBorder = widget.errorText != null && !widget.readOnly
+    final SquircleBorder resolvedBorder = widget.errorText != null && !widget.readOnly
         ? errorBorder
         : _effectiveFocusNode.hasFocus && !widget.readOnly
             ? focusBorder
@@ -1439,7 +1439,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         children: [
           MoonFocusEffect(
             show: widget.hasFocusEffect && _effectiveFocusNode.hasFocus && !widget.readOnly,
-            childBorderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+            childBorderRadius: effectiveBorderRadius.squircleBorderRadius(context),
             effectColor: widget.errorText == null ? focusEffectColor : errorFocusEffectColor,
             effectExtent: effectiveFocusEffectExtent,
             effectDuration: effectiveTransitionDuration,

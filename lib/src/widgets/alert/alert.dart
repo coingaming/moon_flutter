@@ -1,4 +1,3 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
@@ -7,6 +6,7 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
 class MoonAlert extends StatefulWidget {
@@ -255,13 +255,13 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
               constraints: BoxConstraints(minHeight: effectiveMinimumHeight),
               decoration: ShapeDecoration(
                 color: effectiveBackgroundColor,
-                shape: SmoothRectangleBorder(
+                shape: SquircleBorder(
                   side: BorderSide(
                     color: effectiveBorderColor,
                     width: widget.showBorder ? effectiveBorderWidth : 0,
                     style: widget.showBorder ? BorderStyle.solid : BorderStyle.none,
                   ),
-                  borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                  borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                 ),
               ),
               child: AnimatedDefaultTextStyle(

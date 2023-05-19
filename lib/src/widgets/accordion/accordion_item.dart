@@ -1,4 +1,3 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/accordion/accordion_item_size_properties.dart';
@@ -9,6 +8,7 @@ import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/common/icons/icons.dart';
@@ -485,9 +485,9 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                           ? ShapeDecoration(
                               color: resolvedBackgroundColor,
                               shadows: effectiveShadows,
-                              shape: SmoothRectangleBorder(
+                              shape: SquircleBorder(
                                 side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                                borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                               ),
                             )
                           : null,
@@ -503,10 +503,10 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                                 ? ShapeDecoration(
                                     color: resolvedBackgroundColor,
                                     shadows: effectiveShadows,
-                                    shape: SmoothRectangleBorder(
+                                    shape: SquircleBorder(
                                       side:
                                           widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                                      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                                     ),
                                   )
                                 : null,
