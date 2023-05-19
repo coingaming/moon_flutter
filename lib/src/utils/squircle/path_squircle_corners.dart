@@ -7,6 +7,7 @@ extension PathSquircleCornersExtensions on Path {
   void addSmoothTopRight(ProcessedSquircleRadius radius, Rect rect) {
     final width = rect.width;
     final height = rect.height;
+
     if (radius.radius.cornerRadius > 0) {
       final a = radius.a;
       final b = radius.b;

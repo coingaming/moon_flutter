@@ -9,6 +9,16 @@ import 'package:vector_math/vector_math.dart' as vector;
 // The original code
 // https://github.com/MartinRGB/Figma_Squircles_Approximation/blob/bf29714aab58c54329f3ca130ffa16d39a2ff08c/js/rounded-corners.js#L64
 class ProcessedSquircleRadius {
+  final SquircleRadius radius;
+  final double a;
+  final double b;
+  final double c;
+  final double d;
+  final double p;
+  final double circularSectionLength;
+  final double width;
+  final double height;
+
   factory ProcessedSquircleRadius(
     SquircleRadius radius, {
     required double width,
@@ -71,6 +81,7 @@ class ProcessedSquircleRadius {
       circularSectionLength: circularSectionLength,
     );
   }
+
   const ProcessedSquircleRadius._({
     required this.a,
     required this.b,
@@ -83,15 +94,6 @@ class ProcessedSquircleRadius {
     required this.circularSectionLength,
   });
 
-  final SquircleRadius radius;
-  final double a;
-  final double b;
-  final double c;
-  final double d;
-  final double p;
-  final double circularSectionLength;
-  final double width;
-  final double height;
   double get cornerRadius => radius.cornerRadius;
 
   @override

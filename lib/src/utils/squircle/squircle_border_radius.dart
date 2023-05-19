@@ -7,6 +7,25 @@ import 'package:moon_design/src/utils/squircle/processed_squircle_radius.dart';
 import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class SquircleBorderRadius extends BorderRadius {
+  /// A border radius with all zero radii.
+  static const SquircleBorderRadius zero = SquircleBorderRadius.all(SquircleRadius.zero);
+
+  /// The top-left [SquircleRadius].
+  @override
+  final SquircleRadius topLeft;
+
+  /// The top-right [SquircleRadius].
+  @override
+  final SquircleRadius topRight;
+
+  /// The bottom-left [SquircleRadius].
+  @override
+  final SquircleRadius bottomLeft;
+
+  /// The bottom-right [SquircleRadius].
+  @override
+  final SquircleRadius bottomRight;
+
   SquircleBorderRadius({
     required double cornerRadius,
     double cornerSmoothing = 0,
@@ -30,7 +49,6 @@ class SquircleBorderRadius extends BorderRadius {
         );
 
   /// Creates a border radius where all radii are [radius].
-
   const SquircleBorderRadius.all(SquircleRadius radius)
       : this.only(
           topLeft: radius,
@@ -77,6 +95,16 @@ class SquircleBorderRadius extends BorderRadius {
           bottomLeft: bottomLeft,
         );
 
+  /// Needed by internals of Flutter framework.
+  Radius get _topLeft => topLeft;
+  Radius get _topRight => topRight;
+  Radius get _bottomLeft => bottomLeft;
+  Radius get _bottomRight => bottomRight;
+  Radius get _topStart => Radius.zero;
+  Radius get _topEnd => Radius.zero;
+  Radius get _bottomStart => Radius.zero;
+  Radius get _bottomEnd => Radius.zero;
+
   /// Returns a copy of this BorderRadius with the given fields replaced with
   /// the new values.
   @override
@@ -93,35 +121,6 @@ class SquircleBorderRadius extends BorderRadius {
       bottomRight: bottomRight is SquircleRadius ? bottomRight : this.bottomRight,
     );
   }
-
-  /// A border radius with all zero radii.
-  static const SquircleBorderRadius zero = SquircleBorderRadius.all(SquircleRadius.zero);
-
-  /// The top-left [SquircleRadius].
-  @override
-  final SquircleRadius topLeft;
-
-  /// The top-right [SquircleRadius].
-  @override
-  final SquircleRadius topRight;
-
-  /// The bottom-left [SquircleRadius].
-  @override
-  final SquircleRadius bottomLeft;
-
-  /// The bottom-right [SquircleRadius].
-  @override
-  final SquircleRadius bottomRight;
-
-  /// Needed by internals of Flutter framework.
-  Radius get _topLeft => topLeft;
-  Radius get _topRight => topRight;
-  Radius get _bottomLeft => bottomLeft;
-  Radius get _bottomRight => bottomRight;
-  Radius get _topStart => Radius.zero;
-  Radius get _topEnd => Radius.zero;
-  Radius get _bottomStart => Radius.zero;
-  Radius get _bottomEnd => Radius.zero;
 
   /// Creates a [Path] inside the given [Rect].
   Path toPath(Rect rect) {

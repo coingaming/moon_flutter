@@ -11,18 +11,18 @@ enum BorderAlign {
 }
 
 class SquircleBorder extends OutlinedBorder {
-  const SquircleBorder({
-    super.side = BorderSide.none,
-    this.borderRadius = SquircleBorderRadius.zero,
-    this.borderAlign = BorderAlign.inside,
-  });
-
   /// The radius for each corner.
   ///
   /// Negative radius values are clamped to 0.0 by [getInnerPath] and
   /// [getOuterPath].
   final SquircleBorderRadius borderRadius;
   final BorderAlign borderAlign;
+
+  const SquircleBorder({
+    super.side = BorderSide.none,
+    this.borderRadius = SquircleBorderRadius.zero,
+    this.borderAlign = BorderAlign.inside,
+  });
 
   @override
   EdgeInsetsGeometry get dimensions {
@@ -78,6 +78,7 @@ class SquircleBorder extends OutlinedBorder {
           return rect;
       }
     }();
+
     final radius = () {
       switch (borderAlign) {
         case BorderAlign.inside:
@@ -159,6 +160,7 @@ class SquircleBorder extends OutlinedBorder {
               return rect.inflate(side.width / 2);
           }
         }();
+
         final adjustedBorderRadius = () {
           switch (borderAlign) {
             case BorderAlign.inside:

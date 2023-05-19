@@ -1,18 +1,19 @@
 import 'dart:ui';
 
 class SquircleRadius extends Radius {
+  static const zero = SquircleRadius(
+    cornerRadius: 0,
+    cornerSmoothing: 0,
+  );
+
+  final double cornerSmoothing;
+
   const SquircleRadius({
     required double cornerRadius,
     required this.cornerSmoothing,
   }) : super.circular(cornerRadius);
 
-  final double cornerSmoothing;
   double get cornerRadius => x;
-
-  static const zero = SquircleRadius(
-    cornerRadius: 0,
-    cornerSmoothing: 0,
-  );
 
   /// Unary negation operator.
   ///
@@ -41,6 +42,7 @@ class SquircleRadius extends Radius {
         cornerSmoothing: (cornerSmoothing + other.cornerSmoothing) / 2,
       );
     }
+
     return SquircleRadius(
       cornerRadius: cornerRadius - other.x,
       cornerSmoothing: cornerSmoothing,
@@ -60,6 +62,7 @@ class SquircleRadius extends Radius {
         cornerSmoothing: (cornerSmoothing + other.cornerSmoothing) / 2,
       );
     }
+
     return SquircleRadius(
       cornerRadius: cornerRadius + other.x,
       cornerSmoothing: cornerSmoothing,
