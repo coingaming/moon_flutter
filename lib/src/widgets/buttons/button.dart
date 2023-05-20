@@ -416,7 +416,7 @@ class MoonButton extends StatelessWidget {
           constraints: BoxConstraints(minWidth: effectiveHeight),
           decoration: ShapeDecoration(
             color: canAnimateHover ? hoverColor : backgroundColor,
-            shape: SquircleBorder(
+            shape: MoonSquircleBorder(
               side: BorderSide(
                 color: effectiveBorderColor,
                 width: showBorder ? effectiveBorderWidth : 0,

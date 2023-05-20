@@ -3,15 +3,15 @@ import 'package:flutter/widgets.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
 
-class ClipSquircleRect extends StatelessWidget {
-  final SquircleBorderRadius radius;
+class MoonClipSquircleRect extends StatelessWidget {
+  final MoonSquircleBorderRadius radius;
   final Clip clipBehavior;
-  final Widget child;
+  final Widget? child;
 
-  const ClipSquircleRect({
+  const MoonClipSquircleRect({
     super.key,
     required this.child,
-    this.radius = SquircleBorderRadius.zero,
+    this.radius = MoonSquircleBorderRadius.zero,
     this.clipBehavior = Clip.antiAlias,
   });
 
@@ -19,7 +19,7 @@ class ClipSquircleRect extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipPath.shape(
       clipBehavior: clipBehavior,
-      shape: SquircleBorder(
+      shape: MoonSquircleBorder(
         borderRadius: radius,
       ),
       child: child,

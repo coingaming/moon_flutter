@@ -177,7 +177,7 @@ class MoonToast {
                     decoration: ShapeDecoration(
                       color: effectiveBackgroundColor,
                       shadows: effectiveToastShadows,
-                      shape: SquircleBorder(
+                      shape: MoonSquircleBorder(
                         borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                       ),
                     ),

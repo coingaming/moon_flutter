@@ -281,7 +281,7 @@ class MoonChip extends StatelessWidget {
           // doc comment for more info).
           decoration: ShapeDecorationWithPremultipliedAlpha(
             color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
-            shape: SquircleBorder(
+            shape: MoonSquircleBorder(
               side: BorderSide(
                 color: effectiveBorderColor,
                 width: showBorder ? effectiveBorderWidth : 0,

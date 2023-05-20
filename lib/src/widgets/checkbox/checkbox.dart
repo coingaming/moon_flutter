@@ -262,7 +262,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
                   ..checkColor = effectiveCheckColor
                   ..value = value
                   ..previousValue = _previousValue
-                  ..shape = SquircleBorder(borderRadius: effectiveBorderRadius.squircleBorderRadius(context))
+                  ..shape = MoonSquircleBorder(borderRadius: effectiveBorderRadius.squircleBorderRadius(context))
                   ..side = _resolveSide(BorderSide(color: effectiveBorderColor)),
               ),
             ),

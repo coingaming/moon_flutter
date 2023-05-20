@@ -255,7 +255,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
               constraints: BoxConstraints(minHeight: effectiveMinimumHeight),
               decoration: ShapeDecoration(
                 color: effectiveBackgroundColor,
-                shape: SquircleBorder(
+                shape: MoonSquircleBorder(
                   side: BorderSide(
                     color: effectiveBorderColor,
                     width: widget.showBorder ? effectiveBorderWidth : 0,

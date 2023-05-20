@@ -146,7 +146,7 @@ class MoonTag extends StatelessWidget {
             constraints: BoxConstraints(minWidth: effectiveHeight),
             decoration: ShapeDecoration(
               color: effectiveBackgroundColor,
-              shape: SquircleBorder(
+              shape: MoonSquircleBorder(
                 borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
               ),
             ),

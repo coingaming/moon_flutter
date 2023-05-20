@@ -485,7 +485,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                           ? ShapeDecoration(
                               color: resolvedBackgroundColor,
                               shadows: effectiveShadows,
-                              shape: SquircleBorder(
+                              shape: MoonSquircleBorder(
                                 side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
                                 borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                               ),
@@ -503,7 +503,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                                 ? ShapeDecoration(
                                     color: resolvedBackgroundColor,
                                     shadows: effectiveShadows,
-                                    shape: SquircleBorder(
+                                    shape: MoonSquircleBorder(
                                       side:
                                           widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
                                       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),

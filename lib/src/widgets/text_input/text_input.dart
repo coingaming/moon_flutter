@@ -1173,7 +1173,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         context.moonTheme?.textInputTheme.properties.helperTextStyle ??
         const TextStyle(fontSize: 12);
 
-    final SquircleBorder defaultBorder = SquircleBorder(
+    final MoonSquircleBorder defaultBorder = MoonSquircleBorder(
       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
         color: _isHovering ? effectiveHoverBorderColor : effectiveInactiveBorderColor,
@@ -1181,7 +1181,7 @@ class _MoonTextInputState extends State<MoonTextInput>
       ),
     );
 
-    final SquircleBorder focusBorder = SquircleBorder(
+    final MoonSquircleBorder focusBorder = MoonSquircleBorder(
       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
         color: effectiveActiveBorderColor,
@@ -1189,7 +1189,7 @@ class _MoonTextInputState extends State<MoonTextInput>
       ),
     );
 
-    final SquircleBorder errorBorder = SquircleBorder(
+    final MoonSquircleBorder errorBorder = MoonSquircleBorder(
       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
         color: effectiveErrorBorderColor,
@@ -1197,7 +1197,7 @@ class _MoonTextInputState extends State<MoonTextInput>
       ),
     );
 
-    final SquircleBorder resolvedBorder = widget.errorText != null && !widget.readOnly
+    final MoonSquircleBorder resolvedBorder = widget.errorText != null && !widget.readOnly
         ? errorBorder
         : _effectiveFocusNode.hasFocus && !widget.readOnly
             ? focusBorder
@@ -1444,14 +1444,13 @@ class _MoonTextInputState extends State<MoonTextInput>
             effectExtent: effectiveFocusEffectExtent,
             effectDuration: effectiveTransitionDuration,
             effectCurve: effectiveTransitionCurve,
-            // FIXME: Make the borders animate properly with theme animation fix ticket in near future
-            child: Container(
+            child: AnimatedContainer(
+              duration: effectiveTransitionDuration,
               height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
               decoration: ShapeDecoration(
                 color: effectiveBackgroundColor,
-                shape: resolvedBorder.copyWith(side: BorderSide.none),
+                shape: resolvedBorder,
               ),
-              foregroundDecoration: ShapeDecoration(shape: resolvedBorder),
               child: child,
             ),
           ),

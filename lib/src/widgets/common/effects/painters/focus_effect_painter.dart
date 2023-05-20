@@ -41,10 +41,12 @@ class FocusEffectPainter extends CustomPainter {
             rect.width * widthIncrease,
             rect.height * heightIncrease,
           ),
-          topLeft: SquircleRadius(cornerRadius: borderRadius.topLeft.x + resolvedExtent, cornerSmoothing: 1),
-          topRight: SquircleRadius(cornerRadius: borderRadius.topRight.x + resolvedExtent, cornerSmoothing: 1),
-          bottomLeft: SquircleRadius(cornerRadius: borderRadius.bottomLeft.x + resolvedExtent, cornerSmoothing: 1),
-          bottomRight: SquircleRadius(cornerRadius: borderRadius.bottomRight.x + resolvedExtent, cornerSmoothing: 1),
+          topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x + resolvedExtent, cornerSmoothing: 0.99),
+          topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x + resolvedExtent, cornerSmoothing: 0.99),
+          bottomLeft:
+              MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x + resolvedExtent, cornerSmoothing: 0.99),
+          bottomRight:
+              MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x + resolvedExtent, cornerSmoothing: 0.99),
         ),
         paint,
       );

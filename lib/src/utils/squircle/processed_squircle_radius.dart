@@ -9,7 +9,7 @@ import 'package:vector_math/vector_math.dart' as vector;
 // The original code
 // https://github.com/MartinRGB/Figma_Squircles_Approximation/blob/bf29714aab58c54329f3ca130ffa16d39a2ff08c/js/rounded-corners.js#L64
 class ProcessedSquircleRadius {
-  final SquircleRadius radius;
+  final MoonSquircleRadius radius;
   final double a;
   final double b;
   final double c;
@@ -20,7 +20,7 @@ class ProcessedSquircleRadius {
   final double height;
 
   factory ProcessedSquircleRadius(
-    SquircleRadius radius, {
+    MoonSquircleRadius radius, {
     required double width,
     required double height,
   }) {
@@ -74,7 +74,7 @@ class ProcessedSquircleRadius {
       p: p,
       width: width,
       height: height,
-      radius: SquircleRadius(
+      radius: MoonSquircleRadius(
         cornerRadius: cornerRadius,
         cornerSmoothing: radius.cornerSmoothing,
       ),
@@ -100,7 +100,7 @@ class ProcessedSquircleRadius {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (runtimeType != other.runtimeType) return false;
-    if (other is SquircleRadius) {
+    if (other is MoonSquircleRadius) {
       return other == radius;
     }
     if (other is ProcessedSquircleRadius) {

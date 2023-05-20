@@ -14,28 +14,27 @@ extension DarkModeX on BuildContext {
 }
 
 extension BorderRadiusX on BorderRadiusGeometry {
-  /// Returns SquircleBorderRadius.
-  SquircleBorderRadius squircleBorderRadius(BuildContext context) {
-    // FIXME: CornerSmoothing of 1 creates null pointer dereference error with SquircleBorder on mobile web/PWA
-    // for some reason. So we use 0.94 instead.
+  /// Returns MoonSquircleBorderRadius.
+  MoonSquircleBorderRadius squircleBorderRadius(BuildContext context) {
+    // The value of 1 or 1.0 lead to NaN error in mobile web/PWA for some reason. So we use 0.99 instead.
     final borderRadius = resolve(Directionality.of(context));
 
-    return SquircleBorderRadius.only(
-      topLeft: SquircleRadius(
+    return MoonSquircleBorderRadius.only(
+      topLeft: MoonSquircleRadius(
         cornerRadius: borderRadius.topLeft.x,
-        cornerSmoothing: 0.94,
+        cornerSmoothing: 0.99,
       ),
-      topRight: SquircleRadius(
+      topRight: MoonSquircleRadius(
         cornerRadius: borderRadius.topRight.x,
-        cornerSmoothing: 0.94,
+        cornerSmoothing: 0.99,
       ),
-      bottomLeft: SquircleRadius(
+      bottomLeft: MoonSquircleRadius(
         cornerRadius: borderRadius.bottomLeft.x,
-        cornerSmoothing: 0.94,
+        cornerSmoothing: 0.99,
       ),
-      bottomRight: SquircleRadius(
+      bottomRight: MoonSquircleRadius(
         cornerRadius: borderRadius.bottomRight.x,
-        cornerSmoothing: 0.94,
+        cornerSmoothing: 0.99,
       ),
     );
   }

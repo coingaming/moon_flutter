@@ -10,27 +10,28 @@ enum BorderAlign {
   outside,
 }
 
-class SquircleBorder extends OutlinedBorder {
+class MoonSquircleBorder extends OutlinedBorder {
   /// The radius for each corner.
   ///
   /// Negative radius values are clamped to 0.0 by [getInnerPath] and
   /// [getOuterPath].
-  final SquircleBorderRadius borderRadius;
+  final MoonSquircleBorderRadius borderRadius;
   final BorderAlign borderAlign;
 
-  const SquircleBorder({
+  const MoonSquircleBorder({
     super.side = BorderSide.none,
-    this.borderRadius = SquircleBorderRadius.zero,
+    this.borderRadius = MoonSquircleBorderRadius.zero,
     this.borderAlign = BorderAlign.inside,
   });
 
   @override
   EdgeInsetsGeometry get dimensions {
     switch (borderAlign) {
+      // Make the border behave like in Figma ie not adding any padding
       case BorderAlign.inside:
-        return EdgeInsets.all(side.width);
+        return EdgeInsets.zero;
       case BorderAlign.center:
-        return EdgeInsets.all(side.width / 2);
+        return EdgeInsets.zero;
       case BorderAlign.outside:
         return EdgeInsets.zero;
     }
@@ -38,7 +39,7 @@ class SquircleBorder extends OutlinedBorder {
 
   @override
   ShapeBorder scale(double t) {
-    return SquircleBorder(
+    return MoonSquircleBorder(
       side: side.scale(t),
       borderRadius: borderRadius * t,
     );
@@ -46,10 +47,10 @@ class SquircleBorder extends OutlinedBorder {
 
   @override
   ShapeBorder? lerpFrom(ShapeBorder? a, double t) {
-    if (a is SquircleBorder) {
-      return SquircleBorder(
+    if (a is MoonSquircleBorder) {
+      return MoonSquircleBorder(
         side: BorderSide.lerp(a.side, side, t),
-        borderRadius: SquircleBorderRadius.lerp(a.borderRadius, borderRadius, t)!,
+        borderRadius: MoonSquircleBorderRadius.lerp(a.borderRadius, borderRadius, t)!,
       );
     }
     return super.lerpFrom(a, t);
@@ -57,10 +58,10 @@ class SquircleBorder extends OutlinedBorder {
 
   @override
   ShapeBorder? lerpTo(ShapeBorder? b, double t) {
-    if (b is SquircleBorder) {
-      return SquircleBorder(
+    if (b is MoonSquircleBorder) {
+      return MoonSquircleBorder(
         side: BorderSide.lerp(side, b.side, t),
-        borderRadius: SquircleBorderRadius.lerp(borderRadius, b.borderRadius, t)!,
+        borderRadius: MoonSquircleBorderRadius.lerp(borderRadius, b.borderRadius, t)!,
       );
     }
     return super.lerpTo(b, t);
@@ -83,18 +84,18 @@ class SquircleBorder extends OutlinedBorder {
       switch (borderAlign) {
         case BorderAlign.inside:
           return borderRadius -
-              SquircleBorderRadius.all(
-                SquircleRadius(
+              MoonSquircleBorderRadius.all(
+                MoonSquircleRadius(
                   cornerRadius: side.width,
-                  cornerSmoothing: 1.0,
+                  cornerSmoothing: 0.99,
                 ),
               );
         case BorderAlign.center:
           return borderRadius -
-              SquircleBorderRadius.all(
-                SquircleRadius(
+              MoonSquircleBorderRadius.all(
+                MoonSquircleRadius(
                   cornerRadius: side.width / 2,
-                  cornerSmoothing: 1.0,
+                  cornerSmoothing: 0.99,
                 ),
               );
         case BorderAlign.outside:
@@ -117,7 +118,7 @@ class SquircleBorder extends OutlinedBorder {
 
   Path _getPath(
     Rect rect,
-    SquircleBorderRadius radius, {
+    MoonSquircleBorderRadius radius, {
     TextDirection? textDirection,
   }) {
     if ([radius.bottomLeft, radius.bottomRight, radius.topLeft, radius.topRight]
@@ -129,12 +130,12 @@ class SquircleBorder extends OutlinedBorder {
   }
 
   @override
-  SquircleBorder copyWith({
+  MoonSquircleBorder copyWith({
     BorderSide? side,
-    SquircleBorderRadius? borderRadius,
+    MoonSquircleBorderRadius? borderRadius,
     BorderAlign? borderAlign,
   }) {
-    return SquircleBorder(
+    return MoonSquircleBorder(
       side: side ?? this.side,
       borderRadius: borderRadius ?? this.borderRadius,
       borderAlign: borderAlign ?? this.borderAlign,
@@ -165,20 +166,20 @@ class SquircleBorder extends OutlinedBorder {
           switch (borderAlign) {
             case BorderAlign.inside:
               return borderRadius -
-                  SquircleBorderRadius.all(
-                    SquircleRadius(
+                  MoonSquircleBorderRadius.all(
+                    MoonSquircleRadius(
                       cornerRadius: side.width / 2,
-                      cornerSmoothing: 1.0,
+                      cornerSmoothing: 0.99,
                     ),
                   );
             case BorderAlign.center:
               return borderRadius;
             case BorderAlign.outside:
               return borderRadius +
-                  SquircleBorderRadius.all(
-                    SquircleRadius(
+                  MoonSquircleBorderRadius.all(
+                    MoonSquircleRadius(
                       cornerRadius: side.width / 2,
-                      cornerSmoothing: 1.0,
+                      cornerSmoothing: 0.99,
                     ),
                   );
           }
@@ -202,7 +203,7 @@ class SquircleBorder extends OutlinedBorder {
   @override
   bool operator ==(Object other) {
     if (other.runtimeType != runtimeType) return false;
-    return other is SquircleBorder &&
+    return other is MoonSquircleBorder &&
         other.side == side &&
         other.borderRadius == borderRadius &&
         other.borderAlign == borderAlign;
@@ -213,6 +214,6 @@ class SquircleBorder extends OutlinedBorder {
 
   @override
   String toString() {
-    return '${objectRuntimeType(this, 'SquircleBorder')}($side, $borderRadius, $borderAlign)';
+    return '${objectRuntimeType(this, 'MoonSquircleBorder')}($side, $borderRadius, $borderAlign)';
   }
 }

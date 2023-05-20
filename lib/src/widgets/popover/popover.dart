@@ -454,7 +454,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                     decoration: ShapeDecoration(
                       color: effectiveBackgroundColor,
                       shadows: effectivePopoverShadows,
-                      shape: SquircleBorder(
+                      shape: MoonSquircleBorder(
                         borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                         side: BorderSide(color: widget.borderColor),
                       ),

@@ -486,7 +486,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
       case AuthFieldShape.underline:
         return Border(bottom: borderSide);
       default:
-        return SquircleBorder(
+        return MoonSquircleBorder(
           borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
           side: borderSide,
         );

@@ -1,14 +1,14 @@
 import 'dart:ui';
 
-class SquircleRadius extends Radius {
-  static const zero = SquircleRadius(
+class MoonSquircleRadius extends Radius {
+  static const zero = MoonSquircleRadius(
     cornerRadius: 0,
     cornerSmoothing: 0,
   );
 
   final double cornerSmoothing;
 
-  const SquircleRadius({
+  const MoonSquircleRadius({
     required double cornerRadius,
     required this.cornerSmoothing,
   }) : super.circular(cornerRadius);
@@ -24,7 +24,7 @@ class SquircleRadius extends Radius {
   /// and then adding the result to another radius is equivalent to subtracting
   /// a radius of one pixel from the other.
   @override
-  Radius operator -() => SquircleRadius(
+  Radius operator -() => MoonSquircleRadius(
         cornerRadius: -cornerRadius,
         cornerSmoothing: cornerSmoothing,
       );
@@ -36,14 +36,14 @@ class SquircleRadius extends Radius {
   /// left-hand-side operand's [y] minus the right-hand-side operand's [y].
   @override
   Radius operator -(Radius other) {
-    if (other is SquircleRadius) {
-      return SquircleRadius(
+    if (other is MoonSquircleRadius) {
+      return MoonSquircleRadius(
         cornerRadius: cornerRadius - other.cornerRadius,
         cornerSmoothing: (cornerSmoothing + other.cornerSmoothing) / 2,
       );
     }
 
-    return SquircleRadius(
+    return MoonSquircleRadius(
       cornerRadius: cornerRadius - other.x,
       cornerSmoothing: cornerSmoothing,
     );
@@ -56,14 +56,14 @@ class SquircleRadius extends Radius {
   /// two operands.
   @override
   Radius operator +(Radius other) {
-    if (other is SquircleRadius) {
-      return SquircleRadius(
+    if (other is MoonSquircleRadius) {
+      return MoonSquircleRadius(
         cornerRadius: cornerRadius + other.cornerRadius,
         cornerSmoothing: (cornerSmoothing + other.cornerSmoothing) / 2,
       );
     }
 
-    return SquircleRadius(
+    return MoonSquircleRadius(
       cornerRadius: cornerRadius + other.x,
       cornerSmoothing: cornerSmoothing,
     );
@@ -75,7 +75,7 @@ class SquircleRadius extends Radius {
   /// left-hand-side operand (a radius) multiplied by the scalar
   /// right-hand-side operand (a double).
   @override
-  SquircleRadius operator *(double operand) => SquircleRadius(
+  MoonSquircleRadius operator *(double operand) => MoonSquircleRadius(
         cornerRadius: cornerRadius * operand,
         cornerSmoothing: cornerSmoothing * operand,
       );
@@ -86,7 +86,7 @@ class SquircleRadius extends Radius {
   /// left-hand-side operand (a radius) divided by the scalar right-hand-side
   /// operand (a double).
   @override
-  SquircleRadius operator /(double operand) => SquircleRadius(
+  MoonSquircleRadius operator /(double operand) => MoonSquircleRadius(
         cornerRadius: cornerRadius / operand,
         cornerSmoothing: cornerSmoothing / operand,
       );
@@ -97,7 +97,7 @@ class SquircleRadius extends Radius {
   /// left-hand-side operand (a radius) divided by the scalar right-hand-side
   /// operand (a double), rounded towards zero.
   @override
-  SquircleRadius operator ~/(double operand) => SquircleRadius(
+  MoonSquircleRadius operator ~/(double operand) => MoonSquircleRadius(
         cornerRadius: (cornerRadius ~/ operand).toDouble(),
         cornerSmoothing: (cornerSmoothing ~/ operand).toDouble(),
       );
@@ -108,14 +108,14 @@ class SquircleRadius extends Radius {
   /// coordinates of the left-hand-side operand (a radius) by the scalar
   /// right-hand-side operand (a double).
   @override
-  SquircleRadius operator %(double operand) => SquircleRadius(
+  MoonSquircleRadius operator %(double operand) => MoonSquircleRadius(
         cornerRadius: cornerRadius % operand,
         cornerSmoothing: cornerSmoothing % operand,
       );
 
   /// Linearly interpolate between two smooth radii.
   ///
-  /// If either is null, this function substitutes [SquircleRadius.zero] instead.
+  /// If either is null, this function substitutes [MoonSquircleRadius.zero] instead.
   ///
   /// The `t` argument represents position on the timeline, with 0.0 meaning
   /// that the interpolation has not started, returning `a` (or something
@@ -128,25 +128,25 @@ class SquircleRadius extends Radius {
   ///
   /// Values for `t` are usually obtained from an [Animation<double>], such as
   /// an [AnimationController].
-  static SquircleRadius? lerp(SquircleRadius? a, SquircleRadius? b, double t) {
+  static MoonSquircleRadius? lerp(MoonSquircleRadius? a, MoonSquircleRadius? b, double t) {
     if (b == null) {
       if (a == null) {
         return null;
       } else {
         final double k = 1.0 - t;
-        return SquircleRadius(
+        return MoonSquircleRadius(
           cornerRadius: a.cornerRadius * k,
           cornerSmoothing: a.cornerSmoothing * k,
         );
       }
     } else {
       if (a == null) {
-        return SquircleRadius(
+        return MoonSquircleRadius(
           cornerRadius: b.cornerRadius * t,
           cornerSmoothing: b.cornerSmoothing * t,
         );
       } else {
-        return SquircleRadius(
+        return MoonSquircleRadius(
           cornerRadius: lerpDouble(a.cornerRadius, b.cornerRadius, t) ?? 0,
           cornerSmoothing: lerpDouble(a.cornerSmoothing, b.cornerSmoothing, t) ?? 0,
         );
@@ -159,7 +159,9 @@ class SquircleRadius extends Radius {
     if (identical(this, other)) return true;
     if (runtimeType != other.runtimeType) return false;
 
-    return other is SquircleRadius && other.cornerRadius == cornerRadius && other.cornerSmoothing == cornerSmoothing;
+    return other is MoonSquircleRadius &&
+        other.cornerRadius == cornerRadius &&
+        other.cornerSmoothing == cornerSmoothing;
   }
 
   @override
@@ -167,7 +169,7 @@ class SquircleRadius extends Radius {
 
   @override
   String toString() {
-    return 'SquircleRadius('
+    return 'MoonSquircleRadius('
         'cornerRadius: ${cornerRadius.toStringAsFixed(2)}, '
         'cornerSmoothing: ${cornerSmoothing.toStringAsFixed(2)}, '
         ')';

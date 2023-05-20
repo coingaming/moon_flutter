@@ -61,7 +61,7 @@ class MoonModal extends StatelessWidget {
             child: Container(
               decoration: ShapeDecoration(
                 color: effectiveBackgroundColor,
-                shape: SquircleBorder(
+                shape: MoonSquircleBorder(
                   borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                 ),
               ),
