@@ -129,8 +129,8 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// The size of the accordion.
   final MoonAccordionItemSize? accordionSize;
 
-  /// Custom shape for the accordion.
-  final ShapeBorder? shape;
+  /// Custom shape decoration for the accordion.
+  final ShapeDecoration? shapeDecoration;
 
   /// The semantic label for the accordion.
   final String? semanticLabel;
@@ -196,7 +196,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
     this.shadows,
     this.children = const <Widget>[],
     this.accordionSize,
-    this.shape,
+    this.shapeDecoration,
     this.semanticLabel,
     this.identityValue,
     this.groupIdentityValue,
@@ -485,17 +485,17 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                       duration: effectiveHoverEffectDuration,
                       curve: effectiveHoverEffectCurve,
                       clipBehavior: widget.clipBehavior ?? Clip.none,
-                      decoration: !widget.hasContentOutside
-                          ? ShapeDecoration(
-                              color: resolvedBackgroundColor,
-                              shadows: effectiveShadows,
-                              shape: widget.shape ??
-                                  SmoothRectangleBorder(
+                      decoration: widget.shapeDecoration ??
+                          (!widget.hasContentOutside
+                              ? ShapeDecoration(
+                                  color: resolvedBackgroundColor,
+                                  shadows: effectiveShadows,
+                                  shape: SmoothRectangleBorder(
                                     side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
                                     borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                                   ),
-                            )
-                          : null,
+                                )
+                              : null),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[

@@ -78,8 +78,8 @@ class MoonToast {
     /// uses dark colors.
     MoonToastVariant variant = MoonToastVariant.original,
 
-    /// Custom shape for the toast.
-    ShapeBorder? shape,
+    /// Custom shape decoration for the toast.
+    ShapeDecoration? shapeDecoration,
 
     /// The semantic label for the toast.
     String? semanticLabel,
@@ -177,14 +177,14 @@ class MoonToast {
                   child: Container(
                     margin: margin ?? resolvedContentPadding,
                     padding: resolvedContentPadding,
-                    decoration: ShapeDecoration(
-                      color: effectiveBackgroundColor,
-                      shadows: effectiveToastShadows,
-                      shape: shape ??
-                          SmoothRectangleBorder(
+                    decoration: shapeDecoration ??
+                        ShapeDecoration(
+                          color: effectiveBackgroundColor,
+                          shadows: effectiveToastShadows,
+                          shape: SmoothRectangleBorder(
                             borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                           ),
-                    ),
+                        ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       textDirection: Directionality.of(context),

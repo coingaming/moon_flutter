@@ -42,8 +42,8 @@ class MoonOutlinedButton extends StatelessWidget {
   /// The size of the button.
   final MoonButtonSize? buttonSize;
 
-  /// Custom shape for the button.
-  final ShapeBorder? shape;
+  /// Custom shape decoration for the button.
+  final ShapeDecoration? shapeDecoration;
 
   /// The semantic label for the button.
   final String? semanticLabel;
@@ -87,7 +87,7 @@ class MoonOutlinedButton extends StatelessWidget {
     this.minTouchTargetSize = 40,
     this.focusNode,
     this.buttonSize,
-    this.shape,
+    this.shapeDecoration,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -114,7 +114,7 @@ class MoonOutlinedButton extends StatelessWidget {
       minTouchTargetSize: minTouchTargetSize,
       focusNode: focusNode,
       buttonSize: buttonSize,
-      shape: shape,
+      shapeDecoration: shapeDecoration,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,
       onTap: onTap,

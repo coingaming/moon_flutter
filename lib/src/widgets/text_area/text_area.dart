@@ -128,8 +128,8 @@ class MoonTextArea extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.scrollPhysics}
   final ScrollPhysics? scrollPhysics;
 
-  /// Custom shape for the text area.
-  final ShapeBorder? shape;
+  /// Custom shape decoration for the text area.
+  final ShapeDecoration? shapeDecoration;
 
   /// The text for the hint.
   final String? hintText;
@@ -256,7 +256,7 @@ class MoonTextArea extends StatefulWidget {
     this.maxLengthEnforcement,
     this.scrollController,
     this.scrollPhysics,
-    this.shape,
+    this.shapeDecoration,
     this.hintText,
     this.initialValue,
     this.restorationId,
@@ -390,7 +390,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
       scrollController: widget.scrollController,
       scrollPadding: widget.scrollPadding,
       scrollPhysics: widget.scrollPhysics,
-      shape: widget.shape,
+      shapeDecoration: widget.shapeDecoration,
       showCursor: widget.showCursor,
       strutStyle: widget.strutStyle,
       style: effectiveTextStyle.copyWith(color: effectiveTextColor),

@@ -45,8 +45,8 @@ class MoonSegmentedControl extends StatefulWidget {
   /// The size of the MoonSegmentedControl.
   final MoonSegmentedControlSize? segmentedControlSize;
 
-  /// Custom shape for the MoonSegmentedControl.
-  final ShapeBorder? shape;
+  /// Custom shape decoration for the MoonSegmentedControl.
+  final ShapeDecoration? shapeDecoration;
 
   /// Controller of MoonSegmentedControl selection and animation state.
   final TabController? tabController;
@@ -74,7 +74,7 @@ class MoonSegmentedControl extends StatefulWidget {
     this.padding,
     this.selectedIndex = 0,
     this.segmentedControlSize,
-    this.shape,
+    this.shapeDecoration,
     this.tabController,
     this.onSegmentChanged,
     required this.segments,
@@ -96,7 +96,7 @@ class MoonSegmentedControl extends StatefulWidget {
     this.padding,
     this.selectedIndex = 0,
     this.segmentedControlSize,
-    this.shape,
+    this.shapeDecoration,
     this.tabController,
     this.onSegmentChanged,
     required this.customSegments,
@@ -183,13 +183,13 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
       duration: effectiveTransitionDuration,
       curve: effectiveTransitionCurve,
       constraints: BoxConstraints(minWidth: effectiveHeight),
-      decoration: ShapeDecoration(
-        color: effectiveBackgroundColor,
-        shape: widget.shape ??
-            SmoothRectangleBorder(
+      decoration: widget.shapeDecoration ??
+          ShapeDecoration(
+            color: effectiveBackgroundColor,
+            shape: SmoothRectangleBorder(
               borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
             ),
-      ),
+          ),
       child: BaseSegmentedTabBar(
         selectedIndex: widget.selectedIndex,
         tabController: widget.tabController,
@@ -314,13 +314,13 @@ class _SegmentBuilder extends StatelessWidget {
         return AnimatedContainer(
           duration: transitionDuration,
           curve: transitionCurve,
-          decoration: ShapeDecoration(
-            color: isActive ? effectiveSelectedSegmentColor : backgroundColor,
-            shape: segmentStyle?.shape ??
-                SmoothRectangleBorder(
+          decoration: segmentStyle?.shapeDecoration ??
+              ShapeDecoration(
+                color: isActive ? effectiveSelectedSegmentColor : backgroundColor,
+                shape: SmoothRectangleBorder(
                   borderRadius: effectiveSegmentBorderRadius.smoothBorderRadius(context),
                 ),
-          ),
+              ),
           child: AnimatedIconTheme(
             size: moonSegmentedControlSizeProperties.iconSizeValue,
             duration: transitionDuration,
@@ -422,8 +422,8 @@ class SegmentStyle {
   /// The padding of the segment.
   final EdgeInsetsGeometry? segmentPadding;
 
-  /// Custom shape for the segment.
-  final ShapeBorder? shape;
+  /// Custom shape decoration for the segment.
+  final ShapeDecoration? shapeDecoration;
 
   /// The text style of the segment.
   ///
@@ -437,7 +437,7 @@ class SegmentStyle {
     this.selectedTextColor,
     this.segmentGap,
     this.segmentPadding,
-    this.shape,
+    this.shapeDecoration,
     this.textStyle,
   });
 }

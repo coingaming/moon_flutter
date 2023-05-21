@@ -130,8 +130,8 @@ class MoonButton extends StatelessWidget {
   /// The size of the button.
   final MoonButtonSize? buttonSize;
 
-  /// Custom shape for the button.
-  final ShapeBorder? shape;
+  /// Custom shape decoration for the button.
+  final ShapeDecoration? shapeDecoration;
 
   /// The semantic label for the button.
   final String? semanticLabel;
@@ -200,7 +200,7 @@ class MoonButton extends StatelessWidget {
     this.padding,
     this.focusNode,
     this.buttonSize,
-    this.shape,
+    this.shapeDecoration,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -247,7 +247,7 @@ class MoonButton extends StatelessWidget {
     FocusNode? focusNode,
     EdgeInsetsGeometry? padding,
     MoonButtonSize? buttonSize,
-    ShapeBorder? shape,
+    ShapeDecoration? shapeDecoration,
     String? semanticLabel,
     String tooltipMessage = "",
     VoidCallback? onLongPress,
@@ -290,7 +290,7 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       padding: padding,
       buttonSize: buttonSize,
-      shape: shape,
+      shapeDecoration: shapeDecoration,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,
       onLongPress: onLongPress,
@@ -420,10 +420,10 @@ class MoonButton extends StatelessWidget {
           width: width,
           height: effectiveHeight,
           constraints: BoxConstraints(minWidth: effectiveHeight),
-          decoration: ShapeDecoration(
-            color: canAnimateHover ? hoverColor : backgroundColor,
-            shape: shape ??
-                SmoothRectangleBorder(
+          decoration: shapeDecoration ??
+              ShapeDecoration(
+                color: canAnimateHover ? hoverColor : backgroundColor,
+                shape: SmoothRectangleBorder(
                   side: BorderSide(
                     color: effectiveBorderColor,
                     width: showBorder ? effectiveBorderWidth : 0,
@@ -431,7 +431,7 @@ class MoonButton extends StatelessWidget {
                   ),
                   borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                 ),
-          ),
+              ),
           child: Padding(
             padding: isFullWidth ? EdgeInsets.zero : correctedPadding,
             child: AnimatedIconTheme(

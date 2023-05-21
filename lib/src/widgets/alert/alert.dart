@@ -55,8 +55,8 @@ class MoonAlert extends StatefulWidget {
   /// The padding of the alert.
   final EdgeInsetsGeometry? padding;
 
-  /// Custom shape for the alert.
-  final ShapeBorder? shape;
+  /// Custom shape decoration for the alert.
+  final ShapeDecoration? shapeDecoration;
 
   /// The semantic label for the alert.
   final String? semanticLabel;
@@ -102,7 +102,7 @@ class MoonAlert extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
-    this.shape,
+    this.shapeDecoration,
     this.semanticLabel,
     this.bodyTextStyle,
     this.titleTextStyle,
@@ -257,10 +257,10 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
             child: Container(
               padding: effectivePadding,
               constraints: BoxConstraints(minHeight: effectiveMinimumHeight),
-              decoration: ShapeDecoration(
-                color: effectiveBackgroundColor,
-                shape: widget.shape ??
-                    SmoothRectangleBorder(
+              decoration: widget.shapeDecoration ??
+                  ShapeDecoration(
+                    color: effectiveBackgroundColor,
+                    shape: SmoothRectangleBorder(
                       side: BorderSide(
                         color: effectiveBorderColor,
                         width: widget.showBorder ? effectiveBorderWidth : 0,
@@ -268,7 +268,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                       ),
                       borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                     ),
-              ),
+                  ),
               child: AnimatedDefaultTextStyle(
                 duration: effectiveTransitionDuration,
                 style: TextStyle(color: effectiveTextColor),

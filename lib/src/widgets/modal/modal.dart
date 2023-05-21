@@ -13,8 +13,8 @@ class MoonModal extends StatelessWidget {
   /// The background color of the modal.
   final Color? backgroundColor;
 
-  /// Custom shape for the modal.
-  final ShapeBorder? shape;
+  /// Custom shape decoration for the modal.
+  final ShapeDecoration? shapeDecoration;
 
   /// The semantic label for the modal.
   final String? semanticLabel;
@@ -26,7 +26,7 @@ class MoonModal extends StatelessWidget {
     super.key,
     this.borderRadius,
     this.backgroundColor,
-    this.shape,
+    this.shapeDecoration,
     this.semanticLabel,
     required this.child,
   });
@@ -63,13 +63,13 @@ class MoonModal extends StatelessWidget {
           style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
           child: Center(
             child: Container(
-              decoration: ShapeDecoration(
-                color: effectiveBackgroundColor,
-                shape: shape ??
-                    SmoothRectangleBorder(
+              decoration: shapeDecoration ??
+                  ShapeDecoration(
+                    color: effectiveBackgroundColor,
+                    shape: SmoothRectangleBorder(
                       borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
                     ),
-              ),
+                  ),
               child: child,
             ),
           ),
