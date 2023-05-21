@@ -129,6 +129,9 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// The size of the accordion.
   final MoonAccordionItemSize? accordionSize;
 
+  /// Custom shape for the accordion.
+  final ShapeBorder? shape;
+
   /// The semantic label for the accordion.
   final String? semanticLabel;
 
@@ -193,6 +196,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
     this.shadows,
     this.children = const <Widget>[],
     this.accordionSize,
+    this.shape,
     this.semanticLabel,
     this.identityValue,
     this.groupIdentityValue,
@@ -485,10 +489,11 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                           ? ShapeDecoration(
                               color: resolvedBackgroundColor,
                               shadows: effectiveShadows,
-                              shape: SmoothRectangleBorder(
-                                side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-                              ),
+                              shape: widget.shape ??
+                                  SmoothRectangleBorder(
+                                    side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                                    borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                                  ),
                             )
                           : null,
                       child: Column(

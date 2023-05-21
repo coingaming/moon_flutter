@@ -46,7 +46,8 @@ class ModalStory extends Story {
                     textDirection: Directionality.of(context),
                     child: MoonModal(
                       backgroundColor: backgroundColor,
-                      borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius:
+                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       child: SizedBox(
                         width: 300,
                         child: Column(

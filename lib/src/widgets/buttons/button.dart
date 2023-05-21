@@ -130,6 +130,9 @@ class MoonButton extends StatelessWidget {
   /// The size of the button.
   final MoonButtonSize? buttonSize;
 
+  /// Custom shape for the button.
+  final ShapeBorder? shape;
+
   /// The semantic label for the button.
   final String? semanticLabel;
 
@@ -197,6 +200,7 @@ class MoonButton extends StatelessWidget {
     this.padding,
     this.focusNode,
     this.buttonSize,
+    this.shape,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -243,6 +247,7 @@ class MoonButton extends StatelessWidget {
     FocusNode? focusNode,
     EdgeInsetsGeometry? padding,
     MoonButtonSize? buttonSize,
+    ShapeBorder? shape,
     String? semanticLabel,
     String tooltipMessage = "",
     VoidCallback? onLongPress,
@@ -285,6 +290,7 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       padding: padding,
       buttonSize: buttonSize,
+      shape: shape,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,
       onLongPress: onLongPress,
@@ -416,14 +422,15 @@ class MoonButton extends StatelessWidget {
           constraints: BoxConstraints(minWidth: effectiveHeight),
           decoration: ShapeDecoration(
             color: canAnimateHover ? hoverColor : backgroundColor,
-            shape: SmoothRectangleBorder(
-              side: BorderSide(
-                color: effectiveBorderColor,
-                width: showBorder ? effectiveBorderWidth : 0,
-                style: showBorder ? BorderStyle.solid : BorderStyle.none,
-              ),
-              borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-            ),
+            shape: shape ??
+                SmoothRectangleBorder(
+                  side: BorderSide(
+                    color: effectiveBorderColor,
+                    width: showBorder ? effectiveBorderWidth : 0,
+                    style: showBorder ? BorderStyle.solid : BorderStyle.none,
+                  ),
+                  borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                ),
           ),
           child: Padding(
             padding: isFullWidth ? EdgeInsets.zero : correctedPadding,

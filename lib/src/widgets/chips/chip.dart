@@ -101,6 +101,9 @@ class MoonChip extends StatelessWidget {
   /// The size of the chip.
   final MoonChipSize? chipSize;
 
+  /// Custom shape for the chip.
+  final ShapeBorder? shape;
+
   /// The semantic label for the chip.
   final String? semanticLabel;
 
@@ -153,6 +156,7 @@ class MoonChip extends StatelessWidget {
     this.padding,
     this.focusNode,
     this.chipSize,
+    this.shape,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -281,14 +285,15 @@ class MoonChip extends StatelessWidget {
           // doc comment for more info).
           decoration: ShapeDecorationWithPremultipliedAlpha(
             color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
-            shape: SmoothRectangleBorder(
-              side: BorderSide(
-                color: effectiveBorderColor,
-                width: showBorder ? effectiveBorderWidth : 0,
-                style: showBorder ? BorderStyle.solid : BorderStyle.none,
-              ),
-              borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-            ),
+            shape: shape ??
+                SmoothRectangleBorder(
+                  side: BorderSide(
+                    color: effectiveBorderColor,
+                    width: showBorder ? effectiveBorderWidth : 0,
+                    style: showBorder ? BorderStyle.solid : BorderStyle.none,
+                  ),
+                  borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                ),
           ),
 
           child: AnimatedIconTheme(

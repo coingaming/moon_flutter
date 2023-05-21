@@ -31,7 +31,7 @@ class MoonTextArea extends StatefulWidget {
   final bool enableSuggestions;
 
   /// Whether the focus effect is enabled.
-  final bool hasFocusEffect;
+  final bool showFocusEffect;
 
   /// {@macro flutter.widgets.editableText.readOnly}
   final bool readOnly;
@@ -127,6 +127,9 @@ class MoonTextArea extends StatefulWidget {
 
   /// {@macro flutter.widgets.editableText.scrollPhysics}
   final ScrollPhysics? scrollPhysics;
+
+  /// Custom shape for the text area.
+  final ShapeBorder? shape;
 
   /// The text for the hint.
   final String? hintText;
@@ -224,7 +227,7 @@ class MoonTextArea extends StatefulWidget {
     this.enableIMEPersonalizedLearning = true,
     this.enableInteractiveSelection,
     this.enableSuggestions = true,
-    this.hasFocusEffect = true,
+    this.showFocusEffect = true,
     this.readOnly = false,
     this.scribbleEnabled = true,
     this.showCursor,
@@ -253,6 +256,7 @@ class MoonTextArea extends StatefulWidget {
     this.maxLengthEnforcement,
     this.scrollController,
     this.scrollPhysics,
+    this.shape,
     this.hintText,
     this.initialValue,
     this.restorationId,
@@ -357,7 +361,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
       errorBuilder: widget.errorBuilder,
       expands: widget.height != null,
       focusNode: widget.focusNode,
-      hasFocusEffect: widget.hasFocusEffect,
+      showFocusEffect: widget.showFocusEffect,
       height: widget.height,
       helper: widget.helper,
       helperPadding: effectiveHelperPadding,
@@ -386,6 +390,7 @@ class _MoonTextAreaState extends State<MoonTextArea> {
       scrollController: widget.scrollController,
       scrollPadding: widget.scrollPadding,
       scrollPhysics: widget.scrollPhysics,
+      shape: widget.shape,
       showCursor: widget.showCursor,
       strutStyle: widget.strutStyle,
       style: effectiveTextStyle.copyWith(color: effectiveTextColor),

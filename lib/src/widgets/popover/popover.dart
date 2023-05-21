@@ -74,6 +74,9 @@ class MoonPopover extends StatefulWidget {
   /// `RouteObserver` used to listen for route changes that will hide the popover when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
+  /// Custom shape for the popover.
+  final ShapeBorder? shape;
+
   /// The semantic label for the popover.
   final String? semanticLabel;
 
@@ -103,6 +106,7 @@ class MoonPopover extends StatefulWidget {
     this.popoverShadows,
     this.popoverPosition = MoonPopoverPosition.top,
     this.routeObserver,
+    this.shape,
     this.semanticLabel,
     required this.child,
     required this.content,
@@ -454,10 +458,11 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                     decoration: ShapeDecoration(
                       color: effectiveBackgroundColor,
                       shadows: effectivePopoverShadows,
-                      shape: SmoothRectangleBorder(
-                        borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-                        side: BorderSide(color: widget.borderColor),
-                      ),
+                      shape: widget.shape ??
+                          SmoothRectangleBorder(
+                            borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                            side: BorderSide(color: widget.borderColor),
+                          ),
                     ),
                     child: widget.content,
                   ),

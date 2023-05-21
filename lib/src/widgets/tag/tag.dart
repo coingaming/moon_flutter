@@ -39,6 +39,9 @@ class MoonTag extends StatelessWidget {
   /// The size of the tag.
   final MoonTagSize? tagSize;
 
+  /// Custom shape for the tag.
+  final ShapeBorder? shape;
+
   /// The semantic label for the tag.
   final String? semanticLabel;
 
@@ -69,6 +72,7 @@ class MoonTag extends StatelessWidget {
     this.gap,
     this.padding,
     this.tagSize,
+    this.shape,
     this.semanticLabel,
     this.onTap,
     this.onLongPress,
@@ -146,9 +150,10 @@ class MoonTag extends StatelessWidget {
             constraints: BoxConstraints(minWidth: effectiveHeight),
             decoration: ShapeDecoration(
               color: effectiveBackgroundColor,
-              shape: SmoothRectangleBorder(
-                borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-              ),
+              shape: shape ??
+                  SmoothRectangleBorder(
+                    borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                  ),
             ),
             child: IconTheme(
               data: IconThemeData(color: effectiveTextColor, size: effectiveMoonTagSize.iconSizeValue),
