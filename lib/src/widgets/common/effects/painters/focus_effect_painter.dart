@@ -1,5 +1,6 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+
+import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class FocusEffectPainter extends CustomPainter {
   final Color color;
@@ -40,10 +41,12 @@ class FocusEffectPainter extends CustomPainter {
             rect.width * widthIncrease,
             rect.height * heightIncrease,
           ),
-          topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x + resolvedExtent, cornerSmoothing: 1),
-          topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x + resolvedExtent, cornerSmoothing: 1),
-          bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x + resolvedExtent, cornerSmoothing: 1),
-          bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x + resolvedExtent, cornerSmoothing: 1),
+          topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x + resolvedExtent, cornerSmoothing: 0.99),
+          topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x + resolvedExtent, cornerSmoothing: 0.99),
+          bottomLeft:
+              MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x + resolvedExtent, cornerSmoothing: 0.99),
+          bottomRight:
+              MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x + resolvedExtent, cornerSmoothing: 0.99),
         ),
         paint,
       );

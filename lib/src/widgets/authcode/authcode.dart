@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +11,7 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
 enum AuthFieldShape { box, underline, circle }
@@ -486,8 +486,8 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
       case AuthFieldShape.underline:
         return Border(bottom: borderSide);
       default:
-        return SmoothRectangleBorder(
-          borderRadius: _effectiveBorderRadius.smoothBorderRadius(context),
+        return MoonSquircleBorder(
+          borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
           side: borderSide,
         );
     }

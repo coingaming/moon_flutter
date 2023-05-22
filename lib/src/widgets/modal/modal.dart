@@ -1,10 +1,10 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
 class MoonModal extends StatelessWidget {
   /// The border radius of the modal.
@@ -66,8 +66,8 @@ class MoonModal extends StatelessWidget {
               decoration: shapeDecoration ??
                   ShapeDecoration(
                     color: effectiveBackgroundColor,
-                    shape: SmoothRectangleBorder(
-                      borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                    shape: MoonSquircleBorder(
+                      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                     ),
                   ),
               child: child,

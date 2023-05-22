@@ -1,9 +1,10 @@
 import 'dart:ui';
 
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+
+import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class PulseEffectPainter extends CustomPainter {
   static const double _animationRangeStartValue = 0.286;
@@ -64,10 +65,10 @@ class PulseEffectPainter extends CustomPainter {
             rect.width * widthIncrease,
             rect.height * heightIncrease,
           ),
-          topLeft: SmoothRadius(cornerRadius: topLeftLerp, cornerSmoothing: 1),
-          topRight: SmoothRadius(cornerRadius: topRightLerp, cornerSmoothing: 1),
-          bottomLeft: SmoothRadius(cornerRadius: bottomLeftLerp, cornerSmoothing: 1),
-          bottomRight: SmoothRadius(cornerRadius: bottomRightLerp, cornerSmoothing: 1),
+          topLeft: MoonSquircleRadius(cornerRadius: topLeftLerp, cornerSmoothing: 0.99),
+          topRight: MoonSquircleRadius(cornerRadius: topRightLerp, cornerSmoothing: 0.99),
+          bottomLeft: MoonSquircleRadius(cornerRadius: bottomLeftLerp, cornerSmoothing: 0.99),
+          bottomRight: MoonSquircleRadius(cornerRadius: bottomRightLerp, cornerSmoothing: 0.99),
         ),
         paint,
       );

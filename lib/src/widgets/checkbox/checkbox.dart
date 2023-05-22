@@ -1,4 +1,3 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
@@ -7,6 +6,7 @@ import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/checkbox/checkbox_painter.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
@@ -262,7 +262,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
                   ..checkColor = effectiveCheckColor
                   ..value = value
                   ..previousValue = _previousValue
-                  ..shape = SmoothRectangleBorder(borderRadius: effectiveBorderRadius.smoothBorderRadius(context))
+                  ..shape = MoonSquircleBorder(borderRadius: effectiveBorderRadius.squircleBorderRadius(context))
                   ..side = _resolveSide(BorderSide(color: effectiveBorderColor)),
               ),
             ),

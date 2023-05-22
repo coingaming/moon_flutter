@@ -1,7 +1,8 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+
+import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class MoonLinearProgressIndicatorPainter extends CustomPainter {
   static const int _kIndeterminateLinearDuration = 1800;
@@ -56,10 +57,10 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
 
     final containerRect = RRect.fromRectAndCorners(
       Offset.zero & size,
-      topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
-      topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
-      bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
-      bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
+      topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 0.99),
+      topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 0.99),
+      bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 0.99),
+      bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 0.99),
     );
     canvas.drawRRect(containerRect, paint);
 
@@ -82,10 +83,10 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
 
       final progressRect = RRect.fromRectAndCorners(
         Offset(left, 0.0) & Size(width, size.height),
-        topLeft: SmoothRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 1),
-        topRight: SmoothRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 1),
-        bottomLeft: SmoothRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 1),
-        bottomRight: SmoothRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 1),
+        topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 0.99),
+        topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 0.99),
+        bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 0.99),
+        bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 0.99),
       );
 
       canvas.drawRRect(progressRect, paint);

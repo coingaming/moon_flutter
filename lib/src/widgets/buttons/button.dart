@@ -1,4 +1,3 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
@@ -7,6 +6,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
 
@@ -423,13 +423,13 @@ class MoonButton extends StatelessWidget {
           decoration: shapeDecoration ??
               ShapeDecoration(
                 color: canAnimateHover ? hoverColor : backgroundColor,
-                shape: SmoothRectangleBorder(
+                shape: MoonSquircleBorder(
                   side: BorderSide(
                     color: effectiveBorderColor,
                     width: showBorder ? effectiveBorderWidth : 0,
                     style: showBorder ? BorderStyle.solid : BorderStyle.none,
                   ),
-                  borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                  borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                 ),
               ),
           child: Padding(

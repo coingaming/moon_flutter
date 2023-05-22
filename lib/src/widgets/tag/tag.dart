@@ -1,10 +1,10 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
 enum MoonTagSize {
   x2s,
@@ -151,8 +151,8 @@ class MoonTag extends StatelessWidget {
             decoration: shapeDecoration ??
                 ShapeDecoration(
                   color: effectiveBackgroundColor,
-                  shape: SmoothRectangleBorder(
-                    borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                  shape: MoonSquircleBorder(
+                    borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                   ),
                 ),
             child: IconTheme(

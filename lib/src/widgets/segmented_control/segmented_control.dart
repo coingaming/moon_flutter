@@ -1,4 +1,3 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/moon_design.dart';
@@ -186,8 +185,8 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
       decoration: widget.shapeDecoration ??
           ShapeDecoration(
             color: effectiveBackgroundColor,
-            shape: SmoothRectangleBorder(
-              borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+            shape: MoonSquircleBorder(
+              borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
             ),
           ),
       child: BaseSegmentedTabBar(
@@ -296,7 +295,7 @@ class _SegmentBuilder extends StatelessWidget {
       focusNode: segment.focusNode,
       isFocusable: segment.isFocusable,
       semanticLabel: segment.semanticLabel,
-      borderRadius: effectiveSegmentBorderRadius.smoothBorderRadius(context),
+      borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
       cursor: isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         final bool isActive = isSelected || isHovered || isPressed;
@@ -317,8 +316,8 @@ class _SegmentBuilder extends StatelessWidget {
           decoration: segmentStyle?.shapeDecoration ??
               ShapeDecoration(
                 color: isActive ? effectiveSelectedSegmentColor : backgroundColor,
-                shape: SmoothRectangleBorder(
-                  borderRadius: effectiveSegmentBorderRadius.smoothBorderRadius(context),
+                shape: MoonSquircleBorder(
+                  borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
                 ),
               ),
           child: AnimatedIconTheme(
