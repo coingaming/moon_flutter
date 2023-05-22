@@ -101,6 +101,9 @@ class MoonChip extends StatelessWidget {
   /// The size of the chip.
   final MoonChipSize? chipSize;
 
+  /// Custom shape decoration for the chip.
+  final ShapeDecoration? shapeDecoration;
+
   /// The semantic label for the chip.
   final String? semanticLabel;
 
@@ -153,6 +156,7 @@ class MoonChip extends StatelessWidget {
     this.padding,
     this.focusNode,
     this.chipSize,
+    this.shapeDecoration,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -279,17 +283,18 @@ class MoonChip extends StatelessWidget {
           constraints: BoxConstraints(minWidth: effectiveHeight),
           // TODO: Remove this once Impeller becomes the default render engine (see ShapeDecorationWithPremultipliedAlpha
           // doc comment for more info).
-          decoration: ShapeDecorationWithPremultipliedAlpha(
-            color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
-            shape: SmoothRectangleBorder(
-              side: BorderSide(
-                color: effectiveBorderColor,
-                width: showBorder ? effectiveBorderWidth : 0,
-                style: showBorder ? BorderStyle.solid : BorderStyle.none,
+          decoration: shapeDecoration ??
+              ShapeDecorationWithPremultipliedAlpha(
+                color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
+                shape: SmoothRectangleBorder(
+                  side: BorderSide(
+                    color: effectiveBorderColor,
+                    width: showBorder ? effectiveBorderWidth : 0,
+                    style: showBorder ? BorderStyle.solid : BorderStyle.none,
+                  ),
+                  borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
+                ),
               ),
-              borderRadius: effectiveBorderRadius.smoothBorderRadius(context),
-            ),
-          ),
 
           child: AnimatedIconTheme(
             duration: effectiveHoverEffectDuration,

@@ -88,8 +88,8 @@ class TextAreaStory extends Story {
               description: "Whether the MoonTextArea has no fixed height and is growable",
             );
 
-            final hasFocusEffectKnob = context.knobs.boolean(
-              label: "hasFocusEffect",
+            final showFocusEffectKnob = context.knobs.boolean(
+              label: "showFocusEffect",
               description: "Whether to display focus effect around MoonTextInput.",
               initial: true,
             );
@@ -112,7 +112,7 @@ class TextAreaStory extends Story {
                           children: [
                             MoonTextArea(
                               enabled: enabledKnob,
-                              hasFocusEffect: hasFocusEffectKnob,
+                              showFocusEffect: showFocusEffectKnob,
                               height: growableKnob ? null : 200,
                               textColor: textColor,
                               hintTextColor: hintTextColor,
