@@ -185,7 +185,6 @@ class ShapeDecorationWithPremultipliedAlpha extends Decoration {
     }
 
     return ShapeDecorationWithPremultipliedAlpha(
-      //color: colorPremulLerp(a!.color, b!.color, t),
       color: colorPremulLerp(a!.color, b!.color, t),
       gradient: Gradient.lerp(a.gradient, b.gradient, t),
       image: t < 0.5 ? a.image : b.image,
