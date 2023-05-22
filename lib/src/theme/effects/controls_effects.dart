@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with DiagnosticableTreeMixin {
@@ -65,7 +66,7 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
     if (other is! MoonControlsEffects) return this;
 
     return MoonControlsEffects(
-      effectColor: Color.lerp(effectColor, other.effectColor, t),
+      effectColor: colorPremulLerp(effectColor, other.effectColor, t),
       effectDuration: lerpDuration(effectDuration, other.effectDuration, t),
       effectCurve: other.effectCurve,
       effectExtent: lerpDouble(effectExtent, other.effectExtent, t),

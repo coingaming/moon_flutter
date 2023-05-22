@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class FocusEffectPainter extends CustomPainter {
@@ -19,7 +20,7 @@ class FocusEffectPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (!animation.isDismissed) {
       final Rect rect = Rect.fromLTRB(0.0, 0.0, size.width, size.height);
-      final Color transformedColor = Color.lerp(null, color, animation.value)!;
+      final Color transformedColor = colorPremulLerp(null, color, animation.value)!;
       final double newWidth = rect.width + effectExtent;
       final double newHeight = rect.height + effectExtent;
       final double widthIncrease = newWidth / rect.width;

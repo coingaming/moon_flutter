@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonToastColors extends ThemeExtension<MoonToastColors> with DiagnosticableTreeMixin {
@@ -42,8 +43,8 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
     if (other is! MoonToastColors) return this;
 
     return MoonToastColors(
-      lightVariantBackgroundColor: Color.lerp(lightVariantBackgroundColor, other.lightVariantBackgroundColor, t)!,
-      darkVariantBackgroundColor: Color.lerp(darkVariantBackgroundColor, other.darkVariantBackgroundColor, t)!,
+      lightVariantBackgroundColor: colorPremulLerp(lightVariantBackgroundColor, other.lightVariantBackgroundColor, t)!,
+      darkVariantBackgroundColor: colorPremulLerp(darkVariantBackgroundColor, other.darkVariantBackgroundColor, t)!,
     );
   }
 

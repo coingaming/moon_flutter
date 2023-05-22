@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> with DiagnosticableTreeMixin {
@@ -74,12 +75,12 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     if (other is! MoonAccordionItemColors) return this;
 
     return MoonAccordionItemColors(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
-      expandedBackgroundColor: Color.lerp(expandedBackgroundColor, other.expandedBackgroundColor, t)!,
-      borderColor: Color.lerp(borderColor, other.borderColor, t)!,
-      dividerColor: Color.lerp(dividerColor, other.dividerColor, t)!,
-      trailingIconColor: Color.lerp(trailingIconColor, other.trailingIconColor, t)!,
-      expandedTrailingIconColor: Color.lerp(expandedTrailingIconColor, other.expandedTrailingIconColor, t)!,
+      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      expandedBackgroundColor: colorPremulLerp(expandedBackgroundColor, other.expandedBackgroundColor, t)!,
+      borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
+      dividerColor: colorPremulLerp(dividerColor, other.dividerColor, t)!,
+      trailingIconColor: colorPremulLerp(trailingIconColor, other.trailingIconColor, t)!,
+      expandedTrailingIconColor: colorPremulLerp(expandedTrailingIconColor, other.expandedTrailingIconColor, t)!,
     );
   }
 

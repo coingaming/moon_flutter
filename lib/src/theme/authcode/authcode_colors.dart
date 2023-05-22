@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with DiagnosticableTreeMixin {
@@ -98,15 +99,15 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
     if (other is! MoonAuthCodeColors) return this;
 
     return MoonAuthCodeColors(
-      selectedBorderColor: Color.lerp(selectedBorderColor, other.selectedBorderColor, t)!,
-      activeBorderColor: Color.lerp(activeBorderColor, other.activeBorderColor, t)!,
-      inactiveBorderColor: Color.lerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
-      errorBorderColor: Color.lerp(errorBorderColor, other.errorBorderColor, t)!,
-      selectedFillColor: Color.lerp(selectedFillColor, other.selectedFillColor, t)!,
-      activeFillColor: Color.lerp(activeFillColor, other.activeFillColor, t)!,
-      inactiveFillColor: Color.lerp(inactiveFillColor, other.inactiveFillColor, t)!,
-      disabledColor: Color.lerp(disabledColor, other.disabledColor, t)!,
-      textColor: Color.lerp(textColor, other.textColor, t)!,
+      selectedBorderColor: colorPremulLerp(selectedBorderColor, other.selectedBorderColor, t)!,
+      activeBorderColor: colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
+      inactiveBorderColor: colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
+      errorBorderColor: colorPremulLerp(errorBorderColor, other.errorBorderColor, t)!,
+      selectedFillColor: colorPremulLerp(selectedFillColor, other.selectedFillColor, t)!,
+      activeFillColor: colorPremulLerp(activeFillColor, other.activeFillColor, t)!,
+      inactiveFillColor: colorPremulLerp(inactiveFillColor, other.inactiveFillColor, t)!,
+      disabledColor: colorPremulLerp(disabledColor, other.disabledColor, t)!,
+      textColor: colorPremulLerp(textColor, other.textColor, t)!,
     );
   }
 

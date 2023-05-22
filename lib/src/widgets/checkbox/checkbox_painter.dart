@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
+
 class MoonCheckboxPainter extends ToggleablePainter {
   static const double _kEdgeSize = 16;
   static const double _kStrokeWidth = 1.0;
@@ -63,7 +65,7 @@ class MoonCheckboxPainter extends ToggleablePainter {
   // value == true or null.
   Color _colorAt(double t) {
     // As t goes from 0.0 to 0.25, animate from the inactiveColor to activeColor.
-    return t >= 0.25 ? activeColor : Color.lerp(inactiveColor, activeColor, t * 4.0)!;
+    return t >= 0.25 ? activeColor : colorPremulLerp(inactiveColor, activeColor, t * 4.0)!;
   }
 
   // White stroke used to paint the check and dash.

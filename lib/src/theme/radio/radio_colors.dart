@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonRadioColors extends ThemeExtension<MoonRadioColors> with DiagnosticableTreeMixin {
@@ -42,8 +43,8 @@ class MoonRadioColors extends ThemeExtension<MoonRadioColors> with Diagnosticabl
     if (other is! MoonRadioColors) return this;
 
     return MoonRadioColors(
-      activeColor: Color.lerp(activeColor, other.activeColor, t)!,
-      inactiveColor: Color.lerp(inactiveColor, other.inactiveColor, t)!,
+      activeColor: colorPremulLerp(activeColor, other.activeColor, t)!,
+      inactiveColor: colorPremulLerp(inactiveColor, other.inactiveColor, t)!,
     );
   }
 

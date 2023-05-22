@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonButtonColors extends ThemeExtension<MoonButtonColors> with DiagnosticableTreeMixin {
@@ -66,11 +67,12 @@ class MoonButtonColors extends ThemeExtension<MoonButtonColors> with Diagnostica
     if (other is! MoonButtonColors) return this;
 
     return MoonButtonColors(
-      borderColor: Color.lerp(borderColor, other.borderColor, t)!,
-      filledVariantBackgroundColor: Color.lerp(filledVariantBackgroundColor, other.filledVariantBackgroundColor, t)!,
-      textVariantTextColor: Color.lerp(textVariantTextColor, other.textVariantTextColor, t)!,
-      textVariantFocusColor: Color.lerp(textVariantFocusColor, other.textVariantFocusColor, t)!,
-      textVariantHoverColor: Color.lerp(textVariantHoverColor, other.textVariantHoverColor, t)!,
+      borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
+      filledVariantBackgroundColor:
+          colorPremulLerp(filledVariantBackgroundColor, other.filledVariantBackgroundColor, t)!,
+      textVariantTextColor: colorPremulLerp(textVariantTextColor, other.textVariantTextColor, t)!,
+      textVariantFocusColor: colorPremulLerp(textVariantFocusColor, other.textVariantFocusColor, t)!,
+      textVariantHoverColor: colorPremulLerp(textVariantHoverColor, other.textVariantHoverColor, t)!,
     );
   }
 

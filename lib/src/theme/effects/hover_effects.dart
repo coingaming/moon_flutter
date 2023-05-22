@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with DiagnosticableTreeMixin {
@@ -58,8 +58,8 @@ class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with Diagnostica
     if (other is! MoonHoverEffects) return this;
 
     return MoonHoverEffects(
-      primaryHoverColor: Color.lerp(primaryHoverColor, other.primaryHoverColor, t)!,
-      secondaryHoverColor: Color.lerp(secondaryHoverColor, other.secondaryHoverColor, t)!,
+      primaryHoverColor: colorPremulLerp(primaryHoverColor, other.primaryHoverColor, t)!,
+      secondaryHoverColor: colorPremulLerp(secondaryHoverColor, other.secondaryHoverColor, t)!,
       hoverDuration: lerpDuration(hoverDuration, other.hoverDuration, t),
       hoverCurve: other.hoverCurve,
     );

@@ -1,7 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 class ShapeDecorationWithPremultipliedAlpha extends Decoration {
   /// The color to fill in the background of the shape.
@@ -164,42 +164,6 @@ class ShapeDecorationWithPremultipliedAlpha extends Decoration {
     return super.lerpTo(b, t) as ShapeDecorationWithPremultipliedAlpha?;
   }
 
-  static Color _scaleAlpha(Color a, double factor) {
-    return a.withAlpha((a.alpha * factor).round().clamp(0, 255));
-  }
-
-  /// This is a workaround for visual bug in Flutter caused by the Color.lerp method which is using straight alpha instead
-  /// of premultiplied alpha leading to incorrect color lerping. Visually this manifests as a darker colored "hump" in
-  /// the middle of the lerp when any of the lerped colors has low enough alpha on a light background. The lower the alpha
-  /// value, the more pronounced the effect.
-  ///
-  /// This is a known issue in Flutter and is being tracked here: https://github.com/flutter/flutter/issues/48534
-  static Color? _lerpColorWithPremulAlpha(Color? a, Color? b, double t) {
-    if (b == null) {
-      if (a == null) {
-        return null;
-      } else {
-        return _scaleAlpha(a, 1.0 - t);
-      }
-    } else {
-      if (a == null) {
-        return _scaleAlpha(b, t);
-      } else {
-        final weight1 = (1 - t) * a.opacity;
-        final weight2 = t * b.opacity;
-        final summedWeight = weight1 + weight2;
-        final w = summedWeight > 0.000001 ? weight2 / summedWeight : 0.5;
-
-        return Color.fromARGB(
-          lerpDouble(a.alpha, b.alpha, t)!.toInt().clamp(0, 255),
-          lerpDouble(a.red, b.red, w)!.toInt().clamp(0, 255),
-          lerpDouble(a.green, b.green, w)!.toInt().clamp(0, 255),
-          lerpDouble(a.blue, b.blue, w)!.toInt().clamp(0, 255),
-        );
-      }
-    }
-  }
-
   static ShapeDecorationWithPremultipliedAlpha? lerp(
     ShapeDecorationWithPremultipliedAlpha? a,
     ShapeDecorationWithPremultipliedAlpha? b,
@@ -220,8 +184,8 @@ class ShapeDecorationWithPremultipliedAlpha extends Decoration {
     }
 
     return ShapeDecorationWithPremultipliedAlpha(
-      //color: Color.lerp(a!.color, b!.color, t),
-      color: _lerpColorWithPremulAlpha(a!.color, b!.color, t),
+      //color: colorPremulLerp(a!.color, b!.color, t),
+      color: colorPremulLerp(a!.color, b!.color, t),
       gradient: Gradient.lerp(a.gradient, b.gradient, t),
       image: t < 0.5 ? a.image : b.image,
       shadows: BoxShadow.lerpList(a.shadows, b.shadows, t),

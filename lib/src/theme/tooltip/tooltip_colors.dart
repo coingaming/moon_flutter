@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTooltipColors extends ThemeExtension<MoonTooltipColors> with DiagnosticableTreeMixin {
@@ -32,7 +33,7 @@ class MoonTooltipColors extends ThemeExtension<MoonTooltipColors> with Diagnosti
     if (other is! MoonTooltipColors) return this;
 
     return MoonTooltipColors(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
+      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
     );
   }
 

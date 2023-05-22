@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonSegmentedControlColors extends ThemeExtension<MoonSegmentedControlColors> with DiagnosticableTreeMixin {
@@ -58,10 +59,10 @@ class MoonSegmentedControlColors extends ThemeExtension<MoonSegmentedControlColo
     if (other is! MoonSegmentedControlColors) return this;
 
     return MoonSegmentedControlColors(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
-      selectedSegmentColor: Color.lerp(selectedSegmentColor, other.selectedSegmentColor, t)!,
-      textColor: Color.lerp(textColor, other.textColor, t)!,
-      selectedTextColor: Color.lerp(selectedTextColor, other.selectedTextColor, t)!,
+      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      selectedSegmentColor: colorPremulLerp(selectedSegmentColor, other.selectedSegmentColor, t)!,
+      textColor: colorPremulLerp(textColor, other.textColor, t)!,
+      selectedTextColor: colorPremulLerp(selectedTextColor, other.selectedTextColor, t)!,
     );
   }
 
