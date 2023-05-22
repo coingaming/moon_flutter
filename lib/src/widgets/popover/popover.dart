@@ -4,6 +4,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
 enum MoonPopoverPosition {
@@ -75,7 +76,7 @@ class MoonPopover extends StatefulWidget {
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
   /// Custom shape decoration for the popover.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// The semantic label for the popover.
   final String? semanticLabel;
@@ -456,7 +457,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                     constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),
                     padding: resolvedContentPadding,
                     decoration: widget.shapeDecoration ??
-                        ShapeDecoration(
+                        ShapeDecorationWithPremultipliedAlpha(
                           color: effectiveBackgroundColor,
                           shadows: effectivePopoverShadows,
                           shape: MoonSquircleBorder(

@@ -8,6 +8,7 @@ import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
@@ -130,7 +131,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
   final MoonAccordionItemSize? accordionSize;
 
   /// Custom shape decoration for the accordion.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// The semantic label for the accordion.
   final String? semanticLabel;
@@ -487,7 +488,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                       clipBehavior: widget.clipBehavior ?? Clip.none,
                       decoration: widget.shapeDecoration ??
                           (!widget.hasContentOutside
-                              ? ShapeDecoration(
+                              ? ShapeDecorationWithPremultipliedAlpha(
                                   color: resolvedBackgroundColor,
                                   shadows: effectiveShadows,
                                   shape: MoonSquircleBorder(
@@ -506,7 +507,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                             curve: effectiveHoverEffectCurve,
                             decoration: widget.shapeDecoration ??
                                 (widget.hasContentOutside
-                                    ? ShapeDecoration(
+                                    ? ShapeDecorationWithPremultipliedAlpha(
                                         color: resolvedBackgroundColor,
                                         shadows: effectiveShadows,
                                         shape: MoonSquircleBorder(

@@ -6,6 +6,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
@@ -131,7 +132,7 @@ class MoonButton extends StatelessWidget {
   final MoonButtonSize? buttonSize;
 
   /// Custom shape decoration for the button.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// The semantic label for the button.
   final String? semanticLabel;
@@ -247,7 +248,7 @@ class MoonButton extends StatelessWidget {
     FocusNode? focusNode,
     EdgeInsetsGeometry? padding,
     MoonButtonSize? buttonSize,
-    ShapeDecoration? shapeDecoration,
+    Decoration? shapeDecoration,
     String? semanticLabel,
     String tooltipMessage = "",
     VoidCallback? onLongPress,
@@ -421,7 +422,7 @@ class MoonButton extends StatelessWidget {
           height: effectiveHeight,
           constraints: BoxConstraints(minWidth: effectiveHeight),
           decoration: shapeDecoration ??
-              ShapeDecoration(
+              ShapeDecorationWithPremultipliedAlpha(
                 color: canAnimateHover ? hoverColor : backgroundColor,
                 shape: MoonSquircleBorder(
                   side: BorderSide(

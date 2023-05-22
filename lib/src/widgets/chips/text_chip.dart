@@ -87,7 +87,7 @@ class MoonTextChip extends StatelessWidget {
   final MoonChipSize? chipSize;
 
   /// Custom shape decoration for the chip.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// The semantic label for the chip.
   final String? semanticLabel;

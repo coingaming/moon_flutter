@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/moon_design.dart';
+import 'package:moon_design/src/theme/borders.dart';
+import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_size_properties.dart';
+import 'package:moon_design/src/theme/sizes.dart';
+import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
+import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
+import 'package:moon_design/src/widgets/common/base_control.dart';
+import 'package:moon_design/src/widgets/common/base_segmented_tab_bar.dart';
 
 enum MoonSegmentedControlSize {
   sm,
@@ -45,7 +54,7 @@ class MoonSegmentedControl extends StatefulWidget {
   final MoonSegmentedControlSize? segmentedControlSize;
 
   /// Custom shape decoration for the MoonSegmentedControl.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// Controller of MoonSegmentedControl selection and animation state.
   final TabController? tabController;
@@ -183,7 +192,7 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
       curve: effectiveTransitionCurve,
       constraints: BoxConstraints(minWidth: effectiveHeight),
       decoration: widget.shapeDecoration ??
-          ShapeDecoration(
+          ShapeDecorationWithPremultipliedAlpha(
             color: effectiveBackgroundColor,
             shape: MoonSquircleBorder(
               borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
@@ -314,7 +323,7 @@ class _SegmentBuilder extends StatelessWidget {
           duration: transitionDuration,
           curve: transitionCurve,
           decoration: segmentStyle?.shapeDecoration ??
-              ShapeDecoration(
+              ShapeDecorationWithPremultipliedAlpha(
                 color: isActive ? effectiveSelectedSegmentColor : backgroundColor,
                 shape: MoonSquircleBorder(
                   borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
@@ -422,7 +431,7 @@ class SegmentStyle {
   final EdgeInsetsGeometry? segmentPadding;
 
   /// Custom shape decoration for the segment.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// The text style of the segment.
   ///

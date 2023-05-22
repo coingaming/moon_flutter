@@ -11,6 +11,7 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
@@ -544,7 +545,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
               duration: _animationDuration!,
               width: _effectiveWidth,
               height: _effectiveHeight,
-              decoration: ShapeDecoration(
+              decoration: ShapeDecorationWithPremultipliedAlpha(
                 shape: _getAuthInputFieldShape(elementIndex: i),
                 color: widget.enableInputFill ? _getFillColorFromIndex(i) : Colors.transparent,
                 shadows: (widget.activeBoxShadows != null || widget.inActiveBoxShadows != null)

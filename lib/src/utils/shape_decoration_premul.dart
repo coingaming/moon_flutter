@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
+// TODO: This will be unnecessary once Flutter finally moves from straight alpha to premultiplied alpha for color lerping.
 class ShapeDecorationWithPremultipliedAlpha extends Decoration {
   /// The color to fill in the background of the shape.
   ///

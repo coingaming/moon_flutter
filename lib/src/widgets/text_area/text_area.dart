@@ -129,7 +129,7 @@ class MoonTextArea extends StatefulWidget {
   final ScrollPhysics? scrollPhysics;
 
   /// Custom shape decoration for the text area.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// The text for the hint.
   final String? hintText;

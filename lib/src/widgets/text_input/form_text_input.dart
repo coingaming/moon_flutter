@@ -141,7 +141,7 @@ class MoonFormTextInput extends FormField<String> {
     Radius? cursorRadius,
     ScrollController? scrollController,
     ScrollPhysics? scrollPhysics,
-    ShapeDecoration? shapeDecoration,
+    Decoration? shapeDecoration,
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
     SpellCheckConfiguration? spellCheckConfiguration,

@@ -34,6 +34,7 @@ export 'package:moon_design/src/theme/typography/typography.dart';
 
 export 'package:moon_design/src/utils/color_premul_lerp.dart';
 export 'package:moon_design/src/utils/extensions.dart';
+export 'package:moon_design/src/utils/shape_decoration_premul.dart';
 export 'package:moon_design/src/utils/squircle/clip_squircle_rect.dart';
 export 'package:moon_design/src/utils/squircle/squircle_border.dart';
 export 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';

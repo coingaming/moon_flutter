@@ -45,7 +45,7 @@ class MoonFilledButton extends StatelessWidget {
   final MoonButtonSize? buttonSize;
 
   /// Custom shape decoration for the button.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// The semantic label for the button.
   final String? semanticLabel;

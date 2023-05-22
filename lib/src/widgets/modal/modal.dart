@@ -4,6 +4,7 @@ import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
 class MoonModal extends StatelessWidget {
@@ -14,7 +15,7 @@ class MoonModal extends StatelessWidget {
   final Color? backgroundColor;
 
   /// Custom shape decoration for the modal.
-  final ShapeDecoration? shapeDecoration;
+  final Decoration? shapeDecoration;
 
   /// The semantic label for the modal.
   final String? semanticLabel;
@@ -64,7 +65,7 @@ class MoonModal extends StatelessWidget {
           child: Center(
             child: Container(
               decoration: shapeDecoration ??
-                  ShapeDecoration(
+                  ShapeDecorationWithPremultipliedAlpha(
                     color: effectiveBackgroundColor,
                     shape: MoonSquircleBorder(
                       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
