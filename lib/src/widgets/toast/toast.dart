@@ -8,6 +8,7 @@ import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
@@ -78,8 +79,8 @@ class MoonToast {
     /// uses dark colors.
     MoonToastVariant variant = MoonToastVariant.original,
 
-    /// Custom shape decoration for the toast.
-    ShapeDecoration? shapeDecoration,
+    /// Custom decoration for the toast.
+    Decoration? decoration,
 
     /// The semantic label for the toast.
     String? semanticLabel,
@@ -177,8 +178,8 @@ class MoonToast {
                   child: Container(
                     margin: margin ?? resolvedContentPadding,
                     padding: resolvedContentPadding,
-                    decoration: shapeDecoration ??
-                        ShapeDecoration(
+                    decoration: decoration ??
+                        ShapeDecorationWithPremultipliedAlpha(
                           color: effectiveBackgroundColor,
                           shadows: effectiveToastShadows,
                           shape: MoonSquircleBorder(

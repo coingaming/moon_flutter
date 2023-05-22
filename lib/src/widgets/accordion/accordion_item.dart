@@ -8,6 +8,7 @@ import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
@@ -129,8 +130,8 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// The size of the accordion.
   final MoonAccordionItemSize? accordionSize;
 
-  /// Custom shape decoration for the accordion.
-  final ShapeDecoration? shapeDecoration;
+  /// Custom decoration for the accordion.
+  final Decoration? decoration;
 
   /// The semantic label for the accordion.
   final String? semanticLabel;
@@ -196,7 +197,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
     this.shadows,
     this.children = const <Widget>[],
     this.accordionSize,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.identityValue,
     this.groupIdentityValue,
@@ -485,9 +486,9 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                       duration: effectiveHoverEffectDuration,
                       curve: effectiveHoverEffectCurve,
                       clipBehavior: widget.clipBehavior ?? Clip.none,
-                      decoration: widget.shapeDecoration ??
+                      decoration: widget.decoration ??
                           (!widget.hasContentOutside
-                              ? ShapeDecoration(
+                              ? ShapeDecorationWithPremultipliedAlpha(
                                   color: resolvedBackgroundColor,
                                   shadows: effectiveShadows,
                                   shape: MoonSquircleBorder(
@@ -504,9 +505,9 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                             padding: resolvedDirectionalHeaderPadding,
                             duration: effectiveHoverEffectDuration,
                             curve: effectiveHoverEffectCurve,
-                            decoration: widget.shapeDecoration ??
+                            decoration: widget.decoration ??
                                 (widget.hasContentOutside
-                                    ? ShapeDecoration(
+                                    ? ShapeDecorationWithPremultipliedAlpha(
                                         color: resolvedBackgroundColor,
                                         shadows: effectiveShadows,
                                         shape: MoonSquircleBorder(

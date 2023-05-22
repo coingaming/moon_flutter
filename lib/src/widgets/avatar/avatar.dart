@@ -5,6 +5,8 @@ import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/avatar/avatar_clipper.dart';
 
 enum MoonAvatarSize {
@@ -202,8 +204,7 @@ class MoonAvatar extends StatelessWidget {
                 child: DefaultTextStyle.merge(
                   style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
                   child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: resolvedBorderRadius,
+                    decoration: ShapeDecorationWithPremultipliedAlpha(
                       color: effectiveBackgroundColor,
                       image: backgroundImage != null
                           ? DecorationImage(
@@ -211,6 +212,9 @@ class MoonAvatar extends StatelessWidget {
                               fit: BoxFit.cover,
                             )
                           : null,
+                      shape: MoonSquircleBorder(
+                        borderRadius: resolvedBorderRadius.squircleBorderRadius(context),
+                      ),
                     ),
                     child: Center(child: content),
                   ),

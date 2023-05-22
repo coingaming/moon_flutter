@@ -6,6 +6,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
@@ -130,8 +131,8 @@ class MoonButton extends StatelessWidget {
   /// The size of the button.
   final MoonButtonSize? buttonSize;
 
-  /// Custom shape decoration for the button.
-  final ShapeDecoration? shapeDecoration;
+  /// Custom decoration for the button.
+  final Decoration? decoration;
 
   /// The semantic label for the button.
   final String? semanticLabel;
@@ -200,7 +201,7 @@ class MoonButton extends StatelessWidget {
     this.padding,
     this.focusNode,
     this.buttonSize,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -247,7 +248,7 @@ class MoonButton extends StatelessWidget {
     FocusNode? focusNode,
     EdgeInsetsGeometry? padding,
     MoonButtonSize? buttonSize,
-    ShapeDecoration? shapeDecoration,
+    Decoration? decoration,
     String? semanticLabel,
     String tooltipMessage = "",
     VoidCallback? onLongPress,
@@ -290,7 +291,7 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       padding: padding,
       buttonSize: buttonSize,
-      shapeDecoration: shapeDecoration,
+      decoration: decoration,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,
       onLongPress: onLongPress,
@@ -420,8 +421,8 @@ class MoonButton extends StatelessWidget {
           width: width,
           height: effectiveHeight,
           constraints: BoxConstraints(minWidth: effectiveHeight),
-          decoration: shapeDecoration ??
-              ShapeDecoration(
+          decoration: decoration ??
+              ShapeDecorationWithPremultipliedAlpha(
                 color: canAnimateHover ? hoverColor : backgroundColor,
                 shape: MoonSquircleBorder(
                   side: BorderSide(

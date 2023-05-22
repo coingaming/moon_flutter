@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
+
 @immutable
 class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with DiagnosticableTreeMixin {
   static const lightFocusEffect = MoonFocusEffects(
@@ -58,7 +60,7 @@ class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with Diagnostica
     if (other is! MoonFocusEffects) return this;
 
     return MoonFocusEffects(
-      effectColor: Color.lerp(effectColor, other.effectColor, t)!,
+      effectColor: colorPremulLerp(effectColor, other.effectColor, t)!,
       effectExtent: lerpDouble(effectExtent, other.effectExtent, t)!,
       effectDuration: lerpDuration(effectDuration, other.effectDuration, t),
       effectCurve: other.effectCurve,

@@ -28,7 +28,8 @@ class MoonSquircleBorderRadius extends BorderRadius {
 
   MoonSquircleBorderRadius({
     required double cornerRadius,
-    double cornerSmoothing = 0,
+    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA for some reason. So we use 0.99 instead.
+    double cornerSmoothing = 0.99,
   }) : this.only(
           topLeft: MoonSquircleRadius(
             cornerRadius: cornerRadius,

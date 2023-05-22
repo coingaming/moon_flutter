@@ -16,6 +16,7 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
@@ -166,8 +167,8 @@ class MoonTextInput extends StatefulWidget {
   /// The size of the text input.
   final MoonTextInputSize? textInputSize;
 
-  /// Custom shape decoration for the text input.
-  final ShapeDecoration? shapeDecoration;
+  /// Custom decoration for the text input.
+  final Decoration? decoration;
 
   /// The text for the error
   final String? errorText;
@@ -624,7 +625,7 @@ class MoonTextInput extends StatefulWidget {
     this.padding,
     this.helperPadding,
     this.textInputSize,
-    this.shapeDecoration,
+    this.decoration,
     this.errorText,
     this.hintText,
     this.initialValue,
@@ -1451,8 +1452,8 @@ class _MoonTextInputState extends State<MoonTextInput>
             child: AnimatedContainer(
               duration: effectiveTransitionDuration,
               height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
-              decoration: widget.shapeDecoration ??
-                  ShapeDecoration(
+              decoration: widget.decoration ??
+                  ShapeDecorationWithPremultipliedAlpha(
                     color: effectiveBackgroundColor,
                     shape: resolvedBorder,
                   ),

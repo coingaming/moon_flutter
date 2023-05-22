@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonPopoverColors extends ThemeExtension<MoonPopoverColors> with DiagnosticableTreeMixin {
@@ -32,7 +33,7 @@ class MoonPopoverColors extends ThemeExtension<MoonPopoverColors> with Diagnosti
     if (other is! MoonPopoverColors) return this;
 
     return MoonPopoverColors(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
+      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
     );
   }
 

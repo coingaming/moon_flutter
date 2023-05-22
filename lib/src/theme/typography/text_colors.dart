@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTextColors extends ThemeExtension<MoonTextColors> with DiagnosticableTreeMixin {
@@ -58,10 +59,10 @@ class MoonTextColors extends ThemeExtension<MoonTextColors> with DiagnosticableT
     if (other is! MoonTextColors) return this;
 
     return MoonTextColors(
-      bodyPrimary: Color.lerp(bodyPrimary, other.bodyPrimary, t)!,
-      bodySecondary: Color.lerp(bodySecondary, other.bodySecondary, t)!,
-      controlPrimary: Color.lerp(controlPrimary, other.controlPrimary, t)!,
-      controlSecondary: Color.lerp(controlSecondary, other.controlSecondary, t)!,
+      bodyPrimary: colorPremulLerp(bodyPrimary, other.bodyPrimary, t)!,
+      bodySecondary: colorPremulLerp(bodySecondary, other.bodySecondary, t)!,
+      controlPrimary: colorPremulLerp(controlPrimary, other.controlPrimary, t)!,
+      controlSecondary: colorPremulLerp(controlSecondary, other.controlSecondary, t)!,
     );
   }
 

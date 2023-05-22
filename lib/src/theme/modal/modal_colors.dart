@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonModalColors extends ThemeExtension<MoonModalColors> with DiagnosticableTreeMixin {
@@ -42,8 +43,8 @@ class MoonModalColors extends ThemeExtension<MoonModalColors> with Diagnosticabl
     if (other is! MoonModalColors) return this;
 
     return MoonModalColors(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
-      barrierColor: Color.lerp(barrierColor, other.barrierColor, t)!,
+      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      barrierColor: colorPremulLerp(barrierColor, other.barrierColor, t)!,
     );
   }
 

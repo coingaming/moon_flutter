@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/moon_design.dart';
+import 'package:moon_design/src/theme/borders.dart';
+import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_size_properties.dart';
+import 'package:moon_design/src/theme/sizes.dart';
+import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
+import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
+import 'package:moon_design/src/widgets/common/base_control.dart';
+import 'package:moon_design/src/widgets/common/base_segmented_tab_bar.dart';
 
 enum MoonSegmentedControlSize {
   sm,
@@ -44,8 +53,8 @@ class MoonSegmentedControl extends StatefulWidget {
   /// The size of the MoonSegmentedControl.
   final MoonSegmentedControlSize? segmentedControlSize;
 
-  /// Custom shape decoration for the MoonSegmentedControl.
-  final ShapeDecoration? shapeDecoration;
+  /// Custom decoration for the MoonSegmentedControl.
+  final Decoration? decoration;
 
   /// Controller of MoonSegmentedControl selection and animation state.
   final TabController? tabController;
@@ -73,7 +82,7 @@ class MoonSegmentedControl extends StatefulWidget {
     this.padding,
     this.selectedIndex = 0,
     this.segmentedControlSize,
-    this.shapeDecoration,
+    this.decoration,
     this.tabController,
     this.onSegmentChanged,
     required this.segments,
@@ -95,7 +104,7 @@ class MoonSegmentedControl extends StatefulWidget {
     this.padding,
     this.selectedIndex = 0,
     this.segmentedControlSize,
-    this.shapeDecoration,
+    this.decoration,
     this.tabController,
     this.onSegmentChanged,
     required this.customSegments,
@@ -182,8 +191,8 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
       duration: effectiveTransitionDuration,
       curve: effectiveTransitionCurve,
       constraints: BoxConstraints(minWidth: effectiveHeight),
-      decoration: widget.shapeDecoration ??
-          ShapeDecoration(
+      decoration: widget.decoration ??
+          ShapeDecorationWithPremultipliedAlpha(
             color: effectiveBackgroundColor,
             shape: MoonSquircleBorder(
               borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
@@ -313,8 +322,8 @@ class _SegmentBuilder extends StatelessWidget {
         return AnimatedContainer(
           duration: transitionDuration,
           curve: transitionCurve,
-          decoration: segmentStyle?.shapeDecoration ??
-              ShapeDecoration(
+          decoration: segmentStyle?.decoration ??
+              ShapeDecorationWithPremultipliedAlpha(
                 color: isActive ? effectiveSelectedSegmentColor : backgroundColor,
                 shape: MoonSquircleBorder(
                   borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
@@ -421,8 +430,8 @@ class SegmentStyle {
   /// The padding of the segment.
   final EdgeInsetsGeometry? segmentPadding;
 
-  /// Custom shape decoration for the segment.
-  final ShapeDecoration? shapeDecoration;
+  /// Custom decoration for the segment.
+  final Decoration? decoration;
 
   /// The text style of the segment.
   ///
@@ -436,7 +445,7 @@ class SegmentStyle {
     this.selectedTextColor,
     this.segmentGap,
     this.segmentPadding,
-    this.shapeDecoration,
+    this.decoration,
     this.textStyle,
   });
 }

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with DiagnosticableTreeMixin {
@@ -50,9 +51,9 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
     if (other is! MoonSwitchColors) return this;
 
     return MoonSwitchColors(
-      activeTrackColor: Color.lerp(activeTrackColor, other.activeTrackColor, t)!,
-      inactiveTrackColor: Color.lerp(inactiveTrackColor, other.inactiveTrackColor, t)!,
-      thumbColor: Color.lerp(thumbColor, other.thumbColor, t)!,
+      activeTrackColor: colorPremulLerp(activeTrackColor, other.activeTrackColor, t)!,
+      inactiveTrackColor: colorPremulLerp(inactiveTrackColor, other.inactiveTrackColor, t)!,
+      thumbColor: colorPremulLerp(thumbColor, other.thumbColor, t)!,
     );
   }
 

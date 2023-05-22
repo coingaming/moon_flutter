@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
+
 class MoonRadioPainter extends ToggleablePainter {
   static const double _kOuterRadius = 8.0;
   static const double _kInnerRadius = 4.0;
@@ -10,7 +12,7 @@ class MoonRadioPainter extends ToggleablePainter {
 
     // Outer circle
     final Paint paint = Paint()
-      ..color = Color.lerp(inactiveColor, activeColor, position.value)!
+      ..color = colorPremulLerp(inactiveColor, activeColor, position.value)!
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
     canvas.drawCircle(center, _kOuterRadius, paint);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class FocusEffectPainter extends CustomPainter {
@@ -19,7 +20,7 @@ class FocusEffectPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (!animation.isDismissed) {
       final Rect rect = Rect.fromLTRB(0.0, 0.0, size.width, size.height);
-      final Color transformedColor = Color.lerp(null, color, animation.value)!;
+      final Color transformedColor = colorPremulLerp(null, color, animation.value)!;
       final double newWidth = rect.width + effectExtent;
       final double newHeight = rect.height + effectExtent;
       final double widthIncrease = newWidth / rect.width;
@@ -41,12 +42,10 @@ class FocusEffectPainter extends CustomPainter {
             rect.width * widthIncrease,
             rect.height * heightIncrease,
           ),
-          topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x + resolvedExtent, cornerSmoothing: 0.99),
-          topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x + resolvedExtent, cornerSmoothing: 0.99),
-          bottomLeft:
-              MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x + resolvedExtent, cornerSmoothing: 0.99),
-          bottomRight:
-              MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x + resolvedExtent, cornerSmoothing: 0.99),
+          topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x + resolvedExtent),
+          topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x + resolvedExtent),
+          bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x + resolvedExtent),
+          bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x + resolvedExtent),
         ),
         paint,
       );

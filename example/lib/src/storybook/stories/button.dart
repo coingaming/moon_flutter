@@ -213,7 +213,7 @@ class ButtonStory extends Story {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       showTooltip: showTooltipKnob,
                       tooltipMessage: 'This is MoonTooltip',
-                      shapeDecoration: const ShapeDecoration(
+                      decoration: const ShapeDecorationWithPremultipliedAlpha(
                         image: DecorationImage(
                           image: AssetImage("assets/images/placeholder-640x359.png"),
                           fit: BoxFit.cover,
@@ -242,7 +242,7 @@ class ButtonStory extends Story {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       showTooltip: showTooltipKnob,
                       tooltipMessage: 'This is MoonTooltip',
-                      shapeDecoration: ShapeDecoration(
+                      decoration: ShapeDecorationWithPremultipliedAlpha(
                         shadows: const [
                           BoxShadow(
                             blurRadius: 3,

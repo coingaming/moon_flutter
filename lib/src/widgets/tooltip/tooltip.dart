@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_shape.dart';
 
 enum MoonTooltipPosition {
@@ -507,7 +508,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
                     key: _tooltipKey,
                     constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
                     padding: resolvedContentPadding,
-                    decoration: ShapeDecoration(
+                    decoration: ShapeDecorationWithPremultipliedAlpha(
                       color: effectiveBackgroundColor,
                       shadows: effectiveTooltipShadows,
                       shape: TooltipShape(

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonLinearProgressColors extends ThemeExtension<MoonLinearProgressColors> with DiagnosticableTreeMixin {
@@ -42,8 +43,8 @@ class MoonLinearProgressColors extends ThemeExtension<MoonLinearProgressColors> 
     if (other is! MoonLinearProgressColors) return this;
 
     return MoonLinearProgressColors(
-      color: Color.lerp(color, other.color, t)!,
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
+      color: colorPremulLerp(color, other.color, t)!,
+      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
     );
   }
 

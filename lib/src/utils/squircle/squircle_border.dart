@@ -87,7 +87,6 @@ class MoonSquircleBorder extends OutlinedBorder {
               MoonSquircleBorderRadius.all(
                 MoonSquircleRadius(
                   cornerRadius: side.width,
-                  cornerSmoothing: 0.99,
                 ),
               );
         case BorderAlign.center:
@@ -95,7 +94,6 @@ class MoonSquircleBorder extends OutlinedBorder {
               MoonSquircleBorderRadius.all(
                 MoonSquircleRadius(
                   cornerRadius: side.width / 2,
-                  cornerSmoothing: 0.99,
                 ),
               );
         case BorderAlign.outside:
@@ -169,7 +167,6 @@ class MoonSquircleBorder extends OutlinedBorder {
                   MoonSquircleBorderRadius.all(
                     MoonSquircleRadius(
                       cornerRadius: side.width / 2,
-                      cornerSmoothing: 0.99,
                     ),
                   );
             case BorderAlign.center:
@@ -179,7 +176,6 @@ class MoonSquircleBorder extends OutlinedBorder {
                   MoonSquircleBorderRadius.all(
                     MoonSquircleRadius(
                       cornerRadius: side.width / 2,
-                      cornerSmoothing: 0.99,
                     ),
                   );
           }

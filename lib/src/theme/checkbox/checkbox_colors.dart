@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with DiagnosticableTreeMixin {
@@ -58,10 +59,10 @@ class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with Diagnos
     if (other is! MoonCheckboxColors) return this;
 
     return MoonCheckboxColors(
-      activeColor: Color.lerp(activeColor, other.activeColor, t)!,
-      borderColor: Color.lerp(borderColor, other.borderColor, t)!,
-      checkColor: Color.lerp(checkColor, other.checkColor, t)!,
-      inactiveColor: Color.lerp(inactiveColor, other.inactiveColor, t)!,
+      activeColor: colorPremulLerp(activeColor, other.activeColor, t)!,
+      borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
+      checkColor: colorPremulLerp(checkColor, other.checkColor, t)!,
+      inactiveColor: colorPremulLerp(inactiveColor, other.inactiveColor, t)!,
     );
   }
 

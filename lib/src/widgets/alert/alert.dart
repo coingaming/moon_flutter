@@ -6,6 +6,7 @@ import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
@@ -55,8 +56,8 @@ class MoonAlert extends StatefulWidget {
   /// The padding of the alert.
   final EdgeInsetsGeometry? padding;
 
-  /// Custom shape decoration for the alert.
-  final ShapeDecoration? shapeDecoration;
+  /// Custom decoration for the alert.
+  final Decoration? decoration;
 
   /// The semantic label for the alert.
   final String? semanticLabel;
@@ -102,7 +103,7 @@ class MoonAlert extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.bodyTextStyle,
     this.titleTextStyle,
@@ -257,8 +258,8 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
             child: Container(
               padding: effectivePadding,
               constraints: BoxConstraints(minHeight: effectiveMinimumHeight),
-              decoration: widget.shapeDecoration ??
-                  ShapeDecoration(
+              decoration: widget.decoration ??
+                  ShapeDecorationWithPremultipliedAlpha(
                     color: effectiveBackgroundColor,
                     shape: MoonSquircleBorder(
                       side: BorderSide(

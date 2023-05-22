@@ -57,10 +57,10 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
 
     final containerRect = RRect.fromRectAndCorners(
       Offset.zero & size,
-      topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 0.99),
-      topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 0.99),
-      bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 0.99),
-      bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 0.99),
+      topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x),
+      topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x),
+      bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x),
+      bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x),
     );
     canvas.drawRRect(containerRect, paint);
 
@@ -83,10 +83,10 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
 
       final progressRect = RRect.fromRectAndCorners(
         Offset(left, 0.0) & Size(width, size.height),
-        topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x, cornerSmoothing: 0.99),
-        topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x, cornerSmoothing: 0.99),
-        bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x, cornerSmoothing: 0.99),
-        bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x, cornerSmoothing: 0.99),
+        topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x),
+        topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x),
+        bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x),
+        bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x),
       );
 
       canvas.drawRRect(progressRect, paint);

@@ -7,6 +7,10 @@ import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
 import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 
@@ -350,13 +354,17 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     ).animate(_curvedAnimationWithOvershoot!);
 
     _trackDecorationAnimation = DecorationTween(
-      begin: BoxDecoration(
-        borderRadius: BorderRadius.circular(effectiveHeight / 2),
+      begin: ShapeDecorationWithPremultipliedAlpha(
         color: effectiveInactiveTrackColor,
+        shape: MoonSquircleBorder(
+          borderRadius: MoonSquircleBorderRadius(cornerRadius: effectiveHeight / 2),
+        ),
       ),
-      end: BoxDecoration(
-        borderRadius: BorderRadius.circular(effectiveHeight / 2),
+      end: ShapeDecorationWithPremultipliedAlpha(
         color: effectiveActiveTrackColor,
+        shape: MoonSquircleBorder(
+          borderRadius: MoonSquircleBorderRadius(cornerRadius: effectiveHeight / 2),
+        ),
       ),
     ).animate(_curvedAnimation!);
 
@@ -485,10 +493,12 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                                       width: effectiveThumbSizeValue,
                                       height: effectiveThumbSizeValue,
                                       alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        borderRadius: effectiveBorderRadius,
+                                      decoration: ShapeDecorationWithPremultipliedAlpha(
                                         color: effectiveThumbColor,
-                                        boxShadow: effectiveThumbShadow,
+                                        shadows: effectiveThumbShadow,
+                                        shape: MoonSquircleBorder(
+                                          borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                                        ),
                                       ),
                                       child: FadeTransition(
                                         opacity: _thumbFadeAnimation!,

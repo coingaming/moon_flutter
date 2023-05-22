@@ -4,6 +4,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
 enum MoonTagSize {
@@ -39,8 +40,8 @@ class MoonTag extends StatelessWidget {
   /// The size of the tag.
   final MoonTagSize? tagSize;
 
-  /// Custom shape decoration for the tag.
-  final ShapeDecoration? shapeDecoration;
+  /// Custom decoration for the tag.
+  final Decoration? decoration;
 
   /// The semantic label for the tag.
   final String? semanticLabel;
@@ -72,7 +73,7 @@ class MoonTag extends StatelessWidget {
     this.gap,
     this.padding,
     this.tagSize,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.onTap,
     this.onLongPress,
@@ -148,8 +149,8 @@ class MoonTag extends StatelessWidget {
             height: effectiveHeight,
             padding: correctedPadding,
             constraints: BoxConstraints(minWidth: effectiveHeight),
-            decoration: shapeDecoration ??
-                ShapeDecoration(
+            decoration: decoration ??
+                ShapeDecorationWithPremultipliedAlpha(
                   color: effectiveBackgroundColor,
                   shape: MoonSquircleBorder(
                     borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
