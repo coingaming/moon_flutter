@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.3](https://github.com/coingaming/moon_flutter/compare/v0.21.2...v0.21.3) (2023-05-22)
+
+
+### Bug Fixes
+
+* [MDS-534] Replace Color.lerp with premul one where possible ([#176](https://github.com/coingaming/moon_flutter/issues/176)) ([e87e103](https://github.com/coingaming/moon_flutter/commit/e87e103dff231696f814577d5c5b9bc420fe1d03))
+
 ## [0.21.2](https://github.com/coingaming/moon_flutter/compare/v0.21.1...v0.21.2) (2023-05-22)
 
 
