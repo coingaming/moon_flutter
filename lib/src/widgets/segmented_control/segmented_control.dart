@@ -44,9 +44,7 @@ class MoonSegmentedControl extends StatefulWidget {
   /// The size of the MoonSegmentedControl.
   final MoonSegmentedControlSize? segmentedControlSize;
 
-  /// The shape decoration of MoonSegmentedControl.
-  ///
-  /// If [shapeDecoration] is used, then it overrides the [backgroundColor] and [borderRadius] of MoonSegmentedControl.
+  /// Custom shape decoration for the MoonSegmentedControl.
   final ShapeDecoration? shapeDecoration;
 
   /// Controller of MoonSegmentedControl selection and animation state.
@@ -110,17 +108,12 @@ class MoonSegmentedControl extends StatefulWidget {
 }
 
 class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
-  late bool _hasDefaultSegments;
-  late bool _hasShapeDecoration;
-  late int _selectedIndex;
+  late final bool _hasDefaultSegments = widget.segments != null;
+  late int _selectedIndex = widget.selectedIndex;
 
   @override
   void initState() {
     super.initState();
-
-    _hasDefaultSegments = widget.segments != null;
-    _hasShapeDecoration = widget.shapeDecoration != null;
-    _selectedIndex = widget.selectedIndex;
 
     _updateSegmentsSelectedStatus();
   }
@@ -160,8 +153,7 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
         context.moonTheme?.segmentedControlTheme.properties.borderRadius ??
         MoonBorders.borders.interactiveMd;
 
-    final Color effectiveBackgroundColor = widget.shapeDecoration?.color ??
-        widget.backgroundColor ??
+    final Color effectiveBackgroundColor = widget.backgroundColor ??
         context.moonTheme?.segmentedControlTheme.colors.backgroundColor ??
         MoonColors.light.goku;
 
@@ -189,11 +181,13 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
       padding: resolvedContentPadding,
       duration: effectiveTransitionDuration,
       curve: effectiveTransitionCurve,
-      constraints: BoxConstraints(minWidth: _hasShapeDecoration ? 0 : effectiveHeight),
+      constraints: BoxConstraints(minWidth: effectiveHeight),
       decoration: widget.shapeDecoration ??
-          BoxDecoration(
+          ShapeDecoration(
             color: effectiveBackgroundColor,
-            borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+            shape: MoonSquircleBorder(
+              borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+            ),
           ),
       child: BaseSegmentedTabBar(
         selectedIndex: widget.selectedIndex,
@@ -319,10 +313,13 @@ class _SegmentBuilder extends StatelessWidget {
         return AnimatedContainer(
           duration: transitionDuration,
           curve: transitionCurve,
-          decoration: BoxDecoration(
-            color: isActive ? effectiveSelectedSegmentColor : backgroundColor,
-            borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
-          ),
+          decoration: segmentStyle?.shapeDecoration ??
+              ShapeDecoration(
+                color: isActive ? effectiveSelectedSegmentColor : backgroundColor,
+                shape: MoonSquircleBorder(
+                  borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
+                ),
+              ),
           child: AnimatedIconTheme(
             size: moonSegmentedControlSizeProperties.iconSizeValue,
             duration: transitionDuration,
@@ -424,6 +421,9 @@ class SegmentStyle {
   /// The padding of the segment.
   final EdgeInsetsGeometry? segmentPadding;
 
+  /// Custom shape decoration for the segment.
+  final ShapeDecoration? shapeDecoration;
+
   /// The text style of the segment.
   ///
   /// If [TextStyle] color is used, then it overrides the [textColor] and [selectedTextColor].
@@ -436,6 +436,7 @@ class SegmentStyle {
     this.selectedTextColor,
     this.segmentGap,
     this.segmentPadding,
+    this.shapeDecoration,
     this.textStyle,
   });
 }

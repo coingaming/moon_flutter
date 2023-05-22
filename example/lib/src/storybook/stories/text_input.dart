@@ -101,8 +101,8 @@ class TextInputStory extends Story {
               initial: true,
             );
 
-            final hasFocusEffectKnob = context.knobs.boolean(
-              label: "hasFocusEffect",
+            final showFocusEffectKnob = context.knobs.boolean(
+              label: "showFocusEffect",
               description: "Whether to display focus effect around MoonTextInput.",
               initial: true,
             );
@@ -143,7 +143,7 @@ class TextInputStory extends Story {
                               controller: _textController,
                               enabled: enabledKnob,
                               textInputSize: textInputSizesKnob,
-                              hasFocusEffect: hasFocusEffectKnob,
+                              showFocusEffect: showFocusEffectKnob,
                               hasFloatingLabel: hasFloatingLabelKnob,
                               textColor: textColor,
                               hintTextColor: hintTextColor,
@@ -187,7 +187,7 @@ class TextInputStory extends Story {
                                   keyboardType: TextInputType.visiblePassword,
                                   obscureText: _hidePassword,
                                   textInputSize: textInputSizesKnob,
-                                  hasFocusEffect: hasFocusEffectKnob,
+                                  showFocusEffect: showFocusEffectKnob,
                                   hasFloatingLabel: hasFloatingLabelKnob,
                                   textColor: textColor,
                                   hintTextColor: hintTextColor,

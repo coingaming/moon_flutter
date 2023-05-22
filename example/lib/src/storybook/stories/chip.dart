@@ -104,7 +104,7 @@ class ChipStory extends Story {
               description: "Show widget in MoonChip trailing slot.",
             );
 
-            final resolvedIconVariant = chipSizesKnob == MoonChipSize.md ? MoonIcons.frame_24 : MoonIcons.frame_16;
+            final resolvedIconVariant = chipSizesKnob == MoonChipSize.sm ? MoonIcons.frame_16 : MoonIcons.frame_24;
 
             return Center(
               child: SingleChildScrollView(

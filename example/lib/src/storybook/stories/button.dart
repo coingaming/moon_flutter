@@ -205,49 +205,72 @@ class ButtonStory extends Story {
                       trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
                     ),
                     const SizedBox(height: 40),
-                    const TextDivider(text: "Custom MoonButton with non-standard children"),
+                    const TextDivider(text: "Custom MoonButtons with non-standard children"),
                     const SizedBox(height: 32),
                     MoonButton(
                       onTap: showDisabledKnob ? null : () {},
                       height: 40,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
-                      buttonSize: buttonSizesKnob,
-                      isFullWidth: setFullWidthKnob,
                       showTooltip: showTooltipKnob,
                       tooltipMessage: 'This is MoonTooltip',
-                      backgroundColor: context.moonTheme!.colors.krillin100,
-                      showPulseEffect: showPulseEffectKnob,
-                      showPulseEffectJiggle: showPulseEffectJiggleKnob,
-                      leading: showLeadingKnob
-                          ? Container(
-                              width: 24,
-                              height: 24,
-                              padding: const EdgeInsets.all(4),
-                              child: const CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
-                          : null,
-                      label: showLabelKnob
-                          ? SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircleAvatar(
-                                backgroundColor: context.moonTheme!.colors.trunks,
-                                child: const MoonIcon(
-                                  Icons.person,
-                                  size: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            )
-                          : null,
-                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      shapeDecoration: const ShapeDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/placeholder-640x359.png"),
+                          fit: BoxFit.cover,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
+                        ),
+                      ),
+                      leading: Container(
+                        width: 24,
+                        height: 24,
+                        padding: const EdgeInsets.all(4),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: context.moonTheme!.colors.popo,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    MoonButton(
+                      onTap: showDisabledKnob ? null : () {},
+                      height: 72,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      showTooltip: showTooltipKnob,
+                      tooltipMessage: 'This is MoonTooltip',
+                      shapeDecoration: ShapeDecoration(
+                        shadows: const [
+                          BoxShadow(
+                            blurRadius: 3,
+                            offset: Offset(0, 2),
+                          )
+                        ],
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            context.moonTheme!.colors.krillin100,
+                            context.moonTheme!.colors.dodoria100,
+                          ],
+                        ),
+                        shape: const StarBorder(pointRounding: 0.5, valleyRounding: 0.5),
+                      ),
+                      label: SizedBox(
+                        width: 32,
+                        height: 32,
+                        child: CircleAvatar(
+                          backgroundColor: context.moonTheme!.colors.frieza60,
+                          child: const MoonIcon(
+                            MoonIcons.rocket_24,
+                            size: 24,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 64),
                   ],

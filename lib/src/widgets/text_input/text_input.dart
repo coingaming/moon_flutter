@@ -114,7 +114,7 @@ class MoonTextInput extends StatefulWidget {
   final bool hasFloatingLabel;
 
   /// Whether the focus effect is enabled.
-  final bool hasFocusEffect;
+  final bool showFocusEffect;
 
   /// Whether the input is dense ie takes less space.
   ///
@@ -165,6 +165,9 @@ class MoonTextInput extends StatefulWidget {
 
   /// The size of the text input.
   final MoonTextInputSize? textInputSize;
+
+  /// Custom shape decoration for the text input.
+  final ShapeDecoration? shapeDecoration;
 
   /// The text for the error
   final String? errorText;
@@ -604,7 +607,7 @@ class MoonTextInput extends StatefulWidget {
 
     // Moon Design props
     this.hasFloatingLabel = false,
-    this.hasFocusEffect = true,
+    this.showFocusEffect = true,
     this.isDense = true,
     this.borderRadius,
     this.backgroundColor,
@@ -621,6 +624,7 @@ class MoonTextInput extends StatefulWidget {
     this.padding,
     this.helperPadding,
     this.textInputSize,
+    this.shapeDecoration,
     this.errorText,
     this.hintText,
     this.initialValue,
@@ -1438,7 +1442,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MoonFocusEffect(
-            show: widget.hasFocusEffect && _effectiveFocusNode.hasFocus && !widget.readOnly,
+            show: widget.showFocusEffect && _effectiveFocusNode.hasFocus && !widget.readOnly,
             childBorderRadius: effectiveBorderRadius.squircleBorderRadius(context),
             effectColor: widget.errorText == null ? focusEffectColor : errorFocusEffectColor,
             effectExtent: effectiveFocusEffectExtent,
@@ -1447,10 +1451,11 @@ class _MoonTextInputState extends State<MoonTextInput>
             child: AnimatedContainer(
               duration: effectiveTransitionDuration,
               height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
-              decoration: ShapeDecoration(
-                color: effectiveBackgroundColor,
-                shape: resolvedBorder,
-              ),
+              decoration: widget.shapeDecoration ??
+                  ShapeDecoration(
+                    color: effectiveBackgroundColor,
+                    shape: resolvedBorder,
+                  ),
               child: child,
             ),
           ),
