@@ -14,8 +14,8 @@ class MoonModal extends StatelessWidget {
   /// The background color of the modal.
   final Color? backgroundColor;
 
-  /// Custom shape decoration for the modal.
-  final Decoration? shapeDecoration;
+  /// Custom decoration for the modal.
+  final Decoration? decoration;
 
   /// The semantic label for the modal.
   final String? semanticLabel;
@@ -27,7 +27,7 @@ class MoonModal extends StatelessWidget {
     super.key,
     this.borderRadius,
     this.backgroundColor,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     required this.child,
   });
@@ -64,7 +64,7 @@ class MoonModal extends StatelessWidget {
           style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
           child: Center(
             child: Container(
-              decoration: shapeDecoration ??
+              decoration: decoration ??
                   ShapeDecorationWithPremultipliedAlpha(
                     color: effectiveBackgroundColor,
                     shape: MoonSquircleBorder(

@@ -40,8 +40,8 @@ class MoonTag extends StatelessWidget {
   /// The size of the tag.
   final MoonTagSize? tagSize;
 
-  /// Custom shape decoration for the tag.
-  final Decoration? shapeDecoration;
+  /// Custom decoration for the tag.
+  final Decoration? decoration;
 
   /// The semantic label for the tag.
   final String? semanticLabel;
@@ -73,7 +73,7 @@ class MoonTag extends StatelessWidget {
     this.gap,
     this.padding,
     this.tagSize,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.onTap,
     this.onLongPress,
@@ -149,7 +149,7 @@ class MoonTag extends StatelessWidget {
             height: effectiveHeight,
             padding: correctedPadding,
             constraints: BoxConstraints(minWidth: effectiveHeight),
-            decoration: shapeDecoration ??
+            decoration: decoration ??
                 ShapeDecorationWithPremultipliedAlpha(
                   color: effectiveBackgroundColor,
                   shape: MoonSquircleBorder(

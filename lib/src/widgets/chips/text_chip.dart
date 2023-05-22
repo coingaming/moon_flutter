@@ -86,8 +86,8 @@ class MoonTextChip extends StatelessWidget {
   /// The size of the chip.
   final MoonChipSize? chipSize;
 
-  /// Custom shape decoration for the chip.
-  final Decoration? shapeDecoration;
+  /// Custom decoration for the chip.
+  final Decoration? decoration;
 
   /// The semantic label for the chip.
   final String? semanticLabel;
@@ -140,7 +140,7 @@ class MoonTextChip extends StatelessWidget {
     this.padding,
     this.focusNode,
     this.chipSize,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -183,7 +183,7 @@ class MoonTextChip extends StatelessWidget {
       padding: padding,
       focusNode: focusNode,
       chipSize: chipSize,
-      shapeDecoration: shapeDecoration,
+      decoration: decoration,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,
       onTap: onTap,

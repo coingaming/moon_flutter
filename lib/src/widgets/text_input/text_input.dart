@@ -167,8 +167,8 @@ class MoonTextInput extends StatefulWidget {
   /// The size of the text input.
   final MoonTextInputSize? textInputSize;
 
-  /// Custom shape decoration for the text input.
-  final Decoration? shapeDecoration;
+  /// Custom decoration for the text input.
+  final Decoration? decoration;
 
   /// The text for the error
   final String? errorText;
@@ -625,7 +625,7 @@ class MoonTextInput extends StatefulWidget {
     this.padding,
     this.helperPadding,
     this.textInputSize,
-    this.shapeDecoration,
+    this.decoration,
     this.errorText,
     this.hintText,
     this.initialValue,
@@ -1452,7 +1452,7 @@ class _MoonTextInputState extends State<MoonTextInput>
             child: AnimatedContainer(
               duration: effectiveTransitionDuration,
               height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
-              decoration: widget.shapeDecoration ??
+              decoration: widget.decoration ??
                   ShapeDecorationWithPremultipliedAlpha(
                     color: effectiveBackgroundColor,
                     shape: resolvedBorder,

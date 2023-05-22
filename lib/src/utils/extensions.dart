@@ -16,7 +16,6 @@ extension DarkModeX on BuildContext {
 extension BorderRadiusX on BorderRadiusGeometry {
   /// Returns MoonSquircleBorderRadius.
   MoonSquircleBorderRadius squircleBorderRadius(BuildContext context) {
-    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA for some reason. So we use 0.99 instead.
     final borderRadius = resolve(Directionality.of(context));
 
     return MoonSquircleBorderRadius.only(

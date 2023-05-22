@@ -131,8 +131,8 @@ class MoonButton extends StatelessWidget {
   /// The size of the button.
   final MoonButtonSize? buttonSize;
 
-  /// Custom shape decoration for the button.
-  final Decoration? shapeDecoration;
+  /// Custom decoration for the button.
+  final Decoration? decoration;
 
   /// The semantic label for the button.
   final String? semanticLabel;
@@ -201,7 +201,7 @@ class MoonButton extends StatelessWidget {
     this.padding,
     this.focusNode,
     this.buttonSize,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -248,7 +248,7 @@ class MoonButton extends StatelessWidget {
     FocusNode? focusNode,
     EdgeInsetsGeometry? padding,
     MoonButtonSize? buttonSize,
-    Decoration? shapeDecoration,
+    Decoration? decoration,
     String? semanticLabel,
     String tooltipMessage = "",
     VoidCallback? onLongPress,
@@ -291,7 +291,7 @@ class MoonButton extends StatelessWidget {
       focusNode: focusNode,
       padding: padding,
       buttonSize: buttonSize,
-      shapeDecoration: shapeDecoration,
+      decoration: decoration,
       semanticLabel: semanticLabel,
       tooltipMessage: tooltipMessage,
       onLongPress: onLongPress,
@@ -421,7 +421,7 @@ class MoonButton extends StatelessWidget {
           width: width,
           height: effectiveHeight,
           constraints: BoxConstraints(minWidth: effectiveHeight),
-          decoration: shapeDecoration ??
+          decoration: decoration ??
               ShapeDecorationWithPremultipliedAlpha(
                 color: canAnimateHover ? hoverColor : backgroundColor,
                 shape: MoonSquircleBorder(

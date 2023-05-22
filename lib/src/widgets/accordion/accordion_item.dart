@@ -130,8 +130,8 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// The size of the accordion.
   final MoonAccordionItemSize? accordionSize;
 
-  /// Custom shape decoration for the accordion.
-  final Decoration? shapeDecoration;
+  /// Custom decoration for the accordion.
+  final Decoration? decoration;
 
   /// The semantic label for the accordion.
   final String? semanticLabel;
@@ -197,7 +197,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
     this.shadows,
     this.children = const <Widget>[],
     this.accordionSize,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.identityValue,
     this.groupIdentityValue,
@@ -486,7 +486,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                       duration: effectiveHoverEffectDuration,
                       curve: effectiveHoverEffectCurve,
                       clipBehavior: widget.clipBehavior ?? Clip.none,
-                      decoration: widget.shapeDecoration ??
+                      decoration: widget.decoration ??
                           (!widget.hasContentOutside
                               ? ShapeDecorationWithPremultipliedAlpha(
                                   color: resolvedBackgroundColor,
@@ -505,7 +505,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
                             padding: resolvedDirectionalHeaderPadding,
                             duration: effectiveHoverEffectDuration,
                             curve: effectiveHoverEffectCurve,
-                            decoration: widget.shapeDecoration ??
+                            decoration: widget.decoration ??
                                 (widget.hasContentOutside
                                     ? ShapeDecorationWithPremultipliedAlpha(
                                         color: resolvedBackgroundColor,

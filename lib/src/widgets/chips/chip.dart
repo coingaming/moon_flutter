@@ -101,8 +101,8 @@ class MoonChip extends StatelessWidget {
   /// The size of the chip.
   final MoonChipSize? chipSize;
 
-  /// Custom shape decoration for the chip.
-  final Decoration? shapeDecoration;
+  /// Custom decoration for the chip.
+  final Decoration? decoration;
 
   /// The semantic label for the chip.
   final String? semanticLabel;
@@ -156,7 +156,7 @@ class MoonChip extends StatelessWidget {
     this.padding,
     this.focusNode,
     this.chipSize,
-    this.shapeDecoration,
+    this.decoration,
     this.semanticLabel,
     this.tooltipMessage = "",
     this.onTap,
@@ -281,7 +281,7 @@ class MoonChip extends StatelessWidget {
           duration: effectiveHoverEffectDuration,
           curve: effectiveHoverEffectCurve,
           constraints: BoxConstraints(minWidth: effectiveHeight),
-          decoration: shapeDecoration ??
+          decoration: decoration ??
               ShapeDecorationWithPremultipliedAlpha(
                 color: canAnimate ? effectiveHoverEffectColor : effectiveBackgroundColor,
                 shape: MoonSquircleBorder(
