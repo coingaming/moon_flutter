@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.2](https://github.com/coingaming/moon_flutter/compare/v0.21.1...v0.21.2) (2023-05-22)
+
+
+### Bug Fixes
+
+* [MDS-527] Extract out figma_squircle logic and fix various issues ([#172](https://github.com/coingaming/moon_flutter/issues/172)) ([08e7752](https://github.com/coingaming/moon_flutter/commit/08e7752bb61665b269d22a3cee7b2fc7d41a367c))
+
 ## [0.21.1](https://github.com/coingaming/moon_flutter/compare/v0.21.0...v0.21.1) (2023-05-22)
 
 
