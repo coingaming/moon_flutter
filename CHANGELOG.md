@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.1](https://github.com/coingaming/moon_flutter/compare/v0.21.0...v0.21.1) (2023-05-22)
+
+
+### Bug Fixes
+
+* [MDS-532] Add ShapeDecoration as props to every widget where it makes sense ([#173](https://github.com/coingaming/moon_flutter/issues/173)) ([b4eba9c](https://github.com/coingaming/moon_flutter/commit/b4eba9c7945bc930007c239ecd287e6b653d8ada))
+
 ## [0.21.0](https://github.com/coingaming/moon_flutter/compare/v0.20.3...v0.21.0) (2023-05-17)
 
 
