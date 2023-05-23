@@ -79,9 +79,8 @@ class ChipStory extends Story {
 
             final showBorderKnob = context.knobs.boolean(
               label: "showBorder",
-              description: "Show border when isActive.",
+              description: "Show border when hovered, focused or isActive is true.",
             );
-
             final isActiveKnob = context.knobs.boolean(
               label: "isActive",
               description: "Whether MoonChip is active/selected.",
