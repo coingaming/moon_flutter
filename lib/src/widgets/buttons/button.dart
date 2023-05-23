@@ -19,7 +19,7 @@ enum MoonButtonSize {
   xl,
 }
 
-class MoonButton extends StatelessWidget {
+class MoonButton extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
@@ -300,7 +300,25 @@ class MoonButton extends StatelessWidget {
     );
   }
 
-  bool get _isEnabled => onTap != null || onLongPress != null;
+  @override
+  State<MoonButton> createState() => _MoonButtonState();
+}
+
+class _MoonButtonState extends State<MoonButton> with TickerProviderStateMixin {
+  late Animation<Decoration>? _decorationAnimation;
+
+  AnimationController? _decorationAnimationController;
+  CurvedAnimation? _decorationCurvedAnimation;
+
+  bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
+
+  void _handleHoverEffect(bool shouldAnimate) {
+    if (shouldAnimate) {
+      _decorationAnimationController?.forward();
+    } else {
+      _decorationAnimationController?.reverse();
+    }
+  }
 
   MoonButtonSizeProperties _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
     switch (moonButtonSize) {
@@ -325,10 +343,12 @@ class MoonButton extends StatelessWidget {
     required bool isHovered,
     required bool isFocused,
   }) {
-    if (textColor != null && (!isHovered && !isFocused)) return textColor!;
-    if (backgroundColor == null && context.moonTypography != null) return context.moonTypography!.colors.bodyPrimary;
+    if (widget.textColor != null && (!isHovered && !isFocused)) return widget.textColor!;
+    if (widget.backgroundColor == null && context.moonTypography != null) {
+      return context.moonTypography!.colors.bodyPrimary;
+    }
 
-    final backgroundLuminance = backgroundColor!.computeLuminance();
+    final backgroundLuminance = widget.backgroundColor!.computeLuminance();
     if (backgroundLuminance > 0.5) {
       return MoonColors.light.bulma;
     } else {
@@ -338,103 +358,126 @@ class MoonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonButtonSizeProperties effectiveMoonButtonSize = _getMoonButtonSize(context, buttonSize);
+    final MoonButtonSizeProperties effectiveMoonButtonSize = _getMoonButtonSize(context, widget.buttonSize);
 
-    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveMoonButtonSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ?? effectiveMoonButtonSize.borderRadius;
 
     final Color effectiveBorderColor =
-        borderColor ?? context.moonTheme?.buttonTheme.colors.borderColor ?? MoonColors.light.trunks;
+        widget.borderColor ?? context.moonTheme?.buttonTheme.colors.borderColor ?? MoonColors.light.trunks;
 
     final double effectiveBorderWidth =
-        borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
+        widget.borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
-    final Color effectiveHoverEffectColor = hoverEffectColor ??
+    final Color effectiveHoverEffectColor = widget.hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.primaryHoverColor ??
         MoonHoverEffects.lightHoverEffect.primaryHoverColor;
 
-    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, backgroundColor ?? Colors.transparent);
+    final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, widget.backgroundColor ?? Colors.transparent);
 
-    final double effectiveHeight = height ?? effectiveMoonButtonSize.height;
+    final double effectiveHeight = widget.height ?? effectiveMoonButtonSize.height;
 
-    final double effectiveGap = gap ?? effectiveMoonButtonSize.gap;
+    final double effectiveGap = widget.gap ?? effectiveMoonButtonSize.gap;
 
-    final EdgeInsetsGeometry effectivePadding = padding ?? effectiveMoonButtonSize.padding;
+    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonButtonSize.padding;
 
     final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
 
-    final EdgeInsetsGeometry correctedPadding = padding == null
+    final EdgeInsetsGeometry correctedPadding = widget.padding == null
         ? EdgeInsetsDirectional.fromSTEB(
-            leading == null && label != null ? resolvedDirectionalPadding.left : 0,
+            widget.leading == null && widget.label != null ? resolvedDirectionalPadding.left : 0,
             resolvedDirectionalPadding.top,
-            trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
+            widget.trailing == null && widget.label != null ? resolvedDirectionalPadding.right : 0,
             resolvedDirectionalPadding.bottom,
           )
         : resolvedDirectionalPadding;
 
-    final Duration effectiveHoverEffectDuration = hoverEffectDuration ??
+    final Duration effectiveHoverEffectDuration = widget.hoverEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??
         MoonHoverEffects.lightHoverEffect.hoverDuration;
 
-    final Curve effectiveHoverEffectCurve = hoverEffectCurve ??
+    final Curve effectiveHoverEffectCurve = widget.hoverEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
         MoonHoverEffects.lightHoverEffect.hoverCurve;
 
+    _decorationAnimationController ??= AnimationController(duration: effectiveHoverEffectDuration, vsync: this);
+    _decorationCurvedAnimation ??=
+        CurvedAnimation(parent: _decorationAnimationController!, curve: effectiveHoverEffectCurve);
+
+    _decorationAnimation = DecorationTween(
+      begin: ShapeDecorationWithPremultipliedAlpha(
+        color: widget.backgroundColor,
+        shape: MoonSquircleBorder(
+          borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+          side: BorderSide(
+            color: effectiveBorderColor,
+            width: widget.showBorder ? effectiveBorderWidth : 0,
+            style: widget.showBorder ? BorderStyle.solid : BorderStyle.none,
+          ),
+        ),
+      ),
+      end: ShapeDecorationWithPremultipliedAlpha(
+        color: hoverColor,
+        shape: MoonSquircleBorder(
+          borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+          side: BorderSide(
+            color: effectiveBorderColor,
+            width: widget.showBorder ? effectiveBorderWidth : 0,
+            style: widget.showBorder ? BorderStyle.solid : BorderStyle.none,
+          ),
+        ),
+      ),
+    ).animate(_decorationCurvedAnimation!);
+
     return MoonBaseControl(
-      autofocus: autofocus,
-      isFocusable: isFocusable,
-      ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
+      autofocus: widget.autofocus,
+      isFocusable: widget.isFocusable,
+      ensureMinimalTouchTargetSize: widget.ensureMinimalTouchTargetSize,
       semanticTypeIsButton: true,
-      showFocusEffect: showFocusEffect,
-      showPulseEffect: showPulseEffect,
-      showPulseEffectJiggle: showPulseEffectJiggle,
-      showScaleAnimation: showScaleAnimation,
-      showTooltip: showTooltip,
+      showFocusEffect: widget.showFocusEffect,
+      showPulseEffect: widget.showPulseEffect,
+      showPulseEffectJiggle: widget.showPulseEffectJiggle,
+      showScaleAnimation: widget.showScaleAnimation,
+      showTooltip: widget.showTooltip,
       borderRadius: effectiveBorderRadius,
-      backgroundColor: backgroundColor,
-      focusEffectColor: focusEffectColor,
-      pulseEffectColor: pulseEffectColor,
-      disabledOpacityValue: disabledOpacityValue,
-      minTouchTargetSize: minTouchTargetSize,
-      focusEffectExtent: focusEffectExtent,
-      pulseEffectExtent: pulseEffectExtent,
-      scaleEffectScalar: scaleEffectScalar,
-      focusEffectDuration: focusEffectDuration,
-      pulseEffectDuration: pulseEffectDuration,
-      scaleEffectDuration: scaleEffectDuration,
-      focusEffectCurve: focusEffectCurve,
-      pulseEffectCurve: pulseEffectCurve,
-      scaleEffectCurve: scaleEffectCurve,
-      focusNode: focusNode,
-      semanticLabel: semanticLabel,
-      tooltipMessage: tooltipMessage,
-      onTap: onTap,
-      onLongPress: onLongPress,
+      backgroundColor: widget.backgroundColor,
+      focusEffectColor: widget.focusEffectColor,
+      pulseEffectColor: widget.pulseEffectColor,
+      disabledOpacityValue: widget.disabledOpacityValue,
+      minTouchTargetSize: widget.minTouchTargetSize,
+      focusEffectExtent: widget.focusEffectExtent,
+      pulseEffectExtent: widget.pulseEffectExtent,
+      scaleEffectScalar: widget.scaleEffectScalar,
+      focusEffectDuration: widget.focusEffectDuration,
+      pulseEffectDuration: widget.pulseEffectDuration,
+      scaleEffectDuration: widget.scaleEffectDuration,
+      focusEffectCurve: widget.focusEffectCurve,
+      pulseEffectCurve: widget.pulseEffectCurve,
+      scaleEffectCurve: widget.scaleEffectCurve,
+      focusNode: widget.focusNode,
+      semanticLabel: widget.semanticLabel,
+      tooltipMessage: widget.tooltipMessage,
+      onTap: widget.onTap,
+      onLongPress: widget.onLongPress,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+        final bool canAnimate = _isEnabled && (isHovered || isFocused || isPressed);
+        _handleHoverEffect(canAnimate);
+
         final Color effectiveTextColor =
             _getTextColor(context, isDarkMode: context.isDarkMode, isHovered: isHovered, isFocused: isFocused);
 
-        final bool canAnimateHover = _isEnabled && (isHovered || isFocused || isPressed);
-
-        return AnimatedContainer(
-          duration: effectiveHoverEffectDuration,
-          curve: effectiveHoverEffectCurve,
-          width: width,
-          height: effectiveHeight,
-          constraints: BoxConstraints(minWidth: effectiveHeight),
-          decoration: decoration ??
-              ShapeDecorationWithPremultipliedAlpha(
-                color: canAnimateHover ? hoverColor : backgroundColor,
-                shape: MoonSquircleBorder(
-                  side: BorderSide(
-                    color: effectiveBorderColor,
-                    width: showBorder ? effectiveBorderWidth : 0,
-                    style: showBorder ? BorderStyle.solid : BorderStyle.none,
-                  ),
-                  borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
-                ),
-              ),
+        return AnimatedBuilder(
+          animation: _decorationAnimationController!,
+          builder: (context, child) {
+            return Container(
+              width: widget.width,
+              height: effectiveHeight,
+              constraints: BoxConstraints(minWidth: effectiveHeight),
+              decoration: widget.decoration ?? _decorationAnimation!.value,
+              child: child,
+            );
+          },
           child: Padding(
-            padding: isFullWidth ? EdgeInsets.zero : correctedPadding,
+            padding: widget.isFullWidth ? EdgeInsets.zero : correctedPadding,
             child: AnimatedIconTheme(
               duration: effectiveHoverEffectDuration,
               color: effectiveTextColor,
@@ -442,29 +485,29 @@ class MoonButton extends StatelessWidget {
               child: AnimatedDefaultTextStyle(
                 style: TextStyle(color: effectiveTextColor, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
                 duration: effectiveHoverEffectDuration,
-                child: isFullWidth
+                child: widget.isFullWidth
                     ? Stack(
                         fit: StackFit.expand,
                         children: [
-                          if (leading != null)
+                          if (widget.leading != null)
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: effectiveGap),
                               alignment: Directionality.of(context) == TextDirection.ltr
                                   ? Alignment.centerLeft
                                   : Alignment.centerRight,
-                              child: leading,
+                              child: widget.leading,
                             ),
-                          if (label != null)
+                          if (widget.label != null)
                             Align(
-                              child: label,
+                              child: widget.label,
                             ),
-                          if (trailing != null)
+                          if (widget.trailing != null)
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: effectiveGap),
                               alignment: Directionality.of(context) == TextDirection.ltr
                                   ? Alignment.centerRight
                                   : Alignment.centerLeft,
-                              child: trailing,
+                              child: widget.trailing,
                             ),
                         ],
                       )
@@ -472,16 +515,16 @@ class MoonButton extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          if (leading != null)
+                          if (widget.leading != null)
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                              child: leading,
+                              child: widget.leading,
                             ),
-                          if (label != null) label!,
-                          if (trailing != null)
+                          if (widget.label != null) widget.label!,
+                          if (widget.trailing != null)
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                              child: trailing,
+                              child: widget.trailing,
                             ),
                         ],
                       ),
