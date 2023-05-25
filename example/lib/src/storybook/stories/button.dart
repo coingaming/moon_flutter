@@ -50,16 +50,16 @@ class ButtonStory extends Story {
 
             final borderColor = colorTable(context)[borderColorsKnob ?? 40];
 
-            final textColorKnob = context.knobs.nullable.options(
+            final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
-              description: "MoonColors variants for MoonAccordion text.",
+              description: "MoonColors variants for MoonButton text.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorKnob ?? 40];
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",

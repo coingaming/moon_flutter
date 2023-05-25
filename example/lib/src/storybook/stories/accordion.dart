@@ -103,7 +103,7 @@ class AccordionStory extends Story {
 
             final dividerColor = colorTable(context)[dividerColorsKnob ?? 40];
 
-            final textColorKnob = context.knobs.nullable.options(
+            final textColorsKnob = context.knobs.nullable.options(
               label: "textColor",
               description: "MoonColors variants for MoonAccordion text.",
               enabled: false,
@@ -112,7 +112,7 @@ class AccordionStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorKnob ?? 40];
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",

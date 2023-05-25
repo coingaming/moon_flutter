@@ -6,6 +6,7 @@ import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -410,12 +411,13 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Ticker
     final List<BoxShadow> effectiveShadows =
         widget.shadows ?? context.moonTheme?.accordionTheme.itemShadows.shadows ?? MoonShadows.light.sm;
 
-    final Color effectiveTextColor =
-        widget.textColor ?? context.moonTheme?.accordionTheme.itemColors.textColor ?? MoonColors.light.bulma;
+    final Color effectiveTextColor = widget.textColor ??
+        context.moonTheme?.accordionTheme.itemColors.textColor ??
+        MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveExpandedTextColor = widget.expandedTextColor ??
         context.moonTheme?.accordionTheme.itemColors.expandedTextColor ??
-        MoonColors.light.bulma;
+        MoonTypography.light.colors.bodyPrimary;
 
     _textColor ??= _textColorTween.animate(_expansionCurvedAnimation!);
 
