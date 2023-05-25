@@ -26,17 +26,6 @@ class AccordionStory extends Story {
               ],
             );
 
-            final textColorKnob = context.knobs.nullable.options(
-              label: "textColor",
-              description: "MoonColors variants for MoonAccordion text.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final textColor = colorTable(context)[textColorKnob ?? 40];
-
             final expandedTextColorKnob = context.knobs.nullable.options(
               label: "expandedTextColor",
               description: "MoonColors variants for expanded MoonAccordion text.",
@@ -113,6 +102,17 @@ class AccordionStory extends Story {
             );
 
             final dividerColor = colorTable(context)[dividerColorsKnob ?? 40];
+
+            final textColorKnob = context.knobs.nullable.options(
+              label: "textColor",
+              description: "MoonColors variants for MoonAccordion text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",

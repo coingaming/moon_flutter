@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
@@ -11,8 +12,8 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     expandedBackgroundColor: MoonColors.light.gohan,
     borderColor: MoonColors.light.beerus,
     dividerColor: MoonColors.light.beerus,
-    textColor: MoonColors.light.bulma,
-    expandedTextColor: MoonColors.light.bulma,
+    textColor: MoonTypography.light.colors.bodyPrimary,
+    expandedTextColor: MoonTypography.light.colors.bodyPrimary,
     trailingIconColor: MoonColors.light.trunks,
     expandedTrailingIconColor: MoonColors.light.bulma,
   );
@@ -22,8 +23,8 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     expandedBackgroundColor: MoonColors.dark.gohan,
     borderColor: MoonColors.dark.beerus,
     dividerColor: MoonColors.dark.beerus,
-    textColor: MoonColors.dark.bulma,
-    expandedTextColor: MoonColors.dark.bulma,
+    textColor: MoonTypography.dark.colors.bodyPrimary,
+    expandedTextColor: MoonTypography.dark.colors.bodyPrimary,
     trailingIconColor: MoonColors.dark.trunks,
     expandedTrailingIconColor: MoonColors.dark.bulma,
   );

@@ -105,6 +105,8 @@ class MoonFilledButton extends StatelessWidget {
         context.moonTheme?.buttonTheme.colors.filledVariantBackgroundColor ??
         MoonColors.light.piccolo;
 
+    final effectiveTextColor = context.moonTheme?.buttonTheme.colors.filledVariantTextColor ?? MoonColors.light.goten;
+
     return MoonButton(
       autofocus: autofocus,
       isFocusable: isFocusable,
@@ -112,6 +114,7 @@ class MoonFilledButton extends StatelessWidget {
       isFullWidth: isFullWidth,
       showPulseEffect: showPulseEffect,
       showTooltip: showTooltip,
+      textColor: effectiveTextColor,
       borderRadius: borderRadius,
       backgroundColor: effectiveBackgroundColor,
       height: height,
