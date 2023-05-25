@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/utils/color_tween_premul.dart';
+
 class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
   /// The target color for icon.
   ///
@@ -46,13 +48,14 @@ class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
 }
 
 class _AnimatedIconThemeState extends AnimatedWidgetBaseState<AnimatedIconTheme> {
-  ColorTween? _color;
+  ColorTweenWithPremultipliedAlpha? _color;
   SizeTween? _size;
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
     if (widget.color != null) {
-      _color = visitor(_color, widget.color, (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
+      _color = visitor(_color, widget.color, (dynamic value) => ColorTweenWithPremultipliedAlpha(begin: value as Color))
+          as ColorTweenWithPremultipliedAlpha?;
     }
 
     if (widget.size != null) {
