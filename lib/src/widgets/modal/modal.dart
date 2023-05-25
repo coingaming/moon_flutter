@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -32,19 +33,6 @@ class MoonModal extends StatelessWidget {
     required this.child,
   });
 
-  Color _getTextColor(BuildContext context, {required bool isDarkMode, required Color effectiveBackgroundColor}) {
-    if (backgroundColor == null && context.moonTypography != null) {
-      return context.moonTypography!.colors.bodyPrimary;
-    }
-
-    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final BorderRadiusGeometry effectiveBorderRadius =
@@ -54,7 +42,7 @@ class MoonModal extends StatelessWidget {
         backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
-        _getTextColor(context, isDarkMode: context.isDarkMode, effectiveBackgroundColor: effectiveBackgroundColor);
+        context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
 
     return Semantics(
       label: semanticLabel,
