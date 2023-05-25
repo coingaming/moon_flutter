@@ -85,12 +85,7 @@ class SegmentedControlStory extends Story {
               description: "Gap between MoonSegmentedControl segments.",
               enabled: false,
               initial: 4,
-              max: 16,
-            );
-
-            final isExpandedKnob = context.knobs.boolean(
-              label: "isExpanded",
-              description: "Whether MoonSegmentControl is horizontally expanded.",
+              max: 12,
             );
 
             final showLeadingKnob = context.knobs.boolean(
@@ -107,6 +102,16 @@ class SegmentedControlStory extends Story {
             final showTrailingKnob = context.knobs.boolean(
               label: "trailing",
               description: "Show widget in MoonSegmentedControl trailing slot.",
+            );
+
+            final isExpandedKnob = context.knobs.boolean(
+              label: "isExpanded",
+              description: "Expand MoonSegmentControl horizontally.",
+            );
+
+            final isDisabledKnob = context.knobs.boolean(
+              label: "isDisabled",
+              description: "Disable MoonSegmentedControl.",
             );
 
             final segmentStyle = SegmentStyle(
@@ -128,6 +133,7 @@ class SegmentedControlStory extends Story {
                     Column(
                       children: [
                         MoonSegmentedControl(
+                          isDisabled: isDisabledKnob,
                           isExpanded: isExpandedKnob,
                           gap: gapKnob?.toDouble(),
                           segmentedControlSize: segmentedControlSizesKnob,
@@ -159,6 +165,7 @@ class SegmentedControlStory extends Story {
                         const TextDivider(text: "Icon MoonSegmentedControl"),
                         const SizedBox(height: 32),
                         MoonSegmentedControl(
+                          isDisabled: isDisabledKnob,
                           isExpanded: isExpandedKnob,
                           gap: gapKnob?.toDouble(),
                           segmentedControlSize: segmentedControlSizesKnob,

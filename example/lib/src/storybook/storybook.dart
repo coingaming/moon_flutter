@@ -16,6 +16,7 @@ import 'package:example/src/storybook/stories/popover.dart';
 import 'package:example/src/storybook/stories/radio.dart';
 import 'package:example/src/storybook/stories/segmented_control.dart';
 import 'package:example/src/storybook/stories/switch.dart';
+import 'package:example/src/storybook/stories/tab_bar.dart';
 import 'package:example/src/storybook/stories/tag.dart';
 import 'package:example/src/storybook/stories/text_area.dart';
 import 'package:example/src/storybook/stories/text_input.dart';
@@ -96,6 +97,7 @@ class StorybookPage extends StatelessWidget {
             RadioStory(),
             SegmentedControlStory(),
             SwitchStory(),
+            TabBarStory(),
             TagStory(),
             TextAreaStory(),
             TextInputStory(),
