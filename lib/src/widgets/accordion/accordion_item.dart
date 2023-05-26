@@ -371,6 +371,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Ticker
   @override
   void dispose() {
     _expansionAnimationController!.dispose();
+    _hoverAnimationController!.dispose();
 
     super.dispose();
   }

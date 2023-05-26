@@ -308,6 +308,12 @@ class _MoonButtonState extends State<MoonButton> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    _animationController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final MoonButtonSizeProperties effectiveMoonButtonSize = _getMoonButtonSize(context, widget.buttonSize);
 

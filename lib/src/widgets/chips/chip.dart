@@ -242,6 +242,12 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
   }
 
   @override
+  void dispose() {
+    _animationController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final MoonChipSizeProperties effectiveMoonChipSize = _getMoonChipSize(context, widget.chipSize);
 
