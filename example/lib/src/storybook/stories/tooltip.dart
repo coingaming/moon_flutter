@@ -159,6 +159,7 @@ class TooltipStory extends Story {
                     borderRadius: BorderRadius.circular(20),
                     backgroundColor: context.moonColors!.hit,
                     leading: const MoonIcon(MoonIcons.frame_24),
+                    textColor: context.moonTypography!.colors.controlPrimary,
                     label: const Text("MoonChip"),
                   ),
                   const SizedBox(height: 64),
