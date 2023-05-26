@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.2](https://github.com/coingaming/moon_flutter/compare/v0.22.1...v0.22.2) (2023-05-26)
+
+
+### Bug Fixes
+
+* [MDS-510] Fix theme switching color being out of sync in widgets - Part 1 ([#178](https://github.com/coingaming/moon_flutter/issues/178)) ([0e58cd1](https://github.com/coingaming/moon_flutter/commit/0e58cd168b30c50c1058ce375074e76bd4081f66))
+
 ## [0.22.1](https://github.com/coingaming/moon_flutter/compare/v0.22.0...v0.22.1) (2023-05-26)
 
 
