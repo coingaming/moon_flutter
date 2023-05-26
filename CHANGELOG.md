@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/coingaming/moon_flutter/compare/v0.21.3...v0.22.0) (2023-05-26)
+
+
+### Features
+
+* [MDS-535] Create MoonTabBar component ([#179](https://github.com/coingaming/moon_flutter/issues/179)) ([cf19d9f](https://github.com/coingaming/moon_flutter/commit/cf19d9ff061932390ff791d10ba4a7a4b1f97777))
+
 ## [0.21.3](https://github.com/coingaming/moon_flutter/compare/v0.21.2...v0.21.3) (2023-05-22)
 
 
