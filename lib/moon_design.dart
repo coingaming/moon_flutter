@@ -33,6 +33,7 @@ export 'package:moon_design/src/theme/typography/text_styles.dart';
 export 'package:moon_design/src/theme/typography/typography.dart';
 
 export 'package:moon_design/src/utils/color_premul_lerp.dart';
+export 'package:moon_design/src/utils/color_tween_premul.dart';
 export 'package:moon_design/src/utils/extensions.dart';
 export 'package:moon_design/src/utils/shape_decoration_premul.dart';
 export 'package:moon_design/src/utils/squircle/clip_squircle_rect.dart';
@@ -52,7 +53,6 @@ export 'package:moon_design/src/widgets/buttons/outlined_button.dart';
 export 'package:moon_design/src/widgets/buttons/text_button.dart';
 export 'package:moon_design/src/widgets/checkbox/checkbox.dart';
 export 'package:moon_design/src/widgets/chips/chip.dart';
-export 'package:moon_design/src/widgets/chips/text_chip.dart';
 export 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 export 'package:moon_design/src/widgets/common/base_control.dart';
 export 'package:moon_design/src/widgets/common/base_segmented_tab_bar.dart';

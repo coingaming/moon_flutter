@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 
@@ -94,7 +95,11 @@ class MoonTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTextColor = context.moonTheme?.buttonTheme.colors.textVariantTextColor ?? MoonColors.light.trunks;
+    final effectiveTextColor =
+        context.moonTheme?.buttonTheme.colors.textVariantTextColor ?? MoonTypography.light.colors.bodySecondary;
+
+    final effectiveHoverTextColor =
+        context.moonTheme?.buttonTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
     final effectiveHoverColor = context.moonTheme?.buttonTheme.colors.textVariantHoverColor ?? MoonColors.light.jiren;
 
@@ -110,6 +115,7 @@ class MoonTextButton extends StatelessWidget {
       showPulseEffect: showPulseEffect,
       showTooltip: showTooltip,
       textColor: effectiveTextColor,
+      hoverTextColor: effectiveHoverTextColor,
       hoverEffectColor: effectiveHoverColor,
       focusEffectColor: effectiveFocusColor,
       height: height,

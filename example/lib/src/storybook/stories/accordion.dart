@@ -26,17 +26,6 @@ class AccordionStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.nullable.options(
-              label: "textColor",
-              description: "MoonColors variants for MoonAccordion text.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
-
             final iconColorsKnob = context.knobs.nullable.options(
               label: "iconColor",
               description: "MoonColors variants for MoonAccordion trailing icon.",
@@ -103,6 +92,28 @@ class AccordionStory extends Story {
 
             final dividerColor = colorTable(context)[dividerColorsKnob ?? 40];
 
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "textColor",
+              description: "MoonColors variants for MoonAccordion text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
+            final expandedTextColorsKnob = context.knobs.nullable.options(
+              label: "expandedTextColor",
+              description: "MoonColors variants for expanded MoonAccordion text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final expandedTextColor = colorTable(context)[expandedTextColorsKnob ?? 40];
+
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for MoonAccordion.",
@@ -141,6 +152,7 @@ class AccordionStory extends Story {
                       groupIdentityValue: currentlyOpenAccordionItem,
                       accordionSize: accordionSizesKnob,
                       textColor: textColor,
+                      expandedTextColor: expandedTextColor,
                       borderColor: borderColor,
                       trailingIconColor: iconColor,
                       expandedTrailingIconColor: expandedIconColor,
@@ -169,6 +181,7 @@ class AccordionStory extends Story {
                       initiallyExpanded: true,
                       accordionSize: accordionSizesKnob,
                       textColor: textColor,
+                      expandedTextColor: expandedTextColor,
                       borderColor: borderColor,
                       trailingIconColor: iconColor,
                       expandedTrailingIconColor: expandedIconColor,
@@ -198,6 +211,7 @@ class AccordionStory extends Story {
                       initiallyExpanded: true,
                       hasContentOutside: true,
                       textColor: textColor,
+                      expandedTextColor: expandedTextColor,
                       borderColor: borderColor,
                       trailingIconColor: iconColor,
                       expandedTrailingIconColor: expandedIconColor,
@@ -220,6 +234,7 @@ class AccordionStory extends Story {
                       accordionSize: accordionSizesKnob,
                       hasContentOutside: true,
                       textColor: textColor,
+                      expandedTextColor: expandedTextColor,
                       borderColor: borderColor,
                       trailingIconColor: iconColor,
                       expandedTrailingIconColor: expandedIconColor,

@@ -17,6 +17,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:moon_design/src/utils/color_tween_premul.dart';
+
 // Examples can assume:
 // late Widget _myIcon;
 
@@ -93,7 +95,7 @@ class _InputBorderPainter extends CustomPainter {
   final _InputBorderGap gap;
   final TextDirection textDirection;
   final Color fillColor;
-  final ColorTween hoverColorTween;
+  final ColorTweenWithPremultipliedAlpha hoverColorTween;
   final Animation<double> hoverAnimation;
 
   Color get blendedColor => Color.alphaBlend(hoverColorTween.evaluate(hoverAnimation)!, fillColor);
@@ -169,7 +171,7 @@ class _BorderContainerState extends State<_BorderContainer> with TickerProviderS
   late Animation<double> _borderAnimation;
   late _InputBorderTween _border;
   late Animation<double> _hoverAnimation;
-  late ColorTween _hoverColorTween;
+  late ColorTweenWithPremultipliedAlpha _hoverColorTween;
 
   @override
   void initState() {
@@ -195,7 +197,7 @@ class _BorderContainerState extends State<_BorderContainer> with TickerProviderS
       parent: _hoverColorController,
       curve: Curves.linear,
     );
-    _hoverColorTween = ColorTween(begin: Colors.transparent, end: widget.hoverColor);
+    _hoverColorTween = ColorTweenWithPremultipliedAlpha(end: widget.hoverColor);
   }
 
   @override
@@ -218,7 +220,7 @@ class _BorderContainerState extends State<_BorderContainer> with TickerProviderS
         ..forward();
     }
     if (widget.hoverColor != oldWidget.hoverColor) {
-      _hoverColorTween = ColorTween(begin: Colors.transparent, end: widget.hoverColor);
+      _hoverColorTween = ColorTweenWithPremultipliedAlpha(end: widget.hoverColor);
     }
     if (widget.isHovering != oldWidget.isHovering) {
       if (widget.isHovering) {

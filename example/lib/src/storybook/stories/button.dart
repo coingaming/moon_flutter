@@ -50,6 +50,17 @@ class ButtonStory extends Story {
 
             final borderColor = colorTable(context)[borderColorsKnob ?? 40];
 
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "textColor",
+              description: "MoonColors variants for MoonButton text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for base MoonButton.",
@@ -144,6 +155,7 @@ class ButtonStory extends Story {
                       isFullWidth: setFullWidthKnob,
                       backgroundColor: backgroundColor,
                       borderColor: borderColor,
+                      textColor: textColor,
                       showPulseEffect: showPulseEffectKnob,
                       showPulseEffectJiggle: showPulseEffectJiggleKnob,
                       leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
@@ -160,6 +172,7 @@ class ButtonStory extends Story {
                       tooltipMessage: 'This is MoonTooltip',
                       buttonSize: buttonSizesKnob,
                       backgroundColor: backgroundColor,
+                      iconColor: textColor,
                       borderColor: borderColor,
                       showPulseEffect: showPulseEffectKnob,
                       showPulseEffectJiggle: showPulseEffectJiggleKnob,
@@ -213,7 +226,8 @@ class ButtonStory extends Story {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       showTooltip: showTooltipKnob,
                       tooltipMessage: 'This is MoonTooltip',
-                      decoration: const ShapeDecorationWithPremultipliedAlpha(
+                      showFocusEffect: false,
+                      decoration: const ShapeDecoration(
                         image: DecorationImage(
                           image: AssetImage("assets/images/placeholder-640x359.png"),
                           fit: BoxFit.cover,
@@ -242,6 +256,7 @@ class ButtonStory extends Story {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       showTooltip: showTooltipKnob,
                       tooltipMessage: 'This is MoonTooltip',
+                      showFocusEffect: false,
                       decoration: ShapeDecorationWithPremultipliedAlpha(
                         shadows: const [
                           BoxShadow(

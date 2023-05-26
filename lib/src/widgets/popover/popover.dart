@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -173,19 +174,6 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       MoonPopover._openedPopovers.remove(this);
       _overlayEntry!.remove();
       _overlayEntry = null;
-    }
-  }
-
-  Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
-    if (widget.backgroundColor == null && context.moonTypography != null) {
-      return context.moonTypography!.colors.bodyPrimary;
-    }
-
-    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
     }
   }
 
@@ -363,7 +351,8 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.popoverTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
-    final Color effectiveTextColor = _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
+    final Color effectiveTextColor =
+        context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
 
     final double effectiveDistanceToTarget =
         widget.distanceToTarget ?? context.moonTheme?.popoverTheme.properties.distanceToTarget ?? 8;
@@ -450,22 +439,25 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
             child: RepaintBoundary(
               child: FadeTransition(
                 opacity: _curvedAnimation!,
-                child: DefaultTextStyle(
-                  style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
-                  child: Container(
-                    key: _popoverKey,
-                    constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),
-                    padding: resolvedContentPadding,
-                    decoration: widget.decoration ??
-                        ShapeDecorationWithPremultipliedAlpha(
-                          color: effectiveBackgroundColor,
-                          shadows: effectivePopoverShadows,
-                          shape: MoonSquircleBorder(
-                            borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
-                            side: BorderSide(color: widget.borderColor),
+                child: IconTheme(
+                  data: IconThemeData(color: effectiveTextColor),
+                  child: DefaultTextStyle(
+                    style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
+                    child: Container(
+                      key: _popoverKey,
+                      constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),
+                      padding: resolvedContentPadding,
+                      decoration: widget.decoration ??
+                          ShapeDecorationWithPremultipliedAlpha(
+                            color: effectiveBackgroundColor,
+                            shadows: effectivePopoverShadows,
+                            shape: MoonSquircleBorder(
+                              borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                              side: BorderSide(color: widget.borderColor),
+                            ),
                           ),
-                        ),
-                    child: widget.content,
+                      child: widget.content,
+                    ),
                   ),
                 ),
               ),

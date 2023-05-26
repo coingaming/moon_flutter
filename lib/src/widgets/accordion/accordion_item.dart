@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/accordion/accordion_item_size_properties.dart';
-import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
-import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/common/icons/icons.dart';
 import 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
@@ -100,8 +99,11 @@ class MoonAccordionItem<T> extends StatefulWidget {
   /// The color of accordion's trailing icon (downward caret by default) when the accordion is expanded.
   final Color? expandedTrailingIconColor;
 
-  /// The color of the accordion's title.
+  /// The color of the accordion's text.
   final Color? textColor;
+
+  /// The color of the expanded accordion's text.
+  final Color? expandedTextColor;
 
   /// The height of the accordion header.
   final double? headerHeight;
@@ -188,6 +190,7 @@ class MoonAccordionItem<T> extends StatefulWidget {
     this.trailingIconColor,
     this.expandedTrailingIconColor,
     this.textColor,
+    this.expandedTextColor,
     this.headerHeight,
     this.transitionDuration,
     this.transitionCurve,
@@ -217,20 +220,37 @@ class MoonAccordionItem<T> extends StatefulWidget {
   State<MoonAccordionItem<T>> createState() => _MoonAccordionItemState<T>();
 }
 
-class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with SingleTickerProviderStateMixin {
+class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with TickerProviderStateMixin {
   static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: 0.5);
 
   late final Map<Type, Action<Intent>> _actions = {
     ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
   };
 
-  late Animation<Color?>? _iconColorAnimation;
-  late Animation<Color?>? _backgroundColorAnimation;
+  final ColorTweenWithPremultipliedAlpha _backgroundColorTween = ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _iconColorTween = ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _hoverColorTween = ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _textColorTween = ColorTweenWithPremultipliedAlpha();
 
-  AnimationController? _animationController;
-  CurvedAnimation? _curvedAnimation;
+  Animation<Color?>? _backgroundColor;
+  Animation<Color?>? _iconColor;
+  Animation<Color?>? _hoverColor;
+  Animation<Color?>? _textColor;
+
+  AnimationController? _expansionAnimationController;
+  AnimationController? _hoverAnimationController;
+
+  CurvedAnimation? _expansionCurvedAnimation;
 
   FocusNode? _focusNode;
+
+  Color? _effectiveHoverEffectColor;
+
+  MoonAccordionItemSizeProperties? _effectiveMoonAccordionSize;
+  BorderRadiusGeometry? _effectiveBorderRadius;
+  EdgeInsetsGeometry? _effectiveHeaderPadding;
+  EdgeInsets? _resolvedDirectionalHeaderPadding;
+  double? _effectiveHeaderHeight;
 
   bool _isExpanded = false;
   bool _isFocused = false;
@@ -241,12 +261,24 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   void _handleHover(bool hover) {
     if (hover != _isHovered) {
       setState(() => _isHovered = hover);
+
+      if (hover) {
+        _hoverAnimationController!.forward();
+      } else {
+        _hoverAnimationController!.reverse();
+      }
     }
   }
 
   void _handleFocus(bool focus) {
     if (focus != _isFocused) {
       setState(() => _isFocused = focus);
+
+      if (focus) {
+        _hoverAnimationController!.forward();
+      } else {
+        _hoverAnimationController!.reverse();
+      }
     }
   }
 
@@ -258,9 +290,9 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     setState(() {
       _isExpanded = !_isExpanded;
       if (_isExpanded) {
-        _animationController!.forward();
+        _expansionAnimationController!.forward();
       } else {
-        _animationController!.reverse().then<void>((void value) {
+        _expansionAnimationController!.reverse().then<void>((void value) {
           if (!mounted) return;
 
           setState(() {
@@ -292,15 +324,6 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     }
   }
 
-  Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
-    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -312,7 +335,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
       if (!mounted) return;
 
       if (_isExpanded) {
-        _animationController!.value = 1.0;
+        _expansionAnimationController!.value = 1.0;
       }
     });
   }
@@ -331,9 +354,9 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
 
     setState(() {
       if (_isExpanded) {
-        _animationController!.forward();
+        _expansionAnimationController!.forward();
       } else {
-        _animationController!.reverse().then<void>((void value) {
+        _expansionAnimationController!.reverse().then<void>((void value) {
           if (!mounted) return;
 
           setState(() {
@@ -347,7 +370,8 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
 
   @override
   void dispose() {
-    _animationController!.dispose();
+    _expansionAnimationController!.dispose();
+    _hoverAnimationController!.dispose();
 
     super.dispose();
   }
@@ -355,25 +379,24 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
   Widget? _buildIcon(BuildContext context) {
     final double iconSize = _getMoonAccordionItemSize(context, widget.accordionSize).iconSizeValue;
 
-    final Color effectiveBackgroundColor = widget.backgroundColor ??
-        context.moonTheme?.accordionTheme.itemColors.backgroundColor ??
-        MoonColors.light.gohan;
-
     final Color effectiveIconColor = widget.trailingIconColor ??
         context.moonTheme?.accordionTheme.itemColors.trailingIconColor ??
-        _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
+        MoonTypography.light.colors.bodySecondary;
 
     final Color effectiveExpandedIconColor = widget.expandedTrailingIconColor ??
         context.moonTheme?.accordionTheme.itemColors.expandedTrailingIconColor ??
-        effectiveIconColor;
+        MoonTypography.light.colors.bodyPrimary;
 
-    _iconColorAnimation =
-        ColorTween(begin: effectiveIconColor, end: effectiveExpandedIconColor).animate(_curvedAnimation!);
+    _iconColor ??= _iconColorTween.animate(_expansionCurvedAnimation!);
+
+    _iconColorTween
+      ..begin = effectiveIconColor
+      ..end = effectiveExpandedIconColor;
 
     return IconTheme(
-      data: IconThemeData(color: _iconColorAnimation?.value),
+      data: IconThemeData(color: _iconColor?.value),
       child: RotationTransition(
-        turns: _halfTween.animate(_curvedAnimation!),
+        turns: _halfTween.animate(_expansionCurvedAnimation!),
         child: MoonIcon(
           MoonIcons.chevron_down_small_16,
           size: iconSize,
@@ -382,13 +405,70 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     );
   }
 
-  Widget _buildChildren(BuildContext context, Widget? child) {
-    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ??
-        context.moonTheme?.accordionTheme.itemProperties.borderRadius ??
-        MoonBorders.borders.interactiveSm;
-
+  Widget _buildHeader({bool isContentOutsideHeader = false, required Widget child}) {
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.accordionTheme.itemColors.borderColor ?? MoonColors.light.beerus;
+
+    final List<BoxShadow> effectiveShadows =
+        widget.shadows ?? context.moonTheme?.accordionTheme.itemShadows.shadows ?? MoonShadows.light.sm;
+
+    final Color effectiveTextColor = widget.textColor ??
+        context.moonTheme?.accordionTheme.itemColors.textColor ??
+        MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveExpandedTextColor = widget.expandedTextColor ??
+        context.moonTheme?.accordionTheme.itemColors.expandedTextColor ??
+        MoonTypography.light.colors.bodyPrimary;
+
+    _textColor ??= _textColorTween.animate(_expansionCurvedAnimation!);
+
+    _textColorTween
+      ..begin = effectiveTextColor
+      ..end = effectiveExpandedTextColor;
+
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _hoverAnimationController!,
+        builder: (context, child) {
+          return IconTheme(
+            data: IconThemeData(color: _textColor!.value),
+            child: DefaultTextStyle(
+              style: DefaultTextStyle.of(context).style.copyWith(color: _textColor!.value),
+              child: Container(
+                height: isContentOutsideHeader ? _effectiveHeaderHeight : null,
+                padding: isContentOutsideHeader ? _resolvedDirectionalHeaderPadding : null,
+                clipBehavior: widget.clipBehavior ?? Clip.none,
+                decoration: widget.decoration ??
+                    ((widget.hasContentOutside && isContentOutsideHeader) ||
+                            (!widget.hasContentOutside && !isContentOutsideHeader)
+                        ? ShapeDecoration(
+                            color: _hoverColor!.value,
+                            shadows: effectiveShadows,
+                            shape: MoonSquircleBorder(
+                              side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                              borderRadius: _effectiveBorderRadius!.squircleBorderRadius(context),
+                            ),
+                          )
+                        : null),
+                child: child,
+              ),
+            ),
+          );
+        },
+        child: child,
+      ),
+    );
+  }
+
+  Widget _buildChildren(BuildContext context, Widget? rootChild) {
+    _effectiveHoverEffectColor ??= context.moonEffects?.controlHoverEffect.primaryHoverColor ??
+        MoonHoverEffects.lightHoverEffect.primaryHoverColor;
+
+    _effectiveMoonAccordionSize ??= _getMoonAccordionItemSize(context, widget.accordionSize);
+    _effectiveBorderRadius ??= widget.borderRadius ?? _effectiveMoonAccordionSize!.borderRadius;
+    _effectiveHeaderHeight ??= widget.headerHeight ?? _effectiveMoonAccordionSize!.headerHeight;
+    _effectiveHeaderPadding ??= widget.headerPadding ?? _effectiveMoonAccordionSize!.headerPadding;
+    _resolvedDirectionalHeaderPadding ??= _effectiveHeaderPadding!.resolve(Directionality.of(context));
 
     final Color effectiveBackgroundColor = widget.backgroundColor ??
         context.moonTheme?.accordionTheme.itemColors.backgroundColor ??
@@ -397,26 +477,6 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     final Color effectiveExpandedBackgroundColor = widget.expandedBackgroundColor ??
         context.moonTheme?.accordionTheme.itemColors.expandedBackgroundColor ??
         MoonColors.light.gohan;
-
-    final MoonAccordionItemSizeProperties effectiveMoonAccordionSize =
-        _getMoonAccordionItemSize(context, widget.accordionSize);
-
-    final double effectiveHeaderHeight = widget.headerHeight ?? effectiveMoonAccordionSize.headerHeight;
-
-    final EdgeInsetsGeometry effectiveHeaderPadding = widget.headerPadding ?? effectiveMoonAccordionSize.headerPadding;
-
-    final EdgeInsets resolvedDirectionalHeaderPadding = effectiveHeaderPadding.resolve(Directionality.of(context));
-
-    final List<BoxShadow> effectiveShadows =
-        widget.shadows ?? context.moonTheme?.accordionTheme.itemShadows.shadows ?? MoonShadows.light.sm;
-
-    final Duration effectiveTransitionDuration = widget.transitionDuration ??
-        context.moonTheme?.accordionTheme.itemProperties.transitionDuration ??
-        const Duration(milliseconds: 200);
-
-    final Curve effectiveTransitionCurve = widget.transitionCurve ??
-        context.moonTheme?.accordionTheme.itemProperties.transitionCurve ??
-        Curves.easeInOutCubic;
 
     final double effectiveFocusEffectExtent =
         context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
@@ -439,18 +499,32 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     final Curve effectiveHoverEffectCurve =
         context.moonEffects?.controlHoverEffect.hoverCurve ?? MoonHoverEffects.lightHoverEffect.hoverCurve;
 
-    _animationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
-    _curvedAnimation ??= CurvedAnimation(parent: _animationController!, curve: effectiveTransitionCurve);
+    final Duration effectiveTransitionDuration = widget.transitionDuration ??
+        context.moonTheme?.accordionTheme.itemProperties.transitionDuration ??
+        const Duration(milliseconds: 200);
 
-    _backgroundColorAnimation =
-        ColorTween(begin: effectiveBackgroundColor, end: effectiveExpandedBackgroundColor).animate(_curvedAnimation!);
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.accordionTheme.itemProperties.transitionCurve ??
+        Curves.easeInOutCubic;
 
-    final Color? resolvedBackgroundColor = _isHovered || _isFocused
-        ? Color.alphaBlend(effectiveHoverEffectColor, _backgroundColorAnimation!.value!)
-        : _backgroundColorAnimation!.value;
+    _expansionAnimationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
+    _expansionCurvedAnimation ??=
+        CurvedAnimation(parent: _expansionAnimationController!, curve: effectiveTransitionCurve);
 
-    final Color effectiveTextColor = widget.textColor ??
-        _getTextColor(context, effectiveBackgroundColor: resolvedBackgroundColor ?? effectiveBackgroundColor);
+    _backgroundColor ??= _backgroundColorTween.animate(_expansionCurvedAnimation!);
+
+    _backgroundColorTween
+      ..begin = effectiveBackgroundColor
+      ..end = effectiveExpandedBackgroundColor;
+
+    _hoverAnimationController ??= AnimationController(duration: effectiveHoverEffectDuration, vsync: this);
+
+    _hoverColor ??=
+        _hoverAnimationController!.drive(_hoverColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)));
+
+    _hoverColorTween
+      ..begin = _backgroundColor!.value
+      ..end = Color.alphaBlend(effectiveHoverEffectColor, _backgroundColor!.value!);
 
     return Semantics(
       label: widget.semanticLabel,
@@ -465,7 +539,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
         onShowHoverHighlight: _handleHover,
         child: MoonFocusEffect(
           show: _isFocused,
-          childBorderRadius: effectiveBorderRadius,
+          childBorderRadius: _effectiveBorderRadius,
           effectColor: effectiveFocusEffectColor,
           effectDuration: effectiveFocusEffectDuration,
           effectCurve: effectiveFocusEffectCurve,
@@ -475,80 +549,36 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: _handleTap,
-              child: AnimatedIconTheme(
-                duration: effectiveTransitionDuration,
-                color: effectiveTextColor,
-                child: AnimatedDefaultTextStyle(
-                  style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
-                  duration: effectiveTransitionDuration,
-                  child: RepaintBoundary(
-                    child: AnimatedContainer(
-                      duration: effectiveHoverEffectDuration,
-                      curve: effectiveHoverEffectCurve,
-                      clipBehavior: widget.clipBehavior ?? Clip.none,
-                      decoration: widget.decoration ??
-                          (!widget.hasContentOutside
-                              ? ShapeDecorationWithPremultipliedAlpha(
-                                  color: resolvedBackgroundColor,
-                                  shadows: effectiveShadows,
-                                  shape: MoonSquircleBorder(
-                                    side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                                    borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
-                                  ),
-                                )
-                              : null),
+              child: _buildHeader(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _buildHeader(
+                      isContentOutsideHeader: true,
+                      child: Row(
+                        children: [
+                          if (widget.leading != null)
+                            Padding(
+                              padding: EdgeInsetsDirectional.only(end: _resolvedDirectionalHeaderPadding!.left),
+                              child: widget.leading,
+                            ),
+                          Expanded(child: widget.title),
+                          widget.trailing ?? _buildIcon(context)!,
+                        ],
+                      ),
+                    ),
+                    ClipRect(
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          AnimatedContainer(
-                            height: effectiveHeaderHeight,
-                            padding: resolvedDirectionalHeaderPadding,
-                            duration: effectiveHoverEffectDuration,
-                            curve: effectiveHoverEffectCurve,
-                            decoration: widget.decoration ??
-                                (widget.hasContentOutside
-                                    ? ShapeDecorationWithPremultipliedAlpha(
-                                        color: resolvedBackgroundColor,
-                                        shadows: effectiveShadows,
-                                        shape: MoonSquircleBorder(
-                                          side: widget.showBorder
-                                              ? BorderSide(color: effectiveBorderColor)
-                                              : BorderSide.none,
-                                          borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
-                                        ),
-                                      )
-                                    : null),
-                            child: Row(
-                              children: [
-                                if (widget.leading != null)
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.only(end: resolvedDirectionalHeaderPadding.left),
-                                    child: widget.leading,
-                                  ),
-                                AnimatedDefaultTextStyle(
-                                  style: effectiveMoonAccordionSize.textStyle.copyWith(color: effectiveTextColor),
-                                  duration: effectiveTransitionDuration,
-                                  child: Expanded(child: widget.title),
-                                ),
-                                widget.trailing ?? _buildIcon(context)!,
-                              ],
-                            ),
-                          ),
-                          ClipRect(
-                            child: Column(
-                              children: [
-                                Align(
-                                  alignment: widget.expandedAlignment ?? Alignment.topCenter,
-                                  heightFactor: _curvedAnimation!.value,
-                                  child: child,
-                                ),
-                              ],
-                            ),
+                        children: [
+                          Align(
+                            alignment: widget.expandedAlignment ?? Alignment.topCenter,
+                            heightFactor: _expansionCurvedAnimation!.value,
+                            child: rootChild,
                           ),
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
@@ -560,22 +590,22 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
 
   @override
   Widget build(BuildContext context) {
+    final Color effectiveDividerColor =
+        widget.dividerColor ?? context.moonTheme?.accordionTheme.itemColors.dividerColor ?? MoonColors.light.beerus;
+
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.accordionTheme.itemProperties.transitionDuration ??
         const Duration(milliseconds: 200);
 
-    _animationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
+    _expansionAnimationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
 
-    final bool closed = !_isExpanded && _animationController!.isDismissed;
-    final bool shouldRemoveChildren = closed && !widget.maintainState;
-
-    final Color effectiveDividerColor =
-        widget.dividerColor ?? context.moonTheme?.accordionTheme.itemColors.dividerColor ?? MoonColors.light.beerus;
+    final bool isClosed = !_isExpanded && _expansionAnimationController!.isDismissed;
+    final bool shouldRemoveChildren = isClosed && !widget.maintainState;
 
     final Widget result = Offstage(
-      offstage: closed,
+      offstage: isClosed,
       child: TickerMode(
-        enabled: !closed,
+        enabled: !isClosed,
         child: Column(
           children: [
             if (widget.showDivider && !widget.hasContentOutside) Container(height: 1, color: effectiveDividerColor),
@@ -592,7 +622,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Single
     );
 
     return AnimatedBuilder(
-      animation: _animationController!.view,
+      animation: _expansionAnimationController!.view,
       builder: _buildChildren,
       child: shouldRemoveChildren ? null : result,
     );
