@@ -11,7 +11,7 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with DiagnosticableTreeMixin {
   static final sm = MoonChipSizeProperties(
     borderRadius: MoonBorders.borders.interactiveXs,
-    gap: MoonSizes.sizes.x5s,
+    gap: MoonSizes.sizes.x4s,
     height: MoonSizes.sizes.sm,
     iconSizeValue: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),

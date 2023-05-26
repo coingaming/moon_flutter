@@ -166,7 +166,7 @@ class MoonChip extends StatefulWidget {
     this.trailing,
   });
 
-  /// MDS chip widget
+  /// MDS chip widget text variant
   const MoonChip.text({
     super.key,
     this.autofocus = false,
