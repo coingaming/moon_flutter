@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
@@ -9,14 +10,14 @@ class MoonSegmentedControlColors extends ThemeExtension<MoonSegmentedControlColo
   static final light = MoonSegmentedControlColors(
     backgroundColor: MoonColors.light.goku,
     selectedSegmentColor: MoonColors.light.gohan,
-    textColor: MoonColors.light.bulma,
+    textColor: MoonTypography.light.colors.bodyPrimary,
     selectedTextColor: MoonColors.light.bulma,
   );
 
   static final dark = MoonSegmentedControlColors(
     backgroundColor: MoonColors.dark.goku,
     selectedSegmentColor: MoonColors.dark.gohan,
-    textColor: MoonColors.dark.bulma,
+    textColor: MoonTypography.dark.colors.bodyPrimary,
     selectedTextColor: MoonColors.dark.bulma,
   );
 
