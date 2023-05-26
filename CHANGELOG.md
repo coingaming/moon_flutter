@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.3](https://github.com/coingaming/moon_flutter/compare/v0.22.2...v0.22.3) (2023-05-26)
+
+
+### Bug Fixes
+
+* Fix tabBar and segmentedControl animation ([#184](https://github.com/coingaming/moon_flutter/issues/184)) ([af64b94](https://github.com/coingaming/moon_flutter/commit/af64b9486999f96ae602177a77179d42f4aa4975))
+
 ## [0.22.2](https://github.com/coingaming/moon_flutter/compare/v0.22.1...v0.22.2) (2023-05-26)
 
 
