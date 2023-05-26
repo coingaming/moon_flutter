@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.1](https://github.com/coingaming/moon_flutter/compare/v0.22.0...v0.22.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* Add selected tab pill text color ([#181](https://github.com/coingaming/moon_flutter/issues/181)) ([1ce39cf](https://github.com/coingaming/moon_flutter/commit/1ce39cfc8439801bf83d8b925f250b2fd1918d4b))
+
 ## [0.22.0](https://github.com/coingaming/moon_flutter/compare/v0.21.3...v0.22.0) (2023-05-26)
 
 
