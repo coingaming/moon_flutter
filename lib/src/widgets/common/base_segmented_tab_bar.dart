@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class BaseSegmentedTabBar extends StatefulWidget {
   final bool isExpanded;
+  final double gap;
   final int selectedIndex;
   final TabController? tabController;
   final ValueChanged<int> valueChanged;
@@ -10,6 +11,7 @@ class BaseSegmentedTabBar extends StatefulWidget {
   const BaseSegmentedTabBar({
     super.key,
     required this.isExpanded,
+    required this.gap,
     required this.selectedIndex,
     this.tabController,
     required this.valueChanged,
@@ -29,7 +31,14 @@ class _BaseSegmentedTabBarState extends State<BaseSegmentedTabBar> with SingleTi
     super.initState();
 
     _tabKeys = widget.children.map((Widget tab) => GlobalKey()).toList();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
     _controller = widget.tabController ??
+        DefaultTabController.maybeOf(context) ??
         TabController(length: widget.children.length, vsync: this, initialIndex: widget.selectedIndex);
   }
 
@@ -63,18 +72,26 @@ class _BaseSegmentedTabBarState extends State<BaseSegmentedTabBar> with SingleTi
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: List.generate(
-        widget.children.length,
-        (int index) => widget.isExpanded
-            ? Expanded(
-                child: Listener(
-                  onPointerDown: (_) => _handleTap(index),
-                  child: widget.children[index],
-                ),
-              )
-            : Listener(
-                onPointerDown: (_) => _handleTap(index),
-                child: widget.children[index],
-              ),
+        widget.children.length * 2 - 1,
+        (int index) {
+          final int derivedIndex = index ~/ 2;
+
+          return widget.isExpanded
+              ? index.isEven
+                  ? Expanded(
+                      child: Listener(
+                        onPointerDown: (_) => _handleTap(derivedIndex),
+                        child: widget.children[derivedIndex],
+                      ),
+                    )
+                  : SizedBox(width: widget.gap)
+              : index.isEven
+                  ? Listener(
+                      onPointerDown: (_) => _handleTap(derivedIndex),
+                      child: widget.children[derivedIndex],
+                    )
+                  : SizedBox(width: widget.gap);
+        },
       ),
     );
   }
