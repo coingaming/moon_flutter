@@ -449,8 +449,8 @@ class _PillTabBuilder extends StatelessWidget {
         MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveSelectedTextColor = tabStyle?.selectedTextColor ??
-        context.moonTheme?.tabBarTheme.colors.selectedTextColor ??
-        MoonColors.light.piccolo;
+        context.moonTheme?.tabBarTheme.colors.selectedPillTextColor ??
+        MoonTypography.light.colors.bodyPrimary;
 
     final TextStyle effectiveTextStyle = moonTabBarSizeProperties.textStyle.merge(tabStyle?.textStyle);
 

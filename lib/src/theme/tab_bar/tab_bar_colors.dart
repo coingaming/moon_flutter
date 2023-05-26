@@ -11,6 +11,7 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
     indicatorColor: MoonColors.light.piccolo,
     textColor: MoonTypography.light.colors.bodyPrimary,
     selectedTextColor: MoonColors.light.piccolo,
+    selectedPillTextColor: MoonTypography.light.colors.bodyPrimary,
     selectedPillTabColor: MoonColors.light.gohan,
   );
 
@@ -18,6 +19,7 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
     indicatorColor: MoonColors.dark.piccolo,
     textColor: MoonTypography.dark.colors.bodyPrimary,
     selectedTextColor: MoonColors.dark.piccolo,
+    selectedPillTextColor: MoonTypography.dark.colors.bodyPrimary,
     selectedPillTabColor: MoonColors.dark.gohan,
   );
 
@@ -30,6 +32,9 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
   /// TabBar selected tab text color.
   final Color selectedTextColor;
 
+  /// TabBar selected pill tab text color.
+  final Color selectedPillTextColor;
+
   /// TabBar selected pill tab color.
   final Color selectedPillTabColor;
 
@@ -37,6 +42,7 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
     required this.indicatorColor,
     required this.textColor,
     required this.selectedTextColor,
+    required this.selectedPillTextColor,
     required this.selectedPillTabColor,
   });
 
@@ -45,12 +51,14 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
     Color? indicatorColor,
     Color? textColor,
     Color? selectedTextColor,
+    Color? selectedPillTextColor,
     Color? selectedPillTabColor,
   }) {
     return MoonTabBarColors(
       indicatorColor: indicatorColor ?? this.indicatorColor,
       textColor: textColor ?? this.textColor,
       selectedTextColor: selectedTextColor ?? this.selectedTextColor,
+      selectedPillTextColor: selectedPillTextColor ?? this.selectedPillTextColor,
       selectedPillTabColor: selectedPillTabColor ?? this.selectedPillTabColor,
     );
   }
@@ -63,6 +71,7 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
       indicatorColor: colorPremulLerp(indicatorColor, other.indicatorColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
       selectedTextColor: colorPremulLerp(selectedTextColor, other.selectedTextColor, t)!,
+      selectedPillTextColor: colorPremulLerp(selectedPillTextColor, other.selectedPillTextColor, t)!,
       selectedPillTabColor: colorPremulLerp(selectedPillTabColor, other.selectedPillTabColor, t)!,
     );
   }
@@ -75,6 +84,7 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
       ..add(ColorProperty("indicatorColor", indicatorColor))
       ..add(ColorProperty("textColor", textColor))
       ..add(ColorProperty("selectedTextColor", selectedTextColor))
+      ..add(ColorProperty("selectedPillTextColor", selectedPillTextColor))
       ..add(ColorProperty("selectedPillTabColor", selectedPillTabColor));
   }
 }
