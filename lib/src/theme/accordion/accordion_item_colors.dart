@@ -14,8 +14,8 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     dividerColor: MoonColors.light.beerus,
     textColor: MoonTypography.light.colors.bodyPrimary,
     expandedTextColor: MoonTypography.light.colors.bodyPrimary,
-    trailingIconColor: MoonColors.light.trunks,
-    expandedTrailingIconColor: MoonColors.light.bulma,
+    trailingIconColor: MoonTypography.light.colors.bodySecondary,
+    expandedTrailingIconColor: MoonTypography.light.colors.bodyPrimary,
   );
 
   static final dark = MoonAccordionItemColors(
@@ -25,8 +25,8 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     dividerColor: MoonColors.dark.beerus,
     textColor: MoonTypography.dark.colors.bodyPrimary,
     expandedTextColor: MoonTypography.dark.colors.bodyPrimary,
-    trailingIconColor: MoonColors.dark.trunks,
-    expandedTrailingIconColor: MoonColors.dark.bulma,
+    trailingIconColor: MoonTypography.dark.colors.bodySecondary,
+    expandedTrailingIconColor: MoonTypography.dark.colors.bodyPrimary,
   );
 
   /// Accordion item background color.

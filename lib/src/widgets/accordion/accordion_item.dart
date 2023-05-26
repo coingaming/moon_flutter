@@ -381,11 +381,11 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Ticker
 
     final Color effectiveIconColor = widget.trailingIconColor ??
         context.moonTheme?.accordionTheme.itemColors.trailingIconColor ??
-        MoonColors.light.trunks;
+        MoonTypography.light.colors.bodySecondary;
 
     final Color effectiveExpandedIconColor = widget.expandedTrailingIconColor ??
         context.moonTheme?.accordionTheme.itemColors.expandedTrailingIconColor ??
-        MoonColors.light.bulma;
+        MoonTypography.light.colors.bodyPrimary;
 
     _iconColor ??= _iconColorTween.animate(_expansionCurvedAnimation!);
 
@@ -520,7 +520,7 @@ class _MoonAccordionItemState<T> extends State<MoonAccordionItem<T>> with Ticker
     _hoverAnimationController ??= AnimationController(duration: effectiveHoverEffectDuration, vsync: this);
 
     _hoverColor ??=
-        _hoverAnimationController!.drive(_backgroundColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)));
+        _hoverAnimationController!.drive(_hoverColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)));
 
     _hoverColorTween
       ..begin = _backgroundColor!.value

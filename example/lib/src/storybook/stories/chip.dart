@@ -49,7 +49,7 @@ class ChipStory extends Story {
 
             final activeBackgroundColorsKnob = context.knobs.nullable.options(
               label: "activeBackgroundColor",
-              description: "MoonColors variants for MoonChip background when active.",
+              description: "MoonColors variants for active MoonChip background.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -163,7 +163,7 @@ class ChipStory extends Story {
                       activeColor: context.moonColors!.dodoria100,
                       backgroundColor: context.moonColors!.krillin100,
                       activeBackgroundColor: context.moonColors!.chiChi10,
-                      textColor: MoonTypography.light.colors.controlPrimary,
+                      textColor: context.moonTypography!.colors.controlPrimary,
                       borderWidth: 2,
                       showBorder: showBorderKnob,
                       chipSize: chipSizesKnob,

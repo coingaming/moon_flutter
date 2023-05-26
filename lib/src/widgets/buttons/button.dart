@@ -271,7 +271,7 @@ class MoonButton extends StatefulWidget {
   State<MoonButton> createState() => _MoonButtonState();
 }
 
-class _MoonButtonState extends State<MoonButton> with TickerProviderStateMixin {
+class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateMixin {
   final ColorTweenWithPremultipliedAlpha _backgroundColorTween = ColorTweenWithPremultipliedAlpha();
   final ColorTweenWithPremultipliedAlpha _textColorTween = ColorTweenWithPremultipliedAlpha();
 

@@ -80,17 +80,17 @@ class MoonChip extends StatefulWidget {
   /// The minimum size of the touch target.
   final double minTouchTargetSize;
 
+  /// The duration of the active effect.
+  final Duration? activeEffectDuration;
+
   /// The duration of the focus effect.
   final Duration? focusEffectDuration;
 
-  /// The duration of the hover effect.
-  final Duration? hoverEffectDuration;
+  /// The curve of the hover effect.
+  final Curve? activeEffectCurve;
 
   /// The curve of the focus effect.
   final Curve? focusEffectCurve;
-
-  /// The curve of the hover effect.
-  final Curve? hoverEffectCurve;
 
   /// The padding of the chip.
   final EdgeInsetsGeometry? padding;
@@ -149,10 +149,10 @@ class MoonChip extends StatefulWidget {
     this.height,
     this.width,
     this.minTouchTargetSize = 40,
+    this.activeEffectDuration,
     this.focusEffectDuration,
-    this.hoverEffectDuration,
+    this.activeEffectCurve,
     this.focusEffectCurve,
-    this.hoverEffectCurve,
     this.padding,
     this.focusNode,
     this.chipSize,
@@ -190,9 +190,9 @@ class MoonChip extends StatefulWidget {
     this.width,
     this.minTouchTargetSize = 40,
     this.focusEffectDuration,
-    this.hoverEffectDuration,
+    this.activeEffectDuration,
     this.focusEffectCurve,
-    this.hoverEffectCurve,
+    this.activeEffectCurve,
     this.padding,
     this.focusNode,
     this.chipSize,
@@ -221,7 +221,7 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
 
   AnimationController? _animationController;
 
-  void _handleHoverEffect(bool shouldAnimate) {
+  void _handleActiveEffect(bool shouldAnimate) {
     if (shouldAnimate) {
       _animationController?.forward();
     } else {
@@ -273,11 +273,11 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
     final Color effectiveTextColor =
         widget.textColor ?? context.moonTheme?.chipTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
-    final Curve effectiveHoverEffectCurve = widget.hoverEffectCurve ??
+    final Curve effectiveActiveEffectCurve = widget.activeEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
         MoonHoverEffects.lightHoverEffect.hoverCurve;
 
-    final Duration effectiveHoverEffectDuration = widget.hoverEffectDuration ??
+    final Duration effectiveActiveEffectDuration = widget.activeEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??
         MoonHoverEffects.lightHoverEffect.hoverDuration;
 
@@ -294,14 +294,15 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
           )
         : resolvedDirectionalPadding;
 
-    _animationController ??= AnimationController(duration: effectiveHoverEffectDuration, vsync: this);
+    _animationController ??= AnimationController(duration: effectiveActiveEffectDuration, vsync: this);
 
     _backgroundColor ??=
-        _animationController!.drive(_backgroundColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)));
+        _animationController!.drive(_backgroundColorTween.chain(CurveTween(curve: effectiveActiveEffectCurve)));
 
-    _borderColor ??= _animationController!.drive(_borderColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)));
+    _borderColor ??=
+        _animationController!.drive(_borderColorTween.chain(CurveTween(curve: effectiveActiveEffectCurve)));
 
-    _textColor ??= _animationController!.drive(_textColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)));
+    _textColor ??= _animationController!.drive(_textColorTween.chain(CurveTween(curve: effectiveActiveEffectCurve)));
 
     _backgroundColorTween
       ..begin = effectiveBackgroundColor
@@ -337,7 +338,7 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
       onLongPress: widget.onLongPress,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         final bool canAnimate = widget.isActive || isHovered || isFocused;
-        _handleHoverEffect(canAnimate);
+        _handleActiveEffect(canAnimate);
 
         return AnimatedBuilder(
           animation: _animationController!,
