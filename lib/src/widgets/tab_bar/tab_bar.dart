@@ -260,11 +260,13 @@ class _MoonTabBarState extends State<MoonTabBar> {
 
     final double effectiveGap = widget.gap ?? context.moonTheme?.tabBarTheme.properties.gap ?? MoonSizes.sizes.x5s;
 
-    return Container(
+    return AnimatedContainer(
       height: effectiveHeight,
       width: widget.width,
       padding: widget.padding,
       decoration: widget.decoration,
+      duration: _effectiveTransitionDuration,
+      curve: _effectiveTransitionCurve,
       constraints: BoxConstraints(minWidth: effectiveHeight),
       child: BaseSegmentedTabBar(
         gap: effectiveGap,
@@ -350,8 +352,10 @@ class _IndicatorTabBuilder extends StatelessWidget {
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         final bool isActive = isEnabled && (isSelected || isHovered || isPressed);
 
-        return Container(
+        return AnimatedContainer(
           decoration: tabStyle?.decoration,
+          duration: transitionDuration,
+          curve: transitionCurve,
           child: Stack(
             children: [
               AnimatedIconTheme(

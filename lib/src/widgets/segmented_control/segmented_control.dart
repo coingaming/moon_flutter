@@ -196,10 +196,12 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
     return AnimatedOpacity(
       opacity: widget.isDisabled ? effectiveDisabledOpacityValue : 1,
       duration: effectiveTransitionDuration,
-      child: Container(
+      child: AnimatedContainer(
         height: effectiveHeight,
         width: widget.width,
         padding: effectivePadding,
+        duration: effectiveTransitionDuration,
+        curve: effectiveTransitionCurve,
         constraints: BoxConstraints(minWidth: effectiveHeight),
         decoration: widget.decoration ??
             ShapeDecorationWithPremultipliedAlpha(
