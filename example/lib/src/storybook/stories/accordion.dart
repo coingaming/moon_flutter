@@ -92,20 +92,20 @@ class AccordionStory extends Story {
 
             final dividerColor = colorTable(context)[dividerColorsKnob ?? 40];
 
-            final textColorsKnob = context.knobs.nullable.options(
-              label: "textColor",
-              description: "MoonColors variants for MoonAccordion text.",
+            final headerTextColorsKnob = context.knobs.nullable.options(
+              label: "headerTextColor",
+              description: "MoonColors variants for MoonAccordion header text.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final headerTextColor = colorTable(context)[headerTextColorsKnob ?? 40];
 
             final expandedTextColorsKnob = context.knobs.nullable.options(
-              label: "expandedTextColor",
-              description: "MoonColors variants for expanded MoonAccordion text.",
+              label: "expandedHeaderTextColor",
+              description: "MoonColors variants for expanded MoonAccordion header text.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -113,6 +113,17 @@ class AccordionStory extends Story {
             );
 
             final expandedTextColor = colorTable(context)[expandedTextColorsKnob ?? 40];
+
+            final contentTextColorsKnob = context.knobs.nullable.options(
+              label: "contentTextColor",
+              description: "MoonColors variants for MoonAccordion content text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final contentTextColor = colorTable(context)[contentTextColorsKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -151,8 +162,9 @@ class AccordionStory extends Story {
                       identityValue: AccordionItems.first,
                       groupIdentityValue: currentlyOpenAccordionItem,
                       accordionSize: accordionSizesKnob,
-                      textColor: textColor,
-                      expandedTextColor: expandedTextColor,
+                      headerTextColor: headerTextColor,
+                      expandedHeaderTextColor: expandedTextColor,
+                      contentTextColor: contentTextColor,
                       borderColor: borderColor,
                       trailingIconColor: iconColor,
                       expandedTrailingIconColor: expandedIconColor,
@@ -180,8 +192,9 @@ class AccordionStory extends Story {
                       groupIdentityValue: currentlyOpenAccordionItem,
                       initiallyExpanded: true,
                       accordionSize: accordionSizesKnob,
-                      textColor: textColor,
-                      expandedTextColor: expandedTextColor,
+                      headerTextColor: headerTextColor,
+                      expandedHeaderTextColor: expandedTextColor,
+                      contentTextColor: contentTextColor,
                       borderColor: borderColor,
                       trailingIconColor: iconColor,
                       expandedTrailingIconColor: expandedIconColor,
@@ -210,8 +223,9 @@ class AccordionStory extends Story {
                       accordionSize: accordionSizesKnob,
                       initiallyExpanded: true,
                       hasContentOutside: true,
-                      textColor: textColor,
-                      expandedTextColor: expandedTextColor,
+                      headerTextColor: headerTextColor,
+                      expandedHeaderTextColor: expandedTextColor,
+                      contentTextColor: contentTextColor,
                       borderColor: borderColor,
                       trailingIconColor: iconColor,
                       expandedTrailingIconColor: expandedIconColor,
@@ -233,8 +247,9 @@ class AccordionStory extends Story {
                     MoonAccordionItem<AccordionItems>(
                       accordionSize: accordionSizesKnob,
                       hasContentOutside: true,
-                      textColor: textColor,
-                      expandedTextColor: expandedTextColor,
+                      headerTextColor: headerTextColor,
+                      expandedHeaderTextColor: expandedTextColor,
+                      contentTextColor: contentTextColor,
                       borderColor: borderColor,
                       trailingIconColor: iconColor,
                       expandedTrailingIconColor: expandedIconColor,

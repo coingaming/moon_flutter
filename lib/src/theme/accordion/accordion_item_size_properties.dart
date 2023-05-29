@@ -15,7 +15,8 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     headerHeight: MoonSizes.sizes.sm,
     iconSizeValue: MoonSizes.sizes.x2s,
     headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    textStyle: MoonTextStyles.heading.text12,
+    headerTextStyle: MoonTextStyles.heading.text12,
+    contentTextStyle: MoonTextStyles.body.text12,
   );
 
   static final md = MoonAccordionItemSizeProperties(
@@ -23,7 +24,8 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     headerHeight: MoonSizes.sizes.md,
     iconSizeValue: MoonSizes.sizes.xs,
     headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.text14,
+    headerTextStyle: MoonTextStyles.heading.text14,
+    contentTextStyle: MoonTextStyles.body.text14,
   );
 
   static final lg = MoonAccordionItemSizeProperties(
@@ -31,7 +33,8 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     headerHeight: MoonSizes.sizes.lg,
     iconSizeValue: MoonSizes.sizes.xs,
     headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.text14,
+    headerTextStyle: MoonTextStyles.heading.text14,
+    contentTextStyle: MoonTextStyles.body.text14,
   );
 
   static final xl = MoonAccordionItemSizeProperties(
@@ -39,7 +42,8 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     headerHeight: MoonSizes.sizes.xl,
     iconSizeValue: MoonSizes.sizes.xs,
     headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.heading.text16,
+    headerTextStyle: MoonTextStyles.heading.text16,
+    contentTextStyle: MoonTextStyles.body.text14,
   );
 
   /// Accordion item border radius.
@@ -54,15 +58,19 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
   /// Padding around accordion title and icon.
   final EdgeInsetsGeometry headerPadding;
 
-  /// Accordion text style.
-  final TextStyle textStyle;
+  /// Accordion header text style.
+  final TextStyle headerTextStyle;
+
+  /// Accordion content text style.
+  final TextStyle contentTextStyle;
 
   const MoonAccordionItemSizeProperties({
     required this.borderRadius,
     required this.headerHeight,
     required this.iconSizeValue,
     required this.headerPadding,
-    required this.textStyle,
+    required this.headerTextStyle,
+    required this.contentTextStyle,
   });
 
   @override
@@ -71,14 +79,16 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     double? headerHeight,
     double? iconSizeValue,
     EdgeInsetsGeometry? headerPadding,
-    TextStyle? textStyle,
+    TextStyle? headerTextStyle,
+    TextStyle? contentTextStyle,
   }) {
     return MoonAccordionItemSizeProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       headerHeight: headerHeight ?? this.headerHeight,
       iconSizeValue: iconSizeValue ?? this.iconSizeValue,
       headerPadding: headerPadding ?? this.headerPadding,
-      textStyle: textStyle ?? this.textStyle,
+      headerTextStyle: headerTextStyle ?? this.headerTextStyle,
+      contentTextStyle: contentTextStyle ?? this.contentTextStyle,
     );
   }
 
@@ -91,7 +101,8 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
       headerHeight: lerpDouble(headerHeight, other.headerHeight, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
       headerPadding: EdgeInsetsGeometry.lerp(headerPadding, other.headerPadding, t)!,
-      textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
+      headerTextStyle: TextStyle.lerp(headerTextStyle, other.headerTextStyle, t)!,
+      contentTextStyle: TextStyle.lerp(contentTextStyle, other.contentTextStyle, t)!,
     );
   }
 
@@ -104,6 +115,7 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
       ..add(DoubleProperty("headerHeight", headerHeight))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("headerPadding", headerPadding))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
+      ..add(DiagnosticsProperty<TextStyle>("headerTextStyle", headerTextStyle))
+      ..add(DiagnosticsProperty<TextStyle>("contentTextStyle", contentTextStyle));
   }
 }
