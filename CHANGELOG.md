@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.4](https://github.com/coingaming/moon_flutter/compare/v0.22.3...v0.22.4) (2023-05-29)
+
+
+### Bug Fixes
+
+* Fix accordion missing text style ([#186](https://github.com/coingaming/moon_flutter/issues/186)) ([b61d5af](https://github.com/coingaming/moon_flutter/commit/b61d5afc1c58f46da1171698d3fcb5fd1003b4be))
+
 ## [0.22.3](https://github.com/coingaming/moon_flutter/compare/v0.22.2...v0.22.3) (2023-05-26)
 
 
