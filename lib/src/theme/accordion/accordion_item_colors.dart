@@ -12,8 +12,9 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     expandedBackgroundColor: MoonColors.light.gohan,
     borderColor: MoonColors.light.beerus,
     dividerColor: MoonColors.light.beerus,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    expandedTextColor: MoonTypography.light.colors.bodyPrimary,
+    headerTextColor: MoonTypography.light.colors.bodyPrimary,
+    expandedHeaderTextColor: MoonTypography.light.colors.bodyPrimary,
+    contentTextColor: MoonTypography.light.colors.bodyPrimary,
     trailingIconColor: MoonTypography.light.colors.bodySecondary,
     expandedTrailingIconColor: MoonTypography.light.colors.bodyPrimary,
   );
@@ -23,8 +24,9 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     expandedBackgroundColor: MoonColors.dark.gohan,
     borderColor: MoonColors.dark.beerus,
     dividerColor: MoonColors.dark.beerus,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    expandedTextColor: MoonTypography.dark.colors.bodyPrimary,
+    headerTextColor: MoonTypography.dark.colors.bodyPrimary,
+    expandedHeaderTextColor: MoonTypography.dark.colors.bodyPrimary,
+    contentTextColor: MoonTypography.dark.colors.bodyPrimary,
     trailingIconColor: MoonTypography.dark.colors.bodySecondary,
     expandedTrailingIconColor: MoonTypography.dark.colors.bodyPrimary,
   );
@@ -41,11 +43,14 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   /// Accordion item divider color.
   final Color dividerColor;
 
-  /// Accordion item text color.
-  final Color textColor;
+  /// Accordion item header text color.
+  final Color headerTextColor;
 
-  /// Accordion item expanded text color.
-  final Color expandedTextColor;
+  /// Expanded accordion item header text color.
+  final Color expandedHeaderTextColor;
+
+  /// Accordion item content text color.
+  final Color contentTextColor;
 
   /// Accordion item trailing icon color.
   final Color trailingIconColor;
@@ -58,8 +63,9 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     required this.expandedBackgroundColor,
     required this.borderColor,
     required this.dividerColor,
-    required this.textColor,
-    required this.expandedTextColor,
+    required this.headerTextColor,
+    required this.expandedHeaderTextColor,
+    required this.contentTextColor,
     required this.trailingIconColor,
     required this.expandedTrailingIconColor,
   });
@@ -70,8 +76,9 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     Color? expandedBackgroundColor,
     Color? borderColor,
     Color? dividerColor,
-    Color? textColor,
-    Color? expandedTextColor,
+    Color? headerTextColor,
+    Color? expandedHeaderTextColor,
+    Color? contentTextColor,
     Color? trailingIconColor,
     Color? expandedTrailingIconColor,
   }) {
@@ -80,8 +87,9 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
       expandedBackgroundColor: expandedBackgroundColor ?? this.expandedBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
       dividerColor: dividerColor ?? this.dividerColor,
-      textColor: textColor ?? this.textColor,
-      expandedTextColor: expandedTextColor ?? this.expandedTextColor,
+      headerTextColor: headerTextColor ?? this.headerTextColor,
+      expandedHeaderTextColor: expandedHeaderTextColor ?? this.expandedHeaderTextColor,
+      contentTextColor: contentTextColor ?? this.contentTextColor,
       trailingIconColor: trailingIconColor ?? this.trailingIconColor,
       expandedTrailingIconColor: expandedTrailingIconColor ?? this.expandedTrailingIconColor,
     );
@@ -96,8 +104,9 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
       expandedBackgroundColor: colorPremulLerp(expandedBackgroundColor, other.expandedBackgroundColor, t)!,
       borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
       dividerColor: colorPremulLerp(dividerColor, other.dividerColor, t)!,
-      textColor: colorPremulLerp(textColor, other.textColor, t)!,
-      expandedTextColor: colorPremulLerp(expandedTextColor, other.expandedTextColor, t)!,
+      headerTextColor: colorPremulLerp(headerTextColor, other.headerTextColor, t)!,
+      expandedHeaderTextColor: colorPremulLerp(expandedHeaderTextColor, other.expandedHeaderTextColor, t)!,
+      contentTextColor: colorPremulLerp(contentTextColor, other.contentTextColor, t)!,
       trailingIconColor: colorPremulLerp(trailingIconColor, other.trailingIconColor, t)!,
       expandedTrailingIconColor: colorPremulLerp(expandedTrailingIconColor, other.expandedTrailingIconColor, t)!,
     );
@@ -112,8 +121,9 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
       ..add(ColorProperty("expandedBackgroundColor", expandedBackgroundColor))
       ..add(ColorProperty("borderColor", borderColor))
       ..add(ColorProperty("dividerColor", dividerColor))
-      ..add(ColorProperty("textColor", textColor))
-      ..add(ColorProperty("expandedTextColor", expandedTextColor))
+      ..add(ColorProperty("headerTextColor", headerTextColor))
+      ..add(ColorProperty("expandedHeaderTextColor", expandedHeaderTextColor))
+      ..add(ColorProperty("contentTextColor", contentTextColor))
       ..add(ColorProperty("trailingIconColor", trailingIconColor))
       ..add(ColorProperty("expandedTrailingIconColor", expandedTrailingIconColor));
   }
