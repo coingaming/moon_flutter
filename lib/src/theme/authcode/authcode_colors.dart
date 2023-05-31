@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
@@ -15,7 +16,7 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
     activeFillColor: MoonColors.light.gohan,
     inactiveFillColor: MoonColors.light.gohan,
     disabledColor: MoonColors.light.beerus,
-    textColor: MoonColors.light.bulma,
+    textColor: MoonTypography.light.colors.bodyPrimary,
   );
 
   static final dark = MoonAuthCodeColors(
@@ -27,7 +28,7 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
     activeFillColor: MoonColors.dark.gohan,
     inactiveFillColor: MoonColors.dark.gohan,
     disabledColor: MoonColors.dark.beerus,
-    textColor: MoonColors.dark.bulma,
+    textColor: MoonTypography.dark.colors.bodyPrimary,
   );
 
   /// Border color of the selected auth input field.

@@ -197,7 +197,7 @@ class _BorderContainerState extends State<_BorderContainer> with TickerProviderS
       parent: _hoverColorController,
       curve: Curves.linear,
     );
-    _hoverColorTween = ColorTweenWithPremultipliedAlpha(end: widget.hoverColor);
+    _hoverColorTween = ColorTweenWithPremultipliedAlpha(begin: Colors.transparent, end: widget.hoverColor);
   }
 
   @override
@@ -220,7 +220,7 @@ class _BorderContainerState extends State<_BorderContainer> with TickerProviderS
         ..forward();
     }
     if (widget.hoverColor != oldWidget.hoverColor) {
-      _hoverColorTween = ColorTweenWithPremultipliedAlpha(end: widget.hoverColor);
+      _hoverColorTween = ColorTweenWithPremultipliedAlpha(begin: Colors.transparent, end: widget.hoverColor);
     }
     if (widget.isHovering != oldWidget.isHovering) {
       if (widget.isHovering) {

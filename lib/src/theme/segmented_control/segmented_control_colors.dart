@@ -11,14 +11,14 @@ class MoonSegmentedControlColors extends ThemeExtension<MoonSegmentedControlColo
     backgroundColor: MoonColors.light.goku,
     selectedSegmentColor: MoonColors.light.gohan,
     textColor: MoonTypography.light.colors.bodyPrimary,
-    selectedTextColor: MoonColors.light.bulma,
+    selectedTextColor: MoonTypography.light.colors.bodyPrimary,
   );
 
   static final dark = MoonSegmentedControlColors(
     backgroundColor: MoonColors.dark.goku,
     selectedSegmentColor: MoonColors.dark.gohan,
     textColor: MoonTypography.dark.colors.bodyPrimary,
-    selectedTextColor: MoonColors.dark.bulma,
+    selectedTextColor: MoonTypography.dark.colors.bodyPrimary,
   );
 
   /// Background color of SegmentedControl.

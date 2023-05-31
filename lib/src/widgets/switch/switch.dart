@@ -7,6 +7,7 @@ import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -147,16 +148,6 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
         return context.moonTheme?.switchTheme.sizes.sm ?? MoonSwitchSizeProperties.sm;
       default:
         return context.moonTheme?.switchTheme.sizes.xs ?? MoonSwitchSizeProperties.xs;
-    }
-  }
-
-  Color _getTextOrIconColor({required Color backgroundColor}) {
-    final backgroundLuminance = backgroundColor.computeLuminance();
-
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
     }
   }
 
@@ -393,11 +384,13 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
       ),
     );
 
-    final Color iconColor = _getTextOrIconColor(backgroundColor: effectiveThumbColor);
+    final Color thumbIconColor= context.moonTheme?.switchTheme.colors.thumbIconColor ?? MoonTypography.light.colors.bodyPrimary;
 
-    final Color activeTextColor = _getTextOrIconColor(backgroundColor: effectiveActiveTrackColor);
+    final Color activeTextColor =
+        context.moonTheme?.switchTheme.colors.activeTextColor ?? MoonTypography.dark.colors.bodyPrimary;
 
-    final Color inactiveTextColor = _getTextOrIconColor(backgroundColor: effectiveInactiveTrackColor);
+    final Color inactiveTextColor =
+        context.moonTheme?.switchTheme.colors.inactiveTextColor ?? MoonTypography.light.colors.bodyPrimary;
 
     return Semantics(
       label: widget.semanticLabel,
@@ -476,7 +469,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                             Align(
                               alignment: _alignmentAnimation!.value,
                               child: AnimatedIconTheme(
-                                color: iconColor,
+                                color: thumbIconColor,
                                 duration: effectiveDuration,
                                 size: effectiveThumbSizeValue,
                                 child: AnimatedDefaultTextStyle(

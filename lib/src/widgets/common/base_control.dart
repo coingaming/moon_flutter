@@ -266,9 +266,9 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   void _handleVerticalDragEnd(DragEndDetails dragEndDetails) => _handleTapUp(null);
 
-  Color _getFocusColor({required bool isDarkMode, required Color focusColor}) {
+  Color _getFocusColor({required Color focusColor}) {
     if (widget.backgroundColor != null) {
-      return isDarkMode ? widget.backgroundColor!.withOpacity(0.8) : widget.backgroundColor!.withOpacity(0.2);
+      return context.isDarkMode ? widget.backgroundColor!.withOpacity(0.8) : widget.backgroundColor!.withOpacity(0.2);
     } else {
       return focusColor;
     }
@@ -318,7 +318,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
         context.moonEffects?.controlFocusEffect.effectColor ??
         MoonFocusEffects.lightFocusEffect.effectColor;
 
-    final Color focusColor = _getFocusColor(isDarkMode: context.isDarkMode, focusColor: effectiveFocusEffectColor);
+    final Color focusColor = _getFocusColor(focusColor: effectiveFocusEffectColor);
 
     final double effectiveFocusEffectExtent = widget.focusEffectExtent ??
         context.moonEffects?.controlFocusEffect.effectExtent ??

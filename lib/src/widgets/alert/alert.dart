@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -123,17 +124,6 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
   AnimationController? _animationController;
   Animation<double>? _curvedAnimation;
 
-  Color _getElementColor({required Color effectiveBackgroundColor, required Color? elementColor}) {
-    if (elementColor != null) return elementColor;
-
-    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
-    }
-  }
-
   TextStyle _getTextStyle({required BuildContext context}) {
     if (widget.titleTextStyle != null) return widget.titleTextStyle!;
 
@@ -215,13 +205,13 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
         widget.borderColor ?? context.moonTheme?.alertTheme.colors.borderColor ?? MoonColors.light.bulma;
 
     final Color effectiveLeadingColor =
-        _getElementColor(effectiveBackgroundColor: effectiveBackgroundColor, elementColor: widget.leadingColor);
+        widget.leadingColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveTrailingColor =
-        _getElementColor(effectiveBackgroundColor: effectiveBackgroundColor, elementColor: widget.trailingColor);
+        widget.trailingColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveTextColor =
-        _getElementColor(effectiveBackgroundColor: effectiveBackgroundColor, elementColor: widget.textColor);
+        widget.textColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
 
     final EdgeInsetsGeometry effectivePadding =
         widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
