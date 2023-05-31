@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.5](https://github.com/coingaming/moon_flutter/compare/v0.22.4...v0.22.5) (2023-05-31)
+
+
+### Bug Fixes
+
+* [MDS-538] Remove computeLuminace method ([#188](https://github.com/coingaming/moon_flutter/issues/188)) ([bc4ebd7](https://github.com/coingaming/moon_flutter/commit/bc4ebd7b65f0e9a467b08370fc625a1720a3f552))
+
 ## [0.22.4](https://github.com/coingaming/moon_flutter/compare/v0.22.3...v0.22.4) (2023-05-29)
 
 
