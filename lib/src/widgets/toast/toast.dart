@@ -7,6 +7,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -94,16 +95,6 @@ class MoonToast {
     /// The widget in the trailing slot of the toast.
     Widget? trailing,
   }) {
-    Color getElementColor({required Color effectiveBackgroundColor}) {
-      final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-
-      if (backgroundLuminance > 0.5) {
-        return MoonColors.light.bulma;
-      } else {
-        return MoonColors.dark.bulma;
-      }
-    }
-
     final BorderRadiusGeometry effectiveBorderRadius =
         borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
@@ -112,7 +103,9 @@ class MoonToast {
             ? (context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.gohan)
             : (context.moonTheme?.toastTheme.colors.darkVariantBackgroundColor ?? MoonColors.dark.gohan));
 
-    final Color effectiveElementColor = getElementColor(effectiveBackgroundColor: effectiveBackgroundColor);
+    final Color effectiveElementColor = variant == MoonToastVariant.original
+        ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ?? MoonTypography.light.colors.bodyPrimary)
+        : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ?? MoonTypography.dark.colors.bodyPrimary);
 
     final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
 

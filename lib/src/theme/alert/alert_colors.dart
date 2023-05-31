@@ -2,20 +2,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAlertColors extends ThemeExtension<MoonAlertColors> with DiagnosticableTreeMixin {
   static final light = MoonAlertColors(
     backgroundColor: MoonColors.light.gohan,
-    borderColor: MoonColors.light.bulma,
-    outlinedVariantColor: MoonColors.light.bulma,
+    borderColor: MoonTypography.light.colors.bodySecondary,
+    outlinedVariantColor: MoonTypography.light.colors.bodyPrimary,
   );
 
   static final dark = MoonAlertColors(
     backgroundColor: MoonColors.dark.gohan,
-    borderColor: MoonColors.dark.trunks,
-    outlinedVariantColor: MoonColors.dark.bulma,
+    borderColor: MoonTypography.dark.colors.bodySecondary,
+    outlinedVariantColor: MoonTypography.dark.colors.bodyPrimary,
   );
 
   /// Alert background color.

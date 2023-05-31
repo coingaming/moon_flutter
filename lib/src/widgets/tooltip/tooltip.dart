@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_shape.dart';
 
@@ -211,19 +212,6 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     widget.onTap?.call();
   }
 
-  Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
-    if (widget.backgroundColor == null && context.moonTypography != null) {
-      return context.moonTypography!.colors.bodyPrimary;
-    }
-
-    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
-    }
-  }
-
   _TooltipPositionProperties _resolveTooltipPositionParameters({
     required MoonTooltipPosition tooltipPosition,
     required double arrowTipDistance,
@@ -403,7 +391,8 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
-    final Color effectiveTextColor = _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
+    final Color effectiveTextColor =
+        context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
 
     final double effectiveArrowBaseWidth =
         widget.arrowBaseWidth ?? context.moonTheme?.tooltipTheme.properties.arrowBaseWidth ?? 16;

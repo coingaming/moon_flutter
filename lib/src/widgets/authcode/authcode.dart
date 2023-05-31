@@ -10,6 +10,7 @@ import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -309,6 +310,9 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
       .merge(widget.errorTextStyle)
       .copyWith(color: widget.errorTextStyle?.color ?? _effectiveErrorBorderColor);
 
+  Color get _resolvedErrorCursorColor =>
+      _isInErrorMode ? _resolvedErrorTextStyle.color ?? _effectiveErrorBorderColor : _effectiveCursorColor;
+
   void _initializeFields() {
     _initializeFocusNode();
     _initializeInputList();
@@ -464,17 +468,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     return [];
   }
 
-  Color _getElementColor({required Color effectiveBackgroundColor, required Color? elementColor}) {
-    if (elementColor != null) return elementColor;
-
-    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
-    }
-  }
-
   ShapeBorder _getAuthInputFieldShape({required int elementIndex}) {
     final borderSide = BorderSide(
       color: _getBorderColorFromIndex(elementIndex),
@@ -540,9 +533,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         Padding(
           padding: EdgeInsetsDirectional.only(end: i == widget.authInputFieldCount - 1 ? 0 : _effectiveGap),
           child: RepaintBoundary(
-            child: AnimatedContainer(
-              curve: _animationCurve!,
-              duration: _animationDuration!,
+            child: Container(
               width: _effectiveWidth,
               height: _effectiveHeight,
               decoration: ShapeDecorationWithPremultipliedAlpha(
@@ -582,7 +573,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
                     child: CustomPaint(
                       size: Size(0, cursorHeight),
                       painter: _CursorPainter(
-                        cursorColor: _effectiveCursorColor,
+                        cursorColor: _resolvedErrorCursorColor,
                       ),
                     ),
                   ),
@@ -600,7 +591,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
               child: CustomPaint(
                 size: Size(0, cursorHeight),
                 painter: _CursorPainter(
-                  cursorColor: _effectiveCursorColor,
+                  cursorColor: _resolvedErrorCursorColor,
                 ),
               ),
             ),
@@ -731,15 +722,13 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
 
     _effectiveErrorTextStyle = context.moonTheme?.authCodeTheme.properties.errorTextStyle ?? MoonTextStyles.body.text12;
 
-    _effectiveTextColor = _getElementColor(
-      effectiveBackgroundColor: _effectiveActiveFillColor,
-      elementColor: widget.textColor,
-    );
+    _effectiveTextColor = widget.textColor ??
+        context.moonTheme?.authCodeTheme.colors.textColor ??
+        MoonTypography.light.colors.bodyPrimary;
 
-    _effectiveCursorColor = _getElementColor(
-      effectiveBackgroundColor: _effectiveSelectedFillColor,
-      elementColor: widget.authFieldCursorColor,
-    );
+    _effectiveCursorColor = widget.authFieldCursorColor ??
+        context.moonTheme?.authCodeTheme.colors.textColor ??
+        MoonTypography.light.colors.bodyPrimary;
 
     _animationDuration ??= widget.animationDuration ??
         context.moonTheme?.authCodeTheme.properties.animationDuration ??

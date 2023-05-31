@@ -15,6 +15,7 @@ import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -818,9 +819,11 @@ class _MoonTextInputState extends State<MoonTextInput>
   bool _showSelectionHandles = false;
 
   RestorableTextEditingController? _controller;
+
   TextEditingController get _effectiveController => widget.controller ?? _controller!.value;
 
   FocusNode? _focusNode;
+
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
   EditableTextState? get _editableText => editableTextKey.currentState;
@@ -970,15 +973,6 @@ class _MoonTextInputState extends State<MoonTextInput>
     }
   }
 
-  Color _getTextColor(BuildContext context, {required Color effectiveBackgroundColor}) {
-    final backgroundLuminance = effectiveBackgroundColor.computeLuminance();
-    if (backgroundLuminance > 0.5) {
-      return MoonColors.light.bulma;
-    } else {
-      return MoonColors.dark.bulma;
-    }
-  }
-
   // AutofillClient implementation start.
   @override
   String get autofillId => _editableText!.autofillId;
@@ -1000,6 +994,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     return _editableText!.textInputConfiguration.copyWith(autofillConfiguration: autofillConfiguration);
   }
+
   // AutofillClient implementation end.
 
   @override
@@ -1014,6 +1009,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
   @override
   bool get selectionEnabled => widget.selectionEnabled;
+
   // End of API for TextSelectionGestureDetectorBuilderDelegate.
 
   @override
@@ -1138,7 +1134,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         context.isDarkMode ? effectiveErrorBorderColor.withOpacity(0.4) : effectiveErrorBorderColor.withOpacity(0.2);
 
     final Color effectiveTextColor =
-        widget.textColor ?? _getTextColor(context, effectiveBackgroundColor: effectiveBackgroundColor);
+        widget.textColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveHintTextColor =
         widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.supportingTextColor ?? MoonColors.light.trunks;
@@ -1346,7 +1342,8 @@ class _MoonTextInputState extends State<MoonTextInput>
           magnifierConfiguration: widget.magnifierConfiguration ?? TextMagnifier.adaptiveMagnifierConfiguration,
           maxLines: widget.maxLines,
           minLines: widget.minLines,
-          mouseCursor: MouseCursor.defer, // MoonTextInput will handle the cursor
+          mouseCursor: MouseCursor.defer,
+          // MoonTextInput will handle the cursor
           obscureText: widget.obscureText,
           obscuringCharacter: widget.obscuringCharacter,
           onAppPrivateCommand: widget.onAppPrivateCommand,
