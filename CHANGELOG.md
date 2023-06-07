@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.6](https://github.com/coingaming/moon_flutter/compare/v0.22.5...v0.22.6) (2023-06-07)
+
+
+### Bug Fixes
+
+* [MDS-539] Fix theme switching issues ([#190](https://github.com/coingaming/moon_flutter/issues/190)) ([7a0d179](https://github.com/coingaming/moon_flutter/commit/7a0d1798c8f0a6616424362f6467c34761fbfed7))
+
 ## [0.22.5](https://github.com/coingaming/moon_flutter/compare/v0.22.4...v0.22.5) (2023-05-31)
 
 
