@@ -11,7 +11,6 @@ import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
 enum MoonToastPosition {
   top,
@@ -162,11 +161,11 @@ class MoonToast {
           child: themes.wrap(
             Semantics(
               label: semanticLabel,
-              child: AnimatedIconTheme(
-                duration: effectiveTransitionDuration,
-                color: effectiveElementColor,
-                child: AnimatedDefaultTextStyle(
-                  duration: effectiveTransitionDuration,
+              child: IconTheme(
+                data: IconThemeData(
+                  color: effectiveElementColor,
+                ),
+                child: DefaultTextStyle(
                   style: DefaultTextStyle.of(context).style.copyWith(color: effectiveElementColor),
                   child: Container(
                     margin: margin ?? resolvedContentPadding,

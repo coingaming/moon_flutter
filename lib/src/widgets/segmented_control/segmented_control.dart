@@ -290,6 +290,15 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(duration: widget.transitionDuration, vsync: this);
+
+    if (widget.isSelected) _animationController?.value = 1;
+  }
+
+  @override
   void dispose() {
     _animationController!.dispose();
 
@@ -335,10 +344,7 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
           )
         : resolvedDirectionalPadding;
 
-    _animationController ??= AnimationController(duration: widget.transitionDuration, vsync: this);
-
-    _segmentColor ??=
-        _animationController!.drive(_segmentColorTween.chain(CurveTween(curve: widget.transitionCurve)));
+    _segmentColor ??= _animationController!.drive(_segmentColorTween.chain(CurveTween(curve: widget.transitionCurve)));
 
     _textColor ??= _animationController!.drive(_textColorTween.chain(CurveTween(curve: widget.transitionCurve)));
 

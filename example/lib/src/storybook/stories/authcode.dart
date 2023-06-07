@@ -149,6 +149,7 @@ class AuthCodeStory extends Story {
                         const TextDivider(text: "Disabled MoonAuthCode"),
                         const SizedBox(height: 32),
                         MoonAuthCode(
+                          enabled: enableKnob,
                           enableInputFill: true,
                           authInputFieldCount: 4,
                           mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
@@ -160,11 +161,9 @@ class AuthCodeStory extends Story {
                           selectedBorderColor: selectedBorderColor,
                           activeBorderColor: activeBorderColor,
                           inactiveBorderColor: inactiveBorderColor,
-                          enabled: enableKnob,
                           gap: gapKnob?.toDouble(),
                           authFieldShape: shapeKnob,
                           obscureText: obscuringKnob,
-                          obscuringCharacter: '﹡',
                           peekWhenObscuring: peekWhenObscuringKnob,
                           validator: (String? value) => null,
                           errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
@@ -187,7 +186,6 @@ class AuthCodeStory extends Story {
                           gap: gapKnob?.toDouble(),
                           authFieldShape: shapeKnob,
                           obscureText: obscuringKnob,
-                          obscuringCharacter: '﹡',
                           peekWhenObscuring: peekWhenObscuringKnob,
                           validator: (String? value) => null,
                           errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
@@ -213,7 +211,6 @@ class AuthCodeStory extends Story {
                             gap: gapKnob?.toDouble(),
                             authFieldShape: shapeKnob,
                             obscureText: obscuringKnob,
-                            obscuringCharacter: '﹡',
                             peekWhenObscuring: peekWhenObscuringKnob,
                             onCompleted: (pin) {
                               if (pin != '9921') {

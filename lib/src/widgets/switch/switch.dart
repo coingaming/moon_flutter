@@ -12,7 +12,6 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
-import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 
 enum MoonSwitchSize {
@@ -439,9 +438,8 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                               children: [
                                 IconTheme(
                                   data: IconThemeData(color: activeTextColor),
-                                  child: AnimatedDefaultTextStyle(
+                                  child: DefaultTextStyle(
                                     style: TextStyle(color: activeTextColor),
-                                    duration: effectiveDuration,
                                     child: Expanded(
                                       child: FadeTransition(
                                         opacity: _activeTrackWidgetFadeAnimation!,
@@ -453,9 +451,8 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                                 SizedBox(width: resolvedDirectionalPadding.left),
                                 IconTheme(
                                   data: IconThemeData(color: inactiveTextColor),
-                                  child: AnimatedDefaultTextStyle(
+                                  child: DefaultTextStyle(
                                     style: TextStyle(color: inactiveTextColor),
-                                    duration: effectiveDuration,
                                     child: Expanded(
                                       child: FadeTransition(
                                         opacity: _inactiveTrackWidgetFadeAnimation!,
@@ -468,13 +465,13 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                             ),
                             Align(
                               alignment: _alignmentAnimation!.value,
-                              child: AnimatedIconTheme(
-                                color: thumbIconColor,
-                                duration: effectiveDuration,
-                                size: effectiveThumbSizeValue,
-                                child: AnimatedDefaultTextStyle(
+                              child: IconTheme(
+                                data: IconThemeData(
+                                  color: thumbIconColor,
+                                  size: effectiveThumbSizeValue,
+                                ),
+                                child: DefaultTextStyle(
                                   style: TextStyle(color: inactiveTextColor),
-                                  duration: effectiveDuration,
                                   child: MoonFocusEffect(
                                     show: _isFocused,
                                     effectColor: effectiveFocusEffectColor,

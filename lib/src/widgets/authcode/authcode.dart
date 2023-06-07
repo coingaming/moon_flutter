@@ -14,7 +14,6 @@ import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
 enum AuthFieldShape { box, underline, circle }
 
@@ -86,16 +85,14 @@ class MoonAuthCode extends StatefulWidget {
   /// [enableInputFill] has to be set true.
   final Color? inactiveFillColor;
 
-  /// Color of the disabled AuthCode.
-  ///
-  /// [enabled] has to be set to false.
-  final Color? disabledColor;
-
   /// AuthCode text color
   final Color? textColor;
 
   /// Border width for the auth input field.
   final double? borderWidth;
+
+  /// The opacity value of the AuthCode when disabled.
+  final double? disabledOpacityValue;
 
   /// Horizontal space between input fields.
   final double? gap;
@@ -150,7 +147,7 @@ class MoonAuthCode extends StatefulWidget {
 
   /// Character used for obscuring text if [obscureText] is true.
   ///
-  /// Default is ● - 'Black Circle' (U+25CF).
+  /// Defaults to the character U+2022 BULLET (•).
   final String obscuringCharacter;
 
   /// Semantic label for MoonAuthCode.
@@ -220,11 +217,11 @@ class MoonAuthCode extends StatefulWidget {
     this.selectedFillColor,
     this.activeFillColor,
     this.inactiveFillColor,
-    this.disabledColor,
     this.textColor,
     this.height,
     this.width,
     this.borderWidth,
+    this.disabledOpacityValue,
     this.gap,
     this.errorAnimationCurve,
     this.animationCurve,
@@ -240,7 +237,7 @@ class MoonAuthCode extends StatefulWidget {
     this.mainAxisAlignment = MainAxisAlignment.center,
     required this.errorBuilder,
     this.hintCharacter,
-    this.obscuringCharacter = '●',
+    this.obscuringCharacter = '•',
     this.semanticLabel,
     this.errorStreamController,
     this.textController,
@@ -274,7 +271,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   late Color _effectiveSelectedFillColor;
   late Color _effectiveActiveFillColor;
   late Color _effectiveInactiveFillColor;
-  late Color _effectiveDisabledColor;
   late Color _effectiveTextColor;
   late Color _effectiveCursorColor;
   late double _effectiveBorderWidth;
@@ -349,7 +345,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
             if (currentText.length > widget.authInputFieldCount) {
               currentText = currentText.substring(0, widget.authInputFieldCount);
             }
-            Future.delayed(const Duration(milliseconds: 200), () => widget.onCompleted!(currentText));
+            Future.delayed(const Duration(milliseconds: 100), () => widget.onCompleted!(currentText));
           }
           if (widget.autoDismissKeyboard) _focusNode.unfocus();
         }
@@ -424,8 +420,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   }
 
   Color _getBorderColorFromIndex(int index) {
-    if (!widget.enabled) return _effectiveDisabledColor;
-
     if (((_selectedIndex == index) || (_selectedIndex == index + 1 && index + 1 == widget.authInputFieldCount)) &&
         _focusNode.hasFocus) {
       return _isInErrorMode ? _effectiveErrorBorderColor : _effectiveSelectedBorderColor;
@@ -437,8 +431,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   }
 
   Color _getFillColorFromIndex(int index) {
-    if (!widget.enabled) return _effectiveDisabledColor;
-
     if (((_selectedIndex == index) || (_selectedIndex == index + 1 && index + 1 == widget.authInputFieldCount)) &&
         _focusNode.hasFocus) {
       return _effectiveSelectedFillColor;
@@ -702,9 +694,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         context.moonTheme?.authCodeTheme.colors.inactiveBorderColor ??
         MoonColors.light.beerus;
 
-    _effectiveDisabledColor =
-        widget.disabledColor ?? context.moonTheme?.authCodeTheme.colors.disabledColor ?? MoonColors.light.goku;
-
     _effectiveErrorBorderColor = widget.errorBorderColor ??
         context.moonTheme?.authCodeTheme.colors.errorBorderColor ??
         MoonColors.light.chiChi100;
@@ -741,7 +730,8 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         context.moonTheme?.authCodeTheme.properties.peekDuration ??
         const Duration(milliseconds: 200);
 
-    final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+    final double effectiveDisabledOpacityValue =
+        widget.disabledOpacityValue ?? context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
     final Duration effectiveErrorAnimationDuration = widget.errorAnimationDuration ??
         context.moonTheme?.authCodeTheme.properties.errorAnimationDuration ??
@@ -768,50 +758,46 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
 
     return Semantics(
       label: widget.semanticLabel,
-      child: Column(
-        children: [
-          RepaintBoundary(
-            child: AnimatedOpacity(
-              duration: _animationDuration!,
-              curve: _animationCurve!,
-              opacity: widget.enabled ? 1 : effectiveDisabledOpacityValue,
-              child: SlideTransition(
-                position: _errorOffsetAnimation!,
-                child: Stack(
-                  children: <Widget>[
-                    AbsorbPointer(
-                      child: AutofillGroup(child: _getTextFormField()),
-                    ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: GestureDetector(
-                        onTap: () => _onFocus(),
-                        child: Row(
-                          mainAxisAlignment: widget.mainAxisAlignment,
-                          children: _generateAuthInputFields(),
-                        ),
+      child: AnimatedOpacity(
+        duration: _animationDuration!,
+        curve: _animationCurve!,
+        opacity: widget.enabled ? 1 : effectiveDisabledOpacityValue,
+        child: Column(
+          children: [
+            SlideTransition(
+              position: _errorOffsetAnimation!,
+              child: Stack(
+                children: <Widget>[
+                  AbsorbPointer(
+                    child: AutofillGroup(child: _getTextFormField()),
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: () => _onFocus(),
+                      child: Row(
+                        mainAxisAlignment: widget.mainAxisAlignment,
+                        children: _generateAuthInputFields(),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ),
-          if (_isInErrorMode)
-            RepaintBoundary(
-              child: AnimatedDefaultTextStyle(
+            if (_isInErrorMode)
+              DefaultTextStyle(
                 style: _resolvedErrorTextStyle,
-                duration: _animationDuration!,
-                child: AnimatedIconTheme(
-                  duration: _animationDuration!,
-                  curve: _animationCurve!,
+                child: IconTheme(
+                  data: IconThemeData(
+                    color: _resolvedErrorTextStyle.color,
+                  ),
                   child: widget.errorBuilder(context, _validateInput()),
                 ),
               ),
-            )
-        ],
+          ],
+        ),
       ),
     );
   }
