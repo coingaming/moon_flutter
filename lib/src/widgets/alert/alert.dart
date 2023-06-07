@@ -9,7 +9,6 @@ import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 
 class MoonAlert extends StatefulWidget {
   /// Controls whether the alert is shown.
@@ -260,8 +259,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                     ),
                   ),
-              child: AnimatedDefaultTextStyle(
-                duration: effectiveTransitionDuration,
+              child: DefaultTextStyle(
                 style: TextStyle(color: effectiveTextColor),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -269,9 +267,10 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                     Row(
                       children: [
                         if (widget.leading != null)
-                          AnimatedIconTheme(
-                            duration: effectiveTransitionDuration,
-                            color: effectiveLeadingColor,
+                          IconTheme(
+                            data: IconThemeData(
+                              color: effectiveLeadingColor,
+                            ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.only(end: effectiveHorizontalGap),
                               child: widget.leading,
@@ -284,9 +283,10 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                           ),
                         ),
                         if (widget.trailing != null)
-                          AnimatedIconTheme(
-                            duration: effectiveTransitionDuration,
-                            color: effectiveTrailingColor,
+                          IconTheme(
+                            data: IconThemeData(
+                              color: effectiveTrailingColor,
+                            ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.only(start: effectiveHorizontalGap),
                               child: widget.trailing,

@@ -15,7 +15,6 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
     selectedFillColor: MoonColors.light.gohan,
     activeFillColor: MoonColors.light.gohan,
     inactiveFillColor: MoonColors.light.gohan,
-    disabledColor: MoonColors.light.beerus,
     textColor: MoonTypography.light.colors.bodyPrimary,
   );
 
@@ -27,7 +26,6 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
     selectedFillColor: MoonColors.dark.gohan,
     activeFillColor: MoonColors.dark.gohan,
     inactiveFillColor: MoonColors.dark.gohan,
-    disabledColor: MoonColors.dark.beerus,
     textColor: MoonTypography.dark.colors.bodyPrimary,
   );
 
@@ -52,9 +50,6 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
   /// Fill color of the inactive auth input field which has no input.
   final Color inactiveFillColor;
 
-  /// Color of the auth input field when MoonAuthCode is disabled.
-  final Color disabledColor;
-
   /// AuthCode text color.
   final Color textColor;
 
@@ -66,7 +61,6 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
     required this.selectedFillColor,
     required this.activeFillColor,
     required this.inactiveFillColor,
-    required this.disabledColor,
     required this.textColor,
   });
 
@@ -79,7 +73,6 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
     Color? selectedFillColor,
     Color? activeFillColor,
     Color? inactiveFillColor,
-    Color? disabledColor,
     Color? textColor,
   }) {
     return MoonAuthCodeColors(
@@ -90,7 +83,6 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
       selectedFillColor: selectedFillColor ?? this.selectedFillColor,
       activeFillColor: activeFillColor ?? this.activeFillColor,
       inactiveFillColor: inactiveFillColor ?? this.inactiveFillColor,
-      disabledColor: disabledColor ?? this.disabledColor,
       textColor: textColor ?? this.textColor,
     );
   }
@@ -107,7 +99,6 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
       selectedFillColor: colorPremulLerp(selectedFillColor, other.selectedFillColor, t)!,
       activeFillColor: colorPremulLerp(activeFillColor, other.activeFillColor, t)!,
       inactiveFillColor: colorPremulLerp(inactiveFillColor, other.inactiveFillColor, t)!,
-      disabledColor: colorPremulLerp(disabledColor, other.disabledColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
     );
   }
@@ -124,7 +115,6 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
       ..add(ColorProperty("selectedFillColor", selectedFillColor))
       ..add(ColorProperty("activeFillColor", activeFillColor))
       ..add(ColorProperty("inactiveFillColor", inactiveFillColor))
-      ..add(ColorProperty("disabledColor", disabledColor))
       ..add(ColorProperty("textColor", textColor));
   }
 }

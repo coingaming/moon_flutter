@@ -325,6 +325,15 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(duration: widget.transitionDuration, vsync: this);
+
+    if (widget.isSelected) _animationController?.value = 1;
+  }
+
+  @override
   void dispose() {
     _animationController!.dispose();
 
@@ -366,8 +375,6 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
             resolvedDirectionalPadding.bottom,
           )
         : resolvedDirectionalPadding;
-
-    _animationController ??= AnimationController(duration: widget.transitionDuration, vsync: this);
 
     _indicatorColor ??=
         _animationController!.drive(_indicatorColorTween.chain(CurveTween(curve: widget.transitionCurve)));
@@ -514,6 +521,15 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(duration: widget.transitionDuration, vsync: this);
+
+    if (widget.isSelected) _animationController?.value = 1;
+  }
+
+  @override
   void dispose() {
     _animationController!.dispose();
 
@@ -556,8 +572,6 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
             resolvedDirectionalPadding.bottom,
           )
         : resolvedDirectionalPadding;
-
-    _animationController ??= AnimationController(duration: widget.transitionDuration, vsync: this);
 
     _tabColor ??= _animationController!.drive(_tabColorTween.chain(CurveTween(curve: widget.transitionCurve)));
 

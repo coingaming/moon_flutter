@@ -19,7 +19,6 @@ import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_design/src/widgets/common/animated_icon_theme.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/text_input/input_decorator.dart';
 
@@ -1446,8 +1445,7 @@ class _MoonTextInputState extends State<MoonTextInput>
             effectExtent: effectiveFocusEffectExtent,
             effectDuration: effectiveTransitionDuration,
             effectCurve: effectiveTransitionCurve,
-            child: AnimatedContainer(
-              duration: effectiveTransitionDuration,
+            child: Container(
               height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
               decoration: widget.decoration ??
                   ShapeDecorationWithPremultipliedAlpha(
@@ -1459,18 +1457,18 @@ class _MoonTextInputState extends State<MoonTextInput>
           ),
           if (widget.helper != null || (widget.errorText != null && widget.errorBuilder != null))
             RepaintBoundary(
-              child: AnimatedIconTheme(
-                color: widget.errorText != null && widget.errorBuilder != null
-                    ? effectiveErrorBorderColor
-                    : effectiveHintTextColor,
-                duration: effectiveTransitionDuration,
-                child: AnimatedDefaultTextStyle(
+              child: IconTheme(
+                data: IconThemeData(
+                  color: widget.errorText != null && widget.errorBuilder != null
+                      ? effectiveErrorBorderColor
+                      : effectiveHintTextColor,
+                ),
+                child: DefaultTextStyle(
                   style: effectiveHelperTextStyle.copyWith(
                     color: widget.errorText != null && widget.errorBuilder != null
                         ? effectiveErrorBorderColor
                         : effectiveHintTextColor,
                   ),
-                  duration: effectiveTransitionDuration,
                   child: Padding(
                     padding: effectiveHelperPadding,
                     child: widget.errorText != null && widget.errorBuilder != null
