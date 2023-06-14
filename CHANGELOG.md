@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.7](https://github.com/coingaming/moon_flutter/compare/v0.22.6...v0.22.7) (2023-06-14)
+
+
+### Bug Fixes
+
+* [MDS-551] Add default theming for icons ([#192](https://github.com/coingaming/moon_flutter/issues/192)) ([fc476a0](https://github.com/coingaming/moon_flutter/commit/fc476a0ade1684b2b12e24a5d78f98451db6e1ca))
+
 ## [0.22.6](https://github.com/coingaming/moon_flutter/compare/v0.22.5...v0.22.6) (2023-06-07)
 
 
