@@ -35,6 +35,17 @@ class TooltipStory extends Story {
               ],
             );
 
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "Text color",
+              description: "MoonColors variants for MoonTooltip text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonTooltip background.",
@@ -133,7 +144,10 @@ class TooltipStory extends Story {
                         arrowOffsetValue: arrowOffsetKnob ?? 0,
                         arrowTipDistance: arrowTipDistanceKnob,
                         tooltipShadows: showShadowKnob == true ? null : [],
-                        content: Text(customLabelTextKnob),
+                        content: Text(
+                          customLabelTextKnob,
+                          style: TextStyle(color: textColor),
+                        ),
                         child: MoonFilledButton(
                           onTap: () {
                             setState(() => show = true);

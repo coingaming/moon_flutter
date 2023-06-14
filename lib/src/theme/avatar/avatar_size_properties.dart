@@ -33,7 +33,7 @@ class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> 
     avatarSizeValue: MoonSizes.sizes.md,
     badgeMarginValue: MoonSizes.sizes.md * _badgeMarginValueToAvatarRatio,
     badgeSizeValue: MoonSizes.sizes.md * _badgeToAvatarRatio,
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.heading.textDefault,
   );
 
   static final lg = MoonAvatarSizeProperties(

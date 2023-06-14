@@ -113,7 +113,6 @@ class AvatarStory extends Story {
                   const TextDivider(text: "Customisable MoonAvatar"),
                   const SizedBox(height: 32),
                   MoonAvatar(
-                    textColor: textColor,
                     avatarSize: avatarSizesKnob,
                     badgeSize: badgeSizeKnob?.toDouble(),
                     borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
@@ -124,7 +123,10 @@ class AvatarStory extends Story {
                     badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
                     content: Padding(
                       padding: const EdgeInsets.only(top: 1.0),
-                      child: Text(customLabelTextKnob),
+                      child: Text(
+                        customLabelTextKnob,
+                        style: TextStyle(color: textColor),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 40),

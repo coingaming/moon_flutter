@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -88,17 +89,19 @@ class MoonCheckbox extends StatefulWidget {
     Color? inactiveColor,
     double tapAreaSizeValue = 40,
     FocusNode? focusNode,
+    TextStyle? textStyle,
     required String label,
     required ValueChanged<bool?>? onChanged,
   }) {
     final bool isInteractive = onChanged != null;
 
     final Color effectiveTextColor =
-        context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.checkboxTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.typography.body.text14.copyWith(color: effectiveTextColor) ??
-            TextStyle(fontSize: 14, color: effectiveTextColor);
+        context.moonTheme?.checkboxTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+
+    final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 
     final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
 
@@ -132,9 +135,9 @@ class MoonCheckbox extends StatefulWidget {
                 child: AnimatedOpacity(
                   opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
                   duration: effectiveFocusEffectDuration,
-                  child: Text(
-                    label,
-                    style: effectiveTextStyle,
+                  child: DefaultTextStyle(
+                    style: resolvedTextStyle,
+                    child: Text(label),
                   ),
                 ),
               ),

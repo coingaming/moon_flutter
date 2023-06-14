@@ -24,8 +24,8 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     headerHeight: MoonSizes.sizes.md,
     iconSizeValue: MoonSizes.sizes.xs,
     headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    headerTextStyle: MoonTextStyles.heading.text14,
-    contentTextStyle: MoonTextStyles.body.text14,
+    headerTextStyle: MoonTextStyles.heading.textDefault,
+    contentTextStyle: MoonTextStyles.body.textDefault,
   );
 
   static final lg = MoonAccordionItemSizeProperties(
@@ -33,8 +33,8 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     headerHeight: MoonSizes.sizes.lg,
     iconSizeValue: MoonSizes.sizes.xs,
     headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    headerTextStyle: MoonTextStyles.heading.text14,
-    contentTextStyle: MoonTextStyles.body.text14,
+    headerTextStyle: MoonTextStyles.heading.textDefault,
+    contentTextStyle: MoonTextStyles.body.textDefault,
   );
 
   static final xl = MoonAccordionItemSizeProperties(
@@ -43,7 +43,7 @@ class MoonAccordionItemSizeProperties extends ThemeExtension<MoonAccordionItemSi
     iconSizeValue: MoonSizes.sizes.xs,
     headerPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
     headerTextStyle: MoonTextStyles.heading.text16,
-    contentTextStyle: MoonTextStyles.body.text14,
+    contentTextStyle: MoonTextStyles.body.textDefault,
   );
 
   /// Accordion item border radius.

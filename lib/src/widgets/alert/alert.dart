@@ -127,9 +127,9 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
     if (widget.titleTextStyle != null) return widget.titleTextStyle!;
 
     if (widget.body != null) {
-      return context.moonTheme?.alertTheme.properties.titleTextStyle ?? MoonTextStyles.heading.text14;
+      return context.moonTheme?.alertTheme.properties.titleTextStyle ?? MoonTextStyles.heading.textDefault;
     } else {
-      return context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTextStyles.body.text14;
+      return context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTextStyles.body.textDefault;
     }
   }
 
@@ -217,8 +217,9 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
     final TextStyle effectiveTitleTextStyle = _getTextStyle(context: context);
 
-    final TextStyle effectiveBodyTextStyle =
-        widget.bodyTextStyle ?? context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTextStyles.body.text14;
+    final TextStyle effectiveBodyTextStyle = widget.bodyTextStyle ??
+        context.moonTheme?.alertTheme.properties.bodyTextStyle ??
+        MoonTextStyles.body.textDefault;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.alertTheme.properties.transitionDuration ??

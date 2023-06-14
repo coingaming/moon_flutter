@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
@@ -22,9 +23,6 @@ class MoonTag extends StatelessWidget {
 
   /// The background color of the tag.
   final Color? backgroundColor;
-
-  /// The text color of the tag.
-  final Color? textColor;
 
   /// The height of the tag.
   final double? height;
@@ -68,7 +66,6 @@ class MoonTag extends StatelessWidget {
     this.isUpperCase = true,
     this.borderRadius,
     this.backgroundColor,
-    this.textColor,
     this.height,
     this.width,
     this.gap,
@@ -104,7 +101,10 @@ class MoonTag extends StatelessWidget {
         backgroundColor ?? context.moonTheme?.tagTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
-        textColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.tagTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveIconColor =
+        context.moonTheme?.tagTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
 
     final double effectiveHeight = height ?? effectiveMoonTagSize.height;
 
@@ -146,10 +146,10 @@ class MoonTag extends StatelessWidget {
                 ),
             child: IconTheme(
               data: IconThemeData(
-                color: effectiveTextColor,
+                color: effectiveIconColor,
                 size: effectiveMoonTagSize.iconSizeValue,
               ),
-              child: DefaultTextStyle.merge(
+              child: DefaultTextStyle(
                 style: isUpperCase
                     ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor)
                     : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),

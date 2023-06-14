@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -39,9 +40,6 @@ class MoonAvatar extends StatelessWidget {
   /// The color of the avatar badge.
   final Color? badgeColor;
 
-  /// The text color of the avatar.
-  final Color? textColor;
-
   /// The margin value of the avatars badge.
   final double? badgeMarginValue;
 
@@ -76,7 +74,6 @@ class MoonAvatar extends StatelessWidget {
     this.borderRadius,
     this.backgroundColor,
     this.badgeColor,
-    this.textColor,
     this.badgeMarginValue,
     this.badgeSize,
     this.height,
@@ -153,7 +150,10 @@ class MoonAvatar extends StatelessWidget {
         badgeColor ?? context.moonTheme?.avatarTheme.colors.badgeColor ?? MoonColors.light.roshi100;
 
     final Color effectiveTextColor =
-        textColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.avatarTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveIconColor =
+        context.moonTheme?.avatarTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
 
     final double effectiveAvatarHeight = height ?? effectiveMoonAvatarSize.avatarSizeValue;
 
@@ -189,22 +189,27 @@ class MoonAvatar extends StatelessWidget {
                         badgeAlignment: badgeAlignment,
                         textDirection: Directionality.of(context),
                       ),
-                child: DefaultTextStyle.merge(
+                child: DefaultTextStyle(
                   style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
-                  child: DecoratedBox(
-                    decoration: ShapeDecorationWithPremultipliedAlpha(
-                      color: effectiveBackgroundColor,
-                      image: backgroundImage != null
-                          ? DecorationImage(
-                              image: backgroundImage!,
-                              fit: BoxFit.cover,
-                            )
-                          : null,
-                      shape: MoonSquircleBorder(
-                        borderRadius: resolvedBorderRadius.squircleBorderRadius(context),
-                      ),
+                  child: IconTheme(
+                    data: IconThemeData(
+                      color: effectiveIconColor,
                     ),
-                    child: Center(child: content),
+                    child: DecoratedBox(
+                      decoration: ShapeDecorationWithPremultipliedAlpha(
+                        color: effectiveBackgroundColor,
+                        image: backgroundImage != null
+                            ? DecorationImage(
+                                image: backgroundImage!,
+                                fit: BoxFit.cover,
+                              )
+                            : null,
+                        shape: MoonSquircleBorder(
+                          borderRadius: resolvedBorderRadius.squircleBorderRadius(context),
+                        ),
+                      ),
+                      child: Center(child: content),
+                    ),
                   ),
                 ),
               ),

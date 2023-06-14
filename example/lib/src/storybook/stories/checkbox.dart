@@ -12,6 +12,17 @@ class CheckboxStory extends Story {
       : super(
           name: "Checkbox",
           builder: (context) {
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "Text color",
+              description: "MoonColors variants for MoonCheckbox with label text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
             final checkColorsKnob = context.knobs.nullable.options(
               label: "checkColor",
               description: "MoonColors variants for MoonCheckbox icon.",
@@ -94,6 +105,7 @@ class CheckboxStory extends Story {
                       return MoonCheckbox.withLabel(
                         context,
                         label: "With label",
+                        textStyle: TextStyle(color: textColor),
                         activeColor: activeColor,
                         inactiveColor: inactiveColor,
                         checkColor: checkColor,

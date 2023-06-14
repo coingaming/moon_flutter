@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
@@ -12,7 +13,9 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
     inactiveTrackColor: MoonColors.light.beerus,
     activeTextColor: MoonTypography.dark.colors.bodyPrimary,
     inactiveTextColor: MoonTypography.light.colors.bodyPrimary,
-    thumbIconColor: MoonTypography.light.colors.bodyPrimary,
+    activeIconColor: MoonIconTheme.dark.colors.primaryColor,
+    inactiveIconColor: MoonIconTheme.light.colors.primaryColor,
+    thumbIconColor: MoonIconTheme.light.colors.primaryColor,
     thumbColor: MoonColors.light.goten,
   );
 
@@ -21,7 +24,9 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
     inactiveTrackColor: MoonColors.dark.beerus,
     activeTextColor: MoonTypography.dark.colors.bodyPrimary,
     inactiveTextColor: MoonTypography.dark.colors.bodyPrimary,
-    thumbIconColor: MoonTypography.light.colors.bodyPrimary,
+    activeIconColor: MoonIconTheme.dark.colors.primaryColor,
+    inactiveIconColor: MoonIconTheme.dark.colors.primaryColor,
+    thumbIconColor: MoonIconTheme.light.colors.primaryColor,
     thumbColor: MoonColors.dark.goten,
   );
 
@@ -37,6 +42,12 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
   /// Switch inactive track text color.
   final Color inactiveTextColor;
 
+  /// Switch active track icon color.
+  final Color activeIconColor;
+
+  /// Switch inactive track icon color.
+  final Color inactiveIconColor;
+
   /// Switch icon Color.
   final Color thumbIconColor;
 
@@ -48,6 +59,8 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
     required this.inactiveTrackColor,
     required this.activeTextColor,
     required this.inactiveTextColor,
+    required this.activeIconColor,
+    required this.inactiveIconColor,
     required this.thumbIconColor,
     required this.thumbColor,
   });
@@ -58,6 +71,8 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
     Color? inactiveTrackColor,
     Color? activeTextColor,
     Color? inactiveTextColor,
+    Color? activeIconColor,
+    Color? inactiveIconColor,
     Color? thumbIconColor,
     Color? thumbColor,
   }) {
@@ -66,6 +81,8 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
       inactiveTrackColor: inactiveTrackColor ?? this.inactiveTrackColor,
       activeTextColor: activeTextColor ?? this.activeTextColor,
       inactiveTextColor: inactiveTextColor ?? this.inactiveTextColor,
+      activeIconColor: activeIconColor ?? this.activeIconColor,
+      inactiveIconColor: inactiveIconColor ?? this.inactiveIconColor,
       thumbIconColor: thumbIconColor ?? this.thumbIconColor,
       thumbColor: thumbColor ?? this.thumbColor,
     );
@@ -80,6 +97,8 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
       inactiveTrackColor: colorPremulLerp(inactiveTrackColor, other.inactiveTrackColor, t)!,
       activeTextColor: colorPremulLerp(activeTextColor, other.activeTextColor, t)!,
       inactiveTextColor: colorPremulLerp(inactiveTextColor, other.inactiveTextColor, t)!,
+      activeIconColor: colorPremulLerp(activeIconColor, other.activeIconColor, t)!,
+      inactiveIconColor: colorPremulLerp(inactiveIconColor, other.inactiveIconColor, t)!,
       thumbIconColor: colorPremulLerp(thumbIconColor, other.thumbIconColor, t)!,
       thumbColor: colorPremulLerp(thumbColor, other.thumbColor, t)!,
     );
@@ -94,6 +113,8 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
       ..add(ColorProperty("inactiveTrackColor", inactiveTrackColor))
       ..add(ColorProperty("activeTextColor", activeTextColor))
       ..add(ColorProperty("inactiveTextColor", inactiveTextColor))
+      ..add(ColorProperty("activeIconColor", activeIconColor))
+      ..add(ColorProperty("inactiveIconColor", inactiveIconColor))
       ..add(ColorProperty("thumbIconColor", thumbIconColor))
       ..add(ColorProperty("thumbColor", thumbColor));
   }

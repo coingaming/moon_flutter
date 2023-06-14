@@ -16,7 +16,7 @@ class MoonSegmentedControlSizeProperties extends ThemeExtension<MoonSegmentedCon
     height: MoonSizes.sizes.md,
     iconSizeValue: MoonSizes.sizes.xs,
     segmentPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.heading.textDefault,
   );
 
   static final md = MoonSegmentedControlSizeProperties(
@@ -25,7 +25,7 @@ class MoonSegmentedControlSizeProperties extends ThemeExtension<MoonSegmentedCon
     height: MoonSizes.sizes.lg,
     iconSizeValue: MoonSizes.sizes.xs,
     segmentPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.heading.textDefault,
   );
 
   /// SegmentedControl segment border radius.

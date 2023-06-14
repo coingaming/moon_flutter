@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -352,7 +354,13 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
         widget.backgroundColor ?? context.moonTheme?.popoverTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
-        context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.popoverTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveIconColor =
+        context.moonTheme?.popoverTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+
+    final TextStyle effectiveTextStyle =
+        context.moonTheme?.popoverTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
 
     final double effectiveDistanceToTarget =
         widget.distanceToTarget ?? context.moonTheme?.popoverTheme.properties.distanceToTarget ?? 8;
@@ -440,9 +448,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
               child: FadeTransition(
                 opacity: _curvedAnimation!,
                 child: IconTheme(
-                  data: IconThemeData(color: effectiveTextColor),
+                  data: IconThemeData(color: effectiveIconColor),
                   child: DefaultTextStyle(
-                    style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
+                    style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Container(
                       key: _popoverKey,
                       constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),

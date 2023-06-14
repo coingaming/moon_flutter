@@ -34,11 +34,23 @@ class PopoverStory extends Story {
               ],
             );
 
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "Text color",
+              description: "MoonColors variants for MoonPopover text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonPopover background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -48,7 +60,8 @@ class PopoverStory extends Story {
               label: "borderColor",
               description: "MoonColors variants for MoonPopover border.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -106,7 +119,12 @@ class PopoverStory extends Story {
                                     content: const MoonIcon(MoonIcons.rocket_24),
                                   ),
                                   const SizedBox(width: 12),
-                                  Expanded(child: Text(customLabelTextKnob)),
+                                  Expanded(
+                                    child: Text(
+                                      customLabelTextKnob,
+                                      style: TextStyle(color: textColor),
+                                    ),
+                                  ),
                                 ],
                               ),
                               const SizedBox(height: 16),
