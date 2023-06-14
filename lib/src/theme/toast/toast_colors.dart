@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_colors.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
@@ -12,6 +13,8 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
     darkVariantBackgroundColor: MoonColors.dark.gohan,
     lightVariantTextColor: MoonTypography.light.colors.bodyPrimary,
     darkVariantTextColor: MoonTypography.dark.colors.bodyPrimary,
+    lightVariantIconColor: MoonIconColors.light.primaryColor,
+    darkVariantIconColor: MoonIconColors.dark.primaryColor,
   );
 
   static final dark = MoonToastColors(
@@ -19,6 +22,8 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
     darkVariantBackgroundColor: MoonColors.light.gohan,
     lightVariantTextColor: MoonTypography.dark.colors.bodyPrimary,
     darkVariantTextColor: MoonTypography.light.colors.bodyPrimary,
+    lightVariantIconColor: MoonIconColors.dark.primaryColor,
+    darkVariantIconColor: MoonIconColors.light.primaryColor,
   );
 
   /// Toast light variant background color.
@@ -33,11 +38,19 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
   /// Toast dark variant text color.
   final Color darkVariantTextColor;
 
+  /// Toast light variant icon color.
+  final Color lightVariantIconColor;
+
+  /// Toast dark variant icon color.
+  final Color darkVariantIconColor;
+
   const MoonToastColors({
     required this.lightVariantBackgroundColor,
     required this.darkVariantBackgroundColor,
     required this.lightVariantTextColor,
     required this.darkVariantTextColor,
+    required this.lightVariantIconColor,
+    required this.darkVariantIconColor,
   });
 
   @override
@@ -46,12 +59,16 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
     Color? darkVariantBackgroundColor,
     Color? lightVariantTextColor,
     Color? darkVariantTextColor,
+    Color? lightVariantIconColor,
+    Color? darkVariantIconColor,
   }) {
     return MoonToastColors(
       lightVariantBackgroundColor: lightVariantBackgroundColor ?? this.lightVariantBackgroundColor,
       darkVariantBackgroundColor: darkVariantBackgroundColor ?? this.darkVariantBackgroundColor,
       lightVariantTextColor: lightVariantTextColor ?? this.lightVariantTextColor,
       darkVariantTextColor: darkVariantTextColor ?? this.darkVariantTextColor,
+      lightVariantIconColor: lightVariantIconColor ?? this.lightVariantIconColor,
+      darkVariantIconColor: darkVariantIconColor ?? this.darkVariantIconColor,
     );
   }
 
@@ -64,6 +81,8 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
       darkVariantBackgroundColor: colorPremulLerp(darkVariantBackgroundColor, other.darkVariantBackgroundColor, t)!,
       lightVariantTextColor: colorPremulLerp(lightVariantTextColor, other.lightVariantTextColor, t)!,
       darkVariantTextColor: colorPremulLerp(darkVariantTextColor, other.darkVariantTextColor, t)!,
+      lightVariantIconColor: colorPremulLerp(lightVariantIconColor, other.lightVariantIconColor, t)!,
+      darkVariantIconColor: colorPremulLerp(darkVariantIconColor, other.darkVariantIconColor, t)!,
     );
   }
 
@@ -75,6 +94,8 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
       ..add(ColorProperty("lightVariantBackgroundColor", lightVariantBackgroundColor))
       ..add(ColorProperty("darkVariantBackgroundColor", darkVariantBackgroundColor))
       ..add(ColorProperty("lightVariantTextColor", lightVariantTextColor))
-      ..add(ColorProperty("darkVariantTextColor", darkVariantTextColor));
+      ..add(ColorProperty("darkVariantTextColor", darkVariantTextColor))
+      ..add(ColorProperty("lightVariantIconColor", lightVariantIconColor))
+      ..add(ColorProperty("darkVariantIconColor", darkVariantIconColor));
   }
 }

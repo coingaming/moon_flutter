@@ -41,11 +41,34 @@ class AuthCodeStory extends Story {
               ],
             );
 
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "Text color",
+              description: "MoonColors variants for MoonAuthCode text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
+            final cursorColorsKnob = context.knobs.nullable.options(
+              label: "authFieldCursorColor",
+              description: "MoonColors variants for MoonAuthCode cursor.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final cursorColor = colorTable(context)[cursorColorsKnob ?? 40];
+
             final selectedFillColorsKnob = context.knobs.nullable.options(
               label: "selectedFillColor",
               description: "MoonColors variants for selected MoonAuthCode input field.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -55,7 +78,8 @@ class AuthCodeStory extends Story {
               label: "activeFillColor",
               description: "MoonColors variants for active MoonAuthCode input fields.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -65,7 +89,8 @@ class AuthCodeStory extends Story {
               label: "inactiveFillColor",
               description: "MoonColors variants for inactive MoonAuthCode input fields.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -75,7 +100,8 @@ class AuthCodeStory extends Story {
               label: "selectedBorderColor",
               description: "MoonColors variants for selected MoonAuthCode input field border.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -85,7 +111,8 @@ class AuthCodeStory extends Story {
               label: "activeBorderColor",
               description: "MoonColors variants for active MoonAuthCode input fields borders.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -95,7 +122,8 @@ class AuthCodeStory extends Story {
               label: "inactiveBorderColor",
               description: "MoonColors variants for inactive MoonAuthCode input fields borders.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -155,6 +183,8 @@ class AuthCodeStory extends Story {
                           mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
                           borderRadius:
                               borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          textStyle: TextStyle(color: textColor),
+                          authFieldCursorColor: cursorColor,
                           selectedFillColor: selectedFillColor,
                           activeFillColor: activeFillColor,
                           inactiveFillColor: inactiveFillColor,
@@ -177,6 +207,8 @@ class AuthCodeStory extends Story {
                           mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
                           borderRadius:
                               borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          textStyle: TextStyle(color: textColor),
+                          authFieldCursorColor: cursorColor,
                           selectedFillColor: selectedFillColor,
                           activeFillColor: activeFillColor,
                           inactiveFillColor: inactiveFillColor,
@@ -202,6 +234,8 @@ class AuthCodeStory extends Story {
                             borderRadius:
                                 borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                             errorStreamController: errorStreamController,
+                            textStyle: TextStyle(color: textColor),
+                            authFieldCursorColor: cursorColor,
                             selectedFillColor: selectedFillColor,
                             activeFillColor: activeFillColor,
                             inactiveFillColor: inactiveFillColor,

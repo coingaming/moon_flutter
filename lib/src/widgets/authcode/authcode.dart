@@ -85,9 +85,6 @@ class MoonAuthCode extends StatefulWidget {
   /// [enableInputFill] has to be set true.
   final Color? inactiveFillColor;
 
-  /// AuthCode text color
-  final Color? textColor;
-
   /// Border width for the auth input field.
   final double? borderWidth;
 
@@ -217,7 +214,6 @@ class MoonAuthCode extends StatefulWidget {
     this.selectedFillColor,
     this.activeFillColor,
     this.inactiveFillColor,
-    this.textColor,
     this.height,
     this.width,
     this.borderWidth,
@@ -711,9 +707,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
 
     _effectiveErrorTextStyle = context.moonTheme?.authCodeTheme.properties.errorTextStyle ?? MoonTextStyles.body.text12;
 
-    _effectiveTextColor = widget.textColor ??
-        context.moonTheme?.authCodeTheme.colors.textColor ??
-        MoonTypography.light.colors.bodyPrimary;
+    _effectiveTextColor = context.moonTheme?.authCodeTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
     _effectiveCursorColor = widget.authFieldCursorColor ??
         context.moonTheme?.authCodeTheme.colors.textColor ??

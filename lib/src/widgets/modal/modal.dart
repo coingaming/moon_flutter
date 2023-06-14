@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -42,14 +44,20 @@ class MoonModal extends StatelessWidget {
         backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
-        context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.modalTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveIconColor =
+        context.moonTheme?.modalTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+
+    final TextStyle effectiveTextStyle =
+        context.moonTheme?.modalTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
 
     return Semantics(
       label: semanticLabel,
       child: IconTheme(
-        data: IconThemeData(color: effectiveTextColor),
+        data: IconThemeData(color: effectiveIconColor),
         child: DefaultTextStyle(
-          style: DefaultTextStyle.of(context).style.copyWith(color: effectiveTextColor),
+          style: effectiveTextStyle.copyWith(color: effectiveTextColor),
           child: Center(
             child: Container(
               decoration: decoration ??

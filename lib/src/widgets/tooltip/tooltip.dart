@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/typography/text_styles.dart';
@@ -392,7 +393,10 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
-        context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.tooltipTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveIconColor =
+        context.moonTheme?.tooltipTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
 
     final double effectiveArrowBaseWidth =
         widget.arrowBaseWidth ?? context.moonTheme?.tooltipTheme.properties.arrowBaseWidth ?? 16;
@@ -412,8 +416,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         widget.tooltipShadows ?? context.moonTheme?.tooltipTheme.shadows.tooltipShadows ?? MoonShadows.light.sm;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.tooltipTheme.properties.textStyle.copyWith(color: effectiveTextColor) ??
-            MoonTextStyles.body.text12.copyWith(color: effectiveTextColor);
+        context.moonTheme?.tooltipTheme.properties.textStyle ?? MoonTextStyles.body.text12;
 
     final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
@@ -492,27 +495,30 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
               child: FadeTransition(
                 opacity: _curvedAnimation!,
                 child: DefaultTextStyle(
-                  style: effectiveTextStyle,
-                  child: Container(
-                    key: _tooltipKey,
-                    constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
-                    padding: resolvedContentPadding,
-                    decoration: ShapeDecorationWithPremultipliedAlpha(
-                      color: effectiveBackgroundColor,
-                      shadows: effectiveTooltipShadows,
-                      shape: TooltipShape(
-                        arrowBaseWidth: effectiveArrowBaseWidth,
-                        arrowLength: effectiveArrowLength,
-                        arrowOffset: widget.arrowOffsetValue,
-                        arrowTipDistance: effectiveArrowTipDistance,
-                        borderColor: widget.borderColor,
-                        borderRadius: resolvedBorderRadius,
-                        borderWidth: widget.borderWidth,
-                        childWidth: targetRenderBox.size.width,
-                        tooltipPosition: tooltipPosition,
+                  style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                  child: IconTheme(
+                    data: IconThemeData(color: effectiveIconColor),
+                    child: Container(
+                      key: _tooltipKey,
+                      constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
+                      padding: resolvedContentPadding,
+                      decoration: ShapeDecorationWithPremultipliedAlpha(
+                        color: effectiveBackgroundColor,
+                        shadows: effectiveTooltipShadows,
+                        shape: TooltipShape(
+                          arrowBaseWidth: effectiveArrowBaseWidth,
+                          arrowLength: effectiveArrowLength,
+                          arrowOffset: widget.arrowOffsetValue,
+                          arrowTipDistance: effectiveArrowTipDistance,
+                          borderColor: widget.borderColor,
+                          borderRadius: resolvedBorderRadius,
+                          borderWidth: widget.borderWidth,
+                          childWidth: targetRenderBox.size.width,
+                          tooltipPosition: tooltipPosition,
+                        ),
                       ),
+                      child: widget.content,
                     ),
-                    child: widget.content,
                   ),
                 ),
               ),

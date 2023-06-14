@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/sizes.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
 
 @immutable
 class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with DiagnosticableTreeMixin {
@@ -14,6 +15,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
     transitionDuration: const Duration(milliseconds: 150),
     transitionCurve: Curves.easeInOutCubic,
     contentPadding: EdgeInsets.all(MoonSizes.sizes.x3s),
+    textStyle: MoonTextStyles.body.textDefault,
   );
 
   /// Popover border radius.
@@ -31,12 +33,16 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
   /// Padding around popover content.
   final EdgeInsetsGeometry contentPadding;
 
+  /// Popover text style.
+  final TextStyle textStyle;
+
   const MoonPopoverProperties({
     required this.borderRadius,
     required this.distanceToTarget,
     required this.transitionDuration,
     required this.transitionCurve,
     required this.contentPadding,
+    required this.textStyle,
   });
 
   @override
@@ -46,6 +52,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
     Duration? transitionDuration,
     Curve? transitionCurve,
     EdgeInsetsGeometry? contentPadding,
+    TextStyle? textStyle,
   }) {
     return MoonPopoverProperties(
       borderRadius: borderRadius ?? this.borderRadius,
@@ -53,6 +60,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
       contentPadding: contentPadding ?? this.contentPadding,
+      textStyle: textStyle ?? this.textStyle,
     );
   }
 
@@ -66,6 +74,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
       contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
+      textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
 
@@ -78,6 +87,7 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
       ..add(DoubleProperty("distanceToTarget", distanceToTarget))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding));
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding))
+      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

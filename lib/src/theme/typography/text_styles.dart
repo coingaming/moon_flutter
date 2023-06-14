@@ -6,6 +6,9 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
   static const _semiBold = FontWeight.w600;
 
   static const body = MoonTextStyles(
+    textDefault: TextStyle(
+      fontSize: 14,
+    ),
     text6: TextStyle(
       fontSize: 6,
     ),
@@ -54,6 +57,10 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
   );
 
   static const heading = MoonTextStyles(
+    textDefault: TextStyle(
+      fontSize: 14,
+      fontWeight: _semiBold,
+    ),
     text6: TextStyle(
       fontSize: 6,
       fontWeight: _semiBold,
@@ -117,6 +124,12 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
   );
 
   static const caption = MoonTextStyles(
+    textDefault: TextStyle(
+      fontSize: 14,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
     text6: TextStyle(
       fontSize: 6,
       height: 1.1,
@@ -209,10 +222,13 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     ),
   );
 
-  /// Text size 9.
+  /// Default text size.
+  final TextStyle textDefault;
+
+  /// Text size 6.
   final TextStyle text6;
 
-  /// Text size 9.
+  /// Text size 8.
   final TextStyle text8;
 
   /// Text size 9.
@@ -255,6 +271,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
   final TextStyle text72;
 
   const MoonTextStyles({
+    required this.textDefault,
     required this.text6,
     required this.text8,
     required this.text9,
@@ -274,6 +291,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
 
   @override
   MoonTextStyles copyWith({
+    TextStyle? textDefault,
     TextStyle? text6,
     TextStyle? text8,
     TextStyle? text9,
@@ -291,6 +309,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     TextStyle? text72,
   }) {
     return MoonTextStyles(
+      textDefault: textDefault ?? this.textDefault,
       text6: text6 ?? this.text6,
       text8: text8 ?? this.text8,
       text9: text9 ?? this.text9,
@@ -314,6 +333,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     if (other is! MoonTextStyles) return this;
 
     return MoonTextStyles(
+      textDefault: TextStyle.lerp(textDefault, other.textDefault, t)!,
       text6: TextStyle.lerp(text6, other.text6, t)!,
       text8: TextStyle.lerp(text8, other.text8, t)!,
       text9: TextStyle.lerp(text9, other.text9, t)!,
@@ -337,6 +357,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTextStyles"))
+      ..add(DiagnosticsProperty<TextStyle>("textDefault", textDefault))
       ..add(DiagnosticsProperty<TextStyle>("text6", text6))
       ..add(DiagnosticsProperty<TextStyle>("text8", text8))
       ..add(DiagnosticsProperty<TextStyle>("text9", text9))

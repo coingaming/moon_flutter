@@ -17,8 +17,8 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
     padding: EdgeInsets.all(MoonSizes.sizes.x2s),
-    bodyTextStyle: MoonTextStyles.body.text14,
-    titleTextStyle: MoonTextStyles.heading.text14,
+    bodyTextStyle: MoonTextStyles.body.textDefault,
+    titleTextStyle: MoonTextStyles.heading.textDefault,
   );
 
   /// Border radius for alert.

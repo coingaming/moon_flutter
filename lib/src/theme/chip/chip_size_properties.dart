@@ -15,7 +15,7 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
     height: MoonSizes.sizes.sm,
     iconSizeValue: MoonSizes.sizes.x2s,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.heading.textDefault,
   );
 
   static final md = MoonChipSizeProperties(
@@ -24,7 +24,7 @@ class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with
     height: MoonSizes.sizes.md,
     iconSizeValue: MoonSizes.sizes.xs,
     padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.heading.textDefault,
   );
 
   /// Chip border radius.

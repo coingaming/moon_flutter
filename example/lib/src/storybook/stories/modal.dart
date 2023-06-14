@@ -8,11 +8,23 @@ class ModalStory extends Story {
       : super(
           name: "Modal",
           builder: (context) {
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "Text color",
+              description: "MoonColors variants for MoonModal text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonModal background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -22,7 +34,8 @@ class ModalStory extends Story {
               label: "barrierColor",
               description: "MoonColors variants for MoonModal barrier.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -58,7 +71,7 @@ class ModalStory extends Story {
                               padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
                               child: Text(
                                 "MoonModal title",
-                                style: context.moonTypography!.heading.text18,
+                                style: context.moonTypography!.heading.text18.copyWith(color: textColor),
                               ),
                             ),
                             Container(
@@ -69,7 +82,7 @@ class ModalStory extends Story {
                               padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
                               child: Text(
                                 "Reopen the MoonModal to view the updated knob value.",
-                                style: context.moonTypography!.body.text14,
+                                style: context.moonTypography!.body.text14.copyWith(color: textColor),
                               ),
                             ),
                             Padding(
