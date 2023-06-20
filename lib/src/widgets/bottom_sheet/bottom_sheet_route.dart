@@ -88,7 +88,7 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
               namesRoute: true,
               label: _getRouteLabel(),
               explicitChildNodes: true,
-              child: MoonModalBottomSheet(
+              child: MoonBottomSheet(
                 closeProgressThreshold: widget.closeProgressThreshold,
                 isExpanded: widget.route.expanded,
                 containerBuilder: widget.route.containerBuilder,
@@ -175,7 +175,7 @@ class BottomSheetRoute<T> extends PageRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController = MoonModalBottomSheet.createAnimationController(
+    _animationController = MoonBottomSheet.createAnimationController(
       navigator!.overlay!,
       duration: transitionDuration,
     );
@@ -220,7 +220,7 @@ class BottomSheetRoute<T> extends PageRoute<T> {
 }
 
 /// Shows a modal Moon Design bottom sheet.
-Future<T?> showMoonModalBottomSheet<T>({
+Future<T?> showMoonBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
   required WidgetWithChildBuilder containerWidget,

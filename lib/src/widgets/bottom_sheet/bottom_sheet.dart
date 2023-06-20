@@ -17,9 +17,9 @@ typedef WidgetWithChildBuilder = Widget Function(BuildContext context, Animation
 
 /// A Moon Design bottom sheet.
 ///
-/// The [MoonModalBottomSheet] widget itself is rarely used directly. Instead, prefer to create a modal bottom sheet
-/// with [showMoonModalBottomSheet].
-class MoonModalBottomSheet extends StatefulWidget {
+/// The [MoonBottomSheet] widget itself is rarely used directly. Instead, prefer to create a modal bottom sheet
+/// with [showMoonBottomSheet].
+class MoonBottomSheet extends StatefulWidget {
   /// The closeProgressThreshold parameter
   /// specifies when the bottom sheet will be dismissed when user drags it.
   final double closeProgressThreshold;
@@ -74,7 +74,7 @@ class MoonModalBottomSheet extends StatefulWidget {
   final double willPopThreshold;
 
   /// Creates a Moon Design modal bottom sheet.
-  const MoonModalBottomSheet({
+  const MoonBottomSheet({
     super.key,
     required this.animationController,
     this.animationCurve,
@@ -92,9 +92,9 @@ class MoonModalBottomSheet extends StatefulWidget {
   }) : closeProgressThreshold = closeProgressThreshold ?? _closeProgressThreshold;
 
   @override
-  MoonModalBottomSheetState createState() => MoonModalBottomSheetState();
+  MoonBottomSheetState createState() => MoonBottomSheetState();
 
-  /// Creates an [AnimationController] suitable for a [MoonModalBottomSheet.animationController].
+  /// Creates an [AnimationController] suitable for a [MoonBottomSheet.animationController].
   ///
   /// This API available as a convenience for a Material compliant bottom sheet animation. If alternative animation
   /// durations are required, a different animation controller could be provided.
@@ -110,7 +110,7 @@ class MoonModalBottomSheet extends StatefulWidget {
   }
 }
 
-class MoonModalBottomSheetState extends State<MoonModalBottomSheet> with TickerProviderStateMixin {
+class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderStateMixin {
   final GlobalKey _childKey = GlobalKey(debugLabel: 'BottomSheet child');
 
   late AnimationController _bounceDragController;
@@ -244,7 +244,7 @@ class MoonModalBottomSheetState extends State<MoonModalBottomSheet> with TickerP
 
   void _handleScrollUpdate(ScrollNotification notification) {
     assert(notification.context != null);
-    //Check if scrollController is used
+    // Check if ScrollController is used
     if (!_scrollController.hasClients) return;
 
     ScrollPosition scrollPosition;
@@ -264,8 +264,8 @@ class MoonModalBottomSheetState extends State<MoonModalBottomSheet> with TickerP
     final offset = isScrollReversed ? scrollPosition.pixels : scrollPosition.maxScrollExtent - scrollPosition.pixels;
 
     if (offset <= 0) {
-      // Clamping Scroll Physics ends with a ScrollEndNotification with a DragEndDetail class while Bouncing Scroll
-      // Physics or other physics that overflow will not return a drag end info.
+      // Clamping Scroll Physics ends with a ScrollEndNotification with a DragEndDetail class while
+      // BouncingScrollPhysics or other physics that overflow will not return a drag end info.
 
       // We use the velocity from DragEndDetails if it is available.
       if (notification is ScrollEndNotification) {
