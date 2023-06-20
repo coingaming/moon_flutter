@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/focus_effects.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
@@ -383,13 +384,20 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
       ),
     );
 
-    final Color thumbIconColor= context.moonTheme?.switchTheme.colors.thumbIconColor ?? MoonTypography.light.colors.bodyPrimary;
-
-    final Color activeTextColor =
+    final Color effectiveActiveTextColor =
         context.moonTheme?.switchTheme.colors.activeTextColor ?? MoonTypography.dark.colors.bodyPrimary;
 
-    final Color inactiveTextColor =
+    final Color effectiveInactiveTextColor =
         context.moonTheme?.switchTheme.colors.inactiveTextColor ?? MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveActiveIconColor =
+        context.moonTheme?.switchTheme.colors.activeIconColor ?? MoonIconTheme.dark.colors.primaryColor;
+
+    final Color effectiveInactiveIconColor =
+        context.moonTheme?.switchTheme.colors.inactiveIconColor ?? MoonIconTheme.light.colors.primaryColor;
+
+    final Color effectiveThumbIconColor =
+        context.moonTheme?.switchTheme.colors.thumbIconColor ?? MoonIconTheme.light.colors.primaryColor;
 
     return Semantics(
       label: widget.semanticLabel,
@@ -437,9 +445,14 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconTheme(
-                                  data: IconThemeData(color: activeTextColor),
+                                  data: IconThemeData(
+                                    color: effectiveActiveIconColor,
+                                    size: effectiveMoonSwitchSize.iconSizeValue,
+                                  ),
                                   child: DefaultTextStyle(
-                                    style: TextStyle(color: activeTextColor),
+                                    style: effectiveMoonSwitchSize.textStyle.copyWith(
+                                      color: effectiveActiveTextColor,
+                                    ),
                                     child: Expanded(
                                       child: FadeTransition(
                                         opacity: _activeTrackWidgetFadeAnimation!,
@@ -450,9 +463,14 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                                 ),
                                 SizedBox(width: resolvedDirectionalPadding.left),
                                 IconTheme(
-                                  data: IconThemeData(color: inactiveTextColor),
+                                  data: IconThemeData(
+                                    color: effectiveInactiveIconColor,
+                                    size: effectiveMoonSwitchSize.iconSizeValue,
+                                  ),
                                   child: DefaultTextStyle(
-                                    style: TextStyle(color: inactiveTextColor),
+                                    style: effectiveMoonSwitchSize.textStyle.copyWith(
+                                      color: effectiveInactiveTextColor,
+                                    ),
                                     child: Expanded(
                                       child: FadeTransition(
                                         opacity: _inactiveTrackWidgetFadeAnimation!,
@@ -467,11 +485,13 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                               alignment: _alignmentAnimation!.value,
                               child: IconTheme(
                                 data: IconThemeData(
-                                  color: thumbIconColor,
-                                  size: effectiveThumbSizeValue,
+                                  color: effectiveThumbIconColor,
+                                  size: effectiveMoonSwitchSize.iconSizeValue,
                                 ),
                                 child: DefaultTextStyle(
-                                  style: TextStyle(color: inactiveTextColor),
+                                  style: effectiveMoonSwitchSize.textStyle.copyWith(
+                                    color: effectiveInactiveTextColor,
+                                  ),
                                   child: MoonFocusEffect(
                                     show: _isFocused,
                                     effectColor: effectiveFocusEffectColor,

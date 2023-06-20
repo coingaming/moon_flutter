@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -102,9 +104,16 @@ class MoonToast {
             ? (context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.gohan)
             : (context.moonTheme?.toastTheme.colors.darkVariantBackgroundColor ?? MoonColors.dark.gohan));
 
-    final Color effectiveElementColor = variant == MoonToastVariant.original
+    final Color effectiveTextColor = variant == MoonToastVariant.original
         ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ?? MoonTypography.light.colors.bodyPrimary)
         : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ?? MoonTypography.dark.colors.bodyPrimary);
+
+    final Color effectiveIconColor = variant == MoonToastVariant.original
+        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ?? MoonIconTheme.light.colors.primaryColor)
+        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ?? MoonIconTheme.dark.colors.primaryColor);
+
+    final TextStyle effectiveTextStyle =
+        context.moonTheme?.toastTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
 
     final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
 
@@ -162,11 +171,9 @@ class MoonToast {
             Semantics(
               label: semanticLabel,
               child: IconTheme(
-                data: IconThemeData(
-                  color: effectiveElementColor,
-                ),
+                data: IconThemeData(color: effectiveIconColor),
                 child: DefaultTextStyle(
-                  style: DefaultTextStyle.of(context).style.copyWith(color: effectiveElementColor),
+                  style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                   child: Container(
                     margin: margin ?? resolvedContentPadding,
                     padding: resolvedContentPadding,

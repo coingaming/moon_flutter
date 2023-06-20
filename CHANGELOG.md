@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.22.9](https://github.com/coingaming/moon_flutter/compare/v0.22.8...v0.22.9) (2023-06-20)
+
+
+### Bug Fixes
+
+* [MDS-564] Remove vector_math transitive dependency ([#196](https://github.com/coingaming/moon_flutter/issues/196)) ([fa8490a](https://github.com/coingaming/moon_flutter/commit/fa8490adc54cbf9e32d7de4324fb107be143aa9e))
+
+## [0.22.8](https://github.com/coingaming/moon_flutter/compare/v0.22.7...v0.22.8) (2023-06-20)
+
+
+### Bug Fixes
+
+* [MDS-562] Update the icon font ([#194](https://github.com/coingaming/moon_flutter/issues/194)) ([af43608](https://github.com/coingaming/moon_flutter/commit/af43608b20f4a4efcaa8cfd798ca875145346e86))
+
+## [0.22.7](https://github.com/coingaming/moon_flutter/compare/v0.22.6...v0.22.7) (2023-06-14)
+
+
+### Bug Fixes
+
+* [MDS-551] Add default theming for icons ([#192](https://github.com/coingaming/moon_flutter/issues/192)) ([fc476a0](https://github.com/coingaming/moon_flutter/commit/fc476a0ade1684b2b12e24a5d78f98451db6e1ca))
+
 ## [0.22.6](https://github.com/coingaming/moon_flutter/compare/v0.22.5...v0.22.6) (2023-06-07)
 
 

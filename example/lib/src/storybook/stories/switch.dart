@@ -1,7 +1,6 @@
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -29,7 +28,8 @@ class SwitchStory extends Story {
               label: "thumbColor",
               description: "MoonColors variants for MoonSwitch thumb.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -39,7 +39,8 @@ class SwitchStory extends Story {
               label: "activeTrackColor",
               description: "MoonColors variants for active MoonSwitch track.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -49,7 +50,8 @@ class SwitchStory extends Story {
               label: "inactiveTrackColor",
               description: "MoonColors variants for inactive MoonSwitch track.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -85,22 +87,15 @@ class SwitchStory extends Story {
                   StatefulBuilder(
                     builder: (context, setState) {
                       return MoonSwitch(
-                        activeThumbWidget: const MoonIcon(
-                          MoonIcons.check_alternative_16,
-                          size: 14,
-                        ),
-                        inactiveThumbWidget: const MoonIcon(
-                          MoonIcons.close_16,
-                          size: 12,
-                        ),
-                        activeTrackWidget: Text(
+                        switchSize: switchSizesKnob,
+                        activeThumbWidget: const MoonIcon(MoonIcons.check_alternative_16),
+                        inactiveThumbWidget: const MoonIcon(MoonIcons.close_small_16),
+                        activeTrackWidget: const Text(
                           "ON",
-                          style: MoonTextStyles.caption.text8.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
                           textAlign: TextAlign.center,
                         ),
-                        inactiveTrackWidget: Text(
+                        inactiveTrackWidget: const Text(
                           "OFF",
-                          style: MoonTextStyles.caption.text8.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
                           textAlign: TextAlign.center,
                         ),
                         value: value,
@@ -112,14 +107,9 @@ class SwitchStory extends Story {
                   StatefulBuilder(
                     builder: (context, setState) {
                       return MoonSwitch(
-                        activeTrackWidget: const MoonIcon(
-                          MoonIcons.check_alternative_16,
-                          size: 14,
-                        ),
-                        inactiveTrackWidget: const MoonIcon(
-                          MoonIcons.close_16,
-                          size: 12,
-                        ),
+                        switchSize: switchSizesKnob,
+                        activeTrackWidget: const MoonIcon(MoonIcons.moon_16),
+                        inactiveTrackWidget: const MoonIcon(MoonIcons.sun_16),
                         value: value,
                         onChanged: (newValue) => setState(() => value = newValue),
                       );

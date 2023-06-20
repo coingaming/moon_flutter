@@ -18,7 +18,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
       horizontal: MoonSizes.sizes.x4s,
       vertical: MoonSizes.sizes.x6s,
     ),
-    textStyle: MoonTextStyles.body.text14,
+    textStyle: MoonTextStyles.body.textDefault,
   );
 
   static final md = MoonTextInputSizeProperties(
@@ -30,7 +30,7 @@ class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProper
       horizontal: MoonSizes.sizes.x3s,
       vertical: 6,
     ),
-    textStyle: MoonTextStyles.body.text14,
+    textStyle: MoonTextStyles.body.textDefault,
   );
 
   static final lg = MoonTextInputSizeProperties(

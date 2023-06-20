@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/borders.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
 
 @immutable
 class MoonModalProperties extends ThemeExtension<MoonModalProperties> with DiagnosticableTreeMixin {
@@ -9,6 +10,7 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
     borderRadius: MoonBorders.borders.surfaceSm,
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
+    textStyle: MoonTextStyles.body.textDefault,
   );
 
   /// Modal border radius.
@@ -20,10 +22,14 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
   /// Modal transition curve.
   final Curve transitionCurve;
 
+  /// Modal text style.
+  final TextStyle textStyle;
+
   const MoonModalProperties({
     required this.borderRadius,
     required this.transitionDuration,
     required this.transitionCurve,
+    required this.textStyle,
   });
 
   @override
@@ -31,11 +37,13 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
     BorderRadiusGeometry? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
+    TextStyle? textStyle,
   }) {
     return MoonModalProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
+      textStyle: textStyle ?? this.textStyle,
     );
   }
 
@@ -47,6 +55,7 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
       borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
+      textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
 
@@ -57,6 +66,7 @@ class MoonModalProperties extends ThemeExtension<MoonModalProperties> with Diagn
       ..add(DiagnosticsProperty("type", "MoonModalProperties"))
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
+      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
+      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

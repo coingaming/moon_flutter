@@ -35,11 +35,34 @@ class ToastStory extends Story {
               ],
             );
 
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "Text color",
+              description: "MoonColors variants for MoonToast text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
+            final iconColorsKnob = context.knobs.nullable.options(
+              label: "Icon color",
+              description: "MoonColors variants for MoonToast icon.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final iconColor = colorTable(context)[iconColorsKnob ?? 40];
+
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonToast background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -81,9 +104,12 @@ class ToastStory extends Story {
                                 displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
                             borderRadius:
                                 borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                            leading: const MoonIcon(MoonIcons.info_24),
-                            title: Text(customLabelTextKnob),
-                            trailing: const MoonIcon(MoonIcons.star_24),
+                            leading: MoonIcon(MoonIcons.info_24, color: iconColor),
+                            title: Text(
+                              customLabelTextKnob,
+                              style: TextStyle(color: textColor),
+                            ),
+                            trailing: MoonIcon(MoonIcons.star_24, color: iconColor),
                           );
                         },
                       );

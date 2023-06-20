@@ -11,6 +11,7 @@ export 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 export 'package:moon_design/src/theme/chip/chip_theme.dart';
 export 'package:moon_design/src/theme/colors.dart';
 export 'package:moon_design/src/theme/effects/effects.dart';
+export 'package:moon_design/src/theme/icons/icon_theme.dart';
 export 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 export 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
 export 'package:moon_design/src/theme/modal/modal_theme.dart';

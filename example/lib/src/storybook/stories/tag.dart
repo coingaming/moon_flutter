@@ -25,20 +25,33 @@ class TagStory extends Story {
             );
 
             final textColorsKnob = context.knobs.nullable.options(
-              label: "textColor",
+              label: "Text color",
               description: "MoonColors variants for MoonTag text.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
             final textColor = colorTable(context)[textColorsKnob ?? 40];
 
+            final iconColorsKnob = context.knobs.nullable.options(
+              label: "Icon color",
+              description: "MoonColors variants for MoonTag icon.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final iconColor = colorTable(context)[iconColorsKnob ?? 40];
+
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonTag background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -84,13 +97,15 @@ class TagStory extends Story {
                     onTap: () {},
                     tagSize: tagSizesKnob,
                     isUpperCase: setUpperCase,
-                    textColor: textColor,
                     backgroundColor: backgroundColor,
-                    leading: showLeadingKnob ? const MoonIcon(MoonIcons.close_small_16) : null,
+                    leading: showLeadingKnob ? MoonIcon(MoonIcons.close_small_16, color: iconColor) : null,
                     label: showLabelKnob
-                        ? Text(setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob)
+                        ? Text(
+                            setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob,
+                            style: TextStyle(color: textColor),
+                          )
                         : null,
-                    trailing: showTrailingKnob ? const MoonIcon(MoonIcons.close_small_16) : null,
+                    trailing: showTrailingKnob ? MoonIcon(MoonIcons.close_small_16, color: iconColor) : null,
                   ),
                   const SizedBox(height: 64),
                 ],

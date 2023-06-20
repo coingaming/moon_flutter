@@ -16,7 +16,7 @@ class MoonTabBarSizeProperties extends ThemeExtension<MoonTabBarSizeProperties> 
     iconSizeValue: MoonSizes.sizes.xs,
     indicatorHeight: MoonSizes.sizes.x6s,
     tabPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.heading.textDefault,
   );
 
   static final md = MoonTabBarSizeProperties(
@@ -26,7 +26,7 @@ class MoonTabBarSizeProperties extends ThemeExtension<MoonTabBarSizeProperties> 
     iconSizeValue: MoonSizes.sizes.xs,
     indicatorHeight: MoonSizes.sizes.x6s,
     tabPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.heading.text14,
+    textStyle: MoonTextStyles.heading.textDefault,
   );
 
   /// TabBar pill tab border radius.

@@ -17,11 +17,23 @@ class RadioStory extends Story {
       : super(
           name: "Radio",
           builder: (context) {
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "Text color",
+              description: "MoonColors variants for MoonRadio with label text.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
+
             final activeColorsKnob = context.knobs.nullable.options(
               label: "activeColor",
               description: "MoonColors variants for checked MoonRadio.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -31,7 +43,8 @@ class RadioStory extends Story {
               label: "inactiveColor",
               description: "MoonColors variants for unchecked MoonRadio.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -78,6 +91,7 @@ class RadioStory extends Story {
                       const SizedBox(height: 32),
                       MoonRadio.withLabel(
                         context,
+                        textStyle: TextStyle(color: textColor),
                         value: ChoiceLabel.first,
                         groupValue: valueLabel,
                         label: "With label #1",
@@ -87,6 +101,7 @@ class RadioStory extends Story {
                       const SizedBox(height: 8),
                       MoonRadio.withLabel(
                         context,
+                        textStyle: TextStyle(color: textColor),
                         value: ChoiceLabel.second,
                         groupValue: valueLabel,
                         label: "With label #2",

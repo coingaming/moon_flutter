@@ -20,16 +20,16 @@ class MoonTextColors extends ThemeExtension<MoonTextColors> with DiagnosticableT
     controlSecondary: MoonColors.dark.popo,
   );
 
-  /// Primary body text and icon color.
+  /// Primary body text color.
   final Color bodyPrimary;
 
-  /// Primary body text and icon color.
+  /// Primary body text color.
   final Color bodySecondary;
 
-  /// Primary control element (button, chip, etc) text and icon color.
+  /// Primary control element (button, chip, etc) text color.
   final Color controlPrimary;
 
-  /// Secondary control element (button, chip, etc) text and icon color.
+  /// Secondary control element (button, chip, etc) text color.
   final Color controlSecondary;
 
   const MoonTextColors({
