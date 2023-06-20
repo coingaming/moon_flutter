@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
-import 'package:vector_math/vector_math.dart' as vector;
 
 // The article from figma's blog
 // https://www.figma.com/blog/desperately-seeking-squircles/
@@ -24,6 +23,12 @@ class ProcessedSquircleRadius {
     required double width,
     required double height,
   }) {
+    /// Constant factor to convert and angle from degrees to radians.
+    const double degrees2Radians = math.pi / 180.0;
+
+    /// Convert [degrees] to radians.
+    double radians(double degrees) => degrees * degrees2Radians;
+
     final cornerSmoothing = radius.cornerSmoothing;
     var cornerRadius = radius.cornerRadius;
 
@@ -55,14 +60,14 @@ class ProcessedSquircleRadius {
 
     // This was called `h_longest` in the original code
     // In the article this is the distance between 2 control points: P3 and P4
-    final p3ToP4Distance = cornerRadius * math.tan(vector.radians(angleTheta / 2));
+    final p3ToP4Distance = cornerRadius * math.tan(radians(angleTheta / 2));
 
     // This was called `l` in the original code
-    final circularSectionLength = math.sin(vector.radians(angleBeta / 2)) * cornerRadius * math.sqrt(2);
+    final circularSectionLength = math.sin(radians(angleBeta / 2)) * cornerRadius * math.sqrt(2);
 
     // a, b, c and d are from 11.1 in the article
-    final c = p3ToP4Distance * math.cos(vector.radians(angleAlpha));
-    final d = c * math.tan(vector.radians(angleAlpha));
+    final c = p3ToP4Distance * math.cos(radians(angleAlpha));
+    final d = c * math.tan(radians(angleAlpha));
     final b = (p - circularSectionLength - c - d) / 3;
     final a = 2 * b;
 
