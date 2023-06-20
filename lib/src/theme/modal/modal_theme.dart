@@ -16,10 +16,10 @@ class MoonModalTheme extends ThemeExtension<MoonModalTheme> with DiagnosticableT
     properties: MoonModalProperties.properties,
   );
 
-  /// Checkbox colors.
+  /// Modal colors.
   final MoonModalColors colors;
 
-  /// Checkbox properties.
+  /// Modal properties.
   final MoonModalProperties properties;
 
   const MoonModalTheme({

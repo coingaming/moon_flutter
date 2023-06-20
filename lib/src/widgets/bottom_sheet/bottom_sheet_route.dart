@@ -220,7 +220,7 @@ class BottomSheetRoute<T> extends PageRoute<T> {
 }
 
 /// Shows a modal Moon Design bottom sheet.
-Future<T?> showMoonBottomSheet<T>({
+Future<T?> showMoonModalBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
   required WidgetWithChildBuilder containerWidget,
