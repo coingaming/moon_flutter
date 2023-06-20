@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.9](https://github.com/coingaming/moon_flutter/compare/v0.22.8...v0.22.9) (2023-06-20)
+
+
+### Bug Fixes
+
+* [MDS-564] Remove vector_math transitive dependency ([#196](https://github.com/coingaming/moon_flutter/issues/196)) ([fa8490a](https://github.com/coingaming/moon_flutter/commit/fa8490adc54cbf9e32d7de4324fb107be143aa9e))
+
 ## [0.22.8](https://github.com/coingaming/moon_flutter/compare/v0.22.7...v0.22.8) (2023-06-20)
 
 
