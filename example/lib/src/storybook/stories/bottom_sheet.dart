@@ -38,6 +38,9 @@ class BottomSheetStory extends Story {
 
             Future<dynamic> bottomSheetBuilder(BuildContext context) {
               return showMoonModalBottomSheet(
+                backgroundColor: backgroundColor,
+                barrierColor: barrierColor,
+                borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                 context: context,
                 enableDrag: true,
                 isDismissible: true,
@@ -47,18 +50,32 @@ class BottomSheetStory extends Story {
                     children: [
                       Center(
                         child: Container(
+                          margin: const EdgeInsets.only(
+                            top: 8,
+                            bottom: 16,
+                          ),
+                          height: 4,
                           width: 41,
-                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          decoration: ShapeDecoration(
+                            color: context.moonTheme!.colors.beerus,
+                            shape: const StadiumBorder(),
+                          ),
                         ),
                       ),
-                      ListView.builder(
-                        itemCount: 100,
-                        itemBuilder: (_, index) => Container(
-                          height: 4,
-                          padding: const EdgeInsets.all(16),
-                          //color: index.isOdd ? Colors.red : Colors.blue,
-                          child: Row(
-                            children: [Text("Item nr:"), const Spacer(), Text("$index")],
+                      Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          itemCount: 100,
+                          itemBuilder: (_, index) => Container(
+                            color: Colors.transparent,
+                            padding: const EdgeInsets.all(16),
+                            child: Row(
+                              children: [
+                                const Text("Item nr:"),
+                                const Spacer(),
+                                Text("$index"),
+                              ],
+                            ),
                           ),
                         ),
                       ),

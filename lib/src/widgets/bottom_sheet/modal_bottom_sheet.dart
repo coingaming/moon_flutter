@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,10 @@ Future<T?> showMoonModalBottomSheet<T>({
   bool isExpanded = false,
   bool isDismissible = true,
   bool useRootNavigator = false,
+  BorderRadiusGeometry? borderRadius,
+  Color? backgroundColor,
   Color? barrierColor,
+  Decoration? decoration,
   double? closeProgressThreshold,
   RouteSettings? settings,
   Duration? transitionDuration,
@@ -44,6 +48,9 @@ Future<T?> showMoonModalBottomSheet<T>({
   final result = await Navigator.of(context, rootNavigator: useRootNavigator).push(
     MoonModalBottomSheetRoute<T>(
       barrierLabel: barrierLabel,
+      borderRadius: borderRadius,
+      backgroundColor: backgroundColor,
+      decoration: decoration,
       themes: themes,
       animationController: animationController,
       hasBounce: hasBounce,
@@ -70,8 +77,11 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
   final bool isExpanded;
   final bool hasBounce;
   final bool isDismissible;
+  final BorderRadiusGeometry? borderRadius;
   final CapturedThemes? themes;
+  final Color? backgroundColor;
   final Color? modalBarrierColor;
+  final Decoration? decoration;
   final double? closeProgressThreshold;
   final ScrollController? scrollController;
   final Duration? animationDuration;
@@ -86,8 +96,11 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
     required this.isExpanded,
     this.hasBounce = false,
     this.isDismissible = true,
+    this.borderRadius,
     this.themes,
+    this.backgroundColor,
     this.modalBarrierColor,
+    this.decoration,
     this.closeProgressThreshold,
     this.scrollController,
     this.animationDuration,
@@ -143,7 +156,10 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
     final Widget bottomSheet = MediaQuery.removePadding(
       context: context,
       child: _ModalBottomSheet<T>(
+        borderRadius: borderRadius,
         animationController: animationController,
+        backgroundColor: backgroundColor,
+        decoration: decoration,
         hasBounce: hasBounce,
         enableDrag: enableDrag,
         isExpanded: isExpanded,
@@ -160,9 +176,12 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
 
 class _ModalBottomSheet<T> extends StatefulWidget {
   final AnimationController? animationController;
+  final BorderRadiusGeometry? borderRadius;
   final bool hasBounce;
   final bool enableDrag;
   final bool isExpanded;
+  final Color? backgroundColor;
+  final Decoration? decoration;
   final double? closeProgressThreshold;
   final Duration? transitionDuration;
   final Curve? transitionCurve;
@@ -171,9 +190,12 @@ class _ModalBottomSheet<T> extends StatefulWidget {
   const _ModalBottomSheet({
     super.key,
     this.animationController,
+    this.borderRadius,
     this.hasBounce = false,
     this.enableDrag = true,
     this.isExpanded = false,
+    this.backgroundColor,
+    this.decoration,
     this.closeProgressThreshold,
     this.transitionDuration,
     this.transitionCurve,
@@ -233,6 +255,7 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
 
   @override
   Widget build(BuildContext context) {
+    log(widget.backgroundColor.toString());
     assert(debugCheckHasMediaQuery(context));
     assert(widget.route._animationController != null);
 
@@ -251,6 +274,9 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
               namesRoute: true,
               scopesRoute: true,
               child: MoonBottomSheet(
+                backgroundColor: widget.backgroundColor,
+                decoration: widget.decoration,
+                borderRadius: widget.borderRadius,
                 animationController: widget.route._animationController!,
                 enableDrag: widget.enableDrag,
                 hasBounce: widget.hasBounce,
