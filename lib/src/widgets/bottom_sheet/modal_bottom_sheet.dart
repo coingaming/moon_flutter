@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -255,7 +254,6 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
 
   @override
   Widget build(BuildContext context) {
-    log(widget.backgroundColor.toString());
     assert(debugCheckHasMediaQuery(context));
     assert(widget.route._animationController != null);
 
