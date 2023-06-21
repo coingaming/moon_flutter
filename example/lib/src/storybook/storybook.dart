@@ -3,6 +3,7 @@ import 'package:example/src/storybook/stories/accordion.dart';
 import 'package:example/src/storybook/stories/alert.dart';
 import 'package:example/src/storybook/stories/authcode.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
+import 'package:example/src/storybook/stories/bottom_sheet.dart';
 import 'package:example/src/storybook/stories/button.dart';
 import 'package:example/src/storybook/stories/checkbox.dart';
 import 'package:example/src/storybook/stories/chip.dart';
@@ -84,6 +85,7 @@ class StorybookPage extends StatelessWidget {
             AlertStory(),
             AuthCodeStory(),
             AvatarStory(),
+            BottomSheetStory(),
             ButtonStory(),
             CheckboxStory(),
             ChipStory(),
