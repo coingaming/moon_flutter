@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.0](https://github.com/coingaming/moon_flutter/compare/v0.22.9...v0.23.0) (2023-06-21)
+
+
+### Features
+
+* [MDS-552] Create BottomSheet widget ([#198](https://github.com/coingaming/moon_flutter/issues/198)) ([d0ec518](https://github.com/coingaming/moon_flutter/commit/d0ec518815280b54f375c87cae52737ebe620f95))
+
 ## [0.22.9](https://github.com/coingaming/moon_flutter/compare/v0.22.8...v0.22.9) (2023-06-20)
 
 
