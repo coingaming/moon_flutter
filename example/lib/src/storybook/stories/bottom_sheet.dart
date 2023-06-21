@@ -43,7 +43,7 @@ class BottomSheetStory extends Story {
                 context: context,
                 enableDrag: true,
                 isDismissible: true,
-                containerWidget: (context, animation, child) => Container(
+                containerBuilder: (context, animation, child) => Container(
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(/* borderRadiusKnob?.toDouble() ?? */ 32),

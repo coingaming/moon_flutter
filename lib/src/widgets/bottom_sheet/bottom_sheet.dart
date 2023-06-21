@@ -32,11 +32,11 @@ class MoonBottomSheet extends StatefulWidget {
   /// The curve used by the animation showing and dismissing the bottom sheet.
   ///
   /// If no curve is provided it falls back to `decelerateEasing`.
-  final Curve? animationCurve;
+  final Curve? transitionCurve;
 
   /// Allows the bottom sheet to go beyond the top boundary of the content, but then bounces the content back to the
   /// edge of the top boundary.
-  final bool bounce;
+  final bool hasBounce;
 
   // Force the widget to fill the maximum size of the viewport or if false it will fit to the content of the widget.
   final bool isExpanded;
@@ -77,10 +77,10 @@ class MoonBottomSheet extends StatefulWidget {
   const MoonBottomSheet({
     super.key,
     required this.animationController,
-    this.animationCurve,
+    this.transitionCurve,
     this.enableDrag = true,
     this.containerBuilder,
-    this.bounce = true,
+    this.hasBounce = true,
     this.shouldClose,
     required this.scrollController,
     required this.isExpanded,
@@ -122,7 +122,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
   DateTime? _startTime;
 
-  ParametricCurve<double> animationCurve = Curves.linear;
+  ParametricCurve<double> transitionCurve = Curves.linear;
 
   // As we cannot access the DragGesture detector of the scroll view we can not know the DragDownDetails and therefore
   // the end velocity. VelocityTracker is used to calculate the end velocity of the scroll when user is trying to close
@@ -132,7 +132,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
   bool get _dismissUnderway => widget.animationController.status == AnimationStatus.reverse;
   bool get _hasReachedWillPopThreshold => widget.animationController.value < _willPopThreshold;
   bool get _hasReachedCloseThreshold => widget.animationController.value < widget.closeProgressThreshold;
-  Curve get _defaultCurve => widget.animationCurve ?? _decelerateEasing;
+  Curve get _defaultCurve => widget.transitionCurve ?? _decelerateEasing;
   ScrollController get _scrollController => widget.scrollController;
 
   double? get _childHeight {
@@ -171,7 +171,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
   Future<void> _handleDragUpdate(double primaryDelta) async {
     assert(widget.enableDrag, 'Dragging is disabled');
 
-    animationCurve = Curves.linear;
+    transitionCurve = Curves.linear;
 
     if (_dismissUnderway) return;
     _isDragging = true;
@@ -192,11 +192,11 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
     }
 
     // Bounce at the top boundary
-    final bounce = widget.bounce == true;
+    final hasBounce = widget.hasBounce == true;
     final shouldBounce = _bounceDragController.value > 0;
     final isBouncing = (widget.animationController.value - progress) > 1;
 
-    if (bounce && (shouldBounce || isBouncing)) {
+    if (hasBounce && (shouldBounce || isBouncing)) {
       _bounceDragController.value -= progress * 10;
       return;
     }
@@ -207,7 +207,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
   Future<void> _handleDragEnd(double velocity) async {
     assert(widget.enableDrag, 'Dragging is disabled');
 
-    animationCurve = BottomSheetSuspendedCurve(
+    transitionCurve = BottomSheetSuspendedCurve(
       widget.animationController.value,
       curve: _defaultCurve,
     );
@@ -320,7 +320,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
   @override
   void initState() {
-    animationCurve = _defaultCurve;
+    transitionCurve = _defaultCurve;
     _bounceDragController = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
 
     super.initState();
@@ -348,7 +348,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
       builder: (context, Widget? child) {
         assert(child != null);
 
-        final animationValue = animationCurve.transform(widget.animationController.value);
+        final animationValue = transitionCurve.transform(widget.animationController.value);
 
         final draggableChild = !widget.enableDrag
             ? child
