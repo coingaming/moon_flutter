@@ -3,6 +3,16 @@ import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/borders.dart';
+import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
+import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/utils/bottom_sheet_suspended_curve.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/utils/scroll_to_top_status_bar.dart';
 
@@ -20,6 +30,18 @@ typedef WidgetWithChildBuilder = Widget Function(BuildContext context, Animation
 /// The [MoonBottomSheet] widget itself is rarely used directly. Instead, prefer to create a modal bottom sheet
 /// with [showMoonBottomSheet].
 class MoonBottomSheet extends StatefulWidget {
+  /// The border radius of the bottom sheet.
+  final BorderRadiusGeometry? borderRadius;
+
+  /// The background color of the bottom sheet.
+  final Color? backgroundColor;
+
+  /// Custom decoration for the bottom sheet.
+  final Decoration? decoration;
+
+  /// The semantic label for the bottom sheet.
+  final String? semanticLabel;
+
   /// The closeProgressThreshold parameter
   /// specifies when the bottom sheet will be dismissed when user drags it.
   final double closeProgressThreshold;
@@ -29,9 +51,10 @@ class MoonBottomSheet extends StatefulWidget {
   /// The BottomSheet widget will manipulate the position of this animation.
   final AnimationController animationController;
 
-  /// The curve used by the animation showing and dismissing the bottom sheet.
-  ///
-  /// If no curve is provided it falls back to `decelerateEasing`.
+  /// The duration of the animation for showing and dismissing the bottom sheet.
+  final Duration? transitionDuration;
+
+  /// The curve used by the animation for showing and dismissing the bottom sheet.
   final Curve? transitionCurve;
 
   /// Allows the bottom sheet to go beyond the top boundary of the content, but then bounces the content back to the
@@ -40,8 +63,6 @@ class MoonBottomSheet extends StatefulWidget {
 
   // Force the widget to fill the maximum size of the viewport or if false it will fit to the content of the widget.
   final bool isExpanded;
-
-  final WidgetWithChildBuilder? containerBuilder;
 
   /// Called when the bottom sheet begins to close.
   ///
@@ -79,7 +100,6 @@ class MoonBottomSheet extends StatefulWidget {
     required this.animationController,
     this.transitionCurve,
     this.enableDrag = true,
-    this.containerBuilder,
     this.hasBounce = true,
     this.shouldClose,
     required this.scrollController,
@@ -89,6 +109,11 @@ class MoonBottomSheet extends StatefulWidget {
     this.minFlingVelocity = _minFlingVelocity,
     double? closeProgressThreshold,
     this.willPopThreshold = _willPopThreshold,
+    this.borderRadius,
+    this.backgroundColor,
+    this.decoration,
+    this.semanticLabel,
+    this.transitionDuration,
   }) : closeProgressThreshold = closeProgressThreshold ?? _closeProgressThreshold;
 
   @override
@@ -117,11 +142,9 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
   // Used in NotificationListener to detect what the ScrollNotifications are before or after the user stop dragging.
   bool _isDragging = false;
-
   bool _isCheckingShouldClose = false;
 
   DateTime? _startTime;
-
   ParametricCurve<double> transitionCurve = Curves.linear;
 
   // As we cannot access the DragGesture detector of the scroll view we can not know the DragDownDetails and therefore
@@ -328,70 +351,97 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
   @override
   Widget build(BuildContext context) {
+    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ??
+        context.moonTheme?.bottomSheetTheme.properties.borderRadius ??
+        MoonBorders.borders.surfaceSm;
+
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonTheme?.bottomSheetTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveTextColor =
+        context.moonTheme?.bottomSheetTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveIconColor =
+        context.moonTheme?.bottomSheetTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+
+    final TextStyle effectiveTextStyle =
+        context.moonTheme?.bottomSheetTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+
     final bounceAnimation = CurvedAnimation(
       parent: _bounceDragController,
       curve: Curves.easeOutSine,
     );
 
-    Widget child = widget.child;
+    return ScrollToTopStatusBarHandler(
+      scrollController: _scrollController,
+      child: AnimatedBuilder(
+        animation: widget.animationController,
+        builder: (context, Widget? child) {
+          assert(child != null);
 
-    if (widget.containerBuilder != null) {
-      child = widget.containerBuilder!(
-        context,
-        widget.animationController,
-        child,
-      );
-    }
+          final animationValue = transitionCurve.transform(widget.animationController.value);
 
-    child = AnimatedBuilder(
-      animation: widget.animationController,
-      builder: (context, Widget? child) {
-        assert(child != null);
-
-        final animationValue = transitionCurve.transform(widget.animationController.value);
-
-        final draggableChild = !widget.enableDrag
-            ? child
-            : KeyedSubtree(
-                key: _childKey,
-                child: AnimatedBuilder(
-                  animation: bounceAnimation,
-                  builder: (context, _) => CustomSingleChildLayout(
-                    delegate: _BottomSheetChildLayout(bounceAnimation.value),
-                    child: GestureDetector(
-                      onVerticalDragUpdate: (details) => _handleDragUpdate(details.delta.dy),
-                      onVerticalDragEnd: (details) => _handleDragEnd(details.primaryVelocity ?? 0),
-                      child: NotificationListener<ScrollNotification>(
-                        onNotification: (ScrollNotification notification) {
-                          _handleScrollUpdate(notification);
-                          return false;
-                        },
-                        child: child!,
+          final draggableChild = !widget.enableDrag
+              ? child
+              : KeyedSubtree(
+                  key: _childKey,
+                  child: AnimatedBuilder(
+                    animation: bounceAnimation,
+                    builder: (context, _) => CustomSingleChildLayout(
+                      delegate: _BottomSheetChildLayout(bounceAnimation.value),
+                      child: GestureDetector(
+                        onVerticalDragUpdate: (details) => _handleDragUpdate(details.delta.dy),
+                        onVerticalDragEnd: (details) => _handleDragEnd(details.primaryVelocity ?? 0),
+                        child: NotificationListener<ScrollNotification>(
+                          onNotification: (ScrollNotification notification) {
+                            _handleScrollUpdate(notification);
+                            return false;
+                          },
+                          child: child!,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
+                );
 
-        return ClipRect(
-          child: CustomSingleChildLayout(
-            delegate: _ModalBottomSheetLayout(
-              progress: animationValue,
-              isExpanded: widget.isExpanded,
+          return ClipRect(
+            child: CustomSingleChildLayout(
+              delegate: _ModalBottomSheetLayout(
+                progress: animationValue,
+                isExpanded: widget.isExpanded,
+              ),
+              child: draggableChild,
             ),
-            child: draggableChild,
+          );
+        },
+        child: ScrollConfiguration(
+          behavior: const MaterialScrollBehavior().copyWith(overscroll: false),
+          child: RepaintBoundary(
+            child: Semantics(
+              label: widget.semanticLabel,
+              child: IconTheme(
+                data: IconThemeData(color: effectiveIconColor),
+                child: DefaultTextStyle(
+                  style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                  child: Container(
+                    decoration: widget.decoration ??
+                        ShapeDecorationWithPremultipliedAlpha(
+                          color: effectiveBackgroundColor,
+                          shape: MoonSquircleBorder(
+                            borderRadius: MoonSquircleBorderRadius.only(
+                              topLeft: effectiveBorderRadius.squircleBorderRadius(context).topLeft,
+                              topRight: effectiveBorderRadius.squircleBorderRadius(context).topRight,
+                            ),
+                          ),
+                        ),
+                    child: widget.child,
+                  ),
+                ),
+              ),
+            ),
           ),
-        );
-      },
-      child: ScrollConfiguration(
-        behavior: const MaterialScrollBehavior().copyWith(overscroll: false),
-        child: RepaintBoundary(child: child),
+        ),
       ),
-    );
-
-    return ScrollToTopStatusBarHandler(
-      scrollController: _scrollController,
-      child: child,
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 @immutable
 class MoonBottomSheetProperties extends ThemeExtension<MoonBottomSheetProperties> with DiagnosticableTreeMixin {
   static final properties = MoonBottomSheetProperties(
-    borderRadius: MoonBorders.borders.surfaceSm,
+    borderRadius: MoonBorders.borders.surfaceLg,
     transitionDuration: const Duration(milliseconds: 200),
     transitionCurve: Curves.easeInOutCubic,
     textStyle: MoonTextStyles.body.textDefault,

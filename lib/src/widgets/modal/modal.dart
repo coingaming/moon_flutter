@@ -77,9 +77,8 @@ bool _debugIsActive(BuildContext context) {
 }
 
 class MoonModalRoute<T> extends RawDialogRoute<T> {
-  /// A MDS modal route with entrance and exit animations,
-  /// modal barrier color, and modal barrier behavior (modal is dismissible
-  /// with a tap on the barrier).
+  /// A MDS modal route with entrance and exit animations, modal barrier color, and modal barrier behavior
+  /// (modal is dismissible with a tap on the barrier).
   MoonModalRoute({
     super.anchorPoint,
     required super.barrierColor,

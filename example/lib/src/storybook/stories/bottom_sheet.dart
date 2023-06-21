@@ -38,22 +38,31 @@ class BottomSheetStory extends Story {
 
             Future<dynamic> bottomSheetBuilder(BuildContext context) {
               return showMoonModalBottomSheet(
-                barrierColor: Colors.yellow.withOpacity(0.5),
-                backgroundColor: Colors.red.withOpacity(0.5),
                 context: context,
                 enableDrag: true,
                 isDismissible: true,
-                containerBuilder: (context, animation, child) => Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(/* borderRadiusKnob?.toDouble() ?? */ 32),
-                  ),
-                  child: child,
-                ),
-                builder: (context) => ListView.builder(
-                  itemBuilder: (_, index) => Container(
-                    //color: index.isOdd ? Colors.red : Colors.blue,
-                    child: Text(index.toString()),
+                builder: (context) => SizedBox(
+                  height: 600,
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Container(
+                          width: 41,
+                          decoration: BoxDecoration(shape: BoxShape.circle),
+                        ),
+                      ),
+                      ListView.builder(
+                        itemCount: 100,
+                        itemBuilder: (_, index) => Container(
+                          height: 4,
+                          padding: const EdgeInsets.all(16),
+                          //color: index.isOdd ? Colors.red : Colors.blue,
+                          child: Row(
+                            children: [Text("Item nr:"), const Spacer(), Text("$index")],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );

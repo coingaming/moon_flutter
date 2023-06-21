@@ -6,24 +6,19 @@ import 'package:moon_design/moon_design.dart';
 
 /// Shows a modal Moon Design bottom sheet.
 Future<T?> showMoonModalBottomSheet<T>({
-  AnimationController? secondAnimation,
+  AnimationController? animationController,
   bool hasBounce = false,
   bool enableDrag = true,
   bool isExpanded = false,
   bool isDismissible = true,
   bool useRootNavigator = false,
-  Clip? clipBehavior,
-  Color? backgroundColor,
   Color? barrierColor,
-  Curve? transitionCurve,
   double? closeProgressThreshold,
-  double? elevation,
-  Duration? duration,
   RouteSettings? settings,
-  ShapeBorder? shape,
+  Duration? transitionDuration,
+  Curve? transitionCurve,
   required BuildContext context,
   required WidgetBuilder builder,
-  required WidgetWithChildBuilder containerBuilder,
 }) async {
   assert(debugCheckHasMediaQuery(context));
   assert(debugCheckHasMaterialLocalizations(context));
@@ -36,64 +31,69 @@ Future<T?> showMoonModalBottomSheet<T>({
     to: Navigator.of(context, rootNavigator: useRootNavigator).context,
   );
 
+  final Color effectiveBarrierColor =
+      barrierColor ?? context.moonTheme?.bottomSheetTheme.colors.barrierColor ?? MoonColors.light.zeno;
+
+  final Duration effectiveTransitionDuration = transitionDuration ??
+      context.moonTheme?.bottomSheetTheme.properties.transitionDuration ??
+      const Duration(milliseconds: 200);
+
+  final Curve effectiveTransitionCurve =
+      transitionCurve ?? context.moonTheme?.bottomSheetTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+
   final result = await Navigator.of(context, rootNavigator: useRootNavigator).push(
     MoonModalBottomSheetRoute<T>(
-      transitionCurve: transitionCurve,
       barrierLabel: barrierLabel,
-      hasBounce: hasBounce,
-      builder: builder,
-      closeProgressThreshold: closeProgressThreshold,
-      containerBuilder: containerBuilder,
-      duration: duration,
-      enableDrag: enableDrag,
-      expanded: isExpanded,
-      isDismissible: isDismissible,
-      modalBarrierColor: barrierColor,
-      secondAnimationController: secondAnimation,
-      settings: settings,
       themes: themes,
+      animationController: animationController,
+      hasBounce: hasBounce,
+      enableDrag: enableDrag,
+      isExpanded: isExpanded,
+      isDismissible: isDismissible,
+      modalBarrierColor: effectiveBarrierColor,
+      closeProgressThreshold: closeProgressThreshold,
+      settings: settings,
+      animationDuration: effectiveTransitionDuration,
+      animationCurve: effectiveTransitionCurve,
+      builder: builder,
     ),
   );
 
   return result;
 }
 
-const Duration _bottomSheetDuration = Duration(milliseconds: 200);
+//const Duration _bottomSheetDuration = Duration(milliseconds: 200);
 
 class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
+  final AnimationController? animationController;
   final bool enableDrag;
-  final bool expanded;
+  final bool isExpanded;
   final bool hasBounce;
   final bool isDismissible;
-  final bool useSafeArea;
   final CapturedThemes? themes;
   final Color? modalBarrierColor;
-  final Curve? transitionCurve;
   final double? closeProgressThreshold;
-  final Duration duration;
-  final AnimationController? secondAnimationController;
   final ScrollController? scrollController;
+  final Duration? animationDuration;
+  final Curve? animationCurve;
   final WidgetBuilder builder;
-  final WidgetWithChildBuilder? containerBuilder;
 
   MoonModalBottomSheetRoute({
-    this.closeProgressThreshold,
-    this.containerBuilder,
-    required this.builder,
-    this.scrollController,
-    this.barrierLabel,
-    this.secondAnimationController,
-    this.modalBarrierColor,
-    this.isDismissible = true,
-    this.enableDrag = true,
-    required this.expanded,
-    this.hasBounce = false,
-    this.useSafeArea = true,
-    this.transitionCurve,
-    Duration? duration,
     super.settings,
+    this.barrierLabel,
+    this.animationController,
+    this.enableDrag = true,
+    required this.isExpanded,
+    this.hasBounce = false,
+    this.isDismissible = true,
     this.themes,
-  }) : duration = duration ?? _bottomSheetDuration;
+    this.modalBarrierColor,
+    this.closeProgressThreshold,
+    this.scrollController,
+    this.animationDuration,
+    this.animationCurve,
+    required this.builder,
+  });
 
   AnimationController? _animationController;
 
@@ -103,7 +103,7 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
   final String? barrierLabel;
 
   @override
-  Duration get transitionDuration => duration;
+  Duration get transitionDuration => animationDuration ?? const Duration(milliseconds: 200);
 
   @override
   bool get barrierDismissible => isDismissible;
@@ -120,10 +120,12 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
+
     _animationController = MoonBottomSheet.createAnimationController(
       navigator!.overlay!,
       duration: transitionDuration,
     );
+
     return _animationController!;
   }
 
@@ -141,13 +143,14 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
     final Widget bottomSheet = MediaQuery.removePadding(
       context: context,
       child: _ModalBottomSheet<T>(
-        transitionCurve: transitionCurve,
+        animationController: animationController,
         hasBounce: hasBounce,
-        closeProgressThreshold: closeProgressThreshold,
         enableDrag: enableDrag,
-        expanded: expanded,
+        isExpanded: isExpanded,
+        closeProgressThreshold: closeProgressThreshold,
+        transitionDuration: animationDuration,
+        transitionCurve: animationCurve,
         route: this,
-        secondAnimationController: secondAnimationController,
       ),
     );
 
@@ -156,22 +159,24 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
 }
 
 class _ModalBottomSheet<T> extends StatefulWidget {
-  final AnimationController? secondAnimationController;
+  final AnimationController? animationController;
   final bool hasBounce;
   final bool enableDrag;
-  final bool expanded;
-  final Curve? transitionCurve;
+  final bool isExpanded;
   final double? closeProgressThreshold;
+  final Duration? transitionDuration;
+  final Curve? transitionCurve;
   final MoonModalBottomSheetRoute<T> route;
 
   const _ModalBottomSheet({
     super.key,
-    this.secondAnimationController,
+    this.animationController,
     this.hasBounce = false,
     this.enableDrag = true,
-    this.expanded = false,
-    this.transitionCurve,
+    this.isExpanded = false,
     this.closeProgressThreshold,
+    this.transitionDuration,
+    this.transitionCurve,
     required this.route,
   });
 
@@ -200,31 +205,39 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
     }
   }
 
+  Future<bool> _handleShouldClose() async {
+    final willPop = await widget.route.willPop();
+    return willPop != RoutePopDisposition.doNotPop;
+  }
+
+  void _updateController() {
+    final animation = widget.route.animation;
+    if (animation != null) {
+      widget.animationController?.value = animation.value;
+    }
+  }
+
   @override
   void initState() {
-    widget.route.animation?.addListener(updateController);
     super.initState();
+    widget.route.animation?.addListener(_updateController);
   }
 
   @override
   void dispose() {
-    widget.route.animation?.removeListener(updateController);
+    widget.route.animation?.removeListener(_updateController);
     _scrollController?.dispose();
-    super.dispose();
-  }
 
-  void updateController() {
-    final animation = widget.route.animation;
-    if (animation != null) {
-      widget.secondAnimationController?.value = animation.value;
-    }
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     assert(widget.route._animationController != null);
+
     final scrollController = PrimaryScrollController.maybeOf(context) ?? (_scrollController ??= ScrollController());
+
     return PrimaryScrollController(
       controller: scrollController,
       child: Builder(
@@ -233,29 +246,20 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
           builder: (BuildContext context, Widget? child) {
             assert(child != null);
             return Semantics(
-              scopesRoute: true,
-              namesRoute: true,
-              label: _getRouteLabel(),
               explicitChildNodes: true,
+              label: _getRouteLabel(),
+              namesRoute: true,
+              scopesRoute: true,
               child: MoonBottomSheet(
-                closeProgressThreshold: widget.closeProgressThreshold,
-                isExpanded: widget.route.expanded,
-                containerBuilder: widget.route.containerBuilder,
                 animationController: widget.route._animationController!,
-                shouldClose: widget.route._hasScopedWillPopCallback
-                    ? () async {
-                        final willPop = await widget.route.willPop();
-                        return willPop != RoutePopDisposition.doNotPop;
-                      }
-                    : null,
-                onClosing: () {
-                  if (widget.route.isCurrent) {
-                    Navigator.of(context).pop();
-                  }
-                },
                 enableDrag: widget.enableDrag,
                 hasBounce: widget.hasBounce,
+                isExpanded: widget.route.isExpanded,
+                closeProgressThreshold: widget.closeProgressThreshold,
+                onClosing: () => {if (widget.route.isCurrent) Navigator.of(context).pop()},
+                shouldClose: widget.route._hasScopedWillPopCallback ? () => _handleShouldClose() : null,
                 scrollController: scrollController,
+                //transitionDuration: widget.transitionDuration,
                 transitionCurve: widget.transitionCurve,
                 child: child!,
               ),
