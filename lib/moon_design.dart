@@ -55,6 +55,7 @@ export 'package:moon_design/src/widgets/buttons/button.dart';
 export 'package:moon_design/src/widgets/buttons/filled_button.dart';
 export 'package:moon_design/src/widgets/buttons/outlined_button.dart';
 export 'package:moon_design/src/widgets/buttons/text_button.dart';
+export 'package:moon_design/src/widgets/carousel/carousel.dart';
 export 'package:moon_design/src/widgets/checkbox/checkbox.dart';
 export 'package:moon_design/src/widgets/chips/chip.dart';
 export 'package:moon_design/src/widgets/common/animated_icon_theme.dart';

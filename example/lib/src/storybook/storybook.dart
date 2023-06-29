@@ -5,6 +5,7 @@ import 'package:example/src/storybook/stories/authcode.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/bottom_sheet.dart';
 import 'package:example/src/storybook/stories/button.dart';
+import 'package:example/src/storybook/stories/carousel.dart';
 import 'package:example/src/storybook/stories/checkbox.dart';
 import 'package:example/src/storybook/stories/chip.dart';
 import 'package:example/src/storybook/stories/circular_loader.dart';
@@ -48,7 +49,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Accordion",
+          initialStory: "Carousel",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (context, child) => MaterialApp(
@@ -87,6 +88,7 @@ class StorybookPage extends StatelessWidget {
             AvatarStory(),
             BottomSheetStory(),
             ButtonStory(),
+            CarouselStory(),
             CheckboxStory(),
             ChipStory(),
             CircularLoaderStory(),
