@@ -8,6 +8,7 @@ export 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 export 'package:moon_design/src/theme/borders.dart';
 export 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_theme.dart';
 export 'package:moon_design/src/theme/button/button_theme.dart';
+export 'package:moon_design/src/theme/carousel/carousel_theme.dart';
 export 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 export 'package:moon_design/src/theme/chip/chip_theme.dart';
 export 'package:moon_design/src/theme/colors.dart';
