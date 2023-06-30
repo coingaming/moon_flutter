@@ -4,9 +4,7 @@ import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-// Default duration and Curve for animateToItem, nextPage and previousPage.
-const Duration _kDefaultDuration = Duration(milliseconds: 300);
-const Curve _kDefaultCurve = Curves.ease;
+import 'package:moon_design/src/theme/theme.dart';
 
 class MoonCarousel extends StatefulWidget {
   /// Axis direction of the carousel. Defaults to `Axis.horizontal`.
@@ -257,14 +255,25 @@ class MoonCarouselScrollController extends ScrollController {
   /// Animate to specific item index.
   Future<void> animateToItem(
     int itemIndex, {
-    Duration duration = _kDefaultDuration,
-    Curve curve = _kDefaultCurve,
+    required BuildContext context,
+    Duration? duration,
+    Curve? curve,
   }) async {
     if (!hasClients) return;
 
+    final Duration effectiveTransitionDuration =
+        duration ?? context.moonTheme?.carouselTheme.properties.transitionDuration ?? const Duration(milliseconds: 200);
+
+    final Curve effectiveTransitionCurve =
+        curve ?? context.moonTheme?.carouselTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+
     await Future.wait<void>([
       for (final position in positions.cast<_MoonCarouselScrollPosition>())
-        position.animateTo(itemIndex * position.itemExtent, duration: duration, curve: curve),
+        position.animateTo(
+          itemIndex * position.itemExtent,
+          duration: effectiveTransitionDuration,
+          curve: effectiveTransitionCurve,
+        ),
     ]);
   }
 
@@ -276,22 +285,42 @@ class MoonCarouselScrollController extends ScrollController {
   }
 
   /// Animate to the next item in the viewport.
-  Future<void> nextItem({Duration duration = _kDefaultDuration, Curve curve = _kDefaultCurve}) async {
+  Future<void> nextItem({required BuildContext context, Duration? duration, Curve? curve}) async {
     if (!hasClients) return;
+
+    final Duration effectiveTransitionDuration =
+        duration ?? context.moonTheme?.carouselTheme.properties.transitionDuration ?? const Duration(milliseconds: 200);
+
+    final Curve effectiveTransitionCurve =
+        curve ?? context.moonTheme?.carouselTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
     await Future.wait<void>([
       for (final position in positions.cast<_MoonCarouselScrollPosition>())
-        position.animateTo(offset + position.itemExtent, duration: duration, curve: curve),
+        position.animateTo(
+          offset + position.itemExtent,
+          duration: effectiveTransitionDuration,
+          curve: effectiveTransitionCurve,
+        ),
     ]);
   }
 
   /// Animate to the previous item in the viewport.
-  Future<void> previousItem({Duration duration = _kDefaultDuration, Curve curve = _kDefaultCurve}) async {
+  Future<void> previousItem({required BuildContext context, Duration? duration, Curve? curve}) async {
     if (!hasClients) return;
+
+    final Duration effectiveTransitionDuration =
+        duration ?? context.moonTheme?.carouselTheme.properties.transitionDuration ?? const Duration(milliseconds: 200);
+
+    final Curve effectiveTransitionCurve =
+        curve ?? context.moonTheme?.carouselTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
 
     await Future.wait<void>([
       for (final position in positions.cast<_MoonCarouselScrollPosition>())
-        position.animateTo(offset - position.itemExtent, duration: duration, curve: curve),
+        position.animateTo(
+          offset - position.itemExtent,
+          duration: effectiveTransitionDuration,
+          curve: effectiveTransitionCurve,
+        ),
     ]);
   }
 
