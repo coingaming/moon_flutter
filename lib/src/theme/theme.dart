@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_design/moon_design.dart';
 
 import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 import 'package:moon_design/src/theme/alert/alert_theme.dart';

@@ -1,5 +1,7 @@
 import 'dart:math' as math;
+import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -150,6 +152,17 @@ class _MoonCarouselState extends State<MoonCarousel> {
   Widget build(BuildContext context) {
     final AxisDirection axisDirection = _getDirection(context);
 
+    final ScrollBehavior effectiveScrollBehavior = widget.scrollBehavior ??
+        (kIsWeb
+            ? ScrollConfiguration.of(context).copyWith(
+                scrollbars: false,
+                dragDevices: {
+                  PointerDeviceKind.touch,
+                  PointerDeviceKind.mouse,
+                },
+              )
+            : ScrollConfiguration.of(context).copyWith(scrollbars: false));
+
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (ScrollUpdateNotification notification) {
         if (widget.onIndexChanged != null) {
@@ -180,7 +193,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
             itemExtent: widget.itemExtent,
             loop: widget.loop,
             physics: widget.physics ?? const MoonCarouselScrollPhysics(),
-            scrollBehavior: widget.scrollBehavior ?? ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            scrollBehavior: effectiveScrollBehavior,
             velocityFactor: widget.velocityFactor,
             viewportBuilder: (BuildContext context, ViewportOffset position) {
               return Viewport(
