@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
 
@@ -74,7 +75,7 @@ class MoonCarousel extends StatefulWidget {
     super.key,
     this.axisDirection = Axis.horizontal,
     this.center = true,
-    this.loop = true,
+    this.loop = false,
     this.anchor = 0.0,
     required this.itemExtent,
     this.velocityFactor = 0.5,
@@ -146,6 +147,13 @@ class _MoonCarouselState extends State<MoonCarousel> {
     }
 
     _lastReportedItemIndex = scrollController.initialItem;
+  }
+
+  @override
+  void dispose() {
+    scrollController.stopAutoplay();
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -258,6 +266,35 @@ class MoonCarouselScrollController extends ScrollController {
 
   /// Scroll controller for [MoonCarousel].
   MoonCarouselScrollController({this.initialItem = 0});
+
+  // Timer for autoplay.
+  Timer? _autoplayTimer;
+
+  void startAutoplay({
+    required BuildContext context,
+    Duration delay = const Duration(seconds: 3),
+  }) {
+    _autoplayTimer?.cancel();
+
+    _autoplayTimer = Timer.periodic(delay, (timer) {
+      // If at end of carousel, animate back to the beginning.
+      if (offset >= position.maxScrollExtent && !position.outOfRange) {
+        animateToItem(0, context: context);
+      } else {
+        nextItem(context: context);
+      }
+    });
+  }
+
+  void stopAutoplay() {
+    _autoplayTimer?.cancel();
+  }
+
+  @override
+  void dispose() {
+    stopAutoplay();
+    super.dispose();
+  }
 
   /// Returns the selected item's index. If `loop: true`, then it returns the modded index value.
   int get selectedItem => _getTrueIndex(

@@ -49,6 +49,8 @@ class CarouselStory extends Story {
               max: 32,
             );
 
+            final carouselController = MoonCarouselScrollController()..startAutoplay(context: context);
+
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -59,9 +61,9 @@ class CarouselStory extends Story {
                     SizedBox(
                       height: 300,
                       child: MoonCarousel(
+                        controller: carouselController,
                         itemCount: 5,
                         itemExtent: 200,
-                        velocityFactor: 0.5,
                         loop: false,
                         itemBuilder: (context, itemIndex, realIndex) => Card(
                           child: Center(
