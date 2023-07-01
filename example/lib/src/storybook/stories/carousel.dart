@@ -49,32 +49,32 @@ class CarouselStory extends Story {
               max: 32,
             );
 
-            final carouselController = MoonCarouselScrollController()..startAutoplay(context: context);
+            final carouselController =
+                MoonCarouselScrollController() /* ..startAutoplay(context: context, delay: Duration(seconds: 2)) */;
 
             return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 64),
-                    SizedBox(
-                      height: 300,
-                      child: MoonCarousel(
-                        controller: carouselController,
-                        itemCount: 5,
-                        itemExtent: 200,
-                        loop: false,
-                        itemBuilder: (context, itemIndex, realIndex) => Card(
-                          child: Center(
-                            child: Text(itemIndex.toString()),
-                          ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 64),
+                  Container(
+                    color: Colors.red.withOpacity(0.2),
+                    height: 300,
+                    child: MoonCarousel(
+                      controller: carouselController,
+                      itemCount: 5,
+                      itemExtent: 300,
+                      loop: false,
+                      itemBuilder: (context, itemIndex, realIndex) => Container(
+                        color: Colors.blue,
+                        child: Center(
+                          child: Text(itemIndex.toString()),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 64),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 64),
+                ],
               ),
             );
           },

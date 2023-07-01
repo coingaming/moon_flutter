@@ -7,7 +7,11 @@ import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:moon_design/src/theme/icons/icon_theme.dart';
+import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/typography/typography.dart';
 
 class MoonCarousel extends StatefulWidget {
   /// Axis direction of the carousel. Defaults to `Axis.horizontal`.
@@ -29,6 +33,9 @@ class MoonCarousel extends StatefulWidget {
   /// This property is ignored when center is set to `true`.
   final double anchor;
 
+  /// Gap between items in the viewport.
+  final double? gap;
+
   /// Maximum width for single item in the viewport.
   final double itemExtent;
 
@@ -48,12 +55,6 @@ class MoonCarousel extends StatefulWidget {
   /// Scroll behavior for [MoonCarousel].
   final ScrollBehavior? scrollBehavior;
 
-  /// Delegate for lazily building items in the forward direction.
-  final SliverChildDelegate? childDelegate;
-
-  /// Delegate for lazily building items in the reverse direction.
-  final SliverChildDelegate? reversedChildDelegate;
-
   /// Callback which is fired when item index has changed.
   final void Function(int)? onIndexChanged;
 
@@ -71,12 +72,13 @@ class MoonCarousel extends StatefulWidget {
   final Widget Function(BuildContext context, int itemIndex, int realIndex) itemBuilder;
 
   /// MDS Carousel widget.
-  MoonCarousel({
+  const MoonCarousel({
     super.key,
     this.axisDirection = Axis.horizontal,
     this.center = true,
     this.loop = false,
     this.anchor = 0.0,
+    this.gap,
     required this.itemExtent,
     this.velocityFactor = 0.5,
     required this.itemCount,
@@ -87,16 +89,7 @@ class MoonCarousel extends StatefulWidget {
     required this.itemBuilder,
   })  : assert(itemExtent > 0),
         assert(itemCount > 0),
-        assert(velocityFactor > 0.0 && velocityFactor <= 1.0),
-        childDelegate = SliverChildBuilderDelegate(
-          (context, index) => itemBuilder(context, index.abs() % itemCount, index),
-          childCount: loop ? null : itemCount,
-        ),
-        reversedChildDelegate = loop
-            ? SliverChildBuilderDelegate(
-                (context, index) => itemBuilder(context, itemCount - (index.abs() % itemCount) - 1, -(index + 1)),
-              )
-            : null;
+        assert(velocityFactor > 0.0 && velocityFactor <= 1.0);
 
   @override
   State<MoonCarousel> createState() => _MoonCarouselState();
@@ -108,16 +101,45 @@ class _MoonCarouselState extends State<MoonCarousel> {
   late int _lastReportedItemIndex;
   late MoonCarouselScrollController scrollController;
 
-  List<Widget> _buildSlivers() {
+  List<Widget> _buildSlivers(BuildContext context) {
+    final double effectiveGap = context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
+
+    /// Delegate for lazily building items in the forward direction.
+    final SliverChildDelegate childDelegate = SliverChildBuilderDelegate(
+      (context, index) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: effectiveGap / 2),
+        child: widget.itemBuilder(context, index.abs() % widget.itemCount, index),
+      ),
+      childCount: widget.loop ? null : widget.itemCount,
+    );
+
+    /// Delegate for lazily building items in the reverse direction.
+    final SliverChildDelegate? reversedChildDelegate = widget.loop
+        ? SliverChildBuilderDelegate(
+            (context, index) => Padding(
+              padding: EdgeInsets.symmetric(horizontal: effectiveGap / 2),
+              child: widget.itemBuilder(context, widget.itemCount - (index.abs() % widget.itemCount) - 1, -(index + 1)),
+            ),
+          )
+        : null;
+
     final Widget forward =
-        SliverFixedExtentList(key: _forwardListKey, delegate: widget.childDelegate!, itemExtent: widget.itemExtent);
+        SliverFixedExtentList(key: _forwardListKey, delegate: childDelegate, itemExtent: widget.itemExtent);
 
     if (!widget.loop) return [forward];
 
-    final Widget reversed =
-        SliverFixedExtentList(delegate: widget.reversedChildDelegate!, itemExtent: widget.itemExtent);
+    final Widget reversed = SliverFixedExtentList(delegate: reversedChildDelegate!, itemExtent: widget.itemExtent);
 
     return [reversed, forward];
+  }
+
+  // Get the anchor for the viewport to place the item at the center.
+  double _getCenteredAnchor(BoxConstraints constraints) {
+    if (!widget.center) return widget.anchor;
+
+    final maxExtent = widget.axisDirection == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
+
+    return ((maxExtent / 2) - (widget.itemExtent / 2)) / maxExtent;
   }
 
   AxisDirection _getDirection(BuildContext context) {
@@ -192,39 +214,47 @@ class _MoonCarouselState extends State<MoonCarousel> {
       },
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
+          final Color effectiveTextColor =
+              context.moonTheme?.carouselTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+
+          final Color effectiveIconColor =
+              context.moonTheme?.carouselTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+
+          final TextStyle effectiveTextStyle =
+              context.moonTheme?.carouselTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+
           final centeredAnchor = _getCenteredAnchor(constraints);
 
-          return _MoonCarouselScrollable(
-            axisDirection: axisDirection,
-            controller: scrollController,
-            itemCount: widget.itemCount,
-            itemExtent: widget.itemExtent,
-            loop: widget.loop,
-            physics: widget.physics ?? const MoonCarouselScrollPhysics(),
-            scrollBehavior: effectiveScrollBehavior,
-            velocityFactor: widget.velocityFactor,
-            viewportBuilder: (BuildContext context, ViewportOffset position) {
-              return Viewport(
-                anchor: centeredAnchor,
+          return IconTheme(
+            data: IconThemeData(
+              color: effectiveIconColor,
+            ),
+            child: DefaultTextStyle(
+              style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+              child: _MoonCarouselScrollable(
                 axisDirection: axisDirection,
-                center: _forwardListKey,
-                offset: position,
-                slivers: _buildSlivers(),
-              );
-            },
+                controller: scrollController,
+                itemCount: widget.itemCount,
+                itemExtent: widget.itemExtent,
+                loop: widget.loop,
+                physics: widget.physics ?? const MoonCarouselScrollPhysics(),
+                scrollBehavior: effectiveScrollBehavior,
+                velocityFactor: widget.velocityFactor,
+                viewportBuilder: (BuildContext context, ViewportOffset position) {
+                  return Viewport(
+                    anchor: centeredAnchor,
+                    axisDirection: axisDirection,
+                    center: _forwardListKey,
+                    offset: position,
+                    slivers: _buildSlivers(context),
+                  );
+                },
+              ),
+            ),
           );
         },
       ),
     );
-  }
-
-  // Get the anchor for the viewport to place the item at the center.
-  double _getCenteredAnchor(BoxConstraints constraints) {
-    if (!widget.center) return widget.anchor;
-
-    final maxExtent = widget.axisDirection == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
-
-    return ((maxExtent / 2) - (widget.itemExtent / 2)) / maxExtent;
   }
 }
 
