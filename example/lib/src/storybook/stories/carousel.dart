@@ -49,8 +49,7 @@ class CarouselStory extends Story {
               max: 32,
             );
 
-            final carouselController =
-                MoonCarouselScrollController() /* ..startAutoplay(context: context, delay: Duration(seconds: 2)) */;
+            /* final carouselController = MoonCarouselScrollController(); */
 
             return Center(
               child: Column(
@@ -61,7 +60,8 @@ class CarouselStory extends Story {
                     color: Colors.red.withOpacity(0.2),
                     height: 300,
                     child: MoonCarousel(
-                      controller: carouselController,
+                      //controller: carouselController,
+                      autoPlay: false,
                       itemCount: 5,
                       itemExtent: 300,
                       loop: false,

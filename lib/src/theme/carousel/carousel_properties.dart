@@ -11,6 +11,7 @@ class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with
   static final properties = MoonCarouselProperties(
     gap: MoonSizes.sizes.x2s,
     textStyle: MoonTextStyles.body.textDefault,
+    autoPlayDelay: const Duration(seconds: 3),
     transitionDuration: const Duration(milliseconds: 800),
     transitionCurve: Curves.fastOutSlowIn,
   );
@@ -21,6 +22,9 @@ class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with
   /// Carousel item text style.
   final TextStyle textStyle;
 
+  /// Carousel auto play delay between items.
+  final Duration autoPlayDelay;
+
   /// Carousel transition duration.
   final Duration transitionDuration;
 
@@ -30,6 +34,7 @@ class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with
   const MoonCarouselProperties({
     required this.gap,
     required this.textStyle,
+    required this.autoPlayDelay,
     required this.transitionDuration,
     required this.transitionCurve,
   });
@@ -38,12 +43,14 @@ class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with
   MoonCarouselProperties copyWith({
     double? gap,
     TextStyle? textStyle,
+    Duration? autoPlayDelay,
     Duration? transitionDuration,
     Curve? transitionCurve,
   }) {
     return MoonCarouselProperties(
       gap: gap ?? this.gap,
       textStyle: textStyle ?? this.textStyle,
+      autoPlayDelay: autoPlayDelay ?? this.autoPlayDelay,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
     );
@@ -56,6 +63,7 @@ class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with
     return MoonCarouselProperties(
       gap: lerpDouble(gap, other.gap, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
+      autoPlayDelay: lerpDuration(autoPlayDelay, other.autoPlayDelay, t),
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
     );
@@ -68,6 +76,7 @@ class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with
       ..add(DiagnosticsProperty("type", "MoonCarouselProperties"))
       ..add(DoubleProperty("gap", gap))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
+      ..add(DiagnosticsProperty<Duration>("autoPlayDelay", autoPlayDelay))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
   }
