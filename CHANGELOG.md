@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.24.0](https://github.com/coingaming/moon_flutter/compare/v0.23.0...v0.24.0) (2023-07-03)
+
+
+### Features
+
+* [MDS-576] Create DotIndicator widget ([#201](https://github.com/coingaming/moon_flutter/issues/201)) ([41b0ab9](https://github.com/coingaming/moon_flutter/commit/41b0ab993187fc424c41eaaf6082693c1f67346b))
+
 ## [0.23.0](https://github.com/coingaming/moon_flutter/compare/v0.22.9...v0.23.0) (2023-06-21)
 
 
