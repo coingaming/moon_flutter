@@ -6,23 +6,17 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 
 class MoonDotIndicator extends StatefulWidget {
-  /// The gap between each dot.
-  final double? gap;
-
-  /// The size of each dot.
-  final double? size;
-
   /// The color of the selected dot.
   final Color? selectedColor;
 
   /// The color of the unselected dots.
   final Color? unselectedColor;
 
-  /// The index of the currently selected dot.
-  final int selectedDot;
+  /// The gap between each dot.
+  final double? gap;
 
-  /// The total number of dots.
-  final int dotCount;
+  /// The size of each dot.
+  final double? size;
 
   /// Indicator transition duration.
   final Duration? transitionDuration;
@@ -30,16 +24,22 @@ class MoonDotIndicator extends StatefulWidget {
   /// Indicator transition curve.
   final Curve? transitionCurve;
 
+  /// The index of the currently selected dot.
+  final int selectedDot;
+
+  /// The total number of dots.
+  final int dotCount;
+
   /// MDS DotIndicator widget
   const MoonDotIndicator({
-    this.gap,
-    this.size,
     this.selectedColor,
     this.unselectedColor,
-    required this.selectedDot,
-    required this.dotCount,
+    this.gap,
+    this.size,
     this.transitionDuration,
     this.transitionCurve,
+    required this.selectedDot,
+    required this.dotCount,
   });
 
   @override
@@ -55,6 +55,7 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _animationControllers![widget.selectedDot].forward();
     });
