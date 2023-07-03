@@ -16,10 +16,10 @@ class MoonDotIndicatorColors extends ThemeExtension<MoonDotIndicatorColors> with
     unselectedColor: MoonColors.dark.beerus,
   );
 
-  /// DotIndicator text color.
+  /// Selected DotIndicator dot color.
   final Color selectedColor;
 
-  /// DotIndicator icon color.
+  /// Unselected DotIndicator dot color.
   final Color unselectedColor;
 
   const MoonDotIndicatorColors({
