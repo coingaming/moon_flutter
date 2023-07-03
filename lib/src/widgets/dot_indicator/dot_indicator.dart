@@ -12,17 +12,17 @@ class MoonDotIndicator extends StatefulWidget {
   /// The size of each dot.
   final double? size;
 
-  /// The color of the selected item.
+  /// The color of the selected dot.
   final Color? selectedColor;
 
-  /// The color of the unselected item.
+  /// The color of the unselected dots.
   final Color? unselectedColor;
 
-  /// The index of the currently selected item.
-  final int selectedItem;
+  /// The index of the currently selected dot.
+  final int selectedDot;
 
-  /// The total number of items.
-  final int itemCount;
+  /// The total number of dots.
+  final int dotCount;
 
   /// Indicator transition duration.
   final Duration? transitionDuration;
@@ -36,8 +36,8 @@ class MoonDotIndicator extends StatefulWidget {
     this.size,
     this.selectedColor,
     this.unselectedColor,
-    required this.selectedItem,
-    required this.itemCount,
+    required this.selectedDot,
+    required this.dotCount,
     this.transitionDuration,
     this.transitionCurve,
   });
@@ -56,7 +56,7 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _animationControllers![widget.selectedItem].forward();
+      _animationControllers![widget.selectedDot].forward();
     });
   }
 
@@ -64,9 +64,9 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
   void didUpdateWidget(MoonDotIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.selectedItem != oldWidget.selectedItem) {
-      _animationControllers![oldWidget.selectedItem].reverse();
-      _animationControllers![widget.selectedItem].forward();
+    if (widget.selectedDot != oldWidget.selectedDot) {
+      _animationControllers![oldWidget.selectedDot].reverse();
+      _animationControllers![widget.selectedDot].forward();
     }
   }
 
@@ -103,7 +103,7 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
         Curves.easeInOutCubic;
 
     _animationControllers ??= List.generate(
-      widget.itemCount,
+      widget.dotCount,
       (index) => AnimationController(
         duration: effectiveTransitionDuration,
         vsync: this,
@@ -111,7 +111,7 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
     );
 
     _animations ??= List.generate(
-      widget.itemCount,
+      widget.dotCount,
       (index) => _animationControllers![index].drive(_dotColorTween.chain(CurveTween(curve: effectiveTransitionCurve))),
     );
 
@@ -123,7 +123,7 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List<Widget>.generate(
-          widget.itemCount,
+          widget.dotCount,
           (int index) => AnimatedBuilder(
             animation: _animations![index],
             builder: (BuildContext context, _) {

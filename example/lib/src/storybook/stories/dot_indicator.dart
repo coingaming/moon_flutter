@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-int _selectedItem = 0;
+int _selectedDot = 0;
 
 class DotIndicatorStory extends Story {
   DotIndicatorStory()
@@ -56,8 +56,8 @@ class DotIndicatorStory extends Story {
                     children: [
                       const SizedBox(height: 64),
                       MoonDotIndicator(
-                        selectedItem: _selectedItem,
-                        itemCount: 4,
+                        selectedDot: _selectedDot,
+                        dotCount: 4,
                         size: sizeKnob?.toDouble(),
                         gap: gapKnob?.toDouble(),
                         selectedColor: selectedColor,
@@ -70,28 +70,28 @@ class DotIndicatorStory extends Story {
                           MoonFilledButton(
                             label: const Text("1"),
                             onTap: () => setState(() {
-                              _selectedItem = 0;
+                              _selectedDot = 0;
                             }),
                           ),
                           const SizedBox(width: 8),
                           MoonFilledButton(
                             label: const Text("2"),
                             onTap: () => setState(() {
-                              _selectedItem = 1;
+                              _selectedDot = 1;
                             }),
                           ),
                           const SizedBox(width: 8),
                           MoonFilledButton(
                             label: const Text("3"),
                             onTap: () => setState(() {
-                              _selectedItem = 2;
+                              _selectedDot = 2;
                             }),
                           ),
                           const SizedBox(width: 8),
                           MoonFilledButton(
                             label: const Text("4"),
                             onTap: () => setState(() {
-                              _selectedItem = 3;
+                              _selectedDot = 3;
                             }),
                           ),
                         ],
