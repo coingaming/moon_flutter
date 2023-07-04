@@ -49,8 +49,6 @@ class CarouselStory extends Story {
               max: 32,
             );
 
-            /* final carouselController = MoonCarouselScrollController(); */
-
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -65,6 +63,7 @@ class CarouselStory extends Story {
                       itemCount: 5,
                       itemExtent: 300,
                       loop: false,
+                      isItemAlwaysCentered: true,
                       itemBuilder: (context, itemIndex, realIndex) => Container(
                         color: Colors.blue,
                         child: Center(
