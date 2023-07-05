@@ -20,12 +20,27 @@ class MoonCarousel extends StatefulWidget {
   /// Whether to automatically scroll the carousel. Defaults to `false`.
   final bool autoPlay;
 
-  /// Whether to always align the selected item to center of the viewport (including the first and the last position).
+  /// Align selected item to center of the viewport. When this is true, anchor property is ignored.
+  final bool center;
+
+  /// Whether to defer the calculation of `maxExtent`. NOTE: This makes the carousel behave like [ListView] in terms of
+  /// how the `maxExtent` is calculated and makes the last item(s) unreachable for the purposes of [onIndexChanged]
+  /// callback.
+  ///
   /// Defaults to `false`.
-  final bool isItemAlwaysCentered;
+  final bool deferMaxExtent;
 
   /// Whether to create an infinite looping list. Defaults to `true`.
   final bool loop;
+
+  /// Where to place selected item in the viewport. Ranges from 0 to 1.
+  ///
+  /// 0.0 means selected item is aligned to start of the viewport, and
+  /// 1.0 meaning selected item is aligned to end of the viewport.
+  /// Defaults to 0.0.
+  ///
+  /// This property is ignored when center is set to true.
+  final double anchor;
 
   /// Gap between items in the viewport.
   final double? gap;
@@ -79,8 +94,10 @@ class MoonCarousel extends StatefulWidget {
     super.key,
     this.axisDirection = Axis.horizontal,
     this.autoPlay = false,
-    this.isItemAlwaysCentered = false,
+    this.center = true,
+    this.deferMaxExtent = false,
     this.loop = false,
+    this.anchor = 0.0,
     this.gap,
     required this.itemExtent,
     this.velocityFactor = 0.5,
@@ -109,7 +126,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
 
   // Get the anchor for the viewport to place the item at the center.
   double _getCenteredAnchor(BoxConstraints constraints) {
-    if (!widget.isItemAlwaysCentered) return 0;
+    if (!widget.center) return widget.anchor;
 
     final maxExtent = widget.axisDirection == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
 
@@ -135,8 +152,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
   void initState() {
     super.initState();
 
-    _scrollController = (widget.controller as MoonCarouselScrollController?) ??
-        MoonCarouselScrollController(isItemAlwaysCentered: widget.isItemAlwaysCentered);
+    _scrollController = (widget.controller as MoonCarouselScrollController?) ?? MoonCarouselScrollController();
 
     _lastReportedItemIndex = _scrollController.initialItem;
 
@@ -170,12 +186,12 @@ class _MoonCarouselState extends State<MoonCarousel> {
   }
 
   List<Widget> _buildSlivers(BuildContext context) {
-    final double effectiveGap = context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
+    final double effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
 
     /// Delegate for lazily building items in the forward direction.
     final SliverChildDelegate childDelegate = SliverChildBuilderDelegate(
       (context, index) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: effectiveGap / 2),
+        padding: EdgeInsets.only(right: effectiveGap),
         child: widget.itemBuilder(context, index.abs() % widget.itemCount, index),
       ),
       childCount: widget.loop ? null : widget.itemCount,
@@ -185,18 +201,27 @@ class _MoonCarouselState extends State<MoonCarousel> {
     final SliverChildDelegate? reversedChildDelegate = widget.loop
         ? SliverChildBuilderDelegate(
             (context, index) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: effectiveGap / 2),
+              padding: EdgeInsets.only(right: effectiveGap),
               child: widget.itemBuilder(context, widget.itemCount - (index.abs() % widget.itemCount) - 1, -(index + 1)),
             ),
           )
         : null;
 
-    final Widget forward =
-        SliverFixedExtentList(key: _forwardListKey, delegate: childDelegate, itemExtent: widget.itemExtent);
+    final Widget forward = SliverGrid.builder(
+      itemCount: !widget.loop ? widget.itemCount : null,
+      key: _forwardListKey,
+      itemBuilder: (context, index) => widget.itemBuilder(context, index.abs() % widget.itemCount, index),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 1,
+        mainAxisSpacing: effectiveGap,
+        mainAxisExtent: widget.itemExtent,
+      ),
+    );
 
     if (!widget.loop) return [forward];
 
-    final Widget reversed = SliverFixedExtentList(delegate: reversedChildDelegate!, itemExtent: widget.itemExtent);
+    final Widget reversed =
+        SliverFixedExtentList(delegate: reversedChildDelegate!, itemExtent: widget.itemExtent + effectiveGap);
 
     return [reversed, forward];
   }
@@ -255,14 +280,11 @@ class _MoonCarouselState extends State<MoonCarousel> {
               child: _MoonCarouselScrollable(
                 axisDirection: axisDirection,
                 controller: _scrollController,
+                deferMaxExtent: widget.deferMaxExtent,
                 itemCount: widget.itemCount,
-                itemExtent: widget.itemExtent,
+                itemExtent: widget.itemExtent + 16,
                 loop: widget.loop,
-                physics: widget.physics ??
-                    MoonCarouselScrollPhysics(
-                      lastItemIndex: widget.itemCount - 1,
-                      isItemAlwaysCentered: widget.isItemAlwaysCentered,
-                    ),
+                physics: widget.physics ?? const MoonCarouselScrollPhysics(),
                 scrollBehavior: effectiveScrollBehavior,
                 velocityFactor: widget.velocityFactor,
                 viewportBuilder: (BuildContext context, ViewportOffset position) {
@@ -286,6 +308,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
 /// Extends Scrollable to also include viewport children's itemExtent, itemCount, loop and other values.
 /// This is done so that the ScrollPosition and Physics can also access these values via scroll context.
 class _MoonCarouselScrollable extends Scrollable {
+  final bool deferMaxExtent;
   final bool loop;
   final double itemExtent;
   final double velocityFactor;
@@ -297,6 +320,7 @@ class _MoonCarouselScrollable extends Scrollable {
     super.physics,
     super.scrollBehavior,
     required super.viewportBuilder,
+    required this.deferMaxExtent,
     required this.loop,
     required this.itemExtent,
     required this.velocityFactor,
@@ -308,6 +332,7 @@ class _MoonCarouselScrollable extends Scrollable {
 }
 
 class _MoonCarouselScrollableState extends ScrollableState {
+  bool get deferMaxExtent => (widget as _MoonCarouselScrollable).deferMaxExtent;
   bool get loop => (widget as _MoonCarouselScrollable).loop;
   double get itemExtent => (widget as _MoonCarouselScrollable).itemExtent;
   double get velocityFactor => (widget as _MoonCarouselScrollable).velocityFactor;
@@ -319,11 +344,8 @@ class MoonCarouselScrollController extends ScrollController {
   /// Initial item index for [MoonCarouselScrollController]. Defaults to `0`.
   final int initialItem;
 
-  /// Whether or not the carousel item is centered in the viewport at all times (including first and last item).
-  final bool isItemAlwaysCentered;
-
   /// Scroll controller for [MoonCarousel].
-  MoonCarouselScrollController({this.initialItem = 0, this.isItemAlwaysCentered = false});
+  MoonCarouselScrollController({this.initialItem = 0});
 
   // Timer for autoplay.
   Timer? _autoplayTimer;
@@ -428,7 +450,6 @@ class MoonCarouselScrollController extends ScrollController {
     return _MoonCarouselScrollPosition(
       context: context,
       initialItem: initialItem,
-      isItemAlwaysCentered: isItemAlwaysCentered,
       oldPosition: oldPosition,
       physics: physics,
     );
@@ -497,13 +518,10 @@ int _getTrueIndex(int currentIndex, int totalCount) {
 }
 
 class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implements MoonCarouselExtentMetrics {
-  final bool isItemAlwaysCentered;
-
   _MoonCarouselScrollPosition({
     required super.physics,
     required super.context,
     required int initialItem,
-    required this.isItemAlwaysCentered,
     super.oldPosition,
   })  : assert(context is _MoonCarouselScrollableState),
         super(initialPixels: _getItemExtentFromScrollContext(context) * initialItem);
@@ -516,6 +534,11 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
   int get itemCount => _getItemCountFromScrollContext(context);
   static int _getItemCountFromScrollContext(ScrollContext context) {
     return (context as _MoonCarouselScrollableState).itemCount;
+  }
+
+  bool get deferMaxExtent => _getDeferMaxExtentFromScrollContext(context);
+  static bool _getDeferMaxExtentFromScrollContext(ScrollContext context) {
+    return (context as _MoonCarouselScrollableState).deferMaxExtent;
   }
 
   bool get loop => _getLoopFromScrollContext(context);
@@ -539,13 +562,9 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
   }
 
   @override
-  double get maxScrollExtent => loop
+  double get maxScrollExtent => loop || deferMaxExtent
       ? (super.hasContentDimensions ? super.maxScrollExtent : 0.0)
-      : isItemAlwaysCentered
-          // Use the sum of carousel items itemExtent as max scroll extent
-          ? itemExtent * (itemCount - 1)
-          // Use carousel container size as max scroll extent
-          : super.maxScrollExtent;
+      : itemExtent * (itemCount - 1);
 
   @override
   MoonCarouselExtentMetrics copyWith({
@@ -571,28 +590,16 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
 
 /// Physics for the [MoonCarousel].
 class MoonCarouselScrollPhysics extends ScrollPhysics {
-  /// The index of the last item in the carousel.
-  final int lastItemIndex;
-
-  /// Whether all of the items are centered in the viewport (including the first and the last item).
-  final bool isItemAlwaysCentered;
-
   /// Based on Flutter's [FixedExtentScrollPhysics]. Hence, it always lands on a particular item.
   ///
   /// If `loop: false`, friction is applied when user tries to go beyond viewport. The friction factor is calculated the
   /// same  way as in [BouncingScrollPhysics].
-  const MoonCarouselScrollPhysics({
-    super.parent,
-    required this.lastItemIndex,
-    this.isItemAlwaysCentered = false,
-  });
+  const MoonCarouselScrollPhysics({super.parent});
 
   @override
   MoonCarouselScrollPhysics applyTo(ScrollPhysics? ancestor) {
     return MoonCarouselScrollPhysics(
       parent: buildParent(ancestor),
-      lastItemIndex: lastItemIndex,
-      isItemAlwaysCentered: isItemAlwaysCentered,
     );
   }
 
@@ -626,6 +633,7 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
 
   static double _applyFriction(double extentOutside, double absDelta, double gamma) {
     assert(absDelta > 0);
+
     double total = 0.0;
 
     if (extentOutside > 0) {
@@ -676,14 +684,7 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
       offset: testFrictionSimulation?.x(double.infinity) ?? metrics.pixels,
     );
 
-    final centerCorrectionOffset = settlingItemIndex == lastItemIndex
-        ? (metrics.viewportDimension - metrics.itemExtent)
-        : settlingItemIndex != 0
-            ? (metrics.viewportDimension - metrics.itemExtent) / 2
-            : 0;
-
-    final double settlingPixels =
-        settlingItemIndex * metrics.itemExtent - (!isItemAlwaysCentered ? centerCorrectionOffset : 0);
+    final double settlingPixels = settlingItemIndex * metrics.itemExtent;
 
     // Scenario 3:
     // If there's no velocity and we're already at where we intend to land, do nothing.

@@ -57,17 +57,26 @@ class CarouselStory extends Story {
                   Container(
                     color: Colors.red.withOpacity(0.2),
                     height: 300,
-                    child: MoonCarousel(
-                      //controller: carouselController,
-                      autoPlay: false,
-                      itemCount: 5,
-                      itemExtent: 300,
-                      loop: false,
-                      isItemAlwaysCentered: true,
-                      itemBuilder: (context, itemIndex, realIndex) => Container(
-                        color: Colors.blue,
-                        child: Center(
-                          child: Text(itemIndex.toString()),
+                    child: OverflowBox(
+                      maxWidth: MediaQuery.of(context).size.width,
+                      child: MoonCarousel(
+                        gap: 8,
+                        //controller: carouselController,
+                        autoPlay: false,
+                        itemCount: 10,
+                        itemExtent: MediaQuery.of(context).size.width / 3 - 2 * 8,
+                        center: false,
+                        anchor: (MediaQuery.of(context).size.width % (MediaQuery.of(context).size.width / 3 + 2 * 8)) /
+                            MediaQuery.of(context).size.width /
+                            2,
+                        deferMaxExtent: true,
+                        loop: false,
+                        itemBuilder: (context, itemIndex, realIndex) => Container(
+                          //margin: EdgeInsets.only(right: itemIndex == 9 ? 16 : 0),
+                          color: Colors.blue,
+                          child: Center(
+                            child: Text(itemIndex.toString()),
+                          ),
                         ),
                       ),
                     ),
