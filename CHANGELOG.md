@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.0](https://github.com/coingaming/moon_flutter/compare/v0.24.0...v0.25.0) (2023-07-07)
+
+
+### Features
+
+* [MDS-565] Create Carousel widget ([#200](https://github.com/coingaming/moon_flutter/issues/200)) ([fc6534b](https://github.com/coingaming/moon_flutter/commit/fc6534b7796c45d681f79a4cf3e1c287e5598ca6))
+
 ## [0.24.0](https://github.com/coingaming/moon_flutter/compare/v0.23.0...v0.24.0) (2023-07-03)
 
 
