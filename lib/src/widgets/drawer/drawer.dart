@@ -20,11 +20,11 @@ class MoonDrawer extends StatelessWidget {
   /// The color of the Drawer barrier.
   final Color? barrierColor;
 
-  /// The width of the Drawer.
-  final double? width;
-
   /// Custom decoration for the Drawer.
   final Decoration? decoration;
+
+  /// The width of the Drawer.
+  final double? width;
 
   /// List of popover shadows.
   final List<BoxShadow>? drawerShadows;
@@ -40,8 +40,8 @@ class MoonDrawer extends StatelessWidget {
     this.borderRadius,
     this.backgroundColor,
     this.barrierColor,
-    this.width,
     this.decoration,
+    this.width,
     this.drawerShadows,
     this.semanticLabel,
     required this.child,
