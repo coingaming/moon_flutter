@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
 import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
-extension DarkModeX on BuildContext {
+extension BuildContextX on BuildContext {
   /// Is dark mode currently active.
   bool get isDarkMode {
     final brightness = MediaQuery.of(this).platformBrightness;
@@ -13,7 +13,7 @@ extension DarkModeX on BuildContext {
   }
 }
 
-extension BorderRadiusX on BorderRadiusGeometry {
+extension BorderRadiusGeometryX on BorderRadiusGeometry {
   /// Returns MoonSquircleBorderRadius.
   MoonSquircleBorderRadius squircleBorderRadius(BuildContext context) {
     final borderRadius = resolve(Directionality.of(context));
