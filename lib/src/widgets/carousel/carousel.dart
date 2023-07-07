@@ -20,8 +20,8 @@ class MoonCarousel extends StatefulWidget {
   /// Whether to automatically scroll the carousel. Defaults to `false`.
   final bool autoPlay;
 
-  /// Align selected item to center of the viewport. When this is true, anchor property is ignored.
-  final bool center;
+  /// Align selected item to the center of the viewport. When this is true, anchor property is ignored.
+  final bool isCentered;
 
   /// Whether to defer the calculation of `maxExtent`. NOTE: This makes the carousel behave like [ListView] in terms of
   /// how the `maxExtent` is calculated and makes the last item(s) unreachable for the purposes of [onIndexChanged]
@@ -39,7 +39,7 @@ class MoonCarousel extends StatefulWidget {
   /// 1.0 meaning selected item is aligned to end of the viewport.
   /// Defaults to 0.0.
   ///
-  /// This property is ignored when center is set to true.
+  /// This property is ignored when isCentered is set to true.
   final double anchor;
 
   /// Gap between items in the viewport.
@@ -94,7 +94,7 @@ class MoonCarousel extends StatefulWidget {
     super.key,
     this.axisDirection = Axis.horizontal,
     this.autoPlay = false,
-    this.center = true,
+    this.isCentered = true,
     this.deferMaxExtent = false,
     this.loop = false,
     this.anchor = 0.0,
@@ -124,9 +124,9 @@ class _MoonCarouselState extends State<MoonCarousel> {
   late int _lastReportedItemIndex;
   late MoonCarouselScrollController _scrollController;
 
-  // Get the anchor for the viewport to place the item at the center.
+  // Get the anchor for the viewport to place the item at the isCentered.
   double _getCenteredAnchor(BoxConstraints constraints) {
-    if (!widget.center) return widget.anchor;
+    if (!widget.isCentered) return widget.anchor;
 
     final maxExtent = widget.axisDirection == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
 
@@ -180,6 +180,35 @@ class _MoonCarouselState extends State<MoonCarousel> {
   }
 
   @override
+  void didUpdateWidget(MoonCarousel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.autoPlay != oldWidget.autoPlay) {
+      if (widget.autoPlay) {
+        final Duration effectiveAutoPlayDelay = widget.autoPlayDelay ??
+            context.moonTheme?.carouselTheme.properties.autoPlayDelay ??
+            const Duration(seconds: 3);
+
+        final Duration effectiveTransitionDuration = widget.transitionDuration ??
+            context.moonTheme?.carouselTheme.properties.transitionDuration ??
+            const Duration(milliseconds: 800);
+
+        final Curve effectiveTransitionCurve = widget.transitionCurve ??
+            context.moonTheme?.carouselTheme.properties.transitionCurve ??
+            Curves.fastOutSlowIn;
+
+        _scrollController.startAutoPlay(
+          delay: effectiveAutoPlayDelay,
+          duration: effectiveTransitionDuration,
+          curve: effectiveTransitionCurve,
+        );
+      } else {
+        _scrollController.stopAutoplay();
+      }
+    }
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
@@ -191,7 +220,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
     /// Delegate for lazily building items in the forward direction.
     final SliverChildDelegate childDelegate = SliverChildBuilderDelegate(
       (context, index) => Padding(
-        padding: EdgeInsets.only(right: effectiveGap),
+        padding: EdgeInsets.symmetric(horizontal: effectiveGap / 2),
         child: widget.itemBuilder(context, index.abs() % widget.itemCount, index),
       ),
       childCount: widget.loop ? null : widget.itemCount,
@@ -201,27 +230,18 @@ class _MoonCarouselState extends State<MoonCarousel> {
     final SliverChildDelegate? reversedChildDelegate = widget.loop
         ? SliverChildBuilderDelegate(
             (context, index) => Padding(
-              padding: EdgeInsets.only(right: effectiveGap),
+              padding: EdgeInsets.symmetric(horizontal: effectiveGap / 2),
               child: widget.itemBuilder(context, widget.itemCount - (index.abs() % widget.itemCount) - 1, -(index + 1)),
             ),
           )
         : null;
 
-    final Widget forward = SliverGrid.builder(
-      itemCount: !widget.loop ? widget.itemCount : null,
-      key: _forwardListKey,
-      itemBuilder: (context, index) => widget.itemBuilder(context, index.abs() % widget.itemCount, index),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
-        mainAxisSpacing: effectiveGap,
-        mainAxisExtent: widget.itemExtent,
-      ),
-    );
+    final Widget forward =
+        SliverFixedExtentList(key: _forwardListKey, delegate: childDelegate, itemExtent: widget.itemExtent);
 
     if (!widget.loop) return [forward];
 
-    final Widget reversed =
-        SliverFixedExtentList(delegate: reversedChildDelegate!, itemExtent: widget.itemExtent + effectiveGap);
+    final Widget reversed = SliverFixedExtentList(delegate: reversedChildDelegate!, itemExtent: widget.itemExtent);
 
     return [reversed, forward];
   }
@@ -282,7 +302,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
                 controller: _scrollController,
                 deferMaxExtent: widget.deferMaxExtent,
                 itemCount: widget.itemCount,
-                itemExtent: widget.itemExtent + 16,
+                itemExtent: widget.itemExtent,
                 loop: widget.loop,
                 physics: widget.physics ?? const MoonCarouselScrollPhysics(),
                 scrollBehavior: effectiveScrollBehavior,
@@ -562,8 +582,8 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
   }
 
   @override
-  double get maxScrollExtent => loop || deferMaxExtent
-      ? (super.hasContentDimensions ? super.maxScrollExtent : 0.0)
+  double get maxScrollExtent => loop /* || deferMaxExtent */
+      ? (super.hasContentDimensions ? super.maxScrollExtent + 8 : 0.0)
       : itemExtent * (itemCount - 1);
 
   @override

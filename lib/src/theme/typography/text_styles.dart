@@ -42,6 +42,9 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     text32: TextStyle(
       fontSize: 32,
     ),
+    text40: TextStyle(
+      fontSize: 40,
+    ),
     text48: TextStyle(
       fontSize: 48,
     ),
@@ -103,6 +106,10 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     ),
     text32: TextStyle(
       fontSize: 32,
+      fontWeight: _semiBold,
+    ),
+    text40: TextStyle(
+      fontSize: 40,
       fontWeight: _semiBold,
     ),
     text48: TextStyle(
@@ -196,6 +203,12 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
       letterSpacing: 1,
       fontWeight: _semiBold,
     ),
+    text40: TextStyle(
+      fontSize: 40,
+      height: 1.2,
+      letterSpacing: 1,
+      fontWeight: _semiBold,
+    ),
     text48: TextStyle(
       fontSize: 48,
       height: 1.2,
@@ -258,6 +271,9 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
   /// Text size 32.
   final TextStyle text32;
 
+  /// Text size 40.
+  final TextStyle text40;
+
   /// Text size 48.
   final TextStyle text48;
 
@@ -283,6 +299,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     required this.text20,
     required this.text24,
     required this.text32,
+    required this.text40,
     required this.text48,
     required this.text56,
     required this.text64,
@@ -303,6 +320,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     TextStyle? text20,
     TextStyle? text24,
     TextStyle? text32,
+    TextStyle? text40,
     TextStyle? text48,
     TextStyle? text56,
     TextStyle? text64,
@@ -321,6 +339,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
       text20: text20 ?? this.text20,
       text24: text24 ?? this.text24,
       text32: text32 ?? this.text32,
+      text40: text40 ?? this.text40,
       text48: text48 ?? this.text48,
       text56: text56 ?? this.text56,
       text64: text64 ?? this.text64,
@@ -345,6 +364,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
       text20: TextStyle.lerp(text20, other.text20, t)!,
       text24: TextStyle.lerp(text24, other.text24, t)!,
       text32: TextStyle.lerp(text32, other.text32, t)!,
+      text40: TextStyle.lerp(text40, other.text40, t)!,
       text48: TextStyle.lerp(text48, other.text48, t)!,
       text56: TextStyle.lerp(text56, other.text56, t)!,
       text64: TextStyle.lerp(text64, other.text64, t)!,
@@ -369,6 +389,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
       ..add(DiagnosticsProperty<TextStyle>("text20", text20))
       ..add(DiagnosticsProperty<TextStyle>("text24", text24))
       ..add(DiagnosticsProperty<TextStyle>("text32", text32))
+      ..add(DiagnosticsProperty<TextStyle>("text40", text40))
       ..add(DiagnosticsProperty<TextStyle>("text48", text48))
       ..add(DiagnosticsProperty<TextStyle>("text56", text56))
       ..add(DiagnosticsProperty<TextStyle>("text64", text64))
