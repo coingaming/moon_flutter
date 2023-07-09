@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> {
         : MaterialApp(
             theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
             darkTheme: ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.dark]),
-            useInheritedMediaQuery: true,
             home: Scaffold(
               body: Center(
                 child: Column(

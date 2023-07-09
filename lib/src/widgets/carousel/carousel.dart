@@ -484,19 +484,19 @@ class MoonCarouselExtentMetrics extends FixedScrollMetrics {
   /// This is an immutable snapshot of the current values of scroll positions. This can directly be accessed by
   /// [ScrollNotification] to get currently selected real item index at any time.
   MoonCarouselExtentMetrics({
-    required super.axisDirection,
-    required super.maxScrollExtent,
     required super.minScrollExtent,
+    required super.maxScrollExtent,
     required super.pixels,
     required super.viewportDimension,
-    //TODO: uncomment when 3.10: required double devicePixelRatio,
+    required super.axisDirection,
+    required super.devicePixelRatio,
     required this.itemIndex,
   });
 
   @override
   MoonCarouselExtentMetrics copyWith({
     AxisDirection? axisDirection,
-    //TODO: uncomment when 3.10: double? devicePixelRatio,
+    double? devicePixelRatio,
     double? minScrollExtent,
     double? maxScrollExtent,
     double? pixels,
@@ -505,7 +505,7 @@ class MoonCarouselExtentMetrics extends FixedScrollMetrics {
   }) {
     return MoonCarouselExtentMetrics(
       axisDirection: axisDirection ?? this.axisDirection,
-      //TODO: uncomment when 3.10: devicePixelRatio: devicePixelRatio ?? this.devicePixelRatio,
+      devicePixelRatio: devicePixelRatio ?? this.devicePixelRatio,
       minScrollExtent: minScrollExtent ?? (hasContentDimensions ? this.minScrollExtent : 0.0),
       maxScrollExtent: maxScrollExtent ?? this.maxScrollExtent,
       pixels: pixels ?? this.pixels,
@@ -589,7 +589,7 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
   @override
   MoonCarouselExtentMetrics copyWith({
     AxisDirection? axisDirection,
-    //TODO: uncomment when 3.10: double? devicePixelRatio,
+    double? devicePixelRatio,
     double? minScrollExtent,
     double? maxScrollExtent,
     double? pixels,
@@ -598,7 +598,7 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
   }) {
     return MoonCarouselExtentMetrics(
       axisDirection: axisDirection ?? this.axisDirection,
-      //TODO: uncomment when 3.10: devicePixelRatio: devicePixelRatio ?? this.devicePixelRatio,
+      devicePixelRatio: devicePixelRatio ?? this.devicePixelRatio,
       minScrollExtent: minScrollExtent ?? (hasContentDimensions ? this.minScrollExtent : 0.0),
       maxScrollExtent: maxScrollExtent ?? this.maxScrollExtent,
       pixels: pixels ?? this.pixels,
@@ -708,7 +708,7 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
 
     // Scenario 3:
     // If there's no velocity and we're already at where we intend to land, do nothing.
-    //TODO: uncomment when 3.10: final tolerance = toleranceFor(metrics);
+    final tolerance = toleranceFor(metrics);
     if (velocity.abs() < tolerance.velocity && (settlingPixels - metrics.pixels).abs() < tolerance.distance) {
       return null;
     }

@@ -25,12 +25,13 @@ import 'package:example/src/storybook/stories/text_area.dart';
 import 'package:example/src/storybook/stories/text_input.dart';
 import 'package:example/src/storybook/stories/toast.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class StorybookPage extends StatelessWidget {
-  static bool isLargeScreen = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width > 1000;
+  static bool isLargeScreen = MediaQueryData.fromView(PlatformDispatcher.instance.implicitView!).size.width > 1000;
 
   const StorybookPage({super.key});
 
@@ -57,7 +58,6 @@ class StorybookPage extends StatelessWidget {
             title: "Moon Design for Flutter",
             theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
             darkTheme: ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.dark]),
-            useInheritedMediaQuery: true,
             home: Directionality(
               textDirection: Directionality.of(context),
               child: Focus(

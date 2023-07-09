@@ -75,10 +75,8 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
       switch (textDirection) {
         case TextDirection.rtl:
           left = size.width - width - x;
-          break;
         case TextDirection.ltr:
           left = x;
-          break;
       }
 
       final progressRect = RRect.fromRectAndCorners(

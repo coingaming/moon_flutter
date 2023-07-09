@@ -924,7 +924,6 @@ class _MoonTextInputState extends State<MoonTextInput>
         if (cause == SelectionChangedCause.longPress || cause == SelectionChangedCause.drag) {
           _editableText?.bringIntoView(selection.extent);
         }
-        break;
     }
 
     switch (Theme.of(context).platform) {
@@ -938,7 +937,6 @@ class _MoonTextInputState extends State<MoonTextInput>
         if (cause == SelectionChangedCause.drag) {
           _editableText?.hideToolbar();
         }
-        break;
     }
   }
 
@@ -1235,7 +1233,6 @@ class _MoonTextInputState extends State<MoonTextInput>
         cursorRadius ??= const Radius.circular(2.0);
         cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.of(context).devicePixelRatio, 0);
         autocorrectionTextRectColor = selectionColor;
-        break;
 
       case TargetPlatform.macOS:
         final CupertinoThemeData cupertinoTheme = CupertinoTheme.of(context);
@@ -1253,7 +1250,6 @@ class _MoonTextInputState extends State<MoonTextInput>
             _effectiveFocusNode.requestFocus();
           }
         };
-        break;
 
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
@@ -1263,7 +1259,6 @@ class _MoonTextInputState extends State<MoonTextInput>
         cursorOpacityAnimates = false;
         cursorColor = widget.cursorColor ?? effectiveTextColor;
         selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
-        break;
 
       case TargetPlatform.linux:
         forcePressEnabled = false;
@@ -1272,7 +1267,6 @@ class _MoonTextInputState extends State<MoonTextInput>
         cursorOpacityAnimates = false;
         cursorColor = widget.cursorColor ?? effectiveTextColor;
         selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
-        break;
 
       case TargetPlatform.windows:
         forcePressEnabled = false;
@@ -1287,7 +1281,6 @@ class _MoonTextInputState extends State<MoonTextInput>
             _effectiveFocusNode.requestFocus();
           }
         };
-        break;
     }
 
     final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor>(
@@ -1541,7 +1534,7 @@ class _TextFieldSelectionGestureDetectorBuilder extends TextSelectionGestureDete
   }
 
   @override
-  void onSingleTapUp(TapUpDetails details) {
+  void onSingleTapUp(TapDragUpDetails details) {
     super.onSingleTapUp(details);
     _state._requestKeyboard();
     _state.widget.onTap?.call();
@@ -1560,7 +1553,6 @@ class _TextFieldSelectionGestureDetectorBuilder extends TextSelectionGestureDete
         case TargetPlatform.linux:
         case TargetPlatform.windows:
           Feedback.forLongPress(_state.context);
-          break;
       }
     }
   }
