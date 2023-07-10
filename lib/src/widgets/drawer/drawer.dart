@@ -26,7 +26,7 @@ class MoonDrawer extends StatelessWidget {
   /// The width of the Drawer.
   final double? width;
 
-  /// List of popover shadows.
+  /// List of Drawer shadows.
   final List<BoxShadow>? drawerShadows;
 
   /// The semantic label for the Drawer.
