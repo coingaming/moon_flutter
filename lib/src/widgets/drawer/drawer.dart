@@ -61,10 +61,12 @@ class MoonDrawer extends StatelessWidget {
     final Color effectiveIconColor =
         context.moonTheme?.drawerTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
 
-    final double widthFromTheme = context.moonTheme?.drawerTheme.properties.width ?? 448;
+    final double effectiveWidthFromTheme = context.moonTheme?.drawerTheme.properties.width ?? 448;
 
     final double effectiveWidth = width ??
-        (MediaQuery.of(context).size.width < widthFromTheme ? MediaQuery.of(context).size.width : widthFromTheme);
+        (MediaQuery.of(context).size.width < effectiveWidthFromTheme
+            ? MediaQuery.of(context).size.width
+            : effectiveWidthFromTheme);
 
     final List<BoxShadow> effectiveDrawerShadows =
         drawerShadows ?? context.moonTheme?.drawerTheme.shadows.drawerShadows ?? MoonShadows.light.lg;
