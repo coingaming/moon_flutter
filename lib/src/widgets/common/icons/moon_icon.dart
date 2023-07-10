@@ -234,7 +234,6 @@ class MoonIcon extends StatelessWidget {
             transformHitTests: false,
             child: iconWidget,
           );
-          break;
         case TextDirection.ltr:
           break;
       }

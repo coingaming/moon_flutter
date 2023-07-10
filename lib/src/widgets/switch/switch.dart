@@ -222,11 +222,9 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
         case TextDirection.rtl:
           _animationController!.value +=
               -details.primaryDelta! / (switchWidth - (thumbSizeValue + padding.right + padding.left));
-          break;
         case TextDirection.ltr:
           _animationController!.value +=
               details.primaryDelta! / (switchWidth - (thumbSizeValue + padding.right + padding.left));
-          break;
       }
     }
   }

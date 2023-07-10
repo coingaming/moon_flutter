@@ -437,32 +437,24 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
       switch (tooltipPosition) {
         case MoonTooltipPosition.left:
           tooltipPosition = MoonTooltipPosition.right;
-          break;
         case MoonTooltipPosition.right:
           tooltipPosition = MoonTooltipPosition.left;
-          break;
         case MoonTooltipPosition.topLeft:
           tooltipPosition = MoonTooltipPosition.topRight;
-          break;
         case MoonTooltipPosition.topRight:
           tooltipPosition = MoonTooltipPosition.topLeft;
-          break;
         case MoonTooltipPosition.bottomLeft:
           tooltipPosition = MoonTooltipPosition.bottomRight;
-          break;
         case MoonTooltipPosition.bottomRight:
           tooltipPosition = MoonTooltipPosition.bottomLeft;
-          break;
         case MoonTooltipPosition.vertical:
           tooltipPosition = tooltipTargetGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
               ? MoonTooltipPosition.bottom
               : MoonTooltipPosition.top;
-          break;
         case MoonTooltipPosition.horizontal:
           tooltipPosition = tooltipTargetGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
               ? MoonTooltipPosition.right
               : MoonTooltipPosition.left;
-          break;
         default:
           break;
       }
