@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.0](https://github.com/coingaming/moon_flutter/compare/v0.25.1...v0.26.0) (2023-07-10)
+
+
+### Features
+
+* [MDS-590] Create Drawer widget ([#204](https://github.com/coingaming/moon_flutter/issues/204)) ([df73463](https://github.com/coingaming/moon_flutter/commit/df73463e843fa95130807d03d1634500e5376288))
+
 ## [0.25.1](https://github.com/coingaming/moon_flutter/compare/v0.25.0...v0.25.1) (2023-07-10)
 
 
