@@ -392,32 +392,24 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       switch (popoverPosition) {
         case MoonPopoverPosition.left:
           popoverPosition = MoonPopoverPosition.right;
-          break;
         case MoonPopoverPosition.right:
           popoverPosition = MoonPopoverPosition.left;
-          break;
         case MoonPopoverPosition.topLeft:
           popoverPosition = MoonPopoverPosition.topRight;
-          break;
         case MoonPopoverPosition.topRight:
           popoverPosition = MoonPopoverPosition.topLeft;
-          break;
         case MoonPopoverPosition.bottomLeft:
           popoverPosition = MoonPopoverPosition.bottomRight;
-          break;
         case MoonPopoverPosition.bottomRight:
           popoverPosition = MoonPopoverPosition.bottomLeft;
-          break;
         case MoonPopoverPosition.vertical:
           popoverPosition = popoverTargetGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
               ? MoonPopoverPosition.bottom
               : MoonPopoverPosition.top;
-          break;
         case MoonPopoverPosition.horizontal:
           popoverPosition = popoverTargetGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
               ? MoonPopoverPosition.right
               : MoonPopoverPosition.left;
-          break;
         default:
           break;
       }

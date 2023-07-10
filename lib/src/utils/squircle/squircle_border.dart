@@ -191,8 +191,6 @@ class MoonSquircleBorder extends OutlinedBorder {
           outerPath,
           side.toPaint(),
         );
-
-        break;
     }
   }
 

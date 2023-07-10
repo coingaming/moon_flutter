@@ -177,7 +177,7 @@ class MoonAvatar extends StatelessWidget {
               child: ClipPath(
                 // TODO: Since clipper does not work properly on mobile web/PWA, we are disabling it. Remove this check
                 // when it has been fixed from Flutter side.
-                clipper: kIsWeb && MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width < 500
+                clipper: kIsWeb && MediaQueryData.fromView(View.of(context)).size.width < 500
                     ? null
                     : AvatarClipper(
                         showBadge: showBadge,
