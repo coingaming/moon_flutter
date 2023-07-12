@@ -7,13 +7,6 @@ import 'package:moon_design/src/theme/sizes.dart';
 
 @immutable
 class MoonDotIndicatorProperties extends ThemeExtension<MoonDotIndicatorProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonDotIndicatorProperties(
-    gap: MoonSizes.sizes.x4s,
-    size: MoonSizes.sizes.x4s,
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-  );
-
   /// DotIndicator gap between dots.
   final double gap;
 

@@ -7,42 +7,50 @@ import 'package:moon_design/src/theme/typography/text_styles.dart';
 @immutable
 class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableTreeMixin {
   static final light = MoonTypography(
-    body: MoonTextStyles.body,
-    heading: MoonTextStyles.heading,
     colors: MoonTextColors.light,
+    body: MoonTextStyles.body,
+    caption: MoonTextStyles.caption,
+    heading: MoonTextStyles.heading,
   );
 
   static final dark = MoonTypography(
-    body: MoonTextStyles.body,
-    heading: MoonTextStyles.heading,
     colors: MoonTextColors.dark,
+    body: MoonTextStyles.body,
+    caption: MoonTextStyles.caption,
+    heading: MoonTextStyles.heading,
   );
+
+  /// Colors for text.
+  final MoonTextColors colors;
 
   /// Styles for body text.
   final MoonTextStyles body;
 
+  /// Styles for body text.
+  final MoonTextStyles caption;
+
   /// Styles for headings.
   final MoonTextStyles heading;
 
-  /// Colors for body and icons.
-  final MoonTextColors colors;
-
   const MoonTypography({
-    required this.body,
-    required this.heading,
     required this.colors,
+    required this.body,
+    required this.caption,
+    required this.heading,
   });
 
   @override
   MoonTypography copyWith({
-    MoonTextStyles? body,
-    MoonTextStyles? heading,
     MoonTextColors? colors,
+    MoonTextStyles? body,
+    MoonTextStyles? caption,
+    MoonTextStyles? heading,
   }) {
     return MoonTypography(
-      body: body ?? this.body,
-      heading: heading ?? this.heading,
       colors: colors ?? this.colors,
+      body: body ?? this.body,
+      caption: caption ?? this.caption,
+      heading: heading ?? this.heading,
     );
   }
 
@@ -51,9 +59,10 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
     if (other is! MoonTypography) return this;
 
     return MoonTypography(
-      body: body.lerp(other.body, t),
-      heading: heading.lerp(other.heading, t),
       colors: colors.lerp(other.colors, t),
+      body: body.lerp(other.body, t),
+      caption: caption.lerp(other.caption, t),
+      heading: heading.lerp(other.heading, t),
     );
   }
 
@@ -62,8 +71,9 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTypography"))
+      ..add(DiagnosticsProperty("colors", colors))
       ..add(DiagnosticsProperty("body", body))
-      ..add(DiagnosticsProperty("heading", heading))
-      ..add(DiagnosticsProperty("colors", colors));
+      ..add(DiagnosticsProperty("caption", caption))
+      ..add(DiagnosticsProperty("heading", heading));
   }
 }

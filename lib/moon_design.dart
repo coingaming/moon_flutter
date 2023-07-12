@@ -36,6 +36,7 @@ export 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 export 'package:moon_design/src/theme/typography/text_colors.dart';
 export 'package:moon_design/src/theme/typography/text_styles.dart';
 export 'package:moon_design/src/theme/typography/typography.dart';
+export 'package:moon_design/src/theme/tokens.dart';
 
 export 'package:moon_design/src/utils/color_premul_lerp.dart';
 export 'package:moon_design/src/utils/color_tween_premul.dart';
