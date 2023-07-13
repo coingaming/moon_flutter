@@ -8,30 +8,65 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 @immutable
 class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> with DiagnosticableTreeMixin {
   static final light = MoonAccordionItemColors(
+    leadingColor: MoonTypography.light.colors.bodyPrimary,
+    expandedLeadingColor: MoonTypography.light.colors.bodyPrimary,
+    titleColor: MoonTypography.light.colors.bodyPrimary,
+    expandedTitleColor: MoonTypography.light.colors.bodyPrimary,
+    trailingColor: MoonTypography.light.colors.bodyPrimary,
+    expandedTrailingColor: MoonTypography.light.colors.bodyPrimary,
+    contentColor: MoonTypography.light.colors.bodyPrimary,
+    trailingIconColor: MoonTypography.light.colors.bodySecondary,
+    expandedTrailingIconColor: MoonTypography.light.colors.bodyPrimary,
     backgroundColor: MoonColors.light.gohan,
     expandedBackgroundColor: MoonColors.light.gohan,
     borderColor: MoonColors.light.beerus,
     dividerColor: MoonColors.light.beerus,
-    headerTextColor: MoonTypography.light.colors.bodyPrimary,
-    expandedHeaderTextColor: MoonTypography.light.colors.bodyPrimary,
-    contentTextColor: MoonTypography.light.colors.bodyPrimary,
-    trailingIconColor: MoonTypography.light.colors.bodySecondary,
-    expandedTrailingIconColor: MoonTypography.light.colors.bodyPrimary,
   );
 
   static final dark = MoonAccordionItemColors(
+    leadingColor: MoonTypography.dark.colors.bodyPrimary,
+    expandedLeadingColor: MoonTypography.dark.colors.bodyPrimary,
+    titleColor: MoonTypography.dark.colors.bodyPrimary,
+    expandedTitleColor: MoonTypography.dark.colors.bodyPrimary,
+    trailingColor: MoonTypography.dark.colors.bodyPrimary,
+    expandedTrailingColor: MoonTypography.dark.colors.bodyPrimary,
+    contentColor: MoonTypography.dark.colors.bodyPrimary,
+    trailingIconColor: MoonTypography.dark.colors.bodySecondary,
+    expandedTrailingIconColor: MoonTypography.dark.colors.bodyPrimary,
     backgroundColor: MoonColors.dark.gohan,
     expandedBackgroundColor: MoonColors.dark.gohan,
     borderColor: MoonColors.dark.beerus,
     dividerColor: MoonColors.dark.beerus,
-    headerTextColor: MoonTypography.dark.colors.bodyPrimary,
-    expandedHeaderTextColor: MoonTypography.dark.colors.bodyPrimary,
-    contentTextColor: MoonTypography.dark.colors.bodyPrimary,
-    trailingIconColor: MoonTypography.dark.colors.bodySecondary,
-    expandedTrailingIconColor: MoonTypography.dark.colors.bodyPrimary,
   );
 
-  /// Accordion item background color.
+  /// Collapsed accordion item leading slot widget's text and icon color.
+  final Color leadingColor;
+
+  /// Expanded accordion item leading slot widget's text and icon color.
+  final Color expandedLeadingColor;
+
+  /// Collapsed accordion item title slot widget's text and icon color.
+  final Color titleColor;
+
+  /// Expanded accordion item title slot widget's text and icon color.
+  final Color expandedTitleColor;
+
+  /// Collapsed accordion item trailing slot widget's text and icon color.
+  final Color trailingColor;
+
+  /// Expanded accordion item trailing slot widget's text and icon color.
+  final Color expandedTrailingColor;
+
+  /// Accordion item content slot widget's text and icon color.
+  final Color contentColor;
+
+  /// Collapsed accordion item default pre-set trailing icon color.
+  final Color trailingIconColor;
+
+  /// Expanded accordion item default pre-set trailing icon color.
+  final Color expandedTrailingIconColor;
+
+  /// Collapsed accordion item background color.
   final Color backgroundColor;
 
   /// Expanded accordion item background color.
@@ -43,55 +78,52 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   /// Accordion item divider color.
   final Color dividerColor;
 
-  /// Accordion item header text color.
-  final Color headerTextColor;
-
-  /// Expanded accordion item header text color.
-  final Color expandedHeaderTextColor;
-
-  /// Accordion item content text color.
-  final Color contentTextColor;
-
-  /// Accordion item trailing icon color.
-  final Color trailingIconColor;
-
-  /// Expanded accordion item trailing icon color.
-  final Color expandedTrailingIconColor;
-
   const MoonAccordionItemColors({
+    required this.leadingColor,
+    required this.expandedLeadingColor,
+    required this.titleColor,
+    required this.expandedTitleColor,
+    required this.trailingColor,
+    required this.expandedTrailingColor,
+    required this.contentColor,
+    required this.trailingIconColor,
+    required this.expandedTrailingIconColor,
     required this.backgroundColor,
     required this.expandedBackgroundColor,
     required this.borderColor,
     required this.dividerColor,
-    required this.headerTextColor,
-    required this.expandedHeaderTextColor,
-    required this.contentTextColor,
-    required this.trailingIconColor,
-    required this.expandedTrailingIconColor,
   });
 
   @override
   MoonAccordionItemColors copyWith({
+    Color? leadingColor,
+    Color? expandedLeadingColor,
+    Color? titleColor,
+    Color? expandedTitleColor,
+    Color? trailingColor,
+    Color? expandedTrailingColor,
+    Color? contentColor,
+    Color? trailingIconColor,
+    Color? expandedTrailingIconColor,
     Color? backgroundColor,
     Color? expandedBackgroundColor,
     Color? borderColor,
     Color? dividerColor,
-    Color? headerTextColor,
-    Color? expandedHeaderTextColor,
-    Color? contentTextColor,
-    Color? trailingIconColor,
-    Color? expandedTrailingIconColor,
   }) {
     return MoonAccordionItemColors(
+      leadingColor: leadingColor ?? this.leadingColor,
+      expandedLeadingColor: expandedLeadingColor ?? this.expandedLeadingColor,
+      titleColor: titleColor ?? this.titleColor,
+      expandedTitleColor: expandedTitleColor ?? this.expandedTitleColor,
+      trailingColor: trailingColor ?? this.trailingColor,
+      expandedTrailingColor: expandedTrailingColor ?? this.expandedTrailingColor,
+      contentColor: contentColor ?? this.contentColor,
+      trailingIconColor: trailingIconColor ?? this.trailingIconColor,
+      expandedTrailingIconColor: expandedTrailingIconColor ?? this.expandedTrailingIconColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       expandedBackgroundColor: expandedBackgroundColor ?? this.expandedBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
       dividerColor: dividerColor ?? this.dividerColor,
-      headerTextColor: headerTextColor ?? this.headerTextColor,
-      expandedHeaderTextColor: expandedHeaderTextColor ?? this.expandedHeaderTextColor,
-      contentTextColor: contentTextColor ?? this.contentTextColor,
-      trailingIconColor: trailingIconColor ?? this.trailingIconColor,
-      expandedTrailingIconColor: expandedTrailingIconColor ?? this.expandedTrailingIconColor,
     );
   }
 
@@ -100,15 +132,19 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     if (other is! MoonAccordionItemColors) return this;
 
     return MoonAccordionItemColors(
+      leadingColor: colorPremulLerp(leadingColor, other.leadingColor, t)!,
+      expandedLeadingColor: colorPremulLerp(expandedLeadingColor, other.expandedLeadingColor, t)!,
+      titleColor: colorPremulLerp(titleColor, other.titleColor, t)!,
+      expandedTitleColor: colorPremulLerp(expandedTitleColor, other.expandedTitleColor, t)!,
+      trailingColor: colorPremulLerp(trailingColor, other.trailingColor, t)!,
+      expandedTrailingColor: colorPremulLerp(expandedTrailingColor, other.expandedTrailingColor, t)!,
+      contentColor: colorPremulLerp(contentColor, other.contentColor, t)!,
+      trailingIconColor: colorPremulLerp(trailingIconColor, other.trailingIconColor, t)!,
+      expandedTrailingIconColor: colorPremulLerp(expandedTrailingIconColor, other.expandedTrailingIconColor, t)!,
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       expandedBackgroundColor: colorPremulLerp(expandedBackgroundColor, other.expandedBackgroundColor, t)!,
       borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
       dividerColor: colorPremulLerp(dividerColor, other.dividerColor, t)!,
-      headerTextColor: colorPremulLerp(headerTextColor, other.headerTextColor, t)!,
-      expandedHeaderTextColor: colorPremulLerp(expandedHeaderTextColor, other.expandedHeaderTextColor, t)!,
-      contentTextColor: colorPremulLerp(contentTextColor, other.contentTextColor, t)!,
-      trailingIconColor: colorPremulLerp(trailingIconColor, other.trailingIconColor, t)!,
-      expandedTrailingIconColor: colorPremulLerp(expandedTrailingIconColor, other.expandedTrailingIconColor, t)!,
     );
   }
 
@@ -117,14 +153,18 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAccordionItemColors"))
+      ..add(ColorProperty("leadingColor", leadingColor))
+      ..add(ColorProperty("expandedLeadingColor", expandedLeadingColor))
+      ..add(ColorProperty("titleColor", titleColor))
+      ..add(ColorProperty("expandedTitleColor", expandedTitleColor))
+      ..add(ColorProperty("trailingColor", trailingColor))
+      ..add(ColorProperty("expandedTrailingColor", expandedTrailingColor))
+      ..add(ColorProperty("contentColor", contentColor))
+      ..add(ColorProperty("trailingIconColor", trailingIconColor))
+      ..add(ColorProperty("expandedTrailingIconColor", expandedTrailingIconColor))
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("expandedBackgroundColor", expandedBackgroundColor))
       ..add(ColorProperty("borderColor", borderColor))
-      ..add(ColorProperty("dividerColor", dividerColor))
-      ..add(ColorProperty("headerTextColor", headerTextColor))
-      ..add(ColorProperty("expandedHeaderTextColor", expandedHeaderTextColor))
-      ..add(ColorProperty("contentTextColor", contentTextColor))
-      ..add(ColorProperty("trailingIconColor", trailingIconColor))
-      ..add(ColorProperty("expandedTrailingIconColor", expandedTrailingIconColor));
+      ..add(ColorProperty("dividerColor", dividerColor));
   }
 }

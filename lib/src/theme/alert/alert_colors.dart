@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/colors.dart';
+import 'package:moon_design/src/theme/icons/icon_colors.dart';
 import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
@@ -10,13 +11,15 @@ class MoonAlertColors extends ThemeExtension<MoonAlertColors> with Diagnosticabl
   static final light = MoonAlertColors(
     backgroundColor: MoonColors.light.gohan,
     borderColor: MoonTypography.light.colors.bodySecondary,
-    outlinedVariantColor: MoonTypography.light.colors.bodyPrimary,
+    iconColor: MoonIconColors.light.primaryColor,
+    textColor: MoonTypography.light.colors.bodyPrimary,
   );
 
   static final dark = MoonAlertColors(
     backgroundColor: MoonColors.dark.gohan,
     borderColor: MoonTypography.dark.colors.bodySecondary,
-    outlinedVariantColor: MoonTypography.dark.colors.bodyPrimary,
+    iconColor: MoonIconColors.dark.primaryColor,
+    textColor: MoonTypography.dark.colors.bodyPrimary,
   );
 
   /// Alert background color.
@@ -25,25 +28,31 @@ class MoonAlertColors extends ThemeExtension<MoonAlertColors> with Diagnosticabl
   /// Alert border color.
   final Color borderColor;
 
+  /// Alert icon color.
+  final Color iconColor;
+
   /// Alert text color.
-  final Color outlinedVariantColor;
+  final Color textColor;
 
   const MoonAlertColors({
     required this.backgroundColor,
     required this.borderColor,
-    required this.outlinedVariantColor,
+    required this.iconColor,
+    required this.textColor,
   });
 
   @override
   MoonAlertColors copyWith({
     Color? backgroundColor,
     Color? borderColor,
-    Color? outlinedVariantColor,
+    Color? iconColor,
+    Color? textColor,
   }) {
     return MoonAlertColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       borderColor: borderColor ?? this.borderColor,
-      outlinedVariantColor: outlinedVariantColor ?? this.outlinedVariantColor,
+      iconColor: iconColor ?? this.iconColor,
+      textColor: textColor ?? this.textColor,
     );
   }
 
@@ -54,7 +63,8 @@ class MoonAlertColors extends ThemeExtension<MoonAlertColors> with Diagnosticabl
     return MoonAlertColors(
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
-      outlinedVariantColor: colorPremulLerp(outlinedVariantColor, other.outlinedVariantColor, t)!,
+      iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
+      textColor: colorPremulLerp(textColor, other.textColor, t)!,
     );
   }
 
@@ -65,6 +75,7 @@ class MoonAlertColors extends ThemeExtension<MoonAlertColors> with Diagnosticabl
       ..add(DiagnosticsProperty("type", "MoonAlertColors"))
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("borderColor", borderColor))
-      ..add(ColorProperty("outlinedVariantColor", outlinedVariantColor));
+      ..add(ColorProperty("iconColor", iconColor))
+      ..add(ColorProperty("textColor", textColor));
   }
 }
