@@ -11,6 +11,50 @@ class AlertStory extends Story {
       : super(
           name: "Alert",
           builder: (context) {
+            final leadingColorsKnob = context.knobs.nullable.options(
+              label: "Leading Color",
+              description: "MoonColors variants for MoonAlert leading.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final leadingColor = colorTable(context)[leadingColorsKnob ?? 40];
+
+            final titleColorsKnob = context.knobs.nullable.options(
+              label: "Title color",
+              description: "MoonColors variants for MoonAlert title.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final titleColor = colorTable(context)[titleColorsKnob ?? 40];
+
+            final trailingColorsKnob = context.knobs.nullable.options(
+              label: "Trailing color",
+              description: "MoonColors variants for MoonAlert trailing.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final trailingColor = colorTable(context)[trailingColorsKnob ?? 40];
+
+            final bodyColorsKnob = context.knobs.nullable.options(
+              label: "Body color",
+              description: "MoonColors variants for MoonAlert body.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final bodyColor = colorTable(context)[bodyColorsKnob ?? 40];
+
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonAlert background.",
@@ -22,38 +66,6 @@ class AlertStory extends Story {
 
             final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
 
-            final textColorsKnob = context.knobs.nullable.options(
-              label: "textColor",
-              description: "MoonColors variants for MoonAlert text.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
-
-            final leadingColorsKnob = context.knobs.nullable.options(
-              label: "leadingColor",
-              description: "MoonColors variants for MoonAlert leading.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final leadingColor = colorTable(context)[leadingColorsKnob ?? 40];
-
-            final trailingColorsKnob = context.knobs.nullable.options(
-              label: "trailingColor",
-              description: "MoonColors variants for MoonAlert trailing.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final trailingColor = colorTable(context)[trailingColorsKnob ?? 40];
 
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
@@ -115,16 +127,27 @@ class AlertStory extends Story {
                           children: [
                             MoonAlert(
                               show: showAlert,
-                              title: const SizedBox(
+                              showBorder: showBorderKnob,
+                              borderColor: borderColor,
+                              backgroundColor: backgroundColor,
+                              borderRadius:
+                                  borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                              leading: showLeadingKnob
+                                  ? MoonIcon(
+                                      MoonIcons.frame_24,
+                                      color: leadingColor,
+                                    )
+                                  : null,
+                              title: SizedBox(
                                 height: 24,
                                 child: Align(
                                   alignment: AlignmentDirectional.centerStart,
-                                  child: Text("Base MoonAlert"),
+                                  child: Text(
+                                    "Base MoonAlert",
+                                    style: TextStyle(color: titleColor),
+                                  ),
                                 ),
                               ),
-                              borderRadius:
-                                  borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                              leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                               trailing: showTrailingKnob
                                   ? MoonButton.icon(
                                       buttonSize: MoonButtonSize.xs,
@@ -145,18 +168,15 @@ class AlertStory extends Story {
                                             },
                                     )
                                   : null,
-                              backgroundColor: backgroundColor,
-                              showBorder: showBorderKnob,
-                              leadingColor: leadingColor,
-                              trailingColor: trailingColor,
-                              textColor: textColor,
-                              borderColor: borderColor,
                               body: showBodyKnob
-                                  ? const SizedBox(
+                                  ? SizedBox(
                                       height: 24,
                                       child: Align(
                                         alignment: AlignmentDirectional.centerStart,
-                                        child: Text("Here goes MoonAlert body"),
+                                        child: Text(
+                                          "Here goes MoonAlert body",
+                                          style: TextStyle(color: bodyColor),
+                                        ),
                                       ),
                                     )
                                   : null,
@@ -178,11 +198,11 @@ class AlertStory extends Story {
                     const SizedBox(height: 32),
                     MoonFilledAlert(
                       show: true,
-                      title: const Text("Filled error MoonAlert"),
+                      color: context.moonColors!.chiChi100,
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       leading: showLeadingKnob ? const MoonIcon(MoonIcons.alert_24) : null,
-                      color: context.moonColors!.chiChi100,
+                      title: const Text("Filled error MoonAlert"),
                       body: showBodyKnob
                           ? const SizedBox(
                               height: 24,
@@ -197,11 +217,11 @@ class AlertStory extends Story {
                     const SizedBox(height: 16),
                     MoonFilledAlert(
                       show: true,
-                      title: const Text("Filled warning MoonAlert"),
+                      color: context.moonColors!.krillin100,
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       leading: showLeadingKnob ? const MoonIcon(MoonIcons.alarm_round_24) : null,
-                      color: context.moonColors!.krillin100,
+                      title: const Text("Filled warning MoonAlert"),
                       body: showBodyKnob
                           ? const SizedBox(
                               height: 24,
@@ -218,11 +238,11 @@ class AlertStory extends Story {
                     const SizedBox(height: 32),
                     MoonOutlinedAlert(
                       show: true,
-                      title: const Text("Outlined success MoonAlert"),
+                      color: context.moonColors!.roshi100,
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       leading: showLeadingKnob ? const MoonIcon(MoonIcons.check_rounded_24) : null,
-                      color: context.moonColors!.roshi100,
+                      title: const Text("Outlined success MoonAlert"),
                       body: showBodyKnob
                           ? const SizedBox(
                               height: 24,
@@ -237,11 +257,11 @@ class AlertStory extends Story {
                     const SizedBox(height: 16),
                     MoonOutlinedAlert(
                       show: true,
-                      title: const Text('Outlined info MoonAlert'),
+                      color: context.moonColors!.whis100,
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                       leading: showLeadingKnob ? const MoonIcon(MoonIcons.alert_24) : null,
-                      color: context.moonColors!.whis100,
+                      title: const Text('Outlined info MoonAlert'),
                       body: showBodyKnob
                           ? const SizedBox(
                               height: 24,

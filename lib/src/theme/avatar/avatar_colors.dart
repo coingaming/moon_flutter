@@ -9,24 +9,18 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 @immutable
 class MoonAvatarColors extends ThemeExtension<MoonAvatarColors> with DiagnosticableTreeMixin {
   static final light = MoonAvatarColors(
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    iconColor: MoonIconTheme.light.colors.primaryColor,
     backgroundColor: MoonColors.light.gohan,
     badgeColor: MoonColors.light.roshi100,
+    iconColor: MoonIconTheme.light.colors.primaryColor,
+    textColor: MoonTypography.light.colors.bodyPrimary,
   );
 
   static final dark = MoonAvatarColors(
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    iconColor: MoonIconTheme.dark.colors.primaryColor,
     backgroundColor: MoonColors.dark.gohan,
     badgeColor: MoonColors.dark.roshi100,
+    iconColor: MoonIconTheme.dark.colors.primaryColor,
+    textColor: MoonTypography.dark.colors.bodyPrimary,
   );
-
-  /// Avatar text color.
-  final Color textColor;
-
-  /// Avatar icon color.
-  final Color iconColor;
 
   /// Avatar background color.
   final Color backgroundColor;
@@ -34,25 +28,31 @@ class MoonAvatarColors extends ThemeExtension<MoonAvatarColors> with Diagnostica
   /// Avatar badge color.
   final Color badgeColor;
 
+  /// Avatar icon color.
+  final Color iconColor;
+
+  /// Avatar text color.
+  final Color textColor;
+
   const MoonAvatarColors({
-    required this.textColor,
-    required this.iconColor,
     required this.backgroundColor,
     required this.badgeColor,
+    required this.iconColor,
+    required this.textColor,
   });
 
   @override
   MoonAvatarColors copyWith({
-    Color? textColor,
-    Color? iconColor,
     Color? backgroundColor,
     Color? badgeColor,
+    Color? iconColor,
+    Color? textColor,
   }) {
     return MoonAvatarColors(
-      textColor: textColor ?? this.textColor,
-      iconColor: iconColor ?? this.iconColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       badgeColor: badgeColor ?? this.badgeColor,
+      iconColor: iconColor ?? this.iconColor,
+      textColor: textColor ?? this.textColor,
     );
   }
 
@@ -61,10 +61,10 @@ class MoonAvatarColors extends ThemeExtension<MoonAvatarColors> with Diagnostica
     if (other is! MoonAvatarColors) return this;
 
     return MoonAvatarColors(
-      textColor: colorPremulLerp(textColor, other.textColor, t)!,
-      iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       badgeColor: colorPremulLerp(badgeColor, other.badgeColor, t)!,
+      iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
+      textColor: colorPremulLerp(textColor, other.textColor, t)!,
     );
   }
 
@@ -73,9 +73,9 @@ class MoonAvatarColors extends ThemeExtension<MoonAvatarColors> with Diagnostica
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAvatarColors"))
-      ..add(ColorProperty("textColor", textColor))
-      ..add(ColorProperty("iconColor", iconColor))
       ..add(ColorProperty("backgroundColor", backgroundColor))
-      ..add(ColorProperty("badgeColor", badgeColor));
+      ..add(ColorProperty("badgeColor", badgeColor))
+      ..add(ColorProperty("iconColor", iconColor))
+      ..add(ColorProperty("textColor", textColor));
   }
 }
