@@ -5,13 +5,11 @@ import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 import 'package:moon_design/src/theme/alert/alert_theme.dart';
 import 'package:moon_design/src/theme/authcode/authcode_theme.dart';
 import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
-import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_theme.dart';
 import 'package:moon_design/src/theme/button/button_theme.dart';
 import 'package:moon_design/src/theme/carousel/carousel_theme.dart';
 import 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
-import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_theme.dart';
 import 'package:moon_design/src/theme/drawer/drawer_theme.dart';
 import 'package:moon_design/src/theme/effects/effects.dart';
@@ -19,23 +17,25 @@ import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
 import 'package:moon_design/src/theme/modal/modal_theme.dart';
-import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/popover/popover_theme.dart';
 import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_theme.dart';
 import 'package:moon_design/src/theme/radio/radio_theme.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_theme.dart';
-import 'package:moon_design/src/theme/shadows.dart';
-import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
 import 'package:moon_design/src/theme/text_area/text_area_theme.dart';
 import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
 import 'package:moon_design/src/theme/toast/toast_theme.dart';
-import 'package:moon_design/src/theme/tokens.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/opacity.dart';
+import 'package:moon_design/src/theme/tokens/shadows.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
@@ -179,7 +179,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonToastTheme? toastTheme,
     MoonTooltipTheme? tooltipTheme,
     MoonTypography? typography,
-  })  : accordionTheme = accordionTheme ?? MoonAccordionTheme.light,
+  })  : accordionTheme = accordionTheme ?? MoonAccordionTheme(tokens: tokens),
         alertTheme = alertTheme ?? MoonAlertTheme.light,
         authCodeTheme = authCodeTheme ?? MoonAuthCodeTheme.light,
         avatarTheme = avatarTheme ?? MoonAvatarTheme.light,

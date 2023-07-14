@@ -8,14 +8,14 @@ import 'package:flutter/material.dart'
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/effects/focus_effects.dart';
-import 'package:moon_design/src/theme/opacity.dart';
-import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/opacity.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';

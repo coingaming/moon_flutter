@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 
 @immutable
 class MoonRadioProperties extends ThemeExtension<MoonRadioProperties> with DiagnosticableTreeMixin {

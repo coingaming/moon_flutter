@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
 
 enum MoonCircularProgressSize {

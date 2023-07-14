@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_colors.dart';
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_properties.dart';
-import 'package:moon_design/src/theme/tokens.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with DiagnosticableTreeMixin {

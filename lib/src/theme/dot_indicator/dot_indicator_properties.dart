@@ -3,8 +3,6 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/sizes.dart';
-
 @immutable
 class MoonDotIndicatorProperties extends ThemeExtension<MoonDotIndicatorProperties> with DiagnosticableTreeMixin {
   /// DotIndicator gap between dots.

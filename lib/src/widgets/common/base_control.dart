@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/effects/controls_effects.dart';
 import 'package:moon_design/src/theme/effects/focus_effects.dart';
-import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/tokens/opacity.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';

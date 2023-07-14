@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/moon_design.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
 
 @immutable
 class MoonSegmentedControlProperties extends ThemeExtension<MoonSegmentedControlProperties>

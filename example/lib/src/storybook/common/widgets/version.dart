@@ -1,7 +1,6 @@
 import 'package:example/src/storybook/storybook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:moon_design/moon_design.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
