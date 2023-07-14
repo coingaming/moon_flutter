@@ -4,6 +4,7 @@ import 'package:moon_design/src/theme/tab_bar/tab_bar_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -250,10 +251,11 @@ class _MoonTabBarState extends State<MoonTabBar> {
 
     _effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.tabBarTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    _effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.tabBarTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    _effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.tabBarTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     final double effectiveHeight = widget.height ?? _effectiveMoonTabBarSize.height;
 

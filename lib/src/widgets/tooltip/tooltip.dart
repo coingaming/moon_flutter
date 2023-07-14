@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -527,8 +528,9 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         context.moonTheme?.tooltipTheme.properties.transitionDuration ??
         const Duration(milliseconds: 150);
 
-    final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.tooltipTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.tooltipTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _animationController ??= AnimationController(
       duration: effectiveTransitionDuration,

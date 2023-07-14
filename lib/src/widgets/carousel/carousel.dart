@@ -9,6 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 
@@ -448,11 +449,13 @@ class MoonCarouselScrollController extends ScrollController {
   Future<void> previousItem({required BuildContext context, Duration? duration, Curve? curve}) async {
     if (!hasClients) return;
 
-    final Duration effectiveTransitionDuration =
-        duration ?? context.moonTheme?.carouselTheme.properties.transitionDuration ?? const Duration(milliseconds: 200);
+    final Duration effectiveTransitionDuration = duration ??
+        context.moonTheme?.carouselTheme.properties.transitionDuration ??
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        curve ?? context.moonTheme?.carouselTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = curve ??
+        context.moonTheme?.carouselTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     await Future.wait<void>([
       for (final position in positions.cast<_MoonCarouselScrollPosition>())

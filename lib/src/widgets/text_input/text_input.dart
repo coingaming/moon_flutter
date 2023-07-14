@@ -15,6 +15,7 @@ import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -1147,10 +1148,11 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.textInputTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.textInputTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.textInputTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonTextInputSize.padding;
 

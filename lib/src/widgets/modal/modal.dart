@@ -4,6 +4,7 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -38,10 +39,11 @@ Future<T?> showMoonModal<T>({
 
   final Duration effectiveTransitionDuration = transitionDuration ??
       context.moonTheme?.modalTheme.properties.transitionDuration ??
-      const Duration(milliseconds: 200);
+      MoonTransitions.transitions.defaultTransitionDuration;
 
-  final Curve effectiveTransitionCurve =
-      transitionCurve ?? context.moonTheme?.modalTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+  final Curve effectiveTransitionCurve = transitionCurve ??
+      context.moonTheme?.modalTheme.properties.transitionCurve ??
+      MoonTransitions.transitions.defaultTransitionCurve;
 
   return Navigator.of(context, rootNavigator: useRootNavigator).push<T>(
     MoonModalRoute<T>(

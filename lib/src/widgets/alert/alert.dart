@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -202,10 +203,11 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.alertTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.alertTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.alertTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _animationController ??= AnimationController(
       duration: effectiveTransitionDuration,

@@ -6,6 +6,7 @@ import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -184,11 +185,11 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.segmentedControlTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     final Curve effectiveTransitionCurve = widget.transitionCurve ??
         context.moonTheme?.segmentedControlTheme.properties.transitionCurve ??
-        Curves.easeInOutCubic;
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     final EdgeInsetsGeometry effectivePadding =
         widget.padding ?? context.moonTheme?.segmentedControlTheme.properties.padding ?? const EdgeInsets.all(4);

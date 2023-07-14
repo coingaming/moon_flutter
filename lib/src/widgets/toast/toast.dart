@@ -8,6 +8,7 @@ import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -123,10 +124,11 @@ class MoonToast {
 
     final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.toastTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        transitionCurve ?? context.moonTheme?.toastTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = transitionCurve ??
+        context.moonTheme?.toastTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     final EdgeInsetsGeometry effectiveContentPadding =
         padding ?? context.moonTheme?.toastTheme.properties.contentPadding ?? EdgeInsets.all(MoonSizes.sizes.x2s);

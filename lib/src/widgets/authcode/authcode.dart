@@ -9,6 +9,7 @@ import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -715,25 +716,26 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
 
     _animationDuration ??= widget.animationDuration ??
         context.moonTheme?.authCodeTheme.properties.animationDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    _animationCurve ??=
-        widget.animationCurve ?? context.moonTheme?.authCodeTheme.properties.animationCurve ?? Curves.easeInOutCubic;
+    _animationCurve ??= widget.animationCurve ??
+        context.moonTheme?.authCodeTheme.properties.animationCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _peekDuration ??= widget.peekDuration ??
         context.moonTheme?.authCodeTheme.properties.peekDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     final double effectiveDisabledOpacityValue =
         widget.disabledOpacityValue ?? context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final Duration effectiveErrorAnimationDuration = widget.errorAnimationDuration ??
         context.moonTheme?.authCodeTheme.properties.errorAnimationDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     final Curve effectiveErrorAnimationCurve = widget.errorAnimationCurve ??
         context.moonTheme?.authCodeTheme.properties.errorAnimationCurve ??
-        Curves.easeInOutCubic;
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _errorAnimationController ??= AnimationController(
       duration: effectiveErrorAnimationDuration,

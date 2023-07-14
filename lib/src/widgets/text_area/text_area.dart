@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 
@@ -321,10 +322,11 @@ class MoonTextArea extends StatelessWidget {
 
     final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.textAreaTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        transitionCurve ?? context.moonTheme?.textAreaTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = transitionCurve ??
+        context.moonTheme?.textAreaTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     return MoonFormTextInput(
       activeBorderColor: effectiveActiveBorderColor,

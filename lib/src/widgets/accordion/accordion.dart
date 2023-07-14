@@ -8,6 +8,7 @@ import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/tokens/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -528,10 +529,11 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.accordionTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.accordionTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.accordionTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _expansionAnimationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
 
@@ -625,7 +627,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.accordionTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     _expansionAnimationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
 

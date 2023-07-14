@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/moon_design.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 
 /// Shows a modal Moon Design bottom sheet.
 Future<T?> showMoonModalBottomSheet<T>({
@@ -39,10 +40,11 @@ Future<T?> showMoonModalBottomSheet<T>({
 
   final Duration effectiveTransitionDuration = transitionDuration ??
       context.moonTheme?.bottomSheetTheme.properties.transitionDuration ??
-      const Duration(milliseconds: 200);
+      MoonTransitions.transitions.defaultTransitionDuration;
 
-  final Curve effectiveTransitionCurve =
-      transitionCurve ?? context.moonTheme?.bottomSheetTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+  final Curve effectiveTransitionCurve = transitionCurve ??
+      context.moonTheme?.bottomSheetTheme.properties.transitionCurve ??
+      MoonTransitions.transitions.defaultTransitionCurve;
 
   final result = await Navigator.of(context, rootNavigator: useRootNavigator).push(
     MoonModalBottomSheetRoute<T>(
@@ -115,7 +117,7 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
   final String? barrierLabel;
 
   @override
-  Duration get transitionDuration => animationDuration ?? const Duration(milliseconds: 200);
+  Duration get transitionDuration => animationDuration ?? MoonTransitions.transitions.defaultTransitionDuration;
 
   @override
   bool get barrierDismissible => isDismissible;
