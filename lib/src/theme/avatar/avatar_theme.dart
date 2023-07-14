@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/avatar/avatar_colors.dart';
 import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with DiagnosticableTreeMixin {
-  static final light = MoonAvatarTheme(
-    colors: MoonAvatarColors.light,
-    sizes: MoonAvatarSizes.sizes,
-  );
-
-  static final dark = MoonAvatarTheme(
-    colors: MoonAvatarColors.dark,
-    sizes: MoonAvatarSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Avatar colors.
   final MoonAvatarColors colors;
@@ -22,17 +16,27 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
   /// Avatar sizes.
   final MoonAvatarSizes sizes;
 
-  const MoonAvatarTheme({
-    required this.colors,
-    required this.sizes,
-  });
+  MoonAvatarTheme({
+    required this.tokens,
+    MoonAvatarColors? colors,
+    MoonAvatarSizes? sizes,
+  })  : colors = colors ??
+            MoonAvatarColors(
+              backgroundColor: tokens.colors.gohan,
+              badgeColor: tokens.colors.roshi100,
+              iconColor: tokens.iconography.colors.primaryColor,
+              textColor: tokens.typography.colors.bodyPrimary,
+            ),
+        sizes = sizes ?? MoonAvatarSizes(tokens: tokens);
 
   @override
   MoonAvatarTheme copyWith({
+    MoonTokens? tokens,
     MoonAvatarColors? colors,
     MoonAvatarSizes? sizes,
   }) {
     return MoonAvatarTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       sizes: sizes ?? this.sizes,
     );
@@ -43,6 +47,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
     if (other is! MoonAvatarTheme) return this;
 
     return MoonAvatarTheme(
+      tokens: tokens,
       colors: colors.lerp(other.colors, t),
       sizes: sizes.lerp(other.sizes, t),
     );
@@ -53,6 +58,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAvatarTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonAvatarColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonAvatarSizes>("sizes", sizes));
   }

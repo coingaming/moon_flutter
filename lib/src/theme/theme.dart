@@ -150,7 +150,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   })  : accordionTheme = accordionTheme ?? MoonAccordionTheme(tokens: tokens),
         alertTheme = alertTheme ?? MoonAlertTheme(tokens: tokens),
         authCodeTheme = authCodeTheme ?? MoonAuthCodeTheme(tokens: tokens),
-        avatarTheme = avatarTheme ?? MoonAvatarTheme.light,
+        avatarTheme = avatarTheme ?? MoonAvatarTheme(tokens: tokens),
         bottomSheetTheme = bottomSheetTheme ?? MoonBottomSheetTheme.light,
         buttonTheme = buttonTheme ?? MoonButtonTheme.light,
         carouselTheme = carouselTheme ?? MoonCarouselTheme.light,

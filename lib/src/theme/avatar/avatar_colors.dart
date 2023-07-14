@@ -1,27 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAvatarColors extends ThemeExtension<MoonAvatarColors> with DiagnosticableTreeMixin {
-  static final light = MoonAvatarColors(
-    backgroundColor: MoonColors.light.gohan,
-    badgeColor: MoonColors.light.roshi100,
-    iconColor: MoonIconography.light.colors.primaryColor,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-  );
-
-  static final dark = MoonAvatarColors(
-    backgroundColor: MoonColors.dark.gohan,
-    badgeColor: MoonColors.dark.roshi100,
-    iconColor: MoonIconography.dark.colors.primaryColor,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-  );
-
   /// Avatar background color.
   final Color backgroundColor;
 
