@@ -1,34 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with DiagnosticableTreeMixin {
-  static final light = MoonAuthCodeColors(
-    selectedBorderColor: MoonColors.light.piccolo,
-    activeBorderColor: MoonColors.light.beerus,
-    inactiveBorderColor: MoonColors.light.beerus,
-    errorBorderColor: MoonColors.light.chiChi100,
-    selectedFillColor: MoonColors.light.gohan,
-    activeFillColor: MoonColors.light.gohan,
-    inactiveFillColor: MoonColors.light.gohan,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-  );
-
-  static final dark = MoonAuthCodeColors(
-    selectedBorderColor: MoonColors.dark.piccolo,
-    activeBorderColor: MoonColors.dark.beerus,
-    inactiveBorderColor: MoonColors.dark.beerus,
-    errorBorderColor: MoonColors.dark.chiChi100,
-    selectedFillColor: MoonColors.dark.gohan,
-    activeFillColor: MoonColors.dark.gohan,
-    inactiveFillColor: MoonColors.dark.gohan,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-  );
-
   /// Border color of the selected auth input field.
   final Color selectedBorderColor;
 
