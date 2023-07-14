@@ -2,41 +2,34 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProperties> with DiagnosticableTreeMixin {
-  static const properties = MoonAccordionItemProperties(
-    transitionDuration: Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-  );
-
-  /// Accordion item border radius.
-
-  /// Accordion item transition duration.
+class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> with DiagnosticableTreeMixin {
+  /// Accordion transition duration.
   final Duration transitionDuration;
 
-  /// Accordion item transition curve.
+  /// Accordion transition curve.
   final Curve transitionCurve;
 
-  const MoonAccordionItemProperties({
+  const MoonAccordionProperties({
     required this.transitionDuration,
     required this.transitionCurve,
   });
 
   @override
-  MoonAccordionItemProperties copyWith({
+  MoonAccordionProperties copyWith({
     Duration? transitionDuration,
     Curve? transitionCurve,
   }) {
-    return MoonAccordionItemProperties(
+    return MoonAccordionProperties(
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
     );
   }
 
   @override
-  MoonAccordionItemProperties lerp(ThemeExtension<MoonAccordionItemProperties>? other, double t) {
-    if (other is! MoonAccordionItemProperties) return this;
+  MoonAccordionProperties lerp(ThemeExtension<MoonAccordionProperties>? other, double t) {
+    if (other is! MoonAccordionProperties) return this;
 
-    return MoonAccordionItemProperties(
+    return MoonAccordionProperties(
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
     );
@@ -46,7 +39,7 @@ class MoonAccordionItemProperties extends ThemeExtension<MoonAccordionItemProper
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonAccordionItemProperties"))
+      ..add(DiagnosticsProperty("type", "MoonAccordionProperties"))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
   }

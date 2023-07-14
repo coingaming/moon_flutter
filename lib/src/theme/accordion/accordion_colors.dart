@@ -1,36 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> with DiagnosticableTreeMixin {
-  static final light = MoonAccordionItemColors(
-    backgroundColor: MoonColors.light.gohan,
-    expandedBackgroundColor: MoonColors.light.gohan,
-    borderColor: MoonColors.light.beerus,
-    dividerColor: MoonColors.light.beerus,
-    headerTextColor: MoonTypography.light.colors.bodyPrimary,
-    expandedHeaderTextColor: MoonTypography.light.colors.bodyPrimary,
-    contentTextColor: MoonTypography.light.colors.bodyPrimary,
-    trailingIconColor: MoonTypography.light.colors.bodySecondary,
-    expandedTrailingIconColor: MoonTypography.light.colors.bodyPrimary,
-  );
-
-  static final dark = MoonAccordionItemColors(
-    backgroundColor: MoonColors.dark.gohan,
-    expandedBackgroundColor: MoonColors.dark.gohan,
-    borderColor: MoonColors.dark.beerus,
-    dividerColor: MoonColors.dark.beerus,
-    headerTextColor: MoonTypography.dark.colors.bodyPrimary,
-    expandedHeaderTextColor: MoonTypography.dark.colors.bodyPrimary,
-    contentTextColor: MoonTypography.dark.colors.bodyPrimary,
-    trailingIconColor: MoonTypography.dark.colors.bodySecondary,
-    expandedTrailingIconColor: MoonTypography.dark.colors.bodyPrimary,
-  );
-
+class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with DiagnosticableTreeMixin {
   /// Accordion item background color.
   final Color backgroundColor;
 
@@ -58,7 +32,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   /// Expanded accordion item trailing icon color.
   final Color expandedTrailingIconColor;
 
-  const MoonAccordionItemColors({
+  const MoonAccordionColors({
     required this.backgroundColor,
     required this.expandedBackgroundColor,
     required this.borderColor,
@@ -71,7 +45,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   });
 
   @override
-  MoonAccordionItemColors copyWith({
+  MoonAccordionColors copyWith({
     Color? backgroundColor,
     Color? expandedBackgroundColor,
     Color? borderColor,
@@ -82,7 +56,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     Color? trailingIconColor,
     Color? expandedTrailingIconColor,
   }) {
-    return MoonAccordionItemColors(
+    return MoonAccordionColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       expandedBackgroundColor: expandedBackgroundColor ?? this.expandedBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
@@ -96,10 +70,10 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   }
 
   @override
-  MoonAccordionItemColors lerp(ThemeExtension<MoonAccordionItemColors>? other, double t) {
-    if (other is! MoonAccordionItemColors) return this;
+  MoonAccordionColors lerp(ThemeExtension<MoonAccordionColors>? other, double t) {
+    if (other is! MoonAccordionColors) return this;
 
-    return MoonAccordionItemColors(
+    return MoonAccordionColors(
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       expandedBackgroundColor: colorPremulLerp(expandedBackgroundColor, other.expandedBackgroundColor, t)!,
       borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
@@ -116,7 +90,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonAccordionItemColors"))
+      ..add(DiagnosticsProperty("type", "MoonAccordionColors"))
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("expandedBackgroundColor", expandedBackgroundColor))
       ..add(ColorProperty("borderColor", borderColor))
