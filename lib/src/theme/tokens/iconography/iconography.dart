@@ -1,39 +1,39 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icons/icon_colors.dart';
+import 'package:moon_design/src/theme/tokens/iconography/icon_colors.dart';
 
 @immutable
-class MoonIconTheme extends ThemeExtension<MoonIconTheme> with DiagnosticableTreeMixin {
-  static final light = MoonIconTheme(
+class MoonIconography extends ThemeExtension<MoonIconography> with DiagnosticableTreeMixin {
+  static final light = MoonIconography(
     colors: MoonIconColors.light,
   );
 
-  static final dark = MoonIconTheme(
+  static final dark = MoonIconography(
     colors: MoonIconColors.dark,
   );
 
   /// Colors for icons.
   final MoonIconColors colors;
 
-  const MoonIconTheme({
+  const MoonIconography({
     required this.colors,
   });
 
   @override
-  MoonIconTheme copyWith({
+  MoonIconography copyWith({
     MoonIconColors? colors,
   }) {
-    return MoonIconTheme(
+    return MoonIconography(
       colors: colors ?? this.colors,
     );
   }
 
   @override
-  MoonIconTheme lerp(ThemeExtension<MoonIconTheme>? other, double t) {
-    if (other is! MoonIconTheme) return this;
+  MoonIconography lerp(ThemeExtension<MoonIconography>? other, double t) {
+    if (other is! MoonIconography) return this;
 
-    return MoonIconTheme(
+    return MoonIconography(
       colors: colors.lerp(other.colors, t),
     );
   }

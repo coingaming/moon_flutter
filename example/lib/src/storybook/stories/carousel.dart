@@ -75,7 +75,7 @@ class CarouselStory extends Story {
                         loop: isLoopedKnob,
                         itemBuilder: (context, itemIndex, realIndex) => Container(
                           decoration: ShapeDecoration(
-                            color: context.moonTheme?.colors.gohan,
+                            color: context.moonColors!.gohan,
                             shape: MoonSquircleBorder(
                               borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
                             ),

@@ -114,8 +114,7 @@ class MoonRadio<T> extends StatefulWidget {
 
     final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 
-    final double effectiveDisabledOpacityValue =
-        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
@@ -221,8 +220,7 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
     final Curve effectiveFocusEffectCurve =
         context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
 
-    final double effectiveDisabledOpacityValue =
-        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
         MaterialStateProperty.resolveWith<MouseCursor>((Set<MaterialState> states) {

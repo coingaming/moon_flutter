@@ -725,7 +725,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         const Duration(milliseconds: 200);
 
     final double effectiveDisabledOpacityValue =
-        widget.disabledOpacityValue ?? context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
+        widget.disabledOpacityValue ?? context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final Duration effectiveErrorAnimationDuration = widget.errorAnimationDuration ??
         context.moonTheme?.authCodeTheme.properties.errorAnimationDuration ??

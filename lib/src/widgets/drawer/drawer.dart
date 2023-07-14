@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
@@ -59,7 +59,7 @@ class MoonDrawer extends StatelessWidget {
         context.moonTheme?.drawerTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveIconColor =
-        context.moonTheme?.drawerTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+        context.moonTheme?.drawerTheme.colors.iconColor ?? MoonIconography.light.colors.primaryColor;
 
     final double effectiveWidthFromTheme = context.moonTheme?.drawerTheme.properties.width ?? 448;
 

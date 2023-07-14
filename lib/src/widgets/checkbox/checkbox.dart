@@ -103,8 +103,7 @@ class MoonCheckbox extends StatefulWidget {
 
     final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 
-    final double effectiveDisabledOpacityValue =
-        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
@@ -232,8 +231,7 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     final double effectiveFocusEffectExtent =
         context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
 
-    final double effectiveDisabledOpacityValue =
-        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
         MaterialStateProperty.resolveWith<MouseCursor>((Set<MaterialState> states) {

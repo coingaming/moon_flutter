@@ -1140,8 +1140,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final double effectiveHeight = widget.height ?? effectiveMoonTextInputSize.height;
 
-    final double effectiveDisabledOpacityValue =
-        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final double effectiveFocusEffectExtent =
         context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;

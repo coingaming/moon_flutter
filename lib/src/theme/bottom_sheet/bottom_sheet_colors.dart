@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
@@ -10,14 +10,14 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 class MoonBottomSheetColors extends ThemeExtension<MoonBottomSheetColors> with DiagnosticableTreeMixin {
   static final light = MoonBottomSheetColors(
     textColor: MoonTypography.light.colors.bodyPrimary,
-    iconColor: MoonIconTheme.light.colors.primaryColor,
+    iconColor: MoonIconography.light.colors.primaryColor,
     backgroundColor: MoonColors.light.gohan,
     barrierColor: MoonColors.light.zeno,
   );
 
   static final dark = MoonBottomSheetColors(
     textColor: MoonTypography.dark.colors.bodyPrimary,
-    iconColor: MoonIconTheme.dark.colors.primaryColor,
+    iconColor: MoonIconography.dark.colors.primaryColor,
     backgroundColor: MoonColors.dark.gohan,
     barrierColor: MoonColors.dark.zeno,
   );

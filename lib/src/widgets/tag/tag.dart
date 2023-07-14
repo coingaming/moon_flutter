@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -104,7 +104,7 @@ class MoonTag extends StatelessWidget {
         context.moonTheme?.tagTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveIconColor =
-        context.moonTheme?.tagTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+        context.moonTheme?.tagTheme.colors.iconColor ?? MoonIconography.light.colors.primaryColor;
 
     final double effectiveHeight = height ?? effectiveMoonTagSize.height;
 

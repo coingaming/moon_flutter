@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
@@ -109,8 +109,8 @@ class MoonToast {
         : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ?? MoonTypography.dark.colors.bodyPrimary);
 
     final Color effectiveIconColor = variant == MoonToastVariant.original
-        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ?? MoonIconTheme.light.colors.primaryColor)
-        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ?? MoonIconTheme.dark.colors.primaryColor);
+        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ?? MoonIconography.light.colors.primaryColor)
+        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ?? MoonIconography.dark.colors.primaryColor);
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.toastTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;

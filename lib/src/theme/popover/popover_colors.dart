@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
@@ -10,13 +10,13 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 class MoonPopoverColors extends ThemeExtension<MoonPopoverColors> with DiagnosticableTreeMixin {
   static final light = MoonPopoverColors(
     textColor: MoonTypography.light.colors.bodyPrimary,
-    iconColor: MoonIconTheme.light.colors.primaryColor,
+    iconColor: MoonIconography.light.colors.primaryColor,
     backgroundColor: MoonColors.light.gohan,
   );
 
   static final dark = MoonPopoverColors(
     textColor: MoonTypography.dark.colors.bodyPrimary,
-    iconColor: MoonIconTheme.dark.colors.primaryColor,
+    iconColor: MoonIconography.dark.colors.primaryColor,
     backgroundColor: MoonColors.dark.gohan,
   );
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
+import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
@@ -291,8 +291,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
 
     final double effectiveThumbSizeValue = widget.thumbSizeValue ?? effectiveMoonSwitchSize.thumbSizeValue;
 
-    final double effectiveDisabledOpacityValue =
-        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonSwitchSize.padding;
 
@@ -390,13 +389,13 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
         context.moonTheme?.switchTheme.colors.inactiveTextColor ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveActiveIconColor =
-        context.moonTheme?.switchTheme.colors.activeIconColor ?? MoonIconTheme.dark.colors.primaryColor;
+        context.moonTheme?.switchTheme.colors.activeIconColor ?? MoonIconography.dark.colors.primaryColor;
 
     final Color effectiveInactiveIconColor =
-        context.moonTheme?.switchTheme.colors.inactiveIconColor ?? MoonIconTheme.light.colors.primaryColor;
+        context.moonTheme?.switchTheme.colors.inactiveIconColor ?? MoonIconography.light.colors.primaryColor;
 
     final Color effectiveThumbIconColor =
-        context.moonTheme?.switchTheme.colors.thumbIconColor ?? MoonIconTheme.light.colors.primaryColor;
+        context.moonTheme?.switchTheme.colors.thumbIconColor ?? MoonIconography.light.colors.primaryColor;
 
     return Semantics(
       label: widget.semanticLabel,

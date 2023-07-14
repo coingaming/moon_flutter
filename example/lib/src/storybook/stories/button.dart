@@ -245,7 +245,7 @@ class ButtonStory extends Story {
                         padding: const EdgeInsets.all(4),
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          color: context.moonTheme!.colors.popo,
+                          color: context.moonColors!.popo,
                         ),
                       ),
                     ),
@@ -268,8 +268,8 @@ class ButtonStory extends Story {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            context.moonTheme!.colors.krillin100,
-                            context.moonTheme!.colors.dodoria100,
+                            context.moonColors!.krillin100,
+                            context.moonColors!.dodoria100,
                           ],
                         ),
                         shape: const StarBorder(pointRounding: 0.5, valleyRounding: 0.5),
@@ -278,7 +278,7 @@ class ButtonStory extends Story {
                         width: 32,
                         height: 32,
                         child: CircleAvatar(
-                          backgroundColor: context.moonTheme!.colors.frieza60,
+                          backgroundColor: context.moonColors!.frieza60,
                           child: const MoonIcon(
                             MoonIcons.rocket_24,
                             size: 24,
