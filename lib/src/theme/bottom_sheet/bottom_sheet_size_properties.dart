@@ -5,22 +5,6 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonBottomSheetSizeProperties extends ThemeExtension<MoonBottomSheetSizeProperties> with DiagnosticableTreeMixin {
-  static const sm = MoonBottomSheetSizeProperties(
-    normalisedHeight: 0.32,
-  );
-
-  static const md = MoonBottomSheetSizeProperties(
-    normalisedHeight: 0.64,
-  );
-
-  static const lg = MoonBottomSheetSizeProperties(
-    normalisedHeight: 0.88,
-  );
-
-  static const fullScreen = MoonBottomSheetSizeProperties(
-    normalisedHeight: 1.0,
-  );
-
   /// The normalised percentage value of the BottomSheet height.
   final double normalisedHeight;
 

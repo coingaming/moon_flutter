@@ -1,18 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonBottomSheetProperties extends ThemeExtension<MoonBottomSheetProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonBottomSheetProperties(
-    borderRadius: MoonBorders.borders.surfaceLg,
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-    textStyle: MoonTextStyles.body.textDefault,
-  );
-
   /// BottomSheet border radius.
   final BorderRadiusGeometry borderRadius;
 
