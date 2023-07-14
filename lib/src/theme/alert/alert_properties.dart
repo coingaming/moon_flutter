@@ -3,24 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonAlertProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    horizontalGap: MoonSizes.sizes.x3s,
-    minimumHeight: MoonSizes.sizes.xl,
-    verticalGap: MoonSizes.sizes.x4s,
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-    padding: EdgeInsets.all(MoonSizes.sizes.x2s),
-    bodyTextStyle: MoonTextStyles.body.textDefault,
-    titleTextStyle: MoonTextStyles.heading.textDefault,
-  );
-
   /// Border radius for alert.
   final BorderRadiusGeometry borderRadius;
 

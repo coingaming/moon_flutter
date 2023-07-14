@@ -1,27 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAlertColors extends ThemeExtension<MoonAlertColors> with DiagnosticableTreeMixin {
-  static final light = MoonAlertColors(
-    backgroundColor: MoonColors.light.gohan,
-    borderColor: MoonTypography.light.colors.bodySecondary,
-    iconColor: MoonIconography.light.colors.primaryColor,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-  );
-
-  static final dark = MoonAlertColors(
-    backgroundColor: MoonColors.dark.gohan,
-    borderColor: MoonTypography.dark.colors.bodySecondary,
-    iconColor: MoonIconography.dark.colors.primaryColor,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-  );
-
   /// Alert background color.
   final Color backgroundColor;
 
