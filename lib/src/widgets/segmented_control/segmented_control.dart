@@ -4,7 +4,7 @@ import 'package:moon_design/src/theme/segmented_control/segmented_control_size_p
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/opacity.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
@@ -175,7 +175,7 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
         context.moonTheme?.segmentedControlTheme.colors.backgroundColor ??
         MoonColors.light.goku;
 
-    final double effectiveDisabledOpacityValue = context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final double effectiveHeight = widget.height ?? effectiveMoonSegmentControlSize.height;
 

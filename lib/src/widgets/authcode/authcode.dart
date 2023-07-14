@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/opacity.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
@@ -725,7 +725,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         const Duration(milliseconds: 200);
 
     final double effectiveDisabledOpacityValue =
-        widget.disabledOpacityValue ?? context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+        widget.disabledOpacityValue ?? context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
 
     final Duration effectiveErrorAnimationDuration = widget.errorAnimationDuration ??
         context.moonTheme?.authCodeTheme.properties.errorAnimationDuration ??

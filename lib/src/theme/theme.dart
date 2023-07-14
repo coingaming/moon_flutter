@@ -12,7 +12,6 @@ import 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_theme.dart';
 import 'package:moon_design/src/theme/drawer/drawer_theme.dart';
-import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
@@ -30,7 +29,8 @@ import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
 import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/opacity.dart';
+import 'package:moon_design/src/theme/tokens/effects/effects.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
@@ -100,7 +100,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   final MoonModalTheme modalTheme;
 
   /// Moon Design System opacities.
-  final MoonOpacity opacity;
+  final MoonOpacities opacities;
 
   /// Moon Design System MoonPopover widget theming.
   final MoonPopoverTheme popoverTheme;
@@ -165,7 +165,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
     MoonModalTheme? modalTheme,
-    MoonOpacity? opacity,
+    MoonOpacities? opacities,
     MoonPopoverTheme? popoverTheme,
     MoonRadioTheme? radioTheme,
     MoonSegmentedControlTheme? segmentedControlTheme,
@@ -199,7 +199,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         linearLoaderTheme = linearLoaderTheme ?? MoonLinearLoaderTheme.light,
         linearProgressTheme = linearProgressTheme ?? MoonLinearProgressTheme.light,
         modalTheme = modalTheme ?? MoonModalTheme.light,
-        opacity = opacity ?? MoonOpacity.opacities,
+        opacities = opacities ?? MoonOpacities.opacities,
         popoverTheme = popoverTheme ?? MoonPopoverTheme.light,
         radioTheme = radioTheme ?? MoonRadioTheme.light,
         segmentedControlTheme = segmentedControlTheme ?? MoonSegmentedControlTheme.light,
@@ -236,7 +236,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
     MoonModalTheme? modalTheme,
-    MoonOpacity? opacity,
+    MoonOpacities? opacities,
     MoonPopoverTheme? popoverTheme,
     MoonRadioTheme? radioTheme,
     MoonSegmentedControlTheme? segmentedControlTheme,
@@ -273,7 +273,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
       linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
       modalTheme: modalTheme ?? this.modalTheme,
-      opacity: opacity ?? this.opacity,
+      opacities: opacities ?? this.opacities,
       popoverTheme: popoverTheme ?? this.popoverTheme,
       radioTheme: radioTheme ?? this.radioTheme,
       segmentedControlTheme: segmentedControlTheme ?? this.segmentedControlTheme,
@@ -316,7 +316,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
       linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
       modalTheme: modalTheme.lerp(other.modalTheme, t),
-      opacity: opacity.lerp(other.opacity, t),
+      opacities: opacities.lerp(other.opacities, t),
       popoverTheme: popoverTheme.lerp(other.popoverTheme, t),
       radioTheme: radioTheme.lerp(other.radioTheme, t),
       segmentedControlTheme: segmentedControlTheme.lerp(other.segmentedControlTheme, t),
@@ -358,7 +358,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
       ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
       ..add(DiagnosticsProperty<MoonModalTheme>("MoonModalTheme", modalTheme))
-      ..add(DiagnosticsProperty<MoonOpacity>("MoonOpacity", opacity))
+      ..add(DiagnosticsProperty<MoonOpacities>("MoonOpacities", opacities))
       ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popoverTheme))
       ..add(DiagnosticsProperty<MoonRadioTheme>("MoonRadioTheme", radioTheme))
       ..add(DiagnosticsProperty<MoonSegmentedControlTheme>("MoonSegmentedControlTheme", segmentedControlTheme))
@@ -386,7 +386,7 @@ extension MoonThemeX on BuildContext {
 
   MoonIconTheme? get moonIconTheme => moonTheme?.iconTheme;
 
-  MoonOpacity? get moonOpacity => moonTheme?.opacity;
+  MoonOpacities? get moonOpacities => moonTheme?.opacities;
 
   MoonShadows? get moonShadows => moonTheme?.shadows;
 

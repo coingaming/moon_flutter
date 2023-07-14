@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/opacity.dart';
+import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -291,7 +291,8 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
 
     final double effectiveThumbSizeValue = widget.thumbSizeValue ?? effectiveMoonSwitchSize.thumbSizeValue;
 
-    final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+    final double effectiveDisabledOpacityValue =
+        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
 
     final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonSwitchSize.padding;
 

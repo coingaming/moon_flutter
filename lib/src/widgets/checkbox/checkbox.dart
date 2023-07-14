@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/opacity.dart';
+import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -103,7 +103,8 @@ class MoonCheckbox extends StatefulWidget {
 
     final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 
-    final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+    final double effectiveDisabledOpacityValue =
+        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
 
     final Duration effectiveFocusEffectDuration =
         context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
@@ -231,7 +232,8 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     final double effectiveFocusEffectExtent =
         context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
 
-    final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+    final double effectiveDisabledOpacityValue =
+        context.moonTheme?.opacities.disabled ?? MoonOpacities.opacities.disabled;
 
     final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
         MaterialStateProperty.resolveWith<MouseCursor>((Set<MaterialState> states) {

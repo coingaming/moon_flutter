@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/effects/controls_effects.dart';
-import 'package:moon_design/src/theme/effects/focus_effects.dart';
-import 'package:moon_design/src/theme/effects/hover_effects.dart';
+import 'package:moon_design/src/theme/tokens/effects/controls_effects.dart';
+import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
+import 'package:moon_design/src/theme/tokens/effects/hover_effects.dart';
 
 @immutable
 class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMixin {
@@ -64,7 +64,6 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
       controlHoverEffect: controlHoverEffect.lerp(other.controlHoverEffect, t),
       controlScaleEffect: controlScaleEffect.lerp(other.controlScaleEffect, t),
       controlPulseEffect: controlPulseEffect.lerp(other.controlPulseEffect, t),
-
     );
   }
 
