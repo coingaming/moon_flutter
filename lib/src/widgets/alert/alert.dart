@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
@@ -26,14 +27,8 @@ class MoonAlert extends StatefulWidget {
   /// The border color of the alert.
   final Color? borderColor;
 
-  /// The color of the widget in leading slot of the alert.
-  final Color? leadingColor;
-
-  /// The text color of the alert.
-  final Color? textColor;
-
-  /// The color of the widget in trailing slot of the alert.
-  final Color? trailingColor;
+  /// The text and icon color of the alert.
+  final Color? color;
 
   /// The border width of the alert.
   final double? borderWidth;
@@ -62,12 +57,6 @@ class MoonAlert extends StatefulWidget {
   /// The semantic label for the alert.
   final String? semanticLabel;
 
-  /// The text style for body
-  final TextStyle? bodyTextStyle;
-
-  /// The text style for title
-  final TextStyle? titleTextStyle;
-
   /// The widget in the leading slot of the alert.
   final Widget? leading;
 
@@ -93,9 +82,7 @@ class MoonAlert extends StatefulWidget {
     this.borderRadius,
     this.backgroundColor,
     this.borderColor,
-    this.leadingColor,
-    this.textColor,
-    this.trailingColor,
+    this.color,
     this.borderWidth,
     this.horizontalGap,
     this.minimumHeight,
@@ -105,8 +92,6 @@ class MoonAlert extends StatefulWidget {
     this.padding,
     this.decoration,
     this.semanticLabel,
-    this.bodyTextStyle,
-    this.titleTextStyle,
     this.leading,
     required this.title,
     this.trailing,
@@ -123,9 +108,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
   AnimationController? _animationController;
   Animation<double>? _curvedAnimation;
 
-  TextStyle _getTextStyle({required BuildContext context}) {
-    if (widget.titleTextStyle != null) return widget.titleTextStyle!;
-
+  TextStyle _getTitleTextStyle({required BuildContext context}) {
     if (widget.body != null) {
       return context.moonTheme?.alertTheme.properties.titleTextStyle ?? MoonTextStyles.heading.textDefault;
     } else {
@@ -203,23 +186,19 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.alertTheme.colors.borderColor ?? MoonColors.light.bulma;
 
-    final Color effectiveLeadingColor =
-        widget.leadingColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
-
-    final Color effectiveTrailingColor =
-        widget.trailingColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
-
     final Color effectiveTextColor =
-        widget.textColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+        widget.color ?? context.moonTheme?.alertTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+
+    final Color effectiveIconColor =
+        widget.color ?? context.moonTheme?.alertTheme.colors.iconColor ?? MoonIconography.light.colors.primaryColor;
 
     final EdgeInsetsGeometry effectivePadding =
         widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
-    final TextStyle effectiveTitleTextStyle = _getTextStyle(context: context);
+    final TextStyle effectiveTitleTextStyle = _getTitleTextStyle(context: context);
 
-    final TextStyle effectiveBodyTextStyle = widget.bodyTextStyle ??
-        context.moonTheme?.alertTheme.properties.bodyTextStyle ??
-        MoonTextStyles.body.textDefault;
+    final TextStyle effectiveBodyTextStyle =
+        context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTextStyles.body.textDefault;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.alertTheme.properties.transitionDuration ??
@@ -260,56 +239,48 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                     ),
                   ),
-              child: DefaultTextStyle(
-                style: TextStyle(color: effectiveTextColor),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        if (widget.leading != null)
-                          IconTheme(
-                            data: IconThemeData(
-                              color: effectiveLeadingColor,
-                            ),
-                            child: Padding(
+              child: IconTheme(
+                data: IconThemeData(
+                  color: effectiveIconColor,
+                ),
+                child: DefaultTextStyle(
+                  style: effectiveBodyTextStyle.copyWith(color: effectiveTextColor),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          if (widget.leading != null)
+                            Padding(
                               padding: EdgeInsetsDirectional.only(end: effectiveHorizontalGap),
                               child: widget.leading,
                             ),
-                          ),
-                        DefaultTextStyle.merge(
-                          style: effectiveTitleTextStyle,
-                          child: Expanded(
-                            child: widget.title,
-                          ),
-                        ),
-                        if (widget.trailing != null)
-                          IconTheme(
-                            data: IconThemeData(
-                              color: effectiveTrailingColor,
+                          DefaultTextStyle(
+                            style: effectiveTitleTextStyle.copyWith(color: effectiveTextColor),
+                            child: Expanded(
+                              child: widget.title,
                             ),
-                            child: Padding(
+                          ),
+                          if (widget.trailing != null)
+                            Padding(
                               padding: EdgeInsetsDirectional.only(start: effectiveHorizontalGap),
                               child: widget.trailing,
                             ),
-                          ),
-                      ],
-                    ),
-                    if (widget.body != null)
-                      Row(
-                        children: [
-                          DefaultTextStyle.merge(
-                            style: effectiveBodyTextStyle,
-                            child: Expanded(
+                        ],
+                      ),
+                      if (widget.body != null)
+                        Row(
+                          children: [
+                            Expanded(
                               child: Padding(
                                 padding: EdgeInsetsDirectional.only(top: effectiveVerticalGap),
                                 child: widget.body,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                  ],
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),

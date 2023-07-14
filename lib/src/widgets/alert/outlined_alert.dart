@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/widgets/alert/alert.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 import 'package:moon_design/src/widgets/common/icons/icons.dart';
@@ -14,8 +12,8 @@ class MoonOutlinedAlert extends StatelessWidget {
   /// The border radius of the alert.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The border color of the alert.
-  final Color? color;
+  /// The color of the alert.
+  final Color color;
 
   /// The border width of the alert.
   final double? borderWidth;
@@ -44,7 +42,7 @@ class MoonOutlinedAlert extends StatelessWidget {
     super.key,
     this.show = false,
     this.borderRadius,
-    this.color,
+    required this.color,
     this.borderWidth,
     this.semanticLabel,
     this.onTrailingTap,
@@ -55,9 +53,6 @@ class MoonOutlinedAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveElementColor =
-        color ?? context.moonTheme?.alertTheme.colors.outlinedVariantColor ?? MoonColors.light.bulma;
-
     final effectiveTrailing = MoonButton.icon(
       onTap: onTrailingTap,
       semanticLabel: semanticLabel,
@@ -66,7 +61,7 @@ class MoonOutlinedAlert extends StatelessWidget {
       disabledOpacityValue: 1,
       icon: MoonIcon(
         MoonIcons.close_small_24,
-        color: effectiveElementColor,
+        color: color,
         size: 24,
       ),
       gap: 0,
@@ -84,8 +79,7 @@ class MoonOutlinedAlert extends StatelessWidget {
       body: body,
       backgroundColor: Colors.transparent,
       borderColor: color,
-      leadingColor: effectiveElementColor,
-      textColor: effectiveElementColor,
+      color: color,
     );
   }
 }

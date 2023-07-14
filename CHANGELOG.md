@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.1](https://github.com/coingaming/moon_flutter/compare/v0.26.0...v0.26.1) (2023-07-13)
+
+
+### Bug Fixes
+
+* [MDS-601] Refactor components properties ([#208](https://github.com/coingaming/moon_flutter/issues/208)) ([598f9ae](https://github.com/coingaming/moon_flutter/commit/598f9ae54d89a9342681f69ea71772d814db399b))
+
 ## [0.26.0](https://github.com/coingaming/moon_flutter/compare/v0.25.1...v0.26.0) (2023-07-10)
 
 

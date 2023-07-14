@@ -13,7 +13,7 @@ class MoonFilledAlert extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
 
   /// The color of the alert.
-  final Color? color;
+  final Color color;
 
   /// The semantic label for the alert.
   final String? semanticLabel;
@@ -39,7 +39,7 @@ class MoonFilledAlert extends StatelessWidget {
     super.key,
     this.show = false,
     this.borderRadius,
-    this.color,
+    required this.color,
     this.semanticLabel,
     this.onTrailingTap,
     this.leading,
@@ -49,7 +49,7 @@ class MoonFilledAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final resolvedBackgroundColor = color != null ? color!.withOpacity(0.1) : null;
+    final resolvedBackgroundColor = color.withOpacity(0.1);
 
     final effectiveTrailing = MoonButton.icon(
       onTap: onTrailingTap,
@@ -74,8 +74,7 @@ class MoonFilledAlert extends StatelessWidget {
       trailing: effectiveTrailing,
       body: body,
       backgroundColor: resolvedBackgroundColor,
-      leadingColor: color,
-      textColor: color,
+      color: color,
     );
   }
 }
