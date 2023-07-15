@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_colors.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonCircularLoaderTheme extends ThemeExtension<MoonCircularLoaderTheme> with DiagnosticableTreeMixin {
-  static final light = MoonCircularLoaderTheme(
-    colors: MoonCircularLoaderColors.light,
-    sizes: MoonCircularLoaderSizes.sizes,
-  );
-
-  static final dark = MoonCircularLoaderTheme(
-    colors: MoonCircularLoaderColors.dark,
-    sizes: MoonCircularLoaderSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Circular loader colors.
   final MoonCircularLoaderColors colors;
@@ -22,17 +16,25 @@ class MoonCircularLoaderTheme extends ThemeExtension<MoonCircularLoaderTheme> wi
   /// Circular loader sizes.
   final MoonCircularLoaderSizes sizes;
 
-  const MoonCircularLoaderTheme({
-    required this.colors,
-    required this.sizes,
-  });
+  MoonCircularLoaderTheme({
+    required this.tokens,
+    MoonCircularLoaderColors? colors,
+    MoonCircularLoaderSizes? sizes,
+  })  : colors = colors ??
+            MoonCircularLoaderColors(
+              color: tokens.colors.hit,
+              backgroundColor: Colors.transparent,
+            ),
+        sizes = sizes ?? MoonCircularLoaderSizes(tokens: tokens);
 
   @override
   MoonCircularLoaderTheme copyWith({
+    MoonTokens? tokens,
     MoonCircularLoaderColors? colors,
     MoonCircularLoaderSizes? sizes,
   }) {
     return MoonCircularLoaderTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       sizes: sizes ?? this.sizes,
     );
@@ -43,6 +45,7 @@ class MoonCircularLoaderTheme extends ThemeExtension<MoonCircularLoaderTheme> wi
     if (other is! MoonCircularLoaderTheme) return this;
 
     return MoonCircularLoaderTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       sizes: sizes.lerp(other.sizes, t),
     );

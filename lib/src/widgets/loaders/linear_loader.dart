@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_size_properties.dart';
+import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
 
 enum MoonLinearLoaderSize {
@@ -42,18 +44,18 @@ class MoonLinearLoader extends StatelessWidget {
   MoonLinearLoaderSizeProperties _getMoonLoaderSize(BuildContext context, MoonLinearLoaderSize? moonLoaderSize) {
     switch (moonLoaderSize) {
       case MoonLinearLoaderSize.x6s:
-        return context.moonTheme?.linearLoaderTheme.sizes.x6s ?? MoonLinearLoaderSizeProperties.x6s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x6s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x6s;
       case MoonLinearLoaderSize.x5s:
-        return context.moonTheme?.linearLoaderTheme.sizes.x5s ?? MoonLinearLoaderSizeProperties.x5s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x5s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x5s;
       case MoonLinearLoaderSize.x4s:
-        return context.moonTheme?.linearLoaderTheme.sizes.x4s ?? MoonLinearLoaderSizeProperties.x4s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x4s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x4s;
       case MoonLinearLoaderSize.x3s:
-        return context.moonTheme?.linearLoaderTheme.sizes.x3s ?? MoonLinearLoaderSizeProperties.x3s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x3s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x3s;
       case MoonLinearLoaderSize.x2s:
-        return context.moonTheme?.linearLoaderTheme.sizes.x2s ?? MoonLinearLoaderSizeProperties.x2s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x2s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x2s;
 
       default:
-        return context.moonTheme?.linearLoaderTheme.sizes.x4s ?? MoonLinearLoaderSizeProperties.x4s;
+        return context.moonTheme?.linearLoaderTheme.sizes.x4s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x4s;
     }
   }
 

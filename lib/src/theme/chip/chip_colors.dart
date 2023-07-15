@@ -1,26 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonChipColors extends ThemeExtension<MoonChipColors> with DiagnosticableTreeMixin {
-  static final light = MoonChipColors(
-    activeColor: MoonColors.light.piccolo,
-    backgroundColor: MoonColors.light.gohan,
-    activeBackgroundColor: MoonColors.light.jiren,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-  );
-
-  static final dark = MoonChipColors(
-    activeColor: MoonColors.dark.piccolo,
-    backgroundColor: MoonColors.dark.gohan,
-    activeBackgroundColor: MoonColors.dark.jiren,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-  );
-
   /// Chip text and border color when active.
   final Color activeColor;
 

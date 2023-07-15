@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/chip/chip_size_properties.dart';
+import 'package:moon_design/src/theme/chip/chip_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/effects/hover_effects.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -232,12 +234,12 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
   MoonChipSizeProperties _getMoonChipSize(BuildContext context, MoonChipSize? moonChipSize) {
     switch (moonChipSize) {
       case MoonChipSize.sm:
-        return context.moonTheme?.chipTheme.sizes.sm ?? MoonChipSizeProperties.sm;
+        return context.moonTheme?.chipTheme.sizes.sm ?? MoonChipSizes(tokens: MoonTokens.light).sm;
       case MoonChipSize.md:
-        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizeProperties.md;
+        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).md;
 
       default:
-        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizeProperties.sm;
+        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).sm;
     }
   }
 

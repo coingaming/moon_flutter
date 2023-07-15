@@ -64,7 +64,7 @@ class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme> with Diagnosti
     if (other is! MoonAuthCodeTheme) return this;
 
     return MoonAuthCodeTheme(
-      tokens: tokens,
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
     );

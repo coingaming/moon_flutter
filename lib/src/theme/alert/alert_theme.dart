@@ -58,7 +58,7 @@ class MoonAlertTheme extends ThemeExtension<MoonAlertTheme> with DiagnosticableT
     if (other is! MoonAlertTheme) return this;
 
     return MoonAlertTheme(
-      tokens: tokens,
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
     );

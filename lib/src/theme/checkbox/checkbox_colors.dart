@@ -1,28 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with DiagnosticableTreeMixin {
-  static final light = MoonCheckboxColors(
-    activeColor: MoonColors.light.piccolo,
-    borderColor: MoonColors.light.trunks,
-    checkColor: MoonColors.light.goten,
-    inactiveColor: Colors.transparent,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-  );
-
-  static final dark = MoonCheckboxColors(
-    activeColor: MoonColors.dark.piccolo,
-    borderColor: MoonColors.dark.trunks,
-    checkColor: MoonColors.dark.goten,
-    inactiveColor: Colors.transparent,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-  );
-
   /// Checkbox active color.
   final Color activeColor;
 

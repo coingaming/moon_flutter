@@ -3,30 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with DiagnosticableTreeMixin {
-  static final sm = MoonChipSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveXs,
-    gap: MoonSizes.sizes.x4s,
-    height: MoonSizes.sizes.sm,
-    iconSizeValue: MoonSizes.sizes.x2s,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.textDefault,
-  );
-
-  static final md = MoonChipSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    gap: MoonSizes.sizes.x4s,
-    height: MoonSizes.sizes.md,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.textDefault,
-  );
-
   /// Chip border radius.
   final BorderRadiusGeometry borderRadius;
 

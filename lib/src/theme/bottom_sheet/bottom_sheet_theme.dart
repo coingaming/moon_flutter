@@ -61,7 +61,7 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
     if (other is! MoonBottomSheetTheme) return this;
 
     return MoonBottomSheetTheme(
-      tokens: tokens,
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
       sizes: sizes.lerp(other.sizes, t),

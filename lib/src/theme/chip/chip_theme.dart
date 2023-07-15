@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/chip/chip_colors.dart';
 import 'package:moon_design/src/theme/chip/chip_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonChipTheme extends ThemeExtension<MoonChipTheme> with DiagnosticableTreeMixin {
-  static final light = MoonChipTheme(
-    colors: MoonChipColors.light,
-    sizes: MoonChipSizes.sizes,
-  );
-
-  static final dark = MoonChipTheme(
-    colors: MoonChipColors.dark,
-    sizes: MoonChipSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Chip colors.
   final MoonChipColors colors;
@@ -22,17 +16,27 @@ class MoonChipTheme extends ThemeExtension<MoonChipTheme> with DiagnosticableTre
   /// Chip sizes.
   final MoonChipSizes sizes;
 
-  const MoonChipTheme({
-    required this.colors,
-    required this.sizes,
-  });
+  MoonChipTheme({
+    required this.tokens,
+    MoonChipColors? colors,
+    MoonChipSizes? sizes,
+  })  : colors = colors ??
+            MoonChipColors(
+              activeColor: tokens.colors.piccolo,
+              backgroundColor: tokens.colors.gohan,
+              activeBackgroundColor: tokens.colors.jiren,
+              textColor: tokens.typography.colors.bodyPrimary,
+            ),
+        sizes = sizes ?? MoonChipSizes(tokens: tokens);
 
   @override
   MoonChipTheme copyWith({
+    MoonTokens? tokens,
     MoonChipColors? colors,
     MoonChipSizes? sizes,
   }) {
     return MoonChipTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       sizes: sizes ?? this.sizes,
     );
@@ -43,6 +47,7 @@ class MoonChipTheme extends ThemeExtension<MoonChipTheme> with DiagnosticableTre
     if (other is! MoonChipTheme) return this;
 
     return MoonChipTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       sizes: sizes.lerp(other.sizes, t),
     );
@@ -53,6 +58,7 @@ class MoonChipTheme extends ThemeExtension<MoonChipTheme> with DiagnosticableTre
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonChipTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonChipColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonChipSizes>("sizes", sizes));
   }

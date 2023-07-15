@@ -1,27 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonDrawerColors extends ThemeExtension<MoonDrawerColors> with DiagnosticableTreeMixin {
-  static final light = MoonDrawerColors(
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    iconColor: MoonIconography.light.colors.primaryColor,
-    backgroundColor: MoonColors.light.gohan,
-    barrierColor: MoonColors.light.zeno,
-  );
-
-  static final dark = MoonDrawerColors(
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    iconColor: MoonIconography.dark.colors.primaryColor,
-    backgroundColor: MoonColors.dark.gohan,
-    barrierColor: MoonColors.dark.zeno,
-  );
-
   /// Drawer text color.
   final Color textColor;
 

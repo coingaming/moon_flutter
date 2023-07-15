@@ -1,16 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonCheckboxProperties extends ThemeExtension<MoonCheckboxProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonCheckboxProperties(
-    borderRadius: MoonBorders.borders.interactiveXs,
-    textStyle: MoonTextStyles.body.textDefault,
-  );
-
   /// Checkbox border radius.
   final BorderRadiusGeometry borderRadius;
 

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/button/button_size_properties.dart';
+import 'package:moon_design/src/theme/button/button_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/effects/hover_effects.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -293,17 +295,17 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
   MoonButtonSizeProperties _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
     switch (moonButtonSize) {
       case MoonButtonSize.xs:
-        return context.moonTheme?.buttonTheme.sizes.xs ?? MoonButtonSizeProperties.xs;
+        return context.moonTheme?.buttonTheme.sizes.xs ?? MoonButtonSizes(tokens: MoonTokens.light).xs;
       case MoonButtonSize.sm:
-        return context.moonTheme?.buttonTheme.sizes.sm ?? MoonButtonSizeProperties.sm;
+        return context.moonTheme?.buttonTheme.sizes.sm ?? MoonButtonSizes(tokens: MoonTokens.light).sm;
       case MoonButtonSize.md:
-        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizeProperties.md;
+        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizes(tokens: MoonTokens.light).md;
       case MoonButtonSize.lg:
-        return context.moonTheme?.buttonTheme.sizes.lg ?? MoonButtonSizeProperties.lg;
+        return context.moonTheme?.buttonTheme.sizes.lg ?? MoonButtonSizes(tokens: MoonTokens.light).lg;
       case MoonButtonSize.xl:
-        return context.moonTheme?.buttonTheme.sizes.xl ?? MoonButtonSizeProperties.xl;
+        return context.moonTheme?.buttonTheme.sizes.xl ?? MoonButtonSizes(tokens: MoonTokens.light).xl;
       default:
-        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizeProperties.md;
+        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizes(tokens: MoonTokens.light).md;
     }
   }
 

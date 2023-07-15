@@ -47,7 +47,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
     if (other is! MoonAvatarTheme) return this;
 
     return MoonAvatarTheme(
-      tokens: tokens,
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       sizes: sizes.lerp(other.sizes, t),
     );

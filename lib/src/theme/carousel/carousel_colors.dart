@@ -1,22 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCarouselColors extends ThemeExtension<MoonCarouselColors> with DiagnosticableTreeMixin {
-  static final light = MoonCarouselColors(
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    iconColor: MoonIconography.light.colors.primaryColor,
-  );
-
-  static final dark = MoonCarouselColors(
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    iconColor: MoonIconography.dark.colors.primaryColor,
-  );
-
   /// Default text color of Carousel items.
   final Color textColor;
 

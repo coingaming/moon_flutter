@@ -1,32 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonButtonColors extends ThemeExtension<MoonButtonColors> with DiagnosticableTreeMixin {
-  static final light = MoonButtonColors(
-    borderColor: MoonColors.light.trunks,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    filledVariantBackgroundColor: MoonColors.light.piccolo,
-    filledVariantTextColor: MoonTypography.light.colors.controlPrimary,
-    textVariantTextColor: MoonTypography.light.colors.bodySecondary,
-    textVariantFocusColor: MoonColors.light.piccolo,
-    textVariantHoverColor: MoonColors.light.jiren,
-  );
-
-  static final dark = MoonButtonColors(
-    borderColor: MoonColors.dark.trunks,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    filledVariantBackgroundColor: MoonColors.dark.piccolo,
-    filledVariantTextColor: MoonTypography.dark.colors.controlPrimary,
-    textVariantTextColor: MoonTypography.dark.colors.bodySecondary,
-    textVariantFocusColor: MoonColors.dark.piccolo,
-    textVariantHoverColor: MoonColors.dark.jiren,
-  );
-
   /// Button border color.
   final Color borderColor;
 
