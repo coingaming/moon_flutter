@@ -29,8 +29,8 @@ class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with D
             MoonDotIndicatorProperties(
               gap: tokens.sizes.x4s,
               size: tokens.sizes.x4s,
-              transitionDuration: const Duration(milliseconds: 200),
-              transitionCurve: Curves.easeInOutCubic,
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
             );
 
   @override

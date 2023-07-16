@@ -473,7 +473,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   Widget build(BuildContext context) {
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.popoverTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 150);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     final Curve effectiveTransitionCurve = widget.transitionCurve ??
         context.moonTheme?.popoverTheme.properties.transitionCurve ??

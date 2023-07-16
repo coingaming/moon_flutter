@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/modal/modal_colors.dart';
 import 'package:moon_design/src/theme/modal/modal_properties.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonModalTheme extends ThemeExtension<MoonModalTheme> with DiagnosticableTreeMixin {
-  static final light = MoonModalTheme(
-    colors: MoonModalColors.light,
-    properties: MoonModalProperties.properties,
-  );
-
-  static final dark = MoonModalTheme(
-    colors: MoonModalColors.dark,
-    properties: MoonModalProperties.properties,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Modal colors.
   final MoonModalColors colors;
@@ -22,17 +16,33 @@ class MoonModalTheme extends ThemeExtension<MoonModalTheme> with DiagnosticableT
   /// Modal properties.
   final MoonModalProperties properties;
 
-  const MoonModalTheme({
-    required this.colors,
-    required this.properties,
-  });
+  MoonModalTheme({
+    required this.tokens,
+    MoonModalColors? colors,
+    MoonModalProperties? properties,
+  })  : colors = colors ??
+            MoonModalColors(
+              textColor: tokens.typography.colors.bodyPrimary,
+              iconColor: tokens.iconography.colors.primaryColor,
+              backgroundColor: tokens.colors.gohan,
+              barrierColor: tokens.colors.zeno,
+            ),
+        properties = properties ??
+            MoonModalProperties(
+              borderRadius: tokens.borders.surfaceSm,
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
+              textStyle: tokens.typography.body.textDefault,
+            );
 
   @override
   MoonModalTheme copyWith({
+    MoonTokens? tokens,
     MoonModalColors? colors,
     MoonModalProperties? properties,
   }) {
     return MoonModalTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
     );
@@ -43,6 +53,7 @@ class MoonModalTheme extends ThemeExtension<MoonModalTheme> with DiagnosticableT
     if (other is! MoonModalTheme) return this;
 
     return MoonModalTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
     );
@@ -53,6 +64,7 @@ class MoonModalTheme extends ThemeExtension<MoonModalTheme> with DiagnosticableT
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonModalTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonModalColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonModalProperties>("properties", properties));
   }

@@ -34,6 +34,7 @@ import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 
@@ -162,8 +163,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         drawerTheme = drawerTheme ?? MoonDrawerTheme(tokens: tokens),
         linearLoaderTheme = linearLoaderTheme ?? MoonLinearLoaderTheme(tokens: tokens),
         linearProgressTheme = linearProgressTheme ?? MoonLinearProgressTheme.light,
-        modalTheme = modalTheme ?? MoonModalTheme.light,
-        popoverTheme = popoverTheme ?? MoonPopoverTheme.light,
+        modalTheme = modalTheme ?? MoonModalTheme(tokens: tokens),
+        popoverTheme = popoverTheme ?? MoonPopoverTheme(tokens: tokens),
         radioTheme = radioTheme ?? MoonRadioTheme.light,
         segmentedControlTheme = segmentedControlTheme ?? MoonSegmentedControlTheme.light,
         switchTheme = switchTheme ?? MoonSwitchTheme.light,
@@ -306,20 +307,13 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
-
   MoonBorders? get moonBorders => moonTheme?.tokens.borders;
-
   MoonColors? get moonColors => moonTheme?.tokens.colors;
-
   MoonEffects? get moonEffects => moonTheme?.tokens.effects;
-
   MoonIconography? get moonIconography => moonTheme?.tokens.iconography;
-
   MoonOpacities? get moonOpacities => moonTheme?.tokens.opacities;
-
   MoonShadows? get moonShadows => moonTheme?.tokens.shadows;
-
   MoonSizes? get moonSizes => moonTheme?.tokens.sizes;
-
+  MoonTransitions? get moonTransitions => moonTheme?.tokens.transitions;
   MoonTypography? get moonTypography => moonTheme?.tokens.typography;
 }

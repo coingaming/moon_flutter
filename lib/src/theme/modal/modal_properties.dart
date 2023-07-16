@@ -1,18 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonModalProperties extends ThemeExtension<MoonModalProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonModalProperties(
-    borderRadius: MoonBorders.borders.surfaceSm,
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-    textStyle: MoonTextStyles.body.textDefault,
-  );
-
   /// Modal border radius.
   final BorderRadiusGeometry borderRadius;
 

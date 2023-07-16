@@ -4,6 +4,7 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/effects/controls_effects.dart';
 import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
@@ -422,8 +423,10 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
                       effectDuration: effectivePulseEffectDuration,
                       child: AnimatedOpacity(
                         opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
-                        duration: const Duration(milliseconds: 150),
-                        curve: Curves.easeInOutCubic,
+                        duration: context.moonTransitions?.defaultTransitionDuration ??
+                            MoonTransitions.transitions.defaultTransitionDuration,
+                        curve: context.moonTransitions?.defaultTransitionCurve ??
+                            MoonTransitions.transitions.defaultTransitionCurve,
                         child: MoonFocusEffect(
                           show: _canAnimateFocus,
                           effectColor: focusColor,

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
@@ -8,15 +10,15 @@ class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with Diagnostica
   static final lightHoverEffect = MoonHoverEffects(
     primaryHoverColor: MoonColors.light.heles,
     secondaryHoverColor: MoonColors.light.jiren,
-    hoverDuration: const Duration(milliseconds: 150),
-    hoverCurve: Curves.easeInOutCubic,
+    hoverDuration: MoonTransitions.transitions.defaultTransitionDuration,
+    hoverCurve: MoonTransitions.transitions.defaultTransitionCurve,
   );
 
   static final darkHoverEffect = MoonHoverEffects(
     primaryHoverColor: MoonColors.dark.heles,
     secondaryHoverColor: MoonColors.dark.jiren,
-    hoverDuration: const Duration(milliseconds: 150),
-    hoverCurve: Curves.easeInOutCubic,
+    hoverDuration: MoonTransitions.transitions.defaultTransitionDuration,
+    hoverCurve: MoonTransitions.transitions.defaultTransitionCurve,
   );
 
   /// Primary hover effect color.
