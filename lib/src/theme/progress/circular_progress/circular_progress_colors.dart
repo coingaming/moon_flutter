@@ -1,21 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCircularProgressColors extends ThemeExtension<MoonCircularProgressColors> with DiagnosticableTreeMixin {
-  static final light = MoonCircularProgressColors(
-    color: MoonColors.light.piccolo,
-    backgroundColor: MoonColors.light.trunks,
-  );
-
-  static final dark = MoonCircularProgressColors(
-    color: MoonColors.dark.piccolo,
-    backgroundColor: MoonColors.dark.trunks,
-  );
-
   /// Circular progress color.
   final Color color;
 

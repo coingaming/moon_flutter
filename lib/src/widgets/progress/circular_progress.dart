@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_size_properties.dart';
+import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
 
 enum MoonCircularProgressSize {
@@ -57,18 +59,24 @@ class MoonCircularProgress extends StatelessWidget {
   ) {
     switch (moonCircularProgressSize) {
       case MoonCircularProgressSize.x2s:
-        return context.moonTheme?.circularProgressTheme.sizes.x2s ?? MoonCircularProgressSizeProperties.x2s;
+        return context.moonTheme?.circularProgressTheme.sizes.x2s ??
+            MoonCircularProgressSizes(tokens: MoonTokens.light).x2s;
       case MoonCircularProgressSize.xs:
-        return context.moonTheme?.circularProgressTheme.sizes.xs ?? MoonCircularProgressSizeProperties.xs;
+        return context.moonTheme?.circularProgressTheme.sizes.xs ??
+            MoonCircularProgressSizes(tokens: MoonTokens.light).xs;
       case MoonCircularProgressSize.sm:
-        return context.moonTheme?.circularProgressTheme.sizes.sm ?? MoonCircularProgressSizeProperties.sm;
+        return context.moonTheme?.circularProgressTheme.sizes.sm ??
+            MoonCircularProgressSizes(tokens: MoonTokens.light).sm;
       case MoonCircularProgressSize.md:
-        return context.moonTheme?.circularProgressTheme.sizes.md ?? MoonCircularProgressSizeProperties.md;
+        return context.moonTheme?.circularProgressTheme.sizes.md ??
+            MoonCircularProgressSizes(tokens: MoonTokens.light).md;
       case MoonCircularProgressSize.lg:
-        return context.moonTheme?.circularProgressTheme.sizes.lg ?? MoonCircularProgressSizeProperties.lg;
+        return context.moonTheme?.circularProgressTheme.sizes.lg ??
+            MoonCircularProgressSizes(tokens: MoonTokens.light).lg;
 
       default:
-        return context.moonTheme?.circularProgressTheme.sizes.md ?? MoonCircularProgressSizeProperties.md;
+        return context.moonTheme?.circularProgressTheme.sizes.md ??
+            MoonCircularProgressSizes(tokens: MoonTokens.light).md;
     }
   }
 

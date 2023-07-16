@@ -1,29 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with DiagnosticableTreeMixin {
-  static final light = MoonTextAreaColors(
-    backgroundColor: MoonColors.light.gohan,
-    activeBorderColor: MoonColors.light.piccolo,
-    inactiveBorderColor: MoonColors.light.beerus,
-    errorBorderColor: MoonColors.light.chiChi100,
-    hoverBorderColor: MoonColors.light.beerus,
-    hintTextColor: MoonColors.light.trunks,
-  );
-
-  static final dark = MoonTextAreaColors(
-    backgroundColor: MoonColors.dark.gohan,
-    activeBorderColor: MoonColors.dark.piccolo,
-    inactiveBorderColor: MoonColors.dark.beerus,
-    errorBorderColor: MoonColors.dark.chiChi100,
-    hoverBorderColor: MoonColors.dark.beerus,
-    hintTextColor: MoonColors.dark.trunks,
-  );
-
   /// TextArea background color.
   final Color backgroundColor;
 

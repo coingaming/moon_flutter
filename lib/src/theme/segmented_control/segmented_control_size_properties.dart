@@ -3,31 +3,9 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonSegmentedControlSizeProperties extends ThemeExtension<MoonSegmentedControlSizeProperties>
     with DiagnosticableTreeMixin {
-  static final sm = MoonSegmentedControlSizeProperties(
-    segmentBorderRadius: MoonBorders.borders.interactiveSm,
-    segmentGap: MoonSizes.sizes.x5s,
-    height: MoonSizes.sizes.md,
-    iconSizeValue: MoonSizes.sizes.xs,
-    segmentPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.textDefault,
-  );
-
-  static final md = MoonSegmentedControlSizeProperties(
-    segmentBorderRadius: MoonBorders.borders.interactiveSm,
-    segmentGap: MoonSizes.sizes.x4s,
-    height: MoonSizes.sizes.lg,
-    iconSizeValue: MoonSizes.sizes.xs,
-    segmentPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.heading.textDefault,
-  );
-
   /// SegmentedControl segment border radius.
   final BorderRadiusGeometry segmentBorderRadius;
 

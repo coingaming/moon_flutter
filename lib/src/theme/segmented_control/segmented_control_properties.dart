@@ -3,20 +3,9 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-
 @immutable
 class MoonSegmentedControlProperties extends ThemeExtension<MoonSegmentedControlProperties>
     with DiagnosticableTreeMixin {
-  static final properties = MoonSegmentedControlProperties(
-    borderRadius: MoonBorders.borders.interactiveMd,
-    gap: MoonSizes.sizes.x5s,
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-    padding: const EdgeInsets.all(4),
-  );
-
   /// SegmentedControl border radius.
   final BorderRadiusGeometry borderRadius;
 

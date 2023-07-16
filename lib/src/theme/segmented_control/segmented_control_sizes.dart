@@ -2,13 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/segmented_control/segmented_control_size_properties.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonSegmentedControlSizes extends ThemeExtension<MoonSegmentedControlSizes> with DiagnosticableTreeMixin {
-  static final sizes = MoonSegmentedControlSizes(
-    sm: MoonSegmentedControlSizeProperties.sm,
-    md: MoonSegmentedControlSizeProperties.md,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Small segmentedControl item properties.
   final MoonSegmentedControlSizeProperties sm;
@@ -16,17 +15,37 @@ class MoonSegmentedControlSizes extends ThemeExtension<MoonSegmentedControlSizes
   /// Medium segmentedControl item properties.
   final MoonSegmentedControlSizeProperties md;
 
-  const MoonSegmentedControlSizes({
-    required this.sm,
-    required this.md,
-  });
+  MoonSegmentedControlSizes({
+    required this.tokens,
+    MoonSegmentedControlSizeProperties? sm,
+    MoonSegmentedControlSizeProperties? md,
+  })  : sm = sm ??
+            MoonSegmentedControlSizeProperties(
+              segmentBorderRadius: tokens.borders.interactiveSm,
+              segmentGap: tokens.sizes.x5s,
+              height: tokens.sizes.md,
+              iconSizeValue: tokens.sizes.xs,
+              segmentPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              textStyle: tokens.typography.heading.textDefault,
+            ),
+        md = md ??
+            MoonSegmentedControlSizeProperties(
+              segmentBorderRadius: tokens.borders.interactiveSm,
+              segmentGap: tokens.sizes.x4s,
+              height: tokens.sizes.lg,
+              iconSizeValue: tokens.sizes.xs,
+              segmentPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x2s),
+              textStyle: tokens.typography.heading.textDefault,
+            );
 
   @override
   MoonSegmentedControlSizes copyWith({
+    MoonTokens? tokens,
     MoonSegmentedControlSizeProperties? sm,
     MoonSegmentedControlSizeProperties? md,
   }) {
     return MoonSegmentedControlSizes(
+      tokens: tokens ?? this.tokens,
       sm: sm ?? this.sm,
       md: md ?? this.md,
     );
@@ -37,6 +56,7 @@ class MoonSegmentedControlSizes extends ThemeExtension<MoonSegmentedControlSizes
     if (other is! MoonSegmentedControlSizes) return this;
 
     return MoonSegmentedControlSizes(
+      tokens: tokens.lerp(other.tokens, t),
       sm: sm.lerp(other.sm, t),
       md: md.lerp(other.md, t),
     );
@@ -47,6 +67,7 @@ class MoonSegmentedControlSizes extends ThemeExtension<MoonSegmentedControlSizes
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonSegmentedControlSizes"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonSegmentedControlSizeProperties>("sm", sm))
       ..add(DiagnosticsProperty<MoonSegmentedControlSizeProperties>("md", md));
   }

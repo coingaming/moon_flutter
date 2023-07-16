@@ -1,26 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonSegmentedControlColors extends ThemeExtension<MoonSegmentedControlColors> with DiagnosticableTreeMixin {
-  static final light = MoonSegmentedControlColors(
-    backgroundColor: MoonColors.light.goku,
-    selectedSegmentColor: MoonColors.light.gohan,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    selectedTextColor: MoonTypography.light.colors.bodyPrimary,
-  );
-
-  static final dark = MoonSegmentedControlColors(
-    backgroundColor: MoonColors.dark.goku,
-    selectedSegmentColor: MoonColors.dark.gohan,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    selectedTextColor: MoonTypography.dark.colors.bodyPrimary,
-  );
-
   /// Background color of SegmentedControl.
   final Color backgroundColor;
 

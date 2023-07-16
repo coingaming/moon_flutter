@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/radio/radio_colors.dart';
 import 'package:moon_design/src/theme/radio/radio_properties.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonRadioTheme extends ThemeExtension<MoonRadioTheme> with DiagnosticableTreeMixin {
-  static final light = MoonRadioTheme(
-    colors: MoonRadioColors.light,
-    properties: MoonRadioProperties.properties,
-  );
-
-  static final dark = MoonRadioTheme(
-    colors: MoonRadioColors.dark,
-    properties: MoonRadioProperties.properties,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Radio colors.
   final MoonRadioColors colors;
@@ -22,17 +16,29 @@ class MoonRadioTheme extends ThemeExtension<MoonRadioTheme> with DiagnosticableT
   /// Radio properties.
   final MoonRadioProperties properties;
 
-  const MoonRadioTheme({
-    required this.colors,
-    required this.properties,
-  });
+  MoonRadioTheme({
+    required this.tokens,
+    MoonRadioColors? colors,
+    MoonRadioProperties? properties,
+  })  : colors = colors ??
+            MoonRadioColors(
+              activeColor: tokens.colors.piccolo,
+              inactiveColor: tokens.colors.trunks,
+              textColor: tokens.typography.colors.bodyPrimary,
+            ),
+        properties = properties ??
+            MoonRadioProperties(
+              textStyle: tokens.typography.body.textDefault,
+            );
 
   @override
   MoonRadioTheme copyWith({
+    MoonTokens? tokens,
     MoonRadioColors? colors,
     MoonRadioProperties? properties,
   }) {
     return MoonRadioTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
     );
@@ -43,6 +49,7 @@ class MoonRadioTheme extends ThemeExtension<MoonRadioTheme> with DiagnosticableT
     if (other is! MoonRadioTheme) return this;
 
     return MoonRadioTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
     );
@@ -53,6 +60,7 @@ class MoonRadioTheme extends ThemeExtension<MoonRadioTheme> with DiagnosticableT
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonRadioTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonRadioColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonRadioProperties>("properties", properties));
   }
