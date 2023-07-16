@@ -2,14 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with DiagnosticableTreeMixin {
-  static final sizes = MoonSwitchSizes(
-    x2s: MoonSwitchSizeProperties.x2s,
-    xs: MoonSwitchSizeProperties.xs,
-    sm: MoonSwitchSizeProperties.sm,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// (2x) Extra small switch properties.
   final MoonSwitchSizeProperties x2s;
@@ -20,19 +18,48 @@ class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with Diagnosticabl
   /// Small switch properties.
   final MoonSwitchSizeProperties sm;
 
-  const MoonSwitchSizes({
-    required this.x2s,
-    required this.xs,
-    required this.sm,
-  });
+  MoonSwitchSizes({
+    required this.tokens,
+    MoonSwitchSizeProperties? x2s,
+    MoonSwitchSizeProperties? xs,
+    MoonSwitchSizeProperties? sm,
+  })  : x2s = x2s ??
+            MoonSwitchSizeProperties(
+              height: tokens.sizes.x2s,
+              width: 2 * tokens.sizes.x3s + 2 * tokens.sizes.x5s,
+              thumbSizeValue: tokens.sizes.x3s,
+              iconSizeValue: tokens.sizes.x3s,
+              padding: EdgeInsets.all(tokens.sizes.x6s),
+              textStyle: tokens.typography.caption.text6.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
+            ),
+        xs = xs ??
+            MoonSwitchSizeProperties(
+              height: tokens.sizes.xs,
+              width: 2 * tokens.sizes.x2s + 3 * tokens.sizes.x5s,
+              thumbSizeValue: tokens.sizes.x2s,
+              iconSizeValue: tokens.sizes.x2s,
+              padding: EdgeInsets.all(tokens.sizes.x5s),
+              textStyle: tokens.typography.caption.text8.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
+            ),
+        sm = sm ??
+            MoonSwitchSizeProperties(
+              height: tokens.sizes.sm,
+              width: 2 * tokens.sizes.xs + 3 * tokens.sizes.x5s,
+              thumbSizeValue: tokens.sizes.xs,
+              iconSizeValue: tokens.sizes.xs,
+              padding: EdgeInsets.all(tokens.sizes.x5s),
+              textStyle: tokens.typography.caption.text10.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
+            );
 
   @override
   MoonSwitchSizes copyWith({
+    MoonTokens? tokens,
     MoonSwitchSizeProperties? x2s,
     MoonSwitchSizeProperties? xs,
     MoonSwitchSizeProperties? sm,
   }) {
     return MoonSwitchSizes(
+      tokens: tokens ?? this.tokens,
       x2s: x2s ?? this.x2s,
       xs: xs ?? this.xs,
       sm: sm ?? this.sm,
@@ -44,6 +71,7 @@ class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with Diagnosticabl
     if (other is! MoonSwitchSizes) return this;
 
     return MoonSwitchSizes(
+      tokens: tokens.lerp(other.tokens, t),
       x2s: x2s.lerp(other.x2s, t),
       xs: xs.lerp(other.xs, t),
       sm: sm.lerp(other.sm, t),
@@ -55,6 +83,7 @@ class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with Diagnosticabl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonSwitchSizes"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonSwitchSizeProperties>("x2s", x2s))
       ..add(DiagnosticsProperty<MoonSwitchSizeProperties>("xs", xs))
       ..add(DiagnosticsProperty<MoonSwitchSizeProperties>("sm", sm));

@@ -1,18 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/shadows.dart';
-
 @immutable
 class MoonToastShadows extends ThemeExtension<MoonToastShadows> with DiagnosticableTreeMixin {
-  static final light = MoonToastShadows(
-    toastShadows: MoonShadows.light.lg,
-  );
-
-  static final dark = MoonToastShadows(
-    toastShadows: MoonShadows.dark.lg,
-  );
-
   /// Toast shadows.
   final List<BoxShadow> toastShadows;
 

@@ -1,34 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
+
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with DiagnosticableTreeMixin {
-  static final light = MoonSwitchColors(
-    activeTrackColor: MoonColors.light.piccolo,
-    inactiveTrackColor: MoonColors.light.beerus,
-    activeTextColor: MoonTypography.dark.colors.bodyPrimary,
-    inactiveTextColor: MoonTypography.light.colors.bodyPrimary,
-    activeIconColor: MoonIconography.dark.colors.primaryColor,
-    inactiveIconColor: MoonIconography.light.colors.primaryColor,
-    thumbIconColor: MoonIconography.light.colors.primaryColor,
-    thumbColor: MoonColors.light.goten,
-  );
-
-  static final dark = MoonSwitchColors(
-    activeTrackColor: MoonColors.dark.piccolo,
-    inactiveTrackColor: MoonColors.dark.beerus,
-    activeTextColor: MoonTypography.dark.colors.bodyPrimary,
-    inactiveTextColor: MoonTypography.dark.colors.bodyPrimary,
-    activeIconColor: MoonIconography.dark.colors.primaryColor,
-    inactiveIconColor: MoonIconography.dark.colors.primaryColor,
-    thumbIconColor: MoonIconography.light.colors.primaryColor,
-    thumbColor: MoonColors.dark.goten,
-  );
-
   /// Switch active track color.
   final Color activeTrackColor;
 

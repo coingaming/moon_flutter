@@ -3,22 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonToastProperties extends ThemeExtension<MoonToastProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonToastProperties(
-    borderRadius: MoonBorders.borders.surfaceSm,
-    gap: MoonSizes.sizes.x2s,
-    displayDuration: const Duration(seconds: 5),
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-    contentPadding: EdgeInsets.all(MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.body.textDefault,
-  );
-
   /// Toast border radius.
   final BorderRadiusGeometry borderRadius;
 

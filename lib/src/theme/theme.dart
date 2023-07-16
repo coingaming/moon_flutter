@@ -167,13 +167,13 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         popoverTheme = popoverTheme ?? MoonPopoverTheme(tokens: tokens),
         radioTheme = radioTheme ?? MoonRadioTheme(tokens: tokens),
         segmentedControlTheme = segmentedControlTheme ?? MoonSegmentedControlTheme(tokens: tokens),
-        switchTheme = switchTheme ?? MoonSwitchTheme.light,
-        tabBarTheme = tabBarTheme ?? MoonTabBarTheme.light,
-        tagTheme = tagTheme ?? MoonTagTheme.light,
+        switchTheme = switchTheme ?? MoonSwitchTheme(tokens: tokens),
+        tabBarTheme = tabBarTheme ?? MoonTabBarTheme(tokens: tokens),
+        tagTheme = tagTheme ?? MoonTagTheme(tokens: tokens),
         textAreaTheme = textAreaTheme ?? MoonTextAreaTheme(tokens: tokens),
-        textInputTheme = textInputTheme ?? MoonTextInputTheme.light,
-        toastTheme = toastTheme ?? MoonToastTheme.light,
-        tooltipTheme = tooltipTheme ?? MoonTooltipTheme.light;
+        textInputTheme = textInputTheme ?? MoonTextInputTheme(tokens: tokens),
+        toastTheme = toastTheme ?? MoonToastTheme(tokens: tokens),
+        tooltipTheme = tooltipTheme ?? MoonTooltipTheme(tokens: tokens);
 
   @override
   MoonTheme copyWith({

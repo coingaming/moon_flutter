@@ -1,18 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/shadows.dart';
-
 @immutable
 class MoonTooltipShadows extends ThemeExtension<MoonTooltipShadows> with DiagnosticableTreeMixin {
-  static final light = MoonTooltipShadows(
-    tooltipShadows: MoonShadows.light.sm,
-  );
-
-  static final dark = MoonTooltipShadows(
-    tooltipShadows: MoonShadows.dark.sm,
-  );
-
   /// Tooltip shadows.
   final List<BoxShadow> tooltipShadows;
 

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
+import 'package:moon_design/src/theme/switch/switch_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -142,13 +144,13 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   MoonSwitchSizeProperties _getMoonSwitchSize(BuildContext context, MoonSwitchSize? moonSwitchSize) {
     switch (moonSwitchSize) {
       case MoonSwitchSize.x2s:
-        return context.moonTheme?.switchTheme.sizes.x2s ?? MoonSwitchSizeProperties.x2s;
+        return context.moonTheme?.switchTheme.sizes.x2s ?? MoonSwitchSizes(tokens: MoonTokens.light).x2s;
       case MoonSwitchSize.xs:
-        return context.moonTheme?.switchTheme.sizes.xs ?? MoonSwitchSizeProperties.xs;
+        return context.moonTheme?.switchTheme.sizes.xs ?? MoonSwitchSizes(tokens: MoonTokens.light).xs;
       case MoonSwitchSize.sm:
-        return context.moonTheme?.switchTheme.sizes.sm ?? MoonSwitchSizeProperties.sm;
+        return context.moonTheme?.switchTheme.sizes.sm ?? MoonSwitchSizes(tokens: MoonTokens.light).sm;
       default:
-        return context.moonTheme?.switchTheme.sizes.xs ?? MoonSwitchSizeProperties.xs;
+        return context.moonTheme?.switchTheme.sizes.xs ?? MoonSwitchSizes(tokens: MoonTokens.light).xs;
     }
   }
 

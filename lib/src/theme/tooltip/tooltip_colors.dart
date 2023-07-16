@@ -1,25 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTooltipColors extends ThemeExtension<MoonTooltipColors> with DiagnosticableTreeMixin {
-  static final light = MoonTooltipColors(
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    iconColor: MoonIconography.light.colors.primaryColor,
-    backgroundColor: MoonColors.light.gohan,
-  );
-
-  static final dark = MoonTooltipColors(
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    iconColor: MoonIconography.dark.colors.primaryColor,
-    backgroundColor: MoonColors.dark.gohan,
-  );
-
   /// Tooltip text color.
   final Color textColor;
 

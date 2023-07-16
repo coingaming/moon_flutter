@@ -1,31 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/icon_colors.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonToastColors extends ThemeExtension<MoonToastColors> with DiagnosticableTreeMixin {
-  static final light = MoonToastColors(
-    lightVariantBackgroundColor: MoonColors.light.gohan,
-    darkVariantBackgroundColor: MoonColors.dark.gohan,
-    lightVariantTextColor: MoonTypography.light.colors.bodyPrimary,
-    darkVariantTextColor: MoonTypography.dark.colors.bodyPrimary,
-    lightVariantIconColor: MoonIconColors.light.primaryColor,
-    darkVariantIconColor: MoonIconColors.dark.primaryColor,
-  );
-
-  static final dark = MoonToastColors(
-    lightVariantBackgroundColor: MoonColors.dark.gohan,
-    darkVariantBackgroundColor: MoonColors.light.gohan,
-    lightVariantTextColor: MoonTypography.dark.colors.bodyPrimary,
-    darkVariantTextColor: MoonTypography.light.colors.bodyPrimary,
-    lightVariantIconColor: MoonIconColors.dark.primaryColor,
-    darkVariantIconColor: MoonIconColors.light.primaryColor,
-  );
-
   /// Toast light variant background color.
   final Color lightVariantBackgroundColor;
 

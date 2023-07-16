@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonSwitchProperties extends ThemeExtension<MoonSwitchProperties> with DiagnosticableTreeMixin {
-  static const properties = MoonSwitchProperties(
-    transitionDuration: Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-  );
-
   /// Switch transition duration.
   final Duration transitionDuration;
 

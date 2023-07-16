@@ -3,32 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with DiagnosticableTreeMixin {
-  static final x2s = MoonTagSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveXs,
-    gap: MoonSizes.sizes.x5s,
-    height: MoonSizes.sizes.x2s,
-    iconSizeValue: MoonSizes.sizes.x3s,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    textStyle: MoonTextStyles.body.text10.copyWith(fontWeight: FontWeight.w400),
-    upperCaseTextStyle: MoonTextStyles.caption.text9,
-  );
-
-  static final xs = MoonTagSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveXs,
-    gap: MoonSizes.sizes.x5s,
-    height: MoonSizes.sizes.xs,
-    iconSizeValue: MoonSizes.sizes.x2s,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    textStyle: MoonTextStyles.body.text12.copyWith(fontWeight: FontWeight.w400),
-    upperCaseTextStyle: MoonTextStyles.caption.text10,
-  );
-
   /// Tag border radius.
   final BorderRadiusGeometry borderRadius;
 

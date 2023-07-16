@@ -5,22 +5,12 @@ import 'package:moon_design/src/theme/switch/switch_colors.dart';
 import 'package:moon_design/src/theme/switch/switch_properties.dart';
 import 'package:moon_design/src/theme/switch/switch_shadows.dart';
 import 'package:moon_design/src/theme/switch/switch_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonSwitchTheme extends ThemeExtension<MoonSwitchTheme> with DiagnosticableTreeMixin {
-  static final light = MoonSwitchTheme(
-    colors: MoonSwitchColors.light,
-    properties: MoonSwitchProperties.properties,
-    shadows: MoonSwitchShadows.light,
-    sizes: MoonSwitchSizes.sizes,
-  );
-
-  static final dark = MoonSwitchTheme(
-    colors: MoonSwitchColors.dark,
-    properties: MoonSwitchProperties.properties,
-    shadows: MoonSwitchShadows.dark,
-    sizes: MoonSwitchSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Switch colors.
   final MoonSwitchColors colors;
@@ -34,21 +24,44 @@ class MoonSwitchTheme extends ThemeExtension<MoonSwitchTheme> with Diagnosticabl
   /// Switch sizes.
   final MoonSwitchSizes sizes;
 
-  const MoonSwitchTheme({
-    required this.colors,
-    required this.properties,
-    required this.shadows,
-    required this.sizes,
-  });
+  MoonSwitchTheme({
+    required this.tokens,
+    MoonSwitchColors? colors,
+    MoonSwitchProperties? properties,
+    MoonSwitchShadows? shadows,
+    MoonSwitchSizes? sizes,
+  })  : colors = colors ??
+            MoonSwitchColors(
+              activeTrackColor: tokens.colors.piccolo,
+              inactiveTrackColor: tokens.colors.beerus,
+              activeTextColor: tokens.colors.goten,
+              inactiveTextColor: tokens.colors.bulma,
+              activeIconColor: tokens.colors.goten,
+              inactiveIconColor: tokens.colors.bulma,
+              thumbIconColor: tokens.colors.popo,
+              thumbColor: tokens.colors.goten,
+            ),
+        properties = properties ??
+            MoonSwitchProperties(
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
+            ),
+        shadows = shadows ??
+            MoonSwitchShadows(
+              thumbShadows: tokens.shadows.sm,
+            ),
+        sizes = sizes ?? MoonSwitchSizes(tokens: tokens);
 
   @override
   MoonSwitchTheme copyWith({
+    MoonTokens? tokens,
     MoonSwitchColors? colors,
     MoonSwitchProperties? properties,
     MoonSwitchShadows? shadows,
     MoonSwitchSizes? sizes,
   }) {
     return MoonSwitchTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
       shadows: shadows ?? this.shadows,
@@ -61,6 +74,7 @@ class MoonSwitchTheme extends ThemeExtension<MoonSwitchTheme> with Diagnosticabl
     if (other is! MoonSwitchTheme) return this;
 
     return MoonSwitchTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
       shadows: shadows.lerp(other.shadows, t),
@@ -73,6 +87,7 @@ class MoonSwitchTheme extends ThemeExtension<MoonSwitchTheme> with Diagnosticabl
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonSwitchTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonSwitchColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonSwitchProperties>("properties", properties))
       ..add(DiagnosticsProperty<MoonSwitchShadows>("shadows", shadows))

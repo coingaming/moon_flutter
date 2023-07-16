@@ -3,38 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties> with DiagnosticableTreeMixin {
-  static final x2s = MoonSwitchSizeProperties(
-    height: MoonSizes.sizes.x2s,
-    width: 2 * MoonSizes.sizes.x3s + 2 * MoonSizes.sizes.x5s,
-    thumbSizeValue: MoonSizes.sizes.x3s,
-    iconSizeValue: MoonSizes.sizes.x3s,
-    padding: EdgeInsets.all(MoonSizes.sizes.x6s),
-    textStyle: MoonTextStyles.caption.text6.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
-  );
-
-  static final xs = MoonSwitchSizeProperties(
-    height: MoonSizes.sizes.xs,
-    width: 2 * MoonSizes.sizes.x2s + 3 * MoonSizes.sizes.x5s,
-    thumbSizeValue: MoonSizes.sizes.x2s,
-    iconSizeValue: MoonSizes.sizes.x2s,
-    padding: EdgeInsets.all(MoonSizes.sizes.x5s),
-    textStyle: MoonTextStyles.caption.text8.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
-  );
-
-  static final sm = MoonSwitchSizeProperties(
-    height: MoonSizes.sizes.sm,
-    width: 2 * MoonSizes.sizes.xs + 3 * MoonSizes.sizes.x5s,
-    thumbSizeValue: MoonSizes.sizes.xs,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.all(MoonSizes.sizes.x5s),
-    textStyle: MoonTextStyles.caption.text10.copyWith(letterSpacing: kIsWeb ? 0.5 : 0.1),
-  );
-
   /// Switch height.
   final double height;
 

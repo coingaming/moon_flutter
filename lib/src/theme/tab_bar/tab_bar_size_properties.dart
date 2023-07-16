@@ -3,32 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-
 @immutable
 class MoonTabBarSizeProperties extends ThemeExtension<MoonTabBarSizeProperties> with DiagnosticableTreeMixin {
-  static final sm = MoonTabBarSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveXs,
-    tabGap: MoonSizes.sizes.x5s,
-    height: MoonSizes.sizes.sm,
-    iconSizeValue: MoonSizes.sizes.xs,
-    indicatorHeight: MoonSizes.sizes.x6s,
-    tabPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.textDefault,
-  );
-
-  static final md = MoonTabBarSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    tabGap: MoonSizes.sizes.x4s,
-    height: MoonSizes.sizes.md,
-    iconSizeValue: MoonSizes.sizes.xs,
-    indicatorHeight: MoonSizes.sizes.x6s,
-    tabPadding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.heading.textDefault,
-  );
-
   /// TabBar pill tab border radius.
   final BorderRadiusGeometry borderRadius;
 

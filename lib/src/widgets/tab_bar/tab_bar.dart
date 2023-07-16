@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/tab_bar/tab_bar_size_properties.dart';
+import 'package:moon_design/src/theme/tab_bar/tab_bar_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
@@ -153,11 +155,11 @@ class _MoonTabBarState extends State<MoonTabBar> {
   MoonTabBarSizeProperties _getMoonTabBarSize(BuildContext context, MoonTabBarSize? tabBarSize) {
     switch (tabBarSize) {
       case MoonTabBarSize.sm:
-        return context.moonTheme?.tabBarTheme.sizes.sm ?? MoonTabBarSizeProperties.sm;
+        return context.moonTheme?.tabBarTheme.sizes.sm ?? MoonTabBarSizes(tokens: MoonTokens.light).sm;
       case MoonTabBarSize.md:
-        return context.moonTheme?.tabBarTheme.sizes.md ?? MoonTabBarSizeProperties.md;
+        return context.moonTheme?.tabBarTheme.sizes.md ?? MoonTabBarSizes(tokens: MoonTokens.light).md;
       default:
-        return context.moonTheme?.tabBarTheme.sizes.md ?? MoonTabBarSizeProperties.md;
+        return context.moonTheme?.tabBarTheme.sizes.md ?? MoonTabBarSizes(tokens: MoonTokens.light).md;
     }
   }
 

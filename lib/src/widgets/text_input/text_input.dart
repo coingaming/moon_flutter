@@ -9,12 +9,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
+import 'package:moon_design/src/theme/text_input/text_input_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -959,15 +961,15 @@ class _MoonTextInputState extends State<MoonTextInput>
   MoonTextInputSizeProperties _getMoonTextInputSize(BuildContext context, MoonTextInputSize? moonTextInputSize) {
     switch (moonTextInputSize) {
       case MoonTextInputSize.sm:
-        return context.moonTheme?.textInputTheme.sizes.sm ?? MoonTextInputSizeProperties.sm;
+        return context.moonTheme?.textInputTheme.sizes.sm ?? MoonTextInputSizes(tokens: MoonTokens.light).sm;
       case MoonTextInputSize.md:
-        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizeProperties.md;
+        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizes(tokens: MoonTokens.light).md;
       case MoonTextInputSize.lg:
-        return context.moonTheme?.textInputTheme.sizes.lg ?? MoonTextInputSizeProperties.lg;
+        return context.moonTheme?.textInputTheme.sizes.lg ?? MoonTextInputSizes(tokens: MoonTokens.light).lg;
       case MoonTextInputSize.xl:
-        return context.moonTheme?.textInputTheme.sizes.xl ?? MoonTextInputSizeProperties.xl;
+        return context.moonTheme?.textInputTheme.sizes.xl ?? MoonTextInputSizes(tokens: MoonTokens.light).xl;
       default:
-        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizeProperties.md;
+        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizes(tokens: MoonTokens.light).md;
     }
   }
 

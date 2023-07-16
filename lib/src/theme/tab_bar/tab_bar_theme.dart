@@ -4,20 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_colors.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_properties.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTabBarTheme extends ThemeExtension<MoonTabBarTheme> with DiagnosticableTreeMixin {
-  static final light = MoonTabBarTheme(
-    colors: MoonTabBarColors.light,
-    properties: MoonTabBarProperties.properties,
-    sizes: MoonTabBarSizes.sizes,
-  );
-
-  static final dark = MoonTabBarTheme(
-    colors: MoonTabBarColors.dark,
-    properties: MoonTabBarProperties.properties,
-    sizes: MoonTabBarSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// TabBar colors.
   final MoonTabBarColors colors;
@@ -28,19 +20,36 @@ class MoonTabBarTheme extends ThemeExtension<MoonTabBarTheme> with Diagnosticabl
   /// TabBar sizes.
   final MoonTabBarSizes sizes;
 
-  const MoonTabBarTheme({
-    required this.colors,
-    required this.properties,
-    required this.sizes,
-  });
+  MoonTabBarTheme({
+    required this.tokens,
+    MoonTabBarColors? colors,
+    MoonTabBarProperties? properties,
+    MoonTabBarSizes? sizes,
+  })  : colors = colors ??
+            MoonTabBarColors(
+              indicatorColor: tokens.colors.piccolo,
+              textColor: tokens.typography.colors.bodyPrimary,
+              selectedTextColor: tokens.colors.piccolo,
+              selectedPillTextColor: tokens.typography.colors.bodyPrimary,
+              selectedPillTabColor: tokens.colors.gohan,
+            ),
+        properties = properties ??
+            MoonTabBarProperties(
+              gap: tokens.sizes.x5s,
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
+            ),
+        sizes = sizes ?? MoonTabBarSizes(tokens: tokens);
 
   @override
   MoonTabBarTheme copyWith({
+    MoonTokens? tokens,
     MoonTabBarColors? colors,
     MoonTabBarProperties? properties,
     MoonTabBarSizes? sizes,
   }) {
     return MoonTabBarTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
       sizes: sizes ?? this.sizes,
@@ -52,6 +61,7 @@ class MoonTabBarTheme extends ThemeExtension<MoonTabBarTheme> with Diagnosticabl
     if (other is! MoonTabBarTheme) return this;
 
     return MoonTabBarTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
       sizes: sizes.lerp(other.sizes, t),
@@ -63,6 +73,7 @@ class MoonTabBarTheme extends ThemeExtension<MoonTabBarTheme> with Diagnosticabl
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonTabBarTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonTabBarColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonTabBarProperties>("properties", properties))
       ..add(DiagnosticsProperty<MoonTabBarSizes>("sizes", sizes));

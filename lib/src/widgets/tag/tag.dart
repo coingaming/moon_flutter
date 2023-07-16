@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
+import 'package:moon_design/src/theme/tag/tag_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -83,11 +85,11 @@ class MoonTag extends StatelessWidget {
   MoonTagSizeProperties _getMoonTagSize(BuildContext context, MoonTagSize? moonTagSize) {
     switch (moonTagSize) {
       case MoonTagSize.x2s:
-        return context.moonTheme?.tagTheme.sizes.x2s ?? MoonTagSizeProperties.x2s;
+        return context.moonTheme?.tagTheme.sizes.x2s ?? MoonTagSizes(tokens: MoonTokens.light).x2s;
       case MoonTagSize.xs:
-        return context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizeProperties.xs;
+        return context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizes(tokens: MoonTokens.light).xs;
       default:
-        return context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizeProperties.xs;
+        return context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizes(tokens: MoonTokens.light).xs;
     }
   }
 
