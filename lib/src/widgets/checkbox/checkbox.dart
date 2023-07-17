@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -105,8 +106,8 @@ class MoonCheckbox extends StatefulWidget {
 
     final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    final Duration effectiveFocusEffectDuration =
-        context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
+    final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
 
     return GestureDetector(
       onTap: () => onChanged?.call(!value!),
@@ -219,17 +220,17 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.checkboxTheme.colors.borderColor ?? MoonColors.light.trunks;
 
-    final Color effectiveFocusEffectColor =
-        context.moonEffects?.controlFocusEffect.effectColor ?? MoonFocusEffects.lightFocusEffect.effectColor;
+    final Color effectiveFocusEffectColor = context.moonEffects?.controlFocusEffect.effectColor ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectColor;
 
-    final Duration effectiveFocusEffectDuration =
-        context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
+    final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
 
-    final Curve effectiveFocusEffectCurve =
-        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
+    final Curve effectiveFocusEffectCurve = context.moonEffects?.controlFocusEffect.effectCurve ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
 
-    final double effectiveFocusEffectExtent =
-        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
+    final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
 
     final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 

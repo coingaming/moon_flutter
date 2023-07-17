@@ -12,6 +12,7 @@ import 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_theme.dart';
 import 'package:moon_design/src/theme/drawer/drawer_theme.dart';
+import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
 import 'package:moon_design/src/theme/modal/modal_theme.dart';
@@ -28,7 +29,6 @@ import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
 import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/effects/effects.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
@@ -78,6 +78,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   /// Moon Design System MoonDrawer widget theming.
   final MoonDrawerTheme drawerTheme;
+
+  /// Moon Design System effects.
+  final MoonEffects effects;
 
   /// Moon Design System MoonLinearLoader widget theming.
   final MoonLinearLoaderTheme linearLoaderTheme;
@@ -135,6 +138,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonCircularProgressTheme? circularProgressTheme,
     MoonDotIndicatorTheme? dotIndicatorTheme,
     MoonDrawerTheme? drawerTheme,
+    MoonEffects? effects,
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
     MoonModalTheme? modalTheme,
@@ -161,6 +165,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         circularProgressTheme = circularProgressTheme ?? MoonCircularProgressTheme(tokens: tokens),
         dotIndicatorTheme = dotIndicatorTheme ?? MoonDotIndicatorTheme(tokens: tokens),
         drawerTheme = drawerTheme ?? MoonDrawerTheme(tokens: tokens),
+        effects = effects ?? MoonEffects(tokens: tokens),
         linearLoaderTheme = linearLoaderTheme ?? MoonLinearLoaderTheme(tokens: tokens),
         linearProgressTheme = linearProgressTheme ?? MoonLinearProgressTheme(tokens: tokens),
         modalTheme = modalTheme ?? MoonModalTheme(tokens: tokens),
@@ -190,6 +195,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonCircularProgressTheme? circularProgressTheme,
     MoonDotIndicatorTheme? dotIndicatorTheme,
     MoonDrawerTheme? drawerTheme,
+    MoonEffects? effects,
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
     MoonModalTheme? modalTheme,
@@ -219,6 +225,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
       dotIndicatorTheme: dotIndicatorTheme ?? this.dotIndicatorTheme,
       drawerTheme: drawerTheme ?? this.drawerTheme,
+      effects: effects ?? this.effects,
       linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
       linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
       modalTheme: modalTheme ?? this.modalTheme,
@@ -254,6 +261,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
       dotIndicatorTheme: dotIndicatorTheme.lerp(other.dotIndicatorTheme, t),
       drawerTheme: drawerTheme.lerp(other.drawerTheme, t),
+      effects: effects.lerp(other.effects, t),
       linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
       linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
       modalTheme: modalTheme.lerp(other.modalTheme, t),
@@ -288,6 +296,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
       ..add(DiagnosticsProperty<MoonDotIndicatorTheme>("MoonDotIndicatorTheme", dotIndicatorTheme))
       ..add(DiagnosticsProperty<MoonDrawerTheme>("MoonDrawerTheme", drawerTheme))
+      ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
       ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
       ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
       ..add(DiagnosticsProperty<MoonModalTheme>("MoonModalTheme", modalTheme))
@@ -309,7 +318,7 @@ extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
   MoonBorders? get moonBorders => moonTheme?.tokens.borders;
   MoonColors? get moonColors => moonTheme?.tokens.colors;
-  MoonEffects? get moonEffects => moonTheme?.tokens.effects;
+  MoonEffects? get moonEffects => moonTheme?.effects;
   MoonIconography? get moonIconography => moonTheme?.tokens.iconography;
   MoonOpacities? get moonOpacities => moonTheme?.tokens.opacities;
   MoonShadows? get moonShadows => moonTheme?.tokens.shadows;

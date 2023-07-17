@@ -8,12 +8,12 @@ import 'package:flutter/material.dart'
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
+import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
 import 'package:moon_design/src/theme/text_input/text_input_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
@@ -1145,8 +1145,8 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    final double effectiveFocusEffectExtent =
-        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
+    final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.textInputTheme.properties.transitionDuration ??

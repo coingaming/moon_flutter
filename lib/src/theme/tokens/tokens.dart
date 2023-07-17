@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/effects/effects.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
@@ -17,7 +16,6 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
     borders: MoonBorders.borders,
     colors: MoonColors.light,
     complementaryColors: MoonColors.dark,
-    effects: MoonEffects.light,
     iconography: MoonIconography.light,
     opacities: MoonOpacities.opacities,
     shadows: MoonShadows.light,
@@ -30,7 +28,6 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
     borders: MoonBorders.borders,
     colors: MoonColors.dark,
     complementaryColors: MoonColors.light,
-    effects: MoonEffects.dark,
     iconography: MoonIconography.dark,
     opacities: MoonOpacities.opacities,
     shadows: MoonShadows.dark,
@@ -47,9 +44,6 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
 
   /// Moon Design System colors that are from complementary theme (light -> dark, dark -> light).
   final MoonColors complementaryColors;
-
-  /// Moon Design System effects.
-  final MoonEffects effects;
 
   /// Moon Design System iconography.
   final MoonIconography iconography;
@@ -72,7 +66,6 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
     required this.borders,
     required this.colors,
     required this.complementaryColors,
-    required this.effects,
     required this.iconography,
     required this.opacities,
     required this.shadows,
@@ -86,7 +79,6 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
     MoonBorders? borders,
     MoonColors? colors,
     MoonColors? complementaryColors,
-    MoonEffects? effects,
     MoonIconography? iconography,
     MoonOpacities? opacities,
     MoonShadows? shadows,
@@ -98,7 +90,6 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
       borders: borders ?? this.borders,
       colors: colors ?? this.colors,
       complementaryColors: complementaryColors ?? this.complementaryColors,
-      effects: effects ?? this.effects,
       iconography: iconography ?? this.iconography,
       opacities: opacities ?? this.opacities,
       shadows: shadows ?? this.shadows,
@@ -116,7 +107,6 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
       borders: borders.lerp(other.borders, t),
       colors: colors.lerp(other.colors, t),
       complementaryColors: complementaryColors.lerp(other.complementaryColors, t),
-      effects: effects.lerp(other.effects, t),
       iconography: iconography.lerp(other.iconography, t),
       opacities: opacities.lerp(other.opacities, t),
       shadows: shadows.lerp(other.shadows, t),
@@ -134,7 +124,6 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
       ..add(DiagnosticsProperty<MoonBorders>("MoonBorders", borders))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", colors))
       ..add(DiagnosticsProperty<MoonColors>("MoonColors", complementaryColors))
-      ..add(DiagnosticsProperty<MoonEffects>("MoonEffects", effects))
       ..add(DiagnosticsProperty<MoonIconography>("MoonIconography", iconography))
       ..add(DiagnosticsProperty<MoonOpacities>("MoonOpacities", opacities))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/chip/chip_size_properties.dart';
 import 'package:moon_design/src/theme/chip/chip_sizes.dart';
+import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/effects/hover_effects.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
@@ -275,13 +275,13 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
     final Color effectiveTextColor =
         widget.textColor ?? context.moonTheme?.chipTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
-    final Curve effectiveActiveEffectCurve = widget.activeEffectCurve ??
-        context.moonEffects?.controlHoverEffect.hoverCurve ??
-        MoonHoverEffects.lightHoverEffect.hoverCurve;
-
     final Duration effectiveActiveEffectDuration = widget.activeEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??
-        MoonHoverEffects.lightHoverEffect.hoverDuration;
+        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
+
+    final Curve effectiveActiveEffectCurve = widget.activeEffectCurve ??
+        context.moonEffects?.controlHoverEffect.hoverCurve ??
+        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
 
     final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonChipSize.padding;
 

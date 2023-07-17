@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:moon_design/src/theme/effects/effects.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/switch/switch_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
@@ -313,17 +313,17 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
         context.moonTheme?.switchTheme.properties.transitionCurve ??
         MoonTransitions.transitions.defaultTransitionCurve;
 
-    final double effectiveFocusEffectExtent =
-        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
+    final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
 
-    final Color effectiveFocusEffectColor =
-        context.moonEffects?.controlFocusEffect.effectColor ?? MoonFocusEffects.lightFocusEffect.effectColor;
+    final Color effectiveFocusEffectColor = context.moonEffects?.controlFocusEffect.effectColor ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectColor;
 
-    final Duration effectiveFocusEffectDuration =
-        context.moonEffects?.controlFocusEffect.effectDuration ?? MoonFocusEffects.lightFocusEffect.effectDuration;
+    final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
 
-    final Curve effectiveFocusEffectCurve =
-        context.moonEffects?.controlFocusEffect.effectCurve ?? MoonFocusEffects.lightFocusEffect.effectCurve;
+    final Curve effectiveFocusEffectCurve = context.moonEffects?.controlFocusEffect.effectCurve ??
+        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
 
     _animationController ??= AnimationController(
       vsync: this,

@@ -3,25 +3,10 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with DiagnosticableTreeMixin {
-  static final lightFocusEffect = MoonFocusEffects(
-    effectColor: Colors.black26,
-    effectExtent: 4,
-    effectDuration: MoonTransitions.transitions.defaultTransitionDuration,
-    effectCurve: MoonTransitions.transitions.defaultTransitionCurve,
-  );
-
-  static final darkFocusEffect = MoonFocusEffects(
-    effectColor: Colors.white24,
-    effectExtent: 4,
-    effectDuration: MoonTransitions.transitions.defaultTransitionDuration,
-    effectCurve: MoonTransitions.transitions.defaultTransitionCurve,
-  );
-
   /// Focus effect color.
   final Color effectColor;
 

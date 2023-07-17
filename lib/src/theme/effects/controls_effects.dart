@@ -3,25 +3,10 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with DiagnosticableTreeMixin {
-  static final controlScaleEffect = MoonControlsEffects(
-    effectDuration: MoonTransitions.transitions.defaultTransitionDuration,
-    effectCurve: MoonTransitions.transitions.defaultTransitionCurve,
-    effectScalar: 0.95,
-  );
-
-  static final controlPulseEffect = MoonControlsEffects(
-    effectColor: MoonColors.light.piccolo,
-    effectDuration: const Duration(milliseconds: 1400),
-    effectCurve: MoonTransitions.transitions.defaultTransitionCurve,
-    effectExtent: 24,
-  );
-
   /// Controls effect color.
   final Color? effectColor;
 
