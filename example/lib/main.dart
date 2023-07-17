@@ -48,8 +48,10 @@ class _HomePageState extends State<HomePage> {
     return _isInStorybookMode
         ? const StorybookPage()
         : MaterialApp(
-            /* theme: ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.light]),
-            darkTheme: ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme.dark]), */
+            theme:
+                ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.light)]),
+            darkTheme:
+                ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.dark)]),
             home: Scaffold(
               body: Center(
                 child: Column(

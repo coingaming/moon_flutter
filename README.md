@@ -15,4 +15,49 @@ to write commit messages._
 
 ## Resources
 
-- 📖 [Documentation](https://flutter.moon.io)
+- 📱 [Playground](https://flutter.moon.io)
+
+
+## Applying theming and overrides
+
+- Declare tokens variable and optionally override values:
+
+```dart
+final lightTokens = MoonTokens.light.copyWith(
+  colors: MoonColors.light.copyWith(
+    piccolo: Colors.blue,
+    bodyTextPrimary: Colors.amber,
+  ),
+  typography: MoonTypography.typography.copyWith(
+    heading: MoonTypography.typography.heading.apply(fontFamily: "KumbhSans"),
+  ),
+);
+
+final lightTheme = ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: lightTokens)]);
+```
+
+- Or if needed override widget theming:
+
+```dart
+final lightTheme = ThemeData.light().copyWith(
+  extensions: <ThemeExtension<dynamic>>[
+    MoonTheme(tokens: lightTokens).copyWith(
+      accordionTheme: MoonAccordionTheme(tokens: lightTokens).copyWith(
+        colors: MoonAccordionTheme(tokens: lightTokens).colors.copyWith(
+              backgroundColor: Colors.green,
+            ),
+      ),
+    ),
+  ],
+);
+```
+
+- Apply the declared theme:
+
+```dart
+return MaterialApp(
+      title: 'MDS example',
+      theme: lightTheme,
+      home: const HomePage(),
+ );
+```
