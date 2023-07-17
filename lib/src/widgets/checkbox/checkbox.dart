@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
@@ -97,10 +96,10 @@ class MoonCheckbox extends StatefulWidget {
     final bool isInteractive = onChanged != null;
 
     final Color effectiveTextColor =
-        context.moonTheme?.checkboxTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.checkboxTheme.colors.textColor ?? MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.checkboxTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+        context.moonTheme?.checkboxTheme.properties.textStyle ?? MoonTokens.light.typography.body.textDefault;
 
     final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 

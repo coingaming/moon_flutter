@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_colors.dart';
 import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_properties.dart';
 import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_sizes.dart';
 import 'package:moon_design/src/theme/icon/icon_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -28,7 +29,7 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
     MoonBottomSheetSizes? sizes,
   })  : colors = colors ??
             MoonBottomSheetColors(
-              textColor: tokens.typography.colors.bodyPrimary,
+              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
               iconColor: MoonIconTheme(tokens: tokens).colors.primaryColor,
               backgroundColor: tokens.colors.gohan,
               barrierColor: tokens.colors.zeno,

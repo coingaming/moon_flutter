@@ -25,6 +25,7 @@ import 'package:moon_design/src/theme/segmented_control/segmented_control_theme.
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/text_area/text_area_theme.dart';
 import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
 import 'package:moon_design/src/theme/toast/toast_theme.dart';
@@ -40,6 +41,9 @@ import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
+  ///Moon Design System tokens.
+  final MoonTokens tokens;
+
   /// Moon Design System MoonAccordion widget theming.
   final MoonAccordionTheme accordionTheme;
 
@@ -118,13 +122,14 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonTextInput widget theming.
   final MoonTextInputTheme textInputTheme;
 
+  /// Moon Design System text theming.
+  final MoonTextTheme textTheme;
+
   /// Moon Design System MoonToast widget theming.
   final MoonToastTheme toastTheme;
 
   /// Moon Design System MoonTooltip widget theming.
   final MoonTooltipTheme tooltipTheme;
-
-  final MoonTokens tokens;
 
   MoonTheme({
     required this.tokens,
@@ -154,6 +159,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonTagTheme? tagTheme,
     MoonTextAreaTheme? textAreaTheme,
     MoonTextInputTheme? textInputTheme,
+    MoonTextTheme? textTheme,
     MoonToastTheme? toastTheme,
     MoonTooltipTheme? tooltipTheme,
   })  : accordionTheme = accordionTheme ?? MoonAccordionTheme(tokens: tokens),
@@ -182,11 +188,13 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         tagTheme = tagTheme ?? MoonTagTheme(tokens: tokens),
         textAreaTheme = textAreaTheme ?? MoonTextAreaTheme(tokens: tokens),
         textInputTheme = textInputTheme ?? MoonTextInputTheme(tokens: tokens),
+        textTheme = textTheme ?? MoonTextTheme(tokens: tokens),
         toastTheme = toastTheme ?? MoonToastTheme(tokens: tokens),
         tooltipTheme = tooltipTheme ?? MoonTooltipTheme(tokens: tokens);
 
   @override
   MoonTheme copyWith({
+    MoonTokens? tokens,
     MoonAccordionTheme? accordionTheme,
     MoonAlertTheme? alertTheme,
     MoonAuthCodeTheme? authCodeTheme,
@@ -213,11 +221,12 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonTagTheme? tagTheme,
     MoonTextAreaTheme? textAreaTheme,
     MoonTextInputTheme? textInputTheme,
+    MoonTextTheme? textTheme,
     MoonToastTheme? toastTheme,
-    MoonTokens? tokens,
     MoonTooltipTheme? tooltipTheme,
   }) {
     return MoonTheme(
+      tokens: tokens ?? this.tokens,
       accordionTheme: accordionTheme ?? this.accordionTheme,
       alertTheme: alertTheme ?? this.alertTheme,
       authCodeTheme: authCodeTheme ?? this.authCodeTheme,
@@ -244,8 +253,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       tagTheme: tagTheme ?? this.tagTheme,
       textAreaTheme: textAreaTheme ?? this.textAreaTheme,
       textInputTheme: textInputTheme ?? this.textInputTheme,
+      textTheme: textTheme ?? this.textTheme,
       toastTheme: toastTheme ?? this.toastTheme,
-      tokens: tokens ?? this.tokens,
       tooltipTheme: tooltipTheme ?? this.tooltipTheme,
     );
   }
@@ -255,6 +264,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     if (other is! MoonTheme) return this;
 
     return MoonTheme(
+      tokens: tokens.lerp(other.tokens, t),
       accordionTheme: accordionTheme.lerp(other.accordionTheme, t),
       alertTheme: alertTheme.lerp(other.alertTheme, t),
       authCodeTheme: authCodeTheme.lerp(other.authCodeTheme, t),
@@ -281,8 +291,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       tagTheme: tagTheme.lerp(other.tagTheme, t),
       textAreaTheme: textAreaTheme.lerp(other.textAreaTheme, t),
       textInputTheme: textInputTheme.lerp(other.textInputTheme, t),
+      textTheme: textTheme.lerp(other.textTheme, t),
       toastTheme: toastTheme.lerp(other.toastTheme, t),
-      tokens: tokens.lerp(other.tokens, t),
       tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
     );
   }
@@ -292,6 +302,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("MoonTokens", tokens))
       ..add(DiagnosticsProperty<MoonAccordionTheme>("MoonAccordionTheme", accordionTheme))
       ..add(DiagnosticsProperty<MoonAlertTheme>("MoonAlertTheme", alertTheme))
       ..add(DiagnosticsProperty<MoonAuthCodeTheme>("MoonAuthCodeTheme", authCodeTheme))
@@ -317,8 +328,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
       ..add(DiagnosticsProperty<MoonTextAreaTheme>("MoonTextAreaTheme", textAreaTheme))
       ..add(DiagnosticsProperty<MoonTextInputTheme>("MoonTextInputTheme", textInputTheme))
+      ..add(DiagnosticsProperty<MoonTextTheme>("MoonTextTheme", textTheme))
       ..add(DiagnosticsProperty<MoonToastTheme>("MoonToastTheme", toastTheme))
-      ..add(DiagnosticsProperty<MoonTokens>("MoonTokens", tokens))
       ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme));
   }
 }
@@ -332,6 +343,7 @@ extension MoonThemeX on BuildContext {
   MoonOpacities? get moonOpacities => moonTheme?.tokens.opacities;
   MoonShadows? get moonShadows => moonTheme?.tokens.shadows;
   MoonSizes? get moonSizes => moonTheme?.tokens.sizes;
+  MoonTextTheme? get moonTextTheme => moonTheme?.textTheme;
   MoonTransitions? get moonTransitions => moonTheme?.tokens.transitions;
   MoonTypography? get moonTypography => moonTheme?.tokens.typography;
 }

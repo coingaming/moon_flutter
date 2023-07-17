@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/radio/radio_painter.dart';
@@ -108,10 +107,10 @@ class MoonRadio<T> extends StatefulWidget {
     final bool isInteractive = onChanged != null;
 
     final Color effectiveTextColor =
-        context.moonTheme?.radioTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.radioTheme.colors.textColor ?? MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.radioTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+        context.moonTheme?.radioTheme.properties.textStyle ?? MoonTokens.light.typography.body.textDefault;
 
     final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 

@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/accordion/accordion_colors.dart';
 import 'package:moon_design/src/theme/accordion/accordion_properties.dart';
 import 'package:moon_design/src/theme/accordion/accordion_shadows.dart';
 import 'package:moon_design/src/theme/accordion/accordion_sizes.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -36,11 +37,11 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
               expandedBackgroundColor: tokens.colors.gohan,
               borderColor: tokens.colors.beerus,
               dividerColor: tokens.colors.beerus,
-              headerTextColor: tokens.typography.colors.bodyPrimary,
-              expandedHeaderTextColor: tokens.typography.colors.bodyPrimary,
-              contentTextColor: tokens.typography.colors.bodyPrimary,
-              trailingIconColor: tokens.typography.colors.bodySecondary,
-              expandedTrailingIconColor: tokens.typography.colors.bodyPrimary,
+              headerTextColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              expandedHeaderTextColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              contentTextColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              trailingIconColor: MoonTextTheme(tokens: tokens).colors.bodySecondary,
+              expandedTrailingIconColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
             ),
         properties = properties ??
             MoonAccordionProperties(

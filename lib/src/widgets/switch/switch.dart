@@ -5,13 +5,13 @@ import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/icon/icon_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/switch/switch_sizes.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -386,11 +386,11 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
       ),
     );
 
-    final Color effectiveActiveTextColor =
-        context.moonTheme?.switchTheme.colors.activeTextColor ?? MoonTypography.dark.colors.bodyPrimary;
+    final Color effectiveActiveTextColor = context.moonTheme?.switchTheme.colors.activeTextColor ??
+        MoonTextTheme(tokens: MoonTokens.dark).colors.bodyPrimary;
 
-    final Color effectiveInactiveTextColor =
-        context.moonTheme?.switchTheme.colors.inactiveTextColor ?? MoonTypography.light.colors.bodyPrimary;
+    final Color effectiveInactiveTextColor = context.moonTheme?.switchTheme.colors.inactiveTextColor ??
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final Color effectiveActiveIconColor = context.moonTheme?.switchTheme.colors.activeIconColor ??
         MoonIconTheme(tokens: MoonTokens.dark).colors.primaryColor;

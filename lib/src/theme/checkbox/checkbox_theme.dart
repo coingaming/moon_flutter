@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/checkbox/checkbox_colors.dart';
 import 'package:moon_design/src/theme/checkbox/checkbox_properties.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -26,7 +27,7 @@ class MoonCheckboxTheme extends ThemeExtension<MoonCheckboxTheme> with Diagnosti
               borderColor: tokens.colors.trunks,
               checkColor: tokens.colors.goten,
               inactiveColor: Colors.transparent,
-              textColor: tokens.typography.colors.bodyPrimary,
+              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
             ),
         properties = properties ??
             MoonCheckboxProperties(

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_design/src/theme/icon/icon_theme.dart';
-import 'package:moon_design/src/theme/tokens/tokens.dart';
 
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_colors.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_properties.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_shadows.dart';
@@ -28,7 +29,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
     MoonTooltipShadows? shadows,
   })  : colors = colors ??
             MoonTooltipColors(
-              textColor: tokens.typography.colors.bodyPrimary,
+              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
               iconColor: MoonIconTheme(tokens: tokens).colors.primaryColor,
               backgroundColor: tokens.colors.gohan,
             ),

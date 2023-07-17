@@ -15,10 +15,7 @@ class MoonIconTheme extends ThemeExtension<MoonIconTheme> with DiagnosticableTre
   MoonIconTheme({
     required this.tokens,
     MoonIconColors? colors,
-  }) : colors = colors ??
-            MoonIconColors(
-              primaryColor: tokens.colors.bulma,
-            );
+  }) : colors = colors ?? MoonIconColors(primaryColor: tokens.colors.bulma);
 
   @override
   MoonIconTheme copyWith({
@@ -45,7 +42,7 @@ class MoonIconTheme extends ThemeExtension<MoonIconTheme> with DiagnosticableTre
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonIcons"))
+      ..add(DiagnosticsProperty("type", "MoonIconTheme"))
       ..add(DiagnosticsProperty("tokens", tokens))
       ..add(DiagnosticsProperty("colors", colors));
   }

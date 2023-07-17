@@ -11,7 +11,7 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 
 @immutable
 class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin {
-  static final light = MoonTokens(
+  static const light = MoonTokens(
     borders: MoonBorders.borders,
     colors: MoonColors.light,
     complementaryColors: MoonColors.dark,
@@ -19,10 +19,10 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
     shadows: MoonShadows.light,
     sizes: MoonSizes.sizes,
     transitions: MoonTransitions.transitions,
-    typography: MoonTypography.light,
+    typography: MoonTypography.typography,
   );
 
-  static final dark = MoonTokens(
+  static const dark = MoonTokens(
     borders: MoonBorders.borders,
     colors: MoonColors.dark,
     complementaryColors: MoonColors.light,
@@ -30,7 +30,7 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
     shadows: MoonShadows.dark,
     sizes: MoonSizes.sizes,
     transitions: MoonTransitions.transitions,
-    typography: MoonTypography.dark,
+    typography: MoonTypography.typography,
   );
 
   /// Moon Design System borders.

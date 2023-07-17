@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/tab_bar/tab_bar_size_properties.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_sizes.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -354,7 +354,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
     final Color effectiveTextColor = tabStyle?.textStyle?.color ??
         tabStyle?.textColor ??
         context.moonTheme?.tabBarTheme.colors.textColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final Color effectiveSelectedTextColor = tabStyle?.selectedTextColor ??
         context.moonTheme?.tabBarTheme.colors.selectedTextColor ??
@@ -554,11 +554,11 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
     final Color effectiveTextColor = tabStyle?.textStyle?.color ??
         tabStyle?.textColor ??
         context.moonTheme?.tabBarTheme.colors.textColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final Color effectiveSelectedTextColor = tabStyle?.selectedTextColor ??
         context.moonTheme?.tabBarTheme.colors.selectedPillTextColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final TextStyle effectiveTextStyle = widget.moonTabBarSizeProperties.textStyle.merge(tabStyle?.textStyle);
 

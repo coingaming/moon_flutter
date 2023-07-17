@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/icon/icon_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_shape.dart';
 
@@ -395,7 +394,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
-        context.moonTheme?.tooltipTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.tooltipTheme.colors.textColor ?? MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final Color effectiveIconColor =
         context.moonTheme?.tooltipTheme.colors.iconColor ?? MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
@@ -418,7 +417,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         widget.tooltipShadows ?? context.moonTheme?.tooltipTheme.shadows.tooltipShadows ?? MoonShadows.light.sm;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.tooltipTheme.properties.textStyle ?? MoonTextStyles.body.text12;
+        context.moonTheme?.tooltipTheme.properties.textStyle ?? MoonTokens.light.typography.body.text12;
 
     final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 

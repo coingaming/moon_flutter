@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/segmented_control/segmented_control_size_properties.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_sizes.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -9,7 +10,6 @@ import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -325,7 +325,7 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
     final Color effectiveTextColor = segmentStyle?.textStyle?.color ??
         segmentStyle?.textColor ??
         context.moonTheme?.segmentedControlTheme.colors.textColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final Color effectiveSelectedTextColor = segmentStyle?.selectedTextColor ??
         context.moonTheme?.segmentedControlTheme.colors.selectedTextColor ??

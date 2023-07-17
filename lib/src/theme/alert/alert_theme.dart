@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/alert/alert_colors.dart';
 import 'package:moon_design/src/theme/alert/alert_properties.dart';
 import 'package:moon_design/src/theme/icon/icon_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -24,9 +25,9 @@ class MoonAlertTheme extends ThemeExtension<MoonAlertTheme> with DiagnosticableT
   })  : colors = colors ??
             MoonAlertColors(
               backgroundColor: tokens.colors.gohan,
-              borderColor: tokens.typography.colors.bodySecondary,
+              borderColor: MoonTextTheme(tokens: tokens).colors.bodySecondary,
               iconColor: MoonIconTheme(tokens: tokens).colors.primaryColor,
-              textColor: tokens.typography.colors.bodyPrimary,
+              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
             ),
         properties = properties ??
             MoonAlertProperties(

@@ -1,25 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTextColors extends ThemeExtension<MoonTextColors> with DiagnosticableTreeMixin {
-  static final light = MoonTextColors(
-    bodyPrimary: MoonColors.light.bulma,
-    bodySecondary: MoonColors.light.trunks,
-    controlPrimary: MoonColors.light.goten,
-    controlSecondary: MoonColors.light.popo,
-  );
-
-  static final dark = MoonTextColors(
-    bodyPrimary: MoonColors.dark.bulma,
-    bodySecondary: MoonColors.dark.trunks,
-    controlPrimary: MoonColors.dark.goten,
-    controlSecondary: MoonColors.dark.popo,
-  );
-
   /// Primary body text color.
   final Color bodyPrimary;
 

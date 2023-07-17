@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/accordion/accordion_size_properties.dart';
 import 'package:moon_design/src/theme/accordion/accordion_sizes.dart';
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -395,11 +395,11 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
 
     final Color effectiveIconColor = widget.trailingIconColor ??
         context.moonTheme?.accordionTheme.colors.trailingIconColor ??
-        MoonTypography.light.colors.bodySecondary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodySecondary;
 
     final Color effectiveExpandedIconColor = widget.expandedTrailingIconColor ??
         context.moonTheme?.accordionTheme.colors.expandedTrailingIconColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     _iconColor ??= _iconColorTween.animate(_expansionCurvedAnimation!);
 
@@ -429,11 +429,11 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     final Color effectiveHeaderTextColor = widget.headerTextStyle?.color ??
         widget.headerTextColor ??
         context.moonTheme?.accordionTheme.colors.headerTextColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final Color effectiveExpandedHeaderTextColor = widget.expandedHeaderTextColor ??
         context.moonTheme?.accordionTheme.colors.expandedHeaderTextColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final TextStyle effectiveHeaderTextStyle = widget.headerTextStyle ?? _effectiveMoonAccordionSize.headerTextStyle;
 
@@ -516,7 +516,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     final Color effectiveContentTextColor = widget.contentTextStyle?.color ??
         widget.contentTextColor ??
         context.moonTheme?.accordionTheme.colors.contentTextColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final TextStyle effectiveContentTextStyle = widget.contentTextStyle ?? _effectiveMoonAccordionSize.contentTextStyle;
 

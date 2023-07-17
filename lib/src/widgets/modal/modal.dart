@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/icon/icon_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
-import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -156,13 +155,13 @@ class MoonModal extends StatelessWidget {
         backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
-        context.moonTheme?.modalTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.modalTheme.colors.textColor ?? MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final Color effectiveIconColor =
         context.moonTheme?.modalTheme.colors.iconColor ?? MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.modalTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+        context.moonTheme?.modalTheme.properties.textStyle ?? MoonTokens.light.typography.body.textDefault;
 
     return Semantics(
       label: semanticLabel,

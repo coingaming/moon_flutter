@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_colors.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_properties.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_sizes.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -29,8 +30,8 @@ class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme
             MoonSegmentedControlColors(
               backgroundColor: tokens.colors.goku,
               selectedSegmentColor: tokens.colors.gohan,
-              textColor: tokens.typography.colors.bodyPrimary,
-              selectedTextColor: tokens.typography.colors.bodyPrimary,
+              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              selectedTextColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
             ),
         properties = properties ??
             MoonSegmentedControlProperties(

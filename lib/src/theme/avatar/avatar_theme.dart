@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/avatar/avatar_colors.dart';
 import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
 import 'package:moon_design/src/theme/icon/icon_theme.dart';
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -26,7 +27,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
               backgroundColor: tokens.colors.gohan,
               badgeColor: tokens.colors.roshi100,
               iconColor: MoonIconTheme(tokens: tokens).colors.primaryColor,
-              textColor: tokens.typography.colors.bodyPrimary,
+              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
             ),
         sizes = sizes ?? MoonAvatarSizes(tokens: tokens);
 

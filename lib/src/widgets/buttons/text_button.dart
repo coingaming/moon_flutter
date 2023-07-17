@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
 
@@ -95,11 +96,11 @@ class MoonTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTextColor =
-        context.moonTheme?.buttonTheme.colors.textVariantTextColor ?? MoonTypography.light.colors.bodySecondary;
+    final effectiveTextColor = context.moonTheme?.buttonTheme.colors.textVariantTextColor ??
+        MoonTextTheme(tokens: MoonTokens.light).colors.bodySecondary;
 
     final effectiveHoverTextColor =
-        context.moonTheme?.buttonTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+        context.moonTheme?.buttonTheme.colors.textColor ?? MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
 
     final effectiveHoverColor = context.moonTheme?.buttonTheme.colors.textVariantHoverColor ?? MoonColors.light.jiren;
 
