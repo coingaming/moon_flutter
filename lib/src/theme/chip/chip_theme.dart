@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/chip/chip_colors.dart';
 import 'package:moon_design/src/theme/chip/chip_sizes.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -26,7 +25,7 @@ class MoonChipTheme extends ThemeExtension<MoonChipTheme> with DiagnosticableTre
               activeColor: tokens.colors.piccolo,
               backgroundColor: tokens.colors.gohan,
               activeBackgroundColor: tokens.colors.jiren,
-              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              textColor: tokens.colors.bodyTextPrimary,
             ),
         sizes = sizes ?? MoonChipSizes(tokens: tokens);
 

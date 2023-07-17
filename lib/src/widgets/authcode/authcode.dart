@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -710,12 +709,11 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     _effectiveErrorTextStyle =
         context.moonTheme?.authCodeTheme.properties.errorTextStyle ?? MoonTokens.light.typography.body.text12;
 
-    _effectiveTextColor =
-        context.moonTheme?.authCodeTheme.colors.textColor ?? MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+    _effectiveTextColor = context.moonTheme?.authCodeTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
 
     _effectiveCursorColor = widget.authFieldCursorColor ??
         context.moonTheme?.authCodeTheme.colors.textColor ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+        MoonTokens.light.colors.bodyTextPrimary;
 
     _animationDuration ??= widget.animationDuration ??
         context.moonTheme?.authCodeTheme.properties.animationDuration ??

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/authcode/authcode_colors.dart';
 import 'package:moon_design/src/theme/authcode/authcode_properties.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -30,7 +29,7 @@ class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme> with Diagnosti
               selectedFillColor: tokens.colors.gohan,
               activeFillColor: tokens.colors.gohan,
               inactiveFillColor: tokens.colors.gohan,
-              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              textColor: tokens.colors.bodyTextPrimary,
             ),
         properties = properties ??
             MoonAuthCodeProperties(

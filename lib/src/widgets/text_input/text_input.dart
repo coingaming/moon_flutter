@@ -9,7 +9,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
 import 'package:moon_design/src/theme/text_input/text_input_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
@@ -1133,9 +1132,8 @@ class _MoonTextInputState extends State<MoonTextInput>
     final Color errorFocusEffectColor =
         context.isDarkMode ? effectiveErrorBorderColor.withOpacity(0.4) : effectiveErrorBorderColor.withOpacity(0.2);
 
-    final Color effectiveTextColor = widget.textColor ??
-        context.moonTextTheme?.colors.bodyPrimary ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+    final Color effectiveTextColor =
+        widget.textColor ?? context.moonColors?.bodyTextPrimary ?? MoonTokens.light.colors.bodyTextPrimary;
 
     final Color effectiveHintTextColor =
         widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.supportingTextColor ?? MoonColors.light.trunks;

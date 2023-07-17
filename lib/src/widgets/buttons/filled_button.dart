@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
@@ -107,8 +106,8 @@ class MoonFilledButton extends StatelessWidget {
         context.moonTheme?.buttonTheme.colors.filledVariantBackgroundColor ??
         MoonColors.light.piccolo;
 
-    final effectiveTextColor = context.moonTheme?.buttonTheme.colors.filledVariantTextColor ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.controlPrimary;
+    final effectiveTextColor =
+        context.moonTheme?.buttonTheme.colors.filledVariantTextColor ?? MoonTokens.light.colors.controlTextPrimary;
 
     return MoonButton(
       autofocus: autofocus,

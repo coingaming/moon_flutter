@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/radio/radio_colors.dart';
 import 'package:moon_design/src/theme/radio/radio_properties.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -25,7 +24,7 @@ class MoonRadioTheme extends ThemeExtension<MoonRadioTheme> with DiagnosticableT
             MoonRadioColors(
               activeColor: tokens.colors.piccolo,
               inactiveColor: tokens.colors.trunks,
-              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              textColor: tokens.colors.bodyTextPrimary,
             ),
         properties = properties ??
             MoonRadioProperties(

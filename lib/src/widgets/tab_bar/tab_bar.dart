@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/tab_bar/tab_bar_size_properties.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_sizes.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
@@ -354,7 +353,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
     final Color effectiveTextColor = tabStyle?.textStyle?.color ??
         tabStyle?.textColor ??
         context.moonTheme?.tabBarTheme.colors.textColor ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+        MoonTokens.light.colors.bodyTextPrimary;
 
     final Color effectiveSelectedTextColor = tabStyle?.selectedTextColor ??
         context.moonTheme?.tabBarTheme.colors.selectedTextColor ??
@@ -554,11 +553,11 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
     final Color effectiveTextColor = tabStyle?.textStyle?.color ??
         tabStyle?.textColor ??
         context.moonTheme?.tabBarTheme.colors.textColor ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+        MoonTokens.light.colors.bodyTextPrimary;
 
     final Color effectiveSelectedTextColor = tabStyle?.selectedTextColor ??
         context.moonTheme?.tabBarTheme.colors.selectedPillTextColor ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+        MoonTokens.light.colors.bodyTextPrimary;
 
     final TextStyle effectiveTextStyle = widget.moonTabBarSizeProperties.textStyle.merge(tabStyle?.textStyle);
 

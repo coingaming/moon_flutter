@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/carousel/carousel_colors.dart';
 import 'package:moon_design/src/theme/carousel/carousel_properties.dart';
-import 'package:moon_design/src/theme/icon/icon_theme.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -24,8 +22,8 @@ class MoonCarouselTheme extends ThemeExtension<MoonCarouselTheme> with Diagnosti
     MoonCarouselProperties? properties,
   })  : colors = colors ??
             MoonCarouselColors(
-              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
-              iconColor: MoonIconTheme(tokens: tokens).colors.primaryColor,
+              textColor: tokens.colors.bodyTextPrimary,
+              iconColor: tokens.colors.iconPrimary,
             ),
         properties = properties ??
             MoonCarouselProperties(

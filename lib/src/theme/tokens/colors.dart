@@ -8,11 +8,11 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   static const light = MoonColors(
     piccolo: Color(0xFF4E46B4),
     hit: Color(0xFF40A69F),
-    beerus: Color(0xFFEBEBEB),
+    beerus: Color(0xFFE2E2E2),
     goku: Color(0xFFF5F5F5),
     gohan: Color(0xFFFFFFFF),
     bulma: Color(0xFF000000),
-    trunks: Color(0xFF999CA0),
+    trunks: Color(0xFF595D62),
     goten: Color(0xFFFFFFFF),
     popo: Color(0xFF000000),
     jiren: Color(0x1F4E46B4),
@@ -45,6 +45,12 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     whis100: Color(0xFF3448F0),
     whis60: Color(0x8F3448F0),
     whis10: Color(0x143448F0),
+    bodyTextPrimary: Color(0xFF000000), // bulma
+    bodyTextSecondary: Color(0xFF999CA0), // trunks
+    controlTextPrimary: Color(0xFFFFFFFF), // goten
+    controlTextSecondary: Color(0xFF000000), // popo
+    iconPrimary: Color(0xFF000000), // bulma
+    iconSecondary: Color(0xFF999CA0), // trunks
   );
 
   static const dark = MoonColors(
@@ -87,6 +93,12 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     whis100: Color(0xFF3448F0),
     whis60: Color(0x8F3448F0),
     whis10: Color(0x143448F0),
+    bodyTextPrimary: Color(0xFFFFFFFF), // bulma
+    bodyTextSecondary: Color(0xFF999CA0), // trunks
+    controlTextPrimary: Color(0xFFFFFFFF), // goten
+    controlTextSecondary: Color(0xFF000000), // popo
+    iconPrimary: Color(0xFFFFFFFF), // bulma
+    iconSecondary: Color(0xFF999CA0), //trunks
   );
 
   // Main colors:
@@ -210,6 +222,24 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   /// Supportive color.
   final Color whis10;
 
+  /// Primary body text color.
+  final Color bodyTextPrimary;
+
+  /// Secondary body text color.
+  final Color bodyTextSecondary;
+
+  /// Primary control element (button, chip, etc) text color.
+  final Color controlTextPrimary;
+
+  /// Secondary control element (button, chip, etc) text color.
+  final Color controlTextSecondary;
+
+  /// Primary icon color.
+  final Color iconPrimary;
+
+  /// Primary icon color.
+  final Color iconSecondary;
+
   const MoonColors({
     required this.piccolo,
     required this.hit,
@@ -250,6 +280,12 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     required this.whis100,
     required this.whis60,
     required this.whis10,
+    required this.bodyTextPrimary,
+    required this.bodyTextSecondary,
+    required this.controlTextPrimary,
+    required this.controlTextSecondary,
+    required this.iconPrimary,
+    required this.iconSecondary,
   });
 
   @override
@@ -293,6 +329,12 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     Color? whis100,
     Color? whis60,
     Color? whis10,
+    Color? bodyTextPrimary,
+    Color? bodyTextSecondary,
+    Color? controlTextPrimary,
+    Color? controlTextSecondary,
+    Color? iconPrimary,
+    Color? iconSecondary,
   }) {
     return MoonColors(
       piccolo: piccolo ?? this.piccolo,
@@ -334,6 +376,12 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       whis100: whis100 ?? this.whis100,
       whis60: whis60 ?? this.whis60,
       whis10: whis10 ?? this.whis10,
+      bodyTextPrimary: bodyTextPrimary ?? this.bodyTextPrimary,
+      bodyTextSecondary: bodyTextSecondary ?? this.bodyTextSecondary,
+      controlTextPrimary: controlTextPrimary ?? this.controlTextPrimary,
+      controlTextSecondary: controlTextSecondary ?? this.controlTextSecondary,
+      iconPrimary: iconPrimary ?? this.iconPrimary,
+      iconSecondary: iconSecondary ?? this.iconSecondary,
     );
   }
 
@@ -381,6 +429,12 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       whis100: colorPremulLerp(whis100, other.whis100, t)!,
       whis60: colorPremulLerp(whis60, other.whis60, t)!,
       whis10: colorPremulLerp(whis10, other.whis10, t)!,
+      bodyTextPrimary: colorPremulLerp(bodyTextPrimary, other.bodyTextPrimary, t)!,
+      bodyTextSecondary: colorPremulLerp(bodyTextSecondary, other.bodyTextSecondary, t)!,
+      controlTextPrimary: colorPremulLerp(controlTextPrimary, other.controlTextPrimary, t)!,
+      controlTextSecondary: colorPremulLerp(controlTextSecondary, other.controlTextSecondary, t)!,
+      iconPrimary: colorPremulLerp(iconPrimary, other.iconPrimary, t)!,
+      iconSecondary: colorPremulLerp(iconSecondary, other.iconSecondary, t)!,
     );
   }
 
@@ -427,6 +481,12 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       ..add(ColorProperty("nappa10", nappa10))
       ..add(ColorProperty("whis100", whis100))
       ..add(ColorProperty("whis60", whis60))
-      ..add(ColorProperty("whis10", whis10));
+      ..add(ColorProperty("whis10", whis10))
+      ..add(ColorProperty("bodyTextPrimary", bodyTextPrimary))
+      ..add(ColorProperty("bodyTextSecondary", bodyTextSecondary))
+      ..add(ColorProperty("controlTextPrimary", controlTextPrimary))
+      ..add(ColorProperty("controlTextSecondary", controlTextSecondary))
+      ..add(ColorProperty("iconPrimary", iconPrimary))
+      ..add(ColorProperty("iconSecondary", iconSecondary));
   }
 }

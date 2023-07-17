@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icon/icon_theme.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -187,13 +185,11 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.alertTheme.colors.borderColor ?? MoonColors.light.bulma;
 
-    final Color effectiveTextColor = widget.color ??
-        context.moonTheme?.alertTheme.colors.textColor ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+    final Color effectiveTextColor =
+        widget.color ?? context.moonTheme?.alertTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
 
-    final Color effectiveIconColor = widget.color ??
-        context.moonTheme?.alertTheme.colors.iconColor ??
-        MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
+    final Color effectiveIconColor =
+        widget.color ?? context.moonTheme?.alertTheme.colors.iconColor ?? MoonTokens.light.colors.iconPrimary;
 
     final EdgeInsetsGeometry effectivePadding =
         widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);

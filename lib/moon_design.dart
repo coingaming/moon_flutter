@@ -13,7 +13,6 @@ export 'package:moon_design/src/theme/chip/chip_theme.dart';
 export 'package:moon_design/src/theme/dot_indicator/dot_indicator_theme.dart';
 export 'package:moon_design/src/theme/drawer/drawer_theme.dart';
 export 'package:moon_design/src/theme/effects/effects_theme.dart';
-export 'package:moon_design/src/theme/icon/icon_theme.dart';
 export 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 export 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
 export 'package:moon_design/src/theme/modal/modal_theme.dart';
@@ -33,8 +32,6 @@ export 'package:moon_design/src/theme/tokens/opacities.dart';
 export 'package:moon_design/src/theme/tokens/shadows.dart';
 export 'package:moon_design/src/theme/tokens/sizes.dart';
 export 'package:moon_design/src/theme/tokens/tokens.dart';
-export 'package:moon_design/src/theme/tokens/typography/text_colors.dart';
-export 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 export 'package:moon_design/src/theme/tokens/typography/typography.dart';
 export 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
 

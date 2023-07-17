@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
@@ -302,9 +301,8 @@ class MoonTextArea extends StatelessWidget {
     final Color effectiveHoverBorderColor =
         hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
 
-    final Color effectiveTextColor = textColor ??
-        context.moonTextTheme?.colors.bodyPrimary ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+    final Color effectiveTextColor =
+        textColor ?? context.moonColors?.bodyTextPrimary ?? MoonTokens.light.colors.bodyTextPrimary;
 
     final Color effectiveHintTextColor =
         hintTextColor ?? context.moonTheme?.textAreaTheme.colors.hintTextColor ?? MoonColors.light.trunks;

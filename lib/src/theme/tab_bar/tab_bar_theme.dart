@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_colors.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_properties.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_sizes.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -29,9 +28,9 @@ class MoonTabBarTheme extends ThemeExtension<MoonTabBarTheme> with Diagnosticabl
   })  : colors = colors ??
             MoonTabBarColors(
               indicatorColor: tokens.colors.piccolo,
-              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              textColor: tokens.colors.bodyTextPrimary,
               selectedTextColor: tokens.colors.piccolo,
-              selectedPillTextColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              selectedPillTextColor: tokens.colors.bodyTextPrimary,
               selectedPillTabColor: tokens.colors.gohan,
             ),
         properties = properties ??

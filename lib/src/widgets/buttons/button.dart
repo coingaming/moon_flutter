@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/button/button_size_properties.dart';
 import 'package:moon_design/src/theme/button/button_sizes.dart';
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -327,9 +326,8 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
     final double effectiveBorderWidth =
         widget.borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
-    final Color effectiveTextColor = widget.textColor ??
-        context.moonTheme?.buttonTheme.colors.textColor ??
-        MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+    final Color effectiveTextColor =
+        widget.textColor ?? context.moonTheme?.buttonTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
 
     final Color effectiveHoverEffectColor = widget.hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.primaryHoverColor ??

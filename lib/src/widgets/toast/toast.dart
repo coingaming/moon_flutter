@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icon/icon_theme.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -106,16 +104,12 @@ class MoonToast {
             : (context.moonTheme?.toastTheme.colors.darkVariantBackgroundColor ?? MoonColors.dark.gohan));
 
     final Color effectiveTextColor = variant == MoonToastVariant.original
-        ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ??
-            MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary)
-        : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ??
-            MoonTextTheme(tokens: MoonTokens.dark).colors.bodyPrimary);
+        ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ?? MoonTokens.light.colors.bodyTextPrimary)
+        : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ?? MoonTokens.dark.colors.bodyTextPrimary);
 
     final Color effectiveIconColor = variant == MoonToastVariant.original
-        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ??
-            MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor)
-        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ??
-            MoonIconTheme(tokens: MoonTokens.dark).colors.primaryColor);
+        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ?? MoonTokens.light.colors.iconPrimary)
+        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ?? MoonTokens.dark.colors.iconPrimary);
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.toastTheme.properties.textStyle ?? MoonTokens.light.typography.body.textDefault;

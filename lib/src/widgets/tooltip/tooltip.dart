@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/icon/icon_theme.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -394,10 +392,10 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
     final Color effectiveTextColor =
-        context.moonTheme?.tooltipTheme.colors.textColor ?? MoonTextTheme(tokens: MoonTokens.light).colors.bodyPrimary;
+        context.moonTheme?.tooltipTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
 
     final Color effectiveIconColor =
-        context.moonTheme?.tooltipTheme.colors.iconColor ?? MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
+        context.moonTheme?.tooltipTheme.colors.iconColor ?? MoonTokens.light.colors.iconPrimary;
 
     final double effectiveArrowBaseWidth =
         widget.arrowBaseWidth ?? context.moonTheme?.tooltipTheme.properties.arrowBaseWidth ?? 16;

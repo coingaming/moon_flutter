@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/button/button_colors.dart';
 import 'package:moon_design/src/theme/button/button_sizes.dart';
-import 'package:moon_design/src/theme/text/text_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -24,10 +23,10 @@ class MoonButtonTheme extends ThemeExtension<MoonButtonTheme> with Diagnosticabl
   })  : colors = colors ??
             MoonButtonColors(
               borderColor: tokens.colors.trunks,
-              textColor: MoonTextTheme(tokens: tokens).colors.bodyPrimary,
+              textColor: tokens.colors.bodyTextPrimary,
               filledVariantBackgroundColor: tokens.colors.piccolo,
-              filledVariantTextColor: MoonTextTheme(tokens: tokens).colors.controlPrimary,
-              textVariantTextColor: MoonTextTheme(tokens: tokens).colors.bodySecondary,
+              filledVariantTextColor: tokens.colors.controlTextPrimary,
+              textVariantTextColor: tokens.colors.bodyTextSecondary,
               textVariantFocusColor: tokens.colors.piccolo,
               textVariantHoverColor: tokens.colors.jiren,
             ),
