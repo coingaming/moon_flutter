@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/effects/effects.dart';
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -107,7 +107,7 @@ class MoonCheckbox extends StatefulWidget {
     final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
 
     return GestureDetector(
       onTap: () => onChanged?.call(!value!),
@@ -221,16 +221,16 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
         widget.borderColor ?? context.moonTheme?.checkboxTheme.colors.borderColor ?? MoonColors.light.trunks;
 
     final Color effectiveFocusEffectColor = context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectColor;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
 
     final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
 
     final Curve effectiveFocusEffectCurve = context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
 
     final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
 
     final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 

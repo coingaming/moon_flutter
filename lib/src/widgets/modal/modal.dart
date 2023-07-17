@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
@@ -158,7 +159,7 @@ class MoonModal extends StatelessWidget {
         context.moonTheme?.modalTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveIconColor =
-        context.moonTheme?.modalTheme.colors.iconColor ?? MoonIconography.light.colors.primaryColor;
+        context.moonTheme?.modalTheme.colors.iconColor ?? MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.modalTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;

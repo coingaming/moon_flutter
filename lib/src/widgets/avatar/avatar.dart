@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
 import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -155,7 +155,7 @@ class MoonAvatar extends StatelessWidget {
         context.moonTheme?.avatarTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveIconColor =
-        context.moonTheme?.avatarTheme.colors.iconColor ?? MoonIconography.light.colors.primaryColor;
+        context.moonTheme?.avatarTheme.colors.iconColor ?? MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
 
     final double effectiveAvatarHeight = height ?? effectiveMoonAvatarSize.avatarSizeValue;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
 
 import 'package:moon_design/src/theme/tag/tag_colors.dart';
 import 'package:moon_design/src/theme/tag/tag_sizes.dart';
@@ -23,7 +24,7 @@ class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeM
   })  : colors = colors ??
             MoonTagColors(
               textColor: tokens.typography.colors.bodyPrimary,
-              iconColor: tokens.iconography.colors.primaryColor,
+              iconColor: MoonIconTheme(tokens: tokens).colors.primaryColor,
               backgroundColor: tokens.colors.gohan,
             ),
         sizes = sizes ?? MoonTagSizes(tokens: tokens);

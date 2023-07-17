@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/accordion/accordion_size_properties.dart';
 import 'package:moon_design/src/theme/accordion/accordion_sizes.dart';
-import 'package:moon_design/src/theme/effects/effects.dart';
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
@@ -479,7 +479,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
 
   Widget _buildChildren(BuildContext context, Widget? rootChild) {
     _effectiveHoverEffectColor ??= context.moonEffects?.controlHoverEffect.primaryHoverColor ??
-        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
 
     _effectiveMoonAccordionSize = _getMoonAccordionSize(context, widget.accordionSize);
 
@@ -499,19 +499,19 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
         MoonColors.light.gohan;
 
     final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
 
     final Color effectiveFocusEffectColor = context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectColor;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
 
     final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
 
     final Curve effectiveFocusEffectCurve = context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
 
     final Color effectiveHoverEffectColor = context.moonEffects?.controlHoverEffect.primaryHoverColor ??
-        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
 
     final Color effectiveContentTextColor = widget.contentTextStyle?.color ??
         widget.contentTextColor ??
@@ -521,10 +521,10 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     final TextStyle effectiveContentTextStyle = widget.contentTextStyle ?? _effectiveMoonAccordionSize.contentTextStyle;
 
     final Duration effectiveHoverEffectDuration = context.moonEffects?.controlHoverEffect.hoverDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
 
     final Curve effectiveHoverEffectCurve = context.moonEffects?.controlHoverEffect.hoverCurve ??
-        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.accordionTheme.properties.transitionDuration ??

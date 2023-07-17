@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/effects/effects.dart';
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
@@ -317,51 +317,51 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     // Focus effect props
     final Color effectiveFocusEffectColor = widget.focusEffectColor ??
         context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectColor;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
 
     final Color focusColor = _getFocusColor(focusColor: effectiveFocusEffectColor);
 
     final double effectiveFocusEffectExtent = widget.focusEffectExtent ??
         context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
 
     final Duration effectiveFocusEffectDuration = widget.focusEffectDuration ??
         context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
 
     final Curve effectiveFocusEffectCurve = widget.focusEffectCurve ??
         context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
 
     // Pulse effect props
     final Color effectivePulseEffectColor = widget.pulseEffectColor ??
         context.moonEffects?.controlPulseEffect.effectColor ??
-        MoonEffects(tokens: MoonTokens.light).controlPulseEffect.effectColor!;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectColor!;
 
     final double effectivePulseEffectExtent = widget.pulseEffectExtent ??
         context.moonEffects?.controlPulseEffect.effectExtent ??
-        MoonEffects(tokens: MoonTokens.light).controlPulseEffect.effectExtent!;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectExtent!;
 
     final Duration effectivePulseEffectDuration = widget.pulseEffectDuration ??
         context.moonEffects?.controlPulseEffect.effectDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlPulseEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectDuration;
 
     final Curve effectivePulseEffectCurve = widget.pulseEffectCurve ??
         context.moonEffects?.controlPulseEffect.effectCurve ??
-        MoonEffects(tokens: MoonTokens.light).controlPulseEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectCurve;
 
     // Scale effect props
     final double effectiveScaleEffectScalar = widget.scaleEffectScalar ??
         context.moonEffects?.controlScaleEffect.effectScalar ??
-        MoonEffects(tokens: MoonTokens.light).controlScaleEffect.effectScalar!;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlScaleEffect.effectScalar!;
 
     final Duration effectiveScaleEffectDuration = widget.scaleEffectDuration ??
         context.moonEffects?.controlScaleEffect.effectDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlScaleEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlScaleEffect.effectDuration;
 
     final Curve effectiveScaleEffectCurve = widget.scaleEffectCurve ??
         context.moonEffects?.controlScaleEffect.effectCurve ??
-        MoonEffects(tokens: MoonTokens.light).controlScaleEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlScaleEffect.effectCurve;
 
     final Widget child = widget.builder(
       context,

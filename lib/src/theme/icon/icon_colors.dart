@@ -1,19 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonIconColors extends ThemeExtension<MoonIconColors> with DiagnosticableTreeMixin {
-  static final light = MoonIconColors(
-    primaryColor: MoonColors.light.bulma,
-  );
-
-  static final dark = MoonIconColors(
-    primaryColor: MoonColors.dark.bulma,
-  );
-
   /// Primary icon color.
   final Color primaryColor;
 

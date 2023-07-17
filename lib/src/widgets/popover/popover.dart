@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
@@ -358,7 +359,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
         context.moonTheme?.popoverTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
     final Color effectiveIconColor =
-        context.moonTheme?.popoverTheme.colors.iconColor ?? MoonIconography.light.colors.primaryColor;
+        context.moonTheme?.popoverTheme.colors.iconColor ?? MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.popoverTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;

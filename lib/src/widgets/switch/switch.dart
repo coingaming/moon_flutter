@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/effects/effects.dart';
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/switch/switch_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
@@ -314,16 +314,16 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
         MoonTransitions.transitions.defaultTransitionCurve;
 
     final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
 
     final Color effectiveFocusEffectColor = context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectColor;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
 
     final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
 
     final Curve effectiveFocusEffectCurve = context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonEffects(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
 
     _animationController ??= AnimationController(
       vsync: this,
@@ -392,14 +392,14 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     final Color effectiveInactiveTextColor =
         context.moonTheme?.switchTheme.colors.inactiveTextColor ?? MoonTypography.light.colors.bodyPrimary;
 
-    final Color effectiveActiveIconColor =
-        context.moonTheme?.switchTheme.colors.activeIconColor ?? MoonIconography.dark.colors.primaryColor;
+    final Color effectiveActiveIconColor = context.moonTheme?.switchTheme.colors.activeIconColor ??
+        MoonIconTheme(tokens: MoonTokens.dark).colors.primaryColor;
 
-    final Color effectiveInactiveIconColor =
-        context.moonTheme?.switchTheme.colors.inactiveIconColor ?? MoonIconography.light.colors.primaryColor;
+    final Color effectiveInactiveIconColor = context.moonTheme?.switchTheme.colors.inactiveIconColor ??
+        MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
 
-    final Color effectiveThumbIconColor =
-        context.moonTheme?.switchTheme.colors.thumbIconColor ?? MoonIconography.light.colors.primaryColor;
+    final Color effectiveThumbIconColor = context.moonTheme?.switchTheme.colors.thumbIconColor ??
+        MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
 
     return Semantics(
       label: widget.semanticLabel,

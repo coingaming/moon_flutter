@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/drawer/drawer_colors.dart';
 import 'package:moon_design/src/theme/drawer/drawer_properties.dart';
 import 'package:moon_design/src/theme/drawer/drawer_shadows.dart';
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -28,7 +29,7 @@ class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with Diagnosticabl
   })  : colors = colors ??
             MoonDrawerColors(
               textColor: tokens.typography.colors.bodyPrimary,
-              iconColor: tokens.iconography.colors.primaryColor,
+              iconColor: MoonIconTheme(tokens: tokens).colors.primaryColor,
               backgroundColor: tokens.colors.gohan,
               barrierColor: tokens.colors.zeno,
             ),

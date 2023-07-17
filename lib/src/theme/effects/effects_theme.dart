@@ -7,7 +7,7 @@ import 'package:moon_design/src/theme/effects/focus_effects.dart';
 import 'package:moon_design/src/theme/effects/hover_effects.dart';
 
 @immutable
-class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMixin {
+class MoonEffectsTheme extends ThemeExtension<MoonEffectsTheme> with DiagnosticableTreeMixin {
   /// MDS tokens.
   final MoonTokens tokens;
 
@@ -23,7 +23,7 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
   /// Control widgets scale effect.
   final MoonControlsEffects controlScaleEffect;
 
-  MoonEffects({
+  MoonEffectsTheme({
     required this.tokens,
     MoonFocusEffects? controlFocusEffect,
     MoonHoverEffects? controlHoverEffect,
@@ -58,14 +58,14 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
             );
 
   @override
-  MoonEffects copyWith({
+  MoonEffectsTheme copyWith({
     MoonTokens? tokens,
     MoonFocusEffects? controlFocusEffect,
     MoonHoverEffects? controlHoverEffect,
     MoonControlsEffects? controlPulseEffect,
     MoonControlsEffects? controlScaleEffect,
   }) {
-    return MoonEffects(
+    return MoonEffectsTheme(
       tokens: tokens ?? this.tokens,
       controlFocusEffect: controlFocusEffect ?? this.controlFocusEffect,
       controlHoverEffect: controlHoverEffect ?? this.controlHoverEffect,
@@ -75,10 +75,10 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
   }
 
   @override
-  MoonEffects lerp(ThemeExtension<MoonEffects>? other, double t) {
-    if (other is! MoonEffects) return this;
+  MoonEffectsTheme lerp(ThemeExtension<MoonEffectsTheme>? other, double t) {
+    if (other is! MoonEffectsTheme) return this;
 
-    return MoonEffects(
+    return MoonEffectsTheme(
       tokens: tokens.lerp(other.tokens, t),
       controlFocusEffect: controlFocusEffect.lerp(other.controlFocusEffect, t),
       controlHoverEffect: controlHoverEffect.lerp(other.controlHoverEffect, t),
@@ -91,7 +91,7 @@ class MoonEffects extends ThemeExtension<MoonEffects> with DiagnosticableTreeMix
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonEffects"))
+      ..add(DiagnosticsProperty("type", "MoonEffectsTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonControlsEffects>("controlScaleEffect", controlScaleEffect))
       ..add(DiagnosticsProperty<MoonControlsEffects>("controlPulseEffect", controlPulseEffect))

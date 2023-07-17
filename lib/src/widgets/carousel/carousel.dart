@@ -6,9 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
+
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
@@ -251,8 +253,8 @@ class _MoonCarouselState extends State<MoonCarousel> {
     final Color effectiveTextColor =
         context.moonTheme?.carouselTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.carouselTheme.colors.iconColor ?? MoonIconography.light.colors.primaryColor;
+    final Color effectiveIconColor = context.moonTheme?.carouselTheme.colors.iconColor ??
+        MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.carouselTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;

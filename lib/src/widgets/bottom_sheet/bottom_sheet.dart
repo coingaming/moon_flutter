@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/icon/icon_theme.dart';
+
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
-import 'package:moon_design/src/theme/tokens/iconography/iconography.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -360,8 +362,8 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
     final Color effectiveTextColor =
         context.moonTheme?.bottomSheetTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.bottomSheetTheme.colors.iconColor ?? MoonIconography.light.colors.primaryColor;
+    final Color effectiveIconColor = context.moonTheme?.bottomSheetTheme.colors.iconColor ??
+        MoonIconTheme(tokens: MoonTokens.light).colors.primaryColor;
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.bottomSheetTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;

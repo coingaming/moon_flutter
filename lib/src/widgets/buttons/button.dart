@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/button/button_size_properties.dart';
 import 'package:moon_design/src/theme/button/button_sizes.dart';
-import 'package:moon_design/src/theme/effects/effects.dart';
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -332,7 +332,7 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
 
     final Color effectiveHoverEffectColor = widget.hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.primaryHoverColor ??
-        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
 
     final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, widget.backgroundColor ?? Colors.transparent);
 
@@ -355,11 +355,11 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
 
     final Duration effectiveHoverEffectDuration = widget.hoverEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??
-        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
 
     final Curve effectiveHoverEffectCurve = widget.hoverEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
-        MoonEffects(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
 
     _animationController ??= AnimationController(duration: effectiveHoverEffectDuration, vsync: this);
 
