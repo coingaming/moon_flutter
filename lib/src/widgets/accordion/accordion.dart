@@ -656,7 +656,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.accordionTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     _expansionAnimationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
 

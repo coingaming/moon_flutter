@@ -38,7 +38,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
               arrowLength: tokens.sizes.x4s,
               arrowTipDistance: tokens.sizes.x4s,
               transitionDuration: const Duration(milliseconds: 150),
-              transitionCurve: Curves.easeInOutCubic,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
               contentPadding: EdgeInsets.all(tokens.sizes.x3s),
               textStyle: tokens.typography.body.text12,
             ),
