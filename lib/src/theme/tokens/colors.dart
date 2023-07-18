@@ -45,12 +45,10 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     whis100: Color(0xFF3448F0),
     whis60: Color(0x8F3448F0),
     whis10: Color(0x143448F0),
-    bodyTextPrimary: Color(0xFF000000), // bulma
-    bodyTextSecondary: Color(0xFF999CA0), // trunks
-    controlTextPrimary: Color(0xFFFFFFFF), // goten
-    controlTextSecondary: Color(0xFF000000), // popo
+    textPrimary: Color(0xFF000000), // bulma
+    textSecondary: Color(0xFF595D62), // trunks
     iconPrimary: Color(0xFF000000), // bulma
-    iconSecondary: Color(0xFF999CA0), // trunks
+    iconSecondary: Color(0xFF595D62), // trunks
   );
 
   static const dark = MoonColors(
@@ -93,10 +91,8 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     whis100: Color(0xFF3448F0),
     whis60: Color(0x8F3448F0),
     whis10: Color(0x143448F0),
-    bodyTextPrimary: Color(0xFFFFFFFF), // bulma
-    bodyTextSecondary: Color(0xFF999CA0), // trunks
-    controlTextPrimary: Color(0xFFFFFFFF), // goten
-    controlTextSecondary: Color(0xFF000000), // popo
+    textPrimary: Color(0xFFFFFFFF), // bulma
+    textSecondary: Color(0xFF999CA0), // trunks
     iconPrimary: Color(0xFFFFFFFF), // bulma
     iconSecondary: Color(0xFF999CA0), //trunks
   );
@@ -222,17 +218,11 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   /// Supportive color.
   final Color whis10;
 
-  /// Primary body text color.
-  final Color bodyTextPrimary;
+  /// Primary text color.
+  final Color textPrimary;
 
-  /// Secondary body text color.
-  final Color bodyTextSecondary;
-
-  /// Primary control element (button, chip, etc) text color.
-  final Color controlTextPrimary;
-
-  /// Secondary control element (button, chip, etc) text color.
-  final Color controlTextSecondary;
+  /// Secondary text color.
+  final Color textSecondary;
 
   /// Primary icon color.
   final Color iconPrimary;
@@ -280,10 +270,8 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     required this.whis100,
     required this.whis60,
     required this.whis10,
-    required this.bodyTextPrimary,
-    required this.bodyTextSecondary,
-    required this.controlTextPrimary,
-    required this.controlTextSecondary,
+    required this.textPrimary,
+    required this.textSecondary,
     required this.iconPrimary,
     required this.iconSecondary,
   });
@@ -329,10 +317,8 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     Color? whis100,
     Color? whis60,
     Color? whis10,
-    Color? bodyTextPrimary,
-    Color? bodyTextSecondary,
-    Color? controlTextPrimary,
-    Color? controlTextSecondary,
+    Color? textPrimary,
+    Color? textSecondary,
     Color? iconPrimary,
     Color? iconSecondary,
   }) {
@@ -376,10 +362,8 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       whis100: whis100 ?? this.whis100,
       whis60: whis60 ?? this.whis60,
       whis10: whis10 ?? this.whis10,
-      bodyTextPrimary: bodyTextPrimary ?? this.bodyTextPrimary,
-      bodyTextSecondary: bodyTextSecondary ?? this.bodyTextSecondary,
-      controlTextPrimary: controlTextPrimary ?? this.controlTextPrimary,
-      controlTextSecondary: controlTextSecondary ?? this.controlTextSecondary,
+      textPrimary: textPrimary ?? this.textPrimary,
+      textSecondary: textSecondary ?? this.textSecondary,
       iconPrimary: iconPrimary ?? this.iconPrimary,
       iconSecondary: iconSecondary ?? this.iconSecondary,
     );
@@ -429,10 +413,8 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       whis100: colorPremulLerp(whis100, other.whis100, t)!,
       whis60: colorPremulLerp(whis60, other.whis60, t)!,
       whis10: colorPremulLerp(whis10, other.whis10, t)!,
-      bodyTextPrimary: colorPremulLerp(bodyTextPrimary, other.bodyTextPrimary, t)!,
-      bodyTextSecondary: colorPremulLerp(bodyTextSecondary, other.bodyTextSecondary, t)!,
-      controlTextPrimary: colorPremulLerp(controlTextPrimary, other.controlTextPrimary, t)!,
-      controlTextSecondary: colorPremulLerp(controlTextSecondary, other.controlTextSecondary, t)!,
+      textPrimary: colorPremulLerp(textPrimary, other.textPrimary, t)!,
+      textSecondary: colorPremulLerp(textSecondary, other.textSecondary, t)!,
       iconPrimary: colorPremulLerp(iconPrimary, other.iconPrimary, t)!,
       iconSecondary: colorPremulLerp(iconSecondary, other.iconSecondary, t)!,
     );
@@ -482,10 +464,8 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       ..add(ColorProperty("whis100", whis100))
       ..add(ColorProperty("whis60", whis60))
       ..add(ColorProperty("whis10", whis10))
-      ..add(ColorProperty("bodyTextPrimary", bodyTextPrimary))
-      ..add(ColorProperty("bodyTextSecondary", bodyTextSecondary))
-      ..add(ColorProperty("controlTextPrimary", controlTextPrimary))
-      ..add(ColorProperty("controlTextSecondary", controlTextSecondary))
+      ..add(ColorProperty("textPrimary", textPrimary))
+      ..add(ColorProperty("textSecondary", textSecondary))
       ..add(ColorProperty("iconPrimary", iconPrimary))
       ..add(ColorProperty("iconSecondary", iconSecondary));
   }

@@ -353,7 +353,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
     final Color effectiveTextColor = tabStyle?.textStyle?.color ??
         tabStyle?.textColor ??
         context.moonTheme?.tabBarTheme.colors.textColor ??
-        MoonTokens.light.colors.bodyTextPrimary;
+        MoonColors.light.textPrimary;
 
     final Color effectiveSelectedTextColor = tabStyle?.selectedTextColor ??
         context.moonTheme?.tabBarTheme.colors.selectedTextColor ??
@@ -553,11 +553,11 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
     final Color effectiveTextColor = tabStyle?.textStyle?.color ??
         tabStyle?.textColor ??
         context.moonTheme?.tabBarTheme.colors.textColor ??
-        MoonTokens.light.colors.bodyTextPrimary;
+        MoonColors.light.textPrimary;
 
     final Color effectiveSelectedTextColor = tabStyle?.selectedTextColor ??
         context.moonTheme?.tabBarTheme.colors.selectedPillTextColor ??
-        MoonTokens.light.colors.bodyTextPrimary;
+        MoonColors.light.textPrimary;
 
     final TextStyle effectiveTextStyle = widget.moonTabBarSizeProperties.textStyle.merge(tabStyle?.textStyle);
 

@@ -22,7 +22,7 @@ class MoonModalTheme extends ThemeExtension<MoonModalTheme> with DiagnosticableT
     MoonModalProperties? properties,
   })  : colors = colors ??
             MoonModalColors(
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
               backgroundColor: tokens.colors.gohan,
               barrierColor: tokens.colors.zeno,

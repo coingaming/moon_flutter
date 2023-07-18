@@ -27,7 +27,7 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
     MoonTooltipShadows? shadows,
   })  : colors = colors ??
             MoonTooltipColors(
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
               backgroundColor: tokens.colors.gohan,
             ),

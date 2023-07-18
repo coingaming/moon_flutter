@@ -25,7 +25,7 @@ class MoonChipTheme extends ThemeExtension<MoonChipTheme> with DiagnosticableTre
               activeColor: tokens.colors.piccolo,
               backgroundColor: tokens.colors.gohan,
               activeBackgroundColor: tokens.colors.jiren,
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
             ),
         sizes = sizes ?? MoonChipSizes(tokens: tokens);
 

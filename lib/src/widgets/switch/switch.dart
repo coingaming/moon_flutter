@@ -385,19 +385,19 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     );
 
     final Color effectiveActiveTextColor =
-        context.moonTheme?.switchTheme.colors.activeTextColor ?? MoonTokens.dark.colors.bodyTextPrimary;
+        context.moonTheme?.switchTheme.colors.activeTextColor ?? MoonTokens.dark.colors.textPrimary;
 
     final Color effectiveInactiveTextColor =
-        context.moonTheme?.switchTheme.colors.inactiveTextColor ?? MoonTokens.light.colors.bodyTextPrimary;
+        context.moonTheme?.switchTheme.colors.inactiveTextColor ?? MoonColors.light.textPrimary;
 
     final Color effectiveActiveIconColor =
         context.moonTheme?.switchTheme.colors.activeIconColor ?? MoonTokens.dark.colors.iconPrimary;
 
     final Color effectiveInactiveIconColor =
-        context.moonTheme?.switchTheme.colors.inactiveIconColor ?? MoonTokens.light.colors.iconPrimary;
+        context.moonTheme?.switchTheme.colors.inactiveIconColor ?? MoonColors.light.iconPrimary;
 
     final Color effectiveThumbIconColor =
-        context.moonTheme?.switchTheme.colors.thumbIconColor ?? MoonTokens.light.colors.iconPrimary;
+        context.moonTheme?.switchTheme.colors.thumbIconColor ?? MoonColors.light.iconPrimary;
 
     return Semantics(
       label: widget.semanticLabel,

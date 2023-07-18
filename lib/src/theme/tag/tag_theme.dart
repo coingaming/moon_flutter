@@ -22,7 +22,7 @@ class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeM
     MoonTagSizes? sizes,
   })  : colors = colors ??
             MoonTagColors(
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
               backgroundColor: tokens.colors.gohan,
             ),

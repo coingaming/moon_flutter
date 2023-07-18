@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/radio/radio_painter.dart';
@@ -105,11 +106,10 @@ class MoonRadio<T> extends StatefulWidget {
   }) {
     final bool isInteractive = onChanged != null;
 
-    final Color effectiveTextColor =
-        context.moonTheme?.radioTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
+    final Color effectiveTextColor = context.moonTheme?.radioTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.radioTheme.properties.textStyle ?? MoonTokens.light.typography.body.textDefault;
+        context.moonTheme?.radioTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
     final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 

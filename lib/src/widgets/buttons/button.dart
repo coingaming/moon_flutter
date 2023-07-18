@@ -327,7 +327,7 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
         widget.borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
     final Color effectiveTextColor =
-        widget.textColor ?? context.moonTheme?.buttonTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
+        widget.textColor ?? context.moonTheme?.buttonTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final Color effectiveHoverEffectColor = widget.hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.primaryHoverColor ??

@@ -4,8 +4,8 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
-import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip_shape.dart';
 
@@ -391,11 +391,9 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
-    final Color effectiveTextColor =
-        context.moonTheme?.tooltipTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
+    final Color effectiveTextColor = context.moonTheme?.tooltipTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.tooltipTheme.colors.iconColor ?? MoonTokens.light.colors.iconPrimary;
+    final Color effectiveIconColor = context.moonTheme?.tooltipTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
     final double effectiveArrowBaseWidth =
         widget.arrowBaseWidth ?? context.moonTheme?.tooltipTheme.properties.arrowBaseWidth ?? 16;
@@ -415,7 +413,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         widget.tooltipShadows ?? context.moonTheme?.tooltipTheme.shadows.tooltipShadows ?? MoonShadows.light.sm;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.tooltipTheme.properties.textStyle ?? MoonTokens.light.typography.body.text12;
+        context.moonTheme?.tooltipTheme.properties.textStyle ?? MoonTypography.typography.body.text12;
 
     final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 

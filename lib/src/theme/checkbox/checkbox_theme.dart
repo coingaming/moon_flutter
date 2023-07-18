@@ -26,7 +26,7 @@ class MoonCheckboxTheme extends ThemeExtension<MoonCheckboxTheme> with Diagnosti
               borderColor: tokens.colors.trunks,
               checkColor: tokens.colors.goten,
               inactiveColor: Colors.transparent,
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
             ),
         properties = properties ??
             MoonCheckboxProperties(

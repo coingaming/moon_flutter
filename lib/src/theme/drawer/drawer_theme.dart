@@ -27,7 +27,7 @@ class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with Diagnosticabl
     MoonDrawerShadows? shadows,
   })  : colors = colors ??
             MoonDrawerColors(
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
               backgroundColor: tokens.colors.gohan,
               barrierColor: tokens.colors.zeno,

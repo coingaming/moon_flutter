@@ -22,7 +22,7 @@ class MoonCarouselTheme extends ThemeExtension<MoonCarouselTheme> with Diagnosti
     MoonCarouselProperties? properties,
   })  : colors = colors ??
             MoonCarouselColors(
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
             ),
         properties = properties ??

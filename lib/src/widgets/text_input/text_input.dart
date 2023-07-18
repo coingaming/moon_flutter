@@ -1133,7 +1133,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         context.isDarkMode ? effectiveErrorBorderColor.withOpacity(0.4) : effectiveErrorBorderColor.withOpacity(0.2);
 
     final Color effectiveTextColor =
-        widget.textColor ?? context.moonColors?.bodyTextPrimary ?? MoonTokens.light.colors.bodyTextPrimary;
+        widget.textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
 
     final Color effectiveHintTextColor =
         widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.supportingTextColor ?? MoonColors.light.trunks;

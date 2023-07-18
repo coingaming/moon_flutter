@@ -25,7 +25,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
               backgroundColor: tokens.colors.gohan,
               badgeColor: tokens.colors.roshi100,
               iconColor: tokens.colors.iconPrimary,
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
             ),
         sizes = sizes ?? MoonAvatarSizes(tokens: tokens);
 

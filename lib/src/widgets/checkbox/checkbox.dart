@@ -6,6 +6,7 @@ import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
@@ -94,11 +95,10 @@ class MoonCheckbox extends StatefulWidget {
   }) {
     final bool isInteractive = onChanged != null;
 
-    final Color effectiveTextColor =
-        context.moonTheme?.checkboxTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
+    final Color effectiveTextColor = context.moonTheme?.checkboxTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.checkboxTheme.properties.textStyle ?? MoonTokens.light.typography.body.textDefault;
+        context.moonTheme?.checkboxTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
     final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 

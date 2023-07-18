@@ -24,7 +24,7 @@ class MoonRadioTheme extends ThemeExtension<MoonRadioTheme> with DiagnosticableT
             MoonRadioColors(
               activeColor: tokens.colors.piccolo,
               inactiveColor: tokens.colors.trunks,
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
             ),
         properties = properties ??
             MoonRadioProperties(

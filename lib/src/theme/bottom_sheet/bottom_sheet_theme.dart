@@ -27,7 +27,7 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
     MoonBottomSheetSizes? sizes,
   })  : colors = colors ??
             MoonBottomSheetColors(
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
               backgroundColor: tokens.colors.gohan,
               barrierColor: tokens.colors.zeno,

@@ -3,16 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-
 @immutable
 class MoonTabBarProperties extends ThemeExtension<MoonTabBarProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonTabBarProperties(
-    gap: MoonSizes.sizes.x5s,
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-  );
-
   /// Gap between TabBar children.
   final double gap;
 

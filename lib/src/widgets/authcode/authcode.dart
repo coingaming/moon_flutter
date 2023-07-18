@@ -9,8 +9,8 @@ import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -704,16 +704,16 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         widget.inactiveFillColor ?? context.moonTheme?.authCodeTheme.colors.inactiveFillColor ?? MoonColors.light.gohan;
 
     _effectiveTextStyle =
-        context.moonTheme?.authCodeTheme.properties.textStyle ?? MoonTokens.light.typography.body.text24;
+        context.moonTheme?.authCodeTheme.properties.textStyle ?? MoonTypography.typography.body.text24;
 
     _effectiveErrorTextStyle =
-        context.moonTheme?.authCodeTheme.properties.errorTextStyle ?? MoonTokens.light.typography.body.text12;
+        context.moonTheme?.authCodeTheme.properties.errorTextStyle ?? MoonTypography.typography.body.text12;
 
-    _effectiveTextColor = context.moonTheme?.authCodeTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
+    _effectiveTextColor = context.moonTheme?.authCodeTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     _effectiveCursorColor = widget.authFieldCursorColor ??
         context.moonTheme?.authCodeTheme.colors.textColor ??
-        MoonTokens.light.colors.bodyTextPrimary;
+        MoonColors.light.textPrimary;
 
     _animationDuration ??= widget.animationDuration ??
         context.moonTheme?.authCodeTheme.properties.animationDuration ??

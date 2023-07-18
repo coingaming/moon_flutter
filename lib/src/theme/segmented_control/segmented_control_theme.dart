@@ -29,8 +29,8 @@ class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme
             MoonSegmentedControlColors(
               backgroundColor: tokens.colors.goku,
               selectedSegmentColor: tokens.colors.gohan,
-              textColor: tokens.colors.bodyTextPrimary,
-              selectedTextColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
+              selectedTextColor: tokens.colors.textPrimary,
             ),
         properties = properties ??
             MoonSegmentedControlProperties(

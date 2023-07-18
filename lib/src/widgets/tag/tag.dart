@@ -100,11 +100,9 @@ class MoonTag extends StatelessWidget {
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.tagTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
-    final Color effectiveTextColor =
-        context.moonTheme?.tagTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
+    final Color effectiveTextColor = context.moonTheme?.tagTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.tagTheme.colors.iconColor ?? MoonTokens.light.colors.iconPrimary;
+    final Color effectiveIconColor = context.moonTheme?.tagTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
     final double effectiveHeight = height ?? effectiveMoonTagSize.height;
 

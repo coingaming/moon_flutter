@@ -29,7 +29,7 @@ class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme> with Diagnosti
               selectedFillColor: tokens.colors.gohan,
               activeFillColor: tokens.colors.gohan,
               inactiveFillColor: tokens.colors.gohan,
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
             ),
         properties = properties ??
             MoonAuthCodeProperties(

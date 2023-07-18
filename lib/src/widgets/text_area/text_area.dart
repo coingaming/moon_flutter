@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 
 typedef MoonTextAreaErrorBuilder = Widget Function(BuildContext context, String? errorText);
@@ -301,8 +301,7 @@ class MoonTextArea extends StatelessWidget {
     final Color effectiveHoverBorderColor =
         hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
 
-    final Color effectiveTextColor =
-        textColor ?? context.moonColors?.bodyTextPrimary ?? MoonTokens.light.colors.bodyTextPrimary;
+    final Color effectiveTextColor = textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
 
     final Color effectiveHintTextColor =
         hintTextColor ?? context.moonTheme?.textAreaTheme.colors.hintTextColor ?? MoonColors.light.trunks;
@@ -315,10 +314,11 @@ class MoonTextArea extends StatelessWidget {
         textPadding ?? context.moonTheme?.textAreaTheme.properties.textPadding ?? const EdgeInsets.all(16);
 
     final TextStyle effectiveTextStyle =
-        textStyle ?? context.moonTheme?.textAreaTheme.properties.textStyle ?? const TextStyle(fontSize: 16);
+        textStyle ?? context.moonTheme?.textAreaTheme.properties.textStyle ?? MoonTypography.typography.body.text16;
 
-    final TextStyle effectiveHelperTextStyle =
-        helperTextStyle ?? context.moonTheme?.textAreaTheme.properties.helperTextStyle ?? const TextStyle(fontSize: 12);
+    final TextStyle effectiveHelperTextStyle = helperTextStyle ??
+        context.moonTheme?.textAreaTheme.properties.helperTextStyle ??
+        MoonTypography.typography.body.text12;
 
     final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.textAreaTheme.properties.transitionDuration ??

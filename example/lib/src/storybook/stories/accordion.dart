@@ -26,16 +26,71 @@ class AccordionStory extends Story {
               ],
             );
 
-            final headerTextColorsKnob = context.knobs.nullable.options(
-              label: "headerTextColor",
-              description: "MoonColors variants for MoonAccordion header.",
+            final leadingColorsKnob = context.knobs.nullable.options(
+              label: "leadingColor",
+              description: "MoonColors variants for MoonAccordion leading.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final headerTextColor = colorTable(context)[headerTextColorsKnob ?? 40];
+            final leadingColor = colorTable(context)[leadingColorsKnob ?? 40];
+
+            final expandedLeadingColorsKnob = context.knobs.nullable.options(
+              label: "expandedLeadingColor",
+              description: "MoonColors variants for expanded MoonAccordion leading.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final expandedLeadingColor = colorTable(context)[expandedLeadingColorsKnob ?? 40];
+
+            final labelColorsKnob = context.knobs.nullable.options(
+              label: "labelColor",
+              description: "MoonColors variants for MoonAccordion label.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final labelColor = colorTable(context)[labelColorsKnob ?? 40];
+
+            final expandedLabelColorsKnob = context.knobs.nullable.options(
+              label: "expandedLabelColor",
+              description: "MoonColors variants for expanded MoonAccordion label.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final expandedLabelColor = colorTable(context)[expandedLabelColorsKnob ?? 40];
+
+            final trailingColorsKnob = context.knobs.nullable.options(
+              label: "trailingColor",
+              description: "MoonColors variants for MoonAccordion trailing.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final trailingColor = colorTable(context)[trailingColorsKnob ?? 40];
+
+            final expandedTrailingColorsKnob = context.knobs.nullable.options(
+              label: "expandedTrailingColor",
+              description: "MoonColors variants for expanded MoonAccordion trailing.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final expandedTrailingColor = colorTable(context)[expandedTrailingColorsKnob ?? 40];
 
             final contentTextColorsKnob = context.knobs.nullable.options(
               label: "Content color",
@@ -129,10 +184,14 @@ class AccordionStory extends Story {
                       identityValue: AccordionItems.first,
                       groupIdentityValue: currentlyOpenAccordionItem,
                       accordionSize: accordionSizesKnob,
+                      leadingColor: leadingColor,
+                      expandedLeadingColor: expandedLeadingColor,
+                      titleColor: labelColor,
+                      expandedTitleColor: expandedLabelColor,
+                      trailingColor: trailingColor,
+                      expandedTrailingColor: expandedTrailingColor,
                       borderColor: borderColor,
                       backgroundColor: backgroundColor,
-                      contentTextColor: contentTextColor,
-                      headerTextColor: headerTextColor,
                       expandedBackgroundColor: expandedBackgroundColor,
                       dividerColor: dividerColor,
                       borderRadius:
@@ -157,10 +216,14 @@ class AccordionStory extends Story {
                       groupIdentityValue: currentlyOpenAccordionItem,
                       initiallyExpanded: true,
                       accordionSize: accordionSizesKnob,
+                      leadingColor: leadingColor,
+                      expandedLeadingColor: expandedLeadingColor,
+                      titleColor: labelColor,
+                      expandedTitleColor: expandedLabelColor,
+                      trailingColor: trailingColor,
+                      expandedTrailingColor: expandedTrailingColor,
                       borderColor: borderColor,
                       backgroundColor: backgroundColor,
-                      contentTextColor: contentTextColor,
-                      headerTextColor: headerTextColor,
                       expandedBackgroundColor: expandedBackgroundColor,
                       dividerColor: dividerColor,
                       borderRadius:
@@ -186,10 +249,14 @@ class AccordionStory extends Story {
                       accordionSize: accordionSizesKnob,
                       initiallyExpanded: true,
                       hasContentOutside: true,
+                      leadingColor: leadingColor,
+                      expandedLeadingColor: expandedLeadingColor,
+                      titleColor: labelColor,
+                      expandedTitleColor: expandedLabelColor,
+                      trailingColor: trailingColor,
+                      expandedTrailingColor: expandedTrailingColor,
                       borderColor: borderColor,
                       backgroundColor: backgroundColor,
-                      contentTextColor: contentTextColor,
-                      headerTextColor: headerTextColor,
                       expandedBackgroundColor: expandedBackgroundColor,
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
@@ -208,11 +275,15 @@ class AccordionStory extends Story {
                     MoonAccordion<AccordionItems>(
                       accordionSize: accordionSizesKnob,
                       hasContentOutside: true,
+                      leadingColor: leadingColor,
+                      expandedLeadingColor: expandedLeadingColor,
+                      titleColor: labelColor,
+                      expandedTitleColor: expandedLabelColor,
+                      trailingColor: trailingColor,
+                      expandedTrailingColor: expandedTrailingColor,
                       borderColor: borderColor,
                       backgroundColor: backgroundColor,
                       expandedBackgroundColor: expandedBackgroundColor,
-                      contentTextColor: contentTextColor,
-                      headerTextColor: headerTextColor,
                       dividerColor: dividerColor,
                       borderRadius:
                           borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,

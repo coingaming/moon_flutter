@@ -7,8 +7,8 @@ import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -104,15 +104,15 @@ class MoonToast {
             : (context.moonTheme?.toastTheme.colors.darkVariantBackgroundColor ?? MoonColors.dark.gohan));
 
     final Color effectiveTextColor = variant == MoonToastVariant.original
-        ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ?? MoonTokens.light.colors.bodyTextPrimary)
-        : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ?? MoonTokens.dark.colors.bodyTextPrimary);
+        ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ?? MoonColors.light.textPrimary)
+        : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ?? MoonColors.dark.textPrimary);
 
     final Color effectiveIconColor = variant == MoonToastVariant.original
-        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ?? MoonTokens.light.colors.iconPrimary)
-        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ?? MoonTokens.dark.colors.iconPrimary);
+        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ?? MoonColors.light.iconPrimary)
+        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ?? MoonColors.dark.iconPrimary);
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.toastTheme.properties.textStyle ?? MoonTokens.light.typography.body.textDefault;
+        context.moonTheme?.toastTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
     final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
 

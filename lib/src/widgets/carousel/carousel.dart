@@ -8,9 +8,10 @@ import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 
 class MoonCarousel extends StatefulWidget {
   /// Axis direction of the carousel. Defaults to `Axis.horizontal`.
@@ -247,14 +248,12 @@ class _MoonCarouselState extends State<MoonCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveTextColor =
-        context.moonTheme?.carouselTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
+    final Color effectiveTextColor = context.moonTheme?.carouselTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.carouselTheme.colors.iconColor ?? MoonTokens.light.colors.iconPrimary;
+    final Color effectiveIconColor = context.moonTheme?.carouselTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.carouselTheme.properties.textStyle ?? MoonTokens.light.typography.body.textDefault;
+        context.moonTheme?.carouselTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
     final AxisDirection axisDirection = _getDirection(context);
 

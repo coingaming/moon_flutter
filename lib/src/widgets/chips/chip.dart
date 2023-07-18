@@ -272,7 +272,7 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
         MoonColors.light.jiren;
 
     final Color effectiveTextColor =
-        widget.textColor ?? context.moonTheme?.chipTheme.colors.textColor ?? MoonTokens.light.colors.bodyTextPrimary;
+        widget.textColor ?? context.moonTheme?.chipTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final Duration effectiveActiveEffectDuration = widget.activeEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??

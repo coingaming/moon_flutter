@@ -23,9 +23,9 @@ class MoonAlertTheme extends ThemeExtension<MoonAlertTheme> with DiagnosticableT
   })  : colors = colors ??
             MoonAlertColors(
               backgroundColor: tokens.colors.gohan,
-              borderColor: tokens.colors.bodyTextSecondary,
+              borderColor: tokens.colors.textSecondary,
               iconColor: tokens.colors.iconPrimary,
-              textColor: tokens.colors.bodyTextPrimary,
+              textColor: tokens.colors.textPrimary,
             ),
         properties = properties ??
             MoonAlertProperties(

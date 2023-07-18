@@ -324,7 +324,7 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
     final Color effectiveTextColor = segmentStyle?.textStyle?.color ??
         segmentStyle?.textColor ??
         context.moonTheme?.segmentedControlTheme.colors.textColor ??
-        MoonTokens.light.colors.bodyTextPrimary;
+        MoonColors.light.textPrimary;
 
     final Color effectiveSelectedTextColor = segmentStyle?.selectedTextColor ??
         context.moonTheme?.segmentedControlTheme.colors.selectedTextColor ??
