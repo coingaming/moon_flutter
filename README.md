@@ -33,7 +33,9 @@ final lightTokens = MoonTokens.light.copyWith(
   ),
 );
 
-final lightTheme = ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: lightTokens)]);
+final lightTheme = ThemeData.light().copyWith(
+    extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: lightTokens)],
+  );
 ```
 
 - Or if needed override widget theming:
