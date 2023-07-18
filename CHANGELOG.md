@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.2](https://github.com/coingaming/moon_flutter/compare/v0.26.1...v0.26.2) (2023-07-18)
+
+
+### Bug Fixes
+
+* [MDS-596] Refactor theming for extensibility ([#210](https://github.com/coingaming/moon_flutter/issues/210)) ([2c1cd27](https://github.com/coingaming/moon_flutter/commit/2c1cd279616ae3ef168f2cb402dcc2d97261c639))
+
 ## [0.26.1](https://github.com/coingaming/moon_flutter/compare/v0.26.0...v0.26.1) (2023-07-13)
 
 
