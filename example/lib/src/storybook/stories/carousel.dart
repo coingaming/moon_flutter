@@ -81,7 +81,7 @@ class CarouselStory extends Story {
                         itemCount: 10,
                         itemExtent: itemExtentKnob?.toDouble() ?? 114,
                         isCentered: isCenteredKnob,
-                        anchor: anchorKnob ?? 0.04,
+                        anchor: anchorKnob ?? 0.041,
                         loop: isLoopedKnob,
                         clampMaxExtent: clampMaxExtentKnob,
                         itemBuilder: (context, itemIndex, realIndex) => Container(
@@ -140,7 +140,11 @@ class CarouselStory extends Story {
                                           MoonButton.icon(
                                             buttonSize: MoonButtonSize.sm,
                                             showBorder: true,
-                                            icon: const MoonIcon(MoonIcons.chevron_left_24),
+                                            icon: MoonIcon(
+                                              Directionality.of(context) == TextDirection.ltr
+                                                  ? MoonIcons.chevron_left_24
+                                                  : MoonIcons.chevron_right_24,
+                                            ),
                                             decoration: ShapeDecorationWithPremultipliedAlpha(
                                               color: context.moonColors!.gohan,
                                               shadows: context.moonShadows!.sm,
@@ -153,7 +157,11 @@ class CarouselStory extends Story {
                                           MoonButton.icon(
                                             buttonSize: MoonButtonSize.sm,
                                             showBorder: true,
-                                            icon: const MoonIcon(MoonIcons.chevron_right_24),
+                                            icon: MoonIcon(
+                                              Directionality.of(context) == TextDirection.ltr
+                                                  ? MoonIcons.chevron_right_24
+                                                  : MoonIcons.chevron_left_24,
+                                            ),
                                             decoration: ShapeDecorationWithPremultipliedAlpha(
                                               color: context.moonColors!.gohan,
                                               shadows: context.moonShadows!.sm,

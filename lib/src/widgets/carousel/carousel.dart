@@ -215,13 +215,17 @@ class _MoonCarouselState extends State<MoonCarousel> {
     super.dispose();
   }
 
-  List<Widget> _buildSlivers(BuildContext context) {
+  List<Widget> _buildSlivers(BuildContext context, {required AxisDirection axisDirection}) {
     _effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
+
+    final EdgeInsetsDirectional resolvedPadding = widget.axisDirection == Axis.horizontal
+        ? EdgeInsetsDirectional.only(end: _effectiveGap)
+        : EdgeInsetsDirectional.only(bottom: _effectiveGap);
 
     /// Delegate for lazily building items in the forward direction.
     final SliverChildDelegate childDelegate = SliverChildBuilderDelegate(
       (context, index) => Padding(
-        padding: EdgeInsets.only(right: _effectiveGap),
+        padding: resolvedPadding,
         child: widget.itemBuilder(context, index.abs() % widget.itemCount, index),
       ),
       childCount: widget.loop ? null : widget.itemCount,
@@ -231,7 +235,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
     final SliverChildDelegate? reversedChildDelegate = widget.loop
         ? SliverChildBuilderDelegate(
             (context, index) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: _effectiveGap / 2),
+              padding: resolvedPadding,
               child: widget.itemBuilder(context, widget.itemCount - (index.abs() % widget.itemCount) - 1, -(index + 1)),
             ),
           )
@@ -319,7 +323,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
                     axisDirection: axisDirection,
                     center: _forwardListKey,
                     offset: position,
-                    slivers: _buildSlivers(context),
+                    slivers: _buildSlivers(context, axisDirection: axisDirection),
                   );
                 },
               ),
