@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/opacity.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_size_properties.dart';
-import 'package:moon_design/src/theme/sizes.dart';
+import 'package:moon_design/src/theme/segmented_control/segmented_control_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -135,11 +137,14 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
   ) {
     switch (segmentedControlSize) {
       case MoonSegmentedControlSize.sm:
-        return context.moonTheme?.segmentedControlTheme.sizes.sm ?? MoonSegmentedControlSizeProperties.sm;
+        return context.moonTheme?.segmentedControlTheme.sizes.sm ??
+            MoonSegmentedControlSizes(tokens: MoonTokens.light).sm;
       case MoonSegmentedControlSize.md:
-        return context.moonTheme?.segmentedControlTheme.sizes.md ?? MoonSegmentedControlSizeProperties.md;
+        return context.moonTheme?.segmentedControlTheme.sizes.md ??
+            MoonSegmentedControlSizes(tokens: MoonTokens.light).md;
       default:
-        return context.moonTheme?.segmentedControlTheme.sizes.md ?? MoonSegmentedControlSizeProperties.md;
+        return context.moonTheme?.segmentedControlTheme.sizes.md ??
+            MoonSegmentedControlSizes(tokens: MoonTokens.light).md;
     }
   }
 
@@ -175,7 +180,7 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
         context.moonTheme?.segmentedControlTheme.colors.backgroundColor ??
         MoonColors.light.goku;
 
-    final double effectiveDisabledOpacityValue = context.moonOpacity?.disabled ?? MoonOpacity.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final double effectiveHeight = widget.height ?? effectiveMoonSegmentControlSize.height;
 
@@ -184,11 +189,11 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.segmentedControlTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     final Curve effectiveTransitionCurve = widget.transitionCurve ??
         context.moonTheme?.segmentedControlTheme.properties.transitionCurve ??
-        Curves.easeInOutCubic;
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     final EdgeInsetsGeometry effectivePadding =
         widget.padding ?? context.moonTheme?.segmentedControlTheme.properties.padding ?? const EdgeInsets.all(4);
@@ -319,7 +324,7 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
     final Color effectiveTextColor = segmentStyle?.textStyle?.color ??
         segmentStyle?.textColor ??
         context.moonTheme?.segmentedControlTheme.colors.textColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonColors.light.textPrimary;
 
     final Color effectiveSelectedTextColor = segmentStyle?.selectedTextColor ??
         context.moonTheme?.segmentedControlTheme.colors.selectedTextColor ??

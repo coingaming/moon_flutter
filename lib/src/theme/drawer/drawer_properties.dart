@@ -3,16 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonDrawerProperties extends ThemeExtension<MoonDrawerProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonDrawerProperties(
-    borderRadius: BorderRadius.zero,
-    width: 448,
-    textStyle: MoonTextStyles.body.textDefault,
-  );
-
   /// Drawer border radius.
   final BorderRadiusGeometry borderRadius;
 

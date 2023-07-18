@@ -3,36 +3,9 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/sizes.dart';
-
 @immutable
 class MoonCircularLoaderSizeProperties extends ThemeExtension<MoonCircularLoaderSizeProperties>
     with DiagnosticableTreeMixin {
-  static final x2s = MoonCircularLoaderSizeProperties(
-    loaderSizeValue: MoonSizes.sizes.x2s,
-    loaderStrokeWidth: MoonSizes.sizes.x6s,
-  );
-
-  static final xs = MoonCircularLoaderSizeProperties(
-    loaderSizeValue: MoonSizes.sizes.xs,
-    loaderStrokeWidth: MoonSizes.sizes.x6s,
-  );
-
-  static final sm = MoonCircularLoaderSizeProperties(
-    loaderSizeValue: MoonSizes.sizes.sm,
-    loaderStrokeWidth: MoonSizes.sizes.x6s,
-  );
-
-  static final md = MoonCircularLoaderSizeProperties(
-    loaderSizeValue: MoonSizes.sizes.md,
-    loaderStrokeWidth: MoonSizes.sizes.x5s,
-  );
-
-  static final lg = MoonCircularLoaderSizeProperties(
-    loaderSizeValue: MoonSizes.sizes.lg,
-    loaderStrokeWidth: MoonSizes.sizes.x5s,
-  );
-
   /// Circular loader size value.
   final double loaderSizeValue;
 

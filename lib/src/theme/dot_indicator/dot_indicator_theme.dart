@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_colors.dart';
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_properties.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with DiagnosticableTreeMixin {
-  static final light = MoonDotIndicatorTheme(
-    colors: MoonDotIndicatorColors.light,
-    properties: MoonDotIndicatorProperties.properties,
-  );
-
-  static final dark = MoonDotIndicatorTheme(
-    colors: MoonDotIndicatorColors.dark,
-    properties: MoonDotIndicatorProperties.properties,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// DotIndicator colors.
   final MoonDotIndicatorColors colors;
@@ -22,17 +16,31 @@ class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with D
   /// DotIndicator properties.
   final MoonDotIndicatorProperties properties;
 
-  const MoonDotIndicatorTheme({
-    required this.colors,
-    required this.properties,
-  });
+  MoonDotIndicatorTheme({
+    required this.tokens,
+    MoonDotIndicatorColors? colors,
+    MoonDotIndicatorProperties? properties,
+  })  : colors = colors ??
+            MoonDotIndicatorColors(
+              selectedColor: tokens.colors.piccolo,
+              unselectedColor: tokens.colors.beerus,
+            ),
+        properties = properties ??
+            MoonDotIndicatorProperties(
+              gap: tokens.sizes.x4s,
+              size: tokens.sizes.x4s,
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
+            );
 
   @override
   MoonDotIndicatorTheme copyWith({
+    MoonTokens? tokens,
     MoonDotIndicatorColors? colors,
     MoonDotIndicatorProperties? properties,
   }) {
     return MoonDotIndicatorTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
     );
@@ -43,6 +51,7 @@ class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with D
     if (other is! MoonDotIndicatorTheme) return this;
 
     return MoonDotIndicatorTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
     );
@@ -53,6 +62,7 @@ class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with D
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonDotIndicatorTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonDotIndicatorColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonDotIndicatorProperties>("properties", properties));
   }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -305,6 +307,83 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     required this.text64,
     required this.text72,
   });
+
+  /// Creates a copy of this text theme but with the given field replaced in each of the individual text styles.
+  MoonTextStyles apply({
+    Color? backgroundColor,
+    Color? color,
+    Color? decorationColor,
+    double decorationThicknessDelta = 0.0,
+    double decorationThicknessFactor = 1.0,
+    double fontSizeDelta = 0.0,
+    double fontSizeFactor = 1.0,
+    double heightDelta = 0.0,
+    double heightFactor = 1.0,
+    double letterSpacingDelta = 0.0,
+    double letterSpacingFactor = 1.0,
+    FontStyle? fontStyle,
+    int fontWeightDelta = 0,
+    List<FontFeature>? fontFeatures,
+    List<FontVariation>? fontVariations,
+    List<Shadow>? shadows,
+    List<String>? fontFamilyFallback,
+    Locale? locale,
+    String? fontFamily,
+    String? package,
+    TextBaseline? textBaseline,
+    TextDecoration? decoration,
+    TextDecorationStyle? decorationStyle,
+    TextLeadingDistribution? leadingDistribution,
+    TextOverflow? overflow,
+  }) {
+    TextStyle applyProps(TextStyle style) => style.apply(
+          backgroundColor: backgroundColor,
+          decorationThicknessDelta: decorationThicknessDelta,
+          decorationThicknessFactor: decorationThicknessFactor,
+          color: color,
+          decorationColor: decorationColor,
+          fontSizeDelta: fontSizeDelta,
+          fontSizeFactor: fontSizeFactor,
+          heightDelta: heightDelta,
+          heightFactor: heightFactor,
+          letterSpacingDelta: letterSpacingDelta,
+          letterSpacingFactor: letterSpacingFactor,
+          fontFeatures: fontFeatures,
+          fontStyle: fontStyle,
+          fontWeightDelta: fontWeightDelta,
+          fontVariations: fontVariations,
+          shadows: shadows,
+          fontFamilyFallback: fontFamilyFallback,
+          locale: locale,
+          fontFamily: fontFamily,
+          package: package,
+          textBaseline: textBaseline,
+          decoration: decoration,
+          decorationStyle: decorationStyle,
+          leadingDistribution: leadingDistribution,
+          overflow: overflow,
+        );
+
+    return MoonTextStyles(
+      textDefault: applyProps(textDefault),
+      text6: applyProps(text6),
+      text8: applyProps(text8),
+      text9: applyProps(text9),
+      text10: applyProps(text10),
+      text12: applyProps(text12),
+      text14: applyProps(text14),
+      text16: applyProps(text16),
+      text18: applyProps(text18),
+      text20: applyProps(text20),
+      text24: applyProps(text24),
+      text32: applyProps(text32),
+      text40: applyProps(text40),
+      text48: applyProps(text48),
+      text56: applyProps(text56),
+      text64: applyProps(text64),
+      text72: applyProps(text72),
+    );
+  }
 
   @override
   MoonTextStyles copyWith({

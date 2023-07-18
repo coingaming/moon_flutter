@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
-import 'package:moon_design/src/theme/shadows.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/shadows.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -353,14 +352,12 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.popoverTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
-    final Color effectiveTextColor =
-        context.moonTheme?.popoverTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+    final Color effectiveTextColor = context.moonTheme?.popoverTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.popoverTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+    final Color effectiveIconColor = context.moonTheme?.popoverTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.popoverTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+        context.moonTheme?.popoverTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
     final double effectiveDistanceToTarget =
         widget.distanceToTarget ?? context.moonTheme?.popoverTheme.properties.distanceToTarget ?? 8;
@@ -472,10 +469,11 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   Widget build(BuildContext context) {
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.popoverTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 150);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.popoverTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.popoverTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _animationController ??= AnimationController(
       duration: effectiveTransitionDuration,

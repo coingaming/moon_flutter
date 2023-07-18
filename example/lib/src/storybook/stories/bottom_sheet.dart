@@ -57,7 +57,7 @@ class BottomSheetStory extends Story {
                           height: 4,
                           width: 41,
                           decoration: ShapeDecoration(
-                            color: context.moonTheme!.colors.beerus,
+                            color: context.moonColors!.beerus,
                             shape: const StadiumBorder(),
                           ),
                         ),

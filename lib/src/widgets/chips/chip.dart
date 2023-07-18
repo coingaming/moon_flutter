@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/chip/chip_size_properties.dart';
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/effects/hover_effects.dart';
+import 'package:moon_design/src/theme/chip/chip_sizes.dart';
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -232,12 +233,12 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
   MoonChipSizeProperties _getMoonChipSize(BuildContext context, MoonChipSize? moonChipSize) {
     switch (moonChipSize) {
       case MoonChipSize.sm:
-        return context.moonTheme?.chipTheme.sizes.sm ?? MoonChipSizeProperties.sm;
+        return context.moonTheme?.chipTheme.sizes.sm ?? MoonChipSizes(tokens: MoonTokens.light).sm;
       case MoonChipSize.md:
-        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizeProperties.md;
+        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).md;
 
       default:
-        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizeProperties.sm;
+        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).sm;
     }
   }
 
@@ -271,15 +272,15 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
         MoonColors.light.jiren;
 
     final Color effectiveTextColor =
-        widget.textColor ?? context.moonTheme?.chipTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
-
-    final Curve effectiveActiveEffectCurve = widget.activeEffectCurve ??
-        context.moonEffects?.controlHoverEffect.hoverCurve ??
-        MoonHoverEffects.lightHoverEffect.hoverCurve;
+        widget.textColor ?? context.moonTheme?.chipTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final Duration effectiveActiveEffectDuration = widget.activeEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??
-        MoonHoverEffects.lightHoverEffect.hoverDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
+
+    final Curve effectiveActiveEffectCurve = widget.activeEffectCurve ??
+        context.moonEffects?.controlHoverEffect.hoverCurve ??
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
 
     final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonChipSize.padding;
 

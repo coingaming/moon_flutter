@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/tag/tag_colors.dart';
 import 'package:moon_design/src/theme/tag/tag_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeMixin {
-  static final light = MoonTagTheme(
-    colors: MoonTagColors.light,
-    sizes: MoonTagSizes.sizes,
-  );
-
-  static final dark = MoonTagTheme(
-    colors: MoonTagColors.dark,
-    sizes: MoonTagSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Tag colors.
   final MoonTagColors colors;
@@ -22,17 +16,26 @@ class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeM
   /// Tag sizes.
   final MoonTagSizes sizes;
 
-  const MoonTagTheme({
-    required this.colors,
-    required this.sizes,
-  });
+  MoonTagTheme({
+    required this.tokens,
+    MoonTagColors? colors,
+    MoonTagSizes? sizes,
+  })  : colors = colors ??
+            MoonTagColors(
+              textColor: tokens.colors.textPrimary,
+              iconColor: tokens.colors.iconPrimary,
+              backgroundColor: tokens.colors.gohan,
+            ),
+        sizes = sizes ?? MoonTagSizes(tokens: tokens);
 
   @override
   MoonTagTheme copyWith({
+    MoonTokens? tokens,
     MoonTagColors? colors,
     MoonTagSizes? sizes,
   }) {
     return MoonTagTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       sizes: sizes ?? this.sizes,
     );
@@ -43,6 +46,7 @@ class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeM
     if (other is! MoonTagTheme) return this;
 
     return MoonTagTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       sizes: sizes.lerp(other.sizes, t),
     );
@@ -53,6 +57,7 @@ class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeM
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonTagTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonTagColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonTagSizes>("sizes", sizes));
   }

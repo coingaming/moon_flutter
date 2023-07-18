@@ -3,36 +3,9 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/sizes.dart';
-
 @immutable
 class MoonCircularProgressSizeProperties extends ThemeExtension<MoonCircularProgressSizeProperties>
     with DiagnosticableTreeMixin {
-  static final x2s = MoonCircularProgressSizeProperties(
-    progressSizeValue: MoonSizes.sizes.x2s,
-    progressStrokeWidth: MoonSizes.sizes.x6s,
-  );
-
-  static final xs = MoonCircularProgressSizeProperties(
-    progressSizeValue: MoonSizes.sizes.xs,
-    progressStrokeWidth: MoonSizes.sizes.x6s,
-  );
-
-  static final sm = MoonCircularProgressSizeProperties(
-    progressSizeValue: MoonSizes.sizes.sm,
-    progressStrokeWidth: MoonSizes.sizes.x6s,
-  );
-
-  static final md = MoonCircularProgressSizeProperties(
-    progressSizeValue: MoonSizes.sizes.md,
-    progressStrokeWidth: MoonSizes.sizes.x5s,
-  );
-
-  static final lg = MoonCircularProgressSizeProperties(
-    progressSizeValue: MoonSizes.sizes.lg,
-    progressStrokeWidth: MoonSizes.sizes.x5s,
-  );
-
   /// Circular progress size value.
   final double progressSizeValue;
 

@@ -7,20 +7,6 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with DiagnosticableTreeMixin {
-  static const lightFocusEffect = MoonFocusEffects(
-    effectColor: Colors.black26,
-    effectExtent: 4,
-    effectDuration: Duration(milliseconds: 150),
-    effectCurve: Curves.easeInOutCubic,
-  );
-
-  static const darkFocusEffect = MoonFocusEffects(
-    effectColor: Colors.white24,
-    effectExtent: 4,
-    effectDuration: Duration(milliseconds: 150),
-    effectCurve: Curves.easeInOutCubic,
-  );
-
   /// Focus effect color.
   final Color effectColor;
 

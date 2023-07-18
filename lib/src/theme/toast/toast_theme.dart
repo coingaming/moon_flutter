@@ -4,20 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/toast/toast_colors.dart';
 import 'package:moon_design/src/theme/toast/toast_properties.dart';
 import 'package:moon_design/src/theme/toast/toast_shadows.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonToastTheme extends ThemeExtension<MoonToastTheme> with DiagnosticableTreeMixin {
-  static final light = MoonToastTheme(
-    colors: MoonToastColors.light,
-    properties: MoonToastProperties.properties,
-    shadows: MoonToastShadows.light,
-  );
-
-  static final dark = MoonToastTheme(
-    colors: MoonToastColors.dark,
-    properties: MoonToastProperties.properties,
-    shadows: MoonToastShadows.dark,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Toast colors.
   final MoonToastColors colors;
@@ -28,19 +20,41 @@ class MoonToastTheme extends ThemeExtension<MoonToastTheme> with DiagnosticableT
   /// Toast shadows.
   final MoonToastShadows shadows;
 
-  const MoonToastTheme({
-    required this.colors,
-    required this.properties,
-    required this.shadows,
-  });
+  MoonToastTheme({
+    required this.tokens,
+    MoonToastColors? colors,
+    MoonToastProperties? properties,
+    MoonToastShadows? shadows,
+  })  : colors = colors ??
+            MoonToastColors(
+              lightVariantBackgroundColor: tokens.colors.gohan,
+              darkVariantBackgroundColor: tokens.complementaryColors.gohan,
+              lightVariantTextColor: tokens.colors.bulma,
+              darkVariantTextColor: tokens.complementaryColors.bulma,
+              lightVariantIconColor: tokens.colors.bulma,
+              darkVariantIconColor: tokens.complementaryColors.bulma,
+            ),
+        properties = properties ??
+            MoonToastProperties(
+              borderRadius: tokens.borders.surfaceSm,
+              gap: tokens.sizes.x2s,
+              displayDuration: const Duration(seconds: 5),
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
+              contentPadding: EdgeInsets.all(tokens.sizes.x2s),
+              textStyle: tokens.typography.body.textDefault,
+            ),
+        shadows = shadows ?? MoonToastShadows(toastShadows: tokens.shadows.lg);
 
   @override
   MoonToastTheme copyWith({
+    MoonTokens? tokens,
     MoonToastColors? colors,
     MoonToastProperties? properties,
     MoonToastShadows? shadows,
   }) {
     return MoonToastTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
       shadows: shadows ?? this.shadows,
@@ -52,6 +66,7 @@ class MoonToastTheme extends ThemeExtension<MoonToastTheme> with DiagnosticableT
     if (other is! MoonToastTheme) return this;
 
     return MoonToastTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
       shadows: shadows.lerp(other.shadows, t),
@@ -63,6 +78,7 @@ class MoonToastTheme extends ThemeExtension<MoonToastTheme> with DiagnosticableT
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonToastTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonToastColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonToastProperties>("properties", properties))
       ..add(DiagnosticsProperty<MoonToastShadows>("shadows", shadows));

@@ -3,60 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProperties> with DiagnosticableTreeMixin {
-  static final sm = MoonTextInputSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveXs,
-    height: MoonSizes.sizes.sm,
-    gap: MoonSizes.sizes.x4s,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(
-      horizontal: MoonSizes.sizes.x4s,
-      vertical: MoonSizes.sizes.x6s,
-    ),
-    textStyle: MoonTextStyles.body.textDefault,
-  );
-
-  static final md = MoonTextInputSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    height: MoonSizes.sizes.md,
-    gap: MoonSizes.sizes.x4s,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(
-      horizontal: MoonSizes.sizes.x3s,
-      vertical: 6,
-    ),
-    textStyle: MoonTextStyles.body.textDefault,
-  );
-
-  static final lg = MoonTextInputSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    height: MoonSizes.sizes.lg,
-    gap: MoonSizes.sizes.x4s,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(
-      horizontal: MoonSizes.sizes.x3s,
-      vertical: MoonSizes.sizes.x4s,
-    ),
-    textStyle: MoonTextStyles.body.text16,
-  );
-
-  static final xl = MoonTextInputSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    height: MoonSizes.sizes.xl,
-    gap: MoonSizes.sizes.x2s,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(
-      horizontal: MoonSizes.sizes.x2s,
-      vertical: MoonSizes.sizes.x3s,
-    ),
-    textStyle: MoonTextStyles.body.text16,
-  );
-
   /// TextInput border radius.
   final BorderRadiusGeometry borderRadius;
 

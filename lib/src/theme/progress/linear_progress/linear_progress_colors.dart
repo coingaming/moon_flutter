@@ -1,21 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonLinearProgressColors extends ThemeExtension<MoonLinearProgressColors> with DiagnosticableTreeMixin {
-  static final light = MoonLinearProgressColors(
-    color: MoonColors.light.piccolo,
-    backgroundColor: MoonColors.light.trunks,
-  );
-
-  static final dark = MoonLinearProgressColors(
-    color: MoonColors.dark.piccolo,
-    backgroundColor: MoonColors.dark.trunks,
-  );
-
   /// Linear progress color.
   final Color color;
 

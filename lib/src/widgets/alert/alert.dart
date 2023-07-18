@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/icons/icon_colors.dart';
-import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -110,9 +109,9 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
   TextStyle _getTitleTextStyle({required BuildContext context}) {
     if (widget.body != null) {
-      return context.moonTheme?.alertTheme.properties.titleTextStyle ?? MoonTextStyles.heading.textDefault;
+      return context.moonTheme?.alertTheme.properties.titleTextStyle ?? MoonTypography.typography.heading.textDefault;
     } else {
-      return context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTextStyles.body.textDefault;
+      return context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTypography.typography.body.textDefault;
     }
   }
 
@@ -187,10 +186,10 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
         widget.borderColor ?? context.moonTheme?.alertTheme.colors.borderColor ?? MoonColors.light.bulma;
 
     final Color effectiveTextColor =
-        widget.color ?? context.moonTheme?.alertTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+        widget.color ?? context.moonTheme?.alertTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final Color effectiveIconColor =
-        widget.color ?? context.moonTheme?.alertTheme.colors.iconColor ?? MoonIconColors.light.primaryColor;
+        widget.color ?? context.moonTheme?.alertTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
     final EdgeInsetsGeometry effectivePadding =
         widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
@@ -198,14 +197,15 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
     final TextStyle effectiveTitleTextStyle = _getTitleTextStyle(context: context);
 
     final TextStyle effectiveBodyTextStyle =
-        context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTextStyles.body.textDefault;
+        context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTypography.typography.body.textDefault;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.alertTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.alertTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.alertTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _animationController ??= AnimationController(
       duration: effectiveTransitionDuration,

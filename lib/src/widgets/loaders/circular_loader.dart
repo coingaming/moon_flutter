@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_size_properties.dart';
+import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
 
 enum MoonCircularLoaderSize {
@@ -46,18 +48,19 @@ class MoonCircularLoader extends StatelessWidget {
   MoonCircularLoaderSizeProperties _getMoonLoaderSize(BuildContext context, MoonCircularLoaderSize? moonLoaderSize) {
     switch (moonLoaderSize) {
       case MoonCircularLoaderSize.x2s:
-        return context.moonTheme?.circularLoaderTheme.sizes.x2s ?? MoonCircularLoaderSizeProperties.x2s;
+        return context.moonTheme?.circularLoaderTheme.sizes.x2s ??
+            MoonCircularLoaderSizes(tokens: MoonTokens.light).x2s;
       case MoonCircularLoaderSize.xs:
-        return context.moonTheme?.circularLoaderTheme.sizes.xs ?? MoonCircularLoaderSizeProperties.xs;
+        return context.moonTheme?.circularLoaderTheme.sizes.xs ?? MoonCircularLoaderSizes(tokens: MoonTokens.light).xs;
       case MoonCircularLoaderSize.sm:
-        return context.moonTheme?.circularLoaderTheme.sizes.sm ?? MoonCircularLoaderSizeProperties.sm;
+        return context.moonTheme?.circularLoaderTheme.sizes.sm ?? MoonCircularLoaderSizes(tokens: MoonTokens.light).sm;
       case MoonCircularLoaderSize.md:
-        return context.moonTheme?.circularLoaderTheme.sizes.md ?? MoonCircularLoaderSizeProperties.md;
+        return context.moonTheme?.circularLoaderTheme.sizes.md ?? MoonCircularLoaderSizes(tokens: MoonTokens.light).md;
       case MoonCircularLoaderSize.lg:
-        return context.moonTheme?.circularLoaderTheme.sizes.lg ?? MoonCircularLoaderSizeProperties.lg;
+        return context.moonTheme?.circularLoaderTheme.sizes.lg ?? MoonCircularLoaderSizes(tokens: MoonTokens.light).lg;
 
       default:
-        return context.moonTheme?.circularLoaderTheme.sizes.md ?? MoonCircularLoaderSizeProperties.md;
+        return context.moonTheme?.circularLoaderTheme.sizes.md ?? MoonCircularLoaderSizes(tokens: MoonTokens.light).md;
     }
   }
 

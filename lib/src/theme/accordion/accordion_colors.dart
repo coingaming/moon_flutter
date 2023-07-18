@@ -1,44 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> with DiagnosticableTreeMixin {
-  static final light = MoonAccordionItemColors(
-    leadingColor: MoonTypography.light.colors.bodyPrimary,
-    expandedLeadingColor: MoonTypography.light.colors.bodyPrimary,
-    titleColor: MoonTypography.light.colors.bodyPrimary,
-    expandedTitleColor: MoonTypography.light.colors.bodyPrimary,
-    trailingColor: MoonTypography.light.colors.bodyPrimary,
-    expandedTrailingColor: MoonTypography.light.colors.bodyPrimary,
-    contentColor: MoonTypography.light.colors.bodyPrimary,
-    trailingIconColor: MoonTypography.light.colors.bodySecondary,
-    expandedTrailingIconColor: MoonTypography.light.colors.bodyPrimary,
-    backgroundColor: MoonColors.light.gohan,
-    expandedBackgroundColor: MoonColors.light.gohan,
-    borderColor: MoonColors.light.beerus,
-    dividerColor: MoonColors.light.beerus,
-  );
-
-  static final dark = MoonAccordionItemColors(
-    leadingColor: MoonTypography.dark.colors.bodyPrimary,
-    expandedLeadingColor: MoonTypography.dark.colors.bodyPrimary,
-    titleColor: MoonTypography.dark.colors.bodyPrimary,
-    expandedTitleColor: MoonTypography.dark.colors.bodyPrimary,
-    trailingColor: MoonTypography.dark.colors.bodyPrimary,
-    expandedTrailingColor: MoonTypography.dark.colors.bodyPrimary,
-    contentColor: MoonTypography.dark.colors.bodyPrimary,
-    trailingIconColor: MoonTypography.dark.colors.bodySecondary,
-    expandedTrailingIconColor: MoonTypography.dark.colors.bodyPrimary,
-    backgroundColor: MoonColors.dark.gohan,
-    expandedBackgroundColor: MoonColors.dark.gohan,
-    borderColor: MoonColors.dark.beerus,
-    dividerColor: MoonColors.dark.beerus,
-  );
-
+class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with DiagnosticableTreeMixin {
   /// Collapsed accordion item leading slot widget's text and icon color.
   final Color leadingColor;
 
@@ -78,7 +44,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   /// Accordion item divider color.
   final Color dividerColor;
 
-  const MoonAccordionItemColors({
+  const MoonAccordionColors({
     required this.leadingColor,
     required this.expandedLeadingColor,
     required this.titleColor,
@@ -95,7 +61,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   });
 
   @override
-  MoonAccordionItemColors copyWith({
+  MoonAccordionColors copyWith({
     Color? leadingColor,
     Color? expandedLeadingColor,
     Color? titleColor,
@@ -110,7 +76,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
     Color? borderColor,
     Color? dividerColor,
   }) {
-    return MoonAccordionItemColors(
+    return MoonAccordionColors(
       leadingColor: leadingColor ?? this.leadingColor,
       expandedLeadingColor: expandedLeadingColor ?? this.expandedLeadingColor,
       titleColor: titleColor ?? this.titleColor,
@@ -128,10 +94,10 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   }
 
   @override
-  MoonAccordionItemColors lerp(ThemeExtension<MoonAccordionItemColors>? other, double t) {
-    if (other is! MoonAccordionItemColors) return this;
+  MoonAccordionColors lerp(ThemeExtension<MoonAccordionColors>? other, double t) {
+    if (other is! MoonAccordionColors) return this;
 
-    return MoonAccordionItemColors(
+    return MoonAccordionColors(
       leadingColor: colorPremulLerp(leadingColor, other.leadingColor, t)!,
       expandedLeadingColor: colorPremulLerp(expandedLeadingColor, other.expandedLeadingColor, t)!,
       titleColor: colorPremulLerp(titleColor, other.titleColor, t)!,
@@ -152,7 +118,7 @@ class MoonAccordionItemColors extends ThemeExtension<MoonAccordionItemColors> wi
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonAccordionItemColors"))
+      ..add(DiagnosticsProperty("type", "MoonAccordionColors"))
       ..add(ColorProperty("leadingColor", leadingColor))
       ..add(ColorProperty("expandedLeadingColor", expandedLeadingColor))
       ..add(ColorProperty("titleColor", titleColor))

@@ -1,28 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with DiagnosticableTreeMixin {
-  static final light = MoonTabBarColors(
-    indicatorColor: MoonColors.light.piccolo,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    selectedTextColor: MoonColors.light.piccolo,
-    selectedPillTextColor: MoonTypography.light.colors.bodyPrimary,
-    selectedPillTabColor: MoonColors.light.gohan,
-  );
-
-  static final dark = MoonTabBarColors(
-    indicatorColor: MoonColors.dark.piccolo,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    selectedTextColor: MoonColors.dark.piccolo,
-    selectedPillTextColor: MoonTypography.dark.colors.bodyPrimary,
-    selectedPillTabColor: MoonColors.dark.gohan,
-  );
-
   /// TabBar tab indicator color.
   final Color indicatorColor;
 

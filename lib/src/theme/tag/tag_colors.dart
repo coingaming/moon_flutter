@@ -1,25 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTagColors extends ThemeExtension<MoonTagColors> with DiagnosticableTreeMixin {
-  static final light = MoonTagColors(
-    textColor: MoonTypography.light.colors.bodyPrimary,
-    iconColor: MoonIconTheme.light.colors.primaryColor,
-    backgroundColor: MoonColors.light.gohan,
-  );
-
-  static final dark = MoonTagColors(
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-    iconColor: MoonIconTheme.dark.colors.primaryColor,
-    backgroundColor: MoonColors.dark.gohan,
-  );
-
   /// Tag text color.
   final Color textColor;
 

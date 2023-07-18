@@ -1,21 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCircularLoaderColors extends ThemeExtension<MoonCircularLoaderColors> with DiagnosticableTreeMixin {
-  static final light = MoonCircularLoaderColors(
-    color: MoonColors.light.hit,
-    backgroundColor: Colors.transparent,
-  );
-
-  static final dark = MoonCircularLoaderColors(
-    color: MoonColors.dark.hit,
-    backgroundColor: Colors.transparent,
-  );
-
   /// Circular loader color.
   final Color color;
 

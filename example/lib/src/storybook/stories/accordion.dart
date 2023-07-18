@@ -17,12 +17,12 @@ class AccordionStory extends Story {
               label: "accordionSize",
               description: "Size variants for MoonAccordion.",
               enabled: false,
-              initial: MoonAccordionItemSize.md,
+              initial: MoonAccordionSize.md,
               options: const [
-                Option(label: "sm", value: MoonAccordionItemSize.sm),
-                Option(label: "md", value: MoonAccordionItemSize.md),
-                Option(label: "lg", value: MoonAccordionItemSize.lg),
-                Option(label: "xl", value: MoonAccordionItemSize.xl)
+                Option(label: "sm", value: MoonAccordionSize.sm),
+                Option(label: "md", value: MoonAccordionSize.md),
+                Option(label: "lg", value: MoonAccordionSize.lg),
+                Option(label: "xl", value: MoonAccordionSize.xl)
               ],
             );
 
@@ -180,7 +180,7 @@ class AccordionStory extends Story {
                     const SizedBox(height: 64),
                     const TextDivider(text: "Grouped MoonAccordion"),
                     const SizedBox(height: 32),
-                    MoonAccordionItem<AccordionItems>(
+                    MoonAccordion<AccordionItems>(
                       identityValue: AccordionItems.first,
                       groupIdentityValue: currentlyOpenAccordionItem,
                       accordionSize: accordionSizesKnob,
@@ -211,7 +211,7 @@ class AccordionStory extends Story {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    MoonAccordionItem<AccordionItems>(
+                    MoonAccordion<AccordionItems>(
                       identityValue: AccordionItems.second,
                       groupIdentityValue: currentlyOpenAccordionItem,
                       initiallyExpanded: true,
@@ -245,7 +245,7 @@ class AccordionStory extends Story {
                     const SizedBox(height: 40),
                     const TextDivider(text: "Ungrouped MoonAccordion with content outside"),
                     const SizedBox(height: 32),
-                    MoonAccordionItem<AccordionItems>(
+                    MoonAccordion<AccordionItems>(
                       accordionSize: accordionSizesKnob,
                       initiallyExpanded: true,
                       hasContentOutside: true,
@@ -272,7 +272,7 @@ class AccordionStory extends Story {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    MoonAccordionItem<AccordionItems>(
+                    MoonAccordion<AccordionItems>(
                       accordionSize: accordionSizesKnob,
                       hasContentOutside: true,
                       leadingColor: leadingColor,

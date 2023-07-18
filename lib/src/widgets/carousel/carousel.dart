@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
-import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 
 class MoonCarousel extends StatefulWidget {
   /// Axis direction of the carousel. Defaults to `Axis.horizontal`.
@@ -248,14 +248,12 @@ class _MoonCarouselState extends State<MoonCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveTextColor =
-        context.moonTheme?.carouselTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+    final Color effectiveTextColor = context.moonTheme?.carouselTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.carouselTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+    final Color effectiveIconColor = context.moonTheme?.carouselTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.carouselTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+        context.moonTheme?.carouselTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
     final AxisDirection axisDirection = _getDirection(context);
 
@@ -449,11 +447,13 @@ class MoonCarouselScrollController extends ScrollController {
   Future<void> previousItem({required BuildContext context, Duration? duration, Curve? curve}) async {
     if (!hasClients) return;
 
-    final Duration effectiveTransitionDuration =
-        duration ?? context.moonTheme?.carouselTheme.properties.transitionDuration ?? const Duration(milliseconds: 200);
+    final Duration effectiveTransitionDuration = duration ??
+        context.moonTheme?.carouselTheme.properties.transitionDuration ??
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        curve ?? context.moonTheme?.carouselTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = curve ??
+        context.moonTheme?.carouselTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     await Future.wait<void>([
       for (final position in positions.cast<_MoonCarouselScrollPosition>())

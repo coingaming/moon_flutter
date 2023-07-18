@@ -8,14 +8,16 @@ import 'package:flutter/material.dart'
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/effects/focus_effects.dart';
-import 'package:moon_design/src/theme/opacity.dart';
-import 'package:moon_design/src/theme/sizes.dart';
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
+import 'package:moon_design/src/theme/text_input/text_input_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -958,15 +960,15 @@ class _MoonTextInputState extends State<MoonTextInput>
   MoonTextInputSizeProperties _getMoonTextInputSize(BuildContext context, MoonTextInputSize? moonTextInputSize) {
     switch (moonTextInputSize) {
       case MoonTextInputSize.sm:
-        return context.moonTheme?.textInputTheme.sizes.sm ?? MoonTextInputSizeProperties.sm;
+        return context.moonTheme?.textInputTheme.sizes.sm ?? MoonTextInputSizes(tokens: MoonTokens.light).sm;
       case MoonTextInputSize.md:
-        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizeProperties.md;
+        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizes(tokens: MoonTokens.light).md;
       case MoonTextInputSize.lg:
-        return context.moonTheme?.textInputTheme.sizes.lg ?? MoonTextInputSizeProperties.lg;
+        return context.moonTheme?.textInputTheme.sizes.lg ?? MoonTextInputSizes(tokens: MoonTokens.light).lg;
       case MoonTextInputSize.xl:
-        return context.moonTheme?.textInputTheme.sizes.xl ?? MoonTextInputSizeProperties.xl;
+        return context.moonTheme?.textInputTheme.sizes.xl ?? MoonTextInputSizes(tokens: MoonTokens.light).xl;
       default:
-        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizeProperties.md;
+        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizes(tokens: MoonTokens.light).md;
     }
   }
 
@@ -1131,7 +1133,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         context.isDarkMode ? effectiveErrorBorderColor.withOpacity(0.4) : effectiveErrorBorderColor.withOpacity(0.2);
 
     final Color effectiveTextColor =
-        widget.textColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+        widget.textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
 
     final Color effectiveHintTextColor =
         widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.supportingTextColor ?? MoonColors.light.trunks;
@@ -1140,17 +1142,18 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final double effectiveHeight = widget.height ?? effectiveMoonTextInputSize.height;
 
-    final double effectiveDisabledOpacityValue = context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    final double effectiveFocusEffectExtent =
-        context.moonEffects?.controlFocusEffect.effectExtent ?? MoonFocusEffects.lightFocusEffect.effectExtent;
+    final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.textInputTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        widget.transitionCurve ?? context.moonTheme?.textInputTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.textInputTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonTextInputSize.padding;
 

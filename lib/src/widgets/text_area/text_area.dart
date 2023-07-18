@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 
 typedef MoonTextAreaErrorBuilder = Widget Function(BuildContext context, String? errorText);
@@ -288,23 +289,19 @@ class MoonTextArea extends StatelessWidget {
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.textAreaTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
-    final Color effectiveActiveBorderColor = activeBorderColor ??
-        context.moonTheme?.textAreaTheme.colors.activeBorderColor ??
-        MoonColors.light.piccolo;
+    final Color effectiveActiveBorderColor =
+        activeBorderColor ?? context.moonTheme?.textAreaTheme.colors.activeBorderColor ?? MoonColors.light.piccolo;
 
-    final Color effectiveInactiveBorderColor = inactiveBorderColor ??
-        context.moonTheme?.textAreaTheme.colors.inactiveBorderColor ??
-        MoonColors.light.beerus;
+    final Color effectiveInactiveBorderColor =
+        inactiveBorderColor ?? context.moonTheme?.textAreaTheme.colors.inactiveBorderColor ?? MoonColors.light.beerus;
 
-    final Color effectiveErrorBorderColor = errorBorderColor ??
-        context.moonTheme?.textAreaTheme.colors.errorBorderColor ??
-        MoonColors.light.chiChi100;
+    final Color effectiveErrorBorderColor =
+        errorBorderColor ?? context.moonTheme?.textAreaTheme.colors.errorBorderColor ?? MoonColors.light.chiChi100;
 
     final Color effectiveHoverBorderColor =
         hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
 
-    final Color effectiveTextColor =
-        textColor ?? context.moonTypography?.colors.bodyPrimary ?? MoonTypography.light.colors.bodyPrimary;
+    final Color effectiveTextColor = textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
 
     final Color effectiveHintTextColor =
         hintTextColor ?? context.moonTheme?.textAreaTheme.colors.hintTextColor ?? MoonColors.light.trunks;
@@ -317,18 +314,19 @@ class MoonTextArea extends StatelessWidget {
         textPadding ?? context.moonTheme?.textAreaTheme.properties.textPadding ?? const EdgeInsets.all(16);
 
     final TextStyle effectiveTextStyle =
-        textStyle ?? context.moonTheme?.textAreaTheme.properties.textStyle ?? const TextStyle(fontSize: 16);
+        textStyle ?? context.moonTheme?.textAreaTheme.properties.textStyle ?? MoonTypography.typography.body.text16;
 
     final TextStyle effectiveHelperTextStyle = helperTextStyle ??
         context.moonTheme?.textAreaTheme.properties.helperTextStyle ??
-        const TextStyle(fontSize: 12);
+        MoonTypography.typography.body.text12;
 
     final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.textAreaTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        transitionCurve ?? context.moonTheme?.textAreaTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+    final Curve effectiveTransitionCurve = transitionCurve ??
+        context.moonTheme?.textAreaTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     return MoonFormTextInput(
       activeBorderColor: effectiveActiveBorderColor,

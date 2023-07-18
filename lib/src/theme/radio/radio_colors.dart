@@ -1,24 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonRadioColors extends ThemeExtension<MoonRadioColors> with DiagnosticableTreeMixin {
-  static final light = MoonRadioColors(
-    activeColor: MoonColors.light.piccolo,
-    inactiveColor: MoonColors.light.trunks,
-    textColor: MoonTypography.light.colors.bodyPrimary,
-  );
-
-  static final dark = MoonRadioColors(
-    activeColor: MoonColors.dark.piccolo,
-    inactiveColor: MoonColors.dark.trunks,
-    textColor: MoonTypography.dark.colors.bodyPrimary,
-  );
-
   /// Radio active color.
   final Color activeColor;
 

@@ -4,20 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_colors.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_properties.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme> with DiagnosticableTreeMixin {
-  static final light = MoonSegmentedControlTheme(
-    colors: MoonSegmentedControlColors.light,
-    properties: MoonSegmentedControlProperties.properties,
-    sizes: MoonSegmentedControlSizes.sizes,
-  );
-
-  static final dark = MoonSegmentedControlTheme(
-    colors: MoonSegmentedControlColors.dark,
-    properties: MoonSegmentedControlProperties.properties,
-    sizes: MoonSegmentedControlSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// SegmentedControl colors.
   final MoonSegmentedControlColors colors;
@@ -28,19 +20,37 @@ class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme
   /// SegmentedControl sizes.
   final MoonSegmentedControlSizes sizes;
 
-  const MoonSegmentedControlTheme({
-    required this.colors,
-    required this.properties,
-    required this.sizes,
-  });
+  MoonSegmentedControlTheme({
+    required this.tokens,
+    MoonSegmentedControlColors? colors,
+    MoonSegmentedControlProperties? properties,
+    MoonSegmentedControlSizes? sizes,
+  })  : colors = colors ??
+            MoonSegmentedControlColors(
+              backgroundColor: tokens.colors.goku,
+              selectedSegmentColor: tokens.colors.gohan,
+              textColor: tokens.colors.textPrimary,
+              selectedTextColor: tokens.colors.textPrimary,
+            ),
+        properties = properties ??
+            MoonSegmentedControlProperties(
+              borderRadius: tokens.borders.interactiveMd,
+              gap: tokens.sizes.x5s,
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
+              padding: EdgeInsets.all(tokens.sizes.x5s),
+            ),
+        sizes = sizes ?? MoonSegmentedControlSizes(tokens: tokens);
 
   @override
   MoonSegmentedControlTheme copyWith({
+    MoonTokens? tokens,
     MoonSegmentedControlColors? colors,
     MoonSegmentedControlProperties? properties,
     MoonSegmentedControlSizes? sizes,
   }) {
     return MoonSegmentedControlTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
       sizes: sizes ?? this.sizes,
@@ -52,6 +62,7 @@ class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme
     if (other is! MoonSegmentedControlTheme) return this;
 
     return MoonSegmentedControlTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
       sizes: sizes.lerp(other.sizes, t),
@@ -63,6 +74,7 @@ class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonSegmentedControlTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonSegmentedControlColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonSegmentedControlProperties>("properties", properties))
       ..add(DiagnosticsProperty<MoonSegmentedControlSizes>("sizes", sizes));

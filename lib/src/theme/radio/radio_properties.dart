@@ -1,14 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonRadioProperties extends ThemeExtension<MoonRadioProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonRadioProperties(
-    textStyle: MoonTextStyles.body.textDefault,
-  );
-
   /// Radio text style.
   final TextStyle textStyle;
 

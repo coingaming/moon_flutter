@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 
 class MoonDotIndicator extends StatefulWidget {
@@ -97,11 +98,11 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.dotIndicatorTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     final Curve effectiveTransitionCurve = widget.transitionCurve ??
         context.moonTheme?.dotIndicatorTheme.properties.transitionCurve ??
-        Curves.easeInOutCubic;
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _animationControllers ??= List.generate(
       widget.dotCount,

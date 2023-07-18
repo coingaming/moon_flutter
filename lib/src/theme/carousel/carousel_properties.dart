@@ -3,19 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonCarouselProperties(
-    gap: MoonSizes.sizes.x2s,
-    textStyle: MoonTextStyles.body.textDefault,
-    autoPlayDelay: const Duration(seconds: 3),
-    transitionDuration: const Duration(milliseconds: 800),
-    transitionCurve: Curves.fastOutSlowIn,
-  );
-
   /// Gap between Carousel items.
   final double gap;
 

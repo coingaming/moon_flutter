@@ -4,20 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/drawer/drawer_colors.dart';
 import 'package:moon_design/src/theme/drawer/drawer_properties.dart';
 import 'package:moon_design/src/theme/drawer/drawer_shadows.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with DiagnosticableTreeMixin {
-  static final light = MoonDrawerTheme(
-    colors: MoonDrawerColors.light,
-    properties: MoonDrawerProperties.properties,
-    shadows: MoonDrawerShadows.light,
-  );
-
-  static final dark = MoonDrawerTheme(
-    colors: MoonDrawerColors.dark,
-    properties: MoonDrawerProperties.properties,
-    shadows: MoonDrawerShadows.dark,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Drawer colors.
   final MoonDrawerColors colors;
@@ -28,19 +20,35 @@ class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with Diagnosticabl
   /// Drawer shadows.
   final MoonDrawerShadows shadows;
 
-  const MoonDrawerTheme({
-    required this.colors,
-    required this.properties,
-    required this.shadows,
-  });
+  MoonDrawerTheme({
+    required this.tokens,
+    MoonDrawerColors? colors,
+    MoonDrawerProperties? properties,
+    MoonDrawerShadows? shadows,
+  })  : colors = colors ??
+            MoonDrawerColors(
+              textColor: tokens.colors.textPrimary,
+              iconColor: tokens.colors.iconPrimary,
+              backgroundColor: tokens.colors.gohan,
+              barrierColor: tokens.colors.zeno,
+            ),
+        properties = properties ??
+            MoonDrawerProperties(
+              borderRadius: BorderRadius.zero,
+              width: 448,
+              textStyle: tokens.typography.body.textDefault,
+            ),
+        shadows = shadows ?? MoonDrawerShadows(drawerShadows: tokens.shadows.lg);
 
   @override
   MoonDrawerTheme copyWith({
+    MoonTokens? tokens,
     MoonDrawerColors? colors,
     MoonDrawerProperties? properties,
     MoonDrawerShadows? shadows,
   }) {
     return MoonDrawerTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
       shadows: shadows ?? this.shadows,
@@ -52,6 +60,7 @@ class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with Diagnosticabl
     if (other is! MoonDrawerTheme) return this;
 
     return MoonDrawerTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
       shadows: shadows.lerp(other.shadows, t),
@@ -63,6 +72,7 @@ class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with Diagnosticabl
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonDrawerTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonDrawerColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonDrawerProperties>("properties", properties))
       ..add(DiagnosticsProperty<MoonDrawerShadows>("shadows", shadows));

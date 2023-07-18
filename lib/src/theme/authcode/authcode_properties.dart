@@ -3,26 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonAuthCodeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    gap: MoonSizes.sizes.x4s,
-    height: MoonSizes.sizes.xl,
-    width: MoonSizes.sizes.lg,
-    animationDuration: const Duration(milliseconds: 200),
-    errorAnimationDuration: const Duration(milliseconds: 200),
-    peekDuration: const Duration(milliseconds: 200),
-    animationCurve: Curves.easeInOutCubic,
-    errorAnimationCurve: Curves.easeInOutCubic,
-    textStyle: MoonTextStyles.body.text24,
-    errorTextStyle: MoonTextStyles.body.text12,
-  );
-
   /// Border radius of the auth input field.
   final BorderRadiusGeometry borderRadius;
 

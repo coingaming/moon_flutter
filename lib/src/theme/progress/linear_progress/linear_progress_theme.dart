@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_colors.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme> with DiagnosticableTreeMixin {
-  static final light = MoonLinearProgressTheme(
-    colors: MoonLinearProgressColors.light,
-    sizes: MoonLinearProgressSizes.sizes,
-  );
-
-  static final dark = MoonLinearProgressTheme(
-    colors: MoonLinearProgressColors.dark,
-    sizes: MoonLinearProgressSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Linear progress colors.
   final MoonLinearProgressColors colors;
@@ -22,17 +16,25 @@ class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme> wi
   /// Linear progress sizes.
   final MoonLinearProgressSizes sizes;
 
-  const MoonLinearProgressTheme({
-    required this.colors,
-    required this.sizes,
-  });
+  MoonLinearProgressTheme({
+    required this.tokens,
+    MoonLinearProgressColors? colors,
+    MoonLinearProgressSizes? sizes,
+  })  : colors = colors ??
+            MoonLinearProgressColors(
+              color: tokens.colors.piccolo,
+              backgroundColor: tokens.colors.trunks,
+            ),
+        sizes = sizes ?? MoonLinearProgressSizes(tokens: tokens);
 
   @override
   MoonLinearProgressTheme copyWith({
+    MoonTokens? tokens,
     MoonLinearProgressColors? colors,
     MoonLinearProgressSizes? sizes,
   }) {
     return MoonLinearProgressTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       sizes: sizes ?? this.sizes,
     );
@@ -43,6 +45,7 @@ class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme> wi
     if (other is! MoonLinearProgressTheme) return this;
 
     return MoonLinearProgressTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       sizes: sizes.lerp(other.sizes, t),
     );
@@ -53,6 +56,7 @@ class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme> wi
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonLinearProgressTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonLinearProgressColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonLinearProgressSizes>("sizes", sizes));
   }

@@ -1,7 +1,6 @@
 import 'package:example/src/storybook/storybook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:moon_design/moon_design.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -41,11 +40,11 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
                 const SizedBox(width: 8.0),
                 Text(
                   "Moon Design",
-                  style: MoonTextStyles.heading.text16,
+                  style: MoonTypography.typography.heading.text16,
                 ),
               ],
               const SizedBox(width: 6.0),
-              Text("v$_version", style: MoonTextStyles.heading.text16),
+              Text("v$_version", style: MoonTypography.typography.heading.text16),
             ],
           ),
         ),

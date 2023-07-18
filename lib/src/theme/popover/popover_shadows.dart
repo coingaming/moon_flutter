@@ -1,18 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/shadows.dart';
-
 @immutable
 class MoonPopoverShadows extends ThemeExtension<MoonPopoverShadows> with DiagnosticableTreeMixin {
-  static final light = MoonPopoverShadows(
-    popoverShadows: MoonShadows.light.sm,
-  );
-
-  static final dark = MoonPopoverShadows(
-    popoverShadows: MoonShadows.dark.sm,
-  );
-
   /// Popover shadows.
   final List<BoxShadow> popoverShadows;
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/icons/icon_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -38,10 +37,11 @@ Future<T?> showMoonModal<T>({
 
   final Duration effectiveTransitionDuration = transitionDuration ??
       context.moonTheme?.modalTheme.properties.transitionDuration ??
-      const Duration(milliseconds: 200);
+      MoonTransitions.transitions.defaultTransitionDuration;
 
-  final Curve effectiveTransitionCurve =
-      transitionCurve ?? context.moonTheme?.modalTheme.properties.transitionCurve ?? Curves.easeInOutCubic;
+  final Curve effectiveTransitionCurve = transitionCurve ??
+      context.moonTheme?.modalTheme.properties.transitionCurve ??
+      MoonTransitions.transitions.defaultTransitionCurve;
 
   return Navigator.of(context, rootNavigator: useRootNavigator).push<T>(
     MoonModalRoute<T>(
@@ -152,14 +152,12 @@ class MoonModal extends StatelessWidget {
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.gohan;
 
-    final Color effectiveTextColor =
-        context.moonTheme?.modalTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+    final Color effectiveTextColor = context.moonTheme?.modalTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.modalTheme.colors.iconColor ?? MoonIconTheme.light.colors.primaryColor;
+    final Color effectiveIconColor = context.moonTheme?.modalTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.modalTheme.properties.textStyle ?? MoonTextStyles.body.textDefault;
+        context.moonTheme?.modalTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
     return Semantics(
       label: semanticLabel,

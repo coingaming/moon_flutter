@@ -1,22 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonTextAreaProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-    supportingPadding: EdgeInsets.only(top: MoonSizes.sizes.x4s),
-    textPadding: EdgeInsets.all(MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.body.text16,
-    helperTextStyle: MoonTextStyles.body.text12,
-  );
-
   /// TextArea border radius.
   final BorderRadiusGeometry borderRadius;
 

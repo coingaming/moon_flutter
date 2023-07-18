@@ -3,37 +3,9 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/sizes.dart';
-
 @immutable
 class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSizeProperties>
     with DiagnosticableTreeMixin {
-  static final x6s = MoonLinearLoaderSizeProperties(
-    borderRadius: MoonBorders.borders.surfaceXs,
-    loaderHeight: MoonSizes.sizes.x6s,
-  );
-
-  static final x5s = MoonLinearLoaderSizeProperties(
-    borderRadius: MoonBorders.borders.surfaceXs,
-    loaderHeight: MoonSizes.sizes.x5s,
-  );
-
-  static final x4s = MoonLinearLoaderSizeProperties(
-    borderRadius: MoonBorders.borders.surfaceSm,
-    loaderHeight: MoonSizes.sizes.x4s,
-  );
-
-  static final x3s = MoonLinearLoaderSizeProperties(
-    borderRadius: MoonBorders.borders.surfaceMd,
-    loaderHeight: MoonSizes.sizes.x3s,
-  );
-
-  static final x2s = MoonLinearLoaderSizeProperties(
-    borderRadius: MoonBorders.borders.surfaceLg,
-    loaderHeight: MoonSizes.sizes.x2s,
-  );
-
   /// Linear loader border radius.
   final BorderRadiusGeometry borderRadius;
 

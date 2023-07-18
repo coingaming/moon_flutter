@@ -3,57 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> with DiagnosticableTreeMixin {
-  static final xs = MoonButtonSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveXs,
-    gap: MoonSizes.sizes.x5s,
-    height: MoonSizes.sizes.xs,
-    iconSizeValue: MoonSizes.sizes.x2s,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x4s),
-    textStyle: MoonTextStyles.heading.text12,
-  );
-
-  static final sm = MoonButtonSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    gap: MoonSizes.sizes.x5s,
-    height: MoonSizes.sizes.sm,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.heading.textDefault,
-  );
-
-  static final md = MoonButtonSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    gap: MoonSizes.sizes.x4s,
-    height: MoonSizes.sizes.md,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.heading.textDefault,
-  );
-
-  static final lg = MoonButtonSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveSm,
-    gap: MoonSizes.sizes.x3s,
-    height: MoonSizes.sizes.lg,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x2s),
-    textStyle: MoonTextStyles.heading.text16,
-  );
-
-  static final xl = MoonButtonSizeProperties(
-    borderRadius: MoonBorders.borders.interactiveMd,
-    gap: MoonSizes.sizes.x2s,
-    height: MoonSizes.sizes.xl,
-    iconSizeValue: MoonSizes.sizes.xs,
-    padding: EdgeInsets.symmetric(horizontal: MoonSizes.sizes.xs),
-    textStyle: MoonTextStyles.heading.text16,
-  );
-
   /// Button border radius.
   final BorderRadiusGeometry borderRadius;
 

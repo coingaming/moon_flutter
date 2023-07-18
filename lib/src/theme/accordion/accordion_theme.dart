@@ -1,58 +1,73 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/accordion/accordion_item_colors.dart';
-import 'package:moon_design/src/theme/accordion/accordion_item_properties.dart';
-import 'package:moon_design/src/theme/accordion/accordion_item_shadows.dart';
-import 'package:moon_design/src/theme/accordion/accordion_item_sizes.dart';
+import 'package:moon_design/src/theme/accordion/accordion_colors.dart';
+import 'package:moon_design/src/theme/accordion/accordion_properties.dart';
+import 'package:moon_design/src/theme/accordion/accordion_shadows.dart';
+import 'package:moon_design/src/theme/accordion/accordion_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with DiagnosticableTreeMixin {
-  static final light = MoonAccordionTheme(
-    itemColors: MoonAccordionItemColors.light,
-    itemProperties: MoonAccordionItemProperties.properties,
-    itemShadows: MoonAccordionItemShadows.light,
-    itemSizes: MoonAccordionItemSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
-  static final dark = MoonAccordionTheme(
-    itemColors: MoonAccordionItemColors.dark,
-    itemProperties: MoonAccordionItemProperties.properties,
-    itemShadows: MoonAccordionItemShadows.dark,
-    itemSizes: MoonAccordionItemSizes.sizes,
-  );
+  /// Accordion colors.
+  final MoonAccordionColors colors;
 
-  /// Accordion item colors.
-  final MoonAccordionItemColors itemColors;
+  /// Accordion properties.
+  final MoonAccordionProperties properties;
 
-  /// Accordion item properties.
-  final MoonAccordionItemProperties itemProperties;
+  /// Accordion shadows.
+  final MoonAccordionShadows shadows;
 
-  /// Accordion item shadows.
-  final MoonAccordionItemShadows itemShadows;
+  /// Accordion sizes.
+  final MoonAccordionSizes sizes;
 
-  /// Accordion item sizes.
-  final MoonAccordionItemSizes itemSizes;
-
-  const MoonAccordionTheme({
-    required this.itemColors,
-    required this.itemProperties,
-    required this.itemShadows,
-    required this.itemSizes,
-  });
+  MoonAccordionTheme({
+    required this.tokens,
+    MoonAccordionColors? colors,
+    MoonAccordionProperties? properties,
+    MoonAccordionShadows? shadows,
+    MoonAccordionSizes? sizes,
+  })  : colors = colors ??
+            MoonAccordionColors(
+              backgroundColor: tokens.colors.gohan,
+              borderColor: tokens.colors.beerus,
+              contentColor: tokens.colors.textPrimary,
+              dividerColor: tokens.colors.beerus,
+              expandedBackgroundColor: tokens.colors.gohan,
+              expandedLeadingColor: tokens.colors.textPrimary,
+              expandedTitleColor: tokens.colors.textPrimary,
+              expandedTrailingColor: tokens.colors.textPrimary,
+              expandedTrailingIconColor: tokens.colors.textPrimary,
+              leadingColor: tokens.colors.textPrimary,
+              titleColor: tokens.colors.textPrimary,
+              trailingColor: tokens.colors.textPrimary,
+              trailingIconColor: tokens.colors.textSecondary,
+            ),
+        properties = properties ??
+            MoonAccordionProperties(
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
+            ),
+        shadows = shadows ?? MoonAccordionShadows(shadows: tokens.shadows.sm),
+        sizes = sizes ?? MoonAccordionSizes(tokens: tokens);
 
   @override
   MoonAccordionTheme copyWith({
-    MoonAccordionItemColors? itemColors,
-    MoonAccordionItemProperties? itemProperties,
-    MoonAccordionItemShadows? itemShadows,
-    MoonAccordionItemSizes? itemSizes,
+    MoonTokens? tokens,
+    MoonAccordionColors? colors,
+    MoonAccordionProperties? properties,
+    MoonAccordionShadows? shadows,
+    MoonAccordionSizes? sizes,
   }) {
     return MoonAccordionTheme(
-      itemColors: itemColors ?? this.itemColors,
-      itemProperties: itemProperties ?? this.itemProperties,
-      itemShadows: itemShadows ?? this.itemShadows,
-      itemSizes: itemSizes ?? this.itemSizes,
+      tokens: tokens ?? this.tokens,
+      colors: colors ?? this.colors,
+      properties: properties ?? this.properties,
+      shadows: shadows ?? this.shadows,
+      sizes: sizes ?? this.sizes,
     );
   }
 
@@ -61,10 +76,11 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
     if (other is! MoonAccordionTheme) return this;
 
     return MoonAccordionTheme(
-      itemColors: itemColors.lerp(other.itemColors, t),
-      itemProperties: itemProperties.lerp(other.itemProperties, t),
-      itemShadows: itemShadows.lerp(other.itemShadows, t),
-      itemSizes: itemSizes.lerp(other.itemSizes, t),
+      tokens: tokens.lerp(other.tokens, t),
+      colors: colors.lerp(other.colors, t),
+      properties: properties.lerp(other.properties, t),
+      shadows: shadows.lerp(other.shadows, t),
+      sizes: sizes.lerp(other.sizes, t),
     );
   }
 
@@ -73,9 +89,10 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonAccordionTheme"))
-      ..add(DiagnosticsProperty<MoonAccordionItemColors>("itemColors", itemColors))
-      ..add(DiagnosticsProperty<MoonAccordionItemProperties>("itemProperties", itemProperties))
-      ..add(DiagnosticsProperty<MoonAccordionItemShadows>("itemShadows", itemShadows))
-      ..add(DiagnosticsProperty<MoonAccordionItemSizes>("itemSizes", itemSizes));
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
+      ..add(DiagnosticsProperty<MoonAccordionColors>("colors", colors))
+      ..add(DiagnosticsProperty<MoonAccordionProperties>("properties", properties))
+      ..add(DiagnosticsProperty<MoonAccordionShadows>("shadows", shadows))
+      ..add(DiagnosticsProperty<MoonAccordionSizes>("sizes", sizes));
   }
 }

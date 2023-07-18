@@ -4,20 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/text_input/text_input_colors.dart';
 import 'package:moon_design/src/theme/text_input/text_input_properties.dart';
 import 'package:moon_design/src/theme/text_input/text_input_sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with DiagnosticableTreeMixin {
-  static final light = MoonTextInputTheme(
-    colors: MoonTextInputColors.light,
-    properties: MoonTextInputProperties.properties,
-    sizes: MoonTextInputSizes.sizes,
-  );
-
-  static final dark = MoonTextInputTheme(
-    colors: MoonTextInputColors.dark,
-    properties: MoonTextInputProperties.properties,
-    sizes: MoonTextInputSizes.sizes,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// TextInput colors.
   final MoonTextInputColors colors;
@@ -28,19 +20,39 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
   /// TextInput sizes.
   final MoonTextInputSizes sizes;
 
-  const MoonTextInputTheme({
-    required this.colors,
-    required this.properties,
-    required this.sizes,
-  });
+  MoonTextInputTheme({
+    required this.tokens,
+    MoonTextInputColors? colors,
+    MoonTextInputProperties? properties,
+    MoonTextInputSizes? sizes,
+  })  : colors = colors ??
+            MoonTextInputColors(
+              backgroundColor: tokens.colors.gohan,
+              activeBorderColor: tokens.colors.piccolo,
+              inactiveBorderColor: tokens.colors.beerus,
+              errorBorderColor: tokens.colors.chiChi100,
+              hoverBorderColor: tokens.colors.beerus,
+              labelTextColor: tokens.colors.trunks,
+              supportingTextColor: tokens.colors.trunks,
+            ),
+        properties = properties ??
+            MoonTextInputProperties(
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
+              helperPadding: EdgeInsets.only(top: tokens.sizes.x4s),
+              helperTextStyle: tokens.typography.body.text12,
+            ),
+        sizes = sizes ?? MoonTextInputSizes(tokens: tokens);
 
   @override
   MoonTextInputTheme copyWith({
+    MoonTokens? tokens,
     MoonTextInputColors? colors,
     MoonTextInputProperties? properties,
     MoonTextInputSizes? sizes,
   }) {
     return MoonTextInputTheme(
+      tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
       sizes: sizes ?? this.sizes,
@@ -52,6 +64,7 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
     if (other is! MoonTextInputTheme) return this;
 
     return MoonTextInputTheme(
+      tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
       sizes: sizes.lerp(other.sizes, t),
@@ -63,6 +76,7 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
       ..add(DiagnosticsProperty("type", "MoonTextInputTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonTextInputColors>("colors", colors))
       ..add(DiagnosticsProperty<MoonTextInputProperties>("properties", properties))
       ..add(DiagnosticsProperty<MoonTextInputSizes>("sizes", sizes));

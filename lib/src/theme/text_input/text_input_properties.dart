@@ -1,18 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonTextInputProperties(
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionCurve: Curves.easeInOutCubic,
-    helperPadding: EdgeInsets.only(top: MoonSizes.sizes.x4s),
-    helperTextStyle: MoonTextStyles.body.text12,
-  );
-
   /// TextInput transition duration.
   final Duration transitionDuration;
 

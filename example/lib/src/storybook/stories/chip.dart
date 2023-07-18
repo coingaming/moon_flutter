@@ -163,7 +163,7 @@ class ChipStory extends Story {
                       activeColor: context.moonColors!.dodoria100,
                       backgroundColor: context.moonColors!.krillin100,
                       activeBackgroundColor: context.moonColors!.chiChi10,
-                      textColor: context.moonTypography!.colors.controlPrimary,
+                      textColor: context.moonColors!.goten,
                       borderWidth: 2,
                       showBorder: showBorderKnob,
                       chipSize: chipSizesKnob,

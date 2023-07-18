@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
 import 'package:moon_design/src/theme/button/button_size_properties.dart';
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/effects/hover_effects.dart';
+import 'package:moon_design/src/theme/button/button_sizes.dart';
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -293,17 +294,17 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
   MoonButtonSizeProperties _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
     switch (moonButtonSize) {
       case MoonButtonSize.xs:
-        return context.moonTheme?.buttonTheme.sizes.xs ?? MoonButtonSizeProperties.xs;
+        return context.moonTheme?.buttonTheme.sizes.xs ?? MoonButtonSizes(tokens: MoonTokens.light).xs;
       case MoonButtonSize.sm:
-        return context.moonTheme?.buttonTheme.sizes.sm ?? MoonButtonSizeProperties.sm;
+        return context.moonTheme?.buttonTheme.sizes.sm ?? MoonButtonSizes(tokens: MoonTokens.light).sm;
       case MoonButtonSize.md:
-        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizeProperties.md;
+        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizes(tokens: MoonTokens.light).md;
       case MoonButtonSize.lg:
-        return context.moonTheme?.buttonTheme.sizes.lg ?? MoonButtonSizeProperties.lg;
+        return context.moonTheme?.buttonTheme.sizes.lg ?? MoonButtonSizes(tokens: MoonTokens.light).lg;
       case MoonButtonSize.xl:
-        return context.moonTheme?.buttonTheme.sizes.xl ?? MoonButtonSizeProperties.xl;
+        return context.moonTheme?.buttonTheme.sizes.xl ?? MoonButtonSizes(tokens: MoonTokens.light).xl;
       default:
-        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizeProperties.md;
+        return context.moonTheme?.buttonTheme.sizes.md ?? MoonButtonSizes(tokens: MoonTokens.light).md;
     }
   }
 
@@ -326,11 +327,11 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
         widget.borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
     final Color effectiveTextColor =
-        widget.textColor ?? context.moonTheme?.buttonTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+        widget.textColor ?? context.moonTheme?.buttonTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final Color effectiveHoverEffectColor = widget.hoverEffectColor ??
         context.moonEffects?.controlHoverEffect.primaryHoverColor ??
-        MoonHoverEffects.lightHoverEffect.primaryHoverColor;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
 
     final Color hoverColor = Color.alphaBlend(effectiveHoverEffectColor, widget.backgroundColor ?? Colors.transparent);
 
@@ -353,11 +354,11 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
 
     final Duration effectiveHoverEffectDuration = widget.hoverEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??
-        MoonHoverEffects.lightHoverEffect.hoverDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
 
     final Curve effectiveHoverEffectCurve = widget.hoverEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
-        MoonHoverEffects.lightHoverEffect.hoverCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
 
     _animationController ??= AnimationController(duration: effectiveHoverEffectDuration, vsync: this);
 

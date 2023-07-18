@@ -2,16 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/button/button_size_properties.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with DiagnosticableTreeMixin {
-  static final sizes = MoonButtonSizes(
-    xs: MoonButtonSizeProperties.xs,
-    sm: MoonButtonSizeProperties.sm,
-    md: MoonButtonSizeProperties.md,
-    lg: MoonButtonSizeProperties.lg,
-    xl: MoonButtonSizeProperties.xl,
-  );
+  /// MDS tokens.
+  final MoonTokens tokens;
 
   /// Extra small button properties.
   final MoonButtonSizeProperties xs;
@@ -28,16 +24,62 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
   /// Extra large button properties.
   final MoonButtonSizeProperties xl;
 
-  const MoonButtonSizes({
-    required this.xs,
-    required this.sm,
-    required this.md,
-    required this.lg,
-    required this.xl,
-  });
+  MoonButtonSizes({
+    required this.tokens,
+    MoonButtonSizeProperties? xs,
+    MoonButtonSizeProperties? sm,
+    MoonButtonSizeProperties? md,
+    MoonButtonSizeProperties? lg,
+    MoonButtonSizeProperties? xl,
+  })  : xs = xs ??
+            MoonButtonSizeProperties(
+              borderRadius: tokens.borders.interactiveXs,
+              gap: tokens.sizes.x5s,
+              height: tokens.sizes.xs,
+              iconSizeValue: tokens.sizes.x2s,
+              padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
+              textStyle: tokens.typography.heading.text12,
+            ),
+        sm = sm ??
+            MoonButtonSizeProperties(
+              borderRadius: tokens.borders.interactiveSm,
+              gap: tokens.sizes.x5s,
+              height: tokens.sizes.sm,
+              iconSizeValue: tokens.sizes.xs,
+              padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              textStyle: tokens.typography.heading.textDefault,
+            ),
+        md = md ??
+            MoonButtonSizeProperties(
+              borderRadius: tokens.borders.interactiveSm,
+              gap: tokens.sizes.x4s,
+              height: tokens.sizes.md,
+              iconSizeValue: tokens.sizes.xs,
+              padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x2s),
+              textStyle: tokens.typography.heading.textDefault,
+            ),
+        lg = lg ??
+            MoonButtonSizeProperties(
+              borderRadius: tokens.borders.interactiveSm,
+              gap: tokens.sizes.x3s,
+              height: tokens.sizes.lg,
+              iconSizeValue: tokens.sizes.xs,
+              padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x2s),
+              textStyle: tokens.typography.heading.text16,
+            ),
+        xl = xl ??
+            MoonButtonSizeProperties(
+              borderRadius: tokens.borders.interactiveMd,
+              gap: tokens.sizes.x2s,
+              height: tokens.sizes.xl,
+              iconSizeValue: tokens.sizes.xs,
+              padding: EdgeInsets.symmetric(horizontal: tokens.sizes.xs),
+              textStyle: tokens.typography.heading.text16,
+            );
 
   @override
   MoonButtonSizes copyWith({
+    MoonTokens? tokens,
     MoonButtonSizeProperties? xs,
     MoonButtonSizeProperties? sm,
     MoonButtonSizeProperties? md,
@@ -45,6 +87,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     MoonButtonSizeProperties? xl,
   }) {
     return MoonButtonSizes(
+      tokens: tokens ?? this.tokens,
       xs: xs ?? this.xs,
       sm: sm ?? this.sm,
       md: md ?? this.md,
@@ -58,6 +101,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     if (other is! MoonButtonSizes) return this;
 
     return MoonButtonSizes(
+      tokens: tokens.lerp(other.tokens, t),
       xs: xs.lerp(other.xs, t),
       sm: sm.lerp(other.sm, t),
       md: md.lerp(other.md, t),
@@ -71,6 +115,7 @@ class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with Diagnosticabl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonButtonSizes"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonButtonSizeProperties>("xs", xs))
       ..add(DiagnosticsProperty<MoonButtonSizeProperties>("sm", sm))
       ..add(DiagnosticsProperty<MoonButtonSizeProperties>("md", md))

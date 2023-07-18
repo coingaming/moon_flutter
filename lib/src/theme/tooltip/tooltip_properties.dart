@@ -3,23 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/sizes.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-
 @immutable
 class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with DiagnosticableTreeMixin {
-  static final properties = MoonTooltipProperties(
-    borderRadius: MoonBorders.borders.interactiveXs,
-    arrowBaseWidth: MoonSizes.sizes.x2s,
-    arrowLength: MoonSizes.sizes.x4s,
-    arrowTipDistance: MoonSizes.sizes.x4s,
-    transitionDuration: const Duration(milliseconds: 150),
-    transitionCurve: Curves.easeInOutCubic,
-    contentPadding: EdgeInsets.all(MoonSizes.sizes.x3s),
-    textStyle: MoonTextStyles.body.text12,
-  );
-
   /// Tooltip border radius.
   final BorderRadiusGeometry borderRadius;
 

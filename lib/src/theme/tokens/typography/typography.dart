@@ -1,48 +1,41 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/typography/text_colors.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
+import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 
 @immutable
 class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableTreeMixin {
-  static final light = MoonTypography(
+  static const typography = MoonTypography(
     body: MoonTextStyles.body,
+    caption: MoonTextStyles.caption,
     heading: MoonTextStyles.heading,
-    colors: MoonTextColors.light,
-  );
-
-  static final dark = MoonTypography(
-    body: MoonTextStyles.body,
-    heading: MoonTextStyles.heading,
-    colors: MoonTextColors.dark,
   );
 
   /// Styles for body text.
   final MoonTextStyles body;
 
+  /// Styles for caption text.
+  final MoonTextStyles caption;
+
   /// Styles for headings.
   final MoonTextStyles heading;
 
-  /// Colors for body and icons.
-  final MoonTextColors colors;
-
   const MoonTypography({
     required this.body,
+    required this.caption,
     required this.heading,
-    required this.colors,
   });
 
   @override
   MoonTypography copyWith({
     MoonTextStyles? body,
+    MoonTextStyles? caption,
     MoonTextStyles? heading,
-    MoonTextColors? colors,
   }) {
     return MoonTypography(
       body: body ?? this.body,
+      caption: caption ?? this.caption,
       heading: heading ?? this.heading,
-      colors: colors ?? this.colors,
     );
   }
 
@@ -52,8 +45,8 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
 
     return MoonTypography(
       body: body.lerp(other.body, t),
+      caption: caption.lerp(other.caption, t),
       heading: heading.lerp(other.heading, t),
-      colors: colors.lerp(other.colors, t),
     );
   }
 
@@ -63,7 +56,7 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
     properties
       ..add(DiagnosticsProperty("type", "MoonTypography"))
       ..add(DiagnosticsProperty("body", body))
-      ..add(DiagnosticsProperty("heading", heading))
-      ..add(DiagnosticsProperty("colors", colors));
+      ..add(DiagnosticsProperty("caption", caption))
+      ..add(DiagnosticsProperty("heading", heading));
   }
 }

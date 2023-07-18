@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/borders.dart';
-import 'package:moon_design/src/theme/colors.dart';
-import 'package:moon_design/src/theme/opacity.dart';
-import 'package:moon_design/src/theme/sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/typography/text_styles.dart';
-import 'package:moon_design/src/theme/typography/typography.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -703,37 +703,40 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     _effectiveInactiveFillColor =
         widget.inactiveFillColor ?? context.moonTheme?.authCodeTheme.colors.inactiveFillColor ?? MoonColors.light.gohan;
 
-    _effectiveTextStyle = context.moonTheme?.authCodeTheme.properties.textStyle ?? MoonTextStyles.body.text24;
+    _effectiveTextStyle =
+        context.moonTheme?.authCodeTheme.properties.textStyle ?? MoonTypography.typography.body.text24;
 
-    _effectiveErrorTextStyle = context.moonTheme?.authCodeTheme.properties.errorTextStyle ?? MoonTextStyles.body.text12;
+    _effectiveErrorTextStyle =
+        context.moonTheme?.authCodeTheme.properties.errorTextStyle ?? MoonTypography.typography.body.text12;
 
-    _effectiveTextColor = context.moonTheme?.authCodeTheme.colors.textColor ?? MoonTypography.light.colors.bodyPrimary;
+    _effectiveTextColor = context.moonTheme?.authCodeTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     _effectiveCursorColor = widget.authFieldCursorColor ??
         context.moonTheme?.authCodeTheme.colors.textColor ??
-        MoonTypography.light.colors.bodyPrimary;
+        MoonColors.light.textPrimary;
 
     _animationDuration ??= widget.animationDuration ??
         context.moonTheme?.authCodeTheme.properties.animationDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
-    _animationCurve ??=
-        widget.animationCurve ?? context.moonTheme?.authCodeTheme.properties.animationCurve ?? Curves.easeInOutCubic;
+    _animationCurve ??= widget.animationCurve ??
+        context.moonTheme?.authCodeTheme.properties.animationCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _peekDuration ??= widget.peekDuration ??
         context.moonTheme?.authCodeTheme.properties.peekDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     final double effectiveDisabledOpacityValue =
-        widget.disabledOpacityValue ?? context.moonTheme?.opacity.disabled ?? MoonOpacity.opacities.disabled;
+        widget.disabledOpacityValue ?? context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final Duration effectiveErrorAnimationDuration = widget.errorAnimationDuration ??
         context.moonTheme?.authCodeTheme.properties.errorAnimationDuration ??
-        const Duration(milliseconds: 200);
+        MoonTransitions.transitions.defaultTransitionDuration;
 
     final Curve effectiveErrorAnimationCurve = widget.errorAnimationCurve ??
         context.moonTheme?.authCodeTheme.properties.errorAnimationCurve ??
-        Curves.easeInOutCubic;
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     _errorAnimationController ??= AnimationController(
       duration: effectiveErrorAnimationDuration,

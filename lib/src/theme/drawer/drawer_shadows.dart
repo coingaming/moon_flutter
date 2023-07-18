@@ -1,18 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/shadows.dart';
-
 @immutable
 class MoonDrawerShadows extends ThemeExtension<MoonDrawerShadows> with DiagnosticableTreeMixin {
-  static final light = MoonDrawerShadows(
-    drawerShadows: MoonShadows.light.lg,
-  );
-
-  static final dark = MoonDrawerShadows(
-    drawerShadows: MoonShadows.dark.lg,
-  );
-
   /// Drawer shadows.
   final List<BoxShadow> drawerShadows;
 
