@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.3](https://github.com/coingaming/moon_flutter/compare/v0.26.2...v0.26.3) (2023-07-19)
+
+
+### Bug Fixes
+
+* [MDS-594] Carousel edge case fixes and story expansion ([#212](https://github.com/coingaming/moon_flutter/issues/212)) ([74d82ee](https://github.com/coingaming/moon_flutter/commit/74d82eec2126e81d432927de2332937effa8147a))
+
 ## [0.26.2](https://github.com/coingaming/moon_flutter/compare/v0.26.1...v0.26.2) (2023-07-18)
 
 
