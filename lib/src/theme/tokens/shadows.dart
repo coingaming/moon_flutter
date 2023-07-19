@@ -13,6 +13,7 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
         color: Color(0x28000000),
         blurRadius: 6,
         offset: Offset(0, 6),
+        spreadRadius: -6,
       ),
     ],
     md: [
@@ -64,6 +65,7 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
         color: Color(0xA3000000),
         blurRadius: 6,
         offset: Offset(0, 6),
+        spreadRadius: -6,
       ),
     ],
     md: [
