@@ -26,7 +26,7 @@ to write commit messages._
 final lightTokens = MoonTokens.light.copyWith(
   colors: MoonColors.light.copyWith(
     piccolo: Colors.blue,
-    bodyTextPrimary: Colors.amber,
+    textPrimary: Colors.amber,
   ),
   typography: MoonTypography.typography.copyWith(
     heading: MoonTypography.typography.heading.apply(fontFamily: "KumbhSans"),
