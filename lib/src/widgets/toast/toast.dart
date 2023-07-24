@@ -13,11 +13,6 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
-enum MoonToastPosition {
-  top,
-  bottom,
-}
-
 enum MoonToastVariant {
   original,
   inverted,
@@ -26,23 +21,21 @@ enum MoonToastVariant {
 class MoonToast {
   static const double _toastTravelDistance = 64.0;
   static const Duration _timeBetweenToasts = Duration(milliseconds: 200);
-  static final MoonToast _singleton = MoonToast._internal();
 
-  final _toastQueue = <_ToastEntry>[];
+  static final _toastQueue = <_ToastEntry>[];
 
-  Timer? _timer;
-  OverlayEntry? _entry;
+  static Timer? _timer;
+  static OverlayEntry? _entry;
 
   /// MDS toast.
-  factory MoonToast() {
-    return _singleton;
-  }
-
-  MoonToast._internal();
+  const MoonToast();
 
   /// Shows a toast.
-  void show(
+  static void show(
     BuildContext context, {
+    /// The alignment (position) of the toast.
+    AlignmentGeometry toastAlignment = Alignment.bottomCenter,
+
     /// Whether the toast is persistent (attaches to root navigator).
     bool isPersistent = true,
 
@@ -72,9 +65,6 @@ class MoonToast {
 
     /// Toast shadows.
     List<BoxShadow>? toastShadows,
-
-    /// The position of the toast.
-    MoonToastPosition position = MoonToastPosition.bottom,
 
     /// The variant of the toast. Inverted variant flips the color scheme from theming, eg instead of light colors,
     /// uses dark colors.
@@ -118,7 +108,7 @@ class MoonToast {
 
     final Duration effectiveDisplayDuration = displayDuration ??
         context.moonTheme?.toastTheme.properties.displayDuration ??
-        const Duration(milliseconds: 5000);
+        const Duration(milliseconds: 3000);
 
     final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.toastTheme.properties.transitionDuration ??
@@ -136,27 +126,36 @@ class MoonToast {
     final List<BoxShadow> effectiveToastShadows =
         toastShadows ?? context.moonTheme?.toastTheme.shadows.toastShadows ?? MoonShadows.light.lg;
 
+    final effectiveContext =
+        isPersistent ? (Navigator.maybeOf(context, rootNavigator: true)?.context ?? context) : context;
+
     final CapturedThemes themes = InheritedTheme.capture(
       from: context,
-      to: Navigator.of(context, rootNavigator: isPersistent).context,
+      to: Navigator.of(effectiveContext).context,
     );
 
     final OverlayEntry entry = OverlayEntry(
-      builder: (_) {
+      builder: (context) {
         return TweenAnimationBuilder(
           duration: effectiveTransitionDuration,
           curve: effectiveTransitionCurve,
           tween: Tween(begin: 0.0, end: 1.0),
           builder: (context, progress, child) {
             return Align(
-              alignment: position == MoonToastPosition.bottom ? Alignment.bottomCenter : Alignment.topCenter,
+              alignment: toastAlignment,
               child: RepaintBoundary(
                 child: Transform(
                   transform: Matrix4.translationValues(
-                    0,
-                    position == MoonToastPosition.bottom
-                        ? ((1 - progress) * _toastTravelDistance)
-                        : (-_toastTravelDistance + progress * _toastTravelDistance),
+                    switch (toastAlignment) {
+                      Alignment.centerLeft => -_toastTravelDistance + progress * _toastTravelDistance,
+                      Alignment.centerRight => (1 - progress) * _toastTravelDistance,
+                      _ => 0
+                    },
+                    switch (toastAlignment) {
+                      Alignment.topCenter => -_toastTravelDistance + progress * _toastTravelDistance,
+                      Alignment.bottomCenter => (1 - progress) * _toastTravelDistance,
+                      _ => 0
+                    },
                     0,
                   ),
                   child: Opacity(
@@ -210,7 +209,7 @@ class MoonToast {
     );
 
     final toastEntry = _ToastEntry(
-      buildContext: context,
+      buildContext: effectiveContext,
       overlayEntry: entry,
     );
 
@@ -219,10 +218,17 @@ class MoonToast {
     if (_timer == null) _showToastOverlay(duration: effectiveDisplayDuration);
   }
 
-  void _showToastOverlay({
-    required Duration duration,
-    bool isPersistent = false,
-  }) {
+  static void clearToastQueue() {
+    _timer?.cancel();
+    _timer = null;
+
+    _entry?.remove();
+    _entry = null;
+
+    _toastQueue.clear();
+  }
+
+  static void _showToastOverlay({required Duration duration}) {
     if (_toastQueue.isEmpty) {
       _entry = null;
       return;
@@ -230,26 +236,21 @@ class MoonToast {
 
     final toastEntry = _toastQueue.removeAt(0);
 
+    if (!toastEntry.buildContext.mounted) {
+      clearToastQueue();
+      return;
+    }
+
     _entry = toastEntry.overlayEntry;
     _timer = Timer(duration, () => _removeToastOverlay(duration: duration));
 
-    Future.delayed(_timeBetweenToasts, () {
-      OverlayState? overlay;
-
-      if (isPersistent) {
-        overlay = Navigator.of(
-          toastEntry.buildContext,
-          rootNavigator: true,
-        ).overlay;
-      } else {
-        overlay = Overlay.of(toastEntry.buildContext);
-      }
-
-      overlay?.insert(_entry!);
-    });
+    Future.delayed(
+      _timeBetweenToasts,
+      () => Navigator.of(toastEntry.buildContext).overlay?.insert(_entry!),
+    );
   }
 
-  void _removeToastOverlay({required Duration duration}) {
+  static void _removeToastOverlay({required Duration duration}) {
     _timer?.cancel();
     _timer = null;
 
