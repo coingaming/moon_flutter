@@ -30,7 +30,7 @@ class MoonToast {
   /// MDS toast.
   const MoonToast();
 
-  /// Shows a toast.
+  /// Show a MoonToast.
   static void show(
     BuildContext context, {
     /// The alignment (position) of the toast.
@@ -38,6 +38,9 @@ class MoonToast {
 
     /// Whether the toast is persistent (attaches to root navigator).
     bool isPersistent = true,
+
+    /// Whether the toast respects the SafeArea (eg takes into account notches and native system bars).
+    bool useSafeArea = true,
 
     /// The border radius of the toast.
     BorderRadiusGeometry? borderRadius,
@@ -47,6 +50,9 @@ class MoonToast {
 
     /// The horizontal space between toast children.
     double? gap,
+
+    /// The width of the toast. If null the toast will be as wide as its children.
+    double? width,
 
     /// Toast display duration.
     Duration? displayDuration,
@@ -60,7 +66,7 @@ class MoonToast {
     /// The margin around toast.
     EdgeInsetsGeometry? margin,
 
-    ///The padding around toast children.
+    /// The padding around toast children.
     EdgeInsetsGeometry? padding,
 
     /// Toast shadows.
@@ -141,26 +147,39 @@ class MoonToast {
           curve: effectiveTransitionCurve,
           tween: Tween(begin: 0.0, end: 1.0),
           builder: (context, progress, child) {
-            return Align(
-              alignment: toastAlignment,
-              child: RepaintBoundary(
-                child: Transform(
-                  transform: Matrix4.translationValues(
-                    switch (toastAlignment) {
-                      Alignment.centerLeft => -_toastTravelDistance + progress * _toastTravelDistance,
-                      Alignment.centerRight => (1 - progress) * _toastTravelDistance,
-                      _ => 0
-                    },
-                    switch (toastAlignment) {
-                      Alignment.topCenter => -_toastTravelDistance + progress * _toastTravelDistance,
-                      Alignment.bottomCenter => (1 - progress) * _toastTravelDistance,
-                      _ => 0
-                    },
-                    0,
-                  ),
-                  child: Opacity(
-                    opacity: progress,
-                    child: child,
+            return SafeArea(
+              left: useSafeArea,
+              top: useSafeArea,
+              right: useSafeArea,
+              bottom: useSafeArea,
+              maintainBottomViewPadding: true,
+              child: Align(
+                alignment: toastAlignment,
+                child: RepaintBoundary(
+                  child: Transform(
+                    transform: Matrix4.translationValues(
+                      switch (toastAlignment) {
+                        Alignment.topLeft ||
+                        Alignment.centerLeft ||
+                        Alignment.bottomLeft =>
+                          -_toastTravelDistance + progress * _toastTravelDistance,
+                        Alignment.topRight ||
+                        Alignment.centerRight ||
+                        Alignment.bottomRight =>
+                          (1 - progress) * _toastTravelDistance,
+                        _ => 0
+                      },
+                      switch (toastAlignment) {
+                        Alignment.topCenter => -_toastTravelDistance + progress * _toastTravelDistance,
+                        Alignment.bottomCenter => (1 - progress) * _toastTravelDistance,
+                        _ => 0
+                      },
+                      0,
+                    ),
+                    child: Opacity(
+                      opacity: progress,
+                      child: child,
+                    ),
                   ),
                 ),
               ),
@@ -176,6 +195,7 @@ class MoonToast {
                   child: Container(
                     margin: margin ?? resolvedContentPadding,
                     padding: resolvedContentPadding,
+                    width: width,
                     decoration: decoration ??
                         ShapeDecorationWithPremultipliedAlpha(
                           color: effectiveBackgroundColor,
@@ -186,13 +206,14 @@ class MoonToast {
                         ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: width != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
                       textDirection: Directionality.of(context),
                       children: [
                         if (leading != null) ...[
                           leading,
                           SizedBox(width: effectiveGap),
                         ],
-                        title,
+                        Flexible(child: title),
                         if (trailing != null) ...[
                           SizedBox(width: effectiveGap),
                           trailing,
@@ -218,6 +239,7 @@ class MoonToast {
     if (_timer == null) _showToastOverlay(duration: effectiveDisplayDuration);
   }
 
+  /// Clear the toast queue.
   static void clearToastQueue() {
     _timer?.cancel();
     _timer = null;

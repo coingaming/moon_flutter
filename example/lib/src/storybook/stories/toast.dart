@@ -92,10 +92,25 @@ class ToastStory extends Story {
               max: 10,
             );
 
+            final widthKnob = context.knobs.nullable.slider(
+              label: "width",
+              description: "The width of MoonToast. If null the toast will be as wide as its children.",
+              enabled: false,
+              initial: 230,
+              max: MediaQuery.of(context).size.width,
+            );
+
             final isPersistentKnob = context.knobs.boolean(
               label: "isPersistent",
               description:
                   "Whether the toast is persistent across screens (this will not behave as expected only in Storybook).",
+            );
+
+            final useSafeAreaKnob = context.knobs.boolean(
+              label: "useSafeArea",
+              description:
+                  "Whether the toast respects the SafeArea (eg takes into account notches and native system bars)",
+              initial: true,
             );
 
             return Center(
@@ -110,10 +125,12 @@ class ToastStory extends Story {
                         onTap: () {
                           MoonToast.show(
                             context,
+                            backgroundColor: backgroundColor,
                             isPersistent: isPersistentKnob,
+                            useSafeArea: useSafeAreaKnob,
+                            width: widthKnob,
                             toastAlignment: toastAlignmentKnob ?? Alignment.bottomCenter,
                             variant: toastVariantKnob ?? MoonToastVariant.original,
-                            backgroundColor: backgroundColor,
                             displayDuration:
                                 displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
                             borderRadius:
