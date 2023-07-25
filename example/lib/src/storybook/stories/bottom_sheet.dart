@@ -10,9 +10,10 @@ class BottomSheetStory extends Story {
           builder: (context) {
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for MoonModal background.",
+              description: "MoonColors variants for MoonBottomSheet background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -20,9 +21,10 @@ class BottomSheetStory extends Story {
 
             final barrierColorsKnob = context.knobs.nullable.options(
               label: "barrierColor",
-              description: "MoonColors variants for MoonModal barrier.",
+              description: "MoonColors variants for MoonBottomSheet barrier.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -30,76 +32,111 @@ class BottomSheetStory extends Story {
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for MoonModal.",
+              description: "Border radius for MoonBottomSheet.",
               enabled: false,
               initial: 8,
               max: 32,
             );
 
+            final heightKnob = context.knobs.nullable.slider(
+              label: "height",
+              description: "Height of the bottomsheet.",
+              enabled: false,
+              initial: 0.64,
+              min: 0.1,
+            );
+
+            final closeProgressThresholdKnob = context.knobs.nullable.slider(
+              label: "closeProgressThreshold",
+              description: "Close progress threshold for MoonBottomSheet.",
+              enabled: false,
+              initial: 0.6,
+            );
+
             Future<dynamic> bottomSheetBuilder(BuildContext context) {
               return showMoonModalBottomSheet(
+                context: context,
                 backgroundColor: backgroundColor,
                 barrierColor: barrierColor,
-                borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                context: context,
                 enableDrag: true,
-                isDismissible: true,
-                builder: (context) => SizedBox(
-                  height: 600,
-                  child: Column(
-                    children: [
-                      Center(
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                            top: 8,
-                            bottom: 16,
-                          ),
-                          height: 4,
-                          width: 41,
-                          decoration: ShapeDecoration(
-                            color: context.moonColors!.beerus,
-                            shape: const StadiumBorder(),
-                          ),
-                        ),
+                height: heightKnob != null
+                    ? MediaQuery.of(context).size.height * heightKnob
+                    : MediaQuery.of(context).size.height * 0.7,
+                closeProgressThreshold: closeProgressThresholdKnob,
+                borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                builder: (BuildContext context) => Column(
+                  children: [
+                    Container(
+                      height: 4,
+                      width: 40,
+                      margin: const EdgeInsets.only(top: 8, bottom: 8),
+                      decoration: ShapeDecoration(
+                        color: context.moonColors!.beerus,
+                        shape: const StadiumBorder(),
                       ),
-                      Expanded(
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          itemCount: 100,
-                          itemBuilder: (_, index) => Container(
-                            color: Colors.transparent,
-                            padding: const EdgeInsets.all(16),
-                            child: Row(
-                              children: [
-                                const Text("Item nr:"),
-                                const Spacer(),
-                                Text("$index"),
-                              ],
+                    ),
+                    Row(
+                      children: [
+                        const SizedBox(width: 48),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              'Pick your choice!',
+                              style: MoonTypography.typography.heading.text16,
                             ),
                           ),
                         ),
+                        SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: MoonButton.icon(
+                              icon: const MoonIcon(MoonIcons.close_small_16),
+                              buttonSize: MoonButtonSize.sm,
+                              backgroundColor: context.moonColors!.beerus,
+                              borderRadius: BorderRadius.circular(24),
+                              onTap: () => Navigator.of(context).pop(),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Divider(
+                      height: 0,
+                      thickness: 1,
+                      color: context.moonColors!.beerus,
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        primary: true,
+                        itemCount: 100,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (BuildContext _, int index) => Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text("Item nr:"),
+                              Text("$index"),
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             }
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  Builder(
-                    builder: (context) {
-                      return MoonFilledButton(
-                        label: const Text("Tap me"),
-                        onTap: () => bottomSheetBuilder(context),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: Builder(
+                builder: (BuildContext context) {
+                  return MoonFilledButton(
+                    label: const Text("Tap me"),
+                    onTap: () => bottomSheetBuilder(context),
+                  );
+                },
               ),
             );
           },
