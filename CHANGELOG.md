@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.4](https://github.com/coingaming/moon_flutter/compare/v0.26.3...v0.26.4) (2023-07-25)
+
+
+### Bug Fixes
+
+* [MDS-611] Fix Toast queueing mechanism and add more properties ([#214](https://github.com/coingaming/moon_flutter/issues/214)) ([4470593](https://github.com/coingaming/moon_flutter/commit/4470593c181384e8fa557fb7ba2d558893234513))
+
 ## [0.26.3](https://github.com/coingaming/moon_flutter/compare/v0.26.2...v0.26.3) (2023-07-19)
 
 
