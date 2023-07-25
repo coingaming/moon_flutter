@@ -112,9 +112,8 @@ class MoonToast {
 
     final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
 
-    final Duration effectiveDisplayDuration = displayDuration ??
-        context.moonTheme?.toastTheme.properties.displayDuration ??
-        const Duration(milliseconds: 3000);
+    final Duration effectiveDisplayDuration =
+        displayDuration ?? context.moonTheme?.toastTheme.properties.displayDuration ?? const Duration(seconds: 3);
 
     final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.toastTheme.properties.transitionDuration ??
@@ -141,12 +140,12 @@ class MoonToast {
     );
 
     final OverlayEntry entry = OverlayEntry(
-      builder: (context) {
+      builder: (BuildContext context) {
         return TweenAnimationBuilder(
           duration: effectiveTransitionDuration,
           curve: effectiveTransitionCurve,
           tween: Tween(begin: 0.0, end: 1.0),
-          builder: (context, progress, child) {
+          builder: (BuildContext context, double progress, Widget? child) {
             return SafeArea(
               left: useSafeArea,
               top: useSafeArea,

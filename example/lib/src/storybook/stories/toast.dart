@@ -22,12 +22,12 @@ class ToastStory extends Story {
                 Option(label: "topLeft", value: Alignment.topLeft),
                 Option(label: "topCenter", value: Alignment.topCenter),
                 Option(label: "topRight", value: Alignment.topRight),
-                Option(label: "centerRight", value: Alignment.centerRight),
-                Option(label: "bottomRight", value: Alignment.bottomRight),
-                Option(label: "bottomCenter", value: Alignment.bottomCenter),
-                Option(label: "bottomLeft", value: Alignment.bottomLeft),
                 Option(label: "centerLeft", value: Alignment.centerLeft),
                 Option(label: "center", value: Alignment.center),
+                Option(label: "centerRight", value: Alignment.centerRight),
+                Option(label: "bottomLeft", value: Alignment.bottomLeft),
+                Option(label: "bottomCenter", value: Alignment.bottomCenter),
+                Option(label: "bottomRight", value: Alignment.bottomRight),
               ],
             );
 
