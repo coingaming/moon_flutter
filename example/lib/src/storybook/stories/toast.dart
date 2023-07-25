@@ -13,14 +13,21 @@ class ToastStory extends Story {
               initial: "This is a custom MoonToast text",
             );
 
-            final toastPositionKnob = context.knobs.nullable.options(
-              label: "position",
-              description: "The position of MoonToast.",
+            final toastAlignmentKnob = context.knobs.nullable.options(
+              label: "toastAlignment",
+              description: "The alignment (position) of MoonToast.",
               enabled: false,
-              initial: MoonToastPosition.bottom,
+              initial: Alignment.bottomCenter,
               options: const [
-                Option(label: "top", value: MoonToastPosition.top),
-                Option(label: "bottom", value: MoonToastPosition.bottom),
+                Option(label: "topLeft", value: Alignment.topLeft),
+                Option(label: "topCenter", value: Alignment.topCenter),
+                Option(label: "topRight", value: Alignment.topRight),
+                Option(label: "centerLeft", value: Alignment.centerLeft),
+                Option(label: "center", value: Alignment.center),
+                Option(label: "centerRight", value: Alignment.centerRight),
+                Option(label: "bottomLeft", value: Alignment.bottomLeft),
+                Option(label: "bottomCenter", value: Alignment.bottomCenter),
+                Option(label: "bottomRight", value: Alignment.bottomRight),
               ],
             );
 
@@ -80,9 +87,30 @@ class ToastStory extends Story {
               label: "displayDuration",
               description: "The duration of showing MoonToast.",
               enabled: false,
-              initial: 5,
+              initial: 3,
               min: 1,
               max: 10,
+            );
+
+            final widthKnob = context.knobs.nullable.slider(
+              label: "width",
+              description: "The width of MoonToast. If null the toast will be as wide as its children.",
+              enabled: false,
+              initial: 230,
+              max: MediaQuery.of(context).size.width,
+            );
+
+            final isPersistentKnob = context.knobs.boolean(
+              label: "isPersistent",
+              description:
+                  "Whether the toast is persistent across screens (this will not behave as expected only in Storybook).",
+            );
+
+            final useSafeAreaKnob = context.knobs.boolean(
+              label: "useSafeArea",
+              description:
+                  "Whether the toast respects the SafeArea (eg takes into account notches and native system bars)",
+              initial: true,
             );
 
             return Center(
@@ -95,11 +123,14 @@ class ToastStory extends Story {
                       return MoonFilledButton(
                         label: const Text("Tap me"),
                         onTap: () {
-                          MoonToast().show(
+                          MoonToast.show(
                             context,
-                            position: toastPositionKnob ?? MoonToastPosition.bottom,
-                            variant: toastVariantKnob ?? MoonToastVariant.original,
                             backgroundColor: backgroundColor,
+                            isPersistent: isPersistentKnob,
+                            useSafeArea: useSafeAreaKnob,
+                            width: widthKnob,
+                            toastAlignment: toastAlignmentKnob ?? Alignment.bottomCenter,
+                            variant: toastVariantKnob ?? MoonToastVariant.original,
                             displayDuration:
                                 displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
                             borderRadius:

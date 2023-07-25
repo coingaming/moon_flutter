@@ -13,11 +13,6 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
-enum MoonToastPosition {
-  top,
-  bottom,
-}
-
 enum MoonToastVariant {
   original,
   inverted,
@@ -26,25 +21,26 @@ enum MoonToastVariant {
 class MoonToast {
   static const double _toastTravelDistance = 64.0;
   static const Duration _timeBetweenToasts = Duration(milliseconds: 200);
-  static final MoonToast _singleton = MoonToast._internal();
 
-  final _toastQueue = <_ToastEntry>[];
+  static final _toastQueue = <_ToastEntry>[];
 
-  Timer? _timer;
-  OverlayEntry? _entry;
+  static Timer? _timer;
+  static OverlayEntry? _entry;
 
   /// MDS toast.
-  factory MoonToast() {
-    return _singleton;
-  }
+  const MoonToast();
 
-  MoonToast._internal();
-
-  /// Shows a toast.
-  void show(
+  /// Show a MoonToast.
+  static void show(
     BuildContext context, {
+    /// The alignment (position) of the toast.
+    AlignmentGeometry toastAlignment = Alignment.bottomCenter,
+
     /// Whether the toast is persistent (attaches to root navigator).
     bool isPersistent = true,
+
+    /// Whether the toast respects the SafeArea (eg takes into account notches and native system bars).
+    bool useSafeArea = true,
 
     /// The border radius of the toast.
     BorderRadiusGeometry? borderRadius,
@@ -54,6 +50,9 @@ class MoonToast {
 
     /// The horizontal space between toast children.
     double? gap,
+
+    /// The width of the toast. If null the toast will be as wide as its children.
+    double? width,
 
     /// Toast display duration.
     Duration? displayDuration,
@@ -67,14 +66,11 @@ class MoonToast {
     /// The margin around toast.
     EdgeInsetsGeometry? margin,
 
-    ///The padding around toast children.
+    /// The padding around toast children.
     EdgeInsetsGeometry? padding,
 
     /// Toast shadows.
     List<BoxShadow>? toastShadows,
-
-    /// The position of the toast.
-    MoonToastPosition position = MoonToastPosition.bottom,
 
     /// The variant of the toast. Inverted variant flips the color scheme from theming, eg instead of light colors,
     /// uses dark colors.
@@ -116,9 +112,8 @@ class MoonToast {
 
     final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
 
-    final Duration effectiveDisplayDuration = displayDuration ??
-        context.moonTheme?.toastTheme.properties.displayDuration ??
-        const Duration(milliseconds: 5000);
+    final Duration effectiveDisplayDuration =
+        displayDuration ?? context.moonTheme?.toastTheme.properties.displayDuration ?? const Duration(seconds: 3);
 
     final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.toastTheme.properties.transitionDuration ??
@@ -136,32 +131,54 @@ class MoonToast {
     final List<BoxShadow> effectiveToastShadows =
         toastShadows ?? context.moonTheme?.toastTheme.shadows.toastShadows ?? MoonShadows.light.lg;
 
+    final effectiveContext =
+        isPersistent ? (Navigator.maybeOf(context, rootNavigator: true)?.context ?? context) : context;
+
     final CapturedThemes themes = InheritedTheme.capture(
       from: context,
-      to: Navigator.of(context, rootNavigator: isPersistent).context,
+      to: Navigator.of(effectiveContext).context,
     );
 
     final OverlayEntry entry = OverlayEntry(
-      builder: (_) {
+      builder: (BuildContext context) {
         return TweenAnimationBuilder(
           duration: effectiveTransitionDuration,
           curve: effectiveTransitionCurve,
           tween: Tween(begin: 0.0, end: 1.0),
-          builder: (context, progress, child) {
-            return Align(
-              alignment: position == MoonToastPosition.bottom ? Alignment.bottomCenter : Alignment.topCenter,
-              child: RepaintBoundary(
-                child: Transform(
-                  transform: Matrix4.translationValues(
-                    0,
-                    position == MoonToastPosition.bottom
-                        ? ((1 - progress) * _toastTravelDistance)
-                        : (-_toastTravelDistance + progress * _toastTravelDistance),
-                    0,
-                  ),
-                  child: Opacity(
-                    opacity: progress,
-                    child: child,
+          builder: (BuildContext context, double progress, Widget? child) {
+            return SafeArea(
+              left: useSafeArea,
+              top: useSafeArea,
+              right: useSafeArea,
+              bottom: useSafeArea,
+              maintainBottomViewPadding: true,
+              child: Align(
+                alignment: toastAlignment,
+                child: RepaintBoundary(
+                  child: Transform(
+                    transform: Matrix4.translationValues(
+                      switch (toastAlignment) {
+                        Alignment.topLeft ||
+                        Alignment.centerLeft ||
+                        Alignment.bottomLeft =>
+                          -_toastTravelDistance + progress * _toastTravelDistance,
+                        Alignment.topRight ||
+                        Alignment.centerRight ||
+                        Alignment.bottomRight =>
+                          (1 - progress) * _toastTravelDistance,
+                        _ => 0
+                      },
+                      switch (toastAlignment) {
+                        Alignment.topCenter => -_toastTravelDistance + progress * _toastTravelDistance,
+                        Alignment.bottomCenter => (1 - progress) * _toastTravelDistance,
+                        _ => 0
+                      },
+                      0,
+                    ),
+                    child: Opacity(
+                      opacity: progress,
+                      child: child,
+                    ),
                   ),
                 ),
               ),
@@ -177,6 +194,7 @@ class MoonToast {
                   child: Container(
                     margin: margin ?? resolvedContentPadding,
                     padding: resolvedContentPadding,
+                    width: width,
                     decoration: decoration ??
                         ShapeDecorationWithPremultipliedAlpha(
                           color: effectiveBackgroundColor,
@@ -187,13 +205,14 @@ class MoonToast {
                         ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: width != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
                       textDirection: Directionality.of(context),
                       children: [
                         if (leading != null) ...[
                           leading,
                           SizedBox(width: effectiveGap),
                         ],
-                        title,
+                        Flexible(child: title),
                         if (trailing != null) ...[
                           SizedBox(width: effectiveGap),
                           trailing,
@@ -210,7 +229,7 @@ class MoonToast {
     );
 
     final toastEntry = _ToastEntry(
-      buildContext: context,
+      buildContext: effectiveContext,
       overlayEntry: entry,
     );
 
@@ -219,10 +238,18 @@ class MoonToast {
     if (_timer == null) _showToastOverlay(duration: effectiveDisplayDuration);
   }
 
-  void _showToastOverlay({
-    required Duration duration,
-    bool isPersistent = false,
-  }) {
+  /// Clear the toast queue.
+  static void clearToastQueue() {
+    _timer?.cancel();
+    _timer = null;
+
+    _entry?.remove();
+    _entry = null;
+
+    _toastQueue.clear();
+  }
+
+  static void _showToastOverlay({required Duration duration}) {
     if (_toastQueue.isEmpty) {
       _entry = null;
       return;
@@ -230,26 +257,21 @@ class MoonToast {
 
     final toastEntry = _toastQueue.removeAt(0);
 
+    if (!toastEntry.buildContext.mounted) {
+      clearToastQueue();
+      return;
+    }
+
     _entry = toastEntry.overlayEntry;
     _timer = Timer(duration, () => _removeToastOverlay(duration: duration));
 
-    Future.delayed(_timeBetweenToasts, () {
-      OverlayState? overlay;
-
-      if (isPersistent) {
-        overlay = Navigator.of(
-          toastEntry.buildContext,
-          rootNavigator: true,
-        ).overlay;
-      } else {
-        overlay = Overlay.of(toastEntry.buildContext);
-      }
-
-      overlay?.insert(_entry!);
-    });
+    Future.delayed(
+      _timeBetweenToasts,
+      () => Navigator.of(toastEntry.buildContext).overlay?.insert(_entry!),
+    );
   }
 
-  void _removeToastOverlay({required Duration duration}) {
+  static void _removeToastOverlay({required Duration duration}) {
     _timer?.cancel();
     _timer = null;
 
