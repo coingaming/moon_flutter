@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.5](https://github.com/coingaming/moon_flutter/compare/v0.26.4...v0.26.5) (2023-07-26)
+
+
+### Bug Fixes
+
+* [MDS-602] Fix Bottomsheet bugs ([#216](https://github.com/coingaming/moon_flutter/issues/216)) ([9743bc3](https://github.com/coingaming/moon_flutter/commit/9743bc3e8cb27693cb71d5d400d3d41a3cf6e14e))
+
 ## [0.26.4](https://github.com/coingaming/moon_flutter/compare/v0.26.3...v0.26.4) (2023-07-25)
 
 
