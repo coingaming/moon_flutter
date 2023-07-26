@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_colors.dart';
 import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_properties.dart';
-import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
@@ -17,14 +16,10 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
   /// BottomSheet properties.
   final MoonBottomSheetProperties properties;
 
-  /// BottomSheet sizes.
-  final MoonBottomSheetSizes sizes;
-
   MoonBottomSheetTheme({
     required this.tokens,
     MoonBottomSheetColors? colors,
     MoonBottomSheetProperties? properties,
-    MoonBottomSheetSizes? sizes,
   })  : colors = colors ??
             MoonBottomSheetColors(
               textColor: tokens.colors.textPrimary,
@@ -35,24 +30,21 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
         properties = properties ??
             MoonBottomSheetProperties(
               borderRadius: tokens.borders.surfaceLg,
-              transitionDuration: tokens.transitions.defaultTransitionDuration,
-              transitionCurve: tokens.transitions.defaultTransitionCurve,
+              transitionDuration: const Duration(milliseconds: 350),
+              transitionCurve: const Cubic(0.0, 0.0, 0.2, 1.0),
               textStyle: tokens.typography.body.textDefault,
-            ),
-        sizes = sizes ?? MoonBottomSheetSizes(tokens: tokens);
+            );
 
   @override
   MoonBottomSheetTheme copyWith({
     MoonTokens? tokens,
     MoonBottomSheetColors? colors,
     MoonBottomSheetProperties? properties,
-    MoonBottomSheetSizes? sizes,
   }) {
     return MoonBottomSheetTheme(
       tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
-      sizes: sizes ?? this.sizes,
     );
   }
 
@@ -64,7 +56,6 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
       tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
-      sizes: sizes.lerp(other.sizes, t),
     );
   }
 
@@ -75,7 +66,6 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
       ..add(DiagnosticsProperty("type", "MoonBottomSheetTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonBottomSheetColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonBottomSheetProperties>("properties", properties))
-      ..add(DiagnosticsProperty<MoonBottomSheetSizes>("sizes", sizes));
+      ..add(DiagnosticsProperty<MoonBottomSheetProperties>("properties", properties));
   }
 }

@@ -238,7 +238,7 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
         return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).md;
 
       default:
-        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).sm;
+        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).md;
     }
   }
 
