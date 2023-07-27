@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.6](https://github.com/coingaming/moon_flutter/compare/v0.26.5...v0.26.6) (2023-07-27)
+
+
+### Bug Fixes
+
+* Add automation to publish to pub.dev ([1b31d14](https://github.com/coingaming/moon_flutter/commit/1b31d1492ddd42c0ad11bb41b682755cc26d306b))
+
 ## [0.26.5](https://github.com/coingaming/moon_flutter/compare/v0.26.4...v0.26.5) (2023-07-26)
 
 
