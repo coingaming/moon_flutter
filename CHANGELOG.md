@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.7](https://github.com/coingaming/moon_flutter/compare/v0.26.6...v0.26.7) (2023-07-27)
+
+
+### Bug Fixes
+
+* Empty release to force release.yml ([ba87de3](https://github.com/coingaming/moon_flutter/commit/ba87de3e3f7359b9549b0c4228e3657a1773cc6a))
+
 ## [0.26.6](https://github.com/coingaming/moon_flutter/compare/v0.26.5...v0.26.6) (2023-07-27)
 
 
