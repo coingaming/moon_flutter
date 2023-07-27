@@ -15,6 +15,7 @@ import 'package:moon_design/src/theme/drawer/drawer_theme.dart';
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
+import 'package:moon_design/src/theme/menu_item/menu_item_theme.dart';
 import 'package:moon_design/src/theme/modal/modal_theme.dart';
 import 'package:moon_design/src/theme/popover/popover_theme.dart';
 import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
@@ -90,6 +91,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonLinearProgress widget theming.
   final MoonLinearProgressTheme linearProgressTheme;
 
+  /// Moon Design System MoonMenuItemTheme widget theming.
+  final MoonMenuItemTheme menuItemTheme;
+
   /// Moon Design System MoonModal widget theming.
   final MoonModalTheme modalTheme;
 
@@ -141,6 +145,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonEffectsTheme? effects,
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
+    MoonMenuItemTheme? menuItemTheme,
     MoonModalTheme? modalTheme,
     MoonPopoverTheme? popoverTheme,
     MoonRadioTheme? radioTheme,
@@ -168,6 +173,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         effects = effects ?? MoonEffectsTheme(tokens: tokens),
         linearLoaderTheme = linearLoaderTheme ?? MoonLinearLoaderTheme(tokens: tokens),
         linearProgressTheme = linearProgressTheme ?? MoonLinearProgressTheme(tokens: tokens),
+        menuItemTheme = menuItemTheme ?? MoonMenuItemTheme(tokens: tokens),
         modalTheme = modalTheme ?? MoonModalTheme(tokens: tokens),
         popoverTheme = popoverTheme ?? MoonPopoverTheme(tokens: tokens),
         radioTheme = radioTheme ?? MoonRadioTheme(tokens: tokens),
@@ -199,6 +205,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonEffectsTheme? effects,
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
+    MoonMenuItemTheme? menuItemTheme,
     MoonModalTheme? modalTheme,
     MoonPopoverTheme? popoverTheme,
     MoonRadioTheme? radioTheme,
@@ -230,6 +237,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
       linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
       modalTheme: modalTheme ?? this.modalTheme,
+      menuItemTheme: menuItemTheme ?? this.menuItemTheme,
       popoverTheme: popoverTheme ?? this.popoverTheme,
       radioTheme: radioTheme ?? this.radioTheme,
       segmentedControlTheme: segmentedControlTheme ?? this.segmentedControlTheme,
@@ -265,6 +273,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       effects: effects.lerp(other.effects, t),
       linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
       linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
+      menuItemTheme: menuItemTheme.lerp(other.menuItemTheme, t),
       modalTheme: modalTheme.lerp(other.modalTheme, t),
       popoverTheme: popoverTheme.lerp(other.popoverTheme, t),
       radioTheme: radioTheme.lerp(other.radioTheme, t),
@@ -300,6 +309,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonEffectsTheme>("MoonEffectsTheme", effects))
       ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
       ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
+      ..add(DiagnosticsProperty<MoonMenuItemTheme>("MoonMenuItemTheme", menuItemTheme))
       ..add(DiagnosticsProperty<MoonModalTheme>("MoonModalTheme", modalTheme))
       ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popoverTheme))
       ..add(DiagnosticsProperty<MoonRadioTheme>("MoonRadioTheme", radioTheme))
@@ -316,12 +326,20 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
+
   MoonBorders? get moonBorders => moonTheme?.tokens.borders;
+
   MoonColors? get moonColors => moonTheme?.tokens.colors;
+
   MoonEffectsTheme? get moonEffects => moonTheme?.effects;
+
   MoonOpacities? get moonOpacities => moonTheme?.tokens.opacities;
+
   MoonShadows? get moonShadows => moonTheme?.tokens.shadows;
+
   MoonSizes? get moonSizes => moonTheme?.tokens.sizes;
+
   MoonTransitions? get moonTransitions => moonTheme?.tokens.transitions;
+
   MoonTypography? get moonTypography => moonTheme?.tokens.typography;
 }

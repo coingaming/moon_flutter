@@ -1,0 +1,25 @@
+name: Publish to pub.dev
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    if: "${{ contains(github.event.head_commit.message, 'chore(main): release') }}"
+    permissions:
+      id-token: write
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Publish
+        uses: k-paxian/dart-package-publisher@v1.6
+        with:
+          credentialJson: ${{ secrets.CREDENTIAL_JSON }}
+          flutter: true
+          skipTests: true
+          force: true
