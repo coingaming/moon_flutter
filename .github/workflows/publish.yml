@@ -8,22 +8,4 @@ on:
 jobs:
   publish:
     if: "${{ contains(github.event.head_commit.message, 'chore(main): release') }}"
-
-    permissions:
-      id-token: write
-
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.10.6'
-          channel: stable
-  
-      - name: Install Dependencies
-        run: flutter pub get
-  
-      - name: Publish
-        run: dart pub publish --force
+    uses: dart-lang/ecosystem/.github/workflows/publish.yaml@main
