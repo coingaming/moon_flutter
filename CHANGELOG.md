@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.11](https://github.com/coingaming/moon_flutter/compare/v0.26.10...v0.26.11) (2023-07-28)
+
+
+### Bug Fixes
+
+* Fix more GH Actions scripts ([aea75a9](https://github.com/coingaming/moon_flutter/commit/aea75a98b8471ae1bd49611a61bdcf2f72aa0b03))
+
 ## [0.26.10](https://github.com/coingaming/moon_flutter/compare/v0.26.9...v0.26.10) (2023-07-28)
 
 
