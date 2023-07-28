@@ -10,6 +10,7 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
+          token: ${{ secrets.PAT }}
           release-type: "dart"
           command: manifest
     outputs:
