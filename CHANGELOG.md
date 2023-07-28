@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.16](https://github.com/coingaming/moon_flutter/compare/v0.26.15...v0.26.16) (2023-07-28)
+
+
+### Bug Fixes
+
+* Publish fix ([086ce5b](https://github.com/coingaming/moon_flutter/commit/086ce5b78617ccb1d85227b8fa92a48c256d8ada))
+
 ## [0.26.15](https://github.com/coingaming/moon_flutter/compare/v0.26.14...v0.26.15) (2023-07-28)
 
 
