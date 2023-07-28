@@ -10,7 +10,7 @@ jobs:
     if: "${{ contains(github.event.head_commit.message, 'chore(main): release') }}"
     permissions:
       id-token: write
-      
+
     runs-on: ubuntu-latest
     
     steps:
@@ -24,8 +24,12 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Install firehose
-        run: dart pub global activate firehose
-
-      - name: Publish packages
-        run: dart pub global run firehose --publish
+      - name: Check Publish Warnings
+        run: dart pub publish --dry-run
+        
+      - name: Publish
+        uses: k-paxian/dart-package-publisher@v1.5.1
+        with:
+          credentialJson: ${{ secrets.CREDENTIAL_JSON }}
+          flutter: true
+          skipTests: true
