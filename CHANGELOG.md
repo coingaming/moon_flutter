@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.9](https://github.com/coingaming/moon_flutter/compare/v0.26.8...v0.26.9) (2023-07-28)
+
+
+### Bug Fixes
+
+* Workflow automation retry ([c1921d8](https://github.com/coingaming/moon_flutter/commit/c1921d86ab7463bb008459e6b387aa4cda5a7f17))
+
 ## [0.26.8](https://github.com/coingaming/moon_flutter/compare/v0.26.7...v0.26.8) (2023-07-27)
 
 
