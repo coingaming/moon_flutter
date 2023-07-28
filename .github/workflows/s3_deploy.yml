@@ -1,4 +1,5 @@
 name: Deploy to S3
+
 on:
   push:
     branches:
@@ -6,6 +7,7 @@ on:
 
 jobs:
   build:
+    if: "${{ contains(github.event.head_commit.message, 'chore(main): release') }}"
     runs-on: ubuntu-latest
 
     env:
