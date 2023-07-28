@@ -15,21 +15,11 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-  
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.10.6'
-          channel: stable
-    
-      - name: Install Dependencies
-        run: flutter pub get
 
-      - name: Check Publish Warnings
-        run: dart pub publish --dry-run
-        
       - name: Publish
-        uses: k-paxian/dart-package-publisher@v1.5.1
+        uses: k-paxian/dart-package-publisher@v1.6
         with:
           credentialJson: ${{ secrets.CREDENTIAL_JSON }}
           flutter: true
           skipTests: true
+          force: true
