@@ -97,7 +97,7 @@ class MoonBaseControl extends StatefulWidget {
 
   /// The builder that builds the child of this control.
   ///
-  /// This is excusive with [child]. You cannot use both at the same time.
+  /// This is exclusive with [child]. You cannot use both at the same time.
   final MoonBaseControlBuilder? builder;
 
   /// The mouse cursor of the control.
@@ -123,7 +123,7 @@ class MoonBaseControl extends StatefulWidget {
 
   /// The child of this control.
   ///
-  /// This is excusive with [builder]. You cannot use both at the same time.
+  /// This is exclusive with [builder]. You cannot use both at the same time.
   final Widget? child;
 
   /// MDS base control widget.
