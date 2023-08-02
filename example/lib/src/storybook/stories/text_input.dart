@@ -133,6 +133,7 @@ class TextInputStory extends Story {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Container(color: Colors.red, padding: EdgeInsets.all(24), child: MoonTextInput2()),
                   const SizedBox(height: 64),
                   Form(
                     child: Builder(
