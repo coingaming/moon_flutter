@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.27.0](https://github.com/coingaming/moon_flutter/compare/v0.26.19...v0.27.0) (2023-08-02)
+
+
+### Features
+
+* [MDS-618] Menu item component ([#233](https://github.com/coingaming/moon_flutter/issues/233)) ([41ee0e1](https://github.com/coingaming/moon_flutter/commit/41ee0e1fa29406e1226e62148522001223fc0259))
+
+## [0.26.19](https://github.com/coingaming/moon_flutter/compare/v0.26.18...v0.26.19) (2023-08-02)
+
+
+### Bug Fixes
+
+* [MDS-624] Fix Accordion content outside version focus and hover ([#231](https://github.com/coingaming/moon_flutter/issues/231)) ([96585a3](https://github.com/coingaming/moon_flutter/commit/96585a3278e0a9835363b7cc24899e091e53b163))
+
 ## [0.26.18](https://github.com/coingaming/moon_flutter/compare/v0.26.17...v0.26.18) (2023-07-28)
 
 

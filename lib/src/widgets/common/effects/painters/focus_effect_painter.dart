@@ -4,16 +4,18 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class FocusEffectPainter extends CustomPainter {
-  final Color color;
   final Animation<double> animation;
-  final double effectExtent;
+  final bool isFilled;
   final BorderRadius borderRadius;
+  final Color color;
+  final double effectExtent;
 
   FocusEffectPainter({
-    required this.color,
     required this.animation,
-    required this.effectExtent,
     required this.borderRadius,
+    this.isFilled = false,
+    required this.color,
+    required this.effectExtent,
   }) : super(repaint: animation);
 
   @override
@@ -29,10 +31,14 @@ class FocusEffectPainter extends CustomPainter {
       final double heightOffset = (heightIncrease - 1) / 2;
       final double resolvedExtent = borderRadius != BorderRadius.zero ? (effectExtent / 2) : 0;
 
-      final Paint paint = Paint()
-        ..color = transformedColor
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = effectExtent + 1; // +1 for squircle hairline border correction
+      final Paint paint = isFilled
+          ? (Paint()
+            ..color = transformedColor
+            ..style = PaintingStyle.fill)
+          : (Paint()
+            ..color = transformedColor
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = effectExtent + 1); // +1 for squircle hairline border correction
 
       canvas.drawRRect(
         RRect.fromRectAndCorners(

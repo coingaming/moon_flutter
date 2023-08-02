@@ -41,7 +41,7 @@ class MoonAccordionSizes extends ThemeExtension<MoonAccordionSizes> with Diagnos
               borderRadius: tokens.borders.interactiveSm,
               headerHeight: tokens.sizes.md,
               iconSizeValue: tokens.sizes.xs,
-              headerPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              headerPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
               headerTextStyle: tokens.typography.heading.textDefault,
               contentTextStyle: tokens.typography.body.textDefault,
             ),

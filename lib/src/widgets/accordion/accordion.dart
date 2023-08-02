@@ -11,7 +11,7 @@ import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
+import 'package:moon_design/src/widgets/common/base_control.dart';
 import 'package:moon_design/src/widgets/common/icons/icons.dart';
 import 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
 
@@ -62,6 +62,9 @@ class MoonAccordion<T> extends StatefulWidget {
   ///
   /// If [identityValue] matches [groupIdentityValue], this parameter is ignored.
   final bool initiallyExpanded;
+
+  /// Whether the accordion is disabled.
+  final bool isDisabled;
 
   /// Specifies whether the state of the children is maintained when the accordion expands and collapses.
   ///
@@ -118,6 +121,9 @@ class MoonAccordion<T> extends StatefulWidget {
 
   /// Custom decoration for the accordion.
   final Decoration? decoration;
+
+  /// The gap between the leading, title and trailing widgets.
+  final double? gap;
 
   /// The height of the accordion header.
   final double? headerHeight;
@@ -186,6 +192,7 @@ class MoonAccordion<T> extends StatefulWidget {
     this.autofocus = false,
     this.hasContentOutside = false,
     this.initiallyExpanded = false,
+    this.isDisabled = false,
     this.maintainState = false,
     this.showBorder = false,
     this.showDivider = true,
@@ -202,6 +209,7 @@ class MoonAccordion<T> extends StatefulWidget {
     this.borderColor,
     this.dividerColor,
     this.decoration,
+    this.gap,
     this.headerHeight,
     this.transitionDuration,
     this.transitionCurve,
@@ -233,10 +241,6 @@ class MoonAccordion<T> extends StatefulWidget {
 class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProviderStateMixin {
   static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: 0.5);
 
-  late final Map<Type, Action<Intent>> _actions = {
-    ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
-  };
-
   late MoonAccordionSizeProperties _effectiveMoonAccordionSize;
   late BorderRadiusGeometry _effectiveBorderRadius;
   late EdgeInsetsGeometry _effectiveHeaderPadding;
@@ -265,37 +269,11 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
   Color? _effectiveHoverEffectColor;
 
   bool _isExpanded = false;
-  bool _isFocused = false;
-  bool _isHovered = false;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
-  void _handleHover(bool hover) {
-    if (hover != _isHovered) {
-      setState(() => _isHovered = hover);
-
-      if (hover) {
-        _hoverAnimationController!.forward();
-      } else {
-        _hoverAnimationController!.reverse();
-      }
-    }
-  }
-
-  void _handleFocus(bool focus) {
-    if (focus != _isFocused) {
-      setState(() => _isFocused = focus);
-
-      if (focus) {
-        _hoverAnimationController!.forward();
-      } else {
-        _hoverAnimationController!.reverse();
-      }
-    }
-  }
-
-  void _handleFocusChange(bool hasFocus) {
-    setState(() => _isFocused = hasFocus);
+  void _handleActiveState(bool isActive) {
+    isActive ? _hoverAnimationController!.forward() : _hoverAnimationController!.reverse();
   }
 
   void _handleTap() {
@@ -417,42 +395,47 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     );
   }
 
-  Widget _buildHeader({bool isContentOutsideHeader = false, required Widget child}) {
+  Widget _buildDecorationContainer({required Widget child}) {
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.accordionTheme.colors.borderColor ?? MoonColors.light.beerus;
 
     final List<BoxShadow> effectiveShadows =
         widget.shadows ?? context.moonTheme?.accordionTheme.shadows.shadows ?? MoonShadows.light.sm;
 
-    return RepaintBoundary(
-      child: AnimatedBuilder(
-        animation: _hoverAnimationController!,
-        builder: (context, child) {
-          return Container(
-            height: isContentOutsideHeader ? _effectiveHeaderHeight : null,
-            padding: isContentOutsideHeader ? _resolvedDirectionalHeaderPadding : null,
-            clipBehavior: widget.clipBehavior ?? Clip.none,
-            decoration: widget.decoration ??
-                ((widget.hasContentOutside && isContentOutsideHeader) ||
-                        (!widget.hasContentOutside && !isContentOutsideHeader)
-                    ? ShapeDecoration(
-                        color: _hoverColor!.value,
-                        shadows: effectiveShadows,
-                        shape: MoonSquircleBorder(
-                          side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                          borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
-                        ),
-                      )
-                    : null),
-            child: child,
-          );
-        },
-        child: child,
-      ),
+    return MoonBaseControl(
+      onTap: widget.isDisabled ? null : _handleTap,
+      autofocus: widget.autofocus,
+      focusNode: _effectiveFocusNode,
+      borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
+      showScaleAnimation: false,
+      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+        final bool isActive = isHovered || isFocused;
+        _handleActiveState(isActive);
+
+        return AnimatedBuilder(
+          animation: _hoverAnimationController!,
+          builder: (context, child) {
+            return Container(
+              clipBehavior: widget.clipBehavior ?? Clip.none,
+              decoration: widget.decoration ??
+                  ShapeDecoration(
+                    color: _hoverColor!.value,
+                    shadows: effectiveShadows,
+                    shape: MoonSquircleBorder(
+                      side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                      borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
+                    ),
+                  ),
+              child: child,
+            );
+          },
+          child: child,
+        );
+      },
     );
   }
 
-  Widget _buildChildren(BuildContext context, Widget? rootChild) {
+  Widget _buildContent(BuildContext context, Widget? rootChild) {
     _effectiveHoverEffectColor ??= context.moonEffects?.controlHoverEffect.primaryHoverColor ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
 
@@ -465,21 +448,6 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     _effectiveHeaderPadding = widget.headerPadding ?? _effectiveMoonAccordionSize.headerPadding;
 
     _resolvedDirectionalHeaderPadding = _effectiveHeaderPadding.resolve(Directionality.of(context));
-
-    final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
-
-    final Color effectiveFocusEffectColor = context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
-
-    final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
-
-    final Curve effectiveFocusEffectCurve = context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
-
-    final Color effectiveHoverEffectColor = context.moonEffects?.controlHoverEffect.primaryHoverColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
 
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? context.moonTheme?.accordionTheme.colors.backgroundColor ?? MoonColors.light.gohan;
@@ -509,12 +477,14 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
         context.moonTheme?.accordionTheme.colors.expandedTrailingColor ??
         MoonColors.light.textPrimary;
 
-    final TextStyle effectiveHeaderTextStyle = _effectiveMoonAccordionSize.headerTextStyle;
-
     final Color effectiveContentTextColor =
         context.moonTheme?.accordionTheme.colors.contentColor ?? MoonColors.light.textPrimary;
 
+    final TextStyle effectiveHeaderTextStyle = _effectiveMoonAccordionSize.headerTextStyle;
     final TextStyle effectiveContentTextStyle = _effectiveMoonAccordionSize.contentTextStyle;
+
+    final Color effectiveHoverEffectColor = context.moonEffects?.controlHoverEffect.primaryHoverColor ??
+        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
 
     final Duration effectiveHoverEffectDuration = context.moonEffects?.controlHoverEffect.hoverDuration ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
@@ -563,90 +533,85 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
       ..begin = effectiveTrailingColor
       ..end = effectiveExpandedTrailingColor;
 
-    return Semantics(
-      label: widget.semanticLabel,
-      enabled: _isExpanded,
-      focused: _isFocused,
-      child: FocusableActionDetector(
-        actions: _actions,
-        focusNode: _effectiveFocusNode,
-        autofocus: widget.autofocus,
-        onFocusChange: _handleFocusChange,
-        onShowFocusHighlight: _handleFocus,
-        onShowHoverHighlight: _handleHover,
-        child: MoonFocusEffect(
-          show: _isFocused,
-          childBorderRadius: _effectiveBorderRadius,
-          effectColor: effectiveFocusEffectColor,
-          effectDuration: effectiveFocusEffectDuration,
-          effectCurve: effectiveFocusEffectCurve,
-          effectExtent: effectiveFocusEffectExtent,
-          child: MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: _handleTap,
-              child: _buildHeader(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    _buildHeader(
-                      isContentOutsideHeader: true,
-                      child: Row(
-                        children: [
-                          if (widget.leading != null)
-                            IconTheme(
-                              data: IconThemeData(color: _leadingColor!.value),
-                              child: DefaultTextStyle(
-                                style: effectiveHeaderTextStyle.copyWith(color: _leadingColor!.value),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.only(end: _resolvedDirectionalHeaderPadding.left),
-                                  child: widget.leading,
-                                ),
-                              ),
-                            ),
-                          IconTheme(
-                            data: IconThemeData(color: _titleColor!.value),
-                            child: DefaultTextStyle(
-                              style: effectiveHeaderTextStyle.copyWith(color: _titleColor!.value),
-                              child: Expanded(child: widget.title),
-                            ),
-                          ),
-                          IconTheme(
-                            data: IconThemeData(color: _trailingColor!.value),
-                            child: DefaultTextStyle(
-                              style: effectiveHeaderTextStyle.copyWith(color: _trailingColor!.value),
-                              child: widget.trailing ?? _buildIcon(context)!,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ClipRect(
-                      child: Column(
-                        children: [
-                          IconTheme(
-                            data: IconThemeData(color: effectiveContentTextColor),
-                            child: DefaultTextStyle(
-                              style: effectiveContentTextStyle.copyWith(color: effectiveContentTextColor),
-                              child: Align(
-                                alignment: widget.expandedAlignment ?? Alignment.topCenter,
-                                heightFactor: _expansionCurvedAnimation!.value,
-                                child: rootChild,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+    final Widget header = SizedBox(
+      height: _effectiveHeaderHeight,
+      child: Padding(
+        padding: _resolvedDirectionalHeaderPadding,
+        child: Row(
+          children: [
+            if (widget.leading != null)
+              IconTheme(
+                data: IconThemeData(color: _leadingColor!.value),
+                child: DefaultTextStyle(
+                  style: effectiveHeaderTextStyle.copyWith(color: _leadingColor!.value),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(end: widget.gap ?? _resolvedDirectionalHeaderPadding.left),
+                    child: widget.leading,
+                  ),
+                ),
+              ),
+            IconTheme(
+              data: IconThemeData(color: _titleColor!.value),
+              child: DefaultTextStyle(
+                style: effectiveHeaderTextStyle.copyWith(color: _titleColor!.value),
+                child: Expanded(child: widget.title),
+              ),
+            ),
+            IconTheme(
+              data: IconThemeData(color: _trailingColor!.value),
+              child: DefaultTextStyle(
+                style: effectiveHeaderTextStyle.copyWith(color: _trailingColor!.value),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.only(start: widget.gap ?? _resolvedDirectionalHeaderPadding.right),
+                  child: widget.trailing ?? _buildIcon(context)!,
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+
+    final Widget childWrapper = ClipRect(
+      child: IconTheme(
+        data: IconThemeData(color: effectiveContentTextColor),
+        child: DefaultTextStyle(
+          style: effectiveContentTextStyle.copyWith(color: effectiveContentTextColor),
+          child: Align(
+            alignment: widget.expandedAlignment ?? Alignment.topCenter,
+            heightFactor: _expansionCurvedAnimation!.value,
+            child: rootChild,
           ),
         ),
       ),
     );
+
+    return switch (widget.hasContentOutside) {
+      true => Semantics(
+          label: widget.semanticLabel,
+          enabled: _isExpanded,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _buildDecorationContainer(child: header),
+              childWrapper,
+            ],
+          ),
+        ),
+      false => Semantics(
+          label: widget.semanticLabel,
+          enabled: _isExpanded,
+          child: _buildDecorationContainer(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                header,
+                childWrapper,
+              ],
+            ),
+          ),
+        ),
+    };
   }
 
   @override
@@ -682,10 +647,12 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
       ),
     );
 
-    return AnimatedBuilder(
-      animation: _expansionAnimationController!.view,
-      builder: _buildChildren,
-      child: shouldRemoveChildren ? null : result,
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _expansionAnimationController!.view,
+        builder: _buildContent,
+        child: shouldRemoveChildren ? null : result,
+      ),
     );
   }
 }

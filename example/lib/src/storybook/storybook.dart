@@ -15,6 +15,7 @@ import 'package:example/src/storybook/stories/drawer.dart';
 import 'package:example/src/storybook/stories/icons.dart';
 import 'package:example/src/storybook/stories/linear_loader.dart';
 import 'package:example/src/storybook/stories/linear_progress.dart';
+import 'package:example/src/storybook/stories/menu_item.dart';
 import 'package:example/src/storybook/stories/modal.dart';
 import 'package:example/src/storybook/stories/popover.dart';
 import 'package:example/src/storybook/stories/radio.dart';
@@ -102,6 +103,7 @@ class StorybookPage extends StatelessWidget {
             IconsStory(),
             LinearLoaderStory(),
             LinearProgressStory(),
+            MenuItemStory(),
             ModalStory(),
             PopoverStory(),
             RadioStory(),

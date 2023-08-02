@@ -72,6 +72,7 @@ export 'package:moon_design/src/widgets/dot_indicator/dot_indicator.dart';
 export 'package:moon_design/src/widgets/drawer/drawer.dart';
 export 'package:moon_design/src/widgets/loaders/circular_loader.dart';
 export 'package:moon_design/src/widgets/loaders/linear_loader.dart';
+export 'package:moon_design/src/widgets/menu_item/menu_item.dart';
 export 'package:moon_design/src/widgets/modal/modal.dart';
 export 'package:moon_design/src/widgets/popover/popover.dart';
 export 'package:moon_design/src/widgets/progress/circular_progress.dart';
