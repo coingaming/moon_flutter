@@ -1,7 +1,3 @@
-// Copyright 2014 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
 import 'package:flutter/cupertino.dart';
@@ -11,73 +7,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
+import 'package:moon_design/src/theme/effects/effects_theme.dart';
+import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart';
+import 'package:moon_design/src/theme/text_input/text_input_sizes.dart';
+import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/tokens/borders.dart';
+import 'package:moon_design/src/theme/tokens/colors.dart';
+import 'package:moon_design/src/theme/tokens/opacities.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
+import 'package:moon_design/src/utils/extensions.dart';
+import 'package:moon_design/src/utils/shape_decoration_premul.dart';
+import 'package:moon_design/src/utils/squircle/squircle_border.dart';
+import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
+import 'package:moon_design/src/widgets/text_input/text_input.dart';
+
 export 'package:flutter/services.dart'
     show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
 
-// Examples can assume:
-// late BuildContext context;
-// late FocusNode myFocusNode;
-
-/// Signature for the [MoonTextInput2.buildCounter] callback.
-typedef InputCounterWidgetBuilder = Widget? Function(
-  /// The build context for the MoonTextInput2.
-  BuildContext context, {
-  /// The length of the string currently in the input.
-  required int currentLength,
-
-  /// The maximum string length that can be entered into the MoonTextInput2.
-  required int? maxLength,
-
-  /// Whether or not the MoonTextInput2 is currently focused. Mainly provided for
-  /// the [liveRegion] parameter in the [Semantics] widget for accessibility.
-  required bool isFocused,
-});
-
-class _TextFieldSelectionGestureDetectorBuilder extends TextSelectionGestureDetectorBuilder {
-  _TextFieldSelectionGestureDetectorBuilder({
-    required _TextFieldState state,
-  })  : _state = state,
-        super(delegate: state);
-
-  final _TextFieldState _state;
-
-  @override
-  void onForcePressStart(ForcePressDetails details) {
-    super.onForcePressStart(details);
-    if (delegate.selectionEnabled && shouldShowSelectionToolbar) {
-      editableText.showToolbar();
-    }
-  }
-
-  @override
-  void onForcePressEnd(ForcePressDetails details) {
-    // Not required.
-  }
-
-  @override
-  void onSingleTapUp(TapDragUpDetails details) {
-    super.onSingleTapUp(details);
-    _state._requestKeyboard();
-    _state.widget.onTap?.call();
-  }
-
-  @override
-  void onSingleLongTapStart(LongPressStartDetails details) {
-    super.onSingleLongTapStart(details);
-    if (delegate.selectionEnabled) {
-      switch (Theme.of(_state.context).platform) {
-        case TargetPlatform.iOS:
-        case TargetPlatform.macOS:
-          break;
-        case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
-        case TargetPlatform.linux:
-        case TargetPlatform.windows:
-          Feedback.forLongPress(_state.context);
-      }
-    }
-  }
+enum MoonTextInputSize2 {
+  sm,
+  md,
+  lg,
+  xl,
 }
+
+typedef MoonTextInputErrorBuilder2 = Widget Function(BuildContext context, String? errorText);
 
 /// A Material Design text field.
 ///
@@ -182,142 +138,155 @@ class _TextFieldSelectionGestureDetectorBuilder extends TextSelectionGestureDete
 ///  * Cookbook: [Retrieve the value of a text field](https://flutter.dev/docs/cookbook/forms/retrieve-input)
 ///  * Cookbook: [Focus and text fields](https://flutter.dev/docs/cookbook/forms/focus)
 class MoonTextInput2 extends StatefulWidget {
-  /// Creates a Material Design text field.
-  ///
-  /// If [decoration] is non-null (which is the default), the text field requires
-  /// one of its ancestors to be a [Material] widget.
-  ///
-  /// To remove the decoration entirely (including the extra padding introduced
-  /// by the decoration to save space for the labels), set the [decoration] to
-  /// null.
-  ///
-  /// The [maxLines] property can be set to null to remove the restriction on
-  /// the number of lines. By default, it is one, meaning this is a single-line
-  /// text field. [maxLines] must not be zero.
-  ///
-  /// The [maxLength] property is set to null by default, which means the
-  /// number of characters allowed in the text field is not restricted. If
-  /// [maxLength] is set a character counter will be displayed below the
-  /// field showing how many characters have been entered. If the value is
-  /// set to a positive integer it will also display the maximum allowed
-  /// number of characters to be entered. If the value is set to
-  /// [MoonTextInput2.noMaxLength] then only the current length is displayed.
-  ///
-  /// After [maxLength] characters have been input, additional input
-  /// is ignored, unless [maxLengthEnforcement] is set to
-  /// [MaxLengthEnforcement.none].
-  /// The text field enforces the length with a [LengthLimitingTextInputFormatter],
-  /// which is evaluated after the supplied [inputFormatters], if any.
-  /// The [maxLength] value must be either null or greater than zero.
-  ///
-  /// If [maxLengthEnforcement] is set to [MaxLengthEnforcement.none], then more
-  /// than [maxLength] characters may be entered, and the error counter and
-  /// divider will switch to the [decoration].errorStyle when the limit is
-  /// exceeded.
-  ///
-  /// The text cursor is not shown if [showCursor] is false or if [showCursor]
-  /// is null (the default) and [readOnly] is true.
-  ///
-  /// The [selectionHeightStyle] and [selectionWidthStyle] properties allow
-  /// changing the shape of the selection highlighting. These properties default
-  /// to [ui.BoxHeightStyle.tight] and [ui.BoxWidthStyle.tight] respectively and
-  /// must not be null.
-  ///
-  /// The [textAlign], [autofocus], [obscureText], [readOnly], [autocorrect],
-  /// [scrollPadding], [maxLines], [maxLength], [selectionHeightStyle],
-  /// [selectionWidthStyle], [enableSuggestions], and
-  /// [enableIMEPersonalizedLearning] arguments must not be null.
+  /// If [maxLength] is set to this value, only the "current input length"
+  /// part of the character counter is shown.
+  static const int noMaxLength = -1;
+
+  static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
+    return AdaptiveTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
+    );
+  }
+
+  /// The [TextStyle] used to indicate misspelled words in the Material style.
   ///
   /// See also:
+  ///  * [SpellCheckConfiguration.misspelledTextStyle], the style configured to
+  ///    mark misspelled words with.
+  ///  * [CupertinoTextField.cupertinoMisspelledTextStyle], the style configured
+  ///    to mark misspelled words with in the Cupertino style.
+  static const TextStyle materialMisspelledTextStyle = TextStyle(
+    decoration: TextDecoration.underline,
+    decorationColor: Colors.red,
+    decorationStyle: TextDecorationStyle.wavy,
+  );
+
+  /// Default builder for [MoonTextInput2]'s spell check suggestions toolbar.
   ///
-  ///  * [maxLength], which discusses the precise meaning of "number of
-  ///    characters" and how it may differ from the intuitive meaning.
-  const MoonTextInput2({
-    super.key,
-    this.controller,
-    this.focusNode,
-    this.undoController,
-    this.decoration,
-    TextInputType? keyboardType,
-    this.textInputAction,
-    this.textCapitalization = TextCapitalization.none,
-    this.style,
-    this.strutStyle,
-    this.textAlign = TextAlign.start,
-    this.textAlignVertical,
-    this.textDirection,
-    this.readOnly = false,
-    this.showCursor,
-    this.autofocus = false,
-    this.obscuringCharacter = '•',
-    this.obscureText = false,
-    this.autocorrect = true,
-    SmartDashesType? smartDashesType,
-    SmartQuotesType? smartQuotesType,
-    this.enableSuggestions = true,
-    this.maxLines = 1,
-    this.minLines,
-    this.expands = false,
-    this.maxLength,
-    this.maxLengthEnforcement,
-    this.onChanged,
-    this.onEditingComplete,
-    this.onSubmitted,
-    this.onAppPrivateCommand,
-    this.inputFormatters,
-    this.enabled,
-    this.cursorWidth = 2.0,
-    this.cursorHeight,
-    this.cursorRadius,
-    this.cursorOpacityAnimates,
-    this.cursorColor,
-    this.selectionHeightStyle = ui.BoxHeightStyle.tight,
-    this.selectionWidthStyle = ui.BoxWidthStyle.tight,
-    this.keyboardAppearance,
-    this.scrollPadding = const EdgeInsets.all(20.0),
-    this.dragStartBehavior = DragStartBehavior.start,
-    bool? enableInteractiveSelection,
-    this.selectionControls,
-    this.onTap,
-    this.onTapOutside,
-    this.mouseCursor,
-    this.buildCounter,
-    this.scrollController,
-    this.scrollPhysics,
-    this.autofillHints = const <String>[],
-    this.contentInsertionConfiguration,
-    this.clipBehavior = Clip.hardEdge,
-    this.restorationId,
-    this.scribbleEnabled = true,
-    this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
-    this.canRequestFocus = true,
-    this.spellCheckConfiguration,
-    this.magnifierConfiguration,
-  })  : assert(obscuringCharacter.length == 1),
-        smartDashesType = smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType = smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
-        assert(maxLines == null || maxLines > 0),
-        assert(minLines == null || minLines > 0),
-        assert(
-          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
-          "minLines can't be greater than maxLines",
-        ),
-        assert(
-          !expands || (maxLines == null && minLines == null),
-          'minLines and maxLines must be null when expands is true.',
-        ),
-        assert(!obscureText || maxLines == 1, 'Obscured fields cannot be multiline.'),
-        assert(maxLength == null || maxLength == MoonTextInput2.noMaxLength || maxLength > 0),
-        // Assert the following instead of setting it directly to avoid surprising the user by silently changing the value they set.
-        assert(
-          !identical(textInputAction, TextInputAction.newline) ||
-              maxLines == 1 ||
-              !identical(keyboardType, TextInputType.text),
-          'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline MoonTextInput2.',
-        ),
-        keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        enableInteractiveSelection = enableInteractiveSelection ?? (!readOnly || !obscureText);
+  /// On Apple platforms, builds an iOS-style toolbar. Everywhere else, builds
+  /// an Android-style toolbar.
+  ///
+  /// See also:
+  ///  * [spellCheckConfiguration], where this is typically specified for
+  ///    [MoonTextInput2].
+  ///  * [SpellCheckConfiguration.spellCheckSuggestionsToolbarBuilder], the
+  ///    parameter for which this is the default value for [MoonTextInput2].
+  ///  * [CupertinoTextField.defaultSpellCheckSuggestionsToolbarBuilder], which
+  ///    is like this but specifies the default for [CupertinoTextField].
+  @visibleForTesting
+  static Widget defaultSpellCheckSuggestionsToolbarBuilder(
+    BuildContext context,
+    EditableTextState editableTextState,
+  ) {
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return CupertinoSpellCheckSuggestionsToolbar.editableText(
+          editableTextState: editableTextState,
+        );
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return SpellCheckSuggestionsToolbar.editableText(
+          editableTextState: editableTextState,
+        );
+    }
+  }
+
+  /// Returns a new [SpellCheckConfiguration] where the given configuration has
+  /// had any missing values replaced with their defaults for the Android
+  /// platform.
+  static SpellCheckConfiguration inferAndroidSpellCheckConfiguration(SpellCheckConfiguration? configuration) {
+    if (configuration == null || configuration == const SpellCheckConfiguration.disabled()) {
+      return const SpellCheckConfiguration.disabled();
+    }
+    return configuration.copyWith(
+      misspelledTextStyle: configuration.misspelledTextStyle ?? MoonTextInput2.materialMisspelledTextStyle,
+      spellCheckSuggestionsToolbarBuilder: configuration.spellCheckSuggestionsToolbarBuilder ??
+          MoonTextInput2.defaultSpellCheckSuggestionsToolbarBuilder,
+    );
+  }
+
+  /// Whether the text input has floating label.
+  final bool hasFloatingLabel;
+
+  /// Whether the focus effect is enabled.
+  final bool showFocusEffect;
+
+  /// The border radius of the input.
+  final BorderRadiusGeometry? borderRadius;
+
+  /// The background color of the input.
+  final Color? backgroundColor;
+
+  /// The border color of the active or focused input.
+  final Color? activeBorderColor;
+
+  /// The border color of the inactive input.
+  final Color? inactiveBorderColor;
+
+  /// The border color of the error input.
+  final Color? errorBorderColor;
+
+  /// The border color of the hovered input.
+  final Color? hoverBorderColor;
+
+  /// The text color of the input.
+  final Color? textColor;
+
+  /// The text color of the hint in input.
+  final Color? hintTextColor;
+
+  /// The gap between the leading or trailing and the label widgets.
+  final double? gap;
+
+  /// The height of the input (this does not include the space taken by [MoonTextInput.errorBuilder]).
+  final double? height;
+
+  /// The transition duration for disable animation.
+  final Duration? transitionDuration;
+
+  /// The transition curve for disable animation.
+  final Curve? transitionCurve;
+
+  /// The padding of the text input.
+  final EdgeInsetsGeometry? padding;
+
+  /// The padding around helper widget or error builder.
+  final EdgeInsetsGeometry? helperPadding;
+
+  /// The size of the text input.
+  final MoonTextInputSize? textInputSize;
+
+  /// The text for the error
+  final String? errorText;
+
+  /// The text for the hint.
+  final String? hintText;
+
+  /// The initial value of the input.
+  final String? initialValue;
+
+  /// The textStyle to use for the text being edited.
+  final TextStyle? textStyle;
+
+  /// The textStyle to use for the error state text.
+  final TextStyle? helperTextStyle;
+
+  /// Builder for the error widget.
+  final MoonTextInputErrorBuilder2? errorBuilder;
+
+  /// The widget in the leading slot of the text input.
+  final Widget? leading;
+
+  /// The widget in the trailing slot of the text input.
+  final Widget? trailing;
+
+  /// The widget in the helper slot of the text area.
+  final Widget? helper;
+
+  ///////
 
   /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.intro}
   ///
@@ -380,15 +349,6 @@ class MoonTextInput2 extends StatefulWidget {
   /// This widget builds an [EditableText] and will ensure that the keyboard is
   /// showing when it is tapped by calling [EditableTextState.requestKeyboard()].
   final FocusNode? focusNode;
-
-  /// The decoration to show around the text field.
-  ///
-  /// By default, draws a horizontal line under the text field but can be
-  /// configured to show an icon, label, hint text, and error text.
-  ///
-  /// Specify null to remove the decoration entirely (including the
-  /// extra padding introduced by the decoration to save space for the labels).
-  final InputDecoration? decoration;
 
   /// {@macro flutter.widgets.editableText.keyboardType}
   final TextInputType keyboardType;
@@ -466,10 +426,6 @@ class MoonTextInput2 extends StatefulWidget {
 
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
-
-  /// If [maxLength] is set to this value, only the "current input length"
-  /// part of the character counter is shown.
-  static const int noMaxLength = -1;
 
   /// The maximum number of characters (Unicode grapheme clusters) to allow in
   /// the text field.
@@ -597,9 +553,6 @@ class MoonTextInput2 extends StatefulWidget {
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
-  /// {@macro flutter.widgets.editableText.selectionEnabled}
-  bool get selectionEnabled => enableInteractiveSelection;
-
   /// {@template flutter.material.textfield.onTap}
   /// Called for each distinct tap except for every second tap of a double tap.
   ///
@@ -658,38 +611,6 @@ class MoonTextInput2 extends StatefulWidget {
   /// stand for the text cursor, which is usually a blinking vertical line at
   /// the editing position.
   final MouseCursor? mouseCursor;
-
-  /// Callback that generates a custom [InputDecoration.counter] widget.
-  ///
-  /// See [InputCounterWidgetBuilder] for an explanation of the passed in
-  /// arguments. The returned widget will be placed below the line in place of
-  /// the default widget built when [InputDecoration.counterText] is specified.
-  ///
-  /// The returned widget will be wrapped in a [Semantics] widget for
-  /// accessibility, but it also needs to be accessible itself. For example,
-  /// if returning a Text widget, set the [Text.semanticsLabel] property.
-  ///
-  /// {@tool snippet}
-  /// ```dart
-  /// Widget counter(
-  ///   BuildContext context,
-  ///   {
-  ///     required int currentLength,
-  ///     required int? maxLength,
-  ///     required bool isFocused,
-  ///   }
-  /// ) {
-  ///   return Text(
-  ///     '$currentLength of $maxLength characters',
-  ///     semanticsLabel: 'character count',
-  ///   );
-  /// }
-  /// ```
-  /// {@end-tool}
-  ///
-  /// If buildCounter returns null, then no counter and no Semantics widget will
-  /// be created at all.
-  final InputCounterWidgetBuilder? buildCounter;
 
   /// {@macro flutter.widgets.editableText.scrollPhysics}
   final ScrollPhysics? scrollPhysics;
@@ -753,79 +674,176 @@ class MoonTextInput2 extends StatefulWidget {
   /// {@macro flutter.widgets.undoHistory.controller}
   final UndoHistoryController? undoController;
 
-  static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
-    return AdaptiveTextSelectionToolbar.editableText(
-      editableTextState: editableTextState,
-    );
-  }
-
   /// {@macro flutter.widgets.EditableText.spellCheckConfiguration}
   ///
   /// If [SpellCheckConfiguration.misspelledTextStyle] is not specified in this
   /// configuration, then [materialMisspelledTextStyle] is used by default.
   final SpellCheckConfiguration? spellCheckConfiguration;
 
-  /// The [TextStyle] used to indicate misspelled words in the Material style.
+  /// Creates a Material Design text field.
+  ///
+  /// If [decoration] is non-null (which is the default), the text field requires
+  /// one of its ancestors to be a [Material] widget.
+  ///
+  /// To remove the decoration entirely (including the extra padding introduced
+  /// by the decoration to save space for the labels), set the [decoration] to
+  /// null.
+  ///
+  /// The [maxLines] property can be set to null to remove the restriction on
+  /// the number of lines. By default, it is one, meaning this is a single-line
+  /// text field. [maxLines] must not be zero.
+  ///
+  /// The [maxLength] property is set to null by default, which means the
+  /// number of characters allowed in the text field is not restricted. If
+  /// [maxLength] is set a character counter will be displayed below the
+  /// field showing how many characters have been entered. If the value is
+  /// set to a positive integer it will also display the maximum allowed
+  /// number of characters to be entered. If the value is set to
+  /// [MoonTextInput2.noMaxLength] then only the current length is displayed.
+  ///
+  /// After [maxLength] characters have been input, additional input
+  /// is ignored, unless [maxLengthEnforcement] is set to
+  /// [MaxLengthEnforcement.none].
+  /// The text field enforces the length with a [LengthLimitingTextInputFormatter],
+  /// which is evaluated after the supplied [inputFormatters], if any.
+  /// The [maxLength] value must be either null or greater than zero.
+  ///
+  /// If [maxLengthEnforcement] is set to [MaxLengthEnforcement.none], then more
+  /// than [maxLength] characters may be entered, and the error counter and
+  /// divider will switch to the [decoration].errorStyle when the limit is
+  /// exceeded.
+  ///
+  /// The text cursor is not shown if [showCursor] is false or if [showCursor]
+  /// is null (the default) and [readOnly] is true.
+  ///
+  /// The [selectionHeightStyle] and [selectionWidthStyle] properties allow
+  /// changing the shape of the selection highlighting. These properties default
+  /// to [ui.BoxHeightStyle.tight] and [ui.BoxWidthStyle.tight] respectively and
+  /// must not be null.
+  ///
+  /// The [textAlign], [autofocus], [obscureText], [readOnly], [autocorrect],
+  /// [scrollPadding], [maxLines], [maxLength], [selectionHeightStyle],
+  /// [selectionWidthStyle], [enableSuggestions], and
+  /// [enableIMEPersonalizedLearning] arguments must not be null.
   ///
   /// See also:
-  ///  * [SpellCheckConfiguration.misspelledTextStyle], the style configured to
-  ///    mark misspelled words with.
-  ///  * [CupertinoTextField.cupertinoMisspelledTextStyle], the style configured
-  ///    to mark misspelled words with in the Cupertino style.
-  static const TextStyle materialMisspelledTextStyle = TextStyle(
-    decoration: TextDecoration.underline,
-    decorationColor: Colors.red,
-    decorationStyle: TextDecorationStyle.wavy,
-  );
-
-  /// Default builder for [MoonTextInput2]'s spell check suggestions toolbar.
   ///
-  /// On Apple platforms, builds an iOS-style toolbar. Everywhere else, builds
-  /// an Android-style toolbar.
-  ///
-  /// See also:
-  ///  * [spellCheckConfiguration], where this is typically specified for
-  ///    [MoonTextInput2].
-  ///  * [SpellCheckConfiguration.spellCheckSuggestionsToolbarBuilder], the
-  ///    parameter for which this is the default value for [MoonTextInput2].
-  ///  * [CupertinoTextField.defaultSpellCheckSuggestionsToolbarBuilder], which
-  ///    is like this but specifies the default for [CupertinoTextField].
-  @visibleForTesting
-  static Widget defaultSpellCheckSuggestionsToolbarBuilder(
-    BuildContext context,
-    EditableTextState editableTextState,
-  ) {
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.iOS:
-      case TargetPlatform.macOS:
-        return CupertinoSpellCheckSuggestionsToolbar.editableText(
-          editableTextState: editableTextState,
-        );
-      case TargetPlatform.android:
-      case TargetPlatform.fuchsia:
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-        return SpellCheckSuggestionsToolbar.editableText(
-          editableTextState: editableTextState,
-        );
-    }
-  }
+  ///  * [maxLength], which discusses the precise meaning of "number of
+  ///    characters" and how it may differ from the intuitive meaning.
+  const MoonTextInput2({
+    this.hasFloatingLabel = false,
+    this.showFocusEffect = true,
+    this.borderRadius,
+    this.backgroundColor,
+    this.activeBorderColor,
+    this.inactiveBorderColor,
+    this.errorBorderColor,
+    this.hoverBorderColor,
+    this.textColor,
+    this.hintTextColor,
+    this.gap,
+    this.height,
+    this.transitionDuration,
+    this.transitionCurve,
+    this.padding,
+    this.helperPadding,
+    this.textInputSize,
+    this.errorText,
+    this.hintText,
+    this.initialValue,
+    this.textStyle,
+    this.helperTextStyle,
+    this.errorBuilder,
+    this.leading,
+    this.trailing,
+    this.helper,
+    //
+    super.key,
+    this.controller,
+    this.focusNode,
+    this.undoController,
+    TextInputType? keyboardType,
+    this.textInputAction,
+    this.textCapitalization = TextCapitalization.none,
+    this.style,
+    this.strutStyle,
+    this.textAlign = TextAlign.start,
+    this.textAlignVertical,
+    this.textDirection,
+    this.readOnly = false,
+    this.showCursor,
+    this.autofocus = false,
+    this.obscuringCharacter = '•',
+    this.obscureText = false,
+    this.autocorrect = true,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
+    this.enableSuggestions = true,
+    this.maxLines = 1,
+    this.minLines,
+    this.expands = false,
+    this.maxLength,
+    this.maxLengthEnforcement,
+    this.onChanged,
+    this.onEditingComplete,
+    this.onSubmitted,
+    this.onAppPrivateCommand,
+    this.inputFormatters,
+    this.enabled,
+    this.cursorWidth = 2.0,
+    this.cursorHeight,
+    this.cursorRadius,
+    this.cursorOpacityAnimates,
+    this.cursorColor,
+    this.selectionHeightStyle = ui.BoxHeightStyle.tight,
+    this.selectionWidthStyle = ui.BoxWidthStyle.tight,
+    this.keyboardAppearance,
+    this.scrollPadding = const EdgeInsets.all(20.0),
+    this.dragStartBehavior = DragStartBehavior.start,
+    bool? enableInteractiveSelection,
+    this.selectionControls,
+    this.onTap,
+    this.onTapOutside,
+    this.mouseCursor,
+    this.scrollController,
+    this.scrollPhysics,
+    this.autofillHints = const <String>[],
+    this.contentInsertionConfiguration,
+    this.clipBehavior = Clip.hardEdge,
+    this.restorationId,
+    this.scribbleEnabled = true,
+    this.enableIMEPersonalizedLearning = true,
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.canRequestFocus = true,
+    this.spellCheckConfiguration,
+    this.magnifierConfiguration,
+  })  : assert(obscuringCharacter.length == 1),
+        smartDashesType = smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType = smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        assert(maxLines == null || maxLines > 0),
+        assert(minLines == null || minLines > 0),
+        assert(
+          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
+          "minLines can't be greater than maxLines",
+        ),
+        assert(
+          !expands || (maxLines == null && minLines == null),
+          'minLines and maxLines must be null when expands is true.',
+        ),
+        assert(!obscureText || maxLines == 1, 'Obscured fields cannot be multiline.'),
+        assert(maxLength == null || maxLength == MoonTextInput2.noMaxLength || maxLength > 0),
+        // Assert the following instead of setting it directly to avoid surprising the user by silently changing the value they set.
+        assert(
+          !identical(textInputAction, TextInputAction.newline) ||
+              maxLines == 1 ||
+              !identical(keyboardType, TextInputType.text),
+          'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline MoonTextInput2.',
+        ),
+        keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
+        enableInteractiveSelection = enableInteractiveSelection ?? (!readOnly || !obscureText);
 
-  /// Returns a new [SpellCheckConfiguration] where the given configuration has
-  /// had any missing values replaced with their defaults for the Android
-  /// platform.
-  static SpellCheckConfiguration inferAndroidSpellCheckConfiguration(
-    SpellCheckConfiguration? configuration,
-  ) {
-    if (configuration == null || configuration == const SpellCheckConfiguration.disabled()) {
-      return const SpellCheckConfiguration.disabled();
-    }
-    return configuration.copyWith(
-      misspelledTextStyle: configuration.misspelledTextStyle ?? MoonTextInput2.materialMisspelledTextStyle,
-      spellCheckSuggestionsToolbarBuilder: configuration.spellCheckSuggestionsToolbarBuilder ??
-          MoonTextInput2.defaultSpellCheckSuggestionsToolbarBuilder,
-    );
-  }
+  /// {@macro flutter.widgets.editableText.selectionEnabled}
+  bool get selectionEnabled => enableInteractiveSelection;
 
   @override
   State<MoonTextInput2> createState() => _TextFieldState();
@@ -837,8 +855,6 @@ class MoonTextInput2 extends StatefulWidget {
     properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode, defaultValue: null));
     properties.add(DiagnosticsProperty<UndoHistoryController>('undoController', undoController, defaultValue: null));
     properties.add(DiagnosticsProperty<bool>('enabled', enabled, defaultValue: null));
-    properties
-        .add(DiagnosticsProperty<InputDecoration>('decoration', decoration, defaultValue: const InputDecoration()));
     properties.add(DiagnosticsProperty<TextInputType>('keyboardType', keyboardType, defaultValue: TextInputType.text));
     properties.add(DiagnosticsProperty<TextStyle>('style', style, defaultValue: null));
     properties.add(DiagnosticsProperty<bool>('autofocus', autofocus, defaultValue: false));
@@ -922,126 +938,25 @@ class MoonTextInput2 extends StatefulWidget {
 class _TextFieldState extends State<MoonTextInput2>
     with RestorationMixin
     implements TextSelectionGestureDetectorBuilderDelegate, AutofillClient {
-  RestorableTextEditingController? _controller;
-  TextEditingController get _effectiveController => widget.controller ?? _controller!.value;
-
-  FocusNode? _focusNode;
-  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
-
-  MaxLengthEnforcement get _effectiveMaxLengthEnforcement =>
-      widget.maxLengthEnforcement ??
-      LengthLimitingTextInputFormatter.getDefaultMaxLengthEnforcement(Theme.of(context).platform);
-
-  bool _isHovering = false;
-
-  bool get needsCounter =>
-      widget.maxLength != null && widget.decoration != null && widget.decoration!.counterText == null;
-
-  bool _showSelectionHandles = false;
-
-  late _TextFieldSelectionGestureDetectorBuilder _selectionGestureDetectorBuilder;
-
-  // API for TextSelectionGestureDetectorBuilderDelegate.
-  @override
-  late bool forcePressEnabled;
-
   @override
   final GlobalKey<EditableTextState> editableTextKey = GlobalKey<EditableTextState>();
 
   @override
-  bool get selectionEnabled => widget.selectionEnabled;
-  // End of API for TextSelectionGestureDetectorBuilderDelegate.
+  late bool forcePressEnabled;
+  late _MoonTextInputSelectionGestureDetectorBuilder _selectionGestureDetectorBuilder;
 
-  bool get _isEnabled => widget.enabled ?? widget.decoration?.enabled ?? true;
+  RestorableTextEditingController? _controller;
+  FocusNode? _focusNode;
+  bool _isHovering = false;
+  bool _showSelectionHandles = false;
 
+  Color get _errorColor => Theme.of(context).colorScheme.error;
+  bool get _isEnabled => widget.enabled ?? true;
+  bool get _hasError => _hasIntrinsicError;
   int get _currentLength => _effectiveController.value.text.characters.length;
-
-  bool get _hasIntrinsicError =>
-      widget.maxLength != null &&
-      widget.maxLength! > 0 &&
-      _effectiveController.value.text.characters.length > widget.maxLength!;
-
-  bool get _hasError => widget.decoration?.errorText != null || _hasIntrinsicError;
-
-  Color get _errorColor => widget.decoration?.errorStyle?.color ?? Theme.of(context).colorScheme.error;
-
-  InputDecoration _getEffectiveDecoration() {
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    final ThemeData themeData = Theme.of(context);
-    final InputDecoration effectiveDecoration =
-        (widget.decoration ?? const InputDecoration()).applyDefaults(themeData.inputDecorationTheme).copyWith(
-              enabled: _isEnabled,
-              hintMaxLines: widget.decoration?.hintMaxLines ?? widget.maxLines,
-            );
-
-    // No need to build anything if counter or counterText were given directly.
-    if (effectiveDecoration.counter != null || effectiveDecoration.counterText != null) {
-      return effectiveDecoration;
-    }
-
-    // If buildCounter was provided, use it to generate a counter widget.
-    Widget? counter;
-    final int currentLength = _currentLength;
-    if (effectiveDecoration.counter == null && effectiveDecoration.counterText == null && widget.buildCounter != null) {
-      final bool isFocused = _effectiveFocusNode.hasFocus;
-      final Widget? builtCounter = widget.buildCounter!(
-        context,
-        currentLength: currentLength,
-        maxLength: widget.maxLength,
-        isFocused: isFocused,
-      );
-      // If buildCounter returns null, don't add a counter widget to the field.
-      if (builtCounter != null) {
-        counter = Semantics(
-          container: true,
-          liveRegion: isFocused,
-          child: builtCounter,
-        );
-      }
-      return effectiveDecoration.copyWith(counter: counter);
-    }
-
-    if (widget.maxLength == null) {
-      return effectiveDecoration;
-    } // No counter widget
-
-    String counterText = '$currentLength';
-    String semanticCounterText = '';
-
-    // Handle a real maxLength (positive number)
-    if (widget.maxLength! > 0) {
-      // Show the maxLength in the counter
-      counterText += '/${widget.maxLength}';
-      final int remaining = (widget.maxLength! - currentLength).clamp(0, widget.maxLength!); // ignore_clamp_double_lint
-      semanticCounterText = localizations.remainingTextFieldCharacterCount(remaining);
-    }
-
-    if (_hasIntrinsicError) {
-      return effectiveDecoration.copyWith(
-        errorText: effectiveDecoration.errorText ?? '',
-        counterStyle: effectiveDecoration.errorStyle ??
-            (themeData.useMaterial3 ? _m3CounterErrorStyle(context) : _m2CounterErrorStyle(context)),
-        counterText: counterText,
-        semanticCounterText: semanticCounterText,
-      );
-    }
-
-    return effectiveDecoration.copyWith(
-      counterText: counterText,
-      semanticCounterText: semanticCounterText,
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _selectionGestureDetectorBuilder = _TextFieldSelectionGestureDetectorBuilder(state: this);
-    if (widget.controller == null) {
-      _createLocalController();
-    }
-    _effectiveFocusNode.canRequestFocus = widget.canRequestFocus && _isEnabled;
-    _effectiveFocusNode.addListener(_handleFocusChanged);
-  }
+  EditableTextState? get _editableText => editableTextKey.currentState;
+  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+  TextEditingController get _effectiveController => widget.controller ?? _controller!.value;
 
   bool get _canRequestFocus {
     final NavigationMode mode = MediaQuery.maybeNavigationModeOf(context) ?? NavigationMode.traditional;
@@ -1053,6 +968,160 @@ class _TextFieldState extends State<MoonTextInput2>
     }
   }
 
+  bool get _hasIntrinsicError =>
+      widget.maxLength != null &&
+      widget.maxLength! > 0 &&
+      _effectiveController.value.text.characters.length > widget.maxLength!;
+
+  MaxLengthEnforcement get _effectiveMaxLengthEnforcement =>
+      widget.maxLengthEnforcement ??
+      LengthLimitingTextInputFormatter.getDefaultMaxLengthEnforcement(Theme.of(context).platform);
+
+  Set<MaterialState> get _materialState {
+    return <MaterialState>{
+      if (!_isEnabled) MaterialState.disabled,
+      if (_isHovering) MaterialState.hovered,
+      if (_effectiveFocusNode.hasFocus) MaterialState.focused,
+      if (_hasError) MaterialState.error,
+    };
+  }
+
+  @override
+  String? get restorationId => widget.restorationId;
+
+  @override
+  String get autofillId => _editableText!.autofillId;
+
+  @override
+  bool get selectionEnabled => widget.selectionEnabled;
+
+  @override
+  TextInputConfiguration get textInputConfiguration {
+    final List<String>? autofillHints = widget.autofillHints?.toList(growable: false);
+    final AutofillConfiguration autofillConfiguration = autofillHints != null
+        ? AutofillConfiguration(
+            uniqueIdentifier: autofillId,
+            autofillHints: autofillHints,
+            currentEditingValue: _effectiveController.value,
+            //hintText: (widget.decoration ?? const InputDecoration()).hintText,
+          )
+        : AutofillConfiguration.disabled;
+
+    return _editableText!.textInputConfiguration.copyWith(autofillConfiguration: autofillConfiguration);
+  }
+
+  void _createLocalController([TextEditingValue? value]) {
+    assert(_controller == null);
+    _controller = value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
+    if (!restorePending) {
+      _registerController();
+    }
+  }
+
+  void _handleFocusChanged() {
+    setState(() {
+      // Rebuild the widget on focus change to show/hide the text selection highlight.
+    });
+  }
+
+  void _handleSelectionChanged(TextSelection selection, SelectionChangedCause? cause) {
+    final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
+
+    if (willShowSelectionHandles != _showSelectionHandles) {
+      setState(() {
+        _showSelectionHandles = willShowSelectionHandles;
+      });
+    }
+
+    switch (Theme.of(context).platform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.android:
+        if (cause == SelectionChangedCause.longPress) _editableText?.bringIntoView(selection.extent);
+    }
+
+    switch (Theme.of(context).platform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.android:
+        break;
+      case TargetPlatform.macOS:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        if (cause == SelectionChangedCause.drag) _editableText?.hideToolbar();
+    }
+  }
+
+  void _handleHover(bool hovering) {
+    if (hovering != _isHovering) {
+      setState(() {
+        _isHovering = hovering;
+      });
+    }
+  }
+
+  /// Toggle the toolbar when a selection handle is tapped.
+  void _handleSelectionHandleTapped() {
+    if (_effectiveController.selection.isCollapsed) {
+      _editableText!.toggleToolbar();
+    }
+  }
+
+  void _registerController() {
+    assert(_controller != null);
+    registerForRestoration(_controller!, 'controller');
+  }
+
+  void _requestKeyboard() {
+    _editableText?.requestKeyboard();
+  }
+
+  bool _shouldShowSelectionHandles(SelectionChangedCause? cause) {
+    // When the text field is activated by something that doesn't trigger the
+    // selection overlay, we shouldn't show the handles either.
+    if (!_selectionGestureDetectorBuilder.shouldShowSelectionToolbar) return false;
+    if (cause == SelectionChangedCause.keyboard) return false;
+    if (widget.readOnly && _effectiveController.selection.isCollapsed) return false;
+    if (!_isEnabled) return false;
+    if (cause == SelectionChangedCause.longPress || cause == SelectionChangedCause.scribble) return true;
+    if (_effectiveController.text.isNotEmpty) return true;
+
+    return false;
+  }
+
+  MoonTextInputSizeProperties _getMoonTextInputSize(BuildContext context, MoonTextInputSize? moonTextInputSize) {
+    switch (moonTextInputSize) {
+      case MoonTextInputSize.sm:
+        return context.moonTheme?.textInputTheme.sizes.sm ?? MoonTextInputSizes(tokens: MoonTokens.light).sm;
+      case MoonTextInputSize.md:
+        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizes(tokens: MoonTokens.light).md;
+      case MoonTextInputSize.lg:
+        return context.moonTheme?.textInputTheme.sizes.lg ?? MoonTextInputSizes(tokens: MoonTokens.light).lg;
+      case MoonTextInputSize.xl:
+        return context.moonTheme?.textInputTheme.sizes.xl ?? MoonTextInputSizes(tokens: MoonTokens.light).xl;
+      default:
+        return context.moonTheme?.textInputTheme.sizes.md ?? MoonTextInputSizes(tokens: MoonTokens.light).md;
+    }
+  }
+
+  @override
+  void autofill(TextEditingValue newEditingValue) => _editableText!.autofill(newEditingValue);
+
+  @override
+  void initState() {
+    super.initState();
+
+    _selectionGestureDetectorBuilder = _MoonTextInputSelectionGestureDetectorBuilder(state: this);
+
+    if (widget.controller == null) _createLocalController();
+
+    _effectiveFocusNode.canRequestFocus = widget.canRequestFocus && _isEnabled;
+    _effectiveFocusNode.addListener(_handleFocusChanged);
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -1062,6 +1131,7 @@ class _TextFieldState extends State<MoonTextInput2>
   @override
   void didUpdateWidget(MoonTextInput2 oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (widget.controller == null && oldWidget.controller != null) {
       _createLocalController(oldWidget.controller!.value);
     } else if (widget.controller != null && oldWidget.controller == null) {
@@ -1091,162 +1161,13 @@ class _TextFieldState extends State<MoonTextInput2>
     }
   }
 
-  void _registerController() {
-    assert(_controller != null);
-    registerForRestoration(_controller!, 'controller');
-  }
-
-  void _createLocalController([TextEditingValue? value]) {
-    assert(_controller == null);
-    _controller = value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
-    if (!restorePending) {
-      _registerController();
-    }
-  }
-
-  @override
-  String? get restorationId => widget.restorationId;
-
   @override
   void dispose() {
     _effectiveFocusNode.removeListener(_handleFocusChanged);
     _focusNode?.dispose();
     _controller?.dispose();
+
     super.dispose();
-  }
-
-  EditableTextState? get _editableText => editableTextKey.currentState;
-
-  void _requestKeyboard() {
-    _editableText?.requestKeyboard();
-  }
-
-  bool _shouldShowSelectionHandles(SelectionChangedCause? cause) {
-    // When the text field is activated by something that doesn't trigger the
-    // selection overlay, we shouldn't show the handles either.
-    if (!_selectionGestureDetectorBuilder.shouldShowSelectionToolbar) {
-      return false;
-    }
-
-    if (cause == SelectionChangedCause.keyboard) {
-      return false;
-    }
-
-    if (widget.readOnly && _effectiveController.selection.isCollapsed) {
-      return false;
-    }
-
-    if (!_isEnabled) {
-      return false;
-    }
-
-    if (cause == SelectionChangedCause.longPress || cause == SelectionChangedCause.scribble) {
-      return true;
-    }
-
-    if (_effectiveController.text.isNotEmpty) {
-      return true;
-    }
-
-    return false;
-  }
-
-  void _handleFocusChanged() {
-    setState(() {
-      // Rebuild the widget on focus change to show/hide the text selection
-      // highlight.
-    });
-  }
-
-  void _handleSelectionChanged(TextSelection selection, SelectionChangedCause? cause) {
-    final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
-    if (willShowSelectionHandles != _showSelectionHandles) {
-      setState(() {
-        _showSelectionHandles = willShowSelectionHandles;
-      });
-    }
-
-    switch (Theme.of(context).platform) {
-      case TargetPlatform.iOS:
-      case TargetPlatform.macOS:
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-      case TargetPlatform.fuchsia:
-      case TargetPlatform.android:
-        if (cause == SelectionChangedCause.longPress) {
-          _editableText?.bringIntoView(selection.extent);
-        }
-    }
-
-    switch (Theme.of(context).platform) {
-      case TargetPlatform.iOS:
-      case TargetPlatform.fuchsia:
-      case TargetPlatform.android:
-        break;
-      case TargetPlatform.macOS:
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-        if (cause == SelectionChangedCause.drag) {
-          _editableText?.hideToolbar();
-        }
-    }
-  }
-
-  /// Toggle the toolbar when a selection handle is tapped.
-  void _handleSelectionHandleTapped() {
-    if (_effectiveController.selection.isCollapsed) {
-      _editableText!.toggleToolbar();
-    }
-  }
-
-  void _handleHover(bool hovering) {
-    if (hovering != _isHovering) {
-      setState(() {
-        _isHovering = hovering;
-      });
-    }
-  }
-
-  // AutofillClient implementation start.
-  @override
-  String get autofillId => _editableText!.autofillId;
-
-  @override
-  void autofill(TextEditingValue newEditingValue) => _editableText!.autofill(newEditingValue);
-
-  @override
-  TextInputConfiguration get textInputConfiguration {
-    final List<String>? autofillHints = widget.autofillHints?.toList(growable: false);
-    final AutofillConfiguration autofillConfiguration = autofillHints != null
-        ? AutofillConfiguration(
-            uniqueIdentifier: autofillId,
-            autofillHints: autofillHints,
-            currentEditingValue: _effectiveController.value,
-            hintText: (widget.decoration ?? const InputDecoration()).hintText,
-          )
-        : AutofillConfiguration.disabled;
-
-    return _editableText!.textInputConfiguration.copyWith(autofillConfiguration: autofillConfiguration);
-  }
-  // AutofillClient implementation end.
-
-  Set<MaterialState> get _materialState {
-    return <MaterialState>{
-      if (!_isEnabled) MaterialState.disabled,
-      if (_isHovering) MaterialState.hovered,
-      if (_effectiveFocusNode.hasFocus) MaterialState.focused,
-      if (_hasError) MaterialState.error,
-    };
-  }
-
-  TextStyle _getInputStyleForState(TextStyle style) {
-    final ThemeData theme = Theme.of(context);
-    final TextStyle stateStyle = MaterialStateProperty.resolveAs(
-      theme.useMaterial3 ? _m3StateInputStyle(context)! : _m2StateInputStyle(context)!,
-      _materialState,
-    );
-    final TextStyle providedStyle = MaterialStateProperty.resolveAs(style, _materialState);
-    return providedStyle.merge(stateStyle);
   }
 
   @override
@@ -1263,12 +1184,128 @@ class _TextFieldState extends State<MoonTextInput2>
 
     final ThemeData theme = Theme.of(context);
     final DefaultSelectionStyle selectionStyle = DefaultSelectionStyle.of(context);
-    final TextStyle style =
-        _getInputStyleForState(theme.useMaterial3 ? _m3InputStyle(context) : theme.textTheme.titleMedium!)
-            .merge(widget.style);
     final Brightness keyboardAppearance = widget.keyboardAppearance ?? theme.brightness;
     final TextEditingController controller = _effectiveController;
     final FocusNode focusNode = _effectiveFocusNode;
+
+    final MoonTextInputSizeProperties effectiveMoonTextInputSize = _getMoonTextInputSize(context, widget.textInputSize);
+
+    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ?? effectiveMoonTextInputSize.borderRadius;
+
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? context.moonTheme?.textInputTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+
+    final Color effectiveActiveBorderColor = widget.activeBorderColor ??
+        context.moonTheme?.textInputTheme.colors.activeBorderColor ??
+        MoonColors.light.piccolo;
+
+    final Color effectiveInactiveBorderColor = widget.inactiveBorderColor ??
+        context.moonTheme?.textInputTheme.colors.inactiveBorderColor ??
+        MoonColors.light.beerus;
+
+    final Color effectiveErrorBorderColor = widget.errorBorderColor ??
+        context.moonTheme?.textInputTheme.colors.errorBorderColor ??
+        MoonColors.light.chiChi100;
+
+    final Color effectiveHoverBorderColor =
+        widget.hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
+
+    final Color focusEffectColor =
+        context.isDarkMode ? effectiveActiveBorderColor.withOpacity(0.4) : effectiveActiveBorderColor.withOpacity(0.2);
+
+    final Color errorFocusEffectColor =
+        context.isDarkMode ? effectiveErrorBorderColor.withOpacity(0.4) : effectiveErrorBorderColor.withOpacity(0.2);
+
+    final Color effectiveTextColor =
+        widget.textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
+
+    final Color resolvedTextColor = _hasError ? effectiveErrorBorderColor : effectiveTextColor;
+
+    final Color effectiveHintTextColor =
+        widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.supportingTextColor ?? MoonColors.light.trunks;
+
+    final double effectiveGap = widget.gap ?? effectiveMoonTextInputSize.gap;
+
+    final double effectiveHeight = widget.height ?? effectiveMoonTextInputSize.height;
+
+    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
+
+    final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
+
+    final Duration effectiveTransitionDuration = widget.transitionDuration ??
+        context.moonTheme?.textInputTheme.properties.transitionDuration ??
+        MoonTransitions.transitions.defaultTransitionDuration;
+
+    final Curve effectiveTransitionCurve = widget.transitionCurve ??
+        context.moonTheme?.textInputTheme.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
+
+    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonTextInputSize.padding;
+
+    final EdgeInsetsGeometry effectiveHelperPadding = widget.helperPadding ??
+        context.moonTheme?.textInputTheme.properties.helperPadding ??
+        EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
+
+    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
+
+    final EdgeInsets correctedPadding = resolvedDirectionalPadding.copyWith(
+      left: widget.leading != null ? 0 : resolvedDirectionalPadding.left,
+      right: widget.trailing != null ? 0 : resolvedDirectionalPadding.right,
+    );
+
+    final TextStyle effectiveTextStyle = widget.textStyle ?? effectiveMoonTextInputSize.textStyle;
+
+    final TextStyle effectiveHelperTextStyle = widget.helperTextStyle ??
+        context.moonTheme?.textInputTheme.properties.helperTextStyle ??
+        const TextStyle(fontSize: 12);
+
+    final MoonSquircleBorder defaultBorder = MoonSquircleBorder(
+      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+      side: BorderSide(
+        color: _isHovering ? effectiveHoverBorderColor : effectiveInactiveBorderColor,
+        width: _isHovering ? MoonBorders.borders.activeBorderWidth : MoonBorders.borders.defaultBorderWidth,
+      ),
+    );
+
+    final MoonSquircleBorder focusBorder = MoonSquircleBorder(
+      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+      side: BorderSide(
+        color: effectiveActiveBorderColor,
+        width: MoonBorders.borders.activeBorderWidth,
+      ),
+    );
+
+    final MoonSquircleBorder errorBorder = MoonSquircleBorder(
+      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+      side: BorderSide(
+        color: effectiveErrorBorderColor,
+        width: MoonBorders.borders.activeBorderWidth,
+      ),
+    );
+
+    final MoonSquircleBorder resolvedBorder = widget.errorText != null && !widget.readOnly
+        ? errorBorder
+        : _effectiveFocusNode.hasFocus && !widget.readOnly
+            ? focusBorder
+            : defaultBorder;
+
+    bool? cursorOpacityAnimates = widget.cursorOpacityAnimates;
+    Color? autocorrectionTextRectColor;
+    Offset? cursorOffset;
+    Radius? cursorRadius = widget.cursorRadius;
+    VoidCallback? handleDidGainAccessibilityFocus;
+
+    final bool paintCursorAboveText;
+    final Color cursorColor;
+    final Color selectionColor;
+    final TextSelectionControls? textSelectionControls = widget.selectionControls;
+
+    final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor>(
+      widget.mouseCursor ?? MaterialStateMouseCursor.textable,
+      _materialState,
+    );
+
     final List<TextInputFormatter> formatters = <TextInputFormatter>[
       ...?widget.inputFormatters,
       if (widget.maxLength != null)
@@ -1285,27 +1322,22 @@ class _TextFieldState extends State<MoonTextInput2>
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
-        spellCheckConfiguration = CupertinoTextField.inferIOSSpellCheckConfiguration(
-          widget.spellCheckConfiguration,
-        );
+        spellCheckConfiguration = CupertinoTextField.inferIOSSpellCheckConfiguration(widget.spellCheckConfiguration);
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
       case TargetPlatform.linux:
       case TargetPlatform.windows:
-        spellCheckConfiguration = MoonTextInput2.inferAndroidSpellCheckConfiguration(
-          widget.spellCheckConfiguration,
-        );
+        spellCheckConfiguration = MoonTextInput2.inferAndroidSpellCheckConfiguration(widget.spellCheckConfiguration);
     }
 
-    final TextSelectionControls? textSelectionControls = widget.selectionControls;
-    final bool paintCursorAboveText;
-    bool? cursorOpacityAnimates = widget.cursorOpacityAnimates;
-    Offset? cursorOffset;
-    final Color cursorColor;
-    final Color selectionColor;
-    Color? autocorrectionTextRectColor;
-    Radius? cursorRadius = widget.cursorRadius;
-    VoidCallback? handleDidGainAccessibilityFocus;
+    final int? semanticsMaxValueLength;
+    if (_effectiveMaxLengthEnforcement != MaxLengthEnforcement.none &&
+        widget.maxLength != null &&
+        widget.maxLength! > 0) {
+      semanticsMaxValueLength = widget.maxLength;
+    } else {
+      semanticsMaxValueLength = null;
+    }
 
     switch (theme.platform) {
       case TargetPlatform.iOS:
@@ -1369,7 +1401,7 @@ class _TextFieldState extends State<MoonTextInput2>
         };
     }
 
-    Widget child = RepaintBoundary(
+    final Widget child = RepaintBoundary(
       child: UnmanagedRestorationScope(
         bucket: bucket,
         child: EditableText(
@@ -1383,7 +1415,7 @@ class _TextFieldState extends State<MoonTextInput2>
           keyboardType: widget.keyboardType,
           textInputAction: widget.textInputAction,
           textCapitalization: widget.textCapitalization,
-          style: style,
+          style: effectiveTextStyle.copyWith(color: resolvedTextColor),
           strutStyle: widget.strutStyle,
           textAlign: widget.textAlign,
           textDirection: widget.textDirection,
@@ -1440,40 +1472,6 @@ class _TextFieldState extends State<MoonTextInput2>
       ),
     );
 
-    if (widget.decoration != null) {
-      child = AnimatedBuilder(
-        animation: Listenable.merge(<Listenable>[focusNode, controller]),
-        builder: (BuildContext context, Widget? child) {
-          return InputDecorator(
-            decoration: _getEffectiveDecoration(),
-            baseStyle: widget.style,
-            textAlign: widget.textAlign,
-            textAlignVertical: widget.textAlignVertical,
-            isHovering: _isHovering,
-            isFocused: focusNode.hasFocus,
-            isEmpty: controller.value.text.isEmpty,
-            expands: widget.expands,
-            child: child,
-          );
-        },
-        child: child,
-      );
-    }
-
-    final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor>(
-      widget.mouseCursor ?? MaterialStateMouseCursor.textable,
-      _materialState,
-    );
-
-    final int? semanticsMaxValueLength;
-    if (_effectiveMaxLengthEnforcement != MaxLengthEnforcement.none &&
-        widget.maxLength != null &&
-        widget.maxLength! > 0) {
-      semanticsMaxValueLength = widget.maxLength;
-    } else {
-      semanticsMaxValueLength = null;
-    }
-
     return MouseRegion(
       cursor: effectiveMouseCursor,
       onEnter: (PointerEnterEvent event) => _handleHover(true),
@@ -1511,36 +1509,48 @@ class _TextFieldState extends State<MoonTextInput2>
   }
 }
 
-TextStyle? _m2StateInputStyle(BuildContext context) => MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-      final ThemeData theme = Theme.of(context);
-      if (states.contains(MaterialState.disabled)) {
-        return TextStyle(color: theme.disabledColor);
+class _MoonTextInputSelectionGestureDetectorBuilder extends TextSelectionGestureDetectorBuilder {
+  _MoonTextInputSelectionGestureDetectorBuilder({
+    required _TextFieldState state,
+  })  : _state = state,
+        super(delegate: state);
+
+  final _TextFieldState _state;
+
+  @override
+  void onForcePressStart(ForcePressDetails details) {
+    super.onForcePressStart(details);
+    if (delegate.selectionEnabled && shouldShowSelectionToolbar) {
+      editableText.showToolbar();
+    }
+  }
+
+  @override
+  void onForcePressEnd(ForcePressDetails details) {
+    // Not required.
+  }
+
+  @override
+  void onSingleTapUp(TapDragUpDetails details) {
+    super.onSingleTapUp(details);
+    _state._requestKeyboard();
+    _state.widget.onTap?.call();
+  }
+
+  @override
+  void onSingleLongTapStart(LongPressStartDetails details) {
+    super.onSingleLongTapStart(details);
+    if (delegate.selectionEnabled) {
+      switch (Theme.of(_state.context).platform) {
+        case TargetPlatform.iOS:
+        case TargetPlatform.macOS:
+          break;
+        case TargetPlatform.android:
+        case TargetPlatform.fuchsia:
+        case TargetPlatform.linux:
+        case TargetPlatform.windows:
+          Feedback.forLongPress(_state.context);
       }
-      return TextStyle(color: theme.textTheme.titleMedium?.color);
-    });
-
-TextStyle _m2CounterErrorStyle(BuildContext context) =>
-    Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.error);
-
-// BEGIN GENERATED TOKEN PROPERTIES - MoonTextInput2
-
-// Do not edit by hand. The code between the "BEGIN GENERATED" and
-// "END GENERATED" comments are generated from data in the Material
-// Design token database by the script:
-//   dev/tools/gen_defaults/bin/gen_defaults.dart.
-
-// Token database version: v0_162
-
-TextStyle? _m3StateInputStyle(BuildContext context) => MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
-        return TextStyle(color: Theme.of(context).textTheme.bodyLarge!.color?.withOpacity(0.38));
-      }
-      return TextStyle(color: Theme.of(context).textTheme.bodyLarge!.color);
-    });
-
-TextStyle _m3InputStyle(BuildContext context) => Theme.of(context).textTheme.bodyLarge!;
-
-TextStyle _m3CounterErrorStyle(BuildContext context) =>
-    Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.error);
-
-// END GENERATED TOKEN PROPERTIES - MoonTextInput2
+    }
+  }
+}
