@@ -261,33 +261,11 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
   Color? _effectiveHoverEffectColor;
 
   bool _isExpanded = false;
-  bool _isFocused = false;
-  bool _isHovered = false;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
 
-  void _handleHover(bool hover) {
-    if (hover != _isHovered) {
-      setState(() => _isHovered = hover);
-
-      if (hover) {
-        _hoverAnimationController!.forward();
-      } else {
-        _hoverAnimationController!.reverse();
-      }
-    }
-  }
-
-  void _handleFocus(bool focus) {
-    if (focus != _isFocused) {
-      setState(() => _isFocused = focus);
-
-      if (focus) {
-        _hoverAnimationController!.forward();
-      } else {
-        _hoverAnimationController!.reverse();
-      }
-    }
+  void _handleActiveState(bool isActive) {
+    isActive ? _hoverAnimationController!.forward() : _hoverAnimationController!.reverse();
   }
 
   void _handleTap() {
@@ -420,28 +398,31 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
       borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
       autofocus: widget.autofocus,
       focusNode: _effectiveFocusNode,
-      onFocus: _handleFocus,
-      onHover: _handleHover,
       onTap: _handleTap,
-      child: AnimatedBuilder(
-        animation: _hoverAnimationController!,
-        builder: (context, child) {
-          return Container(
-            clipBehavior: widget.clipBehavior ?? Clip.none,
-            decoration: widget.decoration ??
-                ShapeDecoration(
-                  color: _hoverColor!.value,
-                  shadows: effectiveShadows,
-                  shape: MoonSquircleBorder(
-                    side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                    borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
+      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+        final bool isActive = isHovered || isFocused;
+        _handleActiveState(isActive);
+
+        return AnimatedBuilder(
+          animation: _hoverAnimationController!,
+          builder: (context, child) {
+            return Container(
+              clipBehavior: widget.clipBehavior ?? Clip.none,
+              decoration: widget.decoration ??
+                  ShapeDecoration(
+                    color: _hoverColor!.value,
+                    shadows: effectiveShadows,
+                    shape: MoonSquircleBorder(
+                      side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
+                      borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
+                    ),
                   ),
-                ),
-            child: child,
-          );
-        },
-        child: child,
-      ),
+              child: child,
+            );
+          },
+          child: child,
+        );
+      },
     );
   }
 
