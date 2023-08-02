@@ -95,5 +95,6 @@ export 'package:moon_design/src/widgets/tag/tag.dart';
 export 'package:moon_design/src/widgets/text_area/text_area.dart';
 export 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 export 'package:moon_design/src/widgets/text_input/text_input.dart';
+export 'package:moon_design/src/widgets/text_input/text_input2.dart';
 export 'package:moon_design/src/widgets/toast/toast.dart';
 export 'package:moon_design/src/widgets/tooltip/tooltip.dart';

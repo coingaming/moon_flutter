@@ -53,7 +53,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Accordion",
+          initialStory: "TextInput",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (BuildContext context, Widget? child) => MaterialApp(
