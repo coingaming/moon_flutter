@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.27.0](https://github.com/coingaming/moon_flutter/compare/v0.26.19...v0.27.0) (2023-08-02)
+
+
+### Features
+
+* [MDS-618] Menu item component ([#233](https://github.com/coingaming/moon_flutter/issues/233)) ([41ee0e1](https://github.com/coingaming/moon_flutter/commit/41ee0e1fa29406e1226e62148522001223fc0259))
+
 ## [0.26.19](https://github.com/coingaming/moon_flutter/compare/v0.26.18...v0.26.19) (2023-08-02)
 
 
