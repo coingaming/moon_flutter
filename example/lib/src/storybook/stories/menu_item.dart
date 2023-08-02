@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-bool? checkboxValue = false;
-bool switchValue = false;
+bool? checkboxIsSelected = false;
+bool switchIsSelected = false;
 
 enum MenuItem { first, second }
 
@@ -18,7 +18,7 @@ class MenuItemStory extends Story {
           builder: (context) {
             final leadingColorsKnob = context.knobs.nullable.options(
               label: "Leading color",
-              description: "MoonColors variants for MoonMenuItem leading.",
+              description: "MoonColors variants for MoonMenuItem leading slot.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -28,8 +28,8 @@ class MenuItemStory extends Story {
             final leadingColor = colorTable(context)[leadingColorsKnob ?? 40];
 
             final titleColorsKnob = context.knobs.nullable.options(
-              label: "Title text color",
-              description: "MoonColors variants for MoonMenuItem title.",
+              label: "Title color",
+              description: "MoonColors variants for MoonMenuItem title slot.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -39,8 +39,8 @@ class MenuItemStory extends Story {
             final titleTextColor = colorTable(context)[titleColorsKnob ?? 40];
 
             final descriptionTextColorsKnob = context.knobs.nullable.options(
-              label: "Description text color",
-              description: "MoonColors variants for MoonMenuItem description text.",
+              label: "Description color",
+              description: "MoonColors variants for MoonMenuItem description slot.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -51,7 +51,7 @@ class MenuItemStory extends Story {
 
             final trailingColorsKnob = context.knobs.nullable.options(
               label: "Trailing color",
-              description: "MoonColors variants for MoonMenuItem trailing.",
+              description: "MoonColors variants for MoonMenuItem trailing slot.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -97,10 +97,9 @@ class MenuItemStory extends Story {
               initial: true,
             );
 
-            final isEnabledKnob = context.knobs.boolean(
-              label: "enabled",
-              description: "Controls whether MoonMenuItem is enabled.",
-              initial: true,
+            final isDisabledKnob = context.knobs.boolean(
+              label: "Disabled",
+              description: "MoonMenuItem onTap() is null.",
             );
 
             final borderRadius = borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
@@ -141,7 +140,7 @@ class MenuItemStory extends Story {
                                 color: trailingColor,
                               )
                             : null,
-                        onTap: isEnabledKnob ? () {} : null,
+                        onTap: isDisabledKnob ? null : () {},
                       ),
                       const SizedBox(height: 16),
                       MoonMenuItem(
@@ -171,7 +170,7 @@ class MenuItemStory extends Story {
                                 color: trailingColor,
                               )
                             : null,
-                        onTap: isEnabledKnob ? () => {} : null,
+                        onTap: isDisabledKnob ? null : () {},
                       ),
                       const SizedBox(height: 32),
                       const TextDivider(text: "MoonMenuItem with selection control"),
@@ -191,12 +190,12 @@ class MenuItemStory extends Story {
                             : null,
                         trailing: showTrailingKnob
                             ? MoonCheckbox(
-                                value: checkboxValue,
+                                value: checkboxIsSelected,
                                 tapAreaSizeValue: 24,
-                                onChanged: (newValue) => setState(() => checkboxValue = newValue),
+                                onChanged: (bool? isSelected) => setState(() => checkboxIsSelected = isSelected),
                               )
                             : null,
-                        onTap: isEnabledKnob ? () => setState(() => checkboxValue = !checkboxValue!) : null,
+                        onTap: isDisabledKnob ? null : () => setState(() => checkboxIsSelected = !checkboxIsSelected!),
                       ),
                       const SizedBox(height: 16),
                       MoonMenuItem(
@@ -215,18 +214,18 @@ class MenuItemStory extends Story {
                         trailing: showTrailingKnob
                             ? MoonSwitch(
                                 switchSize: MoonSwitchSize.x2s,
-                                value: switchValue,
-                                onChanged: (newValue) => setState(() => switchValue = newValue),
+                                value: switchIsSelected,
+                                onChanged: (bool isSelected) => setState(() => switchIsSelected = isSelected),
                               )
                             : null,
-                        onTap: isEnabledKnob ? () => setState(() => switchValue = !switchValue) : null,
+                        onTap: isDisabledKnob ? null : () => setState(() => switchIsSelected = !switchIsSelected),
                       ),
                       const SizedBox(height: 32),
                       const TextDivider(text: "Expandable MoonMenuItem with divider"),
                       const SizedBox(height: 32),
                       MoonAccordion<MoonMenuItem>(
                         shadows: const [],
-                        isEnabled: isEnabledKnob,
+                        isDisabled: isDisabledKnob,
                         hasContentOutside: true,
                         borderRadius: borderRadius,
                         accordionSize: MoonAccordionSize.md,
@@ -262,7 +261,9 @@ class MenuItemStory extends Story {
                                       value: MenuItem.first,
                                       groupValue: currentlySelectedMenuItem,
                                       tapAreaSizeValue: 24,
-                                      onChanged: (newValue) => setState(() => currentlySelectedMenuItem = newValue!),
+                                      onChanged: (MenuItem? selectedMenuItem) => setState(
+                                        () => currentlySelectedMenuItem = selectedMenuItem!,
+                                      ),
                                     )
                                   : null,
                               trailing: showTrailingKnob
@@ -285,7 +286,9 @@ class MenuItemStory extends Story {
                                       value: MenuItem.second,
                                       groupValue: currentlySelectedMenuItem,
                                       tapAreaSizeValue: 24,
-                                      onChanged: (newValue) => setState(() => currentlySelectedMenuItem = newValue!),
+                                      onChanged: (MenuItem? selectedMenuItem) => setState(
+                                        () => currentlySelectedMenuItem = selectedMenuItem!,
+                                      ),
                                     )
                                   : null,
                               trailing: showTrailingKnob

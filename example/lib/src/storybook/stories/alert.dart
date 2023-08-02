@@ -13,7 +13,7 @@ class AlertStory extends Story {
           builder: (context) {
             final leadingColorsKnob = context.knobs.nullable.options(
               label: "Leading Color",
-              description: "MoonColors variants for MoonAlert leading.",
+              description: "MoonColors variants for MoonAlert leading slot.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -24,7 +24,7 @@ class AlertStory extends Story {
 
             final titleColorsKnob = context.knobs.nullable.options(
               label: "Title color",
-              description: "MoonColors variants for MoonAlert title.",
+              description: "MoonColors variants for MoonAlert title slot.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -35,7 +35,7 @@ class AlertStory extends Story {
 
             final trailingColorsKnob = context.knobs.nullable.options(
               label: "Trailing color",
-              description: "MoonColors variants for MoonAlert trailing.",
+              description: "MoonColors variants for MoonAlert trailing slot.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -46,7 +46,7 @@ class AlertStory extends Story {
 
             final bodyColorsKnob = context.knobs.nullable.options(
               label: "Body color",
-              description: "MoonColors variants for MoonAlert body.",
+              description: "MoonColors variants for MoonAlert body slot.",
               enabled: false,
               initial: 0,
               // piccolo

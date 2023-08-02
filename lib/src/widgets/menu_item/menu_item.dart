@@ -36,6 +36,9 @@ class MoonMenuItem extends StatefulWidget {
   /// The width of the menu item.
   final double? width;
 
+  /// The horizontal gap between the leading, title/description and trailing widgets.
+  final double? horizontalGap;
+
   /// The vertical space between title and description.
   final double? verticalGap;
 
@@ -69,7 +72,7 @@ class MoonMenuItem extends StatefulWidget {
   /// A widget to display after the menu item header.
   final Widget? trailing;
 
-  /// MDS menu item widget.
+  /// MDS MenuItem widget.
   const MoonMenuItem({
     super.key,
     this.crossAxisAlignment,
@@ -79,6 +82,7 @@ class MoonMenuItem extends StatefulWidget {
     this.decoration,
     this.height,
     this.width,
+    this.horizontalGap,
     this.verticalGap,
     this.hoverEffectDuration,
     this.hoverEffectCurve,
@@ -178,10 +182,10 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
     final Color effectiveIconColor = context.moonTheme?.menuItemTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
     final Color effectiveTitleTextColor =
-        context.moonTheme?.menuItemTheme.colors.titleColor ?? MoonColors.light.textPrimary;
+        context.moonTheme?.menuItemTheme.colors.titleTextColor ?? MoonColors.light.textPrimary;
 
     final Color effectiveDescriptionTextColor =
-        context.moonTheme?.menuItemTheme.colors.descriptionColor ?? MoonColors.light.textSecondary;
+        context.moonTheme?.menuItemTheme.colors.descriptionTextColor ?? MoonColors.light.textSecondary;
 
     final TextStyle effectiveTitleTextStyle =
         context.moonTheme?.menuItemTheme.properties.titleTextStyle ?? MoonTypography.typography.body.textDefault;
@@ -219,8 +223,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
         onTap: widget.onTap,
         autofocus: widget.autofocus,
         focusNode: _effectiveFocusNode,
-        backgroundColor: widget.backgroundColor,
-        borderRadius: effectiveBorderRadius,
+        borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
         showScaleAnimation: false,
         builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
           final bool isActive = isHovered || isFocused;
@@ -252,7 +255,9 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
                   children: [
                     if (widget.leading != null)
                       Padding(
-                        padding: EdgeInsetsDirectional.only(end: resolvedDirectionalHeaderPadding.left),
+                        padding: EdgeInsetsDirectional.only(
+                          end: widget.horizontalGap ?? resolvedDirectionalHeaderPadding.left,
+                        ),
                         child: widget.leading,
                       ),
                     Expanded(
@@ -274,7 +279,9 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
                     ),
                     if (widget.trailing != null)
                       Padding(
-                        padding: EdgeInsetsDirectional.only(start: resolvedDirectionalHeaderPadding.right),
+                        padding: EdgeInsetsDirectional.only(
+                          start: widget.horizontalGap ?? resolvedDirectionalHeaderPadding.right,
+                        ),
                         child: widget.trailing,
                       ),
                   ],

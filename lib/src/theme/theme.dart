@@ -91,7 +91,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonLinearProgress widget theming.
   final MoonLinearProgressTheme linearProgressTheme;
 
-  /// Moon Design System MoonMenuItemTheme widget theming.
+  /// Moon Design System MoonMenuItem widget theming.
   final MoonMenuItemTheme menuItemTheme;
 
   /// Moon Design System MoonModal widget theming.
@@ -236,8 +236,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       effects: effects ?? this.effects,
       linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
       linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
-      modalTheme: modalTheme ?? this.modalTheme,
       menuItemTheme: menuItemTheme ?? this.menuItemTheme,
+      modalTheme: modalTheme ?? this.modalTheme,
       popoverTheme: popoverTheme ?? this.popoverTheme,
       radioTheme: radioTheme ?? this.radioTheme,
       segmentedControlTheme: segmentedControlTheme ?? this.segmentedControlTheme,
@@ -326,20 +326,12 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
-
   MoonBorders? get moonBorders => moonTheme?.tokens.borders;
-
   MoonColors? get moonColors => moonTheme?.tokens.colors;
-
   MoonEffectsTheme? get moonEffects => moonTheme?.effects;
-
   MoonOpacities? get moonOpacities => moonTheme?.tokens.opacities;
-
   MoonShadows? get moonShadows => moonTheme?.tokens.shadows;
-
   MoonSizes? get moonSizes => moonTheme?.tokens.sizes;
-
   MoonTransitions? get moonTransitions => moonTheme?.tokens.transitions;
-
   MoonTypography? get moonTypography => moonTheme?.tokens.typography;
 }

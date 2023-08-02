@@ -24,8 +24,8 @@ class MoonMenuItemTheme extends ThemeExtension<MoonMenuItemTheme> with Diagnosti
               backgroundColor: Colors.transparent,
               dividerColor: tokens.colors.beerus,
               iconColor: tokens.colors.iconPrimary,
-              titleColor: tokens.colors.textPrimary,
-              descriptionColor: tokens.colors.textSecondary,
+              titleTextColor: tokens.colors.textPrimary,
+              descriptionTextColor: tokens.colors.textSecondary,
             ),
         properties = properties ??
             MoonMenuItemProperties(
