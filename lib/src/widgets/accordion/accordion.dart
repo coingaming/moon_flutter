@@ -63,6 +63,9 @@ class MoonAccordion<T> extends StatefulWidget {
   /// If [identityValue] matches [groupIdentityValue], this parameter is ignored.
   final bool initiallyExpanded;
 
+  /// Whether the accordion is disabled.
+  final bool isDisabled;
+
   /// Specifies whether the state of the children is maintained when the accordion expands and collapses.
   ///
   /// When true, the children are kept in the tree while the accordion is collapsed.
@@ -118,6 +121,9 @@ class MoonAccordion<T> extends StatefulWidget {
 
   /// Custom decoration for the accordion.
   final Decoration? decoration;
+
+  /// The gap between the leading, title and trailing widgets.
+  final double? gap;
 
   /// The height of the accordion header.
   final double? headerHeight;
@@ -186,6 +192,7 @@ class MoonAccordion<T> extends StatefulWidget {
     this.autofocus = false,
     this.hasContentOutside = false,
     this.initiallyExpanded = false,
+    this.isDisabled = false,
     this.maintainState = false,
     this.showBorder = false,
     this.showDivider = true,
@@ -202,6 +209,7 @@ class MoonAccordion<T> extends StatefulWidget {
     this.borderColor,
     this.dividerColor,
     this.decoration,
+    this.gap,
     this.headerHeight,
     this.transitionDuration,
     this.transitionCurve,
@@ -395,10 +403,11 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
         widget.shadows ?? context.moonTheme?.accordionTheme.shadows.shadows ?? MoonShadows.light.sm;
 
     return MoonBaseControl(
-      borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
+      onTap: widget.isDisabled ? null : _handleTap,
       autofocus: widget.autofocus,
       focusNode: _effectiveFocusNode,
-      onTap: _handleTap,
+      borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
+      showScaleAnimation: false,
       builder: (context, isEnabled, isHovered, isFocused, isPressed) {
         final bool isActive = isHovered || isFocused;
         _handleActiveState(isActive);
@@ -536,7 +545,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
                 child: DefaultTextStyle(
                   style: effectiveHeaderTextStyle.copyWith(color: _leadingColor!.value),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.only(end: _resolvedDirectionalHeaderPadding.left),
+                    padding: EdgeInsetsDirectional.only(end: widget.gap ?? _resolvedDirectionalHeaderPadding.left),
                     child: widget.leading,
                   ),
                 ),
@@ -552,7 +561,10 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
               data: IconThemeData(color: _trailingColor!.value),
               child: DefaultTextStyle(
                 style: effectiveHeaderTextStyle.copyWith(color: _trailingColor!.value),
-                child: widget.trailing ?? _buildIcon(context)!,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.only(start: widget.gap ?? _resolvedDirectionalHeaderPadding.right),
+                  child: widget.trailing ?? _buildIcon(context)!,
+                ),
               ),
             ),
           ],
