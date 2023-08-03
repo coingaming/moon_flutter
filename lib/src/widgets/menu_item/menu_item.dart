@@ -172,7 +172,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
 
     final EdgeInsetsGeometry effectiveHeaderPadding = widget.menuItemPadding ??
         context.moonTheme?.menuItemTheme.properties.padding ??
-        EdgeInsets.all(MoonSizes.sizes.x4s);
+        EdgeInsets.all(MoonSizes.sizes.x3s);
 
     final EdgeInsets resolvedDirectionalHeaderPadding = effectiveHeaderPadding.resolve(Directionality.of(context));
 

@@ -142,8 +142,8 @@ class CarouselStory extends Story {
                                             showBorder: true,
                                             icon: MoonIcon(
                                               Directionality.of(context) == TextDirection.ltr
-                                                  ? MoonIcons.chevron_left_24
-                                                  : MoonIcons.chevron_right_24,
+                                                  ? MoonIcons.chevron_left_small_24
+                                                  : MoonIcons.chevron_right_small_24,
                                             ),
                                             decoration: ShapeDecorationWithPremultipliedAlpha(
                                               color: context.moonColors!.gohan,
@@ -159,8 +159,8 @@ class CarouselStory extends Story {
                                             showBorder: true,
                                             icon: MoonIcon(
                                               Directionality.of(context) == TextDirection.ltr
-                                                  ? MoonIcons.chevron_right_24
-                                                  : MoonIcons.chevron_left_24,
+                                                  ? MoonIcons.chevron_right_small_24
+                                                  : MoonIcons.chevron_left_small_24,
                                             ),
                                             decoration: ShapeDecorationWithPremultipliedAlpha(
                                               color: context.moonColors!.gohan,
