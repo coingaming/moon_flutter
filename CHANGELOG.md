@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.27.1](https://github.com/coingaming/moon_flutter/compare/v0.27.0...v0.27.1) (2023-08-03)
+
+
+### Bug Fixes
+
+* Padding fixes ([#235](https://github.com/coingaming/moon_flutter/issues/235)) ([821da7b](https://github.com/coingaming/moon_flutter/commit/821da7b024f030d24aa31568e3ccb1aabad1c810))
+
 ## [0.27.0](https://github.com/coingaming/moon_flutter/compare/v0.26.19...v0.27.0) (2023-08-02)
 
 
