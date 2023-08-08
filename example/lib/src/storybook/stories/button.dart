@@ -75,11 +75,6 @@ class ButtonStory extends Story {
               initial: true,
             );
 
-            final showTooltipKnob = context.knobs.boolean(
-              label: "showTooltip",
-              description: "Show MoonTooltip for MoonButton.",
-            );
-
             final showPulseEffectKnob = context.knobs.boolean(
               label: "showPulseEffect",
               description: "Show pulse animation.",
@@ -136,6 +131,8 @@ class ButtonStory extends Story {
 
             final resolvedIconVariant = resolveIconVariant(buttonSizesKnob);
 
+            final borderRadius = borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+
             return Center(
               child: SingleChildScrollView(
                 child: Column(
@@ -146,11 +143,8 @@ class ButtonStory extends Story {
                     const SizedBox(height: 32),
                     MoonButton(
                       onTap: showDisabledKnob ? null : () {},
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       showBorder: showBorderKnob,
-                      showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is MoonTooltip',
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
                       backgroundColor: backgroundColor,
@@ -165,11 +159,8 @@ class ButtonStory extends Story {
                     const SizedBox(height: 32),
                     MoonButton.icon(
                       onTap: showDisabledKnob ? null : () {},
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       showBorder: showBorderKnob,
-                      showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is MoonTooltip',
                       buttonSize: buttonSizesKnob,
                       backgroundColor: backgroundColor,
                       iconColor: textColor,
@@ -185,8 +176,6 @@ class ButtonStory extends Story {
                       onTap: showDisabledKnob ? null : () {},
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
-                      showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
                       leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
                       label: showLabelKnob ? const Text("MoonFilledButton") : null,
@@ -197,8 +186,6 @@ class ButtonStory extends Story {
                       onTap: showDisabledKnob ? null : () {},
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
-                      showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
                       borderColor: borderColor,
                       leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
@@ -210,8 +197,6 @@ class ButtonStory extends Story {
                       onTap: showDisabledKnob ? null : () {},
                       buttonSize: buttonSizesKnob,
                       isFullWidth: setFullWidthKnob,
-                      showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is MoonTooltip',
                       showPulseEffect: showPulseEffectKnob,
                       leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
                       label: showLabelKnob ? const Text("MoonTextButton") : null,
@@ -224,8 +209,6 @@ class ButtonStory extends Story {
                       onTap: showDisabledKnob ? null : () {},
                       height: 40,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is MoonTooltip',
                       showFocusEffect: false,
                       decoration: const ShapeDecoration(
                         image: DecorationImage(
@@ -254,8 +237,6 @@ class ButtonStory extends Story {
                       onTap: showDisabledKnob ? null : () {},
                       height: 72,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      showTooltip: showTooltipKnob,
-                      tooltipMessage: 'This is MoonTooltip',
                       showFocusEffect: false,
                       decoration: ShapeDecorationWithPremultipliedAlpha(
                         shadows: const [

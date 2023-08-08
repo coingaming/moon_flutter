@@ -24,9 +24,9 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
               borderRadius: tokens.borders.interactiveXs,
               gap: tokens.sizes.x4s,
               height: tokens.sizes.sm,
-              iconSizeValue: tokens.sizes.x2s,
+              iconSizeValue: tokens.sizes.xs,
               padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
-              textStyle: tokens.typography.heading.textDefault,
+              textStyle: tokens.typography.body.textDefault,
             ),
         md = md ??
             MoonChipSizeProperties(
@@ -34,8 +34,8 @@ class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTre
               gap: tokens.sizes.x4s,
               height: tokens.sizes.md,
               iconSizeValue: tokens.sizes.xs,
-              padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
-              textStyle: tokens.typography.heading.textDefault,
+              padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x2s),
+              textStyle: tokens.typography.body.textDefault,
             );
 
   @override

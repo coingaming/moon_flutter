@@ -36,9 +36,6 @@ class MoonChip extends StatefulWidget {
   /// Whether the chip should show a focus effect.
   final bool showFocusEffect;
 
-  /// Whether the chip should show a tooltip.
-  final bool showTooltip;
-
   /// The border radius of the chip.
   final BorderRadiusGeometry? borderRadius;
 
@@ -108,9 +105,6 @@ class MoonChip extends StatefulWidget {
   /// The semantic label for the chip.
   final String? semanticLabel;
 
-  /// The tooltip message for the chip.
-  final String tooltipMessage;
-
   /// The callback that is called when the chip is tapped or pressed.
   final VoidCallback? onTap;
 
@@ -135,7 +129,6 @@ class MoonChip extends StatefulWidget {
     this.isActive = false,
     this.showBorder = false,
     this.showFocusEffect = true,
-    this.showTooltip = false,
     this.borderRadius,
     this.activeColor,
     this.backgroundColor,
@@ -159,7 +152,6 @@ class MoonChip extends StatefulWidget {
     this.chipSize,
     this.decoration,
     this.semanticLabel,
-    this.tooltipMessage = "",
     this.onTap,
     this.onLongPress,
     this.label,
@@ -176,7 +168,6 @@ class MoonChip extends StatefulWidget {
     this.isActive = false,
     this.showBorder = false,
     this.showFocusEffect = true,
-    this.showTooltip = false,
     this.borderRadius,
     this.activeColor,
     this.activeBackgroundColor,
@@ -199,7 +190,6 @@ class MoonChip extends StatefulWidget {
     this.chipSize,
     this.decoration,
     this.semanticLabel,
-    this.tooltipMessage = "",
     this.onTap,
     this.onLongPress,
     this.label,
@@ -323,7 +313,6 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
       ensureMinimalTouchTargetSize: widget.ensureMinimalTouchTargetSize,
       showFocusEffect: widget.showFocusEffect,
       showScaleAnimation: false,
-      showTooltip: widget.showTooltip,
       borderRadius: effectiveBorderRadius,
       backgroundColor: widget.backgroundColor,
       focusEffectColor: widget.focusEffectColor,
@@ -333,7 +322,6 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
       focusEffectDuration: widget.focusEffectDuration,
       focusEffectCurve: widget.focusEffectCurve,
       focusNode: widget.focusNode,
-      tooltipMessage: widget.tooltipMessage,
       semanticLabel: widget.semanticLabel,
       onTap: widget.onTap ?? () {},
       onLongPress: widget.onLongPress,
@@ -350,10 +338,7 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
                 size: effectiveMoonChipSize.iconSizeValue,
               ),
               child: DefaultTextStyle(
-                style: TextStyle(
-                  color: _textColor!.value,
-                  fontSize: effectiveMoonChipSize.textStyle.fontSize,
-                ),
+                style: effectiveMoonChipSize.textStyle.copyWith(color: _textColor!.value),
                 child: Container(
                   width: widget.width,
                   height: effectiveHeight,

@@ -26,75 +26,31 @@ class AccordionStory extends Story {
               ],
             );
 
-            final leadingColorsKnob = context.knobs.nullable.options(
-              label: "leadingColor",
-              description: "MoonColors variants for MoonAccordion leading slot.",
+            final textColorsKnob = context.knobs.nullable.options(
+              label: "textColor",
+              description: "MoonColors variants for MoonAccordion header text.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final leadingColor = colorTable(context)[leadingColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorsKnob ?? 40];
 
-            final expandedLeadingColorsKnob = context.knobs.nullable.options(
-              label: "expandedLeadingColor",
-              description: "MoonColors variants for expanded MoonAccordion leading slot.",
+            final expandedTextColorsKnob = context.knobs.nullable.options(
+              label: "expandedTextColor",
+              description: "MoonColors variants for expanded MoonAccordion header text.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final expandedLeadingColor = colorTable(context)[expandedLeadingColorsKnob ?? 40];
-
-            final titleColorsKnob = context.knobs.nullable.options(
-              label: "titleColor",
-              description: "MoonColors variants for MoonAccordion title slot.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final titleColor = colorTable(context)[titleColorsKnob ?? 40];
-
-            final expandedTitleColorsKnob = context.knobs.nullable.options(
-              label: "expandedTitleColor",
-              description: "MoonColors variants for expanded MoonAccordion title slot.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final expandedTitleColor = colorTable(context)[expandedTitleColorsKnob ?? 40];
-
-            final trailingColorsKnob = context.knobs.nullable.options(
-              label: "trailingColor",
-              description: "MoonColors variants for MoonAccordion trailing slot.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final trailingColor = colorTable(context)[trailingColorsKnob ?? 40];
-
-            final expandedTrailingColorsKnob = context.knobs.nullable.options(
-              label: "expandedTrailingColor",
-              description: "MoonColors variants for expanded MoonAccordion trailing slot.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final expandedTrailingColor = colorTable(context)[expandedTrailingColorsKnob ?? 40];
+            final expandedTextColor = colorTable(context)[expandedTextColorsKnob ?? 40];
 
             final contentTextColorsKnob = context.knobs.nullable.options(
-              label: "Content color",
-              description: "MoonColors variants for MoonAccordion content slot.",
+              label: "Content text color",
+              description: "MoonColors variants for MoonAccordion content text.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -102,6 +58,28 @@ class AccordionStory extends Story {
             );
 
             final contentTextColor = colorTable(context)[contentTextColorsKnob ?? 40];
+
+            final iconColorsKnob = context.knobs.nullable.options(
+              label: "iconColor",
+              description: "MoonColors variants for MoonAccordion icon.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final iconColor = colorTable(context)[iconColorsKnob ?? 40];
+
+            final expandedIconColorsKnob = context.knobs.nullable.options(
+              label: "expandedIconColor",
+              description: "MoonColors variants for expanded MoonAccordion icon.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final expandedIconColor = colorTable(context)[expandedIconColorsKnob ?? 40];
 
             final backgroundColorsKnob = context.knobs.nullable.options(
               label: "backgroundColor",
@@ -172,6 +150,12 @@ class AccordionStory extends Story {
               initial: true,
             );
 
+            final BorderRadius? borderRadius =
+                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+
+            const String contentText =
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
             return StatefulBuilder(
               builder: (context, setState) {
                 return ListView(
@@ -184,18 +168,15 @@ class AccordionStory extends Story {
                       identityValue: AccordionItems.first,
                       groupIdentityValue: currentlyOpenAccordionItem,
                       accordionSize: accordionSizesKnob,
-                      leadingColor: leadingColor,
-                      expandedLeadingColor: expandedLeadingColor,
-                      titleColor: titleColor,
-                      expandedTitleColor: expandedTitleColor,
-                      trailingColor: trailingColor,
-                      expandedTrailingColor: expandedTrailingColor,
+                      textColor: textColor,
+                      expandedTextColor: expandedTextColor,
+                      iconColor: iconColor,
+                      expandedIconColor: expandedIconColor,
                       borderColor: borderColor,
                       backgroundColor: backgroundColor,
                       expandedBackgroundColor: expandedBackgroundColor,
                       dividerColor: dividerColor,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       showBorder: showBorderKnob,
                       showDivider: showDividerKnob,
                       shadows: showShadowKnob == true ? null : [],
@@ -205,7 +186,7 @@ class AccordionStory extends Story {
                       title: const Text("Grouped MoonAccordion item #1"),
                       children: [
                         Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                          contentText,
                           style: TextStyle(color: contentTextColor),
                         ),
                       ],
@@ -216,18 +197,15 @@ class AccordionStory extends Story {
                       groupIdentityValue: currentlyOpenAccordionItem,
                       initiallyExpanded: true,
                       accordionSize: accordionSizesKnob,
-                      leadingColor: leadingColor,
-                      expandedLeadingColor: expandedLeadingColor,
-                      titleColor: titleColor,
-                      expandedTitleColor: expandedTitleColor,
-                      trailingColor: trailingColor,
-                      expandedTrailingColor: expandedTrailingColor,
+                      textColor: textColor,
+                      expandedTextColor: expandedTextColor,
+                      iconColor: iconColor,
+                      expandedIconColor: expandedIconColor,
                       borderColor: borderColor,
                       backgroundColor: backgroundColor,
                       expandedBackgroundColor: expandedBackgroundColor,
                       dividerColor: dividerColor,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       showBorder: showBorderKnob,
                       showDivider: showDividerKnob,
                       shadows: showShadowKnob == true ? null : [],
@@ -237,7 +215,7 @@ class AccordionStory extends Story {
                       title: const Text("Grouped MoonAccordion item #2"),
                       children: [
                         Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                          contentText,
                           style: TextStyle(color: contentTextColor),
                         ),
                       ],
@@ -249,24 +227,21 @@ class AccordionStory extends Story {
                       accordionSize: accordionSizesKnob,
                       initiallyExpanded: true,
                       hasContentOutside: true,
-                      leadingColor: leadingColor,
-                      expandedLeadingColor: expandedLeadingColor,
-                      titleColor: titleColor,
-                      expandedTitleColor: expandedTitleColor,
-                      trailingColor: trailingColor,
-                      expandedTrailingColor: expandedTrailingColor,
+                      textColor: textColor,
+                      expandedTextColor: expandedTextColor,
+                      iconColor: iconColor,
+                      expandedIconColor: expandedIconColor,
                       borderColor: borderColor,
                       backgroundColor: backgroundColor,
                       expandedBackgroundColor: expandedBackgroundColor,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       showBorder: showBorderKnob,
                       shadows: showShadowKnob == true ? null : [],
                       childrenPadding: const EdgeInsets.symmetric(vertical: 12),
                       title: const Text("Ungrouped MoonAccordion item #1"),
                       children: [
                         Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                          contentText,
                           style: TextStyle(color: contentTextColor),
                         ),
                       ],
@@ -275,25 +250,22 @@ class AccordionStory extends Story {
                     MoonAccordion<AccordionItems>(
                       accordionSize: accordionSizesKnob,
                       hasContentOutside: true,
-                      leadingColor: leadingColor,
-                      expandedLeadingColor: expandedLeadingColor,
-                      titleColor: titleColor,
-                      expandedTitleColor: expandedTitleColor,
-                      trailingColor: trailingColor,
-                      expandedTrailingColor: expandedTrailingColor,
+                      textColor: textColor,
+                      expandedTextColor: expandedTextColor,
+                      iconColor: iconColor,
+                      expandedIconColor: expandedIconColor,
                       borderColor: borderColor,
                       backgroundColor: backgroundColor,
                       expandedBackgroundColor: expandedBackgroundColor,
                       dividerColor: dividerColor,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       showBorder: showBorderKnob,
                       shadows: showShadowKnob == true ? null : [],
                       childrenPadding: const EdgeInsets.symmetric(vertical: 12),
                       title: const Text("Ungrouped MoonAccordion item #2"),
                       children: [
                         Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                          contentText,
                           style: TextStyle(color: contentTextColor),
                         ),
                       ],

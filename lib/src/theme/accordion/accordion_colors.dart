@@ -5,26 +5,20 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with DiagnosticableTreeMixin {
-  /// Collapsed accordion item leading slot widget's text and icon color.
-  final Color leadingColor;
+  /// Collapsed accordion item header text color.
+  final Color textColor;
 
-  /// Expanded accordion item leading slot widget's text and icon color.
-  final Color expandedLeadingColor;
-
-  /// Collapsed accordion item title slot widget's text and icon color.
-  final Color titleColor;
-
-  /// Expanded accordion item title slot widget's text and icon color.
-  final Color expandedTitleColor;
-
-  /// Collapsed accordion item trailing slot widget's text and icon color.
-  final Color trailingColor;
-
-  /// Expanded accordion item trailing slot widget's text and icon color.
-  final Color expandedTrailingColor;
+  /// Expanded accordion item header text color.
+  final Color expandedTextColor;
 
   /// Accordion item content slot widget's text and icon color.
   final Color contentColor;
+
+  /// Collapsed accordion item header icon color.
+  final Color iconColor;
+
+  /// Expanded accordion item header icon color.
+  final Color expandedIconColor;
 
   /// Collapsed accordion item default pre-set trailing icon color.
   final Color trailingIconColor;
@@ -45,13 +39,11 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
   final Color dividerColor;
 
   const MoonAccordionColors({
-    required this.leadingColor,
-    required this.expandedLeadingColor,
-    required this.titleColor,
-    required this.expandedTitleColor,
-    required this.trailingColor,
-    required this.expandedTrailingColor,
+    required this.textColor,
+    required this.expandedTextColor,
     required this.contentColor,
+    required this.iconColor,
+    required this.expandedIconColor,
     required this.trailingIconColor,
     required this.expandedTrailingIconColor,
     required this.backgroundColor,
@@ -62,13 +54,11 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
 
   @override
   MoonAccordionColors copyWith({
-    Color? leadingColor,
-    Color? expandedLeadingColor,
-    Color? titleColor,
-    Color? expandedTitleColor,
-    Color? trailingColor,
-    Color? expandedTrailingColor,
+    Color? textColor,
+    Color? expandedTextColor,
     Color? contentColor,
+    Color? iconColor,
+    Color? expandedIconColor,
     Color? trailingIconColor,
     Color? expandedTrailingIconColor,
     Color? backgroundColor,
@@ -77,13 +67,11 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
     Color? dividerColor,
   }) {
     return MoonAccordionColors(
-      leadingColor: leadingColor ?? this.leadingColor,
-      expandedLeadingColor: expandedLeadingColor ?? this.expandedLeadingColor,
-      titleColor: titleColor ?? this.titleColor,
-      expandedTitleColor: expandedTitleColor ?? this.expandedTitleColor,
-      trailingColor: trailingColor ?? this.trailingColor,
-      expandedTrailingColor: expandedTrailingColor ?? this.expandedTrailingColor,
+      textColor: textColor ?? this.textColor,
+      expandedTextColor: expandedTextColor ?? this.expandedTextColor,
       contentColor: contentColor ?? this.contentColor,
+      iconColor: iconColor ?? this.iconColor,
+      expandedIconColor: expandedIconColor ?? this.expandedIconColor,
       trailingIconColor: trailingIconColor ?? this.trailingIconColor,
       expandedTrailingIconColor: expandedTrailingIconColor ?? this.expandedTrailingIconColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -98,13 +86,11 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
     if (other is! MoonAccordionColors) return this;
 
     return MoonAccordionColors(
-      leadingColor: colorPremulLerp(leadingColor, other.leadingColor, t)!,
-      expandedLeadingColor: colorPremulLerp(expandedLeadingColor, other.expandedLeadingColor, t)!,
-      titleColor: colorPremulLerp(titleColor, other.titleColor, t)!,
-      expandedTitleColor: colorPremulLerp(expandedTitleColor, other.expandedTitleColor, t)!,
-      trailingColor: colorPremulLerp(trailingColor, other.trailingColor, t)!,
-      expandedTrailingColor: colorPremulLerp(expandedTrailingColor, other.expandedTrailingColor, t)!,
+      textColor: colorPremulLerp(textColor, other.textColor, t)!,
+      expandedTextColor: colorPremulLerp(expandedTextColor, other.expandedTextColor, t)!,
       contentColor: colorPremulLerp(contentColor, other.contentColor, t)!,
+      iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
+      expandedIconColor: colorPremulLerp(expandedIconColor, other.expandedIconColor, t)!,
       trailingIconColor: colorPremulLerp(trailingIconColor, other.trailingIconColor, t)!,
       expandedTrailingIconColor: colorPremulLerp(expandedTrailingIconColor, other.expandedTrailingIconColor, t)!,
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
@@ -119,13 +105,11 @@ class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with Diagn
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonAccordionColors"))
-      ..add(ColorProperty("leadingColor", leadingColor))
-      ..add(ColorProperty("expandedLeadingColor", expandedLeadingColor))
-      ..add(ColorProperty("titleColor", titleColor))
-      ..add(ColorProperty("expandedTitleColor", expandedTitleColor))
-      ..add(ColorProperty("trailingColor", trailingColor))
-      ..add(ColorProperty("expandedTrailingColor", expandedTrailingColor))
+      ..add(ColorProperty("textColor", textColor))
+      ..add(ColorProperty("expandedTextColor", expandedTextColor))
       ..add(ColorProperty("contentColor", contentColor))
+      ..add(ColorProperty("iconColor", iconColor))
+      ..add(ColorProperty("expandedIconColor", expandedIconColor))
       ..add(ColorProperty("trailingIconColor", trailingIconColor))
       ..add(ColorProperty("expandedTrailingIconColor", expandedTrailingIconColor))
       ..add(ColorProperty("backgroundColor", backgroundColor))

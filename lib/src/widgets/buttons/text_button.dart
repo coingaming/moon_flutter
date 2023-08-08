@@ -21,9 +21,6 @@ class MoonTextButton extends StatelessWidget {
   /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
 
-  /// Whether this button should show a tooltip.
-  final bool showTooltip;
-
   /// The height of the button.
   final double? height;
 
@@ -44,9 +41,6 @@ class MoonTextButton extends StatelessWidget {
 
   /// The semantic label for the button.
   final String? semanticLabel;
-
-  /// The tooltip message for the button.
-  final String tooltipMessage;
 
   /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
@@ -76,7 +70,6 @@ class MoonTextButton extends StatelessWidget {
     this.ensureMinimalTouchTargetSize = false,
     this.isFullWidth = false,
     this.showPulseEffect = false,
-    this.showTooltip = false,
     this.height,
     this.width,
     this.minTouchTargetSize = 40,
@@ -84,7 +77,6 @@ class MoonTextButton extends StatelessWidget {
     this.buttonSize,
     this.decoration,
     this.semanticLabel,
-    this.tooltipMessage = "",
     this.onTap,
     this.onLongPress,
     this.label,
@@ -111,7 +103,6 @@ class MoonTextButton extends StatelessWidget {
       ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       isFullWidth: isFullWidth,
       showPulseEffect: showPulseEffect,
-      showTooltip: showTooltip,
       textColor: effectiveTextColor,
       hoverTextColor: effectiveHoverTextColor,
       hoverEffectColor: effectiveHoverColor,
@@ -123,7 +114,6 @@ class MoonTextButton extends StatelessWidget {
       buttonSize: buttonSize,
       decoration: decoration,
       semanticLabel: semanticLabel,
-      tooltipMessage: tooltipMessage,
       onTap: onTap,
       onLongPress: onLongPress,
       label: label,

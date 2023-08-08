@@ -66,7 +66,6 @@ class AlertStory extends Story {
 
             final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
 
-
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
               description: "MoonColors variants for MoonAlert border.",

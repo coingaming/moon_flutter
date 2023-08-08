@@ -117,12 +117,12 @@ class MenuItemStory extends Story {
                         borderRadius: borderRadius,
                         backgroundColor: backgroundColor,
                         title: Text(
-                          "Multi line menu item",
+                          "Multi-line menu item",
                           style: TextStyle(color: titleTextColor),
                         ),
                         description: showDescriptionKnob
                             ? Text(
-                                "Multi line default description field as an example for menu item component.",
+                                "Multi-line default description field as an example for menu item component.",
                                 style: TextStyle(color: descriptionTextColor),
                               )
                             : null,
@@ -147,12 +147,12 @@ class MenuItemStory extends Story {
                         backgroundColor: backgroundColor,
                         borderRadius: borderRadius,
                         title: Text(
-                          "One line menu item",
+                          "One-line menu item",
                           style: TextStyle(color: titleTextColor),
                         ),
                         description: showDescriptionKnob
                             ? Text(
-                                'One line description field example',
+                                'One-line description field example',
                                 style: TextStyle(color: descriptionTextColor),
                               )
                             : null,
@@ -229,7 +229,7 @@ class MenuItemStory extends Story {
                         hasContentOutside: true,
                         borderRadius: borderRadius,
                         accordionSize: MoonAccordionSize.md,
-                        trailingColor: trailingColor,
+                        iconColor: trailingColor,
                         backgroundColor: backgroundColor ?? Colors.transparent,
                         expandedBackgroundColor: backgroundColor ?? context.moonColors!.heles,
                         title: Text(
@@ -242,7 +242,7 @@ class MenuItemStory extends Story {
                         leading: showLeadingKnob
                             ? MoonIcon(
                                 MoonIcons.frame_24,
-                                color: leadingColor,
+                                color: leadingColor ?? context.moonColors!.iconPrimary,
                               )
                             : null,
                         childrenPadding: const EdgeInsets.only(top: 8, bottom: 8, left: 24),
