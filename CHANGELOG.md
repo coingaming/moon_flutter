@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.27.2](https://github.com/coingaming/moon_flutter/compare/v0.27.1...v0.27.2) (2023-08-09)
+
+
+### Bug Fixes
+
+* [MDS-631] Components API changes ([#237](https://github.com/coingaming/moon_flutter/issues/237)) ([6e56792](https://github.com/coingaming/moon_flutter/commit/6e56792625c51c231eec37fa9f21319d334951ce))
+
 ## [0.27.1](https://github.com/coingaming/moon_flutter/compare/v0.27.0...v0.27.1) (2023-08-03)
 
 
