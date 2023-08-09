@@ -7,8 +7,8 @@ class ModalStory extends Story {
   ModalStory()
       : super(
           name: "Modal",
-          builder: (context) {
-            final textColorsKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final textColorKnob = context.knobs.nullable.options(
               label: "Text color",
               description: "MoonColors variants for MoonModal text.",
               enabled: false,
@@ -17,9 +17,9 @@ class ModalStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.nullable.options(
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonModal background.",
               enabled: false,
@@ -28,9 +28,9 @@ class ModalStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final barrierColorsKnob = context.knobs.nullable.options(
+            final barrierColorKnob = context.knobs.nullable.options(
               label: "barrierColor",
               description: "MoonColors variants for MoonModal barrier.",
               enabled: false,
@@ -39,7 +39,7 @@ class ModalStory extends Story {
               options: colorOptions,
             );
 
-            final barrierColor = colorTable(context)[barrierColorsKnob ?? 40];
+            final barrierColor = colorTable(context)[barrierColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -54,7 +54,7 @@ class ModalStory extends Story {
                 context: context,
                 useRootNavigator: false,
                 barrierColor: barrierColor,
-                builder: (_) {
+                builder: (BuildContext _) {
                   return Directionality(
                     textDirection: Directionality.of(context),
                     child: MoonModal(
@@ -74,14 +74,14 @@ class ModalStory extends Story {
                                 style: context.moonTypography!.heading.text18.copyWith(color: textColor),
                               ),
                             ),
-                            Container(
+                            Divider(
                               height: 1,
                               color: context.moonColors!.trunks,
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
                               child: Text(
-                                "Reopen the MoonModal to view the updated knob value.",
+                                "Re-open the MoonModal to view the updated knob value.",
                                 style: context.moonTypography!.body.text14.copyWith(color: textColor),
                               ),
                             ),
@@ -103,20 +103,21 @@ class ModalStory extends Story {
             }
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  Builder(
-                    builder: (context) {
-                      return MoonFilledButton(
-                        label: const Text("Tap me"),
-                        onTap: () => modalBuilder(context),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Builder(
+                      builder: (BuildContext context) {
+                        return MoonFilledButton(
+                          label: const Text("Tap me"),
+                          onTap: () => modalBuilder(context),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             );
           },

@@ -8,8 +8,8 @@ class TabBarStory extends Story {
   TabBarStory()
       : super(
           name: "TabBar",
-          builder: (context) {
-            final tabsSizesKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final tabsSizeKnob = context.knobs.nullable.options(
               label: "tabBarSize",
               description: "Size variants for MoonTabBar.",
               enabled: false,
@@ -20,7 +20,7 @@ class TabBarStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.nullable.options(
+            final textColorKnob = context.knobs.nullable.options(
               label: "textColor",
               description: "MoonColors variants for default text.",
               enabled: false,
@@ -29,9 +29,9 @@ class TabBarStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
-            final selectedTextColorsKnob = context.knobs.nullable.options(
+            final selectedTextColorKnob = context.knobs.nullable.options(
               label: "selectedTextColor",
               description: "MoonColors variants for selected tab text.",
               enabled: false,
@@ -40,9 +40,9 @@ class TabBarStory extends Story {
               options: colorOptions,
             );
 
-            final selectedTextColor = colorTable(context)[selectedTextColorsKnob ?? 40];
+            final selectedTextColor = colorTable(context)[selectedTextColorKnob ?? 40];
 
-            final indicatorColorsKnob = context.knobs.nullable.options(
+            final indicatorColorKnob = context.knobs.nullable.options(
               label: "indicatorColor",
               description: "MoonColors variants for default MoonTabBar indicator.",
               enabled: false,
@@ -51,9 +51,9 @@ class TabBarStory extends Story {
               options: colorOptions,
             );
 
-            final indicatorColor = colorTable(context)[indicatorColorsKnob ?? 40];
+            final indicatorColor = colorTable(context)[indicatorColorKnob ?? 40];
 
-            final selectedTabColorsKnob = context.knobs.nullable.options(
+            final selectedTabColorKnob = context.knobs.nullable.options(
               label: "selectedTabColor",
               description: "MoonColors variants for pill MoonTabBar selected tab.",
               enabled: false,
@@ -62,7 +62,7 @@ class TabBarStory extends Story {
               options: colorOptions,
             );
 
-            final selectedTabColor = colorTable(context)[selectedTabColorsKnob ?? 40];
+            final selectedTabColor = colorTable(context)[selectedTabColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -125,16 +125,17 @@ class TabBarStory extends Story {
 
             return Center(
               child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 64),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 64),
-                    const TextDivider(text: "Default MoonTabBar"),
-                    const SizedBox(height: 32),
+                    const TextDivider(
+                      text: "Default MoonTabBar",
+                      paddingTop: 0,
+                    ),
                     Column(
                       children: [
                         MoonTabBar(
-                          tabBarSize: tabsSizesKnob,
+                          tabBarSize: tabsSizeKnob,
                           isExpanded: isExpandedKnob,
                           gap: gapKnob?.toDouble(),
                           tabs: [
@@ -158,11 +159,9 @@ class TabBarStory extends Story {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 32),
                         const TextDivider(text: "MoonTabBar with disabled tab"),
-                        const SizedBox(height: 32),
                         MoonTabBar(
-                          tabBarSize: tabsSizesKnob,
+                          tabBarSize: tabsSizeKnob,
                           isExpanded: isExpandedKnob,
                           gap: gapKnob?.toDouble(),
                           tabs: [
@@ -185,11 +184,9 @@ class TabBarStory extends Story {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 32),
                         const TextDivider(text: "Pill MoonTabBar"),
-                        const SizedBox(height: 32),
                         MoonTabBar.pill(
-                          tabBarSize: tabsSizesKnob,
+                          tabBarSize: tabsSizeKnob,
                           isExpanded: isExpandedKnob,
                           gap: gapKnob?.toDouble(),
                           pillTabs: [
@@ -215,7 +212,6 @@ class TabBarStory extends Story {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 64),
                   ],
                 ),
               ),

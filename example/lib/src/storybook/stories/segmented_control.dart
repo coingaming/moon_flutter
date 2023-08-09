@@ -8,8 +8,8 @@ class SegmentedControlStory extends Story {
   SegmentedControlStory()
       : super(
           name: "SegmentedControl",
-          builder: (context) {
-            final segmentedControlSizesKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final segmentedControlSizeKnob = context.knobs.nullable.options(
               label: "segmentedControlSize",
               description: "Size variants for MoonSegmentedControl.",
               enabled: false,
@@ -20,7 +20,7 @@ class SegmentedControlStory extends Story {
               ],
             );
 
-            final backgroundColorsKnob = context.knobs.nullable.options(
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonSegmentedControl background.",
               enabled: false,
@@ -29,9 +29,9 @@ class SegmentedControlStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final selectedSegmentColorsKnob = context.knobs.nullable.options(
+            final selectedSegmentColorKnob = context.knobs.nullable.options(
               label: "selectedSegmentColor",
               description: "MoonColors variants for selected segment.",
               enabled: false,
@@ -40,9 +40,9 @@ class SegmentedControlStory extends Story {
               options: colorOptions,
             );
 
-            final selectedSegmentColor = colorTable(context)[selectedSegmentColorsKnob ?? 40];
+            final selectedSegmentColor = colorTable(context)[selectedSegmentColorKnob ?? 40];
 
-            final textColorsKnob = context.knobs.nullable.options(
+            final textColorKnob = context.knobs.nullable.options(
               label: "textColor",
               description: "MoonColors variants for default text.",
               enabled: false,
@@ -51,9 +51,9 @@ class SegmentedControlStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
-            final selectedTextColorsKnob = context.knobs.nullable.options(
+            final selectedTextColorKnob = context.knobs.nullable.options(
               label: "selectedTextColor",
               description: "MoonColors variants for selected segment text.",
               enabled: false,
@@ -62,7 +62,7 @@ class SegmentedControlStory extends Story {
               options: colorOptions,
             );
 
-            final selectedTextColor = colorTable(context)[selectedTextColorsKnob ?? 40];
+            final selectedTextColor = colorTable(context)[selectedTextColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -114,7 +114,7 @@ class SegmentedControlStory extends Story {
               description: "Disable MoonSegmentedControl.",
             );
 
-            final segmentStyle = SegmentStyle(
+            final SegmentStyle segmentStyle = SegmentStyle(
               textColor: textColor,
               selectedTextColor: selectedTextColor,
               selectedSegmentColor: selectedSegmentColor,
@@ -122,24 +122,27 @@ class SegmentedControlStory extends Story {
                   segmentBorderRadiusKnob != null ? BorderRadius.circular(segmentBorderRadiusKnob.toDouble()) : null,
             );
 
+            final BorderRadiusGeometry? borderRadius =
+                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+
             return Center(
               child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 64),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 64),
-                    const TextDivider(text: "Default MoonSegmentedControl"),
-                    const SizedBox(height: 32),
+                    const TextDivider(
+                      text: "Default MoonSegmentedControl",
+                      paddingTop: 0,
+                    ),
                     Column(
                       children: [
                         MoonSegmentedControl(
                           isDisabled: isDisabledKnob,
                           isExpanded: isExpandedKnob,
                           gap: gapKnob?.toDouble(),
-                          segmentedControlSize: segmentedControlSizesKnob,
+                          segmentedControlSize: segmentedControlSizeKnob,
                           backgroundColor: backgroundColor,
-                          borderRadius:
-                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          borderRadius: borderRadius,
                           segments: [
                             Segment(
                               leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
@@ -161,17 +164,14 @@ class SegmentedControlStory extends Story {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 32),
                         const TextDivider(text: "Icon MoonSegmentedControl"),
-                        const SizedBox(height: 32),
                         MoonSegmentedControl(
                           isDisabled: isDisabledKnob,
                           isExpanded: isExpandedKnob,
                           gap: gapKnob?.toDouble(),
-                          segmentedControlSize: segmentedControlSizesKnob,
+                          segmentedControlSize: segmentedControlSizeKnob,
                           backgroundColor: backgroundColor,
-                          borderRadius:
-                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          borderRadius: borderRadius,
                           segments: [
                             Segment(
                               trailing: const MoonIcon(MoonIcons.frame_24),
@@ -193,7 +193,6 @@ class SegmentedControlStory extends Story {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 64),
                   ],
                 ),
               ),

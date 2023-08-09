@@ -9,7 +9,7 @@ class ToastStory extends Story {
           name: "Toast",
           builder: (context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "label text",
+              label: "Toast label text",
               initial: "This is a custom MoonToast text",
             );
 
@@ -42,7 +42,7 @@ class ToastStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.nullable.options(
+            final textColorKnob = context.knobs.nullable.options(
               label: "Text color",
               description: "MoonColors variants for MoonToast text.",
               enabled: false,
@@ -51,9 +51,9 @@ class ToastStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
-            final iconColorsKnob = context.knobs.nullable.options(
+            final iconColorKnob = context.knobs.nullable.options(
               label: "Icon color",
               description: "MoonColors variants for MoonToast icon.",
               enabled: false,
@@ -62,9 +62,9 @@ class ToastStory extends Story {
               options: colorOptions,
             );
 
-            final iconColor = colorTable(context)[iconColorsKnob ?? 40];
+            final iconColor = colorTable(context)[iconColorKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.nullable.options(
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonToast background.",
               enabled: false,
@@ -73,7 +73,7 @@ class ToastStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -114,40 +114,38 @@ class ToastStory extends Story {
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  Builder(
-                    builder: (context) {
-                      return MoonFilledButton(
-                        label: const Text("Tap me"),
-                        onTap: () {
-                          MoonToast.show(
-                            context,
-                            backgroundColor: backgroundColor,
-                            isPersistent: isPersistentKnob,
-                            useSafeArea: useSafeAreaKnob,
-                            width: widthKnob,
-                            toastAlignment: toastAlignmentKnob ?? Alignment.bottomCenter,
-                            variant: toastVariantKnob ?? MoonToastVariant.original,
-                            displayDuration:
-                                displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
-                            borderRadius:
-                                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                            leading: MoonIcon(MoonIcons.info_24, color: iconColor),
-                            title: Text(
-                              customLabelTextKnob,
-                              style: TextStyle(color: textColor),
-                            ),
-                            trailing: MoonIcon(MoonIcons.star_24, color: iconColor),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: Builder(
+                  builder: (BuildContext context) {
+                    return MoonFilledButton(
+                      label: const Text("Tap me"),
+                      onTap: () {
+                        MoonToast.show(
+                          context,
+                          backgroundColor: backgroundColor,
+                          isPersistent: isPersistentKnob,
+                          useSafeArea: useSafeAreaKnob,
+                          width: widthKnob,
+                          toastAlignment: toastAlignmentKnob ?? Alignment.bottomCenter,
+                          variant: toastVariantKnob ?? MoonToastVariant.original,
+                          displayDuration: displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
+                          borderRadius:
+                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          leading: MoonIcon(MoonIcons.info_24, color: iconColor),
+                          title: Text(
+                            customLabelTextKnob,
+                            style: TextStyle(color: textColor),
+                          ),
+                          trailing: MoonIcon(
+                            MoonIcons.star_24,
+                            color: iconColor,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             );
           },

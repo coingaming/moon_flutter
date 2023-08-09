@@ -8,25 +8,27 @@ class DrawerStory extends Story {
       : super(
           name: "Drawer",
           builder: (context) {
-            final backgroundColorsKnob = context.knobs.nullable.options(
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonDrawer background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final barrierColorsKnob = context.knobs.nullable.options(
+            final barrierColorKnob = context.knobs.nullable.options(
               label: "barrierColor",
               description: "MoonColors variants for MoonDrawer barrier.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final barrierColor = colorTable(context)[barrierColorsKnob ?? 40];
+            final barrierColor = colorTable(context)[barrierColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -51,47 +53,40 @@ class DrawerStory extends Story {
                 drawerScrimColor: barrierColor,
                 drawer: MoonDrawer(
                   backgroundColor: backgroundColor,
-                  barrierColor: barrierColorsKnob != null
+                  barrierColor: barrierColorKnob != null
                       ? barrierColor
                       : context.moonTheme?.drawerTheme.colors.barrierColor ?? MoonColors.light.zeno,
-                  borderRadius: BorderRadiusDirectional.only(
-                    topEnd: Radius.circular(borderRadiusKnob?.toDouble() ?? 0),
-                    bottomEnd: Radius.circular(borderRadiusKnob?.toDouble() ?? 0),
+                  borderRadius: BorderRadiusDirectional.horizontal(
+                    end: Radius.circular(borderRadiusKnob?.toDouble() ?? 0),
                   ),
                   width: drawerWidthKnob?.toDouble() ?? MediaQuery.of(context).size.width,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 64),
                       const Text("MoonDrawer"),
                       const SizedBox(height: 32),
                       Builder(
-                        builder: (context) {
+                        builder: (BuildContext context) {
                           return MoonFilledButton(
                             label: const Text("Close"),
                             onTap: () => Navigator.of(context).pop(),
                           );
                         },
                       ),
-                      const SizedBox(height: 64),
                     ],
                   ),
                 ),
                 body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 64),
-                      Builder(
-                        builder: (context) {
-                          return MoonFilledButton(
-                            label: const Text("Tap me"),
-                            onTap: () => Scaffold.of(context).openDrawer(),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 64),
-                    ],
+                  child: Builder(
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 64),
+                        child: MoonFilledButton(
+                          label: const Text("Tap me"),
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
