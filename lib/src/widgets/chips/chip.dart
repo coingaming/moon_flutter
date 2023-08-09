@@ -213,11 +213,7 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
   AnimationController? _animationController;
 
   void _handleActiveEffect(bool shouldAnimate) {
-    if (shouldAnimate) {
-      _animationController?.forward();
-    } else {
-      _animationController?.reverse();
-    }
+    shouldAnimate ? _animationController?.forward() : _animationController?.reverse();
   }
 
   MoonChipSizeProperties _getMoonChipSize(BuildContext context, MoonChipSize? moonChipSize) {
@@ -226,7 +222,6 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
         return context.moonTheme?.chipTheme.sizes.sm ?? MoonChipSizes(tokens: MoonTokens.light).sm;
       case MoonChipSize.md:
         return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).md;
-
       default:
         return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).md;
     }
@@ -235,6 +230,7 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
   @override
   void dispose() {
     _animationController?.dispose();
+
     super.dispose();
   }
 
@@ -325,13 +321,14 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
       semanticLabel: widget.semanticLabel,
       onTap: widget.onTap ?? () {},
       onLongPress: widget.onLongPress,
-      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool canAnimate = widget.isActive || isHovered || isFocused;
+
         _handleActiveEffect(canAnimate);
 
         return AnimatedBuilder(
           animation: _animationController!,
-          builder: (context, child) {
+          builder: (BuildContext context, Widget? child) {
             return IconTheme(
               data: IconThemeData(
                 color: _textColor!.value,

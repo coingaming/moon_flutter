@@ -94,11 +94,12 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
     // TODO: Review at a later date (when Impeller is stable?) if CurvedAnimation with Interval can be used. Currently
     //interval has a bug where the curve parameters curve.transform(t) internal method causes uneven buggy animation.
 
-    final resolvedBorderRadius = widget.childBorderRadius?.resolve(Directionality.of(context)) ?? BorderRadius.zero;
+    final BorderRadius resolvedBorderRadius =
+        widget.childBorderRadius?.resolve(Directionality.of(context)) ?? BorderRadius.zero;
 
     return AnimatedBuilder(
       animation: _animationController,
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return RepaintBoundary(
           child: Transform.translate(
             offset: Offset(widget.showJiggle ? _jiggleAnimation.value : 0.0, 0.0),

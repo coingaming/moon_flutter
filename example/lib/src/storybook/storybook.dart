@@ -56,7 +56,7 @@ class StorybookPage extends StatelessWidget {
           initialStory: "Accordion",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
-          wrapperBuilder: (context, child) => MaterialApp(
+          wrapperBuilder: (BuildContext context, Widget? child) => MaterialApp(
             title: "Moon Design for Flutter",
             theme:
                 ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.light)]),

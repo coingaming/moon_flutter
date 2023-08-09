@@ -42,11 +42,7 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
   void didUpdateWidget(MoonFocusEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.show) {
-      _animationController.forward();
-    } else {
-      _animationController.reverse();
-    }
+    widget.show ? _animationController.forward() : _animationController.reverse();
   }
 
   @override
@@ -62,7 +58,7 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
 
     return AnimatedBuilder(
       animation: _animationController,
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return RepaintBoundary(
           child: CustomPaint(
             willChange: true,

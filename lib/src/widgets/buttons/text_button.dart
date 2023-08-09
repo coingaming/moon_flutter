@@ -86,14 +86,16 @@ class MoonTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTextColor =
+    final Color effectiveTextColor =
         context.moonTheme?.buttonTheme.colors.textVariantTextColor ?? MoonColors.light.textSecondary;
 
-    final effectiveHoverTextColor = context.moonTheme?.buttonTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveHoverTextColor =
+        context.moonTheme?.buttonTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
-    final effectiveHoverColor = context.moonTheme?.buttonTheme.colors.textVariantHoverColor ?? MoonColors.light.jiren;
+    final Color effectiveHoverColor =
+        context.moonTheme?.buttonTheme.colors.textVariantHoverColor ?? MoonColors.light.jiren;
 
-    final effectiveFocusColor =
+    final Color effectiveFocusColor =
         context.moonTheme?.buttonTheme.colors.textVariantFocusColor.withOpacity(context.isDarkMode ? 0.8 : 0.2) ??
             MoonColors.light.piccolo.withOpacity(context.isDarkMode ? 0.8 : 0.2);
 

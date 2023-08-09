@@ -282,10 +282,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     widget.onExpansionChanged?.call(_isExpanded ? widget.identityValue : null);
   }
 
-  MoonAccordionSizeProperties _getMoonAccordionSize(
-    BuildContext context,
-    MoonAccordionSize? moonAccordionSize,
-  ) {
+  MoonAccordionSizeProperties _getMoonAccordionSize(BuildContext context, MoonAccordionSize? moonAccordionSize) {
     switch (moonAccordionSize) {
       case MoonAccordionSize.sm:
         return context.moonTheme?.accordionTheme.sizes.sm ?? MoonAccordionSizes(tokens: MoonTokens.light).sm;
@@ -307,7 +304,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     _isExpanded =
         PageStorage.maybeOf(context)?.readState(context) as bool? ?? widget.initiallyExpanded || widget._selected;
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!mounted) return;
 
       if (_isExpanded) {
@@ -394,13 +391,13 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
       focusNode: _effectiveFocusNode,
       borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
       showScaleAnimation: false,
-      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool isActive = isHovered || isFocused;
         _handleActiveState(isActive);
 
         return AnimatedBuilder(
           animation: _hoverAnimationController!,
-          builder: (context, child) {
+          builder: (BuildContext context, Widget? child) {
             return Container(
               clipBehavior: widget.clipBehavior ?? Clip.none,
               decoration: widget.decoration ??
@@ -589,6 +586,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     _expansionAnimationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
 
     final bool isClosed = !_isExpanded && _expansionAnimationController!.isDismissed;
+
     final bool shouldRemoveChildren = isClosed && !widget.maintainState;
 
     final Widget result = Offstage(

@@ -8,6 +8,7 @@ import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class PulseEffectPainter extends CustomPainter {
   static const double _animationRangeStartValue = 0.286;
+
   final Color color;
   final Animation<double> animation;
   final double effectExtent;
@@ -20,11 +21,7 @@ class PulseEffectPainter extends CustomPainter {
     required this.borderRadius,
   }) : super(repaint: animation);
 
-  double animationRange({
-    required double begin,
-    required double end,
-    required double animationValue,
-  }) {
+  double animationRange({required double begin, required double end, required double animationValue}) {
     return clampDouble((animationValue - begin) / (end - begin), 0.0, 1.0);
   }
 
@@ -76,7 +73,5 @@ class PulseEffectPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(PulseEffectPainter oldDelegate) {
-    return false;
-  }
+  bool shouldRepaint(PulseEffectPainter oldDelegate) => false;
 }

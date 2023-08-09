@@ -86,7 +86,8 @@ class MoonAvatar extends StatelessWidget {
   });
 
   Alignment _avatarAlignmentMapper(BuildContext context) {
-    final isRTL = Directionality.of(context) == TextDirection.rtl;
+    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
+
     if (isRTL) {
       switch (badgeAlignment) {
         case MoonBadgeAlignment.topLeft:

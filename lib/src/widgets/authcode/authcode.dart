@@ -15,9 +15,16 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
-enum AuthFieldShape { box, underline, circle }
+enum AuthFieldShape {
+  box,
+  underline,
+  circle,
+}
 
-enum ErrorAnimationType { noAnimation, shake }
+enum ErrorAnimationType {
+  noAnimation,
+  shake,
+}
 
 typedef MoonAuthCodeErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
@@ -368,15 +375,15 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   }
 
   void _initializeErrorAnimationListener() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!mounted) return;
 
-      _errorAnimationController!.addStatusListener((status) {
+      _errorAnimationController!.addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) _errorAnimationController!.reverse();
       });
 
       if (widget.errorStreamController != null) {
-        _errorAnimationSubscription = widget.errorStreamController!.stream.listen((errorAnimation) {
+        _errorAnimationSubscription = widget.errorStreamController!.stream.listen((ErrorAnimationType errorAnimation) {
           if (errorAnimation == ErrorAnimationType.shake) {
             _errorAnimationController!.forward();
           }
@@ -457,7 +464,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   }
 
   ShapeBorder _getAuthInputFieldShape({required int elementIndex}) {
-    final borderSide = BorderSide(
+    final BorderSide borderSide = BorderSide(
       color: _getBorderColorFromIndex(elementIndex),
       width: _getBorderWidthFromIndex(elementIndex),
     );
@@ -476,7 +483,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   }
 
   Future<void> _updateTextField(String text) async {
-    final updatedList = List<String>.filled(widget.authInputFieldCount, '');
+    final List<String> updatedList = List<String>.filled(widget.authInputFieldCount, '');
 
     for (int i = 0; i < widget.authInputFieldCount; i++) {
       updatedList[i] = text.length > i ? text[i] : '';
@@ -488,9 +495,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     });
   }
 
-  String? _validateInput() {
-    return widget.validator.call(_textEditingController.text);
-  }
+  String? _validateInput() => widget.validator.call(_textEditingController.text);
 
   void _setState(void Function() function) {
     if (mounted) setState(function);
@@ -499,6 +504,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
+
     _initializeFields();
   }
 
@@ -514,7 +520,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   }
 
   List<Widget> _generateAuthInputFields() {
-    final authInputFields = <Widget>[];
+    final List<Widget> authInputFields = <Widget>[];
 
     for (int i = 0; i < widget.authInputFieldCount; i++) {
       authInputFields.add(
@@ -539,6 +545,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         ),
       );
     }
+
     return authInputFields;
   }
 
@@ -546,7 +553,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     if (((_selectedIndex == index) || (_selectedIndex == index + 1 && index + 1 == widget.authInputFieldCount)) &&
         _focusNode.hasFocus &&
         widget.showAuthFieldCursor) {
-      final cursorHeight = _resolvedTextStyle.fontSize!;
+      final double cursorHeight = _resolvedTextStyle.fontSize!;
 
       if (_selectedIndex == index + 1 && index + 1 == widget.authInputFieldCount) {
         return Stack(
@@ -593,7 +600,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   Widget _renderAuthInputFieldText({@required int? index}) {
     assert(index != null);
 
-    final showObscured = !widget.peekWhenObscuring ||
+    final bool showObscured = !widget.peekWhenObscuring ||
         (widget.peekWhenObscuring && _hasPeeked) ||
         index != _inputList.where((x) => x.isNotEmpty).length - 1;
 
@@ -609,7 +616,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
       );
     }
 
-    final text = widget.obscureText && _inputList[index].isNotEmpty && showObscured
+    final String text = widget.obscureText && _inputList[index].isNotEmpty && showObscured
         ? widget.obscuringCharacter
         : _inputList[index];
 
@@ -766,7 +773,9 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
               child: Stack(
                 children: <Widget>[
                   AbsorbPointer(
-                    child: AutofillGroup(child: _getTextFormField()),
+                    child: AutofillGroup(
+                      child: _getTextFormField(),
+                    ),
                   ),
                   Positioned(
                     top: 0,
@@ -807,11 +816,12 @@ class _CursorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const p1 = Offset.zero;
-    final p2 = Offset(0, size.height);
-    final paint = Paint()
+    const Offset p1 = Offset.zero;
+    final Offset p2 = Offset(0, size.height);
+    final Paint paint = Paint()
       ..color = cursorColor
       ..strokeWidth = 2;
+
     canvas.drawLine(p1, p2, paint);
   }
 

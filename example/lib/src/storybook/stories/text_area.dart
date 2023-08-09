@@ -134,7 +134,7 @@ class TextAreaStory extends Story {
                             errorBuilder: (BuildContext context, String? errorText) =>
                                 StoryErrorWidget(errorText: errorText!),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 32),
                           MoonFilledButton(
                             label: const Text("Submit"),
                             onTap: () => Form.of(context).validate(),

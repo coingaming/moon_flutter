@@ -166,7 +166,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
     if (_verifyingShouldClose) return false;
     _verifyingShouldClose = true;
 
-    final result = await widget.shouldClose?.call();
+    final bool? result = await widget.shouldClose?.call();
     _verifyingShouldClose = false;
 
     return result ?? false;
@@ -180,12 +180,12 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
     if (_dismissUnderway) return;
     _isDragging = true;
 
-    final progress = primaryDelta / (_childHeight ?? primaryDelta);
+    final double progress = primaryDelta / (_childHeight ?? primaryDelta);
 
     if (widget.shouldClose != null) {
       _cancelClose();
 
-      final canClose = await shouldClose();
+      final bool canClose = await shouldClose();
 
       if (canClose) {
         _close();
@@ -213,10 +213,10 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
     Future<void> tryClose() async {
       if (widget.shouldClose != null) {
         _cancelClose();
+
         final bool canClose = await shouldClose();
-        if (canClose) {
-          _close();
-        }
+
+        if (canClose) _close();
       } else {
         _close();
       }
@@ -252,8 +252,9 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
     if (scrollPosition.axis == Axis.horizontal) return;
 
-    final isScrollReversed = scrollPosition.axisDirection == AxisDirection.down;
-    final offset = isScrollReversed ? scrollPosition.pixels : scrollPosition.maxScrollExtent - scrollPosition.pixels;
+    final bool isScrollReversed = scrollPosition.axisDirection == AxisDirection.down;
+    final double offset =
+        isScrollReversed ? scrollPosition.pixels : scrollPosition.maxScrollExtent - scrollPosition.pixels;
 
     if (offset <= 0) {
       // Clamping Scroll Physics ends with a ScrollEndNotification providing DragEndDetail class while
@@ -261,35 +262,32 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
       // We use the velocity from DragEndDetails if available.
       if (notification is ScrollEndNotification) {
-        final dragDetails = notification.dragDetails;
+        final DragEndDetails? dragDetails = notification.dragDetails;
+
         if (dragDetails != null) {
           _handleDragEnd(dragDetails.primaryVelocity ?? 0);
           _velocityTracker = null;
           _startTime = null;
+
           return;
         }
       }
 
       // Otherwise calculate the velocity with a VelocityTracker.
       if (_velocityTracker == null) {
-        final pointerKind = _defaultPointerDeviceKind(context);
+        final PointerDeviceKind pointerKind = _defaultPointerDeviceKind(context);
+
         _velocityTracker = VelocityTracker.withKind(pointerKind);
         _startTime = DateTime.now();
       }
 
       DragUpdateDetails? dragDetails;
 
-      if (notification is ScrollUpdateNotification) {
-        dragDetails = notification.dragDetails;
-      }
+      if (notification is ScrollUpdateNotification) dragDetails = notification.dragDetails;
 
-      if (notification is OverscrollNotification) {
-        dragDetails = notification.dragDetails;
-      }
+      if (notification is OverscrollNotification) dragDetails = notification.dragDetails;
 
-      if (notification is UserScrollNotification) {
-        return;
-      }
+      if (notification is UserScrollNotification) return;
 
       assert(_velocityTracker != null);
       assert(_startTime != null);
@@ -298,7 +296,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
       final velocityTracker = _velocityTracker!;
 
       if (dragDetails != null) {
-        final duration = startTime.difference(DateTime.now());
+        final Duration duration = startTime.difference(DateTime.now());
 
         velocityTracker.addPosition(duration, Offset(0, offset));
 
@@ -306,7 +304,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
         return;
       } else if (_isDragging) {
-        final velocity = velocityTracker.getVelocity().pixelsPerSecond.dy;
+        final double velocity = velocityTracker.getVelocity().pixelsPerSecond.dy;
 
         _velocityTracker = null;
         _startTime = null;
@@ -351,7 +349,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
         builder: (BuildContext context, Widget? child) {
           assert(child != null);
 
-          final animationValue = transitionCurve!.transform(widget.animationController.value);
+          final double animationValue = transitionCurve!.transform(widget.animationController.value);
 
           final draggableChild = widget.enableDrag
               ? KeyedSubtree(
@@ -457,7 +455,8 @@ class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
 // Used with VelocityTracker
 // https://github.com/flutter/flutter/pull/64267#issuecomment-694196304
 PointerDeviceKind _defaultPointerDeviceKind(BuildContext context) {
-  final platform = Theme.of(context).platform;
+  final TargetPlatform platform = Theme.of(context).platform;
+
   switch (platform) {
     case TargetPlatform.iOS:
     case TargetPlatform.android:

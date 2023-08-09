@@ -320,11 +320,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
   AnimationController? _animationController;
 
   void _handleActiveEffect(bool isActive) {
-    if (isActive) {
-      _animationController?.forward();
-    } else {
-      _animationController?.reverse();
-    }
+    isActive ? _animationController?.forward() : _animationController?.reverse();
   }
 
   @override
@@ -403,7 +399,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
       focusEffectColor: tabStyle?.focusEffectColor,
       showScaleAnimation: false,
       cursor: widget.isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
-      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool isActive = isEnabled && (widget.isSelected || isHovered || isPressed);
 
         _handleActiveEffect(isActive);
@@ -414,7 +410,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
             children: [
               AnimatedBuilder(
                 animation: _animationController!,
-                builder: (context, child) {
+                builder: (BuildContext context, Widget? child) {
                   return IconTheme(
                     data: IconThemeData(
                       color: _textColor!.value,
@@ -458,7 +454,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
                 left: 0,
                 right: 0,
                 child: LayoutBuilder(
-                  builder: (context, constraints) {
+                  builder: (BuildContext context, BoxConstraints constraints) {
                     _indicatorWidthTween.end = constraints.maxWidth;
 
                     return Align(
@@ -467,7 +463,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
                           : Alignment.bottomRight,
                       child: AnimatedBuilder(
                         animation: _animationController!,
-                        builder: (context, child) {
+                        builder: (BuildContext context, Widget? child) {
                           return Container(
                             color: effectiveIndicatorColor,
                             height: effectiveIndicatorHeight,
@@ -516,11 +512,7 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
   AnimationController? _animationController;
 
   void _handleActiveEffect(bool isActive) {
-    if (isActive) {
-      _animationController?.forward();
-    } else {
-      _animationController?.reverse();
-    }
+    isActive ? _animationController?.forward() : _animationController?.reverse();
   }
 
   @override
@@ -597,14 +589,14 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
       showScaleAnimation: false,
       borderRadius: effectiveTabBorderRadius.squircleBorderRadius(context),
       cursor: widget.isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
-      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool isActive = isEnabled && (widget.isSelected || isHovered || isPressed);
 
         _handleActiveEffect(isActive);
 
         return AnimatedBuilder(
           animation: _animationController!,
-          builder: (context, child) {
+          builder: (BuildContext context, Widget? child) {
             return DecoratedBox(
               decoration: tabStyle?.decoration ??
                   ShapeDecoration(

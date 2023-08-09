@@ -8,56 +8,57 @@ class MoonCheckboxPainter extends ToggleablePainter {
 
   Color get checkColor => _checkColor!;
   Color? _checkColor;
+
   set checkColor(Color value) {
-    if (_checkColor == value) {
-      return;
-    }
+    if (_checkColor == value) return;
+
     _checkColor = value;
     notifyListeners();
   }
 
   bool? get value => _value;
   bool? _value;
+
   set value(bool? value) {
-    if (_value == value) {
-      return;
-    }
+    if (_value == value) return;
+
     _value = value;
     notifyListeners();
   }
 
   bool? get previousValue => _previousValue;
   bool? _previousValue;
+
   set previousValue(bool? value) {
-    if (_previousValue == value) {
-      return;
-    }
+    if (_previousValue == value) return;
+
     _previousValue = value;
     notifyListeners();
   }
 
   OutlinedBorder get shape => _shape!;
   OutlinedBorder? _shape;
+
   set shape(OutlinedBorder value) {
-    if (_shape == value) {
-      return;
-    }
+    if (_shape == value) return;
+
     _shape = value;
     notifyListeners();
   }
 
   BorderSide? get side => _side;
   BorderSide? _side;
+
   set side(BorderSide? value) {
-    if (_side == value) {
-      return;
-    }
+    if (_side == value) return;
+
     _side = value;
     notifyListeners();
   }
 
   Rect _outerRectAt(Offset origin, double t) {
     final Rect rect = Rect.fromLTWH(origin.dx, origin.dy, _kEdgeSize, _kEdgeSize);
+
     return rect;
   }
 
@@ -77,12 +78,9 @@ class MoonCheckboxPainter extends ToggleablePainter {
   }
 
   void _drawBox(Canvas canvas, Rect outer, Paint paint, BorderSide? side, bool fill) {
-    if (fill) {
-      canvas.drawPath(shape.getOuterPath(outer), paint);
-    }
-    if (side != null) {
-      shape.copyWith(side: side).paint(canvas, outer);
-    }
+    if (fill) canvas.drawPath(shape.getOuterPath(outer), paint);
+
+    if (side != null) shape.copyWith(side: side).paint(canvas, outer);
   }
 
   void _drawCheck(Canvas canvas, Offset origin, double t, Paint paint) {
@@ -90,21 +88,26 @@ class MoonCheckboxPainter extends ToggleablePainter {
     // As t goes from 0.0 to 1.0, animate the two check mark strokes from the
     // short side to the long side.
     final Path path = Path();
+
     const Offset start = Offset(_kEdgeSize * 0.15, _kEdgeSize * 0.45);
     const Offset mid = Offset(_kEdgeSize * 0.4, _kEdgeSize * 0.7);
     const Offset end = Offset(_kEdgeSize * 0.85, _kEdgeSize * 0.25);
+
     if (t < 0.5) {
       final double strokeT = t * 2.0;
       final Offset drawMid = Offset.lerp(start, mid, strokeT)!;
+
       path.moveTo(origin.dx + start.dx, origin.dy + start.dy);
       path.lineTo(origin.dx + drawMid.dx, origin.dy + drawMid.dy);
     } else {
       final double strokeT = (t - 0.5) * 2.0;
       final Offset drawEnd = Offset.lerp(mid, end, strokeT)!;
+
       path.moveTo(origin.dx + start.dx, origin.dy + start.dy);
       path.lineTo(origin.dx + mid.dx, origin.dy + mid.dy);
       path.lineTo(origin.dx + drawEnd.dx, origin.dy + drawEnd.dy);
     }
+
     canvas.drawPath(path, paint);
   }
 
@@ -115,15 +118,15 @@ class MoonCheckboxPainter extends ToggleablePainter {
     const Offset start = Offset(_kEdgeSize * 0.2, _kEdgeSize * 0.5);
     const Offset mid = Offset(_kEdgeSize * 0.5, _kEdgeSize * 0.5);
     const Offset end = Offset(_kEdgeSize * 0.8, _kEdgeSize * 0.5);
+
     final Offset drawStart = Offset.lerp(start, mid, 1.0 - t)!;
     final Offset drawEnd = Offset.lerp(mid, end, t)!;
+
     canvas.drawLine(origin + drawStart, origin + drawEnd, paint);
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    //paintRadialReaction(canvas: canvas, origin: size.center(Offset.zero));
-
     final Paint strokePaint = _createStrokePaint();
     final Offset origin = size / 2.0 - const Size.square(_kEdgeSize) / 2.0 as Offset;
     final AnimationStatus status = position.status;
@@ -139,10 +142,13 @@ class MoonCheckboxPainter extends ToggleablePainter {
 
       if (t <= 0.5) {
         final BorderSide border = side ?? BorderSide(color: paint.color);
+
         _drawBox(canvas, outer, paint, border, true); // only paint the border
       } else {
         _drawBox(canvas, outer, paint, side, true);
+
         final double tShrink = (t - 0.5) * 2.0;
+
         if (previousValue == null || value == null) {
           _drawDash(canvas, origin, tShrink, strokePaint);
         } else {
@@ -155,8 +161,10 @@ class MoonCheckboxPainter extends ToggleablePainter {
       final Paint paint = Paint()..color = _colorAt(1.0);
 
       _drawBox(canvas, outer, paint, side, true);
+
       if (tNormalized <= 0.5) {
         final double tShrink = 1.0 - tNormalized * 2.0;
+
         if (previousValue ?? false) {
           _drawCheck(canvas, origin, tShrink, strokePaint);
         } else {
@@ -164,6 +172,7 @@ class MoonCheckboxPainter extends ToggleablePainter {
         }
       } else {
         final double tExpand = (tNormalized - 0.5) * 2.0;
+
         if (value ?? false) {
           _drawCheck(canvas, origin, tExpand, strokePaint);
         } else {

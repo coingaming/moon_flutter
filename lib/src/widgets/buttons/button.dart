@@ -274,11 +274,7 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
 
   void _handleHoverEffect(bool shouldAnimate) {
-    if (shouldAnimate) {
-      _animationController?.forward();
-    } else {
-      _animationController?.reverse();
-    }
+    shouldAnimate ? _animationController?.forward() : _animationController?.reverse();
   }
 
   MoonButtonSizeProperties _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
@@ -301,6 +297,7 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
   @override
   void dispose() {
     _animationController?.dispose();
+
     super.dispose();
   }
 
@@ -393,13 +390,14 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
       semanticLabel: widget.semanticLabel,
       onTap: widget.onTap,
       onLongPress: widget.onLongPress,
-      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool canAnimate = _isEnabled && (isHovered || isFocused || isPressed);
+
         _handleHoverEffect(canAnimate);
 
         return AnimatedBuilder(
           animation: _animationController!,
-          builder: (context, child) {
+          builder: (BuildContext context, Widget? child) {
             return IconTheme(
               data: IconThemeData(
                 color: _textColor!.value,

@@ -7,7 +7,7 @@ class DrawerStory extends Story {
   DrawerStory()
       : super(
           name: "Drawer",
-          builder: (context) {
+          builder: (BuildContext context) {
             final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonDrawer background.",

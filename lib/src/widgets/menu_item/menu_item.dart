@@ -227,6 +227,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
         showScaleAnimation: false,
         builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
           final bool isActive = isHovered || isFocused;
+
           _handleActiveStatus(isActive);
 
           return AnimatedBuilder(

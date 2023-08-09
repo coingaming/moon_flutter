@@ -7,7 +7,7 @@ class ToastStory extends Story {
   ToastStory()
       : super(
           name: "Toast",
-          builder: (context) {
+          builder: (BuildContext context) {
             final customLabelTextKnob = context.knobs.text(
               label: "Toast label text",
               initial: "This is a custom MoonToast text",
