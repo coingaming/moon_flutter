@@ -4,19 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-bool show = false;
+bool showOnTap = false;
+bool showOnLongPress = false;
 
 class TooltipStory extends Story {
   TooltipStory()
       : super(
           name: "Tooltip",
-          builder: (context) {
+          builder: (BuildContext context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "label text",
+              label: "Custom MoonTooltip text",
               initial: "Custom MoonTooltip text",
             );
 
-            final tooltipPositionsKnob = context.knobs.nullable.options(
+            final tooltipPositionKnob = context.knobs.nullable.options(
               label: "tooltipPosition",
               description: "Position variants for MoonTooltip.",
               enabled: false,
@@ -35,7 +36,7 @@ class TooltipStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.nullable.options(
+            final textColorKnob = context.knobs.nullable.options(
               label: "Text color",
               description: "MoonColors variants for MoonTooltip text.",
               enabled: false,
@@ -44,9 +45,9 @@ class TooltipStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.nullable.options(
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonTooltip background.",
               enabled: false,
@@ -55,9 +56,9 @@ class TooltipStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final borderColorsKnob = context.knobs.nullable.options(
+            final borderColorKnob = context.knobs.nullable.options(
               label: "borderColor",
               description: "MoonColors variants for MoonTooltip border.",
               enabled: false,
@@ -66,7 +67,7 @@ class TooltipStory extends Story {
               options: colorOptions,
             );
 
-            final borderColor = colorTable(context)[borderColorsKnob ?? 40];
+            final borderColor = colorTable(context)[borderColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -121,23 +122,26 @@ class TooltipStory extends Story {
               initial: true,
             );
 
-            return Center(
+            final borderRadius = borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 64),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 64),
-                  const TextDivider(text: "Customisable MoonTooltip"),
-                  const SizedBox(height: 32),
+                  const TextDivider(
+                    text: "Customisable MoonTooltip",
+                    paddingTop: 0,
+                  ),
                   StatefulBuilder(
                     builder: (context, setState) {
                       return MoonTooltip(
-                        show: show,
+                        show: showOnTap,
                         backgroundColor: backgroundColor,
                         borderWidth: 1,
                         borderColor: borderColor ?? Colors.transparent,
-                        borderRadius:
-                            borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                        tooltipPosition: tooltipPositionsKnob ?? MoonTooltipPosition.top,
+                        borderRadius: borderRadius,
+                        tooltipPosition: tooltipPositionKnob ?? MoonTooltipPosition.top,
                         hasArrow: showArrowKnob,
                         arrowBaseWidth: arrowBaseWidthKnob,
                         arrowLength: arrowLengthKnob,
@@ -149,34 +153,43 @@ class TooltipStory extends Story {
                           style: TextStyle(color: textColor),
                         ),
                         child: MoonFilledButton(
-                          onTap: () {
-                            setState(() => show = true);
-                          },
+                          onTap: () => setState(() => showOnTap = true),
                           label: const Text("Tap me"),
                         ),
                       );
                     },
                   ),
-                  const SizedBox(height: 40),
-                  const TextDivider(text: "Default on hover MoonTooltip"),
-                  const SizedBox(height: 32),
-                  MoonFilledButton(
-                    showTooltip: true,
-                    tooltipMessage: customLabelTextKnob,
-                    onTap: () {},
-                    label: const Text("MoonFilledButton"),
+                  const TextDivider(text: "Show MoonTooltip on long-press"),
+                  StatefulBuilder(
+                    builder: (context, setState) {
+                      return MoonTooltip(
+                        show: showOnLongPress,
+                        backgroundColor: backgroundColor,
+                        borderWidth: 1,
+                        borderColor: borderColor ?? Colors.transparent,
+                        borderRadius: borderRadius,
+                        tooltipPosition: tooltipPositionKnob ?? MoonTooltipPosition.top,
+                        hasArrow: showArrowKnob,
+                        arrowBaseWidth: arrowBaseWidthKnob,
+                        arrowLength: arrowLengthKnob,
+                        arrowOffsetValue: arrowOffsetKnob ?? 0,
+                        arrowTipDistance: arrowTipDistanceKnob,
+                        tooltipShadows: showShadowKnob == true ? null : [],
+                        content: Text(
+                          customLabelTextKnob,
+                          style: TextStyle(color: textColor),
+                        ),
+                        child: MoonChip(
+                          borderRadius: BorderRadius.circular(20),
+                          backgroundColor: context.moonColors!.hit,
+                          leading: const MoonIcon(MoonIcons.frame_24),
+                          textColor: context.moonColors!.goten,
+                          label: const Text("MoonChip"),
+                          onLongPress: () => setState(() => showOnLongPress = true),
+                        ),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 32),
-                  MoonChip(
-                    showTooltip: true,
-                    tooltipMessage: customLabelTextKnob,
-                    borderRadius: BorderRadius.circular(20),
-                    backgroundColor: context.moonColors!.hit,
-                    leading: const MoonIcon(MoonIcons.frame_24),
-                    textColor: context.moonColors!.goten,
-                    label: const Text("MoonChip"),
-                  ),
-                  const SizedBox(height: 64),
                 ],
               ),
             );

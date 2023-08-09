@@ -9,19 +9,16 @@ class IconsStory extends Story {
   IconsStory()
       : super(
           name: "Icons",
-          builder: (context) {
+          builder: (BuildContext context) {
             return CustomScrollView(
               slivers: [
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 24),
-                ),
-                _IconsGridWithTitle(
-                  title: "MoonIcons",
-                  iconsList: iconsList,
-                  iconsNameList: iconsNameList,
-                ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 24),
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(vertical: 64),
+                  sliver: _IconsGridWithTitle(
+                    title: "MoonIcons",
+                    iconsList: iconsList,
+                    iconsNameList: iconsNameList,
+                  ),
                 ),
               ],
             );
@@ -44,19 +41,24 @@ class _IconsGridWithTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiSliver(
       children: [
-        SliverPadding(
-          padding: const EdgeInsets.only(top: 40, bottom: 16),
-          sliver: SliverToBoxAdapter(
-            child: TextDivider(text: title),
+        SliverToBoxAdapter(
+          child: TextDivider(
+            text: title,
+            paddingTop: 0,
+            paddingBottom: 0,
           ),
         ),
         SliverGrid.builder(
           itemCount: iconsList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 8),
-          itemBuilder: (context, index) {
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 8,
+            mainAxisExtent: 104,
+          ),
+          itemBuilder: (BuildContext context, int index) {
             return Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 if (iconsNameList[index].contains("16"))
                   MoonIcon(iconsList[index], size: 16)
@@ -67,7 +69,10 @@ class _IconsGridWithTitle extends StatelessWidget {
                 const SizedBox(height: 20),
                 Text(
                   iconsNameList[index],
-                  style: TextStyle(fontSize: 10, color: context.moonColors!.trunks),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: context.moonColors!.trunks,
+                  ),
                 ),
               ],
             );

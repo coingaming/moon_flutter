@@ -11,8 +11,8 @@ class SwitchStory extends Story {
   SwitchStory()
       : super(
           name: "Switch",
-          builder: (context) {
-            final switchSizesKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final switchSizeKnob = context.knobs.nullable.options(
               label: "switchSize",
               description: "Size variants for MoonSwitch.",
               enabled: false,
@@ -24,7 +24,7 @@ class SwitchStory extends Story {
               ],
             );
 
-            final thumbColorsKnob = context.knobs.nullable.options(
+            final thumbColorKnob = context.knobs.nullable.options(
               label: "thumbColor",
               description: "MoonColors variants for MoonSwitch thumb.",
               enabled: false,
@@ -33,9 +33,9 @@ class SwitchStory extends Story {
               options: colorOptions,
             );
 
-            final thumbColor = colorTable(context)[thumbColorsKnob ?? 40];
+            final thumbColor = colorTable(context)[thumbColorKnob ?? 40];
 
-            final activeTrackColorsKnob = context.knobs.nullable.options(
+            final activeTrackColorKnob = context.knobs.nullable.options(
               label: "activeTrackColor",
               description: "MoonColors variants for active MoonSwitch track.",
               enabled: false,
@@ -44,9 +44,9 @@ class SwitchStory extends Story {
               options: colorOptions,
             );
 
-            final activeTrackColor = colorTable(context)[activeTrackColorsKnob ?? 40];
+            final activeTrackColor = colorTable(context)[activeTrackColorKnob ?? 40];
 
-            final inactiveTrackColorsKnob = context.knobs.nullable.options(
+            final inactiveTrackColorKnob = context.knobs.nullable.options(
               label: "inactiveTrackColor",
               description: "MoonColors variants for inactive MoonSwitch track.",
               enabled: false,
@@ -55,7 +55,7 @@ class SwitchStory extends Story {
               options: colorOptions,
             );
 
-            final inactiveTrackColor = colorTable(context)[inactiveTrackColorsKnob ?? 40];
+            final inactiveTrackColor = colorTable(context)[inactiveTrackColorKnob ?? 40];
 
             final isDisabled = context.knobs.boolean(
               label: "Disabled",
@@ -63,60 +63,60 @@ class SwitchStory extends Story {
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  const TextDivider(text: "Customisable MoonSwitch"),
-                  const SizedBox(height: 32),
-                  StatefulBuilder(
-                    builder: (context, setState) {
-                      return MoonSwitch(
-                        switchSize: switchSizesKnob,
-                        thumbColor: thumbColor,
-                        activeTrackColor: activeTrackColor,
-                        inactiveTrackColor: inactiveTrackColor,
-                        value: value,
-                        onChanged: isDisabled ? null : (newValue) => setState(() => value = newValue),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 40),
-                  const TextDivider(text: "MoonSwitches with custom children"),
-                  const SizedBox(height: 32),
-                  StatefulBuilder(
-                    builder: (context, setState) {
-                      return MoonSwitch(
-                        switchSize: switchSizesKnob,
-                        activeThumbWidget: const MoonIcon(MoonIcons.check_alternative_16),
-                        inactiveThumbWidget: const MoonIcon(MoonIcons.close_small_16),
-                        activeTrackWidget: const Text(
-                          "ON",
-                          textAlign: TextAlign.center,
-                        ),
-                        inactiveTrackWidget: const Text(
-                          "OFF",
-                          textAlign: TextAlign.center,
-                        ),
-                        value: value,
-                        onChanged: (newValue) => setState(() => value = newValue),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 32),
-                  StatefulBuilder(
-                    builder: (context, setState) {
-                      return MoonSwitch(
-                        switchSize: switchSizesKnob,
-                        activeTrackWidget: const MoonIcon(MoonIcons.moon_16),
-                        inactiveTrackWidget: const MoonIcon(MoonIcons.sun_16),
-                        value: value,
-                        onChanged: (newValue) => setState(() => value = newValue),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: Column(
+                  children: [
+                    const TextDivider(
+                      text: "Customisable MoonSwitch",
+                      paddingTop: 0,
+                    ),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return MoonSwitch(
+                          switchSize: switchSizeKnob,
+                          thumbColor: thumbColor,
+                          activeTrackColor: activeTrackColor,
+                          inactiveTrackColor: inactiveTrackColor,
+                          value: value,
+                          onChanged: isDisabled ? null : (bool newValue) => setState(() => value = newValue),
+                        );
+                      },
+                    ),
+                    const TextDivider(text: "MoonSwitches with custom children"),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return MoonSwitch(
+                          switchSize: switchSizeKnob,
+                          activeThumbWidget: const MoonIcon(MoonIcons.check_alternative_16),
+                          inactiveThumbWidget: const MoonIcon(MoonIcons.close_small_16),
+                          activeTrackWidget: const Text(
+                            "ON",
+                            textAlign: TextAlign.center,
+                          ),
+                          inactiveTrackWidget: const Text(
+                            "OFF",
+                            textAlign: TextAlign.center,
+                          ),
+                          value: value,
+                          onChanged: (bool newValue) => setState(() => value = newValue),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 32),
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return MoonSwitch(
+                          switchSize: switchSizeKnob,
+                          activeTrackWidget: const MoonIcon(MoonIcons.moon_16),
+                          inactiveTrackWidget: const MoonIcon(MoonIcons.sun_16),
+                          value: value,
+                          onChanged: (bool newValue) => setState(() => value = newValue),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             );
           },

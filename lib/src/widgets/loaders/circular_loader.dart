@@ -58,7 +58,6 @@ class MoonCircularLoader extends StatelessWidget {
         return context.moonTheme?.circularLoaderTheme.sizes.md ?? MoonCircularLoaderSizes(tokens: MoonTokens.light).md;
       case MoonCircularLoaderSize.lg:
         return context.moonTheme?.circularLoaderTheme.sizes.lg ?? MoonCircularLoaderSizes(tokens: MoonTokens.light).lg;
-
       default:
         return context.moonTheme?.circularLoaderTheme.sizes.md ?? MoonCircularLoaderSizes(tokens: MoonTokens.light).md;
     }

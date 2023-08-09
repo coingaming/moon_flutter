@@ -7,8 +7,8 @@ class CircularProgressStory extends Story {
   CircularProgressStory()
       : super(
           name: "Progress/CircularProgress",
-          builder: (context) {
-            final circularProgressSizesKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final circularProgressSizeKnob = context.knobs.nullable.options(
               label: "circularProgressSize",
               description: "Size variants for CircularProgress.",
               enabled: false,
@@ -26,7 +26,8 @@ class CircularProgressStory extends Story {
               label: "color",
               description: "MoonColors variants for CircularProgress color.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -36,7 +37,8 @@ class CircularProgressStory extends Story {
               label: "backgroundColor",
               description: "MoonColors variants for CircularProgress background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -61,19 +63,15 @@ class CircularProgressStory extends Story {
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  MoonCircularProgress(
-                    value: circularProgressValueKnob,
-                    color: color,
-                    backgroundColor: backgroundColor,
-                    circularProgressSize: circularProgressSizesKnob,
-                    strokeCap: circularProgressStrokeCapKnob,
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: MoonCircularProgress(
+                  value: circularProgressValueKnob,
+                  color: color,
+                  backgroundColor: backgroundColor,
+                  circularProgressSize: circularProgressSizeKnob,
+                  strokeCap: circularProgressStrokeCapKnob,
+                ),
               ),
             );
           },

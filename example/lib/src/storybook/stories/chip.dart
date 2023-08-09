@@ -8,13 +8,13 @@ class ChipStory extends Story {
   ChipStory()
       : super(
           name: "Chip",
-          builder: (context) {
+          builder: (BuildContext context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "label text",
+              label: "Label text",
               initial: "MoonChip",
             );
 
-            final chipSizesKnob = context.knobs.nullable.options(
+            final chipSizeKnob = context.knobs.nullable.options(
               label: "chipSize",
               description: "Size variants for MoonChip.",
               enabled: false,
@@ -25,51 +25,7 @@ class ChipStory extends Story {
               ],
             );
 
-            final activeColorsKnob = context.knobs.nullable.options(
-              label: "activeColor",
-              description: "MoonColors variants for active MoonChip.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final activeColor = colorTable(context)[activeColorsKnob ?? 40];
-
-            final backgroundColorsKnob = context.knobs.nullable.options(
-              label: "backgroundColor",
-              description: "MoonColors variants for MoonChip background.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
-
-            final activeBackgroundColorsKnob = context.knobs.nullable.options(
-              label: "activeBackgroundColor",
-              description: "MoonColors variants for active MoonChip background.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final activeBackgroundColor = colorTable(context)[activeBackgroundColorsKnob ?? 40];
-
-            final borderColorsKnob = context.knobs.nullable.options(
-              label: "borderColor",
-              description: "MoonColors variants for MoonChip border.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final borderColor = colorTable(context)[borderColorsKnob ?? 40];
-
-            final textColorsKnob = context.knobs.nullable.options(
+            final textColorKnob = context.knobs.nullable.options(
               label: "textColor",
               description: "MoonColors variants for MoonChip text.",
               enabled: false,
@@ -78,7 +34,51 @@ class ChipStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
+
+            final activeColorKnob = context.knobs.nullable.options(
+              label: "activeColor",
+              description: "MoonColors variants for active MoonChip.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final activeColor = colorTable(context)[activeColorKnob ?? 40];
+
+            final backgroundColorKnob = context.knobs.nullable.options(
+              label: "backgroundColor",
+              description: "MoonColors variants for MoonChip background.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
+
+            final activeBackgroundColorKnob = context.knobs.nullable.options(
+              label: "activeBackgroundColor",
+              description: "MoonColors variants for active MoonChip background.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final activeBackgroundColor = colorTable(context)[activeBackgroundColorKnob ?? 40];
+
+            final borderColorKnob = context.knobs.nullable.options(
+              label: "borderColor",
+              description: "MoonColors variants for MoonChip border.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -92,6 +92,7 @@ class ChipStory extends Story {
               label: "showBorder",
               description: "Show border when hovered, focused or isActive is true.",
             );
+
             final isActiveKnob = context.knobs.boolean(
               label: "isActive",
               description: "Whether MoonChip is active/selected.",
@@ -114,16 +115,18 @@ class ChipStory extends Story {
               description: "Show widget in MoonChip trailing slot.",
             );
 
-            final resolvedIconVariant = chipSizesKnob == MoonChipSize.sm ? MoonIcons.frame_16 : MoonIcons.frame_24;
+            final BorderRadiusGeometry? borderRadius =
+                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
 
             return Center(
               child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 64),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 64),
-                    const TextDivider(text: "Default MoonChip"),
-                    const SizedBox(height: 32),
+                    const TextDivider(
+                      text: "Default MoonChip",
+                      paddingTop: 0,
+                    ),
                     MoonChip(
                       activeColor: activeColor,
                       borderColor: borderColor,
@@ -131,33 +134,27 @@ class ChipStory extends Story {
                       activeBackgroundColor: activeBackgroundColor,
                       textColor: textColor,
                       isActive: isActiveKnob,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       showBorder: showBorderKnob,
-                      chipSize: chipSizesKnob,
-                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      chipSize: chipSizeKnob,
+                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                       label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                     ),
-                    const SizedBox(height: 40),
                     const TextDivider(text: "Text MoonChip"),
-                    const SizedBox(height: 32),
                     MoonChip.text(
                       activeBackgroundColor: activeBackgroundColor,
                       borderColor: borderColor,
                       textColor: textColor,
                       isActive: isActiveKnob,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       showBorder: showBorderKnob,
-                      chipSize: chipSizesKnob,
-                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      chipSize: chipSizeKnob,
+                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                       label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                     ),
-                    const SizedBox(height: 40),
                     const TextDivider(text: "Preset MoonChip"),
-                    const SizedBox(height: 32),
                     MoonChip(
                       isActive: isActiveKnob,
                       activeColor: context.moonColors!.dodoria100,
@@ -166,12 +163,11 @@ class ChipStory extends Story {
                       textColor: context.moonColors!.goten,
                       borderWidth: 2,
                       showBorder: showBorderKnob,
-                      chipSize: chipSizesKnob,
-                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      chipSize: chipSizeKnob,
+                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                       label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
                     ),
-                    const SizedBox(height: 64),
                   ],
                 ),
               ),

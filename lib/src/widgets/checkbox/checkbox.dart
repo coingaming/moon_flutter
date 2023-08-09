@@ -166,12 +166,10 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
   bool? get value => widget.value;
 
   BorderSide? _resolveSide(BorderSide? side) {
-    if (side is MaterialStateBorderSide) {
-      return MaterialStateProperty.resolveAs<BorderSide?>(side, states);
-    }
-    if (!states.contains(MaterialState.selected)) {
-      return side;
-    }
+    if (side is MaterialStateBorderSide) return MaterialStateProperty.resolveAs<BorderSide?>(side, states);
+
+    if (!states.contains(MaterialState.selected)) return side;
+
     return null;
   }
 

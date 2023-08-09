@@ -120,10 +120,10 @@ class MoonPopover extends StatefulWidget {
     if (_openedPopovers.isNotEmpty) {
       // Avoid concurrent modification.
       final List<MoonPopoverState> openedPopovers = _openedPopovers.toList();
+
       for (final MoonPopoverState state in openedPopovers) {
-        if (state == current) {
-          continue;
-        }
+        if (state == current) continue;
+
         state._clearOverlayEntry();
       }
     }
@@ -147,7 +147,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   bool get shouldShowPopover => widget.show && _routeIsShowing;
 
   void _showPopover() {
-    _overlayEntry = OverlayEntry(builder: (context) => _createOverlayContent());
+    _overlayEntry = OverlayEntry(builder: (BuildContext context) => _createOverlayContent());
     Overlay.of(context).insert(_overlayEntry!);
 
     MoonPopover._openedPopovers.add(this);
@@ -264,8 +264,10 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     // Route was pushed onto navigator and is now topmost route.
     if (shouldShowPopover) {
       _removePopover();
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+
+      WidgetsBinding.instance.addPostFrameCallback((Duration _) {
         if (!mounted) return;
+
         _showPopover();
       });
     }
@@ -274,6 +276,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   @override
   void didPushNext() {
     _routeIsShowing = false;
+
     _removePopover();
   }
 
@@ -284,6 +287,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     if (shouldShowPopover) {
       // Covering route was popped off the navigator.
       _removePopover();
+
       await Future.delayed(const Duration(milliseconds: 100), () {
         if (mounted) _showPopover();
       });
@@ -294,7 +298,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     });
   }
@@ -308,8 +312,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!_routeIsShowing) return;
+
       if (oldWidget.popoverPosition != widget.popoverPosition) {
         _removePopover(immediately: true);
         _showPopover();
@@ -325,18 +330,14 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
 
   @override
   void deactivate() {
-    if (_overlayEntry != null) {
-      _removePopover(immediately: true);
-    }
+    if (_overlayEntry != null) _removePopover(immediately: true);
 
     super.deactivate();
   }
 
   @override
   void dispose() {
-    if (_overlayEntry != null) {
-      _removePopover(immediately: true);
-    }
+    if (_overlayEntry != null) _removePopover(immediately: true);
 
     widget.routeObserver?.unsubscribe(this);
 
@@ -432,7 +433,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           targetAnchor: popoverPositionParameters.targetAnchor,
           child: TapRegion(
             behavior: HitTestBehavior.translucent,
-            onTapOutside: (_) => _removePopover(),
+            onTapOutside: (PointerDownEvent _) => _removePopover(),
             child: RepaintBoundary(
               child: FadeTransition(
                 opacity: _curvedAnimation!,

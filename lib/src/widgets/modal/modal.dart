@@ -104,8 +104,12 @@ class MoonModalRoute<T> extends RawDialogRoute<T> {
 
             return modal;
           },
-          transitionBuilder:
-              (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+          transitionBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
             return RepaintBoundary(
               child: FadeTransition(
                 opacity: CurvedAnimation(

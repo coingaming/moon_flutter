@@ -7,8 +7,8 @@ class CircularLoaderStory extends Story {
   CircularLoaderStory()
       : super(
           name: "Loader/CircularLoader",
-          builder: (context) {
-            final loaderSizesKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final circularLoaderSizeKnob = context.knobs.nullable.options(
               label: "circularLoaderSize",
               description: "Size variants for CircularLoader.",
               enabled: false,
@@ -26,7 +26,8 @@ class CircularLoaderStory extends Story {
               label: "color",
               description: "MoonColors variants for CircularLoader color.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -36,7 +37,8 @@ class CircularLoaderStory extends Story {
               label: "backgroundColor",
               description: "MoonColors variants for CircularLoader background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -55,18 +57,14 @@ class CircularLoaderStory extends Story {
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  MoonCircularLoader(
-                    color: color,
-                    backgroundColor: backgroundColor,
-                    circularLoaderSize: loaderSizesKnob,
-                    strokeCap: loaderStrokeCapKnob,
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: MoonCircularLoader(
+                  color: color,
+                  backgroundColor: backgroundColor,
+                  circularLoaderSize: circularLoaderSizeKnob,
+                  strokeCap: loaderStrokeCapKnob,
+                ),
               ),
             );
           },

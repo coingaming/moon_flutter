@@ -7,8 +7,8 @@ class LinearLoaderStory extends Story {
   LinearLoaderStory()
       : super(
           name: "Loader/LinearLoader",
-          builder: (context) {
-            final loaderSizesKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final linearLoaderSizeKnob = context.knobs.nullable.options(
               label: "linearLoaderSize",
               description: "Size variants for LinearLoader.",
               enabled: false,
@@ -26,7 +26,8 @@ class LinearLoaderStory extends Story {
               label: "color",
               description: "MoonColors variants for LinearLoader color.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -36,7 +37,8 @@ class LinearLoaderStory extends Story {
               label: "backgroundColor",
               description: "MoonColors variants for LinearLoader background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -51,18 +53,14 @@ class LinearLoaderStory extends Story {
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  MoonLinearLoader(
-                    linearLoaderSize: loaderSizesKnob,
-                    color: color,
-                    backgroundColor: backgroundColor,
-                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: MoonLinearLoader(
+                  linearLoaderSize: linearLoaderSizeKnob,
+                  color: color,
+                  backgroundColor: backgroundColor,
+                  borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                ),
               ),
             );
           },

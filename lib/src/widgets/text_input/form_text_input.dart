@@ -191,9 +191,8 @@ class MoonFormTextInput extends FormField<String> {
 
             void onChangedHandler(String value) {
               field.didChange(value);
-              if (onChanged != null) {
-                onChanged(value);
-              }
+
+              if (onChanged != null) onChanged(value);
             }
 
             return UnmanagedRestorationScope(
@@ -292,9 +291,7 @@ class MoonFormTextInput extends FormField<String> {
   final TextEditingController? controller;
 
   static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
-    return AdaptiveTextSelectionToolbar.editableText(
-      editableTextState: editableTextState,
-    );
+    return AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
   }
 
   @override
@@ -311,9 +308,9 @@ class _TextFormFieldState extends FormFieldState<String> {
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     super.restoreState(oldBucket, initialRestore);
-    if (_controller != null) {
-      _registerController();
-    }
+
+    if (_controller != null) _registerController();
+
     // Make sure to update the internal [FormFieldState] value to sync up with
     // text editing controller value.
     setValue(_effectiveController.text);
@@ -321,20 +318,22 @@ class _TextFormFieldState extends FormFieldState<String> {
 
   void _registerController() {
     assert(_controller != null);
+
     registerForRestoration(_controller!, 'controller');
   }
 
   void _createLocalController([TextEditingValue? value]) {
     assert(_controller == null);
+
     _controller = value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
-    if (!restorePending) {
-      _registerController();
-    }
+
+    if (!restorePending) _registerController();
   }
 
   @override
   void initState() {
     super.initState();
+
     if (_textFormField.controller == null) {
       _createLocalController(widget.initialValue != null ? TextEditingValue(text: widget.initialValue!) : null);
     } else {
@@ -345,6 +344,7 @@ class _TextFormFieldState extends FormFieldState<String> {
   @override
   void didUpdateWidget(MoonFormTextInput oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (_textFormField.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_handleControllerChanged);
       _textFormField.controller?.addListener(_handleControllerChanged);
@@ -355,8 +355,10 @@ class _TextFormFieldState extends FormFieldState<String> {
 
       if (_textFormField.controller != null) {
         setValue(_textFormField.controller!.text);
+
         if (oldWidget.controller == null) {
           unregisterFromRestoration(_controller!);
+
           _controller!.dispose();
           _controller = null;
         }
@@ -368,6 +370,7 @@ class _TextFormFieldState extends FormFieldState<String> {
   void dispose() {
     _textFormField.controller?.removeListener(_handleControllerChanged);
     _controller?.dispose();
+
     super.dispose();
   }
 
@@ -385,6 +388,7 @@ class _TextFormFieldState extends FormFieldState<String> {
     // setState will be called in the superclass, so even though state is being
     // manipulated, no setState call is needed here.
     _effectiveController.text = widget.initialValue ?? '';
+
     super.reset();
   }
 

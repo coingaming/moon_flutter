@@ -32,19 +32,17 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
     MoonAccordionSizes? sizes,
   })  : colors = colors ??
             MoonAccordionColors(
-              backgroundColor: tokens.colors.gohan,
-              borderColor: tokens.colors.beerus,
+              textColor: tokens.colors.textPrimary,
+              expandedTextColor: tokens.colors.textPrimary,
               contentColor: tokens.colors.textPrimary,
-              dividerColor: tokens.colors.beerus,
+              iconColor: tokens.colors.iconPrimary,
+              expandedIconColor: tokens.colors.iconPrimary,
+              trailingIconColor: tokens.colors.iconPrimary,
+              expandedTrailingIconColor: tokens.colors.iconSecondary,
+              backgroundColor: tokens.colors.gohan,
               expandedBackgroundColor: tokens.colors.gohan,
-              expandedLeadingColor: tokens.colors.textPrimary,
-              expandedTitleColor: tokens.colors.textPrimary,
-              expandedTrailingColor: tokens.colors.textPrimary,
-              expandedTrailingIconColor: tokens.colors.textPrimary,
-              leadingColor: tokens.colors.textPrimary,
-              titleColor: tokens.colors.textPrimary,
-              trailingColor: tokens.colors.textPrimary,
-              trailingIconColor: tokens.colors.textSecondary,
+              borderColor: tokens.colors.beerus,
+              dividerColor: tokens.colors.beerus,
             ),
         properties = properties ??
             MoonAccordionProperties(

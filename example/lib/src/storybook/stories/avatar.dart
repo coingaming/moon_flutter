@@ -8,13 +8,13 @@ class AvatarStory extends Story {
   AvatarStory()
       : super(
           name: "Avatar",
-          builder: (context) {
+          builder: (BuildContext context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "content",
+              label: "Content text",
               initial: "MD",
             );
 
-            final avatarSizesKnob = context.knobs.nullable.options(
+            final avatarSizeKnob = context.knobs.nullable.options(
               label: "avatarSize",
               description: "Size variants for MoonAvatar.",
               enabled: false,
@@ -105,15 +105,17 @@ class AvatarStory extends Story {
               initial: true,
             );
 
-            return Center(
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 64),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 64),
-                  const TextDivider(text: "Customisable MoonAvatar"),
-                  const SizedBox(height: 32),
+                  const TextDivider(
+                    text: "Customisable MoonAvatar",
+                    paddingTop: 0,
+                  ),
                   MoonAvatar(
-                    avatarSize: avatarSizesKnob,
+                    avatarSize: avatarSizeKnob,
                     badgeSize: badgeSizeKnob?.toDouble(),
                     borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                     badgeMarginValue: badgeMarginKnob?.toDouble(),
@@ -129,11 +131,9 @@ class AvatarStory extends Story {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
                   const TextDivider(text: "Preset MoonAvatar with image background"),
-                  const SizedBox(height: 32),
                   MoonAvatar(
-                    avatarSize: avatarSizesKnob,
+                    avatarSize: avatarSizeKnob,
                     badgeSize: badgeSizeKnob?.toDouble(),
                     borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                     badgeMarginValue: badgeMarginKnob?.toDouble(),
@@ -143,7 +143,6 @@ class AvatarStory extends Story {
                     badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
                     backgroundImage: const AssetImage("assets/images/placeholder-640x359.png"),
                   ),
-                  const SizedBox(height: 64),
                 ],
               ),
             );

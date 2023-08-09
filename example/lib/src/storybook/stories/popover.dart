@@ -9,13 +9,13 @@ class PopoverStory extends Story {
   PopoverStory()
       : super(
           name: "Popover",
-          builder: (context) {
+          builder: (BuildContext context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "label text",
+              label: "Label text",
               initial: "Custom MoonPopover text",
             );
 
-            final popoverPositionsKnob = context.knobs.nullable.options(
+            final popoverPositionKnob = context.knobs.nullable.options(
               label: "popoverPosition",
               description: "Position variants for MoonPopover.",
               enabled: false,
@@ -34,7 +34,7 @@ class PopoverStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.nullable.options(
+            final textColorKnob = context.knobs.nullable.options(
               label: "Text color",
               description: "MoonColors variants for MoonPopover text.",
               enabled: false,
@@ -43,9 +43,9 @@ class PopoverStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.nullable.options(
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonPopover background.",
               enabled: false,
@@ -54,9 +54,9 @@ class PopoverStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final borderColorsKnob = context.knobs.nullable.options(
+            final borderColorKnob = context.knobs.nullable.options(
               label: "borderColor",
               description: "MoonColors variants for MoonPopover border.",
               enabled: false,
@@ -65,7 +65,7 @@ class PopoverStory extends Story {
               options: colorOptions,
             );
 
-            final borderColor = colorTable(context)[borderColorsKnob ?? 40];
+            final borderColor = colorTable(context)[borderColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -90,66 +90,63 @@ class PopoverStory extends Story {
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  StatefulBuilder(
-                    builder: (context, setState) {
-                      return MoonPopover(
-                        show: show,
-                        borderColor: borderColor ?? Colors.transparent,
-                        backgroundColor: backgroundColor,
-                        borderRadius:
-                            borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                        distanceToTarget: distanceToTargetKnob,
-                        popoverPosition: popoverPositionsKnob ?? MoonPopoverPosition.top,
-                        popoverShadows: showShadowKnob == true ? null : [],
-                        content: ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 190),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                textDirection: Directionality.of(context),
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  MoonAvatar(
-                                    backgroundColor: context.moonColors?.heles,
-                                    content: const MoonIcon(MoonIcons.rocket_24),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Text(
-                                      customLabelTextKnob,
-                                      style: TextStyle(color: textColor),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return MoonPopover(
+                          show: show,
+                          borderColor: borderColor ?? Colors.transparent,
+                          backgroundColor: backgroundColor,
+                          borderRadius:
+                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          distanceToTarget: distanceToTargetKnob,
+                          popoverPosition: popoverPositionKnob ?? MoonPopoverPosition.top,
+                          popoverShadows: showShadowKnob == true ? null : [],
+                          content: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 190),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  textDirection: Directionality.of(context),
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    MoonAvatar(
+                                      backgroundColor: context.moonColors?.heles,
+                                      content: const MoonIcon(MoonIcons.rocket_24),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 16),
-                              MoonFilledButton(
-                                buttonSize: MoonButtonSize.sm,
-                                isFullWidth: true,
-                                onTap: () {
-                                  setState(() => show = false);
-                                },
-                                label: const Text("Close"),
-                              ),
-                            ],
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Text(
+                                        customLabelTextKnob,
+                                        style: TextStyle(color: textColor),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                MoonFilledButton(
+                                  buttonSize: MoonButtonSize.sm,
+                                  isFullWidth: true,
+                                  onTap: () => setState(() => show = false),
+                                  label: const Text("Close"),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        child: MoonFilledButton(
-                          onTap: () {
-                            setState(() => show = true);
-                          },
-                          label: const Text("Tap me"),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 64),
-                ],
+                          child: MoonFilledButton(
+                            onTap: () => setState(() => show = true),
+                            label: const Text("Tap me"),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             );
           },

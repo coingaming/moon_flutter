@@ -57,7 +57,7 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       _animationControllers![widget.selectedDot].forward();
     });
   }
@@ -128,7 +128,7 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
           widget.dotCount,
           (int index) => AnimatedBuilder(
             animation: _animations![index],
-            builder: (BuildContext context, _) {
+            builder: (BuildContext context, Widget? _) {
               return Container(
                 width: effectiveSize,
                 height: effectiveSize,

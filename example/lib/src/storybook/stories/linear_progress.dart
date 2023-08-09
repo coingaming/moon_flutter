@@ -7,8 +7,8 @@ class LinearProgressStory extends Story {
   LinearProgressStory()
       : super(
           name: "Progress/LinearProgress",
-          builder: (context) {
-            final progressSizesKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final progressSizeKnob = context.knobs.nullable.options(
               label: "linearProgressSize",
               description: "Size variants for LinearProgress.",
               enabled: false,
@@ -26,7 +26,8 @@ class LinearProgressStory extends Story {
               label: "color",
               description: "MoonColors variants for LinearProgress color.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -36,7 +37,8 @@ class LinearProgressStory extends Story {
               label: "backgroundColor",
               description: "MoonColors variants for LinearProgress background.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
@@ -57,19 +59,15 @@ class LinearProgressStory extends Story {
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  MoonLinearProgress(
-                    value: linearProgressValueKnob,
-                    linearProgressSize: progressSizesKnob,
-                    color: color,
-                    backgroundColor: backgroundColor,
-                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: MoonLinearProgress(
+                  value: linearProgressValueKnob,
+                  linearProgressSize: progressSizeKnob,
+                  color: color,
+                  backgroundColor: backgroundColor,
+                  borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                ),
               ),
             );
           },

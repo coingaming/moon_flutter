@@ -25,7 +25,7 @@ class AvatarClipper extends CustomClipper<Path> {
   });
 
   Path _getBadgePath() {
-    final badgeRadius = badgeSize / 2;
+    final double badgeRadius = badgeSize / 2;
 
     if (textDirection == TextDirection.rtl) {
       switch (badgeAlignment) {
@@ -118,7 +118,7 @@ class AvatarClipper extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    final pathWithBadge = Path.combine(
+    final Path pathWithBadge = Path.combine(
       PathOperation.difference,
       // Avatar shape properties
       Path()
@@ -138,7 +138,7 @@ class AvatarClipper extends CustomClipper<Path> {
       _getBadgePath(),
     );
 
-    final pathWithoutBadge = Path()
+    final Path pathWithoutBadge = Path()
       ..addRRect(
         RRect.fromLTRBAndCorners(
           0,
