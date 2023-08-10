@@ -133,7 +133,26 @@ class TextInputStory extends Story {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(color: Colors.red, padding: EdgeInsets.all(24), child: MoonTextInput2()),
+                  MoonTextInput2(
+                    leading: showLeadingKnob
+                        ? const MoonIcon(
+                            MoonIcons.search_24,
+                            size: 24,
+                          )
+                        : null,
+                    trailing: showTrailingKnob
+                        ? MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              child: const MoonIcon(
+                                MoonIcons.close_small_24,
+                                size: 24,
+                              ),
+                              onTap: () => _textController.clear(),
+                            ),
+                          )
+                        : null,
+                  ),
                   const SizedBox(height: 64),
                   Form(
                     child: Builder(
