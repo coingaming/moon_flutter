@@ -82,15 +82,16 @@ class TextInputStory extends Story {
 
             final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
 
-            final errorColorsKnob = context.knobs.nullable.options(
+            final errorColorKnob = context.knobs.nullable.options(
               label: "errorColor",
               description: "MoonColors variants for MoonTextInput error.",
               enabled: false,
-              initial: 0, // piccolo
+              initial: 0,
+              // piccolo
               options: colorOptions,
             );
 
-            final errorColor = colorTable(context)[errorColorsKnob ?? 40];
+            final errorColor = colorTable(context)[errorColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
