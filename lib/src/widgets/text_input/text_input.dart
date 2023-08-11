@@ -19,6 +19,9 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
+export 'package:flutter/services.dart'
+    show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
+
 enum MoonTextInputSize {
   sm,
   md,
