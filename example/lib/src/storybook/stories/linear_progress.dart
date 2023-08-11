@@ -24,7 +24,7 @@ class LinearProgressStory extends Story {
 
             final progressColorKnob = context.knobs.nullable.options(
               label: "color",
-              description: "MoonColors variants for LinearProgress color.",
+              description: "MoonColors variants for LinearProgress progress.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -44,6 +44,39 @@ class LinearProgressStory extends Story {
 
             final backgroundColor = colorTable(context)[progressBackgroundColorKnob ?? 40];
 
+            final pinColorKnob = context.knobs.nullable.options(
+              label: "pinColor",
+              description: "MoonColors variants for LinearProgress pin.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final pinColor = colorTable(context)[pinColorKnob ?? 40];
+
+            final pinBorderColorKnob = context.knobs.nullable.options(
+              label: "pinBorderColor",
+              description: "MoonColors variants for LinearProgress pin border.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final pinBorderColor = colorTable(context)[pinBorderColorKnob ?? 40];
+
+            final thumbColorKnob = context.knobs.nullable.options(
+              label: "thumbColor",
+              description: "MoonColors variants for LinearProgress thumb.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final thumbColor = colorTable(context)[thumbColorKnob ?? 40];
+
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for LinearProgress.",
@@ -58,10 +91,29 @@ class LinearProgressStory extends Story {
               initial: 0.5,
             );
 
+            final showPinKnob = context.knobs.boolean(
+              label: "showPin",
+              description: "Show pin for LinearProgress",
+              initial: true,
+            );
+
+            final showPinShadowKnob = context.knobs.boolean(
+              label: "showPinShadow",
+              description: "Show pin shadow for LinearProgress",
+              initial: true,
+            );
+
             return Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 64),
+                padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 8),
                 child: MoonLinearProgress(
+                  showPin: showPinKnob,
+                  pinStyle: PinStyle(
+                    pinColor: pinColor,
+                    pinBorderColor: pinBorderColor,
+                    thumbColor: thumbColor,
+                    showShadow: showPinShadowKnob,
+                  ),
                   value: linearProgressValueKnob,
                   linearProgressSize: progressSizeKnob,
                   color: color,

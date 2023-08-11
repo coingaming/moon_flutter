@@ -20,6 +20,7 @@ import 'package:moon_design/src/theme/modal/modal_theme.dart';
 import 'package:moon_design/src/theme/popover/popover_theme.dart';
 import 'package:moon_design/src/theme/progress/circular_progress/circular_progress_theme.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_theme.dart';
+import 'package:moon_design/src/theme/progress_pin/progress_pin_theme.dart';
 import 'package:moon_design/src/theme/radio/radio_theme.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
@@ -100,6 +101,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonPopover widget theming.
   final MoonPopoverTheme popoverTheme;
 
+  /// Moon Design System MoonProgressPin widget theming.
+  final MoonProgressPinTheme progressPinTheme;
+
   /// Moon Design System MoonRadio widget theming.
   final MoonRadioTheme radioTheme;
 
@@ -148,6 +152,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonMenuItemTheme? menuItemTheme,
     MoonModalTheme? modalTheme,
     MoonPopoverTheme? popoverTheme,
+    MoonProgressPinTheme? progressPinTheme,
     MoonRadioTheme? radioTheme,
     MoonSegmentedControlTheme? segmentedControlTheme,
     MoonSwitchTheme? switchTheme,
@@ -176,6 +181,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         menuItemTheme = menuItemTheme ?? MoonMenuItemTheme(tokens: tokens),
         modalTheme = modalTheme ?? MoonModalTheme(tokens: tokens),
         popoverTheme = popoverTheme ?? MoonPopoverTheme(tokens: tokens),
+        progressPinTheme = progressPinTheme ?? MoonProgressPinTheme(tokens: tokens),
         radioTheme = radioTheme ?? MoonRadioTheme(tokens: tokens),
         segmentedControlTheme = segmentedControlTheme ?? MoonSegmentedControlTheme(tokens: tokens),
         switchTheme = switchTheme ?? MoonSwitchTheme(tokens: tokens),
@@ -208,6 +214,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonMenuItemTheme? menuItemTheme,
     MoonModalTheme? modalTheme,
     MoonPopoverTheme? popoverTheme,
+    MoonProgressPinTheme? progressPinTheme,
     MoonRadioTheme? radioTheme,
     MoonSegmentedControlTheme? segmentedControlTheme,
     MoonSwitchTheme? switchTheme,
@@ -239,6 +246,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       menuItemTheme: menuItemTheme ?? this.menuItemTheme,
       modalTheme: modalTheme ?? this.modalTheme,
       popoverTheme: popoverTheme ?? this.popoverTheme,
+      progressPinTheme: progressPinTheme ?? this.progressPinTheme,
       radioTheme: radioTheme ?? this.radioTheme,
       segmentedControlTheme: segmentedControlTheme ?? this.segmentedControlTheme,
       switchTheme: switchTheme ?? this.switchTheme,
@@ -276,6 +284,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       menuItemTheme: menuItemTheme.lerp(other.menuItemTheme, t),
       modalTheme: modalTheme.lerp(other.modalTheme, t),
       popoverTheme: popoverTheme.lerp(other.popoverTheme, t),
+      progressPinTheme: progressPinTheme.lerp(other.progressPinTheme, t),
       radioTheme: radioTheme.lerp(other.radioTheme, t),
       segmentedControlTheme: segmentedControlTheme.lerp(other.segmentedControlTheme, t),
       switchTheme: switchTheme.lerp(other.switchTheme, t),
@@ -312,6 +321,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonMenuItemTheme>("MoonMenuItemTheme", menuItemTheme))
       ..add(DiagnosticsProperty<MoonModalTheme>("MoonModalTheme", modalTheme))
       ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popoverTheme))
+      ..add(DiagnosticsProperty<MoonProgressPinTheme>("MoonProgressPinTheme", progressPinTheme))
       ..add(DiagnosticsProperty<MoonRadioTheme>("MoonRadioTheme", radioTheme))
       ..add(DiagnosticsProperty<MoonSegmentedControlTheme>("MoonSegmentedControlTheme", segmentedControlTheme))
       ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))

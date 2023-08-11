@@ -85,7 +85,7 @@ class MoonCircularProgress extends StatelessWidget {
         color ?? context.moonTheme?.circularProgressTheme.colors.color ?? MoonColors.light.piccolo;
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.circularProgressTheme.colors.backgroundColor ?? MoonColors.light.trunks;
+        backgroundColor ?? context.moonTheme?.circularProgressTheme.colors.backgroundColor ?? MoonColors.light.beerus;
 
     final MoonCircularProgressSizeProperties effectiveMoonCircularProgressSize =
         _getMoonCircularProgressSize(context, circularProgressSize);

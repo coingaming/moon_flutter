@@ -23,7 +23,7 @@ class MoonCircularProgressTheme extends ThemeExtension<MoonCircularProgressTheme
   })  : colors = colors ??
             MoonCircularProgressColors(
               color: tokens.colors.piccolo,
-              backgroundColor: tokens.colors.trunks,
+              backgroundColor: tokens.colors.beerus,
             ),
         sizes = sizes ?? MoonCircularProgressSizes(tokens: tokens);
 
