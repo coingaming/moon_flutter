@@ -26,7 +26,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
               height: tokens.sizes.x2s,
               iconSizeValue: tokens.sizes.x3s,
               padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
-              textStyle: tokens.typography.body.text10.copyWith(fontWeight: FontWeight.w400),
+              textStyle: tokens.typography.body.text10,
               upperCaseTextStyle: tokens.typography.caption.text9,
             ),
         xs = xs ??
@@ -36,7 +36,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
               height: tokens.sizes.xs,
               iconSizeValue: tokens.sizes.x2s,
               padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
-              textStyle: tokens.typography.body.text12.copyWith(fontWeight: FontWeight.w400),
+              textStyle: tokens.typography.body.text12,
               upperCaseTextStyle: tokens.typography.caption.text10,
             );
 

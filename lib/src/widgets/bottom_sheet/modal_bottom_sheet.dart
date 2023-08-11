@@ -29,8 +29,10 @@ Future<T?> showMoonModalBottomSheet<T>({
   assert(debugCheckHasMediaQuery(context));
   assert(debugCheckHasMaterialLocalizations(context));
 
-  final hasMaterialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations) != null;
-  final barrierLabel = hasMaterialLocalizations ? MaterialLocalizations.of(context).modalBarrierDismissLabel : '';
+  final bool hasMaterialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations) != null;
+
+  final String barrierLabel =
+      hasMaterialLocalizations ? MaterialLocalizations.of(context).modalBarrierDismissLabel : '';
 
   final CapturedThemes themes = InheritedTheme.capture(
     from: context,
@@ -48,7 +50,7 @@ Future<T?> showMoonModalBottomSheet<T>({
       context.moonTheme?.bottomSheetTheme.properties.transitionCurve ??
       const Cubic(0.0, 0.0, 0.2, 1.0);
 
-  final result = await Navigator.of(context, rootNavigator: useRootNavigator).push(
+  final T? result = await Navigator.of(context, rootNavigator: useRootNavigator).push(
     MoonModalBottomSheetRoute<T>(
       enableDrag: enableDrag,
       isExpanded: isExpanded,
@@ -217,7 +219,8 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
   ScrollController? _scrollController;
 
   String _getRouteLabel() {
-    final platform = Theme.of(context).platform;
+    final TargetPlatform platform = Theme.of(context).platform;
+
     switch (platform) {
       case TargetPlatform.iOS:
       case TargetPlatform.linux:
@@ -235,12 +238,13 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
   }
 
   Future<bool> _handleShouldClose() async {
-    final willPop = await widget.route.willPop();
+    final RoutePopDisposition willPop = await widget.route.willPop();
+
     return willPop != RoutePopDisposition.doNotPop;
   }
 
   void _updateController() {
-    final animation = widget.route.animation;
+    final Animation<double>? animation = widget.route.animation;
 
     // Used to relay the state of bottom sheet internal animation controller.
     if (animation != null) {
@@ -269,15 +273,17 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
     assert(debugCheckHasMediaQuery(context));
     assert(widget.route._animationController != null);
 
-    final scrollController = PrimaryScrollController.maybeOf(context) ?? (_scrollController ??= ScrollController());
+    final ScrollController scrollController =
+        PrimaryScrollController.maybeOf(context) ?? (_scrollController ??= ScrollController());
 
     return PrimaryScrollController(
       controller: scrollController,
       child: Builder(
-        builder: (context) => AnimatedBuilder(
+        builder: (BuildContext context) => AnimatedBuilder(
           animation: widget.route._animationController!,
           builder: (BuildContext context, Widget? child) {
             assert(child != null);
+
             return Semantics(
               explicitChildNodes: true,
               label: _getRouteLabel(),

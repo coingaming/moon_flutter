@@ -9,8 +9,8 @@ class DotIndicatorStory extends Story {
   DotIndicatorStory()
       : super(
           name: "DotIndicator",
-          builder: (context) {
-            final selectedColorsKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final selectedColorKnob = context.knobs.nullable.options(
               label: "selectedColor",
               description: "MoonColors variants for MoonDotIndicator selected dot.",
               enabled: false,
@@ -19,9 +19,9 @@ class DotIndicatorStory extends Story {
               options: colorOptions,
             );
 
-            final selectedColor = colorTable(context)[selectedColorsKnob ?? 40];
+            final selectedColor = colorTable(context)[selectedColorKnob ?? 40];
 
-            final unselectedColorsKnob = context.knobs.nullable.options(
+            final unselectedColorKnob = context.knobs.nullable.options(
               label: "unselectedColor",
               description: "MoonColors variants for MoonDotIndicator unselected dots.",
               enabled: false,
@@ -30,7 +30,7 @@ class DotIndicatorStory extends Story {
               options: colorOptions,
             );
 
-            final unselectedColor = colorTable(context)[unselectedColorsKnob ?? 40];
+            final unselectedColor = colorTable(context)[unselectedColorKnob ?? 40];
 
             final sizeKnob = context.knobs.nullable.sliderInt(
               label: "size",
@@ -48,13 +48,13 @@ class DotIndicatorStory extends Story {
               max: 32,
             );
 
-            return Center(
-              child: StatefulBuilder(
-                builder: (context, setState) {
-                  return Column(
+            return StatefulBuilder(
+              builder: (context, setState) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 64),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 64),
                       MoonDotIndicator(
                         selectedDot: _selectedDot,
                         dotCount: 4,
@@ -69,38 +69,29 @@ class DotIndicatorStory extends Story {
                         children: [
                           MoonFilledButton(
                             label: const Text("1"),
-                            onTap: () => setState(() {
-                              _selectedDot = 0;
-                            }),
+                            onTap: () => setState(() => _selectedDot = 0),
                           ),
                           const SizedBox(width: 8),
                           MoonFilledButton(
                             label: const Text("2"),
-                            onTap: () => setState(() {
-                              _selectedDot = 1;
-                            }),
+                            onTap: () => setState(() => _selectedDot = 1),
                           ),
                           const SizedBox(width: 8),
                           MoonFilledButton(
                             label: const Text("3"),
-                            onTap: () => setState(() {
-                              _selectedDot = 2;
-                            }),
+                            onTap: () => setState(() => _selectedDot = 2),
                           ),
                           const SizedBox(width: 8),
                           MoonFilledButton(
                             label: const Text("4"),
-                            onTap: () => setState(() {
-                              _selectedDot = 3;
-                            }),
+                            onTap: () => setState(() => _selectedDot = 3),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 64),
                     ],
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             );
           },
         );

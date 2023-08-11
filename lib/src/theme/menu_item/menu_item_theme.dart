@@ -32,7 +32,7 @@ class MoonMenuItemTheme extends ThemeExtension<MoonMenuItemTheme> with Diagnosti
               borderRadius: tokens.borders.interactiveSm,
               verticalGap: tokens.sizes.x5s,
               minimumHeight: tokens.sizes.md,
-              padding: EdgeInsets.all(tokens.sizes.x4s),
+              padding: EdgeInsets.all(tokens.sizes.x3s),
               titleTextStyle: tokens.typography.body.textDefault,
               descriptionTextStyle: tokens.typography.body.text12,
             );

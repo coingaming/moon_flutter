@@ -7,11 +7,7 @@ class ScrollToTopStatusBarHandler extends StatefulWidget {
   final ScrollController scrollController;
   final Widget child;
 
-  const ScrollToTopStatusBarHandler({
-    super.key,
-    required this.scrollController,
-    required this.child,
-  });
+  const ScrollToTopStatusBarHandler({super.key, required this.scrollController, required this.child});
 
   @override
   ScrollToTopStatusBarState createState() => ScrollToTopStatusBarState();
@@ -19,7 +15,8 @@ class ScrollToTopStatusBarHandler extends StatefulWidget {
 
 class ScrollToTopStatusBarState extends State<ScrollToTopStatusBarHandler> {
   void _handleStatusBarTap(BuildContext context) {
-    final controller = widget.scrollController;
+    final ScrollController controller = widget.scrollController;
+
     if (controller.hasClients) {
       controller.animateTo(
         0.0,
@@ -46,7 +43,7 @@ class ScrollToTopStatusBarState extends State<ScrollToTopStatusBarHandler> {
           right: 0,
           height: MediaQuery.of(context).padding.top,
           child: Builder(
-            builder: (context) => GestureDetector(
+            builder: (BuildContext context) => GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () => _handleStatusBarTap(context),
               // iOS accessibility automatically adds scroll-to-top to the clock in the status bar

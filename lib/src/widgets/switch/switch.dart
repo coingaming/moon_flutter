@@ -165,11 +165,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
       ..curve = isLinear ? Curves.linear : Curves.ease
       ..reverseCurve = isLinear ? Curves.linear : Curves.ease.flipped;
 
-    if (widget.value) {
-      _animationController!.forward();
-    } else {
-      _animationController!.reverse();
-    }
+    widget.value ? _animationController!.forward() : _animationController!.reverse();
   }
 
   void _handleFocus(bool focus) {
@@ -232,9 +228,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
 
   void _handleDragEnd(DragEndDetails details) {
     // Deferring the animation to the next build phase.
-    setState(() {
-      _needsPositionAnimation = true;
-    });
+    setState(() => _needsPositionAnimation = true);
     // Call onChanged when the user's intent to change value is clear.
     if (_curvedAnimationWithOvershoot!.value >= 0.5 != widget.value) {
       widget.onChanged!(!widget.value);
@@ -242,9 +236,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   }
 
   void _emitVibration() {
-    if (widget.hasHapticFeedback) {
-      HapticFeedback.lightImpact();
-    }
+    if (widget.hasHapticFeedback) HapticFeedback.lightImpact();
   }
 
   @override
@@ -265,14 +257,13 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   @override
   void dispose() {
     _animationController!.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_needsPositionAnimation) {
-      _resumePositionAnimation();
-    }
+    if (_needsPositionAnimation) _resumePositionAnimation();
 
     final MoonSwitchSizeProperties effectiveMoonSwitchSize = _getMoonSwitchSize(context, widget.switchSize);
 
@@ -426,7 +417,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
           child: RepaintBoundary(
             child: AnimatedBuilder(
               animation: _animationController!,
-              builder: (context, child) {
+              builder: (BuildContext context, Widget? child) {
                 return AnimatedOpacity(
                   opacity: _isInteractive ? 1 : effectiveDisabledOpacityValue,
                   duration: effectiveDuration,

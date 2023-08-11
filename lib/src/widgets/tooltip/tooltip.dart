@@ -141,10 +141,10 @@ class MoonTooltip extends StatefulWidget {
     if (_openedTooltips.isNotEmpty) {
       // Avoid concurrent modification.
       final List<_MoonTooltipState> openedTooltips = _openedTooltips.toList();
+
       for (final _MoonTooltipState state in openedTooltips) {
-        if (state == current) {
-          continue;
-        }
+        if (state == current) continue;
+
         state._clearOverlayEntry();
       }
     }
@@ -168,7 +168,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   bool get shouldShowTooltip => widget.show && _routeIsShowing;
 
   void _showTooltip() {
-    _overlayEntry = OverlayEntry(builder: (context) => _createOverlayContent());
+    _overlayEntry = OverlayEntry(builder: (BuildContext context) => _createOverlayContent());
     Overlay.of(context).insert(_overlayEntry!);
 
     MoonTooltip._openedTooltips.add(this);
@@ -202,7 +202,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   void _handleTap(TapDownDetails details) {
     final RenderBox? tooltipRenderBox = _tooltipKey.currentContext?.findRenderObject() as RenderBox?;
     final RenderBox? overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
-    final tooltipPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
+    final Offset? tooltipPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
 
     if (widget.hideOnTap ||
         tooltipPosition != null && !tooltipRenderBox!.size.contains(details.localPosition - tooltipPosition)) {
@@ -300,8 +300,10 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     // Route was pushed onto navigator and is now topmost route.
     if (shouldShowTooltip) {
       _removeTooltip();
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+
+      WidgetsBinding.instance.addPostFrameCallback((Duration _) {
         if (!mounted) return;
+
         _showTooltip();
       });
     }
@@ -320,6 +322,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     if (shouldShowTooltip) {
       // Covering route was popped off the navigator.
       _removeTooltip();
+
       await Future.delayed(const Duration(milliseconds: 100), () {
         if (mounted) _showTooltip();
       });
@@ -330,7 +333,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     });
   }
@@ -344,8 +347,9 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
       widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!_routeIsShowing) return;
+
       if (oldWidget.tooltipPosition != widget.tooltipPosition) {
         _removeTooltip(immediately: true);
         _showTooltip();

@@ -7,13 +7,13 @@ class TagStory extends Story {
   TagStory()
       : super(
           name: "Tag",
-          builder: (context) {
+          builder: (BuildContext context) {
             final customLabelTextKnob = context.knobs.text(
-              label: "label text",
+              label: "Tag label text",
               initial: "MoonTag",
             );
 
-            final tagSizesKnob = context.knobs.nullable.options(
+            final tagSizeKnob = context.knobs.nullable.options(
               label: "tagSize",
               description: "Size variants for MoonTag.",
               enabled: false,
@@ -24,7 +24,7 @@ class TagStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.nullable.options(
+            final textColorKnob = context.knobs.nullable.options(
               label: "Text color",
               description: "MoonColors variants for MoonTag text.",
               enabled: false,
@@ -33,9 +33,9 @@ class TagStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
-            final iconColorsKnob = context.knobs.nullable.options(
+            final iconColorKnob = context.knobs.nullable.options(
               label: "Icon color",
               description: "MoonColors variants for MoonTag icon.",
               enabled: false,
@@ -44,9 +44,9 @@ class TagStory extends Story {
               options: colorOptions,
             );
 
-            final iconColor = colorTable(context)[iconColorsKnob ?? 40];
+            final iconColor = colorTable(context)[iconColorKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.nullable.options(
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonTag background.",
               enabled: false,
@@ -55,7 +55,7 @@ class TagStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -88,27 +88,33 @@ class TagStory extends Story {
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  MoonTag(
-                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                    onTap: () {},
-                    tagSize: tagSizesKnob,
-                    isUpperCase: setUpperCase,
-                    backgroundColor: backgroundColor,
-                    leading: showLeadingKnob ? MoonIcon(MoonIcons.close_small_16, color: iconColor) : null,
-                    label: showLabelKnob
-                        ? Text(
-                            setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob,
-                            style: TextStyle(color: textColor),
-                          )
-                        : null,
-                    trailing: showTrailingKnob ? MoonIcon(MoonIcons.close_small_16, color: iconColor) : null,
-                  ),
-                  const SizedBox(height: 64),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: MoonTag(
+                  borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                  onTap: () {},
+                  tagSize: tagSizeKnob,
+                  isUpperCase: setUpperCase,
+                  backgroundColor: backgroundColor,
+                  leading: showLeadingKnob
+                      ? MoonIcon(
+                          MoonIcons.close_small_16,
+                          color: iconColor,
+                        )
+                      : null,
+                  label: showLabelKnob
+                      ? Text(
+                          setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob,
+                          style: TextStyle(color: textColor),
+                        )
+                      : null,
+                  trailing: showTrailingKnob
+                      ? MoonIcon(
+                          MoonIcons.close_small_16,
+                          color: iconColor,
+                        )
+                      : null,
+                ),
               ),
             );
           },

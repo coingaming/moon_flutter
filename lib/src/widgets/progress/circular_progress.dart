@@ -73,7 +73,6 @@ class MoonCircularProgress extends StatelessWidget {
       case MoonCircularProgressSize.lg:
         return context.moonTheme?.circularProgressTheme.sizes.lg ??
             MoonCircularProgressSizes(tokens: MoonTokens.light).lg;
-
       default:
         return context.moonTheme?.circularProgressTheme.sizes.md ??
             MoonCircularProgressSizes(tokens: MoonTokens.light).md;

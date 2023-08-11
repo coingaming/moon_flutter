@@ -7,8 +7,8 @@ class BottomSheetStory extends Story {
   BottomSheetStory()
       : super(
           name: "BottomSheet",
-          builder: (context) {
-            final backgroundColorsKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonBottomSheet background.",
               enabled: false,
@@ -17,9 +17,9 @@ class BottomSheetStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final barrierColorsKnob = context.knobs.nullable.options(
+            final barrierColorKnob = context.knobs.nullable.options(
               label: "barrierColor",
               description: "MoonColors variants for MoonBottomSheet barrier.",
               enabled: false,
@@ -28,7 +28,7 @@ class BottomSheetStory extends Story {
               options: colorOptions,
             );
 
-            final barrierColor = colorTable(context)[barrierColorsKnob ?? 40];
+            final barrierColor = colorTable(context)[barrierColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -69,7 +69,7 @@ class BottomSheetStory extends Story {
                     Container(
                       height: 4,
                       width: 40,
-                      margin: const EdgeInsets.only(top: 8, bottom: 8),
+                      margin: const EdgeInsets.symmetric(vertical: 8),
                       decoration: ShapeDecoration(
                         color: context.moonColors!.beerus,
                         shape: const StadiumBorder(),

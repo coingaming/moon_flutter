@@ -13,7 +13,7 @@ class AuthCodeStory extends Story {
   AuthCodeStory()
       : super(
           name: "AuthCode",
-          builder: (context) {
+          builder: (BuildContext context) {
             final mainAxisAlignmentKnob = context.knobs.nullable.options(
               label: "mainAxisAlignment",
               description: "Horizontal alignment of MoonAuthCode input fields.",
@@ -41,7 +41,7 @@ class AuthCodeStory extends Story {
               ],
             );
 
-            final textColorsKnob = context.knobs.nullable.options(
+            final textColorKnob = context.knobs.nullable.options(
               label: "Text color",
               description: "MoonColors variants for MoonAuthCode text.",
               enabled: false,
@@ -50,9 +50,9 @@ class AuthCodeStory extends Story {
               options: colorOptions,
             );
 
-            final textColor = colorTable(context)[textColorsKnob ?? 40];
+            final textColor = colorTable(context)[textColorKnob ?? 40];
 
-            final cursorColorsKnob = context.knobs.nullable.options(
+            final cursorColorKnob = context.knobs.nullable.options(
               label: "authFieldCursorColor",
               description: "MoonColors variants for MoonAuthCode cursor.",
               enabled: false,
@@ -61,9 +61,9 @@ class AuthCodeStory extends Story {
               options: colorOptions,
             );
 
-            final cursorColor = colorTable(context)[cursorColorsKnob ?? 40];
+            final cursorColor = colorTable(context)[cursorColorKnob ?? 40];
 
-            final selectedFillColorsKnob = context.knobs.nullable.options(
+            final selectedFillColorKnob = context.knobs.nullable.options(
               label: "selectedFillColor",
               description: "MoonColors variants for selected MoonAuthCode input field.",
               enabled: false,
@@ -72,9 +72,9 @@ class AuthCodeStory extends Story {
               options: colorOptions,
             );
 
-            final selectedFillColor = colorTable(context)[selectedFillColorsKnob ?? 40];
+            final selectedFillColor = colorTable(context)[selectedFillColorKnob ?? 40];
 
-            final activeFillColorsKnob = context.knobs.nullable.options(
+            final activeFillColorKnob = context.knobs.nullable.options(
               label: "activeFillColor",
               description: "MoonColors variants for active MoonAuthCode input fields.",
               enabled: false,
@@ -83,9 +83,9 @@ class AuthCodeStory extends Story {
               options: colorOptions,
             );
 
-            final activeFillColor = colorTable(context)[activeFillColorsKnob ?? 40];
+            final activeFillColor = colorTable(context)[activeFillColorKnob ?? 40];
 
-            final inactiveFillColorsKnob = context.knobs.nullable.options(
+            final inactiveFillColorKnob = context.knobs.nullable.options(
               label: "inactiveFillColor",
               description: "MoonColors variants for inactive MoonAuthCode input fields.",
               enabled: false,
@@ -94,9 +94,9 @@ class AuthCodeStory extends Story {
               options: colorOptions,
             );
 
-            final inactiveFillColor = colorTable(context)[inactiveFillColorsKnob ?? 40];
+            final inactiveFillColor = colorTable(context)[inactiveFillColorKnob ?? 40];
 
-            final selectedBorderColorsKnob = context.knobs.nullable.options(
+            final selectedBorderColorKnob = context.knobs.nullable.options(
               label: "selectedBorderColor",
               description: "MoonColors variants for selected MoonAuthCode input field border.",
               enabled: false,
@@ -105,9 +105,9 @@ class AuthCodeStory extends Story {
               options: colorOptions,
             );
 
-            final selectedBorderColor = colorTable(context)[selectedBorderColorsKnob ?? 40];
+            final selectedBorderColor = colorTable(context)[selectedBorderColorKnob ?? 40];
 
-            final activeBorderColorsKnob = context.knobs.nullable.options(
+            final activeBorderColorKnob = context.knobs.nullable.options(
               label: "activeBorderColor",
               description: "MoonColors variants for active MoonAuthCode input fields borders.",
               enabled: false,
@@ -116,9 +116,9 @@ class AuthCodeStory extends Story {
               options: colorOptions,
             );
 
-            final activeBorderColor = colorTable(context)[activeBorderColorsKnob ?? 40];
+            final activeBorderColor = colorTable(context)[activeBorderColorKnob ?? 40];
 
-            final inactiveBorderColorsKnob = context.knobs.nullable.options(
+            final inactiveBorderColorKnob = context.knobs.nullable.options(
               label: "inactiveBorderColor",
               description: "MoonColors variants for inactive MoonAuthCode input fields borders.",
               enabled: false,
@@ -127,7 +127,7 @@ class AuthCodeStory extends Story {
               options: colorOptions,
             );
 
-            final inactiveBorderColor = colorTable(context)[inactiveBorderColorsKnob ?? 40];
+            final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -165,24 +165,26 @@ class AuthCodeStory extends Story {
               description: "Show error with shake animation (ErrorAnimationType.shake).",
             );
 
+            final BorderRadiusGeometry? borderRadius =
+                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+
             return StatefulBuilder(
               builder: (context, setState) {
                 return Center(
                   child: SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(vertical: 64),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(height: 64),
-                        const TextDivider(text: "Disabled MoonAuthCode"),
-                        const SizedBox(height: 32),
+                        const TextDivider(
+                          text: "Disabled MoonAuthCode",
+                          paddingTop: 0,
+                        ),
                         MoonAuthCode(
                           enabled: enableKnob,
                           enableInputFill: true,
                           authInputFieldCount: 4,
                           mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
-                          borderRadius:
-                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          borderRadius: borderRadius,
                           textStyle: TextStyle(color: textColor),
                           authFieldCursorColor: cursorColor,
                           selectedFillColor: selectedFillColor,
@@ -198,15 +200,12 @@ class AuthCodeStory extends Story {
                           validator: (String? value) => null,
                           errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
                         ),
-                        const SizedBox(height: 32),
                         const TextDivider(text: "Active MoonAuthCode"),
-                        const SizedBox(height: 32),
                         MoonAuthCode(
                           autoFocus: true,
                           enableInputFill: true,
                           mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
-                          borderRadius:
-                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          borderRadius: borderRadius,
                           textStyle: TextStyle(color: textColor),
                           authFieldCursorColor: cursorColor,
                           selectedFillColor: selectedFillColor,
@@ -222,17 +221,14 @@ class AuthCodeStory extends Story {
                           validator: (String? value) => null,
                           errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
                         ),
-                        const SizedBox(height: 32),
                         const TextDivider(text: "Error MoonAuthCode"),
-                        const SizedBox(height: 32),
                         SizedBox(
                           height: 95,
                           child: MoonAuthCode(
                             enableInputFill: true,
                             authInputFieldCount: 4,
                             mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
-                            borderRadius:
-                                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                            borderRadius: borderRadius,
                             errorStreamController: errorStreamController,
                             textStyle: TextStyle(color: textColor),
                             authFieldCursorColor: cursorColor,
@@ -246,22 +242,23 @@ class AuthCodeStory extends Story {
                             authFieldShape: shapeKnob,
                             obscureText: obscuringKnob,
                             peekWhenObscuring: peekWhenObscuringKnob,
-                            onCompleted: (pin) {
+                            onCompleted: (String pin) {
                               if (pin != '9921') {
                                 errorStreamController.add(
                                   errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
                                 );
                               }
                             },
-                            validator: (pin) {
+                            validator: (String? pin) {
                               if (pin?.length == 4 && pin != '9921') {
                                 return 'Invalid authentication code. Please try again.';
                               }
+
                               return null;
                             },
-                            errorBuilder: (context, errorText) {
+                            errorBuilder: (BuildContext context, String? errorText) {
                               return Align(
-                                child: Container(
+                                child: Padding(
                                   padding: const EdgeInsets.only(top: 8),
                                   child: Text(errorText ?? ''),
                                 ),
@@ -269,7 +266,6 @@ class AuthCodeStory extends Story {
                             },
                           ),
                         ),
-                        const SizedBox(height: 64),
                       ],
                     ),
                   ),

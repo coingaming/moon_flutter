@@ -53,7 +53,6 @@ class MoonLinearLoader extends StatelessWidget {
         return context.moonTheme?.linearLoaderTheme.sizes.x3s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x3s;
       case MoonLinearLoaderSize.x2s:
         return context.moonTheme?.linearLoaderTheme.sizes.x2s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x2s;
-
       default:
         return context.moonTheme?.linearLoaderTheme.sizes.x4s ?? MoonLinearLoaderSizes(tokens: MoonTokens.light).x4s;
     }

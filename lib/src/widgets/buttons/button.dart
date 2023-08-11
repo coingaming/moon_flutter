@@ -48,9 +48,6 @@ class MoonButton extends StatefulWidget {
   /// Whether the button should show a scale animation.
   final bool showScaleAnimation;
 
-  /// Whether the button should show a tooltip.
-  final bool showTooltip;
-
   /// The border radius of the button.
   final BorderRadiusGeometry? borderRadius;
 
@@ -141,9 +138,6 @@ class MoonButton extends StatefulWidget {
   /// The semantic label for the button.
   final String? semanticLabel;
 
-  /// The tooltip message for the button.
-  final String tooltipMessage;
-
   /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
 
@@ -177,7 +171,6 @@ class MoonButton extends StatefulWidget {
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
     this.showScaleAnimation = true,
-    this.showTooltip = false,
     this.borderRadius,
     this.backgroundColor,
     this.borderColor,
@@ -208,7 +201,6 @@ class MoonButton extends StatefulWidget {
     this.buttonSize,
     this.decoration,
     this.semanticLabel,
-    this.tooltipMessage = "",
     this.onTap,
     this.onLongPress,
     this.leading,
@@ -228,7 +220,6 @@ class MoonButton extends StatefulWidget {
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
     this.showScaleAnimation = true,
-    this.showTooltip = false,
     this.borderRadius,
     this.backgroundColor,
     this.borderColor,
@@ -258,7 +249,6 @@ class MoonButton extends StatefulWidget {
     this.buttonSize,
     this.decoration,
     this.semanticLabel,
-    this.tooltipMessage = "",
     this.onTap,
     this.onLongPress,
     Color? iconColor,
@@ -284,11 +274,7 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
 
   void _handleHoverEffect(bool shouldAnimate) {
-    if (shouldAnimate) {
-      _animationController?.forward();
-    } else {
-      _animationController?.reverse();
-    }
+    shouldAnimate ? _animationController?.forward() : _animationController?.reverse();
   }
 
   MoonButtonSizeProperties _getMoonButtonSize(BuildContext context, MoonButtonSize? moonButtonSize) {
@@ -311,6 +297,7 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
   @override
   void dispose() {
     _animationController?.dispose();
+
     super.dispose();
   }
 
@@ -384,7 +371,6 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
       showPulseEffect: widget.showPulseEffect,
       showPulseEffectJiggle: widget.showPulseEffectJiggle,
       showScaleAnimation: widget.showScaleAnimation,
-      showTooltip: widget.showTooltip,
       borderRadius: effectiveBorderRadius,
       backgroundColor: widget.backgroundColor,
       focusEffectColor: widget.focusEffectColor,
@@ -402,23 +388,23 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
       scaleEffectCurve: widget.scaleEffectCurve,
       focusNode: widget.focusNode,
       semanticLabel: widget.semanticLabel,
-      tooltipMessage: widget.tooltipMessage,
       onTap: widget.onTap,
       onLongPress: widget.onLongPress,
-      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool canAnimate = _isEnabled && (isHovered || isFocused || isPressed);
+
         _handleHoverEffect(canAnimate);
 
         return AnimatedBuilder(
           animation: _animationController!,
-          builder: (context, child) {
+          builder: (BuildContext context, Widget? child) {
             return IconTheme(
               data: IconThemeData(
                 color: _textColor!.value,
                 size: effectiveMoonButtonSize.iconSizeValue,
               ),
               child: DefaultTextStyle(
-                style: TextStyle(color: _textColor!.value, fontSize: effectiveMoonButtonSize.textStyle.fontSize),
+                style: effectiveMoonButtonSize.textStyle.copyWith(color: _textColor!.value),
                 child: Container(
                   width: widget.width,
                   height: effectiveHeight,

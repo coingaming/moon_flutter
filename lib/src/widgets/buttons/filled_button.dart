@@ -20,9 +20,6 @@ class MoonFilledButton extends StatelessWidget {
   /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
 
-  /// Whether this button should show a tooltip.
-  final bool showTooltip;
-
   /// The border radius of the button.
   final BorderRadiusGeometry? borderRadius;
 
@@ -49,9 +46,6 @@ class MoonFilledButton extends StatelessWidget {
 
   /// The semantic label for the button.
   final String? semanticLabel;
-
-  /// The tooltip message for the button.
-  final String tooltipMessage;
 
   /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
@@ -81,7 +75,6 @@ class MoonFilledButton extends StatelessWidget {
     this.ensureMinimalTouchTargetSize = false,
     this.isFullWidth = false,
     this.showPulseEffect = false,
-    this.showTooltip = false,
     this.borderRadius,
     this.backgroundColor,
     this.height,
@@ -91,7 +84,6 @@ class MoonFilledButton extends StatelessWidget {
     this.buttonSize,
     this.decoration,
     this.semanticLabel,
-    this.tooltipMessage = "",
     this.onTap,
     this.onLongPress,
     this.leading,
@@ -101,11 +93,12 @@ class MoonFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveBackgroundColor = backgroundColor ??
+    final Color effectiveBackgroundColor = backgroundColor ??
         context.moonTheme?.buttonTheme.colors.filledVariantBackgroundColor ??
         MoonColors.light.piccolo;
 
-    final effectiveTextColor = context.moonTheme?.buttonTheme.colors.filledVariantTextColor ?? MoonColors.light.goten;
+    final Color effectiveTextColor =
+        context.moonTheme?.buttonTheme.colors.filledVariantTextColor ?? MoonColors.light.goten;
 
     return MoonButton(
       autofocus: autofocus,
@@ -113,7 +106,6 @@ class MoonFilledButton extends StatelessWidget {
       ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       isFullWidth: isFullWidth,
       showPulseEffect: showPulseEffect,
-      showTooltip: showTooltip,
       textColor: effectiveTextColor,
       borderRadius: borderRadius,
       backgroundColor: effectiveBackgroundColor,
@@ -124,7 +116,6 @@ class MoonFilledButton extends StatelessWidget {
       buttonSize: buttonSize,
       decoration: decoration,
       semanticLabel: semanticLabel,
-      tooltipMessage: tooltipMessage,
       onTap: onTap,
       onLongPress: onLongPress,
       label: label,

@@ -69,7 +69,6 @@ class MoonLinearProgress extends StatelessWidget {
       case MoonLinearProgressSize.x2s:
         return context.moonTheme?.linearProgressTheme.sizes.x2s ??
             MoonLinearProgressSizes(tokens: MoonTokens.light).x2s;
-
       default:
         return context.moonTheme?.linearProgressTheme.sizes.x4s ??
             MoonLinearProgressSizes(tokens: MoonTokens.light).x4s;

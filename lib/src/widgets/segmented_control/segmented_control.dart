@@ -129,6 +129,7 @@ class MoonSegmentedControl extends StatefulWidget {
 
 class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
   late final bool _hasDefaultSegments = widget.segments != null;
+
   late int _selectedIndex = widget.selectedIndex;
 
   MoonSegmentedControlSizeProperties _getMoonSegmentedControlSize(
@@ -287,11 +288,7 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
   AnimationController? _animationController;
 
   void _handleActiveEffect(bool isActive) {
-    if (isActive) {
-      _animationController?.forward();
-    } else {
-      _animationController?.reverse();
-    }
+    isActive ? _animationController?.forward() : _animationController?.reverse();
   }
 
   @override
@@ -370,14 +367,14 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
       semanticLabel: widget.segment.semanticLabel,
       borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
       cursor: widget.isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
-      builder: (context, isEnabled, isHovered, isFocused, isPressed) {
+      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool isActive = isEnabled && (widget.isSelected || isHovered || isPressed);
 
         _handleActiveEffect(isActive);
 
         return AnimatedBuilder(
           animation: _animationController!,
-          builder: (context, child) {
+          builder: (BuildContext context, Widget? child) {
             return DecoratedBox(
               decoration: segmentStyle?.decoration ??
                   ShapeDecoration(

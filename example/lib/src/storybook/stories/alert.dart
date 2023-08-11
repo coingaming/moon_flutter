@@ -10,8 +10,8 @@ class AlertStory extends Story {
   AlertStory()
       : super(
           name: "Alert",
-          builder: (context) {
-            final leadingColorsKnob = context.knobs.nullable.options(
+          builder: (BuildContext context) {
+            final leadingColorKnob = context.knobs.nullable.options(
               label: "Leading Color",
               description: "MoonColors variants for MoonAlert leading slot.",
               enabled: false,
@@ -20,9 +20,9 @@ class AlertStory extends Story {
               options: colorOptions,
             );
 
-            final leadingColor = colorTable(context)[leadingColorsKnob ?? 40];
+            final leadingColor = colorTable(context)[leadingColorKnob ?? 40];
 
-            final titleColorsKnob = context.knobs.nullable.options(
+            final titleColorKnob = context.knobs.nullable.options(
               label: "Title color",
               description: "MoonColors variants for MoonAlert title slot.",
               enabled: false,
@@ -31,9 +31,9 @@ class AlertStory extends Story {
               options: colorOptions,
             );
 
-            final titleColor = colorTable(context)[titleColorsKnob ?? 40];
+            final titleColor = colorTable(context)[titleColorKnob ?? 40];
 
-            final trailingColorsKnob = context.knobs.nullable.options(
+            final trailingColorKnob = context.knobs.nullable.options(
               label: "Trailing color",
               description: "MoonColors variants for MoonAlert trailing slot.",
               enabled: false,
@@ -42,9 +42,9 @@ class AlertStory extends Story {
               options: colorOptions,
             );
 
-            final trailingColor = colorTable(context)[trailingColorsKnob ?? 40];
+            final trailingColor = colorTable(context)[trailingColorKnob ?? 40];
 
-            final bodyColorsKnob = context.knobs.nullable.options(
+            final bodyColorKnob = context.knobs.nullable.options(
               label: "Body color",
               description: "MoonColors variants for MoonAlert body slot.",
               enabled: false,
@@ -53,9 +53,9 @@ class AlertStory extends Story {
               options: colorOptions,
             );
 
-            final bodyColor = colorTable(context)[bodyColorsKnob ?? 40];
+            final bodyColor = colorTable(context)[bodyColorKnob ?? 40];
 
-            final backgroundColorsKnob = context.knobs.nullable.options(
+            final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonAlert background.",
               enabled: false,
@@ -64,10 +64,9 @@ class AlertStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-
-            final borderColorsKnob = context.knobs.nullable.options(
+            final borderColorKnob = context.knobs.nullable.options(
               label: "borderColor",
               description: "MoonColors variants for MoonAlert border.",
               enabled: false,
@@ -76,7 +75,7 @@ class AlertStory extends Story {
               options: colorOptions,
             );
 
-            final borderColor = colorTable(context)[borderColorsKnob ?? 40];
+            final borderColor = colorTable(context)[borderColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -113,25 +112,29 @@ class AlertStory extends Story {
               description: "onTrailingTap() is null.",
             );
 
+            final BorderRadiusGeometry? borderRadius =
+                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+
             return Center(
               child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 64),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 64),
-                    const TextDivider(text: "Base MoonAlert"),
-                    const SizedBox(height: 32),
+                    const TextDivider(
+                      text: "Base MoonAlert",
+                      paddingTop: 0,
+                    ),
                     StatefulBuilder(
                       builder: (context, setState) {
                         return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             MoonAlert(
                               show: showAlert,
                               showBorder: showBorderKnob,
                               borderColor: borderColor,
                               backgroundColor: backgroundColor,
-                              borderRadius:
-                                  borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                              borderRadius: borderRadius,
                               leading: showLeadingKnob
                                   ? MoonIcon(
                                       MoonIcons.frame_24,
@@ -151,9 +154,7 @@ class AlertStory extends Story {
                               trailing: showTrailingKnob
                                   ? MoonButton.icon(
                                       buttonSize: MoonButtonSize.xs,
-                                      borderRadius: borderRadiusKnob != null
-                                          ? BorderRadius.circular(borderRadiusKnob.toDouble())
-                                          : null,
+                                      borderRadius: borderRadius,
                                       disabledOpacityValue: 1,
                                       icon: MoonIcon(
                                         MoonIcons.close_small_24,
@@ -161,11 +162,7 @@ class AlertStory extends Story {
                                         size: 24,
                                       ),
                                       gap: 0,
-                                      onTap: showDisabledKnob
-                                          ? null
-                                          : () {
-                                              setState(() => showAlert = !showAlert);
-                                            },
+                                      onTap: showDisabledKnob ? null : () => setState(() => showAlert = !showAlert),
                                     )
                                   : null,
                               body: showBodyKnob
@@ -185,22 +182,17 @@ class AlertStory extends Story {
                             MoonFilledButton(
                               label: const Text("Show/Hide MoonAlert"),
                               backgroundColor: context.moonColors!.piccolo,
-                              onTap: () {
-                                setState(() => showAlert = !showAlert);
-                              },
+                              onTap: () => setState(() => showAlert = !showAlert),
                             ),
                           ],
                         );
                       },
                     ),
-                    const SizedBox(height: 40),
                     const TextDivider(text: "Filled MoonAlert variant"),
-                    const SizedBox(height: 32),
                     MoonFilledAlert(
                       show: true,
                       color: context.moonColors!.chiChi100,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       leading: showLeadingKnob ? const MoonIcon(MoonIcons.alert_24) : null,
                       title: const Text("Filled error MoonAlert"),
                       body: showBodyKnob
@@ -218,8 +210,7 @@ class AlertStory extends Story {
                     MoonFilledAlert(
                       show: true,
                       color: context.moonColors!.krillin100,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       leading: showLeadingKnob ? const MoonIcon(MoonIcons.alarm_round_24) : null,
                       title: const Text("Filled warning MoonAlert"),
                       body: showBodyKnob
@@ -233,14 +224,11 @@ class AlertStory extends Story {
                           : null,
                       onTrailingTap: () {},
                     ),
-                    const SizedBox(height: 40),
                     const TextDivider(text: "Outlined MoonAlert variant"),
-                    const SizedBox(height: 32),
                     MoonOutlinedAlert(
                       show: true,
                       color: context.moonColors!.roshi100,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       leading: showLeadingKnob ? const MoonIcon(MoonIcons.check_rounded_24) : null,
                       title: const Text("Outlined success MoonAlert"),
                       body: showBodyKnob
@@ -258,8 +246,7 @@ class AlertStory extends Story {
                     MoonOutlinedAlert(
                       show: true,
                       color: context.moonColors!.whis100,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadius,
                       leading: showLeadingKnob ? const MoonIcon(MoonIcons.alert_24) : null,
                       title: const Text('Outlined info MoonAlert'),
                       body: showBodyKnob
@@ -273,7 +260,6 @@ class AlertStory extends Story {
                           : null,
                       onTrailingTap: () {},
                     ),
-                    const SizedBox(height: 64),
                   ],
                 ),
               ),

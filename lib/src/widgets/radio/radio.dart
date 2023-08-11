@@ -167,6 +167,7 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
   void _handleChanged(bool? selected) {
     if (selected == null) {
       widget.onChanged!(null);
+
       return;
     }
     if (selected) {
@@ -177,6 +178,7 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
   @override
   void didUpdateWidget(MoonRadio<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (widget._selected != oldWidget._selected) {
       animateToValue();
     }
@@ -185,6 +187,7 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
   @override
   void dispose() {
     _painter.dispose();
+
     super.dispose();
   }
 

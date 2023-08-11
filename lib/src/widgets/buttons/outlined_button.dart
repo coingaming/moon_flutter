@@ -18,9 +18,6 @@ class MoonOutlinedButton extends StatelessWidget {
   /// Whether this button should show a pulse effect.
   final bool showPulseEffect;
 
-  /// Whether the button should show a tooltip.
-  final bool showTooltip;
-
   /// The border radius of the button.
   final BorderRadiusGeometry? borderRadius;
 
@@ -47,9 +44,6 @@ class MoonOutlinedButton extends StatelessWidget {
 
   /// The semantic label for the button.
   final String? semanticLabel;
-
-  /// The tooltip message for the button.
-  final String tooltipMessage;
 
   /// The callback that is called when the button is tapped or pressed.
   final VoidCallback? onTap;
@@ -79,7 +73,6 @@ class MoonOutlinedButton extends StatelessWidget {
     this.ensureMinimalTouchTargetSize = false,
     this.isFullWidth = false,
     this.showPulseEffect = false,
-    this.showTooltip = false,
     this.borderRadius,
     this.borderColor,
     this.height,
@@ -89,7 +82,6 @@ class MoonOutlinedButton extends StatelessWidget {
     this.buttonSize,
     this.decoration,
     this.semanticLabel,
-    this.tooltipMessage = "",
     this.onTap,
     this.onLongPress,
     this.label,
@@ -105,7 +97,6 @@ class MoonOutlinedButton extends StatelessWidget {
       ensureMinimalTouchTargetSize: ensureMinimalTouchTargetSize,
       isFullWidth: isFullWidth,
       showPulseEffect: showPulseEffect,
-      showTooltip: showTooltip,
       showBorder: true,
       borderRadius: borderRadius,
       borderColor: borderColor,
@@ -116,7 +107,6 @@ class MoonOutlinedButton extends StatelessWidget {
       buttonSize: buttonSize,
       decoration: decoration,
       semanticLabel: semanticLabel,
-      tooltipMessage: tooltipMessage,
       onTap: onTap,
       onLongPress: onLongPress,
       label: label,

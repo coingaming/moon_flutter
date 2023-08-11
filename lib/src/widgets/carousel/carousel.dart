@@ -120,10 +120,11 @@ class MoonCarousel extends StatefulWidget {
 class _MoonCarouselState extends State<MoonCarousel> {
   final Key _forwardListKey = const ValueKey<String>("moon_carousel_key");
 
-  late int _lastReportedItemIndex;
-  late MoonCarouselScrollController _scrollController;
-
   late double _effectiveGap = 0;
+
+  late int _lastReportedItemIndex;
+
+  late MoonCarouselScrollController _scrollController;
 
   // Get the anchor for the viewport to place the item at the isCentered.
   double _getCenteredAnchor(BoxConstraints constraints) {
@@ -158,7 +159,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
     _lastReportedItemIndex = _scrollController.initialItem;
 
     if (widget.autoPlay) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((Duration _) {
         final Duration effectiveAutoPlayDelay = widget.autoPlayDelay ??
             context.moonTheme?.carouselTheme.properties.autoPlayDelay ??
             const Duration(seconds: 3);
@@ -212,6 +213,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
   @override
   void dispose() {
     _scrollController.dispose();
+
     super.dispose();
   }
 
@@ -281,10 +283,12 @@ class _MoonCarouselState extends State<MoonCarousel> {
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (ScrollUpdateNotification notification) {
         final MoonCarouselExtentMetrics metrics = notification.metrics as MoonCarouselExtentMetrics;
+
         final int currentItem = metrics.itemIndex;
 
         if (currentItem != _lastReportedItemIndex) {
           _lastReportedItemIndex = currentItem;
+
           final int trueIndex = _getTrueIndex(_lastReportedItemIndex, widget.itemCount);
 
           if (widget.onIndexChanged != null) {
@@ -297,7 +301,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
       },
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          final centeredAnchor = _getCenteredAnchor(constraints);
+          final double centeredAnchor = _getCenteredAnchor(constraints);
 
           return IconTheme(
             data: IconThemeData(
@@ -367,11 +371,17 @@ class _MoonCarouselScrollable extends Scrollable {
 
 class _MoonCarouselScrollableState extends ScrollableState {
   bool get clampMaxExtent => (widget as _MoonCarouselScrollable).clampMaxExtent;
+
   bool get loop => (widget as _MoonCarouselScrollable).loop;
+
   double get anchor => (widget as _MoonCarouselScrollable).anchor;
+
   double get gap => (widget as _MoonCarouselScrollable).gap;
+
   double get itemExtent => (widget as _MoonCarouselScrollable).itemExtent;
+
   double get velocityFactor => (widget as _MoonCarouselScrollable).velocityFactor;
+
   int get itemCount => (widget as _MoonCarouselScrollable).itemCount;
 }
 
@@ -386,11 +396,7 @@ class MoonCarouselScrollController extends ScrollController {
   // Timer for autoplay.
   Timer? _autoplayTimer;
 
-  void startAutoPlay({
-    Duration delay = const Duration(seconds: 3),
-    Duration? duration,
-    Curve? curve,
-  }) {
+  void startAutoPlay({Duration delay = const Duration(seconds: 3), Duration? duration, Curve? curve}) {
     _autoplayTimer?.cancel();
 
     _autoplayTimer = Timer.periodic(delay, (timer) {
@@ -410,6 +416,7 @@ class MoonCarouselScrollController extends ScrollController {
   @override
   void dispose() {
     stopAutoplay();
+
     super.dispose();
   }
 
@@ -420,11 +427,7 @@ class MoonCarouselScrollController extends ScrollController {
       );
 
   /// Animate to specific item index.
-  Future<void> animateToItem(
-    int itemIndex, {
-    Duration? duration,
-    Curve? curve,
-  }) async {
+  Future<void> animateToItem(int itemIndex, {Duration? duration, Curve? curve}) async {
     if (!hasClients) return;
 
     await Future.wait<void>([
@@ -445,10 +448,7 @@ class MoonCarouselScrollController extends ScrollController {
   }
 
   /// Animate to the next item in the viewport.
-  Future<void> nextItem({
-    Duration? duration,
-    Curve? curve,
-  }) async {
+  Future<void> nextItem({Duration? duration, Curve? curve}) async {
     if (!hasClients) return;
 
     await Future.wait<void>([
@@ -540,9 +540,7 @@ double _clipOffsetToScrollableRange(double offset, double minScrollExtent, doubl
 
 /// Get the modded item index from the real index.
 int _getTrueIndex(int currentIndex, int totalCount) {
-  if (currentIndex >= 0) {
-    return currentIndex % totalCount;
-  }
+  if (currentIndex >= 0) return currentIndex % totalCount;
 
   return (totalCount + (currentIndex % totalCount)) % totalCount;
 }
@@ -557,39 +555,36 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
         super(initialPixels: _getItemExtentFromScrollContext(context) * initialItem);
 
   double get anchor => _getAnchorFromScrollContext(context);
-  static double _getAnchorFromScrollContext(ScrollContext context) {
-    return (context as _MoonCarouselScrollableState).anchor;
-  }
+
+  static double _getAnchorFromScrollContext(ScrollContext context) => (context as _MoonCarouselScrollableState).anchor;
 
   double get itemExtent => _getItemExtentFromScrollContext(context);
-  static double _getItemExtentFromScrollContext(ScrollContext context) {
-    return (context as _MoonCarouselScrollableState).itemExtent;
-  }
+
+  static double _getItemExtentFromScrollContext(ScrollContext context) =>
+      (context as _MoonCarouselScrollableState).itemExtent;
 
   double get gap => _getGapFromScrollContext(context);
-  static double _getGapFromScrollContext(ScrollContext context) {
-    return (context as _MoonCarouselScrollableState).gap;
-  }
+
+  static double _getGapFromScrollContext(ScrollContext context) => (context as _MoonCarouselScrollableState).gap;
 
   int get itemCount => _getItemCountFromScrollContext(context);
-  static int _getItemCountFromScrollContext(ScrollContext context) {
-    return (context as _MoonCarouselScrollableState).itemCount;
-  }
+
+  static int _getItemCountFromScrollContext(ScrollContext context) =>
+      (context as _MoonCarouselScrollableState).itemCount;
 
   bool get clampMaxExtent => _getDeferMaxExtentFromScrollContext(context);
-  static bool _getDeferMaxExtentFromScrollContext(ScrollContext context) {
-    return (context as _MoonCarouselScrollableState).clampMaxExtent;
-  }
+
+  static bool _getDeferMaxExtentFromScrollContext(ScrollContext context) =>
+      (context as _MoonCarouselScrollableState).clampMaxExtent;
 
   bool get loop => _getLoopFromScrollContext(context);
-  static bool _getLoopFromScrollContext(ScrollContext context) {
-    return (context as _MoonCarouselScrollableState).loop;
-  }
+
+  static bool _getLoopFromScrollContext(ScrollContext context) => (context as _MoonCarouselScrollableState).loop;
 
   double get velocityFactor => _getVelocityFactorFromScrollContext(context);
-  static double _getVelocityFactorFromScrollContext(ScrollContext context) {
-    return (context as _MoonCarouselScrollableState).velocityFactor;
-  }
+
+  static double _getVelocityFactorFromScrollContext(ScrollContext context) =>
+      (context as _MoonCarouselScrollableState).velocityFactor;
 
   @override
   int get itemIndex {
@@ -648,9 +643,7 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
 
   @override
   MoonCarouselScrollPhysics applyTo(ScrollPhysics? ancestor) {
-    return MoonCarouselScrollPhysics(
-      parent: buildParent(ancestor),
-    );
+    return MoonCarouselScrollPhysics(parent: buildParent(ancestor));
   }
 
   @override
@@ -677,6 +670,7 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
           ),
         ]);
       }
+
       return true;
     }());
     if (value < position.pixels && position.pixels <= position.minScrollExtent) {
@@ -737,7 +731,8 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
 
     // Scenario 3:
     // If there's no velocity and we're already at where we intend to land, do nothing.
-    final tolerance = toleranceFor(metrics);
+    final Tolerance tolerance = toleranceFor(metrics);
+
     if (velocity.abs() < tolerance.velocity && (settlingPixels - metrics.pixels).abs() < tolerance.distance) {
       return null;
     }

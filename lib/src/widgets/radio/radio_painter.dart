@@ -15,11 +15,13 @@ class MoonRadioPainter extends ToggleablePainter {
       ..color = colorPremulLerp(inactiveColor, activeColor, position.value)!
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
+
     canvas.drawCircle(center, _kOuterRadius, paint);
 
     // Inner circle
     if (!position.isDismissed) {
       paint.style = PaintingStyle.fill;
+
       canvas.drawCircle(center, _kInnerRadius * position.value, paint);
     }
   }
