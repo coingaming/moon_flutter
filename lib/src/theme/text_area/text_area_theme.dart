@@ -25,7 +25,7 @@ class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme> with Diagnosti
               backgroundColor: tokens.colors.gohan,
               activeBorderColor: tokens.colors.piccolo,
               inactiveBorderColor: tokens.colors.beerus,
-              errorBorderColor: tokens.colors.chiChi100,
+              errorColor: tokens.colors.chiChi100,
               hoverBorderColor: tokens.colors.beerus,
               hintTextColor: tokens.colors.trunks,
             ),
