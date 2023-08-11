@@ -6,6 +6,8 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
+import 'package:moon_design/src/widgets/progress_pin/pin_style.dart';
+import 'package:moon_design/src/widgets/progress_pin/progress_pin.dart';
 
 enum MoonLinearProgressSize {
   x6s,
@@ -16,6 +18,9 @@ enum MoonLinearProgressSize {
 }
 
 class MoonLinearProgress extends StatelessWidget {
+  /// Show linear progress with thumb and pin.
+  final bool showPin;
+
   /// Border radius value of the linear progress widget.
   final BorderRadiusGeometry? borderRadius;
 
@@ -34,18 +39,23 @@ class MoonLinearProgress extends StatelessWidget {
   /// Size of the linear progress widget.
   final MoonLinearProgressSize? linearProgressSize;
 
+  /// Style for the linear progress pin.
+  final PinStyle? pinStyle;
+
   /// The semantic label for the linear progress widget.
   final String? semanticLabel;
 
   /// MDS linear progress widget.
   const MoonLinearProgress({
     super.key,
+    this.showPin = false,
     this.borderRadius,
     this.color,
     this.backgroundColor,
     this.height,
     required this.value,
     this.linearProgressSize,
+    this.pinStyle,
     this.semanticLabel,
   });
 
@@ -85,20 +95,33 @@ class MoonLinearProgress extends StatelessWidget {
         color ?? context.moonTheme?.linearProgressTheme.colors.color ?? MoonColors.light.piccolo;
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.trunks;
+        backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.beerus;
 
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 
     return Semantics(
       label: semanticLabel,
       value: "${value * 100}%",
-      child: MoonLinearProgressIndicator(
-        borderRadius: effectiveBorderRadius,
-        value: value,
-        color: effectiveColor,
-        backgroundColor: effectiveBackgroundColor,
-        minHeight: effectiveHeight,
-      ),
+      child: showPin
+          ? MoonProgressPin(
+              progressValue: value,
+              progressLabel: '${(value * 100).round()}%',
+              pinStyle: pinStyle,
+              child: MoonLinearProgressIndicator(
+                value: value,
+                color: effectiveColor,
+                backgroundColor: effectiveBackgroundColor,
+                borderRadius: effectiveBorderRadius,
+                minHeight: effectiveHeight,
+              ),
+            )
+          : MoonLinearProgressIndicator(
+              value: value,
+              color: effectiveColor,
+              backgroundColor: effectiveBackgroundColor,
+              borderRadius: effectiveBorderRadius,
+              minHeight: effectiveHeight,
+            ),
     );
   }
 }
