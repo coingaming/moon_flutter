@@ -43,6 +43,8 @@ class MoonTextInput extends StatefulWidget {
     );
   }
 
+  // MDS props
+
   /// Whether the text input has floating label.
   final bool hasFloatingLabel;
 
@@ -122,6 +124,8 @@ class MoonTextInput extends StatefulWidget {
   final Widget? helper;
 
   ///////
+
+  // Flutter props
 
   /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.intro}
   ///
@@ -559,6 +563,7 @@ class MoonTextInput extends StatefulWidget {
   ///  * [maxLength], which discusses the precise meaning of "number of
   ///    characters" and how it may differ from the intuitive meaning.
   const MoonTextInput({
+    //MDS props
     this.hasFloatingLabel = false,
     this.borderRadius,
     this.backgroundColor,
@@ -585,7 +590,8 @@ class MoonTextInput extends StatefulWidget {
     this.leading,
     this.trailing,
     this.helper,
-    //
+    /////////////////
+    // Flutter props
     super.key,
     this.controller,
     this.focusNode,
