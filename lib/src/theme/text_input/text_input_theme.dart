@@ -37,8 +37,10 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
             ),
         properties = properties ??
             MoonTextInputProperties(
-              transitionDuration: tokens.transitions.defaultTransitionDuration,
-              transitionCurve: tokens.transitions.defaultTransitionCurve,
+              // The duration value extracted from:
+              // https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/textfield/TextInputLayout.java
+              transitionDuration: const Duration(milliseconds: 167),
+              transitionCurve: Curves.fastOutSlowIn,
               helperPadding: EdgeInsets.only(top: tokens.sizes.x4s),
               helperTextStyle: tokens.typography.body.text12,
             ),

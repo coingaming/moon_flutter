@@ -59,15 +59,15 @@ class TextAreaStory extends Story {
 
             final inactiveBorderColor = colorTable(context)[inactiveBorderColorsKnob ?? 40];
 
-            final errorBorderColorsKnob = context.knobs.nullable.options(
-              label: "errorBorderColor",
-              description: "MoonColors variants for MoonTextArea error border.",
+            final errorColorsKnob = context.knobs.nullable.options(
+              label: "errorColor",
+              description: "MoonColors variants for MoonTextArea error.",
               enabled: false,
               initial: 0, // piccolo
               options: colorOptions,
             );
 
-            final errorBorderColor = colorTable(context)[errorBorderColorsKnob ?? 40];
+            final errorColor = colorTable(context)[errorColorsKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -88,59 +88,55 @@ class TextAreaStory extends Story {
               description: "Whether the MoonTextArea has no fixed height and is growable",
             );
 
-            final showFocusEffectKnob = context.knobs.boolean(
-              label: "showFocusEffect",
-              description: "Whether to display focus effect around MoonTextInput.",
-              initial: true,
-            );
-
             final showHelperKnob = context.knobs.boolean(
               label: "helper",
               description: "Show widget in MoonTextArea helper slot.",
             );
 
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 64),
-                  Form(
-                    child: Builder(
-                      builder: (context) {
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            MoonTextArea(
-                              enabled: enabledKnob,
-                              showFocusEffect: showFocusEffectKnob,
-                              height: growableKnob ? null : 200,
-                              textColor: textColor,
-                              hintTextColor: hintTextColor,
-                              backgroundColor: backgroundColor,
-                              activeBorderColor: activeBorderColor,
-                              inactiveBorderColor: inactiveBorderColor,
-                              errorBorderColor: errorBorderColor,
-                              borderRadius:
-                                  borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                              hintText: "Enter your text here...",
-                              validator: (value) => value?.length != null && value!.length < 10
-                                  ? "The text should be longer than 10 characters."
-                                  : null,
-                              helper: showHelperKnob ? const Text("Supporting text") : null,
-                              errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
-                            ),
-                            const SizedBox(height: 16),
-                            MoonFilledButton(
-                              label: const Text("Submit"),
-                              onTap: () => Form.of(context).validate(),
-                            )
-                          ],
-                        );
-                      },
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 64),
+                    Form(
+                      child: Builder(
+                        builder: (context) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              MoonTextArea(
+                                enabled: enabledKnob,
+                                height: growableKnob ? null : 200,
+                                textColor: textColor,
+                                hintTextColor: hintTextColor,
+                                backgroundColor: backgroundColor,
+                                activeBorderColor: activeBorderColor,
+                                inactiveBorderColor: inactiveBorderColor,
+                                errorColor: errorColor,
+                                borderRadius: borderRadiusKnob != null
+                                    ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                                    : null,
+                                hintText: "Enter your text here...",
+                                validator: (value) => value?.length != null && value!.length < 10
+                                    ? "The text should be longer than 10 characters."
+                                    : null,
+                                helper: showHelperKnob ? const Text("Supporting text") : null,
+                                errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
+                              ),
+                              const SizedBox(height: 16),
+                              MoonFilledButton(
+                                label: const Text("Submit"),
+                                onTap: () => Form.of(context).validate(),
+                              )
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 64),
-                ],
+                    const SizedBox(height: 64),
+                  ],
+                ),
               ),
             );
           },
