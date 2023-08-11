@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.1](https://github.com/coingaming/moon_flutter/compare/v0.28.0...v0.28.1) (2023-08-11)
+
+
+### Bug Fixes
+
+* [MDS-643] Fix progress bar clipping bug ([#242](https://github.com/coingaming/moon_flutter/issues/242)) ([b5d650b](https://github.com/coingaming/moon_flutter/commit/b5d650bcffbbec5a5222ba1c3125d3d70d560f1e))
+
 ## [0.28.0](https://github.com/coingaming/moon_flutter/compare/v0.27.2...v0.28.0) (2023-08-11)
 
 
