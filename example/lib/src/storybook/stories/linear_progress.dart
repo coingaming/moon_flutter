@@ -94,7 +94,6 @@ class LinearProgressStory extends Story {
             final showPinKnob = context.knobs.boolean(
               label: "showPin",
               description: "Show pin for LinearProgress",
-              initial: true,
             );
 
             final showPinShadowKnob = context.knobs.boolean(
