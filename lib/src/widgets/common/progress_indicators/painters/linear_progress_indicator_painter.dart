@@ -87,6 +87,9 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
         bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x),
       );
 
+      // Clipping progressRect with containerRect
+      canvas.clipRRect(containerRect);
+
       canvas.drawRRect(progressRect, paint);
     }
 
