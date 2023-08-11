@@ -24,6 +24,7 @@ export 'package:moon_design/src/theme/segmented_control/segmented_control_theme.
 export 'package:moon_design/src/theme/switch/switch_theme.dart';
 export 'package:moon_design/src/theme/text_area/text_area_theme.dart';
 export 'package:moon_design/src/theme/text_input/text_input_theme.dart';
+export 'package:moon_design/src/theme/text_input_group/text_input_group_theme.dart';
 export 'package:moon_design/src/theme/theme.dart';
 export 'package:moon_design/src/theme/toast/toast_theme.dart';
 export 'package:moon_design/src/theme/tokens/borders.dart';
@@ -91,5 +92,6 @@ export 'package:moon_design/src/widgets/tag/tag.dart';
 export 'package:moon_design/src/widgets/text_area/text_area.dart';
 export 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 export 'package:moon_design/src/widgets/text_input/text_input.dart';
+export 'package:moon_design/src/widgets/text_input_group/text_input_group.dart';
 export 'package:moon_design/src/widgets/toast/toast.dart';
 export 'package:moon_design/src/widgets/tooltip/tooltip.dart';
