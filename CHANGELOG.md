@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.0](https://github.com/coingaming/moon_flutter/compare/v0.27.2...v0.28.0) (2023-08-11)
+
+
+### Features
+
+* [MDS-629] Add pin for linear progress ([#240](https://github.com/coingaming/moon_flutter/issues/240)) ([7f81e38](https://github.com/coingaming/moon_flutter/commit/7f81e3870f273ad2f162872fc0863e104b3a46ab))
+
 ## [0.27.2](https://github.com/coingaming/moon_flutter/compare/v0.27.1...v0.27.2) (2023-08-09)
 
 
