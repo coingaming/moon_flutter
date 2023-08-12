@@ -390,7 +390,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
       autofocus: widget.autofocus,
       focusNode: _effectiveFocusNode,
       borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
-      showScaleAnimation: false,
+      showScaleEffect: false,
       builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool isActive = isHovered || isFocused;
         _handleActiveState(isActive);

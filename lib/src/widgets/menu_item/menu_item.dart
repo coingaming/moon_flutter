@@ -224,7 +224,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
         autofocus: widget.autofocus,
         focusNode: _effectiveFocusNode,
         borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
-        showScaleAnimation: false,
+        showScaleEffect: false,
         builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
           final bool isActive = isHovered || isFocused;
 

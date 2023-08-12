@@ -27,6 +27,7 @@ import 'package:moon_design/src/theme/tab_bar/tab_bar_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
 import 'package:moon_design/src/theme/text_area/text_area_theme.dart';
 import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
+import 'package:moon_design/src/theme/text_input_group/text_input_group_theme.dart';
 import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
@@ -121,6 +122,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonTextInput widget theming.
   final MoonTextInputTheme textInputTheme;
 
+  /// Moon Design System MoonTextInput widget theming.
+  final MoonTextInputGroupTheme textInputGroupTheme;
+
   /// Moon Design System MoonToast widget theming.
   final MoonToastTheme toastTheme;
 
@@ -155,6 +159,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonTagTheme? tagTheme,
     MoonTextAreaTheme? textAreaTheme,
     MoonTextInputTheme? textInputTheme,
+    MoonTextInputGroupTheme? textInputGroupTheme,
     MoonToastTheme? toastTheme,
     MoonTooltipTheme? tooltipTheme,
   })  : accordionTheme = accordionTheme ?? MoonAccordionTheme(tokens: tokens),
@@ -183,6 +188,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         tagTheme = tagTheme ?? MoonTagTheme(tokens: tokens),
         textAreaTheme = textAreaTheme ?? MoonTextAreaTheme(tokens: tokens),
         textInputTheme = textInputTheme ?? MoonTextInputTheme(tokens: tokens),
+        textInputGroupTheme = textInputGroupTheme ?? MoonTextInputGroupTheme(tokens: tokens),
         toastTheme = toastTheme ?? MoonToastTheme(tokens: tokens),
         tooltipTheme = tooltipTheme ?? MoonTooltipTheme(tokens: tokens);
 
@@ -215,6 +221,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonTagTheme? tagTheme,
     MoonTextAreaTheme? textAreaTheme,
     MoonTextInputTheme? textInputTheme,
+    MoonTextInputGroupTheme? textInputGroupTheme,
     MoonToastTheme? toastTheme,
     MoonTooltipTheme? tooltipTheme,
   }) {
@@ -246,6 +253,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       tagTheme: tagTheme ?? this.tagTheme,
       textAreaTheme: textAreaTheme ?? this.textAreaTheme,
       textInputTheme: textInputTheme ?? this.textInputTheme,
+      textInputGroupTheme: textInputGroupTheme ?? this.textInputGroupTheme,
       toastTheme: toastTheme ?? this.toastTheme,
       tooltipTheme: tooltipTheme ?? this.tooltipTheme,
     );
@@ -283,6 +291,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       tagTheme: tagTheme.lerp(other.tagTheme, t),
       textAreaTheme: textAreaTheme.lerp(other.textAreaTheme, t),
       textInputTheme: textInputTheme.lerp(other.textInputTheme, t),
+      textInputGroupTheme: textInputGroupTheme.lerp(other.textInputGroupTheme, t),
       toastTheme: toastTheme.lerp(other.toastTheme, t),
       tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
     );
@@ -319,6 +328,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
       ..add(DiagnosticsProperty<MoonTextAreaTheme>("MoonTextAreaTheme", textAreaTheme))
       ..add(DiagnosticsProperty<MoonTextInputTheme>("MoonTextInputTheme", textInputTheme))
+      ..add(DiagnosticsProperty<MoonTextInputGroupTheme>("MoonTextInputGroupTheme", textInputGroupTheme))
       ..add(DiagnosticsProperty<MoonToastTheme>("MoonToastTheme", toastTheme))
       ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme));
   }

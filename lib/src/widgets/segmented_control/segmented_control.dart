@@ -363,7 +363,7 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
       isFocusable: widget.segment.isFocusable,
       showFocusEffect: widget.segment.showFocusEffect,
       focusEffectColor: segmentStyle?.focusEffectColor,
-      showScaleAnimation: false,
+      showScaleEffect: false,
       semanticLabel: widget.segment.semanticLabel,
       borderRadius: effectiveSegmentBorderRadius.squircleBorderRadius(context),
       cursor: widget.isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
