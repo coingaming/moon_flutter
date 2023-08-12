@@ -40,8 +40,8 @@ class MoonBaseControl extends StatefulWidget {
   /// Whether this control should jiggle when the pulse effect is shown.
   final bool showPulseEffectJiggle;
 
-  /// Whether this control should show a scale animation.
-  final bool showScaleAnimation;
+  /// Whether this control should show a scale effect.
+  final bool showScaleEffect;
 
   /// The border radius of the control.
   final BorderRadiusGeometry? borderRadius;
@@ -129,7 +129,7 @@ class MoonBaseControl extends StatefulWidget {
     this.showFocusEffect = true,
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
-    this.showScaleAnimation = true,
+    this.showScaleEffect = true,
     this.borderRadius = BorderRadius.zero,
     this.backgroundColor,
     this.focusEffectColor,
@@ -179,11 +179,12 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   bool get _canAnimatePulse => widget.showPulseEffect && _isEnabled;
 
-  bool get _canAnimateScale => widget.showScaleAnimation && _isEnabled && (_isPressed || _isLongPressed);
+  bool get _canAnimateScale => widget.showScaleEffect && _isEnabled && (_isPressed || _isLongPressed);
 
   MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.basic;
 
-  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+  FocusNode get _effectiveFocusNode =>
+      widget.focusNode ?? (_focusNode ??= FocusNode(skipTraversal: !widget.isFocusable));
 
   void _handleHover(bool hover) {
     if (hover != _isHovered) {
@@ -293,7 +294,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
     _actions = <Type, Action<Intent>>{ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())};
 
-    _focusNode = FocusNode(canRequestFocus: _isEnabled);
+    _focusNode = FocusNode(canRequestFocus: _isEnabled, skipTraversal: !widget.isFocusable);
     _effectiveFocusNode.canRequestFocus = _isEnabled;
 
     if (widget.autofocus) {
@@ -394,11 +395,13 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
         child: AbsorbPointer(
           absorbing: !_isEnabled,
           child: FocusableActionDetector(
-            enabled: _isEnabled && widget.isFocusable,
+            enabled: _isEnabled,
             actions: _actions,
             mouseCursor: _cursor,
             focusNode: _effectiveFocusNode,
-            autofocus: _isEnabled && widget.autofocus,
+            autofocus: _isEnabled && widget.isFocusable && widget.autofocus,
+            descendantsAreFocusable: _isEnabled,
+            descendantsAreTraversable: _isEnabled,
             onFocusChange: _handleFocusChange,
             onShowFocusHighlight: _handleFocus,
             onShowHoverHighlight: _handleHover,
