@@ -20,8 +20,8 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
   /// TextArea hover border color.
   final Color hoverBorderColor;
 
-  /// TextArea hint text color.
-  final Color hintTextColor;
+  /// TextArea helper text color.
+  final Color helperTextColor;
 
   const MoonTextAreaColors({
     required this.backgroundColor,
@@ -29,7 +29,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     required this.activeBorderColor,
     required this.inactiveBorderColor,
     required this.hoverBorderColor,
-    required this.hintTextColor,
+    required this.helperTextColor,
   });
 
   @override
@@ -39,7 +39,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? hoverBorderColor,
-    Color? hintTextColor,
+    Color? helperTextColor,
   }) {
     return MoonTextAreaColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -47,7 +47,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
       hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,
-      hintTextColor: hintTextColor ?? this.hintTextColor,
+      helperTextColor: helperTextColor ?? this.helperTextColor,
     );
   }
 
@@ -61,7 +61,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
       activeBorderColor: colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
       inactiveBorderColor: colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
       hoverBorderColor: colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
-      hintTextColor: colorPremulLerp(hintTextColor, other.hintTextColor, t)!,
+      helperTextColor: colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
     );
   }
 
@@ -75,6 +75,6 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
       ..add(ColorProperty("hoverBorderColor", hoverBorderColor))
-      ..add(ColorProperty("hintTextColor", hintTextColor));
+      ..add(ColorProperty("helperTextColor", helperTextColor));
   }
 }

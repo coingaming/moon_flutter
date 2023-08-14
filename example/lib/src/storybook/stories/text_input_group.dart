@@ -94,6 +94,11 @@ class TextInputGroupStory extends Story {
               initial: true,
             );
 
+            final showHelperKnob = context.knobs.boolean(
+              label: "helper",
+              description: "Show widget in MoonTextInputGroup helper slot.",
+            );
+
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +118,8 @@ class TextInputGroupStory extends Story {
                               errorColor: errorBorderColor,
                               borderRadius:
                                   borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                              errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
+                              helper: showHelperKnob ? const Text("Supporting text") : null,
+                              errorBuilder: (context, errorTexts) => _StoryErrorsWidget(errors: errorTexts),
                               children: [
                                 MoonFormTextInput(
                                   textInputSize: MoonTextInputSize.xl,
@@ -122,17 +128,15 @@ class TextInputGroupStory extends Story {
                                   hasFloatingLabel: true,
                                   textColor: textColor,
                                   hintTextColor: hintTextColor,
-                                  backgroundColor: Colors.transparent,
                                   activeBorderColor: activeBorderColor,
-                                  inactiveBorderColor: Colors.transparent,
                                   errorColor: errorBorderColor,
                                   borderRadius: borderRadiusKnob != null
                                       ? BorderRadius.circular(borderRadiusKnob.toDouble())
                                       : null,
                                   hintText: "Enter your text here (over 10 characters)",
-                                  /* validator: (value) => value?.length != null && value!.length < 10
+                                  validator: (value) => value?.length != null && value!.length < 10
                                       ? "The text should be longer than 10 characters."
-                                      : null, */
+                                      : null,
                                   leading: const MoonIcon(
                                     MoonIcons.search_24,
                                     size: 24,
@@ -157,15 +161,13 @@ class TextInputGroupStory extends Story {
                                   hasFloatingLabel: true,
                                   textColor: textColor,
                                   hintTextColor: hintTextColor,
-                                  backgroundColor: Colors.transparent,
                                   activeBorderColor: activeBorderColor,
-                                  inactiveBorderColor: Colors.transparent,
                                   errorColor: errorBorderColor,
                                   borderRadius: borderRadiusKnob != null
                                       ? BorderRadius.circular(borderRadiusKnob.toDouble())
                                       : null,
                                   hintText: "Enter password (123abc)",
-                                  //validator: (value) => value != "123abc" ? "Wrong password." : null,
+                                  validator: (value) => value != "123abc" ? "Wrong password." : null,
                                   leading: const MoonIcon(
                                     MoonIcons.search_24,
                                     size: 24,
@@ -206,4 +208,22 @@ class TextInputGroupStory extends Story {
             );
           },
         );
+}
+
+class _StoryErrorsWidget extends StatelessWidget {
+  final List<String> errors;
+
+  const _StoryErrorsWidget({required this.errors});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(errors.length * 2 - 1, (int index) {
+        final int derivedIndex = index ~/ 2;
+
+        return index.isEven ? StoryErrorWidget(errorText: errors[derivedIndex]) : const SizedBox(height: 4);
+      }),
+    );
+  }
 }

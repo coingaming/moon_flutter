@@ -202,7 +202,7 @@ class TextInputStory extends Story {
                                       ? BorderRadius.circular(borderRadiusKnob.toDouble())
                                       : null,
                                   hintText: "Enter password (123abc)",
-                                  validator: (value) => value != "123abc" ? "Wrong password." : null,
+                                  //validator: (value) => value != "123abc" ? "Wrong password." : null,
                                   leading: showLeadingKnob
                                       ? const MoonIcon(
                                           MoonIcons.search_24,

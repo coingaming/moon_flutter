@@ -11,43 +11,37 @@ class MoonTextInputGroupColors extends ThemeExtension<MoonTextInputGroupColors> 
   /// TextInputGroup error color.
   final Color errorColor;
 
-  /// TextInputGroup active border color.
-  final Color activeBorderColor;
+  /// TextInputGroup helper text color.
+  final Color helperTextColor;
 
   /// TextInputGroup inactive border color.
-  final Color inactiveBorderColor;
+  final Color borderColor;
 
   /// TextInputGroup hover border color.
   final Color hoverBorderColor;
 
-  /// TextInputGroup hint text color.
-  final Color hintTextColor;
-
   const MoonTextInputGroupColors({
     required this.backgroundColor,
     required this.errorColor,
-    required this.activeBorderColor,
-    required this.inactiveBorderColor,
+    required this.helperTextColor,
+    required this.borderColor,
     required this.hoverBorderColor,
-    required this.hintTextColor,
   });
 
   @override
   MoonTextInputGroupColors copyWith({
     Color? backgroundColor,
     Color? errorColor,
-    Color? activeBorderColor,
-    Color? inactiveBorderColor,
+    Color? helperTextColor,
+    Color? borderColor,
     Color? hoverBorderColor,
-    Color? hintTextColor,
   }) {
     return MoonTextInputGroupColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       errorColor: errorColor ?? this.errorColor,
-      activeBorderColor: activeBorderColor ?? this.activeBorderColor,
-      inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
+      helperTextColor: helperTextColor ?? this.helperTextColor,
+      borderColor: borderColor ?? this.borderColor,
       hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,
-      hintTextColor: hintTextColor ?? this.hintTextColor,
     );
   }
 
@@ -58,10 +52,9 @@ class MoonTextInputGroupColors extends ThemeExtension<MoonTextInputGroupColors> 
     return MoonTextInputGroupColors(
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       errorColor: colorPremulLerp(errorColor, other.errorColor, t)!,
-      activeBorderColor: colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
-      inactiveBorderColor: colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
+      helperTextColor: colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
+      borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
       hoverBorderColor: colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
-      hintTextColor: colorPremulLerp(hintTextColor, other.hintTextColor, t)!,
     );
   }
 
@@ -72,9 +65,8 @@ class MoonTextInputGroupColors extends ThemeExtension<MoonTextInputGroupColors> 
       ..add(DiagnosticsProperty("type", "MoonTextInputGroupColors"))
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("errorColor", errorColor))
-      ..add(ColorProperty("activeBorderColor", activeBorderColor))
-      ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
-      ..add(ColorProperty("hoverBorderColor", hoverBorderColor))
-      ..add(ColorProperty("hintTextColor", hintTextColor));
+      ..add(ColorProperty("helperTextColor", helperTextColor))
+      ..add(ColorProperty("borderColor", borderColor))
+      ..add(ColorProperty("hoverBorderColor", hoverBorderColor));
   }
 }
