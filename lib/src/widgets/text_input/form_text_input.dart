@@ -12,6 +12,8 @@ import 'package:moon_design/src/widgets/text_input/text_input.dart';
 export 'package:flutter/services.dart'
     show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
 
+typedef MoonFormTextInputErrorCallback = void Function(String? errorText);
+
 /// A [FormField] that contains a [MoonTextInput].
 ///
 /// This is a convenience widget that wraps a [MoonTextInput] widget in a
@@ -47,7 +49,6 @@ export 'package:flutter/services.dart'
 /// ![If the user enters valid text, the MoonTextInput appears normally without any warnings to the user](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field.png)
 ///
 /// ![If the user enters invalid text, the error message returned from the validator function is displayed in dark red underneath the input](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field_error.png)
-
 class MoonFormTextInput extends StatefulWidget {
   /// If [maxLength] is set to this value, only the "current input length"
   /// part of the character counter is shown.
@@ -108,6 +109,9 @@ class MoonFormTextInput extends StatefulWidget {
 
   /// The padding around helper widget or error builder.
   final EdgeInsetsGeometry? helperPadding;
+
+  /// Callback for when the form text input has an error.
+  final MoonFormTextInputErrorCallback? onError;
 
   /// The size of the text input.
   final MoonTextInputSize? textInputSize;
@@ -588,6 +592,7 @@ class MoonFormTextInput extends StatefulWidget {
     this.transitionCurve,
     this.padding,
     this.helperPadding,
+    this.onError,
     this.textInputSize,
     this.errorText,
     this.hintText,
@@ -802,6 +807,12 @@ class _MoonTextInputState extends State<MoonFormTextInput> {
           restorationId: widget.restorationId,
           validator: widget.validator,
           builder: (field) {
+            if (field.hasError) {
+              widget.onError?.call(field.errorText);
+            } else {
+              widget.onError?.call(null);
+            }
+
             void onChangedHandler(String value) {
               field.didChange(value);
               widget.onChanged?.call(value);

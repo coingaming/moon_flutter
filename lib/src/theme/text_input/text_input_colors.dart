@@ -23,8 +23,8 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
   /// TextInput hint text color.
   final Color labelTextColor;
 
-  /// TextInput hint text color.
-  final Color supportingTextColor;
+  /// TextInput helper text color.
+  final Color helperTextColor;
 
   const MoonTextInputColors({
     required this.backgroundColor,
@@ -33,7 +33,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
     required this.inactiveBorderColor,
     required this.hoverBorderColor,
     required this.labelTextColor,
-    required this.supportingTextColor,
+    required this.helperTextColor,
   });
 
   @override
@@ -44,7 +44,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
     Color? inactiveBorderColor,
     Color? hoverBorderColor,
     Color? labelTextColor,
-    Color? supportingTextColor,
+    Color? helperTextColor,
   }) {
     return MoonTextInputColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -53,7 +53,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
       hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,
       labelTextColor: labelTextColor ?? this.labelTextColor,
-      supportingTextColor: supportingTextColor ?? this.supportingTextColor,
+      helperTextColor: helperTextColor ?? this.helperTextColor,
     );
   }
 
@@ -68,7 +68,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
       inactiveBorderColor: colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
       hoverBorderColor: colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
       labelTextColor: colorPremulLerp(labelTextColor, other.labelTextColor, t)!,
-      supportingTextColor: colorPremulLerp(supportingTextColor, other.supportingTextColor, t)!,
+      helperTextColor: colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
     );
   }
 
@@ -83,6 +83,6 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
       ..add(ColorProperty("hoverBorderColor", hoverBorderColor))
       ..add(ColorProperty("labelTextColor", labelTextColor))
-      ..add(ColorProperty("supportingTextColor", supportingTextColor));
+      ..add(ColorProperty("helperTextColor", helperTextColor));
   }
 }

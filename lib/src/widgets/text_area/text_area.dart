@@ -299,8 +299,8 @@ class MoonTextArea extends StatelessWidget {
 
     final Color effectiveTextColor = textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
 
-    final Color effectiveHintTextColor =
-        hintTextColor ?? context.moonTheme?.textAreaTheme.colors.hintTextColor ?? MoonColors.light.trunks;
+    final Color effectiveHelperTextColor =
+        hintTextColor ?? context.moonTheme?.textAreaTheme.colors.helperTextColor ?? MoonColors.light.trunks;
 
     final EdgeInsetsGeometry effectiveHelperPadding = helperPadding ??
         context.moonTheme?.textAreaTheme.properties.helperPadding ??
@@ -347,7 +347,7 @@ class MoonTextArea extends StatelessWidget {
       helperPadding: effectiveHelperPadding,
       helperTextStyle: effectiveHelperTextStyle,
       hintText: hintText,
-      hintTextColor: effectiveHintTextColor,
+      hintTextColor: effectiveHelperTextColor,
       hoverBorderColor: effectiveHoverBorderColor,
       inactiveBorderColor: effectiveInactiveBorderColor,
       initialValue: initialValue,

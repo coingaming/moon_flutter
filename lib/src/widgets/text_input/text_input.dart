@@ -1042,7 +1042,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         widget.textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
 
     final Color effectiveHintTextColor =
-        widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.supportingTextColor ?? MoonColors.light.trunks;
+        widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.helperTextColor ?? MoonColors.light.trunks;
 
     final double effectiveGap = widget.gap ?? effectiveMoonTextInputSize.gap;
 
@@ -1380,7 +1380,7 @@ class _MoonTextInputState extends State<MoonTextInput>
       duration: effectiveTransitionDuration,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           child,
           if (widget.helper != null || (widget.errorText != null && widget.errorBuilder != null))
