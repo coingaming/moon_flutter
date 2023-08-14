@@ -360,7 +360,7 @@ class MoonTextArea extends StatelessWidget {
       minLines: minLines,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete,
-      onFieldSubmitted: onSubmitted,
+      onSubmitted: onSubmitted,
       onSaved: onSaved,
       onTap: onTap,
       onTapOutside: onTapOutside,
