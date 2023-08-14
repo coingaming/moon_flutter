@@ -139,43 +139,48 @@ class TextInputStory extends Story {
                       builder: (context) {
                         return Column(
                           children: [
-                            MoonFormTextInput(
-                              controller: _textController,
-                              enabled: enabledKnob,
-                              textInputSize: textInputSizeKnob,
-                              hasFloatingLabel: hasFloatingLabelKnob,
-                              textColor: textColor,
-                              hintTextColor: hintTextColor,
-                              backgroundColor: backgroundColor,
-                              activeBorderColor: activeBorderColor,
-                              inactiveBorderColor: inactiveBorderColor,
-                              errorColor: errorBorderColor,
-                              borderRadius:
-                                  borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                              hintText: "Enter your text here (over 10 characters)",
-                              validator: (value) => value?.length != null && value!.length < 10
-                                  ? "The text should be longer than 10 characters."
-                                  : null,
-                              leading: showLeadingKnob
-                                  ? const MoonIcon(
-                                      MoonIcons.search_24,
-                                      size: 24,
-                                    )
-                                  : null,
-                              trailing: showTrailingKnob
-                                  ? MouseRegion(
-                                      cursor: SystemMouseCursors.click,
-                                      child: GestureDetector(
-                                        child: const MoonIcon(
-                                          MoonIcons.close_small_24,
+                            Builder(
+                              builder: (context) {
+                                return MoonFormTextInput(
+                                  //controller: _textController,
+                                  enabled: enabledKnob,
+                                  textInputSize: textInputSizeKnob,
+                                  hasFloatingLabel: hasFloatingLabelKnob,
+                                  textColor: textColor,
+                                  hintTextColor: hintTextColor,
+                                  backgroundColor: backgroundColor,
+                                  activeBorderColor: activeBorderColor,
+                                  inactiveBorderColor: inactiveBorderColor,
+                                  errorColor: errorBorderColor,
+                                  borderRadius: borderRadiusKnob != null
+                                      ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                                      : null,
+                                  hintText: "Enter your text here (over 10 characters)",
+                                  validator: (value) => value?.length != null && value!.length < 10
+                                      ? "The text should be longer than 10 characters."
+                                      : null,
+                                  leading: showLeadingKnob
+                                      ? const MoonIcon(
+                                          MoonIcons.search_24,
                                           size: 24,
-                                        ),
-                                        onTap: () => _textController.clear(),
-                                      ),
-                                    )
-                                  : null,
-                              helper: showHelperKnob ? const Text("Supporting text") : null,
-                              errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
+                                        )
+                                      : null,
+                                  trailing: showTrailingKnob
+                                      ? MouseRegion(
+                                          cursor: SystemMouseCursors.click,
+                                          child: GestureDetector(
+                                            child: const MoonIcon(
+                                              MoonIcons.close_small_24,
+                                              size: 24,
+                                            ),
+                                            onTap: () => _textController.clear(),
+                                          ),
+                                        )
+                                      : null,
+                                  helper: showHelperKnob ? const Text("Supporting text") : null,
+                                  errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
+                                );
+                              },
                             ),
                             const SizedBox(height: 16),
                             StatefulBuilder(

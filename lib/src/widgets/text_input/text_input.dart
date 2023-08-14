@@ -105,9 +105,6 @@ class MoonTextInput extends StatefulWidget {
   /// The initial value of the input.
   final String? initialValue;
 
-  /// The textStyle to use for the text being edited.
-  final TextStyle? textStyle;
-
   /// The textStyle to use for the error state text.
   final TextStyle? helperTextStyle;
 
@@ -584,7 +581,6 @@ class MoonTextInput extends StatefulWidget {
     this.errorText,
     this.hintText,
     this.initialValue,
-    this.textStyle,
     this.helperTextStyle,
     this.errorBuilder,
     this.leading,
@@ -1069,7 +1065,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         context.moonTheme?.textInputTheme.properties.helperPadding ??
         EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
 
-    final TextStyle effectiveTextStyle = widget.textStyle ?? effectiveMoonTextInputSize.textStyle;
+    final TextStyle effectiveTextStyle = widget.style ?? effectiveMoonTextInputSize.textStyle;
 
     final TextStyle effectiveHelperTextStyle = widget.helperTextStyle ??
         context.moonTheme?.textInputTheme.properties.helperTextStyle ??

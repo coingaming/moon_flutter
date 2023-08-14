@@ -94,38 +94,25 @@ class TextInputGroupStory extends Story {
               initial: true,
             );
 
-            final growableKnob = context.knobs.boolean(
-              label: "Growable",
-              description: "Whether the MoonTextInputGroup has no fixed height and is growable",
-            );
-
-            final showHelperKnob = context.knobs.boolean(
-              label: "helper",
-              description: "Show widget in MoonTextInputGroup helper slot.",
-            );
-
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 64),
                   Form(
-                    child: Builder(
-                      builder: (context) {
+                    child: StatefulBuilder(
+                      builder: (context, setState) {
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             MoonTextInputGroup(
                               enabled: enabledKnob,
-                              height: growableKnob ? null : 200,
                               textColor: textColor,
                               backgroundColor: backgroundColor,
-                              activeBorderColor: activeBorderColor,
                               inactiveBorderColor: inactiveBorderColor,
                               errorColor: errorBorderColor,
                               borderRadius:
                                   borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                              helper: showHelperKnob ? const Text("Supporting text") : null,
                               errorBuilder: (context, errorText) => StoryErrorWidget(errorText: errorText!),
                               children: [
                                 MoonFormTextInput(
@@ -143,9 +130,9 @@ class TextInputGroupStory extends Story {
                                       ? BorderRadius.circular(borderRadiusKnob.toDouble())
                                       : null,
                                   hintText: "Enter your text here (over 10 characters)",
-                                  validator: (value) => value?.length != null && value!.length < 10
+                                  /* validator: (value) => value?.length != null && value!.length < 10
                                       ? "The text should be longer than 10 characters."
-                                      : null,
+                                      : null, */
                                   leading: const MoonIcon(
                                     MoonIcons.search_24,
                                     size: 24,
@@ -161,49 +148,45 @@ class TextInputGroupStory extends Story {
                                     ),
                                   ),
                                 ),
-                                StatefulBuilder(
-                                  builder: (context, setState) {
-                                    return MoonFormTextInput(
-                                      textInputSize: MoonTextInputSize.xl,
-                                      controller: _passwordController,
-                                      enabled: enabledKnob,
-                                      keyboardType: TextInputType.visiblePassword,
-                                      obscureText: _hidePassword,
-                                      hasFloatingLabel: true,
-                                      textColor: textColor,
-                                      hintTextColor: hintTextColor,
-                                      backgroundColor: Colors.transparent,
-                                      activeBorderColor: activeBorderColor,
-                                      inactiveBorderColor: Colors.transparent,
-                                      errorColor: errorBorderColor,
-                                      borderRadius: borderRadiusKnob != null
-                                          ? BorderRadius.circular(borderRadiusKnob.toDouble())
-                                          : null,
-                                      hintText: "Enter password (123abc)",
-                                      validator: (value) => value != "123abc" ? "Wrong password." : null,
-                                      leading: const MoonIcon(
-                                        MoonIcons.search_24,
-                                        size: 24,
-                                      ),
-                                      trailing: MouseRegion(
-                                        cursor: SystemMouseCursors.click,
-                                        child: GestureDetector(
-                                          child: IntrinsicWidth(
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: Text(
-                                                _hidePassword ? "Show" : "Hide",
-                                                style: DefaultTextStyle.of(context)
-                                                    .style
-                                                    .copyWith(decoration: TextDecoration.underline),
-                                              ),
-                                            ),
+                                MoonFormTextInput(
+                                  textInputSize: MoonTextInputSize.xl,
+                                  controller: _passwordController,
+                                  enabled: enabledKnob,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: _hidePassword,
+                                  hasFloatingLabel: true,
+                                  textColor: textColor,
+                                  hintTextColor: hintTextColor,
+                                  backgroundColor: Colors.transparent,
+                                  activeBorderColor: activeBorderColor,
+                                  inactiveBorderColor: Colors.transparent,
+                                  errorColor: errorBorderColor,
+                                  borderRadius: borderRadiusKnob != null
+                                      ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                                      : null,
+                                  hintText: "Enter password (123abc)",
+                                  //validator: (value) => value != "123abc" ? "Wrong password." : null,
+                                  leading: const MoonIcon(
+                                    MoonIcons.search_24,
+                                    size: 24,
+                                  ),
+                                  trailing: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    child: GestureDetector(
+                                      child: IntrinsicWidth(
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            _hidePassword ? "Show" : "Hide",
+                                            style: DefaultTextStyle.of(context)
+                                                .style
+                                                .copyWith(decoration: TextDecoration.underline),
                                           ),
-                                          onTap: () => setState(() => _hidePassword = !_hidePassword),
                                         ),
                                       ),
-                                    );
-                                  },
+                                      onTap: () => setState(() => _hidePassword = !_hidePassword),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
