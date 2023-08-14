@@ -11,48 +11,48 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
   /// TextInput active border color.
   final Color activeBorderColor;
 
-  /// TextInput error color.
-  final Color errorColor;
-
   /// TextInput inactive border color.
   final Color inactiveBorderColor;
+
+  /// TextInput error color.
+  final Color errorColor;
 
   /// TextInput hover border color.
   final Color hoverBorderColor;
 
-  /// TextInput hint text color.
-  final Color labelTextColor;
+  /// TextInput text color.
+  final Color textColor;
 
   /// TextInput helper text color.
   final Color helperTextColor;
 
   const MoonTextInputColors({
     required this.backgroundColor,
-    required this.errorColor,
     required this.activeBorderColor,
     required this.inactiveBorderColor,
+    required this.errorColor,
     required this.hoverBorderColor,
-    required this.labelTextColor,
+    required this.textColor,
     required this.helperTextColor,
   });
 
   @override
   MoonTextInputColors copyWith({
     Color? backgroundColor,
-    Color? errorColor,
     Color? activeBorderColor,
     Color? inactiveBorderColor,
+    Color? errorColor,
     Color? hoverBorderColor,
-    Color? labelTextColor,
+    Color? textColor,
     Color? helperTextColor,
   }) {
     return MoonTextInputColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
-      errorColor: errorColor ?? this.errorColor,
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
+      errorColor: errorColor ?? this.errorColor,
       hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,
-      labelTextColor: labelTextColor ?? this.labelTextColor,
+      textColor: textColor ?? this.textColor,
       helperTextColor: helperTextColor ?? this.helperTextColor,
     );
   }
@@ -63,11 +63,11 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
 
     return MoonTextInputColors(
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
-      errorColor: colorPremulLerp(errorColor, other.errorColor, t)!,
       activeBorderColor: colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
       inactiveBorderColor: colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
+      errorColor: colorPremulLerp(errorColor, other.errorColor, t)!,
       hoverBorderColor: colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
-      labelTextColor: colorPremulLerp(labelTextColor, other.labelTextColor, t)!,
+      textColor: colorPremulLerp(textColor, other.textColor, t)!,
       helperTextColor: colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
     );
   }
@@ -78,11 +78,11 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with Diagn
     properties
       ..add(DiagnosticsProperty("type", "MoonTextInputColors"))
       ..add(ColorProperty("backgroundColor", backgroundColor))
-      ..add(ColorProperty("errorColor", errorColor))
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
+      ..add(ColorProperty("errorColor", errorColor))
       ..add(ColorProperty("hoverBorderColor", hoverBorderColor))
-      ..add(ColorProperty("labelTextColor", labelTextColor))
+      ..add(ColorProperty("textColor", textColor))
       ..add(ColorProperty("helperTextColor", helperTextColor));
   }
 }

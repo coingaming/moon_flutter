@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
-//import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
@@ -42,10 +41,10 @@ class MoonTextInputGroup extends StatefulWidget {
   /// The border color of the inactive text input group.
   final Color? inactiveBorderColor;
 
-  /// The border color of the error text input group.
+  /// The color of the error state of text input group.
   final Color? errorColor;
 
-  /// The text color of the hint in input.
+  /// The text color of the hint in text input group.
   final Color? hintTextColor;
 
   /// The border color of the hovered text input group.
@@ -69,7 +68,7 @@ class MoonTextInputGroup extends StatefulWidget {
   /// Custom decoration for the text input group.
   final Decoration? decoration;
 
-  /// The semantic label for the widget.
+  /// The semantic label for the text input group widget.
   final String? semanticLabel;
 
   /// The text style to use for the helper or error state text.
@@ -81,7 +80,7 @@ class MoonTextInputGroup extends StatefulWidget {
   /// Builder for the error widget.
   final MoonTextInputGroupErrorBuilder? errorBuilder;
 
-  /// The widget in the helper slot of the text area.
+  /// The widget in the helper slot of the text input group.
   final Widget? helper;
 
   /// MDS TextInputGroup widget
@@ -122,6 +121,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
     } else {
       _validatorErrors.clear();
     }
+
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!mounted) return;
 
@@ -283,7 +283,6 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
           semanticLabel: widget.semanticLabel,
           isFocusable: false,
           showFocusEffect: false,
-          showScaleEffect: false,
           onTap: widget.enabled ? () {} : null,
           builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
             return Container(

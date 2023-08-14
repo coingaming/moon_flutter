@@ -133,7 +133,7 @@ class MoonBaseControl extends StatefulWidget {
     this.showFocusEffect = true,
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
-    this.showScaleEffect = true,
+    this.showScaleEffect = false,
     this.borderRadius = BorderRadius.zero,
     this.backgroundColor,
     this.focusEffectColor,

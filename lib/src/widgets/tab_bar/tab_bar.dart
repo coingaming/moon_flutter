@@ -397,7 +397,6 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
       isFocusable: widget.tab.isFocusable,
       showFocusEffect: widget.tab.showFocusEffect,
       focusEffectColor: tabStyle?.focusEffectColor,
-      showScaleEffect: false,
       cursor: widget.isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
       builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
         final bool isActive = isEnabled && (widget.isSelected || isHovered || isPressed);
@@ -586,7 +585,6 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
       isFocusable: widget.tab.isFocusable,
       showFocusEffect: widget.tab.showFocusEffect,
       focusEffectColor: tabStyle?.focusEffectColor,
-      showScaleEffect: false,
       borderRadius: effectiveTabBorderRadius.squircleBorderRadius(context),
       cursor: widget.isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
       builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {

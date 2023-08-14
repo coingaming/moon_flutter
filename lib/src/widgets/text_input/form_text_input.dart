@@ -50,8 +50,7 @@ typedef MoonFormTextInputErrorCallback = void Function(String? errorText);
 ///
 /// ![If the user enters invalid text, the error message returned from the validator function is displayed in dark red underneath the input](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field_error.png)
 class MoonFormTextInput extends StatefulWidget {
-  /// If [maxLength] is set to this value, only the "current input length"
-  /// part of the character counter is shown.
+  /// If [maxLength] is set to this value, only the "current input length" part of the character counter is shown.
   static const int noMaxLength = -1;
 
   static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
@@ -62,40 +61,40 @@ class MoonFormTextInput extends StatefulWidget {
 
   // MDS props
 
-  /// Whether the text input has floating label.
+  /// Whether the form text input has floating label.
   final bool hasFloatingLabel;
 
-  /// The border radius of the input.
+  /// The border radius of the form text input.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The background color of the input.
+  /// The background color of the form text input.
   final Color? backgroundColor;
 
-  /// The border color of the active or focused input.
+  /// The border color of the active or focused form text input.
   final Color? activeBorderColor;
 
-  /// The border color of the inactive input.
+  /// The border color of the inactive form text input.
   final Color? inactiveBorderColor;
 
-  /// The color used for input error state.
+  /// The color used for form text input error state.
   final Color? errorColor;
 
-  /// The border color of the hovered input.
+  /// The border color of the hovered form text input.
   final Color? hoverBorderColor;
 
-  /// The text color of the input.
+  /// The text color of the form text input.
   final Color? textColor;
 
-  /// The text color of the hint in input.
+  /// The text color of the hint in form text input.
   final Color? hintTextColor;
 
-  /// Custom decoration for the text input.
+  /// Custom decoration for the form text input.
   final Decoration? decoration;
 
-  /// The gap between the leading or trailing and the label widgets.
+  /// The gap between the leading, trailing widgets and the form text input area.
   final double? gap;
 
-  /// The height of the input (this does not include the space taken by [MoonFormTextInput.errorBuilder]).
+  /// The height of the form text input (this does not include the space taken by [MoonFormTextInput.errorBuilder]).
   final double? height;
 
   /// The transition duration for disable animation.
@@ -104,7 +103,7 @@ class MoonFormTextInput extends StatefulWidget {
   /// The transition curve for disable animation.
   final Curve? transitionCurve;
 
-  /// The padding of the text input.
+  /// The padding of the form text input.
   final EdgeInsetsGeometry? padding;
 
   /// The padding around helper widget or error builder.
@@ -113,35 +112,34 @@ class MoonFormTextInput extends StatefulWidget {
   /// Callback for when the form text input has an error.
   final MoonFormTextInputErrorCallback? onError;
 
-  /// The size of the text input.
+  /// The size of the form text input.
   final MoonTextInputSize? textInputSize;
 
-  /// The text for the error
+  /// The text for the error.
   final String? errorText;
 
   /// The text for the hint.
   final String? hintText;
 
-  /// The initial value of the input.
+  /// The initial value of the form text input.
   final String? initialValue;
 
-  /// The textStyle to use for the error state text.
+  /// The text style to use for the error state text.
   final TextStyle? helperTextStyle;
 
   /// Builder for the error widget.
   final MoonTextInputErrorBuilder? errorBuilder;
 
-  /// The widget in the leading slot of the text input.
+  /// The widget in the leading slot of the form text input.
   final Widget? leading;
 
-  /// The widget in the trailing slot of the text input.
+  /// The widget in the trailing slot of the form text input.
   final Widget? trailing;
 
-  /// The widget in the helper slot of the text area.
+  /// The widget in the helper slot of the form text input.
   final Widget? helper;
 
   ///////
-
   // Flutter props
 
   /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.intro}
@@ -729,15 +727,12 @@ class MoonFormTextInput extends StatefulWidget {
     properties.add(IntProperty('minLines', minLines, defaultValue: null));
     properties.add(DiagnosticsProperty<bool>('expands', expands, defaultValue: false));
     properties.add(IntProperty('maxLength', maxLength, defaultValue: null));
-    properties
-        .add(EnumProperty<MaxLengthEnforcement>('maxLengthEnforcement', maxLengthEnforcement, defaultValue: null));
+    properties.add(
+      EnumProperty<MaxLengthEnforcement>('maxLengthEnforcement', maxLengthEnforcement, defaultValue: null),
+    );
     properties.add(EnumProperty<TextInputAction>('textInputAction', textInputAction, defaultValue: null));
     properties.add(
-      EnumProperty<TextCapitalization>(
-        'textCapitalization',
-        textCapitalization,
-        defaultValue: TextCapitalization.none,
-      ),
+      EnumProperty<TextCapitalization>('textCapitalization', textCapitalization, defaultValue: TextCapitalization.none),
     );
     properties.add(EnumProperty<TextAlign>('textAlign', textAlign, defaultValue: TextAlign.start));
     properties.add(DiagnosticsProperty<TextAlignVertical>('textAlignVertical', textAlignVertical, defaultValue: null));
@@ -749,17 +744,14 @@ class MoonFormTextInput extends StatefulWidget {
     properties.add(ColorProperty('cursorColor', cursorColor, defaultValue: null));
     properties.add(DiagnosticsProperty<Brightness>('keyboardAppearance', keyboardAppearance, defaultValue: null));
     properties.add(
-      DiagnosticsProperty<EdgeInsetsGeometry>(
-        'scrollPadding',
-        scrollPadding,
-        defaultValue: const EdgeInsets.all(20.0),
-      ),
+      DiagnosticsProperty<EdgeInsetsGeometry>('scrollPadding', scrollPadding, defaultValue: const EdgeInsets.all(20.0)),
     );
     properties.add(
       FlagProperty('selectionEnabled', value: selectionEnabled, defaultValue: true, ifFalse: 'selection disabled'),
     );
-    properties
-        .add(DiagnosticsProperty<TextSelectionControls>('selectionControls', selectionControls, defaultValue: null));
+    properties.add(
+      DiagnosticsProperty<TextSelectionControls>('selectionControls', selectionControls, defaultValue: null),
+    );
     properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController, defaultValue: null));
     properties.add(DiagnosticsProperty<ScrollPhysics>('scrollPhysics', scrollPhysics, defaultValue: null));
     properties.add(DiagnosticsProperty<Clip>('clipBehavior', clipBehavior, defaultValue: Clip.hardEdge));
@@ -806,7 +798,7 @@ class _MoonTextInputState extends State<MoonFormTextInput> {
           onSaved: widget.onSaved,
           restorationId: widget.restorationId,
           validator: widget.validator,
-          builder: (field) {
+          builder: (FormFieldState<String> field) {
             if (field.hasError) {
               widget.onError?.call(field.errorText);
             } else {

@@ -57,7 +57,7 @@ class StorybookPage extends StatelessWidget {
           initialStory: "Accordion",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
-          wrapperBuilder: (context, child) => MaterialApp(
+          wrapperBuilder: (BuildContext context, Widget? child) => MaterialApp(
             title: "Moon Design for Flutter",
             theme:
                 ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.light)]),
@@ -78,9 +78,13 @@ class StorybookPage extends StatelessWidget {
                     extendBody: true,
                     extendBodyBehindAppBar: true,
                     resizeToAvoidBottomInset: false,
-                    body: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: child,
+                    body: SafeArea(
+                      top: false,
+                      bottom: false,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: child,
+                      ),
                     ),
                   ),
                 ),

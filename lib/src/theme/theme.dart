@@ -126,7 +126,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonTextInput widget theming.
   final MoonTextInputTheme textInputTheme;
 
-  /// Moon Design System MoonTextInput widget theming.
+  /// Moon Design System MoonTextInputGroup widget theming.
   final MoonTextInputGroupTheme textInputGroupTheme;
 
   /// Moon Design System MoonToast widget theming.

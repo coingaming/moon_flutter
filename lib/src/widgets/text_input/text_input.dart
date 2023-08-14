@@ -15,6 +15,7 @@ import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
+import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
@@ -48,37 +49,37 @@ class MoonTextInput extends StatefulWidget {
   /// Whether the text input has floating label.
   final bool hasFloatingLabel;
 
-  /// The border radius of the input.
+  /// The border radius of the text input.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The background color of the input.
+  /// The background color of the text input.
   final Color? backgroundColor;
 
-  /// The border color of the active or focused input.
+  /// The border color of the active or focused text input.
   final Color? activeBorderColor;
 
-  /// The border color of the inactive input.
+  /// The border color of the inactive text input.
   final Color? inactiveBorderColor;
 
-  /// The color used for input error state.
+  /// The color used for text input error state.
   final Color? errorColor;
 
-  /// The border color of the hovered input.
+  /// The border color of the hovered text input.
   final Color? hoverBorderColor;
 
-  /// The text color of the input.
+  /// The text color of the text input.
   final Color? textColor;
 
-  /// The text color of the hint in input.
+  /// The text color of the hint in text input.
   final Color? hintTextColor;
 
   /// Custom decoration for the text input.
   final Decoration? decoration;
 
-  /// The gap between the leading or trailing and the label widgets.
+  /// The gap between the leading, trailing widgets and the text input area.
   final double? gap;
 
-  /// The height of the input (this does not include the space taken by [MoonTextInput.errorBuilder]).
+  /// The height of the text input (this does not include the space taken by [MoonTextInput.errorBuilder]).
   final double? height;
 
   /// The transition duration for disable animation.
@@ -96,16 +97,16 @@ class MoonTextInput extends StatefulWidget {
   /// The size of the text input.
   final MoonTextInputSize? textInputSize;
 
-  /// The text for the error
+  /// The text for the error.
   final String? errorText;
 
   /// The text for the hint.
   final String? hintText;
 
-  /// The initial value of the input.
+  /// The initial value of the text input.
   final String? initialValue;
 
-  /// The textStyle to use for the error state text.
+  /// The text style to use for the error state text.
   final TextStyle? helperTextStyle;
 
   /// Builder for the error widget.
@@ -117,11 +118,10 @@ class MoonTextInput extends StatefulWidget {
   /// The widget in the trailing slot of the text input.
   final Widget? trailing;
 
-  /// The widget in the helper slot of the text area.
+  /// The widget in the helper slot of the text input.
   final Widget? helper;
 
   ///////
-
   // Flutter props
 
   /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.intro}
@@ -710,15 +710,12 @@ class MoonTextInput extends StatefulWidget {
     properties.add(IntProperty('minLines', minLines, defaultValue: null));
     properties.add(DiagnosticsProperty<bool>('expands', expands, defaultValue: false));
     properties.add(IntProperty('maxLength', maxLength, defaultValue: null));
-    properties
-        .add(EnumProperty<MaxLengthEnforcement>('maxLengthEnforcement', maxLengthEnforcement, defaultValue: null));
+    properties.add(
+      EnumProperty<MaxLengthEnforcement>('maxLengthEnforcement', maxLengthEnforcement, defaultValue: null),
+    );
     properties.add(EnumProperty<TextInputAction>('textInputAction', textInputAction, defaultValue: null));
     properties.add(
-      EnumProperty<TextCapitalization>(
-        'textCapitalization',
-        textCapitalization,
-        defaultValue: TextCapitalization.none,
-      ),
+      EnumProperty<TextCapitalization>('textCapitalization', textCapitalization, defaultValue: TextCapitalization.none),
     );
     properties.add(EnumProperty<TextAlign>('textAlign', textAlign, defaultValue: TextAlign.start));
     properties.add(DiagnosticsProperty<TextAlignVertical>('textAlignVertical', textAlignVertical, defaultValue: null));
@@ -730,17 +727,14 @@ class MoonTextInput extends StatefulWidget {
     properties.add(ColorProperty('cursorColor', cursorColor, defaultValue: null));
     properties.add(DiagnosticsProperty<Brightness>('keyboardAppearance', keyboardAppearance, defaultValue: null));
     properties.add(
-      DiagnosticsProperty<EdgeInsetsGeometry>(
-        'scrollPadding',
-        scrollPadding,
-        defaultValue: const EdgeInsets.all(20.0),
-      ),
+      DiagnosticsProperty<EdgeInsetsGeometry>('scrollPadding', scrollPadding, defaultValue: const EdgeInsets.all(20.0)),
     );
     properties.add(
       FlagProperty('selectionEnabled', value: selectionEnabled, defaultValue: true, ifFalse: 'selection disabled'),
     );
-    properties
-        .add(DiagnosticsProperty<TextSelectionControls>('selectionControls', selectionControls, defaultValue: null));
+    properties.add(
+      DiagnosticsProperty<TextSelectionControls>('selectionControls', selectionControls, defaultValue: null),
+    );
     properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController, defaultValue: null));
     properties.add(DiagnosticsProperty<ScrollPhysics>('scrollPhysics', scrollPhysics, defaultValue: null));
     properties.add(DiagnosticsProperty<Clip>('clipBehavior', clipBehavior, defaultValue: Clip.hardEdge));
@@ -773,6 +767,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
   @override
   late bool forcePressEnabled;
+
   late _MoonTextInputSelectionGestureDetectorBuilder _selectionGestureDetectorBuilder;
 
   RestorableTextEditingController? _controller;
@@ -781,10 +776,15 @@ class _MoonTextInputState extends State<MoonTextInput>
   bool _showSelectionHandles = false;
 
   bool get _isEnabled => widget.enabled;
+
   bool get _hasError => _hasIntrinsicError;
+
   int get _currentLength => _effectiveController.value.text.characters.length;
+
   EditableTextState? get _editableText => editableTextKey.currentState;
+
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+
   TextEditingController get _effectiveController => widget.controller ?? _controller!.value;
 
   bool get _canRequestFocus {
@@ -841,10 +841,10 @@ class _MoonTextInputState extends State<MoonTextInput>
 
   void _createLocalController([TextEditingValue? value]) {
     assert(_controller == null);
+
     _controller = value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
-    if (!restorePending) {
-      _registerController();
-    }
+
+    if (!restorePending) _registerController();
   }
 
   void _handleFocusChanged() {
@@ -857,9 +857,7 @@ class _MoonTextInputState extends State<MoonTextInput>
     final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
 
     if (willShowSelectionHandles != _showSelectionHandles) {
-      setState(() {
-        _showSelectionHandles = willShowSelectionHandles;
-      });
+      setState(() => _showSelectionHandles = willShowSelectionHandles);
     }
 
     switch (Theme.of(context).platform) {
@@ -886,9 +884,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
   void _handleHover(bool hovering) {
     if (hovering != _isHovering) {
-      setState(() {
-        _isHovering = hovering;
-      });
+      setState(() => _isHovering = hovering);
     }
   }
 
@@ -901,6 +897,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
   void _registerController() {
     assert(_controller != null);
+
     registerForRestoration(_controller!, 'controller');
   }
 
@@ -985,9 +982,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    if (_controller != null) {
-      _registerController();
-    }
+    if (_controller != null) _registerController();
   }
 
   @override
@@ -1039,7 +1034,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         widget.hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
 
     final Color effectiveTextColor =
-        widget.textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
+        widget.textColor ?? context.moonTheme?.textInputTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final Color effectiveHintTextColor =
         widget.hintTextColor ?? context.moonTheme?.textInputTheme.colors.helperTextColor ?? MoonColors.light.trunks;
@@ -1069,7 +1064,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final TextStyle effectiveHelperTextStyle = widget.helperTextStyle ??
         context.moonTheme?.textInputTheme.properties.helperTextStyle ??
-        const TextStyle(fontSize: 12);
+        MoonTypography.typography.body.text12;
 
     final MoonSquircleBorder defaultBorder = MoonSquircleBorder(
       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
@@ -1239,7 +1234,8 @@ class _MoonTextInputState extends State<MoonTextInput>
           magnifierConfiguration: widget.magnifierConfiguration ?? TextMagnifier.adaptiveMagnifierConfiguration,
           maxLines: widget.maxLines,
           minLines: widget.minLines,
-          mouseCursor: MouseCursor.defer, // MoonTextInput will handle the cursor
+          mouseCursor: MouseCursor.defer,
+          // MoonTextInput will handle the cursor
           obscureText: widget.obscureText,
           obscuringCharacter: widget.obscuringCharacter,
           onAppPrivateCommand: widget.onAppPrivateCommand,
