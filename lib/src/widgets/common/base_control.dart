@@ -22,6 +22,9 @@ class MoonBaseControl extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
+  /// Whether this control should absorb drag events.
+  final bool absorbDragEvents;
+
   /// Whether this control should be focusable.
   final bool isFocusable;
 
@@ -123,6 +126,7 @@ class MoonBaseControl extends StatefulWidget {
   const MoonBaseControl({
     super.key,
     this.autofocus = false,
+    this.absorbDragEvents = false,
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
     this.semanticTypeIsButton = false,
@@ -415,10 +419,10 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
               onLongPressStart: _handleLongPressStart,
               onLongPressUp: _handleLongPressUp,
               onTapCancel: _handleTapCancel,
-              onHorizontalDragStart: _handleHorizontalDragStart,
-              onHorizontalDragEnd: _handleHorizontalDragEnd,
-              onVerticalDragStart: _handleVerticalDragStart,
-              onVerticalDragEnd: _handleVerticalDragEnd,
+              onHorizontalDragStart: widget.absorbDragEvents ? _handleHorizontalDragStart : null,
+              onHorizontalDragEnd: widget.absorbDragEvents ? _handleHorizontalDragEnd : null,
+              onVerticalDragStart: widget.absorbDragEvents ? _handleVerticalDragStart : null,
+              onVerticalDragEnd: widget.absorbDragEvents ? _handleVerticalDragEnd : null,
               child: TouchTargetPadding(
                 minSize: widget.ensureMinimalTouchTargetSize
                     ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)
