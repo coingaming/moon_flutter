@@ -70,6 +70,8 @@ export 'package:moon_design/src/widgets/common/icons/icons.dart';
 export 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
 export 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
 export 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
+export 'package:moon_design/src/widgets/data_table/data_table.dart';
+export 'package:moon_design/src/widgets/data_table/linked_scroll_controllers.dart';
 export 'package:moon_design/src/widgets/dot_indicator/dot_indicator.dart';
 export 'package:moon_design/src/widgets/drawer/drawer.dart';
 export 'package:moon_design/src/widgets/loaders/circular_loader.dart';

@@ -10,6 +10,7 @@ import 'package:example/src/storybook/stories/checkbox.dart';
 import 'package:example/src/storybook/stories/chip.dart';
 import 'package:example/src/storybook/stories/circular_loader.dart';
 import 'package:example/src/storybook/stories/circular_progress.dart';
+import 'package:example/src/storybook/stories/data_table.dart';
 import 'package:example/src/storybook/stories/dot_indicator.dart';
 import 'package:example/src/storybook/stories/drawer.dart';
 import 'package:example/src/storybook/stories/icons.dart';
@@ -53,7 +54,8 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Accordion",
+          // initialStory: "Accordion",
+          initialStory: "DataTable",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (BuildContext context, Widget? child) => MaterialApp(
@@ -102,6 +104,7 @@ class StorybookPage extends StatelessWidget {
             ChipStory(),
             CircularLoaderStory(),
             CircularProgressStory(),
+            DataTableStory(),
             DotIndicatorStory(),
             DrawerStory(),
             IconsStory(),
