@@ -29,7 +29,7 @@ final lightTokens = MoonTokens.light.copyWith(
     textPrimary: Colors.amber,
   ),
   typography: MoonTypography.typography.copyWith(
-    heading: MoonTypography.typography.heading.apply(fontFamily: "KumbhSans"),
+    heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
   ),
 );
 
