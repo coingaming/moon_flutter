@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.0](https://github.com/coingaming/moon_flutter/compare/v0.28.1...v0.29.0) (2023-09-06)
+
+
+### Features
+
+* [MDS-617] Refactor Input to align with Flutter 3.10.x changes and create InputGroup component ([#239](https://github.com/coingaming/moon_flutter/issues/239)) ([32ec1c7](https://github.com/coingaming/moon_flutter/commit/32ec1c79588239167ac559ef8aceab445c6b33d2))
+
 ## [0.28.1](https://github.com/coingaming/moon_flutter/compare/v0.28.0...v0.28.1) (2023-08-11)
 
 
