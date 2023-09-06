@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.1](https://github.com/coingaming/moon_flutter/compare/v0.29.0...v0.29.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [MDS-664] Update icon font and MDS text font ([#246](https://github.com/coingaming/moon_flutter/issues/246)) ([95aed8e](https://github.com/coingaming/moon_flutter/commit/95aed8e34e13db01e797d57d617c94a1181bdf9e))
+
 ## [0.29.0](https://github.com/coingaming/moon_flutter/compare/v0.28.1...v0.29.0) (2023-09-06)
 
 
