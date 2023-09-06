@@ -59,10 +59,32 @@ class StorybookPage extends StatelessWidget {
           brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",
-            theme:
-                ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.light)]),
-            darkTheme:
-                ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.dark)]),
+            theme: ThemeData.light().copyWith(
+              extensions: <ThemeExtension<dynamic>>[
+                MoonTheme(
+                  tokens: MoonTokens.light.copyWith(
+                    typography: MoonTypography.typography.copyWith(
+                      heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
+                      body: MoonTypography.typography.body.apply(fontFamily: "DMSans"),
+                      caption: MoonTypography.typography.caption.apply(fontFamily: "DMSans"),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            darkTheme: ThemeData.dark().copyWith(
+              extensions: <ThemeExtension<dynamic>>[
+                MoonTheme(
+                  tokens: MoonTokens.dark.copyWith(
+                    typography: MoonTypography.typography.copyWith(
+                      heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
+                      body: MoonTypography.typography.body.apply(fontFamily: "DMSans"),
+                      caption: MoonTypography.typography.caption.apply(fontFamily: "DMSans"),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             home: Directionality(
               textDirection: Directionality.of(context),
               child: Focus(

@@ -24,6 +24,10 @@ dev_dependencies:
       path: packages/storybook_flutter
 flutter:
   uses-material-design: true
+  fonts:
+    - family: DMSans
+      fonts:
+        - asset: assets/DMSans.ttf
   assets:
     - assets/images/
     - assets/svg/
