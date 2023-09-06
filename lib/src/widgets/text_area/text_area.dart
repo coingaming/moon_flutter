@@ -32,9 +32,6 @@ class MoonTextArea extends StatelessWidget {
   /// {@macro flutter.services.TextInputConfiguration.enableSuggestions}
   final bool enableSuggestions;
 
-  /// Whether the focus effect is enabled.
-  final bool showFocusEffect;
-
   /// {@macro flutter.widgets.editableText.readOnly}
   final bool readOnly;
 
@@ -68,8 +65,8 @@ class MoonTextArea extends StatelessWidget {
   /// The border color of the inactive text area.
   final Color? inactiveBorderColor;
 
-  /// The border color of the error text area.
-  final Color? errorBorderColor;
+  /// The error color of the text area.
+  final Color? errorColor;
 
   /// The border color of the hovered text area.
   final Color? hoverBorderColor;
@@ -229,7 +226,6 @@ class MoonTextArea extends StatelessWidget {
     this.enableIMEPersonalizedLearning = true,
     this.enableInteractiveSelection,
     this.enableSuggestions = true,
-    this.showFocusEffect = true,
     this.readOnly = false,
     this.scribbleEnabled = true,
     this.showCursor,
@@ -239,7 +235,7 @@ class MoonTextArea extends StatelessWidget {
     this.backgroundColor,
     this.activeBorderColor,
     this.inactiveBorderColor,
-    this.errorBorderColor,
+    this.errorColor,
     this.hoverBorderColor,
     this.textColor,
     this.hintTextColor,
@@ -295,19 +291,20 @@ class MoonTextArea extends StatelessWidget {
     final Color effectiveInactiveBorderColor =
         inactiveBorderColor ?? context.moonTheme?.textAreaTheme.colors.inactiveBorderColor ?? MoonColors.light.beerus;
 
-    final Color effectiveErrorBorderColor =
-        errorBorderColor ?? context.moonTheme?.textAreaTheme.colors.errorBorderColor ?? MoonColors.light.chiChi100;
+    final Color effectiveErrorColor =
+        errorColor ?? context.moonTheme?.textAreaTheme.colors.errorColor ?? MoonColors.light.chiChi100;
 
     final Color effectiveHoverBorderColor =
-        hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
+        hoverBorderColor ?? context.moonTheme?.textAreaTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
 
-    final Color effectiveTextColor = textColor ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        textColor ?? context.moonTheme?.textAreaTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveHintTextColor =
-        hintTextColor ?? context.moonTheme?.textAreaTheme.colors.hintTextColor ?? MoonColors.light.trunks;
+    final Color effectiveHelperTextColor =
+        hintTextColor ?? context.moonTheme?.textAreaTheme.colors.helperTextColor ?? MoonColors.light.trunks;
 
     final EdgeInsetsGeometry effectiveHelperPadding = helperPadding ??
-        context.moonTheme?.textInputTheme.properties.helperPadding ??
+        context.moonTheme?.textAreaTheme.properties.helperPadding ??
         EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
 
     final EdgeInsetsGeometry effectiveTextPadding =
@@ -342,17 +339,16 @@ class MoonTextArea extends StatelessWidget {
       enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
       enableInteractiveSelection: enableInteractiveSelection,
       enableSuggestions: enableSuggestions,
-      errorBorderColor: effectiveErrorBorderColor,
+      errorColor: effectiveErrorColor,
       errorBuilder: errorBuilder,
       expands: height != null,
       focusNode: focusNode,
-      showFocusEffect: showFocusEffect,
       height: height,
       helper: helper,
       helperPadding: effectiveHelperPadding,
       helperTextStyle: effectiveHelperTextStyle,
       hintText: hintText,
-      hintTextColor: effectiveHintTextColor,
+      hintTextColor: effectiveHelperTextColor,
       hoverBorderColor: effectiveHoverBorderColor,
       inactiveBorderColor: effectiveInactiveBorderColor,
       initialValue: initialValue,
@@ -365,7 +361,7 @@ class MoonTextArea extends StatelessWidget {
       minLines: minLines,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete,
-      onFieldSubmitted: onSubmitted,
+      onSubmitted: onSubmitted,
       onSaved: onSaved,
       onTap: onTap,
       onTapOutside: onTapOutside,

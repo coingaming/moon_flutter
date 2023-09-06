@@ -25,6 +25,7 @@ import 'package:example/src/storybook/stories/tab_bar.dart';
 import 'package:example/src/storybook/stories/tag.dart';
 import 'package:example/src/storybook/stories/text_area.dart';
 import 'package:example/src/storybook/stories/text_input.dart';
+import 'package:example/src/storybook/stories/text_input_group.dart';
 import 'package:example/src/storybook/stories/toast.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
 import 'package:flutter/foundation.dart';
@@ -56,7 +57,7 @@ class StorybookPage extends StatelessWidget {
           initialStory: "Accordion",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
-          wrapperBuilder: (BuildContext context, Widget? child) => MaterialApp(
+          wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",
             theme:
                 ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.light)]),
@@ -77,13 +78,9 @@ class StorybookPage extends StatelessWidget {
                     extendBody: true,
                     extendBodyBehindAppBar: true,
                     resizeToAvoidBottomInset: false,
-                    body: SafeArea(
-                      top: false,
-                      bottom: false,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: child,
-                      ),
+                    body: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: child,
                     ),
                   ),
                 ),
@@ -117,6 +114,7 @@ class StorybookPage extends StatelessWidget {
             TagStory(),
             TextAreaStory(),
             TextInputStory(),
+            TextInputGroupStory(),
             ToastStory(),
             TooltipStory(),
           ],

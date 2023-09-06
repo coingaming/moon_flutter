@@ -64,16 +64,16 @@ class TextAreaStory extends Story {
 
             final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
 
-            final errorBorderColorKnob = context.knobs.nullable.options(
-              label: "errorBorderColor",
-              description: "MoonColors variants for MoonTextArea error border.",
+            final errorColorKnob = context.knobs.nullable.options(
+              label: "errorColor",
+              description: "MoonColors variants for MoonTextArea error.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final errorBorderColor = colorTable(context)[errorBorderColorKnob ?? 40];
+            final errorColor = colorTable(context)[errorColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -94,12 +94,6 @@ class TextAreaStory extends Story {
               description: "Whether the MoonTextArea has no fixed height and is growable",
             );
 
-            final showFocusEffectKnob = context.knobs.boolean(
-              label: "showFocusEffect",
-              description: "Whether to display focus effect around MoonTextInput.",
-              initial: true,
-            );
-
             final showHelperKnob = context.knobs.boolean(
               label: "helper",
               description: "Show widget in MoonTextArea helper slot.",
@@ -116,14 +110,13 @@ class TextAreaStory extends Story {
                         children: [
                           MoonTextArea(
                             enabled: enabledKnob,
-                            showFocusEffect: showFocusEffectKnob,
                             height: growableKnob ? null : 200,
                             textColor: textColor,
                             hintTextColor: hintTextColor,
                             backgroundColor: backgroundColor,
                             activeBorderColor: activeBorderColor,
                             inactiveBorderColor: inactiveBorderColor,
-                            errorBorderColor: errorBorderColor,
+                            errorColor: errorColor,
                             borderRadius:
                                 borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                             hintText: "Enter your text here...",

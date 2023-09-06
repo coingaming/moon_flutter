@@ -308,7 +308,6 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
       isFocusable: widget.isFocusable,
       ensureMinimalTouchTargetSize: widget.ensureMinimalTouchTargetSize,
       showFocusEffect: widget.showFocusEffect,
-      showScaleAnimation: false,
       borderRadius: effectiveBorderRadius,
       backgroundColor: widget.backgroundColor,
       focusEffectColor: widget.focusEffectColor,

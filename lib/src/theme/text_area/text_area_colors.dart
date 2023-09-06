@@ -14,22 +14,26 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
   /// TextArea inactive border color.
   final Color inactiveBorderColor;
 
-  /// TextArea error border color.
-  final Color errorBorderColor;
+  /// TextArea error color.
+  final Color errorColor;
 
-  /// TextArea error border color.
+  /// TextArea hover border color.
   final Color hoverBorderColor;
 
-  /// TextArea hint text color.
-  final Color hintTextColor;
+  /// TextArea text color.
+  final Color textColor;
+
+  /// TextArea helper text color.
+  final Color helperTextColor;
 
   const MoonTextAreaColors({
     required this.backgroundColor,
     required this.activeBorderColor,
     required this.inactiveBorderColor,
-    required this.errorBorderColor,
+    required this.errorColor,
     required this.hoverBorderColor,
-    required this.hintTextColor,
+    required this.textColor,
+    required this.helperTextColor,
   });
 
   @override
@@ -37,17 +41,19 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     Color? backgroundColor,
     Color? activeBorderColor,
     Color? inactiveBorderColor,
-    Color? errorBorderColor,
+    Color? errorColor,
     Color? hoverBorderColor,
-    Color? hintTextColor,
+    Color? textColor,
+    Color? helperTextColor,
   }) {
     return MoonTextAreaColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
-      errorBorderColor: errorBorderColor ?? this.errorBorderColor,
+      errorColor: errorColor ?? this.errorColor,
       hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,
-      hintTextColor: hintTextColor ?? this.hintTextColor,
+      textColor: textColor ?? this.textColor,
+      helperTextColor: helperTextColor ?? this.helperTextColor,
     );
   }
 
@@ -59,9 +65,10 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       activeBorderColor: colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
       inactiveBorderColor: colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
-      errorBorderColor: colorPremulLerp(errorBorderColor, other.errorBorderColor, t)!,
+      errorColor: colorPremulLerp(errorColor, other.errorColor, t)!,
       hoverBorderColor: colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
-      hintTextColor: colorPremulLerp(hintTextColor, other.hintTextColor, t)!,
+      textColor: colorPremulLerp(textColor, other.textColor, t)!,
+      helperTextColor: colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
     );
   }
 
@@ -73,8 +80,9 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
-      ..add(ColorProperty("errorBorderColor", errorBorderColor))
+      ..add(ColorProperty("errorColor", errorColor))
       ..add(ColorProperty("hoverBorderColor", hoverBorderColor))
-      ..add(ColorProperty("hintTextColor", hintTextColor));
+      ..add(ColorProperty("textColor", textColor))
+      ..add(ColorProperty("helperTextColor", helperTextColor));
   }
 }

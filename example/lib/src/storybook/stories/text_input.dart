@@ -82,16 +82,16 @@ class TextInputStory extends Story {
 
             final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
 
-            final errorBorderColorKnob = context.knobs.nullable.options(
-              label: "errorBorderColor",
-              description: "MoonColors variants for MoonTextInput error border.",
+            final errorColorKnob = context.knobs.nullable.options(
+              label: "errorColor",
+              description: "MoonColors variants for MoonTextInput error.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final errorBorderColor = colorTable(context)[errorBorderColorKnob ?? 40];
+            final errorColor = colorTable(context)[errorColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -104,12 +104,6 @@ class TextInputStory extends Story {
             final enabledKnob = context.knobs.boolean(
               label: "enabled",
               description: "Switch between enabled and disabled states.",
-              initial: true,
-            );
-
-            final showFocusEffectKnob = context.knobs.boolean(
-              label: "showFocusEffect",
-              description: "Whether to display focus effect around MoonTextInput.",
               initial: true,
             );
 
@@ -150,14 +144,13 @@ class TextInputStory extends Story {
                           controller: _textController,
                           enabled: enabledKnob,
                           textInputSize: textInputSizeKnob,
-                          showFocusEffect: showFocusEffectKnob,
                           hasFloatingLabel: hasFloatingLabelKnob,
                           textColor: textColor,
                           hintTextColor: hintTextColor,
                           backgroundColor: backgroundColor,
                           activeBorderColor: activeBorderColor,
                           inactiveBorderColor: inactiveBorderColor,
-                          errorBorderColor: errorBorderColor,
+                          errorColor: errorColor,
                           borderRadius: borderRadius,
                           hintText: "Enter your text here (over 10 characters)",
                           validator: (String? value) => value?.length != null && value!.length < 10
@@ -194,14 +187,13 @@ class TextInputStory extends Story {
                               keyboardType: TextInputType.visiblePassword,
                               obscureText: _hidePassword,
                               textInputSize: textInputSizeKnob,
-                              showFocusEffect: showFocusEffectKnob,
                               hasFloatingLabel: hasFloatingLabelKnob,
                               textColor: textColor,
                               hintTextColor: hintTextColor,
                               backgroundColor: backgroundColor,
                               activeBorderColor: activeBorderColor,
                               inactiveBorderColor: inactiveBorderColor,
-                              errorBorderColor: errorBorderColor,
+                              errorColor: errorColor,
                               borderRadius: borderRadius,
                               hintText: "Enter password (123abc)",
                               validator: (String? value) => value != "123abc" ? "Wrong password." : null,
