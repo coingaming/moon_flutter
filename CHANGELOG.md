@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.2](https://github.com/coingaming/moon_flutter/compare/v0.29.1...v0.29.2) (2023-09-08)
+
+
+### Bug Fixes
+
+* [MDS-665] Fix Input bugs and add border animations ([#248](https://github.com/coingaming/moon_flutter/issues/248)) ([2f22b29](https://github.com/coingaming/moon_flutter/commit/2f22b29cfa193fd2883b57f64a37f38f8fd2dcdc))
+
 ## [0.29.1](https://github.com/coingaming/moon_flutter/compare/v0.29.0...v0.29.1) (2023-09-06)
 
 
