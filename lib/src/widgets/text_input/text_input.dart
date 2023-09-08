@@ -777,7 +777,9 @@ class _MoonTextInputState extends State<MoonTextInput>
 
   bool get _isEnabled => widget.enabled;
 
-  bool get _hasError => _hasIntrinsicError;
+  bool get _hasError => _hasIntrinsicError || widget.errorText != null;
+
+  bool get _hasFocus => _effectiveFocusNode.hasFocus;
 
   int get _currentLength => _effectiveController.value.text.characters.length;
 
@@ -810,7 +812,7 @@ class _MoonTextInputState extends State<MoonTextInput>
     return <MaterialState>{
       if (!_isEnabled) MaterialState.disabled,
       if (_isHovering) MaterialState.hovered,
-      if (_effectiveFocusNode.hasFocus) MaterialState.focused,
+      if (_hasFocus) MaterialState.focused,
       if (_hasError) MaterialState.error,
     };
   }
@@ -883,6 +885,8 @@ class _MoonTextInputState extends State<MoonTextInput>
   }
 
   void _handleHover(bool hovering) {
+    if (!_isEnabled) return;
+
     if (hovering != _isHovering) {
       setState(() => _isHovering = hovering);
     }
@@ -973,7 +977,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     _effectiveFocusNode.canRequestFocus = _canRequestFocus;
 
-    if (_effectiveFocusNode.hasFocus && widget.readOnly != oldWidget.readOnly && _isEnabled) {
+    if (_hasFocus && widget.readOnly != oldWidget.readOnly && _isEnabled) {
       if (_effectiveController.selection.isCollapsed) {
         _showSelectionHandles = !widget.readOnly;
       }
@@ -1069,8 +1073,16 @@ class _MoonTextInputState extends State<MoonTextInput>
     final MoonSquircleBorder defaultBorder = MoonSquircleBorder(
       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
-        color: _isHovering ? effectiveHoverBorderColor : effectiveInactiveBorderColor,
-        width: _isHovering ? MoonBorders.borders.activeBorderWidth : MoonBorders.borders.defaultBorderWidth,
+        color: effectiveInactiveBorderColor,
+        width: MoonBorders.borders.defaultBorderWidth,
+      ),
+    );
+
+    final MoonSquircleBorder hoverBorder = MoonSquircleBorder(
+      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+      side: BorderSide(
+        color: effectiveHoverBorderColor,
+        width: MoonBorders.borders.activeBorderWidth,
       ),
     );
 
@@ -1090,11 +1102,13 @@ class _MoonTextInputState extends State<MoonTextInput>
       ),
     );
 
-    final MoonSquircleBorder resolvedBorder = widget.errorText != null && !widget.readOnly
+    final MoonSquircleBorder resolvedBorder = _hasError
         ? errorBorder
-        : _effectiveFocusNode.hasFocus && !widget.readOnly
+        : _hasFocus
             ? focusBorder
-            : defaultBorder;
+            : _isHovering
+                ? hoverBorder
+                : defaultBorder;
 
     bool? cursorOpacityAnimates = widget.cursorOpacityAnimates;
     Color? autocorrectionTextRectColor;
@@ -1168,7 +1182,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.devicePixelRatioOf(context), 0);
         handleDidGainAccessibilityFocus = () {
           // Automatically activate the MoonTextInput when it receives accessibility focus.
-          if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
+          if (!_hasFocus && _effectiveFocusNode.canRequestFocus) {
             _effectiveFocusNode.requestFocus();
           }
         };
@@ -1196,7 +1210,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
         handleDidGainAccessibilityFocus = () {
           // Automatically activate the MoonTextInput when it receives accessibility focus.
-          if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
+          if (!_hasFocus && _effectiveFocusNode.canRequestFocus) {
             _effectiveFocusNode.requestFocus();
           }
         };
@@ -1234,8 +1248,7 @@ class _MoonTextInputState extends State<MoonTextInput>
           magnifierConfiguration: widget.magnifierConfiguration ?? TextMagnifier.adaptiveMagnifierConfiguration,
           maxLines: widget.maxLines,
           minLines: widget.minLines,
-          mouseCursor: MouseCursor.defer,
-          // MoonTextInput will handle the cursor
+          mouseCursor: MouseCursor.defer, // MoonTextInput will handle the cursor
           obscureText: widget.obscureText,
           obscuringCharacter: widget.obscuringCharacter,
           onAppPrivateCommand: widget.onAppPrivateCommand,
@@ -1276,13 +1289,13 @@ class _MoonTextInputState extends State<MoonTextInput>
     child = AnimatedBuilder(
       animation: Listenable.merge(<Listenable>[focusNode, controller]),
       builder: (BuildContext context, Widget? child) {
-        return Container(
+        return _BorderContainer(
+          backgroundColor: effectiveBackgroundColor,
+          border: resolvedBorder,
+          decoration: widget.decoration,
           height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
-          decoration: widget.decoration ??
-              ShapeDecorationWithPremultipliedAlpha(
-                color: effectiveBackgroundColor,
-                shape: resolvedBorder,
-              ),
+          duration: effectiveTransitionDuration,
+          curve: effectiveTransitionCurve,
           child: Row(
             children: [
               if (widget.leading != null)
@@ -1486,5 +1499,93 @@ class _MoonTextInputSelectionGestureDetectorBuilder extends TextSelectionGesture
           Feedback.forLongPress(_state.context);
       }
     }
+  }
+}
+
+class _BorderContainer extends StatefulWidget {
+  final Color backgroundColor;
+  final Decoration? decoration;
+  final double? height;
+  final ShapeBorder border;
+  final Duration duration;
+  final Curve curve;
+  final Widget child;
+
+  const _BorderContainer({
+    required this.backgroundColor,
+    this.decoration,
+    required this.height,
+    required this.border,
+    required this.duration,
+    required this.curve,
+    required this.child,
+  });
+
+  @override
+  _BorderContainerState createState() => _BorderContainerState();
+}
+
+class _BorderContainerState extends State<_BorderContainer> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _borderAnimation;
+  late ShapeBorderTween _border;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: widget.duration,
+      vsync: this,
+    );
+    _borderAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: widget.curve,
+      reverseCurve: widget.curve.flipped,
+    );
+    _border = ShapeBorderTween(
+      begin: widget.border,
+      end: widget.border,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(_BorderContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.border != oldWidget.border) {
+      _border = ShapeBorderTween(
+        begin: oldWidget.border,
+        end: widget.border,
+      );
+      _controller
+        ..value = 0.0
+        ..forward();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _borderAnimation,
+      builder: (context, child) {
+        return Container(
+          height: widget.height,
+          decoration: widget.decoration ??
+              ShapeDecorationWithPremultipliedAlpha(
+                color: widget.backgroundColor,
+                shape: _border.evaluate(_borderAnimation)!,
+              ),
+          child: child,
+        );
+      },
+      child: widget.child,
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 TextEditingController _textController = TextEditingController();
+TextEditingController _dateController = TextEditingController();
 TextEditingController _passwordController = TextEditingController();
 
 bool _hidePassword = true;
@@ -82,6 +83,17 @@ class TextInputStory extends Story {
 
             final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
 
+            final hoverBorderColorKnob = context.knobs.nullable.options(
+              label: "hoverBorderColor",
+              description: "MoonColors variants for MoonTextInput hover border.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final hoverBorderColor = colorTable(context)[hoverBorderColorKnob ?? 40];
+
             final errorColorKnob = context.knobs.nullable.options(
               label: "errorColor",
               description: "MoonColors variants for MoonTextInput error.",
@@ -141,6 +153,7 @@ class TextInputStory extends Story {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         MoonFormTextInput(
+                          hoverBorderColor: hoverBorderColor,
                           controller: _textController,
                           enabled: enabledKnob,
                           textInputSize: textInputSizeKnob,
@@ -152,8 +165,8 @@ class TextInputStory extends Story {
                           inactiveBorderColor: inactiveBorderColor,
                           errorColor: errorColor,
                           borderRadius: borderRadius,
-                          hintText: "Enter your text here (over 10 characters)",
-                          validator: (String? value) => value?.length != null && value!.length < 10
+                          hintText: "Enter text (over 10 characters)",
+                          validator: (String? value) => value != null && value.length < 10
                               ? "The text should be longer than 10 characters."
                               : null,
                           leading: showLeadingKnob
@@ -199,7 +212,7 @@ class TextInputStory extends Story {
                               validator: (String? value) => value != "123abc" ? "Wrong password." : null,
                               leading: showLeadingKnob
                                   ? const MoonIcon(
-                                      MoonIcons.search_24,
+                                      MoonIcons.password_24,
                                       size: 24,
                                     )
                                   : null,
@@ -227,6 +240,56 @@ class TextInputStory extends Story {
                                   StoryErrorWidget(errorText: errorText!),
                             );
                           },
+                        ),
+                        const SizedBox(height: 16),
+                        MoonFormTextInput(
+                          readOnly: true,
+                          hoverBorderColor: hoverBorderColor,
+                          controller: _dateController,
+                          enabled: enabledKnob,
+                          textInputSize: textInputSizeKnob,
+                          textColor: textColor,
+                          hintTextColor: hintTextColor,
+                          backgroundColor: backgroundColor,
+                          activeBorderColor: activeBorderColor,
+                          inactiveBorderColor: inactiveBorderColor,
+                          errorColor: errorColor,
+                          borderRadius: borderRadius,
+                          hintText: "Pick a date",
+                          validator: (String? value) => value != null && value.isEmpty ? "Pick a date." : null,
+                          onTap: () async {
+                            final DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2050),
+                            );
+
+                            if (pickedDate != null) {
+                              _dateController.text = "${pickedDate.toLocal()}".split(" ")[0];
+                            }
+                          },
+                          leading: showLeadingKnob
+                              ? const MoonIcon(
+                                  MoonIcons.calendar_24,
+                                  size: 24,
+                                )
+                              : null,
+                          trailing: showTrailingKnob
+                              ? MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: GestureDetector(
+                                    child: const MoonIcon(
+                                      MoonIcons.close_small_24,
+                                      size: 24,
+                                    ),
+                                    onTap: () => _dateController.clear(),
+                                  ),
+                                )
+                              : null,
+                          helper: showHelperKnob ? const Text("Supporting text") : null,
+                          errorBuilder: (BuildContext context, String? errorText) =>
+                              StoryErrorWidget(errorText: errorText!),
                         ),
                         const SizedBox(height: 32),
                         MoonFilledButton(

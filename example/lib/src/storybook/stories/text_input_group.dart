@@ -132,7 +132,7 @@ class TextInputGroupStory extends Story {
                                 activeBorderColor: activeBorderColor,
                                 errorColor: errorColor,
                                 borderRadius: borderRadius,
-                                hintText: "Enter your text here (over 10 characters)",
+                                hintText: "Enter text (over 10 characters)",
                                 validator: (String? value) => value?.length != null && value!.length < 10
                                     ? "The text should be longer than 10 characters."
                                     : null,
