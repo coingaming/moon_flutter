@@ -8,7 +8,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
-import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
+import 'package:moon_design/src/widgets/text_input/form_text_input3.dart';
 
 typedef MoonTextInputGroupErrorBuilder = Widget Function(BuildContext context, List<String> errorTexts);
 
