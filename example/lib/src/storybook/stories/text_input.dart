@@ -266,9 +266,7 @@ class TextInputStory extends Story {
                             );
 
                             if (pickedDate != null) {
-                              /* setState(() { */
                               _dateController.text = "${pickedDate.toLocal()}".split(" ")[0];
-                              /* }); */
                             }
                           },
                           leading: showLeadingKnob
