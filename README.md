@@ -1,11 +1,6 @@
 # Moon Design System
-<p>
-  <a href="https://conventionalcommits.org">
-    <img alt="Conventional Commits" src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg">
-  </a>
-</p>
 
-
+[![Version](https://img.shields.io/pub/v/moon_design.svg)](https://pub.dev/packages/moon_design) ![Build](https://github.com/coingaming/moon_flutter/actions/workflows/analyze_and_test.yml/badge.svg) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org) 
 
 <img width="644" alt="Moon Design System" src="https://user-images.githubusercontent.com/232199/133601344-e63bd62f-dd0f-47a1-9d1e-b5cb065e5a90.png">
 
