@@ -195,7 +195,6 @@ class TextInputStory extends Story {
                         StatefulBuilder(
                           builder: (context, setState) {
                             return MoonFormTextInput(
-                              autovalidateMode: AutovalidateMode.always,
                               controller: _passwordController,
                               enabled: enabledKnob,
                               keyboardType: TextInputType.visiblePassword,
@@ -243,61 +242,56 @@ class TextInputStory extends Story {
                           },
                         ),
                         const SizedBox(height: 16),
-                        StatefulBuilder(
-                          builder: (context, setState) {
-                            return MoonFormTextInput(
-                              autovalidateMode: AutovalidateMode.always,
-                              readOnly: true,
-                              hoverBorderColor: hoverBorderColor,
-                              controller: _dateController,
-                              enabled: enabledKnob,
-                              textInputSize: textInputSizeKnob,
-                              textColor: textColor,
-                              hintTextColor: hintTextColor,
-                              backgroundColor: backgroundColor,
-                              activeBorderColor: activeBorderColor,
-                              inactiveBorderColor: inactiveBorderColor,
-                              errorColor: errorColor,
-                              borderRadius: borderRadius,
-                              hintText: "Pick a date",
-                              validator: (String? value) => value != null && value.isEmpty ? "Pick a date." : null,
-                              onTap: () async {
-                                final DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime(2050),
-                                );
-
-                                if (pickedDate != null) {
-                                  setState(() {
-                                    _dateController.text = "${pickedDate.toLocal()}".split(" ")[0];
-                                  });
-                                }
-                              },
-                              leading: showLeadingKnob
-                                  ? const MoonIcon(
-                                      MoonIcons.calendar_24,
-                                      size: 24,
-                                    )
-                                  : null,
-                              trailing: showTrailingKnob
-                                  ? MouseRegion(
-                                      cursor: SystemMouseCursors.click,
-                                      child: GestureDetector(
-                                        child: const MoonIcon(
-                                          MoonIcons.close_small_24,
-                                          size: 24,
-                                        ),
-                                        onTap: () => _dateController.clear(),
-                                      ),
-                                    )
-                                  : null,
-                              helper: showHelperKnob ? const Text("Supporting text") : null,
-                              errorBuilder: (BuildContext context, String? errorText) =>
-                                  StoryErrorWidget(errorText: errorText!),
+                        MoonFormTextInput(
+                          readOnly: true,
+                          hoverBorderColor: hoverBorderColor,
+                          controller: _dateController,
+                          enabled: enabledKnob,
+                          textInputSize: textInputSizeKnob,
+                          textColor: textColor,
+                          hintTextColor: hintTextColor,
+                          backgroundColor: backgroundColor,
+                          activeBorderColor: activeBorderColor,
+                          inactiveBorderColor: inactiveBorderColor,
+                          errorColor: errorColor,
+                          borderRadius: borderRadius,
+                          hintText: "Pick a date",
+                          validator: (String? value) => value != null && value.isEmpty ? "Pick a date." : null,
+                          onTap: () async {
+                            final DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2050),
                             );
+
+                            if (pickedDate != null) {
+                              /* setState(() { */
+                              _dateController.text = "${pickedDate.toLocal()}".split(" ")[0];
+                              /* }); */
+                            }
                           },
+                          leading: showLeadingKnob
+                              ? const MoonIcon(
+                                  MoonIcons.calendar_24,
+                                  size: 24,
+                                )
+                              : null,
+                          trailing: showTrailingKnob
+                              ? MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: GestureDetector(
+                                    child: const MoonIcon(
+                                      MoonIcons.close_small_24,
+                                      size: 24,
+                                    ),
+                                    onTap: () => _dateController.clear(),
+                                  ),
+                                )
+                              : null,
+                          helper: showHelperKnob ? const Text("Supporting text") : null,
+                          errorBuilder: (BuildContext context, String? errorText) =>
+                              StoryErrorWidget(errorText: errorText!),
                         ),
                         const SizedBox(height: 32),
                         MoonFilledButton(

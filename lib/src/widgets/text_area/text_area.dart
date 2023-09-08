@@ -6,7 +6,7 @@ import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
-import 'package:moon_design/src/widgets/text_input/form_text_input3.dart';
+import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 
 typedef MoonTextAreaErrorBuilder = Widget Function(BuildContext context, String? errorText);
 

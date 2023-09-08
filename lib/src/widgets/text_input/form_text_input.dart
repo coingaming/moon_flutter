@@ -11,7 +11,7 @@ export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType;
 typedef MoonFormTextInputErrorCallback = void Function(String? errorText);
 
 class MoonFormTextInput extends FormField<String> {
-  final MoonFormTextInputConfiguration? configuration;
+  final MoonFormTextInputConfiguration configuration;
 
   /// Creates a [MoonFormTextInput] that contains a [MoonTextInput].
   ///
