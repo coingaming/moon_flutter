@@ -58,6 +58,9 @@ class MoonTextInput extends StatefulWidget {
   /// The border color of the active or focused text input.
   final Color? activeBorderColor;
 
+  /// The border color used for text input error state.
+  final Color? errorBorderColor;
+
   /// The border color of the inactive text input.
   final Color? inactiveBorderColor;
 
@@ -565,6 +568,7 @@ class MoonTextInput extends StatefulWidget {
     this.borderRadius,
     this.backgroundColor,
     this.activeBorderColor,
+    this.errorBorderColor,
     this.inactiveBorderColor,
     this.errorColor,
     this.hoverBorderColor,
@@ -1097,7 +1101,7 @@ class _MoonTextInputState extends State<MoonTextInput>
     final MoonSquircleBorder errorBorder = MoonSquircleBorder(
       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
-        color: effectiveErrorColor,
+        color: widget.errorBorderColor ?? effectiveErrorColor,
         width: MoonBorders.borders.activeBorderWidth,
       ),
     );

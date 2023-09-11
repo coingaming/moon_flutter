@@ -20,6 +20,8 @@ class MoonFormTextInput extends FormField<String> {
   /// [initialValue] or the empty string.
   ///
   /// For documentation about the various parameters, see the [MoonTextInput] class.
+  ///
+  /// Note that validator errors have precedence over passed in [errorText].
   MoonFormTextInput({
     super.key,
     // MDS props
@@ -29,6 +31,7 @@ class MoonFormTextInput extends FormField<String> {
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? errorColor,
+    Color? errorBorderColor,
     Color? hoverBorderColor,
     Color? textColor,
     Color? hintTextColor,
@@ -152,6 +155,7 @@ class MoonFormTextInput extends FormField<String> {
           enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
           enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
           enableSuggestions: enableSuggestions,
+          errorBorderColor: errorBorderColor,
           errorBuilder: errorBuilder,
           errorColor: errorColor,
           errorText: errorText,
@@ -258,6 +262,7 @@ class MoonFormTextInput extends FormField<String> {
                 enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
                 enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
                 enableSuggestions: enableSuggestions,
+                errorBorderColor: errorBorderColor,
                 errorBuilder: errorBuilder,
                 errorColor: errorColor,
                 errorText: field.errorText ?? errorText,
@@ -444,6 +449,7 @@ class MoonFormTextInputConfiguration {
   final BorderRadiusGeometry? borderRadius;
   final Color? backgroundColor;
   final Color? activeBorderColor;
+  final Color? errorBorderColor;
   final Color? inactiveBorderColor;
   final Color? errorColor;
   final Color? hoverBorderColor;
@@ -536,6 +542,7 @@ class MoonFormTextInputConfiguration {
     this.borderRadius,
     this.backgroundColor,
     this.activeBorderColor,
+    this.errorBorderColor,
     this.inactiveBorderColor,
     this.errorColor,
     this.hoverBorderColor,

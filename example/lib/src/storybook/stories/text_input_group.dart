@@ -112,7 +112,6 @@ class TextInputGroupStory extends Story {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           MoonTextInputGroup(
-                            errorTexts: {0: "BOOOO", 1: "sdfgsdg"},
                             enabled: enabledKnob,
                             textColor: textColor,
                             backgroundColor: backgroundColor,
@@ -124,6 +123,7 @@ class TextInputGroupStory extends Story {
                                 _StoryErrorMessageWidget(errors: errorMessages),
                             children: [
                               MoonFormTextInput(
+                                errorText: "This is an error message.",
                                 textInputSize: MoonTextInputSize.xl,
                                 controller: _textController,
                                 enabled: enabledKnob,
@@ -153,6 +153,7 @@ class TextInputGroupStory extends Story {
                                 ),
                               ),
                               MoonFormTextInput(
+                                errorText: "Another error message.",
                                 textInputSize: MoonTextInputSize.xl,
                                 controller: _passwordController,
                                 enabled: enabledKnob,
@@ -215,7 +216,7 @@ class _StoryErrorMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(_nonEmptyErrors);
+    //print(_nonEmptyErrors);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: List.generate(_nonEmptyErrors.length * 2 - 1, (int index) {
