@@ -112,6 +112,7 @@ class TextInputGroupStory extends Story {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           MoonTextInputGroup(
+                            errorTexts: {0: "BOOOO", 1: "sdfgsdg"},
                             enabled: enabledKnob,
                             textColor: textColor,
                             backgroundColor: backgroundColor,
@@ -166,7 +167,7 @@ class TextInputGroupStory extends Story {
                                 hintText: "Enter password (123abc)",
                                 validator: (String? value) => value != "123abc" ? "Wrong password." : null,
                                 leading: const MoonIcon(
-                                  MoonIcons.search_24,
+                                  MoonIcons.password_24,
                                   size: 24,
                                 ),
                                 trailing: MouseRegion(
@@ -210,14 +211,17 @@ class _StoryErrorMessageWidget extends StatelessWidget {
 
   const _StoryErrorMessageWidget({required this.errors});
 
+  List<String> get _nonEmptyErrors => errors.where((String error) => error.isNotEmpty).toList();
+
   @override
   Widget build(BuildContext context) {
+    print(_nonEmptyErrors);
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: List.generate(errors.length * 2 - 1, (int index) {
+      children: List.generate(_nonEmptyErrors.length * 2 - 1, (int index) {
         final int derivedIndex = index ~/ 2;
 
-        return index.isEven ? StoryErrorWidget(errorText: errors[derivedIndex]) : const SizedBox(height: 4);
+        return index.isEven ? StoryErrorWidget(errorText: _nonEmptyErrors[derivedIndex]) : const SizedBox(height: 4);
       }),
     );
   }

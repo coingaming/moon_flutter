@@ -8,7 +8,7 @@ import 'package:moon_design/src/widgets/text_input/text_input.dart';
 
 export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType;
 
-typedef MoonFormTextInputErrorCallback = void Function(String? errorText);
+typedef MoonFormTextInputValidationStatusCallback = void Function(String? validationErrorText);
 
 class MoonFormTextInput extends FormField<String> {
   final MoonFormTextInputConfiguration configuration;
@@ -39,7 +39,7 @@ class MoonFormTextInput extends FormField<String> {
     Curve? transitionCurve,
     EdgeInsetsGeometry? padding,
     EdgeInsetsGeometry? helperPadding,
-    MoonFormTextInputErrorCallback? onError,
+    MoonFormTextInputValidationStatusCallback? validationStatusCallback,
     MoonTextInputSize? textInputSize,
     String? errorText,
     String? hintText,
@@ -133,6 +133,7 @@ class MoonFormTextInput extends FormField<String> {
           autocorrect: autocorrect,
           autofillHints: autofillHints,
           autofocus: autofocus,
+          autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
           backgroundColor: backgroundColor,
           borderRadius: borderRadius,
           canRequestFocus: canRequestFocus,
@@ -166,7 +167,7 @@ class MoonFormTextInput extends FormField<String> {
           hintTextColor: hintTextColor,
           hoverBorderColor: hoverBorderColor,
           inactiveBorderColor: inactiveBorderColor,
-          initialValue: controller != null ? controller.text : (initialValue ?? ""),
+          initialValue: initialValue,
           inputFormatters: inputFormatters,
           keyboardAppearance: keyboardAppearance,
           keyboardType: keyboardType,
@@ -182,6 +183,8 @@ class MoonFormTextInput extends FormField<String> {
           onAppPrivateCommand: onAppPrivateCommand,
           onChanged: onChanged,
           onEditingComplete: onEditingComplete,
+          validationStatusCallback: validationStatusCallback,
+          onSaved: onSaved,
           onSubmitted: onSubmitted,
           onTap: onTap,
           onTapOutside: onTapOutside,
@@ -212,7 +215,7 @@ class MoonFormTextInput extends FormField<String> {
           transitionCurve: transitionCurve,
           transitionDuration: transitionDuration,
           undoController: undoController,
-          autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
+          validator: validator,
         ),
         super(
           initialValue: controller != null ? controller.text : (initialValue ?? ""),
@@ -221,9 +224,7 @@ class MoonFormTextInput extends FormField<String> {
           builder: (FormFieldState<String> field) {
             final _MoonFormTextInputState state = field as _MoonFormTextInputState;
 
-            if (field.hasError) {
-              onError?.call(field.errorText);
-            }
+            validationStatusCallback?.call(field.errorText);
 
             void onChangedHandler(String value) {
               field.didChange(value);
@@ -455,7 +456,7 @@ class MoonFormTextInputConfiguration {
   final Curve? transitionCurve;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? helperPadding;
-  final MoonFormTextInputErrorCallback? onError;
+  final MoonFormTextInputValidationStatusCallback? validationStatusCallback;
   final MoonTextInputSize? textInputSize;
   final String? errorText;
   final String? hintText;
@@ -547,7 +548,7 @@ class MoonFormTextInputConfiguration {
     this.transitionCurve,
     this.padding,
     this.helperPadding,
-    this.onError,
+    this.validationStatusCallback,
     this.textInputSize,
     this.errorText,
     this.hintText,
