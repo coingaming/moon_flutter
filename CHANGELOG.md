@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.4](https://github.com/coingaming/moon_flutter/compare/v0.29.3...v0.29.4) (2023-09-12)
+
+
+### Bug Fixes
+
+* [MDS-675] Add missing container border and helper animations for InputGroup ([#252](https://github.com/coingaming/moon_flutter/issues/252)) ([e254b16](https://github.com/coingaming/moon_flutter/commit/e254b16d0593b9cd89fcbbb0640c879d2949c66f))
+
 ## [0.29.3](https://github.com/coingaming/moon_flutter/compare/v0.29.2...v0.29.3) (2023-09-12)
 
 
