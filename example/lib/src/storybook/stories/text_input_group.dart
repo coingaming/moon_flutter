@@ -1,5 +1,4 @@
 import 'package:example/src/storybook/common/color_options.dart';
-import 'package:example/src/storybook/common/widgets/error.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -129,8 +128,6 @@ class TextInputGroupStory extends Story {
                             errorColor: errorColor,
                             borderRadius: borderRadius,
                             helper: showHelperKnob ? const Text("Supporting text") : null,
-                            errorBuilder: (BuildContext context, List<String> errorMessages) =>
-                                _StoryErrorMessageWidget(errors: errorMessages),
                             children: [
                               MoonFormTextInput(
                                 //errorText: "This is an error message.",
@@ -216,25 +213,4 @@ class TextInputGroupStory extends Story {
             );
           },
         );
-}
-
-class _StoryErrorMessageWidget extends StatelessWidget {
-  final List<String> errors;
-
-  const _StoryErrorMessageWidget({required this.errors});
-
-  List<String> get _nonEmptyErrors => errors.where((String error) => error.isNotEmpty).toList();
-
-  @override
-  Widget build(BuildContext context) {
-    //print(_nonEmptyErrors);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(_nonEmptyErrors.length * 2 - 1, (int index) {
-        final int derivedIndex = index ~/ 2;
-
-        return index.isEven ? StoryErrorWidget(errorText: _nonEmptyErrors[derivedIndex]) : const SizedBox(height: 4);
-      }),
-    );
-  }
 }

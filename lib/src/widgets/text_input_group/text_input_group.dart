@@ -8,6 +8,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
+import 'package:moon_design/src/widgets/common/error_message_widgets.dart';
 import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 
 typedef MoonTextInputGroupErrorBuilder = Widget Function(BuildContext context, List<String> errorText);
@@ -180,6 +181,10 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
         context.moonTheme?.textInputGroupTheme.properties.transitionCurve ??
         MoonTransitions.transitions.defaultTransitionCurve; */
 
+    final List<String> effectiveErrorMessages = _validatorErrors.nonNulls.toList().isNotEmpty
+        ? _validatorErrors.nonNulls.toList()
+        : widget.children.map((MoonFormTextInput child) => child.configuration.errorText).nonNulls.toList();
+
     List<Widget> childrenWithDivider({required bool shouldHideDivider}) => List.generate(
           widget.children.length * 2 - 1,
           (int index) {
@@ -339,15 +344,8 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
                 child: Padding(
                   padding: effectiveHelperPadding,
                   child: _shouldShowError
-                      ? widget.errorBuilder!(
-                          context,
-                          _validatorErrors.nonNulls.toList().isNotEmpty
-                              ? _validatorErrors.nonNulls.toList()
-                              : widget.children
-                                  .map((MoonFormTextInput child) => child.configuration.errorText)
-                                  .nonNulls
-                                  .toList(),
-                        )
+                      ? (widget.errorBuilder?.call(context, effectiveErrorMessages) ??
+                          MoonErrorMessages(errors: effectiveErrorMessages))
                       : widget.helper,
                 ),
               ),

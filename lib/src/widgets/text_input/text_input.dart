@@ -19,6 +19,7 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/border_container.dart';
+import 'package:moon_design/src/widgets/common/error_message_widgets.dart';
 
 export 'package:flutter/services.dart'
     show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
@@ -1396,24 +1397,21 @@ class _MoonTextInputState extends State<MoonTextInput>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           child,
-          if (widget.helper != null || (widget.errorText != null && widget.errorBuilder != null))
+          if (widget.helper != null || (widget.errorText != null))
             RepaintBoundary(
               child: IconTheme(
                 data: IconThemeData(
-                  color: widget.errorText != null && widget.errorBuilder != null
-                      ? effectiveErrorColor
-                      : effectiveHintTextColor,
+                  color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
                 ),
                 child: DefaultTextStyle(
                   style: effectiveHelperTextStyle.copyWith(
-                    color: widget.errorText != null && widget.errorBuilder != null
-                        ? effectiveErrorColor
-                        : effectiveHintTextColor,
+                    color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
                   ),
                   child: Padding(
                     padding: effectiveHelperPadding,
-                    child: widget.errorText != null && widget.errorBuilder != null
-                        ? widget.errorBuilder!(context, widget.errorText)
+                    child: widget.errorText != null
+                        ? (widget.errorBuilder?.call(context, widget.errorText) ??
+                            MoonErrorMessage(errorText: widget.errorText!))
                         : widget.helper,
                   ),
                 ),
