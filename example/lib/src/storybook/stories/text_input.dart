@@ -1,5 +1,4 @@
 import 'package:example/src/storybook/common/color_options.dart';
-import 'package:example/src/storybook/common/widgets/error.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -188,8 +187,6 @@ class TextInputStory extends Story {
                                 )
                               : null,
                           helper: showHelperKnob ? const Text("Supporting text") : null,
-                          errorBuilder: (BuildContext context, String? errorText) =>
-                              StoryErrorWidget(errorText: errorText!),
                         ),
                         const SizedBox(height: 16),
                         StatefulBuilder(
@@ -236,8 +233,6 @@ class TextInputStory extends Story {
                                     )
                                   : null,
                               helper: showHelperKnob ? const Text("Supporting text") : null,
-                              errorBuilder: (BuildContext context, String? errorText) =>
-                                  StoryErrorWidget(errorText: errorText!),
                             );
                           },
                         ),
@@ -288,8 +283,6 @@ class TextInputStory extends Story {
                                 )
                               : null,
                           helper: showHelperKnob ? const Text("Supporting text") : null,
-                          errorBuilder: (BuildContext context, String? errorText) =>
-                              StoryErrorWidget(errorText: errorText!),
                         ),
                         const SizedBox(height: 32),
                         MoonFilledButton(

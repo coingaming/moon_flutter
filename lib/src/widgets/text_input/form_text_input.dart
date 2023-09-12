@@ -8,7 +8,7 @@ import 'package:moon_design/src/widgets/text_input/text_input.dart';
 
 export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType;
 
-typedef MoonFormTextInputErrorCallback = void Function(String? errorText);
+typedef MoonFormTextInputValidationStatusCallback = void Function(String? validationErrorText);
 
 class MoonFormTextInput extends FormField<String> {
   final MoonFormTextInputConfiguration configuration;
@@ -20,6 +20,8 @@ class MoonFormTextInput extends FormField<String> {
   /// [initialValue] or the empty string.
   ///
   /// For documentation about the various parameters, see the [MoonTextInput] class.
+  ///
+  /// Note that validator errors have precedence over passed in [errorText].
   MoonFormTextInput({
     super.key,
     // MDS props
@@ -29,17 +31,19 @@ class MoonFormTextInput extends FormField<String> {
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? errorColor,
+    Color? errorBorderColor,
     Color? hoverBorderColor,
     Color? textColor,
     Color? hintTextColor,
     Decoration? decoration,
     double? gap,
     double? height,
+    double? width,
     Duration? transitionDuration,
     Curve? transitionCurve,
     EdgeInsetsGeometry? padding,
     EdgeInsetsGeometry? helperPadding,
-    MoonFormTextInputErrorCallback? onError,
+    MoonFormTextInputValidationStatusCallback? validationStatusCallback,
     MoonTextInputSize? textInputSize,
     String? errorText,
     String? hintText,
@@ -133,6 +137,7 @@ class MoonFormTextInput extends FormField<String> {
           autocorrect: autocorrect,
           autofillHints: autofillHints,
           autofocus: autofocus,
+          autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
           backgroundColor: backgroundColor,
           borderRadius: borderRadius,
           canRequestFocus: canRequestFocus,
@@ -151,6 +156,7 @@ class MoonFormTextInput extends FormField<String> {
           enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
           enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
           enableSuggestions: enableSuggestions,
+          errorBorderColor: errorBorderColor,
           errorBuilder: errorBuilder,
           errorColor: errorColor,
           errorText: errorText,
@@ -166,7 +172,7 @@ class MoonFormTextInput extends FormField<String> {
           hintTextColor: hintTextColor,
           hoverBorderColor: hoverBorderColor,
           inactiveBorderColor: inactiveBorderColor,
-          initialValue: controller != null ? controller.text : (initialValue ?? ""),
+          initialValue: initialValue,
           inputFormatters: inputFormatters,
           keyboardAppearance: keyboardAppearance,
           keyboardType: keyboardType,
@@ -182,6 +188,8 @@ class MoonFormTextInput extends FormField<String> {
           onAppPrivateCommand: onAppPrivateCommand,
           onChanged: onChanged,
           onEditingComplete: onEditingComplete,
+          validationStatusCallback: validationStatusCallback,
+          onSaved: onSaved,
           onSubmitted: onSubmitted,
           onTap: onTap,
           onTapOutside: onTapOutside,
@@ -212,7 +220,8 @@ class MoonFormTextInput extends FormField<String> {
           transitionCurve: transitionCurve,
           transitionDuration: transitionDuration,
           undoController: undoController,
-          autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
+          validator: validator,
+          width: width,
         ),
         super(
           initialValue: controller != null ? controller.text : (initialValue ?? ""),
@@ -221,9 +230,7 @@ class MoonFormTextInput extends FormField<String> {
           builder: (FormFieldState<String> field) {
             final _MoonFormTextInputState state = field as _MoonFormTextInputState;
 
-            if (field.hasError) {
-              onError?.call(field.errorText);
-            }
+            validationStatusCallback?.call(field.errorText);
 
             void onChangedHandler(String value) {
               field.didChange(value);
@@ -257,6 +264,7 @@ class MoonFormTextInput extends FormField<String> {
                 enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
                 enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
                 enableSuggestions: enableSuggestions,
+                errorBorderColor: errorBorderColor,
                 errorBuilder: errorBuilder,
                 errorColor: errorColor,
                 errorText: field.errorText ?? errorText,
@@ -318,6 +326,7 @@ class MoonFormTextInput extends FormField<String> {
                 transitionCurve: transitionCurve,
                 transitionDuration: transitionDuration,
                 undoController: undoController,
+                width: width,
               ),
             );
           },
@@ -443,6 +452,7 @@ class MoonFormTextInputConfiguration {
   final BorderRadiusGeometry? borderRadius;
   final Color? backgroundColor;
   final Color? activeBorderColor;
+  final Color? errorBorderColor;
   final Color? inactiveBorderColor;
   final Color? errorColor;
   final Color? hoverBorderColor;
@@ -451,11 +461,12 @@ class MoonFormTextInputConfiguration {
   final Decoration? decoration;
   final double? gap;
   final double? height;
+  final double? width;
   final Duration? transitionDuration;
   final Curve? transitionCurve;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? helperPadding;
-  final MoonFormTextInputErrorCallback? onError;
+  final MoonFormTextInputValidationStatusCallback? validationStatusCallback;
   final MoonTextInputSize? textInputSize;
   final String? errorText;
   final String? hintText;
@@ -535,6 +546,7 @@ class MoonFormTextInputConfiguration {
     this.borderRadius,
     this.backgroundColor,
     this.activeBorderColor,
+    this.errorBorderColor,
     this.inactiveBorderColor,
     this.errorColor,
     this.hoverBorderColor,
@@ -543,11 +555,12 @@ class MoonFormTextInputConfiguration {
     this.decoration,
     this.gap,
     this.height,
+    this.width,
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
     this.helperPadding,
-    this.onError,
+    this.validationStatusCallback,
     this.textInputSize,
     this.errorText,
     this.hintText,

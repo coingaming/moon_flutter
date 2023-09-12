@@ -35,7 +35,11 @@ class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme> with Diagnosti
               borderRadius: tokens.borders.interactiveSm,
               transitionDuration: tokens.transitions.defaultTransitionDuration,
               transitionCurve: tokens.transitions.defaultTransitionCurve,
-              helperPadding: EdgeInsets.only(top: tokens.sizes.x4s),
+              helperPadding: EdgeInsets.only(
+                left: tokens.sizes.x3s,
+                top: tokens.sizes.x4s,
+                right: tokens.sizes.x3s,
+              ),
               textPadding: EdgeInsets.all(tokens.sizes.x2s),
               textStyle: tokens.typography.body.text16,
               helperTextStyle: tokens.typography.body.text12,

@@ -8,9 +8,15 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
+import 'package:moon_design/src/widgets/common/error_message_widgets.dart';
 import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 
-typedef MoonTextInputGroupErrorBuilder = Widget Function(BuildContext context, List<String> errorTexts);
+enum MoonTextInputGroupOrientation {
+  vertical,
+  horizontal,
+}
+
+typedef MoonTextInputGroupErrorBuilder = Widget Function(BuildContext context, List<String> errorText);
 
 class MoonTextInputGroup extends StatefulWidget {
   /// Used to enable/disable this TextInputGroup auto validation and update its error text.
@@ -38,8 +44,8 @@ class MoonTextInputGroup extends StatefulWidget {
   /// The background color of the text input group.
   final Color? backgroundColor;
 
-  /// The border color of the inactive text input group.
-  final Color? inactiveBorderColor;
+  /// The default border color of the text input group.
+  final Color? borderColor;
 
   /// The color of the error state of text input group.
   final Color? errorColor;
@@ -49,9 +55,6 @@ class MoonTextInputGroup extends StatefulWidget {
 
   /// The border color of the hovered text input group.
   final Color? hoverBorderColor;
-
-  /// The text color of the text input group.
-  final Color? textColor;
 
   /// The transition duration for disable animation.
   final Duration? transitionDuration;
@@ -74,6 +77,9 @@ class MoonTextInputGroup extends StatefulWidget {
   /// The text style to use for the helper or error state text.
   final TextStyle? helperTextStyle;
 
+  /// The orientation of the text input group.
+  final MoonTextInputGroupOrientation orientation;
+
   /// The children of the text input group.
   final List<MoonFormTextInput> children;
 
@@ -91,11 +97,10 @@ class MoonTextInputGroup extends StatefulWidget {
     this.borderRadius,
     this.clipBehavior,
     this.backgroundColor,
-    this.inactiveBorderColor,
+    this.borderColor,
     this.errorColor,
     this.hintTextColor,
     this.hoverBorderColor,
-    this.textColor,
     this.transitionDuration,
     this.transitionCurve,
     this.helperPadding,
@@ -103,6 +108,7 @@ class MoonTextInputGroup extends StatefulWidget {
     this.decoration,
     this.semanticLabel,
     this.helperTextStyle,
+    this.orientation = MoonTextInputGroupOrientation.vertical,
     required this.children,
     this.errorBuilder,
     this.helper,
@@ -113,18 +119,36 @@ class MoonTextInputGroup extends StatefulWidget {
 }
 
 class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
-  final Set<String> _validatorErrors = {};
+  late final List<String?> _validatorErrors = List.filled(widget.children.length, null);
 
-  void _handleValidationError(String? errorText) {
+  bool get _groupHasValidationError => _validatorErrors.nonNulls.toList().isNotEmpty;
+  bool get _groupHasErrorText =>
+      widget.children.any((MoonFormTextInput child) => child.configuration.errorText != null);
+
+  bool get _groupHasError => _groupHasValidationError || _groupHasErrorText;
+
+  bool get _groupHasAllValidationErrors => _validatorErrors.nonNulls.length == widget.children.length;
+  bool get _groupHasAllErrorTexts =>
+      widget.children.every((MoonFormTextInput child) => child.configuration.errorText != null);
+
+  bool get _groupIsInErrorState => _groupHasAllValidationErrors || _groupHasAllErrorTexts;
+  bool get _shouldShowError => _groupHasError || _groupIsInErrorState;
+
+  void _handleValidationError(int index, String? errorText) {
     if (errorText != null) {
-      _validatorErrors.add(errorText);
+      _validatorErrors[index] = errorText;
     } else {
-      _validatorErrors.clear();
+      _validatorErrors[index] = null;
     }
+  }
 
+  @override
+  void didUpdateWidget(covariant MoonTextInputGroup oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // This is necessary to reflect the children validation state visually.
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!mounted) return;
-
       setState(() {});
     });
   }
@@ -139,9 +163,8 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
         context.moonTheme?.textInputGroupTheme.colors.backgroundColor ??
         MoonColors.light.gohan;
 
-    final Color effectiveBorderColor = widget.inactiveBorderColor ??
-        context.moonTheme?.textInputGroupTheme.colors.borderColor ??
-        MoonColors.light.beerus;
+    final Color effectiveBorderColor =
+        widget.borderColor ?? context.moonTheme?.textInputGroupTheme.colors.borderColor ?? MoonColors.light.beerus;
 
     final Color effectiveErrorColor =
         widget.errorColor ?? context.moonTheme?.textInputGroupTheme.colors.errorColor ?? MoonColors.light.chiChi100;
@@ -152,7 +175,11 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
 
     final EdgeInsetsGeometry effectiveHelperPadding = widget.helperPadding ??
         context.moonTheme?.textInputGroupTheme.properties.helperPadding ??
-        EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
+        EdgeInsets.only(
+          left: MoonSizes.sizes.x3s,
+          top: MoonSizes.sizes.x4s,
+          right: MoonSizes.sizes.x3s,
+        );
 
     final TextStyle effectiveHelperTextStyle = widget.helperTextStyle ??
         context.moonTheme?.textInputGroupTheme.properties.helperTextStyle ??
@@ -167,12 +194,22 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
         context.moonTheme?.textInputGroupTheme.properties.transitionCurve ??
         MoonTransitions.transitions.defaultTransitionCurve; */
 
+    final List<String> effectiveErrorMessages = _validatorErrors.nonNulls.toList().isNotEmpty
+        ? _validatorErrors.nonNulls.toList()
+        : widget.children.map((MoonFormTextInput child) => child.configuration.errorText).nonNulls.toList();
+
     List<Widget> childrenWithDivider({required bool shouldHideDivider}) => List.generate(
           widget.children.length * 2 - 1,
           (int index) {
             final int derivedIndex = index ~/ 2;
 
-            final MoonFormTextInput child = MoonFormTextInput(
+            final bool selfShowError = ((widget.children[derivedIndex].configuration.errorText != null &&
+                        _validatorErrors[derivedIndex] == null) &&
+                    !_groupHasValidationError &&
+                    !_groupHasAllErrorTexts) ||
+                (_validatorErrors[derivedIndex] != null && !_groupHasAllValidationErrors);
+
+            Widget child = MoonFormTextInput(
               activeBorderColor: widget.children[derivedIndex].configuration.activeBorderColor,
               autocorrect: widget.children[derivedIndex].configuration.autocorrect,
               autofillHints: widget.children[derivedIndex].configuration.autofillHints,
@@ -184,7 +221,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
               clipBehavior: widget.children[derivedIndex].configuration.clipBehavior,
               contentInsertionConfiguration: widget.children[derivedIndex].configuration.contentInsertionConfiguration,
               contextMenuBuilder: widget.children[derivedIndex].configuration.contextMenuBuilder,
-              //controller: widget.children[derivedIndex].configuration.controller,
+              controller: widget.children[derivedIndex].configuration.controller,
               cursorColor: widget.children[derivedIndex].configuration.cursorColor,
               cursorHeight: widget.children[derivedIndex].configuration.cursorHeight,
               cursorOpacityAnimates: widget.children[derivedIndex].configuration.cursorOpacityAnimates,
@@ -196,9 +233,11 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
               enableIMEPersonalizedLearning: widget.children[derivedIndex].configuration.enableIMEPersonalizedLearning,
               enableInteractiveSelection: widget.children[derivedIndex].configuration.enableInteractiveSelection,
               enableSuggestions: widget.children[derivedIndex].configuration.enableSuggestions,
-              errorColor: _validatorErrors.length == widget.children.length
-                  ? Colors.transparent
-                  : widget.children[derivedIndex].configuration.errorColor,
+              errorBorderColor:
+                  selfShowError ? widget.children[derivedIndex].configuration.errorColor : Colors.transparent,
+              errorBuilder: (BuildContext context, String? errorText) => const SizedBox.shrink(),
+              errorColor: widget.children[derivedIndex].configuration.errorColor,
+              errorText: widget.children[derivedIndex].configuration.errorText,
               expands: widget.children[derivedIndex].configuration.expands,
               focusNode: widget.children[derivedIndex].configuration.focusNode,
               gap: widget.children[derivedIndex].configuration.gap,
@@ -211,7 +250,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
               hintTextColor: widget.children[derivedIndex].configuration.hintTextColor,
               hoverBorderColor: widget.children[derivedIndex].configuration.hoverBorderColor,
               inactiveBorderColor: Colors.transparent,
-              initialValue: widget.children[derivedIndex].initialValue,
+              initialValue: widget.children[derivedIndex].configuration.initialValue,
               inputFormatters: widget.children[derivedIndex].configuration.inputFormatters,
               keyboardAppearance: widget.children[derivedIndex].configuration.keyboardAppearance,
               keyboardType: widget.children[derivedIndex].configuration.keyboardType,
@@ -227,8 +266,8 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
               onAppPrivateCommand: widget.children[derivedIndex].configuration.onAppPrivateCommand,
               onChanged: widget.children[derivedIndex].configuration.onChanged,
               onEditingComplete: widget.children[derivedIndex].configuration.onEditingComplete,
-              onError: _handleValidationError,
               onSubmitted: widget.children[derivedIndex].configuration.onSubmitted,
+              onSaved: widget.children[derivedIndex].configuration.onSaved,
               onTap: widget.children[derivedIndex].configuration.onTap,
               onTapOutside: widget.children[derivedIndex].configuration.onTapOutside,
               padding: widget.children[derivedIndex].configuration.padding,
@@ -258,16 +297,26 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
               transitionCurve: widget.children[derivedIndex].configuration.transitionCurve,
               transitionDuration: widget.children[derivedIndex].configuration.transitionDuration,
               undoController: widget.children[derivedIndex].configuration.undoController,
-              validator: widget.children[derivedIndex].validator,
+              validationStatusCallback: (errorText) => _handleValidationError(derivedIndex, errorText),
+              validator: widget.children[derivedIndex].configuration.validator,
+              width: widget.children[derivedIndex].configuration.width,
             );
+
+            child = widget.children[derivedIndex].configuration.width != null
+                ? SizedBox(
+                    width: widget.children[derivedIndex].configuration.width,
+                    child: child,
+                  )
+                : Flexible(child: child);
 
             return index.isEven
                 ? child
-                : Divider(
-                    height: 1,
-                    color: _validatorErrors.length == widget.children.length
+                : Container(
+                    height: widget.orientation == MoonTextInputGroupOrientation.horizontal ? double.infinity : 1,
+                    width: widget.orientation == MoonTextInputGroupOrientation.vertical ? double.infinity : 1,
+                    color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
                         ? effectiveErrorColor
-                        : shouldHideDivider || _validatorErrors.isNotEmpty
+                        : shouldHideDivider || (_groupHasError || _groupHasValidationError)
                             ? Colors.transparent
                             : effectiveBorderColor,
                   );
@@ -293,36 +342,36 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
                     shape: MoonSquircleBorder(
                       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                       side: BorderSide(
-                        color: _validatorErrors.length == widget.children.length
+                        color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
                             ? effectiveErrorColor
                             : effectiveBorderColor,
                       ),
                     ),
                   ),
-              child: Column(
-                children: childrenWithDivider(shouldHideDivider: isHovered || isFocused),
+              child: RepaintBoundary(
+                child: _GroupOrientation(
+                  orientation: widget.orientation,
+                  children: childrenWithDivider(shouldHideDivider: isHovered || isFocused),
+                ),
               ),
             );
           },
         ),
-        if (widget.helper != null || (_validatorErrors.isNotEmpty && widget.errorBuilder != null))
+        if (widget.helper != null || _shouldShowError)
           RepaintBoundary(
             child: IconTheme(
               data: IconThemeData(
-                color: _validatorErrors.isNotEmpty && widget.errorBuilder != null
-                    ? effectiveErrorColor
-                    : effectiveHelperTextColor,
+                color: _shouldShowError ? effectiveErrorColor : effectiveHelperTextColor,
               ),
               child: DefaultTextStyle(
                 style: effectiveHelperTextStyle.copyWith(
-                  color: _validatorErrors.isNotEmpty && widget.errorBuilder != null
-                      ? effectiveErrorColor
-                      : effectiveHelperTextColor,
+                  color: _shouldShowError ? effectiveErrorColor : effectiveHelperTextColor,
                 ),
                 child: Padding(
                   padding: effectiveHelperPadding,
-                  child: _validatorErrors.isNotEmpty && widget.errorBuilder != null
-                      ? widget.errorBuilder!(context, _validatorErrors.toList())
+                  child: _shouldShowError
+                      ? (widget.errorBuilder?.call(context, effectiveErrorMessages) ??
+                          MoonErrorMessages(errors: effectiveErrorMessages))
                       : widget.helper,
                 ),
               ),
@@ -330,5 +379,34 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
           ),
       ],
     );
+  }
+}
+
+class _GroupOrientation extends StatelessWidget {
+  final MoonTextInputGroupOrientation orientation;
+  final List<Widget> children;
+
+  const _GroupOrientation({
+    required this.orientation,
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (orientation) {
+      MoonTextInputGroupOrientation.vertical => Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: children,
+        ),
+      MoonTextInputGroupOrientation.horizontal => SizedBox(
+          height: 56,
+          width: 300,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: children,
+          ),
+        ),
+    };
   }
 }

@@ -17,8 +17,9 @@ import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
-import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
+import 'package:moon_design/src/widgets/common/border_container.dart';
+import 'package:moon_design/src/widgets/common/error_message_widgets.dart';
 
 export 'package:flutter/services.dart'
     show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
@@ -58,6 +59,9 @@ class MoonTextInput extends StatefulWidget {
   /// The border color of the active or focused text input.
   final Color? activeBorderColor;
 
+  /// The border color used for text input error state.
+  final Color? errorBorderColor;
+
   /// The border color of the inactive text input.
   final Color? inactiveBorderColor;
 
@@ -81,6 +85,9 @@ class MoonTextInput extends StatefulWidget {
 
   /// The height of the text input (this does not include the space taken by [MoonTextInput.errorBuilder]).
   final double? height;
+
+  /// The width of the text input.
+  final double? width;
 
   /// The transition duration for disable animation.
   final Duration? transitionDuration;
@@ -565,6 +572,7 @@ class MoonTextInput extends StatefulWidget {
     this.borderRadius,
     this.backgroundColor,
     this.activeBorderColor,
+    this.errorBorderColor,
     this.inactiveBorderColor,
     this.errorColor,
     this.hoverBorderColor,
@@ -573,6 +581,7 @@ class MoonTextInput extends StatefulWidget {
     this.decoration,
     this.gap,
     this.height,
+    this.width,
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
@@ -1062,7 +1071,11 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final EdgeInsetsGeometry effectiveHelperPadding = widget.helperPadding ??
         context.moonTheme?.textInputTheme.properties.helperPadding ??
-        EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
+        EdgeInsets.only(
+          left: MoonSizes.sizes.x3s,
+          top: MoonSizes.sizes.x4s,
+          right: MoonSizes.sizes.x3s,
+        );
 
     final TextStyle effectiveTextStyle = widget.style ?? effectiveMoonTextInputSize.textStyle;
 
@@ -1097,7 +1110,7 @@ class _MoonTextInputState extends State<MoonTextInput>
     final MoonSquircleBorder errorBorder = MoonSquircleBorder(
       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
       side: BorderSide(
-        color: effectiveErrorColor,
+        color: widget.errorBorderColor ?? effectiveErrorColor,
         width: MoonBorders.borders.activeBorderWidth,
       ),
     );
@@ -1289,7 +1302,7 @@ class _MoonTextInputState extends State<MoonTextInput>
     child = AnimatedBuilder(
       animation: Listenable.merge(<Listenable>[focusNode, controller]),
       builder: (BuildContext context, Widget? child) {
-        return _BorderContainer(
+        return BorderContainer(
           backgroundColor: effectiveBackgroundColor,
           border: resolvedBorder,
           decoration: widget.decoration,
@@ -1387,35 +1400,38 @@ class _MoonTextInputState extends State<MoonTextInput>
       opacity: widget.enabled ? 1.0 : effectiveDisabledOpacityValue,
       curve: effectiveTransitionCurve,
       duration: effectiveTransitionDuration,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          child,
-          if (widget.helper != null || (widget.errorText != null && widget.errorBuilder != null))
-            RepaintBoundary(
-              child: IconTheme(
-                data: IconThemeData(
-                  color: widget.errorText != null && widget.errorBuilder != null
-                      ? effectiveErrorColor
-                      : effectiveHintTextColor,
-                ),
-                child: DefaultTextStyle(
-                  style: effectiveHelperTextStyle.copyWith(
-                    color: widget.errorText != null && widget.errorBuilder != null
-                        ? effectiveErrorColor
-                        : effectiveHintTextColor,
+      child: SizedBox(
+        width: widget.width,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            child,
+            if (widget.helper != null || (widget.errorText != null))
+              RepaintBoundary(
+                child: IconTheme(
+                  data: IconThemeData(
+                    color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
                   ),
-                  child: Padding(
-                    padding: effectiveHelperPadding,
-                    child: widget.errorText != null && widget.errorBuilder != null
-                        ? widget.errorBuilder!(context, widget.errorText)
-                        : widget.helper,
+                  child: DefaultTextStyle(
+                    style: effectiveHelperTextStyle.copyWith(
+                      color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
+                    ),
+                    child: widget.errorText != null
+                        ? widget.errorBuilder?.call(context, widget.errorText) ??
+                            Padding(
+                              padding: effectiveHelperPadding,
+                              child: MoonErrorMessage(errorText: widget.errorText!),
+                            )
+                        : Padding(
+                            padding: effectiveHelperPadding,
+                            child: widget.helper,
+                          ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
 
@@ -1499,93 +1515,5 @@ class _MoonTextInputSelectionGestureDetectorBuilder extends TextSelectionGesture
           Feedback.forLongPress(_state.context);
       }
     }
-  }
-}
-
-class _BorderContainer extends StatefulWidget {
-  final Color backgroundColor;
-  final Decoration? decoration;
-  final double? height;
-  final ShapeBorder border;
-  final Duration duration;
-  final Curve curve;
-  final Widget child;
-
-  const _BorderContainer({
-    required this.backgroundColor,
-    this.decoration,
-    required this.height,
-    required this.border,
-    required this.duration,
-    required this.curve,
-    required this.child,
-  });
-
-  @override
-  _BorderContainerState createState() => _BorderContainerState();
-}
-
-class _BorderContainerState extends State<_BorderContainer> with TickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _borderAnimation;
-  late ShapeBorderTween _border;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
-    _borderAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: widget.curve,
-      reverseCurve: widget.curve.flipped,
-    );
-    _border = ShapeBorderTween(
-      begin: widget.border,
-      end: widget.border,
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  void didUpdateWidget(_BorderContainer oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.border != oldWidget.border) {
-      _border = ShapeBorderTween(
-        begin: oldWidget.border,
-        end: widget.border,
-      );
-      _controller
-        ..value = 0.0
-        ..forward();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _borderAnimation,
-      builder: (context, child) {
-        return Container(
-          height: widget.height,
-          decoration: widget.decoration ??
-              ShapeDecorationWithPremultipliedAlpha(
-                color: widget.backgroundColor,
-                shape: _border.evaluate(_borderAnimation)!,
-              ),
-          child: child,
-        );
-      },
-      child: widget.child,
-    );
   }
 }

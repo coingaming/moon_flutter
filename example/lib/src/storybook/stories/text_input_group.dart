@@ -1,5 +1,4 @@
 import 'package:example/src/storybook/common/color_options.dart';
-import 'package:example/src/storybook/common/widgets/error.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -47,27 +46,38 @@ class TextInputGroupStory extends Story {
 
             final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final activeBorderColorKnob = context.knobs.nullable.options(
+            final borderColorKnob = context.knobs.nullable.options(
+              label: "borderColor",
+              description: "MoonColors variants for MoonTextInputGroup border.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorKnob ?? 40];
+
+            final activeChildrenBorderColorKnob = context.knobs.nullable.options(
               label: "activeBorderColor",
-              description: "MoonColors variants for MoonTextInputGroup active border.",
+              description: "MoonColors variants for MoonTextInputGroup children active border.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final activeBorderColor = colorTable(context)[activeBorderColorKnob ?? 40];
+            final activeBorderColor = colorTable(context)[activeChildrenBorderColorKnob ?? 40];
 
-            final inactiveBorderColorKnob = context.knobs.nullable.options(
-              label: "inactiveBorderColor",
-              description: "MoonColors variants for MoonTextInputGroup inactive border.",
+            final errorBorderColorKnob = context.knobs.nullable.options(
+              label: "errorBorderColor",
+              description: "MoonColors variants for MoonTextInputGroup error border.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+            final errorBorderColor = colorTable(context)[errorBorderColorKnob ?? 40];
 
             final errorColorKnob = context.knobs.nullable.options(
               label: "errorColor",
@@ -79,6 +89,23 @@ class TextInputGroupStory extends Story {
             );
 
             final errorColor = colorTable(context)[errorColorKnob ?? 40];
+
+            final orientationKnob = context.knobs.nullable.options(
+              label: "orientation",
+              description: "MoonTextInputGroup orientation.",
+              enabled: false,
+              initial: MoonTextInputGroupOrientation.vertical,
+              options: [
+                const Option(
+                  label: "vertical",
+                  value: MoonTextInputGroupOrientation.vertical,
+                ),
+                const Option(
+                  label: "horizontal",
+                  value: MoonTextInputGroupOrientation.horizontal,
+                ),
+              ],
+            );
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
@@ -113,14 +140,12 @@ class TextInputGroupStory extends Story {
                         children: [
                           MoonTextInputGroup(
                             enabled: enabledKnob,
-                            textColor: textColor,
                             backgroundColor: backgroundColor,
-                            inactiveBorderColor: inactiveBorderColor,
+                            borderColor: borderColor,
                             errorColor: errorColor,
                             borderRadius: borderRadius,
+                            orientation: orientationKnob ?? MoonTextInputGroupOrientation.vertical,
                             helper: showHelperKnob ? const Text("Supporting text") : null,
-                            errorBuilder: (BuildContext context, List<String> errorMessages) =>
-                                _StoryErrorMessageWidget(errors: errorMessages),
                             children: [
                               MoonFormTextInput(
                                 textInputSize: MoonTextInputSize.xl,
@@ -130,6 +155,7 @@ class TextInputGroupStory extends Story {
                                 textColor: textColor,
                                 hintTextColor: hintTextColor,
                                 activeBorderColor: activeBorderColor,
+                                errorBorderColor: errorBorderColor,
                                 errorColor: errorColor,
                                 borderRadius: borderRadius,
                                 hintText: "Enter text (over 10 characters)",
@@ -166,7 +192,7 @@ class TextInputGroupStory extends Story {
                                 hintText: "Enter password (123abc)",
                                 validator: (String? value) => value != "123abc" ? "Wrong password." : null,
                                 leading: const MoonIcon(
-                                  MoonIcons.search_24,
+                                  MoonIcons.password_24,
                                   size: 24,
                                 ),
                                 trailing: MouseRegion(
@@ -203,22 +229,4 @@ class TextInputGroupStory extends Story {
             );
           },
         );
-}
-
-class _StoryErrorMessageWidget extends StatelessWidget {
-  final List<String> errors;
-
-  const _StoryErrorMessageWidget({required this.errors});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(errors.length * 2 - 1, (int index) {
-        final int derivedIndex = index ~/ 2;
-
-        return index.isEven ? StoryErrorWidget(errorText: errors[derivedIndex]) : const SizedBox(height: 4);
-      }),
-    );
-  }
 }

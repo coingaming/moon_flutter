@@ -305,7 +305,11 @@ class MoonTextArea extends StatelessWidget {
 
     final EdgeInsetsGeometry effectiveHelperPadding = helperPadding ??
         context.moonTheme?.textAreaTheme.properties.helperPadding ??
-        EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
+        EdgeInsets.only(
+          left: MoonSizes.sizes.x3s,
+          top: MoonSizes.sizes.x4s,
+          right: MoonSizes.sizes.x3s,
+        );
 
     final EdgeInsetsGeometry effectiveTextPadding =
         textPadding ?? context.moonTheme?.textAreaTheme.properties.textPadding ?? const EdgeInsets.all(16);
