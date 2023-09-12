@@ -38,8 +38,8 @@ class MoonTextInputGroup extends StatefulWidget {
   /// The background color of the text input group.
   final Color? backgroundColor;
 
-  /// The border color of the inactive text input group.
-  final Color? inactiveBorderColor;
+  /// The default border color of the text input group.
+  final Color? borderColor;
 
   /// The color of the error state of text input group.
   final Color? errorColor;
@@ -49,9 +49,6 @@ class MoonTextInputGroup extends StatefulWidget {
 
   /// The border color of the hovered text input group.
   final Color? hoverBorderColor;
-
-  /// The text color of the text input group.
-  final Color? textColor;
 
   /// The transition duration for disable animation.
   final Duration? transitionDuration;
@@ -91,11 +88,10 @@ class MoonTextInputGroup extends StatefulWidget {
     this.borderRadius,
     this.clipBehavior,
     this.backgroundColor,
-    this.inactiveBorderColor,
+    this.borderColor,
     this.errorColor,
     this.hintTextColor,
     this.hoverBorderColor,
-    this.textColor,
     this.transitionDuration,
     this.transitionCurve,
     this.helperPadding,
@@ -115,14 +111,17 @@ class MoonTextInputGroup extends StatefulWidget {
 class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
   late final List<String?> _validatorErrors = List.filled(widget.children.length, null);
 
+  bool get _groupHasValidationError => _validatorErrors.nonNulls.toList().isNotEmpty;
   bool get _groupHasErrorText =>
       widget.children.any((MoonFormTextInput child) => child.configuration.errorText != null);
-  bool get _groupHasValidationError => _validatorErrors.nonNulls.toList().isNotEmpty;
-  bool get _groupHasError => _groupHasErrorText || _groupHasValidationError;
 
-  bool get _groupIsInErrorState =>
-      _validatorErrors.nonNulls.length == widget.children.length ||
+  bool get _groupHasError => _groupHasValidationError || _groupHasErrorText;
+
+  bool get _groupHasAllValidationErrors => _validatorErrors.nonNulls.length == widget.children.length;
+  bool get _groupHasAllErrorTexts =>
       widget.children.every((MoonFormTextInput child) => child.configuration.errorText != null);
+
+  bool get _groupIsInErrorState => _groupHasAllValidationErrors || _groupHasAllErrorTexts;
   bool get _shouldShowError => _groupHasError || _groupIsInErrorState;
 
   void _handleValidationError(int index, String? errorText) {
@@ -137,21 +136,15 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
   void didUpdateWidget(covariant MoonTextInputGroup oldWidget) {
     super.didUpdateWidget(oldWidget);
 
+    // This is necessary to reflect the children validation state visually.
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!mounted) return;
-      print("spam");
-      /* if (_previousValidatorErrors.values.nonNulls.toSet().containsAll(_validatorErrors.values.nonNulls.toSet())) {
-        print("setState"); */
-      setState(() {
-        //_previousValidatorErrors = _validatorErrors;
-      });
-      /* } */
+      setState(() {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print(_validatorErrors);
     final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ??
         context.moonTheme?.textInputGroupTheme.properties.borderRadius ??
         BorderRadius.circular(8);
@@ -160,9 +153,8 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
         context.moonTheme?.textInputGroupTheme.colors.backgroundColor ??
         MoonColors.light.gohan;
 
-    final Color effectiveBorderColor = widget.inactiveBorderColor ??
-        context.moonTheme?.textInputGroupTheme.colors.borderColor ??
-        MoonColors.light.beerus;
+    final Color effectiveBorderColor =
+        widget.borderColor ?? context.moonTheme?.textInputGroupTheme.colors.borderColor ?? MoonColors.light.beerus;
 
     final Color effectiveErrorColor =
         widget.errorColor ?? context.moonTheme?.textInputGroupTheme.colors.errorColor ?? MoonColors.light.chiChi100;
@@ -196,10 +188,8 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
             final bool selfShowError = ((widget.children[derivedIndex].configuration.errorText != null &&
                         _validatorErrors[derivedIndex] == null) &&
                     !_groupHasValidationError &&
-                    !_groupIsInErrorState) ||
-                (_validatorErrors[derivedIndex] != null && !_groupIsInErrorState);
-
-            print(widget.children[derivedIndex].configuration.errorText);
+                    !_groupHasAllErrorTexts) ||
+                (_validatorErrors[derivedIndex] != null && !_groupHasAllValidationErrors);
 
             final MoonFormTextInput child = MoonFormTextInput(
               activeBorderColor: widget.children[derivedIndex].configuration.activeBorderColor,
@@ -296,9 +286,9 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
                 ? child
                 : Divider(
                     height: 1,
-                    color: _groupIsInErrorState
+                    color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
                         ? effectiveErrorColor
-                        : shouldHideDivider || (_groupHasError && !_groupIsInErrorState)
+                        : shouldHideDivider || (_groupHasError || _groupHasValidationError)
                             ? Colors.transparent
                             : effectiveBorderColor,
                   );
@@ -324,7 +314,9 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
                     shape: MoonSquircleBorder(
                       borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                       side: BorderSide(
-                        color: _groupIsInErrorState ? effectiveErrorColor : effectiveBorderColor,
+                        color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
+                            ? effectiveErrorColor
+                            : effectiveBorderColor,
                       ),
                     ),
                   ),

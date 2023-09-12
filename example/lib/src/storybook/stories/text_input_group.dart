@@ -47,27 +47,38 @@ class TextInputGroupStory extends Story {
 
             final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final activeBorderColorKnob = context.knobs.nullable.options(
+            final borderColorKnob = context.knobs.nullable.options(
+              label: "borderColor",
+              description: "MoonColors variants for MoonTextInputGroup border.",
+              enabled: false,
+              initial: 0,
+              // piccolo
+              options: colorOptions,
+            );
+
+            final borderColor = colorTable(context)[borderColorKnob ?? 40];
+
+            final activeChildrenBorderColorKnob = context.knobs.nullable.options(
               label: "activeBorderColor",
-              description: "MoonColors variants for MoonTextInputGroup active border.",
+              description: "MoonColors variants for MoonTextInputGroup children active border.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final activeBorderColor = colorTable(context)[activeBorderColorKnob ?? 40];
+            final activeBorderColor = colorTable(context)[activeChildrenBorderColorKnob ?? 40];
 
-            final inactiveBorderColorKnob = context.knobs.nullable.options(
-              label: "inactiveBorderColor",
-              description: "MoonColors variants for MoonTextInputGroup inactive border.",
+            final errorBorderColorKnob = context.knobs.nullable.options(
+              label: "errorBorderColor",
+              description: "MoonColors variants for MoonTextInputGroup error border.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+            final errorBorderColor = colorTable(context)[errorBorderColorKnob ?? 40];
 
             final errorColorKnob = context.knobs.nullable.options(
               label: "errorColor",
@@ -113,9 +124,8 @@ class TextInputGroupStory extends Story {
                         children: [
                           MoonTextInputGroup(
                             enabled: enabledKnob,
-                            textColor: textColor,
                             backgroundColor: backgroundColor,
-                            inactiveBorderColor: inactiveBorderColor,
+                            borderColor: borderColor,
                             errorColor: errorColor,
                             borderRadius: borderRadius,
                             helper: showHelperKnob ? const Text("Supporting text") : null,
@@ -123,7 +133,7 @@ class TextInputGroupStory extends Story {
                                 _StoryErrorMessageWidget(errors: errorMessages),
                             children: [
                               MoonFormTextInput(
-                                errorText: "This is an error message.",
+                                //errorText: "This is an error message.",
                                 textInputSize: MoonTextInputSize.xl,
                                 controller: _textController,
                                 enabled: enabledKnob,
@@ -131,6 +141,7 @@ class TextInputGroupStory extends Story {
                                 textColor: textColor,
                                 hintTextColor: hintTextColor,
                                 activeBorderColor: activeBorderColor,
+                                errorBorderColor: errorBorderColor,
                                 errorColor: errorColor,
                                 borderRadius: borderRadius,
                                 hintText: "Enter text (over 10 characters)",
@@ -153,7 +164,7 @@ class TextInputGroupStory extends Story {
                                 ),
                               ),
                               MoonFormTextInput(
-                                errorText: "Another error message.",
+                                //errorText: "Another error message.",
                                 textInputSize: MoonTextInputSize.xl,
                                 controller: _passwordController,
                                 enabled: enabledKnob,
