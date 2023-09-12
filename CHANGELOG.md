@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.3](https://github.com/coingaming/moon_flutter/compare/v0.29.2...v0.29.3) (2023-09-12)
+
+
+### Bug Fixes
+
+* [MDS-669] Fix InputGroup bugs ([#250](https://github.com/coingaming/moon_flutter/issues/250)) ([f7a6759](https://github.com/coingaming/moon_flutter/commit/f7a6759bb3ded699629f4e7b43beff224aa0067a))
+
 ## [0.29.2](https://github.com/coingaming/moon_flutter/compare/v0.29.1...v0.29.2) (2023-09-08)
 
 
