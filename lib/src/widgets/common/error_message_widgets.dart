@@ -27,23 +27,64 @@ class MoonErrorMessages extends StatelessWidget {
   }
 }
 
-class MoonErrorMessage extends StatelessWidget {
+class MoonErrorMessage extends StatefulWidget {
   final String errorText;
+  final Duration duration;
+  final Curve curve;
 
   /// Default error message widget used in [MoonTextInput] and [MoonTextArea].
   const MoonErrorMessage({
     super.key,
     required this.errorText,
+    this.duration = const Duration(milliseconds: 167),
+    this.curve = Curves.fastOutSlowIn,
   });
 
   @override
+  State<MoonErrorMessage> createState() => _MoonErrorMessageState();
+}
+
+class _MoonErrorMessageState extends State<MoonErrorMessage> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacityAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: widget.duration,
+      vsync: this,
+    );
+    _opacityAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: widget.curve,
+      reverseCurve: widget.curve.flipped,
+    );
+
+    _controller
+      ..value = 0.0
+      ..forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        MoonIcon(MoonIcons.info_16, size: context.moonSizes?.x2s ?? 16),
-        SizedBox(width: context.moonSizes?.x5s ?? 4),
-        Text(errorText),
-      ],
+    return FadeTransition(
+      opacity: _opacityAnimation,
+      child: Row(
+        children: [
+          MoonIcon(MoonIcons.info_16, size: context.moonSizes?.x2s ?? 16),
+          SizedBox(width: context.moonSizes?.x5s ?? 4),
+          Text(widget.errorText),
+        ],
+      ),
     );
   }
 }

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
+import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
-import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
+import 'package:moon_design/src/widgets/common/border_container.dart';
 import 'package:moon_design/src/widgets/common/error_message_widgets.dart';
 import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 
@@ -185,14 +186,13 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
         context.moonTheme?.textInputGroupTheme.properties.helperTextStyle ??
         MoonTypography.typography.body.text12;
 
-    // TODO: Implement animations
-    /* final Duration effectiveTransitionDuration = widget.transitionDuration ??
+    final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.textInputGroupTheme.properties.transitionDuration ??
         MoonTransitions.transitions.defaultTransitionDuration;
 
     final Curve effectiveTransitionCurve = widget.transitionCurve ??
         context.moonTheme?.textInputGroupTheme.properties.transitionCurve ??
-        MoonTransitions.transitions.defaultTransitionCurve; */
+        MoonTransitions.transitions.defaultTransitionCurve;
 
     final List<String> effectiveErrorMessages = _validatorErrors.nonNulls.toList().isNotEmpty
         ? _validatorErrors.nonNulls.toList()
@@ -311,14 +311,23 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
 
             return index.isEven
                 ? child
-                : Container(
+                // Animated divider
+                : BorderContainer(
                     height: widget.orientation == MoonTextInputGroupOrientation.horizontal ? double.infinity : 1,
                     width: widget.orientation == MoonTextInputGroupOrientation.vertical ? double.infinity : 1,
-                    color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
-                        ? effectiveErrorColor
-                        : shouldHideDivider || (_groupHasError || _groupHasValidationError)
-                            ? Colors.transparent
-                            : effectiveBorderColor,
+                    duration: effectiveTransitionDuration,
+                    curve: effectiveTransitionCurve,
+                    border: MoonSquircleBorder(
+                      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                      side: BorderSide(
+                        color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
+                            ? effectiveErrorColor
+                            : shouldHideDivider || (_groupHasError || _groupHasValidationError)
+                                ? Colors.transparent
+                                : effectiveBorderColor,
+                      ),
+                    ),
+                    child: const SizedBox.shrink(),
                   );
           },
           growable: false,
@@ -334,22 +343,22 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
           showFocusEffect: false,
           onTap: widget.enabled ? () {} : null,
           builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
-            return Container(
+            return BorderContainer(
               clipBehavior: widget.clipBehavior ?? Clip.none,
-              decoration: widget.decoration ??
-                  ShapeDecorationWithPremultipliedAlpha(
-                    color: effectiveBackgroundColor,
-                    shape: MoonSquircleBorder(
-                      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
-                      side: BorderSide(
-                        color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
-                            ? effectiveErrorColor
-                            : effectiveBorderColor,
-                      ),
-                    ),
-                  ),
+              backgroundColor: effectiveBackgroundColor,
+              decoration: widget.decoration,
+              duration: effectiveTransitionDuration,
+              curve: effectiveTransitionCurve,
+              border: MoonSquircleBorder(
+                borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                side: BorderSide(
+                  color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
+                      ? effectiveErrorColor
+                      : effectiveBorderColor,
+                ),
+              ),
               child: RepaintBoundary(
-                child: _GroupOrientation(
+                child: _InputGroupOrientation(
                   orientation: widget.orientation,
                   children: childrenWithDivider(shouldHideDivider: isHovered || isFocused),
                 ),
@@ -382,11 +391,11 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
   }
 }
 
-class _GroupOrientation extends StatelessWidget {
+class _InputGroupOrientation extends StatelessWidget {
   final MoonTextInputGroupOrientation orientation;
   final List<Widget> children;
 
-  const _GroupOrientation({
+  const _InputGroupOrientation({
     required this.orientation,
     required this.children,
   });
