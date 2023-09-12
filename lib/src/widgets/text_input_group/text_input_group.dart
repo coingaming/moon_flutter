@@ -166,7 +166,11 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
 
     final EdgeInsetsGeometry effectiveHelperPadding = widget.helperPadding ??
         context.moonTheme?.textInputGroupTheme.properties.helperPadding ??
-        EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
+        EdgeInsets.only(
+          left: MoonSizes.sizes.x3s,
+          top: MoonSizes.sizes.x4s,
+          right: MoonSizes.sizes.x3s,
+        );
 
     final TextStyle effectiveHelperTextStyle = widget.helperTextStyle ??
         context.moonTheme?.textInputGroupTheme.properties.helperTextStyle ??
@@ -222,6 +226,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
               enableSuggestions: widget.children[derivedIndex].configuration.enableSuggestions,
               errorBorderColor:
                   selfShowError ? widget.children[derivedIndex].configuration.errorColor : Colors.transparent,
+              errorBuilder: (BuildContext context, String? errorText) => const SizedBox.shrink(),
               errorColor: widget.children[derivedIndex].configuration.errorColor,
               errorText: widget.children[derivedIndex].configuration.errorText,
               expands: widget.children[derivedIndex].configuration.expands,

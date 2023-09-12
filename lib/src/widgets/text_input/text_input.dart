@@ -1067,7 +1067,11 @@ class _MoonTextInputState extends State<MoonTextInput>
 
     final EdgeInsetsGeometry effectiveHelperPadding = widget.helperPadding ??
         context.moonTheme?.textInputTheme.properties.helperPadding ??
-        EdgeInsets.symmetric(horizontal: MoonSizes.sizes.x3s, vertical: MoonSizes.sizes.x4s);
+        EdgeInsets.only(
+          left: MoonSizes.sizes.x3s,
+          top: MoonSizes.sizes.x4s,
+          right: MoonSizes.sizes.x3s,
+        );
 
     final TextStyle effectiveTextStyle = widget.style ?? effectiveMoonTextInputSize.textStyle;
 
@@ -1407,13 +1411,16 @@ class _MoonTextInputState extends State<MoonTextInput>
                   style: effectiveHelperTextStyle.copyWith(
                     color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
                   ),
-                  child: Padding(
-                    padding: effectiveHelperPadding,
-                    child: widget.errorText != null
-                        ? (widget.errorBuilder?.call(context, widget.errorText) ??
-                            MoonErrorMessage(errorText: widget.errorText!))
-                        : widget.helper,
-                  ),
+                  child: widget.errorText != null
+                      ? widget.errorBuilder?.call(context, widget.errorText) ??
+                          Padding(
+                            padding: effectiveHelperPadding,
+                            child: MoonErrorMessage(errorText: widget.errorText!),
+                          )
+                      : Padding(
+                          padding: effectiveHelperPadding,
+                          child: widget.helper,
+                        ),
                 ),
               ),
             ),
