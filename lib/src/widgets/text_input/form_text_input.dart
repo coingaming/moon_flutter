@@ -38,6 +38,7 @@ class MoonFormTextInput extends FormField<String> {
     Decoration? decoration,
     double? gap,
     double? height,
+    double? width,
     Duration? transitionDuration,
     Curve? transitionCurve,
     EdgeInsetsGeometry? padding,
@@ -220,6 +221,7 @@ class MoonFormTextInput extends FormField<String> {
           transitionDuration: transitionDuration,
           undoController: undoController,
           validator: validator,
+          width: width,
         ),
         super(
           initialValue: controller != null ? controller.text : (initialValue ?? ""),
@@ -324,6 +326,7 @@ class MoonFormTextInput extends FormField<String> {
                 transitionCurve: transitionCurve,
                 transitionDuration: transitionDuration,
                 undoController: undoController,
+                width: width,
               ),
             );
           },
@@ -458,6 +461,7 @@ class MoonFormTextInputConfiguration {
   final Decoration? decoration;
   final double? gap;
   final double? height;
+  final double? width;
   final Duration? transitionDuration;
   final Curve? transitionCurve;
   final EdgeInsetsGeometry? padding;
@@ -551,6 +555,7 @@ class MoonFormTextInputConfiguration {
     this.decoration,
     this.gap,
     this.height,
+    this.width,
     this.transitionDuration,
     this.transitionCurve,
     this.padding,

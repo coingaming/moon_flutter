@@ -6,6 +6,7 @@ class BorderContainer extends StatefulWidget {
   final Color backgroundColor;
   final Decoration? decoration;
   final double? height;
+
   final ShapeBorder border;
   final Duration duration;
   final Curve curve;

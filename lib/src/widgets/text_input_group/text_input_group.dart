@@ -11,6 +11,11 @@ import 'package:moon_design/src/widgets/common/base_control.dart';
 import 'package:moon_design/src/widgets/common/error_message_widgets.dart';
 import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
 
+enum MoonTextInputGroupOrientation {
+  vertical,
+  horizontal,
+}
+
 typedef MoonTextInputGroupErrorBuilder = Widget Function(BuildContext context, List<String> errorText);
 
 class MoonTextInputGroup extends StatefulWidget {
@@ -72,6 +77,9 @@ class MoonTextInputGroup extends StatefulWidget {
   /// The text style to use for the helper or error state text.
   final TextStyle? helperTextStyle;
 
+  /// The orientation of the text input group.
+  final MoonTextInputGroupOrientation orientation;
+
   /// The children of the text input group.
   final List<MoonFormTextInput> children;
 
@@ -100,6 +108,7 @@ class MoonTextInputGroup extends StatefulWidget {
     this.decoration,
     this.semanticLabel,
     this.helperTextStyle,
+    this.orientation = MoonTextInputGroupOrientation.vertical,
     required this.children,
     this.errorBuilder,
     this.helper,
@@ -200,7 +209,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
                     !_groupHasAllErrorTexts) ||
                 (_validatorErrors[derivedIndex] != null && !_groupHasAllValidationErrors);
 
-            final MoonFormTextInput child = MoonFormTextInput(
+            Widget child = MoonFormTextInput(
               activeBorderColor: widget.children[derivedIndex].configuration.activeBorderColor,
               autocorrect: widget.children[derivedIndex].configuration.autocorrect,
               autofillHints: widget.children[derivedIndex].configuration.autofillHints,
@@ -290,12 +299,21 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
               undoController: widget.children[derivedIndex].configuration.undoController,
               validationStatusCallback: (errorText) => _handleValidationError(derivedIndex, errorText),
               validator: widget.children[derivedIndex].configuration.validator,
+              width: widget.children[derivedIndex].configuration.width,
             );
+
+            child = widget.children[derivedIndex].configuration.width != null
+                ? SizedBox(
+                    width: widget.children[derivedIndex].configuration.width,
+                    child: child,
+                  )
+                : Flexible(child: child);
 
             return index.isEven
                 ? child
-                : Divider(
-                    height: 1,
+                : Container(
+                    height: widget.orientation == MoonTextInputGroupOrientation.horizontal ? double.infinity : 1,
+                    width: widget.orientation == MoonTextInputGroupOrientation.vertical ? double.infinity : 1,
                     color: (!_groupHasValidationError && _groupHasAllErrorTexts) || _groupHasAllValidationErrors
                         ? effectiveErrorColor
                         : shouldHideDivider || (_groupHasError || _groupHasValidationError)
@@ -330,8 +348,11 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
                       ),
                     ),
                   ),
-              child: Column(
-                children: childrenWithDivider(shouldHideDivider: isHovered || isFocused),
+              child: RepaintBoundary(
+                child: _GroupOrientation(
+                  orientation: widget.orientation,
+                  children: childrenWithDivider(shouldHideDivider: isHovered || isFocused),
+                ),
               ),
             );
           },
@@ -358,5 +379,34 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
           ),
       ],
     );
+  }
+}
+
+class _GroupOrientation extends StatelessWidget {
+  final MoonTextInputGroupOrientation orientation;
+  final List<Widget> children;
+
+  const _GroupOrientation({
+    required this.orientation,
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (orientation) {
+      MoonTextInputGroupOrientation.vertical => Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: children,
+        ),
+      MoonTextInputGroupOrientation.horizontal => SizedBox(
+          height: 56,
+          width: 300,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: children,
+          ),
+        ),
+    };
   }
 }

@@ -90,6 +90,23 @@ class TextInputGroupStory extends Story {
 
             final errorColor = colorTable(context)[errorColorKnob ?? 40];
 
+            final orientationKnob = context.knobs.nullable.options(
+              label: "orientation",
+              description: "MoonTextInputGroup orientation.",
+              enabled: false,
+              initial: MoonTextInputGroupOrientation.vertical,
+              options: [
+                const Option(
+                  label: "vertical",
+                  value: MoonTextInputGroupOrientation.vertical,
+                ),
+                const Option(
+                  label: "horizontal",
+                  value: MoonTextInputGroupOrientation.horizontal,
+                ),
+              ],
+            );
+
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
               description: "Border radius for MoonTextInputGroup.",
@@ -127,10 +144,10 @@ class TextInputGroupStory extends Story {
                             borderColor: borderColor,
                             errorColor: errorColor,
                             borderRadius: borderRadius,
+                            orientation: orientationKnob ?? MoonTextInputGroupOrientation.vertical,
                             helper: showHelperKnob ? const Text("Supporting text") : null,
                             children: [
                               MoonFormTextInput(
-                                //errorText: "This is an error message.",
                                 textInputSize: MoonTextInputSize.xl,
                                 controller: _textController,
                                 enabled: enabledKnob,
@@ -161,7 +178,6 @@ class TextInputGroupStory extends Story {
                                 ),
                               ),
                               MoonFormTextInput(
-                                //errorText: "Another error message.",
                                 textInputSize: MoonTextInputSize.xl,
                                 controller: _passwordController,
                                 enabled: enabledKnob,

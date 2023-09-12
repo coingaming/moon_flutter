@@ -86,6 +86,9 @@ class MoonTextInput extends StatefulWidget {
   /// The height of the text input (this does not include the space taken by [MoonTextInput.errorBuilder]).
   final double? height;
 
+  /// The width of the text input.
+  final double? width;
+
   /// The transition duration for disable animation.
   final Duration? transitionDuration;
 
@@ -578,6 +581,7 @@ class MoonTextInput extends StatefulWidget {
     this.decoration,
     this.gap,
     this.height,
+    this.width,
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
@@ -1396,35 +1400,38 @@ class _MoonTextInputState extends State<MoonTextInput>
       opacity: widget.enabled ? 1.0 : effectiveDisabledOpacityValue,
       curve: effectiveTransitionCurve,
       duration: effectiveTransitionDuration,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          child,
-          if (widget.helper != null || (widget.errorText != null))
-            RepaintBoundary(
-              child: IconTheme(
-                data: IconThemeData(
-                  color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
-                ),
-                child: DefaultTextStyle(
-                  style: effectiveHelperTextStyle.copyWith(
+      child: SizedBox(
+        width: widget.width,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            child,
+            if (widget.helper != null || (widget.errorText != null))
+              RepaintBoundary(
+                child: IconTheme(
+                  data: IconThemeData(
                     color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
                   ),
-                  child: widget.errorText != null
-                      ? widget.errorBuilder?.call(context, widget.errorText) ??
-                          Padding(
+                  child: DefaultTextStyle(
+                    style: effectiveHelperTextStyle.copyWith(
+                      color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
+                    ),
+                    child: widget.errorText != null
+                        ? widget.errorBuilder?.call(context, widget.errorText) ??
+                            Padding(
+                              padding: effectiveHelperPadding,
+                              child: MoonErrorMessage(errorText: widget.errorText!),
+                            )
+                        : Padding(
                             padding: effectiveHelperPadding,
-                            child: MoonErrorMessage(errorText: widget.errorText!),
-                          )
-                      : Padding(
-                          padding: effectiveHelperPadding,
-                          child: widget.helper,
-                        ),
+                            child: widget.helper,
+                          ),
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
 
