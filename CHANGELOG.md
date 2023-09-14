@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.5](https://github.com/coingaming/moon_flutter/compare/v0.29.4...v0.29.5) (2023-09-14)
+
+
+### Bug Fixes
+
+* [MDS-682] Fix InputGroup auto validate mode ([#254](https://github.com/coingaming/moon_flutter/issues/254)) ([81bcf3d](https://github.com/coingaming/moon_flutter/commit/81bcf3dff063d69cdccf599ad243e0482049fccb))
+
 ## [0.29.4](https://github.com/coingaming/moon_flutter/compare/v0.29.3...v0.29.4) (2023-09-12)
 
 
