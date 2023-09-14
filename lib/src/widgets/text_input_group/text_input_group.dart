@@ -20,17 +20,6 @@ enum MoonTextInputGroupOrientation {
 typedef MoonTextInputGroupErrorBuilder = Widget Function(BuildContext context, List<String> errorText);
 
 class MoonTextInputGroup extends StatefulWidget {
-  /// Used to enable/disable this TextInputGroup auto validation and update its error text.
-  ///
-  /// {@template flutter.widgets.FormField.autovalidateMode}
-  /// If [AutovalidateMode.onUserInteraction], this TextInputGroup will only auto-validate after its content changes.
-  /// If [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
-  ///  auto-validation will be disabled.
-  ///
-  /// Defaults to [AutovalidateMode.disabled], cannot be null.
-  /// {@endtemplate}
-  final AutovalidateMode autovalidateMode;
-
   /// If false the widget is "disabled": it ignores taps and has a reduced opacity.
   final bool enabled;
 
@@ -93,7 +82,6 @@ class MoonTextInputGroup extends StatefulWidget {
   /// MDS TextInputGroup widget
   const MoonTextInputGroup({
     super.key,
-    this.autovalidateMode = AutovalidateMode.disabled,
     this.enabled = true,
     this.borderRadius,
     this.clipBehavior,
@@ -121,6 +109,7 @@ class MoonTextInputGroup extends StatefulWidget {
 
 class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
   late final List<String?> _validatorErrors = List.filled(widget.children.length, null);
+  late List<String?> _previousValidatorErrors;
 
   bool get _groupHasValidationError => _validatorErrors.nonNulls.toList().isNotEmpty;
   bool get _groupHasErrorText =>
@@ -136,20 +125,19 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
   bool get _shouldShowError => _groupHasError || _groupIsInErrorState;
 
   void _handleValidationError(int index, String? errorText) {
+    _previousValidatorErrors = _validatorErrors;
+
+    if (_previousValidatorErrors[index] == errorText) return;
+
     if (errorText != null) {
       _validatorErrors[index] = errorText;
     } else {
       _validatorErrors[index] = null;
     }
-  }
 
-  @override
-  void didUpdateWidget(covariant MoonTextInputGroup oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    // This is necessary to reflect the children validation state visually.
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!mounted) return;
+      // Rebuild the widget to show the error
       setState(() {});
     });
   }
@@ -214,7 +202,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
               autocorrect: widget.children[derivedIndex].configuration.autocorrect,
               autofillHints: widget.children[derivedIndex].configuration.autofillHints,
               autofocus: widget.children[derivedIndex].configuration.autofocus,
-              autovalidateMode: widget.autovalidateMode,
+              autovalidateMode: widget.children[derivedIndex].configuration.autovalidateMode,
               backgroundColor: Colors.transparent,
               borderRadius: widget.children[derivedIndex].configuration.borderRadius,
               canRequestFocus: widget.children[derivedIndex].configuration.canRequestFocus,
