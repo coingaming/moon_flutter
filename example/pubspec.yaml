@@ -1,7 +1,7 @@
 name: example
 description: Showcase Moon Design.
 publish_to: none
-version: 0.28.1
+version: 0.29.5
 environment:
   sdk: '>=3.0.5 <4.0.0'
 dependencies:
@@ -24,6 +24,10 @@ dev_dependencies:
       path: packages/storybook_flutter
 flutter:
   uses-material-design: true
+  fonts:
+    - family: DMSans
+      fonts:
+        - asset: assets/DMSans.ttf
   assets:
     - assets/images/
     - assets/svg/

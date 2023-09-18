@@ -30,16 +30,22 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
               backgroundColor: tokens.colors.gohan,
               activeBorderColor: tokens.colors.piccolo,
               inactiveBorderColor: tokens.colors.beerus,
-              errorBorderColor: tokens.colors.chiChi100,
+              errorColor: tokens.colors.chiChi100,
               hoverBorderColor: tokens.colors.beerus,
-              labelTextColor: tokens.colors.trunks,
-              supportingTextColor: tokens.colors.trunks,
+              textColor: tokens.colors.textPrimary,
+              helperTextColor: tokens.colors.textSecondary,
             ),
         properties = properties ??
             MoonTextInputProperties(
-              transitionDuration: tokens.transitions.defaultTransitionDuration,
-              transitionCurve: tokens.transitions.defaultTransitionCurve,
-              helperPadding: EdgeInsets.only(top: tokens.sizes.x4s),
+              // The duration value extracted from:
+              // https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/textfield/TextInputLayout.java
+              transitionDuration: const Duration(milliseconds: 167),
+              transitionCurve: Curves.fastOutSlowIn,
+              helperPadding: EdgeInsets.only(
+                left: tokens.sizes.x3s,
+                top: tokens.sizes.x4s,
+                right: tokens.sizes.x3s,
+              ),
               helperTextStyle: tokens.typography.body.text12,
             ),
         sizes = sizes ?? MoonTextInputSizes(tokens: tokens);

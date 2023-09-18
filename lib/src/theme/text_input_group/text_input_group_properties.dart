@@ -2,29 +2,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with DiagnosticableTreeMixin {
-  /// TextArea border radius.
+class MoonTextInputGroupProperties extends ThemeExtension<MoonTextInputGroupProperties> with DiagnosticableTreeMixin {
+  /// TextInputGroup border radius.
   final BorderRadiusGeometry borderRadius;
 
-  /// TextArea transition duration.
+  /// TextInputGroup transition duration.
   final Duration transitionDuration;
 
-  /// TextArea transition curve.
+  /// TextInputGroup transition curve.
   final Curve transitionCurve;
 
-  /// The padding around TextArea helper widget or error builder.
+  /// The padding around TextInputGroup helper widget or error builder.
   final EdgeInsetsGeometry helperPadding;
 
-  /// TextArea text padding.
+  /// TextInputGroup text padding.
   final EdgeInsetsGeometry textPadding;
 
-  /// TextArea text style.
+  /// TextInputGroup text style.
   final TextStyle textStyle;
 
-  /// TextArea helper or error text style.
+  /// TextInputGroup helper or error text style.
   final TextStyle helperTextStyle;
 
-  const MoonTextAreaProperties({
+  const MoonTextInputGroupProperties({
     required this.borderRadius,
     required this.transitionDuration,
     required this.transitionCurve,
@@ -35,7 +35,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
   });
 
   @override
-  MoonTextAreaProperties copyWith({
+  MoonTextInputGroupProperties copyWith({
     BorderRadiusGeometry? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
@@ -44,7 +44,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
     TextStyle? textStyle,
     TextStyle? helperTextStyle,
   }) {
-    return MoonTextAreaProperties(
+    return MoonTextInputGroupProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
@@ -56,10 +56,10 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
   }
 
   @override
-  MoonTextAreaProperties lerp(ThemeExtension<MoonTextAreaProperties>? other, double t) {
-    if (other is! MoonTextAreaProperties) return this;
+  MoonTextInputGroupProperties lerp(ThemeExtension<MoonTextInputGroupProperties>? other, double t) {
+    if (other is! MoonTextInputGroupProperties) return this;
 
-    return MoonTextAreaProperties(
+    return MoonTextInputGroupProperties(
       borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
@@ -74,7 +74,7 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTextAreaProperties"))
+      ..add(DiagnosticsProperty("type", "MoonTextInputGroupProperties"))
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))

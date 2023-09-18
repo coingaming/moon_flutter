@@ -1,5 +1,47 @@
 # Changelog
 
+## [0.29.5](https://github.com/coingaming/moon_flutter/compare/v0.29.4...v0.29.5) (2023-09-14)
+
+
+### Bug Fixes
+
+* [MDS-682] Fix InputGroup auto validate mode ([#254](https://github.com/coingaming/moon_flutter/issues/254)) ([81bcf3d](https://github.com/coingaming/moon_flutter/commit/81bcf3dff063d69cdccf599ad243e0482049fccb))
+
+## [0.29.4](https://github.com/coingaming/moon_flutter/compare/v0.29.3...v0.29.4) (2023-09-12)
+
+
+### Bug Fixes
+
+* [MDS-675] Add missing container border and helper animations for InputGroup ([#252](https://github.com/coingaming/moon_flutter/issues/252)) ([e254b16](https://github.com/coingaming/moon_flutter/commit/e254b16d0593b9cd89fcbbb0640c879d2949c66f))
+
+## [0.29.3](https://github.com/coingaming/moon_flutter/compare/v0.29.2...v0.29.3) (2023-09-12)
+
+
+### Bug Fixes
+
+* [MDS-669] Fix InputGroup bugs ([#250](https://github.com/coingaming/moon_flutter/issues/250)) ([f7a6759](https://github.com/coingaming/moon_flutter/commit/f7a6759bb3ded699629f4e7b43beff224aa0067a))
+
+## [0.29.2](https://github.com/coingaming/moon_flutter/compare/v0.29.1...v0.29.2) (2023-09-08)
+
+
+### Bug Fixes
+
+* [MDS-665] Fix Input bugs and add border animations ([#248](https://github.com/coingaming/moon_flutter/issues/248)) ([2f22b29](https://github.com/coingaming/moon_flutter/commit/2f22b29cfa193fd2883b57f64a37f38f8fd2dcdc))
+
+## [0.29.1](https://github.com/coingaming/moon_flutter/compare/v0.29.0...v0.29.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [MDS-664] Update icon font and MDS text font ([#246](https://github.com/coingaming/moon_flutter/issues/246)) ([95aed8e](https://github.com/coingaming/moon_flutter/commit/95aed8e34e13db01e797d57d617c94a1181bdf9e))
+
+## [0.29.0](https://github.com/coingaming/moon_flutter/compare/v0.28.1...v0.29.0) (2023-09-06)
+
+
+### Features
+
+* [MDS-617] Refactor Input to align with Flutter 3.10.x changes and create InputGroup component ([#239](https://github.com/coingaming/moon_flutter/issues/239)) ([32ec1c7](https://github.com/coingaming/moon_flutter/commit/32ec1c79588239167ac559ef8aceab445c6b33d2))
+
 ## [0.28.1](https://github.com/coingaming/moon_flutter/compare/v0.28.0...v0.28.1) (2023-08-11)
 
 

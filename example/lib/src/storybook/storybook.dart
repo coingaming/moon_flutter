@@ -26,6 +26,7 @@ import 'package:example/src/storybook/stories/tab_bar.dart';
 import 'package:example/src/storybook/stories/tag.dart';
 import 'package:example/src/storybook/stories/text_area.dart';
 import 'package:example/src/storybook/stories/text_input.dart';
+import 'package:example/src/storybook/stories/text_input_group.dart';
 import 'package:example/src/storybook/stories/toast.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
 import 'package:flutter/foundation.dart';
@@ -58,12 +59,34 @@ class StorybookPage extends StatelessWidget {
           initialStory: "DataTable",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
-          wrapperBuilder: (BuildContext context, Widget? child) => MaterialApp(
+          wrapperBuilder: (context, child) => MaterialApp(
             title: "Moon Design for Flutter",
-            theme:
-                ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.light)]),
-            darkTheme:
-                ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.dark)]),
+            theme: ThemeData.light().copyWith(
+              extensions: <ThemeExtension<dynamic>>[
+                MoonTheme(
+                  tokens: MoonTokens.light.copyWith(
+                    typography: MoonTypography.typography.copyWith(
+                      heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
+                      body: MoonTypography.typography.body.apply(fontFamily: "DMSans"),
+                      caption: MoonTypography.typography.caption.apply(fontFamily: "DMSans"),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            darkTheme: ThemeData.dark().copyWith(
+              extensions: <ThemeExtension<dynamic>>[
+                MoonTheme(
+                  tokens: MoonTokens.dark.copyWith(
+                    typography: MoonTypography.typography.copyWith(
+                      heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
+                      body: MoonTypography.typography.body.apply(fontFamily: "DMSans"),
+                      caption: MoonTypography.typography.caption.apply(fontFamily: "DMSans"),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             home: Directionality(
               textDirection: Directionality.of(context),
               child: Focus(
@@ -79,13 +102,9 @@ class StorybookPage extends StatelessWidget {
                     extendBody: true,
                     extendBodyBehindAppBar: true,
                     resizeToAvoidBottomInset: false,
-                    body: SafeArea(
-                      top: false,
-                      bottom: false,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: child,
-                      ),
+                    body: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: child,
                     ),
                   ),
                 ),
@@ -120,6 +139,7 @@ class StorybookPage extends StatelessWidget {
             TagStory(),
             TextAreaStory(),
             TextInputStory(),
+            TextInputGroupStory(),
             ToastStory(),
             TooltipStory(),
           ],
