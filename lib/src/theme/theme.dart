@@ -12,6 +12,7 @@ import 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_theme.dart';
 import 'package:moon_design/src/theme/drawer/drawer_theme.dart';
+import 'package:moon_design/src/theme/dropdown/dropdown_theme.dart';
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_theme.dart';
 import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_theme.dart';
@@ -84,6 +85,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonDrawer widget theming.
   final MoonDrawerTheme drawerTheme;
 
+  /// Moon Design System MoonDropdown widget theming.
+  final MoonDropdownTheme dropdownTheme;
+
   /// Moon Design System effects.
   final MoonEffectsTheme effects;
 
@@ -150,6 +154,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonCircularProgressTheme? circularProgressTheme,
     MoonDotIndicatorTheme? dotIndicatorTheme,
     MoonDrawerTheme? drawerTheme,
+    MoonDropdownTheme? dropdownTheme,
     MoonEffectsTheme? effects,
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
@@ -180,6 +185,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         circularProgressTheme = circularProgressTheme ?? MoonCircularProgressTheme(tokens: tokens),
         dotIndicatorTheme = dotIndicatorTheme ?? MoonDotIndicatorTheme(tokens: tokens),
         drawerTheme = drawerTheme ?? MoonDrawerTheme(tokens: tokens),
+        dropdownTheme = dropdownTheme ?? MoonDropdownTheme(tokens: tokens),
         effects = effects ?? MoonEffectsTheme(tokens: tokens),
         linearLoaderTheme = linearLoaderTheme ?? MoonLinearLoaderTheme(tokens: tokens),
         linearProgressTheme = linearProgressTheme ?? MoonLinearProgressTheme(tokens: tokens),
@@ -214,6 +220,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonCircularProgressTheme? circularProgressTheme,
     MoonDotIndicatorTheme? dotIndicatorTheme,
     MoonDrawerTheme? drawerTheme,
+    MoonDropdownTheme? dropdownTheme,
     MoonEffectsTheme? effects,
     MoonLinearLoaderTheme? linearLoaderTheme,
     MoonLinearProgressTheme? linearProgressTheme,
@@ -247,6 +254,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
       dotIndicatorTheme: dotIndicatorTheme ?? this.dotIndicatorTheme,
       drawerTheme: drawerTheme ?? this.drawerTheme,
+      dropdownTheme: dropdownTheme ?? this.dropdownTheme,
       effects: effects ?? this.effects,
       linearLoaderTheme: linearLoaderTheme ?? this.linearLoaderTheme,
       linearProgressTheme: linearProgressTheme ?? this.linearProgressTheme,
@@ -286,6 +294,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
       dotIndicatorTheme: dotIndicatorTheme.lerp(other.dotIndicatorTheme, t),
       drawerTheme: drawerTheme.lerp(other.drawerTheme, t),
+      dropdownTheme: dropdownTheme.lerp(other.dropdownTheme, t),
       effects: effects.lerp(other.effects, t),
       linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
       linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
@@ -324,6 +333,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
       ..add(DiagnosticsProperty<MoonDotIndicatorTheme>("MoonDotIndicatorTheme", dotIndicatorTheme))
       ..add(DiagnosticsProperty<MoonDrawerTheme>("MoonDrawerTheme", drawerTheme))
+      ..add(DiagnosticsProperty<MoonDropdownTheme>("MoonDropdownTheme", dropdownTheme))
       ..add(DiagnosticsProperty<MoonEffectsTheme>("MoonEffectsTheme", effects))
       ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
       ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))

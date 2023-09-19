@@ -12,6 +12,7 @@ import 'package:example/src/storybook/stories/circular_loader.dart';
 import 'package:example/src/storybook/stories/circular_progress.dart';
 import 'package:example/src/storybook/stories/dot_indicator.dart';
 import 'package:example/src/storybook/stories/drawer.dart';
+import 'package:example/src/storybook/stories/dropdown.dart';
 import 'package:example/src/storybook/stories/icons.dart';
 import 'package:example/src/storybook/stories/linear_loader.dart';
 import 'package:example/src/storybook/stories/linear_progress.dart';
@@ -54,7 +55,7 @@ class StorybookPage extends StatelessWidget {
     return Stack(
       children: [
         Storybook(
-          initialStory: "Accordion",
+          initialStory: "Dropdown",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (context, child) => MaterialApp(
@@ -123,6 +124,7 @@ class StorybookPage extends StatelessWidget {
             CircularProgressStory(),
             DotIndicatorStory(),
             DrawerStory(),
+            DropdownStory(),
             IconsStory(),
             LinearLoaderStory(),
             LinearProgressStory(),

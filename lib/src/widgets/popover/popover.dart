@@ -83,6 +83,9 @@ class MoonPopover extends StatefulWidget {
   /// The semantic label for the popover.
   final String? semanticLabel;
 
+  /// Callback that is called when the user taps outside the popover.
+  final VoidCallback? onTapOutside;
+
   /// The [child] widget which the popover will target.
   final Widget child;
 
@@ -111,6 +114,7 @@ class MoonPopover extends StatefulWidget {
     this.routeObserver,
     this.decoration,
     this.semanticLabel,
+    this.onTapOutside,
     required this.child,
     required this.content,
   });
@@ -134,6 +138,7 @@ class MoonPopover extends StatefulWidget {
 }
 
 class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerProviderStateMixin {
+  late final ObjectKey _regionKey = ObjectKey(widget);
   final GlobalKey _popoverKey = GlobalKey();
   final LayerLink _layerLink = LayerLink();
 
@@ -168,6 +173,11 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       _animationController!.value = 1;
       _animationController!.reverse().then((value) => _clearOverlayEntry());
     }
+  }
+
+  void _handleTapOutside() {
+    widget.onTapOutside?.call();
+    _removePopover();
   }
 
   void _clearOverlayEntry() {
@@ -432,8 +442,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           followerAnchor: popoverPositionParameters.followerAnchor,
           targetAnchor: popoverPositionParameters.targetAnchor,
           child: TapRegion(
+            groupId: _regionKey,
             behavior: HitTestBehavior.translucent,
-            onTapOutside: (PointerDownEvent _) => _removePopover(),
+            onTapOutside: (PointerDownEvent _) => _handleTapOutside(),
             child: RepaintBoundary(
               child: FadeTransition(
                 opacity: _curvedAnimation!,
@@ -486,9 +497,13 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       curve: effectiveTransitionCurve,
     );
 
-    return CompositedTransformTarget(
-      link: _layerLink,
-      child: widget.child,
+    return TapRegion(
+      groupId: _regionKey,
+      behavior: HitTestBehavior.translucent,
+      child: CompositedTransformTarget(
+        link: _layerLink,
+        child: widget.child,
+      ),
     );
   }
 }
