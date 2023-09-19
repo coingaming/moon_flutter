@@ -326,8 +326,12 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
     );
 
     final double targetWidth = targetRenderBox.size.width;
-    final double effectiveDropdownWidth =
-        widget.constrainWidthToChild ? targetWidth : dropdownPositionParameters.dropdownMaxWidth;
+
+    final double effectiveDropdownWidth = widget.constrainWidthToChild
+        ? targetWidth
+        : widget.maxWidth != null
+            ? widget.maxWidth!
+            : dropdownPositionParameters.dropdownMaxWidth;
 
     return Semantics(
       label: widget.semanticLabel,
@@ -350,7 +354,12 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Container(
-                      constraints: BoxConstraints(maxWidth: effectiveDropdownWidth),
+                      constraints: BoxConstraints(
+                        minHeight: widget.minHeight ?? 0,
+                        maxHeight: widget.maxHeight ?? double.infinity,
+                        minWidth: widget.minWidth ?? 0,
+                        maxWidth: effectiveDropdownWidth,
+                      ),
                       padding: resolvedContentPadding,
                       decoration: widget.decoration ??
                           ShapeDecorationWithPremultipliedAlpha(

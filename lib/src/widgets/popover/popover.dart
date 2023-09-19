@@ -431,6 +431,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       popoverTargetGlobalRight: popoverTargetGlobalRight.dx,
     );
 
+    final double effectiveDropdownWidth =
+        widget.maxWidth != null ? widget.maxWidth! : popoverPositionParameters.popoverMaxWidth;
+
     return Semantics(
       label: widget.semanticLabel,
       child: UnconstrainedBox(
@@ -452,7 +455,12 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Container(
-                      constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),
+                      constraints: BoxConstraints(
+                        minHeight: widget.minHeight ?? 0,
+                        maxHeight: widget.maxHeight ?? double.infinity,
+                        minWidth: widget.minWidth ?? 0,
+                        maxWidth: effectiveDropdownWidth,
+                      ),
                       padding: resolvedContentPadding,
                       decoration: widget.decoration ??
                           ShapeDecorationWithPremultipliedAlpha(
