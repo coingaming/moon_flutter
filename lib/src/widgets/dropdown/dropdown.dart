@@ -16,8 +16,8 @@ enum MoonDropdownPosition {
 }
 
 class MoonDropdown extends StatefulWidget {
-  // This is required so only one dropdown is shown at a time.
-  static final List<MoonDropdownState> _openedDropdowns = [];
+  /// If true, the dropdown will be constrained to the width of its child (target).
+  final bool constrainWidthToChild;
 
   /// Controls the dropdown visibility.
   final bool show;
@@ -79,7 +79,7 @@ class MoonDropdown extends StatefulWidget {
   /// Callback that is called when the user taps outside the dropdown.
   final VoidCallback? onTapOutside;
 
-  /// The [child] widget which the dropdown will target.
+  /// The child (target) of the dropdown.
   final Widget child;
 
   /// The widget that its placed inside the dropdown and functions as its content.
@@ -89,6 +89,7 @@ class MoonDropdown extends StatefulWidget {
   const MoonDropdown({
     super.key,
     required this.show,
+    this.constrainWidthToChild = false,
     this.borderRadius,
     this.backgroundColor,
     this.borderColor = Colors.transparent,
@@ -112,25 +113,11 @@ class MoonDropdown extends StatefulWidget {
     required this.content,
   });
 
-  // Causes any current dropdowns to be removed. Won't remove the supplied dropdown.
-  static void _removeOtherdropdowns(MoonDropdownState current) {
-    if (_openedDropdowns.isNotEmpty) {
-      // Avoid concurrent modification.
-      final List<MoonDropdownState> openedDropdowns = _openedDropdowns.toList();
-
-      for (final MoonDropdownState state in openedDropdowns) {
-        if (state == current) continue;
-
-        state._clearOverlayEntry();
-      }
-    }
-  }
-
   @override
-  MoonDropdownState createState() => MoonDropdownState();
+  _MoonDropdownState createState() => _MoonDropdownState();
 }
 
-class MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTickerProviderStateMixin {
+class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTickerProviderStateMixin {
   late final ObjectKey _regionKey = ObjectKey(widget);
   final GlobalKey _dropdownKey = GlobalKey();
   final LayerLink _layerLink = LayerLink();
@@ -147,9 +134,6 @@ class MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTicke
   void _showDropdown() {
     _overlayEntry = OverlayEntry(builder: (BuildContext context) => _createOverlayContent());
     Overlay.of(context).insert(_overlayEntry!);
-
-    MoonDropdown._openedDropdowns.add(this);
-    MoonDropdown._removeOtherdropdowns(this);
 
     _animationController!.value = 0;
     _animationController!.forward();
@@ -174,7 +158,6 @@ class MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTicke
 
   void _clearOverlayEntry() {
     if (_overlayEntry != null) {
-      MoonDropdown._openedDropdowns.remove(this);
       _overlayEntry!.remove();
       _overlayEntry = null;
     }
@@ -297,8 +280,6 @@ class MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTicke
   }
 
   Widget _createOverlayContent() {
-    MoonDropdownPosition dropdownPosition = widget.dropdownPosition;
-
     final BorderRadiusGeometry effectiveBorderRadius =
         widget.borderRadius ?? context.moonTheme?.dropdownTheme.properties.borderRadius ?? BorderRadius.circular(12);
 
@@ -323,11 +304,13 @@ class MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTicke
     final List<BoxShadow> effectivedropdownShadows =
         widget.dropdownShadows ?? context.moonTheme?.dropdownTheme.shadows.dropdownShadows ?? MoonShadows.light.sm;
 
-    final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
+    MoonDropdownPosition dropdownPosition = widget.dropdownPosition;
 
-    final targetRenderBox = context.findRenderObject()! as RenderBox;
+    final RenderBox overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
-    final dropdownTargetGlobalCenter =
+    final RenderBox targetRenderBox = context.findRenderObject()! as RenderBox;
+
+    final Offset dropdownTargetGlobalCenter =
         targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
 
     if (dropdownPosition == MoonDropdownPosition.auto) {
@@ -336,12 +319,16 @@ class MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTicke
           : MoonDropdownPosition.top;
     }
 
-    final dropdownPositionParameters = _resolveDropdownPositionParameters(
+    final _DropdownPositionProperties dropdownPositionParameters = _resolveDropdownPositionParameters(
       dropdownPosition: dropdownPosition,
       distanceToTarget: effectiveDistanceToTarget,
       overlayWidth: overlayRenderBox.size.width,
       dropdownTargetGlobalCenter: dropdownTargetGlobalCenter.dx,
     );
+
+    final double targetWidth = targetRenderBox.size.width;
+    final double effectiveDropdownWidth =
+        widget.constrainWidthToChild ? targetWidth : dropdownPositionParameters.dropdownMaxWidth;
 
     return Semantics(
       label: widget.semanticLabel,
@@ -365,7 +352,7 @@ class MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTicke
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Container(
                       key: _dropdownKey,
-                      constraints: BoxConstraints(maxWidth: dropdownPositionParameters.dropdownMaxWidth),
+                      constraints: BoxConstraints(maxWidth: effectiveDropdownWidth),
                       padding: resolvedContentPadding,
                       decoration: widget.decoration ??
                           ShapeDecorationWithPremultipliedAlpha(

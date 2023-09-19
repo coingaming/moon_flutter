@@ -151,14 +151,18 @@ class DropdownStory extends Story {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MoonDropdown(
+                            constrainWidthToChild: true,
                             show: _show,
                             transitionDuration: Duration.zero,
                             onTapOutside: () => setState(() => _show = false),
                             content: Column(
                               children: MoonMenuItem.divideMenuItems(
                                 context: context,
-                                menuItems: const [
-                                  MoonMenuItem(title: Text("Item 1")),
+                                menuItems: [
+                                  MoonMenuItem(
+                                    title: Text("Item 1"),
+                                    onTap: () {},
+                                  ),
                                   MoonMenuItem(title: Text("Item 1")),
                                 ],
                               ).toList(),

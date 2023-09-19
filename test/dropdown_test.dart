@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:moon_design/src/widgets/buttons/filled_button.dart';
-import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
+import 'package:moon_design/src/widgets/dropdown/dropdown.dart';
 
 void main() {
-  const key = Key("tooltip_test");
+  const key = Key("dropdown_test");
 
   testWidgets("Provided key is used", (tester) async {
-    await tester.pumpWidget(MoonTooltip(key: key, show: true, content: Container(), child: Container()));
+    await tester.pumpWidget(MoonDropdown(key: key, show: true, content: Container(), child: Container()));
     expect(find.byKey(key), findsOneWidget);
   });
 
-  testWidgets("Tooltip is shown after clicking on button", (tester) async {
+  testWidgets("Dropdown is shown after clicking on button", (tester) async {
     await tester.pumpWidget(const TestWidget(key: key, content: content));
     final button = find.byType(MoonFilledButton);
 
@@ -24,7 +24,7 @@ void main() {
     expect(find.byWidget(content), findsOneWidget);
   });
 
-  testWidgets("Tooltip is hidden after clicking on it", (tester) async {
+  testWidgets("Dropdown is hidden after clicking outside content", (tester) async {
     await tester.pumpWidget(const TestWidget(key: key, content: content));
     final button = find.byType(MoonFilledButton);
 
@@ -32,11 +32,13 @@ void main() {
 
     await tester.tap(button);
     await tester.pumpAndSettle();
-    final tooltipContent = _findTooltipContent(tooltipText);
-    await tester.tap(tooltipContent);
+
+    expect(find.byWidget(content), findsOneWidget);
+
+    await tester.tapAt(const Offset(10, 10));
     await tester.pumpAndSettle();
 
-    expect(tooltipContent, findsNothing);
+    expect(find.byWidget(content), findsNothing);
   });
 
   testWidgets("Provided color is used", (tester) async {
@@ -56,21 +58,14 @@ void main() {
 
     expect(find.byWidget(content), findsOneWidget);
     expect(
-      find.byWidgetPredicate((widget) => widget is MoonTooltip && widget.backgroundColor == Colors.red),
+      find.byWidgetPredicate((widget) => widget is MoonDropdown && widget.backgroundColor == Colors.red),
       findsOneWidget,
     );
   });
 }
 
-const String tooltipText = "Tooltip content";
-const Widget content = Text(tooltipText);
-
-Finder _findTooltipContent(String tooltipText) {
-  return find.ancestor(
-    of: find.text(tooltipText),
-    matching: find.byType(Container),
-  );
-}
+const String dropdownText = "Dropdown content";
+const Widget content = Text(dropdownText);
 
 bool show = false;
 
@@ -91,10 +86,11 @@ class TestWidget extends StatelessWidget {
         body: Center(
           child: StatefulBuilder(
             builder: (context, setState) {
-              return MoonTooltip(
+              return MoonDropdown(
                 show: show,
                 backgroundColor: color,
                 content: content,
+                onTapOutside: () => setState(() => show = false),
                 child: MoonFilledButton(
                   onTap: () {
                     setState(() => show = true);

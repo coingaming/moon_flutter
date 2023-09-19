@@ -86,7 +86,7 @@ class MoonPopover extends StatefulWidget {
   /// Callback that is called when the user taps outside the popover.
   final VoidCallback? onTapOutside;
 
-  /// The [child] widget which the popover will target.
+  /// The child (target) of the popover.
   final Widget child;
 
   /// The widget that its placed inside the popover and functions as its content.
@@ -381,17 +381,17 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final List<BoxShadow> effectivePopoverShadows =
         widget.popoverShadows ?? context.moonTheme?.popoverTheme.shadows.popoverShadows ?? MoonShadows.light.sm;
 
-    final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
+    final RenderBox overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
-    final targetRenderBox = context.findRenderObject()! as RenderBox;
+    final RenderBox targetRenderBox = context.findRenderObject()! as RenderBox;
 
-    final popoverTargetGlobalCenter =
+    final Offset popoverTargetGlobalCenter =
         targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
 
-    final popoverTargetGlobalLeft =
+    final Offset popoverTargetGlobalLeft =
         targetRenderBox.localToGlobal(targetRenderBox.size.centerLeft(Offset.zero), ancestor: overlayRenderBox);
 
-    final popoverTargetGlobalRight =
+    final Offset popoverTargetGlobalRight =
         targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
 
     if (Directionality.of(context) == TextDirection.rtl ||
@@ -423,7 +423,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       }
     }
 
-    final popoverPositionParameters = _resolvePopoverPositionParameters(
+    final _PopoverPositionProperties popoverPositionParameters = _resolvePopoverPositionParameters(
       popoverPosition: popoverPosition,
       distanceToTarget: effectiveDistanceToTarget,
       overlayWidth: overlayRenderBox.size.width,
