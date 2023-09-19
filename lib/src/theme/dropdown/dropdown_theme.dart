@@ -35,9 +35,9 @@ class MoonDropdownTheme extends ThemeExtension<MoonDropdownTheme> with Diagnosti
             MoonDropdownProperties(
               borderRadius: tokens.borders.interactiveMd,
               distanceToTarget: tokens.sizes.x4s,
-              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionDuration: Duration.zero,
               transitionCurve: tokens.transitions.defaultTransitionCurve,
-              contentPadding: EdgeInsets.all(tokens.sizes.x3s),
+              contentPadding: EdgeInsets.all(tokens.sizes.x5s),
               textStyle: tokens.typography.body.textDefault,
             ),
         shadows = shadows ?? MoonDropdownShadows(dropdownShadows: tokens.shadows.sm);

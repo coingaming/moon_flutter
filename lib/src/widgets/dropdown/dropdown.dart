@@ -119,7 +119,6 @@ class MoonDropdown extends StatefulWidget {
 
 class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTickerProviderStateMixin {
   late final ObjectKey _regionKey = ObjectKey(widget);
-  final GlobalKey _dropdownKey = GlobalKey();
   final LayerLink _layerLink = LayerLink();
 
   AnimationController? _animationController;
@@ -351,7 +350,6 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Container(
-                      key: _dropdownKey,
                       constraints: BoxConstraints(maxWidth: effectiveDropdownWidth),
                       padding: resolvedContentPadding,
                       decoration: widget.decoration ??

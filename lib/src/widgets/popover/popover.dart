@@ -139,7 +139,6 @@ class MoonPopover extends StatefulWidget {
 
 class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerProviderStateMixin {
   late final ObjectKey _regionKey = ObjectKey(widget);
-  final GlobalKey _popoverKey = GlobalKey();
   final LayerLink _layerLink = LayerLink();
 
   AnimationController? _animationController;
@@ -453,7 +452,6 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Container(
-                      key: _popoverKey,
                       constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),
                       padding: resolvedContentPadding,
                       decoration: widget.decoration ??

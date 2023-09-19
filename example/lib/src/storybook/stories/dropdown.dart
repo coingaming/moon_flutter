@@ -6,6 +6,8 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 TextEditingController _dateController = TextEditingController();
 
 bool _show = false;
+Color? _buttonColor;
+String _buttonName = "Piccolo";
 
 class DropdownStory extends Story {
   DropdownStory()
@@ -141,6 +143,11 @@ class DropdownStory extends Story {
             final BorderRadiusGeometry? borderRadius =
                 borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
 
+            // Used to avoid the stale closure within callbacks
+            final colorPiccolo = context.moonColors!.piccolo;
+            final colorKrillin = context.moonColors!.krillin100;
+            final colorRoshi = context.moonColors!.roshi100;
+
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 64),
               child: Form(
@@ -151,24 +158,47 @@ class DropdownStory extends Story {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MoonDropdown(
-                            constrainWidthToChild: true,
                             show: _show,
-                            transitionDuration: Duration.zero,
+                            constrainWidthToChild: true,
                             onTapOutside: () => setState(() => _show = false),
                             content: Column(
-                              children: MoonMenuItem.divideMenuItems(
-                                context: context,
-                                menuItems: [
-                                  MoonMenuItem(
-                                    title: Text("Item 1"),
-                                    onTap: () {},
-                                  ),
-                                  MoonMenuItem(title: Text("Item 1")),
-                                ],
-                              ).toList(),
+                              children: [
+                                MoonMenuItem(
+                                  title: const Text("Piccolo"),
+                                  borderRadius:
+                                      const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
+                                  onTap: () => setState(() {
+                                    _buttonName = "Piccolo";
+                                    _buttonColor = colorPiccolo;
+                                    _show = false;
+                                  }),
+                                ),
+                                MoonMenuItem(
+                                  title: const Text("Krillin"),
+                                  borderRadius:
+                                      const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
+                                  onTap: () => setState(() {
+                                    _buttonName = "Krillin";
+                                    _buttonColor = colorKrillin;
+                                    _show = false;
+                                  }),
+                                ),
+                                MoonMenuItem(
+                                  title: const Text("Roshi"),
+                                  borderRadius:
+                                      const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
+                                  onTap: () => setState(() {
+                                    _buttonName = "Roshi";
+                                    _buttonColor = colorRoshi;
+                                    _show = false;
+                                  }),
+                                ),
+                              ],
                             ),
                             child: MoonFilledButton(
-                              label: const Text("Dropdown"),
+                              width: 100,
+                              label: Text(_buttonName),
+                              backgroundColor: _buttonColor,
                               onTap: () => setState(() => _show = !_show),
                             ),
                           ),
