@@ -106,6 +106,7 @@ class PopoverStory extends Story {
                           distanceToTarget: distanceToTargetKnob,
                           popoverPosition: popoverPositionKnob ?? MoonPopoverPosition.top,
                           popoverShadows: showShadowKnob == true ? null : [],
+                          onTapOutside: () => setState(() => show = false),
                           content: ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 190),
                             child: Column(
@@ -139,7 +140,7 @@ class PopoverStory extends Story {
                             ),
                           ),
                           child: MoonFilledButton(
-                            onTap: () => setState(() => show = true),
+                            onTap: () => setState(() => show = !show),
                             label: const Text("Tap me"),
                           ),
                         );
