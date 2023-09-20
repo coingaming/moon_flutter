@@ -473,7 +473,7 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
         );

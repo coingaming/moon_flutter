@@ -22,7 +22,7 @@ class AccordionStory extends Story {
                 Option(label: "sm", value: MoonAccordionSize.sm),
                 Option(label: "md", value: MoonAccordionSize.md),
                 Option(label: "lg", value: MoonAccordionSize.lg),
-                Option(label: "xl", value: MoonAccordionSize.xl)
+                Option(label: "xl", value: MoonAccordionSize.xl),
               ],
             );
 

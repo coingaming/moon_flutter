@@ -99,7 +99,7 @@ class BottomSheetStory extends Story {
                               onTap: () => Navigator.of(context).pop(),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     Divider(

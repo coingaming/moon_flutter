@@ -24,7 +24,7 @@ class ButtonStory extends Story {
                 Option(label: "sm", value: MoonButtonSize.sm),
                 Option(label: "md", value: MoonButtonSize.md),
                 Option(label: "lg", value: MoonButtonSize.lg),
-                Option(label: "xl", value: MoonButtonSize.xl)
+                Option(label: "xl", value: MoonButtonSize.xl),
               ],
             );
 
@@ -241,7 +241,7 @@ class ButtonStory extends Story {
                           BoxShadow(
                             blurRadius: 3,
                             offset: Offset(0, 2),
-                          )
+                          ),
                         ],
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,

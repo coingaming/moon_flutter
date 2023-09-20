@@ -10,7 +10,6 @@ import 'package:example/src/storybook/stories/checkbox.dart';
 import 'package:example/src/storybook/stories/chip.dart';
 import 'package:example/src/storybook/stories/circular_loader.dart';
 import 'package:example/src/storybook/stories/circular_progress.dart';
-import 'package:example/src/storybook/stories/data_table.dart';
 import 'package:example/src/storybook/stories/dot_indicator.dart';
 import 'package:example/src/storybook/stories/drawer.dart';
 import 'package:example/src/storybook/stories/icons.dart';
@@ -23,6 +22,7 @@ import 'package:example/src/storybook/stories/radio.dart';
 import 'package:example/src/storybook/stories/segmented_control.dart';
 import 'package:example/src/storybook/stories/switch.dart';
 import 'package:example/src/storybook/stories/tab_bar.dart';
+import 'package:example/src/storybook/stories/table.dart';
 import 'package:example/src/storybook/stories/tag.dart';
 import 'package:example/src/storybook/stories/text_area.dart';
 import 'package:example/src/storybook/stories/text_input.dart';
@@ -56,10 +56,10 @@ class StorybookPage extends StatelessWidget {
       children: [
         Storybook(
           // initialStory: "Accordion",
-          initialStory: "DataTable",
+          initialStory: "Table",
           plugins: _plugins,
           brandingWidget: const MoonVersionWidget(),
-          wrapperBuilder: (context, child) => MaterialApp(
+          wrapperBuilder: (BuildContext context, Widget? child) => MaterialApp(
             title: "Moon Design for Flutter",
             theme: ThemeData.light().copyWith(
               extensions: <ThemeExtension<dynamic>>[
@@ -102,9 +102,13 @@ class StorybookPage extends StatelessWidget {
                     extendBody: true,
                     extendBodyBehindAppBar: true,
                     resizeToAvoidBottomInset: false,
-                    body: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: child,
+                    body: SafeArea(
+                      top: false,
+                      bottom: false,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: child,
+                      ),
                     ),
                   ),
                 ),
@@ -123,7 +127,6 @@ class StorybookPage extends StatelessWidget {
             ChipStory(),
             CircularLoaderStory(),
             CircularProgressStory(),
-            DataTableStory(),
             DotIndicatorStory(),
             DrawerStory(),
             IconsStory(),
@@ -136,6 +139,7 @@ class StorybookPage extends StatelessWidget {
             SegmentedControlStory(),
             SwitchStory(),
             TabBarStory(),
+            TableStory(),
             TagStory(),
             TextAreaStory(),
             TextInputStory(),
