@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-TextEditingController _dateController = TextEditingController();
-
 bool _show = false;
 Color? _buttonColor;
 String _buttonName = "Piccolo";
@@ -14,44 +12,21 @@ class DropdownStory extends Story {
       : super(
           name: "Dropdown",
           builder: (BuildContext context) {
-            final textInputSizeKnob = context.knobs.nullable.options(
-              label: "textInputSize",
-              description: "Size variants for MoonTextInput.",
+            final dropdownPositionKnob = context.knobs.nullable.options(
+              label: "dropdownPosition",
+              description: "Position variants for MoonDropdown.",
               enabled: false,
-              initial: MoonTextInputSize.md,
+              initial: MoonDropdownPosition.bottom,
               options: const [
-                Option(label: "sm", value: MoonTextInputSize.sm),
-                Option(label: "md", value: MoonTextInputSize.md),
-                Option(label: "lg", value: MoonTextInputSize.lg),
-                Option(label: "xl", value: MoonTextInputSize.xl)
+                Option(label: "top", value: MoonDropdownPosition.top),
+                Option(label: "bottom", value: MoonDropdownPosition.bottom),
+                Option(label: "left", value: MoonDropdownPosition.auto),
               ],
             );
 
-            final textColorKnob = context.knobs.nullable.options(
-              label: "textColor",
-              description: "MoonColors variants for MoonTextInput text.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final textColor = colorTable(context)[textColorKnob ?? 40];
-
-            final hintTextColorKnob = context.knobs.nullable.options(
-              label: "hintTextColor",
-              description: "MoonColors variants for MoonTextInput hint text.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final hintTextColor = colorTable(context)[hintTextColorKnob ?? 40];
-
             final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
-              description: "MoonColors variants for MoonTextInput background.",
+              description: "MoonColors variants for MoonDropdown background.",
               enabled: false,
               initial: 0,
               // piccolo
@@ -60,88 +35,44 @@ class DropdownStory extends Story {
 
             final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
 
-            final activeBorderColorKnob = context.knobs.nullable.options(
-              label: "activeBorderColor",
-              description: "MoonColors variants for MoonTextInput active border.",
+            final borderColorKnob = context.knobs.nullable.options(
+              label: "borderColor",
+              description: "MoonColors variants for MoonDropdown border.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final activeBorderColor = colorTable(context)[activeBorderColorKnob ?? 40];
-
-            final inactiveBorderColorKnob = context.knobs.nullable.options(
-              label: "inactiveBorderColor",
-              description: "MoonColors variants for MoonTextInput inactive border.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
-
-            final hoverBorderColorKnob = context.knobs.nullable.options(
-              label: "hoverBorderColor",
-              description: "MoonColors variants for MoonTextInput hover border.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final hoverBorderColor = colorTable(context)[hoverBorderColorKnob ?? 40];
-
-            final errorColorKnob = context.knobs.nullable.options(
-              label: "errorColor",
-              description: "MoonColors variants for MoonTextInput error.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final errorColor = colorTable(context)[errorColorKnob ?? 40];
+            final borderColor = colorTable(context)[borderColorKnob ?? 40];
 
             final borderRadiusKnob = context.knobs.nullable.sliderInt(
               label: "borderRadius",
-              description: "Border radius for MoonTextInput.",
+              description: "Border radius for MoonDropdown.",
               enabled: false,
               initial: 8,
               max: 32,
             );
 
-            final enabledKnob = context.knobs.boolean(
-              label: "enabled",
-              description: "Switch between enabled and disabled states.",
+            final distanceToTargetKnob = context.knobs.nullable.slider(
+              label: "distanceToTarget",
+              description: "Set the distance to target child widget.",
+              enabled: false,
+              initial: 8,
+              max: 100,
+            );
+
+            final showShadowKnob = context.knobs.boolean(
+              label: "Show shadow",
+              description: "Show shadows under MoonDropdown.",
               initial: true,
             );
 
-            final hasFloatingLabelKnob = context.knobs.boolean(
-              label: "hasFloatingLabel",
-              description: "Whether MoonTextInput has floating label.",
-            );
-
-            final showLeadingKnob = context.knobs.boolean(
-              label: "leading",
-              description: "Show widget in MoonTextInput leading slot.",
+            final constrainWidthToChildKnob = context.knobs.boolean(
+              label: "constrainWidthToChild",
+              description: "Constrain the width of the MoonDropdown to be same as the child (target).",
               initial: true,
             );
-
-            final showTrailingKnob = context.knobs.boolean(
-              label: "trailing",
-              description: "Show widget in MoonTextInput trailing slot.",
-              initial: true,
-            );
-
-            final showHelperKnob = context.knobs.boolean(
-              label: "helper",
-              description: "Show widget in MoonTextInput helper slot.",
-            );
-
-            final BorderRadiusGeometry? borderRadius =
-                borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
 
             // Used to avoid the stale closure within callbacks
             final colorPiccolo = context.moonColors!.piccolo;
@@ -150,68 +81,65 @@ class DropdownStory extends Story {
 
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 64),
-              child: Form(
-                child: StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MoonDropdown(
-                            show: _show,
-                            constrainWidthToChild: true,
-                            onTapOutside: () => setState(() => _show = false),
-                            content: Column(
-                              children: [
-                                MoonMenuItem(
-                                  title: const Text("Piccolo"),
-                                  borderRadius:
-                                      const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
-                                  onTap: () => setState(() {
-                                    _buttonName = "Piccolo";
-                                    _buttonColor = colorPiccolo;
-                                    _show = false;
-                                  }),
-                                ),
-                                MoonMenuItem(
-                                  title: const Text("Krillin"),
-                                  borderRadius:
-                                      const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
-                                  onTap: () => setState(() {
-                                    _buttonName = "Krillin";
-                                    _buttonColor = colorKrillin;
-                                    _show = false;
-                                  }),
-                                ),
-                                MoonMenuItem(
-                                  title: const Text("Roshi"),
-                                  borderRadius:
-                                      const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
-                                  onTap: () => setState(() {
-                                    _buttonName = "Roshi";
-                                    _buttonColor = colorRoshi;
-                                    _show = false;
-                                  }),
-                                ),
-                              ],
-                            ),
-                            child: MoonFilledButton(
-                              width: 100,
-                              label: Text(_buttonName),
-                              backgroundColor: _buttonColor,
-                              onTap: () => setState(() => _show = !_show),
-                            ),
+              child: StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MoonDropdown(
+                          show: _show,
+                          borderColor: borderColor ?? Colors.transparent,
+                          backgroundColor: backgroundColor,
+                          borderRadius:
+                              borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                          constrainWidthToChild: constrainWidthToChildKnob,
+                          distanceToTarget: distanceToTargetKnob,
+                          dropdownPosition: dropdownPositionKnob ?? MoonDropdownPosition.bottom,
+                          dropdownShadows: showShadowKnob == true ? null : [],
+                          onTapOutside: () => setState(() => _show = false),
+                          content: Column(
+                            children: [
+                              MoonMenuItem(
+                                title: const Text("Piccolo"),
+                                borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
+                                onTap: () => setState(() {
+                                  _show = false;
+                                  _buttonName = "Piccolo";
+                                  _buttonColor = colorPiccolo;
+                                }),
+                              ),
+                              MoonMenuItem(
+                                title: const Text("Krillin"),
+                                borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
+                                onTap: () => setState(() {
+                                  _show = false;
+                                  _buttonName = "Krillin";
+                                  _buttonColor = colorKrillin;
+                                }),
+                              ),
+                              MoonMenuItem(
+                                title: const Text("Roshi"),
+                                borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
+                                onTap: () => setState(() {
+                                  _show = false;
+                                  _buttonName = "Roshi";
+                                  _buttonColor = colorRoshi;
+                                }),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 32),
-                          MoonFilledButton(
-                            label: const Text("Submit"),
-                            onTap: () => Form.of(context).validate(),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                          child: MoonFilledButton(
+                            width: 100,
+                            label: Text(_buttonName),
+                            backgroundColor: _buttonColor,
+                            onTap: () => setState(() => _show = !_show),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             );
           },

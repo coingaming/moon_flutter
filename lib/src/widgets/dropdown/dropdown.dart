@@ -31,6 +31,9 @@ class MoonDropdown extends StatefulWidget {
   /// The color of the dropdown border.
   final Color borderColor;
 
+  /// Custom decoration for the dropdown.
+  final Decoration? decoration;
+
   /// The width of the dropdown border.
   final double borderWidth;
 
@@ -70,9 +73,6 @@ class MoonDropdown extends StatefulWidget {
   /// `RouteObserver` used to listen for route changes that will hide the dropdown when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
-  /// Custom decoration for the dropdown.
-  final Decoration? decoration;
-
   /// The semantic label for the dropdown.
   final String? semanticLabel;
 
@@ -93,6 +93,7 @@ class MoonDropdown extends StatefulWidget {
     this.borderRadius,
     this.backgroundColor,
     this.borderColor = Colors.transparent,
+    this.decoration,
     this.borderWidth = 0,
     this.distanceToTarget,
     this.minHeight,
@@ -106,7 +107,6 @@ class MoonDropdown extends StatefulWidget {
     this.dropdownShadows,
     this.dropdownPosition = MoonDropdownPosition.bottom,
     this.routeObserver,
-    this.decoration,
     this.semanticLabel,
     this.onTapOutside,
     required this.child,

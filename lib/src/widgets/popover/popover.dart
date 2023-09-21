@@ -38,6 +38,9 @@ class MoonPopover extends StatefulWidget {
   /// The color of the popover border.
   final Color borderColor;
 
+  /// Custom decoration for the popover.
+  final Decoration? decoration;
+
   /// The width of the popover border.
   final double borderWidth;
 
@@ -77,9 +80,6 @@ class MoonPopover extends StatefulWidget {
   /// `RouteObserver` used to listen for route changes that will hide the popover when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
-  /// Custom decoration for the popover.
-  final Decoration? decoration;
-
   /// The semantic label for the popover.
   final String? semanticLabel;
 
@@ -99,6 +99,7 @@ class MoonPopover extends StatefulWidget {
     this.borderRadius,
     this.backgroundColor,
     this.borderColor = Colors.transparent,
+    this.decoration,
     this.borderWidth = 0,
     this.distanceToTarget,
     this.minHeight,
@@ -112,7 +113,6 @@ class MoonPopover extends StatefulWidget {
     this.popoverShadows,
     this.popoverPosition = MoonPopoverPosition.top,
     this.routeObserver,
-    this.decoration,
     this.semanticLabel,
     this.onTapOutside,
     required this.child,

@@ -34,17 +34,6 @@ class PopoverStory extends Story {
               ],
             );
 
-            final textColorKnob = context.knobs.nullable.options(
-              label: "Text color",
-              description: "MoonColors variants for MoonPopover text.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final textColor = colorTable(context)[textColorKnob ?? 40];
-
             final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonPopover background.",
@@ -122,10 +111,7 @@ class PopoverStory extends Story {
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
-                                      child: Text(
-                                        customLabelTextKnob,
-                                        style: TextStyle(color: textColor),
-                                      ),
+                                      child: Text(customLabelTextKnob),
                                     ),
                                   ],
                                 ),
