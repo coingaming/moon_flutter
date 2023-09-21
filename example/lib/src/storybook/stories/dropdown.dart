@@ -20,7 +20,7 @@ class DropdownStory extends Story {
               options: const [
                 Option(label: "top", value: MoonDropdownPosition.top),
                 Option(label: "bottom", value: MoonDropdownPosition.bottom),
-                Option(label: "left", value: MoonDropdownPosition.auto),
+                Option(label: "auto", value: MoonDropdownPosition.auto),
               ],
             );
 
