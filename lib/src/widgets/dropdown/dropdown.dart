@@ -67,7 +67,7 @@ class MoonDropdown extends StatefulWidget {
   /// List of dropdown shadows.
   final List<BoxShadow>? dropdownShadows;
 
-  /// Sets the dropdown position relative to the target. Defaults to [MoonDropdownPosition.vertical]
+  /// Sets the dropdown position relative to the target. Defaults to [MoonDropdownPosition.bottom]
   final MoonDropdownPosition dropdownPosition;
 
   /// `RouteObserver` used to listen for route changes that will hide the dropdown when the widget's route is not active.
@@ -296,7 +296,7 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
         widget.distanceToTarget ?? context.moonTheme?.dropdownTheme.properties.distanceToTarget ?? 8;
 
     final EdgeInsetsGeometry effectiveContentPadding =
-        widget.contentPadding ?? context.moonTheme?.dropdownTheme.properties.contentPadding ?? const EdgeInsets.all(12);
+        widget.contentPadding ?? context.moonTheme?.dropdownTheme.properties.contentPadding ?? const EdgeInsets.all(4);
 
     final EdgeInsets resolvedContentPadding = effectiveContentPadding.resolve(Directionality.of(context));
 
