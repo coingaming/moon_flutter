@@ -9,13 +9,30 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 
-enum MoonDropdownPosition {
+enum MoonDropdownAnchorPosition {
   top,
+  topLeft,
+  topRight,
   bottom,
-  auto,
+  bottomLeft,
+  bottomRight,
+  left,
+  right,
+  vertical,
+  horizontal,
 }
 
 class MoonDropdown extends StatefulWidget {
+  /// Sets the dropdown anchor position on dropdown content (follower).
+  ///
+  /// Note: this will override [MoonDropdownAnchorPosition] property.
+  final Alignment? followerAnchor;
+
+  /// Sets the dropdown anchor position on the child (target).
+  ///
+  /// Note: this will override [MoonDropdownAnchorPosition] property.
+  final Alignment? targetAnchor;
+
   /// If true, the dropdown will be constrained to the width of its child (target).
   final bool constrainWidthToChild;
 
@@ -38,6 +55,8 @@ class MoonDropdown extends StatefulWidget {
   final double borderWidth;
 
   /// The distance from the tip of the dropdown arrow (tail) to the target widget.
+  ///
+  /// Note: this will be overriden by the [offset] property.
   final double? distanceToTarget;
 
   /// Optional size constraint. If a constraint is not set the size will adjust to the content.
@@ -52,26 +71,38 @@ class MoonDropdown extends StatefulWidget {
   /// Optional size constraint. If a constraint is not set the size will adjust to the content.
   final double? maxWidth;
 
-  /// The margin around dropdown. Used to prevent the dropdown from touching the edges of the viewport.
-  final double dropdownMargin;
-
-  /// dropdown transition duration (fade in or out animation).
+  /// Dropdown transition duration (fade in or out animation).
   final Duration? transitionDuration;
 
-  /// dropdown transition curve (fade in or out animation).
+  /// Dropdown transition curve (fade in or out animation).
   final Curve? transitionCurve;
 
   /// Padding around the dropdown content.
   final EdgeInsetsGeometry? contentPadding;
 
+  /// The margin around dropdown. Used to prevent the dropdown from touching the edges of the viewport.
+  final EdgeInsetsGeometry? dropdownMargin;
+
   /// List of dropdown shadows.
   final List<BoxShadow>? dropdownShadows;
 
-  /// Sets the dropdown position relative to the target. Defaults to [MoonDropdownPosition.bottom]
-  final MoonDropdownPosition dropdownPosition;
+  /// Sets the dropdown anchor position on the child (target). Defaults to [MoonDropdownAnchorPosition.bottom]
+  ///
+  /// Note: this is a convenience property whose parameters either will be overriden or ignored when using
+  /// [followerAnchor], [targetAnchor], [offset] or [maxWidth] properties.
+  final MoonDropdownAnchorPosition dropdownAnchorPosition;
+
+  /// The offset of the dropdown.
+  ///
+  /// Note: this will override [distanceToTarget] property.
+  final Offset? offset;
 
   /// `RouteObserver` used to listen for route changes that will hide the dropdown when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
+
+  /// The group id of the dropdown. Used to prevent the dropdown from closing when tapping inside nested dropdowns with
+  /// the same group id.
+  final String? groupId;
 
   /// The semantic label for the dropdown.
   final String? semanticLabel;
@@ -89,6 +120,8 @@ class MoonDropdown extends StatefulWidget {
   const MoonDropdown({
     super.key,
     required this.show,
+    this.followerAnchor,
+    this.targetAnchor,
     this.constrainWidthToChild = false,
     this.borderRadius,
     this.backgroundColor,
@@ -100,13 +133,15 @@ class MoonDropdown extends StatefulWidget {
     this.minWidth,
     this.maxHeight,
     this.maxWidth,
-    this.dropdownMargin = 8,
     this.transitionDuration,
     this.transitionCurve,
     this.contentPadding,
+    this.dropdownMargin,
     this.dropdownShadows,
-    this.dropdownPosition = MoonDropdownPosition.bottom,
+    this.dropdownAnchorPosition = MoonDropdownAnchorPosition.bottom,
+    this.offset,
     this.routeObserver,
+    this.groupId,
     this.semanticLabel,
     this.onTapOutside,
     required this.child,
@@ -118,7 +153,7 @@ class MoonDropdown extends StatefulWidget {
 }
 
 class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTickerProviderStateMixin {
-  late final ObjectKey _regionKey = ObjectKey(widget);
+  late final Key _regionKey = widget.groupId != null ? ValueKey(widget.groupId) : ObjectKey(widget);
   final LayerLink _layerLink = LayerLink();
 
   AnimationController? _animationController;
@@ -163,32 +198,83 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
   }
 
   _DropdownPositionProperties _resolveDropdownPositionParameters({
-    required MoonDropdownPosition dropdownPosition,
+    required MoonDropdownAnchorPosition dropdownAnchorPosition,
     required double distanceToTarget,
     required double overlayWidth,
+    required double dropdownTargetGlobalLeft,
     required double dropdownTargetGlobalCenter,
+    required double dropdownTargetGlobalRight,
+    required EdgeInsets dropdownMargin,
   }) {
-    switch (dropdownPosition) {
-      case MoonDropdownPosition.top:
+    switch (dropdownAnchorPosition) {
+      case MoonDropdownAnchorPosition.top:
         return _DropdownPositionProperties(
           offset: Offset(0, -distanceToTarget),
           targetAnchor: Alignment.topCenter,
           followerAnchor: Alignment.bottomCenter,
           dropdownMaxWidth:
-              overlayWidth - ((overlayWidth / 2 - dropdownTargetGlobalCenter) * 2).abs() - widget.dropdownMargin * 2,
+              overlayWidth - ((overlayWidth / 2 - dropdownTargetGlobalCenter) * 2).abs() - dropdownMargin.horizontal,
         );
 
-      case MoonDropdownPosition.bottom:
+      case MoonDropdownAnchorPosition.bottom:
         return _DropdownPositionProperties(
           offset: Offset(0, distanceToTarget),
           targetAnchor: Alignment.bottomCenter,
           followerAnchor: Alignment.topCenter,
           dropdownMaxWidth:
-              overlayWidth - ((overlayWidth / 2 - dropdownTargetGlobalCenter) * 2).abs() - widget.dropdownMargin * 2,
+              overlayWidth - ((overlayWidth / 2 - dropdownTargetGlobalCenter) * 2).abs() - dropdownMargin.horizontal,
+        );
+
+      case MoonDropdownAnchorPosition.left:
+        return _DropdownPositionProperties(
+          offset: Offset(-distanceToTarget, 0),
+          targetAnchor: Alignment.centerLeft,
+          followerAnchor: Alignment.centerRight,
+          dropdownMaxWidth: dropdownTargetGlobalLeft - distanceToTarget - dropdownMargin.left,
+        );
+
+      case MoonDropdownAnchorPosition.right:
+        return _DropdownPositionProperties(
+          offset: Offset(distanceToTarget, 0),
+          targetAnchor: Alignment.centerRight,
+          followerAnchor: Alignment.centerLeft,
+          dropdownMaxWidth: overlayWidth - dropdownTargetGlobalRight - distanceToTarget - dropdownMargin.right,
+        );
+
+      case MoonDropdownAnchorPosition.topLeft:
+        return _DropdownPositionProperties(
+          offset: Offset(0, -distanceToTarget),
+          targetAnchor: Alignment.topLeft,
+          followerAnchor: Alignment.bottomLeft,
+          dropdownMaxWidth: overlayWidth - dropdownTargetGlobalLeft - dropdownMargin.left,
+        );
+
+      case MoonDropdownAnchorPosition.topRight:
+        return _DropdownPositionProperties(
+          offset: Offset(0, -distanceToTarget),
+          targetAnchor: Alignment.topRight,
+          followerAnchor: Alignment.bottomRight,
+          dropdownMaxWidth: dropdownTargetGlobalRight - dropdownMargin.right,
+        );
+
+      case MoonDropdownAnchorPosition.bottomLeft:
+        return _DropdownPositionProperties(
+          offset: Offset(0, distanceToTarget),
+          targetAnchor: Alignment.bottomLeft,
+          followerAnchor: Alignment.topLeft,
+          dropdownMaxWidth: overlayWidth - dropdownTargetGlobalLeft - dropdownMargin.left,
+        );
+
+      case MoonDropdownAnchorPosition.bottomRight:
+        return _DropdownPositionProperties(
+          offset: Offset(0, distanceToTarget),
+          targetAnchor: Alignment.bottomRight,
+          followerAnchor: Alignment.topRight,
+          dropdownMaxWidth: dropdownTargetGlobalRight - dropdownMargin.right,
         );
 
       default:
-        throw AssertionError(dropdownPosition);
+        throw AssertionError("No match: $dropdownAnchorPosition");
     }
   }
 
@@ -249,7 +335,7 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!_routeIsShowing) return;
 
-      if (oldWidget.dropdownPosition != widget.dropdownPosition) {
+      if (oldWidget.dropdownAnchorPosition != widget.dropdownAnchorPosition) {
         _removeDropdown(immediately: true);
         _showDropdown();
       } else if (shouldShowdropdown && _overlayEntry == null) {
@@ -300,10 +386,15 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
 
     final EdgeInsets resolvedContentPadding = effectiveContentPadding.resolve(Directionality.of(context));
 
+    final EdgeInsetsGeometry effectiveDropdownMargin =
+        widget.dropdownMargin ?? context.moonTheme?.dropdownTheme.properties.dropdownMargin ?? const EdgeInsets.all(8);
+
+    final EdgeInsets resolvedDropdownMargin = effectiveDropdownMargin.resolve(Directionality.of(context));
+
     final List<BoxShadow> effectivedropdownShadows =
         widget.dropdownShadows ?? context.moonTheme?.dropdownTheme.shadows.dropdownShadows ?? MoonShadows.light.sm;
 
-    MoonDropdownPosition dropdownPosition = widget.dropdownPosition;
+    MoonDropdownAnchorPosition dropdownAnchorPosition = widget.dropdownAnchorPosition;
 
     final RenderBox overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
@@ -312,17 +403,49 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
     final Offset dropdownTargetGlobalCenter =
         targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
 
-    if (dropdownPosition == MoonDropdownPosition.auto) {
-      dropdownPosition = dropdownTargetGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
-          ? MoonDropdownPosition.bottom
-          : MoonDropdownPosition.top;
+    final Offset dropdownTargetGlobalLeft =
+        targetRenderBox.localToGlobal(targetRenderBox.size.centerLeft(Offset.zero), ancestor: overlayRenderBox);
+
+    final Offset dropdownTargetGlobalRight =
+        targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
+
+    if (Directionality.of(context) == TextDirection.rtl ||
+        dropdownAnchorPosition == MoonDropdownAnchorPosition.horizontal ||
+        dropdownAnchorPosition == MoonDropdownAnchorPosition.vertical) {
+      switch (dropdownAnchorPosition) {
+        case MoonDropdownAnchorPosition.left:
+          dropdownAnchorPosition = MoonDropdownAnchorPosition.right;
+        case MoonDropdownAnchorPosition.right:
+          dropdownAnchorPosition = MoonDropdownAnchorPosition.left;
+        case MoonDropdownAnchorPosition.topLeft:
+          dropdownAnchorPosition = MoonDropdownAnchorPosition.topRight;
+        case MoonDropdownAnchorPosition.topRight:
+          dropdownAnchorPosition = MoonDropdownAnchorPosition.topLeft;
+        case MoonDropdownAnchorPosition.bottomLeft:
+          dropdownAnchorPosition = MoonDropdownAnchorPosition.bottomRight;
+        case MoonDropdownAnchorPosition.bottomRight:
+          dropdownAnchorPosition = MoonDropdownAnchorPosition.bottomLeft;
+        case MoonDropdownAnchorPosition.vertical:
+          dropdownAnchorPosition = dropdownTargetGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
+              ? MoonDropdownAnchorPosition.bottom
+              : MoonDropdownAnchorPosition.top;
+        case MoonDropdownAnchorPosition.horizontal:
+          dropdownAnchorPosition = dropdownTargetGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
+              ? MoonDropdownAnchorPosition.right
+              : MoonDropdownAnchorPosition.left;
+        default:
+          break;
+      }
     }
 
-    final _DropdownPositionProperties dropdownPositionParameters = _resolveDropdownPositionParameters(
-      dropdownPosition: dropdownPosition,
+    final _DropdownPositionProperties dropdownAnchorPositionParameters = _resolveDropdownPositionParameters(
+      dropdownAnchorPosition: dropdownAnchorPosition,
       distanceToTarget: effectiveDistanceToTarget,
       overlayWidth: overlayRenderBox.size.width,
+      dropdownTargetGlobalLeft: dropdownTargetGlobalLeft.dx,
       dropdownTargetGlobalCenter: dropdownTargetGlobalCenter.dx,
+      dropdownTargetGlobalRight: dropdownTargetGlobalRight.dx,
+      dropdownMargin: resolvedDropdownMargin,
     );
 
     final double targetWidth = targetRenderBox.size.width;
@@ -331,7 +454,7 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
         ? targetWidth
         : widget.maxWidth != null
             ? widget.maxWidth!
-            : dropdownPositionParameters.dropdownMaxWidth;
+            : dropdownAnchorPositionParameters.dropdownMaxWidth;
 
     return Semantics(
       label: widget.semanticLabel,
@@ -339,9 +462,9 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
         child: CompositedTransformFollower(
           link: _layerLink,
           showWhenUnlinked: false,
-          offset: dropdownPositionParameters.offset,
-          followerAnchor: dropdownPositionParameters.followerAnchor,
-          targetAnchor: dropdownPositionParameters.targetAnchor,
+          offset: widget.offset ?? dropdownAnchorPositionParameters.offset,
+          followerAnchor: widget.followerAnchor ?? dropdownAnchorPositionParameters.followerAnchor,
+          targetAnchor: widget.targetAnchor ?? dropdownAnchorPositionParameters.targetAnchor,
           child: TapRegion(
             groupId: _regionKey,
             behavior: HitTestBehavior.translucent,
@@ -370,7 +493,10 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
                               side: BorderSide(color: widget.borderColor),
                             ),
                           ),
-                      child: widget.content,
+                      child: Directionality(
+                        textDirection: Directionality.of(context),
+                        child: widget.content,
+                      ),
                     ),
                   ),
                 ),

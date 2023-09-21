@@ -20,6 +20,9 @@ class MoonDropdownProperties extends ThemeExtension<MoonDropdownProperties> with
   /// Padding around dropdown content.
   final EdgeInsetsGeometry contentPadding;
 
+  /// Margin of the dropdown.
+  final EdgeInsetsGeometry dropdownMargin;
+
   /// Dropdown text style.
   final TextStyle textStyle;
 
@@ -29,6 +32,7 @@ class MoonDropdownProperties extends ThemeExtension<MoonDropdownProperties> with
     required this.transitionDuration,
     required this.transitionCurve,
     required this.contentPadding,
+    required this.dropdownMargin,
     required this.textStyle,
   });
 
@@ -39,6 +43,7 @@ class MoonDropdownProperties extends ThemeExtension<MoonDropdownProperties> with
     Duration? transitionDuration,
     Curve? transitionCurve,
     EdgeInsetsGeometry? contentPadding,
+    EdgeInsetsGeometry? dropdownMargin,
     TextStyle? textStyle,
   }) {
     return MoonDropdownProperties(
@@ -47,6 +52,7 @@ class MoonDropdownProperties extends ThemeExtension<MoonDropdownProperties> with
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
       contentPadding: contentPadding ?? this.contentPadding,
+      dropdownMargin: dropdownMargin ?? this.dropdownMargin,
       textStyle: textStyle ?? this.textStyle,
     );
   }
@@ -61,6 +67,7 @@ class MoonDropdownProperties extends ThemeExtension<MoonDropdownProperties> with
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
       contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
+      dropdownMargin: EdgeInsetsGeometry.lerp(dropdownMargin, other.dropdownMargin, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -75,6 +82,7 @@ class MoonDropdownProperties extends ThemeExtension<MoonDropdownProperties> with
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("dropdownMargin", dropdownMargin))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

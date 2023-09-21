@@ -102,7 +102,6 @@ class PopoverStory extends Story {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Row(
-                                  textDirection: Directionality.of(context),
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     MoonAvatar(

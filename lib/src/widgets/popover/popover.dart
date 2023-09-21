@@ -263,7 +263,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
         );
 
       default:
-        throw AssertionError(popoverPosition);
+        throw AssertionError("No match: $popoverPosition");
     }
   }
 
@@ -471,7 +471,10 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                               side: BorderSide(color: widget.borderColor),
                             ),
                           ),
-                      child: widget.content,
+                      child: Directionality(
+                        textDirection: Directionality.of(context),
+                        child: widget.content,
+                      ),
                     ),
                   ),
                 ),
