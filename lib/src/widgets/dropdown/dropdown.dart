@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
@@ -379,7 +380,7 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
         context.moonTheme?.dropdownTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
     final double effectiveDistanceToTarget =
-        widget.distanceToTarget ?? context.moonTheme?.dropdownTheme.properties.distanceToTarget ?? 8;
+        widget.distanceToTarget ?? context.moonTheme?.dropdownTheme.properties.distanceToTarget ?? MoonSizes.sizes.x4s;
 
     final EdgeInsetsGeometry effectiveContentPadding =
         widget.contentPadding ?? context.moonTheme?.dropdownTheme.properties.contentPadding ?? const EdgeInsets.all(4);
