@@ -38,6 +38,9 @@ class MoonPopover extends StatefulWidget {
   /// The color of the popover border.
   final Color borderColor;
 
+  /// Custom decoration for the popover.
+  final Decoration? decoration;
+
   /// The width of the popover border.
   final double borderWidth;
 
@@ -77,13 +80,13 @@ class MoonPopover extends StatefulWidget {
   /// `RouteObserver` used to listen for route changes that will hide the popover when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
-  /// Custom decoration for the popover.
-  final Decoration? decoration;
-
   /// The semantic label for the popover.
   final String? semanticLabel;
 
-  /// The [child] widget which the popover will target.
+  /// Callback that is called when the user taps outside the popover.
+  final VoidCallback? onTapOutside;
+
+  /// The child (target) of the popover.
   final Widget child;
 
   /// The widget that its placed inside the popover and functions as its content.
@@ -96,6 +99,7 @@ class MoonPopover extends StatefulWidget {
     this.borderRadius,
     this.backgroundColor,
     this.borderColor = Colors.transparent,
+    this.decoration,
     this.borderWidth = 0,
     this.distanceToTarget,
     this.minHeight,
@@ -109,8 +113,8 @@ class MoonPopover extends StatefulWidget {
     this.popoverShadows,
     this.popoverPosition = MoonPopoverPosition.top,
     this.routeObserver,
-    this.decoration,
     this.semanticLabel,
+    this.onTapOutside,
     required this.child,
     required this.content,
   });
@@ -134,7 +138,7 @@ class MoonPopover extends StatefulWidget {
 }
 
 class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerProviderStateMixin {
-  final GlobalKey _popoverKey = GlobalKey();
+  late final ObjectKey _regionKey = ObjectKey(widget);
   final LayerLink _layerLink = LayerLink();
 
   AnimationController? _animationController;
@@ -168,6 +172,11 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       _animationController!.value = 1;
       _animationController!.reverse().then((value) => _clearOverlayEntry());
     }
+  }
+
+  void _handleTapOutside() {
+    widget.onTapOutside?.call();
+    _removePopover();
   }
 
   void _clearOverlayEntry() {
@@ -254,7 +263,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
         );
 
       default:
-        throw AssertionError(popoverPosition);
+        throw AssertionError("No match: $popoverPosition");
     }
   }
 
@@ -371,17 +380,17 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     final List<BoxShadow> effectivePopoverShadows =
         widget.popoverShadows ?? context.moonTheme?.popoverTheme.shadows.popoverShadows ?? MoonShadows.light.sm;
 
-    final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
+    final RenderBox overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
 
-    final targetRenderBox = context.findRenderObject()! as RenderBox;
+    final RenderBox targetRenderBox = context.findRenderObject()! as RenderBox;
 
-    final popoverTargetGlobalCenter =
+    final Offset popoverTargetGlobalCenter =
         targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
 
-    final popoverTargetGlobalLeft =
+    final Offset popoverTargetGlobalLeft =
         targetRenderBox.localToGlobal(targetRenderBox.size.centerLeft(Offset.zero), ancestor: overlayRenderBox);
 
-    final popoverTargetGlobalRight =
+    final Offset popoverTargetGlobalRight =
         targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
 
     if (Directionality.of(context) == TextDirection.rtl ||
@@ -413,7 +422,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       }
     }
 
-    final popoverPositionParameters = _resolvePopoverPositionParameters(
+    final _PopoverPositionProperties popoverPositionParameters = _resolvePopoverPositionParameters(
       popoverPosition: popoverPosition,
       distanceToTarget: effectiveDistanceToTarget,
       overlayWidth: overlayRenderBox.size.width,
@@ -421,6 +430,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       popoverTargetGlobalCenter: popoverTargetGlobalCenter.dx,
       popoverTargetGlobalRight: popoverTargetGlobalRight.dx,
     );
+
+    final double effectiveDropdownWidth =
+        widget.maxWidth != null ? widget.maxWidth! : popoverPositionParameters.popoverMaxWidth;
 
     return Semantics(
       label: widget.semanticLabel,
@@ -432,8 +444,9 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
           followerAnchor: popoverPositionParameters.followerAnchor,
           targetAnchor: popoverPositionParameters.targetAnchor,
           child: TapRegion(
+            groupId: _regionKey,
             behavior: HitTestBehavior.translucent,
-            onTapOutside: (PointerDownEvent _) => _removePopover(),
+            onTapOutside: (PointerDownEvent _) => _handleTapOutside(),
             child: RepaintBoundary(
               child: FadeTransition(
                 opacity: _curvedAnimation!,
@@ -442,8 +455,12 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Container(
-                      key: _popoverKey,
-                      constraints: BoxConstraints(maxWidth: popoverPositionParameters.popoverMaxWidth),
+                      constraints: BoxConstraints(
+                        minHeight: widget.minHeight ?? 0,
+                        maxHeight: widget.maxHeight ?? double.infinity,
+                        minWidth: widget.minWidth ?? 0,
+                        maxWidth: effectiveDropdownWidth,
+                      ),
                       padding: resolvedContentPadding,
                       decoration: widget.decoration ??
                           ShapeDecorationWithPremultipliedAlpha(
@@ -454,7 +471,10 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
                               side: BorderSide(color: widget.borderColor),
                             ),
                           ),
-                      child: widget.content,
+                      child: Directionality(
+                        textDirection: Directionality.of(context),
+                        child: widget.content,
+                      ),
                     ),
                   ),
                 ),
@@ -486,9 +506,13 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
       curve: effectiveTransitionCurve,
     );
 
-    return CompositedTransformTarget(
-      link: _layerLink,
-      child: widget.child,
+    return TapRegion(
+      groupId: _regionKey,
+      behavior: HitTestBehavior.translucent,
+      child: CompositedTransformTarget(
+        link: _layerLink,
+        child: widget.child,
+      ),
     );
   }
 }
