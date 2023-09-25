@@ -55,7 +55,7 @@ List<Color?> colorTable(BuildContext context) => [
       context.moonColors!.piccolo,
       context.moonColors!.hit,
       context.moonColors!.beerus,
-      context.moonColors!.goku,
+      context.moonColors!.gohan,
       context.moonColors!.gohan,
       context.moonColors!.bulma,
       context.moonColors!.trunks,

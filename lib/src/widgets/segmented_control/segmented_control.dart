@@ -179,7 +179,7 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
 
     final Color effectiveBackgroundColor = widget.backgroundColor ??
         context.moonTheme?.segmentedControlTheme.colors.backgroundColor ??
-        MoonColors.light.goku;
+        MoonColors.light.gohan;
 
     final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
