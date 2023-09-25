@@ -316,7 +316,7 @@ class _SegmentBuilderState extends State<_SegmentBuilder> with SingleTickerProvi
 
     final Color effectiveSelectedSegmentColor = segmentStyle?.selectedSegmentColor ??
         context.moonTheme?.segmentedControlTheme.colors.selectedSegmentColor ??
-        MoonColors.light.gohan;
+        MoonColors.light.goku;
 
     final Color effectiveTextColor = segmentStyle?.textStyle?.color ??
         segmentStyle?.textColor ??

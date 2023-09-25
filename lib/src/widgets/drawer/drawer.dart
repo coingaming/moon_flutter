@@ -51,7 +51,7 @@ class MoonDrawer extends StatelessWidget {
         borderRadius ?? context.moonTheme?.drawerTheme.properties.borderRadius ?? BorderRadius.zero;
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.drawerTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        backgroundColor ?? context.moonTheme?.drawerTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveTextColor = context.moonTheme?.drawerTheme.colors.textColor ?? MoonColors.light.textPrimary;
 

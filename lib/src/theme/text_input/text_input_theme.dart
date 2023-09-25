@@ -27,7 +27,7 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
     MoonTextInputSizes? sizes,
   })  : colors = colors ??
             MoonTextInputColors(
-              backgroundColor: tokens.colors.gohan,
+              backgroundColor: tokens.colors.goku,
               activeBorderColor: tokens.colors.piccolo,
               inactiveBorderColor: tokens.colors.beerus,
               errorColor: tokens.colors.chiChi100,

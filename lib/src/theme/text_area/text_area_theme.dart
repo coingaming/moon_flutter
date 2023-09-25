@@ -22,7 +22,7 @@ class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme> with Diagnosti
     MoonTextAreaProperties? properties,
   })  : colors = colors ??
             MoonTextAreaColors(
-              backgroundColor: tokens.colors.gohan,
+              backgroundColor: tokens.colors.goku,
               activeBorderColor: tokens.colors.piccolo,
               inactiveBorderColor: tokens.colors.beerus,
               errorColor: tokens.colors.chiChi100,

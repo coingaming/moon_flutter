@@ -29,7 +29,7 @@ class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme> with Diagnostica
             MoonPopoverColors(
               textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
-              backgroundColor: tokens.colors.gohan,
+              backgroundColor: tokens.colors.goku,
             ),
         properties = properties ??
             MoonPopoverProperties(

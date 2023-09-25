@@ -29,7 +29,7 @@ class MoonDropdownTheme extends ThemeExtension<MoonDropdownTheme> with Diagnosti
             MoonDropdownColors(
               textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
-              backgroundColor: tokens.colors.gohan,
+              backgroundColor: tokens.colors.goku,
             ),
         properties = properties ??
             MoonDropdownProperties(

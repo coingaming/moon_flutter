@@ -370,7 +370,7 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
         widget.borderRadius ?? context.moonTheme?.dropdownTheme.properties.borderRadius ?? BorderRadius.circular(12);
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.dropdownTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.dropdownTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveTextColor = context.moonTheme?.dropdownTheme.colors.textColor ?? MoonColors.light.textPrimary;
 

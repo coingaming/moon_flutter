@@ -702,13 +702,13 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         MoonColors.light.chiChi100;
 
     _effectiveSelectedFillColor =
-        widget.selectedFillColor ?? context.moonTheme?.authCodeTheme.colors.selectedFillColor ?? MoonColors.light.gohan;
+        widget.selectedFillColor ?? context.moonTheme?.authCodeTheme.colors.selectedFillColor ?? MoonColors.light.goku;
 
     _effectiveActiveFillColor =
-        widget.activeFillColor ?? context.moonTheme?.authCodeTheme.colors.activeFillColor ?? MoonColors.light.gohan;
+        widget.activeFillColor ?? context.moonTheme?.authCodeTheme.colors.activeFillColor ?? MoonColors.light.goku;
 
     _effectiveInactiveFillColor =
-        widget.inactiveFillColor ?? context.moonTheme?.authCodeTheme.colors.inactiveFillColor ?? MoonColors.light.gohan;
+        widget.inactiveFillColor ?? context.moonTheme?.authCodeTheme.colors.inactiveFillColor ?? MoonColors.light.goku;
 
     _effectiveTextStyle =
         context.moonTheme?.authCodeTheme.properties.textStyle ?? MoonTypography.typography.body.text24;

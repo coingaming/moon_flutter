@@ -321,7 +321,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
         MoonBorders.borders.surfaceSm;
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.bottomSheetTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.bottomSheetTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveIconColor =
         context.moonTheme?.bottomSheetTheme.colors.iconColor ?? MoonColors.light.iconPrimary;

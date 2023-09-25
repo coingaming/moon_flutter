@@ -283,7 +283,7 @@ class MoonTextArea extends StatelessWidget {
         borderRadius ?? context.moonTheme?.textAreaTheme.properties.borderRadius ?? BorderRadius.circular(8);
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.textAreaTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        backgroundColor ?? context.moonTheme?.textAreaTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveActiveBorderColor =
         activeBorderColor ?? context.moonTheme?.textAreaTheme.colors.activeBorderColor ?? MoonColors.light.piccolo;

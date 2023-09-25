@@ -1030,7 +1030,7 @@ class _MoonTextInputState extends State<MoonTextInput>
     final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ?? effectiveMoonTextInputSize.borderRadius;
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.textInputTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.textInputTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveActiveBorderColor = widget.activeBorderColor ??
         context.moonTheme?.textInputTheme.colors.activeBorderColor ??
