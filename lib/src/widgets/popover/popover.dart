@@ -360,7 +360,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
         widget.borderRadius ?? context.moonTheme?.popoverTheme.properties.borderRadius ?? BorderRadius.circular(12);
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.popoverTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.popoverTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveTextColor = context.moonTheme?.popoverTheme.colors.textColor ?? MoonColors.light.textPrimary;
 

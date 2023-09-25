@@ -98,7 +98,7 @@ class MoonTag extends StatelessWidget {
     final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.tagTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        backgroundColor ?? context.moonTheme?.tagTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveTextColor = context.moonTheme?.tagTheme.colors.textColor ?? MoonColors.light.textPrimary;
 

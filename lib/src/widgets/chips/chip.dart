@@ -251,7 +251,7 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
         widget.activeColor ?? context.moonTheme?.chipTheme.colors.activeColor ?? MoonColors.light.piccolo;
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.chipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.chipTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveActiveBackgroundColor = widget.activeBackgroundColor ??
         context.moonTheme?.chipTheme.colors.activeBackgroundColor ??

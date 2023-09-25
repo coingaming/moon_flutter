@@ -175,7 +175,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
         widget.minimumHeight ?? context.moonTheme?.alertTheme.properties.minimumHeight ?? MoonSizes.sizes.xl;
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.alertTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.alertTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveBorderColor =
         widget.borderColor ?? context.moonTheme?.alertTheme.colors.borderColor ?? MoonColors.light.bulma;

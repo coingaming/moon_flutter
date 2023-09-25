@@ -31,7 +31,7 @@ class MoonTabBarTheme extends ThemeExtension<MoonTabBarTheme> with Diagnosticabl
               textColor: tokens.colors.textPrimary,
               selectedTextColor: tokens.colors.piccolo,
               selectedPillTextColor: tokens.colors.textPrimary,
-              selectedPillTabColor: tokens.colors.gohan,
+              selectedPillTabColor: tokens.colors.goku,
             ),
         properties = properties ??
             MoonTabBarProperties(

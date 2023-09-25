@@ -29,7 +29,7 @@ class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with Diagnosticabl
             MoonDrawerColors(
               textColor: tokens.colors.textPrimary,
               iconColor: tokens.colors.iconPrimary,
-              backgroundColor: tokens.colors.gohan,
+              backgroundColor: tokens.colors.goku,
               barrierColor: tokens.colors.zeno,
             ),
         properties = properties ??
