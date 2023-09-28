@@ -433,11 +433,11 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     _resolvedDirectionalHeaderPadding = _effectiveHeaderPadding.resolve(Directionality.of(context));
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.accordionTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.accordionTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveExpandedBackgroundColor = widget.expandedBackgroundColor ??
         context.moonTheme?.accordionTheme.colors.expandedBackgroundColor ??
-        MoonColors.light.gohan;
+        MoonColors.light.goku;
 
     final Color effectiveIconColor =
         widget.iconColor ?? context.moonTheme?.accordionTheme.colors.iconColor ?? MoonColors.light.iconPrimary;

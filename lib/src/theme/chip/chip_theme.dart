@@ -23,7 +23,7 @@ class MoonChipTheme extends ThemeExtension<MoonChipTheme> with DiagnosticableTre
   })  : colors = colors ??
             MoonChipColors(
               activeColor: tokens.colors.piccolo,
-              backgroundColor: tokens.colors.gohan,
+              backgroundColor: tokens.colors.goku,
               activeBackgroundColor: tokens.colors.jiren,
               textColor: tokens.colors.textPrimary,
             ),

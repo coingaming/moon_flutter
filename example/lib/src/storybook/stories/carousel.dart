@@ -88,7 +88,7 @@ class CarouselStory extends Story {
                           clampMaxExtent: clampMaxExtentKnob,
                           itemBuilder: (BuildContext context, int itemIndex, int realIndex) => Container(
                             decoration: ShapeDecoration(
-                              color: context.moonColors!.gohan,
+                              color: context.moonColors!.goku,
                               shape: MoonSquircleBorder(
                                 borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
                               ),
@@ -121,7 +121,7 @@ class CarouselStory extends Story {
                                       onIndexChanged: (int index) => setState(() => selectedDot = index),
                                       itemBuilder: (BuildContext context, int itemIndex, int realIndex) => Container(
                                         decoration: ShapeDecoration(
-                                          color: context.moonColors!.gohan,
+                                          color: context.moonColors!.goku,
                                           shape: MoonSquircleBorder(
                                             borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
                                           ),
@@ -146,7 +146,7 @@ class CarouselStory extends Story {
                                                     : MoonIcons.chevron_right_small_24,
                                               ),
                                               decoration: ShapeDecorationWithPremultipliedAlpha(
-                                                color: context.moonColors!.gohan,
+                                                color: context.moonColors!.goku,
                                                 shadows: context.moonShadows!.sm,
                                                 shape: MoonSquircleBorder(
                                                   borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
@@ -163,7 +163,7 @@ class CarouselStory extends Story {
                                                     : MoonIcons.chevron_left_small_24,
                                               ),
                                               decoration: ShapeDecorationWithPremultipliedAlpha(
-                                                color: context.moonColors!.gohan,
+                                                color: context.moonColors!.goku,
                                                 shadows: context.moonShadows!.sm,
                                                 shape: MoonSquircleBorder(
                                                   borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),

@@ -27,8 +27,8 @@ class MoonToastTheme extends ThemeExtension<MoonToastTheme> with DiagnosticableT
     MoonToastShadows? shadows,
   })  : colors = colors ??
             MoonToastColors(
-              lightVariantBackgroundColor: tokens.colors.gohan,
-              darkVariantBackgroundColor: tokens.complementaryColors.gohan,
+              lightVariantBackgroundColor: tokens.colors.goku,
+              darkVariantBackgroundColor: tokens.complementaryColors.goku,
               lightVariantTextColor: tokens.colors.bulma,
               darkVariantTextColor: tokens.complementaryColors.bulma,
               lightVariantIconColor: tokens.colors.bulma,

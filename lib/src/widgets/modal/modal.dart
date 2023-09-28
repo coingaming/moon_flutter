@@ -154,7 +154,7 @@ class MoonModal extends StatelessWidget {
         borderRadius ?? context.moonTheme?.modalTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveTextColor = context.moonTheme?.modalTheme.colors.textColor ?? MoonColors.light.textPrimary;
 

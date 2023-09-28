@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.30.1](https://github.com/coingaming/moon_flutter/compare/v0.30.0...v0.30.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* [MDS-696] Swap light gohan and goku colors ([#258](https://github.com/coingaming/moon_flutter/issues/258)) ([0fb1750](https://github.com/coingaming/moon_flutter/commit/0fb1750b299452476f70dccac53eec5be7e565b6))
+
+## [0.30.0](https://github.com/coingaming/moon_flutter/compare/v0.29.5...v0.30.0) (2023-09-22)
+
+
+### Features
+
+* [MDS-592] Create Dropdown component ([#256](https://github.com/coingaming/moon_flutter/issues/256)) ([adee0d1](https://github.com/coingaming/moon_flutter/commit/adee0d19fd23696a2b45a57ffac67de05b355143))
+
 ## [0.29.5](https://github.com/coingaming/moon_flutter/compare/v0.29.4...v0.29.5) (2023-09-14)
 
 

@@ -539,7 +539,7 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
 
     final Color effectiveSelectedTabColor = tabStyle?.selectedTabColor ??
         context.moonTheme?.tabBarTheme.colors.selectedPillTabColor ??
-        MoonColors.light.gohan;
+        MoonColors.light.goku;
 
     final Color effectiveTextColor = tabStyle?.textStyle?.color ??
         tabStyle?.textColor ??

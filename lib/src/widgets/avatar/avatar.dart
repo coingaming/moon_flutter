@@ -145,7 +145,7 @@ class MoonAvatar extends StatelessWidget {
     final resolvedBorderRadius = effectiveBorderRadius.resolve(Directionality.of(context));
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.avatarTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        backgroundColor ?? context.moonTheme?.avatarTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveBadgeColor =
         badgeColor ?? context.moonTheme?.avatarTheme.colors.badgeColor ?? MoonColors.light.roshi100;

@@ -34,17 +34,6 @@ class PopoverStory extends Story {
               ],
             );
 
-            final textColorKnob = context.knobs.nullable.options(
-              label: "Text color",
-              description: "MoonColors variants for MoonPopover text.",
-              enabled: false,
-              initial: 0,
-              // piccolo
-              options: colorOptions,
-            );
-
-            final textColor = colorTable(context)[textColorKnob ?? 40];
-
             final backgroundColorKnob = context.knobs.nullable.options(
               label: "backgroundColor",
               description: "MoonColors variants for MoonPopover background.",
@@ -106,13 +95,13 @@ class PopoverStory extends Story {
                           distanceToTarget: distanceToTargetKnob,
                           popoverPosition: popoverPositionKnob ?? MoonPopoverPosition.top,
                           popoverShadows: showShadowKnob == true ? null : [],
+                          onTapOutside: () => setState(() => show = false),
                           content: ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 190),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Row(
-                                  textDirection: Directionality.of(context),
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     MoonAvatar(
@@ -121,10 +110,7 @@ class PopoverStory extends Story {
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
-                                      child: Text(
-                                        customLabelTextKnob,
-                                        style: TextStyle(color: textColor),
-                                      ),
+                                      child: Text(customLabelTextKnob),
                                     ),
                                   ],
                                 ),
@@ -139,7 +125,7 @@ class PopoverStory extends Story {
                             ),
                           ),
                           child: MoonFilledButton(
-                            onTap: () => setState(() => show = true),
+                            onTap: () => setState(() => show = !show),
                             label: const Text("Tap me"),
                           ),
                         );

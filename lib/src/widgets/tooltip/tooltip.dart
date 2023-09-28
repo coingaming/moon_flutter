@@ -393,7 +393,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     final resolvedBorderRadius = effectiveBorderRadius.resolve(Directionality.of(context));
 
     final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.gohan;
+        widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveTextColor = context.moonTheme?.tooltipTheme.colors.textColor ?? MoonColors.light.textPrimary;
 

@@ -96,8 +96,8 @@ class MoonToast {
 
     final Color effectiveBackgroundColor = backgroundColor ??
         (variant == MoonToastVariant.original
-            ? (context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.gohan)
-            : (context.moonTheme?.toastTheme.colors.darkVariantBackgroundColor ?? MoonColors.dark.gohan));
+            ? (context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.goku)
+            : (context.moonTheme?.toastTheme.colors.darkVariantBackgroundColor ?? MoonColors.dark.goku));
 
     final Color effectiveTextColor = variant == MoonToastVariant.original
         ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ?? MoonColors.light.textPrimary)
