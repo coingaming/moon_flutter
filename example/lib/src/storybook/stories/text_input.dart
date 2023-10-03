@@ -23,7 +23,7 @@ class TextInputStory extends Story {
                 Option(label: "sm", value: MoonTextInputSize.sm),
                 Option(label: "md", value: MoonTextInputSize.md),
                 Option(label: "lg", value: MoonTextInputSize.lg),
-                Option(label: "xl", value: MoonTextInputSize.xl)
+                Option(label: "xl", value: MoonTextInputSize.xl),
               ],
             );
 
@@ -288,7 +288,7 @@ class TextInputStory extends Story {
                         MoonFilledButton(
                           label: const Text("Submit"),
                           onTap: () => Form.of(context).validate(),
-                        )
+                        ),
                       ],
                     );
                   },

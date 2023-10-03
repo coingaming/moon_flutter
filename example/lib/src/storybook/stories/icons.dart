@@ -2,7 +2,6 @@ import 'package:example/src/storybook/common/icons/icons_list.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class IconsStory extends Story {
@@ -39,8 +38,8 @@ class _IconsGridWithTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiSliver(
-      children: [
+    return SliverMainAxisGroup(
+      slivers: [
         SliverToBoxAdapter(
           child: TextDivider(
             text: title,

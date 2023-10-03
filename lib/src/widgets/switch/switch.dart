@@ -114,7 +114,7 @@ class MoonSwitch extends StatefulWidget {
 
 class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateMixin {
   late final Map<Type, Action<Intent>> _actions = {
-    ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
+    ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap()),
   };
 
   late Animation<Alignment>? _alignmentAnimation;
@@ -469,7 +469,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                             Align(

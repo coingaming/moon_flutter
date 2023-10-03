@@ -224,7 +224,7 @@ class MoonAvatar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(effectiveBadgeSize / 2),
                   ),
                 ),
-              )
+              ),
           ],
         ),
       ),
