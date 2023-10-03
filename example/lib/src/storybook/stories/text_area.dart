@@ -128,7 +128,7 @@ class TextAreaStory extends Story {
                           MoonFilledButton(
                             label: const Text("Submit"),
                             onTap: () => Form.of(context).validate(),
-                          )
+                          ),
                         ],
                       );
                     },

@@ -183,7 +183,7 @@ class CarouselStory extends Story {
                             MoonDotIndicator(
                               selectedDot: selectedDot,
                               dotCount: 5,
-                            )
+                            ),
                           ],
                         );
                       },
