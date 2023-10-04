@@ -5,20 +5,26 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-List<_ExampleTableData> _exampleTableData = _generateTableData();
-List<String> _columnNames = ['ID', 'First name', 'Last name', 'Age', 'Activity'];
-List<bool> _sortingList = List.generate(6, (int _) => true);
+const _rowsInPage = 25;
 
+List<_ExampleTableData> _exampleTableData = _generateTableData();
+List<_ExampleTableData> _exampleTableDataToShow = _exampleTableData.sublist(0, _rowsInPage);
+
+List<String> _columnNames = ['ID', 'First name', 'Last name', 'Age', 'Activity'];
+List<bool> _columnSorting = List.generate(6, (int _) => true);
 bool _sortAscending = true;
 int _sortColumnIndex = 0;
 
 bool _checkAllBoxes = false;
+
+int _rowsToShow = _rowsInPage;
 
 // Knob variables for methods to use outside TableStory.
 bool _showCheckboxes = false;
 bool _showDividerKnob = false;
 bool _selectableKnob = false;
 bool _zebraStyleKnob = false;
+bool _infiniteScrollKnob = false;
 Color? _rowColor;
 Color? _selectedRowColor;
 Color? _textColor;
@@ -87,27 +93,22 @@ class TableStory extends Story {
 
             final rowGapKnob = context.knobs.nullable.sliderInt(
               label: "rowGap",
-              description: "Row gap for MoonTable rows.",
+              description: "Row gap between MoonTable rows.",
               enabled: false,
               initial: 4,
               max: 16,
             );
 
             final fixedHeaderKnob = context.knobs.boolean(
-              label: "isFixedHeader",
+              label: "hasFixedHeader",
               description: "Show MoonTable with fixed header.",
               initial: true,
             );
 
             final fixedFooterKnob = context.knobs.boolean(
-              label: "isFixedFooter",
+              label: "hasFixedFooter",
               description: "Show MoonTable with fixed footer.",
               initial: true,
-            );
-
-            _zebraStyleKnob = context.knobs.boolean(
-              label: "Zebra style rows",
-              description: "Show MoonTable rows with zebra style.",
             );
 
             _selectableKnob = context.knobs.boolean(
@@ -116,62 +117,60 @@ class TableStory extends Story {
               initial: true,
             );
 
+            _zebraStyleKnob = context.knobs.boolean(
+              label: "Zebra style rows",
+              description: "Show MoonTable rows with zebra style.",
+            );
+
             final showCheckboxesKnob = context.knobs.boolean(
               label: "With checkboxes",
               description: "Show MoonTable with checkboxes.",
-              initial: true,
             );
 
             _showDividerKnob = context.knobs.boolean(
               label: "With cell divider",
-              description: "Show MoonTable with cell dividers.",
-              initial: true,
+              description: "Show MoonTable with cell divider.",
+            );
+
+            final infiniteScrollKnob = context.knobs.boolean(
+              label: "With infinite scroll",
+              description: "Show MoonTable with infinite scroll.",
             );
 
             return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-                final double verticalCellPadding = tableRowSizeKnob == MoonTableRowSize.xs ? 4 : 8;
-
                 if (_showCheckboxes != showCheckboxesKnob) {
                   _showCheckboxes = showCheckboxesKnob;
                   _sortColumnIndex = showCheckboxesKnob ? _sortColumnIndex + 1 : _sortColumnIndex - 1;
                 }
 
+                if (_infiniteScrollKnob != infiniteScrollKnob) {
+                  _infiniteScrollKnob = infiniteScrollKnob;
+
+                  if (!infiniteScrollKnob) {
+                    _exampleTableDataToShow = _exampleTableData.sublist(0, _rowsInPage);
+                    _rowsToShow = _rowsInPage;
+                  }
+                }
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 64.0),
                   child: MoonTable(
-                    hasFixedHeader: fixedHeaderKnob,
-                    hasFixedFooter: fixedFooterKnob,
+                    fixedHeader: fixedHeaderKnob,
+                    fixedFooter: fixedFooterKnob,
                     sortAscending: _sortAscending,
                     sortColumnIndex: _sortColumnIndex,
                     rowGap: rowGapKnob?.toDouble(),
-                    // hasFixedPaginationPlaceHolder: false,
-                    // hasFixedRowsPlaceHolder: false,
-                    // paginationPlaceHolder: Padding(
-                    //   padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-                    //   child: Row(
-                    //     children: [
-                    //       MoonButton.icon(
-                    //         icon: const MoonIcon(MoonIcons.chevron_left_16),
-                    //         backgroundColor: context.moonColors!.beerus,
-                    //       ),
-                    //       const Spacer(),
-                    //       const Text('1-20 of 4396'),
-                    //       const Spacer(),
-                    //       MoonButton.icon(
-                    //         icon: const MoonIcon(MoonIcons.chevron_right_16),
-                    //         backgroundColor: context.moonColors!.beerus,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    rowSeparatorWidget: Container(height: 1, color: context.moonColors!.chiChi60),
-                    // rowsPlaceHolder: const Text('No data to show'),
+                    rowSize: tableRowSizeKnob ?? MoonTableRowSize.md,
                     tableHeader: _generateTableHeader(context, setState),
                     tableFooter: _generateTableFooter(context),
-                    tableRows: _generateTableRows(context, setState),
-                    cellPadding: EdgeInsetsDirectional.fromSTEB(16, verticalCellPadding, 0, verticalCellPadding),
-                    // rowSize: tableRowSizeKnob ?? MoonTableRowSize.md,
+                    rows: _generateTableRows(context, setState),
+                    cellPadding: EdgeInsets.symmetric(vertical: tableRowSizeKnob == MoonTableRowSize.xs ? 4 : 8),
+                    onScrollControllersReady: (
+                      ScrollController verticalScrollController,
+                      ScrollController horizontalScrollController,
+                    ) =>
+                        _scrollListener(setState, verticalScrollController),
                   ),
                 );
               },
@@ -180,26 +179,91 @@ class TableStory extends Story {
         );
 }
 
+void _scrollListener(StateSetter setState, ScrollController verticalScrollController) {
+  verticalScrollController.addListener(() {
+    if (verticalScrollController.hasClients && _infiniteScrollKnob) {
+      final double pixels = verticalScrollController.position.pixels;
+      final double maxScrollExtent = verticalScrollController.position.maxScrollExtent;
+
+      if (pixels >= maxScrollExtent && _rowsToShow < _rowsInPage * 5) {
+        _exampleTableDataToShow += _exampleTableData.sublist(_rowsToShow, _rowsToShow + _rowsInPage);
+
+        setState(() => _rowsToShow += _rowsInPage);
+      }
+    }
+  });
+}
+
+void _onSort(StateSetter setState, int columnIndex, bool sortAscending) {
+  if (_sortColumnIndex == columnIndex || _sortAscending != sortAscending) {
+    setState(() {
+      if (columnIndex == _sortColumnIndex) {
+        _sortAscending = _columnSorting[columnIndex] = sortAscending;
+      } else {
+        _sortColumnIndex = columnIndex;
+        _sortAscending = _columnSorting[columnIndex];
+      }
+      switch (_showCheckboxes ? columnIndex : columnIndex + 1) {
+        case 1:
+          _exampleTableDataToShow.sort((a, b) => a.id.compareTo(b.id));
+        case 2:
+          _exampleTableDataToShow.sort((a, b) => a.firstName.compareTo(b.firstName));
+        case 3:
+          _exampleTableDataToShow.sort((a, b) => a.lastName.compareTo(b.lastName));
+        case 4:
+          _exampleTableDataToShow.sort((a, b) => a.age.compareTo(b.age));
+        case 5:
+          _exampleTableDataToShow.sort((a, b) => a.activity.compareTo(b.activity));
+      }
+      if (!_sortAscending) _exampleTableDataToShow = _exampleTableDataToShow.reversed.toList();
+    });
+  }
+}
+
+Widget _headerCheckBox(StateSetter setState) {
+  return Padding(
+    padding: const EdgeInsetsDirectional.only(start: 16.0),
+    child: MoonCheckbox(
+      tapAreaSizeValue: 0,
+      value: _checkAllBoxes,
+      onChanged: _selectableKnob
+          ? (bool? onChanged) => onChanged != null
+              ? setState(() {
+                  _checkAllBoxes = onChanged;
+                  for (final item in _exampleTableDataToShow) {
+                    item.selected = _checkAllBoxes;
+                  }
+                })
+              : null
+          : null,
+    ),
+  );
+}
+
 Widget _buildCell(BuildContext context, dynamic label, {bool firstCell = false}) {
   return DecoratedBox(
     decoration: _showDividerKnob && !firstCell
         ? BoxDecoration(
             border: Border(
-              left: Divider.createBorderSide(
-                context,
-                color: context.moonColors!.beerus,
-              ),
+              left: Directionality.of(context) == TextDirection.ltr
+                  ? Divider.createBorderSide(context, color: context.moonColors!.beerus, width: 1)
+                  : BorderSide.none,
+              right: Directionality.of(context) == TextDirection.rtl
+                  ? Divider.createBorderSide(context, color: context.moonColors!.beerus, width: 1)
+                  : BorderSide.none,
             ),
           )
         : const BoxDecoration(),
     child: Padding(
-      padding: EdgeInsetsDirectional.only(start: firstCell ? 0 : 16),
-      child: Text(
-        label.toString(),
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          color: _textColor,
-        ),
+      padding: const EdgeInsetsDirectional.only(start: 16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            label.toString(),
+            style: TextStyle(color: _textColor),
+          ),
+        ],
       ),
     ),
   );
@@ -209,70 +273,28 @@ MoonTableHeader _generateTableHeader(BuildContext context, StateSetter setState)
   return MoonTableHeader(
     columns: List.generate(
       _showCheckboxes ? 6 : 5,
-      (index) {
-        final bool hasCheckboxColumn = index == 0 && _showCheckboxes;
-        double columnWidth = 128;
-
-        if (index == 0 && !_showCheckboxes || index == 1 && _showCheckboxes) {
-          columnWidth = 72;
-        } else if (index == 0 && _showCheckboxes) {
-          columnWidth = 56;
-        }
+      (int index) {
+        final bool checkboxColumn = index == 0 && _showCheckboxes;
+        final double columnWidth = index == 0 || index == 1 && _showCheckboxes ? 64 : 128;
 
         return MoonTableColumn(
-          columnWidth: columnWidth,
+          width: columnWidth,
           onTap: () {
-            if (index == 0 && _showCheckboxes) {
+            if (checkboxColumn && _selectableKnob) {
               setState(() {
                 _checkAllBoxes = !_checkAllBoxes;
 
-                for (int i = 0; i < _exampleTableData.length; i++) {
-                  _exampleTableData[i].selected = _checkAllBoxes;
+                for (final item in _exampleTableDataToShow) {
+                  item.selected = _checkAllBoxes;
                 }
               });
             }
           },
-          onSort: hasCheckboxColumn
+          onSort: checkboxColumn
               ? null
-              : (int columnIndex, bool sortAscending) => {
-                    setState(() {
-                      if (columnIndex == _sortColumnIndex) {
-                        _sortAscending = _sortingList[columnIndex] = sortAscending;
-                      } else {
-                        _sortColumnIndex = columnIndex;
-                        _sortAscending = _sortingList[columnIndex];
-                      }
-                      switch (_showCheckboxes ? columnIndex : columnIndex + 1) {
-                        case 1:
-                          _exampleTableData.sort((a, b) => a.id.compareTo(b.id));
-                        case 2:
-                          _exampleTableData.sort((a, b) => a.firstName.compareTo(b.firstName));
-                        case 3:
-                          _exampleTableData.sort((a, b) => a.lastName.compareTo(b.lastName));
-                        case 4:
-                          _exampleTableData.sort((a, b) => a.age.compareTo(b.age));
-                        case 5:
-                          _exampleTableData.sort((a, b) => a.activity.compareTo(b.activity));
-                      }
-                      if (!_sortAscending) _exampleTableData = _exampleTableData.reversed.toList();
-                    }),
-                  },
-          cell: hasCheckboxColumn
-              ? MoonCheckbox(
-                  tapAreaSizeValue: 0,
-                  value: _checkAllBoxes,
-                  onChanged: (bool? onChanged) {
-                    if (onChanged != null) {
-                      setState(() {
-                        _checkAllBoxes = onChanged;
-
-                        for (int i = 0; i < _exampleTableData.length; i++) {
-                          _exampleTableData[i].selected = _checkAllBoxes;
-                        }
-                      });
-                    }
-                  },
-                )
+              : (int columnIndex, bool sortAscending) => _onSort(setState, columnIndex, sortAscending),
+          cell: checkboxColumn
+              ? _headerCheckBox(setState)
               : _buildCell(
                   context,
                   _columnNames[_showCheckboxes ? index - 1 : index],
@@ -284,77 +306,72 @@ MoonTableHeader _generateTableHeader(BuildContext context, StateSetter setState)
   );
 }
 
+MoonTableFooter _generateTableFooter(BuildContext context) {
+  return MoonTableFooter(
+    cells: List.generate(
+      _showCheckboxes ? 6 : 5,
+      (int index) {
+        final int ageColumnIndex = _showCheckboxes ? 4 : 3;
+        final int activityColumnIndex = _showCheckboxes ? 5 : 4;
+
+        final String label = index == 0
+            ? 'Total:'
+            : (index == ageColumnIndex || index == activityColumnIndex)
+                ? _exampleTableDataToShow
+                    .map((_ExampleTableData item) => index == ageColumnIndex ? item.age : item.activity)
+                    .reduce((int value, int element) => value + element)
+                    .toString()
+                : '-';
+
+        return _buildCell(context, label, firstCell: index == 0);
+      },
+    ),
+  );
+}
+
 List<MoonTableRow> _generateTableRows(BuildContext context, StateSetter setState) {
   return List.generate(
-    30,
-    (index) {
-      final row = _exampleTableData[index];
+    _rowsToShow,
+    (int index) {
+      final row = _exampleTableDataToShow[index];
 
       return MoonTableRow(
         selected: row.selected,
-        onSelectChanged: _selectableKnob == false
-            ? null
-            : (bool? selected) => {
-                  if (selected != null) setState(() => row.selected = selected),
-                },
-        rowDecoration: ShapeDecorationWithPremultipliedAlpha(
+        onSelectChanged: _selectableKnob ? (bool? selected) => setState(() => row.selected = selected ?? false) : null,
+        decoration: ShapeDecorationWithPremultipliedAlpha(
           color: _zebraStyleKnob
               ? row.selected
                   ? _selectedRowColor ?? context.moonColors!.beerus
                   : index.isEven
-                      ? _rowColor ?? context.moonColors!.gohan
+                      ? _rowColor ?? context.moonColors!.goku
                       : Colors.transparent
               : row.selected
                   ? _selectedRowColor ?? context.moonColors!.beerus
-                  : _rowColor ?? context.moonColors!.gohan,
+                  : _rowColor ?? context.moonColors!.goku,
           shape: MoonSquircleBorder(
             borderRadius: _borderRadiusKnob != null
                 ? BorderRadius.circular(_borderRadiusKnob!.toDouble()).squircleBorderRadius(context)
                 : BorderRadius.circular(8).squircleBorderRadius(context),
           ),
         ),
-        rowTitle: MoonTableRowTitle(
-          title: Text(_exampleTableData[index].colStickyTitle),
-        ),
         cells: [
           if (_showCheckboxes)
-            MoonCheckbox(
-              tapAreaSizeValue: 0,
-              value: row.selected,
-              onChanged: (bool? onChanged) {
-                if (onChanged != null) setState(() => setState(() => row.selected = !row.selected));
-              },
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 16.0),
+              child: MoonCheckbox(
+                tapAreaSizeValue: 0,
+                value: row.selected,
+                onChanged: _selectableKnob ? (bool? onChanged) => setState(() => row.selected = !row.selected) : null,
+              ),
             ),
-          _buildCell(context, _exampleTableData[index].id, firstCell: !_showCheckboxes),
-          _buildCell(context, _exampleTableData[index].firstName),
-          _buildCell(context, _exampleTableData[index].lastName),
-          _buildCell(context, _exampleTableData[index].age),
-          _buildCell(context, _exampleTableData[index].activity),
+          _buildCell(context, _exampleTableDataToShow[index].id, firstCell: !_showCheckboxes),
+          _buildCell(context, _exampleTableDataToShow[index].firstName),
+          _buildCell(context, _exampleTableDataToShow[index].lastName),
+          _buildCell(context, _exampleTableDataToShow[index].age),
+          _buildCell(context, _exampleTableDataToShow[index].activity),
         ],
       );
     },
-  );
-}
-
-MoonTableFooter _generateTableFooter(BuildContext context) {
-  return MoonTableFooter(
-    cells: List.generate(_showCheckboxes ? 6 : 5, (index) {
-      final int ageColumn = _showCheckboxes ? 4 : 3;
-      final int activityColumn = _showCheckboxes ? 5 : 4;
-
-      String label = '30';
-
-      if (index == 0) {
-        label = 'Total:';
-      } else if (index == ageColumn || index == activityColumn) {
-        label = _exampleTableData
-            .map((item) => index == ageColumn ? item.age : item.activity)
-            .reduce((value, element) => value + element)
-            .toString();
-      }
-
-      return _buildCell(context, label, firstCell: index == 0);
-    }),
   );
 }
 
@@ -380,8 +397,8 @@ class _ExampleTableData {
 
 List<_ExampleTableData> _generateTableData() {
   return List<_ExampleTableData>.generate(
-    30,
-    (index) => _ExampleTableData(
+    _rowsInPage * 5,
+    (int index) => _ExampleTableData(
       id: index,
       selected: false,
       firstName: 'Test$index',

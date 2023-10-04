@@ -23,6 +23,9 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
   /// Table row cell padding.
   final EdgeInsetsGeometry cellPadding;
 
+  /// Table row cell padding.
+  final EdgeInsetsGeometry rowTitlePadding;
+
   /// Table column text style.
   final TextStyle columnTextStyle;
 
@@ -42,6 +45,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
     required this.sortIconGap,
     required this.sortIconSizeValue,
     required this.cellPadding,
+    required this.rowTitlePadding,
     required this.columnTextStyle,
     required this.rowTextStyle,
     required this.rowTitleTextStyle,
@@ -56,6 +60,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
     double? sortIconGap,
     double? sortIconSizeValue,
     EdgeInsetsGeometry? cellPadding,
+    EdgeInsetsGeometry? rowTitlePadding,
     TextStyle? columnTextStyle,
     TextStyle? rowTextStyle,
     TextStyle? rowTitleTextStyle,
@@ -68,6 +73,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       sortIconGap: sortIconGap ?? this.sortIconGap,
       sortIconSizeValue: sortIconSizeValue ?? this.sortIconSizeValue,
       cellPadding: cellPadding ?? this.cellPadding,
+      rowTitlePadding: rowTitlePadding ?? this.rowTitlePadding,
       columnTextStyle: columnTextStyle ?? this.columnTextStyle,
       rowTextStyle: rowTextStyle ?? this.rowTextStyle,
       rowTitleTextStyle: rowTitleTextStyle ?? this.rowTitleTextStyle,
@@ -86,6 +92,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       sortIconGap: lerpDouble(sortIconGap, other.sortIconGap, t)!,
       sortIconSizeValue: lerpDouble(sortIconSizeValue, other.sortIconSizeValue, t)!,
       cellPadding: EdgeInsetsGeometry.lerp(cellPadding, other.cellPadding, t)!,
+      rowTitlePadding: EdgeInsetsGeometry.lerp(rowTitlePadding, other.rowTitlePadding, t)!,
       columnTextStyle: TextStyle.lerp(columnTextStyle, other.columnTextStyle, t)!,
       rowTextStyle: TextStyle.lerp(rowTextStyle, other.rowTextStyle, t)!,
       rowTitleTextStyle: TextStyle.lerp(rowTitleTextStyle, other.rowTitleTextStyle, t)!,
@@ -104,6 +111,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       ..add(DoubleProperty("sortIconGap", sortIconGap))
       ..add(DoubleProperty("sortIconSizeValue", sortIconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("cellPadding", cellPadding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("rowTitlePadding", rowTitlePadding))
       ..add(DiagnosticsProperty<TextStyle>("columnTextStyle", columnTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("rowTextStyle", rowTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("rowTitleTextStyle", rowTitleTextStyle))

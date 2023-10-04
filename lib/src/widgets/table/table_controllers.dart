@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:moon_design/src/widgets/table/linked_scroll_controllers.dart';
+import 'package:moon_design/src/utils/linked_scroll_controller.dart';
 
 class TableControllers {
   late ScrollController verticalScrollController;
@@ -8,42 +8,35 @@ class TableControllers {
 
   final LinkedScrollControllerGroup _horizontalControllersGroup = LinkedScrollControllerGroup();
 
-  final bool hasFixedHeader;
-  final bool hasFixedFooter;
-  final bool hasFixedRowsPlaceholder;
-  final bool hasFixedPaginationPlaceholder;
+  final bool fixedHeader;
+  final bool fixedFooter;
+  final bool fixedEmptyPlaceholder;
 
   ScrollController? headerHorizontalScrollController;
   ScrollController? footerHorizontalScrollController;
-  ScrollController? rowsPlaceholderScrollController;
-  ScrollController? paginationPlaceHolderScrollController;
+  ScrollController? emptyPlaceholderHorizontalScrollController;
 
   TableControllers({
-    required this.hasFixedHeader,
-    required this.hasFixedFooter,
-    required this.hasFixedPaginationPlaceholder,
-    required this.hasFixedRowsPlaceholder,
+    required this.fixedHeader,
+    required this.fixedFooter,
+    required this.fixedEmptyPlaceholder,
   });
 
   void init() {
     verticalScrollController = ScrollController();
     horizontalScrollController = _horizontalControllersGroup.addAndGet();
 
-    if (hasFixedHeader) headerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
-    if (hasFixedFooter) footerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
-
-    if (!hasFixedRowsPlaceholder) rowsPlaceholderScrollController = _horizontalControllersGroup.addAndGet();
-    if (!hasFixedPaginationPlaceholder) paginationPlaceHolderScrollController = _horizontalControllersGroup.addAndGet();
+    if (fixedHeader) headerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
+    if (fixedFooter) footerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
+    if (!fixedEmptyPlaceholder) emptyPlaceholderHorizontalScrollController = _horizontalControllersGroup.addAndGet();
   }
 
   void dispose() {
     verticalScrollController.dispose();
     horizontalScrollController.dispose();
 
-    if (hasFixedHeader) headerHorizontalScrollController?.dispose();
-    if (hasFixedFooter) footerHorizontalScrollController?.dispose();
-
-    if (!hasFixedRowsPlaceholder) rowsPlaceholderScrollController?.dispose();
-    if (!hasFixedPaginationPlaceholder) paginationPlaceHolderScrollController?.dispose();
+    if (fixedHeader) headerHorizontalScrollController?.dispose();
+    if (fixedFooter) footerHorizontalScrollController?.dispose();
+    if (!fixedEmptyPlaceholder) emptyPlaceholderHorizontalScrollController?.dispose();
   }
 }

@@ -32,7 +32,7 @@ class MoonTableTheme extends ThemeExtension<MoonTableTheme> with DiagnosticableT
               rowTitleTextColor: tokens.colors.textPrimary,
               rowAnimatedTitleTextColor: tokens.colors.trunks,
               iconColor: tokens.colors.iconPrimary,
-              rowBackgroundColor: tokens.colors.gohan,
+              rowBackgroundColor: tokens.colors.goku,
             ),
         properties = properties ??
             MoonTableProperties(
