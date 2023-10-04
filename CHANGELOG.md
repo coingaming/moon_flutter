@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.30.2](https://github.com/coingaming/moon_flutter/compare/v0.30.1...v0.30.2) (2023-10-03)
+
+
+### Bug Fixes
+
+* [MDS-728] Bump minimum Flutter version to 3.13.5 ([#260](https://github.com/coingaming/moon_flutter/issues/260)) ([5c3ff61](https://github.com/coingaming/moon_flutter/commit/5c3ff61f8b53619299777f051fae6e7b8977f5b7))
+
 ## [0.30.1](https://github.com/coingaming/moon_flutter/compare/v0.30.0...v0.30.1) (2023-09-25)
 
 
