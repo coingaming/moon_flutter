@@ -26,6 +26,7 @@ import 'package:moon_design/src/theme/radio/radio_theme.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_theme.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_theme.dart';
+import 'package:moon_design/src/theme/table/table_theme.dart';
 import 'package:moon_design/src/theme/tag/tag_theme.dart';
 import 'package:moon_design/src/theme/text_area/text_area_theme.dart';
 import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
@@ -121,6 +122,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonTabBar widget theming.
   final MoonTabBarTheme tabBarTheme;
 
+  /// Moon Design System MoonTable widget theming.
+  final MoonTableTheme tableTheme;
+
   /// Moon Design System MoonTag widget theming.
   final MoonTagTheme tagTheme;
 
@@ -166,6 +170,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonSegmentedControlTheme? segmentedControlTheme,
     MoonSwitchTheme? switchTheme,
     MoonTabBarTheme? tabBarTheme,
+    MoonTableTheme? tableTheme,
     MoonTagTheme? tagTheme,
     MoonTextAreaTheme? textAreaTheme,
     MoonTextInputTheme? textInputTheme,
@@ -197,6 +202,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         segmentedControlTheme = segmentedControlTheme ?? MoonSegmentedControlTheme(tokens: tokens),
         switchTheme = switchTheme ?? MoonSwitchTheme(tokens: tokens),
         tabBarTheme = tabBarTheme ?? MoonTabBarTheme(tokens: tokens),
+        tableTheme = tableTheme ?? MoonTableTheme(tokens: tokens),
         tagTheme = tagTheme ?? MoonTagTheme(tokens: tokens),
         textAreaTheme = textAreaTheme ?? MoonTextAreaTheme(tokens: tokens),
         textInputTheme = textInputTheme ?? MoonTextInputTheme(tokens: tokens),
@@ -232,6 +238,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonSegmentedControlTheme? segmentedControlTheme,
     MoonSwitchTheme? switchTheme,
     MoonTabBarTheme? tabBarTheme,
+    MoonTableTheme? tableTheme,
     MoonTagTheme? tagTheme,
     MoonTextAreaTheme? textAreaTheme,
     MoonTextInputTheme? textInputTheme,
@@ -266,6 +273,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       segmentedControlTheme: segmentedControlTheme ?? this.segmentedControlTheme,
       switchTheme: switchTheme ?? this.switchTheme,
       tabBarTheme: tabBarTheme ?? this.tabBarTheme,
+      tableTheme: tableTheme ?? this.tableTheme,
       tagTheme: tagTheme ?? this.tagTheme,
       textAreaTheme: textAreaTheme ?? this.textAreaTheme,
       textInputTheme: textInputTheme ?? this.textInputTheme,
@@ -306,6 +314,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       segmentedControlTheme: segmentedControlTheme.lerp(other.segmentedControlTheme, t),
       switchTheme: switchTheme.lerp(other.switchTheme, t),
       tabBarTheme: tabBarTheme.lerp(other.tabBarTheme, t),
+      tableTheme: tableTheme.lerp(other.tableTheme, t),
       tagTheme: tagTheme.lerp(other.tagTheme, t),
       textAreaTheme: textAreaTheme.lerp(other.textAreaTheme, t),
       textInputTheme: textInputTheme.lerp(other.textInputTheme, t),
@@ -345,6 +354,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonSegmentedControlTheme>("MoonSegmentedControlTheme", segmentedControlTheme))
       ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
       ..add(DiagnosticsProperty<MoonTabBarTheme>("MoonTabBarTheme", tabBarTheme))
+      ..add(DiagnosticsProperty<MoonTableTheme>("MoonTableTheme", tableTheme))
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
       ..add(DiagnosticsProperty<MoonTextAreaTheme>("MoonTextAreaTheme", textAreaTheme))
       ..add(DiagnosticsProperty<MoonTextInputTheme>("MoonTextInputTheme", textInputTheme))
@@ -356,12 +366,20 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
 extension MoonThemeX on BuildContext {
   MoonTheme? get moonTheme => Theme.of(this).extension<MoonTheme>();
+
   MoonBorders? get moonBorders => moonTheme?.tokens.borders;
+
   MoonColors? get moonColors => moonTheme?.tokens.colors;
+
   MoonEffectsTheme? get moonEffects => moonTheme?.effects;
+
   MoonOpacities? get moonOpacities => moonTheme?.tokens.opacities;
+
   MoonShadows? get moonShadows => moonTheme?.tokens.shadows;
+
   MoonSizes? get moonSizes => moonTheme?.tokens.sizes;
+
   MoonTransitions? get moonTransitions => moonTheme?.tokens.transitions;
+
   MoonTypography? get moonTypography => moonTheme?.tokens.typography;
 }

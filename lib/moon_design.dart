@@ -94,6 +94,7 @@ export 'package:moon_design/src/widgets/tab_bar/pill_tab_style.dart';
 export 'package:moon_design/src/widgets/tab_bar/tab.dart';
 export 'package:moon_design/src/widgets/tab_bar/tab_bar.dart';
 export 'package:moon_design/src/widgets/tab_bar/tab_style.dart';
+export 'package:moon_design/src/widgets/table/table.dart';
 export 'package:moon_design/src/widgets/tag/tag.dart';
 export 'package:moon_design/src/widgets/text_area/text_area.dart';
 export 'package:moon_design/src/widgets/text_input/form_text_input.dart';
