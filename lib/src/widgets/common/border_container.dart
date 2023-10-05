@@ -31,7 +31,7 @@ class BorderContainer extends StatefulWidget {
   _BorderContainerState createState() => _BorderContainerState();
 }
 
-class _BorderContainerState extends State<BorderContainer> with TickerProviderStateMixin {
+class _BorderContainerState extends State<BorderContainer> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _borderAnimation;
   late ShapeBorderTween _border;

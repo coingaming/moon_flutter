@@ -14,8 +14,8 @@ class MoonTableColors extends ThemeExtension<MoonTableColors> with Diagnosticabl
   /// Table row title text color.
   final Color rowTitleTextColor;
 
-  /// Table row animated title text color.
-  final Color rowAnimatedTitleTextColor;
+  /// Table row pinned and animated title text color.
+  final Color rowPinnedAnimatedTitleTextColor;
 
   /// Table icon color.
   final Color iconColor;
@@ -27,7 +27,7 @@ class MoonTableColors extends ThemeExtension<MoonTableColors> with Diagnosticabl
     required this.columnTextColor,
     required this.rowTextColor,
     required this.rowTitleTextColor,
-    required this.rowAnimatedTitleTextColor,
+    required this.rowPinnedAnimatedTitleTextColor,
     required this.iconColor,
     required this.rowBackgroundColor,
   });
@@ -37,7 +37,7 @@ class MoonTableColors extends ThemeExtension<MoonTableColors> with Diagnosticabl
     Color? columnTextColor,
     Color? rowTextColor,
     Color? rowTitleTextColor,
-    Color? rowAnimatedTitleTextColor,
+    Color? rowPinnedAnimatedTitleTextColor,
     Color? iconColor,
     Color? rowBackgroundColor,
   }) {
@@ -45,7 +45,7 @@ class MoonTableColors extends ThemeExtension<MoonTableColors> with Diagnosticabl
       columnTextColor: columnTextColor ?? this.columnTextColor,
       rowTextColor: rowTextColor ?? this.rowTextColor,
       rowTitleTextColor: rowTitleTextColor ?? this.rowTitleTextColor,
-      rowAnimatedTitleTextColor: rowAnimatedTitleTextColor ?? this.rowAnimatedTitleTextColor,
+      rowPinnedAnimatedTitleTextColor: rowPinnedAnimatedTitleTextColor ?? this.rowPinnedAnimatedTitleTextColor,
       iconColor: iconColor ?? this.iconColor,
       rowBackgroundColor: rowBackgroundColor ?? this.rowBackgroundColor,
     );
@@ -58,8 +58,10 @@ class MoonTableColors extends ThemeExtension<MoonTableColors> with Diagnosticabl
     return MoonTableColors(
       columnTextColor: colorPremulLerp(columnTextColor, other.columnTextColor, t)!,
       rowTextColor: colorPremulLerp(rowTextColor, other.rowTextColor, t)!,
-      rowTitleTextColor: colorPremulLerp(rowTitleTextColor, other.rowTitleTextColor, t)!,
-      rowAnimatedTitleTextColor: colorPremulLerp(rowAnimatedTitleTextColor, other.rowAnimatedTitleTextColor, t)!,
+      rowTitleTextColor:
+          colorPremulLerp(rowTitleTextColor, other.rowTitleTextColor, t)!,
+      rowPinnedAnimatedTitleTextColor:
+          colorPremulLerp(rowPinnedAnimatedTitleTextColor, other.rowPinnedAnimatedTitleTextColor, t)!,
       iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
       rowBackgroundColor: colorPremulLerp(rowBackgroundColor, other.rowBackgroundColor, t)!,
     );
@@ -73,7 +75,7 @@ class MoonTableColors extends ThemeExtension<MoonTableColors> with Diagnosticabl
       ..add(ColorProperty("columnTextColor", columnTextColor))
       ..add(ColorProperty("rowTextColor", rowTextColor))
       ..add(ColorProperty("rowTitleTextColor", rowTitleTextColor))
-      ..add(ColorProperty("rowAnimatedTitleTextColor", rowAnimatedTitleTextColor))
+      ..add(ColorProperty("rowPinnedAnimatedTitleTextColor", rowPinnedAnimatedTitleTextColor))
       ..add(ColorProperty("iconColor", iconColor))
       ..add(ColorProperty("rowBackgroundColor", rowBackgroundColor));
   }

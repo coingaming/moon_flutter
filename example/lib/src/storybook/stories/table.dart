@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-const _rowsInPage = 25;
+const int _rowsInPage = 25;
 
 List<_ExampleTableData> _exampleTableData = _generateTableData();
 List<_ExampleTableData> _exampleTableDataToShow = _exampleTableData.sublist(0, _rowsInPage);
@@ -22,7 +22,7 @@ int _rowsToShow = _rowsInPage;
 // Knob variables for methods to use outside TableStory.
 bool _showCheckboxes = false;
 bool _showDividerKnob = false;
-bool _selectableKnob = false;
+bool _rowsSelectableKnob = false;
 bool _zebraStyleKnob = false;
 bool _infiniteScrollKnob = false;
 Color? _rowColor;
@@ -99,20 +99,20 @@ class TableStory extends Story {
               max: 16,
             );
 
-            final fixedHeaderKnob = context.knobs.boolean(
-              label: "hasFixedHeader",
-              description: "Show MoonTable with fixed header.",
+            final isHeaderPinnedKnob = context.knobs.boolean(
+              label: "isHeaderPinned",
+              description: "Show MoonTable with pinned header.",
               initial: true,
             );
 
-            final fixedFooterKnob = context.knobs.boolean(
-              label: "hasFixedFooter",
-              description: "Show MoonTable with fixed footer.",
+            final isFooterPinnedKnob = context.knobs.boolean(
+              label: "isFooterPinned",
+              description: "Show MoonTable with pinned footer.",
               initial: true,
             );
 
-            _selectableKnob = context.knobs.boolean(
-              label: "Selectable",
+            _rowsSelectableKnob = context.knobs.boolean(
+              label: "Rows selectable",
               description: "Row onSelectChanged() is not null.",
               initial: true,
             );
@@ -154,23 +154,31 @@ class TableStory extends Story {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 64.0),
-                  child: MoonTable(
-                    fixedHeader: fixedHeaderKnob,
-                    fixedFooter: fixedFooterKnob,
-                    sortAscending: _sortAscending,
-                    sortColumnIndex: _sortColumnIndex,
-                    rowGap: rowGapKnob?.toDouble(),
-                    rowSize: tableRowSizeKnob ?? MoonTableRowSize.md,
-                    tableHeader: _generateTableHeader(context, setState),
-                    tableFooter: _generateTableFooter(context),
-                    rows: _generateTableRows(context, setState),
-                    cellPadding: EdgeInsets.symmetric(vertical: tableRowSizeKnob == MoonTableRowSize.xs ? 4 : 8),
-                    onScrollControllersReady: (
-                      ScrollController verticalScrollController,
-                      ScrollController horizontalScrollController,
-                    ) =>
-                        _scrollListener(setState, verticalScrollController),
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).padding.top + 16.0,
+                    bottom: 42.0,
+                  ),
+                  child: OverflowBox(
+                    maxWidth: MediaQuery.of(context).size.width,
+                    child: MoonTable(
+                      columnsCount: _showCheckboxes ? 6 : 5,
+                      isHeaderPinned: isHeaderPinnedKnob,
+                      isFooterPinned: isFooterPinnedKnob,
+                      sortAscending: _sortAscending,
+                      sortColumnIndex: _sortColumnIndex,
+                      rowGap: rowGapKnob?.toDouble(),
+                      rowSize: tableRowSizeKnob ?? MoonTableRowSize.md,
+                      header: _generateTableHeader(context, setState),
+                      footer: _generateTableFooter(context),
+                      rows: _generateTableRows(context, setState),
+                      tablePadding: const EdgeInsets.symmetric(horizontal: 16),
+                      cellPadding: EdgeInsets.symmetric(vertical: tableRowSizeKnob == MoonTableRowSize.xs ? 4 : 8),
+                      onScrollControllersReady: (
+                        ScrollController verticalScrollController,
+                        ScrollController horizontalScrollController,
+                      ) =>
+                          _scrollListener(setState, verticalScrollController),
+                    ),
                   ),
                 );
               },
@@ -226,7 +234,7 @@ Widget _headerCheckBox(StateSetter setState) {
     child: MoonCheckbox(
       tapAreaSizeValue: 0,
       value: _checkAllBoxes,
-      onChanged: _selectableKnob
+      onChanged: _rowsSelectableKnob
           ? (bool? onChanged) => onChanged != null
               ? setState(() {
                   _checkAllBoxes = onChanged;
@@ -280,7 +288,7 @@ MoonTableHeader _generateTableHeader(BuildContext context, StateSetter setState)
         return MoonTableColumn(
           width: columnWidth,
           onTap: () {
-            if (checkboxColumn && _selectableKnob) {
+            if (checkboxColumn && _rowsSelectableKnob) {
               setState(() {
                 _checkAllBoxes = !_checkAllBoxes;
 
@@ -337,7 +345,8 @@ List<MoonTableRow> _generateTableRows(BuildContext context, StateSetter setState
 
       return MoonTableRow(
         selected: row.selected,
-        onSelectChanged: _selectableKnob ? (bool? selected) => setState(() => row.selected = selected ?? false) : null,
+        onSelectChanged:
+            _rowsSelectableKnob ? (bool? selected) => setState(() => row.selected = selected ?? false) : null,
         decoration: ShapeDecorationWithPremultipliedAlpha(
           color: _zebraStyleKnob
               ? row.selected
@@ -361,7 +370,8 @@ List<MoonTableRow> _generateTableRows(BuildContext context, StateSetter setState
               child: MoonCheckbox(
                 tapAreaSizeValue: 0,
                 value: row.selected,
-                onChanged: _selectableKnob ? (bool? onChanged) => setState(() => row.selected = !row.selected) : null,
+                onChanged:
+                    _rowsSelectableKnob ? (bool? onChanged) => setState(() => row.selected = !row.selected) : null,
               ),
             ),
           _buildCell(context, _exampleTableDataToShow[index].id, firstCell: !_showCheckboxes),

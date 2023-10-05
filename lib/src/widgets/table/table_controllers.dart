@@ -8,35 +8,35 @@ class TableControllers {
 
   final LinkedScrollControllerGroup _horizontalControllersGroup = LinkedScrollControllerGroup();
 
-  final bool fixedHeader;
-  final bool fixedFooter;
-  final bool fixedEmptyPlaceholder;
+  final bool isHeaderPinned;
+  final bool isFooterPinned;
+  final bool hasPinnedEmptyPlaceholder;
 
   ScrollController? headerHorizontalScrollController;
   ScrollController? footerHorizontalScrollController;
-  ScrollController? emptyPlaceholderHorizontalScrollController;
+  ScrollController? rowsPlaceholderHorizontalScrollController;
 
   TableControllers({
-    required this.fixedHeader,
-    required this.fixedFooter,
-    required this.fixedEmptyPlaceholder,
+    required this.isHeaderPinned,
+    required this.isFooterPinned,
+    required this.hasPinnedEmptyPlaceholder,
   });
 
   void init() {
     verticalScrollController = ScrollController();
     horizontalScrollController = _horizontalControllersGroup.addAndGet();
 
-    if (fixedHeader) headerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
-    if (fixedFooter) footerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
-    if (!fixedEmptyPlaceholder) emptyPlaceholderHorizontalScrollController = _horizontalControllersGroup.addAndGet();
+    if (isHeaderPinned) headerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
+    if (isFooterPinned) footerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
+    if (!hasPinnedEmptyPlaceholder) rowsPlaceholderHorizontalScrollController = _horizontalControllersGroup.addAndGet();
   }
 
   void dispose() {
     verticalScrollController.dispose();
     horizontalScrollController.dispose();
 
-    if (fixedHeader) headerHorizontalScrollController?.dispose();
-    if (fixedFooter) footerHorizontalScrollController?.dispose();
-    if (!fixedEmptyPlaceholder) emptyPlaceholderHorizontalScrollController?.dispose();
+    if (isHeaderPinned) headerHorizontalScrollController?.dispose();
+    if (isFooterPinned) footerHorizontalScrollController?.dispose();
+    if (!hasPinnedEmptyPlaceholder) rowsPlaceholderHorizontalScrollController?.dispose();
   }
 }

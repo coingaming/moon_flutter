@@ -36,7 +36,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
   final TextStyle rowTitleTextStyle;
 
   /// Table row animated title text style.
-  final TextStyle rowAnimatedTitleTextStyle;
+  final TextStyle rowPinnedAnimatedTitleTextStyle;
 
   const MoonTableSizeProperties({
     required this.rowBorderRadius,
@@ -49,7 +49,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
     required this.columnTextStyle,
     required this.rowTextStyle,
     required this.rowTitleTextStyle,
-    required this.rowAnimatedTitleTextStyle,
+    required this.rowPinnedAnimatedTitleTextStyle,
   });
 
   @override
@@ -64,7 +64,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
     TextStyle? columnTextStyle,
     TextStyle? rowTextStyle,
     TextStyle? rowTitleTextStyle,
-    TextStyle? rowAnimatedTitleTextStyle,
+    TextStyle? rowPinnedAnimatedTitleTextStyle,
   }) {
     return MoonTableSizeProperties(
       rowBorderRadius: rowBorderRadius ?? this.rowBorderRadius,
@@ -77,7 +77,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       columnTextStyle: columnTextStyle ?? this.columnTextStyle,
       rowTextStyle: rowTextStyle ?? this.rowTextStyle,
       rowTitleTextStyle: rowTitleTextStyle ?? this.rowTitleTextStyle,
-      rowAnimatedTitleTextStyle: rowAnimatedTitleTextStyle ?? this.rowAnimatedTitleTextStyle,
+      rowPinnedAnimatedTitleTextStyle: rowPinnedAnimatedTitleTextStyle ?? this.rowPinnedAnimatedTitleTextStyle,
     );
   }
 
@@ -96,7 +96,7 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       columnTextStyle: TextStyle.lerp(columnTextStyle, other.columnTextStyle, t)!,
       rowTextStyle: TextStyle.lerp(rowTextStyle, other.rowTextStyle, t)!,
       rowTitleTextStyle: TextStyle.lerp(rowTitleTextStyle, other.rowTitleTextStyle, t)!,
-      rowAnimatedTitleTextStyle: TextStyle.lerp(rowAnimatedTitleTextStyle, other.rowAnimatedTitleTextStyle, t)!,
+      rowPinnedAnimatedTitleTextStyle: TextStyle.lerp(rowPinnedAnimatedTitleTextStyle, other.rowPinnedAnimatedTitleTextStyle, t)!,
     );
   }
 
@@ -115,6 +115,6 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       ..add(DiagnosticsProperty<TextStyle>("columnTextStyle", columnTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("rowTextStyle", rowTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("rowTitleTextStyle", rowTitleTextStyle))
-      ..add(DiagnosticsProperty<TextStyle>("rowAnimatedTitleTextStyle", rowAnimatedTitleTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("rowAnimatedTitleTextStyle", rowPinnedAnimatedTitleTextStyle));
   }
 }

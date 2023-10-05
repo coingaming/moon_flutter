@@ -47,7 +47,7 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               columnTextStyle: tokens.typography.heading.text12,
               rowTextStyle: tokens.typography.body.text12,
               rowTitleTextStyle: tokens.typography.body.text12,
-              rowAnimatedTitleTextStyle: tokens.typography.body.text12,
+              rowPinnedAnimatedTitleTextStyle: tokens.typography.body.text12,
             ),
         sm = sm ??
             MoonTableSizeProperties(
@@ -61,7 +61,7 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowTitleTextStyle: tokens.typography.body.textDefault,
-              rowAnimatedTitleTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedTitleTextStyle: tokens.typography.body.textDefault,
             ),
         md = md ??
             MoonTableSizeProperties(
@@ -75,7 +75,7 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowTitleTextStyle: tokens.typography.body.textDefault,
-              rowAnimatedTitleTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedTitleTextStyle: tokens.typography.body.textDefault,
             ),
         lg = lg ??
             MoonTableSizeProperties(
@@ -89,7 +89,7 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowTitleTextStyle: tokens.typography.body.textDefault,
-              rowAnimatedTitleTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedTitleTextStyle: tokens.typography.body.textDefault,
             ),
         xl = xl ??
             MoonTableSizeProperties(
@@ -103,7 +103,7 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowTitleTextStyle: tokens.typography.body.textDefault,
-              rowAnimatedTitleTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedTitleTextStyle: tokens.typography.body.textDefault,
             ),
         x2l = x2l ??
             MoonTableSizeProperties(
@@ -117,7 +117,7 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowTitleTextStyle: tokens.typography.body.textDefault,
-              rowAnimatedTitleTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedTitleTextStyle: tokens.typography.body.textDefault,
             );
 
   @override
