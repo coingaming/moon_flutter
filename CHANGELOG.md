@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.0](https://github.com/coingaming/moon_flutter/compare/v0.30.2...v0.31.0) (2023-10-05)
+
+
+### Features
+
+* [MDS-649] Create Table component ([#262](https://github.com/coingaming/moon_flutter/issues/262)) ([5ad503f](https://github.com/coingaming/moon_flutter/commit/5ad503fa936b6b12750f0ed250afdf6a425d16af))
+
 ## [0.30.2](https://github.com/coingaming/moon_flutter/compare/v0.30.1...v0.30.2) (2023-10-03)
 
 
