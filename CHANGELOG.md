@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.1](https://github.com/coingaming/moon_flutter/compare/v0.31.0...v0.31.1) (2023-10-06)
+
+
+### Bug Fixes
+
+* Table width fix ([#264](https://github.com/coingaming/moon_flutter/issues/264)) ([91bcb92](https://github.com/coingaming/moon_flutter/commit/91bcb92a181d11f1ee7f76a5541037e80af3b219))
+
 ## [0.31.0](https://github.com/coingaming/moon_flutter/compare/v0.30.2...v0.31.0) (2023-10-05)
 
 
