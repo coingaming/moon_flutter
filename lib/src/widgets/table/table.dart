@@ -137,19 +137,19 @@ class MoonTableRowTitle {
   /// Controls whether title of the row is pinned or not during table horizontal scroll.
   final bool pinned;
 
-  /// Row animated title transition duration.
+  /// Row animated title transition duration during horizontal scroll.
   final Duration? transitionDuration;
 
-  /// Row animated title transition curve.
+  /// Row animated title transition curve during horizontal scroll.
   final Curve? transitionCurve;
 
   /// Row title padding.
   final EdgeInsetsGeometry? padding;
 
-  /// Text style of the row title.
+  /// Text style of the row title if [pinned] is false or table is not being horizontally scrolled.
   final TextStyle? textStyle;
 
-  /// Horizontally animated text style of the row title when [pinned] is true.
+  /// Animated text style of the row title when [pinned] is true and table is being horizontally scrolled.
   final TextStyle? pinnedAnimatedTextStyle;
 
   /// Row title widget.
@@ -202,7 +202,7 @@ class MoonTable extends StatefulWidget {
   /// The whole height of the table. Defaults to null using up all available space.
   final double? height;
 
-  /// The whole width of the table including [tablePadding].
+  /// The width of the table.
   /// Either [MoonTable.width] or [MoonTableColumn.width] for each column must be provided.
   /// This is exclusive with [MoonTableColumn.width]. Both can not be used at the same time.
   final double? width;
@@ -350,18 +350,15 @@ class _MoonTableState extends State<MoonTable> {
   }
 
   void _calculateTableWidth() {
-    final double tableHorizontalPadding = widget.tablePadding?.horizontal ?? 0.0;
-
-    // If a table width is specified, the available space, including table padding,
-    // is divided equally among the columns.
+    // If a table width is specified, the available space is divided equally among the columns.
     if (widget.width != null) {
-      _columnEqualWidth = (widget.width! - tableHorizontalPadding) / widget.columnsCount;
+      _columnEqualWidth = widget.width! / widget.columnsCount;
 
       _tableWidth = widget.width!;
     } else {
-      // Calculate table width based on column widths and padding.
+      // Calculate table width based on columns widths.
       _tableWidth = widget.header!.columns.fold<double>(
-        tableHorizontalPadding,
+        0,
         (double totalWidth, MoonTableColumn column) => totalWidth + (column.width!),
       );
     }
