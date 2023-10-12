@@ -20,6 +20,7 @@ dev_dependencies:
   storybook_flutter:
     git:
       url: https://github.com/coingaming/storybook_flutter.git
+      ref: 95de8c31c0c0a0bc391d5e4ac7924df2fcfad1ad
       path: packages/storybook_flutter
 flutter:
   uses-material-design: true
