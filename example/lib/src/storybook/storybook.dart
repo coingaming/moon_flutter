@@ -30,24 +30,21 @@ import 'package:example/src/storybook/stories/text_input.dart';
 import 'package:example/src/storybook/stories/text_input_group.dart';
 import 'package:example/src/storybook/stories/toast.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class StorybookPage extends StatelessWidget {
-  static bool isLargeScreen = MediaQueryData.fromView(PlatformDispatcher.instance.implicitView!).size.width > 1000;
-
   const StorybookPage({super.key});
 
-  static final _storyPanelFocusNode = FocusNode();
+  static const double autoLayoutThreshold = 1000;
 
   static final _plugins = initializePlugins(
-    contentsSidePanel: isLargeScreen,
-    knobsSidePanel: isLargeScreen,
-    enableDeviceFrame: isLargeScreen,
-    initialDeviceFrameData: DeviceFrameData(
+    enableCompactLayoutDeviceFrame: false,
+    initialDeviceFrameData: (
+      isFrameVisible: true,
       device: Devices.ios.iPhone13,
+      orientation: Orientation.portrait,
     ),
   );
 
@@ -58,6 +55,8 @@ class StorybookPage extends StatelessWidget {
         Storybook(
           initialStory: "Accordion",
           plugins: _plugins,
+          enableLayout: false,
+          autoLayoutThreshold: autoLayoutThreshold,
           brandingWidget: const MoonVersionWidget(),
           wrapperBuilder: (BuildContext context, Widget? child) => MaterialApp(
             title: "Moon Design for Flutter",
@@ -89,27 +88,16 @@ class StorybookPage extends StatelessWidget {
             ),
             home: Directionality(
               textDirection: Directionality.of(context),
-              child: Focus(
-                focusNode: _storyPanelFocusNode,
-                descendantsAreFocusable: true,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.deferToChild,
-                  onTap: () {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    _storyPanelFocusNode.requestFocus();
-                  },
-                  child: Scaffold(
-                    extendBody: true,
-                    extendBodyBehindAppBar: true,
-                    resizeToAvoidBottomInset: false,
-                    body: SafeArea(
-                      top: false,
-                      bottom: false,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: child,
-                      ),
-                    ),
+              child: Scaffold(
+                extendBody: true,
+                extendBodyBehindAppBar: true,
+                resizeToAvoidBottomInset: false,
+                body: SafeArea(
+                  top: false,
+                  bottom: false,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: child,
                   ),
                 ),
               ),
