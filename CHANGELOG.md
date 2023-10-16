@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.3](https://github.com/coingaming/moon_flutter/compare/v0.31.2...v0.31.3) (2023-10-16)
+
+
+### Bug Fixes
+
+* [MDS-739] Update code after Storybook fork changes ([#268](https://github.com/coingaming/moon_flutter/issues/268)) ([e9affcb](https://github.com/coingaming/moon_flutter/commit/e9affcb73f0cab0509b08912137fa4e770f2ba1c))
+
 ## [0.31.2](https://github.com/coingaming/moon_flutter/compare/v0.31.1...v0.31.2) (2023-10-12)
 
 
