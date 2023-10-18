@@ -1,4 +1,6 @@
-import 'package:example/src/storybook/common/icons/icons_list.dart';
+import 'dart:ui';
+
+import 'package:example/src/storybook/common/icons_map.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
@@ -9,14 +11,23 @@ class IconsStory extends Story {
       : super(
           name: "Icons",
           builder: (BuildContext context) {
+            final ScrollBehavior scrollBehaviour = ScrollConfiguration.of(context).copyWith(
+              scrollbars: false,
+              overscroll: false,
+              dragDevices: {
+                PointerDeviceKind.touch,
+                PointerDeviceKind.mouse,
+              },
+            );
+
             return CustomScrollView(
+              scrollBehavior: scrollBehaviour,
               slivers: [
                 SliverPadding(
                   padding: const EdgeInsets.symmetric(vertical: 64),
                   sliver: _IconsGridWithTitle(
                     title: "MoonIcons",
-                    iconsList: iconsList,
-                    iconsNameList: iconsNameList,
+                    iconsMap: iconsMap,
                   ),
                 ),
               ],
@@ -27,13 +38,11 @@ class IconsStory extends Story {
 
 class _IconsGridWithTitle extends StatelessWidget {
   final String title;
-  final List<IconData> iconsList;
-  final List<String> iconsNameList;
+  final Map<String, IconData> iconsMap;
 
   const _IconsGridWithTitle({
     required this.title,
-    required this.iconsList,
-    required this.iconsNameList,
+    required this.iconsMap,
   });
 
   @override
@@ -48,7 +57,7 @@ class _IconsGridWithTitle extends StatelessWidget {
           ),
         ),
         SliverGrid.builder(
-          itemCount: iconsList.length,
+          itemCount: iconsMap.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             crossAxisSpacing: 8,
@@ -59,15 +68,15 @@ class _IconsGridWithTitle extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                if (iconsNameList[index].contains("16"))
-                  MoonIcon(iconsList[index], size: 16)
-                else if (iconsNameList[index].contains("24"))
-                  MoonIcon(iconsList[index], size: 24)
+                if (iconsMap.keys.toList()[index].contains("16"))
+                  MoonIcon(iconsMap.values.toList()[index], size: 16)
+                else if (iconsMap.keys.toList()[index].contains("24"))
+                  MoonIcon(iconsMap.values.toList()[index], size: 24)
                 else
-                  MoonIcon(iconsList[index], size: 32),
+                  MoonIcon(iconsMap.values.toList()[index], size: 32),
                 const SizedBox(height: 20),
                 Text(
-                  iconsNameList[index],
+                  iconsMap.keys.toList()[index],
                   style: TextStyle(
                     fontSize: 10,
                     color: context.moonColors!.trunks,

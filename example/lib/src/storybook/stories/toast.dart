@@ -1,6 +1,7 @@
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
+import 'package:moon_icons/moon_icons.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class ToastStory extends Story {
@@ -132,7 +133,10 @@ class ToastStory extends Story {
                           displayDuration: displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
                           borderRadius:
                               borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                          leading: MoonIcon(MoonIcons.info_24, color: iconColor),
+                          leading: MoonIcon(
+                            MoonIcons.info_24,
+                            color: iconColor,
+                          ),
                           title: Text(
                             customLabelTextKnob,
                             style: TextStyle(color: textColor),
