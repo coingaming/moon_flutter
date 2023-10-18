@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/widgets/common/icons/icons.dart';
-import 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
+import 'package:moon_design/src/widgets/common/moon_icon.dart';
+import 'package:moon_icons/moon_icons.dart';
 
 class MoonErrorMessages extends StatelessWidget {
   final List<String> errors;

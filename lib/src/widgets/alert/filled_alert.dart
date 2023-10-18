@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/widgets/alert/alert.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
-import 'package:moon_design/src/widgets/common/icons/icons.dart';
-import 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
+import 'package:moon_design/src/widgets/common/moon_icon.dart';
+import 'package:moon_icons/moon_icons.dart';
 
 class MoonFilledAlert extends StatelessWidget {
   /// Controls whether the alert is shown.

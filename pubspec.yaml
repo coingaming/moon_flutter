@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  moon_icons: any
 
 dev_dependencies:
   flutter_test:
@@ -19,7 +20,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  fonts:
-    - family: MoonIcons
-      fonts:
-        - asset: fonts/MoonIcons.ttf

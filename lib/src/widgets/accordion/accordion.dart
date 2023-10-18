@@ -12,8 +12,8 @@ import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
-import 'package:moon_design/src/widgets/common/icons/icons.dart';
-import 'package:moon_design/src/widgets/common/icons/moon_icon.dart';
+import 'package:moon_design/src/widgets/common/moon_icon.dart';
+import 'package:moon_icons/moon_icons.dart';
 
 enum MoonAccordionSize {
   sm,
