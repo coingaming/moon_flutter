@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.4](https://github.com/coingaming/moon_flutter/compare/v0.31.3...v0.31.4) (2023-10-18)
+
+
+### Bug Fixes
+
+* [MDS-756] Use moon_flutter_icons package for icons ([#270](https://github.com/coingaming/moon_flutter/issues/270)) ([78d7735](https://github.com/coingaming/moon_flutter/commit/78d7735b1a8b14a92a1d7d91a9dbd8bff30741d1))
+
 ## [0.31.3](https://github.com/coingaming/moon_flutter/compare/v0.31.2...v0.31.3) (2023-10-16)
 
 
