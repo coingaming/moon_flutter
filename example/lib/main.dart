@@ -1,37 +1,26 @@
 import 'package:example/src/storybook/storybook.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:moon_design/moon_design.dart';
 
 void main() {
+  usePathUrlStrategy();
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Moon Design for Flutter',
-      home: HomePage(),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class _MyAppState extends State<MyApp> {
   bool _isInStorybookMode = true;
 
   void toggleStorybookMode() {
-    setState(() {
-      _isInStorybookMode = !_isInStorybookMode;
-    });
+    setState(() => _isInStorybookMode = !_isInStorybookMode);
   }
 
   @override
