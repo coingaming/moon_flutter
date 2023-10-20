@@ -1,39 +1,39 @@
 import 'dart:ui';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/icons_map.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
-import 'package:storybook_flutter/storybook_flutter.dart';
 
-class IconsStory extends Story {
-  IconsStory()
-      : super(
-          name: "Icons",
-          builder: (BuildContext context) {
-            final ScrollBehavior scrollBehaviour = ScrollConfiguration.of(context).copyWith(
-              scrollbars: false,
-              overscroll: false,
-              dragDevices: {
-                PointerDeviceKind.touch,
-                PointerDeviceKind.mouse,
-              },
-            );
+@RoutePage()
+class IconsStory extends StatelessWidget {
+  const IconsStory({super.key});
 
-            return CustomScrollView(
-              scrollBehavior: scrollBehaviour,
-              slivers: [
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(vertical: 64),
-                  sliver: _IconsGridWithTitle(
-                    title: "MoonIcons",
-                    iconsMap: iconsMap,
-                  ),
-                ),
-              ],
-            );
-          },
-        );
+  @override
+  Widget build(BuildContext context) {
+    final ScrollBehavior scrollBehaviour = ScrollConfiguration.of(context).copyWith(
+      scrollbars: false,
+      overscroll: false,
+      dragDevices: {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      },
+    );
+
+    return CustomScrollView(
+      scrollBehavior: scrollBehaviour,
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+          sliver: _IconsGridWithTitle(
+            title: "MoonIcons",
+            iconsMap: iconsMap,
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class _IconsGridWithTitle extends StatelessWidget {

@@ -5,10 +5,13 @@ version: 0.31.5
 environment:
   sdk: '>=3.1.2 <4.0.0'
 dependencies:
+  auto_route: ^7.8.4
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.1
+  flutter_web_plugins:
+    sdk: flutter
   moon_design:
     path: ../
   moon_icons: any
@@ -16,9 +19,10 @@ dependencies:
   storybook_flutter:
     git:
       url: https://github.com/coingaming/storybook_flutter.git
-      ref: 7db5a9c8925da3ad0244da674aaafdbf4c91ff14
       path: packages/storybook_flutter
 dev_dependencies:
+  auto_route_generator: ^7.3.2
+  build_runner: ^2.4.6
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
