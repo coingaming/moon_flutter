@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.5](https://github.com/coingaming/moon_flutter/compare/v0.31.4...v0.31.5) (2023-10-20)
+
+
+### Bug Fixes
+
+* [MDS-758] Pin storybook_flutter temporarily to previous commit again ([#272](https://github.com/coingaming/moon_flutter/issues/272)) ([66712b5](https://github.com/coingaming/moon_flutter/commit/66712b5bcced705eba3dc4e24a769f3af7347c1e))
+
 ## [0.31.4](https://github.com/coingaming/moon_flutter/compare/v0.31.3...v0.31.4) (2023-10-18)
 
 
