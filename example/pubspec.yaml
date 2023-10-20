@@ -16,6 +16,7 @@ dependencies:
   storybook_flutter:
     git:
       url: https://github.com/coingaming/storybook_flutter.git
+      ref: 7db5a9c8925da3ad0244da674aaafdbf4c91ff14
       path: packages/storybook_flutter
 dev_dependencies:
   flutter_lints: ^2.0.0
