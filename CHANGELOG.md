@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.32.0](https://github.com/coingaming/moon_flutter/compare/v0.31.5...v0.32.0) (2023-10-20)
+
+
+### Features
+
+* [MDS-741] Add routing for stories ([#274](https://github.com/coingaming/moon_flutter/issues/274)) ([6db4ca5](https://github.com/coingaming/moon_flutter/commit/6db4ca5f55346b5139fb8f30b6b6efbf8b7f261d))
+
 ## [0.31.5](https://github.com/coingaming/moon_flutter/compare/v0.31.4...v0.31.5) (2023-10-20)
 
 
