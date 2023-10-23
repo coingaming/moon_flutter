@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.32.1](https://github.com/coingaming/moon_flutter/compare/v0.32.0...v0.32.1) (2023-10-23)
+
+
+### Bug Fixes
+
+* [NO-TASK] CI token verification ([e3530fc](https://github.com/coingaming/moon_flutter/commit/e3530fce95171952b28c8db41cc1694eeecf2f2b))
+
 ## [0.32.0](https://github.com/coingaming/moon_flutter/compare/v0.31.5...v0.32.0) (2023-10-20)
 
 
