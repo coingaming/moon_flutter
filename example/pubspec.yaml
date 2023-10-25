@@ -19,6 +19,7 @@ dependencies:
   storybook_flutter:
     git:
       url: https://github.com/coingaming/storybook_flutter.git
+      ref: 9dcb0bfcb572e99d14f2b91979a9ceb4866541a5
       path: packages/storybook_flutter
 dev_dependencies:
   auto_route_generator: ^7.3.2
