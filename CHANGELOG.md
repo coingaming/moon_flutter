@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.0](https://github.com/coingaming/moon_flutter/compare/v0.32.2...v0.33.0) (2023-10-30)
+
+
+### Features
+
+* [MDS-766] Change storybook routing library ([#279](https://github.com/coingaming/moon_flutter/issues/279)) ([1d74da0](https://github.com/coingaming/moon_flutter/commit/1d74da0789e069091e725eb7f737dd98aa508ad3))
+
 ## [0.32.2](https://github.com/coingaming/moon_flutter/compare/v0.32.1...v0.32.2) (2023-10-25)
 
 
