@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-@RoutePage()
 class LinearLoaderStory extends StatelessWidget {
+  static const path = '/loader/linear_loader';
+
   const LinearLoaderStory({super.key});
 
   @override

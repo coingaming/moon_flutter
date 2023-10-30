@@ -22,7 +22,7 @@ class BaseSegmentedTabBar extends StatefulWidget {
   _BaseSegmentedTabBarState createState() => _BaseSegmentedTabBarState();
 }
 
-class _BaseSegmentedTabBarState extends State<BaseSegmentedTabBar> with SingleTickerProviderStateMixin {
+class _BaseSegmentedTabBarState extends State<BaseSegmentedTabBar> with TickerProviderStateMixin {
   late List<GlobalKey> _tabKeys;
   late TabController? _controller;
 

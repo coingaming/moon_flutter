@@ -1,11 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-@RoutePage()
 class CircularProgressStory extends StatelessWidget {
+  static const subdirectory = '/progress';
+  static const path = '/progress/circular_progress';
+  static const segment = 'circular_progress';
+
   const CircularProgressStory({super.key});
 
   @override

@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-@RoutePage()
 class DotIndicatorStory extends StatefulWidget {
+  static const path = '/dot_indicator';
+
   const DotIndicatorStory({super.key});
 
   @override

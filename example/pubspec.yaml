@@ -5,7 +5,6 @@ version: 0.32.2
 environment:
   sdk: '>=3.1.2 <4.0.0'
 dependencies:
-  auto_route: ^7.8.4
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
@@ -19,11 +18,9 @@ dependencies:
   storybook_flutter:
     git:
       url: https://github.com/coingaming/storybook_flutter.git
-      ref: 9dcb0bfcb572e99d14f2b91979a9ceb4866541a5
       path: packages/storybook_flutter
+  transparent_image: ^2.0.1
 dev_dependencies:
-  auto_route_generator: ^7.3.2
-  build_runner: ^2.4.6
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
