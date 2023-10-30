@@ -19,7 +19,7 @@ class RoutingErrorWidget extends StatelessWidget {
               FadeInImage.memoryNetwork(
                 height: 200,
                 placeholder: kTransparentImage,
-                image: 'assets/images/url_error.webp',
+                image: 'assets/images/url_error.jpg',
               ),
               Text(
                 'Lost in space',
