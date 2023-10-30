@@ -1,13 +1,13 @@
 import 'dart:ui';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/icons_map.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 
-@RoutePage()
 class IconsStory extends StatelessWidget {
+  static const path = '/icons';
+
   const IconsStory({super.key});
 
   @override

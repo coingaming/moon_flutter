@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,9 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 
 enum MenuItem { first, second }
 
-@RoutePage()
 class MenuItemStory extends StatefulWidget {
+  static const path = '/menu_item';
+
   const MenuItemStory({super.key});
 
   @override

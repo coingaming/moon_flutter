@@ -1,12 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-@RoutePage()
 class AvatarStory extends StatelessWidget {
+  static const path = '/avatar';
+
   const AvatarStory({super.key});
 
   @override

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,8 +9,9 @@ enum ChoiceCustom { first, second }
 
 enum ChoiceLabel { first, second }
 
-@RoutePage()
 class RadioStory extends StatefulWidget {
+  static const path = '/radio';
+
   const RadioStory({super.key});
 
   @override

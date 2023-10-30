@@ -1,15 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:moon_icons/moon_icons.dart';
-
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 const String _groupId = "dropdown";
 
-@RoutePage()
 class DropdownStory extends StatefulWidget {
+  static const path = '/dropdown';
+
   const DropdownStory({super.key});
 
   @override

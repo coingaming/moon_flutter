@@ -1,11 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-@RoutePage()
 class CircularLoaderStory extends StatelessWidget {
+  static const subdirectory = '/loader';
+  static const path = '/loader/circular_loader';
+  static const segment = 'circular_loader';
+
   const CircularLoaderStory({super.key});
 
   @override

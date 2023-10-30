@@ -1,4 +1,4 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:example/src/storybook/routing/routing_error_widget.dart';
 import 'package:example/src/storybook/stories/accordion.dart';
 import 'package:example/src/storybook/stories/alert.dart';
 import 'package:example/src/storybook/stories/auth_code.dart';
@@ -30,197 +30,372 @@ import 'package:example/src/storybook/stories/text_input.dart';
 import 'package:example/src/storybook/stories/text_input_group.dart';
 import 'package:example/src/storybook/stories/toast.dart';
 import 'package:example/src/storybook/stories/tooltip.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-part 'app_router.gr.dart';
-
-@AutoRouterConfig(replaceInRouteName: 'Story,Route')
-class AppRouter extends _$AppRouter {
-  @override
-  List<AutoRoute> get routes => [
-        AutoRoute(page: AccordionRoute.page, path: '/accordion', initial: true),
-        AutoRoute(page: AlertRoute.page, path: '/alert'),
-        AutoRoute(page: AuthCodeRoute.page, path: '/auth_code'),
-        AutoRoute(page: AvatarRoute.page, path: '/avatar'),
-        AutoRoute(page: BottomSheetRoute.page, path: '/bottom_sheet'),
-        AutoRoute(page: ButtonRoute.page, path: '/button'),
-        AutoRoute(page: CarouselRoute.page, path: '/carousel'),
-        AutoRoute(page: CheckboxRoute.page, path: '/checkbox'),
-        AutoRoute(page: ChipRoute.page, path: '/chip'),
-        AutoRoute(page: CircularLoaderRoute.page, path: '/loader/circular_loader'),
-        AutoRoute(page: CircularProgressRoute.page, path: '/progress/circular_progress'),
-        AutoRoute(page: DotIndicatorRoute.page, path: '/dot_indicator'),
-        AutoRoute(page: DrawerRoute.page, path: '/drawer'),
-        AutoRoute(page: DropdownRoute.page, path: '/dropdown'),
-        AutoRoute(page: IconsRoute.page, path: '/icons'),
-        AutoRoute(page: LinearLoaderRoute.page, path: '/loader/linear_loader'),
-        AutoRoute(page: LinearProgressRoute.page, path: '/progress/linear_progress'),
-        AutoRoute(page: MenuItemRoute.page, path: '/menu_item'),
-        AutoRoute(page: ModalRoute.page, path: '/modal'),
-        AutoRoute(page: PopoverRoute.page, path: '/popover'),
-        AutoRoute(page: RadioRoute.page, path: '/radio'),
-        AutoRoute(page: SegmentedControlRoute.page, path: '/segmented_control'),
-        AutoRoute(page: SwitchRoute.page, path: '/switch'),
-        AutoRoute(page: TabBarRoute.page, path: '/tab_bar'),
-        AutoRoute(page: TableRoute.page, path: '/table'),
-        AutoRoute(page: TagRoute.page, path: '/tag'),
-        AutoRoute(page: TextAreaRoute.page, path: '/text_area'),
-        AutoRoute(page: TextInputRoute.page, path: '/text_input'),
-        AutoRoute(page: TextInputGroupRoute.page, path: '/text_input_group'),
-        AutoRoute(page: ToastRoute.page, path: '/toast'),
-        AutoRoute(page: TooltipRoute.page, path: '/tooltip'),
-      ];
-}
+GoRouter router = GoRouter(
+  debugLogDiagnostics: true,
+  initialLocation: AccordionStory.path,
+  errorBuilder: (context, state) => const RoutingErrorWidget(),
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      redirect: (BuildContext context, GoRouterState state) {
+        Storybook.storyRouterNotifier.currentStoryRoute = AccordionStory.path;
+        return AccordionStory.path;
+      },
+    ),
+    GoRoute(
+      path: CircularLoaderStory.subdirectory,
+      redirect: (BuildContext context, GoRouterState state) => CircularLoaderStory.path,
+      routes: [
+        GoRoute(
+          path: CircularLoaderStory.segment,
+          pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+            child: CircularLoaderStory(),
+          ),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: CircularProgressStory.subdirectory,
+      redirect: (BuildContext context, GoRouterState state) => CircularProgressStory.path,
+      routes: [
+        GoRoute(
+          path: CircularProgressStory.segment,
+          pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+            child: CircularProgressStory(),
+          ),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: AccordionStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: AccordionStory(),
+      ),
+    ),
+    GoRoute(
+      path: AlertStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: AlertStory(),
+      ),
+    ),
+    GoRoute(
+      path: AuthCodeStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: AuthCodeStory(),
+      ),
+    ),
+    GoRoute(
+      path: AvatarStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: AvatarStory(),
+      ),
+    ),
+    GoRoute(
+      path: BottomSheetStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: BottomSheetStory(),
+      ),
+    ),
+    GoRoute(
+      path: ButtonStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: ButtonStory(),
+      ),
+    ),
+    GoRoute(
+      path: CarouselStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: CarouselStory(),
+      ),
+    ),
+    GoRoute(
+      path: CheckboxStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: CheckboxStory(),
+      ),
+    ),
+    GoRoute(
+      path: ChipStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: ChipStory(),
+      ),
+    ),
+    GoRoute(
+      path: DotIndicatorStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: DotIndicatorStory(),
+      ),
+    ),
+    GoRoute(
+      path: DrawerStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: DrawerStory(),
+      ),
+    ),
+    GoRoute(
+      path: DropdownStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: DropdownStory(),
+      ),
+    ),
+    GoRoute(
+      path: IconsStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: IconsStory(),
+      ),
+    ),
+    GoRoute(
+      path: LinearLoaderStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: LinearLoaderStory(),
+      ),
+    ),
+    GoRoute(
+      path: LinearProgressStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: LinearProgressStory(),
+      ),
+    ),
+    GoRoute(
+      path: MenuItemStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: MenuItemStory(),
+      ),
+    ),
+    GoRoute(
+      path: ModalStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: ModalStory(),
+      ),
+    ),
+    GoRoute(
+      path: PopoverStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: PopoverStory(),
+      ),
+    ),
+    GoRoute(
+      path: RadioStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: RadioStory(),
+      ),
+    ),
+    GoRoute(
+      path: SegmentedControlStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: SegmentedControlStory(),
+      ),
+    ),
+    GoRoute(
+      path: SwitchStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: SwitchStory(),
+      ),
+    ),
+    GoRoute(
+      path: TabBarStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: TabBarStory(),
+      ),
+    ),
+    GoRoute(
+      path: TableStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: TableStory(),
+      ),
+    ),
+    GoRoute(
+      path: TagStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: TagStory(),
+      ),
+    ),
+    GoRoute(
+      path: TextAreaStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: TextAreaStory(),
+      ),
+    ),
+    GoRoute(
+      path: TextInputStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: TextInputStory(),
+      ),
+    ),
+    GoRoute(
+      path: TextInputGroupStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: TextInputGroupStory(),
+      ),
+    ),
+    GoRoute(
+      path: ToastStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: ToastStory(),
+      ),
+    ),
+    GoRoute(
+      path: TooltipStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: TooltipStory(),
+      ),
+    ),
+  ],
+);
 
 final List<Story> routeAwareStories = [
   Story.asRoute(
     name: 'Accordion',
-    initialRoutes: const [AccordionRoute()],
-    router: AppRouter(),
+    routePath: AccordionStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Alert',
-    initialRoutes: const [AlertRoute()],
-    router: AppRouter(),
+    routePath: AlertStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'AuthCode',
-    initialRoutes: const [AuthCodeRoute()],
-    router: AppRouter(),
+    routePath: AuthCodeStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Avatar',
-    initialRoutes: const [AvatarRoute()],
-    router: AppRouter(),
+    routePath: AvatarStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'BottomSheet',
-    initialRoutes: const [BottomSheetRoute()],
-    router: AppRouter(),
+    routePath: BottomSheetStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Button',
-    initialRoutes: const [ButtonRoute()],
-    router: AppRouter(),
+    routePath: ButtonStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Carousel',
-    initialRoutes: const [CarouselRoute()],
-    router: AppRouter(),
+    routePath: CarouselStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Checkbox',
-    initialRoutes: const [CheckboxRoute()],
-    router: AppRouter(),
+    routePath: CheckboxStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Chip',
-    initialRoutes: const [ChipRoute()],
-    router: AppRouter(),
+    routePath: ChipStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Loader/CircularLoader',
-    initialRoutes: const [CircularLoaderRoute()],
-    router: AppRouter(),
+    routePath: CircularLoaderStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Progress/CircularProgress',
-    initialRoutes: const [CircularProgressRoute()],
-    router: AppRouter(),
+    routePath: CircularProgressStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'DotIndicator',
-    initialRoutes: const [DotIndicatorRoute()],
-    router: AppRouter(),
+    routePath: DotIndicatorStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Drawer',
-    initialRoutes: const [DrawerRoute()],
-    router: AppRouter(),
+    routePath: DrawerStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Dropdown',
-    initialRoutes: const [DropdownRoute()],
-    router: AppRouter(),
+    routePath: DropdownStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Loader/LinearLoader',
-    initialRoutes: const [LinearLoaderRoute()],
-    router: AppRouter(),
+    routePath: LinearLoaderStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Progress/LinearProgress',
-    initialRoutes: const [LinearProgressRoute()],
-    router: AppRouter(),
+    routePath: LinearProgressStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'MenuItem',
-    initialRoutes: const [MenuItemRoute()],
-    router: AppRouter(),
+    routePath: MenuItemStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Modal',
-    initialRoutes: const [ModalRoute()],
-    router: AppRouter(),
+    routePath: ModalStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Popover',
-    initialRoutes: const [PopoverRoute()],
-    router: AppRouter(),
+    routePath: PopoverStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Radio',
-    initialRoutes: const [RadioRoute()],
-    router: AppRouter(),
+    routePath: RadioStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'SegmentedControl',
-    initialRoutes: const [SegmentedControlRoute()],
-    router: AppRouter(),
+    routePath: SegmentedControlStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Switch',
-    initialRoutes: const [SwitchRoute()],
-    router: AppRouter(),
+    routePath: SwitchStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'TabBar',
-    initialRoutes: const [TabBarRoute()],
-    router: AppRouter(),
+    routePath: TabBarStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Table',
-    initialRoutes: const [TableRoute()],
-    router: AppRouter(),
+    routePath: TableStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Tag',
-    initialRoutes: const [TagRoute()],
-    router: AppRouter(),
+    routePath: TagStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'TextArea',
-    initialRoutes: const [TextAreaRoute()],
-    router: AppRouter(),
+    routePath: TextAreaStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'TextInput',
-    initialRoutes: const [TextInputRoute()],
-    router: AppRouter(),
+    routePath: TextInputStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'TextInputGroup',
-    initialRoutes: const [TextInputGroupRoute()],
-    router: AppRouter(),
+    routePath: TextInputGroupStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Toast',
-    initialRoutes: const [ToastRoute()],
-    router: AppRouter(),
+    routePath: ToastStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Tooltip',
-    initialRoutes: const [TooltipRoute()],
-    router: AppRouter(),
+    routePath: TooltipStory.path,
+    router: router,
   ),
 ];
