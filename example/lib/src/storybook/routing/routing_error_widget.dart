@@ -16,10 +16,10 @@ class RoutingErrorWidget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FadeInImage.memoryNetwork(
+              FadeInImage(
                 height: 200,
-                placeholder: kTransparentImage,
-                image: 'assets/images/url_error.jpg',
+                placeholder: MemoryImage(kTransparentImage),
+                image: const AssetImage('assets/images/url_error.jpg'),
               ),
               Text(
                 'Lost in space',
