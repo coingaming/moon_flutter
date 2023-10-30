@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.1](https://github.com/coingaming/moon_flutter/compare/v0.33.0...v0.33.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* [MDS-767] Change url error image format ([#281](https://github.com/coingaming/moon_flutter/issues/281)) ([d07e196](https://github.com/coingaming/moon_flutter/commit/d07e1961c351cc105ecd5c8938ea4036cf5cbb66))
+
 ## [0.33.0](https://github.com/coingaming/moon_flutter/compare/v0.32.2...v0.33.0) (2023-10-30)
 
 
