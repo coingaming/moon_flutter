@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.2](https://github.com/coingaming/moon_flutter/compare/v0.33.1...v0.33.2) (2023-10-30)
+
+
+### Bug Fixes
+
+* [NO-TASK] Add routing dependency ([#283](https://github.com/coingaming/moon_flutter/issues/283)) ([1f396a5](https://github.com/coingaming/moon_flutter/commit/1f396a58e6e186a152030b67bc48d5257bb8ffff))
+
 ## [0.33.1](https://github.com/coingaming/moon_flutter/compare/v0.33.0...v0.33.1) (2023-10-30)
 
 
