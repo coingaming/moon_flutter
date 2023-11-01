@@ -319,6 +319,11 @@ final List<Story> routeAwareStories = [
     router: router,
   ),
   Story.asRoute(
+    name: 'Icons',
+    routePath: IconsStory.path,
+    router: router,
+  ),
+  Story.asRoute(
     name: 'Loader/LinearLoader',
     routePath: LinearLoaderStory.path,
     router: router,
