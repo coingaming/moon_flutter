@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.3](https://github.com/coingaming/moon_flutter/compare/v0.33.2...v0.33.3) (2023-11-01)
+
+
+### Bug Fixes
+
+* [MDS-774] Add Icons to Storybook ([#285](https://github.com/coingaming/moon_flutter/issues/285)) ([7e8b56d](https://github.com/coingaming/moon_flutter/commit/7e8b56dde178eadb82351f20af1ff703f67eea50))
+
 ## [0.33.2](https://github.com/coingaming/moon_flutter/compare/v0.33.1...v0.33.2) (2023-10-30)
 
 
