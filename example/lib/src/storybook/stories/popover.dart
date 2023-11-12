@@ -111,7 +111,7 @@ class _PopoverStoryState extends State<PopoverStory> {
                       children: [
                         MoonAvatar(
                           backgroundColor: context.moonColors?.heles,
-                          content: const MoonIcon(MoonIcons.rocket_24),
+                          content: const Icon(MoonIcons.other_rocket_24_light),
                         ),
                         const SizedBox(width: 12),
                         Expanded(

@@ -127,7 +127,7 @@ class MoonIcon extends StatelessWidget {
   /// Typically, a Material Design color will be used, as follows:
   ///
   /// ```dart
-  /// MoonIcon(
+  /// Icon(
   ///   Icons.widgets,
   ///   color: Colors.blue.shade400,
   /// )

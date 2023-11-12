@@ -92,8 +92,8 @@ class _SwitchStoryState extends State<SwitchStory> {
             const TextDivider(text: "MoonSwitches with custom children"),
             MoonSwitch(
               switchSize: switchSizeKnob,
-              activeThumbWidget: const MoonIcon(MoonIcons.check_alternative_16),
-              inactiveThumbWidget: const MoonIcon(MoonIcons.close_small_16),
+              activeThumbWidget: const Icon(MoonIcons.generic_check_alternative_16_light),
+              inactiveThumbWidget: const Icon(MoonIcons.controls_close_small_16_light),
               activeTrackWidget: const Text(
                 "ON",
                 textAlign: TextAlign.center,
@@ -110,8 +110,8 @@ class _SwitchStoryState extends State<SwitchStory> {
             const SizedBox(height: 32),
             MoonSwitch(
               switchSize: switchSizeKnob,
-              activeTrackWidget: const MoonIcon(MoonIcons.moon_16),
-              inactiveTrackWidget: const MoonIcon(MoonIcons.sun_16),
+              activeTrackWidget: const Icon(MoonIcons.other_moon_16_light),
+              inactiveTrackWidget: const Icon(MoonIcons.other_sun_16_light),
               value: switchIconValue,
               onChanged: (bool newValue) => setState(() => switchIconValue = newValue),
             ),

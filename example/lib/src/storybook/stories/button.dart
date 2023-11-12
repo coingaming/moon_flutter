@@ -118,17 +118,17 @@ class ButtonStory extends StatelessWidget {
     IconData resolveIconVariant(MoonButtonSize? buttonSize) {
       switch (buttonSize) {
         case MoonButtonSize.xs:
-          return MoonIcons.frame_16;
+          return MoonIcons.other_frame_16_light;
         case MoonButtonSize.sm:
-          return MoonIcons.frame_24;
+          return MoonIcons.other_frame_24_light;
         case MoonButtonSize.md:
-          return MoonIcons.frame_24;
+          return MoonIcons.other_frame_24_light;
         case MoonButtonSize.lg:
-          return MoonIcons.frame_24;
+          return MoonIcons.other_frame_24_light;
         case MoonButtonSize.xl:
-          return MoonIcons.frame_24;
+          return MoonIcons.other_frame_24_light;
         default:
-          return MoonIcons.frame_24;
+          return MoonIcons.other_frame_24_light;
       }
     }
 
@@ -157,9 +157,9 @@ class ButtonStory extends StatelessWidget {
               textColor: textColor,
               showPulseEffect: showPulseEffectKnob,
               showPulseEffectJiggle: showPulseEffectJiggleKnob,
-              leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+              leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
               label: showLabelKnob ? Text(customLabelTextKnob) : null,
-              trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+              trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
             ),
             const SizedBox(height: 32),
             MoonButton.icon(
@@ -172,7 +172,7 @@ class ButtonStory extends StatelessWidget {
               borderColor: borderColor,
               showPulseEffect: showPulseEffectKnob,
               showPulseEffectJiggle: showPulseEffectJiggleKnob,
-              icon: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+              icon: showLeadingKnob ? Icon(resolvedIconVariant) : null,
             ),
             const TextDivider(text: "MoonButton variants"),
             MoonFilledButton(
@@ -180,9 +180,9 @@ class ButtonStory extends StatelessWidget {
               buttonSize: buttonSizeKnob,
               isFullWidth: setFullWidthKnob,
               showPulseEffect: showPulseEffectKnob,
-              leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+              leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
               label: showLabelKnob ? const Text("MoonFilledButton") : null,
-              trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+              trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
             ),
             const SizedBox(height: 32),
             MoonOutlinedButton(
@@ -191,9 +191,9 @@ class ButtonStory extends StatelessWidget {
               isFullWidth: setFullWidthKnob,
               showPulseEffect: showPulseEffectKnob,
               borderColor: borderColor,
-              leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+              leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
               label: showLabelKnob ? const Text("MoonOutlinedButton") : null,
-              trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+              trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
             ),
             const SizedBox(height: 32),
             MoonTextButton(
@@ -201,9 +201,9 @@ class ButtonStory extends StatelessWidget {
               buttonSize: buttonSizeKnob,
               isFullWidth: setFullWidthKnob,
               showPulseEffect: showPulseEffectKnob,
-              leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+              leading: showLeadingKnob ? Icon(resolvedIconVariant) : null,
               label: showLabelKnob ? const Text("MoonTextButton") : null,
-              trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+              trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
             ),
             const TextDivider(text: "Custom MoonButtons with non-standard children"),
             MoonButton(
@@ -261,8 +261,8 @@ class ButtonStory extends StatelessWidget {
                 height: 32,
                 child: CircleAvatar(
                   backgroundColor: context.moonColors!.frieza60,
-                  child: const MoonIcon(
-                    MoonIcons.rocket_24,
+                  child: const Icon(
+                    MoonIcons.other_rocket_24_light,
                     size: 24,
                     color: Colors.white,
                   ),

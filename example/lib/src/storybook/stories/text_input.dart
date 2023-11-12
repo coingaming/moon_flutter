@@ -176,8 +176,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                   validator: (String? value) =>
                       value != null && value.length < 10 ? "The text should be longer than 10 characters." : null,
                   leading: showLeadingKnob
-                      ? const MoonIcon(
-                          MoonIcons.search_24,
+                      ? const Icon(
+                          MoonIcons.generic_search_24_light,
                           size: 24,
                         )
                       : null,
@@ -185,8 +185,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                       ? MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
-                            child: const MoonIcon(
-                              MoonIcons.close_small_24,
+                            child: const Icon(
+                              MoonIcons.controls_close_small_24_light,
                               size: 24,
                             ),
                             onTap: () => _textController.clear(),
@@ -215,8 +215,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                       hintText: "Enter password (123abc)",
                       validator: (String? value) => value != "123abc" ? "Wrong password." : null,
                       leading: showLeadingKnob
-                          ? const MoonIcon(
-                              MoonIcons.password_24,
+                          ? const Icon(
+                              MoonIcons.security_password_24_light,
                               size: 24,
                             )
                           : null,
@@ -272,8 +272,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                     }
                   },
                   leading: showLeadingKnob
-                      ? const MoonIcon(
-                          MoonIcons.calendar_24,
+                      ? const Icon(
+                          MoonIcons.time_calendar_24_light,
                           size: 24,
                         )
                       : null,
@@ -281,8 +281,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                       ? MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
-                            child: const MoonIcon(
-                              MoonIcons.close_small_24,
+                            child: const Icon(
+                              MoonIcons.controls_close_small_24_light,
                               size: 24,
                             ),
                             onTap: () => _dateController.clear(),

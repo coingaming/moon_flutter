@@ -12,7 +12,6 @@ import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
-import 'package:moon_design/src/widgets/common/moon_icon.dart';
 import 'package:moon_icons/moon_icons.dart';
 
 enum MoonAccordionSize {
@@ -370,8 +369,12 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
       data: IconThemeData(color: _iconColor?.value),
       child: RotationTransition(
         turns: _halfTween.animate(_expansionCurvedAnimation!),
-        child: MoonIcon(
-          MoonIcons.chevron_down_small_16,
+        child: Icon(
+          switch (iconSize) {
+            16 => MoonIcons.controls_chevron_down_small_16_light,
+            24 => MoonIcons.controls_chevron_down_small_24_light,
+            _ => MoonIcons.controls_chevron_down_small_32_regular,
+          },
           size: iconSize,
         ),
       ),

@@ -195,8 +195,8 @@ class _DropdownStoryState extends State<DropdownStory> {
                       onTap: () => setState(() {
                         _showInner = !_showInner;
                       }),
-                      trailing: const MoonIcon(
-                        MoonIcons.chevron_right_16,
+                      trailing: const Icon(
+                        MoonIcons.controls_chevron_right_16_light,
                         size: 16,
                       ),
                     ),

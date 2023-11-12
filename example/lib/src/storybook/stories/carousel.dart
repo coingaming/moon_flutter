@@ -147,10 +147,10 @@ class _CarouselStoryState extends State<CarouselStory> {
                                 MoonButton.icon(
                                   buttonSize: MoonButtonSize.sm,
                                   showBorder: true,
-                                  icon: MoonIcon(
+                                  icon: Icon(
                                     Directionality.of(context) == TextDirection.ltr
-                                        ? MoonIcons.chevron_left_small_24
-                                        : MoonIcons.chevron_right_small_24,
+                                        ? MoonIcons.controls_chevron_left_small_24_light
+                                        : MoonIcons.controls_chevron_right_small_24_light,
                                   ),
                                   decoration: ShapeDecorationWithPremultipliedAlpha(
                                     color: context.moonColors!.goku,
@@ -164,10 +164,10 @@ class _CarouselStoryState extends State<CarouselStory> {
                                 MoonButton.icon(
                                   buttonSize: MoonButtonSize.sm,
                                   showBorder: true,
-                                  icon: MoonIcon(
+                                  icon: Icon(
                                     Directionality.of(context) == TextDirection.ltr
-                                        ? MoonIcons.chevron_right_small_24
-                                        : MoonIcons.chevron_left_small_24,
+                                        ? MoonIcons.controls_chevron_right_small_24_light
+                                        : MoonIcons.controls_chevron_left_small_24_light,
                                   ),
                                   decoration: ShapeDecorationWithPremultipliedAlpha(
                                     color: context.moonColors!.goku,

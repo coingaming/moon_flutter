@@ -100,8 +100,8 @@ class TagStory extends StatelessWidget {
           isUpperCase: setUpperCase,
           backgroundColor: backgroundColor,
           leading: showLeadingKnob
-              ? MoonIcon(
-                  MoonIcons.close_small_16,
+              ? Icon(
+                  MoonIcons.controls_close_small_16_light,
                   color: iconColor,
                 )
               : null,
@@ -112,8 +112,8 @@ class TagStory extends StatelessWidget {
                 )
               : null,
           trailing: showTrailingKnob
-              ? MoonIcon(
-                  MoonIcons.close_small_16,
+              ? Icon(
+                  MoonIcons.controls_close_small_16_light,
                   color: iconColor,
                 )
               : null,

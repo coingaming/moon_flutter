@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/widgets/common/moon_icon.dart';
 import 'package:moon_icons/moon_icons.dart';
 
 class MoonErrorMessages extends StatelessWidget {
@@ -80,7 +79,7 @@ class _MoonErrorMessageState extends State<MoonErrorMessage> with SingleTickerPr
       opacity: _opacityAnimation,
       child: Row(
         children: [
-          MoonIcon(MoonIcons.info_16, size: context.moonSizes?.x2s ?? 16),
+          Icon(MoonIcons.generic_info_16_light, size: context.moonSizes?.x2s ?? 16),
           SizedBox(width: context.moonSizes?.x5s ?? 4),
           Text(widget.errorText),
         ],

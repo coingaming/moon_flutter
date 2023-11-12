@@ -424,7 +424,7 @@ class _MoonTableState extends State<MoonTable> {
                 currentColumn.sortingIconGap ?? _effectiveMoonTableRowSize.sortIconGap;
 
             final Widget effectiveSortingIcon =
-                currentColumn.sortingIcon ?? MoonIcon(MoonIcons.chevron_up_16, size: effectiveSortIconSize);
+                currentColumn.sortingIcon ?? Icon(MoonIcons.controls_chevron_up_16_light, size: effectiveSortIconSize);
 
             return GestureDetector(
               behavior: HitTestBehavior.translucent,

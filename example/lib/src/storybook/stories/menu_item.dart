@@ -141,12 +141,12 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                       borderRadius: borderRadius,
                       backgroundColor: context.moonColors!.jiren,
                       avatarSize: MoonAvatarSize.lg,
-                      content: const MoonIcon(MoonIcons.airplane_32, size: 32),
+                      content: const Icon(MoonIcons.travel_airplane_32_regular, size: 32),
                     )
                   : null,
               trailing: showTrailingKnob
-                  ? MoonIcon(
-                      MoonIcons.chevron_right_24,
+                  ? Icon(
+                      MoonIcons.controls_chevron_right_24_light,
                       color: trailingColor,
                     )
                   : null,
@@ -171,12 +171,12 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                       borderRadius: borderRadius,
                       backgroundColor: context.moonColors!.jiren,
                       avatarSize: MoonAvatarSize.md,
-                      content: const MoonIcon(MoonIcons.activity_32, size: 24),
+                      content: const Icon(MoonIcons.notifications_activity_32_regular, size: 24),
                     )
                   : null,
               trailing: showTrailingKnob
-                  ? MoonIcon(
-                      MoonIcons.chevron_right_24,
+                  ? Icon(
+                      MoonIcons.controls_chevron_right_24_light,
                       color: trailingColor,
                     )
                   : null,
@@ -191,8 +191,8 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                 style: TextStyle(color: titleTextColor),
               ),
               leading: showLeadingKnob
-                  ? MoonIcon(
-                      MoonIcons.frame_24,
+                  ? Icon(
+                      MoonIcons.other_frame_24_light,
                       color: leadingColor,
                     )
                   : null,
@@ -214,8 +214,8 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                 style: TextStyle(color: titleTextColor),
               ),
               leading: showLeadingKnob
-                  ? MoonIcon(
-                      MoonIcons.frame_24,
+                  ? Icon(
+                      MoonIcons.other_frame_24_light,
                       color: leadingColor,
                     )
                   : null,
@@ -246,8 +246,8 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                 ),
               ),
               leading: showLeadingKnob
-                  ? MoonIcon(
-                      MoonIcons.frame_24,
+                  ? Icon(
+                      MoonIcons.other_frame_24_light,
                       color: leadingColor ?? context.moonColors!.iconPrimary,
                     )
                   : null,
@@ -273,8 +273,8 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                           )
                         : null,
                     trailing: showTrailingKnob
-                        ? MoonIcon(
-                            MoonIcons.frame_24,
+                        ? Icon(
+                            MoonIcons.other_frame_24_light,
                             color: trailingColor,
                           )
                         : null,
@@ -298,8 +298,8 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                           )
                         : null,
                     trailing: showTrailingKnob
-                        ? MoonIcon(
-                            MoonIcons.frame_24,
+                        ? Icon(
+                            MoonIcons.other_frame_24_light,
                             color: trailingColor,
                           )
                         : null,
