@@ -148,21 +148,21 @@ class SegmentedControlStory extends StatelessWidget {
                   borderRadius: borderRadius,
                   segments: [
                     Segment(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       segmentStyle: segmentStyle,
                     ),
                   ],
@@ -177,19 +177,19 @@ class SegmentedControlStory extends StatelessWidget {
                   borderRadius: borderRadius,
                   segments: [
                     Segment(
-                      trailing: const MoonIcon(MoonIcons.frame_24),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      trailing: const MoonIcon(MoonIcons.frame_24),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      trailing: const MoonIcon(MoonIcons.frame_24),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      trailing: const MoonIcon(MoonIcons.frame_24),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
                   ],

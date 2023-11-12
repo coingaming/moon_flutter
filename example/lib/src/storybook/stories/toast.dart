@@ -133,16 +133,16 @@ class ToastStory extends StatelessWidget {
                   variant: toastVariantKnob ?? MoonToastVariant.original,
                   displayDuration: displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
                   borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                  leading: MoonIcon(
-                    MoonIcons.info_24,
+                  leading: Icon(
+                    MoonIcons.generic_info_24_light,
                     color: iconColor,
                   ),
                   title: Text(
                     customLabelTextKnob,
                     style: TextStyle(color: textColor),
                   ),
-                  trailing: MoonIcon(
-                    MoonIcons.star_24,
+                  trailing: Icon(
+                    MoonIcons.generic_star_24_light,
                     color: iconColor,
                   ),
                 );

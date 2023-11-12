@@ -1,9 +1,9 @@
+import 'dart:math';
 import 'dart:ui';
 
-import 'package:example/src/storybook/common/icons_map.dart';
-import 'package:example/src/storybook/common/widgets/text_divider.dart';
+import 'package:example/src/storybook/common/widgets/segment.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_design/moon_design.dart';
+import 'package:moon_icons/moon_icons.dart';
 
 class IconsStory extends StatelessWidget {
   static const path = '/icons';
@@ -21,72 +21,64 @@ class IconsStory extends StatelessWidget {
       },
     );
 
+    Map<String, Map<String, IconData>> segments = {};
+    final Map<String, Map<String, IconData>> lightSegments = {};
+    final Map<String, Map<String, IconData>> regularSegments = {};
+
+    for (final String key in iconsMap.keys) {
+      // Extract the segment and type (like light or regular)
+      final List<String> parts = key.split('_');
+      final String segment = parts.first;
+      final String type = parts.last;
+
+      if (type == "light") {
+        if (!lightSegments.containsKey(segment)) {
+          lightSegments[segment] = {};
+        }
+        lightSegments[segment]![key] = iconsMap[key]!;
+      } else if (type == "regular") {
+        if (!regularSegments.containsKey(segment)) {
+          regularSegments[segment] = {};
+        }
+        regularSegments[segment]![key] = iconsMap[key]!;
+      }
+    }
+
+    final Map<String, Map<String, IconData>> combinedSegments = {};
+
+    // Get all unique segment names
+    final Set<String> allSegments = lightSegments.keys.toSet()..addAll(regularSegments.keys);
+
+    for (final String segment in allSegments) {
+      combinedSegments[segment] = {};
+
+      // Get the list of keys from light and regular segments for this segment
+      final List<String> lightKeys = lightSegments[segment]?.keys.toList() ?? [];
+      final List<String> regularKeys = regularSegments[segment]?.keys.toList() ?? [];
+
+      // Iterate in steps of 3 for trios
+      final int maxLightIndex = (lightKeys.length / 3).ceil() * 3;
+      final int maxRegularIndex = (regularKeys.length / 3).ceil() * 3;
+
+      for (int i = 0; i < max(maxLightIndex, maxRegularIndex); i += 3) {
+        // Add up to three light icons
+        for (int j = i; j < min(i + 3, lightKeys.length); j++) {
+          final String key = lightKeys[j];
+          combinedSegments[segment]![key] = lightSegments[segment]![key]!;
+        }
+        // Add up to three regular icons
+        for (int j = i; j < min(i + 3, regularKeys.length); j++) {
+          final String key = regularKeys[j];
+          combinedSegments[segment]![key] = regularSegments[segment]![key]!;
+        }
+      }
+    }
+
+    segments = combinedSegments;
+
     return CustomScrollView(
       scrollBehavior: scrollBehaviour,
-      slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
-          sliver: _IconsGridWithTitle(
-            title: "MoonIcons",
-            iconsMap: iconsMap,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _IconsGridWithTitle extends StatelessWidget {
-  final String title;
-  final Map<String, IconData> iconsMap;
-
-  const _IconsGridWithTitle({
-    required this.title,
-    required this.iconsMap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverMainAxisGroup(
-      slivers: [
-        SliverToBoxAdapter(
-          child: TextDivider(
-            text: title,
-            paddingTop: 0,
-            paddingBottom: 0,
-          ),
-        ),
-        SliverGrid.builder(
-          itemCount: iconsMap.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 8,
-            mainAxisExtent: 104,
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                if (iconsMap.keys.toList()[index].contains("16"))
-                  MoonIcon(iconsMap.values.toList()[index], size: 16)
-                else if (iconsMap.keys.toList()[index].contains("24"))
-                  MoonIcon(iconsMap.values.toList()[index], size: 24)
-                else
-                  MoonIcon(iconsMap.values.toList()[index], size: 32),
-                const SizedBox(height: 20),
-                Text(
-                  iconsMap.keys.toList()[index],
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: context.moonColors!.trunks,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ],
+      slivers: segments.values.map((e) => IconsSegment(segmentMap: e)).toList(),
     );
   }
 }

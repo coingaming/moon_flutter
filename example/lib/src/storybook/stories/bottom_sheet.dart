@@ -95,7 +95,7 @@ class BottomSheetStory extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: MoonButton.icon(
-                      icon: const MoonIcon(MoonIcons.close_small_16),
+                      icon: const Icon(MoonIcons.controls_close_small_16_light),
                       buttonSize: MoonButtonSize.sm,
                       backgroundColor: context.moonColors!.beerus,
                       borderRadius: BorderRadius.circular(24),

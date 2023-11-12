@@ -143,21 +143,21 @@ class TabBarStory extends StatelessWidget {
                   gap: gapKnob?.toDouble(),
                   tabs: [
                     MoonTab(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab1') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: tabStyle,
                     ),
                     MoonTab(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab2') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: tabStyle,
                     ),
                     MoonTab(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab3') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: tabStyle,
                     ),
                   ],
@@ -169,20 +169,20 @@ class TabBarStory extends StatelessWidget {
                   gap: gapKnob?.toDouble(),
                   tabs: [
                     MoonTab(
-                      trailing: const MoonIcon(MoonIcons.frame_24),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                     ),
                     MoonTab(
-                      trailing: const MoonIcon(MoonIcons.frame_24),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                       disabled: true,
                     ),
                     MoonTab(
-                      trailing: const MoonIcon(MoonIcons.frame_24),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                     ),
                     MoonTab(
-                      trailing: const MoonIcon(MoonIcons.frame_24),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                     ),
                   ],
@@ -194,21 +194,21 @@ class TabBarStory extends StatelessWidget {
                   gap: gapKnob?.toDouble(),
                   pillTabs: [
                     MoonPillTab(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab1') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: pillTabStyle,
                     ),
                     MoonPillTab(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab2') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: pillTabStyle,
                     ),
                     MoonPillTab(
-                      leading: showLeadingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab3') : null,
-                      trailing: showTrailingKnob ? const MoonIcon(MoonIcons.frame_24) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: pillTabStyle,
                     ),
                   ],

@@ -142,8 +142,8 @@ class _AlertStoryState extends State<AlertStory> {
                   backgroundColor: backgroundColor,
                   borderRadius: borderRadius,
                   leading: showLeadingKnob
-                      ? MoonIcon(
-                          MoonIcons.frame_24,
+                      ? Icon(
+                          MoonIcons.other_frame_24_light,
                           color: leadingColor,
                         )
                       : null,
@@ -162,8 +162,8 @@ class _AlertStoryState extends State<AlertStory> {
                           buttonSize: MoonButtonSize.xs,
                           borderRadius: borderRadius,
                           disabledOpacityValue: 1,
-                          icon: MoonIcon(
-                            MoonIcons.close_small_24,
+                          icon: Icon(
+                            MoonIcons.controls_close_small_24_light,
                             color: trailingColor,
                             size: 24,
                           ),
@@ -197,7 +197,7 @@ class _AlertStoryState extends State<AlertStory> {
               show: true,
               color: context.moonColors!.chiChi100,
               borderRadius: borderRadius,
-              leading: showLeadingKnob ? const MoonIcon(MoonIcons.alert_24) : null,
+              leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
               title: const Text("Filled error MoonAlert"),
               body: showBodyKnob
                   ? const SizedBox(
@@ -215,7 +215,7 @@ class _AlertStoryState extends State<AlertStory> {
               show: true,
               color: context.moonColors!.krillin100,
               borderRadius: borderRadius,
-              leading: showLeadingKnob ? const MoonIcon(MoonIcons.alarm_round_24) : null,
+              leading: showLeadingKnob ? const Icon(MoonIcons.generic_alarm_round_24_light) : null,
               title: const Text("Filled warning MoonAlert"),
               body: showBodyKnob
                   ? const SizedBox(
@@ -233,7 +233,7 @@ class _AlertStoryState extends State<AlertStory> {
               show: true,
               color: context.moonColors!.roshi100,
               borderRadius: borderRadius,
-              leading: showLeadingKnob ? const MoonIcon(MoonIcons.check_rounded_24) : null,
+              leading: showLeadingKnob ? const Icon(MoonIcons.generic_check_rounded_24_light) : null,
               title: const Text("Outlined success MoonAlert"),
               body: showBodyKnob
                   ? const SizedBox(
@@ -251,7 +251,7 @@ class _AlertStoryState extends State<AlertStory> {
               show: true,
               color: context.moonColors!.whis100,
               borderRadius: borderRadius,
-              leading: showLeadingKnob ? const MoonIcon(MoonIcons.alert_24) : null,
+              leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
               title: const Text('Outlined info MoonAlert'),
               body: showBodyKnob
                   ? const SizedBox(
