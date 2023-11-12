@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.0](https://github.com/coingaming/moon_flutter/compare/v0.33.3...v0.34.0) (2023-11-12)
+
+
+### Features
+
+* [MDS-800] Make relevant changes to use the latest moon_icons_flutter library in moon_flutter ([#287](https://github.com/coingaming/moon_flutter/issues/287)) ([4c9d572](https://github.com/coingaming/moon_flutter/commit/4c9d572833ba3cd802bb9a99b0ae6f90f768a494))
+
 ## [0.33.3](https://github.com/coingaming/moon_flutter/compare/v0.33.2...v0.33.3) (2023-11-01)
 
 
