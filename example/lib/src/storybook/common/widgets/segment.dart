@@ -17,17 +17,24 @@ class IconsSegment extends StatelessWidget {
     }
 
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       sliver: SliverMainAxisGroup(
         slivers: [
-          SliverToBoxAdapter(
-            child: TextDivider(text: createSegmentTitle(segmentMap.keys.first)),
+          SliverPadding(
+            padding: const EdgeInsets.only(top: 32),
+            sliver: SliverToBoxAdapter(
+              child: TextDivider(
+                text: createSegmentTitle(segmentMap.keys.first),
+                paddingBottom: 0,
+              ),
+            ),
           ),
           SliverGrid.builder(
             itemCount: segmentMap.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
               mainAxisExtent: 104,
             ),
             itemBuilder: (BuildContext context, int index) {
@@ -41,7 +48,7 @@ class IconsSegment extends StatelessWidget {
                     Icon(segmentMap.values.toList()[index], size: 24)
                   else
                     Icon(segmentMap.values.toList()[index], size: 32),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
                   Text(
                     segmentMap.keys.toList()[index],
                     style: TextStyle(
