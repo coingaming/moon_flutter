@@ -9,7 +9,6 @@ import 'package:moon_design/src/theme/table/table_sizes.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/widgets/common/default_animated_text_style.dart';
 import 'package:moon_design/src/widgets/table/table_controllers.dart';
-import 'package:moon_icons/moon_icons.dart';
 
 /// [MoonTableRow] used in [MoonTable.rows].
 class MoonTableRow {

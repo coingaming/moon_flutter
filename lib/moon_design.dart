@@ -101,3 +101,5 @@ export 'package:moon_design/src/widgets/text_input/text_input.dart';
 export 'package:moon_design/src/widgets/text_input_group/text_input_group.dart';
 export 'package:moon_design/src/widgets/toast/toast.dart';
 export 'package:moon_design/src/widgets/tooltip/tooltip.dart';
+
+export 'package:moon_icons/moon_icons.dart';
