@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.1](https://github.com/coingaming/moon_flutter/compare/v0.34.0...v0.34.1) (2023-11-13)
+
+
+### Bug Fixes
+
+* [MDS-801] Bump moon_flutter_icons version ([#289](https://github.com/coingaming/moon_flutter/issues/289)) ([fa6b0c5](https://github.com/coingaming/moon_flutter/commit/fa6b0c5995de475b3b450ff546b21fbc7c66de47))
+
 ## [0.34.0](https://github.com/coingaming/moon_flutter/compare/v0.33.3...v0.34.0) (2023-11-12)
 
 
