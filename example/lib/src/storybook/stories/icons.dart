@@ -10,18 +10,16 @@ class IconsStory extends StatelessWidget {
 
   const IconsStory({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final ScrollBehavior scrollBehaviour = ScrollConfiguration.of(context).copyWith(
-      scrollbars: false,
-      overscroll: false,
-      dragDevices: {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      },
-    );
+  // Helper function to group keys in trios
+  List<List<String>> _groupInTrios(List<String> keys) {
+    final List<List<String>> trios = [];
+    for (int i = 0; i < keys.length; i += 3) {
+      trios.add(keys.sublist(i, min(i + 3, keys.length)));
+    }
+    return trios;
+  }
 
-    Map<String, Map<String, IconData>> segments = {};
+  Iterable<Map<String, IconData>> _getSortedIcons(Map<String, IconData> iconsMap) {
     final Map<String, Map<String, IconData>> lightSegments = {};
     final Map<String, Map<String, IconData>> regularSegments = {};
 
@@ -56,29 +54,48 @@ class IconsStory extends StatelessWidget {
       final List<String> lightKeys = lightSegments[segment]?.keys.toList() ?? [];
       final List<String> regularKeys = regularSegments[segment]?.keys.toList() ?? [];
 
-      // Iterate in steps of 3 for trios
-      final int maxLightIndex = (lightKeys.length / 3).ceil() * 3;
-      final int maxRegularIndex = (regularKeys.length / 3).ceil() * 3;
+      // Group the keys in trios
+      final List<List<String>> lightTrios = _groupInTrios(lightKeys);
+      final List<List<String>> regularTrios = _groupInTrios(regularKeys);
 
-      for (int i = 0; i < max(maxLightIndex, maxRegularIndex); i += 3) {
-        // Add up to three light icons
-        for (int j = i; j < min(i + 3, lightKeys.length); j++) {
-          final String key = lightKeys[j];
-          combinedSegments[segment]![key] = lightSegments[segment]![key]!;
+      // Maximum number of trios in either list
+      final int maxTrios = max(lightTrios.length, regularTrios.length);
+
+      for (int i = 0; i < maxTrios; i++) {
+        // Add light trios if available
+        if (i < lightTrios.length) {
+          for (final String key in lightTrios[i]) {
+            combinedSegments[segment]![key] = lightSegments[segment]![key]!;
+          }
         }
-        // Add up to three regular icons
-        for (int j = i; j < min(i + 3, regularKeys.length); j++) {
-          final String key = regularKeys[j];
-          combinedSegments[segment]![key] = regularSegments[segment]![key]!;
+        // Add regular trios if available
+        if (i < regularTrios.length) {
+          for (final String key in regularTrios[i]) {
+            combinedSegments[segment]![key] = regularSegments[segment]![key]!;
+          }
         }
       }
     }
 
-    segments = combinedSegments;
+    return combinedSegments.values;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ScrollBehavior scrollBehaviour = ScrollConfiguration.of(context).copyWith(
+      scrollbars: false,
+      overscroll: false,
+      dragDevices: {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      },
+    );
+
+    final sortedIcons = _getSortedIcons(iconsMap);
 
     return CustomScrollView(
       scrollBehavior: scrollBehaviour,
-      slivers: segments.values.map((e) => IconsSegment(segmentMap: e)).toList(),
+      slivers: sortedIcons.map((e) => IconsSegment(segmentMap: e)).toList(),
     );
   }
 }
