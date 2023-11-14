@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.2](https://github.com/coingaming/moon_flutter/compare/v0.34.1...v0.34.2) (2023-11-13)
+
+
+### Bug Fixes
+
+* [MDS-804] Export moon_flutter_icons from moon_flutter ([#291](https://github.com/coingaming/moon_flutter/issues/291)) ([cc9ef2f](https://github.com/coingaming/moon_flutter/commit/cc9ef2f98912b6df7eb307a9eca94f6a9f11c446))
+
 ## [0.34.1](https://github.com/coingaming/moon_flutter/compare/v0.34.0...v0.34.1) (2023-11-13)
 
 
