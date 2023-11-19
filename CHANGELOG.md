@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.3](https://github.com/coingaming/moon_flutter/compare/v0.34.2...v0.34.3) (2023-11-19)
+
+
+### Bug Fixes
+
+* [MDS-818] Fix storybook_flutter icons display issues on mobile browsers ([#293](https://github.com/coingaming/moon_flutter/issues/293)) ([069a8f6](https://github.com/coingaming/moon_flutter/commit/069a8f67ae71fc1ab420fd20e56bd2e977fc63fe))
+
 ## [0.34.2](https://github.com/coingaming/moon_flutter/compare/v0.34.1...v0.34.2) (2023-11-13)
 
 
