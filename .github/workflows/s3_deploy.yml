@@ -33,7 +33,7 @@ jobs:
         run: flutter test
 
       - name: Build Web
-        run: flutter build web
+        run: flutter build web --web-renderer canvaskit --release
         working-directory: ./example
         
       - name: Deploy

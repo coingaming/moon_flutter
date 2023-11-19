@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  moon_icons: ^0.2.1
+  moon_icons: ^0.3.0
 
 dev_dependencies:
   flutter_test:
