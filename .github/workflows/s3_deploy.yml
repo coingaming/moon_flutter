@@ -15,7 +15,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: subosito/flutter-action@v2
         with:
@@ -37,7 +37,7 @@ jobs:
         working-directory: ./example
         
       - name: Deploy
-        uses: reggionick/s3-deploy@v3
+        uses: reggionick/s3-deploy@v4
         with:
           folder: example/build/web
           bucket: ${{ secrets.S3_BUCKET }}
@@ -46,4 +46,4 @@ jobs:
           delete-removed: true
           no-cache: true
           private: true
-          filesToInclude: ".*/*,*/*,**"
+          files-to-include: ".*/*,*/*,**"
