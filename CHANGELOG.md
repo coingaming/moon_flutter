@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.5](https://github.com/coingaming/moon_flutter/compare/v0.34.4...v0.34.5) (2023-11-21)
+
+
+### Bug Fixes
+
+* [MDS-827] Add sm version for MoonTag ([#297](https://github.com/coingaming/moon_flutter/issues/297)) ([ad0f1ef](https://github.com/coingaming/moon_flutter/commit/ad0f1ef194260360a44bfe7c61b9fe7081003a41))
+
 ## [0.34.4](https://github.com/coingaming/moon_flutter/compare/v0.34.3...v0.34.4) (2023-11-21)
 
 
