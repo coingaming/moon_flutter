@@ -23,6 +23,7 @@ class TagStory extends StatelessWidget {
       options: const [
         Option(label: "x2s", value: MoonTagSize.x2s),
         Option(label: "xs", value: MoonTagSize.xs),
+        Option(label: "sm", value: MoonTagSize.sm),
       ],
     );
 

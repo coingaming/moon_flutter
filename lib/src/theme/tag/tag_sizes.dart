@@ -15,27 +15,41 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
   /// Extra small tag properties.
   final MoonTagSizeProperties xs;
 
+  /// Small tag properties.
+  final MoonTagSizeProperties sm;
+
   MoonTagSizes({
     required this.tokens,
     MoonTagSizeProperties? x2s,
     MoonTagSizeProperties? xs,
+    MoonTagSizeProperties? sm,
   })  : x2s = x2s ??
             MoonTagSizeProperties(
               borderRadius: tokens.borders.interactiveXs,
-              gap: tokens.sizes.x5s,
+              gap: tokens.sizes.x6s,
               height: tokens.sizes.x2s,
               iconSizeValue: tokens.sizes.x3s,
               padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
-              textStyle: tokens.typography.body.text10,
+              textStyle: tokens.typography.body.text9,
               upperCaseTextStyle: tokens.typography.caption.text9,
             ),
         xs = xs ??
             MoonTagSizeProperties(
               borderRadius: tokens.borders.interactiveXs,
-              gap: tokens.sizes.x5s,
+              gap: tokens.sizes.x6s,
               height: tokens.sizes.xs,
               iconSizeValue: tokens.sizes.x2s,
               padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
+              textStyle: tokens.typography.body.text12,
+              upperCaseTextStyle: tokens.typography.caption.text10,
+            ),
+        sm = sm ??
+            MoonTagSizeProperties(
+              borderRadius: tokens.borders.interactiveSm,
+              gap: tokens.sizes.x4s,
+              height: tokens.sizes.sm,
+              iconSizeValue: tokens.sizes.x2s,
+              padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x2s),
               textStyle: tokens.typography.body.text12,
               upperCaseTextStyle: tokens.typography.caption.text10,
             );
@@ -45,11 +59,13 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
     MoonTokens? tokens,
     MoonTagSizeProperties? x2s,
     MoonTagSizeProperties? xs,
+    MoonTagSizeProperties? sm,
   }) {
     return MoonTagSizes(
       tokens: tokens ?? this.tokens,
       x2s: x2s ?? this.x2s,
       xs: xs ?? this.xs,
+      sm: sm ?? this.sm,
     );
   }
 
@@ -61,6 +77,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
       tokens: tokens.lerp(other.tokens, t),
       x2s: x2s.lerp(other.x2s, t),
       xs: xs.lerp(other.xs, t),
+      sm: sm.lerp(other.sm, t),
     );
   }
 
@@ -71,6 +88,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
       ..add(DiagnosticsProperty("type", "MoonTagSizes"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonTagSizeProperties>("x2s", x2s))
-      ..add(DiagnosticsProperty<MoonTagSizeProperties>("xs", xs));
+      ..add(DiagnosticsProperty<MoonTagSizeProperties>("xs", xs))
+      ..add(DiagnosticsProperty<MoonTagSizeProperties>("sm", sm));
   }
 }
