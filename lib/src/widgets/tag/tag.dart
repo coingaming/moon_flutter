@@ -12,6 +12,7 @@ import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 enum MoonTagSize {
   x2s,
   xs,
+  sm,
 }
 
 class MoonTag extends StatelessWidget {
@@ -81,14 +82,12 @@ class MoonTag extends StatelessWidget {
   });
 
   MoonTagSizeProperties _getMoonTagSize(BuildContext context, MoonTagSize? moonTagSize) {
-    switch (moonTagSize) {
-      case MoonTagSize.x2s:
-        return context.moonTheme?.tagTheme.sizes.x2s ?? MoonTagSizes(tokens: MoonTokens.light).x2s;
-      case MoonTagSize.xs:
-        return context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizes(tokens: MoonTokens.light).xs;
-      default:
-        return context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizes(tokens: MoonTokens.light).xs;
-    }
+    return switch (moonTagSize) {
+      MoonTagSize.x2s => context.moonTheme?.tagTheme.sizes.x2s ?? MoonTagSizes(tokens: MoonTokens.light).x2s,
+      MoonTagSize.xs => context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizes(tokens: MoonTokens.light).xs,
+      MoonTagSize.sm => context.moonTheme?.tagTheme.sizes.sm ?? MoonTagSizes(tokens: MoonTokens.light).sm,
+      _ => context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizes(tokens: MoonTokens.light).xs,
+    };
   }
 
   @override
