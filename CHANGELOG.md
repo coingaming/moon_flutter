@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.4](https://github.com/coingaming/moon_flutter/compare/v0.34.3...v0.34.4) (2023-11-21)
+
+
+### Bug Fixes
+
+* [MDS-828] Adjust MDS color scheme to latest ([#295](https://github.com/coingaming/moon_flutter/issues/295)) ([e5285fe](https://github.com/coingaming/moon_flutter/commit/e5285fec4d0e17e8a1cea80bf08086eca25574b5))
+
 ## [0.34.3](https://github.com/coingaming/moon_flutter/compare/v0.34.2...v0.34.3) (2023-11-19)
 
 
