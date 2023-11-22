@@ -345,32 +345,28 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
                       : effectiveBorderColor,
                 ),
               ),
-              child: RepaintBoundary(
-                child: _InputGroupOrientation(
-                  orientation: widget.orientation,
-                  children: childrenWithDivider(shouldHideDivider: isHovered || isFocused),
-                ),
+              child: _InputGroupOrientation(
+                orientation: widget.orientation,
+                children: childrenWithDivider(shouldHideDivider: isHovered || isFocused),
               ),
             );
           },
         ),
         if (widget.helper != null || _shouldShowError)
-          RepaintBoundary(
-            child: IconTheme(
-              data: IconThemeData(
+          IconTheme(
+            data: IconThemeData(
+              color: _shouldShowError ? effectiveErrorColor : effectiveHelperTextColor,
+            ),
+            child: DefaultTextStyle(
+              style: effectiveHelperTextStyle.copyWith(
                 color: _shouldShowError ? effectiveErrorColor : effectiveHelperTextColor,
               ),
-              child: DefaultTextStyle(
-                style: effectiveHelperTextStyle.copyWith(
-                  color: _shouldShowError ? effectiveErrorColor : effectiveHelperTextColor,
-                ),
-                child: Padding(
-                  padding: effectiveHelperPadding,
-                  child: _shouldShowError
-                      ? (widget.errorBuilder?.call(context, effectiveErrorMessages) ??
-                          MoonErrorMessages(errors: effectiveErrorMessages))
-                      : widget.helper,
-                ),
+              child: Padding(
+                padding: effectiveHelperPadding,
+                child: _shouldShowError
+                    ? (widget.errorBuilder?.call(context, effectiveErrorMessages) ??
+                        MoonErrorMessages(errors: effectiveErrorMessages))
+                    : widget.helper,
               ),
             ),
           ),

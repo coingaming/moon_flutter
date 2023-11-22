@@ -141,20 +141,20 @@ class MoonToast {
 
     final OverlayEntry entry = OverlayEntry(
       builder: (BuildContext context) {
-        return TweenAnimationBuilder(
-          duration: effectiveTransitionDuration,
-          curve: effectiveTransitionCurve,
-          tween: Tween(begin: 0.0, end: 1.0),
-          builder: (BuildContext context, double progress, Widget? child) {
-            return SafeArea(
-              left: useSafeArea,
-              top: useSafeArea,
-              right: useSafeArea,
-              bottom: useSafeArea,
-              maintainBottomViewPadding: true,
-              child: Align(
-                alignment: toastAlignment,
-                child: RepaintBoundary(
+        return RepaintBoundary(
+          child: TweenAnimationBuilder(
+            duration: effectiveTransitionDuration,
+            curve: effectiveTransitionCurve,
+            tween: Tween(begin: 0.0, end: 1.0),
+            builder: (BuildContext context, double progress, Widget? child) {
+              return SafeArea(
+                left: useSafeArea,
+                top: useSafeArea,
+                right: useSafeArea,
+                bottom: useSafeArea,
+                maintainBottomViewPadding: true,
+                child: Align(
+                  alignment: toastAlignment,
                   child: Transform(
                     transform: Matrix4.translationValues(
                       switch (toastAlignment) {
@@ -181,43 +181,43 @@ class MoonToast {
                     ),
                   ),
                 ),
-              ),
-            );
-          },
-          child: themes.wrap(
-            Semantics(
-              label: semanticLabel,
-              child: IconTheme(
-                data: IconThemeData(color: effectiveIconColor),
-                child: DefaultTextStyle(
-                  style: effectiveTextStyle.copyWith(color: effectiveTextColor),
-                  child: Container(
-                    margin: margin ?? resolvedContentPadding,
-                    padding: resolvedContentPadding,
-                    width: width,
-                    decoration: decoration ??
-                        ShapeDecorationWithPremultipliedAlpha(
-                          color: effectiveBackgroundColor,
-                          shadows: effectiveToastShadows,
-                          shape: MoonSquircleBorder(
-                            borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+              );
+            },
+            child: themes.wrap(
+              Semantics(
+                label: semanticLabel,
+                child: IconTheme(
+                  data: IconThemeData(color: effectiveIconColor),
+                  child: DefaultTextStyle(
+                    style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                    child: Container(
+                      margin: margin ?? resolvedContentPadding,
+                      padding: resolvedContentPadding,
+                      width: width,
+                      decoration: decoration ??
+                          ShapeDecorationWithPremultipliedAlpha(
+                            color: effectiveBackgroundColor,
+                            shadows: effectiveToastShadows,
+                            shape: MoonSquircleBorder(
+                              borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                            ),
                           ),
-                        ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: width != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
-                      textDirection: Directionality.of(context),
-                      children: [
-                        if (leading != null) ...[
-                          leading,
-                          SizedBox(width: effectiveGap),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: width != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
+                        textDirection: Directionality.of(context),
+                        children: [
+                          if (leading != null) ...[
+                            leading,
+                            SizedBox(width: effectiveGap),
+                          ],
+                          Flexible(child: title),
+                          if (trailing != null) ...[
+                            SizedBox(width: effectiveGap),
+                            trailing,
+                          ],
                         ],
-                        Flexible(child: title),
-                        if (trailing != null) ...[
-                          SizedBox(width: effectiveGap),
-                          trailing,
-                        ],
-                      ],
+                      ),
                     ),
                   ),
                 ),

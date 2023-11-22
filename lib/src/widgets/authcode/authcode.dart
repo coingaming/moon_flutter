@@ -562,14 +562,12 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
             Center(
               child: Padding(
                 padding: EdgeInsets.only(left: _resolvedTextStyle.fontSize! / 1.5),
-                child: RepaintBoundary(
-                  child: FadeTransition(
-                    opacity: _cursorAnimation,
-                    child: CustomPaint(
-                      size: Size(0, cursorHeight),
-                      painter: _CursorPainter(
-                        cursorColor: _resolvedErrorCursorColor,
-                      ),
+                child: FadeTransition(
+                  opacity: _cursorAnimation,
+                  child: CustomPaint(
+                    size: Size(0, cursorHeight),
+                    painter: _CursorPainter(
+                      cursorColor: _resolvedErrorCursorColor,
                     ),
                   ),
                 ),
@@ -580,14 +578,12 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         );
       } else {
         return Center(
-          child: RepaintBoundary(
-            child: FadeTransition(
-              opacity: _cursorAnimation,
-              child: CustomPaint(
-                size: Size(0, cursorHeight),
-                painter: _CursorPainter(
-                  cursorColor: _resolvedErrorCursorColor,
-                ),
+          child: FadeTransition(
+            opacity: _cursorAnimation,
+            child: CustomPaint(
+              size: Size(0, cursorHeight),
+              painter: _CursorPainter(
+                cursorColor: _resolvedErrorCursorColor,
               ),
             ),
           ),
@@ -762,47 +758,49 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
 
     return Semantics(
       label: widget.semanticLabel,
-      child: AnimatedOpacity(
-        duration: _animationDuration!,
-        curve: _animationCurve!,
-        opacity: widget.enabled ? 1 : effectiveDisabledOpacityValue,
-        child: Column(
-          children: [
-            SlideTransition(
-              position: _errorOffsetAnimation!,
-              child: Stack(
-                children: <Widget>[
-                  AbsorbPointer(
-                    child: AutofillGroup(
-                      child: _getTextFormField(),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: () => _onFocus(),
-                      child: Row(
-                        mainAxisAlignment: widget.mainAxisAlignment,
-                        children: _generateAuthInputFields(),
+      child: RepaintBoundary(
+        child: AnimatedOpacity(
+          duration: _animationDuration!,
+          curve: _animationCurve!,
+          opacity: widget.enabled ? 1 : effectiveDisabledOpacityValue,
+          child: Column(
+            children: [
+              SlideTransition(
+                position: _errorOffsetAnimation!,
+                child: Stack(
+                  children: <Widget>[
+                    AbsorbPointer(
+                      child: AutofillGroup(
+                        child: _getTextFormField(),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            if (_isInErrorMode)
-              DefaultTextStyle(
-                style: _resolvedErrorTextStyle,
-                child: IconTheme(
-                  data: IconThemeData(
-                    color: _resolvedErrorTextStyle.color,
-                  ),
-                  child: widget.errorBuilder(context, _validateInput()),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () => _onFocus(),
+                        child: Row(
+                          mainAxisAlignment: widget.mainAxisAlignment,
+                          children: _generateAuthInputFields(),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-          ],
+              if (_isInErrorMode)
+                DefaultTextStyle(
+                  style: _resolvedErrorTextStyle,
+                  child: IconTheme(
+                    data: IconThemeData(
+                      color: _resolvedErrorTextStyle.color,
+                    ),
+                    child: widget.errorBuilder(context, _validateInput()),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
