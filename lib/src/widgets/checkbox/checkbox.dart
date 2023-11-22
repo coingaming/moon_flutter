@@ -130,14 +130,12 @@ class MoonCheckbox extends StatefulWidget {
                 onChanged: onChanged,
               ),
               const SizedBox(width: 12),
-              RepaintBoundary(
-                child: AnimatedOpacity(
-                  opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
-                  duration: effectiveFocusEffectDuration,
-                  child: DefaultTextStyle(
-                    style: resolvedTextStyle,
-                    child: Text(label),
-                  ),
+              AnimatedOpacity(
+                opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
+                duration: effectiveFocusEffectDuration,
+                child: DefaultTextStyle(
+                  style: resolvedTextStyle,
+                  child: Text(label),
                 ),
               ),
             ],
@@ -241,14 +239,14 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
       mixed: widget.tristate ? widget.value == null : null,
       child: TouchTargetPadding(
         minSize: Size(widget.tapAreaSizeValue, widget.tapAreaSizeValue),
-        child: MoonFocusEffect(
-          show: states.contains(MaterialState.focused),
-          childBorderRadius: effectiveBorderRadius,
-          effectColor: effectiveFocusEffectColor,
-          effectCurve: effectiveFocusEffectCurve,
-          effectDuration: effectiveFocusEffectDuration,
-          effectExtent: effectiveFocusEffectExtent,
-          child: RepaintBoundary(
+        child: RepaintBoundary(
+          child: MoonFocusEffect(
+            show: states.contains(MaterialState.focused),
+            childBorderRadius: effectiveBorderRadius,
+            effectColor: effectiveFocusEffectColor,
+            effectCurve: effectiveFocusEffectCurve,
+            effectDuration: effectiveFocusEffectDuration,
+            effectExtent: effectiveFocusEffectExtent,
             child: AnimatedOpacity(
               opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,
               duration: effectiveFocusEffectDuration,

@@ -100,20 +100,18 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
     return AnimatedBuilder(
       animation: _animationController,
       builder: (BuildContext context, Widget? child) {
-        return RepaintBoundary(
-          child: Transform.translate(
-            offset: Offset(widget.showJiggle ? _jiggleAnimation.value : 0.0, 0.0),
-            child: CustomPaint(
-              isComplex: true,
-              willChange: true,
-              painter: PulseEffectPainter(
-                color: widget.effectColor,
-                effectExtent: widget.effectExtent,
-                borderRadius: resolvedBorderRadius,
-                animation: _pulseAnimation,
-              ),
-              child: child,
+        return Transform.translate(
+          offset: Offset(widget.showJiggle ? _jiggleAnimation.value : 0.0, 0.0),
+          child: CustomPaint(
+            isComplex: true,
+            willChange: true,
+            painter: PulseEffectPainter(
+              color: widget.effectColor,
+              effectExtent: widget.effectExtent,
+              borderRadius: resolvedBorderRadius,
+              animation: _pulseAnimation,
             ),
+            child: child,
           ),
         );
       },
