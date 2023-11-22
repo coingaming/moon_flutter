@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.6](https://github.com/coingaming/moon_flutter/compare/v0.34.5...v0.34.6) (2023-11-22)
+
+
+### Bug Fixes
+
+* [MDS-830] Reduce the amount of RepaintBoundary's in use ([#299](https://github.com/coingaming/moon_flutter/issues/299)) ([a712571](https://github.com/coingaming/moon_flutter/commit/a712571c07d1f2f660fff664ac63cec8c2e83fa4))
+
 ## [0.34.5](https://github.com/coingaming/moon_flutter/compare/v0.34.4...v0.34.5) (2023-11-21)
 
 
