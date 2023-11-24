@@ -10,8 +10,8 @@ class MoonSquircleRadius extends Radius {
 
   const MoonSquircleRadius({
     required double cornerRadius,
-    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA for some reason. So we use 0.99 instead.
-    this.cornerSmoothing = 0.99,
+    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA for some reason. So we use 0.9 instead.
+    this.cornerSmoothing = 0.9,
   }) : super.circular(cornerRadius);
 
   double get cornerRadius => x;
