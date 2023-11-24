@@ -112,7 +112,7 @@ class _DropdownStoryState extends State<DropdownStory> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextDivider(text: "Dropdown with choices"),
+            const TextDivider(text: "Dropdown with multiple choices"),
             MoonDropdown(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               show: _showChoices,
