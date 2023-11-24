@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-  # Used to manual triggering.
-  workflow_dispatch:
 
 jobs:
   build:
