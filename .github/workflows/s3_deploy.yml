@@ -37,7 +37,7 @@ jobs:
         working-directory: ./example
         
       - name: Deploy
-        uses: reggionick/s3-deploy@v4
+        uses: reggionick/s3-deploy@v3
         with:
           folder: example/build/web
           bucket: ${{ secrets.S3_BUCKET }}
@@ -46,4 +46,4 @@ jobs:
           delete-removed: true
           no-cache: true
           private: true
-          files-to-include: ".*/*,*/*,**"
+          filesToInclude: ".*/*,*/*,**"
