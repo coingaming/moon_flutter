@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.7](https://github.com/coingaming/moon_flutter/compare/v0.34.6...v0.34.7) (2023-11-24)
+
+
+### Bug Fixes
+
+* [NO-TASK] Revert deploy workflow version ([5452bf8](https://github.com/coingaming/moon_flutter/commit/5452bf8aec3114e647984aaf1c3c32ae8b1fffd1))
+
 ## [0.34.6](https://github.com/coingaming/moon_flutter/compare/v0.34.5...v0.34.6) (2023-11-22)
 
 
