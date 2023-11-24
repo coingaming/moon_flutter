@@ -125,8 +125,17 @@ class MoonRadio<T> extends StatefulWidget {
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: tapAreaSizeValue),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              AnimatedOpacity(
+                opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
+                duration: effectiveFocusEffectDuration,
+                child: DefaultTextStyle(
+                  style: resolvedTextStyle,
+                  child: Text(label),
+                ),
+              ),
+              const SizedBox(width: 12),
               MoonRadio<T>(
                 key: key,
                 value: value,
@@ -138,15 +147,6 @@ class MoonRadio<T> extends StatefulWidget {
                 inactiveColor: inactiveColor,
                 focusNode: focusNode,
                 autofocus: autofocus,
-              ),
-              const SizedBox(width: 12),
-              AnimatedOpacity(
-                opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
-                duration: effectiveFocusEffectDuration,
-                child: DefaultTextStyle(
-                  style: resolvedTextStyle,
-                  child: Text(label),
-                ),
               ),
             ],
           ),
