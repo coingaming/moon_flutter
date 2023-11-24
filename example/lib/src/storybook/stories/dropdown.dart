@@ -1,5 +1,4 @@
 import 'package:example/src/storybook/common/color_options.dart';
-import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -16,15 +15,8 @@ class DropdownStory extends StatefulWidget {
 }
 
 class _DropdownStoryState extends State<DropdownStory> {
-  final Map<String, bool> _availableChoices = {
-    "Choice #1": false,
-    "Choice #2": false,
-    "Choice #3": false,
-  };
-
-  bool _showChoices = false;
-  bool _showMenu = false;
-  bool _showMenuInner = false;
+  bool _show = false;
+  bool _showInner = false;
   Color? _buttonColor;
   String _buttonName = "Piccolo";
 
@@ -112,86 +104,8 @@ class _DropdownStoryState extends State<DropdownStory> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextDivider(text: "Dropdown with choices"),
             MoonDropdown(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-              show: _showChoices,
-              minWidth: 250,
-              borderColor: borderColor ?? Colors.transparent,
-              backgroundColor: backgroundColor,
-              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-              constrainWidthToChild: constrainWidthToChildKnob,
-              distanceToTarget: distanceToTargetKnob,
-              dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
-              dropdownShadows: showShadowKnob == true ? null : [],
-              onTapOutside: () => setState(() {
-                _showChoices = false;
-              }),
-              content: Column(
-                children: [
-                  MoonCheckbox.withLabel(
-                    context,
-                    label: "Choice #1",
-                    value: _availableChoices["Choice #1"],
-                    onChanged: (bool? isSelected) => setState(() => _availableChoices["Choice #1"] = isSelected!),
-                  ),
-                  const SizedBox(height: 4),
-                  MoonCheckbox.withLabel(
-                    context,
-                    label: "Choice #2",
-                    value: _availableChoices["Choice #2"],
-                    onChanged: (bool? isSelected) => setState(() => _availableChoices["Choice #2"] = isSelected!),
-                  ),
-                  const SizedBox(height: 4),
-                  MoonCheckbox.withLabel(
-                    context,
-                    label: "Choice #3",
-                    value: _availableChoices["Choice #3"],
-                    onChanged: (bool? isSelected) => setState(() => _availableChoices["Choice #3"] = isSelected!),
-                  ),
-                ],
-              ),
-              child: MoonTextInput(
-                mouseCursor: MouseCursor.defer,
-                readOnly: true,
-                width: 250,
-                hintText: "Choose an option",
-                leading: _availableChoices.values.any((element) => element == true)
-                    ? Center(
-                        child: GestureDetector(
-                          onTap: () => setState(() => _availableChoices.updateAll((key, value) => false)),
-                          child: MoonTag(
-                            tagSize: MoonTagSize.xs,
-                            backgroundColor: context.moonColors!.bulma,
-                            label: Text(
-                              "${_availableChoices.values.where((element) => element == true).length}",
-                              style: TextStyle(color: context.moonColors!.gohan),
-                            ),
-                            trailing: Icon(
-                              MoonIcons.controls_close_small_16_light,
-                              color: context.moonColors!.gohan,
-                            ),
-                          ),
-                        ),
-                      )
-                    : null,
-                trailing: Center(
-                  child: AnimatedRotation(
-                    duration: const Duration(milliseconds: 200),
-                    turns: _showChoices ? -0.5 : 0,
-                    child: const Icon(
-                      MoonIcons.controls_chevron_down_small_16_light,
-                      size: 16,
-                    ),
-                  ),
-                ),
-                onTap: () => setState(() => _showChoices = !_showChoices),
-              ),
-            ),
-            const SizedBox(height: 32),
-            const TextDivider(text: "Dropdown usage as menu"),
-            MoonDropdown(
-              show: _showMenu,
+              show: _show,
               groupId: _groupId,
               maxWidth: 250,
               borderColor: borderColor ?? Colors.transparent,
@@ -202,8 +116,8 @@ class _DropdownStoryState extends State<DropdownStory> {
               dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
               dropdownShadows: showShadowKnob == true ? null : [],
               onTapOutside: () => setState(() {
-                _showMenu = false;
-                _showMenuInner = false;
+                _show = false;
+                _showInner = false;
               }),
               content: Column(
                 children: [
@@ -211,7 +125,7 @@ class _DropdownStoryState extends State<DropdownStory> {
                     title: const Text("Piccolo"),
                     borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
                     onTap: () => setState(() {
-                      _showMenu = false;
+                      _show = false;
                       _buttonName = "Piccolo";
                       _buttonColor = colorPiccolo;
                     }),
@@ -221,14 +135,14 @@ class _DropdownStoryState extends State<DropdownStory> {
                     title: const Text("Krillin"),
                     borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
                     onTap: () => setState(() {
-                      _showMenu = false;
+                      _show = false;
                       _buttonName = "Krillin";
                       _buttonColor = colorKrillin;
                     }),
                   ),
                   const SizedBox(height: 4),
                   MoonDropdown(
-                    show: _showMenuInner,
+                    show: _showInner,
                     groupId: _groupId,
                     maxWidth: 100,
                     constrainWidthToChild: constrainWidthToChildKnob,
@@ -243,8 +157,8 @@ class _DropdownStoryState extends State<DropdownStory> {
                           title: const Text("Roshi100"),
                           borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
                           onTap: () => setState(() {
-                            _showMenu = false;
-                            _showMenuInner = false;
+                            _show = false;
+                            _showInner = false;
                             _buttonName = "Roshi100";
                             _buttonColor = colorRoshi100;
                           }),
@@ -254,8 +168,8 @@ class _DropdownStoryState extends State<DropdownStory> {
                           title: const Text("Roshi60"),
                           borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
                           onTap: () => setState(() {
-                            _showMenu = false;
-                            _showMenuInner = false;
+                            _show = false;
+                            _showInner = false;
                             _buttonName = "Roshi60";
                             _buttonColor = colorRoshi60;
                           }),
@@ -265,8 +179,8 @@ class _DropdownStoryState extends State<DropdownStory> {
                           title: const Text("Roshi10"),
                           borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
                           onTap: () => setState(() {
-                            _showMenu = false;
-                            _showMenuInner = false;
+                            _show = false;
+                            _showInner = false;
                             _buttonName = "Roshi10";
                             _buttonColor = colorRoshi10;
                           }),
@@ -274,11 +188,11 @@ class _DropdownStoryState extends State<DropdownStory> {
                       ],
                     ),
                     child: MoonMenuItem(
-                      backgroundColor: _showMenuInner ? context.moonColors!.heles : null,
+                      backgroundColor: _showInner ? context.moonColors!.heles : null,
                       title: const Text("Roshi"),
                       borderRadius: const MoonSquircleBorderRadius.all(MoonSquircleRadius(cornerRadius: 12)),
                       onTap: () => setState(() {
-                        _showMenuInner = !_showMenuInner;
+                        _showInner = !_showInner;
                       }),
                       trailing: const Icon(
                         MoonIcons.controls_chevron_right_16_light,
@@ -292,7 +206,7 @@ class _DropdownStoryState extends State<DropdownStory> {
                 width: 128,
                 label: Text(_buttonName),
                 backgroundColor: _buttonColor,
-                onTap: () => setState(() => _showMenu = !_showMenu),
+                onTap: () => setState(() => _show = !_show),
               ),
             ),
           ],

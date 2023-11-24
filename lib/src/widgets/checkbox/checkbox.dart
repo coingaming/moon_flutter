@@ -114,17 +114,8 @@ class MoonCheckbox extends StatefulWidget {
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: tapAreaSizeValue),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              AnimatedOpacity(
-                opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
-                duration: effectiveFocusEffectDuration,
-                child: DefaultTextStyle(
-                  style: resolvedTextStyle,
-                  child: Text(label),
-                ),
-              ),
-              const SizedBox(width: 12),
               MoonCheckbox(
                 key: key,
                 autofocus: autofocus,
@@ -137,6 +128,15 @@ class MoonCheckbox extends StatefulWidget {
                 tapAreaSizeValue: 0,
                 focusNode: focusNode,
                 onChanged: onChanged,
+              ),
+              const SizedBox(width: 12),
+              AnimatedOpacity(
+                opacity: isInteractive ? 1 : effectiveDisabledOpacityValue,
+                duration: effectiveFocusEffectDuration,
+                child: DefaultTextStyle(
+                  style: resolvedTextStyle,
+                  child: Text(label),
+                ),
               ),
             ],
           ),
