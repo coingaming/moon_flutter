@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.36.0](https://github.com/coingaming/moon_flutter/compare/v0.35.0...v0.36.0) (2023-11-24)
+
+
+### Features
+
+* [MDS-833] Create an example of multi-select Dropdown ([43070b6](https://github.com/coingaming/moon_flutter/commit/43070b671c35da9c17c4f08f64c9f3ca8c85337e))
+
 ## [0.35.0](https://github.com/coingaming/moon_flutter/compare/v0.34.7...v0.35.0) (2023-11-24)
 
 
