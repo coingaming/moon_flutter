@@ -41,11 +41,7 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
               // https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/textfield/TextInputLayout.java
               transitionDuration: const Duration(milliseconds: 167),
               transitionCurve: Curves.fastOutSlowIn,
-              helperPadding: EdgeInsets.only(
-                left: tokens.sizes.x3s,
-                top: tokens.sizes.x4s,
-                right: tokens.sizes.x3s,
-              ),
+              helperPadding: EdgeInsets.only(top: tokens.sizes.x4s),
               helperTextStyle: tokens.typography.body.text12,
             ),
         sizes = sizes ?? MoonTextInputSizes(tokens: tokens);
