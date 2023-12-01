@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.36.1](https://github.com/coingaming/moon_flutter/compare/v0.36.0...v0.36.1) (2023-12-01)
+
+
+### Bug Fixes
+
+* [MDS-844] Adjust Input helper text padding ([#307](https://github.com/coingaming/moon_flutter/issues/307)) ([b453a71](https://github.com/coingaming/moon_flutter/commit/b453a715fde01c7dac930cc088474c205a8b4097))
+
 ## [0.36.0](https://github.com/coingaming/moon_flutter/compare/v0.35.0...v0.36.0) (2023-11-24)
 
 
