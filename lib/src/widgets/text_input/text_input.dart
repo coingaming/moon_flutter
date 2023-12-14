@@ -1041,7 +1041,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         MoonColors.light.beerus;
 
     final Color effectiveErrorColor =
-        widget.errorColor ?? context.moonTheme?.textInputTheme.colors.errorColor ?? MoonColors.light.chiChi100;
+        widget.errorColor ?? context.moonTheme?.textInputTheme.colors.errorColor ?? MoonColors.light.chichi;
 
     final Color effectiveHoverBorderColor =
         widget.hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;

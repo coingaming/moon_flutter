@@ -23,7 +23,7 @@ class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme> wi
   })  : colors = colors ??
             MoonTextInputGroupColors(
               backgroundColor: tokens.colors.goku,
-              errorColor: tokens.colors.chiChi100,
+              errorColor: tokens.colors.chichi,
               helperTextColor: tokens.colors.trunks,
               borderColor: tokens.colors.beerus,
               hoverBorderColor: tokens.colors.beerus,

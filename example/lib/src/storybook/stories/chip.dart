@@ -159,9 +159,9 @@ class ChipStory extends StatelessWidget {
             const TextDivider(text: "Preset MoonChip"),
             MoonChip(
               isActive: isActiveKnob,
-              activeColor: context.moonColors!.dodoria100,
-              backgroundColor: context.moonColors!.krillin100,
-              activeBackgroundColor: context.moonColors!.chiChi10,
+              activeColor: context.moonColors!.dodoria,
+              backgroundColor: context.moonColors!.krillin,
+              activeBackgroundColor: context.moonColors!.chichi10,
               textColor: context.moonColors!.goten,
               borderWidth: 2,
               showBorder: showBorderKnob,

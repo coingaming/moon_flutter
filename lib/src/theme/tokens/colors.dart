@@ -18,31 +18,31 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     jiren: Color(0x1F5C33CF),
     heles: Color(0x0A000000),
     zeno: Color(0x8F000000),
-    krillin100: Color(0xFFFFB319),
+    krillin: Color(0xFFFFB319),
     krillin60: Color(0x8FFFB319),
     krillin10: Color(0x14FFB319),
-    chiChi100: Color(0xFFFF4E64),
-    chiChi60: Color(0x8FFF4E64),
-    chiChi10: Color(0x14FF4E64),
-    roshi100: Color(0xFF49B356),
+    chichi: Color(0xFFFF4E64),
+    chichi60: Color(0x8FFF4E64),
+    chichi10: Color(0x14FF4E64),
+    roshi: Color(0xFF49B356),
     roshi60: Color(0x8F49B356),
     roshi10: Color(0x1449B356),
-    dodoria100: Color(0xFFD33030),
+    dodoria: Color(0xFFD33030),
     dodoria60: Color(0x8FD33030),
     dodoria10: Color(0x14D33030),
-    cell100: Color(0xFF95F1D5),
+    cell: Color(0xFF95F1D5),
     cell60: Color(0x8F95F1D5),
     cell10: Color(0x1495F1D5),
-    raditz100: Color(0xFFB3804A),
+    raditz: Color(0xFFB3804A),
     raditz60: Color(0x8FB3804A),
     raditz10: Color(0x14B3804A),
-    whis100: Color(0xFF3448F0),
+    whis: Color(0xFF3448F0),
     whis60: Color(0x8F3448F0),
     whis10: Color(0x143448F0),
-    frieza100: Color(0xFF5C33CF),
+    frieza: Color(0xFF5C33CF),
     frieza60: Color(0x8F5C33CF),
     frieza10: Color(0x145C33CF),
-    nappa100: Color(0xFF725550),
+    nappa: Color(0xFF725550),
     nappa60: Color(0x8F725550),
     nappa10: Color(0x14725550),
     textPrimary: Color(0xFF000000), // bulma
@@ -64,31 +64,31 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     jiren: Color(0x1F5C33CF),
     heles: Color(0x14FFFFFF),
     zeno: Color(0x8F000000),
-    krillin100: Color(0xFFFFB319),
+    krillin: Color(0xFFFFB319),
     krillin60: Color(0x8FFFB319),
     krillin10: Color(0x14FFB319),
-    chiChi100: Color(0xFFFF4E64),
-    chiChi60: Color(0x8FFF4E64),
-    chiChi10: Color(0x14FF4E64),
-    roshi100: Color(0xFF49B356),
+    chichi: Color(0xFFFF4E64),
+    chichi60: Color(0x8FFF4E64),
+    chichi10: Color(0x14FF4E64),
+    roshi: Color(0xFF49B356),
     roshi60: Color(0x8F49B356),
     roshi10: Color(0x1449B356),
-    dodoria100: Color(0xFFD33030),
+    dodoria: Color(0xFFD33030),
     dodoria60: Color(0x8FD33030),
     dodoria10: Color(0x14D33030),
-    cell100: Color(0xFF95F1D5),
+    cell: Color(0xFF95F1D5),
     cell60: Color(0x8F95F1D5),
     cell10: Color(0x1495F1D5),
-    raditz100: Color(0xFFB3804A),
+    raditz: Color(0xFFB3804A),
     raditz60: Color(0x8FB3804A),
     raditz10: Color(0x14B3804A),
-    whis100: Color(0xFF3448F0),
+    whis: Color(0xFF3448F0),
     whis60: Color(0x8F3448F0),
     whis10: Color(0x143448F0),
-    frieza100: Color(0xFF5C33CF),
+    frieza: Color(0xFF5C33CF),
     frieza60: Color(0x8F5C33CF),
     frieza10: Color(0x145C33CF),
-    nappa100: Color(0xFF725550),
+    nappa: Color(0xFF725550),
     nappa60: Color(0x8F725550),
     nappa10: Color(0x14725550),
     textPrimary: Color(0xFFFFFFFF), // bulma
@@ -138,7 +138,7 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   // Supportive and Semantic colors:
 
   /// Warning color.
-  final Color krillin100;
+  final Color krillin;
 
   /// Warning color.
   final Color krillin60;
@@ -147,16 +147,16 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   final Color krillin10;
 
   /// Error color.
-  final Color chiChi100;
+  final Color chichi;
 
   /// Error color.
-  final Color chiChi60;
+  final Color chichi60;
 
   /// Error color.
-  final Color chiChi10;
+  final Color chichi10;
 
   /// Success color.
-  final Color roshi100;
+  final Color roshi;
 
   /// Success color.
   final Color roshi60;
@@ -165,7 +165,7 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   final Color roshi10;
 
   /// Supportive color.
-  final Color frieza100;
+  final Color frieza;
 
   /// Supportive color.
   final Color frieza60;
@@ -174,7 +174,7 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   final Color frieza10;
 
   /// Supportive color.
-  final Color dodoria100;
+  final Color dodoria;
 
   /// Supportive color.
   final Color dodoria60;
@@ -183,7 +183,7 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   final Color dodoria10;
 
   /// Supportive color.
-  final Color cell100;
+  final Color cell;
 
   /// Supportive color.
   final Color cell60;
@@ -192,7 +192,7 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   final Color cell10;
 
   /// Supportive color.
-  final Color raditz100;
+  final Color raditz;
 
   /// Supportive color.
   final Color raditz60;
@@ -201,7 +201,7 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   final Color raditz10;
 
   /// Supportive color.
-  final Color nappa100;
+  final Color nappa;
 
   /// Supportive color.
   final Color nappa60;
@@ -210,7 +210,7 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
   final Color nappa10;
 
   /// Supportive color.
-  final Color whis100;
+  final Color whis;
 
   /// Supportive color.
   final Color whis60;
@@ -243,31 +243,31 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     required this.jiren,
     required this.heles,
     required this.zeno,
-    required this.krillin100,
+    required this.krillin,
     required this.krillin60,
     required this.krillin10,
-    required this.chiChi100,
-    required this.chiChi60,
-    required this.chiChi10,
-    required this.roshi100,
+    required this.chichi,
+    required this.chichi60,
+    required this.chichi10,
+    required this.roshi,
     required this.roshi60,
     required this.roshi10,
-    required this.frieza100,
+    required this.frieza,
     required this.frieza60,
     required this.frieza10,
-    required this.dodoria100,
+    required this.dodoria,
     required this.dodoria60,
     required this.dodoria10,
-    required this.cell100,
+    required this.cell,
     required this.cell60,
     required this.cell10,
-    required this.raditz100,
+    required this.raditz,
     required this.raditz60,
     required this.raditz10,
-    required this.nappa100,
+    required this.nappa,
     required this.nappa60,
     required this.nappa10,
-    required this.whis100,
+    required this.whis,
     required this.whis60,
     required this.whis10,
     required this.textPrimary,
@@ -290,31 +290,31 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
     Color? jiren,
     Color? heles,
     Color? zeno,
-    Color? krillin100,
+    Color? krillin,
     Color? krillin60,
     Color? krillin10,
-    Color? chiChi100,
-    Color? chiChi60,
-    Color? chiChi10,
-    Color? roshi100,
+    Color? chichi,
+    Color? chichi60,
+    Color? chichi10,
+    Color? roshi,
     Color? roshi60,
     Color? roshi10,
-    Color? frieza100,
+    Color? frieza,
     Color? frieza60,
     Color? frieza10,
-    Color? dodoria100,
+    Color? dodoria,
     Color? dodoria60,
     Color? dodoria10,
-    Color? cell100,
+    Color? cell,
     Color? cell60,
     Color? cell10,
-    Color? raditz100,
+    Color? raditz,
     Color? raditz60,
     Color? raditz10,
-    Color? nappa100,
+    Color? nappa,
     Color? nappa60,
     Color? nappa10,
-    Color? whis100,
+    Color? whis,
     Color? whis60,
     Color? whis10,
     Color? textPrimary,
@@ -335,31 +335,31 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       jiren: jiren ?? this.jiren,
       heles: heles ?? this.heles,
       zeno: zeno ?? this.zeno,
-      krillin100: krillin100 ?? this.krillin100,
+      krillin: krillin ?? this.krillin,
       krillin60: krillin60 ?? this.krillin60,
       krillin10: krillin10 ?? this.krillin10,
-      chiChi100: chiChi100 ?? this.chiChi100,
-      chiChi60: chiChi60 ?? this.chiChi60,
-      chiChi10: chiChi10 ?? this.chiChi10,
-      roshi100: roshi100 ?? this.roshi100,
+      chichi: chichi ?? this.chichi,
+      chichi60: chichi60 ?? this.chichi60,
+      chichi10: chichi10 ?? this.chichi10,
+      roshi: roshi ?? this.roshi,
       roshi60: roshi60 ?? this.roshi60,
       roshi10: roshi10 ?? this.roshi10,
-      frieza100: frieza100 ?? this.frieza100,
+      frieza: frieza ?? this.frieza,
       frieza60: frieza60 ?? this.frieza60,
       frieza10: frieza10 ?? this.frieza10,
-      dodoria100: dodoria100 ?? this.dodoria100,
+      dodoria: dodoria ?? this.dodoria,
       dodoria60: dodoria60 ?? this.dodoria60,
       dodoria10: dodoria10 ?? this.dodoria10,
-      cell100: cell100 ?? this.cell100,
+      cell: cell ?? this.cell,
       cell60: cell60 ?? this.cell60,
       cell10: cell10 ?? this.cell10,
-      raditz100: raditz100 ?? this.raditz100,
+      raditz: raditz ?? this.raditz,
       raditz60: raditz60 ?? this.raditz60,
       raditz10: raditz10 ?? this.raditz10,
-      nappa100: nappa100 ?? this.nappa100,
+      nappa: nappa ?? this.nappa,
       nappa60: nappa60 ?? this.nappa60,
       nappa10: nappa10 ?? this.nappa10,
-      whis100: whis100 ?? this.whis100,
+      whis: whis ?? this.whis,
       whis60: whis60 ?? this.whis60,
       whis10: whis10 ?? this.whis10,
       textPrimary: textPrimary ?? this.textPrimary,
@@ -386,31 +386,31 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       jiren: colorPremulLerp(jiren, other.jiren, t)!,
       heles: colorPremulLerp(heles, other.heles, t)!,
       zeno: colorPremulLerp(zeno, other.zeno, t)!,
-      krillin100: colorPremulLerp(krillin100, other.krillin100, t)!,
+      krillin: colorPremulLerp(krillin, other.krillin, t)!,
       krillin60: colorPremulLerp(krillin60, other.krillin60, t)!,
       krillin10: colorPremulLerp(krillin10, other.krillin10, t)!,
-      chiChi100: colorPremulLerp(chiChi100, other.chiChi100, t)!,
-      chiChi60: colorPremulLerp(chiChi60, other.chiChi60, t)!,
-      chiChi10: colorPremulLerp(chiChi10, other.chiChi10, t)!,
-      roshi100: colorPremulLerp(roshi100, other.roshi100, t)!,
+      chichi: colorPremulLerp(chichi, other.chichi, t)!,
+      chichi60: colorPremulLerp(chichi60, other.chichi60, t)!,
+      chichi10: colorPremulLerp(chichi10, other.chichi10, t)!,
+      roshi: colorPremulLerp(roshi, other.roshi, t)!,
       roshi60: colorPremulLerp(roshi60, other.roshi60, t)!,
       roshi10: colorPremulLerp(roshi10, other.roshi10, t)!,
-      frieza100: colorPremulLerp(frieza100, other.frieza100, t)!,
+      frieza: colorPremulLerp(frieza, other.frieza, t)!,
       frieza60: colorPremulLerp(frieza60, other.frieza60, t)!,
       frieza10: colorPremulLerp(frieza10, other.frieza10, t)!,
-      dodoria100: colorPremulLerp(dodoria100, other.dodoria100, t)!,
+      dodoria: colorPremulLerp(dodoria, other.dodoria, t)!,
       dodoria60: colorPremulLerp(dodoria60, other.dodoria60, t)!,
       dodoria10: colorPremulLerp(dodoria10, other.dodoria10, t)!,
-      cell100: colorPremulLerp(cell100, other.cell100, t)!,
+      cell: colorPremulLerp(cell, other.cell, t)!,
       cell60: colorPremulLerp(cell60, other.cell60, t)!,
       cell10: colorPremulLerp(cell10, other.cell10, t)!,
-      raditz100: colorPremulLerp(raditz100, other.raditz100, t)!,
+      raditz: colorPremulLerp(raditz, other.raditz, t)!,
       raditz60: colorPremulLerp(raditz60, other.raditz60, t)!,
       raditz10: colorPremulLerp(raditz10, other.raditz10, t)!,
-      nappa100: colorPremulLerp(nappa100, other.nappa100, t)!,
+      nappa: colorPremulLerp(nappa, other.nappa, t)!,
       nappa60: colorPremulLerp(nappa60, other.nappa60, t)!,
       nappa10: colorPremulLerp(nappa10, other.nappa10, t)!,
-      whis100: colorPremulLerp(whis100, other.whis100, t)!,
+      whis: colorPremulLerp(whis, other.whis, t)!,
       whis60: colorPremulLerp(whis60, other.whis60, t)!,
       whis10: colorPremulLerp(whis10, other.whis10, t)!,
       textPrimary: colorPremulLerp(textPrimary, other.textPrimary, t)!,
@@ -437,31 +437,31 @@ class MoonColors extends ThemeExtension<MoonColors> with DiagnosticableTreeMixin
       ..add(ColorProperty("jiren", jiren))
       ..add(ColorProperty("heles", heles))
       ..add(ColorProperty("zeno", zeno))
-      ..add(ColorProperty("krillin100", krillin100))
+      ..add(ColorProperty("krillin", krillin))
       ..add(ColorProperty("krillin60", krillin60))
       ..add(ColorProperty("krillin10", krillin10))
-      ..add(ColorProperty("chiChi100", chiChi100))
-      ..add(ColorProperty("chiChi60", chiChi60))
-      ..add(ColorProperty("chiChi10", chiChi10))
-      ..add(ColorProperty("roshi100", roshi100))
+      ..add(ColorProperty("chichi", chichi))
+      ..add(ColorProperty("chichi60", chichi60))
+      ..add(ColorProperty("chichi10", chichi10))
+      ..add(ColorProperty("roshi", roshi))
       ..add(ColorProperty("roshi60", roshi60))
       ..add(ColorProperty("roshi10", roshi10))
-      ..add(ColorProperty("frieza100", frieza100))
+      ..add(ColorProperty("frieza", frieza))
       ..add(ColorProperty("frieza60", frieza60))
       ..add(ColorProperty("frieza10", frieza10))
-      ..add(ColorProperty("dodoria100", dodoria100))
+      ..add(ColorProperty("dodoria", dodoria))
       ..add(ColorProperty("dodoria60", dodoria60))
       ..add(ColorProperty("dodoria10", dodoria10))
-      ..add(ColorProperty("cell100", cell100))
+      ..add(ColorProperty("cell", cell))
       ..add(ColorProperty("cell60", cell60))
       ..add(ColorProperty("cell10", cell10))
-      ..add(ColorProperty("raditz100", raditz100))
+      ..add(ColorProperty("raditz", raditz))
       ..add(ColorProperty("raditz60", raditz60))
       ..add(ColorProperty("raditz10", raditz10))
-      ..add(ColorProperty("nappa100", nappa100))
+      ..add(ColorProperty("nappa", nappa))
       ..add(ColorProperty("nappa60", nappa60))
       ..add(ColorProperty("nappa10", nappa10))
-      ..add(ColorProperty("whis100", whis100))
+      ..add(ColorProperty("whis", whis))
       ..add(ColorProperty("whis60", whis60))
       ..add(ColorProperty("whis10", whis10))
       ..add(ColorProperty("textPrimary", textPrimary))

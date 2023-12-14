@@ -156,7 +156,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
         widget.borderColor ?? context.moonTheme?.textInputGroupTheme.colors.borderColor ?? MoonColors.light.beerus;
 
     final Color effectiveErrorColor =
-        widget.errorColor ?? context.moonTheme?.textInputGroupTheme.colors.errorColor ?? MoonColors.light.chiChi100;
+        widget.errorColor ?? context.moonTheme?.textInputGroupTheme.colors.errorColor ?? MoonColors.light.chichi;
 
     final Color effectiveHelperTextColor = widget.hintTextColor ??
         context.moonTheme?.textInputGroupTheme.colors.helperTextColor ??

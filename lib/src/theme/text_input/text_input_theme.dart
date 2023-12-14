@@ -30,7 +30,7 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
               backgroundColor: tokens.colors.goku,
               activeBorderColor: tokens.colors.piccolo,
               inactiveBorderColor: tokens.colors.beerus,
-              errorColor: tokens.colors.chiChi100,
+              errorColor: tokens.colors.chichi,
               hoverBorderColor: tokens.colors.beerus,
               textColor: tokens.colors.textPrimary,
               helperTextColor: tokens.colors.textSecondary,

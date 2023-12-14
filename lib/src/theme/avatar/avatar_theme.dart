@@ -23,7 +23,7 @@ class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with Diagnosticabl
   })  : colors = colors ??
             MoonAvatarColors(
               backgroundColor: tokens.colors.goku,
-              badgeColor: tokens.colors.roshi100,
+              badgeColor: tokens.colors.roshi,
               iconColor: tokens.colors.iconPrimary,
               textColor: tokens.colors.textPrimary,
             ),

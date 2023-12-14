@@ -194,7 +194,7 @@ class _AlertStoryState extends State<AlertStory> {
             const TextDivider(text: "Filled MoonAlert variant"),
             MoonFilledAlert(
               show: true,
-              color: context.moonColors!.chiChi100,
+              color: context.moonColors!.chichi,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
               title: const Text("Filled error MoonAlert"),
@@ -212,7 +212,7 @@ class _AlertStoryState extends State<AlertStory> {
             const SizedBox(height: 16),
             MoonFilledAlert(
               show: true,
-              color: context.moonColors!.krillin100,
+              color: context.moonColors!.krillin,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.generic_alarm_round_24_light) : null,
               title: const Text("Filled warning MoonAlert"),
@@ -230,7 +230,7 @@ class _AlertStoryState extends State<AlertStory> {
             const TextDivider(text: "Outlined MoonAlert variant"),
             MoonOutlinedAlert(
               show: true,
-              color: context.moonColors!.roshi100,
+              color: context.moonColors!.roshi,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.generic_check_rounded_24_light) : null,
               title: const Text("Outlined success MoonAlert"),
@@ -248,7 +248,7 @@ class _AlertStoryState extends State<AlertStory> {
             const SizedBox(height: 16),
             MoonOutlinedAlert(
               show: true,
-              color: context.moonColors!.whis100,
+              color: context.moonColors!.whis,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
               title: const Text('Outlined info MoonAlert'),
