@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.38.0](https://github.com/coingaming/moon_flutter/compare/v0.37.0...v0.38.0) (2023-12-15)
+
+
+### Features
+
+* [MDS-910] Rename color tokens to align more with design variables ([#311](https://github.com/coingaming/moon_flutter/issues/311)) ([3c54130](https://github.com/coingaming/moon_flutter/commit/3c541304ee74a4239ad25d5c80a892a2b868fe51))
+
 ## [0.37.0](https://github.com/coingaming/moon_flutter/compare/v0.36.1...v0.37.0) (2023-12-08)
 
 
