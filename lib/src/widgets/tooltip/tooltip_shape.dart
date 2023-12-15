@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
+import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
 class TooltipShape extends ShapeBorder {

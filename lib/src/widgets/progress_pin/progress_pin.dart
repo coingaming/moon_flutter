@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/widgets/progress_pin/pin_style.dart';
 import 'package:moon_design/src/widgets/progress_pin/progress_pin_painter.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonProgressPin extends StatelessWidget {
   final double progressValue;

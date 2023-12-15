@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonDotIndicator extends StatefulWidget {
   /// The color of the selected dot.

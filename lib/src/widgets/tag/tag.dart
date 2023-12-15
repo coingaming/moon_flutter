@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 import 'package:moon_design/src/theme/tag/tag_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 enum MoonTagSize {
   x2s,

@@ -4,7 +4,6 @@ import 'package:moon_design/src/theme/accordion/accordion_size_properties.dart';
 import 'package:moon_design/src/theme/accordion/accordion_sizes.dart';
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
@@ -13,6 +12,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
 import 'package:moon_icons/moon_icons.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 enum MoonAccordionSize {
   sm,

@@ -30,7 +30,6 @@ export 'package:moon_design/src/theme/text_input_group/text_input_group_theme.da
 export 'package:moon_design/src/theme/theme.dart';
 export 'package:moon_design/src/theme/toast/toast_theme.dart';
 export 'package:moon_design/src/theme/tokens/borders.dart';
-export 'package:moon_design/src/theme/tokens/colors.dart';
 export 'package:moon_design/src/theme/tokens/opacities.dart';
 export 'package:moon_design/src/theme/tokens/shadows.dart';
 export 'package:moon_design/src/theme/tokens/sizes.dart';
@@ -103,3 +102,4 @@ export 'package:moon_design/src/widgets/toast/toast.dart';
 export 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
 export 'package:moon_icons/moon_icons.dart';
+export 'package:moon_tokens/moon_tokens.dart';
