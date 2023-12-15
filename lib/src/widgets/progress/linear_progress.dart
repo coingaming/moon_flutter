@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_size_properties.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
 import 'package:moon_design/src/widgets/progress_pin/pin_style.dart';
 import 'package:moon_design/src/widgets/progress_pin/progress_pin.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 enum MoonLinearProgressSize {
   x6s,

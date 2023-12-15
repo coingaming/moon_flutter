@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/theme/segmented_control/segmented_control_size_properties.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
@@ -17,6 +15,7 @@ import 'package:moon_design/src/widgets/common/base_control.dart';
 import 'package:moon_design/src/widgets/common/base_segmented_tab_bar.dart';
 import 'package:moon_design/src/widgets/segmented_control/segment.dart';
 import 'package:moon_design/src/widgets/segmented_control/segment_style.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 enum MoonSegmentedControlSize {
   sm,

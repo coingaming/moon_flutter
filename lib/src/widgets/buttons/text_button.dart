@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonTextButton extends StatelessWidget {
   /// {@macro flutter.widgets.Focus.autofocus}

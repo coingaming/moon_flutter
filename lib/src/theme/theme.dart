@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 import 'package:moon_design/src/theme/alert/alert_theme.dart';
 import 'package:moon_design/src/theme/authcode/authcode_theme.dart';
@@ -33,7 +32,6 @@ import 'package:moon_design/src/theme/text_input/text_input_theme.dart';
 import 'package:moon_design/src/theme/text_input_group/text_input_group_theme.dart';
 import 'package:moon_design/src/theme/toast/toast_theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
@@ -41,6 +39,7 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {

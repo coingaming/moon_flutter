@@ -6,11 +6,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
-
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonCarousel extends StatefulWidget {
   /// Axis direction of the carousel. Defaults to `Axis.horizontal`.

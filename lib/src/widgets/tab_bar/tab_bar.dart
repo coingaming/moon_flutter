@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/theme/tab_bar/tab_bar_size_properties.dart';
 import 'package:moon_design/src/theme/tab_bar/tab_bar_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/colors.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
@@ -16,6 +14,7 @@ import 'package:moon_design/src/widgets/tab_bar/pill_tab.dart';
 import 'package:moon_design/src/widgets/tab_bar/pill_tab_style.dart';
 import 'package:moon_design/src/widgets/tab_bar/tab.dart';
 import 'package:moon_design/src/widgets/tab_bar/tab_style.dart';
+import 'package:moon_tokens/moon_tokens.dart';
 
 enum MoonTabBarVariant {
   indicator,
