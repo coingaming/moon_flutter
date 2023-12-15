@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/switch/switch_sizes.dart';

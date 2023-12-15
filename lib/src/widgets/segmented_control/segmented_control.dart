@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:moon_design/src/theme/segmented_control/segmented_control_size_properties.dart';
 import 'package:moon_design/src/theme/segmented_control/segmented_control_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';

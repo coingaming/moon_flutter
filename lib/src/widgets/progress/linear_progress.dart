@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_size_properties.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
