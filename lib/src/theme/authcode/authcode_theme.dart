@@ -25,7 +25,7 @@ class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme> with Diagnosti
               selectedBorderColor: tokens.colors.piccolo,
               activeBorderColor: tokens.colors.beerus,
               inactiveBorderColor: tokens.colors.beerus,
-              errorBorderColor: tokens.colors.chiChi100,
+              errorBorderColor: tokens.colors.chichi,
               selectedFillColor: tokens.colors.goku,
               activeFillColor: tokens.colors.goku,
               inactiveFillColor: tokens.colors.goku,

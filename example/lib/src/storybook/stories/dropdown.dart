@@ -101,8 +101,8 @@ class _DropdownStoryState extends State<DropdownStory> {
 
     // Used to avoid the stale closure within callbacks in Story
     final colorPiccolo = context.moonColors!.piccolo;
-    final colorKrillin = context.moonColors!.krillin100;
-    final colorRoshi100 = context.moonColors!.roshi100;
+    final colorKrillin = context.moonColors!.krillin;
+    final colorRoshi100 = context.moonColors!.roshi;
     final colorRoshi60 = context.moonColors!.roshi60;
     final colorRoshi10 = context.moonColors!.roshi10;
 

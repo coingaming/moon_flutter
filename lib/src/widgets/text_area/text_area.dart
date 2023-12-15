@@ -292,7 +292,7 @@ class MoonTextArea extends StatelessWidget {
         inactiveBorderColor ?? context.moonTheme?.textAreaTheme.colors.inactiveBorderColor ?? MoonColors.light.beerus;
 
     final Color effectiveErrorColor =
-        errorColor ?? context.moonTheme?.textAreaTheme.colors.errorColor ?? MoonColors.light.chiChi100;
+        errorColor ?? context.moonTheme?.textAreaTheme.colors.errorColor ?? MoonColors.light.chichi;
 
     final Color effectiveHoverBorderColor =
         hoverBorderColor ?? context.moonTheme?.textAreaTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;

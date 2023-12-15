@@ -249,8 +249,8 @@ class ButtonStory extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    context.moonColors!.krillin100,
-                    context.moonColors!.dodoria100,
+                    context.moonColors!.krillin,
+                    context.moonColors!.dodoria,
                   ],
                 ),
                 shape: const StarBorder(pointRounding: 0.5, valleyRounding: 0.5),

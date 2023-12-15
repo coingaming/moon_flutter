@@ -693,9 +693,8 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
         context.moonTheme?.authCodeTheme.colors.inactiveBorderColor ??
         MoonColors.light.beerus;
 
-    _effectiveErrorBorderColor = widget.errorBorderColor ??
-        context.moonTheme?.authCodeTheme.colors.errorBorderColor ??
-        MoonColors.light.chiChi100;
+    _effectiveErrorBorderColor =
+        widget.errorBorderColor ?? context.moonTheme?.authCodeTheme.colors.errorBorderColor ?? MoonColors.light.chichi;
 
     _effectiveSelectedFillColor =
         widget.selectedFillColor ?? context.moonTheme?.authCodeTheme.colors.selectedFillColor ?? MoonColors.light.goku;

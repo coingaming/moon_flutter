@@ -148,7 +148,7 @@ class MoonAvatar extends StatelessWidget {
         backgroundColor ?? context.moonTheme?.avatarTheme.colors.backgroundColor ?? MoonColors.light.goku;
 
     final Color effectiveBadgeColor =
-        badgeColor ?? context.moonTheme?.avatarTheme.colors.badgeColor ?? MoonColors.light.roshi100;
+        badgeColor ?? context.moonTheme?.avatarTheme.colors.badgeColor ?? MoonColors.light.roshi;
 
     final Color effectiveTextColor = context.moonTheme?.avatarTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
