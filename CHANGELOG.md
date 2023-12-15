@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.39.0](https://github.com/coingaming/moon_flutter/compare/v0.38.0...v0.39.0) (2023-12-15)
+
+
+### Features
+
+* [MDS-912] Add moon_tokens as dependency of moon_flutter ([#313](https://github.com/coingaming/moon_flutter/issues/313)) ([3ae5f93](https://github.com/coingaming/moon_flutter/commit/3ae5f935f0b0ab114fb2ee352744b1f273c467e6))
+
 ## [0.38.0](https://github.com/coingaming/moon_flutter/compare/v0.37.0...v0.38.0) (2023-12-15)
 
 
