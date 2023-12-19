@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.40.0](https://github.com/coingaming/moon_flutter/compare/v0.39.0...v0.40.0) (2023-12-19)
+
+
+### Features
+
+* [MDS-742] Enable code plugin and add code snippets ([#315](https://github.com/coingaming/moon_flutter/issues/315)) ([0887fd7](https://github.com/coingaming/moon_flutter/commit/0887fd7edf1ee189650f0ef190c8e2b6180a0af6))
+
 ## [0.39.0](https://github.com/coingaming/moon_flutter/compare/v0.38.0...v0.39.0) (2023-12-15)
 
 
