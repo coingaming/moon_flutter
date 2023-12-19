@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-const int _rowsInPage = 25;
+const int _rowsPerPage = 25;
 
 class TableStory extends StatefulWidget {
   static const path = '/table';
@@ -17,8 +17,8 @@ class TableStory extends StatefulWidget {
 }
 
 class _TableStoryState extends State<TableStory> {
-  final List<_ExampleTableData> _exampleTableData = _generateTableData();
-  late List<_ExampleTableData> _exampleTableDataToShow;
+  late final List<_TableData> _tableDataOriginal;
+  late List<_TableData> _tableDataToShow;
 
   final List<String> _columnNames = ['ID', 'First name', 'Last name', 'Age', 'Activity'];
   final List<bool> _columnSorting = List.generate(6, (int _) => true);
@@ -26,7 +26,7 @@ class _TableStoryState extends State<TableStory> {
   bool _checkAllBoxes = false;
   bool _sortAscending = true;
   int _sortColumnIndex = 0;
-  int _rowsToShow = _rowsInPage;
+  int _rowsToShow = _rowsPerPage;
 
   bool _showCheckboxes = false;
   bool _showDividerKnob = false;
@@ -38,22 +38,37 @@ class _TableStoryState extends State<TableStory> {
   Color? _textColor;
   int? _borderRadiusKnob;
 
-  void _scrollListener(StateSetter setState, ScrollController verticalScrollController) {
+  List<_TableData> _generateTableData() {
+    return List<_TableData>.generate(
+      _rowsPerPage * 5,
+      (int index) => _TableData(
+        id: index,
+        selected: false,
+        firstName: 'Test$index',
+        lastName: 'Subject$index',
+        age: Random().nextInt(81),
+        activity: Random().nextInt(100),
+        colStickyTitle: 'Sticky title $index',
+      ),
+    );
+  }
+
+  void _scrollListener(ScrollController verticalScrollController) {
     verticalScrollController.addListener(() {
       if (verticalScrollController.hasClients && _infiniteScrollKnob) {
         final double pixels = verticalScrollController.position.pixels;
         final double maxScrollExtent = verticalScrollController.position.maxScrollExtent;
 
-        if (pixels >= maxScrollExtent && _rowsToShow < _rowsInPage * 5) {
-          _exampleTableDataToShow += _exampleTableData.sublist(_rowsToShow, _rowsToShow + _rowsInPage);
+        if (pixels >= maxScrollExtent && _rowsToShow < _rowsPerPage * 5) {
+          _tableDataToShow += _tableDataOriginal.sublist(_rowsToShow, _rowsToShow + _rowsPerPage);
 
-          setState(() => _rowsToShow += _rowsInPage);
+          setState(() => _rowsToShow += _rowsPerPage);
         }
       }
     });
   }
 
-  void _onSort(StateSetter setState, int columnIndex, bool sortAscending) {
+  void _onSort(int columnIndex, bool sortAscending) {
     if (_sortColumnIndex == columnIndex || _sortAscending != sortAscending) {
       setState(() {
         if (columnIndex == _sortColumnIndex) {
@@ -62,19 +77,21 @@ class _TableStoryState extends State<TableStory> {
           _sortColumnIndex = columnIndex;
           _sortAscending = _columnSorting[columnIndex];
         }
+
         switch (_showCheckboxes ? columnIndex : columnIndex + 1) {
           case 1:
-            _exampleTableDataToShow.sort((a, b) => a.id.compareTo(b.id));
+            _tableDataToShow.sort((a, b) => a.id.compareTo(b.id));
           case 2:
-            _exampleTableDataToShow.sort((a, b) => a.firstName.compareTo(b.firstName));
+            _tableDataToShow.sort((a, b) => a.firstName.compareTo(b.firstName));
           case 3:
-            _exampleTableDataToShow.sort((a, b) => a.lastName.compareTo(b.lastName));
+            _tableDataToShow.sort((a, b) => a.lastName.compareTo(b.lastName));
           case 4:
-            _exampleTableDataToShow.sort((a, b) => a.age.compareTo(b.age));
+            _tableDataToShow.sort((a, b) => a.age.compareTo(b.age));
           case 5:
-            _exampleTableDataToShow.sort((a, b) => a.activity.compareTo(b.activity));
+            _tableDataToShow.sort((a, b) => a.activity.compareTo(b.activity));
         }
-        if (!_sortAscending) _exampleTableDataToShow = _exampleTableDataToShow.reversed.toList();
+
+        if (!_sortAscending) _tableDataToShow = _tableDataToShow.reversed.toList();
       });
     }
   }
@@ -83,10 +100,11 @@ class _TableStoryState extends State<TableStory> {
   void initState() {
     super.initState();
 
-    _exampleTableDataToShow = _exampleTableData.sublist(0, _rowsInPage);
+    _tableDataOriginal = _generateTableData();
+    _tableDataToShow = _tableDataOriginal.sublist(0, _rowsPerPage);
   }
 
-  Widget _headerCheckBox(StateSetter setState) {
+  Widget _headerCheckBox() {
     return Padding(
       padding: const EdgeInsetsDirectional.only(start: 16.0),
       child: MoonCheckbox(
@@ -96,7 +114,8 @@ class _TableStoryState extends State<TableStory> {
             ? (bool? onChanged) => onChanged != null
                 ? setState(() {
                     _checkAllBoxes = onChanged;
-                    for (final item in _exampleTableDataToShow) {
+
+                    for (final item in _tableDataToShow) {
                       item.selected = _checkAllBoxes;
                     }
                   })
@@ -106,7 +125,7 @@ class _TableStoryState extends State<TableStory> {
     );
   }
 
-  Widget _buildCell(BuildContext context, dynamic label, {bool firstCell = false}) {
+  Widget _buildCell(dynamic label, {bool firstCell = false}) {
     return DecoratedBox(
       decoration: _showDividerKnob && !firstCell
           ? BoxDecoration(
@@ -135,7 +154,7 @@ class _TableStoryState extends State<TableStory> {
     );
   }
 
-  MoonTableHeader _generateTableHeader(BuildContext context, StateSetter setState) {
+  MoonTableHeader _generateTableHeader() {
     return MoonTableHeader(
       columns: List.generate(
         _showCheckboxes ? 6 : 5,
@@ -150,19 +169,17 @@ class _TableStoryState extends State<TableStory> {
                 setState(() {
                   _checkAllBoxes = !_checkAllBoxes;
 
-                  for (final item in _exampleTableDataToShow) {
+                  for (final item in _tableDataToShow) {
                     item.selected = _checkAllBoxes;
                   }
                 });
               }
             },
-            onSort: checkboxColumn
-                ? null
-                : (int columnIndex, bool sortAscending) => _onSort(setState, columnIndex, sortAscending),
+            onSort:
+                checkboxColumn ? null : (int columnIndex, bool sortAscending) => _onSort(columnIndex, sortAscending),
             cell: checkboxColumn
-                ? _headerCheckBox(setState)
+                ? _headerCheckBox()
                 : _buildCell(
-                    context,
                     _columnNames[_showCheckboxes ? index - 1 : index],
                     firstCell: index == 0 && !_showCheckboxes,
                   ),
@@ -172,7 +189,7 @@ class _TableStoryState extends State<TableStory> {
     );
   }
 
-  MoonTableFooter _generateTableFooter(BuildContext context) {
+  MoonTableFooter _generateTableFooter() {
     return MoonTableFooter(
       cells: List.generate(
         _showCheckboxes ? 6 : 5,
@@ -183,23 +200,23 @@ class _TableStoryState extends State<TableStory> {
           final String label = index == 0
               ? 'Total:'
               : (index == ageColumnIndex || index == activityColumnIndex)
-                  ? _exampleTableDataToShow
-                      .map((_ExampleTableData item) => index == ageColumnIndex ? item.age : item.activity)
+                  ? _tableDataToShow
+                      .map((_TableData item) => index == ageColumnIndex ? item.age : item.activity)
                       .reduce((int value, int element) => value + element)
                       .toString()
                   : '-';
 
-          return _buildCell(context, label, firstCell: index == 0);
+          return _buildCell(label, firstCell: index == 0);
         },
       ),
     );
   }
 
-  List<MoonTableRow> _generateTableRows(BuildContext context, StateSetter setState) {
+  List<MoonTableRow> _generateTableRows() {
     return List.generate(
       _rowsToShow,
       (int index) {
-        final row = _exampleTableDataToShow[index];
+        final row = _tableDataToShow[index];
 
         return MoonTableRow(
           selected: row.selected,
@@ -232,11 +249,11 @@ class _TableStoryState extends State<TableStory> {
                       _rowsSelectableKnob ? (bool? onChanged) => setState(() => row.selected = !row.selected) : null,
                 ),
               ),
-            _buildCell(context, _exampleTableDataToShow[index].id, firstCell: !_showCheckboxes),
-            _buildCell(context, _exampleTableDataToShow[index].firstName),
-            _buildCell(context, _exampleTableDataToShow[index].lastName),
-            _buildCell(context, _exampleTableDataToShow[index].age),
-            _buildCell(context, _exampleTableDataToShow[index].activity),
+            _buildCell(row.id, firstCell: !_showCheckboxes),
+            _buildCell(row.firstName),
+            _buildCell(row.lastName),
+            _buildCell(row.age),
+            _buildCell(row.activity),
           ],
         );
       },
@@ -356,8 +373,8 @@ class _TableStoryState extends State<TableStory> {
       _infiniteScrollKnob = infiniteScrollKnob;
 
       if (!infiniteScrollKnob) {
-        _exampleTableDataToShow = _exampleTableData.sublist(0, _rowsInPage);
-        _rowsToShow = _rowsInPage;
+        _tableDataToShow = _tableDataOriginal.sublist(0, _rowsPerPage);
+        _rowsToShow = _rowsPerPage;
       }
     }
 
@@ -376,23 +393,23 @@ class _TableStoryState extends State<TableStory> {
           sortColumnIndex: _sortColumnIndex,
           rowGap: rowGapKnob?.toDouble(),
           rowSize: tableRowSizeKnob ?? MoonTableRowSize.md,
-          header: _generateTableHeader(context, setState),
-          footer: _generateTableFooter(context),
-          rows: _generateTableRows(context, setState),
+          header: _generateTableHeader(),
+          footer: _generateTableFooter(),
+          rows: _generateTableRows(),
           tablePadding: const EdgeInsets.symmetric(horizontal: 16),
           cellPadding: EdgeInsets.symmetric(vertical: tableRowSizeKnob == MoonTableRowSize.xs ? 4 : 8),
           onScrollControllersReady: (
             ScrollController verticalScrollController,
             ScrollController horizontalScrollController,
           ) =>
-              _scrollListener(setState, verticalScrollController),
+              _scrollListener(verticalScrollController),
         ),
       ),
     );
   }
 }
 
-class _ExampleTableData {
+class _TableData {
   bool selected;
   int id;
   String firstName;
@@ -401,7 +418,7 @@ class _ExampleTableData {
   int activity;
   String colStickyTitle;
 
-  _ExampleTableData({
+  _TableData({
     required this.selected,
     required this.id,
     required this.firstName,
@@ -410,19 +427,4 @@ class _ExampleTableData {
     required this.activity,
     required this.colStickyTitle,
   });
-}
-
-List<_ExampleTableData> _generateTableData() {
-  return List<_ExampleTableData>.generate(
-    _rowsInPage * 5,
-    (int index) => _ExampleTableData(
-      id: index,
-      selected: false,
-      firstName: 'Test$index',
-      lastName: 'Subject$index',
-      age: Random().nextInt(81),
-      activity: Random().nextInt(100),
-      colStickyTitle: 'Sticky title $index',
-    ),
-  );
 }

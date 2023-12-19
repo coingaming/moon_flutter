@@ -64,10 +64,10 @@ class MoonLinearLoader extends StatelessWidget {
 
     final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveLoaderSize.borderRadius;
 
-    final Color effectiveColor = color ?? context.moonTheme?.linearLoaderTheme.colors.color ?? MoonColors.light.hit;
+    final Color effectiveColor = color ?? context.moonTheme?.linearLoaderTheme.colors.color ?? MoonColors.light.piccolo;
 
     final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.linearLoaderTheme.colors.backgroundColor ?? MoonColors.light.trunks;
+        backgroundColor ?? context.moonTheme?.linearLoaderTheme.colors.backgroundColor ?? Colors.transparent;
 
     final double effectiveHeight = height ?? effectiveLoaderSize.loaderHeight;
 
