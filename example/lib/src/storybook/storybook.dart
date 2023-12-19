@@ -1,5 +1,5 @@
 import 'package:example/src/storybook/common/widgets/version.dart';
-import 'package:example/src/storybook/routing/app_router.dart';
+import 'package:example/src/storybook/routing/route_aware_stories.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -10,6 +10,7 @@ class StorybookPage extends StatelessWidget {
   static const double autoLayoutThreshold = 1000;
 
   static final _plugins = initializePlugins(
+    enableCodeView: true,
     enableCompactLayoutDeviceFrame: false,
     initialDeviceFrameData: (
       isFrameVisible: true,

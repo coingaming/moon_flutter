@@ -22,7 +22,7 @@ class MoonCircularLoaderTheme extends ThemeExtension<MoonCircularLoaderTheme> wi
     MoonCircularLoaderSizes? sizes,
   })  : colors = colors ??
             MoonCircularLoaderColors(
-              color: tokens.colors.hit,
+              color: tokens.colors.piccolo,
               backgroundColor: Colors.transparent,
             ),
         sizes = sizes ?? MoonCircularLoaderSizes(tokens: tokens);

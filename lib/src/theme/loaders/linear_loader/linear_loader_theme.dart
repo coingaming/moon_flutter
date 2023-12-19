@@ -22,7 +22,7 @@ class MoonLinearLoaderTheme extends ThemeExtension<MoonLinearLoaderTheme> with D
     MoonLinearLoaderSizes? sizes,
   })  : colors = colors ??
             MoonLinearLoaderColors(
-              color: tokens.colors.hit,
+              color: tokens.colors.piccolo,
               backgroundColor: Colors.transparent,
             ),
         sizes = sizes ?? MoonLinearLoaderSizes(tokens: tokens);
