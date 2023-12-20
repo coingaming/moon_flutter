@@ -192,12 +192,25 @@ class _AlertStoryState extends State<AlertStory> {
               ],
             ),
             const TextDivider(text: "Filled MoonAlert variant"),
-            MoonFilledAlert(
+            MoonAlert.filled(
               show: true,
               color: context.moonColors!.chichi,
+              backgroundColor: context.moonColors!.chichi10,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
               title: const Text("Filled error MoonAlert"),
+              trailing: MoonButton.icon(
+                buttonSize: MoonButtonSize.xs,
+                borderRadius: borderRadius,
+                disabledOpacityValue: 1,
+                gap: 0,
+                onTap: () {},
+                icon: Icon(
+                  MoonIcons.controls_close_small_24_light,
+                  size: 24,
+                  color: context.moonColors!.chichi,
+                ),
+              ),
               body: showBodyKnob
                   ? const SizedBox(
                       height: 24,
@@ -207,15 +220,27 @@ class _AlertStoryState extends State<AlertStory> {
                       ),
                     )
                   : null,
-              onTrailingTap: () {},
             ),
             const SizedBox(height: 16),
-            MoonFilledAlert(
+            MoonAlert.filled(
               show: true,
               color: context.moonColors!.krillin,
+              backgroundColor: context.moonColors!.krillin10,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.generic_alarm_round_24_light) : null,
               title: const Text("Filled warning MoonAlert"),
+              trailing: MoonButton.icon(
+                buttonSize: MoonButtonSize.xs,
+                borderRadius: borderRadius,
+                disabledOpacityValue: 1,
+                gap: 0,
+                onTap: () {},
+                icon: Icon(
+                  MoonIcons.controls_close_small_24_light,
+                  size: 24,
+                  color: context.moonColors!.krillin,
+                ),
+              ),
               body: showBodyKnob
                   ? const SizedBox(
                       height: 24,
@@ -225,15 +250,27 @@ class _AlertStoryState extends State<AlertStory> {
                       ),
                     )
                   : null,
-              onTrailingTap: () {},
             ),
             const TextDivider(text: "Outlined MoonAlert variant"),
-            MoonOutlinedAlert(
+            MoonAlert.outlined(
               show: true,
               color: context.moonColors!.roshi,
+              borderColor: context.moonColors!.roshi,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.generic_check_rounded_24_light) : null,
               title: const Text("Outlined success MoonAlert"),
+              trailing: MoonButton.icon(
+                buttonSize: MoonButtonSize.xs,
+                borderRadius: borderRadius,
+                disabledOpacityValue: 1,
+                gap: 0,
+                onTap: () {},
+                icon: Icon(
+                  MoonIcons.controls_close_small_24_light,
+                  size: 24,
+                  color: context.moonColors!.roshi,
+                ),
+              ),
               body: showBodyKnob
                   ? const SizedBox(
                       height: 24,
@@ -243,15 +280,27 @@ class _AlertStoryState extends State<AlertStory> {
                       ),
                     )
                   : null,
-              onTrailingTap: () {},
             ),
             const SizedBox(height: 16),
-            MoonOutlinedAlert(
+            MoonAlert.outlined(
               show: true,
               color: context.moonColors!.whis,
+              borderColor: context.moonColors!.whis,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
               title: const Text('Outlined info MoonAlert'),
+              trailing: MoonButton.icon(
+                buttonSize: MoonButtonSize.xs,
+                borderRadius: borderRadius,
+                disabledOpacityValue: 1,
+                gap: 0,
+                onTap: () {},
+                icon: Icon(
+                  MoonIcons.controls_close_small_24_light,
+                  size: 24,
+                  color: context.moonColors!.whis,
+                ),
+              ),
               body: showBodyKnob
                   ? const SizedBox(
                       height: 24,
@@ -261,7 +310,6 @@ class _AlertStoryState extends State<AlertStory> {
                       ),
                     )
                   : null,
-              onTrailingTap: () {},
             ),
           ],
         ),

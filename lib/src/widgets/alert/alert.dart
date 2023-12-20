@@ -97,6 +97,60 @@ class MoonAlert extends StatefulWidget {
     this.body,
   });
 
+  /// MDS filled alert variant.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonOutlinedAlert], MDS outlined button.
+  const MoonAlert.filled({
+    super.key,
+    this.show = false,
+    this.borderRadius,
+    this.color,
+    required this.backgroundColor,
+    this.semanticLabel,
+    this.leading,
+    required this.title,
+    this.trailing,
+    this.body,
+  })  : showBorder = false,
+        borderColor = null,
+        borderWidth = null,
+        decoration = null,
+        minimumHeight = null,
+        padding = null,
+        horizontalGap = null,
+        verticalGap = null,
+        transitionDuration = null,
+        transitionCurve = null;
+
+  /// MDS outlined alert variant.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonFilledAlert], MDS filled button.
+  const MoonAlert.outlined({
+    super.key,
+    this.show = false,
+    this.borderRadius,
+    this.borderWidth,
+    this.color,
+    required this.borderColor,
+    this.semanticLabel,
+    this.leading,
+    required this.title,
+    this.trailing,
+    this.body,
+  })  : showBorder = true,
+        backgroundColor = Colors.transparent,
+        decoration = null,
+        minimumHeight = null,
+        padding = null,
+        horizontalGap = null,
+        verticalGap = null,
+        transitionDuration = null,
+        transitionCurve = null;
+
   @override
   State<MoonAlert> createState() => _MoonAlertState();
 }

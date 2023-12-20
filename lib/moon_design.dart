@@ -48,8 +48,6 @@ export 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 export 'package:moon_design/src/widgets/accordion/accordion.dart';
 export 'package:moon_design/src/widgets/alert/alert.dart';
-export 'package:moon_design/src/widgets/alert/filled_alert.dart';
-export 'package:moon_design/src/widgets/alert/outlined_alert.dart';
 export 'package:moon_design/src/widgets/authcode/authcode.dart';
 export 'package:moon_design/src/widgets/avatar/avatar.dart';
 export 'package:moon_design/src/widgets/bottom_sheet/bottom_sheet.dart';
