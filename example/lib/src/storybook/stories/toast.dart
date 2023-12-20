@@ -114,6 +114,11 @@ class ToastStory extends StatelessWidget {
       initial: true,
     );
 
+    final showBodyKnob = context.knobs.boolean(
+      label: "body",
+      description: "Show widget in MoonAlert body slot.",
+    );
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 64),
@@ -144,6 +149,15 @@ class ToastStory extends StatelessWidget {
                     MoonIcons.generic_star_24_light,
                     color: iconColor,
                   ),
+                  body: showBodyKnob
+                      ? Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Text(
+                            "Here goes MoonToast body",
+                            style: TextStyle(color: textColor),
+                          ),
+                        )
+                      : null,
                 );
               },
             );
