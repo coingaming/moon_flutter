@@ -52,8 +52,10 @@ class MoonTabBar extends StatefulWidget {
   /// The padding of the MoonTabBar.
   final EdgeInsetsGeometry? padding;
 
-  /// The index of initially selected tab.
-  final int selectedIndex;
+  /// The index of initially selected tab. If [tabController] is provided,
+  /// then [initialIndex] is ignored and [tabController] initial index is used instead.
+  /// To update the tab index externally, use [tabController].
+  final int initialIndex;
 
   /// The size of the MoonTabBar.
   final MoonTabBarSize? tabBarSize;
@@ -61,7 +63,8 @@ class MoonTabBar extends StatefulWidget {
   /// Custom decoration of the MoonTabBar.
   final Decoration? decoration;
 
-  /// Controller of MoonTabBar selection and animation state.
+  /// External controller for MoonTabBar tab selection and animation state. If [tabController] is provided,
+  /// then [initialIndex] is ignored and [tabController] initial index is used instead.
   final TabController? tabController;
 
   /// Callback that returns current selected tab index.
@@ -86,7 +89,7 @@ class MoonTabBar extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
-    this.selectedIndex = 0,
+    this.initialIndex = 0,
     this.tabBarSize,
     this.decoration,
     this.tabController,
@@ -107,7 +110,7 @@ class MoonTabBar extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
-    this.selectedIndex = 0,
+    this.initialIndex = 0,
     this.tabBarSize,
     this.decoration,
     this.tabController,
@@ -128,7 +131,7 @@ class MoonTabBar extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
-    this.selectedIndex = 0,
+    this.initialIndex = 0,
     this.tabBarSize,
     this.decoration,
     this.tabController,
@@ -144,7 +147,7 @@ class MoonTabBar extends StatefulWidget {
 }
 
 class _MoonTabBarState extends State<MoonTabBar> {
-  late int _selectedIndex = widget.selectedIndex;
+  late int _selectedIndex = widget.tabController?.index ?? widget.initialIndex;
   late MoonTabBarVariant _tabBarVariant;
 
   late Duration _effectiveTransitionDuration;
@@ -188,14 +191,16 @@ class _MoonTabBarState extends State<MoonTabBar> {
     }
   }
 
-  List<Widget> _generateTabs() {
-    switch (_tabBarVariant) {
-      case MoonTabBarVariant.indicator:
-        return _generateIndicatorTabs();
-      case MoonTabBarVariant.pill:
-        return _generatePillTabs();
-      default:
-        return _generateCustomTabs();
+  void _handleTabChange() {
+    final int animationValue = widget.tabController?.animation?.value.round() ?? 0;
+
+    if (animationValue != _selectedIndex) {
+      setState(() {
+        _selectedIndex = animationValue;
+
+        widget.onTabChanged?.call(animationValue);
+        _updateTabsSelectedStatus();
+      });
     }
   }
 
@@ -205,6 +210,19 @@ class _MoonTabBarState extends State<MoonTabBar> {
 
     _setSelectedTabBarVariant();
     _updateTabsSelectedStatus();
+
+    widget.tabController?.animation?.addListener(_handleTabChange);
+  }
+
+  List<Widget> _generateTabs() {
+    switch (_tabBarVariant) {
+      case MoonTabBarVariant.indicator:
+        return _generateIndicatorTabs();
+      case MoonTabBarVariant.pill:
+        return _generatePillTabs();
+      default:
+        return _generateCustomTabs();
+    }
   }
 
   List<Widget> _generateIndicatorTabs() {
@@ -271,7 +289,7 @@ class _MoonTabBarState extends State<MoonTabBar> {
       child: BaseSegmentedTabBar(
         gap: effectiveGap,
         isExpanded: widget.isExpanded,
-        selectedIndex: widget.selectedIndex,
+        initialIndex: widget.initialIndex,
         tabController: widget.tabController,
         children: _generateTabs(),
         valueChanged: (int newIndex) {
@@ -279,10 +297,14 @@ class _MoonTabBarState extends State<MoonTabBar> {
           if (widget.tabs != null && widget.tabs![newIndex].disabled) return;
           if (widget.pillTabs != null && widget.pillTabs![newIndex].disabled) return;
 
-          widget.onTabChanged?.call(newIndex);
-          _updateTabsSelectedStatus();
+          setState(() {
+            _selectedIndex = newIndex;
 
-          setState(() => _selectedIndex = newIndex);
+            if (widget.tabController == null) {
+              widget.onTabChanged?.call(newIndex);
+              _updateTabsSelectedStatus();
+            }
+          });
         },
       ),
     );

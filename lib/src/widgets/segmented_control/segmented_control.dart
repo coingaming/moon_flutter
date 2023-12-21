@@ -56,8 +56,10 @@ class MoonSegmentedControl extends StatefulWidget {
   /// The padding of the MoonSegmentedControl.
   final EdgeInsetsGeometry? padding;
 
-  /// The index of initially selected segment.
-  final int selectedIndex;
+  /// The index of initially selected segment. If [tabController] is provided,
+  /// then [initialIndex] is ignored and [tabController] initial index is used instead.
+  /// To update the segment index externally, use [tabController].
+  final int initialIndex;
 
   /// The size of the MoonSegmentedControl.
   final MoonSegmentedControlSize? segmentedControlSize;
@@ -65,7 +67,8 @@ class MoonSegmentedControl extends StatefulWidget {
   /// Custom decoration for the MoonSegmentedControl.
   final Decoration? decoration;
 
-  /// Controller of MoonSegmentedControl selection and animation state.
+  /// External controller for MoonSegmentedControl segment selection and animation state.
+  /// If [tabController] is provided, then [initialIndex] is ignored and [tabController] initial index is used instead.
   final TabController? tabController;
 
   /// Callback that returns current selected segment index.
@@ -90,7 +93,7 @@ class MoonSegmentedControl extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
-    this.selectedIndex = 0,
+    this.initialIndex = 0,
     this.segmentedControlSize,
     this.decoration,
     this.tabController,
@@ -113,7 +116,7 @@ class MoonSegmentedControl extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
-    this.selectedIndex = 0,
+    this.initialIndex = 0,
     this.segmentedControlSize,
     this.decoration,
     this.tabController,
@@ -130,7 +133,7 @@ class MoonSegmentedControl extends StatefulWidget {
 class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
   late final bool _hasDefaultSegments = widget.segments != null;
 
-  late int _selectedIndex = widget.selectedIndex;
+  late int _selectedIndex = widget.tabController?.index ?? widget.initialIndex;
 
   MoonSegmentedControlSizeProperties _getMoonSegmentedControlSize(
     BuildContext context,
@@ -161,11 +164,26 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
     }
   }
 
+  void _handleSegmentChange() {
+    final int animationValue = widget.tabController?.animation?.value.round() ?? 0;
+
+    if (animationValue != _selectedIndex) {
+      setState(() {
+        _selectedIndex = animationValue;
+
+        widget.onSegmentChanged?.call(animationValue);
+        _updateSegmentsSelectedStatus();
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
 
     _updateSegmentsSelectedStatus();
+
+    widget.tabController?.animation?.addListener(_handleSegmentChange);
   }
 
   @override
@@ -216,9 +234,9 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
             ),
         child: BaseSegmentedTabBar(
           gap: effectiveGap,
-          selectedIndex: widget.selectedIndex,
-          tabController: widget.tabController,
           isExpanded: widget.isExpanded,
+          initialIndex: widget.initialIndex,
+          tabController: widget.tabController,
           children: _hasDefaultSegments
               ? List.generate(
                   widget.segments!.length,
@@ -244,10 +262,14 @@ class _MoonSegmentedControlState extends State<MoonSegmentedControl> {
             if (_selectedIndex == newIndex) return;
             if (widget.isDisabled) return;
 
-            widget.onSegmentChanged?.call(newIndex);
-            _updateSegmentsSelectedStatus();
+            setState(() {
+              _selectedIndex = newIndex;
 
-            setState(() => _selectedIndex = newIndex);
+              if (widget.tabController == null) {
+                widget.onSegmentChanged?.call(newIndex);
+                _updateSegmentsSelectedStatus();
+              }
+            });
           },
         ),
       ),
