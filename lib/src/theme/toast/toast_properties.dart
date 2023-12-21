@@ -8,8 +8,11 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
   /// Toast border radius.
   final BorderRadiusGeometry borderRadius;
 
-  /// Space between toast children.
-  final double gap;
+  /// The horizontal space between toast leading, trailing and title.
+  final double horizontalGap;
+
+  /// The vertical space between toast header and body.
+  final double verticalGap;
 
   /// Toast display duration.
   final Duration displayDuration;
@@ -28,7 +31,8 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
 
   const MoonToastProperties({
     required this.borderRadius,
-    required this.gap,
+    required this.horizontalGap,
+    required this.verticalGap,
     required this.displayDuration,
     required this.transitionDuration,
     required this.transitionCurve,
@@ -39,7 +43,8 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
   @override
   MoonToastProperties copyWith({
     BorderRadiusGeometry? borderRadius,
-    double? gap,
+    double? horizontalGap,
+    double? verticalGap,
     Duration? displayDuration,
     Duration? transitionDuration,
     Curve? transitionCurve,
@@ -48,7 +53,8 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
   }) {
     return MoonToastProperties(
       borderRadius: borderRadius ?? this.borderRadius,
-      gap: gap ?? this.gap,
+      horizontalGap: horizontalGap ?? this.horizontalGap,
+      verticalGap: verticalGap ?? this.verticalGap,
       displayDuration: displayDuration ?? this.displayDuration,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
@@ -63,7 +69,8 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
 
     return MoonToastProperties(
       borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
-      gap: lerpDouble(gap, other.gap, t)!,
+      horizontalGap: lerpDouble(horizontalGap, other.horizontalGap, t)!,
+      verticalGap: lerpDouble(verticalGap, other.verticalGap, t)!,
       displayDuration: lerpDuration(displayDuration, other.displayDuration, t),
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
@@ -78,7 +85,7 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
     properties
       ..add(DiagnosticsProperty("type", "MoonToastProperties"))
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("horizontalGap", horizontalGap))
       ..add(DiagnosticsProperty<Duration>("displayDuration", displayDuration))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))

@@ -37,7 +37,8 @@ class MoonToastTheme extends ThemeExtension<MoonToastTheme> with DiagnosticableT
         properties = properties ??
             MoonToastProperties(
               borderRadius: tokens.borders.surfaceSm,
-              gap: tokens.sizes.x2s,
+              horizontalGap: tokens.sizes.x2s,
+              verticalGap: tokens.sizes.x3s,
               displayDuration: const Duration(seconds: 3),
               transitionDuration: tokens.transitions.defaultTransitionDuration,
               transitionCurve: tokens.transitions.defaultTransitionCurve,

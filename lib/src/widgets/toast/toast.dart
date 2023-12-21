@@ -48,8 +48,11 @@ class MoonToast {
     /// The background color of the toast.
     Color? backgroundColor,
 
-    /// The horizontal space between toast children.
-    double? gap,
+    /// The horizontal space between toast leading, trailing and title.
+    double? horizontalGap,
+
+    /// The vertical space between toast header and body.
+    double? verticalGap,
 
     /// The width of the toast. If null the toast will be as wide as its children.
     double? width,
@@ -90,6 +93,9 @@ class MoonToast {
 
     /// The widget in the trailing slot of the toast.
     Widget? trailing,
+
+    /// The widget in the body slot of the toast.
+    Widget? body,
   }) {
     final BorderRadiusGeometry effectiveBorderRadius =
         borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
@@ -110,7 +116,11 @@ class MoonToast {
     final TextStyle effectiveTextStyle =
         context.moonTheme?.toastTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
 
-    final double effectiveGap = gap ?? context.moonTheme?.toastTheme.properties.gap ?? MoonSizes.sizes.x2s;
+    final double effectiveHorizontalGap =
+        horizontalGap ?? context.moonTheme?.toastTheme.properties.horizontalGap ?? MoonSizes.sizes.x2s;
+
+    final double effectiveVerticalGap =
+        verticalGap ?? context.moonTheme?.toastTheme.properties.verticalGap ?? MoonSizes.sizes.x3s;
 
     final Duration effectiveDisplayDuration =
         displayDuration ?? context.moonTheme?.toastTheme.properties.displayDuration ?? const Duration(seconds: 3);
@@ -202,19 +212,29 @@ class MoonToast {
                               borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                             ),
                           ),
-                      child: Row(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: width != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
-                        textDirection: Directionality.of(context),
                         children: [
-                          if (leading != null) ...[
-                            leading,
-                            SizedBox(width: effectiveGap),
-                          ],
-                          Flexible(child: title),
-                          if (trailing != null) ...[
-                            SizedBox(width: effectiveGap),
-                            trailing,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment:
+                                width != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
+                            textDirection: Directionality.of(context),
+                            children: [
+                              if (leading != null) ...[
+                                leading,
+                                SizedBox(width: effectiveHorizontalGap),
+                              ],
+                              Flexible(child: title),
+                              if (trailing != null) ...[
+                                SizedBox(width: effectiveHorizontalGap),
+                                trailing,
+                              ],
+                            ],
+                          ),
+                          if (body != null) ...[
+                            SizedBox(height: effectiveVerticalGap),
+                            body,
                           ],
                         ],
                       ),
