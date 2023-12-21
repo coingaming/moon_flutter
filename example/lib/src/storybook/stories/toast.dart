@@ -116,7 +116,7 @@ class ToastStory extends StatelessWidget {
 
     final showBodyKnob = context.knobs.boolean(
       label: "body",
-      description: "Show widget in MoonAlert body slot.",
+      description: "Show widget in MoonToast body slot.",
     );
 
     return Center(

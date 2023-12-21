@@ -120,7 +120,7 @@ class MoonToast {
         horizontalGap ?? context.moonTheme?.toastTheme.properties.horizontalGap ?? MoonSizes.sizes.x2s;
 
     final double effectiveVerticalGap =
-        verticalGap ?? context.moonTheme?.toastTheme.properties.verticalGap ?? MoonSizes.sizes.x2s;
+        verticalGap ?? context.moonTheme?.toastTheme.properties.verticalGap ?? MoonSizes.sizes.x3s;
 
     final Duration effectiveDisplayDuration =
         displayDuration ?? context.moonTheme?.toastTheme.properties.displayDuration ?? const Duration(seconds: 3);
