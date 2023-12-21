@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.41.0](https://github.com/coingaming/moon_flutter/compare/v0.40.1...v0.41.0) (2023-12-21)
+
+
+### Features
+
+* [MDS-914] Modify filled and outlined versions of MoonAlert to align with design ([#319](https://github.com/coingaming/moon_flutter/issues/319)) ([7cb4440](https://github.com/coingaming/moon_flutter/commit/7cb4440e9f302af3b4c050a6fd1ee72b26625599))
+
 ## [0.40.1](https://github.com/coingaming/moon_flutter/compare/v0.40.0...v0.40.1) (2023-12-20)
 
 
