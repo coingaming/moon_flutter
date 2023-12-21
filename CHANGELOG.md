@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.0](https://github.com/coingaming/moon_flutter/compare/v0.42.0...v0.43.0) (2023-12-21)
+
+
+### Features
+
+* [MDS-916] Change code snippet text font family ([#324](https://github.com/coingaming/moon_flutter/issues/324)) ([8c9f851](https://github.com/coingaming/moon_flutter/commit/8c9f851f167e2dfdf83c04829748e2f2febcf585))
+
 ## [0.42.0](https://github.com/coingaming/moon_flutter/compare/v0.41.0...v0.42.0) (2023-12-21)
 
 
