@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.44.0](https://github.com/coingaming/moon_flutter/compare/v0.43.0...v0.44.0) (2023-12-21)
+
+
+### Features
+
+* [MDS-917] Refactor TabBar and SegmentedControl components ([#325](https://github.com/coingaming/moon_flutter/issues/325)) ([13256fc](https://github.com/coingaming/moon_flutter/commit/13256fcdf9dc481fa8e7571a7c7be08d4cf531d8))
+
 ## [0.43.0](https://github.com/coingaming/moon_flutter/compare/v0.42.0...v0.43.0) (2023-12-21)
 
 
