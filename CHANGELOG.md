@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.42.0](https://github.com/coingaming/moon_flutter/compare/v0.41.0...v0.42.0) (2023-12-21)
+
+
+### Features
+
+* [MDS-915] Modify MoonToast to align with design ([#320](https://github.com/coingaming/moon_flutter/issues/320)) ([7837be9](https://github.com/coingaming/moon_flutter/commit/7837be910bd51523045d5da48e8e57afc8e4ea54))
+
 ## [0.41.0](https://github.com/coingaming/moon_flutter/compare/v0.40.1...v0.41.0) (2023-12-21)
 
 
