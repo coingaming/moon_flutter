@@ -202,7 +202,6 @@ class _AlertStoryState extends State<AlertStory> {
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
                 borderRadius: borderRadius,
-                disabledOpacityValue: 1,
                 gap: 0,
                 onTap: () {},
                 icon: Icon(
@@ -232,7 +231,6 @@ class _AlertStoryState extends State<AlertStory> {
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
                 borderRadius: borderRadius,
-                disabledOpacityValue: 1,
                 gap: 0,
                 onTap: () {},
                 icon: Icon(
@@ -262,7 +260,6 @@ class _AlertStoryState extends State<AlertStory> {
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
                 borderRadius: borderRadius,
-                disabledOpacityValue: 1,
                 gap: 0,
                 onTap: () {},
                 icon: Icon(
@@ -292,7 +289,6 @@ class _AlertStoryState extends State<AlertStory> {
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
                 borderRadius: borderRadius,
-                disabledOpacityValue: 1,
                 gap: 0,
                 onTap: () {},
                 icon: Icon(
