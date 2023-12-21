@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BaseSegmentedTabBar extends StatefulWidget {
   final bool isExpanded;
   final double gap;
-  final int selectedIndex;
+  final int initialIndex;
   final TabController? tabController;
   final ValueChanged<int> valueChanged;
   final List<Widget> children;
@@ -12,7 +12,7 @@ class BaseSegmentedTabBar extends StatefulWidget {
     super.key,
     required this.isExpanded,
     required this.gap,
-    required this.selectedIndex,
+    required this.initialIndex,
     this.tabController,
     required this.valueChanged,
     required this.children,
@@ -39,7 +39,7 @@ class _BaseSegmentedTabBarState extends State<BaseSegmentedTabBar> with TickerPr
 
     _controller = widget.tabController ??
         DefaultTabController.maybeOf(context) ??
-        TabController(length: widget.children.length, vsync: this, initialIndex: widget.selectedIndex);
+        TabController(length: widget.children.length, vsync: this, initialIndex: widget.initialIndex);
   }
 
   @override
@@ -63,7 +63,7 @@ class _BaseSegmentedTabBarState extends State<BaseSegmentedTabBar> with TickerPr
 
   void _handleTap(int index) {
     assert(index >= 0 && index < widget.children.length);
-    _controller!.animateTo(index);
+    _controller!.index = index;
     widget.valueChanged.call(index);
   }
 
