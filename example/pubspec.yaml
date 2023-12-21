@@ -31,6 +31,9 @@ flutter:
     - family: DMSans
       fonts:
         - asset: assets/DMSans.ttf
+    - family: RobotoMono
+      fonts:
+        - asset: assets/RobotoMono-Regular.ttf
   assets:
     - assets/code_snippets/
     - assets/images/
