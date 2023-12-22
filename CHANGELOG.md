@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.44.1](https://github.com/coingaming/moon_flutter/compare/v0.44.0...v0.44.1) (2023-12-22)
+
+
+### Bug Fixes
+
+* [MDS-920] Fix AuthCode validation ([#328](https://github.com/coingaming/moon_flutter/issues/328)) ([f25dbe0](https://github.com/coingaming/moon_flutter/commit/f25dbe00d363dca0e4559b9680a518afec8e45e0))
+
 ## [0.44.0](https://github.com/coingaming/moon_flutter/compare/v0.43.0...v0.44.0) (2023-12-21)
 
 
