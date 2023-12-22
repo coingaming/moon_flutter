@@ -122,11 +122,11 @@ class MoonAuthCode extends StatefulWidget {
   /// AuthCode error animation curve.
   final Curve? errorAnimationCurve;
 
+  /// Animation type for validation error. Default is [ErrorAnimationType.noAnimation].
+  final ErrorAnimationType errorAnimationType;
+
   /// {@macro flutter.widgets.Focus.focusNode}.
   final FocusNode? focusNode;
-
-  /// Validator for the [TextFormField].
-  final FormFieldValidator<String> validator;
 
   /// Count of auth input fields.
   final int authInputFieldCount;
@@ -143,8 +143,10 @@ class MoonAuthCode extends StatefulWidget {
   /// Controls how auth input fields are aligned on the main axis.
   final MainAxisAlignment mainAxisAlignment;
 
-  /// Builder for the error widget.
-  final MoonAuthCodeErrorBuilder errorBuilder;
+  /// Error text can be used to force Authcode to be in error state (useful for async errors).
+  ///
+  /// Note that validator errors have precedence over passed in [errorText].
+  final String? errorText;
 
   /// Displays a hint or a placeholder in the input field if it's value is empty.
   final String? hintCharacter;
@@ -156,12 +158,6 @@ class MoonAuthCode extends StatefulWidget {
 
   /// Semantic label for MoonAuthCode.
   final String? semanticLabel;
-
-  /// MoonAuthCode error stream controller.
-  final StreamController<ErrorAnimationType>? errorStreamController;
-
-  /// [TextEditingController] for an editable text field.
-  final TextEditingController? textController;
 
   /// An action user has requested the text input control to perform.
   final TextInputAction textInputAction;
@@ -178,6 +174,12 @@ class MoonAuthCode extends StatefulWidget {
   /// MoonAuthCode error text style.
   final TextStyle? errorTextStyle;
 
+  /// [TextEditingController] for an editable text field.
+  final TextEditingController? textController;
+
+  /// Validator for the [TextFormField].
+  final FormFieldValidator<String> validator;
+
   /// Returns current auth input text.
   final ValueChanged<String>? onChanged;
 
@@ -193,6 +195,9 @@ class MoonAuthCode extends StatefulWidget {
   ///
   /// Set this to empty function if keyboard should not close automatically on done/next press.
   final VoidCallback? onEditingComplete;
+
+  /// Builder for the error widget.
+  final MoonAuthCodeErrorBuilder errorBuilder;
 
   /// Widget used to obscure text.
   ///
@@ -221,38 +226,39 @@ class MoonAuthCode extends StatefulWidget {
     this.selectedFillColor,
     this.activeFillColor,
     this.inactiveFillColor,
-    this.height,
-    this.width,
     this.borderWidth,
     this.disabledOpacityValue,
     this.gap,
-    this.errorAnimationCurve,
-    this.animationCurve,
-    this.errorAnimationDuration,
+    this.height,
+    this.width,
     this.animationDuration,
+    this.errorAnimationDuration,
     this.peekDuration,
+    this.animationCurve,
+    this.errorAnimationCurve,
+    this.errorAnimationType = ErrorAnimationType.noAnimation,
     this.focusNode,
-    required this.validator,
     this.authInputFieldCount = 6,
     this.boxShadows,
     this.activeBoxShadows,
     this.inActiveBoxShadows,
     this.mainAxisAlignment = MainAxisAlignment.center,
-    required this.errorBuilder,
     this.hintCharacter,
     this.obscuringCharacter = '•',
     this.semanticLabel,
-    this.errorStreamController,
-    this.textController,
     this.textInputAction = TextInputAction.done,
     this.keyboardType = TextInputType.visiblePassword,
+    this.errorText,
     this.hintStyle,
     this.textStyle,
     this.errorTextStyle,
+    this.textController,
+    required this.validator,
     this.onChanged,
     this.onCompleted,
-    this.onEditingComplete,
     this.onSubmitted,
+    this.onEditingComplete,
+    required this.errorBuilder,
     this.obscuringWidget,
   })  : assert(authInputFieldCount > 0),
         assert(height == null || height > 0),
@@ -287,9 +293,9 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   late AnimationController _cursorController;
   late Animation<double> _cursorAnimation;
 
-  StreamSubscription<ErrorAnimationType>? _errorAnimationSubscription;
   AnimationController? _errorAnimationController;
   Animation<Offset>? _errorOffsetAnimation;
+
   Duration? _peekDuration;
   Duration? _animationDuration;
   Curve? _animationCurve;
@@ -315,9 +321,9 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   void _initializeFields() {
     _initializeFocusNode();
     _initializeInputList();
+    _initializeErrorAnimationListener();
     _initializeTextEditingController();
     _initializeAuthFieldCursor();
-    _initializeErrorAnimationListener();
   }
 
   void _initializeFocusNode() {
@@ -333,11 +339,18 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     _textEditingController = widget.textController ?? TextEditingController();
 
     _textEditingController.addListener(() {
-      if (_isInErrorMode) {
-        _setState(() => _isInErrorMode = false);
-      }
+      // We use custom error builder and thus need to validate input manually to show validation error.
+      // _validateInput() returns error String in case of error, otherwise null.
+      if (_validateInput() != null) {
+        if (widget.errorAnimationType == ErrorAnimationType.shake) {
+          _errorAnimationController!.forward();
 
-      if (widget.useHapticFeedback) HapticFeedback.lightImpact();
+          if (widget.useHapticFeedback) HapticFeedback.lightImpact();
+        }
+        if (!_isInErrorMode) _setState(() => _isInErrorMode = true);
+      } else {
+        if (_isInErrorMode && widget.errorText == null) _setState(() => _isInErrorMode = false);
+      }
 
       _debounceBlink();
 
@@ -381,17 +394,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
       _errorAnimationController!.addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) _errorAnimationController!.reverse();
       });
-
-      if (widget.errorStreamController != null) {
-        _errorAnimationSubscription = widget.errorStreamController!.stream.listen((ErrorAnimationType errorAnimation) {
-          if (errorAnimation == ErrorAnimationType.shake) {
-            _errorAnimationController!.forward();
-          }
-          _setState(() => _isInErrorMode = true);
-
-          if (widget.useHapticFeedback) HapticFeedback.vibrate();
-        });
-      }
     });
   }
 
@@ -505,7 +507,20 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
   void initState() {
     super.initState();
 
+    _isInErrorMode = widget.errorText != null;
+
     _initializeFields();
+  }
+
+  @override
+  void didUpdateWidget(MoonAuthCode oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.errorText != widget.errorText) {
+      _setState(() {
+        _isInErrorMode = widget.errorText != null || _validateInput() != null;
+      });
+    }
   }
 
   @override
@@ -514,7 +529,6 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     _errorAnimationController!.dispose();
     _cursorController.dispose();
     _focusNode.dispose();
-    _errorAnimationSubscription?.cancel();
 
     super.dispose();
   }
@@ -795,7 +809,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
                     data: IconThemeData(
                       color: _resolvedErrorTextStyle.color,
                     ),
-                    child: widget.errorBuilder(context, _validateInput()),
+                    child: widget.errorBuilder(context, _validateInput() ?? widget.errorText),
                   ),
                 ),
             ],

@@ -1,36 +1,13 @@
-import 'dart:async';
-
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class AuthCodeStory extends StatefulWidget {
+class AuthCodeStory extends StatelessWidget {
   static const path = '/auth_code';
 
   const AuthCodeStory({super.key});
-
-  @override
-  State<AuthCodeStory> createState() => _AuthCodeStoryState();
-}
-
-class _AuthCodeStoryState extends State<AuthCodeStory> {
-  late StreamController<ErrorAnimationType> _errorStreamController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _errorStreamController = StreamController<ErrorAnimationType>();
-  }
-
-  @override
-  void dispose() {
-    _errorStreamController.close();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,8 +223,8 @@ class _AuthCodeStoryState extends State<AuthCodeStory> {
                 enableInputFill: true,
                 authInputFieldCount: 4,
                 mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+                errorAnimationType: errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
                 borderRadius: borderRadius,
-                errorStreamController: _errorStreamController,
                 textStyle: TextStyle(color: textColor),
                 authFieldCursorColor: cursorColor,
                 selectedFillColor: selectedFillColor,
@@ -260,15 +237,13 @@ class _AuthCodeStoryState extends State<AuthCodeStory> {
                 authFieldShape: shapeKnob,
                 obscureText: obscuringKnob,
                 peekWhenObscuring: peekWhenObscuringKnob,
-                onCompleted: (String pin) {
-                  if (pin != '9921') {
-                    _errorStreamController.add(
-                      errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
-                    );
-                  }
-                },
                 validator: (String? pin) {
-                  return pin?.length == 4 && pin != '9921' ? 'Invalid authentication code. Please try again.' : null;
+                  // Matches all numbers
+                  final RegExp regex = RegExp(r'^\d+$');
+
+                  return pin != null && pin.length == 4 && !regex.hasMatch(pin)
+                      ? 'The input must only contain numbers'
+                      : null;
                 },
                 errorBuilder: (BuildContext context, String? errorText) {
                   return Align(
