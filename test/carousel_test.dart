@@ -43,32 +43,33 @@ class CarouselTestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      body: SizedBox(
-        height: 114,
-        width: 200,
-        child: MoonCarousel(
-          key: widgetKey,
-          gap: 8,
-          itemCount: 10,
-          itemExtent: 100,
-          itemBuilder: (BuildContext context, int itemIndex, int realIndex) =>
-              Container(
-            height: 100,
-            width: 100,
-            decoration: ShapeDecoration(
-              color: context.moonColors?.goku,
-              shape: MoonSquircleBorder(
-                borderRadius:
-                    BorderRadius.circular(12).squircleBorderRadius(context),
+      home: Scaffold(
+        body: SizedBox(
+          height: 114,
+          width: 200,
+          child: MoonCarousel(
+            key: widgetKey,
+            gap: 8,
+            itemCount: 10,
+            itemExtent: 100,
+            itemBuilder: (BuildContext context, int itemIndex, int realIndex) =>
+                Container(
+              height: 100,
+              width: 100,
+              decoration: ShapeDecoration(
+                color: context.moonColors?.goku,
+                shape: MoonSquircleBorder(
+                  borderRadius:
+                      BorderRadius.circular(12).squircleBorderRadius(context),
+                ),
               ),
-            ),
-            child: Center(
-              child: Text("${itemIndex + 1}"),
+              child: Center(
+                child: Text("${itemIndex + 1}"),
+              ),
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 }
