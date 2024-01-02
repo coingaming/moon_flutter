@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.44.2](https://github.com/coingaming/moon_flutter/compare/v0.44.1...v0.44.2) (2024-01-02)
+
+
+### Bug Fixes
+
+* [MDS-923] Fix semibold fontWeight from 600 to 500 ([#331](https://github.com/coingaming/moon_flutter/issues/331)) ([bcbae9a](https://github.com/coingaming/moon_flutter/commit/bcbae9aac8d217c4417919a92d1c74611684475b))
+
 ## [0.44.1](https://github.com/coingaming/moon_flutter/compare/v0.44.0...v0.44.1) (2023-12-22)
 
 
