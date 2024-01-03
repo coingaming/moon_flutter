@@ -34,12 +34,12 @@ void main() {
     );
     expect(find.text(label), findsOneWidget);
     expect(find.byIcon(trailingIcon), findsOneWidget);
-    expect(find.byIcon(leadinIcon), findsOneWidget);
+    expect(find.byIcon(leadingIcon), findsOneWidget);
   });
 }
 
 const String label = "Label";
-const IconData leadinIcon = MoonIcons.other_frame_24_light;
+const IconData leadingIcon = MoonIcons.other_frame_24_light;
 const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
 
 class TestWidget extends StatelessWidget {
@@ -61,7 +61,7 @@ class TestWidget extends StatelessWidget {
       home: Scaffold(
         body: MoonChip(
           key: widgetKey,
-          leading: showLeading ? const Icon(leadinIcon) : null,
+          leading: showLeading ? const Icon(leadingIcon) : null,
           label: showLabel ? const Text(label) : null,
           trailing: showTrailing ? const Icon(trailingIcon) : null,
         ),

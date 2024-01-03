@@ -24,7 +24,7 @@ void main() {
     );
     expect(find.text(buttonLabel), findsOneWidget);
     expect(find.byIcon(trailingIcon), findsOneWidget);
-    expect(find.byIcon(leadinIcon), findsOneWidget);
+    expect(find.byIcon(leadingIcon), findsOneWidget);
   });
 
   testWidgets("Button tap", (tester) async {
@@ -56,7 +56,7 @@ void main() {
 }
 
 const String buttonLabel = "Button label";
-const IconData leadinIcon = MoonIcons.other_frame_24_light;
+const IconData leadingIcon = MoonIcons.other_frame_24_light;
 const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
 
 class TestWidget extends StatefulWidget {
@@ -91,7 +91,7 @@ class _TestWidgetState extends State<TestWidget> {
           key: widget.buttonKey,
           onLongPress: widget.onLongPress,
           onTap: widget.onTap,
-          leading: widget.showLeading ? const Icon(leadinIcon) : null,
+          leading: widget.showLeading ? const Icon(leadingIcon) : null,
           label: widget.showLabel
               ? const SizedBox(
                   height: 24,

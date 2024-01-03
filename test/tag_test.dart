@@ -3,18 +3,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
 void main() {
-  const key = Key("menu_item_test");
+  const key = Key("tag_test");
 
   testWidgets("Provided key is used", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const Directionality(
+        textDirection: TextDirection.ltr,
+        child: MoonTag(
+          key: key,
+          label: Text(title),
+        ),
       ),
     );
     expect(find.byKey(key), findsOneWidget);
   });
 
-  testWidgets("Simple menu item", (tester) async {
+  testWidgets("Simple tag", (tester) async {
     await tester.pumpWidget(
       const TestWidget(),
     );
@@ -22,63 +26,60 @@ void main() {
     expect(find.text(title), findsOneWidget);
   });
 
-  testWidgets("Menu item with leading, trailing, description", (tester) async {
+  testWidgets("Tag with leading, trailing", (tester) async {
     await tester.pumpWidget(
       const TestWidget(
         showLeading: true,
-        showDiscription: true,
         showTrailing: true,
       ),
     );
-    expect(find.text(description), findsOneWidget);
+    expect(find.text(title), findsOneWidget);
     expect(find.byIcon(trailingIcon), findsOneWidget);
     expect(find.byIcon(leadingIcon), findsOneWidget);
   });
 
-  testWidgets("Tap menu item", (tester) async {
-    bool value = false;
+  testWidgets("Press tag", (tester) async {
+    bool isPressed = false;
     await tester.pumpWidget(
       TestWidget(
-        onTap: () => value = !value,
+        showTrailing: true,
+        onTap: () {
+          isPressed = true;
+        },
       ),
     );
-    await tester.tap(find.byType(MoonMenuItem));
+
+    await tester.tap(find.byType(MoonTag));
     await tester.pumpAndSettle();
-    expect(value, true);
+    expect(isPressed, true);
   });
 }
 
-const String title = "Title";
-const String description = "Description";
+const String title = "Tag title";
 const IconData leadingIcon = MoonIcons.other_frame_24_light;
 const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
 
 class TestWidget extends StatelessWidget {
   final bool showLeading;
   final bool showTrailing;
-  final bool showDiscription;
-  final Key? widgetKey;
+
   final VoidCallback? onTap;
 
   const TestWidget({
     super.key,
     this.showLeading = false,
-    this.showDiscription = false,
     this.showTrailing = false,
-    this.widgetKey,
     this.onTap,
   });
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: MoonMenuItem(
-          key: widgetKey,
-          leading: showLeading ? const Icon(leadingIcon) : null,
-          description: showDiscription ? const Text(description) : null,
-          title: const Text(title),
-          trailing: showTrailing ? const Icon(trailingIcon) : null,
+        body: MoonTag(
           onTap: onTap,
+          leading: showLeading ? const Icon(leadingIcon) : null,
+          label: const Text(title),
+          trailing: showTrailing ? const Icon(trailingIcon) : null,
         ),
       ),
     );
