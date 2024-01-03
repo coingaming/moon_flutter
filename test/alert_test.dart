@@ -37,7 +37,7 @@ void main() {
     expect(find.text(alertTitle), findsOneWidget);
     expect(find.text(alertBody), findsOneWidget);
     expect(find.byIcon(trailingIcon), findsOneWidget);
-    expect(find.byIcon(leadinIcon), findsOneWidget);
+    expect(find.byIcon(leadingIcon), findsOneWidget);
   });
 
   testWidgets("Hide alert", (tester) async {
@@ -59,7 +59,7 @@ void main() {
 
 const String alertTitle = "Alert title";
 const String alertBody = "Alert body";
-const IconData leadinIcon = MoonIcons.other_frame_24_light;
+const IconData leadingIcon = MoonIcons.other_frame_24_light;
 const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
 
 class TestWidget extends StatefulWidget {
@@ -86,7 +86,7 @@ class _TestWidgetState extends State<TestWidget> {
       home: Scaffold(
         body: MoonAlert(
           show: _showAlert,
-          leading: widget.showLeading ? const Icon(leadinIcon) : null,
+          leading: widget.showLeading ? const Icon(leadingIcon) : null,
           title: const SizedBox(
             height: 24,
             child: Align(
