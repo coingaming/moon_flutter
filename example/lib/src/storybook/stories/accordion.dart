@@ -190,7 +190,7 @@ class _AccordionStoryState extends State<AccordionStory> {
           childrenPadding: const EdgeInsets.all(12),
           onExpansionChanged: (AccordionItems? value) => setState(() => _currentlyOpenAccordionItem = value),
           leading: const Icon(MoonIcons.other_frame_24_light),
-          title: const Text("Grouped MoonAccordion item #1"),
+          label: const Text("Grouped MoonAccordion item #1"),
           children: [
             Text(
               contentText,
@@ -218,7 +218,7 @@ class _AccordionStoryState extends State<AccordionStory> {
           childrenPadding: const EdgeInsets.all(12),
           onExpansionChanged: (AccordionItems? value) => setState(() => _currentlyOpenAccordionItem = value),
           leading: const Icon(MoonIcons.other_frame_24_light),
-          title: const Text("Grouped MoonAccordion item #2"),
+          label: const Text("Grouped MoonAccordion item #2"),
           children: [
             Text(
               contentText,
@@ -242,7 +242,7 @@ class _AccordionStoryState extends State<AccordionStory> {
           showBorder: showBorderKnob,
           shadows: showShadowKnob == true ? null : [],
           childrenPadding: const EdgeInsets.symmetric(vertical: 12),
-          title: const Text("Ungrouped MoonAccordion item #1"),
+          label: const Text("Ungrouped MoonAccordion item #1"),
           children: [
             Text(
               contentText,
@@ -266,7 +266,7 @@ class _AccordionStoryState extends State<AccordionStory> {
           showBorder: showBorderKnob,
           shadows: showShadowKnob == true ? null : [],
           childrenPadding: const EdgeInsets.symmetric(vertical: 12),
-          title: const Text("Ungrouped MoonAccordion item #2"),
+          label: const Text("Ungrouped MoonAccordion item #2"),
           children: [
             Text(
               contentText,

@@ -13,7 +13,7 @@ void main() {
         textDirection: TextDirection.ltr,
         child: MoonAccordion<AccordionItems>(
           key: key,
-          title: const Text("Title"),
+          label: const Text("Title"),
           children: [
             Container(),
           ],
@@ -40,7 +40,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(child, findsOneWidget);
-      expect(find.text(accordionText), findsOneWidget);
+      expect(find.text(accordionContent), findsOneWidget);
     });
     testWidgets("Disabled accordion not expands after click", (tester) async {
       await tester.pumpWidget(
@@ -95,8 +95,8 @@ void main() {
   });
 }
 
-const String accordionText = "Accordion content";
 const String accordionTitle = "Single MoonAccordion item";
+const String accordionContent = "Accordion content";
 const IconData accordionIcon = MoonIcons.other_frame_24_light;
 
 const firstAccordionKey = Key("first_accordion");
@@ -125,10 +125,10 @@ class SingleAccordionTestWidget extends StatelessWidget {
           expandedBackgroundColor: Colors.brown,
           childrenPadding: const EdgeInsets.all(12),
           leading: const Icon(accordionIcon),
-          title: const Text(accordionTitle),
+          label: const Text(accordionTitle),
           children: const [
             Text(
-              accordionText,
+              accordionContent,
               key: firstAccordionChildKey,
             ),
           ],
@@ -167,10 +167,10 @@ class _GroupedAccordionTestWidgetState
                 setState(() => _currentlyOpenAccordionItem = value);
               },
               leading: const Icon(MoonIcons.other_frame_24_light),
-              title: const Text("Grouped MoonAccordion item #1"),
+              label: const Text("Grouped MoonAccordion item #1"),
               children: const [
                 Text(
-                  accordionText,
+                  accordionContent,
                   key: firstAccordionChildKey,
                 ),
               ],
@@ -184,10 +184,10 @@ class _GroupedAccordionTestWidgetState
                 setState(() => _currentlyOpenAccordionItem = value);
               },
               leading: const Icon(MoonIcons.other_frame_24_light),
-              title: const Text("Grouped MoonAccordion item #2"),
+              label: const Text("Grouped MoonAccordion item #2"),
               children: const [
                 Text(
-                  accordionText,
+                  accordionContent,
                   key: secondAccordionChildKey,
                 ),
               ],

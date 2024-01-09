@@ -111,7 +111,7 @@ class MoonAccordion<T> extends StatefulWidget {
   /// Custom decoration for the accordion.
   final Decoration? decoration;
 
-  /// The gap between the leading, title and trailing widgets.
+  /// The gap between the leading, label and trailing widgets.
   final double? gap;
 
   /// The height of the accordion header.
@@ -138,7 +138,7 @@ class MoonAccordion<T> extends StatefulWidget {
   /// The size of the accordion.
   final MoonAccordionSize? accordionSize;
 
-  /// The semantic title for the accordion.
+  /// The semantic label for the accordion.
   final String? semanticLabel;
 
   /// The identity value represented by this accordion.
@@ -154,7 +154,7 @@ class MoonAccordion<T> extends StatefulWidget {
   /// When the accordion expansion changes, this function is called with the [identityValue].
   final ValueChanged<T?>? onExpansionChanged;
 
-  /// A widget to display before the title.
+  /// A widget to display before the label.
   ///
   /// Typically a [CircleAvatar] widget.
   final Widget? leading;
@@ -162,9 +162,9 @@ class MoonAccordion<T> extends StatefulWidget {
   /// The primary content of the accordion header.
   ///
   /// Typically a [Text] widget.
-  final Widget title;
+  final Widget label;
 
-  /// A widget to display after the title.
+  /// A widget to display after the label.
   ///
   /// Note that depending on the value of [controlAffinity], the [trailing] widget
   /// may replace the rotating expansion arrow icon.
@@ -210,7 +210,7 @@ class MoonAccordion<T> extends StatefulWidget {
     this.groupIdentityValue,
     this.onExpansionChanged,
     this.leading,
-    required this.title,
+    required this.label,
     this.trailing,
     this.children = const <Widget>[],
   }) : assert(
@@ -523,7 +523,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
                     padding: EdgeInsetsDirectional.only(end: widget.gap ?? _resolvedDirectionalHeaderPadding.left),
                     child: widget.leading,
                   ),
-                Expanded(child: widget.title),
+                Expanded(child: widget.label),
                 Padding(
                   padding: EdgeInsetsDirectional.only(start: widget.gap ?? _resolvedDirectionalHeaderPadding.right),
                   child: widget.trailing ?? _buildIcon(context)!,

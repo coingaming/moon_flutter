@@ -14,7 +14,7 @@ class MoonAccordionSizeProperties extends ThemeExtension<MoonAccordionSizeProper
   /// Accordion icon size value.
   final double iconSizeValue;
 
-  /// Padding around accordion title and icon.
+  /// Padding around accordion label and icon.
   final EdgeInsetsGeometry headerPadding;
 
   /// Accordion header text style.

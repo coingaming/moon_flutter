@@ -20,10 +20,10 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
   /// Padding around tag children.
   final EdgeInsetsGeometry padding;
 
-  /// Tag body style.
+  /// Tag text style.
   final TextStyle textStyle;
 
-  /// Tag upper case body style.
+  /// Tag upper case text style.
   final TextStyle upperCaseTextStyle;
 
   const MoonTagSizeProperties({

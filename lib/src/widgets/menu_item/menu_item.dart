@@ -13,7 +13,7 @@ import 'package:moon_design/src/widgets/common/base_control.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonMenuItem extends StatefulWidget {
-  /// Specifies the alignment of title and description of menu item.
+  /// Specifies the alignment of label and content of menu item.
   ///
   /// Default value is [CrossAxisAlignment.start].
   final CrossAxisAlignment? crossAxisAlignment;
@@ -36,10 +36,10 @@ class MoonMenuItem extends StatefulWidget {
   /// The width of the menu item.
   final double? width;
 
-  /// The horizontal gap between the leading, title/description and trailing widgets.
+  /// The horizontal gap between the leading, label/content and trailing widgets.
   final double? horizontalGap;
 
-  /// The vertical space between title and description.
+  /// The vertical gap between the label and content widgets.
   final double? verticalGap;
 
   /// Menu item hover effect duration.
@@ -64,10 +64,10 @@ class MoonMenuItem extends StatefulWidget {
   final Widget? leading;
 
   /// The primary content of the menu item header.
-  final Widget title;
+  final Widget label;
 
   /// The secondary content of the menu item header.
-  final Widget? description;
+  final Widget? content;
 
   /// A widget to display after the menu item header.
   final Widget? trailing;
@@ -91,12 +91,12 @@ class MoonMenuItem extends StatefulWidget {
     this.semanticLabel,
     this.onTap,
     this.leading,
-    required this.title,
-    this.description,
+    required this.label,
+    this.content,
     this.trailing,
   }) : assert(
           crossAxisAlignment != CrossAxisAlignment.baseline,
-          'CrossAxisAlignment.baseline is not supported since the title and description of menu item '
+          'CrossAxisAlignment.baseline is not supported since the label and content of menu item '
           'are aligned in a column, not in a row. Try to use another constant.',
         );
 
@@ -181,17 +181,17 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
 
     final Color effectiveIconColor = context.moonTheme?.menuItemTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
 
-    final Color effectiveTitleTextColor =
-        context.moonTheme?.menuItemTheme.colors.titleTextColor ?? MoonColors.light.textPrimary;
+    final Color effectiveLabelTextColor =
+        context.moonTheme?.menuItemTheme.colors.labelTextColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveDescriptionTextColor =
-        context.moonTheme?.menuItemTheme.colors.descriptionTextColor ?? MoonColors.light.textSecondary;
+    final Color effectiveContentTextColor =
+        context.moonTheme?.menuItemTheme.colors.contentTextColor ?? MoonColors.light.textSecondary;
 
-    final TextStyle effectiveTitleTextStyle =
-        context.moonTheme?.menuItemTheme.properties.titleTextStyle ?? MoonTypography.typography.body.textDefault;
+    final TextStyle effectiveLabelTextStyle =
+        context.moonTheme?.menuItemTheme.properties.labelTextStyle ?? MoonTypography.typography.body.textDefault;
 
-    final TextStyle effectiveDescriptionTextStyle =
-        context.moonTheme?.menuItemTheme.properties.descriptionTextStyle ?? MoonTypography.typography.body.text12;
+    final TextStyle effectiveContentTextStyle =
+        context.moonTheme?.menuItemTheme.properties.contentTextStyle ?? MoonTypography.typography.body.text12;
 
     final Color effectiveHoverEffectColor = context.moonEffects?.controlHoverEffect.primaryHoverColor ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
@@ -250,7 +250,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
             child: IconTheme(
               data: IconThemeData(color: effectiveIconColor),
               child: DefaultTextStyle(
-                style: effectiveTitleTextStyle.copyWith(color: effectiveTitleTextColor),
+                style: effectiveLabelTextStyle.copyWith(color: effectiveLabelTextColor),
                 child: Row(
                   children: [
                     if (widget.leading != null)
@@ -265,13 +265,13 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.start,
                         children: [
-                          widget.title,
-                          if (widget.description != null)
+                          widget.label,
+                          if (widget.content != null)
                             DefaultTextStyle(
-                              style: effectiveDescriptionTextStyle.copyWith(color: effectiveDescriptionTextColor),
+                              style: effectiveContentTextStyle.copyWith(color: effectiveContentTextColor),
                               child: Padding(
                                 padding: EdgeInsets.only(top: effectiveVerticalGap),
-                                child: widget.description,
+                                child: widget.content,
                               ),
                             ),
                         ],

@@ -48,7 +48,6 @@ class _TableStoryState extends State<TableStory> {
         lastName: 'Subject$index',
         age: Random().nextInt(81),
         activity: Random().nextInt(100),
-        colStickyTitle: 'Sticky title $index',
       ),
     );
   }
@@ -320,7 +319,7 @@ class _TableStoryState extends State<TableStory> {
 
     final rowGapKnob = context.knobs.nullable.sliderInt(
       label: "rowGap",
-      description: "Row gap between MoonTable rows.",
+      description: "Gap between MoonTable rows.",
       enabled: false,
       initial: 4,
       max: 16,
@@ -416,7 +415,6 @@ class _TableData {
   String lastName;
   int age;
   int activity;
-  String colStickyTitle;
 
   _TableData({
     required this.selected,
@@ -425,6 +423,5 @@ class _TableData {
     required this.lastName,
     required this.age,
     required this.activity,
-    required this.colStickyTitle,
   });
 }

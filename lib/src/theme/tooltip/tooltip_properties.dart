@@ -26,7 +26,7 @@ class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with D
   /// Padding around tooltip content.
   final EdgeInsetsGeometry contentPadding;
 
-  /// Tooltip body style.
+  /// Tooltip text style.
   final TextStyle textStyle;
 
   const MoonTooltipProperties({

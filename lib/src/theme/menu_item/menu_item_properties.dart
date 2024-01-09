@@ -8,7 +8,7 @@ class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with
   /// MenuItem border radius.
   final BorderRadiusGeometry borderRadius;
 
-  /// Vertical space between MenuItem title and description.
+  /// Vertical space between MenuItem label and content.
   final double verticalGap;
 
   /// MenuItem minimum height.
@@ -17,19 +17,19 @@ class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with
   /// MenuItem padding.
   final EdgeInsetsGeometry padding;
 
-  /// MenuItem title text style.
-  final TextStyle titleTextStyle;
+  /// MenuItem label text style.
+  final TextStyle labelTextStyle;
 
-  /// MenuItem description text style.
-  final TextStyle descriptionTextStyle;
+  /// MenuItem content text style.
+  final TextStyle contentTextStyle;
 
   const MoonMenuItemProperties({
     required this.borderRadius,
     required this.verticalGap,
     required this.minimumHeight,
     required this.padding,
-    required this.titleTextStyle,
-    required this.descriptionTextStyle,
+    required this.labelTextStyle,
+    required this.contentTextStyle,
   });
 
   @override
@@ -38,16 +38,16 @@ class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with
     double? verticalGap,
     double? minimumHeight,
     EdgeInsetsGeometry? padding,
-    TextStyle? titleTextStyle,
-    TextStyle? descriptionTextStyle,
+    TextStyle? labelTextStyle,
+    TextStyle? contentTextStyle,
   }) {
     return MoonMenuItemProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       verticalGap: verticalGap ?? this.verticalGap,
       minimumHeight: minimumHeight ?? this.minimumHeight,
       padding: padding ?? this.padding,
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-      descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
+      labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+      contentTextStyle: contentTextStyle ?? this.contentTextStyle,
     );
   }
 
@@ -60,8 +60,8 @@ class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with
       verticalGap: lerpDouble(verticalGap, other.verticalGap, t)!,
       minimumHeight: lerpDouble(minimumHeight, other.minimumHeight, t)!,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
-      titleTextStyle: TextStyle.lerp(titleTextStyle, other.titleTextStyle, t)!,
-      descriptionTextStyle: TextStyle.lerp(descriptionTextStyle, other.descriptionTextStyle, t)!,
+      labelTextStyle: TextStyle.lerp(labelTextStyle, other.labelTextStyle, t)!,
+      contentTextStyle: TextStyle.lerp(contentTextStyle, other.contentTextStyle, t)!,
     );
   }
 
@@ -74,7 +74,7 @@ class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with
       ..add(DoubleProperty("verticalGap", verticalGap))
       ..add(DoubleProperty("minimumHeight", minimumHeight))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
-      ..add(DiagnosticsProperty<TextStyle>("titleTextStyle", titleTextStyle))
-      ..add(DiagnosticsProperty<TextStyle>("descriptionTextStyle", descriptionTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("labelTextStyle", labelTextStyle))
+      ..add(DiagnosticsProperty<TextStyle>("contentTextStyle", contentTextStyle));
   }
 }

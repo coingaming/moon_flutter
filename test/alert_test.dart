@@ -11,7 +11,7 @@ void main() {
         textDirection: TextDirection.ltr,
         child: MoonAlert(
           key: key,
-          title: Text(alertTitle),
+          label: Text(alertTitle),
         ),
       ),
     );
@@ -87,7 +87,7 @@ class _TestWidgetState extends State<TestWidget> {
         body: MoonAlert(
           show: _showAlert,
           leading: widget.showLeading ? const Icon(leadingIcon) : null,
-          title: const SizedBox(
+          label: const SizedBox(
             height: 24,
             child: Align(
               alignment: AlignmentDirectional.centerStart,
@@ -103,7 +103,7 @@ class _TestWidgetState extends State<TestWidget> {
                   onTap: () => setState(() => _showAlert = !_showAlert),
                 )
               : null,
-          body: widget.showBody
+          content: widget.showBody
               ? const SizedBox(
                   height: 24,
                   child: Align(

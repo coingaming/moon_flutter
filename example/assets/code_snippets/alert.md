@@ -11,20 +11,20 @@ class Alert extends StatelessWidget {
         MoonAlert(
           show: true,
           leading: const Icon(MoonIcons.other_frame_24_light),
-          title: const Text("Base MoonAlert"),
+          label: const Text("Base MoonAlert"),
           trailing: MoonButton.icon(
             buttonSize: MoonButtonSize.xs,
             onTap: () => {},
             icon: const Icon(MoonIcons.controls_close_24_light),
           ),
-          body: const Text("Here goes MoonAlert body"),
+          content: const Text("Here goes MoonAlert content"),
         ),
         MoonAlert.filled(
           show: true,
           color: context.moonColors!.chichi,
           backgroundColor: context.moonColors!.chichi10,
           leading: const Icon(MoonIcons.notifications_alert_24_light),
-          title: const Text("Filled error MoonAlert"),
+          label: const Text("Filled error MoonAlert"),
           trailing: MoonButton.icon(
             buttonSize: MoonButtonSize.xs,
             onTap: () {},
@@ -39,7 +39,7 @@ class Alert extends StatelessWidget {
           color: context.moonColors!.roshi,
           borderColor: context.moonColors!.roshi,
           leading: const Icon(MoonIcons.generic_check_rounded_24_light),
-          title: const Text("Outlined success MoonAlert"),
+          label: const Text("Outlined success MoonAlert"),
           trailing: MoonButton.icon(
             buttonSize: MoonButtonSize.xs,
             onTap: () {},
