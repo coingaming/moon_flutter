@@ -61,11 +61,11 @@ void main() {
     final moreButton = find.text('...');
 
     expect(moreButton, findsOneWidget);
-    expect(find.textContaining('p'), findsExactly(2));
+    expect(find.textContaining('p'), findsNWidgets(2));
 
     await tester.tap(moreButton);
     await tester.pumpAndSettle();
-    expect(find.textContaining('p'), findsExactly(4));
+    expect(find.textContaining('p'), findsNWidgets(4));
   });
 
   testWidgets("Press breadcrumb item", (tester) async {
