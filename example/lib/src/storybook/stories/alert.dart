@@ -29,16 +29,16 @@ class _AlertStoryState extends State<AlertStory> {
 
     final leadingColor = colorTable(context)[leadingColorKnob ?? 40];
 
-    final titleColorKnob = context.knobs.nullable.options(
-      label: "Title color",
-      description: "MoonColors variants for MoonAlert title slot.",
+    final labelColorKnob = context.knobs.nullable.options(
+      label: "Label color",
+      description: "MoonColors variants for MoonAlert label slot.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final titleColor = colorTable(context)[titleColorKnob ?? 40];
+    final labelColor = colorTable(context)[labelColorKnob ?? 40];
 
     final trailingColorKnob = context.knobs.nullable.options(
       label: "Trailing color",
@@ -51,16 +51,16 @@ class _AlertStoryState extends State<AlertStory> {
 
     final trailingColor = colorTable(context)[trailingColorKnob ?? 40];
 
-    final bodyColorKnob = context.knobs.nullable.options(
-      label: "Body color",
-      description: "MoonColors variants for MoonAlert body slot.",
+    final contentColorKnob = context.knobs.nullable.options(
+      label: "Content color",
+      description: "MoonColors variants for MoonAlert content slot.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final bodyColor = colorTable(context)[bodyColorKnob ?? 40];
+    final contentColor = colorTable(context)[contentColorKnob ?? 40];
 
     final backgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
@@ -103,9 +103,9 @@ class _AlertStoryState extends State<AlertStory> {
       initial: true,
     );
 
-    final showBodyKnob = context.knobs.boolean(
-      label: "body",
-      description: "Show widget in MoonAlert body slot.",
+    final showContentKnob = context.knobs.boolean(
+      label: "content",
+      description: "Show widget in MoonAlert content slot.",
     );
 
     final showTrailingKnob = context.knobs.boolean(
@@ -146,13 +146,13 @@ class _AlertStoryState extends State<AlertStory> {
                           color: leadingColor,
                         )
                       : null,
-                  title: SizedBox(
+                  label: SizedBox(
                     height: 24,
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
                         "Base MoonAlert",
-                        style: TextStyle(color: titleColor),
+                        style: TextStyle(color: labelColor),
                       ),
                     ),
                   ),
@@ -170,14 +170,14 @@ class _AlertStoryState extends State<AlertStory> {
                           onTap: showDisabledKnob ? null : () => setState(() => _showAlert = !_showAlert),
                         )
                       : null,
-                  body: showBodyKnob
+                  content: showContentKnob
                       ? SizedBox(
                           height: 24,
                           child: Align(
                             alignment: AlignmentDirectional.centerStart,
                             child: Text(
-                              "Here goes MoonAlert body",
-                              style: TextStyle(color: bodyColor),
+                              "Here goes MoonAlert content",
+                              style: TextStyle(color: contentColor),
                             ),
                           ),
                         )
@@ -198,7 +198,7 @@ class _AlertStoryState extends State<AlertStory> {
               backgroundColor: context.moonColors!.chichi10,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
-              title: const Text("Filled error MoonAlert"),
+              label: const Text("Filled error MoonAlert"),
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
                 borderRadius: borderRadius,
@@ -210,12 +210,12 @@ class _AlertStoryState extends State<AlertStory> {
                   color: context.moonColors!.chichi,
                 ),
               ),
-              body: showBodyKnob
+              content: showContentKnob
                   ? const SizedBox(
                       height: 24,
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Text("Here goes MoonAlert body"),
+                        child: Text("Here goes MoonAlert content"),
                       ),
                     )
                   : null,
@@ -227,7 +227,7 @@ class _AlertStoryState extends State<AlertStory> {
               backgroundColor: context.moonColors!.krillin10,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.generic_alarm_round_24_light) : null,
-              title: const Text("Filled warning MoonAlert"),
+              label: const Text("Filled warning MoonAlert"),
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
                 borderRadius: borderRadius,
@@ -239,12 +239,12 @@ class _AlertStoryState extends State<AlertStory> {
                   color: context.moonColors!.krillin,
                 ),
               ),
-              body: showBodyKnob
+              content: showContentKnob
                   ? const SizedBox(
                       height: 24,
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Text("Here goes MoonAlert body"),
+                        child: Text("Here goes MoonAlert content"),
                       ),
                     )
                   : null,
@@ -256,7 +256,7 @@ class _AlertStoryState extends State<AlertStory> {
               borderColor: context.moonColors!.roshi,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.generic_check_rounded_24_light) : null,
-              title: const Text("Outlined success MoonAlert"),
+              label: const Text("Outlined success MoonAlert"),
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
                 borderRadius: borderRadius,
@@ -268,12 +268,12 @@ class _AlertStoryState extends State<AlertStory> {
                   color: context.moonColors!.roshi,
                 ),
               ),
-              body: showBodyKnob
+              content: showContentKnob
                   ? const SizedBox(
                       height: 24,
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Text("Here goes MoonAlert body"),
+                        child: Text("Here goes MoonAlert content"),
                       ),
                     )
                   : null,
@@ -285,7 +285,7 @@ class _AlertStoryState extends State<AlertStory> {
               borderColor: context.moonColors!.whis,
               borderRadius: borderRadius,
               leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
-              title: const Text('Outlined info MoonAlert'),
+              label: const Text('Outlined info MoonAlert'),
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
                 borderRadius: borderRadius,
@@ -297,12 +297,12 @@ class _AlertStoryState extends State<AlertStory> {
                   color: context.moonColors!.whis,
                 ),
               ),
-              body: showBodyKnob
+              content: showContentKnob
                   ? const SizedBox(
                       height: 24,
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Text("Here goes MoonAlert body"),
+                        child: Text("Here goes MoonAlert content"),
                       ),
                     )
                   : null,

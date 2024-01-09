@@ -17,14 +17,14 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
   /// Horizontal gap between column label and sort icon.
   final double sortIconGap;
 
-  /// Table sort icon size value.
+  /// Table column sort icon size value.
   final double sortIconSizeValue;
 
   /// Table row cell padding.
   final EdgeInsetsGeometry cellPadding;
 
-  /// Table row cell padding.
-  final EdgeInsetsGeometry rowTitlePadding;
+  /// Table row label padding.
+  final EdgeInsetsGeometry rowLabelPadding;
 
   /// Table column text style.
   final TextStyle columnTextStyle;
@@ -32,11 +32,11 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
   /// Table row text style.
   final TextStyle rowTextStyle;
 
-  /// Table row title text style.
-  final TextStyle rowTitleTextStyle;
+  /// Table row label text style.
+  final TextStyle rowLabelTextStyle;
 
-  /// Table row animated title text style.
-  final TextStyle rowPinnedAnimatedTitleTextStyle;
+  /// Table row animated label text style.
+  final TextStyle rowPinnedAnimatedLabelTextStyle;
 
   const MoonTableSizeProperties({
     required this.rowBorderRadius,
@@ -45,11 +45,11 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
     required this.sortIconGap,
     required this.sortIconSizeValue,
     required this.cellPadding,
-    required this.rowTitlePadding,
+    required this.rowLabelPadding,
     required this.columnTextStyle,
     required this.rowTextStyle,
-    required this.rowTitleTextStyle,
-    required this.rowPinnedAnimatedTitleTextStyle,
+    required this.rowLabelTextStyle,
+    required this.rowPinnedAnimatedLabelTextStyle,
   });
 
   @override
@@ -60,11 +60,11 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
     double? sortIconGap,
     double? sortIconSizeValue,
     EdgeInsetsGeometry? cellPadding,
-    EdgeInsetsGeometry? rowTitlePadding,
+    EdgeInsetsGeometry? rowLabelPadding,
     TextStyle? columnTextStyle,
     TextStyle? rowTextStyle,
-    TextStyle? rowTitleTextStyle,
-    TextStyle? rowPinnedAnimatedTitleTextStyle,
+    TextStyle? rowLabelTextStyle,
+    TextStyle? rowPinnedAnimatedLabelTextStyle,
   }) {
     return MoonTableSizeProperties(
       rowBorderRadius: rowBorderRadius ?? this.rowBorderRadius,
@@ -73,11 +73,11 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       sortIconGap: sortIconGap ?? this.sortIconGap,
       sortIconSizeValue: sortIconSizeValue ?? this.sortIconSizeValue,
       cellPadding: cellPadding ?? this.cellPadding,
-      rowTitlePadding: rowTitlePadding ?? this.rowTitlePadding,
+      rowLabelPadding: rowLabelPadding ?? this.rowLabelPadding,
       columnTextStyle: columnTextStyle ?? this.columnTextStyle,
       rowTextStyle: rowTextStyle ?? this.rowTextStyle,
-      rowTitleTextStyle: rowTitleTextStyle ?? this.rowTitleTextStyle,
-      rowPinnedAnimatedTitleTextStyle: rowPinnedAnimatedTitleTextStyle ?? this.rowPinnedAnimatedTitleTextStyle,
+      rowLabelTextStyle: rowLabelTextStyle ?? this.rowLabelTextStyle,
+      rowPinnedAnimatedLabelTextStyle: rowPinnedAnimatedLabelTextStyle ?? this.rowPinnedAnimatedLabelTextStyle,
     );
   }
 
@@ -92,11 +92,11 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       sortIconGap: lerpDouble(sortIconGap, other.sortIconGap, t)!,
       sortIconSizeValue: lerpDouble(sortIconSizeValue, other.sortIconSizeValue, t)!,
       cellPadding: EdgeInsetsGeometry.lerp(cellPadding, other.cellPadding, t)!,
-      rowTitlePadding: EdgeInsetsGeometry.lerp(rowTitlePadding, other.rowTitlePadding, t)!,
+      rowLabelPadding: EdgeInsetsGeometry.lerp(rowLabelPadding, other.rowLabelPadding, t)!,
       columnTextStyle: TextStyle.lerp(columnTextStyle, other.columnTextStyle, t)!,
       rowTextStyle: TextStyle.lerp(rowTextStyle, other.rowTextStyle, t)!,
-      rowTitleTextStyle: TextStyle.lerp(rowTitleTextStyle, other.rowTitleTextStyle, t)!,
-      rowPinnedAnimatedTitleTextStyle: TextStyle.lerp(rowPinnedAnimatedTitleTextStyle, other.rowPinnedAnimatedTitleTextStyle, t)!,
+      rowLabelTextStyle: TextStyle.lerp(rowLabelTextStyle, other.rowLabelTextStyle, t)!,
+      rowPinnedAnimatedLabelTextStyle: TextStyle.lerp(rowPinnedAnimatedLabelTextStyle, other.rowPinnedAnimatedLabelTextStyle, t)!,
     );
   }
 
@@ -111,10 +111,10 @@ class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> wi
       ..add(DoubleProperty("sortIconGap", sortIconGap))
       ..add(DoubleProperty("sortIconSizeValue", sortIconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("cellPadding", cellPadding))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("rowTitlePadding", rowTitlePadding))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("rowLabelPadding", rowLabelPadding))
       ..add(DiagnosticsProperty<TextStyle>("columnTextStyle", columnTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("rowTextStyle", rowTextStyle))
-      ..add(DiagnosticsProperty<TextStyle>("rowTitleTextStyle", rowTitleTextStyle))
-      ..add(DiagnosticsProperty<TextStyle>("rowAnimatedTitleTextStyle", rowPinnedAnimatedTitleTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("rowLabelTextStyle", rowLabelTextStyle))
+      ..add(DiagnosticsProperty<TextStyle>("rowPinnedAnimatedLabelTextStyle", rowPinnedAnimatedLabelTextStyle));
   }
 }

@@ -24,8 +24,8 @@ class MoonMenuItemTheme extends ThemeExtension<MoonMenuItemTheme> with Diagnosti
               backgroundColor: Colors.transparent,
               dividerColor: tokens.colors.beerus,
               iconColor: tokens.colors.iconPrimary,
-              titleTextColor: tokens.colors.textPrimary,
-              descriptionTextColor: tokens.colors.textSecondary,
+              labelTextColor: tokens.colors.textPrimary,
+              contentTextColor: tokens.colors.textSecondary,
             ),
         properties = properties ??
             MoonMenuItemProperties(
@@ -33,8 +33,8 @@ class MoonMenuItemTheme extends ThemeExtension<MoonMenuItemTheme> with Diagnosti
               verticalGap: tokens.sizes.x5s,
               minimumHeight: tokens.sizes.md,
               padding: EdgeInsets.all(tokens.sizes.x3s),
-              titleTextStyle: tokens.typography.body.textDefault,
-              descriptionTextStyle: tokens.typography.body.text12,
+              labelTextStyle: tokens.typography.body.textDefault,
+              contentTextStyle: tokens.typography.body.text12,
             );
 
   @override

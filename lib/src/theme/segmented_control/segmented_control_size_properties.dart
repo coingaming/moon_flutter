@@ -18,7 +18,7 @@ class MoonSegmentedControlSizeProperties extends ThemeExtension<MoonSegmentedCon
   /// SegmentedControl icon size value.
   final double iconSizeValue;
 
-  /// SegmentedControl segment segmentPadding.
+  /// SegmentedControl segment padding.
   final EdgeInsetsGeometry segmentPadding;
 
   /// SegmentedControl default text style.

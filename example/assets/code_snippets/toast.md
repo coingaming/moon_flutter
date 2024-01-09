@@ -9,7 +9,7 @@ class Toast extends StatelessWidget {
     return MoonFilledButton(
       onTap: () => MoonToast.show(
         context,
-        title: const Text('This is MoonToast'),
+        label: const Text('This is MoonToast'),
       ),
       label: const Text("Show toast"),
     );

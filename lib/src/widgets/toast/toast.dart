@@ -48,10 +48,10 @@ class MoonToast {
     /// The background color of the toast.
     Color? backgroundColor,
 
-    /// The horizontal space between toast leading, trailing and title.
+    /// The horizontal gap between toast leading, trailing and label.
     double? horizontalGap,
 
-    /// The vertical space between toast header and body.
+    /// The vertical gap between toast header and content.
     double? verticalGap,
 
     /// The width of the toast. If null the toast will be as wide as its children.
@@ -88,14 +88,14 @@ class MoonToast {
     /// The widget in the leading slot of the toast.
     Widget? leading,
 
-    /// The widget in the title slot of the toast.
-    required Widget title,
+    /// The widget in the label slot of the toast.
+    required Widget label,
 
     /// The widget in the trailing slot of the toast.
     Widget? trailing,
 
-    /// The widget in the body slot of the toast.
-    Widget? body,
+    /// The widget in the content slot of the toast.
+    Widget? content,
   }) {
     final BorderRadiusGeometry effectiveBorderRadius =
         borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
@@ -225,16 +225,16 @@ class MoonToast {
                                 leading,
                                 SizedBox(width: effectiveHorizontalGap),
                               ],
-                              Flexible(child: title),
+                              Flexible(child: label),
                               if (trailing != null) ...[
                                 SizedBox(width: effectiveHorizontalGap),
                                 trailing,
                               ],
                             ],
                           ),
-                          if (body != null) ...[
+                          if (content != null) ...[
                             SizedBox(height: effectiveVerticalGap),
-                            body,
+                            content,
                           ],
                         ],
                       ),

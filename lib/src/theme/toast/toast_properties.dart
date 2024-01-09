@@ -8,7 +8,7 @@ class MoonToastProperties extends ThemeExtension<MoonToastProperties> with Diagn
   /// Toast border radius.
   final BorderRadiusGeometry borderRadius;
 
-  /// The horizontal space between toast leading, trailing and title.
+  /// The horizontal space between toast leading, trailing and label.
   final double horizontalGap;
 
   /// The vertical space between toast header and body.

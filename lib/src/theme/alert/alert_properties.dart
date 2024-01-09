@@ -8,7 +8,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
   /// Border radius for alert.
   final BorderRadiusGeometry borderRadius;
 
-  /// Horizontal space between alert leading, trailing and title.
+  /// Horizontal space between alert leading, trailing and label.
   final double horizontalGap;
 
   /// Alert Widget minimum height.
@@ -26,11 +26,11 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
   /// Alert padding.
   final EdgeInsetsGeometry padding;
 
-  /// Alert body text style.
-  final TextStyle bodyTextStyle;
+  /// Alert content text style.
+  final TextStyle contentTextStyle;
 
-  /// Alert title text style.
-  final TextStyle titleTextStyle;
+  /// Alert label text style.
+  final TextStyle labelTextStyle;
 
   const MoonAlertProperties({
     required this.borderRadius,
@@ -40,8 +40,8 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
     required this.transitionDuration,
     required this.transitionCurve,
     required this.padding,
-    required this.bodyTextStyle,
-    required this.titleTextStyle,
+    required this.contentTextStyle,
+    required this.labelTextStyle,
   });
 
   @override
@@ -53,8 +53,8 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
     Duration? transitionDuration,
     Curve? transitionCurve,
     EdgeInsetsGeometry? padding,
-    TextStyle? bodyTextStyle,
-    TextStyle? titleTextStyle,
+    TextStyle? contentTextStyle,
+    TextStyle? labelTextStyle,
   }) {
     return MoonAlertProperties(
       borderRadius: borderRadius ?? this.borderRadius,
@@ -64,8 +64,8 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
       padding: padding ?? this.padding,
-      bodyTextStyle: bodyTextStyle ?? this.bodyTextStyle,
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      contentTextStyle: contentTextStyle ?? this.contentTextStyle,
+      labelTextStyle: labelTextStyle ?? this.labelTextStyle,
     );
   }
 
@@ -81,8 +81,8 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
-      bodyTextStyle: TextStyle.lerp(bodyTextStyle, other.bodyTextStyle, t)!,
-      titleTextStyle: TextStyle.lerp(titleTextStyle, other.titleTextStyle, t)!,
+      contentTextStyle: TextStyle.lerp(contentTextStyle, other.contentTextStyle, t)!,
+      labelTextStyle: TextStyle.lerp(labelTextStyle, other.labelTextStyle, t)!,
     );
   }
 
@@ -98,7 +98,7 @@ class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with Diagn
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
-      ..add(DiagnosticsProperty<TextStyle>("bodyTextStyle", bodyTextStyle))
-      ..add(DiagnosticsProperty<TextStyle>("titleTextStyle", titleTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("contentTextStyle", contentTextStyle))
+      ..add(DiagnosticsProperty<TextStyle>("labelTextStyle", labelTextStyle));
   }
 }

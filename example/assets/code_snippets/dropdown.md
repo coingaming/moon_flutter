@@ -99,7 +99,7 @@ class _DropdownState extends State<Dropdown> {
                   _buttonName = "Piccolo";
                   _buttonColor = context.moonColors!.piccolo;
                 }),
-                title: const Text("Piccolo"),
+                label: const Text("Piccolo"),
               ),
               MoonDropdown(
                 show: _showMenuInner,
@@ -117,7 +117,7 @@ class _DropdownState extends State<Dropdown> {
                         _buttonName = "Roshi";
                         _buttonColor = context.moonColors!.roshi;
                       }),
-                      title: const Text("Roshi"),
+                      label: const Text("Roshi"),
                     ),
                     MoonMenuItem(
                       onTap: () => setState(() {
@@ -126,7 +126,7 @@ class _DropdownState extends State<Dropdown> {
                         _buttonName = "Roshi60";
                         _buttonColor = context.moonColors!.roshi60;
                       }),
-                      title: const Text("Roshi60"),
+                      label: const Text("Roshi60"),
                     ),
                     MoonMenuItem(
                       onTap: () => setState(() {
@@ -135,14 +135,14 @@ class _DropdownState extends State<Dropdown> {
                         _buttonName = "Roshi10";
                         _buttonColor = context.moonColors!.roshi10;
                       }),
-                      title: const Text("Roshi10"),
+                      label: const Text("Roshi10"),
                     ),
                   ],
                 ),
                 child: MoonMenuItem(
                   backgroundColor: _showMenuInner ? context.moonColors!.heles : null,
                   onTap: () => setState(() => _showMenuInner = !_showMenuInner),
-                  title: const Text("Roshi"),
+                  label: const Text("Roshi"),
                   trailing: const Icon(
                     MoonIcons.controls_chevron_right_16_light,
                     size: 16,

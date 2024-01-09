@@ -29,8 +29,8 @@ class MoonTableTheme extends ThemeExtension<MoonTableTheme> with DiagnosticableT
             MoonTableColors(
               columnTextColor: tokens.colors.textPrimary,
               rowTextColor: tokens.colors.textPrimary,
-              rowTitleTextColor: tokens.colors.textPrimary,
-              rowPinnedAnimatedTitleTextColor: tokens.colors.trunks,
+              rowLabelTextColor: tokens.colors.textPrimary,
+              rowPinnedAnimatedLabelTextColor: tokens.colors.trunks,
               iconColor: tokens.colors.iconPrimary,
               rowBackgroundColor: tokens.colors.goku,
             ),
