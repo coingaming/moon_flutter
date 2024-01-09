@@ -1,0 +1,150 @@
+import 'package:example/src/storybook/common/color_options.dart';
+import 'package:example/src/storybook/common/widgets/text_divider.dart';
+import 'package:flutter/material.dart';
+import 'package:moon_design/moon_design.dart';
+import 'package:storybook_flutter/storybook_flutter.dart';
+
+class BreadcrumbStory extends StatelessWidget {
+  static const path = '/breadcrumb';
+
+  const BreadcrumbStory({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final textColorKnob = context.knobs.nullable.options(
+      label: "itemTextColor",
+      description: "MoonColors variants for BreadCramb item text.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+    final textColor = colorTable(context)[textColorKnob ?? 40];
+    final hoverTextColorKnob = context.knobs.nullable.options(
+      label: "itemTextHoverColor",
+      description: "MoonColors variants for BreadCramb item text on hover.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+    final hoverTextColor = colorTable(context)[hoverTextColorKnob ?? 40];
+
+    final currentItemColorKnob = context.knobs.nullable.options(
+      label: "currentItemTextColor",
+      description: "MoonColors variants for current breadcrumb item .",
+      enabled: false,
+      initial: 1,
+      // hit
+      options: colorOptions,
+    );
+
+    final currentItemTextColor = colorTable(context)[currentItemColorKnob ?? 40];
+
+    final pageAmountKnob = context.knobs.nullable.sliderInt(
+      label: "pageAmount",
+      description: "Amount of pages in breadcrumb.",
+      initial: 7,
+      max: 12,
+    );
+
+    final maxItemsKnob = context.knobs.nullable.sliderInt(
+      label: "maxItemsAmount",
+      description: "Amount of pages to show in breadcrumb.",
+      initial: 3,
+      max: 12,
+    );
+
+    final gapKnob = context.knobs.nullable.sliderInt(
+      label: "gap",
+      description: "Gap between Breadcrumb items.",
+      enabled: false,
+      initial: 4,
+      max: 16,
+    );
+
+    final showLabelKnob = context.knobs.boolean(
+      label: "label",
+      description: "Show widget in BreadCrumbItem label slot.",
+      initial: true,
+    );
+
+    final showLeadingKnob = context.knobs.boolean(
+      label: "leading",
+      description: "Show widget in BreadCrumbItem leading slot.",
+    );
+
+    final isDisabledKnob = context.knobs.boolean(
+      label: "isDisabled",
+      description: "Disable Breadcrumb.",
+    );
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const TextDivider(
+            text: "Breadcrumb",
+            paddingTop: 0,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: MoonBreadcrumb(
+              maxItems: maxItemsKnob ?? 3,
+              textColor: textColor,
+              currentItemTextColor: currentItemTextColor,
+              hoverTextColor: hoverTextColor,
+              gap: gapKnob?.toDouble(),
+              items: [
+                BreadcrumbItem(
+                  leading: showLeadingKnob ? const Icon(MoonIcons.generic_home_16_light) : null,
+                  label: showLabelKnob ? const Text('Home') : null,
+                  onPressed: isDisabledKnob
+                      ? null
+                      : () {
+                          MoonToast.show(context, title: const Text('Home page pressed'));
+                        },
+                ),
+                ...List.generate(pageAmountKnob ?? 3, (i) => i).map(
+                  (index) {
+                    return BreadcrumbItem(
+                      label: Text('Page ${index + 1}'),
+                      onPressed: isDisabledKnob
+                          ? null
+                          : () {
+                              MoonToast.show(context, title: Text('Page ${index + 1} pressed'));
+                            },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          const TextDivider(text: "Breadcrumb with custom divider and text style"),
+          MoonBreadcrumb(
+            itemTextStyle: context.moonTypography?.caption.text18,
+            currentItemTextStyle: context.moonTypography?.heading.text20,
+            textColor: context.moonColors?.trunks,
+            divider: const Icon(
+              Icons.chevron_right,
+              size: 24,
+            ),
+            items: [
+              BreadcrumbItem(
+                label: const Text('Home'),
+                onPressed: () {},
+              ),
+              BreadcrumbItem(
+                label: const Text('Page 1'),
+                onPressed: () {},
+              ),
+              BreadcrumbItem(
+                label: const Text('Page 2'),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

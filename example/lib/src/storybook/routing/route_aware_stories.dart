@@ -4,6 +4,7 @@ import 'package:example/src/storybook/stories/alert.dart';
 import 'package:example/src/storybook/stories/auth_code.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/bottom_sheet.dart';
+import 'package:example/src/storybook/stories/breadcrumb.dart';
 import 'package:example/src/storybook/stories/button.dart';
 import 'package:example/src/storybook/stories/carousel.dart';
 import 'package:example/src/storybook/stories/checkbox.dart';
@@ -65,6 +66,11 @@ final List<Story> routeAwareStories = [
     routePath: BottomSheetStory.path,
     router: router,
     codeString: fetchAsset('bottom_sheet.md'),
+  ),
+  Story.asRoute(
+    name: 'Breadcrumb',
+    routePath: BreadcrumbStory.path,
+    router: router,
   ),
   Story.asRoute(
     name: 'Button',

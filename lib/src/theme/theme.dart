@@ -5,6 +5,7 @@ import 'package:moon_design/src/theme/alert/alert_theme.dart';
 import 'package:moon_design/src/theme/authcode/authcode_theme.dart';
 import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_theme.dart';
+import 'package:moon_design/src/theme/breadcrumb/breadcrumb_theme.dart';
 import 'package:moon_design/src/theme/button/button_theme.dart';
 import 'package:moon_design/src/theme/carousel/carousel_theme.dart';
 import 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
@@ -60,6 +61,9 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
 
   /// Moon Design System MoonButton widgets theming.
   final MoonBottomSheetTheme bottomSheetTheme;
+
+  /// Moon Design System Breadcrumb widgets theming.
+  final MoonBreadcrumbTheme breadcrumbTheme;
 
   /// Moon Design System MoonButton widgets theming.
   final MoonButtonTheme buttonTheme;
@@ -149,6 +153,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonAuthCodeTheme? authCodeTheme,
     MoonAvatarTheme? avatarTheme,
     MoonBottomSheetTheme? bottomSheetTheme,
+    MoonBreadcrumbTheme? breadcrumbTheme,
     MoonButtonTheme? buttonTheme,
     MoonCarouselTheme? carouselTheme,
     MoonCheckboxTheme? checkboxTheme,
@@ -181,6 +186,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         authCodeTheme = authCodeTheme ?? MoonAuthCodeTheme(tokens: tokens),
         avatarTheme = avatarTheme ?? MoonAvatarTheme(tokens: tokens),
         bottomSheetTheme = bottomSheetTheme ?? MoonBottomSheetTheme(tokens: tokens),
+        breadcrumbTheme = breadcrumbTheme ?? MoonBreadcrumbTheme(tokens: tokens),
         buttonTheme = buttonTheme ?? MoonButtonTheme(tokens: tokens),
         carouselTheme = carouselTheme ?? MoonCarouselTheme(tokens: tokens),
         checkboxTheme = checkboxTheme ?? MoonCheckboxTheme(tokens: tokens),
@@ -217,6 +223,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     MoonAuthCodeTheme? authCodeTheme,
     MoonAvatarTheme? avatarTheme,
     MoonBottomSheetTheme? bottomSheetTheme,
+    MoonBreadcrumbTheme? breadcrumbTheme,
     MoonButtonTheme? buttonTheme,
     MoonCarouselTheme? carouselTheme,
     MoonCheckboxTheme? checkboxTheme,
@@ -252,6 +259,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       authCodeTheme: authCodeTheme ?? this.authCodeTheme,
       avatarTheme: avatarTheme ?? this.avatarTheme,
       bottomSheetTheme: bottomSheetTheme ?? this.bottomSheetTheme,
+      breadcrumbTheme: breadcrumbTheme ?? this.breadcrumbTheme,
       buttonTheme: buttonTheme ?? this.buttonTheme,
       carouselTheme: carouselTheme ?? this.carouselTheme,
       checkboxTheme: checkboxTheme ?? this.checkboxTheme,
@@ -293,6 +301,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       authCodeTheme: authCodeTheme.lerp(other.authCodeTheme, t),
       avatarTheme: avatarTheme.lerp(other.avatarTheme, t),
       bottomSheetTheme: bottomSheetTheme.lerp(other.bottomSheetTheme, t),
+      breadcrumbTheme: breadcrumbTheme.lerp(other.breadcrumbTheme, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       carouselTheme: carouselTheme.lerp(other.carouselTheme, t),
       checkboxTheme: checkboxTheme.lerp(other.checkboxTheme, t),
