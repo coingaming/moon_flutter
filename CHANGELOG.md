@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.45.0](https://github.com/coingaming/moon_flutter/compare/v0.44.2...v0.45.0) (2024-01-09)
+
+
+### Features
+
+* [MDS-941] Change property names ([#335](https://github.com/coingaming/moon_flutter/issues/335)) ([ef79d4e](https://github.com/coingaming/moon_flutter/commit/ef79d4ea15109dc2c63321a42b85a068b3e49a6d))
+
 ## [0.44.2](https://github.com/coingaming/moon_flutter/compare/v0.44.1...v0.44.2) (2024-01-02)
 
 
