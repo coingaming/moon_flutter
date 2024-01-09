@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonBreadcrumbProperties extends ThemeExtension<MoonBreadcrumbProperties> with DiagnosticableTreeMixin {
-  /// The gap between divider and BreadcrumbItem.
+  /// The gap between divider and MoonBreadcrumb item.
   final double gap;
 
-  /// Padding around Breadcrumb.
+  /// Padding around MoonBreadcrumb.
   final EdgeInsetsGeometry padding;
 
-  /// Item text style.
+  /// MoonBreadcrumb item text style.
   final TextStyle itemTextStyle;
 
-  /// Current item text style.
+  /// Current MoonBreadcrumb item text style.
   final TextStyle currentItemTextStyle;
 
   /// Icon to use as divider.
   final IconData dividerIcon;
 
-  /// Menu item text style.
+  /// MoonBreadcrumb more items menu item text style.
   final TextStyle menuItemTextStyle;
 
-  /// Menu max height.
+  /// MoonBreadcrumb more items menu max height.
   final double menuMaxHeight;
 
   const MoonBreadcrumbProperties({

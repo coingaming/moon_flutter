@@ -71,6 +71,7 @@ final List<Story> routeAwareStories = [
     name: 'Breadcrumb',
     routePath: BreadcrumbStory.path,
     router: router,
+    codeString: fetchAsset('breadcrumb.md'),
   ),
   Story.asRoute(
     name: 'Button',

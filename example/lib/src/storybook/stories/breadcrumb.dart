@@ -12,26 +12,29 @@ class BreadcrumbStory extends StatelessWidget {
   Widget build(BuildContext context) {
     final textColorKnob = context.knobs.nullable.options(
       label: "itemTextColor",
-      description: "MoonColors variants for BreadCramb item text.",
+      description: "MoonColors variants for MoonBreadcrumb item text.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
+
     final textColor = colorTable(context)[textColorKnob ?? 40];
+
     final hoverTextColorKnob = context.knobs.nullable.options(
       label: "itemTextHoverColor",
-      description: "MoonColors variants for BreadCramb item text on hover.",
+      description: "MoonColors variants for MoonBreadcrumb item text on hover.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
+
     final hoverTextColor = colorTable(context)[hoverTextColorKnob ?? 40];
 
     final currentItemColorKnob = context.knobs.nullable.options(
       label: "currentItemTextColor",
-      description: "MoonColors variants for current breadcrumb item .",
+      description: "MoonColors variants for current MoonBreadcrumb item.",
       enabled: false,
       initial: 1,
       // hit
@@ -42,21 +45,21 @@ class BreadcrumbStory extends StatelessWidget {
 
     final pageAmountKnob = context.knobs.nullable.sliderInt(
       label: "pageAmount",
-      description: "Amount of pages in breadcrumb.",
+      description: "Amount of pages in MoonBreadcrumb.",
       initial: 7,
       max: 12,
     );
 
     final maxItemsKnob = context.knobs.nullable.sliderInt(
       label: "maxItemsAmount",
-      description: "Amount of pages to show in breadcrumb.",
+      description: "Amount of pages to show in MoonBreadcrumb.",
       initial: 3,
       max: 12,
     );
 
     final gapKnob = context.knobs.nullable.sliderInt(
       label: "gap",
-      description: "Gap between Breadcrumb items.",
+      description: "Gap between MoonBreadcrumb items.",
       enabled: false,
       initial: 4,
       max: 16,
@@ -64,18 +67,18 @@ class BreadcrumbStory extends StatelessWidget {
 
     final showLabelKnob = context.knobs.boolean(
       label: "label",
-      description: "Show widget in BreadCrumbItem label slot.",
+      description: "Show widget in MoonBreadcrumb item label slot.",
       initial: true,
     );
 
     final showLeadingKnob = context.knobs.boolean(
       label: "leading",
-      description: "Show widget in BreadCrumbItem leading slot.",
+      description: "Show widget in MoonBreadcrumb item leading slot.",
     );
 
     final isDisabledKnob = context.knobs.boolean(
       label: "isDisabled",
-      description: "Disable Breadcrumb.",
+      description: "Disable MoonBreadcrumb.",
     );
 
     return Center(
@@ -83,7 +86,7 @@ class BreadcrumbStory extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const TextDivider(
-            text: "Breadcrumb",
+            text: "MoonBreadcrumb",
             paddingTop: 0,
           ),
           SingleChildScrollView(
@@ -119,7 +122,7 @@ class BreadcrumbStory extends StatelessWidget {
               ],
             ),
           ),
-          const TextDivider(text: "Breadcrumb with custom divider and text style"),
+          const TextDivider(text: "MoonBreadcrumb with custom divider and text style"),
           MoonBreadcrumb(
             itemTextStyle: context.moonTypography?.caption.text18,
             currentItemTextStyle: context.moonTypography?.heading.text20,

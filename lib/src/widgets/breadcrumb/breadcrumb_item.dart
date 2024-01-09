@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class BreadcrumbItem {
-  /// The widget in the label slot of the tab.
+  /// The widget in the label slot of the BreadcrumbItem.
   final Widget? label;
 
-  /// The widget in the leading slot of the tab.
+  /// The widget in the leading slot of the BreadcrumbItem.
   final Widget? leading;
 
-  /// The semantic label for the segment.
+  /// The semantic label for the BreadcrumbItem.
   final String? semanticLabel;
 
-  /// The callback that is called when the item is tapped or pressed.
+  /// The callback that is called when the BreadcrumbItem is tapped or pressed.
   final VoidCallback? onPressed;
 
   const BreadcrumbItem({

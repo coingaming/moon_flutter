@@ -5,29 +5,20 @@ import 'package:moon_design/moon_design.dart';
 import 'package:moon_design/src/theme/breadcrumb/breadcrumb_theme.dart';
 
 class MoonBreadcrumb extends StatelessWidget {
-  const MoonBreadcrumb({
-    required this.items,
-    super.key,
-    this.divider,
-    this.gap,
-    this.itemTextStyle,
-    this.textColor,
-    this.hoverTextColor,
-    this.padding,
-    this.maxItems = 3,
-    TextStyle? currentItemTextStyle,
-    Color? currentItemTextColor,
-  })  : currentItemTextColor = currentItemTextColor ?? textColor,
-        currentItemTextStyle = currentItemTextStyle ?? itemTextStyle;
+  /// Text color of current breadcrumb item.
+  final Color? currentItemTextColor;
 
-  /// Widget to display between items.
-  final Widget? divider;
+  /// Text color when breadcrumb item hovered.
+  final Color? hoverTextColor;
+
+  /// Text color of breadcrumb item.
+  final Color? textColor;
 
   /// The gap between divider and BreadcrumbItem.
   final double? gap;
 
-  /// Items to display as syquence of steps.
-  final List<BreadcrumbItem> items;
+  /// Padding around Breadcrumb.
+  final EdgeInsetsGeometry? padding;
 
   /// Amount of items to display in Breadcrumb.
   final int maxItems;
@@ -38,17 +29,26 @@ class MoonBreadcrumb extends StatelessWidget {
   /// Current item text style.
   final TextStyle? currentItemTextStyle;
 
-  /// Text color of breadcrumb item.
-  final Color? textColor;
+  /// Items to display as syquence of steps.
+  final List<BreadcrumbItem> items;
 
-  /// Text color when breadcrumb item hovered.
-  final Color? hoverTextColor;
+  /// Widget to display between items.
+  final Widget? divider;
 
-  /// Text color of current breadcrumb item.
-  final Color? currentItemTextColor;
-
-  /// Padding around Breadcrumb.
-  final EdgeInsetsGeometry? padding;
+  const MoonBreadcrumb({
+    Color? currentItemTextColor,
+    this.hoverTextColor,
+    this.textColor,
+    this.gap,
+    this.padding,
+    this.maxItems = 3,
+    this.itemTextStyle,
+    TextStyle? currentItemTextStyle,
+    required this.items,
+    this.divider,
+    super.key,
+  })  : currentItemTextColor = currentItemTextColor ?? textColor,
+        currentItemTextStyle = currentItemTextStyle ?? itemTextStyle;
 
   Widget _buildDivider(MoonBreadcrumbTheme theme) {
     return IconTheme(
@@ -157,22 +157,22 @@ class _MoreButtonState extends State<_MoreButton> {
       show: show,
       content: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: widget.theme.properties.menuMaxHeight),
-        child: SingleChildScrollView(
-          child: Column(
-            children: widget.items
-                .map(
-                  (item) => MoonMenuItem(
-                    title: DefaultTextStyle(
-                      style: widget.theme.properties.menuItemTextStyle,
-                      child: item.label ?? Container(),
-                    ),
-                    leading: item.leading,
-                    onTap: item.onPressed,
-                    backgroundColor: widget.theme.colors.menuBackgroundColor,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          children: widget.items
+              .map(
+                (item) => MoonMenuItem(
+                  title: DefaultTextStyle(
+                    style: widget.theme.properties.menuItemTextStyle,
+                    child: item.label ?? Container(),
                   ),
-                )
-                .toList(),
-          ),
+                  leading: item.leading,
+                  onTap: item.onPressed,
+                  backgroundColor: widget.theme.colors.menuBackgroundColor,
+                ),
+              )
+              .toList(),
         ),
       ),
       onTapOutside: () => setState(() => show = false),

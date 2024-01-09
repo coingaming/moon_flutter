@@ -5,13 +5,13 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonBreadcrumbColors extends ThemeExtension<MoonBreadcrumbColors> with DiagnosticableTreeMixin {
-  /// Default text color of breadcrumb item.
+  /// Default text color of MoonBreadcrumb item.
   final Color textColor;
 
-  /// The text color when breadcrumb item hovered.
+  /// The text color when MoonBreadcrumb item hovered.
   final Color? hoverTextColor;
 
-  /// Text color of current breadcrumb item.
+  /// Text color of current MoonBreadcrumb item.
   final Color? currentItemTextColor;
 
   /// Default divider color.
