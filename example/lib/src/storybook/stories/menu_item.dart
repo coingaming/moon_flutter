@@ -34,27 +34,27 @@ class _MenuItemStoryState extends State<MenuItemStory> {
 
     final leadingColor = colorTable(context)[leadingColorKnob ?? 40];
 
-    final titleColorKnob = context.knobs.nullable.options(
-      label: "Title color",
-      description: "MoonColors variants for MoonMenuItem title slot.",
+    final labelColorKnob = context.knobs.nullable.options(
+      label: "Label color",
+      description: "MoonColors variants for MoonMenuItem label slot.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final titleTextColor = colorTable(context)[titleColorKnob ?? 40];
+    final labelTextColor = colorTable(context)[labelColorKnob ?? 40];
 
-    final descriptionTextColorKnob = context.knobs.nullable.options(
-      label: "Description color",
-      description: "MoonColors variants for MoonMenuItem description slot.",
+    final contentTextColorKnob = context.knobs.nullable.options(
+      label: "Content color",
+      description: "MoonColors variants for MoonMenuItem content slot.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final descriptionTextColor = colorTable(context)[descriptionTextColorKnob ?? 40];
+    final contentTextColor = colorTable(context)[contentTextColorKnob ?? 40];
 
     final trailingColorKnob = context.knobs.nullable.options(
       label: "Trailing color",
@@ -92,9 +92,9 @@ class _MenuItemStoryState extends State<MenuItemStory> {
       initial: true,
     );
 
-    final showDescriptionKnob = context.knobs.boolean(
-      label: "description",
-      description: "Show widget in MoonMenuItem description slot.",
+    final showContentKnob = context.knobs.boolean(
+      label: "content",
+      description: "Show widget in MoonMenuItem content slot.",
       initial: true,
     );
 
@@ -125,14 +125,14 @@ class _MenuItemStoryState extends State<MenuItemStory> {
             MoonMenuItem(
               borderRadius: borderRadius,
               backgroundColor: backgroundColor,
-              title: Text(
+              label: Text(
                 "Multi-line menu item",
-                style: TextStyle(color: titleTextColor),
+                style: TextStyle(color: labelTextColor),
               ),
-              description: showDescriptionKnob
+              content: showContentKnob
                   ? Text(
-                      "Multi-line default description field as an example for menu item component.",
-                      style: TextStyle(color: descriptionTextColor),
+                      "Multi-line default content field as an example for menu item component.",
+                      style: TextStyle(color: contentTextColor),
                     )
                   : null,
               leading: showLeadingKnob
@@ -155,14 +155,14 @@ class _MenuItemStoryState extends State<MenuItemStory> {
             MoonMenuItem(
               backgroundColor: backgroundColor,
               borderRadius: borderRadius,
-              title: Text(
+              label: Text(
                 "One-line menu item",
-                style: TextStyle(color: titleTextColor),
+                style: TextStyle(color: labelTextColor),
               ),
-              description: showDescriptionKnob
+              content: showContentKnob
                   ? Text(
-                      'One-line description field example',
-                      style: TextStyle(color: descriptionTextColor),
+                      'One-line content field example',
+                      style: TextStyle(color: contentTextColor),
                     )
                   : null,
               leading: showLeadingKnob
@@ -185,9 +185,9 @@ class _MenuItemStoryState extends State<MenuItemStory> {
             MoonMenuItem(
               borderRadius: borderRadius,
               backgroundColor: backgroundColor,
-              title: Text(
+              label: Text(
                 "Menu item with MoonCheckbox",
-                style: TextStyle(color: titleTextColor),
+                style: TextStyle(color: labelTextColor),
               ),
               leading: showLeadingKnob
                   ? Icon(
@@ -208,9 +208,9 @@ class _MenuItemStoryState extends State<MenuItemStory> {
             MoonMenuItem(
               borderRadius: borderRadius,
               backgroundColor: backgroundColor,
-              title: Text(
+              label: Text(
                 "Menu item with MoonSwitch",
-                style: TextStyle(color: titleTextColor),
+                style: TextStyle(color: labelTextColor),
               ),
               leading: showLeadingKnob
                   ? Icon(
@@ -237,10 +237,10 @@ class _MenuItemStoryState extends State<MenuItemStory> {
               iconColor: trailingColor,
               backgroundColor: backgroundColor ?? Colors.transparent,
               expandedBackgroundColor: backgroundColor ?? context.moonColors!.heles,
-              title: Text(
+              label: Text(
                 'Expandable menu item',
                 style: context.moonTypography!.body.textDefault.copyWith(
-                  color: titleTextColor,
+                  color: labelTextColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -257,9 +257,9 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                   MoonMenuItem(
                     backgroundColor: backgroundColor,
                     borderRadius: borderRadius,
-                    title: Text(
+                    label: Text(
                       "Menu item 1 with MoonRadio",
-                      style: TextStyle(color: titleTextColor),
+                      style: TextStyle(color: labelTextColor),
                     ),
                     leading: showLeadingKnob
                         ? MoonRadio<MenuItem>(
@@ -282,9 +282,9 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                   MoonMenuItem(
                     backgroundColor: backgroundColor,
                     borderRadius: borderRadius,
-                    title: Text(
+                    label: Text(
                       "Menu item 2 with MoonRadio",
-                      style: TextStyle(color: titleTextColor),
+                      style: TextStyle(color: labelTextColor),
                     ),
                     leading: showLeadingKnob
                         ? MoonRadio(

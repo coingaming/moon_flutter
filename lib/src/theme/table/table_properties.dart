@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTableProperties extends ThemeExtension<MoonTableProperties> with DiagnosticableTreeMixin {
-  /// Table row animated title transition duration.
+  /// Table row animated label transition duration.
   final Duration transitionDuration;
 
-  /// Table row animated title transition curve.
+  /// Table row animated label transition curve.
   final Curve transitionCurve;
 
   const MoonTableProperties({

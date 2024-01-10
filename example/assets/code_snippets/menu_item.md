@@ -13,7 +13,7 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     return MoonMenuItem(
       onTap: () {},
-      title: const Text("Menu Item"),
+      label: const Text("Menu Item"),
       leading: const Icon(MoonIcons.notifications_activity_32_regular),
       trailing: const Icon(MoonIcons.controls_chevron_right_24_light),
     );

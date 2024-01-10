@@ -45,9 +45,9 @@ class TestWidget extends StatelessWidget {
                   displayDuration: const Duration(milliseconds: 500),
                   transitionDuration: Duration.zero,
                   leading: const Icon(leadingIcon),
-                  title: const Text(title),
+                  label: const Text(title),
                   trailing: const Icon(trailingIcon),
-                  body: const Text(body),
+                  content: const Text(body),
                 );
               },
             );

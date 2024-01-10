@@ -33,7 +33,7 @@ class _AccordionState extends State<Accordion> {
             () => _currentlyOpenAccordionItem = value,
           ),
           leading: const Icon(MoonIcons.other_frame_24_light),
-          title: const Text("Grouped MoonAccordion item #1"),
+          label: const Text("Grouped MoonAccordion item #1"),
           children: const [
             Text(contentText),
           ],
@@ -50,7 +50,7 @@ class _AccordionState extends State<Accordion> {
             () => _currentlyOpenAccordionItem = value,
           ),
           leading: const Icon(MoonIcons.other_frame_24_light),
-          title: const Text("Grouped MoonAccordion item #2"),
+          label: const Text("Grouped MoonAccordion item #2"),
           children: const [
             Text(contentText),
           ],

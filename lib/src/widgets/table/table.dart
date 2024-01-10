@@ -29,8 +29,8 @@ class MoonTableRow {
   /// Callback when the row is tapped.
   final VoidCallback? onTap;
 
-  /// Title of the row, which expands to the whole row width.
-  final MoonTableRowTitle? title;
+  /// Label of the row which expands to the whole width of the row. Placed on top of the row cells.
+  final MoonTableRowLabel? label;
 
   /// List of table row cells.
   /// The length of the list must be equal to the length of [MoonTableHeader.columns] and can not be empty.
@@ -42,7 +42,7 @@ class MoonTableRow {
     this.decoration,
     this.onSelectChanged,
     this.onTap,
-    this.title,
+    this.label,
     required this.cells,
   }) : assert(cells.length > 0, 'Cells length must not be empty.');
 }
@@ -132,37 +132,37 @@ class MoonTableFooter {
   }) : assert(cells.length > 0, 'If footer is provided, cells must not be empty.');
 }
 
-/// [MoonTableRowTitle] used in [MoonTableRow.title].
-class MoonTableRowTitle {
-  /// Controls whether title of the row is pinned or not during table horizontal scroll.
+/// [MoonTableRowLabel] used in [MoonTableRow.label].
+class MoonTableRowLabel {
+  /// Controls whether label of the row is pinned or not during table horizontal scroll.
   final bool pinned;
 
-  /// Row animated title transition duration during horizontal scroll.
+  /// Row's animated label transition duration during horizontal scroll.
   final Duration? transitionDuration;
 
-  /// Row animated title transition curve during horizontal scroll.
+  /// Row's animated label transition curve during horizontal scroll.
   final Curve? transitionCurve;
 
-  /// Row title padding.
+  /// Label padding.
   final EdgeInsetsGeometry? padding;
 
-  /// Text style of the row title if [pinned] is false or table is not being horizontally scrolled.
+  /// Text style of the row's label when [pinned] is true and the table is being horizontally scrolled.
   final TextStyle? textStyle;
 
-  /// Animated text style of the row title when [pinned] is true and table is being horizontally scrolled.
+  /// Animated text style of row's label when [pinned] is true and the table is being horizontally scrolled.
   final TextStyle? pinnedAnimatedTextStyle;
 
-  /// Row title widget.
-  final Widget title;
+  /// Row label widget. Placed on top of the row cells.
+  final Widget label;
 
-  const MoonTableRowTitle({
+  const MoonTableRowLabel({
     this.pinned = true,
     this.transitionDuration,
     this.transitionCurve,
     this.padding,
     this.textStyle,
     this.pinnedAnimatedTextStyle,
-    required this.title,
+    required this.label,
   });
 }
 
@@ -544,15 +544,15 @@ class _MoonTableState extends State<MoonTable> {
                 final double? effectiveRowHeight =
                     currentRow.height ?? (widget.rowSize == null ? null : _effectiveMoonTableRowSize.rowHeight);
 
-                final EdgeInsetsGeometry effectiveTitlePadding =
-                    currentRow.title?.padding ?? _effectiveMoonTableRowSize.rowTitlePadding;
+                final EdgeInsetsGeometry effectiveLabelPadding =
+                    currentRow.label?.padding ?? _effectiveMoonTableRowSize.rowLabelPadding;
 
-                final TextStyle effectiveTitleTextStyle =
-                    _effectiveMoonTableRowSize.rowTitleTextStyle.merge(currentRow.title?.textStyle);
+                final TextStyle effectiveLabelTextStyle =
+                    _effectiveMoonTableRowSize.rowLabelTextStyle.merge(currentRow.label?.textStyle);
 
-                final TextStyle effectiveAnimatedTitleTextStyle = _effectiveMoonTableRowSize
-                    .rowPinnedAnimatedTitleTextStyle
-                    .merge(currentRow.title?.pinnedAnimatedTextStyle);
+                final TextStyle effectiveAnimatedLabelTextStyle = _effectiveMoonTableRowSize
+                    .rowPinnedAnimatedLabelTextStyle
+                    .merge(currentRow.label?.pinnedAnimatedTextStyle);
 
                 return GestureDetector(
                   onTap: () {
@@ -576,13 +576,13 @@ class _MoonTableState extends State<MoonTable> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (currentRow.title != null)
+                        if (currentRow.label != null)
                           Padding(
-                            padding: effectiveTitlePadding,
-                            child: _TableRowTitle(
-                              rowTitle: currentRow.title!,
-                              titleTextStyle: effectiveTitleTextStyle,
-                              animatedTitleTextStyle: effectiveAnimatedTitleTextStyle,
+                            padding: effectiveLabelPadding,
+                            child: _TableRowLabel(
+                              label: currentRow.label!,
+                              labelTextStyle: effectiveLabelTextStyle,
+                              animatedLabelTextStyle: effectiveAnimatedLabelTextStyle,
                               horizontalScrollController: _tableControllers.horizontalScrollController,
                             ),
                           ),
@@ -591,7 +591,7 @@ class _MoonTableState extends State<MoonTable> {
                             for (var i = 0; i < currentRow.cells.length; i++)
                               SizedBox(
                                 width: widget.header?.columns[i].width ?? _columnEqualWidth,
-                                height: currentRow.title != null ? null : effectiveRowHeight,
+                                height: currentRow.label != null ? null : effectiveRowHeight,
                                 child: DefaultTextStyle(
                                   style: effectiveTextStyle,
                                   child: Padding(
@@ -706,42 +706,42 @@ class _MoonTableState extends State<MoonTable> {
   }
 }
 
-class _TableRowTitle extends StatelessWidget {
-  final MoonTableRowTitle rowTitle;
-  final TextStyle titleTextStyle;
-  final TextStyle animatedTitleTextStyle;
+class _TableRowLabel extends StatelessWidget {
+  final MoonTableRowLabel label;
+  final TextStyle labelTextStyle;
+  final TextStyle animatedLabelTextStyle;
   final ScrollController horizontalScrollController;
 
-  const _TableRowTitle({
-    required this.rowTitle,
-    required this.titleTextStyle,
-    required this.animatedTitleTextStyle,
+  const _TableRowLabel({
+    required this.label,
+    required this.labelTextStyle,
+    required this.animatedLabelTextStyle,
     required this.horizontalScrollController,
   });
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveTitleTextColor =
-        titleTextStyle.color ?? context.moonTheme?.tableTheme.colors.rowTitleTextColor ?? MoonColors.light.textPrimary;
+    final Color effectiveLableTextColor =
+        labelTextStyle.color ?? context.moonTheme?.tableTheme.colors.rowLabelTextColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveAnimatedTitleTextColor = animatedTitleTextStyle.color ??
-        context.moonTheme?.tableTheme.colors.rowPinnedAnimatedTitleTextColor ??
+    final Color effectiveAnimatedLabelTextColor = animatedLabelTextStyle.color ??
+        context.moonTheme?.tableTheme.colors.rowPinnedAnimatedLabelTextColor ??
         MoonColors.light.trunks;
 
-    final Duration effectiveTransitionDuration = rowTitle.transitionDuration ??
+    final Duration effectiveTransitionDuration = label.transitionDuration ??
         context.moonTheme?.tableTheme.properties.transitionDuration ??
         const Duration(milliseconds: 400);
 
-    final Curve effectiveTransitionCurve = rowTitle.transitionCurve ??
+    final Curve effectiveTransitionCurve = label.transitionCurve ??
         context.moonTheme?.tableTheme.properties.transitionCurve ??
         MoonTransitions.transitions.defaultTransitionCurve;
 
-    final TextStyle resolvedTitleTextStyle = titleTextStyle.copyWith(color: effectiveTitleTextColor);
+    final TextStyle resolvedLabelTextStyle = labelTextStyle.copyWith(color: effectiveLableTextColor);
 
-    final TextStyle resolvedAnimatedTitleTextStyle =
-        animatedTitleTextStyle.copyWith(color: effectiveAnimatedTitleTextColor);
+    final TextStyle resolvedAnimatedLabelTextStyle =
+        animatedLabelTextStyle.copyWith(color: effectiveAnimatedLabelTextColor);
 
-    return rowTitle.pinned
+    return label.pinned
         ? AnimatedBuilder(
             animation: horizontalScrollController,
             builder: (BuildContext context, Widget? child) {
@@ -756,18 +756,18 @@ class _TableRowTitle extends StatelessWidget {
               return Padding(
                 padding: EdgeInsetsDirectional.only(start: widgetOffset),
                 child: MoonAnimatedDefaultTextStyle(
-                  textStyle: offsetIsIncreasing ? resolvedAnimatedTitleTextStyle : resolvedTitleTextStyle,
+                  textStyle: offsetIsIncreasing ? resolvedAnimatedLabelTextStyle : resolvedLabelTextStyle,
                   curve: effectiveTransitionCurve,
                   duration: effectiveTransitionDuration,
                   child: child!,
                 ),
               );
             },
-            child: rowTitle.title,
+            child: label.label,
           )
         : DefaultTextStyle(
-            style: resolvedTitleTextStyle,
-            child: rowTitle.title,
+            style: resolvedLabelTextStyle,
+            child: label.label,
           );
   }
 }

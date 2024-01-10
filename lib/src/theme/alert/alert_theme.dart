@@ -36,8 +36,8 @@ class MoonAlertTheme extends ThemeExtension<MoonAlertTheme> with DiagnosticableT
               transitionDuration: tokens.transitions.defaultTransitionDuration,
               transitionCurve: tokens.transitions.defaultTransitionCurve,
               padding: EdgeInsets.all(tokens.sizes.x2s),
-              bodyTextStyle: tokens.typography.body.textDefault,
-              titleTextStyle: tokens.typography.heading.textDefault,
+              contentTextStyle: tokens.typography.body.textDefault,
+              labelTextStyle: tokens.typography.heading.textDefault,
             );
 
   @override

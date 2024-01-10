@@ -32,13 +32,13 @@ class MoonAlert extends StatefulWidget {
   /// The border width of the alert.
   final double? borderWidth;
 
-  /// The horizontal space between alert leading, trailing and title.
+  /// The horizontal space between alert leading, trailing and label.
   final double? horizontalGap;
 
   /// The minimum height of Alert.
   final double? minimumHeight;
 
-  /// The vertical space between alert header and body.
+  /// The vertical space between alert header and content.
   final double? verticalGap;
 
   /// Alert transition duration (show and hide animation).
@@ -59,14 +59,14 @@ class MoonAlert extends StatefulWidget {
   /// The widget in the leading slot of the alert.
   final Widget? leading;
 
-  /// The widget in the title slot of the alert.
-  final Widget title;
+  /// The widget in the label slot of the alert.
+  final Widget label;
 
   /// The widget in the trailing slot of the alert.
   final Widget? trailing;
 
-  /// The widget in the body slot of the alert.
-  final Widget? body;
+  /// The widget in the content slot of the alert.
+  final Widget? content;
 
   /// MDS base alert.
   ///
@@ -92,9 +92,9 @@ class MoonAlert extends StatefulWidget {
     this.decoration,
     this.semanticLabel,
     this.leading,
-    required this.title,
+    required this.label,
     this.trailing,
-    this.body,
+    this.content,
   });
 
   /// MDS filled alert variant.
@@ -110,9 +110,9 @@ class MoonAlert extends StatefulWidget {
     required this.backgroundColor,
     this.semanticLabel,
     this.leading,
-    required this.title,
+    required this.label,
     this.trailing,
-    this.body,
+    this.content,
   })  : showBorder = false,
         borderColor = null,
         borderWidth = null,
@@ -138,9 +138,9 @@ class MoonAlert extends StatefulWidget {
     required this.borderColor,
     this.semanticLabel,
     this.leading,
-    required this.title,
+    required this.label,
     this.trailing,
-    this.body,
+    this.content,
   })  : showBorder = true,
         backgroundColor = Colors.transparent,
         decoration = null,
@@ -161,11 +161,11 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
   AnimationController? _animationController;
   Animation<double>? _curvedAnimation;
 
-  TextStyle _getTitleTextStyle({required BuildContext context}) {
-    if (widget.body != null) {
-      return context.moonTheme?.alertTheme.properties.titleTextStyle ?? MoonTypography.typography.heading.textDefault;
+  TextStyle _getLabelTextStyle({required BuildContext context}) {
+    if (widget.content != null) {
+      return context.moonTheme?.alertTheme.properties.labelTextStyle ?? MoonTypography.typography.heading.textDefault;
     } else {
-      return context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTypography.typography.body.textDefault;
+      return context.moonTheme?.alertTheme.properties.contentTextStyle ?? MoonTypography.typography.body.textDefault;
     }
   }
 
@@ -243,10 +243,10 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
     final EdgeInsetsGeometry effectivePadding =
         widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
-    final TextStyle effectiveTitleTextStyle = _getTitleTextStyle(context: context);
+    final TextStyle effectiveLabelTextStyle = _getLabelTextStyle(context: context);
 
-    final TextStyle effectiveBodyTextStyle =
-        context.moonTheme?.alertTheme.properties.bodyTextStyle ?? MoonTypography.typography.body.textDefault;
+    final TextStyle effectiveContentTextStyle =
+        context.moonTheme?.alertTheme.properties.contentTextStyle ?? MoonTypography.typography.body.textDefault;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.alertTheme.properties.transitionDuration ??
@@ -293,7 +293,7 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                   color: effectiveIconColor,
                 ),
                 child: DefaultTextStyle(
-                  style: effectiveBodyTextStyle.copyWith(color: effectiveTextColor),
+                  style: effectiveContentTextStyle.copyWith(color: effectiveTextColor),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -305,9 +305,9 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                               child: widget.leading,
                             ),
                           DefaultTextStyle(
-                            style: effectiveTitleTextStyle.copyWith(color: effectiveTextColor),
+                            style: effectiveLabelTextStyle.copyWith(color: effectiveTextColor),
                             child: Expanded(
-                              child: widget.title,
+                              child: widget.label,
                             ),
                           ),
                           if (widget.trailing != null)
@@ -317,13 +317,13 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                             ),
                         ],
                       ),
-                      if (widget.body != null)
+                      if (widget.content != null)
                         Row(
                           children: [
                             Expanded(
                               child: Padding(
                                 padding: EdgeInsetsDirectional.only(top: effectiveVerticalGap),
-                                child: widget.body,
+                                child: widget.content,
                               ),
                             ),
                           ],

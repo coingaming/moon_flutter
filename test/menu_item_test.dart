@@ -26,7 +26,7 @@ void main() {
     await tester.pumpWidget(
       const TestWidget(
         showLeading: true,
-        showDiscription: true,
+        showDescription: true,
         showTrailing: true,
       ),
     );
@@ -56,14 +56,14 @@ const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
 class TestWidget extends StatelessWidget {
   final bool showLeading;
   final bool showTrailing;
-  final bool showDiscription;
+  final bool showDescription;
   final Key? widgetKey;
   final VoidCallback? onTap;
 
   const TestWidget({
     super.key,
     this.showLeading = false,
-    this.showDiscription = false,
+    this.showDescription = false,
     this.showTrailing = false,
     this.widgetKey,
     this.onTap,
@@ -75,8 +75,8 @@ class TestWidget extends StatelessWidget {
         body: MoonMenuItem(
           key: widgetKey,
           leading: showLeading ? const Icon(leadingIcon) : null,
-          description: showDiscription ? const Text(description) : null,
-          title: const Text(title),
+          content: showDescription ? const Text(description) : null,
+          label: const Text(title),
           trailing: showTrailing ? const Icon(trailingIcon) : null,
           onTap: onTap,
         ),

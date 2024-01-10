@@ -14,18 +14,18 @@ class MoonMenuItemColors extends ThemeExtension<MoonMenuItemColors> with Diagnos
   /// MenuItem icon color.
   final Color iconColor;
 
-  /// MenuItem title text color.
-  final Color titleTextColor;
+  /// MenuItem label text color.
+  final Color labelTextColor;
 
-  /// MenuItem description text color.
-  final Color descriptionTextColor;
+  /// MenuItem content text color.
+  final Color contentTextColor;
 
   const MoonMenuItemColors({
     required this.backgroundColor,
     required this.dividerColor,
     required this.iconColor,
-    required this.titleTextColor,
-    required this.descriptionTextColor,
+    required this.labelTextColor,
+    required this.contentTextColor,
   });
 
   @override
@@ -33,15 +33,15 @@ class MoonMenuItemColors extends ThemeExtension<MoonMenuItemColors> with Diagnos
     Color? backgroundColor,
     Color? dividerColor,
     Color? iconColor,
-    Color? titleTextColor,
-    Color? descriptionTextColor,
+    Color? labelTextColor,
+    Color? contentTextColor,
   }) {
     return MoonMenuItemColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       dividerColor: dividerColor ?? this.dividerColor,
       iconColor: iconColor ?? this.iconColor,
-      titleTextColor: titleTextColor ?? this.titleTextColor,
-      descriptionTextColor: descriptionTextColor ?? this.descriptionTextColor,
+      labelTextColor: labelTextColor ?? this.labelTextColor,
+      contentTextColor: contentTextColor ?? this.contentTextColor,
     );
   }
 
@@ -53,8 +53,8 @@ class MoonMenuItemColors extends ThemeExtension<MoonMenuItemColors> with Diagnos
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       dividerColor: colorPremulLerp(dividerColor, other.dividerColor, t)!,
       iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
-      titleTextColor: colorPremulLerp(titleTextColor, other.titleTextColor, t)!,
-      descriptionTextColor: colorPremulLerp(descriptionTextColor, other.descriptionTextColor, t)!,
+      labelTextColor: colorPremulLerp(labelTextColor, other.labelTextColor, t)!,
+      contentTextColor: colorPremulLerp(contentTextColor, other.contentTextColor, t)!,
     );
   }
 
@@ -66,7 +66,7 @@ class MoonMenuItemColors extends ThemeExtension<MoonMenuItemColors> with Diagnos
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("dividerColor", dividerColor))
       ..add(ColorProperty("iconColor", iconColor))
-      ..add(ColorProperty("titleTextColor", titleTextColor))
-      ..add(ColorProperty("descriptionTextColor", descriptionTextColor));
+      ..add(ColorProperty("labelTextColor", labelTextColor))
+      ..add(ColorProperty("contentTextColor", contentTextColor));
   }
 }
