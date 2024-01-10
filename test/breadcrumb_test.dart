@@ -51,11 +51,11 @@ void main() {
     expect(find.byIcon(dividerIcon), findsWidgets);
   });
 
-  testWidgets("Test max amount", (tester) async {
+  testWidgets("Test max itemsToShow", (tester) async {
     await tester.pumpWidget(
       const TestWidget(
         widgetKey: key,
-        maxItems: 2,
+        itemsToShow: 2,
       ),
     );
     final moreButton = find.text('...');
@@ -106,14 +106,14 @@ const IconData dividerIcon = MoonIcons.arrows_chevron_right_double_16_light;
 class TestWidget extends StatelessWidget {
   final bool showLeading;
   final bool showLabel;
-  final int? maxItems;
+  final int? itemsToShow;
   final void Function(int)? onPressed;
   final Key? widgetKey;
   const TestWidget({
     super.key,
     this.showLeading = false,
     this.showLabel = true,
-    this.maxItems,
+    this.itemsToShow,
     this.onPressed,
     this.widgetKey,
   });
@@ -125,7 +125,7 @@ class TestWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: MoonBreadcrumb(
             key: widgetKey,
-            maxItems: maxItems ?? 3,
+            itemsToShow: itemsToShow ?? 3,
             divider: const Icon(dividerIcon),
             items: [
               ...List.generate(4, (i) => i).map(

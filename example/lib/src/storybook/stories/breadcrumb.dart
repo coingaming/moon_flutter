@@ -43,16 +43,16 @@ class BreadcrumbStory extends StatelessWidget {
 
     final currentItemTextColor = colorTable(context)[currentItemColorKnob ?? 40];
 
-    final pageAmountKnob = context.knobs.nullable.sliderInt(
-      label: "pageAmount",
-      description: "Amount of pages in MoonBreadcrumb.",
+    final pageCountKnob = context.knobs.nullable.sliderInt(
+      label: "pageCount",
+      description: "Count of pages in MoonBreadcrumb.",
       initial: 7,
       max: 12,
     );
 
-    final maxItemsKnob = context.knobs.nullable.sliderInt(
-      label: "maxItemsAmount",
-      description: "Amount of pages to show in MoonBreadcrumb.",
+    final itemsToShowKnob = context.knobs.nullable.sliderInt(
+      label: "itemsToShowCount",
+      description: "Count of pages to show in MoonBreadcrumb.",
       initial: 3,
       max: 12,
     );
@@ -92,10 +92,10 @@ class BreadcrumbStory extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: MoonBreadcrumb(
-              maxItems: maxItemsKnob ?? 3,
-              textColor: textColor,
-              currentItemTextColor: currentItemTextColor,
+              itemsToShow: itemsToShowKnob ?? 3,
               hoverTextColor: hoverTextColor,
+              itemTextStyle: MoonTypography.typography.body.textDefault.copyWith(color: textColor),
+              currentItemTextStyle: MoonTypography.typography.body.textDefault.copyWith(color: currentItemTextColor),
               gap: gapKnob?.toDouble(),
               items: [
                 BreadcrumbItem(
@@ -104,17 +104,17 @@ class BreadcrumbStory extends StatelessWidget {
                   onPressed: isDisabledKnob
                       ? null
                       : () {
-                          MoonToast.show(context, title: const Text('Home page pressed'));
+                          MoonToast.show(context, label: const Text('Home page pressed'));
                         },
                 ),
-                ...List.generate(pageAmountKnob ?? 3, (i) => i).map(
+                ...List.generate(pageCountKnob ?? 3, (i) => i).map(
                   (index) {
                     return BreadcrumbItem(
                       label: Text('Page ${index + 1}'),
                       onPressed: isDisabledKnob
                           ? null
                           : () {
-                              MoonToast.show(context, title: Text('Page ${index + 1} pressed'));
+                              MoonToast.show(context, label: Text('Page ${index + 1} pressed'));
                             },
                     );
                   },
@@ -126,7 +126,6 @@ class BreadcrumbStory extends StatelessWidget {
           MoonBreadcrumb(
             itemTextStyle: context.moonTypography?.caption.text18,
             currentItemTextStyle: context.moonTypography?.heading.text20,
-            textColor: context.moonColors?.trunks,
             divider: const Icon(
               Icons.chevron_right,
               size: 24,

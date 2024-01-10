@@ -8,52 +8,58 @@ class MoonBreadcrumbProperties extends ThemeExtension<MoonBreadcrumbProperties> 
   /// The gap between divider and MoonBreadcrumb item.
   final double gap;
 
-  /// Padding around MoonBreadcrumb.
+  /// The MoonBreadcrumb expanded menu max height.
+  final double menuMaxHeight;
+
+  /// The MoonBreadcrumb transition duration.
+  final Duration transitionDuration;
+
+  /// The MoonBreadcrumb transition curve.
+  final Curve transitionCurve;
+
+  /// The padding around MoonBreadcrumb.
   final EdgeInsetsGeometry padding;
 
-  /// MoonBreadcrumb item text style.
+  /// The MoonBreadcrumb item text style.
   final TextStyle itemTextStyle;
 
-  /// Current MoonBreadcrumb item text style.
+  /// The current MoonBreadcrumb item text style.
   final TextStyle currentItemTextStyle;
 
-  /// Icon to use as divider.
-  final IconData dividerIcon;
-
-  /// MoonBreadcrumb more items menu item text style.
+  /// The MoonBreadcrumb expanded menu item text style.
   final TextStyle menuItemTextStyle;
-
-  /// MoonBreadcrumb more items menu max height.
-  final double menuMaxHeight;
 
   const MoonBreadcrumbProperties({
     required this.gap,
-    required this.dividerIcon,
+    required this.menuMaxHeight,
+    required this.transitionDuration,
+    required this.transitionCurve,
+    required this.padding,
     required this.itemTextStyle,
     required this.currentItemTextStyle,
-    required this.padding,
     required this.menuItemTextStyle,
-    required this.menuMaxHeight,
   });
 
   @override
   MoonBreadcrumbProperties copyWith({
     double? gap,
-    IconData? dividerIcon,
+    double? menuMaxHeight,
+    Duration? transitionDuration,
+    Curve? transitionCurve,
+    EdgeInsetsGeometry? padding,
     TextStyle? itemTextStyle,
     TextStyle? currentItemTextStyle,
-    EdgeInsetsGeometry? padding,
     TextStyle? menuItemTextStyle,
-    double? menuMaxHeight,
   }) {
     return MoonBreadcrumbProperties(
       gap: gap ?? this.gap,
-      dividerIcon: dividerIcon ?? this.dividerIcon,
+      menuMaxHeight: menuMaxHeight ?? this.menuMaxHeight,
+      transitionDuration: transitionDuration ?? this.transitionDuration,
+      transitionCurve: transitionCurve ?? this.transitionCurve,
+      padding: padding ?? this.padding,
       itemTextStyle: itemTextStyle ?? this.itemTextStyle,
       currentItemTextStyle: currentItemTextStyle ?? this.currentItemTextStyle,
-      padding: padding ?? this.padding,
       menuItemTextStyle: menuItemTextStyle ?? this.menuItemTextStyle,
-      menuMaxHeight: menuMaxHeight ?? this.menuMaxHeight,
     );
   }
 
@@ -63,12 +69,13 @@ class MoonBreadcrumbProperties extends ThemeExtension<MoonBreadcrumbProperties> 
 
     return MoonBreadcrumbProperties(
       gap: lerpDouble(gap, other.gap, t)!,
+      menuMaxHeight: lerpDouble(menuMaxHeight, other.menuMaxHeight, t)!,
+      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionCurve: other.transitionCurve,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
-      dividerIcon: dividerIcon,
       itemTextStyle: TextStyle.lerp(itemTextStyle, other.itemTextStyle, t)!,
       currentItemTextStyle: TextStyle.lerp(currentItemTextStyle, other.currentItemTextStyle, t)!,
       menuItemTextStyle: TextStyle.lerp(menuItemTextStyle, other.menuItemTextStyle, t)!,
-      menuMaxHeight: lerpDouble(menuMaxHeight, other.menuMaxHeight, t)!,
     );
   }
 
@@ -78,16 +85,12 @@ class MoonBreadcrumbProperties extends ThemeExtension<MoonBreadcrumbProperties> 
     properties
       ..add(DiagnosticsProperty("type", "MoonBreadcrumbProperties"))
       ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("menuMaxHeight", menuMaxHeight))
+      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
+      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
       ..add(DiagnosticsProperty<TextStyle>("itemTextStyle", itemTextStyle))
-      ..add(
-        DiagnosticsProperty<TextStyle>(
-          "currentItemTextStyle",
-          currentItemTextStyle,
-        ),
-      )
-      ..add(DiagnosticsProperty<IconData>("dividerIcon", dividerIcon))
-      ..add(DiagnosticsProperty<TextStyle>("menuItemTextStyle", menuItemTextStyle))
-      ..add(DoubleProperty("menuMaxHeight", menuMaxHeight));
+      ..add(DiagnosticsProperty<TextStyle>("currentItemTextStyle", currentItemTextStyle))
+      ..add(DiagnosticsProperty<TextStyle>("menuItemTextStyle", menuItemTextStyle));
   }
 }

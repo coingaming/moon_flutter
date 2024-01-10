@@ -9,10 +9,10 @@ class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with Diagn
   /// MDS tokens.
   final MoonTokens tokens;
 
-  /// Breadcrumb colors.
+  /// The MoonBreadcrumb colors.
   final MoonBreadcrumbColors colors;
 
-  /// Breadcrumb properties.
+  /// The MoonBreadcrumb properties.
   final MoonBreadcrumbProperties properties;
 
   MoonBreadcrumbTheme({
@@ -31,11 +31,12 @@ class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with Diagn
             MoonBreadcrumbProperties(
               gap: tokens.sizes.x4s,
               padding: EdgeInsets.zero,
-              dividerIcon: MoonIcons.arrows_right_24_light,
               itemTextStyle: tokens.typography.body.text14,
               currentItemTextStyle: tokens.typography.body.text14,
               menuItemTextStyle: tokens.typography.body.text14.copyWith(color: tokens.colors.bulma),
               menuMaxHeight: 300,
+              transitionDuration: tokens.transitions.defaultTransitionDuration,
+              transitionCurve: tokens.transitions.defaultTransitionCurve,
             );
 
   @override
