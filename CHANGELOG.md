@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.46.0](https://github.com/coingaming/moon_flutter/compare/v0.45.0...v0.46.0) (2024-01-11)
+
+
+### Features
+
+* [MDS-946] Add search functionality to Icons story ([#337](https://github.com/coingaming/moon_flutter/issues/337)) ([b6cf11a](https://github.com/coingaming/moon_flutter/commit/b6cf11aa99bb569162e996c2ba8b71f71ee0ed0e))
+
 ## [0.45.0](https://github.com/coingaming/moon_flutter/compare/v0.44.2...v0.45.0) (2024-01-09)
 
 
