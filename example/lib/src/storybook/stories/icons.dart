@@ -111,7 +111,6 @@ class _IconsStoryState extends State<IconsStory> {
     super.initState();
 
     _searchController.addListener(_performSearch);
-
     // Perform search once on init to show all icons
     _performSearch();
   }
@@ -119,6 +118,7 @@ class _IconsStoryState extends State<IconsStory> {
   @override
   void dispose() {
     _searchController.dispose();
+
     super.dispose();
   }
 
