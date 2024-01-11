@@ -26,14 +26,15 @@ class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with Diagn
               currentItemTextColor: tokens.colors.textPrimary,
               dividerColor: tokens.colors.trunks,
               menuBackgroundColor: tokens.colors.goku,
+              menuItemTextColor: tokens.colors.textPrimary,
             ),
         properties = properties ??
             MoonBreadcrumbProperties(
               gap: tokens.sizes.x4s,
               padding: EdgeInsets.zero,
-              itemTextStyle: tokens.typography.body.text14,
-              currentItemTextStyle: tokens.typography.body.text14,
-              menuItemTextStyle: tokens.typography.body.text14.copyWith(color: tokens.colors.bulma),
+              itemTextStyle: tokens.typography.body.textDefault,
+              currentItemTextStyle: tokens.typography.body.textDefault,
+              menuItemTextStyle: tokens.typography.body.textDefault,
               menuMaxHeight: 300,
               transitionDuration: tokens.transitions.defaultTransitionDuration,
               transitionCurve: tokens.transitions.defaultTransitionCurve,

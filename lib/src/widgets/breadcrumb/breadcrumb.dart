@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
+import 'package:moon_design/src/theme/breadcrumb/breadcrumb_theme.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 
@@ -22,7 +23,7 @@ class MoonBreadcrumb extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   /// The count of items to show in MoonBreadcrumb.
-  final int itemsToShow;
+  final int? itemsToShow;
 
   /// The text style of the MoonBreadcrumb item.
   final TextStyle? itemTextStyle;
@@ -46,7 +47,7 @@ class MoonBreadcrumb extends StatelessWidget {
     this.gap,
     this.menuMaxHeight,
     this.padding,
-    this.itemsToShow = 3,
+    this.itemsToShow,
     this.itemTextStyle,
     this.currentItemTextStyle,
     this.menuItemTextStyle,
@@ -55,7 +56,7 @@ class MoonBreadcrumb extends StatelessWidget {
   });
 
   Widget _buildDivider(BuildContext context) {
-    final effectiveDividerColor =
+    final Color effectiveDividerColor =
         itemTextStyle?.color ?? context.moonTheme?.breadcrumbTheme.colors.textColor ?? MoonColors.light.trunks;
 
     return IconTheme(
@@ -68,18 +69,20 @@ class MoonBreadcrumb extends StatelessWidget {
     List<BreadcrumbItem> actualItems,
     BuildContext context,
   ) {
-    final theme = context.moonTheme?.breadcrumbTheme;
+    final MoonBreadcrumbTheme? theme = context.moonTheme?.breadcrumbTheme;
 
-    final effectiveGap = gap ?? theme?.properties.gap ?? MoonSizes.sizes.x4s;
+    final double effectiveGap = gap ?? theme?.properties.gap ?? MoonSizes.sizes.x4s;
 
-    final effectiveHoveredTextColor = hoverTextColor ?? theme?.colors.hoverTextColor ?? MoonColors.light.bulma;
+    final Color effectiveHoveredTextColor = hoverTextColor ?? theme?.colors.hoverTextColor ?? MoonColors.light.bulma;
 
-    final effectiveCurrentItemTextColor = theme?.colors.currentItemTextColor ?? MoonColors.light.textPrimary;
+    final Color effectiveCurrentItemTextColor =
+        currentItemTextStyle?.color ?? theme?.colors.currentItemTextColor ?? MoonColors.light.textPrimary;
 
-    final effectiveItemTextStyle = itemTextStyle ?? theme?.properties.itemTextStyle ?? MoonTextStyles.body.text14;
+    final TextStyle effectiveItemTextStyle =
+        itemTextStyle ?? theme?.properties.itemTextStyle ?? MoonTextStyles.body.textDefault;
 
-    final effectiveCurrentItemTextStyle =
-        currentItemTextStyle ?? theme?.properties.currentItemTextStyle ?? MoonTextStyles.body.text14;
+    final TextStyle effectiveCurrentItemTextStyle =
+        currentItemTextStyle ?? theme?.properties.currentItemTextStyle ?? MoonTextStyles.body.textDefault;
 
     final Duration effectiveTransitionDuration =
         theme?.properties.transitionDuration ?? MoonTransitions.transitions.defaultTransitionDuration;
@@ -87,13 +90,13 @@ class MoonBreadcrumb extends StatelessWidget {
     final Curve effectiveTransitionCurve =
         theme?.properties.transitionCurve ?? MoonTransitions.transitions.defaultTransitionCurve;
 
-    final effectiveTextColor = itemTextStyle?.color ?? theme?.colors.textColor ?? MoonColors.light.trunks;
+    final Color effectiveTextColor = itemTextStyle?.color ?? theme?.colors.textColor ?? MoonColors.light.trunks;
 
-    final divider = _buildDivider(context);
+    final Widget divider = _buildDivider(context);
 
     return actualItems
         .map(
-          (item) => Row(
+          (BreadcrumbItem item) => Row(
             children: [
               if (item != actualItems.first) SizedBox(width: effectiveGap),
               _BreadcrumbItemBuilder(
@@ -118,51 +121,68 @@ class MoonBreadcrumb extends StatelessWidget {
         .toList();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.moonTheme?.breadcrumbTheme;
+  List<BreadcrumbItem> _generateActualItems(List<BreadcrumbItem> items, int effectiveItemsToShow) {
+    final int itemsLength = items.length;
 
-    final effectiveMenuMaxHeight = menuMaxHeight ?? theme?.properties.menuMaxHeight ?? 300;
-
-    final effectiveMenuItemTextStyle = menuItemTextStyle ??
-        theme?.properties.menuItemTextStyle ??
-        MoonTextStyles.body.text14.copyWith(color: MoonColors.light.bulma);
-
-    final effectiveMenuBackgroundColor =
-        menuBackgroundColor ?? theme?.colors.menuBackgroundColor ?? MoonColors.light.goku;
-
-    final effectivePadding = padding ?? theme?.properties.padding ?? EdgeInsets.zero;
-
-    final itemsLength = items.length;
-
-    final effectiveItemsToShow = max(2, itemsToShow);
-    final actualItems = itemsLength > effectiveItemsToShow
+    final List<BreadcrumbItem> actualItems = itemsLength > effectiveItemsToShow
         ? [
             items[0],
             ...List.generate(effectiveItemsToShow - 1, (index) => itemsLength - index)
                 .reversed
-                .map((index) => items[index - 1]),
+                .map((int index) => items[index - 1]),
           ]
         : items;
+    return actualItems;
+  }
 
-    final itemsWidgets = _generateItemsWidgets(actualItems, context);
+  List<Widget> _addShowMoreButton({
+    required BuildContext context,
+    required int itemsToShow,
+    required List<Widget> itemsWidgets,
+  }) {
+    final MoonBreadcrumbTheme? theme = context.moonTheme?.breadcrumbTheme;
 
-    if (itemsLength > effectiveItemsToShow) {
-      itemsWidgets.insert(
+    final double effectiveMenuMaxHeight = menuMaxHeight ?? theme?.properties.menuMaxHeight ?? 300;
+
+    final Color effectiveMenuBackgroundColor =
+        menuBackgroundColor ?? theme?.colors.menuBackgroundColor ?? MoonColors.light.goku;
+
+    return itemsWidgets
+      ..insert(
         1,
         Row(
           children: [
             _ShowMoreButton(
-              items: items.sublist(1, items.length - effectiveItemsToShow + 1),
+              items: items.sublist(1, items.length - itemsToShow + 1),
               menuMaxHeight: effectiveMenuMaxHeight,
-              menuItemTextStyle: effectiveMenuItemTextStyle,
+              menuItemTextStyle: menuItemTextStyle,
               menuBackgroundColor: effectiveMenuBackgroundColor,
             ),
             _buildDivider(context),
           ],
         ),
       );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final MoonBreadcrumbTheme? theme = context.moonTheme?.breadcrumbTheme;
+
+    final EdgeInsetsGeometry effectivePadding = padding ?? theme?.properties.padding ?? EdgeInsets.zero;
+
+    final int itemsLength = items.length;
+
+    final int effectiveItemsToShow = max(2, itemsToShow ?? 3);
+
+    final List<BreadcrumbItem> actualItems = _generateActualItems(items, effectiveItemsToShow);
+
+    List<Widget> itemsWidgets = _generateItemsWidgets(actualItems, context);
+
+    if (itemsLength > effectiveItemsToShow) {
+      itemsWidgets =
+          _addShowMoreButton(context: context, itemsWidgets: itemsWidgets, itemsToShow: effectiveItemsToShow);
     }
+
     return Padding(
       padding: effectivePadding,
       child: Row(
@@ -176,7 +196,7 @@ class MoonBreadcrumb extends StatelessWidget {
 class _ShowMoreButton extends StatefulWidget {
   final double menuMaxHeight;
 
-  final TextStyle menuItemTextStyle;
+  final TextStyle? menuItemTextStyle;
 
   final Color menuBackgroundColor;
 
@@ -197,7 +217,13 @@ class _ShowMoreButtonState extends State<_ShowMoreButton> {
 
   @override
   Widget build(BuildContext context) {
-    final color = widget.menuItemTextStyle.color ?? context.moonColors?.textPrimary ?? MoonColors.light.textPrimary;
+    final MoonBreadcrumbTheme? theme = context.moonTheme?.breadcrumbTheme;
+
+    final TextStyle effectiveMenuItemTextStyle =
+        widget.menuItemTextStyle ?? theme?.properties.menuItemTextStyle ?? MoonTextStyles.body.textDefault;
+
+    final Color effectiveMenuItemTextColor =
+        widget.menuItemTextStyle?.color ?? theme?.colors.menuItemTextColor ?? MoonColors.light.textPrimary;
 
     return MoonPopover(
       popoverPosition: MoonPopoverPosition.bottom,
@@ -210,9 +236,9 @@ class _ShowMoreButtonState extends State<_ShowMoreButton> {
           shrinkWrap: true,
           children: widget.items
               .map(
-                (item) => MoonMenuItem(
+                (BreadcrumbItem item) => MoonMenuItem(
                   label: DefaultTextStyle(
-                    style: MoonTypography.typography.body.textDefault.copyWith(color: color),
+                    style: effectiveMenuItemTextStyle.copyWith(color: effectiveMenuItemTextColor),
                     child: item.label ?? Container(),
                   ),
                   leading: item.leading,
@@ -251,9 +277,9 @@ class _BreadcrumbItemBuilder extends StatefulWidget {
 
   final Color textColor;
 
-  final Color? currentItemTextColor;
+  final Color currentItemTextColor;
 
-  final Color? hoveredTextColor;
+  final Color hoveredTextColor;
 
   const _BreadcrumbItemBuilder({
     required this.isCurrent,
@@ -303,12 +329,9 @@ class _BreadCrumbItemBuilderState extends State<_BreadcrumbItemBuilder> with Sin
   Widget build(BuildContext context) {
     final TextStyle effectiveTextStyle = widget.isCurrent ? widget.currentItemTextStyle : widget.itemTextStyle;
 
-    final Color effectiveTextColor =
-        widget.isCurrent ? (widget.currentItemTextColor ?? widget.textColor) : widget.textColor;
+    final Color effectiveTextColor = widget.isCurrent ? (widget.currentItemTextColor) : widget.textColor;
 
-    final Color effectiveHoveredTextColor = widget.isCurrent
-        ? (widget.currentItemTextColor ?? widget.textColor)
-        : widget.hoveredTextColor ?? widget.textColor;
+    final Color effectiveHoveredTextColor = widget.isCurrent ? (widget.currentItemTextColor) : widget.hoveredTextColor;
 
     _textColor ??= _animationController!.drive(
       _textColorTween.chain(CurveTween(curve: widget.transitionCurve)),

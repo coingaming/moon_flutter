@@ -92,32 +92,27 @@ class BreadcrumbStory extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: MoonBreadcrumb(
-              itemsToShow: itemsToShowKnob ?? 3,
+              itemsToShow: itemsToShowKnob,
               hoverTextColor: hoverTextColor,
-              itemTextStyle: MoonTypography.typography.body.textDefault.copyWith(color: textColor),
-              currentItemTextStyle: MoonTypography.typography.body.textDefault.copyWith(color: currentItemTextColor),
+              itemTextStyle: TextStyle(color: textColor),
+              currentItemTextStyle: TextStyle(color: currentItemTextColor),
               gap: gapKnob?.toDouble(),
               items: [
                 BreadcrumbItem(
                   leading: showLeadingKnob ? const Icon(MoonIcons.generic_home_16_light) : null,
                   label: showLabelKnob ? const Text('Home') : null,
-                  onPressed: isDisabledKnob
-                      ? null
-                      : () {
-                          MoonToast.show(context, label: const Text('Home page pressed'));
-                        },
+                  onPressed:
+                      isDisabledKnob ? null : () => MoonToast.show(context, label: const Text('Home page pressed')),
                 ),
-                ...List.generate(pageCountKnob ?? 3, (i) => i).map(
-                  (index) {
-                    return BreadcrumbItem(
-                      label: Text('Page ${index + 1}'),
-                      onPressed: isDisabledKnob
-                          ? null
-                          : () {
-                              MoonToast.show(context, label: Text('Page ${index + 1} pressed'));
-                            },
-                    );
-                  },
+                ...List.generate(pageCountKnob ?? 3, (int i) => i).map(
+                  (int index) => BreadcrumbItem(
+                    label: Text('Page ${index + 1}'),
+                    onPressed: isDisabledKnob
+                        ? null
+                        : () {
+                            MoonToast.show(context, label: Text('Page ${index + 1} pressed'));
+                          },
+                  ),
                 ),
               ],
             ),
