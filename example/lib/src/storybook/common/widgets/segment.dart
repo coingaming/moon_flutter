@@ -21,7 +21,7 @@ class IconsSegment extends StatelessWidget {
       sliver: SliverMainAxisGroup(
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.only(top: 32),
+            padding: const EdgeInsets.only(top: 16),
             sliver: SliverToBoxAdapter(
               child: TextDivider(
                 text: createSegmentTitle(segmentMap.keys.first),
@@ -59,6 +59,9 @@ class IconsSegment extends StatelessWidget {
                 ],
               );
             },
+          ),
+          const SliverPadding(
+            padding: EdgeInsets.only(bottom: 16),
           ),
         ],
       ),
