@@ -3,12 +3,21 @@ import 'dart:ui';
 
 import 'package:example/src/storybook/common/widgets/segment.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_icons/moon_icons.dart';
+import 'package:moon_design/moon_design.dart';
 
-class IconsStory extends StatelessWidget {
+class IconsStory extends StatefulWidget {
   static const path = '/icons';
 
   const IconsStory({super.key});
+
+  @override
+  State<IconsStory> createState() => _IconsStoryState();
+}
+
+class _IconsStoryState extends State<IconsStory> {
+  final TextEditingController _searchController = TextEditingController();
+
+  Map<String, IconData> _filteredIcons = {};
 
   // Helper function to group keys in trios
   List<List<String>> _groupInTrios(List<String> keys) {
@@ -80,8 +89,43 @@ class IconsStory extends StatelessWidget {
     return combinedSegments.values;
   }
 
+  void _performSearch() {
+    setState(() {
+      _filteredIcons = Map.fromEntries(
+        iconsMap.entries
+            .where((entry) => entry.key.contains(_searchController.text.toLowerCase()))
+            .map((entry) => MapEntry(entry.key, entry.value)),
+      );
+    });
+  }
+
+  void _handleClear() {
+    setState(() {
+      _searchController.clear();
+      _performSearch();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _searchController.addListener(_performSearch);
+
+    // Perform search once on init to show all icons
+    _performSearch();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final sortedIcons = _getSortedIcons(_filteredIcons);
+
     final ScrollBehavior scrollBehaviour = ScrollConfiguration.of(context).copyWith(
       scrollbars: false,
       overscroll: false,
@@ -91,11 +135,35 @@ class IconsStory extends StatelessWidget {
       },
     );
 
-    final sortedIcons = _getSortedIcons(iconsMap);
-
-    return CustomScrollView(
-      scrollBehavior: scrollBehaviour,
-      slivers: sortedIcons.map((e) => IconsSegment(segmentMap: e)).toList(),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: context.moonColors?.goku,
+        title: Theme(
+          data: Theme.of(context),
+          child: MoonTextInput(
+            controller: _searchController,
+            hintText: "Search icons",
+            leading: const Icon(
+              MoonIcons.generic_search_24_light,
+              size: 24,
+            ),
+            trailing: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: _handleClear,
+                child: const Icon(
+                  MoonIcons.controls_close_small_24_light,
+                  size: 24,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      body: CustomScrollView(
+        scrollBehavior: scrollBehaviour,
+        slivers: sortedIcons.map((e) => IconsSegment(segmentMap: e)).toList(),
+      ),
     );
   }
 }
