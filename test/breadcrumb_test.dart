@@ -133,7 +133,7 @@ class TestWidget extends StatelessWidget {
                   return BreadcrumbItem(
                     label: showLabel ? Text('p$index') : null,
                     leading: showLeading ? const Icon(leadingIcon) : null,
-                    onPressed: () => onPressed?.call(index),
+                    onTap: () => onPressed?.call(index),
                   );
                 },
               ),
