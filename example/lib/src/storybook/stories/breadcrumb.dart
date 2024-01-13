@@ -10,6 +10,17 @@ class BreadcrumbStory extends StatelessWidget {
   const BreadcrumbStory({super.key});
   @override
   Widget build(BuildContext context) {
+    final homeItemTextColorKnob = context.knobs.nullable.options(
+      label: "homeItemTextColorKnob",
+      description: "MoonColors variants for MoonBreadcrumb Home item text.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final homeItemTextColor = colorTable(context)[homeItemTextColorKnob ?? 40];
+
     final textColorKnob = context.knobs.nullable.options(
       label: "itemTextColor",
       description: "MoonColors variants for MoonBreadcrumb item text.",
@@ -20,6 +31,28 @@ class BreadcrumbStory extends StatelessWidget {
     );
 
     final textColor = colorTable(context)[textColorKnob ?? 40];
+
+    final menuBackgroundColorKnob = context.knobs.nullable.options(
+      label: "menuBakgroundColorKnob",
+      description: "MoonColors variants for MoonBreadcrumb expanded menu background.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final menuBackgroundColor = colorTable(context)[menuBackgroundColorKnob ?? 40];
+
+    final menuItemTextColorKnob = context.knobs.nullable.options(
+      label: "menuItemTextColorKnob",
+      description: "MoonColors variants for MoonBreadcrumb expanded menu item text color.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final menuItemTextColor = colorTable(context)[menuItemTextColorKnob ?? 40];
 
     final hoverTextColorKnob = context.knobs.nullable.options(
       label: "itemTextHoverColor",
@@ -92,6 +125,8 @@ class BreadcrumbStory extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: MoonBreadcrumb(
+              menuBackgroundColor: menuBackgroundColor,
+              menuItemTextStyle: TextStyle(color: menuItemTextColor),
               itemsToShow: itemsToShowKnob,
               hoverTextColor: hoverTextColor,
               itemTextStyle: TextStyle(color: textColor),
@@ -100,14 +135,18 @@ class BreadcrumbStory extends StatelessWidget {
               items: [
                 BreadcrumbItem(
                   leading: showLeadingKnob ? const Icon(MoonIcons.generic_home_16_light) : null,
-                  label: showLabelKnob ? const Text('Home') : null,
-                  onPressed:
-                      isDisabledKnob ? null : () => MoonToast.show(context, label: const Text('Home page pressed')),
+                  label: showLabelKnob
+                      ? Text(
+                          'Home',
+                          style: TextStyle(color: homeItemTextColor),
+                        )
+                      : null,
+                  onTap: isDisabledKnob ? null : () => MoonToast.show(context, label: const Text('Home page pressed')),
                 ),
                 ...List.generate(pageCountKnob ?? 3, (int i) => i).map(
                   (int index) => BreadcrumbItem(
                     label: Text('Page ${index + 1}'),
-                    onPressed: isDisabledKnob
+                    onTap: isDisabledKnob
                         ? null
                         : () {
                             MoonToast.show(context, label: Text('Page ${index + 1} pressed'));
@@ -119,7 +158,7 @@ class BreadcrumbStory extends StatelessWidget {
           ),
           const TextDivider(text: "MoonBreadcrumb with custom divider and text style"),
           MoonBreadcrumb(
-            itemTextStyle: context.moonTypography?.caption.text18,
+            itemTextStyle: context.moonTypography?.caption.text18.copyWith(color: Colors.amber),
             currentItemTextStyle: context.moonTypography?.heading.text20,
             divider: const Icon(
               Icons.chevron_right,
@@ -127,16 +166,19 @@ class BreadcrumbStory extends StatelessWidget {
             ),
             items: [
               BreadcrumbItem(
-                label: const Text('Home'),
-                onPressed: () {},
+                label: const Text(
+                  'Home',
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onTap: () {},
               ),
               BreadcrumbItem(
                 label: const Text('Page 1'),
-                onPressed: () {},
+                onTap: () {},
               ),
               BreadcrumbItem(
                 label: const Text('Page 2'),
-                onPressed: () {},
+                onTap: () {},
               ),
             ],
           ),

@@ -7,6 +7,9 @@ import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 
 class MoonBreadcrumb extends StatelessWidget {
+  /// The divider color.
+  final Color? dividerColor;
+
   /// The MoonBreadcrumb expanded menu background color.
   final Color? menuBackgroundColor;
 
@@ -42,6 +45,7 @@ class MoonBreadcrumb extends StatelessWidget {
 
   const MoonBreadcrumb({
     super.key,
+    this.dividerColor,
     this.menuBackgroundColor,
     this.hoverTextColor,
     this.gap,
@@ -56,8 +60,11 @@ class MoonBreadcrumb extends StatelessWidget {
   });
 
   Widget _buildDivider(BuildContext context) {
-    final Color effectiveDividerColor =
-        itemTextStyle?.color ?? context.moonTheme?.breadcrumbTheme.colors.textColor ?? MoonColors.light.trunks;
+    final Color effectiveDividerColor = dividerColor ??
+        context.moonTheme?.breadcrumbTheme.colors.dividerColor ??
+        itemTextStyle?.color ??
+        context.moonTheme?.breadcrumbTheme.colors.textColor ??
+        MoonColors.light.textSecondary;
 
     return IconTheme(
       data: IconThemeData(color: effectiveDividerColor),
@@ -73,7 +80,8 @@ class MoonBreadcrumb extends StatelessWidget {
 
     final double effectiveGap = gap ?? theme?.properties.gap ?? MoonSizes.sizes.x4s;
 
-    final Color effectiveHoveredTextColor = hoverTextColor ?? theme?.colors.hoverTextColor ?? MoonColors.light.bulma;
+    final Color effectiveHoveredTextColor =
+        hoverTextColor ?? theme?.colors.hoverTextColor ?? MoonColors.light.textPrimary;
 
     final Color effectiveCurrentItemTextColor =
         currentItemTextStyle?.color ?? theme?.colors.currentItemTextColor ?? MoonColors.light.textPrimary;
@@ -90,7 +98,7 @@ class MoonBreadcrumb extends StatelessWidget {
     final Curve effectiveTransitionCurve =
         theme?.properties.transitionCurve ?? MoonTransitions.transitions.defaultTransitionCurve;
 
-    final Color effectiveTextColor = itemTextStyle?.color ?? theme?.colors.textColor ?? MoonColors.light.trunks;
+    final Color effectiveTextColor = itemTextStyle?.color ?? theme?.colors.textColor ?? MoonColors.light.textSecondary;
 
     final Widget divider = _buildDivider(context);
 
@@ -104,7 +112,7 @@ class MoonBreadcrumb extends StatelessWidget {
                 transitionDuration: effectiveTransitionDuration,
                 transitionCurve: effectiveTransitionCurve,
                 item: item,
-                onPressed: item.onPressed,
+                onTap: item.onTap,
                 hoveredTextColor: effectiveHoveredTextColor,
                 currentItemTextColor: effectiveCurrentItemTextColor,
                 itemTextStyle: effectiveItemTextStyle,
@@ -226,6 +234,7 @@ class _ShowMoreButtonState extends State<_ShowMoreButton> {
         widget.menuItemTextStyle?.color ?? theme?.colors.menuItemTextColor ?? MoonColors.light.textPrimary;
 
     return MoonPopover(
+      backgroundColor: widget.menuBackgroundColor,
       popoverPosition: MoonPopoverPosition.bottom,
       contentPadding: const EdgeInsets.all(4),
       show: show,
@@ -242,7 +251,7 @@ class _ShowMoreButtonState extends State<_ShowMoreButton> {
                     child: item.label ?? Container(),
                   ),
                   leading: item.leading,
-                  onTap: item.onPressed,
+                  onTap: item.onTap,
                   backgroundColor: widget.menuBackgroundColor,
                 ),
               )
@@ -273,7 +282,7 @@ class _BreadcrumbItemBuilder extends StatefulWidget {
 
   final TextStyle itemTextStyle;
 
-  final VoidCallback? onPressed;
+  final VoidCallback? onTap;
 
   final Color textColor;
 
@@ -286,7 +295,7 @@ class _BreadcrumbItemBuilder extends StatefulWidget {
     required this.transitionDuration,
     required this.transitionCurve,
     required this.item,
-    required this.onPressed,
+    required this.onTap,
     required this.currentItemTextStyle,
     required this.itemTextStyle,
     required this.currentItemTextColor,
@@ -329,9 +338,9 @@ class _BreadCrumbItemBuilderState extends State<_BreadcrumbItemBuilder> with Sin
   Widget build(BuildContext context) {
     final TextStyle effectiveTextStyle = widget.isCurrent ? widget.currentItemTextStyle : widget.itemTextStyle;
 
-    final Color effectiveTextColor = widget.isCurrent ? (widget.currentItemTextColor) : widget.textColor;
+    final Color effectiveTextColor = widget.isCurrent ? widget.currentItemTextColor : widget.textColor;
 
-    final Color effectiveHoveredTextColor = widget.isCurrent ? (widget.currentItemTextColor) : widget.hoveredTextColor;
+    final Color effectiveHoveredTextColor = widget.isCurrent ? widget.currentItemTextColor : widget.hoveredTextColor;
 
     _textColor ??= _animationController!.drive(
       _textColorTween.chain(CurveTween(curve: widget.transitionCurve)),
@@ -343,7 +352,7 @@ class _BreadCrumbItemBuilderState extends State<_BreadcrumbItemBuilder> with Sin
 
     return MoonBaseControl(
       disabledOpacityValue: 1,
-      onTap: widget.onPressed,
+      onTap: widget.onTap,
       semanticLabel: widget.item.semanticLabel,
       builder: (
         BuildContext context,

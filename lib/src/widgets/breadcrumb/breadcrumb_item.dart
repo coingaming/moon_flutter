@@ -11,12 +11,12 @@ class BreadcrumbItem {
   final String? semanticLabel;
 
   /// The callback that is called when the BreadcrumbItem is tapped or pressed.
-  final VoidCallback? onPressed;
+  final VoidCallback? onTap;
 
   const BreadcrumbItem({
     this.label,
     this.leading,
     this.semanticLabel,
-    this.onPressed,
+    this.onTap,
   });
 }

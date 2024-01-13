@@ -21,10 +21,10 @@ class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with Diagn
     MoonBreadcrumbProperties? properties,
   })  : colors = colors ??
             MoonBreadcrumbColors(
-              textColor: tokens.colors.trunks,
-              hoverTextColor: tokens.colors.bulma,
+              textColor: tokens.colors.textSecondary,
+              hoverTextColor: tokens.colors.textPrimary,
               currentItemTextColor: tokens.colors.textPrimary,
-              dividerColor: tokens.colors.trunks,
+              dividerColor: tokens.colors.textSecondary,
               menuBackgroundColor: tokens.colors.goku,
               menuItemTextColor: tokens.colors.textPrimary,
             ),
