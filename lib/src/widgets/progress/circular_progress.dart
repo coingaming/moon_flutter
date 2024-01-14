@@ -5,7 +5,7 @@ import 'package:moon_design/src/theme/progress/circular_progress/circular_progre
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/circular_progress_indicator.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 enum MoonCircularProgressSize {
   x2s,
@@ -81,18 +81,22 @@ class MoonCircularProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor =
-        color ?? context.moonTheme?.circularProgressTheme.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveColor = color ??
+        context.moonTheme?.circularProgressTheme.colors.color ??
+        MoonColors.light.piccolo;
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.circularProgressTheme.colors.backgroundColor ?? MoonColors.light.beerus;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.circularProgressTheme.colors.backgroundColor ??
+        MoonColors.light.beerus;
 
     final MoonCircularProgressSizeProperties effectiveMoonCircularProgressSize =
         _getMoonCircularProgressSize(context, circularProgressSize);
 
-    final double effectiveSize = sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
+    final double effectiveSize =
+        sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
 
-    final double effectiveStrokeWidth = strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
+    final double effectiveStrokeWidth =
+        strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
 
     final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 

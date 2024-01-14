@@ -11,7 +11,7 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 enum MoonToastVariant {
   original,
@@ -97,33 +97,46 @@ class MoonToast {
     /// The widget in the content slot of the toast.
     Widget? content,
   }) {
-    final BorderRadiusGeometry effectiveBorderRadius =
-        borderRadius ?? context.moonTheme?.toastTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ??
+        context.moonTheme?.toastTheme.properties.borderRadius ??
+        MoonBorders.borders.surfaceSm;
 
     final Color effectiveBackgroundColor = backgroundColor ??
         (variant == MoonToastVariant.original
-            ? (context.moonTheme?.toastTheme.colors.lightVariantBackgroundColor ?? MoonColors.light.goku)
-            : (context.moonTheme?.toastTheme.colors.darkVariantBackgroundColor ?? MoonColors.dark.goku));
+            ? (context
+                    .moonTheme?.toastTheme.colors.lightVariantBackgroundColor ??
+                MoonColors.light.goku)
+            : (context
+                    .moonTheme?.toastTheme.colors.darkVariantBackgroundColor ??
+                MoonColors.dark.goku));
 
     final Color effectiveTextColor = variant == MoonToastVariant.original
-        ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ?? MoonColors.light.textPrimary)
-        : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ?? MoonColors.dark.textPrimary);
+        ? (context.moonTheme?.toastTheme.colors.lightVariantTextColor ??
+            MoonColors.light.textPrimary)
+        : (context.moonTheme?.toastTheme.colors.darkVariantTextColor ??
+            MoonColors.dark.textPrimary);
 
     final Color effectiveIconColor = variant == MoonToastVariant.original
-        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ?? MoonColors.light.iconPrimary)
-        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ?? MoonColors.dark.iconPrimary);
+        ? (context.moonTheme?.toastTheme.colors.lightVariantIconColor ??
+            MoonColors.light.iconPrimary)
+        : (context.moonTheme?.toastTheme.colors.darkVariantIconColor ??
+            MoonColors.dark.iconPrimary);
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.toastTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.toastTheme.properties.textStyle ??
+            MoonTypography.typography.body.textDefault;
 
-    final double effectiveHorizontalGap =
-        horizontalGap ?? context.moonTheme?.toastTheme.properties.horizontalGap ?? MoonSizes.sizes.x2s;
+    final double effectiveHorizontalGap = horizontalGap ??
+        context.moonTheme?.toastTheme.properties.horizontalGap ??
+        MoonSizes.sizes.x2s;
 
-    final double effectiveVerticalGap =
-        verticalGap ?? context.moonTheme?.toastTheme.properties.verticalGap ?? MoonSizes.sizes.x3s;
+    final double effectiveVerticalGap = verticalGap ??
+        context.moonTheme?.toastTheme.properties.verticalGap ??
+        MoonSizes.sizes.x3s;
 
-    final Duration effectiveDisplayDuration =
-        displayDuration ?? context.moonTheme?.toastTheme.properties.displayDuration ?? const Duration(seconds: 3);
+    final Duration effectiveDisplayDuration = displayDuration ??
+        context.moonTheme?.toastTheme.properties.displayDuration ??
+        const Duration(seconds: 3);
 
     final Duration effectiveTransitionDuration = transitionDuration ??
         context.moonTheme?.toastTheme.properties.transitionDuration ??
@@ -133,16 +146,20 @@ class MoonToast {
         context.moonTheme?.toastTheme.properties.transitionCurve ??
         MoonTransitions.transitions.defaultTransitionCurve;
 
-    final EdgeInsetsGeometry effectiveContentPadding =
-        padding ?? context.moonTheme?.toastTheme.properties.contentPadding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
+    final EdgeInsetsGeometry effectiveContentPadding = padding ??
+        context.moonTheme?.toastTheme.properties.contentPadding ??
+        EdgeInsets.all(MoonSizes.sizes.x2s);
 
-    final EdgeInsets resolvedContentPadding = effectiveContentPadding.resolve(Directionality.of(context));
+    final EdgeInsets resolvedContentPadding =
+        effectiveContentPadding.resolve(Directionality.of(context));
 
-    final List<BoxShadow> effectiveToastShadows =
-        toastShadows ?? context.moonTheme?.toastTheme.shadows.toastShadows ?? MoonShadows.light.lg;
+    final List<BoxShadow> effectiveToastShadows = toastShadows ??
+        context.moonTheme?.toastTheme.shadows.toastShadows ??
+        MoonShadows.light.lg;
 
-    final effectiveContext =
-        isPersistent ? (Navigator.maybeOf(context, rootNavigator: true)?.context ?? context) : context;
+    final effectiveContext = isPersistent
+        ? (Navigator.maybeOf(context, rootNavigator: true)?.context ?? context)
+        : context;
 
     final CapturedThemes themes = InheritedTheme.capture(
       from: context,
@@ -171,7 +188,8 @@ class MoonToast {
                         Alignment.topLeft ||
                         Alignment.centerLeft ||
                         Alignment.bottomLeft =>
-                          -_toastTravelDistance + progress * _toastTravelDistance,
+                          -_toastTravelDistance +
+                              progress * _toastTravelDistance,
                         Alignment.topRight ||
                         Alignment.centerRight ||
                         Alignment.bottomRight =>
@@ -179,8 +197,10 @@ class MoonToast {
                         _ => 0
                       },
                       switch (toastAlignment) {
-                        Alignment.topCenter => -_toastTravelDistance + progress * _toastTravelDistance,
-                        Alignment.bottomCenter => (1 - progress) * _toastTravelDistance,
+                        Alignment.topCenter => -_toastTravelDistance +
+                            progress * _toastTravelDistance,
+                        Alignment.bottomCenter =>
+                          (1 - progress) * _toastTravelDistance,
                         _ => 0
                       },
                       0,
@@ -199,7 +219,8 @@ class MoonToast {
                 child: IconTheme(
                   data: IconThemeData(color: effectiveIconColor),
                   child: DefaultTextStyle(
-                    style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                    style:
+                        effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Container(
                       margin: margin ?? resolvedContentPadding,
                       padding: resolvedContentPadding,
@@ -209,7 +230,8 @@ class MoonToast {
                             color: effectiveBackgroundColor,
                             shadows: effectiveToastShadows,
                             shape: MoonSquircleBorder(
-                              borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                              borderRadius: effectiveBorderRadius
+                                  .squircleBorderRadius(context),
                             ),
                           ),
                       child: Column(
@@ -217,8 +239,9 @@ class MoonToast {
                         children: [
                           Row(
                             mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment:
-                                width != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
+                            mainAxisAlignment: width != null
+                                ? MainAxisAlignment.spaceBetween
+                                : MainAxisAlignment.center,
                             textDirection: Directionality.of(context),
                             children: [
                               if (leading != null) ...[

@@ -12,7 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
   moon_icons: ^0.4.0
-  moon_tokens: ^0.0.6
 
 dev_dependencies:
   flutter_test:

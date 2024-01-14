@@ -7,7 +7,7 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 /// Displays a modal above the current contents of the app, with entrance and exit animations, modal barrier color,
 /// and modal barrier behavior (dialog is dismissible with a tap on the barrier). Used together with MoonModal.
@@ -32,8 +32,9 @@ Future<T?> showMoonModal<T>({
     to: Navigator.of(context, rootNavigator: useRootNavigator).context,
   );
 
-  final Color effectiveBarrierColor =
-      barrierColor ?? context.moonTheme?.modalTheme.colors.barrierColor ?? MoonColors.light.zeno;
+  final Color effectiveBarrierColor = barrierColor ??
+      context.moonTheme?.modalTheme.colors.barrierColor ??
+      MoonColors.light.zeno;
 
   final Duration effectiveTransitionDuration = transitionDuration ??
       context.moonTheme?.modalTheme.properties.transitionDuration ??
@@ -64,7 +65,8 @@ bool _debugIsActive(BuildContext context) {
   if (context is Element && !context.debugIsActive) {
     throw FlutterError.fromParts(<DiagnosticsNode>[
       ErrorSummary('This BuildContext is no longer valid.'),
-      ErrorDescription('The showMoonModal function context parameter is a BuildContext that is no longer valid.'),
+      ErrorDescription(
+          'The showMoonModal function context parameter is a BuildContext that is no longer valid.'),
       ErrorHint(
         'This can commonly occur when the showMoonModal function is called after awaiting a Future. '
         'In this situation the BuildContext might refer to a widget that has already been disposed during the await. '
@@ -92,8 +94,10 @@ class MoonModalRoute<T> extends RawDialogRoute<T> {
     required BuildContext context,
     required WidgetBuilder builder,
   }) : super(
-          barrierLabel: barrierLabel ?? MaterialLocalizations.of(context).modalBarrierDismissLabel,
-          pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
+          barrierLabel: barrierLabel ??
+              MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          pageBuilder: (BuildContext buildContext, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
             final Widget pageChild = Builder(builder: builder);
 
             Widget modal = themes?.wrap(pageChild) ?? pageChild;
@@ -150,18 +154,25 @@ class MoonModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadiusGeometry effectiveBorderRadius =
-        borderRadius ?? context.moonTheme?.modalTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ??
+        context.moonTheme?.modalTheme.properties.borderRadius ??
+        MoonBorders.borders.surfaceSm;
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.modalTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
-    final Color effectiveTextColor = context.moonTheme?.modalTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.modalTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor = context.moonTheme?.modalTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.modalTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.modalTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.modalTheme.properties.textStyle ??
+            MoonTypography.typography.body.textDefault;
 
     return Semantics(
       label: semanticLabel,
@@ -175,7 +186,8 @@ class MoonModal extends StatelessWidget {
                   ShapeDecorationWithPremultipliedAlpha(
                     color: effectiveBackgroundColor,
                     shape: MoonSquircleBorder(
-                      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                      borderRadius:
+                          effectiveBorderRadius.squircleBorderRadius(context),
                     ),
                   ),
               child: child,

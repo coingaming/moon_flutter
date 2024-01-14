@@ -9,6 +9,7 @@ import 'package:moon_design/src/theme/button/button_theme.dart';
 import 'package:moon_design/src/theme/carousel/carousel_theme.dart';
 import 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 import 'package:moon_design/src/theme/chip/chip_theme.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 import 'package:moon_design/src/theme/dot_indicator/dot_indicator_theme.dart';
 import 'package:moon_design/src/theme/drawer/drawer_theme.dart';
 import 'package:moon_design/src/theme/dropdown/dropdown_theme.dart';
@@ -39,7 +40,6 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
-import 'package:moon_tokens/moon_tokens.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
@@ -180,32 +180,41 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
         alertTheme = alertTheme ?? MoonAlertTheme(tokens: tokens),
         authCodeTheme = authCodeTheme ?? MoonAuthCodeTheme(tokens: tokens),
         avatarTheme = avatarTheme ?? MoonAvatarTheme(tokens: tokens),
-        bottomSheetTheme = bottomSheetTheme ?? MoonBottomSheetTheme(tokens: tokens),
+        bottomSheetTheme =
+            bottomSheetTheme ?? MoonBottomSheetTheme(tokens: tokens),
         buttonTheme = buttonTheme ?? MoonButtonTheme(tokens: tokens),
         carouselTheme = carouselTheme ?? MoonCarouselTheme(tokens: tokens),
         checkboxTheme = checkboxTheme ?? MoonCheckboxTheme(tokens: tokens),
         chipTheme = chipTheme ?? MoonChipTheme(tokens: tokens),
-        circularLoaderTheme = circularLoaderTheme ?? MoonCircularLoaderTheme(tokens: tokens),
-        circularProgressTheme = circularProgressTheme ?? MoonCircularProgressTheme(tokens: tokens),
-        dotIndicatorTheme = dotIndicatorTheme ?? MoonDotIndicatorTheme(tokens: tokens),
+        circularLoaderTheme =
+            circularLoaderTheme ?? MoonCircularLoaderTheme(tokens: tokens),
+        circularProgressTheme =
+            circularProgressTheme ?? MoonCircularProgressTheme(tokens: tokens),
+        dotIndicatorTheme =
+            dotIndicatorTheme ?? MoonDotIndicatorTheme(tokens: tokens),
         drawerTheme = drawerTheme ?? MoonDrawerTheme(tokens: tokens),
         dropdownTheme = dropdownTheme ?? MoonDropdownTheme(tokens: tokens),
         effects = effects ?? MoonEffectsTheme(tokens: tokens),
-        linearLoaderTheme = linearLoaderTheme ?? MoonLinearLoaderTheme(tokens: tokens),
-        linearProgressTheme = linearProgressTheme ?? MoonLinearProgressTheme(tokens: tokens),
+        linearLoaderTheme =
+            linearLoaderTheme ?? MoonLinearLoaderTheme(tokens: tokens),
+        linearProgressTheme =
+            linearProgressTheme ?? MoonLinearProgressTheme(tokens: tokens),
         menuItemTheme = menuItemTheme ?? MoonMenuItemTheme(tokens: tokens),
         modalTheme = modalTheme ?? MoonModalTheme(tokens: tokens),
         popoverTheme = popoverTheme ?? MoonPopoverTheme(tokens: tokens),
-        progressPinTheme = progressPinTheme ?? MoonProgressPinTheme(tokens: tokens),
+        progressPinTheme =
+            progressPinTheme ?? MoonProgressPinTheme(tokens: tokens),
         radioTheme = radioTheme ?? MoonRadioTheme(tokens: tokens),
-        segmentedControlTheme = segmentedControlTheme ?? MoonSegmentedControlTheme(tokens: tokens),
+        segmentedControlTheme =
+            segmentedControlTheme ?? MoonSegmentedControlTheme(tokens: tokens),
         switchTheme = switchTheme ?? MoonSwitchTheme(tokens: tokens),
         tabBarTheme = tabBarTheme ?? MoonTabBarTheme(tokens: tokens),
         tableTheme = tableTheme ?? MoonTableTheme(tokens: tokens),
         tagTheme = tagTheme ?? MoonTagTheme(tokens: tokens),
         textAreaTheme = textAreaTheme ?? MoonTextAreaTheme(tokens: tokens),
         textInputTheme = textInputTheme ?? MoonTextInputTheme(tokens: tokens),
-        textInputGroupTheme = textInputGroupTheme ?? MoonTextInputGroupTheme(tokens: tokens),
+        textInputGroupTheme =
+            textInputGroupTheme ?? MoonTextInputGroupTheme(tokens: tokens),
         toastTheme = toastTheme ?? MoonToastTheme(tokens: tokens),
         tooltipTheme = tooltipTheme ?? MoonTooltipTheme(tokens: tokens);
 
@@ -257,7 +266,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       checkboxTheme: checkboxTheme ?? this.checkboxTheme,
       chipTheme: chipTheme ?? this.chipTheme,
       circularLoaderTheme: circularLoaderTheme ?? this.circularLoaderTheme,
-      circularProgressTheme: circularProgressTheme ?? this.circularProgressTheme,
+      circularProgressTheme:
+          circularProgressTheme ?? this.circularProgressTheme,
       dotIndicatorTheme: dotIndicatorTheme ?? this.dotIndicatorTheme,
       drawerTheme: drawerTheme ?? this.drawerTheme,
       dropdownTheme: dropdownTheme ?? this.dropdownTheme,
@@ -269,7 +279,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       popoverTheme: popoverTheme ?? this.popoverTheme,
       progressPinTheme: progressPinTheme ?? this.progressPinTheme,
       radioTheme: radioTheme ?? this.radioTheme,
-      segmentedControlTheme: segmentedControlTheme ?? this.segmentedControlTheme,
+      segmentedControlTheme:
+          segmentedControlTheme ?? this.segmentedControlTheme,
       switchTheme: switchTheme ?? this.switchTheme,
       tabBarTheme: tabBarTheme ?? this.tabBarTheme,
       tableTheme: tableTheme ?? this.tableTheme,
@@ -297,27 +308,32 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       carouselTheme: carouselTheme.lerp(other.carouselTheme, t),
       checkboxTheme: checkboxTheme.lerp(other.checkboxTheme, t),
       chipTheme: chipTheme.lerp(other.chipTheme, t),
-      circularLoaderTheme: circularLoaderTheme.lerp(other.circularLoaderTheme, t),
-      circularProgressTheme: circularProgressTheme.lerp(other.circularProgressTheme, t),
+      circularLoaderTheme:
+          circularLoaderTheme.lerp(other.circularLoaderTheme, t),
+      circularProgressTheme:
+          circularProgressTheme.lerp(other.circularProgressTheme, t),
       dotIndicatorTheme: dotIndicatorTheme.lerp(other.dotIndicatorTheme, t),
       drawerTheme: drawerTheme.lerp(other.drawerTheme, t),
       dropdownTheme: dropdownTheme.lerp(other.dropdownTheme, t),
       effects: effects.lerp(other.effects, t),
       linearLoaderTheme: linearLoaderTheme.lerp(other.linearLoaderTheme, t),
-      linearProgressTheme: linearProgressTheme.lerp(other.linearProgressTheme, t),
+      linearProgressTheme:
+          linearProgressTheme.lerp(other.linearProgressTheme, t),
       menuItemTheme: menuItemTheme.lerp(other.menuItemTheme, t),
       modalTheme: modalTheme.lerp(other.modalTheme, t),
       popoverTheme: popoverTheme.lerp(other.popoverTheme, t),
       progressPinTheme: progressPinTheme.lerp(other.progressPinTheme, t),
       radioTheme: radioTheme.lerp(other.radioTheme, t),
-      segmentedControlTheme: segmentedControlTheme.lerp(other.segmentedControlTheme, t),
+      segmentedControlTheme:
+          segmentedControlTheme.lerp(other.segmentedControlTheme, t),
       switchTheme: switchTheme.lerp(other.switchTheme, t),
       tabBarTheme: tabBarTheme.lerp(other.tabBarTheme, t),
       tableTheme: tableTheme.lerp(other.tableTheme, t),
       tagTheme: tagTheme.lerp(other.tagTheme, t),
       textAreaTheme: textAreaTheme.lerp(other.textAreaTheme, t),
       textInputTheme: textInputTheme.lerp(other.textInputTheme, t),
-      textInputGroupTheme: textInputGroupTheme.lerp(other.textInputGroupTheme, t),
+      textInputGroupTheme:
+          textInputGroupTheme.lerp(other.textInputGroupTheme, t),
       toastTheme: toastTheme.lerp(other.toastTheme, t),
       tooltipTheme: tooltipTheme.lerp(other.tooltipTheme, t),
     );
@@ -329,37 +345,60 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty("type", "MoonTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("MoonTokens", tokens))
-      ..add(DiagnosticsProperty<MoonAccordionTheme>("MoonAccordionTheme", accordionTheme))
+      ..add(DiagnosticsProperty<MoonAccordionTheme>(
+          "MoonAccordionTheme", accordionTheme))
       ..add(DiagnosticsProperty<MoonAlertTheme>("MoonAlertTheme", alertTheme))
-      ..add(DiagnosticsProperty<MoonAuthCodeTheme>("MoonAuthCodeTheme", authCodeTheme))
-      ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
-      ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
-      ..add(DiagnosticsProperty<MoonCarouselTheme>("MoonCarouselTheme", carouselTheme))
-      ..add(DiagnosticsProperty<MoonCheckboxTheme>("MoonCheckboxTheme", checkboxTheme))
+      ..add(DiagnosticsProperty<MoonAuthCodeTheme>(
+          "MoonAuthCodeTheme", authCodeTheme))
+      ..add(
+          DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
+      ..add(
+          DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
+      ..add(DiagnosticsProperty<MoonCarouselTheme>(
+          "MoonCarouselTheme", carouselTheme))
+      ..add(DiagnosticsProperty<MoonCheckboxTheme>(
+          "MoonCheckboxTheme", checkboxTheme))
       ..add(DiagnosticsProperty<MoonChipTheme>("MoonChipTheme", chipTheme))
-      ..add(DiagnosticsProperty<MoonCircularLoaderTheme>("MoonCircularLoaderTheme", circularLoaderTheme))
-      ..add(DiagnosticsProperty<MoonCircularProgressTheme>("MoonCircularProgressTheme", circularProgressTheme))
-      ..add(DiagnosticsProperty<MoonDotIndicatorTheme>("MoonDotIndicatorTheme", dotIndicatorTheme))
-      ..add(DiagnosticsProperty<MoonDrawerTheme>("MoonDrawerTheme", drawerTheme))
-      ..add(DiagnosticsProperty<MoonDropdownTheme>("MoonDropdownTheme", dropdownTheme))
+      ..add(DiagnosticsProperty<MoonCircularLoaderTheme>(
+          "MoonCircularLoaderTheme", circularLoaderTheme))
+      ..add(DiagnosticsProperty<MoonCircularProgressTheme>(
+          "MoonCircularProgressTheme", circularProgressTheme))
+      ..add(DiagnosticsProperty<MoonDotIndicatorTheme>(
+          "MoonDotIndicatorTheme", dotIndicatorTheme))
+      ..add(
+          DiagnosticsProperty<MoonDrawerTheme>("MoonDrawerTheme", drawerTheme))
+      ..add(DiagnosticsProperty<MoonDropdownTheme>(
+          "MoonDropdownTheme", dropdownTheme))
       ..add(DiagnosticsProperty<MoonEffectsTheme>("MoonEffectsTheme", effects))
-      ..add(DiagnosticsProperty<MoonLinearLoaderTheme>("MoonLinearLoaderTheme", linearLoaderTheme))
-      ..add(DiagnosticsProperty<MoonLinearProgressTheme>("MoonLinearProgressTheme", linearProgressTheme))
-      ..add(DiagnosticsProperty<MoonMenuItemTheme>("MoonMenuItemTheme", menuItemTheme))
+      ..add(DiagnosticsProperty<MoonLinearLoaderTheme>(
+          "MoonLinearLoaderTheme", linearLoaderTheme))
+      ..add(DiagnosticsProperty<MoonLinearProgressTheme>(
+          "MoonLinearProgressTheme", linearProgressTheme))
+      ..add(DiagnosticsProperty<MoonMenuItemTheme>(
+          "MoonMenuItemTheme", menuItemTheme))
       ..add(DiagnosticsProperty<MoonModalTheme>("MoonModalTheme", modalTheme))
-      ..add(DiagnosticsProperty<MoonPopoverTheme>("MoonPopoverTheme", popoverTheme))
-      ..add(DiagnosticsProperty<MoonProgressPinTheme>("MoonProgressPinTheme", progressPinTheme))
+      ..add(DiagnosticsProperty<MoonPopoverTheme>(
+          "MoonPopoverTheme", popoverTheme))
+      ..add(DiagnosticsProperty<MoonProgressPinTheme>(
+          "MoonProgressPinTheme", progressPinTheme))
       ..add(DiagnosticsProperty<MoonRadioTheme>("MoonRadioTheme", radioTheme))
-      ..add(DiagnosticsProperty<MoonSegmentedControlTheme>("MoonSegmentedControlTheme", segmentedControlTheme))
-      ..add(DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
-      ..add(DiagnosticsProperty<MoonTabBarTheme>("MoonTabBarTheme", tabBarTheme))
+      ..add(DiagnosticsProperty<MoonSegmentedControlTheme>(
+          "MoonSegmentedControlTheme", segmentedControlTheme))
+      ..add(
+          DiagnosticsProperty<MoonSwitchTheme>("MoonSwitchTheme", switchTheme))
+      ..add(
+          DiagnosticsProperty<MoonTabBarTheme>("MoonTabBarTheme", tabBarTheme))
       ..add(DiagnosticsProperty<MoonTableTheme>("MoonTableTheme", tableTheme))
       ..add(DiagnosticsProperty<MoonTagTheme>("MoonTagTheme", tagTheme))
-      ..add(DiagnosticsProperty<MoonTextAreaTheme>("MoonTextAreaTheme", textAreaTheme))
-      ..add(DiagnosticsProperty<MoonTextInputTheme>("MoonTextInputTheme", textInputTheme))
-      ..add(DiagnosticsProperty<MoonTextInputGroupTheme>("MoonTextInputGroupTheme", textInputGroupTheme))
+      ..add(DiagnosticsProperty<MoonTextAreaTheme>(
+          "MoonTextAreaTheme", textAreaTheme))
+      ..add(DiagnosticsProperty<MoonTextInputTheme>(
+          "MoonTextInputTheme", textInputTheme))
+      ..add(DiagnosticsProperty<MoonTextInputGroupTheme>(
+          "MoonTextInputGroupTheme", textInputGroupTheme))
       ..add(DiagnosticsProperty<MoonToastTheme>("MoonToastTheme", toastTheme))
-      ..add(DiagnosticsProperty<MoonTooltipTheme>("MoonTooltipTheme", tooltipTheme));
+      ..add(DiagnosticsProperty<MoonTooltipTheme>(
+          "MoonTooltipTheme", tooltipTheme));
   }
 }
 

@@ -6,7 +6,7 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 class MoonDrawer extends StatelessWidget {
   /// The border radius of the Drawer.
@@ -47,28 +47,37 @@ class MoonDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadiusGeometry effectiveBorderRadius =
-        borderRadius ?? context.moonTheme?.drawerTheme.properties.borderRadius ?? BorderRadius.zero;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ??
+        context.moonTheme?.drawerTheme.properties.borderRadius ??
+        BorderRadius.zero;
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.drawerTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.drawerTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
-    final Color effectiveTextColor = context.moonTheme?.drawerTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.drawerTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor = context.moonTheme?.drawerTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.drawerTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
-    final double effectiveWidthFromTheme = context.moonTheme?.drawerTheme.properties.width ?? 448;
+    final double effectiveWidthFromTheme =
+        context.moonTheme?.drawerTheme.properties.width ?? 448;
 
     final double effectiveWidth = width ??
         (MediaQuery.of(context).size.width < effectiveWidthFromTheme
             ? MediaQuery.of(context).size.width
             : effectiveWidthFromTheme);
 
-    final List<BoxShadow> effectiveDrawerShadows =
-        drawerShadows ?? context.moonTheme?.drawerTheme.shadows.drawerShadows ?? MoonShadows.light.lg;
+    final List<BoxShadow> effectiveDrawerShadows = drawerShadows ??
+        context.moonTheme?.drawerTheme.shadows.drawerShadows ??
+        MoonShadows.light.lg;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.drawerTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.drawerTheme.properties.textStyle ??
+            MoonTypography.typography.body.textDefault;
 
     return Semantics(
       explicitChildNodes: true,
@@ -86,7 +95,8 @@ class MoonDrawer extends StatelessWidget {
                   color: effectiveBackgroundColor,
                   shadows: effectiveDrawerShadows,
                   shape: MoonSquircleBorder(
-                    borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                    borderRadius:
+                        effectiveBorderRadius.squircleBorderRadius(context),
                   ),
                 ),
             child: child,

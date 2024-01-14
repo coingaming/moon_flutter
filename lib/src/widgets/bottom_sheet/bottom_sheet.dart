@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
@@ -13,12 +14,12 @@ import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/utils/bottom_sheet_custom_scroll_physics.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/utils/bottom_sheet_suspended_curve.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/utils/scroll_to_top_status_bar.dart';
-import 'package:moon_tokens/moon_tokens.dart';
 
 const double _minFlingVelocity = 500.0;
 const double _closeProgressThreshold = 0.6;
 
-typedef WidgetWithChildBuilder = Widget Function(BuildContext context, Animation<double> animation, Widget child);
+typedef WidgetWithChildBuilder = Widget Function(
+    BuildContext context, Animation<double> animation, Widget child);
 
 /// A Moon Design bottom sheet.
 ///
@@ -101,7 +102,8 @@ class MoonBottomSheet extends StatefulWidget {
     required this.animationController,
     required this.scrollController,
     required this.child,
-  }) : closeProgressThreshold = closeProgressThreshold ?? _closeProgressThreshold;
+  }) : closeProgressThreshold =
+            closeProgressThreshold ?? _closeProgressThreshold;
 
   @override
   MoonBottomSheetState createState() => MoonBottomSheetState();
@@ -110,7 +112,8 @@ class MoonBottomSheet extends StatefulWidget {
   ///
   /// This API is available as a convenience for a Material compliant bottom sheet animation. If alternative animation
   /// durations are required, a different animation controller could be provided.
-  static AnimationController createAnimationController(TickerProvider vsync, Duration duration) {
+  static AnimationController createAnimationController(
+      TickerProvider vsync, Duration duration) {
     return AnimationController(
       duration: duration,
       debugLabel: 'MoonBottomSheet',
@@ -119,7 +122,8 @@ class MoonBottomSheet extends StatefulWidget {
   }
 }
 
-class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderStateMixin {
+class MoonBottomSheetState extends State<MoonBottomSheet>
+    with TickerProviderStateMixin {
   final GlobalKey _childKey = GlobalKey(debugLabel: 'BottomSheet child');
 
   // Used in NotificationListener to detect different ScrollNotifications before/after the dragging gesture.
@@ -141,11 +145,14 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
   bool get needsVerifyShouldClose => widget.shouldClose != null;
 
-  bool get _dismissUnderway => widget.animationController.status == AnimationStatus.reverse;
+  bool get _dismissUnderway =>
+      widget.animationController.status == AnimationStatus.reverse;
 
-  bool get _hasReachedCloseThreshold => widget.animationController.value < widget.closeProgressThreshold;
+  bool get _hasReachedCloseThreshold =>
+      widget.animationController.value < widget.closeProgressThreshold;
 
-  double? get _childHeight => (_childKey.currentContext?.findRenderObject() as RenderBox?)?.size.height;
+  double? get _childHeight =>
+      (_childKey.currentContext?.findRenderObject() as RenderBox?)?.size.height;
 
   ScrollController get _scrollController => widget.scrollController;
 
@@ -252,9 +259,11 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
     if (scrollPosition.axis == Axis.horizontal) return;
 
-    final bool isScrollReversed = scrollPosition.axisDirection == AxisDirection.down;
-    final double offset =
-        isScrollReversed ? scrollPosition.pixels : scrollPosition.maxScrollExtent - scrollPosition.pixels;
+    final bool isScrollReversed =
+        scrollPosition.axisDirection == AxisDirection.down;
+    final double offset = isScrollReversed
+        ? scrollPosition.pixels
+        : scrollPosition.maxScrollExtent - scrollPosition.pixels;
 
     if (offset <= 0) {
       // Clamping Scroll Physics ends with a ScrollEndNotification providing DragEndDetail class while
@@ -275,7 +284,8 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
       // Otherwise calculate the velocity with a VelocityTracker.
       if (_velocityTracker == null) {
-        final PointerDeviceKind pointerKind = _defaultPointerDeviceKind(context);
+        final PointerDeviceKind pointerKind =
+            _defaultPointerDeviceKind(context);
 
         _velocityTracker = VelocityTracker.withKind(pointerKind);
         _startTime = DateTime.now();
@@ -283,9 +293,11 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
       DragUpdateDetails? dragDetails;
 
-      if (notification is ScrollUpdateNotification) dragDetails = notification.dragDetails;
+      if (notification is ScrollUpdateNotification)
+        dragDetails = notification.dragDetails;
 
-      if (notification is OverscrollNotification) dragDetails = notification.dragDetails;
+      if (notification is OverscrollNotification)
+        dragDetails = notification.dragDetails;
 
       if (notification is UserScrollNotification) return;
 
@@ -304,7 +316,8 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
         return;
       } else if (_isDragging) {
-        final double velocity = velocityTracker.getVelocity().pixelsPerSecond.dy;
+        final double velocity =
+            velocityTracker.getVelocity().pixelsPerSecond.dy;
 
         _velocityTracker = null;
         _startTime = null;
@@ -320,17 +333,21 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
         context.moonTheme?.bottomSheetTheme.properties.borderRadius ??
         MoonBorders.borders.surfaceSm;
 
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.bottomSheetTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = widget.backgroundColor ??
+        context.moonTheme?.bottomSheetTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
     final Color effectiveIconColor =
-        context.moonTheme?.bottomSheetTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+        context.moonTheme?.bottomSheetTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
     final Color effectiveTextColor =
-        context.moonTheme?.bottomSheetTheme.colors.textColor ?? MoonColors.light.textPrimary;
+        context.moonTheme?.bottomSheetTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.bottomSheetTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.bottomSheetTheme.properties.textStyle ??
+            MoonTypography.typography.body.textDefault;
 
     _defaultDuration ??= widget.transitionDuration ??
         context.moonTheme?.bottomSheetTheme.properties.transitionDuration ??
@@ -349,14 +366,17 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
         builder: (BuildContext context, Widget? child) {
           assert(child != null);
 
-          final double animationValue = transitionCurve!.transform(widget.animationController.value);
+          final double animationValue =
+              transitionCurve!.transform(widget.animationController.value);
 
           final draggableChild = widget.enableDrag
               ? KeyedSubtree(
                   key: _childKey,
                   child: GestureDetector(
-                    onVerticalDragUpdate: (DragUpdateDetails details) => _handleDragUpdate(details.delta.dy),
-                    onVerticalDragEnd: (DragEndDetails details) => _handleDragEnd(details.primaryVelocity ?? 0),
+                    onVerticalDragUpdate: (DragUpdateDetails details) =>
+                        _handleDragUpdate(details.delta.dy),
+                    onVerticalDragEnd: (DragEndDetails details) =>
+                        _handleDragEnd(details.primaryVelocity ?? 0),
                     child: NotificationListener<ScrollNotification>(
                       onNotification: (ScrollNotification notification) {
                         _handleScrollUpdate(notification);
@@ -406,8 +426,12 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
                           color: effectiveBackgroundColor,
                           shape: MoonSquircleBorder(
                             borderRadius: MoonSquircleBorderRadius.only(
-                              topLeft: effectiveBorderRadius.squircleBorderRadius(context).topLeft,
-                              topRight: effectiveBorderRadius.squircleBorderRadius(context).topRight,
+                              topLeft: effectiveBorderRadius
+                                  .squircleBorderRadius(context)
+                                  .topLeft,
+                              topRight: effectiveBorderRadius
+                                  .squircleBorderRadius(context)
+                                  .topRight,
                             ),
                           ),
                         ),

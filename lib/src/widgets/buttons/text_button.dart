@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/widgets/buttons/button.dart';
-import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonTextButton extends StatelessWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
@@ -87,17 +87,21 @@ class MoonTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color effectiveTextColor =
-        context.moonTheme?.buttonTheme.colors.textVariantTextColor ?? MoonColors.light.textSecondary;
+        context.moonTheme?.buttonTheme.colors.textVariantTextColor ??
+            MoonColors.light.textSecondary;
 
     final Color effectiveHoverTextColor =
-        context.moonTheme?.buttonTheme.colors.textColor ?? MoonColors.light.textPrimary;
+        context.moonTheme?.buttonTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
     final Color effectiveHoverColor =
-        context.moonTheme?.buttonTheme.colors.textVariantHoverColor ?? MoonColors.light.jiren;
+        context.moonTheme?.buttonTheme.colors.textVariantHoverColor ??
+            MoonColors.light.jiren;
 
-    final Color effectiveFocusColor =
-        context.moonTheme?.buttonTheme.colors.textVariantFocusColor.withOpacity(context.isDarkMode ? 0.8 : 0.2) ??
-            MoonColors.light.piccolo.withOpacity(context.isDarkMode ? 0.8 : 0.2);
+    final Color effectiveFocusColor = context
+            .moonTheme?.buttonTheme.colors.textVariantFocusColor
+            .withOpacity(context.isDarkMode ? 0.8 : 0.2) ??
+        MoonColors.light.piccolo.withOpacity(context.isDarkMode ? 0.8 : 0.2);
 
     return MoonButton(
       autofocus: autofocus,

@@ -10,7 +10,7 @@ import 'package:moon_design/src/utils/color_tween_premul.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/widgets/common/base_control.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 class MoonMenuItem extends StatefulWidget {
   /// Specifies the alignment of label and content of menu item.
@@ -110,8 +110,9 @@ class MoonMenuItem extends StatefulWidget {
 
     if (menuItems.isEmpty || menuItems.length == 1) return menuItems;
 
-    final Color effectiveColor =
-        color ?? context.moonTheme?.menuItemTheme.colors.dividerColor ?? MoonColors.light.beerus;
+    final Color effectiveColor = color ??
+        context.moonTheme?.menuItemTheme.colors.dividerColor ??
+        MoonColors.light.beerus;
 
     Widget wrapMenuItem(Widget menuItems) {
       return DecoratedBox(
@@ -139,8 +140,10 @@ class MoonMenuItem extends StatefulWidget {
   State<MoonMenuItem> createState() => _MoonMenuItemState();
 }
 
-class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMixin {
-  final ColorTweenWithPremultipliedAlpha _backgroundColorTween = ColorTweenWithPremultipliedAlpha();
+class _MoonMenuItemState extends State<MoonMenuItem>
+    with TickerProviderStateMixin {
+  final ColorTweenWithPremultipliedAlpha _backgroundColorTween =
+      ColorTweenWithPremultipliedAlpha();
 
   AnimationController? _animationController;
   Animation<Color?>? _backgroundColor;
@@ -148,7 +151,9 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
   FocusNode get _effectiveFocusNode => widget.focusNode ?? FocusNode();
 
   void _handleActiveStatus(bool isActive) {
-    isActive ? _animationController!.forward() : _animationController!.reverse();
+    isActive
+        ? _animationController!.forward()
+        : _animationController!.reverse();
   }
 
   @override
@@ -164,53 +169,71 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
         context.moonTheme?.menuItemTheme.properties.borderRadius ??
         MoonBorders.borders.interactiveSm;
 
-    final double effectiveMinimumHeaderHeight =
-        widget.height ?? context.moonTheme?.menuItemTheme.properties.minimumHeight ?? MoonSizes.sizes.md;
+    final double effectiveMinimumHeaderHeight = widget.height ??
+        context.moonTheme?.menuItemTheme.properties.minimumHeight ??
+        MoonSizes.sizes.md;
 
-    final double effectiveVerticalGap =
-        widget.verticalGap ?? context.moonTheme?.menuItemTheme.properties.verticalGap ?? MoonSizes.sizes.x5s;
+    final double effectiveVerticalGap = widget.verticalGap ??
+        context.moonTheme?.menuItemTheme.properties.verticalGap ??
+        MoonSizes.sizes.x5s;
 
     final EdgeInsetsGeometry effectiveHeaderPadding = widget.menuItemPadding ??
         context.moonTheme?.menuItemTheme.properties.padding ??
         EdgeInsets.all(MoonSizes.sizes.x3s);
 
-    final EdgeInsets resolvedDirectionalHeaderPadding = effectiveHeaderPadding.resolve(Directionality.of(context));
+    final EdgeInsets resolvedDirectionalHeaderPadding =
+        effectiveHeaderPadding.resolve(Directionality.of(context));
 
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.menuItemTheme.colors.backgroundColor ?? Colors.transparent;
+    final Color effectiveBackgroundColor = widget.backgroundColor ??
+        context.moonTheme?.menuItemTheme.colors.backgroundColor ??
+        Colors.transparent;
 
-    final Color effectiveIconColor = context.moonTheme?.menuItemTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.menuItemTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
     final Color effectiveLabelTextColor =
-        context.moonTheme?.menuItemTheme.colors.labelTextColor ?? MoonColors.light.textPrimary;
+        context.moonTheme?.menuItemTheme.colors.labelTextColor ??
+            MoonColors.light.textPrimary;
 
     final Color effectiveContentTextColor =
-        context.moonTheme?.menuItemTheme.colors.contentTextColor ?? MoonColors.light.textSecondary;
+        context.moonTheme?.menuItemTheme.colors.contentTextColor ??
+            MoonColors.light.textSecondary;
 
     final TextStyle effectiveLabelTextStyle =
-        context.moonTheme?.menuItemTheme.properties.labelTextStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.menuItemTheme.properties.labelTextStyle ??
+            MoonTypography.typography.body.textDefault;
 
     final TextStyle effectiveContentTextStyle =
-        context.moonTheme?.menuItemTheme.properties.contentTextStyle ?? MoonTypography.typography.body.text12;
+        context.moonTheme?.menuItemTheme.properties.contentTextStyle ??
+            MoonTypography.typography.body.text12;
 
-    final Color effectiveHoverEffectColor = context.moonEffects?.controlHoverEffect.primaryHoverColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
+    final Color effectiveHoverEffectColor =
+        context.moonEffects?.controlHoverEffect.primaryHoverColor ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlHoverEffect
+                .primaryHoverColor;
 
-    final Color resolvedHoverColor =
-        Color.alphaBlend(effectiveHoverEffectColor, widget.backgroundColor ?? Colors.transparent);
+    final Color resolvedHoverColor = Color.alphaBlend(effectiveHoverEffectColor,
+        widget.backgroundColor ?? Colors.transparent);
 
     final Duration effectiveHoverEffectDuration = widget.hoverEffectDuration ??
         context.moonEffects?.controlHoverEffect.hoverDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlHoverEffect
+            .hoverDuration;
 
     final Curve effectiveHoverEffectCurve = widget.hoverEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlHoverEffect
+            .hoverCurve;
 
-    _animationController ??= AnimationController(duration: effectiveHoverEffectDuration, vsync: this);
+    _animationController ??= AnimationController(
+        duration: effectiveHoverEffectDuration, vsync: this);
 
-    _backgroundColor ??=
-        _animationController!.drive(_backgroundColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)));
+    _backgroundColor ??= _animationController!.drive(_backgroundColorTween
+        .chain(CurveTween(curve: effectiveHoverEffectCurve)));
 
     _backgroundColorTween
       ..begin = effectiveBackgroundColor
@@ -224,7 +247,8 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
         autofocus: widget.autofocus,
         focusNode: _effectiveFocusNode,
         borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
-        builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
+        builder: (BuildContext context, bool isEnabled, bool isHovered,
+            bool isFocused, bool isPressed) {
           final bool isActive = isHovered || isFocused;
 
           _handleActiveStatus(isActive);
@@ -235,13 +259,15 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
               return Container(
                 height: widget.height,
                 width: widget.width,
-                constraints: BoxConstraints(minHeight: effectiveMinimumHeaderHeight),
+                constraints:
+                    BoxConstraints(minHeight: effectiveMinimumHeaderHeight),
                 padding: resolvedDirectionalHeaderPadding,
                 decoration: widget.decoration ??
                     ShapeDecoration(
                       color: _backgroundColor!.value,
                       shape: MoonSquircleBorder(
-                        borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                        borderRadius:
+                            effectiveBorderRadius.squircleBorderRadius(context),
                       ),
                     ),
                 child: child,
@@ -250,27 +276,32 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
             child: IconTheme(
               data: IconThemeData(color: effectiveIconColor),
               child: DefaultTextStyle(
-                style: effectiveLabelTextStyle.copyWith(color: effectiveLabelTextColor),
+                style: effectiveLabelTextStyle.copyWith(
+                    color: effectiveLabelTextColor),
                 child: Row(
                   children: [
                     if (widget.leading != null)
                       Padding(
                         padding: EdgeInsetsDirectional.only(
-                          end: widget.horizontalGap ?? resolvedDirectionalHeaderPadding.left,
+                          end: widget.horizontalGap ??
+                              resolvedDirectionalHeaderPadding.left,
                         ),
                         child: widget.leading,
                       ),
                     Expanded(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.start,
+                        crossAxisAlignment: widget.crossAxisAlignment ??
+                            CrossAxisAlignment.start,
                         children: [
                           widget.label,
                           if (widget.content != null)
                             DefaultTextStyle(
-                              style: effectiveContentTextStyle.copyWith(color: effectiveContentTextColor),
+                              style: effectiveContentTextStyle.copyWith(
+                                  color: effectiveContentTextColor),
                               child: Padding(
-                                padding: EdgeInsets.only(top: effectiveVerticalGap),
+                                padding:
+                                    EdgeInsets.only(top: effectiveVerticalGap),
                                 child: widget.content,
                               ),
                             ),
@@ -280,7 +311,8 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
                     if (widget.trailing != null)
                       Padding(
                         padding: EdgeInsetsDirectional.only(
-                          start: widget.horizontalGap ?? resolvedDirectionalHeaderPadding.right,
+                          start: widget.horizontalGap ??
+                              resolvedDirectionalHeaderPadding.right,
                         ),
                         child: widget.trailing,
                       ),

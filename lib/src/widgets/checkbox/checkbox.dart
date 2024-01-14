@@ -11,7 +11,7 @@ import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/checkbox/checkbox_painter.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 class MoonCheckbox extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
@@ -95,22 +95,31 @@ class MoonCheckbox extends StatefulWidget {
   }) {
     final bool isInteractive = onChanged != null;
 
-    final Color effectiveTextColor = context.moonTheme?.checkboxTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.checkboxTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.checkboxTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.checkboxTheme.properties.textStyle ??
+            MoonTypography.typography.body.textDefault;
 
-    final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
+    final TextStyle resolvedTextStyle =
+        effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 
-    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue =
+        context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+    final Duration effectiveFocusEffectDuration =
+        context.moonEffects?.controlFocusEffect.effectDuration ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectDuration;
 
     return GestureDetector(
       onTap: () => onChanged?.call(!value!),
       child: MouseRegion(
-        cursor: isInteractive ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        cursor:
+            isInteractive ? SystemMouseCursors.click : SystemMouseCursors.basic,
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: tapAreaSizeValue),
           child: Row(
@@ -149,7 +158,8 @@ class MoonCheckbox extends StatefulWidget {
   State<MoonCheckbox> createState() => _MoonCheckboxState();
 }
 
-class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMixin, ToggleableStateMixin {
+class _MoonCheckboxState extends State<MoonCheckbox>
+    with TickerProviderStateMixin, ToggleableStateMixin {
   final MoonCheckboxPainter _painter = MoonCheckboxPainter();
 
   bool? _previousValue;
@@ -164,7 +174,8 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
   bool? get value => widget.value;
 
   BorderSide? _resolveSide(BorderSide? side) {
-    if (side is MaterialStateBorderSide) return MaterialStateProperty.resolveAs<BorderSide?>(side, states);
+    if (side is MaterialStateBorderSide)
+      return MaterialStateProperty.resolveAs<BorderSide?>(side, states);
 
     if (!states.contains(MaterialState.selected)) return side;
 
@@ -200,36 +211,55 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
     const Size size = Size(16, 16);
 
     final BorderRadiusGeometry effectiveBorderRadius =
-        context.moonTheme?.checkboxTheme.properties.borderRadius ?? MoonBorders.borders.interactiveXs;
+        context.moonTheme?.checkboxTheme.properties.borderRadius ??
+            MoonBorders.borders.interactiveXs;
 
-    final Color effectiveActiveColor =
-        widget.activeColor ?? context.moonTheme?.checkboxTheme.colors.activeColor ?? MoonColors.light.piccolo;
+    final Color effectiveActiveColor = widget.activeColor ??
+        context.moonTheme?.checkboxTheme.colors.activeColor ??
+        MoonColors.light.piccolo;
 
-    final Color effectiveInactiveColor =
-        widget.inactiveColor ?? context.moonTheme?.checkboxTheme.colors.inactiveColor ?? Colors.transparent;
+    final Color effectiveInactiveColor = widget.inactiveColor ??
+        context.moonTheme?.checkboxTheme.colors.inactiveColor ??
+        Colors.transparent;
 
-    final Color effectiveCheckColor =
-        widget.checkColor ?? context.moonTheme?.checkboxTheme.colors.checkColor ?? MoonColors.light.goten;
+    final Color effectiveCheckColor = widget.checkColor ??
+        context.moonTheme?.checkboxTheme.colors.checkColor ??
+        MoonColors.light.goten;
 
-    final Color effectiveBorderColor =
-        widget.borderColor ?? context.moonTheme?.checkboxTheme.colors.borderColor ?? MoonColors.light.trunks;
+    final Color effectiveBorderColor = widget.borderColor ??
+        context.moonTheme?.checkboxTheme.colors.borderColor ??
+        MoonColors.light.trunks;
 
-    final Color effectiveFocusEffectColor = context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
+    final Color effectiveFocusEffectColor =
+        context.moonEffects?.controlFocusEffect.effectColor ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectColor;
 
-    final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+    final Duration effectiveFocusEffectDuration =
+        context.moonEffects?.controlFocusEffect.effectDuration ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectDuration;
 
-    final Curve effectiveFocusEffectCurve = context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
+    final Curve effectiveFocusEffectCurve =
+        context.moonEffects?.controlFocusEffect.effectCurve ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectCurve;
 
-    final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
+    final double effectiveFocusEffectExtent =
+        context.moonEffects?.controlFocusEffect.effectExtent ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectExtent;
 
-    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue =
+        context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
-        MaterialStateProperty.resolveWith<MouseCursor>((Set<MaterialState> states) {
+        MaterialStateProperty.resolveWith<MouseCursor>(
+            (Set<MaterialState> states) {
       return MaterialStateMouseCursor.clickable.resolve(states);
     });
 
@@ -248,7 +278,9 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
             effectDuration: effectiveFocusEffectDuration,
             effectExtent: effectiveFocusEffectExtent,
             child: AnimatedOpacity(
-              opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,
+              opacity: states.contains(MaterialState.disabled)
+                  ? effectiveDisabledOpacityValue
+                  : 1,
               duration: effectiveFocusEffectDuration,
               child: buildToggleable(
                 mouseCursor: effectiveMouseCursor,
@@ -262,8 +294,11 @@ class _MoonCheckboxState extends State<MoonCheckbox> with TickerProviderStateMix
                   ..checkColor = effectiveCheckColor
                   ..value = value
                   ..previousValue = _previousValue
-                  ..shape = MoonSquircleBorder(borderRadius: effectiveBorderRadius.squircleBorderRadius(context))
-                  ..side = _resolveSide(BorderSide(color: effectiveBorderColor)),
+                  ..shape = MoonSquircleBorder(
+                      borderRadius:
+                          effectiveBorderRadius.squircleBorderRadius(context))
+                  ..side =
+                      _resolveSide(BorderSide(color: effectiveBorderColor)),
               ),
             ),
           ),

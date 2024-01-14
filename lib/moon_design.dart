@@ -10,6 +10,7 @@ export 'package:moon_design/src/theme/button/button_theme.dart';
 export 'package:moon_design/src/theme/carousel/carousel_theme.dart';
 export 'package:moon_design/src/theme/checkbox/checkbox_theme.dart';
 export 'package:moon_design/src/theme/chip/chip_theme.dart';
+export 'package:moon_design/src/theme/colors/colors.dart';
 export 'package:moon_design/src/theme/dot_indicator/dot_indicator_theme.dart';
 export 'package:moon_design/src/theme/drawer/drawer_theme.dart';
 export 'package:moon_design/src/theme/effects/effects_theme.dart';
@@ -36,7 +37,6 @@ export 'package:moon_design/src/theme/tokens/sizes.dart';
 export 'package:moon_design/src/theme/tokens/tokens.dart';
 export 'package:moon_design/src/theme/tokens/typography/typography.dart';
 export 'package:moon_design/src/theme/tooltip/tooltip_theme.dart';
-
 export 'package:moon_design/src/utils/color_premul_lerp.dart';
 export 'package:moon_design/src/utils/color_tween_premul.dart';
 export 'package:moon_design/src/utils/extensions.dart';
@@ -45,7 +45,6 @@ export 'package:moon_design/src/utils/squircle/clip_squircle_rect.dart';
 export 'package:moon_design/src/utils/squircle/squircle_border.dart';
 export 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
 export 'package:moon_design/src/utils/squircle/squircle_radius.dart';
-
 export 'package:moon_design/src/widgets/accordion/accordion.dart';
 export 'package:moon_design/src/widgets/alert/alert.dart';
 export 'package:moon_design/src/widgets/authcode/authcode.dart';
@@ -100,4 +99,3 @@ export 'package:moon_design/src/widgets/toast/toast.dart';
 export 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
 export 'package:moon_icons/moon_icons.dart';
-export 'package:moon_tokens/moon_tokens.dart';

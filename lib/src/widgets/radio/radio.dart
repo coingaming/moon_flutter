@@ -8,7 +8,7 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/touch_target_padding.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
 import 'package:moon_design/src/widgets/radio/radio_painter.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 class MoonRadio<T> extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
@@ -106,22 +106,31 @@ class MoonRadio<T> extends StatefulWidget {
   }) {
     final bool isInteractive = onChanged != null;
 
-    final Color effectiveTextColor = context.moonTheme?.radioTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.radioTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.radioTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.radioTheme.properties.textStyle ??
+            MoonTypography.typography.body.textDefault;
 
-    final TextStyle resolvedTextStyle = effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
+    final TextStyle resolvedTextStyle =
+        effectiveTextStyle.copyWith(color: effectiveTextColor).merge(textStyle);
 
-    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue =
+        context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+    final Duration effectiveFocusEffectDuration =
+        context.moonEffects?.controlFocusEffect.effectDuration ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectDuration;
 
     return GestureDetector(
       onTap: () => onChanged?.call(value),
       child: MouseRegion(
-        cursor: isInteractive ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        cursor:
+            isInteractive ? SystemMouseCursors.click : SystemMouseCursors.basic,
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: tapAreaSizeValue),
           child: Row(
@@ -161,7 +170,8 @@ class MoonRadio<T> extends StatefulWidget {
   State<MoonRadio<T>> createState() => _RadioState<T>();
 }
 
-class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, ToggleableStateMixin {
+class _RadioState<T> extends State<MoonRadio<T>>
+    with TickerProviderStateMixin, ToggleableStateMixin {
   final MoonRadioPainter _painter = MoonRadioPainter();
 
   void _handleChanged(bool? selected) {
@@ -192,7 +202,8 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
   }
 
   @override
-  ValueChanged<bool?>? get onChanged => widget.onChanged != null ? _handleChanged : null;
+  ValueChanged<bool?>? get onChanged =>
+      widget.onChanged != null ? _handleChanged : null;
 
   @override
   bool get tristate => widget.toggleable;
@@ -204,28 +215,44 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
   Widget build(BuildContext context) {
     const Size size = Size(16, 16);
 
-    final Color effectiveActiveColor =
-        widget.activeColor ?? context.moonTheme?.radioTheme.colors.activeColor ?? MoonColors.light.piccolo;
+    final Color effectiveActiveColor = widget.activeColor ??
+        context.moonTheme?.radioTheme.colors.activeColor ??
+        MoonColors.light.piccolo;
 
-    final Color effectiveInactiveColor =
-        widget.inactiveColor ?? context.moonTheme?.radioTheme.colors.inactiveColor ?? MoonColors.light.trunks;
+    final Color effectiveInactiveColor = widget.inactiveColor ??
+        context.moonTheme?.radioTheme.colors.inactiveColor ??
+        MoonColors.light.trunks;
 
-    final Color effectiveFocusEffectColor = context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
+    final Color effectiveFocusEffectColor =
+        context.moonEffects?.controlFocusEffect.effectColor ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectColor;
 
-    final double effectiveFocusEffectExtent = context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
+    final double effectiveFocusEffectExtent =
+        context.moonEffects?.controlFocusEffect.effectExtent ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectExtent;
 
-    final Duration effectiveFocusEffectDuration = context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+    final Duration effectiveFocusEffectDuration =
+        context.moonEffects?.controlFocusEffect.effectDuration ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectDuration;
 
-    final Curve effectiveFocusEffectCurve = context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
+    final Curve effectiveFocusEffectCurve =
+        context.moonEffects?.controlFocusEffect.effectCurve ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlFocusEffect
+                .effectCurve;
 
-    final double effectiveDisabledOpacityValue = context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue =
+        context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
     final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
-        MaterialStateProperty.resolveWith<MouseCursor>((Set<MaterialState> states) {
+        MaterialStateProperty.resolveWith<MouseCursor>(
+            (Set<MaterialState> states) {
       return MaterialStateMouseCursor.clickable.resolve(states);
     });
 
@@ -244,7 +271,9 @@ class _RadioState<T> extends State<MoonRadio<T>> with TickerProviderStateMixin, 
           effectDuration: effectiveFocusEffectDuration,
           child: RepaintBoundary(
             child: AnimatedOpacity(
-              opacity: states.contains(MaterialState.disabled) ? effectiveDisabledOpacityValue : 1,
+              opacity: states.contains(MaterialState.disabled)
+                  ? effectiveDisabledOpacityValue
+                  : 1,
               duration: effectiveFocusEffectDuration,
               child: buildToggleable(
                 focusNode: widget.focusNode,

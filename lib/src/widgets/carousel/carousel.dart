@@ -10,7 +10,7 @@ import 'package:flutter/rendering.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 class MoonCarousel extends StatefulWidget {
   /// Axis direction of the carousel. Defaults to `Axis.horizontal`.
@@ -86,7 +86,8 @@ class MoonCarousel extends StatefulWidget {
   ///
   /// Second one is the `realIndex`, that is the actual index, i.e. [..., -2, -1, 0, 1, 2, ...] in loop.
   /// `realIndex` is necessary to support `jumpToItem` by tapping on it.
-  final Widget Function(BuildContext context, int itemIndex, int realIndex) itemBuilder;
+  final Widget Function(BuildContext context, int itemIndex, int realIndex)
+      itemBuilder;
 
   /// MDS Carousel widget.
   const MoonCarousel({
@@ -130,7 +131,9 @@ class _MoonCarouselState extends State<MoonCarousel> {
   double _getCenteredAnchor(BoxConstraints constraints) {
     if (!widget.isCentered) return widget.anchor;
 
-    final maxExtent = widget.axisDirection == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
+    final maxExtent = widget.axisDirection == Axis.horizontal
+        ? constraints.maxWidth
+        : constraints.maxHeight;
 
     return ((maxExtent / 2) - (widget.itemExtent / 2)) / maxExtent;
   }
@@ -141,7 +144,8 @@ class _MoonCarouselState extends State<MoonCarousel> {
         assert(debugCheckHasDirectionality(context));
 
         final TextDirection textDirection = Directionality.of(context);
-        final AxisDirection axisDirection = textDirectionToAxisDirection(textDirection);
+        final AxisDirection axisDirection =
+            textDirectionToAxisDirection(textDirection);
 
         return axisDirection;
 
@@ -154,7 +158,8 @@ class _MoonCarouselState extends State<MoonCarousel> {
   void initState() {
     super.initState();
 
-    _scrollController = (widget.controller as MoonCarouselScrollController?) ?? MoonCarouselScrollController();
+    _scrollController = (widget.controller as MoonCarouselScrollController?) ??
+        MoonCarouselScrollController();
 
     _lastReportedItemIndex = _scrollController.initialItem;
 
@@ -164,7 +169,8 @@ class _MoonCarouselState extends State<MoonCarousel> {
             context.moonTheme?.carouselTheme.properties.autoPlayDelay ??
             const Duration(seconds: 3);
 
-        final Duration effectiveTransitionDuration = widget.transitionDuration ??
+        final Duration effectiveTransitionDuration = widget
+                .transitionDuration ??
             context.moonTheme?.carouselTheme.properties.transitionDuration ??
             const Duration(milliseconds: 800);
 
@@ -191,7 +197,8 @@ class _MoonCarouselState extends State<MoonCarousel> {
             context.moonTheme?.carouselTheme.properties.autoPlayDelay ??
             const Duration(seconds: 3);
 
-        final Duration effectiveTransitionDuration = widget.transitionDuration ??
+        final Duration effectiveTransitionDuration = widget
+                .transitionDuration ??
             context.moonTheme?.carouselTheme.properties.transitionDuration ??
             const Duration(milliseconds: 800);
 
@@ -217,18 +224,23 @@ class _MoonCarouselState extends State<MoonCarousel> {
     super.dispose();
   }
 
-  List<Widget> _buildSlivers(BuildContext context, {required AxisDirection axisDirection}) {
-    _effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
+  List<Widget> _buildSlivers(BuildContext context,
+      {required AxisDirection axisDirection}) {
+    _effectiveGap = widget.gap ??
+        context.moonTheme?.carouselTheme.properties.gap ??
+        MoonSizes.sizes.x2s;
 
-    final EdgeInsetsDirectional resolvedPadding = widget.axisDirection == Axis.horizontal
-        ? EdgeInsetsDirectional.only(end: _effectiveGap)
-        : EdgeInsetsDirectional.only(bottom: _effectiveGap);
+    final EdgeInsetsDirectional resolvedPadding =
+        widget.axisDirection == Axis.horizontal
+            ? EdgeInsetsDirectional.only(end: _effectiveGap)
+            : EdgeInsetsDirectional.only(bottom: _effectiveGap);
 
     /// Delegate for lazily building items in the forward direction.
     final SliverChildDelegate childDelegate = SliverChildBuilderDelegate(
       (context, index) => Padding(
         padding: resolvedPadding,
-        child: widget.itemBuilder(context, index.abs() % widget.itemCount, index),
+        child:
+            widget.itemBuilder(context, index.abs() % widget.itemCount, index),
       ),
       childCount: widget.loop ? null : widget.itemCount,
     );
@@ -238,7 +250,10 @@ class _MoonCarouselState extends State<MoonCarousel> {
         ? SliverChildBuilderDelegate(
             (context, index) => Padding(
               padding: resolvedPadding,
-              child: widget.itemBuilder(context, widget.itemCount - (index.abs() % widget.itemCount) - 1, -(index + 1)),
+              child: widget.itemBuilder(
+                  context,
+                  widget.itemCount - (index.abs() % widget.itemCount) - 1,
+                  -(index + 1)),
             ),
           )
         : null;
@@ -261,12 +276,17 @@ class _MoonCarouselState extends State<MoonCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveTextColor = context.moonTheme?.carouselTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.carouselTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor = context.moonTheme?.carouselTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.carouselTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.carouselTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.carouselTheme.properties.textStyle ??
+            MoonTypography.typography.body.textDefault;
 
     final AxisDirection axisDirection = _getDirection(context);
 
@@ -282,14 +302,16 @@ class _MoonCarouselState extends State<MoonCarousel> {
 
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (ScrollUpdateNotification notification) {
-        final MoonCarouselExtentMetrics metrics = notification.metrics as MoonCarouselExtentMetrics;
+        final MoonCarouselExtentMetrics metrics =
+            notification.metrics as MoonCarouselExtentMetrics;
 
         final int currentItem = metrics.itemIndex;
 
         if (currentItem != _lastReportedItemIndex) {
           _lastReportedItemIndex = currentItem;
 
-          final int trueIndex = _getTrueIndex(_lastReportedItemIndex, widget.itemCount);
+          final int trueIndex =
+              _getTrueIndex(_lastReportedItemIndex, widget.itemCount);
 
           if (widget.onIndexChanged != null) {
             // ignore: prefer_null_aware_method_calls
@@ -321,13 +343,15 @@ class _MoonCarouselState extends State<MoonCarousel> {
                 physics: widget.physics ?? const MoonCarouselScrollPhysics(),
                 scrollBehavior: effectiveScrollBehavior,
                 velocityFactor: widget.velocityFactor,
-                viewportBuilder: (BuildContext context, ViewportOffset position) {
+                viewportBuilder:
+                    (BuildContext context, ViewportOffset position) {
                   return Viewport(
                     anchor: centeredAnchor,
                     axisDirection: axisDirection,
                     center: _forwardListKey,
                     offset: position,
-                    slivers: _buildSlivers(context, axisDirection: axisDirection),
+                    slivers:
+                        _buildSlivers(context, axisDirection: axisDirection),
                   );
                 },
               ),
@@ -380,7 +404,8 @@ class _MoonCarouselScrollableState extends ScrollableState {
 
   double get itemExtent => (widget as _MoonCarouselScrollable).itemExtent;
 
-  double get velocityFactor => (widget as _MoonCarouselScrollable).velocityFactor;
+  double get velocityFactor =>
+      (widget as _MoonCarouselScrollable).velocityFactor;
 
   int get itemCount => (widget as _MoonCarouselScrollable).itemCount;
 }
@@ -396,7 +421,10 @@ class MoonCarouselScrollController extends ScrollController {
   // Timer for autoplay.
   Timer? _autoplayTimer;
 
-  void startAutoPlay({Duration delay = const Duration(seconds: 3), Duration? duration, Curve? curve}) {
+  void startAutoPlay(
+      {Duration delay = const Duration(seconds: 3),
+      Duration? duration,
+      Curve? curve}) {
     _autoplayTimer?.cancel();
 
     _autoplayTimer = Timer.periodic(delay, (timer) {
@@ -427,7 +455,8 @@ class MoonCarouselScrollController extends ScrollController {
       );
 
   /// Animate to specific item index.
-  Future<void> animateToItem(int itemIndex, {Duration? duration, Curve? curve}) async {
+  Future<void> animateToItem(int itemIndex,
+      {Duration? duration, Curve? curve}) async {
     if (!hasClients) return;
 
     await Future.wait<void>([
@@ -476,7 +505,8 @@ class MoonCarouselScrollController extends ScrollController {
   }
 
   @override
-  ScrollPosition createScrollPosition(ScrollPhysics physics, ScrollContext context, ScrollPosition? oldPosition) {
+  ScrollPosition createScrollPosition(ScrollPhysics physics,
+      ScrollContext context, ScrollPosition? oldPosition) {
     return _MoonCarouselScrollPosition(
       context: context,
       initialItem: initialItem,
@@ -516,7 +546,8 @@ class MoonCarouselExtentMetrics extends FixedScrollMetrics {
     return MoonCarouselExtentMetrics(
       axisDirection: axisDirection ?? this.axisDirection,
       devicePixelRatio: devicePixelRatio ?? this.devicePixelRatio,
-      minScrollExtent: minScrollExtent ?? (hasContentDimensions ? this.minScrollExtent : 0.0),
+      minScrollExtent: minScrollExtent ??
+          (hasContentDimensions ? this.minScrollExtent : 0.0),
       maxScrollExtent: maxScrollExtent ?? this.maxScrollExtent,
       pixels: pixels ?? this.pixels,
       viewportDimension: viewportDimension ?? this.viewportDimension,
@@ -531,10 +562,14 @@ int _getItemFromOffset({
   required double maxScrollExtent,
   required double offset,
 }) {
-  return (_clipOffsetToScrollableRange(offset, minScrollExtent, maxScrollExtent) / itemExtent).round();
+  return (_clipOffsetToScrollableRange(
+              offset, minScrollExtent, maxScrollExtent) /
+          itemExtent)
+      .round();
 }
 
-double _clipOffsetToScrollableRange(double offset, double minScrollExtent, double maxScrollExtent) {
+double _clipOffsetToScrollableRange(
+    double offset, double minScrollExtent, double maxScrollExtent) {
   return math.min(math.max(offset, minScrollExtent), maxScrollExtent);
 }
 
@@ -545,18 +580,22 @@ int _getTrueIndex(int currentIndex, int totalCount) {
   return (totalCount + (currentIndex % totalCount)) % totalCount;
 }
 
-class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implements MoonCarouselExtentMetrics {
+class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext
+    implements MoonCarouselExtentMetrics {
   _MoonCarouselScrollPosition({
     required super.physics,
     required super.context,
     required int initialItem,
     super.oldPosition,
   })  : assert(context is _MoonCarouselScrollableState),
-        super(initialPixels: _getItemExtentFromScrollContext(context) * initialItem);
+        super(
+            initialPixels:
+                _getItemExtentFromScrollContext(context) * initialItem);
 
   double get anchor => _getAnchorFromScrollContext(context);
 
-  static double _getAnchorFromScrollContext(ScrollContext context) => (context as _MoonCarouselScrollableState).anchor;
+  static double _getAnchorFromScrollContext(ScrollContext context) =>
+      (context as _MoonCarouselScrollableState).anchor;
 
   double get itemExtent => _getItemExtentFromScrollContext(context);
 
@@ -565,7 +604,8 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
 
   double get gap => _getGapFromScrollContext(context);
 
-  static double _getGapFromScrollContext(ScrollContext context) => (context as _MoonCarouselScrollableState).gap;
+  static double _getGapFromScrollContext(ScrollContext context) =>
+      (context as _MoonCarouselScrollableState).gap;
 
   int get itemCount => _getItemCountFromScrollContext(context);
 
@@ -579,7 +619,8 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
 
   bool get loop => _getLoopFromScrollContext(context);
 
-  static bool _getLoopFromScrollContext(ScrollContext context) => (context as _MoonCarouselScrollableState).loop;
+  static bool _getLoopFromScrollContext(ScrollContext context) =>
+      (context as _MoonCarouselScrollableState).loop;
 
   double get velocityFactor => _getVelocityFactorFromScrollContext(context);
 
@@ -605,7 +646,10 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
       final remainderOfViewport = viewportDimension % itemExtent;
       final anchorWhitespaceFactor = viewportDimension * anchor * 2;
 
-      return itemExtent * (itemCount - itemsToSubtract) - remainderOfViewport + anchorWhitespaceFactor - gap;
+      return itemExtent * (itemCount - itemsToSubtract) -
+          remainderOfViewport +
+          anchorWhitespaceFactor -
+          gap;
     } else {
       return itemExtent * (itemCount - 1);
     }
@@ -624,7 +668,8 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
     return MoonCarouselExtentMetrics(
       axisDirection: axisDirection ?? this.axisDirection,
       devicePixelRatio: devicePixelRatio ?? this.devicePixelRatio,
-      minScrollExtent: minScrollExtent ?? (hasContentDimensions ? this.minScrollExtent : 0.0),
+      minScrollExtent: minScrollExtent ??
+          (hasContentDimensions ? this.minScrollExtent : 0.0),
       maxScrollExtent: maxScrollExtent ?? this.maxScrollExtent,
       pixels: pixels ?? this.pixels,
       viewportDimension: viewportDimension ?? this.viewportDimension,
@@ -651,7 +696,8 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
     assert(() {
       if (value == position.pixels) {
         throw FlutterError.fromParts(<DiagnosticsNode>[
-          ErrorSummary('$runtimeType.applyBoundaryConditions() was called redundantly.'),
+          ErrorSummary(
+              '$runtimeType.applyBoundaryConditions() was called redundantly.'),
           ErrorDescription(
             'The proposed new position, $value, is exactly equal to the current position of the '
             'given ${position.runtimeType}, ${position.pixels}.\n'
@@ -673,19 +719,23 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
 
       return true;
     }());
-    if (value < position.pixels && position.pixels <= position.minScrollExtent) {
+    if (value < position.pixels &&
+        position.pixels <= position.minScrollExtent) {
       // Underscroll.
       return value - position.pixels;
     }
-    if (position.maxScrollExtent <= position.pixels && position.pixels < value) {
+    if (position.maxScrollExtent <= position.pixels &&
+        position.pixels < value) {
       // Overscroll.
       return value - position.pixels;
     }
-    if (value < position.minScrollExtent && position.minScrollExtent < position.pixels) {
+    if (value < position.minScrollExtent &&
+        position.minScrollExtent < position.pixels) {
       // Hit top edge.
       return value - position.minScrollExtent;
     }
-    if (position.pixels < position.maxScrollExtent && position.maxScrollExtent < value) {
+    if (position.pixels < position.maxScrollExtent &&
+        position.maxScrollExtent < value) {
       // Hit bottom edge.
       return value - position.maxScrollExtent;
     }
@@ -693,8 +743,10 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
   }
 
   @override
-  Simulation? createBallisticSimulation(ScrollMetrics position, double velocity) {
-    final _MoonCarouselScrollPosition metrics = position as _MoonCarouselScrollPosition;
+  Simulation? createBallisticSimulation(
+      ScrollMetrics position, double velocity) {
+    final _MoonCarouselScrollPosition metrics =
+        position as _MoonCarouselScrollPosition;
 
     // Scenario 1:
     // If we're out of range and not headed back in range, defer to the parent ballistics, which should put us back in
@@ -715,7 +767,8 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
     // put us on the scrollable's boundary.
     if (testFrictionSimulation != null &&
         (testFrictionSimulation.x(double.infinity) == metrics.minScrollExtent ||
-            testFrictionSimulation.x(double.infinity) == metrics.maxScrollExtent)) {
+            testFrictionSimulation.x(double.infinity) ==
+                metrics.maxScrollExtent)) {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
@@ -733,7 +786,8 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
     // If there's no velocity and we're already at where we intend to land, do nothing.
     final Tolerance tolerance = toleranceFor(metrics);
 
-    if (velocity.abs() < tolerance.velocity && (settlingPixels - metrics.pixels).abs() < tolerance.distance) {
+    if (velocity.abs() < tolerance.velocity &&
+        (settlingPixels - metrics.pixels).abs() < tolerance.distance) {
       return null;
     }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/borders.dart';
@@ -8,7 +9,6 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonAlert extends StatefulWidget {
   /// Controls whether the alert is shown.
@@ -155,7 +155,8 @@ class MoonAlert extends StatefulWidget {
   State<MoonAlert> createState() => _MoonAlertState();
 }
 
-class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMixin {
+class _MoonAlertState extends State<MoonAlert>
+    with SingleTickerProviderStateMixin {
   bool _isVisible = true;
 
   AnimationController? _animationController;
@@ -163,9 +164,11 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
 
   TextStyle _getLabelTextStyle({required BuildContext context}) {
     if (widget.content != null) {
-      return context.moonTheme?.alertTheme.properties.labelTextStyle ?? MoonTypography.typography.heading.textDefault;
+      return context.moonTheme?.alertTheme.properties.labelTextStyle ??
+          MoonTypography.typography.heading.textDefault;
     } else {
-      return context.moonTheme?.alertTheme.properties.contentTextStyle ?? MoonTypography.typography.body.textDefault;
+      return context.moonTheme?.alertTheme.properties.contentTextStyle ??
+          MoonTypography.typography.body.textDefault;
     }
   }
 
@@ -216,37 +219,48 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
         context.moonTheme?.alertTheme.properties.borderRadius ??
         MoonBorders.borders.interactiveSm;
 
-    final double effectiveBorderWidth =
-        widget.borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
+    final double effectiveBorderWidth = widget.borderWidth ??
+        context.moonBorders?.defaultBorderWidth ??
+        MoonBorders.borders.defaultBorderWidth;
 
-    final double effectiveHorizontalGap =
-        widget.horizontalGap ?? context.moonTheme?.alertTheme.properties.horizontalGap ?? MoonSizes.sizes.x3s;
+    final double effectiveHorizontalGap = widget.horizontalGap ??
+        context.moonTheme?.alertTheme.properties.horizontalGap ??
+        MoonSizes.sizes.x3s;
 
-    final double effectiveVerticalGap =
-        widget.verticalGap ?? context.moonTheme?.alertTheme.properties.verticalGap ?? MoonSizes.sizes.x4s;
+    final double effectiveVerticalGap = widget.verticalGap ??
+        context.moonTheme?.alertTheme.properties.verticalGap ??
+        MoonSizes.sizes.x4s;
 
-    final double effectiveMinimumHeight =
-        widget.minimumHeight ?? context.moonTheme?.alertTheme.properties.minimumHeight ?? MoonSizes.sizes.xl;
+    final double effectiveMinimumHeight = widget.minimumHeight ??
+        context.moonTheme?.alertTheme.properties.minimumHeight ??
+        MoonSizes.sizes.xl;
 
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.alertTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = widget.backgroundColor ??
+        context.moonTheme?.alertTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
-    final Color effectiveBorderColor =
-        widget.borderColor ?? context.moonTheme?.alertTheme.colors.borderColor ?? MoonColors.light.bulma;
+    final Color effectiveBorderColor = widget.borderColor ??
+        context.moonTheme?.alertTheme.colors.borderColor ??
+        MoonColors.light.bulma;
 
-    final Color effectiveTextColor =
-        widget.color ?? context.moonTheme?.alertTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor = widget.color ??
+        context.moonTheme?.alertTheme.colors.textColor ??
+        MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        widget.color ?? context.moonTheme?.alertTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor = widget.color ??
+        context.moonTheme?.alertTheme.colors.iconColor ??
+        MoonColors.light.iconPrimary;
 
-    final EdgeInsetsGeometry effectivePadding =
-        widget.padding ?? context.moonTheme?.alertTheme.properties.padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
+    final EdgeInsetsGeometry effectivePadding = widget.padding ??
+        context.moonTheme?.alertTheme.properties.padding ??
+        EdgeInsets.all(MoonSizes.sizes.x2s);
 
-    final TextStyle effectiveLabelTextStyle = _getLabelTextStyle(context: context);
+    final TextStyle effectiveLabelTextStyle =
+        _getLabelTextStyle(context: context);
 
     final TextStyle effectiveContentTextStyle =
-        context.moonTheme?.alertTheme.properties.contentTextStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.alertTheme.properties.contentTextStyle ??
+            MoonTypography.typography.body.textDefault;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.alertTheme.properties.transitionDuration ??
@@ -283,9 +297,12 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                       side: BorderSide(
                         color: effectiveBorderColor,
                         width: widget.showBorder ? effectiveBorderWidth : 0,
-                        style: widget.showBorder ? BorderStyle.solid : BorderStyle.none,
+                        style: widget.showBorder
+                            ? BorderStyle.solid
+                            : BorderStyle.none,
                       ),
-                      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                      borderRadius:
+                          effectiveBorderRadius.squircleBorderRadius(context),
                     ),
                   ),
               child: IconTheme(
@@ -293,7 +310,8 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                   color: effectiveIconColor,
                 ),
                 child: DefaultTextStyle(
-                  style: effectiveContentTextStyle.copyWith(color: effectiveTextColor),
+                  style: effectiveContentTextStyle.copyWith(
+                      color: effectiveTextColor),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -301,18 +319,21 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                         children: [
                           if (widget.leading != null)
                             Padding(
-                              padding: EdgeInsetsDirectional.only(end: effectiveHorizontalGap),
+                              padding: EdgeInsetsDirectional.only(
+                                  end: effectiveHorizontalGap),
                               child: widget.leading,
                             ),
                           DefaultTextStyle(
-                            style: effectiveLabelTextStyle.copyWith(color: effectiveTextColor),
+                            style: effectiveLabelTextStyle.copyWith(
+                                color: effectiveTextColor),
                             child: Expanded(
                               child: widget.label,
                             ),
                           ),
                           if (widget.trailing != null)
                             Padding(
-                              padding: EdgeInsetsDirectional.only(start: effectiveHorizontalGap),
+                              padding: EdgeInsetsDirectional.only(
+                                  start: effectiveHorizontalGap),
                               child: widget.trailing,
                             ),
                         ],
@@ -322,7 +343,8 @@ class _MoonAlertState extends State<MoonAlert> with SingleTickerProviderStateMix
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.only(top: effectiveVerticalGap),
+                                padding: EdgeInsetsDirectional.only(
+                                    top: effectiveVerticalGap),
                                 child: widget.content,
                               ),
                             ),

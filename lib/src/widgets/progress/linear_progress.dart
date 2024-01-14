@@ -7,7 +7,7 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
 import 'package:moon_design/src/widgets/progress_pin/pin_style.dart';
 import 'package:moon_design/src/widgets/progress_pin/progress_pin.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 enum MoonLinearProgressSize {
   x6s,
@@ -87,17 +87,22 @@ class MoonLinearProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, linearProgressSize);
+    final MoonLinearProgressSizeProperties effectiveProgressSize =
+        _getMoonProgressSize(context, linearProgressSize);
 
-    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius =
+        borderRadius ?? effectiveProgressSize.borderRadius;
 
-    final Color effectiveColor =
-        color ?? context.moonTheme?.linearProgressTheme.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveColor = color ??
+        context.moonTheme?.linearProgressTheme.colors.color ??
+        MoonColors.light.piccolo;
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.beerus;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.linearProgressTheme.colors.backgroundColor ??
+        MoonColors.light.beerus;
 
-    final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
+    final double effectiveHeight =
+        height ?? effectiveProgressSize.progressHeight;
 
     return Semantics(
       label: semanticLabel,

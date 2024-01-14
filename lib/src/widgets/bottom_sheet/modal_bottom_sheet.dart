@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:moon_tokens/moon_tokens.dart';
 
 /// Shows a modal Moon Design bottom sheet.
 Future<T?> showMoonModalBottomSheet<T>({
@@ -29,18 +29,22 @@ Future<T?> showMoonModalBottomSheet<T>({
   assert(debugCheckHasMediaQuery(context));
   assert(debugCheckHasMaterialLocalizations(context));
 
-  final bool hasMaterialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations) != null;
+  final bool hasMaterialLocalizations =
+      Localizations.of<MaterialLocalizations>(context, MaterialLocalizations) !=
+          null;
 
-  final String barrierLabel =
-      hasMaterialLocalizations ? MaterialLocalizations.of(context).modalBarrierDismissLabel : '';
+  final String barrierLabel = hasMaterialLocalizations
+      ? MaterialLocalizations.of(context).modalBarrierDismissLabel
+      : '';
 
   final CapturedThemes themes = InheritedTheme.capture(
     from: context,
     to: Navigator.of(context, rootNavigator: useRootNavigator).context,
   );
 
-  final Color effectiveBarrierColor =
-      barrierColor ?? context.moonTheme?.bottomSheetTheme.colors.barrierColor ?? MoonColors.light.zeno;
+  final Color effectiveBarrierColor = barrierColor ??
+      context.moonTheme?.bottomSheetTheme.colors.barrierColor ??
+      MoonColors.light.zeno;
 
   final Duration effectiveTransitionDuration = transitionDuration ??
       context.moonTheme?.bottomSheetTheme.properties.transitionDuration ??
@@ -50,7 +54,8 @@ Future<T?> showMoonModalBottomSheet<T>({
       context.moonTheme?.bottomSheetTheme.properties.transitionCurve ??
       const Cubic(0.0, 0.0, 0.2, 1.0);
 
-  final T? result = await Navigator.of(context, rootNavigator: useRootNavigator).push(
+  final T? result =
+      await Navigator.of(context, rootNavigator: useRootNavigator).push(
     MoonModalBottomSheetRoute<T>(
       enableDrag: enableDrag,
       isExpanded: isExpanded,
@@ -149,14 +154,16 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
   }
 
   @override
-  bool canTransitionTo(TransitionRoute<dynamic> nextRoute) => nextRoute is MoonModalBottomSheetRoute;
+  bool canTransitionTo(TransitionRoute<dynamic> nextRoute) =>
+      nextRoute is MoonModalBottomSheetRoute;
 
   @override
   bool canTransitionFrom(TransitionRoute<dynamic> previousRoute) =>
       previousRoute is MoonModalBottomSheetRoute || previousRoute is PageRoute;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
     // By definition, the bottom sheet is aligned to the bottom of the page
     // and isn't exposed to the top padding of the MediaQuery.
     final Widget bottomSheet = MediaQuery.removePadding(
@@ -229,7 +236,9 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
         return '';
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
-        if (Localizations.of<MaterialLocalizations>(context, MaterialLocalizations) != null) {
+        if (Localizations.of<MaterialLocalizations>(
+                context, MaterialLocalizations) !=
+            null) {
           return MaterialLocalizations.of(context).dialogLabel;
         } else {
           return const DefaultMaterialLocalizations().dialogLabel;
@@ -274,7 +283,8 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
     assert(widget.route._animationController != null);
 
     final ScrollController scrollController =
-        PrimaryScrollController.maybeOf(context) ?? (_scrollController ??= ScrollController());
+        PrimaryScrollController.maybeOf(context) ??
+            (_scrollController ??= ScrollController());
 
     return PrimaryScrollController(
       controller: scrollController,
@@ -300,8 +310,11 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
                 transitionDuration: widget.transitionDuration,
                 transitionCurve: widget.transitionCurve,
                 semanticLabel: widget.semanticLabel,
-                onClosing: () => {if (widget.route.isCurrent) Navigator.of(context).pop()},
-                shouldClose: widget.route._hasScopedWillPopCallback ? () => _handleShouldClose() : null,
+                onClosing: () =>
+                    {if (widget.route.isCurrent) Navigator.of(context).pop()},
+                shouldClose: widget.route._hasScopedWillPopCallback
+                    ? () => _handleShouldClose()
+                    : null,
                 animationController: widget.route._animationController!,
                 scrollController: scrollController,
                 child: child!,

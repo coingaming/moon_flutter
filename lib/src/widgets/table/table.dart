@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/moon_design.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 import 'package:moon_design/src/theme/table/table_size_properties.dart';
 import 'package:moon_design/src/theme/table/table_sizes.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
@@ -108,7 +109,8 @@ class MoonTableHeader {
     this.decoration,
     this.height,
     required this.columns,
-  }) : assert(columns.length > 0, 'If header is provided, columns must not be empty.');
+  }) : assert(columns.length > 0,
+            'If header is provided, columns must not be empty.');
 }
 
 /// [MoonTableFooter] used in [MoonTable.footer].
@@ -129,7 +131,8 @@ class MoonTableFooter {
     this.decoration,
     this.height,
     required this.cells,
-  }) : assert(cells.length > 0, 'If footer is provided, cells must not be empty.');
+  }) : assert(cells.length > 0,
+            'If footer is provided, cells must not be empty.');
 }
 
 /// [MoonTableRowLabel] used in [MoonTableRow.label].
@@ -284,7 +287,8 @@ class MoonTable extends StatefulWidget {
     this.rowsPlaceholder,
     this.rowDivider,
     this.loadingIndicator,
-  })  : assert(height == null || height > 0, 'Table height can only be null or > 0.'),
+  })  : assert(height == null || height > 0,
+            'Table height can only be null or > 0.'),
         assert(sortColumnIndex >= 0, 'SortColumnIndex can only be >= 0.'),
         assert(columnsCount > 0, 'Columns count must be > 0');
 
@@ -305,12 +309,15 @@ class _MoonTableState extends State<MoonTable> {
     final bool hasTableHeader = widget.header != null;
 
     assert(
-      !hasTableFooter || hasTableFooter && widget.footer!.cells.length == widget.columnsCount,
+      !hasTableFooter ||
+          hasTableFooter && widget.footer!.cells.length == widget.columnsCount,
       'If footer is not null, footer.cells.length must be equal to widget.columnsCount.',
     );
 
     assert(
-      !hasTableHeader || hasTableHeader && widget.header!.columns.length == widget.columnsCount,
+      !hasTableHeader ||
+          hasTableHeader &&
+              widget.header!.columns.length == widget.columnsCount,
       'If header is not null, header.columns.length must be equal to widget.columnsCount.',
     );
 
@@ -322,30 +329,40 @@ class _MoonTableState extends State<MoonTable> {
             'If table width is null, each provided header column must have a width specified.',
           );
         } else {
-          assert(column.width == null, 'If table width is not null, each provided column width must be null.');
+          assert(column.width == null,
+              'If table width is not null, each provided column width must be null.');
         }
       }
     } else {
-      assert(widget.width != null, 'If table header is null, table width must be specified.');
+      assert(widget.width != null,
+          'If table header is null, table width must be specified.');
     }
   }
 
-  MoonTableSizeProperties _getMoonTableRowSize(BuildContext context, MoonTableRowSize? moonTableRowSize) {
+  MoonTableSizeProperties _getMoonTableRowSize(
+      BuildContext context, MoonTableRowSize? moonTableRowSize) {
     switch (moonTableRowSize) {
       case MoonTableRowSize.xs:
-        return context.moonTheme?.tableTheme.sizes.xs ?? MoonTableSizes(tokens: MoonTokens.light).xs;
+        return context.moonTheme?.tableTheme.sizes.xs ??
+            MoonTableSizes(tokens: MoonTokens.light).xs;
       case MoonTableRowSize.sm:
-        return context.moonTheme?.tableTheme.sizes.sm ?? MoonTableSizes(tokens: MoonTokens.light).sm;
+        return context.moonTheme?.tableTheme.sizes.sm ??
+            MoonTableSizes(tokens: MoonTokens.light).sm;
       case MoonTableRowSize.md:
-        return context.moonTheme?.tableTheme.sizes.md ?? MoonTableSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.tableTheme.sizes.md ??
+            MoonTableSizes(tokens: MoonTokens.light).md;
       case MoonTableRowSize.lg:
-        return context.moonTheme?.tableTheme.sizes.lg ?? MoonTableSizes(tokens: MoonTokens.light).lg;
+        return context.moonTheme?.tableTheme.sizes.lg ??
+            MoonTableSizes(tokens: MoonTokens.light).lg;
       case MoonTableRowSize.xl:
-        return context.moonTheme?.tableTheme.sizes.xl ?? MoonTableSizes(tokens: MoonTokens.light).xl;
+        return context.moonTheme?.tableTheme.sizes.xl ??
+            MoonTableSizes(tokens: MoonTokens.light).xl;
       case MoonTableRowSize.x2l:
-        return context.moonTheme?.tableTheme.sizes.x2l ?? MoonTableSizes(tokens: MoonTokens.light).x2l;
+        return context.moonTheme?.tableTheme.sizes.x2l ??
+            MoonTableSizes(tokens: MoonTokens.light).x2l;
       default:
-        return context.moonTheme?.tableTheme.sizes.md ?? MoonTableSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.tableTheme.sizes.md ??
+            MoonTableSizes(tokens: MoonTokens.light).md;
     }
   }
 
@@ -359,7 +376,8 @@ class _MoonTableState extends State<MoonTable> {
       // Calculate table width based on columns widths.
       _tableWidth = widget.header!.columns.fold<double>(
         0,
-        (double totalWidth, MoonTableColumn column) => totalWidth + (column.width!),
+        (double totalWidth, MoonTableColumn column) =>
+            totalWidth + (column.width!),
       );
     }
   }
@@ -397,14 +415,18 @@ class _MoonTableState extends State<MoonTable> {
     final MoonTableHeader header = widget.header!;
 
     final Color effectiveTextColor =
-        context.moonTheme?.tableTheme.colors.columnTextColor ?? MoonColors.light.textPrimary;
+        context.moonTheme?.tableTheme.colors.columnTextColor ??
+            MoonColors.light.textPrimary;
 
-    final double? effectiveHeight =
-        header.height ?? (widget.rowSize == null ? null : _effectiveMoonTableRowSize.rowHeight);
+    final double? effectiveHeight = header.height ??
+        (widget.rowSize == null ? null : _effectiveMoonTableRowSize.rowHeight);
 
-    final double effectiveSortIconSize = _effectiveMoonTableRowSize.sortIconSizeValue;
+    final double effectiveSortIconSize =
+        _effectiveMoonTableRowSize.sortIconSizeValue;
 
-    final TextStyle effectiveTextStyle = _effectiveMoonTableRowSize.columnTextStyle.copyWith(color: effectiveTextColor);
+    final TextStyle effectiveTextStyle = _effectiveMoonTableRowSize
+        .columnTextStyle
+        .copyWith(color: effectiveTextColor);
 
     return Container(
       height: effectiveHeight,
@@ -415,15 +437,19 @@ class _MoonTableState extends State<MoonTable> {
           header.columns.length,
           (int index) {
             final MoonTableColumn currentColumn = header.columns[index];
-            final bool showSortingIcon = currentColumn.onSort != null && currentColumn.showSortingIcon;
+            final bool showSortingIcon =
+                currentColumn.onSort != null && currentColumn.showSortingIcon;
 
-            final double effectiveColumnWidth = currentColumn.width ?? _columnEqualWidth;
+            final double effectiveColumnWidth =
+                currentColumn.width ?? _columnEqualWidth;
 
             final double effectiveSortingIconGap =
-                currentColumn.sortingIconGap ?? _effectiveMoonTableRowSize.sortIconGap;
+                currentColumn.sortingIconGap ??
+                    _effectiveMoonTableRowSize.sortIconGap;
 
-            final Widget effectiveSortingIcon =
-                currentColumn.sortingIcon ?? Icon(MoonIcons.controls_chevron_up_16_light, size: effectiveSortIconSize);
+            final Widget effectiveSortingIcon = currentColumn.sortingIcon ??
+                Icon(MoonIcons.controls_chevron_up_16_light,
+                    size: effectiveSortIconSize);
 
             return GestureDetector(
               behavior: HitTestBehavior.translucent,
@@ -439,7 +465,8 @@ class _MoonTableState extends State<MoonTable> {
                     style: effectiveTextStyle,
                     child: showSortingIcon && index == widget.sortColumnIndex
                         ? Row(
-                            mainAxisAlignment: currentColumn.sortingIconAlignment,
+                            mainAxisAlignment:
+                                currentColumn.sortingIconAlignment,
                             children: [
                               currentColumn.cell ?? const SizedBox(),
                               _SortIcon(
@@ -447,7 +474,9 @@ class _MoonTableState extends State<MoonTable> {
                                 icon: effectiveSortingIcon,
                                 iconSize: effectiveSortIconSize,
                                 visible: index == widget.sortColumnIndex,
-                                up: index == widget.sortColumnIndex ? widget.sortAscending : null,
+                                up: index == widget.sortColumnIndex
+                                    ? widget.sortAscending
+                                    : null,
                               ),
                             ],
                           )
@@ -467,12 +496,15 @@ class _MoonTableState extends State<MoonTable> {
 
   Widget _buildFooter() {
     final Color effectiveTextColor =
-        context.moonTheme?.tableTheme.colors.columnTextColor ?? MoonColors.light.textPrimary;
+        context.moonTheme?.tableTheme.colors.columnTextColor ??
+            MoonColors.light.textPrimary;
 
-    final double? effectiveFooterHeight =
-        widget.footer?.height ?? (widget.rowSize == null ? null : _effectiveMoonTableRowSize.rowHeight);
+    final double? effectiveFooterHeight = widget.footer?.height ??
+        (widget.rowSize == null ? null : _effectiveMoonTableRowSize.rowHeight);
 
-    final TextStyle effectiveTextStyle = _effectiveMoonTableRowSize.columnTextStyle.copyWith(color: effectiveTextColor);
+    final TextStyle effectiveTextStyle = _effectiveMoonTableRowSize
+        .columnTextStyle
+        .copyWith(color: effectiveTextColor);
 
     return Container(
       height: effectiveFooterHeight,
@@ -482,7 +514,8 @@ class _MoonTableState extends State<MoonTable> {
         children: List.generate(
           widget.footer!.cells.length,
           (int index) {
-            final double effectiveColumnWidth = widget.header?.columns[index].width ?? _columnEqualWidth;
+            final double effectiveColumnWidth =
+                widget.header?.columns[index].width ?? _columnEqualWidth;
 
             return SizedBox(
               width: effectiveColumnWidth,
@@ -505,18 +538,25 @@ class _MoonTableState extends State<MoonTable> {
 
   Widget _buildRows() {
     final bool hasScrollableHeader = !widget.isHeaderPinned;
-    final bool hasScrollableFooter = !widget.isFooterPinned && widget.footer != null;
+    final bool hasScrollableFooter =
+        !widget.isFooterPinned && widget.footer != null;
 
-    final BorderRadiusGeometry effectiveBorderRadius = _effectiveMoonTableRowSize.rowBorderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius =
+        _effectiveMoonTableRowSize.rowBorderRadius;
 
-    final Color effectiveTextColor = context.moonTheme?.tableTheme.colors.rowTextColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.tableTheme.colors.rowTextColor ??
+            MoonColors.light.textPrimary;
 
     final Color effectiveBackgroundColor =
-        context.moonTheme?.tableTheme.colors.rowBackgroundColor ?? MoonColors.light.gohan;
+        context.moonTheme?.tableTheme.colors.rowBackgroundColor ??
+            MoonColors.light.gohan;
 
-    final double effectiveGap = widget.rowGap ?? _effectiveMoonTableRowSize.rowGap;
+    final double effectiveGap =
+        widget.rowGap ?? _effectiveMoonTableRowSize.rowGap;
 
-    final TextStyle effectiveTextStyle = _effectiveMoonTableRowSize.rowTextStyle.copyWith(color: effectiveTextColor);
+    final TextStyle effectiveTextStyle = _effectiveMoonTableRowSize.rowTextStyle
+        .copyWith(color: effectiveTextColor);
 
     return CustomScrollView(
       controller: _tableControllers.verticalScrollController,
@@ -529,7 +569,8 @@ class _MoonTableState extends State<MoonTable> {
         if (widget.rows.isNotEmpty)
           SliverList.separated(
             itemCount: widget.rows.length + 1,
-            separatorBuilder: (BuildContext context, int index) => widget.rowDivider ?? const SizedBox(),
+            separatorBuilder: (BuildContext context, int index) =>
+                widget.rowDivider ?? const SizedBox(),
             itemBuilder: (BuildContext context, int index) {
               if (index < widget.rows.length) {
                 final MoonTableRow currentRow = widget.rows[index];
@@ -541,18 +582,22 @@ class _MoonTableState extends State<MoonTable> {
                   'Table row cells count must be equal to table columns count.',
                 );
 
-                final double? effectiveRowHeight =
-                    currentRow.height ?? (widget.rowSize == null ? null : _effectiveMoonTableRowSize.rowHeight);
+                final double? effectiveRowHeight = currentRow.height ??
+                    (widget.rowSize == null
+                        ? null
+                        : _effectiveMoonTableRowSize.rowHeight);
 
                 final EdgeInsetsGeometry effectiveLabelPadding =
-                    currentRow.label?.padding ?? _effectiveMoonTableRowSize.rowLabelPadding;
+                    currentRow.label?.padding ??
+                        _effectiveMoonTableRowSize.rowLabelPadding;
 
                 final TextStyle effectiveLabelTextStyle =
-                    _effectiveMoonTableRowSize.rowLabelTextStyle.merge(currentRow.label?.textStyle);
+                    _effectiveMoonTableRowSize.rowLabelTextStyle
+                        .merge(currentRow.label?.textStyle);
 
-                final TextStyle effectiveAnimatedLabelTextStyle = _effectiveMoonTableRowSize
-                    .rowPinnedAnimatedLabelTextStyle
-                    .merge(currentRow.label?.pinnedAnimatedTextStyle);
+                final TextStyle effectiveAnimatedLabelTextStyle =
+                    _effectiveMoonTableRowSize.rowPinnedAnimatedLabelTextStyle
+                        .merge(currentRow.label?.pinnedAnimatedTextStyle);
 
                 return GestureDetector(
                   onTap: () {
@@ -569,7 +614,8 @@ class _MoonTableState extends State<MoonTable> {
                         ShapeDecorationWithPremultipliedAlpha(
                           color: effectiveBackgroundColor,
                           shape: MoonSquircleBorder(
-                            borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                            borderRadius: effectiveBorderRadius
+                                .squircleBorderRadius(context),
                           ),
                         ),
                     child: Column(
@@ -582,22 +628,28 @@ class _MoonTableState extends State<MoonTable> {
                             child: _TableRowLabel(
                               label: currentRow.label!,
                               labelTextStyle: effectiveLabelTextStyle,
-                              animatedLabelTextStyle: effectiveAnimatedLabelTextStyle,
-                              horizontalScrollController: _tableControllers.horizontalScrollController,
+                              animatedLabelTextStyle:
+                                  effectiveAnimatedLabelTextStyle,
+                              horizontalScrollController:
+                                  _tableControllers.horizontalScrollController,
                             ),
                           ),
                         Row(
                           children: [
                             for (var i = 0; i < currentRow.cells.length; i++)
                               SizedBox(
-                                width: widget.header?.columns[i].width ?? _columnEqualWidth,
-                                height: currentRow.label != null ? null : effectiveRowHeight,
+                                width: widget.header?.columns[i].width ??
+                                    _columnEqualWidth,
+                                height: currentRow.label != null
+                                    ? null
+                                    : effectiveRowHeight,
                                 child: DefaultTextStyle(
                                   style: effectiveTextStyle,
                                   child: Padding(
                                     padding: _effectiveCellPadding,
                                     child: Align(
-                                      alignment: AlignmentDirectional.centerStart,
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
                                       child: currentRow.cells[i],
                                     ),
                                   ),
@@ -628,9 +680,12 @@ class _MoonTableState extends State<MoonTable> {
 
     _effectiveMoonTableRowSize = _getMoonTableRowSize(context, widget.rowSize);
 
-    _effectiveCellPadding = widget.cellPadding ?? _effectiveMoonTableRowSize.cellPadding;
+    _effectiveCellPadding =
+        widget.cellPadding ?? _effectiveMoonTableRowSize.cellPadding;
 
-    final Color effectiveIconColor = context.moonTheme?.tableTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.tableTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
     final ScrollBehavior effectiveScrollBehavior = widget.scrollBehaviour ??
         ScrollConfiguration.of(context).copyWith(
@@ -659,7 +714,8 @@ class _MoonTableState extends State<MoonTable> {
                 if (widget.isHeaderPinned && widget.header != null)
                   SingleChildScrollView(
                     physics: widget.horizontalScrollPhysics,
-                    controller: _tableControllers.headerHorizontalScrollController,
+                    controller:
+                        _tableControllers.headerHorizontalScrollController,
                     scrollDirection: Axis.horizontal,
                     clipBehavior: Clip.none,
                     child: _buildHeader(),
@@ -669,7 +725,8 @@ class _MoonTableState extends State<MoonTable> {
                       ? widget.rowsPlaceholder!
                       : SingleChildScrollView(
                           physics: widget.horizontalScrollPhysics,
-                          controller: _tableControllers.rowsPlaceholderHorizontalScrollController,
+                          controller: _tableControllers
+                              .rowsPlaceholderHorizontalScrollController,
                           scrollDirection: Axis.horizontal,
                           clipBehavior: Clip.none,
                           child: SizedBox(
@@ -692,7 +749,8 @@ class _MoonTableState extends State<MoonTable> {
                 if (widget.isFooterPinned && widget.footer != null)
                   SingleChildScrollView(
                     physics: widget.horizontalScrollPhysics,
-                    controller: _tableControllers.footerHorizontalScrollController,
+                    controller:
+                        _tableControllers.footerHorizontalScrollController,
                     scrollDirection: Axis.horizontal,
                     clipBehavior: Clip.none,
                     child: _buildFooter(),
@@ -721,10 +779,12 @@ class _TableRowLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveLableTextColor =
-        labelTextStyle.color ?? context.moonTheme?.tableTheme.colors.rowLabelTextColor ?? MoonColors.light.textPrimary;
+    final Color effectiveLableTextColor = labelTextStyle.color ??
+        context.moonTheme?.tableTheme.colors.rowLabelTextColor ??
+        MoonColors.light.textPrimary;
 
-    final Color effectiveAnimatedLabelTextColor = animatedLabelTextStyle.color ??
+    final Color effectiveAnimatedLabelTextColor = animatedLabelTextStyle
+            .color ??
         context.moonTheme?.tableTheme.colors.rowPinnedAnimatedLabelTextColor ??
         MoonColors.light.trunks;
 
@@ -736,7 +796,8 @@ class _TableRowLabel extends StatelessWidget {
         context.moonTheme?.tableTheme.properties.transitionCurve ??
         MoonTransitions.transitions.defaultTransitionCurve;
 
-    final TextStyle resolvedLabelTextStyle = labelTextStyle.copyWith(color: effectiveLableTextColor);
+    final TextStyle resolvedLabelTextStyle =
+        labelTextStyle.copyWith(color: effectiveLableTextColor);
 
     final TextStyle resolvedAnimatedLabelTextStyle =
         animatedLabelTextStyle.copyWith(color: effectiveAnimatedLabelTextColor);
@@ -756,7 +817,9 @@ class _TableRowLabel extends StatelessWidget {
               return Padding(
                 padding: EdgeInsetsDirectional.only(start: widgetOffset),
                 child: MoonAnimatedDefaultTextStyle(
-                  textStyle: offsetIsIncreasing ? resolvedAnimatedLabelTextStyle : resolvedLabelTextStyle,
+                  textStyle: offsetIsIncreasing
+                      ? resolvedAnimatedLabelTextStyle
+                      : resolvedLabelTextStyle,
                   curve: effectiveTransitionCurve,
                   duration: effectiveTransitionDuration,
                   child: child!,
@@ -792,7 +855,8 @@ class _SortIcon extends StatefulWidget {
 }
 
 class _SortIconState extends State<_SortIcon> with TickerProviderStateMixin {
-  final Animatable<double> _turnTween = Tween<double>(begin: 0.0, end: pi).chain(CurveTween(curve: Curves.easeIn));
+  final Animatable<double> _turnTween = Tween<double>(begin: 0.0, end: pi)
+      .chain(CurveTween(curve: Curves.easeIn));
 
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
@@ -812,12 +876,14 @@ class _SortIconState extends State<_SortIcon> with TickerProviderStateMixin {
     _up = widget.up;
 
     _opacityAnimation = CurvedAnimation(
-      parent: _opacityController = AnimationController(duration: _animationDuration, vsync: this),
+      parent: _opacityController =
+          AnimationController(duration: _animationDuration, vsync: this),
       curve: Curves.fastOutSlowIn,
     )..addListener(_rebuild);
     _opacityController.value = widget.visible ? 1.0 : 0.0;
 
-    _orientationController = AnimationController(duration: _animationDuration, vsync: this);
+    _orientationController =
+        AnimationController(duration: _animationDuration, vsync: this);
     _orientationAnimation = _orientationController.drive(_turnTween)
       ..addListener(_rebuild)
       ..addStatusListener(_resetOrientationAnimation);
@@ -848,14 +914,17 @@ class _SortIconState extends State<_SortIcon> with TickerProviderStateMixin {
     bool skipIcon = false;
 
     if (oldWidget.visible != widget.visible) {
-      if (widget.visible && (_opacityController.status == AnimationStatus.dismissed)) {
+      if (widget.visible &&
+          (_opacityController.status == AnimationStatus.dismissed)) {
         _orientationController.stop();
         _orientationController.value = 0.0;
         _orientationOffset = newUp! ? 0.0 : pi;
         skipIcon = true;
       }
 
-      widget.visible ? _opacityController.forward() : _opacityController.reverse();
+      widget.visible
+          ? _opacityController.forward()
+          : _opacityController.reverse();
     }
 
     if (_up != newUp && !skipIcon) {
@@ -882,7 +951,8 @@ class _SortIconState extends State<_SortIcon> with TickerProviderStateMixin {
       child: FadeTransition(
         opacity: _opacityAnimation,
         child: Transform(
-          transform: Matrix4.rotationZ(_orientationOffset + _orientationAnimation.value),
+          transform: Matrix4.rotationZ(
+              _orientationOffset + _orientationAnimation.value),
           alignment: Alignment.center,
           child: widget.icon,
         ),

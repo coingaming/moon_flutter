@@ -4,7 +4,7 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/color_tween_premul.dart';
-import 'package:moon_tokens/moon_tokens.dart';
+import 'package:moon_design/src/theme/colors/colors.dart';
 
 class MoonDotIndicator extends StatefulWidget {
   /// The color of the selected dot.
@@ -47,8 +47,10 @@ class MoonDotIndicator extends StatefulWidget {
   _CarouselIndicatorState createState() => _CarouselIndicatorState();
 }
 
-class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProviderStateMixin {
-  final ColorTweenWithPremultipliedAlpha _dotColorTween = ColorTweenWithPremultipliedAlpha();
+class _CarouselIndicatorState extends State<MoonDotIndicator>
+    with TickerProviderStateMixin {
+  final ColorTweenWithPremultipliedAlpha _dotColorTween =
+      ColorTweenWithPremultipliedAlpha();
 
   List<AnimationController>? _animationControllers;
   List<Animation<Color?>>? _animations;
@@ -83,14 +85,17 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
 
   @override
   Widget build(BuildContext context) {
-    final double effectiveSize =
-        widget.size ?? context.moonTheme?.dotIndicatorTheme.properties.size ?? MoonSizes.sizes.x4s;
+    final double effectiveSize = widget.size ??
+        context.moonTheme?.dotIndicatorTheme.properties.size ??
+        MoonSizes.sizes.x4s;
 
-    final double effectiveGap =
-        widget.gap ?? context.moonTheme?.dotIndicatorTheme.properties.gap ?? MoonSizes.sizes.x4s;
+    final double effectiveGap = widget.gap ??
+        context.moonTheme?.dotIndicatorTheme.properties.gap ??
+        MoonSizes.sizes.x4s;
 
-    final Color effectiveSelectedColor =
-        widget.selectedColor ?? context.moonTheme?.dotIndicatorTheme.colors.selectedColor ?? MoonColors.light.piccolo;
+    final Color effectiveSelectedColor = widget.selectedColor ??
+        context.moonTheme?.dotIndicatorTheme.colors.selectedColor ??
+        MoonColors.light.piccolo;
 
     final Color effectiveUnselectedColor = widget.unselectedColor ??
         context.moonTheme?.dotIndicatorTheme.colors.unselectedColor ??
@@ -114,7 +119,8 @@ class _CarouselIndicatorState extends State<MoonDotIndicator> with TickerProvide
 
     _animations ??= List.generate(
       widget.dotCount,
-      (index) => _animationControllers![index].drive(_dotColorTween.chain(CurveTween(curve: effectiveTransitionCurve))),
+      (index) => _animationControllers![index].drive(
+          _dotColorTween.chain(CurveTween(curve: effectiveTransitionCurve))),
     );
 
     _dotColorTween
