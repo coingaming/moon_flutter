@@ -7,7 +7,7 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 class MoonColors extends ThemeExtension<MoonColors>
     with DiagnosticableTreeMixin {
   static const light = MoonColors(
-    piccolo: Color(0xFF5C33CF),
+    piccolo: Color(0xFF00E701),
     hit: Color(0xFF1BD29A),
     beerus: Color(0xFFDCDEE3),
     goku: Color(0xFFFFFFFF),
@@ -53,14 +53,14 @@ class MoonColors extends ThemeExtension<MoonColors>
   );
 
   static const dark = MoonColors(
-    piccolo: Color(0xFF5C33CF),
+    piccolo: Color(0xFF00E701),
     hit: Color(0xFF1BD29A),
     beerus: Color(0xFF292929),
-    goku: Color(0xFF000000),
-    gohan: Color(0xFF1F1F1F),
+    goku: Color(0xFF0B0E0F),
+    gohan: Color(0xFF171C1E),
     bulma: Color(0xFFFFFFFF),
     trunks: Color(0xFF94989E),
-    goten: Color(0xFFFFFFFF),
+    goten: Color(0xFF070809),
     popo: Color(0xFF000000),
     jiren: Color(0x1F5C33CF),
     heles: Color(0x14FFFFFF),
