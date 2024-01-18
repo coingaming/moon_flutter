@@ -5,61 +5,55 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonBreadcrumbProperties extends ThemeExtension<MoonBreadcrumbProperties> with DiagnosticableTreeMixin {
-  /// The gap between divider and MoonBreadcrumb item.
+  /// The gap between the divider and the MoonBreadcrumb's item.
   final double gap;
 
-  /// The MoonBreadcrumb expanded menu max height.
-  final double menuMaxHeight;
+  /// The gap between the MoonBreadcrumb item's leading, label and trailing widgets.
+  final double itemGap;
 
-  /// The MoonBreadcrumb transition duration.
+  /// The duration of the MoonBreadcrumb's transition animation.
   final Duration transitionDuration;
 
-  /// The MoonBreadcrumb transition curve.
+  /// The curve of the MoonBreadcrumb's transition animation.
   final Curve transitionCurve;
 
-  /// The padding around MoonBreadcrumb.
-  final EdgeInsetsGeometry padding;
-
-  /// The MoonBreadcrumb item text style.
+  /// The text style of the MoonBreadcrumb's item.
   final TextStyle itemTextStyle;
 
-  /// The current MoonBreadcrumb item text style.
+  /// The text style of the current MoonBreadcrumb's item.
   final TextStyle currentItemTextStyle;
 
-  /// The MoonBreadcrumb expanded menu item text style.
-  final TextStyle menuItemTextStyle;
+  /// The text style of the MoonBreadcrumb's show more item.
+  final TextStyle showMoreItemTextStyle;
 
   const MoonBreadcrumbProperties({
     required this.gap,
-    required this.menuMaxHeight,
+    required this.itemGap,
     required this.transitionDuration,
     required this.transitionCurve,
-    required this.padding,
     required this.itemTextStyle,
     required this.currentItemTextStyle,
-    required this.menuItemTextStyle,
+    required this.showMoreItemTextStyle,
   });
 
   @override
   MoonBreadcrumbProperties copyWith({
     double? gap,
-    double? menuMaxHeight,
+    double? itemGap,
     Duration? transitionDuration,
     Curve? transitionCurve,
-    EdgeInsetsGeometry? padding,
     TextStyle? itemTextStyle,
     TextStyle? currentItemTextStyle,
-    TextStyle? menuItemTextStyle,
+    TextStyle? showMoreItemTextStyle,
   }) {
     return MoonBreadcrumbProperties(
       gap: gap ?? this.gap,
-      menuMaxHeight: menuMaxHeight ?? this.menuMaxHeight,
+      itemGap: itemGap ?? this.itemGap,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
-      padding: padding ?? this.padding,
       itemTextStyle: itemTextStyle ?? this.itemTextStyle,
       currentItemTextStyle: currentItemTextStyle ?? this.currentItemTextStyle,
-      menuItemTextStyle: menuItemTextStyle ?? this.menuItemTextStyle,
+      showMoreItemTextStyle: showMoreItemTextStyle ?? this.showMoreItemTextStyle,
     );
   }
 
@@ -69,13 +63,12 @@ class MoonBreadcrumbProperties extends ThemeExtension<MoonBreadcrumbProperties> 
 
     return MoonBreadcrumbProperties(
       gap: lerpDouble(gap, other.gap, t)!,
-      menuMaxHeight: lerpDouble(menuMaxHeight, other.menuMaxHeight, t)!,
+      itemGap: lerpDouble(itemGap, other.itemGap, t)!,
       transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       itemTextStyle: TextStyle.lerp(itemTextStyle, other.itemTextStyle, t)!,
       currentItemTextStyle: TextStyle.lerp(currentItemTextStyle, other.currentItemTextStyle, t)!,
-      menuItemTextStyle: TextStyle.lerp(menuItemTextStyle, other.menuItemTextStyle, t)!,
+      showMoreItemTextStyle: TextStyle.lerp(showMoreItemTextStyle, other.showMoreItemTextStyle, t)!,
     );
   }
 
@@ -85,12 +78,11 @@ class MoonBreadcrumbProperties extends ThemeExtension<MoonBreadcrumbProperties> 
     properties
       ..add(DiagnosticsProperty("type", "MoonBreadcrumbProperties"))
       ..add(DoubleProperty("gap", gap))
-      ..add(DoubleProperty("menuMaxHeight", menuMaxHeight))
+      ..add(DoubleProperty("itemGap", itemGap))
       ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
       ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
       ..add(DiagnosticsProperty<TextStyle>("itemTextStyle", itemTextStyle))
       ..add(DiagnosticsProperty<TextStyle>("currentItemTextStyle", currentItemTextStyle))
-      ..add(DiagnosticsProperty<TextStyle>("menuItemTextStyle", menuItemTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("showMoreItemTextStyle", showMoreItemTextStyle));
   }
 }

@@ -1,53 +1,34 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonBreadcrumbColors extends ThemeExtension<MoonBreadcrumbColors> with DiagnosticableTreeMixin {
-  /// The default text color of MoonBreadcrumb item.
-  final Color textColor;
+  /// The icon and text color of the MoonBreadcrumb's item.
+  final Color itemColor;
 
-  /// The text color when MoonBreadcrumb item is hovered.
-  final Color? hoverTextColor;
+  /// The icon and text color of the MoonBreadcrumb's current item.
+  final Color? currentItemColor;
 
-  /// The text color of MoonBreadcrumb current item.
-  final Color? currentItemTextColor;
-
-  /// The default divider color.
-  final Color? dividerColor;
-
-  /// The background color of the MoonBreadcrumb expanded menu.
-  final Color? menuBackgroundColor;
-
-  /// The text color of the MoonBreadcrumb expanded menu item.
-  final Color? menuItemTextColor;
+  /// The icon and text color of the MoonBreadcrumb's item on hover.
+  final Color? hoverEffectColor;
 
   const MoonBreadcrumbColors({
-    required this.textColor,
-    this.hoverTextColor,
-    this.currentItemTextColor,
-    this.dividerColor,
-    this.menuBackgroundColor,
-    this.menuItemTextColor,
+    required this.itemColor,
+    required this.currentItemColor,
+    required this.hoverEffectColor,
   });
 
   @override
   MoonBreadcrumbColors copyWith({
-    Color? textColor,
-    Color? hoverTextColor,
-    Color? currentItemTextColor,
-    Color? dividerColor,
-    Color? menuBackgroundColor,
-    Color? menuItemTextColor,
+    Color? itemColor,
+    Color? currentItemColor,
+    Color? hoverEffectColor,
   }) {
     return MoonBreadcrumbColors(
-      textColor: textColor ?? this.textColor,
-      hoverTextColor: hoverTextColor ?? this.hoverTextColor,
-      currentItemTextColor: currentItemTextColor ?? this.currentItemTextColor,
-      dividerColor: dividerColor ?? this.dividerColor,
-      menuBackgroundColor: menuBackgroundColor ?? this.menuBackgroundColor,
-      menuItemTextColor: menuItemTextColor ?? this.menuItemTextColor,
+      itemColor: itemColor ?? this.itemColor,
+      currentItemColor: currentItemColor ?? this.currentItemColor,
+      hoverEffectColor: hoverEffectColor ?? this.hoverEffectColor,
     );
   }
 
@@ -59,12 +40,9 @@ class MoonBreadcrumbColors extends ThemeExtension<MoonBreadcrumbColors> with Dia
     if (other is! MoonBreadcrumbColors) return this;
 
     return MoonBreadcrumbColors(
-      textColor: colorPremulLerp(textColor, other.textColor, t)!,
-      hoverTextColor: colorPremulLerp(hoverTextColor, other.hoverTextColor, t),
-      currentItemTextColor: colorPremulLerp(currentItemTextColor, other.currentItemTextColor, t),
-      dividerColor: colorPremulLerp(dividerColor, other.dividerColor, t),
-      menuBackgroundColor: Color.lerp(menuBackgroundColor, other.menuBackgroundColor, t),
-      menuItemTextColor: colorPremulLerp(menuItemTextColor, other.menuItemTextColor, t),
+      itemColor: colorPremulLerp(itemColor, other.itemColor, t)!,
+      currentItemColor: colorPremulLerp(currentItemColor, other.currentItemColor, t),
+      hoverEffectColor: colorPremulLerp(hoverEffectColor, other.hoverEffectColor, t),
     );
   }
 
@@ -73,11 +51,8 @@ class MoonBreadcrumbColors extends ThemeExtension<MoonBreadcrumbColors> with Dia
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonBreadcrumbColors"))
-      ..add(ColorProperty("textColor", textColor))
-      ..add(ColorProperty("hoverTextColor", hoverTextColor))
-      ..add(ColorProperty("currentItemTextColor", currentItemTextColor))
-      ..add(ColorProperty("dividerColor", dividerColor))
-      ..add(ColorProperty("menuBackgroundColor", menuBackgroundColor))
-      ..add(ColorProperty("menuItemTextColor", menuItemTextColor));
+      ..add(ColorProperty("itemColor", itemColor))
+      ..add(ColorProperty("currentItemColor", currentItemColor))
+      ..add(ColorProperty("hoverEffectColor", hoverEffectColor));
   }
 }

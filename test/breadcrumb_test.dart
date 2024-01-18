@@ -36,16 +36,15 @@ void main() {
     expect(find.textContaining('1'), findsOneWidget);
   });
 
-  testWidgets("Item with leading, custom divider, without label", (tester) async {
+  testWidgets("Item with leading, custom divider and label", (tester) async {
     await tester.pumpWidget(
       const TestWidget(
         widgetKey: key,
-        showLabel: false,
         showLeading: true,
       ),
     );
 
-    expect(find.textContaining('p'), findsNothing);
+    expect(find.textContaining('p'), findsWidgets);
 
     expect(find.byIcon(leadingIcon), findsWidgets);
     expect(find.byIcon(dividerIcon), findsWidgets);
@@ -105,18 +104,18 @@ const IconData dividerIcon = MoonIcons.arrows_chevron_right_double_16_light;
 
 class TestWidget extends StatelessWidget {
   final bool showLeading;
-  final bool showLabel;
   final int? itemsToShow;
   final void Function(int)? onPressed;
   final Key? widgetKey;
+
   const TestWidget({
     super.key,
     this.showLeading = false,
-    this.showLabel = true,
     this.itemsToShow,
     this.onPressed,
     this.widgetKey,
   });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -125,15 +124,15 @@ class TestWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: MoonBreadcrumb(
             key: widgetKey,
-            itemsToShow: itemsToShow ?? 3,
+            visibleItemCount: itemsToShow ?? 3,
             divider: const Icon(dividerIcon),
             items: [
               ...List.generate(4, (i) => i).map(
                 (index) {
-                  return BreadcrumbItem(
-                    label: showLabel ? Text('p$index') : null,
+                  return MoonBreadcrumbItem(
+                    label: Text('p$index'),
                     leading: showLeading ? const Icon(leadingIcon) : null,
-                    onPressed: () => onPressed?.call(index),
+                    onTap: () => onPressed?.call(index),
                   );
                 },
               ),

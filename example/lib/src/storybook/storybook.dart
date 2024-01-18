@@ -32,6 +32,7 @@ class StorybookPage extends StatelessWidget {
           extensions: <ThemeExtension<dynamic>>[
             MoonTheme(
               tokens: MoonTokens.light.copyWith(
+                colors: mdsLightColors,
                 typography: MoonTypography.typography.copyWith(
                   heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
                   body: MoonTypography.typography.body.apply(fontFamily: "DMSans"),
@@ -45,6 +46,7 @@ class StorybookPage extends StatelessWidget {
           extensions: <ThemeExtension<dynamic>>[
             MoonTheme(
               tokens: MoonTokens.dark.copyWith(
+                colors: mdsDarkColors,
                 typography: MoonTypography.typography.copyWith(
                   heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
                   body: MoonTypography.typography.body.apply(fontFamily: "DMSans"),

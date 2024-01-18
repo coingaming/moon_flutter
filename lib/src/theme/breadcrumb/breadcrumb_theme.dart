@@ -6,13 +6,13 @@ import 'package:moon_design/src/theme/breadcrumb/breadcrumb_properties.dart';
 
 @immutable
 class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the MDS.
   final MoonTokens tokens;
 
-  /// The MoonBreadcrumb colors.
+  /// The colors of the MoonBreadcrumb.
   final MoonBreadcrumbColors colors;
 
-  /// The MoonBreadcrumb properties.
+  /// The properties of the MoonBreadcrumb.
   final MoonBreadcrumbProperties properties;
 
   MoonBreadcrumbTheme({
@@ -21,23 +21,19 @@ class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with Diagn
     MoonBreadcrumbProperties? properties,
   })  : colors = colors ??
             MoonBreadcrumbColors(
-              textColor: tokens.colors.textSecondary,
-              hoverTextColor: tokens.colors.textPrimary,
-              currentItemTextColor: tokens.colors.textPrimary,
-              dividerColor: tokens.colors.textSecondary,
-              menuBackgroundColor: tokens.colors.goku,
-              menuItemTextColor: tokens.colors.textPrimary,
+              itemColor: tokens.colors.textSecondary,
+              currentItemColor: tokens.colors.textPrimary,
+              hoverEffectColor: tokens.colors.textPrimary,
             ),
         properties = properties ??
             MoonBreadcrumbProperties(
               gap: tokens.sizes.x4s,
-              padding: EdgeInsets.zero,
-              itemTextStyle: tokens.typography.body.textDefault,
-              currentItemTextStyle: tokens.typography.body.textDefault,
-              menuItemTextStyle: tokens.typography.body.textDefault,
-              menuMaxHeight: 300,
+              itemGap: tokens.sizes.x6s,
               transitionDuration: tokens.transitions.defaultTransitionDuration,
               transitionCurve: tokens.transitions.defaultTransitionCurve,
+              itemTextStyle: tokens.typography.body.textDefault,
+              currentItemTextStyle: tokens.typography.body.textDefault,
+              showMoreItemTextStyle: tokens.typography.caption.textDefault,
             );
 
   @override
