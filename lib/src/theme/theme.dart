@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 import 'package:moon_design/src/theme/alert/alert_theme.dart';
 import 'package:moon_design/src/theme/authcode/authcode_theme.dart';
@@ -44,7 +45,7 @@ import 'package:moon_tokens/moon_tokens.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
-  ///Moon Design System tokens.
+  /// Moon Design System tokens.
   final MoonTokens tokens;
 
   /// Moon Design System MoonAccordion widget theming.
@@ -59,13 +60,13 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonAvatar widget theming.
   final MoonAvatarTheme avatarTheme;
 
-  /// Moon Design System MoonButton widgets theming.
+  /// Moon Design System MoonBottomSheet widget theming.
   final MoonBottomSheetTheme bottomSheetTheme;
 
-  /// Moon Design System Breadcrumb widgets theming.
+  /// Moon Design System MoonBreadcrumb widget theming.
   final MoonBreadcrumbTheme breadcrumbTheme;
 
-  /// Moon Design System MoonButton widgets theming.
+  /// Moon Design System MoonButton widget theming.
   final MoonButtonTheme buttonTheme;
 
   /// Moon Design System MoonCarousel widget theming.
@@ -74,7 +75,7 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
   /// Moon Design System MoonCheckbox widget theming.
   final MoonCheckboxTheme checkboxTheme;
 
-  /// Moon Design System MoonChip widgets theming.
+  /// Moon Design System MoonChip widget theming.
   final MoonChipTheme chipTheme;
 
   /// Moon Design System MoonCircularLoader widget theming.
@@ -342,6 +343,8 @@ class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty<MoonAlertTheme>("MoonAlertTheme", alertTheme))
       ..add(DiagnosticsProperty<MoonAuthCodeTheme>("MoonAuthCodeTheme", authCodeTheme))
       ..add(DiagnosticsProperty<MoonAvatarTheme>("MoonAvatarTheme", avatarTheme))
+      ..add(DiagnosticsProperty<MoonBottomSheetTheme>("MoonBottomSheetTheme", bottomSheetTheme))
+      ..add(DiagnosticsProperty<MoonBreadcrumbTheme>("MoonBreadcrumbTheme", breadcrumbTheme))
       ..add(DiagnosticsProperty<MoonButtonTheme>("MoonButtonTheme", buttonTheme))
       ..add(DiagnosticsProperty<MoonCarouselTheme>("MoonCarouselTheme", carouselTheme))
       ..add(DiagnosticsProperty<MoonCheckboxTheme>("MoonCheckboxTheme", checkboxTheme))
