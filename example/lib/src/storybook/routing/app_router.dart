@@ -4,6 +4,7 @@ import 'package:example/src/storybook/stories/alert.dart';
 import 'package:example/src/storybook/stories/auth_code.dart';
 import 'package:example/src/storybook/stories/avatar.dart';
 import 'package:example/src/storybook/stories/bottom_sheet.dart';
+import 'package:example/src/storybook/stories/breadcrumb.dart';
 import 'package:example/src/storybook/stories/button.dart';
 import 'package:example/src/storybook/stories/carousel.dart';
 import 'package:example/src/storybook/stories/checkbox.dart';
@@ -98,6 +99,12 @@ GoRouter router = GoRouter(
       path: BottomSheetStory.path,
       pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
         child: BottomSheetStory(),
+      ),
+    ),
+    GoRoute(
+      path: BreadcrumbStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: BreadcrumbStory(),
       ),
     ),
     GoRoute(

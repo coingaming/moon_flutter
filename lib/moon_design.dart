@@ -52,6 +52,8 @@ export 'package:moon_design/src/widgets/authcode/authcode.dart';
 export 'package:moon_design/src/widgets/avatar/avatar.dart';
 export 'package:moon_design/src/widgets/bottom_sheet/bottom_sheet.dart';
 export 'package:moon_design/src/widgets/bottom_sheet/modal_bottom_sheet.dart';
+export 'package:moon_design/src/widgets/breadcrumb/breadcrumb.dart';
+export 'package:moon_design/src/widgets/breadcrumb/breadcrumb_item.dart';
 export 'package:moon_design/src/widgets/buttons/button.dart';
 export 'package:moon_design/src/widgets/buttons/filled_button.dart';
 export 'package:moon_design/src/widgets/buttons/outlined_button.dart';
