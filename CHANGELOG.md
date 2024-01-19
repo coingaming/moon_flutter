@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.0](https://github.com/coingaming/moon_flutter/compare/v0.46.0...v0.47.0) (2024-01-19)
+
+
+### Features
+
+* [MDS-924] Add breadcrumb widget ([#334](https://github.com/coingaming/moon_flutter/issues/334)) ([6767d86](https://github.com/coingaming/moon_flutter/commit/6767d868c5b118a6d7106a6c801674f38a244f33))
+
 ## [0.46.0](https://github.com/coingaming/moon_flutter/compare/v0.45.0...v0.46.0) (2024-01-11)
 
 
