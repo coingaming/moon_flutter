@@ -28,7 +28,7 @@ class MoonProgressPin extends StatelessWidget {
     final Color effectivePinBorderColor =
         pinStyle?.pinBorderColor ?? context.moonTheme?.progressPinTheme.colors.pinBorderColor ?? MoonColors.light.goten;
 
-    final Color effectiveKnobColor =
+    final Color effectiveThumbColor =
         pinStyle?.thumbColor ?? context.moonTheme?.progressPinTheme.colors.thumbColor ?? MoonColors.light.goten;
 
     final Color effectiveShadowColor =
@@ -41,9 +41,6 @@ class MoonProgressPin extends StatelessWidget {
         context.moonTheme?.progressPinTheme.properties.textStyle ??
         MoonTypography.typography.caption.text10.copyWith(letterSpacing: 0.5);
 
-    final double effectiveKnobWidthMultiplier =
-        context.moonTheme?.progressPinTheme.properties.thumbWidthMultiplier ?? 1.5;
-
     final double effectivePinWidth =
         pinStyle?.pinWidth ?? context.moonTheme?.progressPinTheme.properties.pinWidth ?? 36;
 
@@ -51,7 +48,13 @@ class MoonProgressPin extends StatelessWidget {
         pinStyle?.pinBorderWidth ?? context.moonTheme?.progressPinTheme.properties.pinBorderWidth ?? 2;
 
     final double effectivePinDistance =
-        pinStyle?.pinDistance ?? context.moonTheme?.progressPinTheme.properties.pinDistance ?? 6;
+        pinStyle?.pinDistance ?? context.moonTheme?.progressPinTheme.properties.pinDistance ?? 4;
+
+    final double effectiveArrowHeight =
+        pinStyle?.arrowHeight ?? context.moonTheme?.progressPinTheme.properties.arrowHeight ?? 6;
+
+    final double effectiveArrowWidth =
+        pinStyle?.arrowWidth ?? context.moonTheme?.progressPinTheme.properties.arrowWidth ?? 8;
 
     final double effectiveShadowElevation =
         pinStyle?.shadowElevation ?? context.moonTheme?.progressPinTheme.properties.shadowElevation ?? 6;
@@ -62,14 +65,15 @@ class MoonProgressPin extends StatelessWidget {
       foregroundPainter: ProgressPinPainter(
         showShadow: pinStyle?.showShadow ?? true,
         pinColor: effectivePinColor,
-        thumbColor: effectiveKnobColor,
+        thumbColor: effectiveThumbColor,
         shadowColor: effectiveShadowColor,
         pinBorderColor: effectivePinBorderColor,
         pinBorderWidth: effectivePinBorderWidth,
+        arrowHeight: effectiveArrowHeight,
+        arrowWidth: effectiveArrowWidth,
         pinDistance: effectivePinDistance,
         pinWidth: effectivePinWidth,
         thumbWidth: pinStyle?.thumbWidth,
-        thumbWidthMultiplier: effectiveKnobWidthMultiplier,
         progressValue: progressValue,
         shadowElevation: effectiveShadowElevation,
         labelText: progressLabel,

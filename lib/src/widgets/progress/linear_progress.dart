@@ -21,6 +21,10 @@ class MoonLinearProgress extends StatelessWidget {
   /// Show linear progress with thumb and pin.
   final bool showPin;
 
+  /// When this and [showPin] are true, the pin height gets added to linear progress height. If false, the pin functions
+  /// like an overlay and does not affect the overall height of linear progress.
+  final bool pinAffectsHeight;
+
   /// Border radius value of the linear progress widget.
   final BorderRadiusGeometry? borderRadius;
 
@@ -49,6 +53,7 @@ class MoonLinearProgress extends StatelessWidget {
   const MoonLinearProgress({
     super.key,
     this.showPin = false,
+    this.pinAffectsHeight = true,
     this.borderRadius,
     this.color,
     this.backgroundColor,
@@ -91,6 +96,19 @@ class MoonLinearProgress extends StatelessWidget {
 
     final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
 
+    // This is used to ensure that the corners of the progress bar properly touch the thumb with bigger bar variants.
+    final BorderRadiusGeometry progressRadius = switch (effectiveBorderRadius) {
+      BorderRadiusDirectional() when showPin == true => BorderRadiusDirectional.only(
+          topStart: effectiveBorderRadius.topStart,
+          bottomStart: effectiveBorderRadius.bottomStart,
+        ),
+      BorderRadius() when showPin == true => BorderRadiusDirectional.only(
+          topStart: effectiveBorderRadius.topLeft,
+          bottomStart: effectiveBorderRadius.bottomLeft,
+        ),
+      _ => effectiveBorderRadius,
+    };
+
     final Color effectiveColor =
         color ?? context.moonTheme?.linearProgressTheme.colors.color ?? MoonColors.light.piccolo;
 
@@ -99,29 +117,54 @@ class MoonLinearProgress extends StatelessWidget {
 
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 
+    final double effectiveThumbSizeValue = pinStyle?.thumbWidth ?? effectiveProgressSize.thumbSizeValue;
+
+    final double effectivePinWidth =
+        pinStyle?.pinWidth ?? context.moonTheme?.progressPinTheme.properties.pinWidth ?? 36;
+
+    final double effectivePinDistance =
+        pinStyle?.pinDistance ?? context.moonTheme?.progressPinTheme.properties.pinDistance ?? 4;
+
+    final double effectivePinArrowHeight =
+        pinStyle?.arrowHeight ?? context.moonTheme?.progressPinTheme.properties.arrowHeight ?? 6;
+
+    final double bottomPaddingValue =
+        effectiveThumbSizeValue - effectiveHeight > 0 ? effectiveThumbSizeValue / 2 - effectiveHeight / 2 : 0;
+
+    final double heightWithPin =
+        effectivePinWidth + effectivePinArrowHeight + effectivePinDistance + effectiveThumbSizeValue;
+
+    Widget child = MoonLinearProgressIndicator(
+      value: value,
+      color: effectiveColor,
+      backgroundColor: effectiveBackgroundColor,
+      containerRadius: effectiveBorderRadius,
+      progressRadius: showPin ? progressRadius : effectiveBorderRadius,
+      minHeight: effectiveHeight,
+    );
+
+    if (showPin) {
+      child = MoonProgressPin(
+        progressValue: value,
+        progressLabel: '${(value * 100).round()}%',
+        pinStyle: pinStyle?.copyWith(thumbWidth: effectiveThumbSizeValue),
+        child: child,
+      );
+    }
+
+    if (showPin && pinAffectsHeight) {
+      child = Container(
+        height: heightWithPin,
+        padding: EdgeInsets.only(bottom: bottomPaddingValue),
+        alignment: Alignment.bottomCenter,
+        child: child,
+      );
+    }
+
     return Semantics(
       label: semanticLabel,
       value: "${value * 100}%",
-      child: showPin
-          ? MoonProgressPin(
-              progressValue: value,
-              progressLabel: '${(value * 100).round()}%',
-              pinStyle: pinStyle,
-              child: MoonLinearProgressIndicator(
-                value: value,
-                color: effectiveColor,
-                backgroundColor: effectiveBackgroundColor,
-                borderRadius: effectiveBorderRadius,
-                minHeight: effectiveHeight,
-              ),
-            )
-          : MoonLinearProgressIndicator(
-              value: value,
-              color: effectiveColor,
-              backgroundColor: effectiveBackgroundColor,
-              borderRadius: effectiveBorderRadius,
-              minHeight: effectiveHeight,
-            ),
+      child: child,
     );
   }
 }

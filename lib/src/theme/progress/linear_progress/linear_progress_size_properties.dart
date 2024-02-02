@@ -12,19 +12,25 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
   /// Linear progress height.
   final double progressHeight;
 
+  /// Linear progress thumb size value.
+  final double thumbSizeValue;
+
   const MoonLinearProgressSizeProperties({
     required this.borderRadius,
     required this.progressHeight,
+    required this.thumbSizeValue,
   });
 
   @override
   MoonLinearProgressSizeProperties copyWith({
     BorderRadiusGeometry? borderRadius,
     double? progressHeight,
+    double? thumbSizeValue,
   }) {
     return MoonLinearProgressSizeProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       progressHeight: progressHeight ?? this.progressHeight,
+      thumbSizeValue: thumbSizeValue ?? this.thumbSizeValue,
     );
   }
 
@@ -35,6 +41,7 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
     return MoonLinearProgressSizeProperties(
       borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       progressHeight: lerpDouble(progressHeight, other.progressHeight, t)!,
+      thumbSizeValue: lerpDouble(thumbSizeValue, other.thumbSizeValue, t)!,
     );
   }
 
@@ -44,6 +51,7 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
     properties
       ..add(DiagnosticsProperty("type", "MoonLinearProgressSizeProperties"))
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DoubleProperty("progressHeight", progressHeight));
+      ..add(DoubleProperty("progressHeight", progressHeight))
+      ..add(DoubleProperty("thumbSizeValue", thumbSizeValue));
   }
 }

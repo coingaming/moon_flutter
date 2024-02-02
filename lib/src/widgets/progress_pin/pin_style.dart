@@ -16,6 +16,12 @@ class PinStyle {
   /// The color of the pin shadow.
   final Color? shadowColor;
 
+  /// The height of the pin arrow.
+  final double? arrowHeight;
+
+  /// The width of the pin arrow.
+  final double? arrowWidth;
+
   /// The width of the thumb.
   final double? thumbWidth;
 
@@ -40,6 +46,8 @@ class PinStyle {
     this.pinBorderColor,
     this.thumbColor,
     this.shadowColor,
+    this.arrowHeight,
+    this.arrowWidth,
     this.thumbWidth,
     this.pinWidth,
     this.pinBorderWidth,
@@ -47,4 +55,36 @@ class PinStyle {
     this.shadowElevation,
     this.textStyle,
   });
+
+  PinStyle copyWith({
+    bool? showShadow,
+    Color? pinColor,
+    Color? pinBorderColor,
+    Color? thumbColor,
+    Color? shadowColor,
+    double? arrowHeight,
+    double? arrowWidth,
+    double? thumbWidth,
+    double? pinWidth,
+    double? pinBorderWidth,
+    double? pinDistance,
+    double? shadowElevation,
+    TextStyle? textStyle,
+  }) {
+    return PinStyle(
+      showShadow: showShadow ?? this.showShadow,
+      pinColor: pinColor ?? this.pinColor,
+      pinBorderColor: pinBorderColor ?? this.pinBorderColor,
+      thumbColor: thumbColor ?? this.thumbColor,
+      shadowColor: shadowColor ?? this.shadowColor,
+      arrowHeight: arrowHeight ?? this.arrowHeight,
+      arrowWidth: arrowWidth ?? this.arrowWidth,
+      thumbWidth: thumbWidth ?? this.thumbWidth,
+      pinWidth: pinWidth ?? this.pinWidth,
+      pinBorderWidth: pinBorderWidth ?? this.pinBorderWidth,
+      pinDistance: pinDistance ?? this.pinDistance,
+      shadowElevation: shadowElevation ?? this.shadowElevation,
+      textStyle: textStyle ?? this.textStyle,
+    );
+  }
 }

@@ -74,7 +74,8 @@ class MoonLinearLoader extends StatelessWidget {
     return MoonLinearProgressIndicator(
       color: effectiveColor,
       backgroundColor: effectiveBackgroundColor,
-      borderRadius: effectiveBorderRadius,
+      containerRadius: effectiveBorderRadius,
+      progressRadius: effectiveBorderRadius,
       minHeight: effectiveHeight,
     );
   }

@@ -8,6 +8,12 @@ class MoonProgressPinProperties extends ThemeExtension<MoonProgressPinProperties
   /// Progress pin shadow elevation.
   final double shadowElevation;
 
+  /// Progress pin arrow height.
+  final double arrowHeight;
+
+  /// Progress pin arrow width.
+  final double arrowWidth;
+
   /// Vertical space between pin and linear progress.
   final double pinDistance;
 
@@ -17,36 +23,36 @@ class MoonProgressPinProperties extends ThemeExtension<MoonProgressPinProperties
   /// Progress pin border width.
   final double pinBorderWidth;
 
-  /// Thumb width multiplier for linear progress.
-  final double thumbWidthMultiplier;
-
   /// Progress pin text style.
   final TextStyle textStyle;
 
   const MoonProgressPinProperties({
     required this.shadowElevation,
+    required this.arrowHeight,
+    required this.arrowWidth,
     required this.pinDistance,
     required this.pinWidth,
     required this.pinBorderWidth,
-    required this.thumbWidthMultiplier,
     required this.textStyle,
   });
 
   @override
   MoonProgressPinProperties copyWith({
     double? shadowElevation,
+    double? arrowHeight,
+    double? arrowWidth,
     double? pinDistance,
     double? pinWidth,
     double? pinBorderWidth,
-    double? thumbWidthMultiplier,
     TextStyle? textStyle,
   }) {
     return MoonProgressPinProperties(
       shadowElevation: shadowElevation ?? this.shadowElevation,
+      arrowHeight: arrowHeight ?? this.arrowHeight,
+      arrowWidth: arrowWidth ?? this.arrowWidth,
       pinDistance: pinDistance ?? this.pinDistance,
       pinWidth: pinWidth ?? this.pinWidth,
       pinBorderWidth: pinBorderWidth ?? this.pinBorderWidth,
-      thumbWidthMultiplier: thumbWidthMultiplier ?? this.thumbWidthMultiplier,
       textStyle: textStyle ?? this.textStyle,
     );
   }
@@ -57,10 +63,11 @@ class MoonProgressPinProperties extends ThemeExtension<MoonProgressPinProperties
 
     return MoonProgressPinProperties(
       shadowElevation: lerpDouble(shadowElevation, other.shadowElevation, t)!,
+      arrowHeight: lerpDouble(arrowHeight, other.arrowHeight, t)!,
+      arrowWidth: lerpDouble(arrowWidth, other.arrowWidth, t)!,
       pinDistance: lerpDouble(pinDistance, other.pinDistance, t)!,
       pinWidth: lerpDouble(pinWidth, other.pinWidth, t)!,
       pinBorderWidth: lerpDouble(pinBorderWidth, other.pinBorderWidth, t)!,
-      thumbWidthMultiplier: lerpDouble(thumbWidthMultiplier, other.thumbWidthMultiplier, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -71,10 +78,11 @@ class MoonProgressPinProperties extends ThemeExtension<MoonProgressPinProperties
     properties
       ..add(DiagnosticsProperty("type", "MoonProgressPinProperties"))
       ..add(DoubleProperty("shadowElevation", shadowElevation))
+      ..add(DoubleProperty("arrowHeight", arrowHeight))
+      ..add(DoubleProperty("arrowWidth", arrowWidth))
       ..add(DoubleProperty("pinDistance", pinDistance))
       ..add(DoubleProperty("pinWidth", pinWidth))
       ..add(DoubleProperty("pinBorderWidth", pinBorderWidth))
-      ..add(DoubleProperty("thumbWidthMultiplier", thumbWidthMultiplier))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }
