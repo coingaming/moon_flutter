@@ -75,7 +75,7 @@ class MoonProgressPin extends StatelessWidget {
         arrowWidth: effectiveArrowWidth,
         pinDistance: effectivePinDistance,
         pinWidth: effectivePinWidth,
-        thumbSizeValue: pinStyle?.thumbSizeValue,
+        thumbSizeValue: pinStyle?.thumbSizeValue ?? pinStyle?.thumbWidth,
         progressValue: progressValue,
         shadowElevation: effectiveShadowElevation,
         pinText: pinText,
