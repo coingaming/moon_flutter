@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_size_properties.dart';
 import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/widgets/common/progress_indicators/linear_progress_indicator.dart';
 import 'package:moon_design/src/widgets/progress_pin/pin_style.dart';
@@ -21,11 +22,11 @@ class MoonLinearProgress extends StatelessWidget {
   /// Show linear progress with thumb and pin.
   final bool showPin;
 
-  /// Whether to show the min widget.
-  final bool showMinWidget;
+  /// Whether to show the min label widget.
+  final bool showMinLabel;
 
-  /// Whether to show the max widget.
-  final bool showMaxWidget;
+  /// Whether to show the max label widget.
+  final bool showMaxLabel;
 
   /// When this and [showPin] are true, the pin height gets added to linear progress height. If false, the pin functions
   /// like an overlay and does not affect the overall height of linear progress.
@@ -46,10 +47,10 @@ class MoonLinearProgress extends StatelessWidget {
   /// Height of the linear progress widget.
   final double? height;
 
-  /// Gap between the linear progress widget and the min and max widgets.
+  /// Gap between the linear progress widget and the min and max label widgets.
   ///
-  /// Has no effect if [showMinWidget] and [showMaxWidget] are false.
-  final double? topGap;
+  /// Has no effect if [showMinLabel] and [showMaxLabel] are false.
+  final double? verticalGap;
 
   /// Value of the linear progress widget.
   final double value;
@@ -63,25 +64,25 @@ class MoonLinearProgress extends StatelessWidget {
   /// The semantic label for the linear progress widget.
   final String? semanticLabel;
 
-  /// The widget in the min slot of the linear progress widget.
+  /// The widget in the min label slot of the linear progress widget.
   final Widget? minWidget;
 
-  /// The widget in the max slot of the linear progress widget.
+  /// The widget in the max label slot of the linear progress widget.
   final Widget? maxWidget;
 
   /// MDS linear progress widget.
   const MoonLinearProgress({
     super.key,
     this.showPin = false,
-    this.showMinWidget = false,
-    this.showMaxWidget = false,
+    this.showMinLabel = false,
+    this.showMaxLabel = false,
     this.pinAffectsHeight = true,
     this.borderRadius,
     this.color,
     this.backgroundColor,
     this.textColor,
     this.height,
-    this.topGap,
+    this.verticalGap,
     required this.value,
     this.linearProgressSize,
     this.pinStyle,
@@ -142,26 +143,26 @@ class MoonLinearProgress extends StatelessWidget {
         backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.beerus;
 
     final Color effectiveTextColor =
-        textColor ?? context.moonTheme?.linearProgressTheme.colors.textColor ?? MoonColors.light.bulma;
+        textColor ?? context.moonTheme?.linearProgressTheme.colors.textColor ?? MoonColors.light.textPrimary;
 
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 
-    final double effectiveTopGap = topGap ?? effectiveProgressSize.topGap;
+    final double effectiveTopGap = verticalGap ?? effectiveProgressSize.verticalGap;
 
-    final double effectiveThumbSizeValue = pinStyle?.thumbWidth ?? effectiveProgressSize.thumbSizeValue;
+    final double effectiveThumbSizeValue = pinStyle?.thumbSizeValue ?? effectiveProgressSize.thumbSizeValue;
 
     final double effectivePinWidth =
         pinStyle?.pinWidth ?? context.moonTheme?.progressPinTheme.properties.pinWidth ?? 36;
 
     final double effectivePinDistance =
-        pinStyle?.pinDistance ?? context.moonTheme?.progressPinTheme.properties.pinDistance ?? 4;
+        pinStyle?.pinDistance ?? context.moonTheme?.progressPinTheme.properties.pinDistance ?? MoonSizes.sizes.x5s;
 
     final double effectivePinArrowHeight =
         pinStyle?.arrowHeight ?? context.moonTheme?.progressPinTheme.properties.arrowHeight ?? 6;
 
     final TextStyle effectiveTextStyle = effectiveProgressSize.textStyle;
 
-    final double bottomPaddingValue =
+    final double resolvedPaddingValue =
         effectiveThumbSizeValue - effectiveHeight > 0 ? effectiveThumbSizeValue / 2 - effectiveHeight / 2 : 0;
 
     final double heightWithPin =
@@ -185,7 +186,7 @@ class MoonLinearProgress extends StatelessWidget {
       );
     }
 
-    if (showMinWidget || showMaxWidget) {
+    if (showMinLabel || showMaxLabel) {
       child = Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -193,7 +194,7 @@ class MoonLinearProgress extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if (showMinWidget)
+              if (showMinLabel)
                 Expanded(
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
@@ -203,7 +204,7 @@ class MoonLinearProgress extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (showMaxWidget)
+              if (showMaxLabel)
                 Expanded(
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
@@ -224,7 +225,7 @@ class MoonLinearProgress extends StatelessWidget {
     if (showPin && pinAffectsHeight) {
       child = Container(
         height: heightWithPin,
-        padding: EdgeInsets.only(bottom: bottomPaddingValue),
+        padding: EdgeInsets.only(bottom: resolvedPaddingValue),
         alignment: Alignment.bottomCenter,
         child: child,
       );

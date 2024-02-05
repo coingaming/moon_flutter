@@ -11,7 +11,7 @@ class ProgressPinPainter extends CustomPainter {
   final double pinBorderWidth;
   final double pinDistance;
   final double pinWidth;
-  final double? thumbWidth;
+  final double? thumbSizeValue;
   final double progressValue;
   final double shadowElevation;
   final String pinText;
@@ -29,7 +29,7 @@ class ProgressPinPainter extends CustomPainter {
     required this.arrowWidth,
     required this.pinDistance,
     required this.pinWidth,
-    this.thumbWidth,
+    this.thumbSizeValue,
     required this.progressValue,
     required this.shadowElevation,
     required this.pinText,
@@ -40,8 +40,8 @@ class ProgressPinPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final double radius = pinWidth / 2;
-    final double thumbRadius = switch (thumbWidth) {
-      _ when thumbWidth != null => thumbWidth! / 2,
+    final double thumbRadius = switch (thumbSizeValue) {
+      _ when thumbSizeValue != null => thumbSizeValue! / 2,
       _ => size.height / 2,
     };
     final double offsetY = -(radius + arrowHeight + pinDistance) + (size.height / 2 - thumbRadius);
@@ -101,7 +101,7 @@ class ProgressPinPainter extends CustomPainter {
         oldPainter.pinBorderColor != pinBorderColor ||
         oldPainter.pinDistance != pinDistance ||
         oldPainter.thumbColor != thumbColor ||
-        oldPainter.thumbWidth != thumbWidth ||
+        oldPainter.thumbSizeValue != thumbSizeValue ||
         oldPainter.showShadow != showShadow ||
         oldPainter.shadowColor != shadowColor ||
         oldPainter.shadowElevation != shadowElevation ||

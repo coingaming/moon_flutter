@@ -24,7 +24,7 @@ class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme> wi
             MoonLinearProgressColors(
               color: tokens.colors.piccolo,
               backgroundColor: tokens.colors.beerus,
-              textColor: tokens.colors.bulma,
+              textColor: tokens.colors.textPrimary,
             ),
         sizes = sizes ?? MoonLinearProgressSizes(tokens: tokens);
 

@@ -16,7 +16,7 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
   final double thumbSizeValue;
 
   /// Linear progress gap between progress bar and minWidget or maxWidget.
-  final double topGap;
+  final double verticalGap;
 
   /// Linear progress minWidget and maxWidget text style.
   final TextStyle textStyle;
@@ -25,7 +25,7 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
     required this.borderRadius,
     required this.progressHeight,
     required this.thumbSizeValue,
-    required this.topGap,
+    required this.verticalGap,
     required this.textStyle,
   });
 
@@ -34,14 +34,14 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
     BorderRadiusGeometry? borderRadius,
     double? progressHeight,
     double? thumbSizeValue,
-    double? topGap,
+    double? verticalGap,
     TextStyle? textStyle,
   }) {
     return MoonLinearProgressSizeProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       progressHeight: progressHeight ?? this.progressHeight,
       thumbSizeValue: thumbSizeValue ?? this.thumbSizeValue,
-      topGap: topGap ?? this.topGap,
+      verticalGap: verticalGap ?? this.verticalGap,
       textStyle: textStyle ?? this.textStyle,
     );
   }
@@ -54,7 +54,7 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
       borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       progressHeight: lerpDouble(progressHeight, other.progressHeight, t)!,
       thumbSizeValue: lerpDouble(thumbSizeValue, other.thumbSizeValue, t)!,
-      topGap: lerpDouble(topGap, other.topGap, t)!,
+      verticalGap: lerpDouble(verticalGap, other.verticalGap, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -67,7 +67,7 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
       ..add(DoubleProperty("progressHeight", progressHeight))
       ..add(DoubleProperty("thumbSizeValue", thumbSizeValue))
-      ..add(DoubleProperty("topGap", topGap))
+      ..add(DoubleProperty("verticalGap", verticalGap))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

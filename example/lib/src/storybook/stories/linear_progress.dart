@@ -98,14 +98,14 @@ class LinearProgressStory extends StatelessWidget {
       description: "Show pin for LinearProgress",
     );
 
-    final showMinWidgetKnob = context.knobs.boolean(
-      label: "showMinWidget",
-      description: "Show minWidget for LinearProgress",
+    final showMinLabelKnob = context.knobs.boolean(
+      label: "showMinLabel",
+      description: "Show minLabel for LinearProgress",
     );
 
-    final showMaxWidgetKnob = context.knobs.boolean(
-      label: "showMaxWidget",
-      description: "Show maxWidget for LinearProgress",
+    final showMaxLabelKnob = context.knobs.boolean(
+      label: "showMaxLabel",
+      description: "Show maxLabel for LinearProgress",
     );
 
     final showPinShadowKnob = context.knobs.boolean(
@@ -123,8 +123,8 @@ class LinearProgressStory extends StatelessWidget {
           color: color,
           backgroundColor: backgroundColor,
           borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-          showMinWidget: showMinWidgetKnob,
-          showMaxWidget: showMaxWidgetKnob,
+          showMinLabel: showMinLabelKnob,
+          showMaxLabel: showMaxLabelKnob,
           showPin: showPinKnob,
           pinStyle: PinStyle(
             pinColor: pinColor,

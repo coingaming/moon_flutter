@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/theme.dart';
+import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_design/src/widgets/progress_pin/pin_style.dart';
 import 'package:moon_design/src/widgets/progress_pin/progress_pin_painter.dart';
@@ -44,17 +45,18 @@ class MoonProgressPin extends StatelessWidget {
     final double effectivePinWidth =
         pinStyle?.pinWidth ?? context.moonTheme?.progressPinTheme.properties.pinWidth ?? 36;
 
-    final double effectivePinBorderWidth =
-        pinStyle?.pinBorderWidth ?? context.moonTheme?.progressPinTheme.properties.pinBorderWidth ?? 2;
+    final double effectivePinBorderWidth = pinStyle?.pinBorderWidth ??
+        context.moonTheme?.progressPinTheme.properties.pinBorderWidth ??
+        MoonSizes.sizes.x6s;
 
     final double effectivePinDistance =
-        pinStyle?.pinDistance ?? context.moonTheme?.progressPinTheme.properties.pinDistance ?? 4;
+        pinStyle?.pinDistance ?? context.moonTheme?.progressPinTheme.properties.pinDistance ?? MoonSizes.sizes.x5s;
 
     final double effectiveArrowHeight =
         pinStyle?.arrowHeight ?? context.moonTheme?.progressPinTheme.properties.arrowHeight ?? 6;
 
     final double effectiveArrowWidth =
-        pinStyle?.arrowWidth ?? context.moonTheme?.progressPinTheme.properties.arrowWidth ?? 8;
+        pinStyle?.arrowWidth ?? context.moonTheme?.progressPinTheme.properties.arrowWidth ?? MoonSizes.sizes.x4s;
 
     final double effectiveShadowElevation =
         pinStyle?.shadowElevation ?? context.moonTheme?.progressPinTheme.properties.shadowElevation ?? 6;
@@ -73,7 +75,7 @@ class MoonProgressPin extends StatelessWidget {
         arrowWidth: effectiveArrowWidth,
         pinDistance: effectivePinDistance,
         pinWidth: effectivePinWidth,
-        thumbWidth: pinStyle?.thumbWidth,
+        thumbSizeValue: pinStyle?.thumbSizeValue,
         progressValue: progressValue,
         shadowElevation: effectiveShadowElevation,
         pinText: pinText,

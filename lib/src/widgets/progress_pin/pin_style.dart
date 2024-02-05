@@ -23,7 +23,11 @@ class PinStyle {
   final double? arrowWidth;
 
   /// The width of the thumb.
+  @Deprecated("Use thumbSizeValue instead")
   final double? thumbWidth;
+
+  /// The size value of the thumb.
+  final double? thumbSizeValue;
 
   /// The width of the pin.
   final double? pinWidth;
@@ -48,7 +52,8 @@ class PinStyle {
     this.shadowColor,
     this.arrowHeight,
     this.arrowWidth,
-    this.thumbWidth,
+    @Deprecated("Use thumbSizeValue instead") this.thumbWidth,
+    this.thumbSizeValue,
     this.pinWidth,
     this.pinBorderWidth,
     this.pinDistance,
@@ -65,6 +70,7 @@ class PinStyle {
     double? arrowHeight,
     double? arrowWidth,
     double? thumbWidth,
+    double? thumbSizeValue,
     double? pinWidth,
     double? pinBorderWidth,
     double? pinDistance,
@@ -79,7 +85,8 @@ class PinStyle {
       shadowColor: shadowColor ?? this.shadowColor,
       arrowHeight: arrowHeight ?? this.arrowHeight,
       arrowWidth: arrowWidth ?? this.arrowWidth,
-      thumbWidth: thumbWidth ?? this.thumbWidth,
+      thumbWidth: thumbWidth ?? this.thumbSizeValue,
+      thumbSizeValue: thumbSizeValue ?? this.thumbSizeValue,
       pinWidth: pinWidth ?? this.pinWidth,
       pinBorderWidth: pinBorderWidth ?? this.pinBorderWidth,
       pinDistance: pinDistance ?? this.pinDistance,
