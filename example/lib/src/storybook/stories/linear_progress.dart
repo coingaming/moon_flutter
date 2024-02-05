@@ -117,25 +117,21 @@ class LinearProgressStory extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 16),
-        child: Column(
-          children: [
-            MoonLinearProgress(
-              linearProgressSize: progressSizeKnob,
-              value: linearProgressValueKnob,
-              color: color,
-              backgroundColor: backgroundColor,
-              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-              showMinWidget: showMinWidgetKnob,
-              showMaxWidget: showMaxWidgetKnob,
-              showPin: showPinKnob,
-              pinStyle: PinStyle(
-                pinColor: pinColor,
-                pinBorderColor: pinBorderColor,
-                thumbColor: thumbColor,
-                showShadow: showPinShadowKnob,
-              ),
-            ),
-          ],
+        child: MoonLinearProgress(
+          linearProgressSize: progressSizeKnob,
+          value: linearProgressValueKnob,
+          color: color,
+          backgroundColor: backgroundColor,
+          borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+          showMinWidget: showMinWidgetKnob,
+          showMaxWidget: showMaxWidgetKnob,
+          showPin: showPinKnob,
+          pinStyle: PinStyle(
+            pinColor: pinColor,
+            pinBorderColor: pinBorderColor,
+            thumbColor: thumbColor,
+            showShadow: showPinShadowKnob,
+          ),
         ),
       ),
     );

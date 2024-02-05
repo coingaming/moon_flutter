@@ -187,6 +187,7 @@ class MoonLinearProgress extends StatelessWidget {
 
     if (showMinWidget || showMaxWidget) {
       child = Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Row(
@@ -196,14 +197,20 @@ class MoonLinearProgress extends StatelessWidget {
                 Expanded(
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
-                    child: Align(alignment: AlignmentDirectional.centerStart, child: minWidget ?? const Text("0%")),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: minWidget ?? const Text("0%"),
+                    ),
                   ),
                 ),
               if (showMaxWidget)
                 Expanded(
                   child: DefaultTextStyle(
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
-                    child: Align(alignment: AlignmentDirectional.centerEnd, child: maxWidget ?? const Text("100%")),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: maxWidget ?? const Text("100%"),
+                    ),
                   ),
                 ),
             ],
