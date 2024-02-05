@@ -5,7 +5,8 @@ import 'package:moon_design/src/widgets/common/progress_indicators/painters/line
 
 class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
   /// The border radius of the linear progress indicator.
-  final BorderRadiusGeometry borderRadius;
+  final BorderRadiusGeometry containerRadius;
+  final BorderRadiusGeometry progressRadius;
 
   /// The minimum height of the linear progress indicator.
   final double minHeight;
@@ -20,7 +21,8 @@ class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
     super.semanticsLabel,
     super.semanticsValue,
     this.minHeight = 4,
-    this.borderRadius = BorderRadius.zero,
+    this.containerRadius = BorderRadius.zero,
+    this.progressRadius = BorderRadius.zero,
   }) : assert(minHeight > 0);
 
   /// Color of the track being filled by the linear indicator.
@@ -65,7 +67,8 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
   }
 
   Widget buildStaticProgressIndicator(BuildContext context, double animationValue, TextDirection textDirection) {
-    final resolvedBorderRadius = widget.borderRadius.resolve(Directionality.of(context));
+    final resolvedContainerRadius = widget.containerRadius.resolve(Directionality.of(context));
+    final resolvedProgressRadius = widget.progressRadius.resolve(Directionality.of(context));
 
     return widget.buildSemanticsWrapper(
       context: context,
@@ -83,7 +86,8 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
               // may be null
               animationValue: animationValue,
               // ignored if widget.value is not null
-              borderRadius: resolvedBorderRadius,
+              containerRadius: resolvedContainerRadius,
+              progressRadius: resolvedProgressRadius,
               textDirection: textDirection,
             ),
           ),

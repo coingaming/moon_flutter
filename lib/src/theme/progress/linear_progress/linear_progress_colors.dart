@@ -11,19 +11,25 @@ class MoonLinearProgressColors extends ThemeExtension<MoonLinearProgressColors> 
   /// Linear progress background color.
   final Color backgroundColor;
 
+  /// Linear progress minWidget and maxWidget text color.
+  final Color textColor;
+
   const MoonLinearProgressColors({
     required this.color,
     required this.backgroundColor,
+    required this.textColor,
   });
 
   @override
   MoonLinearProgressColors copyWith({
     Color? color,
     Color? backgroundColor,
+    Color? textColor,
   }) {
     return MoonLinearProgressColors(
       color: color ?? this.color,
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      textColor: textColor ?? this.textColor,
     );
   }
 
@@ -34,6 +40,7 @@ class MoonLinearProgressColors extends ThemeExtension<MoonLinearProgressColors> 
     return MoonLinearProgressColors(
       color: colorPremulLerp(color, other.color, t)!,
       backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      textColor: colorPremulLerp(textColor, other.textColor, t)!,
     );
   }
 
@@ -43,6 +50,7 @@ class MoonLinearProgressColors extends ThemeExtension<MoonLinearProgressColors> 
     properties
       ..add(DiagnosticsProperty("type", "MoonLinearProgressColors"))
       ..add(ColorProperty("color", color))
-      ..add(ColorProperty("backgroundColor", backgroundColor));
+      ..add(ColorProperty("backgroundColor", backgroundColor))
+      ..add(ColorProperty("textColor", textColor));
   }
 }

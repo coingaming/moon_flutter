@@ -30,12 +30,13 @@ class MoonProgressPinTheme extends ThemeExtension<MoonProgressPinTheme> with Dia
             ),
         properties = properties ??
             MoonProgressPinProperties(
-              pinDistance: 6,
+              arrowHeight: 6,
+              arrowWidth: tokens.sizes.x4s,
+              pinDistance: tokens.sizes.x5s,
               pinWidth: 36,
-              pinBorderWidth: 2,
-              thumbWidthMultiplier: 1.5,
+              pinBorderWidth: tokens.sizes.x6s,
               shadowElevation: 6,
-              textStyle: tokens.typography.caption.text10.copyWith(letterSpacing: 0.5),
+              textStyle: tokens.typography.caption.text10,
             );
 
   @override

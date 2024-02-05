@@ -6,14 +6,15 @@ class ProgressPinPainter extends CustomPainter {
   final Color thumbColor;
   final Color shadowColor;
   final Color pinBorderColor;
+  final double arrowHeight;
+  final double arrowWidth;
   final double pinBorderWidth;
   final double pinDistance;
   final double pinWidth;
-  final double? thumbWidth;
-  final double thumbWidthMultiplier;
+  final double? thumbSizeValue;
   final double progressValue;
   final double shadowElevation;
-  final String labelText;
+  final String pinText;
   final TextStyle textStyle;
   final TextDirection textDirection;
 
@@ -24,13 +25,14 @@ class ProgressPinPainter extends CustomPainter {
     required this.shadowColor,
     required this.pinBorderColor,
     required this.pinBorderWidth,
+    required this.arrowHeight,
+    required this.arrowWidth,
     required this.pinDistance,
     required this.pinWidth,
-    this.thumbWidth,
-    required this.thumbWidthMultiplier,
+    this.thumbSizeValue,
     required this.progressValue,
     required this.shadowElevation,
-    required this.labelText,
+    required this.pinText,
     required this.textStyle,
     required this.textDirection,
   });
@@ -38,10 +40,11 @@ class ProgressPinPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final double radius = pinWidth / 2;
-    final double arrowHeight = radius / 3;
-    final double arrowWidth = radius / 2;
-    final double offsetY = -(radius + arrowHeight + pinDistance);
-    final double thumbSizeWidth = thumbWidth ?? size.height / thumbWidthMultiplier;
+    final double thumbRadius = switch (thumbSizeValue) {
+      _ when thumbSizeValue != null => thumbSizeValue! / 2,
+      _ => size.height / 2,
+    };
+    final double offsetY = -(radius + arrowHeight + pinDistance) + (size.height / 2 - thumbRadius);
 
     // Offset based on directionality
     double offsetX = progressValue * size.width;
@@ -62,9 +65,9 @@ class ProgressPinPainter extends CustomPainter {
     final Path path = Path()
       ..addOval(Rect.fromCircle(center: Offset(offsetX, offsetY), radius: radius))
       ..addOval(Rect.fromCircle(center: Offset(offsetX, offsetY), radius: radius))
-      ..moveTo(offsetX - arrowWidth / 2, offsetY + (radius * 0.9))
+      ..moveTo(offsetX - arrowWidth / 2, offsetY + radius - 0.5) // shift the origin "up" by 0.5 to avoid aliasing
       ..lineTo(offsetX, offsetY + radius + arrowHeight)
-      ..lineTo(offsetX + arrowWidth / 2, offsetY + (radius * 0.9))
+      ..lineTo(offsetX + arrowWidth / 2, offsetY + radius - 0.5) // shift the destination "up" by 0.5 to avoid aliasing
       ..close();
 
     // Draw shadow around outer path
@@ -77,16 +80,16 @@ class ProgressPinPainter extends CustomPainter {
     canvas.drawCircle(Offset(offsetX, offsetY), radius - pinBorderWidth, innerCirclePaint);
 
     // Draw thumb
-    canvas.drawCircle(Offset(offsetX, size.height / 2), thumbSizeWidth, thumbCirclePaint);
+    canvas.drawCircle(Offset(offsetX, size.height / 2), thumbRadius, thumbCirclePaint);
 
-    // Draw text
-    final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: labelText, style: textStyle),
-      textDirection: TextDirection.ltr,
+    // Draw pin text
+    final TextPainter pinTextPainter = TextPainter(
+      text: TextSpan(text: pinText, style: textStyle),
+      textDirection: textDirection,
     );
 
-    textPainter.layout();
-    textPainter.paint(canvas, Offset(offsetX - textPainter.width / 2, offsetY - textPainter.height / 2));
+    pinTextPainter.layout();
+    pinTextPainter.paint(canvas, Offset(offsetX - pinTextPainter.width / 2, offsetY - pinTextPainter.height / 2));
   }
 
   @override
@@ -98,7 +101,7 @@ class ProgressPinPainter extends CustomPainter {
         oldPainter.pinBorderColor != pinBorderColor ||
         oldPainter.pinDistance != pinDistance ||
         oldPainter.thumbColor != thumbColor ||
-        oldPainter.thumbWidth != thumbWidth ||
+        oldPainter.thumbSizeValue != thumbSizeValue ||
         oldPainter.showShadow != showShadow ||
         oldPainter.shadowColor != shadowColor ||
         oldPainter.shadowElevation != shadowElevation ||

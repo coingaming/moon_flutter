@@ -16,8 +16,18 @@ class PinStyle {
   /// The color of the pin shadow.
   final Color? shadowColor;
 
+  /// The height of the pin arrow.
+  final double? arrowHeight;
+
+  /// The width of the pin arrow.
+  final double? arrowWidth;
+
   /// The width of the thumb.
+  @Deprecated("Use thumbSizeValue instead")
   final double? thumbWidth;
+
+  /// The size value of the thumb.
+  final double? thumbSizeValue;
 
   /// The width of the pin.
   final double? pinWidth;
@@ -40,11 +50,49 @@ class PinStyle {
     this.pinBorderColor,
     this.thumbColor,
     this.shadowColor,
-    this.thumbWidth,
+    this.arrowHeight,
+    this.arrowWidth,
+    @Deprecated("Use thumbSizeValue instead") this.thumbWidth,
+    this.thumbSizeValue,
     this.pinWidth,
     this.pinBorderWidth,
     this.pinDistance,
     this.shadowElevation,
     this.textStyle,
   });
+
+  PinStyle copyWith({
+    bool? showShadow,
+    Color? pinColor,
+    Color? pinBorderColor,
+    Color? thumbColor,
+    Color? shadowColor,
+    double? arrowHeight,
+    double? arrowWidth,
+    double? thumbWidth,
+    double? thumbSizeValue,
+    double? pinWidth,
+    double? pinBorderWidth,
+    double? pinDistance,
+    double? shadowElevation,
+    TextStyle? textStyle,
+  }) {
+    return PinStyle(
+      showShadow: showShadow ?? this.showShadow,
+      pinColor: pinColor ?? this.pinColor,
+      pinBorderColor: pinBorderColor ?? this.pinBorderColor,
+      thumbColor: thumbColor ?? this.thumbColor,
+      shadowColor: shadowColor ?? this.shadowColor,
+      arrowHeight: arrowHeight ?? this.arrowHeight,
+      arrowWidth: arrowWidth ?? this.arrowWidth,
+      // ignore: deprecated_member_use_from_same_package
+      thumbWidth: thumbWidth ?? this.thumbWidth,
+      thumbSizeValue: thumbSizeValue ?? this.thumbSizeValue,
+      pinWidth: pinWidth ?? this.pinWidth,
+      pinBorderWidth: pinBorderWidth ?? this.pinBorderWidth,
+      pinDistance: pinDistance ?? this.pinDistance,
+      shadowElevation: shadowElevation ?? this.shadowElevation,
+      textStyle: textStyle ?? this.textStyle,
+    );
+  }
 }
