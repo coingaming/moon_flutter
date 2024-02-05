@@ -36,7 +36,7 @@ class MoonProgressPinTheme extends ThemeExtension<MoonProgressPinTheme> with Dia
               pinWidth: 36,
               pinBorderWidth: 2,
               shadowElevation: 6,
-              textStyle: tokens.typography.caption.text10.copyWith(letterSpacing: 0.5),
+              textStyle: tokens.typography.caption.text10,
             );
 
   @override

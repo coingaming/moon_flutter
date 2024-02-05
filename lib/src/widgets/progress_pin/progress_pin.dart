@@ -9,15 +9,15 @@ import 'package:moon_tokens/moon_tokens.dart';
 class MoonProgressPin extends StatelessWidget {
   final double progressValue;
   final PinStyle? pinStyle;
-  final String progressLabel;
+  final String pinText;
   final Widget child;
 
   const MoonProgressPin({
     super.key,
     required this.progressValue,
-    required this.child,
     this.pinStyle,
-    required this.progressLabel,
+    required this.pinText,
+    required this.child,
   });
 
   @override
@@ -39,7 +39,7 @@ class MoonProgressPin extends StatelessWidget {
 
     final TextStyle effectiveTextStyle = pinStyle?.textStyle ??
         context.moonTheme?.progressPinTheme.properties.textStyle ??
-        MoonTypography.typography.caption.text10.copyWith(letterSpacing: 0.5);
+        MoonTypography.typography.caption.text10;
 
     final double effectivePinWidth =
         pinStyle?.pinWidth ?? context.moonTheme?.progressPinTheme.properties.pinWidth ?? 36;
@@ -76,7 +76,7 @@ class MoonProgressPin extends StatelessWidget {
         thumbWidth: pinStyle?.thumbWidth,
         progressValue: progressValue,
         shadowElevation: effectiveShadowElevation,
-        labelText: progressLabel,
+        pinText: pinText,
         textDirection: effectiveTextDirection,
         textStyle: effectiveTextStyle.copyWith(color: effectiveTextColor),
       ),

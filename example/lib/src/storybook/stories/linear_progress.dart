@@ -98,6 +98,16 @@ class LinearProgressStory extends StatelessWidget {
       description: "Show pin for LinearProgress",
     );
 
+    final showMinWidgetKnob = context.knobs.boolean(
+      label: "showMinWidget",
+      description: "Show minWidget for LinearProgress",
+    );
+
+    final showMaxWidgetKnob = context.knobs.boolean(
+      label: "showMaxWidget",
+      description: "Show maxWidget for LinearProgress",
+    );
+
     final showPinShadowKnob = context.knobs.boolean(
       label: "showPinShadow",
       description: "Show pin shadow for LinearProgress",
@@ -107,19 +117,25 @@ class LinearProgressStory extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 16),
-        child: MoonLinearProgress(
-          showPin: showPinKnob,
-          pinStyle: PinStyle(
-            pinColor: pinColor,
-            pinBorderColor: pinBorderColor,
-            thumbColor: thumbColor,
-            showShadow: showPinShadowKnob,
-          ),
-          value: linearProgressValueKnob,
-          linearProgressSize: progressSizeKnob,
-          color: color,
-          backgroundColor: backgroundColor,
-          borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+        child: Column(
+          children: [
+            MoonLinearProgress(
+              linearProgressSize: progressSizeKnob,
+              value: linearProgressValueKnob,
+              color: color,
+              backgroundColor: backgroundColor,
+              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+              showMinWidget: showMinWidgetKnob,
+              showMaxWidget: showMaxWidgetKnob,
+              showPin: showPinKnob,
+              pinStyle: PinStyle(
+                pinColor: pinColor,
+                pinBorderColor: pinBorderColor,
+                thumbColor: thumbColor,
+                showShadow: showPinShadowKnob,
+              ),
+            ),
+          ],
         ),
       ),
     );

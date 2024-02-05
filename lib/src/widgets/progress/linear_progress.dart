@@ -21,6 +21,12 @@ class MoonLinearProgress extends StatelessWidget {
   /// Show linear progress with thumb and pin.
   final bool showPin;
 
+  /// Whether to show the min widget.
+  final bool showMinWidget;
+
+  /// Whether to show the max widget.
+  final bool showMaxWidget;
+
   /// When this and [showPin] are true, the pin height gets added to linear progress height. If false, the pin functions
   /// like an overlay and does not affect the overall height of linear progress.
   final bool pinAffectsHeight;
@@ -34,8 +40,16 @@ class MoonLinearProgress extends StatelessWidget {
   /// Background color of the linear progress widget.
   final Color? backgroundColor;
 
+  /// The text color of the minWidget and maxWidget.
+  final Color? textColor;
+
   /// Height of the linear progress widget.
   final double? height;
+
+  /// Gap between the linear progress widget and the min and max widgets.
+  ///
+  /// Has no effect if [showMinWidget] and [showMaxWidget] are false.
+  final double? topGap;
 
   /// Value of the linear progress widget.
   final double value;
@@ -49,19 +63,31 @@ class MoonLinearProgress extends StatelessWidget {
   /// The semantic label for the linear progress widget.
   final String? semanticLabel;
 
+  /// The widget in the min slot of the linear progress widget.
+  final Widget? minWidget;
+
+  /// The widget in the max slot of the linear progress widget.
+  final Widget? maxWidget;
+
   /// MDS linear progress widget.
   const MoonLinearProgress({
     super.key,
     this.showPin = false,
+    this.showMinWidget = false,
+    this.showMaxWidget = false,
     this.pinAffectsHeight = true,
     this.borderRadius,
     this.color,
     this.backgroundColor,
+    this.textColor,
     this.height,
+    this.topGap,
     required this.value,
     this.linearProgressSize,
     this.pinStyle,
     this.semanticLabel,
+    this.minWidget,
+    this.maxWidget,
   });
 
   MoonLinearProgressSizeProperties _getMoonProgressSize(
@@ -115,7 +141,12 @@ class MoonLinearProgress extends StatelessWidget {
     final Color effectiveBackgroundColor =
         backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.beerus;
 
+    final Color effectiveTextColor =
+        textColor ?? context.moonTheme?.linearProgressTheme.colors.textColor ?? MoonColors.light.bulma;
+
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
+
+    final double effectiveTopGap = topGap ?? effectiveProgressSize.topGap;
 
     final double effectiveThumbSizeValue = pinStyle?.thumbWidth ?? effectiveProgressSize.thumbSizeValue;
 
@@ -127,6 +158,8 @@ class MoonLinearProgress extends StatelessWidget {
 
     final double effectivePinArrowHeight =
         pinStyle?.arrowHeight ?? context.moonTheme?.progressPinTheme.properties.arrowHeight ?? 6;
+
+    final TextStyle effectiveTextStyle = effectiveProgressSize.textStyle;
 
     final double bottomPaddingValue =
         effectiveThumbSizeValue - effectiveHeight > 0 ? effectiveThumbSizeValue / 2 - effectiveHeight / 2 : 0;
@@ -146,9 +179,38 @@ class MoonLinearProgress extends StatelessWidget {
     if (showPin) {
       child = MoonProgressPin(
         progressValue: value,
-        progressLabel: '${(value * 100).round()}%',
+        pinText: '${(value * 100).round()}%',
         pinStyle: pinStyle?.copyWith(thumbWidth: effectiveThumbSizeValue),
         child: child,
+      );
+    }
+
+    if (showMinWidget || showMaxWidget) {
+      child = Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (showMinWidget)
+                Expanded(
+                  child: DefaultTextStyle(
+                    style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                    child: Align(alignment: AlignmentDirectional.centerStart, child: minWidget ?? const Text("0%")),
+                  ),
+                ),
+              if (showMaxWidget)
+                Expanded(
+                  child: DefaultTextStyle(
+                    style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                    child: Align(alignment: AlignmentDirectional.centerEnd, child: maxWidget ?? const Text("100%")),
+                  ),
+                ),
+            ],
+          ),
+          SizedBox(height: effectiveTopGap),
+          child,
+        ],
       );
     }
 

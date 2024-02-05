@@ -14,7 +14,7 @@ class ProgressPinPainter extends CustomPainter {
   final double? thumbWidth;
   final double progressValue;
   final double shadowElevation;
-  final String labelText;
+  final String pinText;
   final TextStyle textStyle;
   final TextDirection textDirection;
 
@@ -32,7 +32,7 @@ class ProgressPinPainter extends CustomPainter {
     this.thumbWidth,
     required this.progressValue,
     required this.shadowElevation,
-    required this.labelText,
+    required this.pinText,
     required this.textStyle,
     required this.textDirection,
   });
@@ -82,14 +82,14 @@ class ProgressPinPainter extends CustomPainter {
     // Draw thumb
     canvas.drawCircle(Offset(offsetX, size.height / 2), thumbRadius, thumbCirclePaint);
 
-    // Draw text
-    final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: labelText, style: textStyle),
-      textDirection: TextDirection.ltr,
+    // Draw pin text
+    final TextPainter pinTextPainter = TextPainter(
+      text: TextSpan(text: pinText, style: textStyle),
+      textDirection: textDirection,
     );
 
-    textPainter.layout();
-    textPainter.paint(canvas, Offset(offsetX - textPainter.width / 2, offsetY - textPainter.height / 2));
+    pinTextPainter.layout();
+    pinTextPainter.paint(canvas, Offset(offsetX - pinTextPainter.width / 2, offsetY - pinTextPainter.height / 2));
   }
 
   @override

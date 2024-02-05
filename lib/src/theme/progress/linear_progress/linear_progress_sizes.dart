@@ -36,30 +36,40 @@ class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> wi
               borderRadius: tokens.borders.surfaceXs,
               progressHeight: tokens.sizes.x6s,
               thumbSizeValue: tokens.sizes.x3s,
+              topGap: tokens.sizes.x4s,
+              textStyle: tokens.typography.caption.text10,
             ),
         x5s = x5s ??
             MoonLinearProgressSizeProperties(
               borderRadius: tokens.borders.surfaceXs,
               progressHeight: tokens.sizes.x5s,
               thumbSizeValue: tokens.sizes.x3s,
+              topGap: tokens.sizes.x4s,
+              textStyle: tokens.typography.caption.text10,
             ),
         x4s = x4s ??
             MoonLinearProgressSizeProperties(
               borderRadius: tokens.borders.surfaceSm,
               progressHeight: tokens.sizes.x4s,
               thumbSizeValue: tokens.sizes.x3s,
+              topGap: 6,
+              textStyle: tokens.typography.caption.text10,
             ),
         x3s = x3s ??
             MoonLinearProgressSizeProperties(
               borderRadius: tokens.borders.surfaceMd,
               progressHeight: tokens.sizes.x3s,
               thumbSizeValue: tokens.sizes.x2s,
+              topGap: 6,
+              textStyle: tokens.typography.caption.text10,
             ),
         x2s = x2s ??
             MoonLinearProgressSizeProperties(
               borderRadius: tokens.borders.surfaceLg,
               progressHeight: tokens.sizes.x2s,
               thumbSizeValue: tokens.sizes.x2s,
+              topGap: tokens.sizes.x5s,
+              textStyle: tokens.typography.caption.text10,
             );
 
   @override
