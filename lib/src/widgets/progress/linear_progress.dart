@@ -41,7 +41,7 @@ class MoonLinearProgress extends StatelessWidget {
   /// Background color of the linear progress widget.
   final Color? backgroundColor;
 
-  /// The text color of the minWidget and maxWidget.
+  /// The text color of the minLabel and maxLabel.
   final Color? textColor;
 
   /// Height of the linear progress widget.
@@ -65,10 +65,10 @@ class MoonLinearProgress extends StatelessWidget {
   final String? semanticLabel;
 
   /// The widget in the min label slot of the linear progress widget.
-  final Widget? minWidget;
+  final Widget? minLabel;
 
   /// The widget in the max label slot of the linear progress widget.
-  final Widget? maxWidget;
+  final Widget? maxLabel;
 
   /// MDS linear progress widget.
   const MoonLinearProgress({
@@ -87,8 +87,8 @@ class MoonLinearProgress extends StatelessWidget {
     this.linearProgressSize,
     this.pinStyle,
     this.semanticLabel,
-    this.minWidget,
-    this.maxWidget,
+    this.minLabel,
+    this.maxLabel,
   });
 
   MoonLinearProgressSizeProperties _getMoonProgressSize(
@@ -200,7 +200,7 @@ class MoonLinearProgress extends StatelessWidget {
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
-                      child: minWidget ?? const Text("0%"),
+                      child: minLabel ?? const Text("0%"),
                     ),
                   ),
                 ),
@@ -210,7 +210,7 @@ class MoonLinearProgress extends StatelessWidget {
                     style: effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Align(
                       alignment: AlignmentDirectional.centerEnd,
-                      child: maxWidget ?? const Text("100%"),
+                      child: maxLabel ?? const Text("100%"),
                     ),
                   ),
                 ),
