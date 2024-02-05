@@ -150,6 +150,7 @@ class MoonLinearProgress extends StatelessWidget {
     final double effectiveTopGap = verticalGap ?? effectiveProgressSize.verticalGap;
 
     final double effectiveThumbSizeValue =
+        // ignore: deprecated_member_use_from_same_package
         (pinStyle?.thumbSizeValue ?? pinStyle?.thumbWidth) ?? effectiveProgressSize.thumbSizeValue;
 
     final double effectivePinWidth =
