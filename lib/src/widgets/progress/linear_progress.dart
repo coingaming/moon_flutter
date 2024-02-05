@@ -149,7 +149,8 @@ class MoonLinearProgress extends StatelessWidget {
 
     final double effectiveTopGap = verticalGap ?? effectiveProgressSize.verticalGap;
 
-    final double effectiveThumbSizeValue = pinStyle?.thumbSizeValue ?? effectiveProgressSize.thumbSizeValue;
+    final double effectiveThumbSizeValue =
+        (pinStyle?.thumbSizeValue ?? pinStyle?.thumbWidth) ?? effectiveProgressSize.thumbSizeValue;
 
     final double effectivePinWidth =
         pinStyle?.pinWidth ?? context.moonTheme?.progressPinTheme.properties.pinWidth ?? 36;
@@ -181,7 +182,7 @@ class MoonLinearProgress extends StatelessWidget {
       child = MoonProgressPin(
         progressValue: value,
         pinText: '${(value * 100).round()}%',
-        pinStyle: pinStyle?.copyWith(thumbWidth: effectiveThumbSizeValue),
+        pinStyle: pinStyle?.copyWith(thumbSizeValue: effectiveThumbSizeValue),
         child: child,
       );
     }

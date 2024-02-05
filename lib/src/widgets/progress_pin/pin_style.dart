@@ -85,7 +85,7 @@ class PinStyle {
       shadowColor: shadowColor ?? this.shadowColor,
       arrowHeight: arrowHeight ?? this.arrowHeight,
       arrowWidth: arrowWidth ?? this.arrowWidth,
-      thumbWidth: thumbWidth ?? this.thumbSizeValue,
+      thumbWidth: thumbWidth ?? this.thumbWidth,
       thumbSizeValue: thumbSizeValue ?? this.thumbSizeValue,
       pinWidth: pinWidth ?? this.pinWidth,
       pinBorderWidth: pinBorderWidth ?? this.pinBorderWidth,
