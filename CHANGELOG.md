@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.1](https://github.com/coingaming/moon_flutter/compare/v0.47.0...v0.47.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* [MDS-984] Update LinearProgress according to design ([#342](https://github.com/coingaming/moon_flutter/issues/342)) ([2294a0b](https://github.com/coingaming/moon_flutter/commit/2294a0b147f11b785d303f35e854dd0462ff995e))
+
 ## [0.47.0](https://github.com/coingaming/moon_flutter/compare/v0.46.0...v0.47.0) (2024-01-19)
 
 
