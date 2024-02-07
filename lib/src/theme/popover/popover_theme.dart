@@ -8,16 +8,16 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Popover colors.
+  /// The colors of the MoonPopover.
   final MoonPopoverColors colors;
 
-  /// Popover properties.
+  /// The properties of the MoonPopover.
   final MoonPopoverProperties properties;
 
-  /// Popover shadows.
+  /// The shadows of the MoonPopover.
   final MoonPopoverShadows shadows;
 
   MoonPopoverTheme({

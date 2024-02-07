@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTooltipShadows extends ThemeExtension<MoonTooltipShadows> with DiagnosticableTreeMixin {
-  /// Tooltip shadows.
+  /// The list of shadows applied to the MoonTooltip.
   final List<BoxShadow> tooltipShadows;
 
   const MoonTooltipShadows({

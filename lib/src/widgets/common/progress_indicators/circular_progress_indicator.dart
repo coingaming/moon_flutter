@@ -4,13 +4,13 @@ import 'package:moon_design/src/widgets/common/progress_indicators/base_progress
 import 'package:moon_design/src/widgets/common/progress_indicators/painters/circular_progress_indicator_painter.dart';
 
 class MoonCircularProgressIndicator extends MoonBaseProgressIndicator {
-  /// The width of the line used to draw the circle.
+  /// The width of the stroke for the circular progress indicator.
   final double strokeWidth;
 
-  /// The shape of the line ends used to draw the circle.
+  /// The shape of the end of the stroke (stroke-cap) for the circular progress indicator.
   final StrokeCap strokeCap;
 
-  /// Creates a circular progress indicator.
+  /// Creates a Moon Design circular progress indicator.
   const MoonCircularProgressIndicator({
     super.key,
     super.value,
@@ -23,7 +23,7 @@ class MoonCircularProgressIndicator extends MoonBaseProgressIndicator {
     this.strokeCap = StrokeCap.round,
   });
 
-  /// Color of the circular track being filled by the circular indicator.
+  /// The color of the circular track that forms the background for the circular progress indicator.
   @override
   Color get backgroundColor => super.backgroundColor;
 
@@ -54,18 +54,19 @@ class _MoonCircularProgressIndicatorState extends State<MoonCircularProgressIndi
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       duration: const Duration(milliseconds: _kIndeterminateCircularDuration),
       vsync: this,
     );
-    if (widget.value == null) {
-      _controller.repeat();
-    }
+
+    if (widget.value == null) _controller.repeat();
   }
 
   @override
   void didUpdateWidget(MoonCircularProgressIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (widget.value == null && !_controller.isAnimating) {
       _controller.repeat();
     } else if (widget.value != null && _controller.isAnimating) {
@@ -76,6 +77,7 @@ class _MoonCircularProgressIndicatorState extends State<MoonCircularProgressIndi
   @override
   void dispose() {
     _controller.dispose();
+
     super.dispose();
   }
 
@@ -99,9 +101,9 @@ class _MoonCircularProgressIndicatorState extends State<MoonCircularProgressIndi
               backgroundColor: widget.backgroundColor,
               valueColor: widget.color,
               value: widget.value,
-              // may be null
+              // May be null.
               headValue: headValue,
-              // remaining arguments are ignored if widget.value is not null
+              // If 'widget.value' is not null, all remaining arguments are ignored.
               tailValue: tailValue,
               offsetValue: offsetValue,
               rotationValue: rotationValue,
@@ -131,9 +133,8 @@ class _MoonCircularProgressIndicatorState extends State<MoonCircularProgressIndi
 
   @override
   Widget build(BuildContext context) {
-    if (widget.value != null) {
-      return _buildStaticProgressIndicator(context, 0.0, 0.0, 0, 0.0);
-    }
+    if (widget.value != null) _buildStaticProgressIndicator(context, 0.0, 0.0, 0, 0.0);
+
     return _buildAnimation();
   }
 }

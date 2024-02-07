@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonCheckboxTheme extends ThemeExtension<MoonCheckboxTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Checkbox colors.
+  /// The colors of the MoonCheckbox.
   final MoonCheckboxColors colors;
 
-  /// Checkbox properties.
+  /// The properties of the MoonCheckbox.
   final MoonCheckboxProperties properties;
 
   MoonCheckboxTheme({

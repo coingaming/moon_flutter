@@ -5,16 +5,16 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonBottomSheetColors extends ThemeExtension<MoonBottomSheetColors> with DiagnosticableTreeMixin {
-  /// BottomSheet text color.
+  /// The text color of the MoonBottomSheet.
   final Color textColor;
 
-  /// BottomSheet icon color.
+  /// The icon color of the MoonBottomSheet.
   final Color iconColor;
 
-  /// BottomSheet background color.
+  /// The background color of the MoonBottomSheet.
   final Color backgroundColor;
 
-  /// BottomSheet barrier color.
+  /// The color of the MoonBottomSheet barrier.
   final Color barrierColor;
 
   const MoonBottomSheetColors({

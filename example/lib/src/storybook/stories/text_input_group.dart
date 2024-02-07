@@ -77,7 +77,7 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
 
     final errorBorderColorKnob = context.knobs.nullable.options(
       label: "errorBorderColor",
-      description: "MoonColors variants for MoonTextInputGroup error border.",
+      description: "MoonColors variants for MoonTextInputGroup error state border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -88,7 +88,7 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
 
     final errorColorKnob = context.knobs.nullable.options(
       label: "errorColor",
-      description: "MoonColors variants for MoonTextInputGroup error.",
+      description: "MoonColors variants for MoonTextInputGroup in error state.",
       enabled: false,
       initial: 0,
       // piccolo

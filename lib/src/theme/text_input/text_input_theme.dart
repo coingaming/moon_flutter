@@ -8,16 +8,16 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// TextInput colors.
+  /// The colors of the MoonTextInput.
   final MoonTextInputColors colors;
 
-  /// TextInput properties.
+  /// The properties of the MoonTextInput.
   final MoonTextInputProperties properties;
 
-  /// TextInput sizes.
+  /// The sizes of the MoonTextInput.
   final MoonTextInputSizes sizes;
 
   MoonTextInputTheme({

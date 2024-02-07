@@ -17,64 +17,60 @@ class MoonRadio<T> extends StatefulWidget {
   /// Set to true if this radio button is allowed to be returned to an
   /// indeterminate state by selecting it again when selected.
   ///
-  /// To indicate returning to an indeterminate state, [onChanged] will be
-  /// called with null.
+  /// To indicate returning to an indeterminate state, [onChanged] is called with null.
   ///
-  /// If true, [onChanged] can be called with [value] when selected while
-  /// [groupValue] != [value], or with null when selected again while
-  /// [groupValue] == [value].
+  /// If true, [onChanged] is called with [value] when selected while [groupValue] != [value],
+  /// or with null when selected again while [groupValue] == [value].
   ///
-  /// If false, [onChanged] will be called with [value] when it is selected
-  /// while [groupValue] != [value], and only by selecting another radio button
-  /// in the group (i.e. changing the value of [groupValue]) can this radio
-  /// button be unselected.
-  ///
-  /// Defaults to false.
+  /// If false, [onChanged] is called with [value] when selected while [groupValue] != [value],
+  /// and only by selecting another radio button in the group (i.e. changing the value of [groupValue])
+  /// can this radio button be unselected.
   final bool toggleable;
 
-  /// The color to use when this radio is checked.
+  /// The color of the active (selected) radio button.
   final Color? activeColor;
 
-  /// The color to use for the radio's background when the radio is not checked.
+  /// The background color of the inactive (unselected) radio button.
   final Color? inactiveColor;
 
-  /// The size of the radio's tap target.
+  /// The size of the radio button tap target.
   ///
   /// Defaults to 40.
   final double tapAreaSizeValue;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
-  /// The semantic label for the radio.
+  /// The semantic label for the radio button.
   final String? semanticLabel;
 
-  /// The value represented by this radio button.
+  /// The value of the radio button.
   final T value;
 
-  /// The currently selected value for a group of radio buttons.
+  /// The value of a group of radio buttons.
   ///
-  /// This radio button is considered selected if its [value] matches the
-  /// [groupValue].
+  /// This radio button is considered selected if its [value] matches the [groupValue].
   final T? groupValue;
 
-  /// Called when the user selects this radio button.
+  /// The callback that is called when the user selects the radio button.
   ///
-  /// The radio button passes [value] as a parameter to this callback. The radio
+  /// The radio button passes its [value] as a parameter to [onChanged] callback. The radio
   /// button does not actually change state until the parent widget rebuilds the
   /// radio button with the new [groupValue].
   ///
-  /// If null, the radio button will be displayed as disabled.
+  /// If null, the radio button is displayed as disabled.
   ///
-  /// The provided callback will not be invoked if this radio button is already
-  /// selected.
+  /// The provided callback is not invoked if this radio button is already selected.
   ///
   /// The callback provided to [onChanged] should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt.
+  /// [StatefulWidget] using the [State.setState] method, so that the parent gets rebuilt.
   final ValueChanged<T?>? onChanged;
 
-  /// MDS radio widget.
+  /// Creates a Moon Design radio button.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonRadio.withLabel], Moon Design radio button with label.
   const MoonRadio({
     super.key,
     this.autofocus = false,
@@ -89,6 +85,7 @@ class MoonRadio<T> extends StatefulWidget {
     required this.onChanged,
   });
 
+  /// Creates a Moon Design radio button with label.
   static Widget withLabel<T>(
     BuildContext context, {
     Key? key,

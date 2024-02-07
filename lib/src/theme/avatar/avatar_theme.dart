@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Avatar colors.
+  /// The colors of the MoonAvatar.
   final MoonAvatarColors colors;
 
-  /// Avatar sizes.
+  /// The sizes of the MoonAvatar.
   final MoonAvatarSizes sizes;
 
   MoonAvatarTheme({

@@ -113,7 +113,7 @@ class AvatarStory extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const TextDivider(
-            text: "Customisable MoonAvatar",
+            text: "MoonAvatar",
             paddingTop: 0,
           ),
           MoonAvatar(
@@ -133,7 +133,7 @@ class AvatarStory extends StatelessWidget {
               ),
             ),
           ),
-          const TextDivider(text: "Preset MoonAvatar with image background"),
+          const TextDivider(text: "Customized MoonAvatar with image background"),
           MoonAvatar(
             avatarSize: avatarSizeKnob,
             badgeSize: badgeSizeKnob?.toDouble(),

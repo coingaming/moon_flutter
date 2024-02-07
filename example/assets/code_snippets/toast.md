@@ -11,7 +11,7 @@ class Toast extends StatelessWidget {
         context,
         label: const Text('This is MoonToast'),
       ),
-      label: const Text("Show toast"),
+      label: const Text("Show MoonToast"),
     );
   }
 }

@@ -19,7 +19,7 @@ class _TooltipState extends State<Tooltip> {
       child: MoonFilledButton(
         buttonSize: MoonButtonSize.sm,
         onTap: () => setState(() => showOnTap = true),
-        label: const Text("Show tooltip"),
+        label: const Text("Show MoonTooltip"),
       ),
     );
   }

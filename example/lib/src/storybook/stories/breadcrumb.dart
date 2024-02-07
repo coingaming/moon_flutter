@@ -22,7 +22,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
   Widget build(BuildContext context) {
     final itemColorKnob = context.knobs.nullable.options(
       label: "Item color",
-      description: "MoonColors variants for the MoonBreadcrumb's item.",
+      description: "MoonColors variants for MoonBreadcrumb item.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -33,7 +33,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
 
     final currentItemColorKnob = context.knobs.nullable.options(
       label: "Current item color",
-      description: "MoonColors variants for the current MoonBreadcrumb's item.",
+      description: "MoonColors variants for MoonBreadcrumb current item.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -44,7 +44,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
 
     final hoverEffectColorKnob = context.knobs.nullable.options(
       label: "hoverEffectColor",
-      description: "MoonColors variants for the MoonBreadcrumb's item on hover.",
+      description: "MoonColors variants for MoonBreadcrumb item on hover.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -55,7 +55,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
 
     final dividerColorKnob = context.knobs.nullable.options(
       label: "dividerColor",
-      description: "MoonColors variants for the MoonBreadcrumb's divider.",
+      description: "MoonColors variants for MoonBreadcrumb divider.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -66,7 +66,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
 
     final itemCountKnob = context.knobs.nullable.sliderInt(
       label: "Item count",
-      description: "Total count of items for the MoonBreadcrumb.",
+      description: "Total count of items for MoonBreadcrumb.",
       enabled: false,
       initial: 7,
       max: 12,
@@ -74,7 +74,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
 
     final visibleItemCountKnob = context.knobs.nullable.sliderInt(
       label: "visibleItemCount",
-      description: "Count of items to display for the MoonBreadcrumb.",
+      description: "Number of items to display for MoonBreadcrumb.",
       enabled: false,
       initial: 3,
       max: 12,
@@ -82,7 +82,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
 
     final gapKnob = context.knobs.nullable.sliderInt(
       label: "gap",
-      description: "Gap between the MoonBreadcrumb's items.",
+      description: "Gap between MoonBreadcrumb items.",
       enabled: false,
       initial: 8,
       max: 16,
@@ -90,12 +90,12 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
 
     final showLeadingKnob = context.knobs.boolean(
       label: "leading",
-      description: "Show widget in the MoonBreadcrumb item's leading slot.",
+      description: "Show widget in MoonBreadcrumb item leading slot.",
     );
 
     final showTrailingKnob = context.knobs.boolean(
       label: "trailing",
-      description: "Show widget in the MoonBreadcrumb item's trailing slot.",
+      description: "Show widget in MoonBreadcrumb item trailing slot.",
     );
 
     return Column(
@@ -146,7 +146,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
             ),
           ],
         ),
-        const TextDivider(text: "Custom MoonBreadcrumb with MoonDropdown"),
+        const TextDivider(text: "Customized MoonBreadcrumb with MoonDropdown"),
         StatefulBuilder(
           builder: (context, setState) {
             return MoonBreadcrumb(

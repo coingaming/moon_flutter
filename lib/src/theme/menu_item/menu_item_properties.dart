@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with DiagnosticableTreeMixin {
-  /// MenuItem border radius.
+  /// The border radius of the MoonMenuItem.
   final BorderRadiusGeometry borderRadius;
 
-  /// Vertical space between MenuItem label and content.
+  /// The vertical gap between the label and content widgets of the MoonMenuItem.
   final double verticalGap;
 
-  /// MenuItem minimum height.
+  /// The minimum height of the MoonMenuItem.
   final double minimumHeight;
 
-  /// MenuItem padding.
+  /// The padding of the MoonMenuItem.
   final EdgeInsetsGeometry padding;
 
-  /// MenuItem label text style.
+  /// The text style of the MoonMenuItem label.
   final TextStyle labelTextStyle;
 
-  /// MenuItem content text style.
+  /// The text style of the MoonMenuItem content.
   final TextStyle contentTextStyle;
 
   const MoonMenuItemProperties({

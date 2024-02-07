@@ -19,58 +19,59 @@ enum MoonLinearProgressSize {
 }
 
 class MoonLinearProgress extends StatelessWidget {
-  /// Show linear progress with thumb and pin.
+  /// Whether to show the thumb and the pin for the linear progress.
   final bool showPin;
 
-  /// Whether to show the min label widget.
+  /// Whether to show the [minLabel] widget for the linear progress.
   final bool showMinLabel;
 
-  /// Whether to show the max label widget.
+  /// Whether to show the [maxLabel] widget for the linear progress.
   final bool showMaxLabel;
 
-  /// When this and [showPin] are true, the pin height gets added to linear progress height. If false, the pin functions
-  /// like an overlay and does not affect the overall height of linear progress.
+  /// Whether the pin height is added to the linear progress height.
+  /// Applies only when both this and [showPin] are true.
+  /// Otherwise, the pin acts as an overlay without affecting the linear progress height.
   final bool pinAffectsHeight;
 
-  /// Border radius value of the linear progress widget.
+  /// The border radius of the linear progress.
   final BorderRadiusGeometry? borderRadius;
 
-  /// Color of the linear progress widget.
+  /// The color of the linear progress.
   final Color? color;
 
-  /// Background color of the linear progress widget.
+  /// The background color of the linear progress.
   final Color? backgroundColor;
 
-  /// The text color of the minLabel and maxLabel.
+  /// The text color of the [minLabel] and [maxLabel] widgets.
   final Color? textColor;
 
-  /// Height of the linear progress widget.
+  /// The height of the linear progress.
   final double? height;
 
-  /// Gap between the linear progress widget and the min and max label widgets.
+  /// The vertical gap between the linear progress and the [minLabel] and [maxLabel] widgets.
   ///
-  /// Has no effect if [showMinLabel] and [showMaxLabel] are false.
+  /// Has effect only if [showMinLabel] and [showMaxLabel] are true.
   final double? verticalGap;
 
-  /// Value of the linear progress widget.
+  /// The progress value of the linear progress.
   final double value;
 
-  /// Size of the linear progress widget.
+  /// The size of the linear progress.
   final MoonLinearProgressSize? linearProgressSize;
 
-  /// Style for the linear progress pin.
+  /// The styling options for the linear progress pin.
   final PinStyle? pinStyle;
 
-  /// The semantic label for the linear progress widget.
+  /// The semantic label for the linear progress.
   final String? semanticLabel;
 
-  /// The widget in the min label slot of the linear progress widget.
+  /// The widget to display the minimum progress value of the linear progress.
   final Widget? minLabel;
 
-  /// The widget in the max label slot of the linear progress widget.
+  /// The widget to display the maximum progress value of the linear progress.
   final Widget? maxLabel;
 
-  /// MDS linear progress widget.
+  /// Creates a Moon Design linear progress.
   const MoonLinearProgress({
     super.key,
     this.showPin = false,
@@ -147,7 +148,7 @@ class MoonLinearProgress extends StatelessWidget {
 
     final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
 
-    final double effectiveTopGap = verticalGap ?? effectiveProgressSize.verticalGap;
+    final double effectiveVerticalGap = verticalGap ?? effectiveProgressSize.verticalGap;
 
     final double effectiveThumbSizeValue =
         // ignore: deprecated_member_use_from_same_package
@@ -218,7 +219,7 @@ class MoonLinearProgress extends StatelessWidget {
                 ),
             ],
           ),
-          SizedBox(height: effectiveTopGap),
+          SizedBox(height: effectiveVerticalGap),
           child,
         ],
       );

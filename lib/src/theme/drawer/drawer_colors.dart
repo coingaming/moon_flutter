@@ -5,16 +5,16 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonDrawerColors extends ThemeExtension<MoonDrawerColors> with DiagnosticableTreeMixin {
-  /// Drawer text color.
+  /// The text color of the MoonDrawer.
   final Color textColor;
 
-  /// Drawer icon color.
+  /// The icon color of the MoonDrawer.
   final Color iconColor;
 
-  /// Drawer background color.
+  /// The background color of the MoonDrawer.
   final Color backgroundColor;
 
-  /// Drawer barrier color.
+  /// The color of the MoonDrawer barrier.
   final Color barrierColor;
 
   const MoonDrawerColors({

@@ -6,7 +6,7 @@ import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
-/// Shows a modal Moon Design bottom sheet.
+/// Displays a Moon Design modal bottom sheet.
 Future<T?> showMoonModalBottomSheet<T>({
   required BuildContext context,
   bool enableDrag = true,
@@ -157,8 +157,8 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-    // By definition, the bottom sheet is aligned to the bottom of the page
-    // and isn't exposed to the top padding of the MediaQuery.
+    // By design, the bottom sheet is positioned at the bottom of the viewport
+    // and is not affected by the top padding of the MediaQuery.
     final Widget bottomSheet = MediaQuery.removePadding(
       context: context,
       child: _ModalBottomSheet<T>(
@@ -246,7 +246,7 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
   void _updateController() {
     final Animation<double>? animation = widget.route.animation;
 
-    // Used to relay the state of bottom sheet internal animation controller.
+    // Used to relay the state of the bottom sheet internal animation controller.
     if (animation != null) {
       widget.animationController?.value = animation.value;
     }

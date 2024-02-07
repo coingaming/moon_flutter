@@ -26,7 +26,7 @@ class _RadioStoryState extends State<RadioStory> {
   Widget build(BuildContext context) {
     final textColorKnob = context.knobs.nullable.options(
       label: "Text color",
-      description: "MoonColors variants for MoonRadio with label text.",
+      description: "MoonColors variants for MoonRadio label.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -59,12 +59,12 @@ class _RadioStoryState extends State<RadioStory> {
 
     final isToggleableKnob = context.knobs.boolean(
       label: "toggleable",
-      description: "Whether the selected MoonRadio can be unselected.",
+      description: "Whether selected MoonRadio can be unselected.",
     );
 
     final isDisabledKnob = context.knobs.boolean(
       label: "Disabled",
-      description: "onChanged() is null.",
+      description: "MoonRadio onChanged() is null.",
     );
 
     return Center(
@@ -73,7 +73,7 @@ class _RadioStoryState extends State<RadioStory> {
         child: Column(
           children: [
             const TextDivider(
-              text: "Customisable MoonRadio buttons",
+              text: "MoonRadio",
               paddingTop: 0,
             ),
             MoonRadio(
@@ -93,7 +93,7 @@ class _RadioStoryState extends State<RadioStory> {
               inactiveColor: inactiveColor,
               toggleable: isToggleableKnob,
             ),
-            const TextDivider(text: "MoonRadio buttons with clickable text"),
+            const TextDivider(text: "MoonRadio with label"),
             MoonRadio.withLabel(
               context,
               textStyle: TextStyle(color: textColor),

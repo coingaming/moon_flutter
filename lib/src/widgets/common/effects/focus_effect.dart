@@ -11,6 +11,7 @@ class MoonFocusEffect extends StatefulWidget {
   final Curve effectCurve;
   final Widget child;
 
+  /// Creates a Moon Design focus effect.
   const MoonFocusEffect({
     super.key,
     required this.show,
@@ -30,7 +31,7 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
   late final AnimationController _animationController = AnimationController(
     vsync: this,
     duration: widget.effectDuration,
-    debugLabel: "MoonFocusEffect animation controller",
+    debugLabel: "MoonFocusEffect animation controller.",
   );
 
   late final CurvedAnimation _focusAnimation = CurvedAnimation(

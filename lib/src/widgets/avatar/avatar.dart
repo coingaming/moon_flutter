@@ -28,7 +28,7 @@ enum MoonBadgeAlignment {
 }
 
 class MoonAvatar extends StatelessWidget {
-  /// Whether to show the avatar badge or not.
+  /// Whether to show the avatar badge.
   final bool showBadge;
 
   /// The border radius of the avatar.
@@ -40,16 +40,16 @@ class MoonAvatar extends StatelessWidget {
   /// The color of the avatar badge.
   final Color? badgeColor;
 
-  /// The margin value of the avatars badge.
+  /// The margin value of the avatar badge.
   final double? badgeMarginValue;
 
-  /// The size of the avatars badge.
+  /// The size of the avatar badge.
   final double? badgeSize;
 
-  /// The width of the avatar.
+  /// The height of the avatar.
   final double? height;
 
-  /// The height of the avatar.
+  /// The width of the avatar.
   final double? width;
 
   /// The background image of the avatar.
@@ -64,10 +64,10 @@ class MoonAvatar extends StatelessWidget {
   /// The semantic label for the avatar.
   final String? semanticLabel;
 
-  /// The content of the avatar.
+  /// The widget to display within the avatar.
   final Widget? content;
 
-  /// MDS avatar widget.
+  /// Creates a Moon Design avatar.
   const MoonAvatar({
     super.key,
     this.showBadge = false,
@@ -175,7 +175,7 @@ class MoonAvatar extends StatelessWidget {
             Positioned.fill(
               child: ClipPath(
                 // TODO: Since clipper does not work properly on mobile web/PWA, we are disabling it. Remove this check
-                // when it has been fixed from Flutter side.
+                //  when it has been fixed from Flutter side.
                 clipper: kIsWeb && MediaQueryData.fromView(View.of(context)).size.width < 500
                     ? null
                     : AvatarClipper(

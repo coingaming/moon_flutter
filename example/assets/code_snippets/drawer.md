@@ -21,7 +21,7 @@ class Drawer extends StatelessWidget {
             return Center(
               child: MoonFilledButton(
                 onTap: () => Scaffold.of(context).openDrawer(),
-                label: const Text("Open drawer"),
+                label: const Text("Open MoonDrawer"),
               ),
             );
           },

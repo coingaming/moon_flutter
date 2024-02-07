@@ -26,7 +26,7 @@ class _DropdownState extends State<Dropdown> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //Dropdown with multiple choices
+        // MoonDropdown with multiple choices.
         MoonDropdown(
           show: _showChoices,
           constrainWidthToChild: true,
@@ -82,7 +82,7 @@ class _DropdownState extends State<Dropdown> {
           ),
         ),
 
-        // Dropdown as menu
+        // MoonDropdown as a menu.
         MoonDropdown(
           show: _showMenu,
           groupId: _groupId,

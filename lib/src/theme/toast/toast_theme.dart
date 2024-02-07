@@ -8,16 +8,16 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonToastTheme extends ThemeExtension<MoonToastTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Toast colors.
+  /// The colors of the MoonToast.
   final MoonToastColors colors;
 
-  /// Toast properties.
+  /// The properties of the MoonToast.
   final MoonToastProperties properties;
 
-  /// Toast shadows.
+  /// The shadows of the MoonToast.
   final MoonToastShadows shadows;
 
   MoonToastTheme({

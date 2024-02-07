@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonLinearLoaderTheme extends ThemeExtension<MoonLinearLoaderTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Circular loader colors.
+  /// The colors of the MoonLinearLoader.
   final MoonLinearLoaderColors colors;
 
-  /// Circular loader sizes.
+  /// The sizes of the MoonLinearLoader.
   final MoonLinearLoaderSizes sizes;
 
   MoonLinearLoaderTheme({

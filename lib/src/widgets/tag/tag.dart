@@ -16,7 +16,7 @@ enum MoonTagSize {
 }
 
 class MoonTag extends StatelessWidget {
-  /// Whether the tag should use upper case text style.
+  /// Whether to use the upper case text style for the tag.
   final bool isUpperCase;
 
   /// The border radius of the tag.
@@ -31,7 +31,7 @@ class MoonTag extends StatelessWidget {
   /// The width of the tag.
   final double? width;
 
-  /// The gap between the leading or trailing and the label widgets.
+  /// The gap between the [leading], [label] and [trailing] widgets of the tag.
   final double? gap;
 
   /// The padding of the tag.
@@ -40,7 +40,7 @@ class MoonTag extends StatelessWidget {
   /// The size of the tag.
   final MoonTagSize? tagSize;
 
-  /// Custom decoration for the tag.
+  /// The custom decoration of the tag.
   final Decoration? decoration;
 
   /// The semantic label for the tag.
@@ -52,16 +52,16 @@ class MoonTag extends StatelessWidget {
   /// The callback that is called when the tag is long-pressed.
   final VoidCallback? onLongPress;
 
-  /// The widget in the leading slot of the tag.
+  /// The widget to display before the [label] widget of the tag.
   final Widget? leading;
 
-  /// The widget in the label slot of the tag.
+  /// The primary content of the tag widget.
   final Widget? label;
 
-  /// The widget in the trailing slot of the tag.
+  /// The widget to display after the [label] widget of the tag.
   final Widget? trailing;
 
-  /// MDS tag widget.
+  /// Creates a Moon Design tag.
   const MoonTag({
     super.key,
     this.isUpperCase = true,

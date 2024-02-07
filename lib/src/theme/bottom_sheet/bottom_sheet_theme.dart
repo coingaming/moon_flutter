@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// BottomSheet colors.
+  /// The colors of the MoonBottomSheet.
   final MoonBottomSheetColors colors;
 
-  /// BottomSheet properties.
+  /// The properties of the MoonBottomSheet.
   final MoonBottomSheetProperties properties;
 
   MoonBottomSheetTheme({

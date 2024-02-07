@@ -63,7 +63,7 @@ class _TabBarState extends State<TabBar> with SingleTickerProviderStateMixin {
           ],
         ),
 
-        // MoonTabBar with TabBarView
+        // MoonTabBar with TabBarView.
         MoonTabBar(
           isExpanded: true,
           tabController: tabController,

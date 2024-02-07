@@ -6,13 +6,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTabBarSizes extends ThemeExtension<MoonTabBarSizes> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Small TabBar item properties.
+  /// The properties of the small MoonTabBar.
   final MoonTabBarSizeProperties sm;
 
-  /// Medium TabBar item properties.
+  /// The properties of the medium MoonTabBar.
   final MoonTabBarSizeProperties md;
 
   MoonTabBarSizes({

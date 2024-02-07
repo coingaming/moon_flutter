@@ -6,19 +6,19 @@ import 'package:flutter/material.dart';
 @immutable
 class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgressSizeProperties>
     with DiagnosticableTreeMixin {
-  /// Linear progress border radius.
+  /// The border radius of the MoonLinearProgress.
   final BorderRadiusGeometry borderRadius;
 
-  /// Linear progress height.
+  /// The height of the MoonLinearProgress.
   final double progressHeight;
 
-  /// Linear progress thumb size value.
+  /// The size value of the MoonLinearProgress thumb.
   final double thumbSizeValue;
 
-  /// Linear progress gap between progress bar and minWidget or maxWidget.
+  /// The vertical gap between the MoonLinearProgress and the minLabel and maxLabel widgets.
   final double verticalGap;
 
-  /// Linear progress minWidget and maxWidget text style.
+  /// The text style of the MoonLinearProgress minLabel and maxLabel widgets.
   final TextStyle textStyle;
 
   const MoonLinearProgressSizeProperties({

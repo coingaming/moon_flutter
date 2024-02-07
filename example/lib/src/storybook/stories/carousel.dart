@@ -21,7 +21,7 @@ class _CarouselStoryState extends State<CarouselStory> {
   Widget build(BuildContext context) {
     final itemExtentKnob = context.knobs.nullable.sliderInt(
       label: "itemExtent",
-      description: "MoonCarousel item extent.",
+      description: "Extent for MoonCarousel item.",
       enabled: false,
       initial: 114,
       max: MediaQuery.of(context).size.width.round(),
@@ -29,7 +29,7 @@ class _CarouselStoryState extends State<CarouselStory> {
 
     final gapKnob = context.knobs.nullable.sliderInt(
       label: "gap",
-      description: "The gap between MoonCarousel items.",
+      description: "Gap between MoonCarousel items.",
       enabled: false,
       initial: 8,
       max: 64,
@@ -37,14 +37,14 @@ class _CarouselStoryState extends State<CarouselStory> {
 
     final anchorKnob = context.knobs.nullable.slider(
       label: "anchor",
-      description: "MoonCarousel anchor placement.",
+      description: "Anchor placement for MoonCarousel.",
       enabled: false,
       initial: 0.04,
     );
 
     final velocityFactorKnob = context.knobs.nullable.slider(
       label: "velocityFactor",
-      description: "The velocity factor for MoonCarousel.",
+      description: "Velocity factor for MoonCarousel.",
       enabled: false,
       min: 0.1,
       initial: 0.5,
@@ -52,22 +52,22 @@ class _CarouselStoryState extends State<CarouselStory> {
 
     final autoPlayKnob = context.knobs.boolean(
       label: "autoPlay",
-      description: "Whether the MoonCarousel is auto playing.",
+      description: "Whether MoonCarousel is auto playing.",
     );
 
     final isCenteredKnob = context.knobs.boolean(
       label: "isCentered",
-      description: "Whether the MoonCarousel items are centered.",
+      description: "Whether MoonCarousel items are centered.",
     );
 
     final isLoopedKnob = context.knobs.boolean(
       label: "loop",
-      description: "Whether the MoonCarousel is looped or not (infinite scroll).",
+      description: "Whether MoonCarousel is looped (infinite scroll).",
     );
 
     final clampMaxExtentKnob = context.knobs.boolean(
       label: "clampMaxExtent",
-      description: "Whether to clamp the maxExtent of the MoonCarousel.",
+      description: "Whether to clamp the maxExtent of MoonCarousel.",
       initial: true,
     );
 
@@ -77,7 +77,7 @@ class _CarouselStoryState extends State<CarouselStory> {
         child: Column(
           children: [
             const TextDivider(
-              text: "Customisable MoonCarousel",
+              text: "MoonCarousel",
               paddingTop: 0,
             ),
             SizedBox(
@@ -108,7 +108,7 @@ class _CarouselStoryState extends State<CarouselStory> {
                 ),
               ),
             ),
-            const TextDivider(text: "Pre-made MoonCarousel with extras"),
+            const TextDivider(text: "Customized MoonCarousel with extras"),
             Column(
               children: [
                 SizedBox(

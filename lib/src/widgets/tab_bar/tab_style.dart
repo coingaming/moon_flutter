@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/widgets/tab_bar/tab.dart';
+
 class MoonTabStyle {
-  /// The color of the focus effect.
+  /// The color of the tab focus effect.
   final Color? focusEffectColor;
 
-  /// The color of tab indicator.
+  /// The color of the tab indicator.
   final Color? indicatorColor;
 
   /// The default text color of the tab.
   final Color? textColor;
 
-  /// The text color of selected tab.
+  /// The text color of the selected tab.
   final Color? selectedTextColor;
 
-  /// Custom decoration for the tab.
+  /// The custom decoration of the tab.
   final Decoration? decoration;
 
   /// The height of the tab indicator.
   final double? indicatorHeight;
 
-  /// The gap between the leading, label and trailing widgets of tab.
+  /// The gap between the [MoonTab.leading], [MoonTab.label] and [MoonTab.trailing] widgets of the tab.
   final double? tabGap;
 
   /// The padding of the tab.
@@ -30,6 +32,7 @@ class MoonTabStyle {
   /// If [TextStyle] color is used, then it overrides the [textColor] and [selectedTextColor].
   final TextStyle? textStyle;
 
+  /// Defines a Moon Design tab style.
   const MoonTabStyle({
     this.focusEffectColor,
     this.indicatorColor,

@@ -6,22 +6,22 @@ import 'package:flutter/material.dart';
 @immutable
 class MoonSegmentedControlSizeProperties extends ThemeExtension<MoonSegmentedControlSizeProperties>
     with DiagnosticableTreeMixin {
-  /// SegmentedControl segment border radius.
+  /// The border radius of the MoonSegmentedControl segment.
   final BorderRadiusGeometry segmentBorderRadius;
 
-  /// Gap between segment leading, label and trailing widgets.
+  /// The horizontal gap between the leading, label and trailing widgets of the MoonSegmentedControl segment.
   final double segmentGap;
 
-  /// SegmentedControl height.
+  /// The height of the MoonSegmentedControl.
   final double height;
 
-  /// SegmentedControl icon size value.
+  /// The size value of the MoonSegmentedControl icon.
   final double iconSizeValue;
 
-  /// SegmentedControl segment padding.
+  /// The padding of the MoonSegmentedControl segment.
   final EdgeInsetsGeometry segmentPadding;
 
-  /// SegmentedControl default text style.
+  /// The text style of the MoonSegmentedControl.
   final TextStyle textStyle;
 
   const MoonSegmentedControlSizeProperties({

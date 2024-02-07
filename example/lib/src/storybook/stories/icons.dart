@@ -19,7 +19,7 @@ class _IconsStoryState extends State<IconsStory> {
 
   Map<String, IconData> _filteredIcons = {};
 
-  // Helper function to group keys in trios
+  // Helper function for grouping keys into trios.
   List<List<String>> _groupInTrios(List<String> keys) {
     final List<List<String>> trios = [];
     for (int i = 0; i < keys.length; i += 3) {
@@ -33,7 +33,7 @@ class _IconsStoryState extends State<IconsStory> {
     final Map<String, Map<String, IconData>> regularSegments = {};
 
     for (final String key in iconsMap.keys) {
-      // Extract the segment and type (like light or regular)
+      // Extract the segment and type (light or regular).
       final List<String> parts = key.split('_');
       final String segment = parts.first;
       final String type = parts.last;
@@ -53,31 +53,31 @@ class _IconsStoryState extends State<IconsStory> {
 
     final Map<String, Map<String, IconData>> combinedSegments = {};
 
-    // Get all unique segment names
+    // Get all unique segment names.
     final Set<String> allSegments = lightSegments.keys.toSet()..addAll(regularSegments.keys);
 
     for (final String segment in allSegments) {
       combinedSegments[segment] = {};
 
-      // Get the list of keys from light and regular segments for this segment
+      // Get the list of keys from light and regular segments for this segment.
       final List<String> lightKeys = lightSegments[segment]?.keys.toList() ?? [];
       final List<String> regularKeys = regularSegments[segment]?.keys.toList() ?? [];
 
-      // Group the keys in trios
+      // Group the keys in trios.
       final List<List<String>> lightTrios = _groupInTrios(lightKeys);
       final List<List<String>> regularTrios = _groupInTrios(regularKeys);
 
-      // Maximum number of trios in either list
+      // Maximum number of trios in either list.
       final int maxTrios = max(lightTrios.length, regularTrios.length);
 
       for (int i = 0; i < maxTrios; i++) {
-        // Add light trios if available
+        // Add light trios if available.
         if (i < lightTrios.length) {
           for (final String key in lightTrios[i]) {
             combinedSegments[segment]![key] = lightSegments[segment]![key]!;
           }
         }
-        // Add regular trios if available
+        // Add regular trios if available.
         if (i < regularTrios.length) {
           for (final String key in regularTrios[i]) {
             combinedSegments[segment]![key] = regularSegments[segment]![key]!;
@@ -111,7 +111,7 @@ class _IconsStoryState extends State<IconsStory> {
     super.initState();
 
     _searchController.addListener(_performSearch);
-    // Perform search once on init to show all icons
+    // Initialize by performing a search to display all icons.
     _performSearch();
   }
 

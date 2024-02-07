@@ -33,27 +33,27 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
     typography: MoonTypography.typography,
   );
 
-  /// Moon Design System borders.
+  /// The borders of the Moon Design System.
   final MoonBorders borders;
 
-  /// Moon Design System colors.
+  /// The colors of the Moon Design System.
   final MoonColors colors;
 
-  /// Moon Design System colors that are from complementary theme (light -> dark, dark -> light).
+  /// The colors of the Moon Design System that are from complementary theme (light -> dark, dark -> light).
   final MoonColors complementaryColors;
 
-  /// Moon Design System opacities.
+  /// The opacities of the Moon Design System.
   final MoonOpacities opacities;
 
-  /// Moon Design System shadows.
+  /// The shadows of the Moon Design System.
   final MoonShadows shadows;
 
-  /// Moon Design System sizes.
+  /// The sizes of the Moon Design System.
   final MoonSizes sizes;
 
   final MoonTransitions transitions;
 
-  /// Moon Design System typography.
+  /// The typography of the Moon Design System.
   final MoonTypography typography;
 
   const MoonTokens({

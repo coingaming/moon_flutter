@@ -9,19 +9,19 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Accordion colors.
+  /// The colors of the MoonAccordion.
   final MoonAccordionColors colors;
 
-  /// Accordion properties.
+  /// The properties of the MoonAccordion.
   final MoonAccordionProperties properties;
 
-  /// Accordion shadows.
+  /// The shadows of the MoonAccordion.
   final MoonAccordionShadows shadows;
 
-  /// Accordion sizes.
+  /// The sizes of the MoonAccordion.
   final MoonAccordionSizes sizes;
 
   MoonAccordionTheme({

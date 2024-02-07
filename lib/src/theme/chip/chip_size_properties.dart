@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonChipSizeProperties extends ThemeExtension<MoonChipSizeProperties> with DiagnosticableTreeMixin {
-  /// Chip border radius.
+  /// The border radius of the MoonChip.
   final BorderRadiusGeometry borderRadius;
 
-  /// Space between chip children.
+  /// The gap between the leading, label and trailing widgets of the MoonChip.
   final double gap;
 
-  /// Chip height.
+  /// The height of the MoonChip.
   final double height;
 
-  /// Chip icon size value.
+  /// The size value of the MoonChip icon.
   final double iconSizeValue;
 
-  /// Padding around chip children.
+  /// The padding of the MoonChip.
   final EdgeInsetsGeometry padding;
 
-  /// Chip text style.
+  /// The text style of the MoonChip.
   final TextStyle textStyle;
 
   const MoonChipSizeProperties({

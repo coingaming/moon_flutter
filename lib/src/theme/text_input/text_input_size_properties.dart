@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTextInputSizeProperties extends ThemeExtension<MoonTextInputSizeProperties> with DiagnosticableTreeMixin {
-  /// TextInput border radius.
+  /// The border radius of the MoonTextInput.
   final BorderRadiusGeometry borderRadius;
 
-  /// TextInput height.
+  /// The height of the MoonTextInput.
   final double height;
 
-  /// Space between TextInput children.
+  /// The gap between the leading, label and trailing widgets of the MoonTextInput.
   final double gap;
 
-  /// TextInput icon size value.
+  /// The size value of the MoonTextInput icon.
   final double iconSizeValue;
 
-  /// Padding around TextInput children.
+  /// The padding of the MoonTextInput.
   final EdgeInsetsGeometry padding;
 
-  /// TextInput text style.
+  /// The text style of the MoonTextInput.
   final TextStyle textStyle;
 
   const MoonTextInputSizeProperties({

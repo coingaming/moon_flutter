@@ -8,16 +8,16 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Drawer colors.
+  /// The colors of the MoonDrawer.
   final MoonDrawerColors colors;
 
-  /// Drawer properties.
+  /// The properties of the MoonDrawer.
   final MoonDrawerProperties properties;
 
-  /// Drawer shadows.
+  /// The shadows of the MoonDrawer.
   final MoonDrawerShadows shadows;
 
   MoonDrawerTheme({

@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
-// TODO: This will be unnecessary once Flutter finally moves from straight alpha to premultiplied alpha for color lerping.
+// TODO: Remove this once Flutter transitions from straight alpha to premultiplied alpha for color lerping.
 class ShapeDecorationWithPremultipliedAlpha extends Decoration {
   /// The color to fill in the background of the shape.
   ///
@@ -12,7 +12,7 @@ class ShapeDecorationWithPremultipliedAlpha extends Decoration {
   /// If a [gradient] is specified, [color] must be null.
   final Color? color;
 
-  /// A gradient to use when filling the shape.
+  /// A gradient to use for filling the shape.
   ///
   /// The gradient is under the [image].
   ///
@@ -24,32 +24,28 @@ class ShapeDecorationWithPremultipliedAlpha extends Decoration {
   /// The image is drawn over the [color] or [gradient].
   final DecorationImage? image;
 
-  /// A list of shadows cast by the [shape].
+  /// The list of shadows cast by the [shape].
   ///
   /// See also:
   ///
-  ///  * [kElevationToShadow], for some predefined shadows used in Material
-  ///    Design.
+  ///  * [kElevationToShadow], for some predefined shadows used in Material Design.
   ///  * [PhysicalModel], a widget for showing shadows.
   final List<BoxShadow>? shadows;
 
-  /// The shape to fill the [color], [gradient], and [image] into and to cast as
-  /// the [shadows].
+  /// The shape to fill the [color], [gradient], and [image] into and to cast as the [shadows].
   ///
   /// Shapes can be stacked (using the `+` operator). The color, gradient, and
   /// image are drawn into the inner-most shape specified.
   ///
-  /// The [shape] property specifies the outline (border) of the decoration. The
-  /// shape must not be null.
+  /// The [shape] property specifies the outline (border) of the decoration. The shape must not be null.
   ///
   /// ## Directionality-dependent shapes
   ///
   /// Some [ShapeBorder] subclasses are sensitive to the [TextDirection]. The
-  /// direction that is provided to the border (e.g. for its [ShapeBorder.paint]
-  /// method) is the one specified in the [ImageConfiguration]
-  /// ([ImageConfiguration.textDirection]) provided to the [BoxPainter] (via its
-  /// [BoxPainter.paint method). The [BoxPainter] is obtained when
-  /// [createBoxPainter] is called.
+  /// direction that is provided to the border (e.g. for its [ShapeBorder.paint] method)
+  /// is the one specified in the [ImageConfiguration] ([ImageConfiguration.textDirection])
+  /// provided to the [BoxPainter] (via its [BoxPainter.paint method).
+  /// The [BoxPainter] is obtained when [createBoxPainter] is called.
   ///
   /// When a [ShapeDecorationWithPremultipliedAlpha] is used with a [Container] widget or a
   /// [DecoratedBox] widget (which is what [Container] uses), the
@@ -65,8 +61,7 @@ class ShapeDecorationWithPremultipliedAlpha extends Decoration {
   /// * If [image] is null, this decoration does not paint a background image.
   /// * If [shadows] is null, this decoration does not paint a shadow.
   ///
-  /// The [color] and [gradient] properties are mutually exclusive, one (or
-  /// both) of them must be null.
+  /// The [color] and [gradient] properties are mutually exclusive, one (or both) of them must be null.
   ///
   /// The [shape] must not be null.
   const ShapeDecorationWithPremultipliedAlpha({
@@ -84,9 +79,8 @@ class ShapeDecorationWithPremultipliedAlpha extends Decoration {
   /// because [ShapeDecorationWithPremultipliedAlpha] has to be more general as it can support any
   /// shape. However, having a [ShapeDecorationWithPremultipliedAlpha] is sometimes necessary, for
   /// example when calling [ShapeDecorationWithPremultipliedAlpha.lerp] to transition between
-  /// different shapes (e.g. from a [CircleBorder] to a
-  /// [RoundedRectangleBorder]; the [BoxDecoration] class cannot animate the
-  /// transition from a [BoxShape.circle] to [BoxShape.rectangle]).
+  /// different shapes (e.g. from a [CircleBorder] to a [RoundedRectangleBorder]; the [BoxDecoration] class
+  /// cannot animate the transition from a [BoxShape.circle] to [BoxShape.rectangle]).
   factory ShapeDecorationWithPremultipliedAlpha.fromBoxDecoration(BoxDecoration source) {
     final ShapeBorder shape;
 
@@ -260,10 +254,8 @@ class _ShapeDecorationPainter extends BoxPainter {
   void _precache(Rect rect, TextDirection? textDirection) {
     if (rect == _lastRect && textDirection == _lastTextDirection) return;
 
-    // We reach here in two cases:
-    //  - the very first time we paint, in which case everything except _decoration is null
-    //  - subsequent times, if the rect has changed, in which case we only need to update
-    //    the features that depend on the actual rect.
+    // This code path is reached either during the initial paint or when the rectangle has changed.
+    // In the latter case, only features dependent on the rectangle need to be updated.
     if (_interiorPaint == null && (_decoration.color != null || _decoration.gradient != null)) {
       _interiorPaint = Paint();
       if (_decoration.color != null) {

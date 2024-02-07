@@ -13,7 +13,7 @@ class AuthCodeStory extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainAxisAlignmentKnob = context.knobs.nullable.options(
       label: "mainAxisAlignment",
-      description: "Horizontal alignment of MoonAuthCode input fields.",
+      description: "Horizontal alignment for MoonAuthCode input fields.",
       enabled: false,
       initial: MainAxisAlignment.center,
       options: const [
@@ -28,7 +28,7 @@ class AuthCodeStory extends StatelessWidget {
 
     final shapeKnob = context.knobs.nullable.options(
       label: "shape",
-      description: "Shape of the MoonAuthCode input fields.",
+      description: "Shape of MoonAuthCode input fields.",
       enabled: false,
       initial: AuthFieldShape.box,
       options: const [
@@ -62,7 +62,7 @@ class AuthCodeStory extends StatelessWidget {
 
     final selectedFillColorKnob = context.knobs.nullable.options(
       label: "selectedFillColor",
-      description: "MoonColors variants for selected MoonAuthCode input field.",
+      description: "MoonColors variants for MoonAuthCode selected input field.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -73,7 +73,7 @@ class AuthCodeStory extends StatelessWidget {
 
     final activeFillColorKnob = context.knobs.nullable.options(
       label: "activeFillColor",
-      description: "MoonColors variants for active MoonAuthCode input fields.",
+      description: "MoonColors variants for MoonAuthCode active input field.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -84,7 +84,7 @@ class AuthCodeStory extends StatelessWidget {
 
     final inactiveFillColorKnob = context.knobs.nullable.options(
       label: "inactiveFillColor",
-      description: "MoonColors variants for inactive MoonAuthCode input fields.",
+      description: "MoonColors variants for MoonAuthCode inactive input field.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -95,7 +95,7 @@ class AuthCodeStory extends StatelessWidget {
 
     final selectedBorderColorKnob = context.knobs.nullable.options(
       label: "selectedBorderColor",
-      description: "MoonColors variants for selected MoonAuthCode input field border.",
+      description: "MoonColors variants for MoonAuthCode selected input field border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -106,7 +106,7 @@ class AuthCodeStory extends StatelessWidget {
 
     final activeBorderColorKnob = context.knobs.nullable.options(
       label: "activeBorderColor",
-      description: "MoonColors variants for active MoonAuthCode input fields borders.",
+      description: "MoonColors variants for MoonAuthCode active input field border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -117,7 +117,7 @@ class AuthCodeStory extends StatelessWidget {
 
     final inactiveBorderColorKnob = context.knobs.nullable.options(
       label: "inactiveBorderColor",
-      description: "MoonColors variants for inactive MoonAuthCode input fields borders.",
+      description: "MoonColors variants for MoonAuthCode inactive input field border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -242,7 +242,7 @@ class AuthCodeStory extends StatelessWidget {
                   final RegExp regex = RegExp(r'^\d+$');
 
                   return pin != null && pin.length == 4 && !regex.hasMatch(pin)
-                      ? 'The input must only contain numbers'
+                      ? 'The input must only contain numbers.'
                       : null;
                 },
                 errorBuilder: (BuildContext context, String? errorText) {

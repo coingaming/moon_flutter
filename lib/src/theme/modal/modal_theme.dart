@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonModalTheme extends ThemeExtension<MoonModalTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Modal colors.
+  /// The colors of the MoonModal.
   final MoonModalColors colors;
 
-  /// Modal properties.
+  /// The properties of the MoonModal.
   final MoonModalProperties properties;
 
   MoonModalTheme({

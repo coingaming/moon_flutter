@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonBreadcrumbProperties extends ThemeExtension<MoonBreadcrumbProperties> with DiagnosticableTreeMixin {
-  /// The gap between the divider and the MoonBreadcrumb's item.
+  /// The gap between the divider widget and the MoonBreadcrumb item.
   final double gap;
 
-  /// The gap between the MoonBreadcrumb item's leading, label and trailing widgets.
+  /// The gap between the leading, label and trailing widgets of the MoonBreadcrumb item.
   final double itemGap;
 
-  /// The duration of the MoonBreadcrumb's transition animation.
+  /// The duration of the MoonBreadcrumb item transition animation.
   final Duration transitionDuration;
 
-  /// The curve of the MoonBreadcrumb's transition animation.
+  /// The curve of the MoonBreadcrumb item transition animation.
   final Curve transitionCurve;
 
-  /// The text style of the MoonBreadcrumb's item.
+  /// The text style of the MoonBreadcrumb item.
   final TextStyle itemTextStyle;
 
-  /// The text style of the current MoonBreadcrumb's item.
+  /// The text style of the current MoonBreadcrumb item.
   final TextStyle currentItemTextStyle;
 
-  /// The text style of the MoonBreadcrumb's show more item.
+  /// The text style of the MoonBreadcrumb single custom widget to replace all the breadcrumb collapsed items with.
   final TextStyle showMoreItemTextStyle;
 
   const MoonBreadcrumbProperties({

@@ -5,10 +5,10 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonDotIndicatorColors extends ThemeExtension<MoonDotIndicatorColors> with DiagnosticableTreeMixin {
-  /// Selected DotIndicator dot color.
+  /// The color of the selected MoonDotIndicator dot.
   final Color selectedColor;
 
-  /// Unselected DotIndicator dot color.
+  /// The color of the unselected MoonDotIndicator dot.
   final Color unselectedColor;
 
   const MoonDotIndicatorColors({

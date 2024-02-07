@@ -26,19 +26,19 @@ class MoonSwitch extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// Whether the switch has haptic feedback (vibration) when toggled.
+  /// Whether to use haptic feedback (vibration) when the switch is toggled.
   final bool hasHapticFeedback;
 
-  /// Determines if the switch is on or off.
+  /// Whether the switch is in active (on) state.
   final bool value;
 
-  /// The color to use on the switch when the switch is on.
+  /// The background color of the active (on) switch track.
   final Color? activeTrackColor;
 
-  /// The color to use on the switch when the switch is off.
+  /// The background color of the inactive (off) switch track.
   final Color? inactiveTrackColor;
 
-  /// The color of the thumb.
+  /// The color of the switch thumb.
   final Color? thumbColor;
 
   /// The height of the switch.
@@ -47,19 +47,19 @@ class MoonSwitch extends StatefulWidget {
   /// The width of the switch.
   final double? width;
 
-  /// The size of the thumb.
+  /// The size of the switch thumb.
   final double? thumbSizeValue;
 
-  /// The duration for the switch animation.
+  /// The duration of the switch toggle animation.
   final Duration? duration;
 
-  /// The curve for the switch animation.
+  /// The curve of the switch toggle animation.
   final Curve? curve;
 
   /// The padding of the switch.
   final EdgeInsetsGeometry? padding;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
   /// The size of the switch.
@@ -68,22 +68,22 @@ class MoonSwitch extends StatefulWidget {
   /// The semantic label for the switch.
   final String? semanticLabel;
 
-  /// Callback when the switch is toggled on or off.
+  /// The callback that is called when the switch toggles between the active (on) and inactive (off) states.
   final ValueChanged<bool>? onChanged;
 
-  /// The widget to display when the switch is on (left slot).
+  /// The widget to display on the left side of the switch track when the switch is active (on).
   final Widget? activeTrackWidget;
 
-  /// The widget to display when the switch is off (right slot).
+  /// The widget to display on the right side of the switch track when the switch is inactive (off).
   final Widget? inactiveTrackWidget;
 
-  /// The widget inside the thumb when switch is on.
+  /// The widget to display inside the thumb when the switch is active (on).
   final Widget? activeThumbWidget;
 
-  /// The widget inside the thumb when the switch is off.
+  /// The widget to display inside the thumb when the switch is inactive (off).
   final Widget? inactiveThumbWidget;
 
-  /// MDS switch widget.
+  /// Creates a Moon Design switch.
   const MoonSwitch({
     super.key,
     this.autofocus = false,
@@ -131,8 +131,8 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
 
   bool _isFocused = false;
 
-  // A non-null boolean value that changes to true at the end of a drag if the
-  // switch must be animated to the _curvedAnimationWithOvershoot indicated by the widget's value.
+  // Whether to animate the switch to its new position (based on widget value) using _curvedAnimationWithOvershoot
+  // after a drag ends. Changes to true at the end of a drag.
   bool _needsPositionAnimation = false;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
@@ -152,12 +152,11 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
     }
   }
 
-  // `isLinear` must be true if the _curvedAnimationWithOvershoot animation is trying to move the
-  // thumb to the closest end after the most recent drag animation, so the curve
-  // does not change when the controller's value is not 0 or 1.
+  // The `isLinear` flag is set to true when the `_curvedAnimationWithOvershoot` animation
+  // attempts to move the thumb to the closest end after the most recent drag animation.
+  // This ensures that the curve remains unchanged when the controller's value is not 0 or 1.
   //
-  // It can be set to false when it's an implicit animation triggered by
-  // widget.value changes.
+  // It can be set to false when it's an implicit animation triggered by changes in widget.value.
   void _resumePositionAnimation({bool isLinear = true}) {
     _needsPositionAnimation = false;
 
@@ -229,7 +228,7 @@ class _MoonSwitchState extends State<MoonSwitch> with SingleTickerProviderStateM
   void _handleDragEnd(DragEndDetails details) {
     // Deferring the animation to the next build phase.
     setState(() => _needsPositionAnimation = true);
-    // Call onChanged when the user's intent to change value is clear.
+    // Trigger onChanged when the user's intent to change the value is evident.
     if (_curvedAnimationWithOvershoot!.value >= 0.5 != widget.value) {
       widget.onChanged!(!widget.value);
     }

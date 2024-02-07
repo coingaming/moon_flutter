@@ -13,7 +13,7 @@ class BottomSheet extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.7,
         builder: (BuildContext context) => Column(
           children: [
-            // Drag handle for the bottom sheet
+            // Drag handle for the bottom sheet.
             Container(
               height: 4,
               width: 40,

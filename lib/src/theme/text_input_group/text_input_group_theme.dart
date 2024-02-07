@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// TextInputGroup colors.
+  /// The colors of the MoonTextInputGroup.
   final MoonTextInputGroupColors colors;
 
-  /// TextInputGroup properties.
+  /// The properties of the MoonTextInputGroup.
   final MoonTextInputGroupProperties properties;
 
   MoonTextInputGroupTheme({

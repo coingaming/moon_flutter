@@ -13,6 +13,7 @@ class MoonProgressPin extends StatelessWidget {
   final String pinText;
   final Widget child;
 
+  /// Creates a Moon Design progress pin.
   const MoonProgressPin({
     super.key,
     required this.progressValue,

@@ -22,63 +22,58 @@ enum MoonAccordionSize {
 }
 
 class MoonAccordion<T> extends StatefulWidget {
-  /// Specifies the alignment of [children], which are arranged in a column when
-  /// the accordion is expanded.
-  /// The internals of the expanded accordion make use of a [Column] widget for
-  /// [children], and [Align] widget to align the column. The [expandedAlignment]
-  /// parameter is passed directly into the [Align].
+  /// The alignment of [children], which are arranged in a column when the accordion is expanded.
+  ///
+  /// Internally, the expanded accordion uses a [Column] widget for [children] and an [Align] widget
+  /// to align the column. The [expandedAlignment] parameter is directly passed into the [Align].
   ///
   /// Modifying this property controls the alignment of the column within the
   /// expanded accordion, not the alignment of [children] widgets within the column.
   /// To align each child within [children], see [expandedCrossAxisAlignment].
   ///
-  /// The width of the column is the width of the widest child widget in [children].
+  /// The width of the column is determined by the widest child widget in [children].
   final AlignmentGeometry? expandedAlignment;
 
-  /// Specifies the alignment of each child within [children] when the accordion is expanded.
+  /// The alignment of each child within [children] when the accordion is expanded.
   ///
-  /// The internals of the expanded accordion make use of a [Column] widget for
-  /// [children], and the `crossAxisAlignment` parameter is passed directly into the [Column].
+  /// Internally, the expanded accordion uses a [Column] widget for
+  /// [children], and the `crossAxisAlignment` parameter is directly passed into the [Column].
   ///
-  /// Modifying this property controls the cross axis alignment of each child
-  /// within its [Column]. Note that the width of the [Column] that houses
-  /// [children] will be the same as the widest child widget in [children]. It is
-  /// not necessarily the width of [Column] is equal to the width of expanded accordion.
+  /// Modifying this property controls the cross axis alignment of each child within its [Column].
+  /// The width of the [Column] housing [children] will be the same as the widest child widget in [children].
+  /// It is not necessarily that the width of the [Column] is equal to the width of the expanded accordion.
   ///
-  /// To align the [Column] along the expanded accordion, use the [expandedAlignment] property
-  /// instead.
-  ///
-  /// When the value is null, the value of [expandedCrossAxisAlignment] is [CrossAxisAlignment.center].
+  /// To align the [Column] along the expanded accordion, use the [expandedAlignment] property instead.
   final CrossAxisAlignment? expandedCrossAxisAlignment;
 
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// Whether the accordion content is outside
+  /// Whether to display the accordion content outside of its header.
   final bool hasContentOutside;
 
-  /// Specifies if the accordion is initially expanded (true) or collapsed (false, the default).
+  /// Whether the accordion is initially expanded (true) or collapsed (false, the default).
   ///
-  /// If [identityValue] matches [groupIdentityValue], this parameter is ignored.
+  /// If the [identityValue] matches the [groupIdentityValue], this parameter is disregarded.
   final bool initiallyExpanded;
 
   /// Whether the accordion is disabled.
   final bool isDisabled;
 
-  /// Specifies whether the state of the children is maintained when the accordion expands and collapses.
+  /// Whether to preserve the state of the [children] when the accordion expands and collapses.
   ///
-  /// When true, the children are kept in the tree while the accordion is collapsed.
+  /// When true, the children remain in the widget tree even when the accordion is collapsed.
   /// When false (default), the children are removed from the tree when the accordion is
-  /// collapsed and recreated upon expansion.
+  /// collapsed and recreated when it is expanded.
   final bool maintainState;
 
   /// Whether to show a border around the accordion.
   final bool showBorder;
 
-  /// Whether to show a divider between the header and the body.
+  /// Whether to show a dividing line between the accordion header and the body.
   final bool showDivider;
 
-  /// The accordion's border radius.
+  /// The border radius of the accordion.
   final BorderRadiusGeometry? borderRadius;
 
   /// {@macro flutter.material.Material.clipBehavior}
@@ -105,34 +100,34 @@ class MoonAccordion<T> extends StatefulWidget {
   /// The border color of the accordion.
   final Color? borderColor;
 
-  /// The color of the divider between the header and the body.
+  /// The color of the line dividing the accordion header from the body.
   final Color? dividerColor;
 
-  /// Custom decoration for the accordion.
+  /// The custom decoration of the accordion.
   final Decoration? decoration;
 
-  /// The gap between the leading, label and trailing widgets.
+  /// The gap between the [leading], [label] and [trailing] widgets of the accordion header.
   final double? gap;
 
   /// The height of the accordion header.
   final double? headerHeight;
 
-  /// Accordion transition duration (expand and collapse animation).
+  /// The duration of the accordion transition animation (expand and collapse).
   final Duration? transitionDuration;
 
-  /// Accordion transition curve (expand and collapse animation).
+  /// The curve of the accordion transition animation (expand and collapse).
   final Curve? transitionCurve;
 
-  /// Specifies padding for accordion [children].
+  /// The padding of the accordion [children].
   final EdgeInsetsGeometry? childrenPadding;
 
-  /// Specifies padding for the accordion header.
+  /// The padding of the accordion header.
   final EdgeInsetsGeometry? headerPadding;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
-  /// Accordion shadows.
+  /// The list of shadows applied to the accordion.
   final List<BoxShadow>? shadows;
 
   /// The size of the accordion.
@@ -146,34 +141,34 @@ class MoonAccordion<T> extends StatefulWidget {
 
   /// The currently selected identity value for a group of accordions.
   ///
-  /// This accordion is considered selected if its [identityValue] matches the [groupIdentityValue].
+  /// This accordion is considered selected if its [identityValue] is equal to the [groupIdentityValue].
   final T? groupIdentityValue;
 
-  /// Called when the accordion expands or collapses.
+  /// The callback that is called when the accordion expands or collapses.
   ///
   /// When the accordion expansion changes, this function is called with the [identityValue].
   final ValueChanged<T?>? onExpansionChanged;
 
-  /// A widget to display before the label.
+  /// The widget to display before the [label] widget of the accordion.
   ///
-  /// Typically a [CircleAvatar] widget.
+  /// Typically, a [CircleAvatar] widget is used.
   final Widget? leading;
 
   /// The primary content of the accordion header.
   ///
-  /// Typically a [Text] widget.
+  /// Typically, a [Text] widget is used.
   final Widget label;
 
-  /// A widget to display after the label.
+  /// The widget to display after the [label] widget of the accordion.
   ///
-  /// Note that depending on the value of [controlAffinity], the [trailing] widget
+  /// Depending on the value of [controlAffinity], the [trailing] widget
   /// may replace the rotating expansion arrow icon.
   final Widget? trailing;
 
-  /// The list of widgets that are displayed when accordion expands.
+  /// The list of widgets to display as the content of the accordion when the accordion expands.
   final List<Widget> children;
 
-  /// MDS accordion widget.
+  /// Creates a Moon Design accordion.
   const MoonAccordion({
     super.key,
     this.expandedAlignment,

@@ -12,6 +12,7 @@ class MoonPulseEffect extends StatefulWidget {
   final Curve effectCurve;
   final Widget child;
 
+  /// Creates a Moon Design pulse effect.
   const MoonPulseEffect({
     super.key,
     required this.show,
@@ -36,7 +37,7 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
     animationBehavior: AnimationBehavior.preserve,
     vsync: this,
     duration: widget.effectDuration,
-    debugLabel: "MoonPulseEffect animation controller",
+    debugLabel: "MoonPulseEffect animation controller.",
   );
 
   late final CurvedAnimation _pulseAnimation = CurvedAnimation(
@@ -91,9 +92,9 @@ class _MoonPulseEffectState extends State<MoonPulseEffect> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Review at a later date (when Impeller is stable?) if CurvedAnimation with Interval can be used. Currently
-    //interval has a bug where the curve parameters curve.transform(t) internal method causes uneven buggy animation.
-
+    // TODO: Revisit this at a later date, when Impeller is more stable, to determine if we can
+    //  use CurvedAnimation with Interval. Currently, there is a bug in Interval where the internal
+    //  method curve.transform(t) causes uneven and buggy animations.
     final BorderRadius resolvedBorderRadius =
         widget.childBorderRadius?.resolve(Directionality.of(context)) ?? BorderRadius.zero;
 

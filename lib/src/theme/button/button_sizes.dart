@@ -6,22 +6,22 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Extra small button properties.
+  /// The properties of the extra small MoonButton.
   final MoonButtonSizeProperties xs;
 
-  /// Small button properties.
+  /// The properties of the small MoonButton.
   final MoonButtonSizeProperties sm;
 
-  /// Medium button properties.
+  /// The properties of the medium MoonButton.
   final MoonButtonSizeProperties md;
 
-  /// Large button properties.
+  /// The properties of the large MoonButton.
   final MoonButtonSizeProperties lg;
 
-  /// Extra large button properties.
+  /// The properties of the extra large MoonButton.
   final MoonButtonSizeProperties xl;
 
   MoonButtonSizes({

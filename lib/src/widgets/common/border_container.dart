@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:moon_design/moon_design.dart';
 
-/// Used to animate the border of a container. Mainly used in [MoonTextInput] and [MoonTextInputGroup]
 class BorderContainer extends StatefulWidget {
   final Clip clipBehavior;
   final Color? backgroundColor;
@@ -13,7 +13,8 @@ class BorderContainer extends StatefulWidget {
   final Curve curve;
   final Widget child;
 
-  /// Utility widget used to animate the border of a container.
+  /// Creates a utility widget for animating the border of a container.
+  /// Primarily utilized in [MoonTextInput] and [MoonTextInputGroup].
   const BorderContainer({
     super.key,
     this.clipBehavior = Clip.none,
@@ -65,6 +66,7 @@ class _BorderContainerState extends State<BorderContainer> with SingleTickerProv
   @override
   void didUpdateWidget(BorderContainer oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (widget.border != oldWidget.border) {
       _border = ShapeBorderTween(
         begin: oldWidget.border,

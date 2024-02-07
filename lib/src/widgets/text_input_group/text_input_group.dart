@@ -20,7 +20,7 @@ enum MoonTextInputGroupOrientation {
 typedef MoonTextInputGroupErrorBuilder = Widget Function(BuildContext context, List<String> errorText);
 
 class MoonTextInputGroup extends StatefulWidget {
-  /// If false the widget is "disabled": it ignores taps and has a reduced opacity.
+  /// Whether the text input group is enabled. When false, taps are ignored and the opacity reduced.
   final bool enabled;
 
   /// The border radius of the text input group.
@@ -37,49 +37,49 @@ class MoonTextInputGroup extends StatefulWidget {
   /// The default border color of the text input group.
   final Color? borderColor;
 
-  /// The color of the error state of text input group.
+  /// The color of the text input group in error state.
   final Color? errorColor;
 
-  /// The text color of the hint in text input group.
+  /// The text color of the text input group hint.
   final Color? hintTextColor;
 
-  /// The border color of the hovered text input group.
+  /// The border color of the text input group on hover.
   final Color? hoverBorderColor;
 
-  /// The transition duration for disable animation.
+  /// The duration of the text input group transition animation (enable and disable).
   final Duration? transitionDuration;
 
-  /// The transition curve for disable animation.
+  /// The curve of the text input group transition animation (enable and disable).
   final Curve? transitionCurve;
 
-  /// The padding around helper widget or error builder.
+  /// The padding of the [helper] and [errorBuilder] widgets.
   final EdgeInsetsGeometry? helperPadding;
 
-  /// The padding around the text content.
+  /// The padding of the text content.
   final EdgeInsetsGeometry? textPadding;
 
-  /// Custom decoration for the text input group.
+  /// The custom decoration of the text input group.
   final Decoration? decoration;
 
   /// The semantic label for the text input group widget.
   final String? semanticLabel;
 
-  /// The text style to use for the helper or error state text.
+  /// The text style of the [helper] or error state text.
   final TextStyle? helperTextStyle;
 
   /// The orientation of the text input group.
   final MoonTextInputGroupOrientation orientation;
 
-  /// The children of the text input group.
+  /// The list of text inputs to display as the children of the text input group.
   final List<MoonFormTextInput> children;
 
-  /// Builder for the error widget.
+  /// A builder to build the text input group error widget.
   final MoonTextInputGroupErrorBuilder? errorBuilder;
 
-  /// The widget in the helper slot of the text input group.
+  /// The widget to display below the text input group. Not displayed in error state.
   final Widget? helper;
 
-  /// MDS TextInputGroup widget
+  /// Creates a Moon Design text input group.
   const MoonTextInputGroup({
     super.key,
     this.enabled = true,
@@ -137,7 +137,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
 
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!mounted) return;
-      // Rebuild the widget to show the error
+      // Rebuild the widget to show the error.
       setState(() {});
     });
   }

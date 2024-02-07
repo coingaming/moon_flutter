@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class CustomModalScrollPhysics extends ScrollPhysics {
   final AnimationController controller;
 
-  /// Creates scroll physics that prevent the scroll offset from exceeding the top bound of the modal.
-  /// Enables user to drag bottomsheet up and down with scrollable content.
+  /// Creates scroll physics that restrict the scroll offset from reaching the modal's upper boundary.
+  /// Permits users to drag the bottom sheet up and down when the content is scrollable.
   const CustomModalScrollPhysics({super.parent, required this.controller});
 
   @override

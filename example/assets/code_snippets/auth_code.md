@@ -10,7 +10,7 @@ class AuthCode extends StatelessWidget {
       height: 95, // To avoid widget jumping with error text, use a fixed-height wrapper.
       child: MoonAuthCode(
         validator: (String? pin) {
-          // Matches all numbers
+          // Matches all numbers.
           final RegExp regex = RegExp(r'^\d+$');
 
           return pin != null && pin.length == 4 && !regex.hasMatch(pin)

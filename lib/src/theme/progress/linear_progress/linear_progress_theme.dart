@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Linear progress colors.
+  /// The colors of the MoonLinearProgress.
   final MoonLinearProgressColors colors;
 
-  /// Linear progress sizes.
+  /// The sizes of the MoonLinearProgress.
   final MoonLinearProgressSizes sizes;
 
   MoonLinearProgressTheme({

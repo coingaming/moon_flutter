@@ -4,7 +4,7 @@ Color _scaleAlpha(Color a, double factor) {
   return a.withAlpha((a.alpha * factor).round().clamp(0, 255));
 }
 
-/// Workaround for Flutter using straight alpha instead of premultiplied alpha for Color lerping.
+/// Workaround for Flutter's use of straight alpha instead of premultiplied alpha for color lerping.
 Color? colorPremulLerp(Color? a, Color? b, double t) {
   if (b == null) {
     if (a == null) {

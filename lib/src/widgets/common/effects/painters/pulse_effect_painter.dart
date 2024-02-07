@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/animation.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
@@ -52,7 +51,7 @@ class PulseEffectPainter extends CustomPainter {
       final Paint paint = Paint()
         ..color = transformedColor
         ..style = PaintingStyle.stroke
-        ..strokeWidth = rangeValue * effectExtent + 1; // +1 for squircle hairline border correction
+        ..strokeWidth = rangeValue * effectExtent + 1; // +1 for squircle hairline border correction.
 
       canvas.drawRRect(
         RRect.fromRectAndCorners(

@@ -5,22 +5,22 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonToastColors extends ThemeExtension<MoonToastColors> with DiagnosticableTreeMixin {
-  /// Toast light variant background color.
+  /// The background color of the MoonToast light variant.
   final Color lightVariantBackgroundColor;
 
-  /// Toast dark variant background color.
+  /// The background color of the MoonToast dark variant.
   final Color darkVariantBackgroundColor;
 
-  /// Toast light variant text color.
+  /// The text color of the MoonToast light variant.
   final Color lightVariantTextColor;
 
-  /// Toast dark variant text color.
+  /// The text color of the MoonToast dark variant.
   final Color darkVariantTextColor;
 
-  /// Toast light variant icon color.
+  /// The icon color of the MoonToast light variant.
   final Color lightVariantIconColor;
 
-  /// Toast dark variant icon color.
+  /// The icon color of the MoonToast dark variant.
   final Color darkVariantIconColor;
 
   const MoonToastColors({

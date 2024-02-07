@@ -46,7 +46,7 @@ class _SwitchStoryState extends State<SwitchStory> {
 
     final activeTrackColorKnob = context.knobs.nullable.options(
       label: "activeTrackColor",
-      description: "MoonColors variants for active MoonSwitch track.",
+      description: "MoonColors variants for MoonSwitch active track.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -57,7 +57,7 @@ class _SwitchStoryState extends State<SwitchStory> {
 
     final inactiveTrackColorKnob = context.knobs.nullable.options(
       label: "inactiveTrackColor",
-      description: "MoonColors variants for inactive MoonSwitch track.",
+      description: "MoonColors variants for MoonSwitch inactive track.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -68,7 +68,7 @@ class _SwitchStoryState extends State<SwitchStory> {
 
     final isDisabled = context.knobs.boolean(
       label: "Disabled",
-      description: "onChanged() is null.",
+      description: "MoonSwitch onChanged() is null.",
     );
 
     return Center(
@@ -77,7 +77,7 @@ class _SwitchStoryState extends State<SwitchStory> {
         child: Column(
           children: [
             const TextDivider(
-              text: "Customisable MoonSwitch",
+              text: "MoonSwitch",
               paddingTop: 0,
             ),
             MoonSwitch(
@@ -88,7 +88,7 @@ class _SwitchStoryState extends State<SwitchStory> {
               value: switchValue,
               onChanged: isDisabled ? null : (bool newValue) => setState(() => switchValue = newValue),
             ),
-            const TextDivider(text: "MoonSwitches with custom children"),
+            const TextDivider(text: "Customized MoonSwitch"),
             MoonSwitch(
               switchSize: switchSizeKnob,
               activeThumbWidget: const Icon(MoonIcons.generic_check_alternative_16_light),

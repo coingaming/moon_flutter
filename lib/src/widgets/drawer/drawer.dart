@@ -9,30 +9,31 @@ import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonDrawer extends StatelessWidget {
-  /// The border radius of the Drawer.
+  /// The border radius of the drawer.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The background color of the Drawer.
+  /// The background color of the drawer.
   final Color? backgroundColor;
 
-  /// The color of the Drawer barrier.
+  /// The color of the drawer barrier.
   final Color? barrierColor;
 
-  /// Custom decoration for the Drawer.
+  /// The custom decoration of the drawer.
   final Decoration? decoration;
 
-  /// The width of the Drawer.
+  /// The width of the drawer.
   final double? width;
 
-  /// List of Drawer shadows.
+  /// The list of shadows applied to the drawer.
   final List<BoxShadow>? drawerShadows;
 
-  /// The semantic label for the Drawer.
+  /// The semantic label for the drawer.
   final String? semanticLabel;
 
-  /// The child of the Drawer.
+  /// The widget to display inside the drawer as its content.
   final Widget child;
 
+  /// Creates a Moon Design drawer.
   const MoonDrawer({
     super.key,
     this.borderRadius,

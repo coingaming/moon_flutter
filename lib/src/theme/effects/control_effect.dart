@@ -6,23 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with DiagnosticableTreeMixin {
-  /// Controls effect color.
+class MoonControlEffect extends ThemeExtension<MoonControlEffect> with DiagnosticableTreeMixin {
+  /// The effect color of the control.
   final Color? effectColor;
 
-  /// Controls effect duration.
+  /// The effect duration of the control.
   final Duration effectDuration;
 
-  /// Controls effect curve.
+  /// The effect curve of the control.
   final Curve effectCurve;
 
-  /// Controls effect width.
+  /// The effect extent of the control.
   final double? effectExtent;
 
-  /// Controls effect final scale.
+  /// The effect scalar of the control.
   final double? effectScalar;
 
-  const MoonControlsEffects({
+  const MoonControlEffect({
     this.effectColor,
     required this.effectDuration,
     required this.effectCurve,
@@ -31,14 +31,14 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
   });
 
   @override
-  MoonControlsEffects copyWith({
+  MoonControlEffect copyWith({
     Color? effectColor,
     Duration? effectDuration,
     Curve? effectCurve,
     double? effectExtent,
     double? effectScalar,
   }) {
-    return MoonControlsEffects(
+    return MoonControlEffect(
       effectColor: effectColor ?? this.effectColor,
       effectDuration: effectDuration ?? this.effectDuration,
       effectCurve: effectCurve ?? this.effectCurve,
@@ -48,10 +48,10 @@ class MoonControlsEffects extends ThemeExtension<MoonControlsEffects> with Diagn
   }
 
   @override
-  MoonControlsEffects lerp(ThemeExtension<MoonControlsEffects>? other, double t) {
-    if (other is! MoonControlsEffects) return this;
+  MoonControlEffect lerp(ThemeExtension<MoonControlEffect>? other, double t) {
+    if (other is! MoonControlEffect) return this;
 
-    return MoonControlsEffects(
+    return MoonControlEffect(
       effectColor: colorPremulLerp(effectColor, other.effectColor, t),
       effectDuration: lerpDuration(effectDuration, other.effectDuration, t),
       effectCurve: other.effectCurve,

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonModalProperties extends ThemeExtension<MoonModalProperties> with DiagnosticableTreeMixin {
-  /// Modal border radius.
+  /// The border radius of the MoonModal.
   final BorderRadiusGeometry borderRadius;
 
-  /// Modal transition duration.
+  /// The duration of the MoonModal transition animation (fade in or out).
   final Duration transitionDuration;
 
-  /// Modal transition curve.
+  /// The curve of the MoonModal transition animation (fade in or out).
   final Curve transitionCurve;
 
-  /// Modal text style.
+  /// The text style of the MoonModal.
   final TextStyle textStyle;
 
   const MoonModalProperties({

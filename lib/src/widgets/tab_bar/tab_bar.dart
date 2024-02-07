@@ -31,55 +31,66 @@ enum MoonTabBarSize {
 typedef MoonCustomTabBuilder = Widget Function(BuildContext context, bool isSelected);
 
 class MoonTabBar extends StatefulWidget {
-  /// Controls whether MoonTabBar is expanded and takes up all available space horizontally.
+  /// Whether the tab bar is expanded to its full available width horizontally or resizes to fit its content.
   final bool isExpanded;
 
-  /// The gap between MoonTabBar children.
+  /// The gap between the tab bar tabs.
   final double? gap;
 
-  /// The height of the MoonTabBar.
+  /// The height of the tab bar.
   final double? height;
 
-  /// The width of the MoonTabBar.
+  /// The width of the tab bar.
   final double? width;
 
-  /// Transition duration of MoonTabBar.
+  /// The duration of the tab bar transition animation.
   final Duration? transitionDuration;
 
-  /// Transition curve of MoonTabBar.
+  /// The curve of the tab bar transition animation.
   final Curve? transitionCurve;
 
-  /// The padding of the MoonTabBar.
+  /// The padding of the tab bar.
   final EdgeInsetsGeometry? padding;
 
-  /// The index of initially selected tab. If [tabController] is provided,
-  /// then [initialIndex] is ignored and [tabController] initial index is used instead.
-  /// To update the tab index externally, use [tabController].
+  /// The index of the initially selected tab.
+  /// This property is overridden by the [tabController]'s initial index if the [tabController] is provided.
+  /// For external updates to the tab index, use [tabController].
   final int initialIndex;
 
-  /// The size of the MoonTabBar.
+  /// The size of the tab bar.
   final MoonTabBarSize? tabBarSize;
 
-  /// Custom decoration of the MoonTabBar.
+  /// The custom decoration of the tab bar.
   final Decoration? decoration;
 
-  /// External controller for MoonTabBar tab selection and animation state. If [tabController] is provided,
-  /// then [initialIndex] is ignored and [tabController] initial index is used instead.
+  /// The external controller for managing tab selection and animation in tab bar.
+  /// If tabController is provided, then [initialIndex] is ignored and tabController's index is used instead.
   final TabController? tabController;
 
-  /// Callback that returns current selected tab index.
+  /// The callback that returns the index of the currently selected tab.
   final ValueChanged<int>? onTabChanged;
 
-  /// The children of MoonTabBar. At least one child is required.
+  /// The list of tabs to display as the children of the tab bar.
+  /// At least one child is required when this property is used.
+  /// This property cannot be used in conjunction with the [pillTabs] or [customTabs] properties; both must be set to null.
   final List<MoonTab>? tabs;
 
-  /// The children of pill MoonTabBar. At least one child is required.
+  /// The list of pill tabs to display as the children of the pill tab bar.
+  /// At least one child is required when this property is used.
+  /// This property cannot be used in conjunction with the [tabs] or [customTabs] properties; both must be set to null.
   final List<MoonPillTab>? pillTabs;
 
-  /// The children of custom MoonTabBar. At least one child is required.
+  /// The list of custom tabs to display as the children of the custom tab bar.
+  /// At least one child is required when this property is used.
+  /// This property cannot be used in conjunction with the [tabs] or [pillTabs] properties; both must be set to null.
   final List<MoonCustomTabBuilder>? customTabs;
 
-  /// MDS TabBar widget.
+  /// Creates a Moon Design tab bar.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonTabBar.pill], Moon Design pill tab bar.
+  ///   * [MoonTabBar.custom], Moon Design custom tab bar.
   const MoonTabBar({
     super.key,
     this.isExpanded = false,
@@ -100,7 +111,11 @@ class MoonTabBar extends StatefulWidget {
         pillTabs = null,
         customTabs = null;
 
-  /// MDS pill TabBar widget.
+  /// Creates a Moon Design pill tab bar.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonTabBar.custom], Moon Design custom tab bar.
   const MoonTabBar.pill({
     super.key,
     this.isExpanded = false,
@@ -121,7 +136,11 @@ class MoonTabBar extends StatefulWidget {
         tabs = null,
         customTabs = null;
 
-  /// MDS custom TabBar widget.
+  /// Creates a Moon Design custom tab bar.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonTabBar.pill], Moon Design pill tab bar.
   const MoonTabBar.custom({
     super.key,
     this.isExpanded = false,

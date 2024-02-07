@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonRadioProperties extends ThemeExtension<MoonRadioProperties> with DiagnosticableTreeMixin {
-  /// Radio text style.
+  /// The text style of the MoonRadio with label button.
   final TextStyle textStyle;
 
   const MoonRadioProperties({

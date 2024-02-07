@@ -5,10 +5,10 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCarouselColors extends ThemeExtension<MoonCarouselColors> with DiagnosticableTreeMixin {
-  /// Default text color of Carousel items.
+  /// The text color of the MoonCarousel items.
   final Color textColor;
 
-  /// Carousel item icon color.
+  /// The icon color of the MoonCarousel items.
   final Color iconColor;
 
   const MoonCarouselColors({

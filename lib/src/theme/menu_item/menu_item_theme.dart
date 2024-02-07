@@ -6,13 +6,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonMenuItemTheme extends ThemeExtension<MoonMenuItemTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// MenuItem colors.
+  /// The colors of the MoonMenuItem.
   final MoonMenuItemColors colors;
 
-  /// MenuItem properties.
+  /// The properties of the MoonMenuItem.
   final MoonMenuItemProperties properties;
 
   MoonMenuItemTheme({

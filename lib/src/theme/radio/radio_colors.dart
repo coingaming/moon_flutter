@@ -5,13 +5,13 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonRadioColors extends ThemeExtension<MoonRadioColors> with DiagnosticableTreeMixin {
-  /// Radio active color.
+  /// The color of the selected MoonRadio button.
   final Color activeColor;
 
-  /// Radio inactive color.
+  /// The background color of the unselected MoonRadio button.
   final Color inactiveColor;
 
-  /// Radio text color.
+  /// The text color of the MoonRadio with label button.
   final Color textColor;
 
   const MoonRadioColors({

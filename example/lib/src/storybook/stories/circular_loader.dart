@@ -28,7 +28,7 @@ class CircularLoaderStory extends StatelessWidget {
 
     final loaderColorKnob = context.knobs.nullable.options(
       label: "color",
-      description: "MoonColors variants for CircularLoader color.",
+      description: "MoonColors variants for CircularLoader.",
       enabled: false,
       initial: 0,
       // piccolo

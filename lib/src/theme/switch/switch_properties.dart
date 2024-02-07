@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonSwitchProperties extends ThemeExtension<MoonSwitchProperties> with DiagnosticableTreeMixin {
-  /// Switch transition duration.
+  /// The duration of the MoonSwitch toggle animation.
   final Duration transitionDuration;
 
-  /// Switch transition curve.
+  /// The curve of the MoonSwitch toggle animation.
   final Curve transitionCurve;
 
   const MoonSwitchProperties({

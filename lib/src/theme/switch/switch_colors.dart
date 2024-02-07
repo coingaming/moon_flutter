@@ -5,28 +5,28 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with DiagnosticableTreeMixin {
-  /// Switch active track color.
+  /// The background color of the active (on) MoonSwitch track.
   final Color activeTrackColor;
 
-  /// Switch inactive track color.
+  /// The background color of the inactive (off) MoonSwitch track.
   final Color inactiveTrackColor;
 
-  /// Switch active track text color.
+  /// The text color of the active (on) MoonSwitch.
   final Color activeTextColor;
 
-  /// Switch inactive track text color.
+  /// The text color of the inactive (off) MoonSwitch.
   final Color inactiveTextColor;
 
-  /// Switch active track icon color.
+  /// The icon color of the active (on) MoonSwitch.
   final Color activeIconColor;
 
-  /// Switch inactive track icon color.
+  /// The icon color of the inactive (off) MoonSwitch.
   final Color inactiveIconColor;
 
-  /// Switch icon Color.
+  /// The icon color of the MoonSwitch thumb.
   final Color thumbIconColor;
 
-  /// Switch thumb color.
+  /// The color of the MoonSwitch thumb.
   final Color thumbColor;
 
   const MoonSwitchColors({

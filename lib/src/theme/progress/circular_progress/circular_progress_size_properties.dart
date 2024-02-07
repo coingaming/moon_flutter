@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 @immutable
 class MoonCircularProgressSizeProperties extends ThemeExtension<MoonCircularProgressSizeProperties>
     with DiagnosticableTreeMixin {
-  /// Circular progress size value.
+  /// The size value of the MoonCircularProgress.
   final double progressSizeValue;
 
-  /// Circular progress stroke width.
+  /// The stroke width of the MoonCircularProgress.
   final double progressStrokeWidth;
 
   const MoonCircularProgressSizeProperties({

@@ -73,7 +73,7 @@ class _PopoverStoryState extends State<PopoverStory> {
 
     final distanceToTargetKnob = context.knobs.nullable.slider(
       label: "distanceToTarget",
-      description: "Set the distance to target child widget.",
+      description: "Distance to target child widget.",
       enabled: false,
       initial: 8,
       max: 100,
@@ -81,7 +81,7 @@ class _PopoverStoryState extends State<PopoverStory> {
 
     final showShadowKnob = context.knobs.boolean(
       label: "Show shadow",
-      description: "Show shadows under MoonPopover.",
+      description: "Show shadows for MoonPopover.",
       initial: true,
     );
 

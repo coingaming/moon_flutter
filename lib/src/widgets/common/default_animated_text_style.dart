@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// Used to animate the text style.
 class MoonAnimatedDefaultTextStyle extends StatefulWidget {
   final TextStyle textStyle;
   final Duration duration;
   final Curve curve;
   final Widget child;
 
-  /// Utility widget used to animate the text style.
+  /// Creates a utility widget for animating text style.
   const MoonAnimatedDefaultTextStyle({
     super.key,
     required this.textStyle,

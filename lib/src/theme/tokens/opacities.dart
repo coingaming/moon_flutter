@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class MoonOpacities extends ThemeExtension<MoonOpacities> with DiagnosticableTreeMixin {
   static const opacities = MoonOpacities(disabled: 0.6);
 
-  /// Disabled opacity value.
+  /// The disabled opacity value.
   final double disabled;
 
   const MoonOpacities({

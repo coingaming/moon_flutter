@@ -16,6 +16,7 @@ class TableControllers {
   ScrollController? footerHorizontalScrollController;
   ScrollController? rowsPlaceholderHorizontalScrollController;
 
+  /// Creates Moon Design table controllers.
   TableControllers({
     required this.isHeaderPinned,
     required this.isFooterPinned,

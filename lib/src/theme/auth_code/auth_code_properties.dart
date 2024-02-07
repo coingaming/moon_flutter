@@ -5,37 +5,37 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with DiagnosticableTreeMixin {
-  /// Border radius of the auth input field.
+  /// The border radius of the MoonAuthCode input field.
   final BorderRadiusGeometry borderRadius;
 
-  /// Horizontal space between auth input fields.
+  /// The horizontal gap between the MoonAuthCode input fields.
   final double gap;
 
-  /// Height of the auth input field.
+  /// The height of the MoonAuthCode input field.
   final double height;
 
-  /// Width of the auth input field.
+  /// The width of the MoonAuthCode input field.
   final double width;
 
-  /// AuthCode input field animation duration.
+  /// The duration of the MoonAuthCode input field transition animation.
   final Duration animationDuration;
 
-  /// AuthCode error animation duration.
+  /// The duration of the MoonAuthCode error state animation.
   final Duration errorAnimationDuration;
 
-  /// Peek duration before obscuring.
+  /// The duration to display the typed character before it is obscured.
   final Duration peekDuration;
 
-  /// AuthCode input field animation curve.
+  /// The curve of the MoonAuthCode input field transition animation.
   final Curve animationCurve;
 
-  /// AuthCode error animation curve.
+  /// The curve of the MoonAuthCode error state animation.
   final Curve errorAnimationCurve;
 
-  /// AuthCode text style.
+  /// The text style of the MoonAuthCode.
   final TextStyle textStyle;
 
-  /// AuthCode error text style.
+  /// The text style of the MoonAuthCode in error state.
   final TextStyle errorTextStyle;
 
   const MoonAuthCodeProperties({

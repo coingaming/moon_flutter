@@ -17,31 +17,31 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     activeBorderWidth: 1.5,
   );
 
-  /// Interactive radius XS.
+  /// The extra small interactive radius.
   final BorderRadiusGeometry interactiveXs;
 
-  /// Interactive radius SM.
+  /// The small interactive radius.
   final BorderRadiusGeometry interactiveSm;
 
-  /// Interactive radius MD.
+  /// The medium interactive radius.
   final BorderRadiusGeometry interactiveMd;
 
-  /// Surface radius XS.
+  /// The extra small surface radius.
   final BorderRadiusGeometry surfaceXs;
 
-  /// Surface radius SM.
+  /// The small surface radius.
   final BorderRadiusGeometry surfaceSm;
 
-  /// Surface radius MD.
+  /// The medium surface radius.
   final BorderRadiusGeometry surfaceMd;
 
-  /// Surface radius LG.
+  /// The large surface radius.
   final BorderRadiusGeometry surfaceLg;
 
-  /// Default border width.
+  /// The default border width.
   final double defaultBorderWidth;
 
-  /// Active border width.
+  /// The active border width.
   final double activeBorderWidth;
 
   const MoonBorders({

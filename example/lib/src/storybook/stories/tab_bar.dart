@@ -38,7 +38,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
 
     final textColorKnob = context.knobs.nullable.options(
       label: "textColor",
-      description: "MoonColors variants for default text.",
+      description: "MoonColors variants for MoonTabBar default text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -49,7 +49,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
 
     final selectedTextColorKnob = context.knobs.nullable.options(
       label: "selectedTextColor",
-      description: "MoonColors variants for selected tab text.",
+      description: "MoonColors variants for MoonTabBar selected tab text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -60,7 +60,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
 
     final indicatorColorKnob = context.knobs.nullable.options(
       label: "indicatorColor",
-      description: "MoonColors variants for default MoonTabBar indicator.",
+      description: "MoonColors variants for MoonTabBar indicator.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -90,7 +90,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
 
     final indicatorHeightKnob = context.knobs.nullable.sliderInt(
       label: "indicatorHeight",
-      description: "Indicator height for default MoonTabBar.",
+      description: "Indicator height for MoonTabBar.",
       enabled: false,
       initial: 2,
       max: 4,
@@ -98,7 +98,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
 
     final gapKnob = context.knobs.nullable.sliderInt(
       label: "gap",
-      description: "Gap between MoonTabBar children.",
+      description: "Gap between MoonTabBar tabs.",
       enabled: false,
       initial: 4,
       max: 12,
@@ -145,7 +145,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
         child: Column(
           children: [
             const TextDivider(
-              text: "Default MoonTabBar",
+              text: "MoonTabBar",
               paddingTop: 0,
             ),
             Column(
@@ -226,7 +226,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
                     ),
                   ],
                 ),
-                const TextDivider(text: "Pre-made MoonTabBar with TabBarView"),
+                const TextDivider(text: "Customized MoonTabBar with TabBarView"),
                 MoonTabBar(
                   isExpanded: true,
                   tabController: tabController,

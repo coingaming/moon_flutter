@@ -5,16 +5,16 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonSegmentedControlColors extends ThemeExtension<MoonSegmentedControlColors> with DiagnosticableTreeMixin {
-  /// Background color of SegmentedControl.
+  /// The background color of the MoonSegmentedControl.
   final Color backgroundColor;
 
-  /// Color of selected segment.
+  /// The color of the selected MoonSegmentedControl segment.
   final Color selectedSegmentColor;
 
-  /// Default text color of segments.
+  /// The text color of the MoonSegmentedControl segment.
   final Color textColor;
 
-  /// Text color of selected segment.
+  /// The text color of the selected MoonSegmentedControl segment.
   final Color selectedTextColor;
 
   const MoonSegmentedControlColors({

@@ -67,7 +67,7 @@ class TextAreaStory extends StatelessWidget {
 
     final errorColorKnob = context.knobs.nullable.options(
       label: "errorColor",
-      description: "MoonColors variants for MoonTextArea error.",
+      description: "MoonColors variants for MoonTextArea in error state.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -92,7 +92,7 @@ class TextAreaStory extends StatelessWidget {
 
     final growableKnob = context.knobs.boolean(
       label: "Growable",
-      description: "Whether the MoonTextArea has no fixed height and is growable",
+      description: "Whether MoonTextArea is growable with unfixed height",
     );
 
     final showHelperKnob = context.knobs.boolean(

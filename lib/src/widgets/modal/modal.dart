@@ -9,8 +9,9 @@ import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
-/// Displays a modal above the current contents of the app, with entrance and exit animations, modal barrier color,
-/// and modal barrier behavior (dialog is dismissible with a tap on the barrier). Used together with MoonModal.
+/// Displays a modal overlay over the app's current content, incorporating entrance and exit animations,
+/// modal barrier color, and modal barrier behavior, enabling dialog dismissal via barrier taps.
+/// Intended for use in conjunction with [MoonModal].
 Future<T?> showMoonModal<T>({
   bool barrierDismissible = true,
   bool useRootNavigator = true,
@@ -77,8 +78,8 @@ bool _debugIsActive(BuildContext context) {
 }
 
 class MoonModalRoute<T> extends RawDialogRoute<T> {
-  /// A MDS modal route with entrance and exit animations, modal barrier color, and modal barrier behavior
-  /// (modal is dismissible with a tap on the barrier).
+  /// A Moon Design modal route with entrance and exit animations, modal barrier color, and modal barrier behavior
+  /// that allows dismissing the modal when tapped on the barrier.
   MoonModalRoute({
     super.anchorPoint,
     required super.barrierColor,
@@ -130,15 +131,16 @@ class MoonModal extends StatelessWidget {
   /// The background color of the modal.
   final Color? backgroundColor;
 
-  /// Custom decoration for the modal.
+  /// The custom decoration of the modal.
   final Decoration? decoration;
 
   /// The semantic label for the modal.
   final String? semanticLabel;
 
-  /// The child of the modal.
+  /// The widget to display inside the modal as its content.
   final Widget child;
 
+  /// Creates a Moon Design modal.
   const MoonModal({
     super.key,
     this.borderRadius,

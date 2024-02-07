@@ -91,7 +91,7 @@ class _TextInputStoryState extends State<TextInputStory> {
 
     final hoverBorderColorKnob = context.knobs.nullable.options(
       label: "hoverBorderColor",
-      description: "MoonColors variants for MoonTextInput hover border.",
+      description: "MoonColors variants for MoonTextInput border on hover.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -102,7 +102,7 @@ class _TextInputStoryState extends State<TextInputStory> {
 
     final errorColorKnob = context.knobs.nullable.options(
       label: "errorColor",
-      description: "MoonColors variants for MoonTextInput error.",
+      description: "MoonColors variants for MoonTextInput in error state.",
       enabled: false,
       initial: 0,
       // piccolo

@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonDotIndicatorProperties extends ThemeExtension<MoonDotIndicatorProperties> with DiagnosticableTreeMixin {
-  /// DotIndicator gap between dots.
+  /// The gap between the MoonDotIndicator dots.
   final double gap;
 
-  /// DotIndicator dot size.
+  /// The size of each MoonDotIndicator dot.
   final double size;
 
-  /// DotIndicator transition duration.
+  /// The duration of the MoonDotIndicator transition animation.
   final Duration transitionDuration;
 
-  /// DotIndicator transition curve.
+  /// The curve of the MoonDotIndicator transition animation.
   final Curve transitionCurve;
 
   const MoonDotIndicatorProperties({

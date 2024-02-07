@@ -16,22 +16,22 @@ enum MoonLinearLoaderSize {
 }
 
 class MoonLinearLoader extends StatelessWidget {
-  /// Border radius of the linear loader widget.
+  /// The border radius of the linear loader.
   final BorderRadiusGeometry? borderRadius;
 
-  /// Color of the linear loader widget.
+  /// The color of the linear loader.
   final Color? color;
 
-  /// Background color of the linear loader widget.
+  /// The background color of the linear loader.
   final Color? backgroundColor;
 
-  /// Height of the linear loader widget.
+  /// The height of the linear loader.
   final double? height;
 
-  /// Size of the linear loader widget.
+  /// The size of the linear loader.
   final MoonLinearLoaderSize? linearLoaderSize;
 
-  /// MDS linear loader widget.
+  /// Creates a Moon Design linear loader.
   const MoonLinearLoader({
     super.key,
     this.borderRadius,

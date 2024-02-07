@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with DiagnosticableTreeMixin {
-  /// Tag border radius.
+  /// The border radius of the MoonTag.
   final BorderRadiusGeometry borderRadius;
 
-  /// Space between tag children.
+  /// The horizontal gap between the leading, label and trailing widgets of the MoonTag.
   final double gap;
 
-  /// Tag height.
+  /// The height of the MoonTag.
   final double height;
 
-  /// Tag icon size value.
+  /// The size value of the MoonTag icon.
   final double iconSizeValue;
 
-  /// Padding around tag children.
+  /// The padding of the MoonTag.
   final EdgeInsetsGeometry padding;
 
-  /// Tag text style.
+  /// The text style of the MoonTag.
   final TextStyle textStyle;
 
-  /// Tag upper case text style.
+  /// The upper case text style of the MoonTag.
   final TextStyle upperCaseTextStyle;
 
   const MoonTagSizeProperties({

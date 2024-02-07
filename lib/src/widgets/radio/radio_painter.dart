@@ -10,7 +10,7 @@ class MoonRadioPainter extends ToggleablePainter {
   void paint(Canvas canvas, Size size) {
     final Offset center = (Offset.zero & size).center;
 
-    // Outer circle
+    // Outer circle.
     final Paint paint = Paint()
       ..color = colorPremulLerp(inactiveColor, activeColor, position.value)!
       ..style = PaintingStyle.stroke
@@ -18,7 +18,7 @@ class MoonRadioPainter extends ToggleablePainter {
 
     canvas.drawCircle(center, _kOuterRadius, paint);
 
-    // Inner circle
+    // Inner circle.
     if (!position.isDismissed) {
       paint.style = PaintingStyle.fill;
 

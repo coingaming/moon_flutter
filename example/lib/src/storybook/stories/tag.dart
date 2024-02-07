@@ -87,7 +87,7 @@ class TagStory extends StatelessWidget {
 
     final setUpperCase = context.knobs.boolean(
       label: "isUpperCase",
-      description: "Sets the text style of MoonTag to upper case.",
+      description: "Use upper case text for MoonTag.",
     );
 
     return Center(

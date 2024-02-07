@@ -5,13 +5,13 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonPopoverColors extends ThemeExtension<MoonPopoverColors> with DiagnosticableTreeMixin {
-  /// Popover text color.
+  /// The text color of the MoonPopover.
   final Color textColor;
 
-  /// Popover icon color.
+  /// The icon color of the MoonPopover.
   final Color iconColor;
 
-  /// Popover background color.
+  /// The background color of the MoonPopover.
   final Color backgroundColor;
 
   const MoonPopoverColors({

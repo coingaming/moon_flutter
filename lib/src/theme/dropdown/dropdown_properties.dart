@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonDropdownProperties extends ThemeExtension<MoonDropdownProperties> with DiagnosticableTreeMixin {
-  /// Dropdown border radius.
+  /// The border radius of the MoonDropdown.
   final BorderRadiusGeometry borderRadius;
 
-  /// Dropdown distance to target child widget.
+  /// The distance between the MoonDropdown and the target child widget.
   final double distanceToTarget;
 
-  /// Dropdown transition duration (fade in or out animation).
+  /// The duration of the MoonDropdown transition animation (fade in or out).
   final Duration transitionDuration;
 
-  /// Dropdown transition curve (fade in or out animation).
+  /// The curve of the MoonDropdown transition animation (fade in or out).
   final Curve transitionCurve;
 
-  /// Padding around dropdown content.
+  /// The padding of the MoonDropdown content.
   final EdgeInsetsGeometry contentPadding;
 
-  /// Margin of the dropdown.
+  /// The margin of the MoonDropdown.
   final EdgeInsetsGeometry dropdownMargin;
 
-  /// Dropdown text style.
+  /// The text style of the MoonDropdown.
   final TextStyle textStyle;
 
   const MoonDropdownProperties({

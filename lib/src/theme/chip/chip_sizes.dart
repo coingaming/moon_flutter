@@ -6,13 +6,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonChipSizes extends ThemeExtension<MoonChipSizes> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Small chip properties.
+  /// The properties of the small MoonChip.
   final MoonChipSizeProperties sm;
 
-  /// Medium chip properties.
+  /// The properties of the medium MoonChip.
   final MoonChipSizeProperties md;
 
   MoonChipSizes({

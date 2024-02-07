@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-/// Widget that that will scroll to the top of the ScrollController when tapped on the status bar.
+/// The widget that enables the associated ScrollController to scroll to the top when the status bar is tapped.
 ///
-/// Extracted from Scaffold and used in modal bottom sheet
+/// Extracted from Scaffold and utilized in modal bottom sheets.
 class ScrollToTopStatusBarHandler extends StatefulWidget {
   final ScrollController scrollController;
   final Widget child;
@@ -46,7 +46,8 @@ class ScrollToTopStatusBarState extends State<ScrollToTopStatusBarHandler> {
             builder: (BuildContext context) => GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () => _handleStatusBarTap(context),
-              // iOS accessibility automatically adds scroll-to-top to the clock in the status bar
+              // iOS accessibility features automatically enable a scroll-to-top gesture
+              // for the clock in the status bar.
               excludeFromSemantics: true,
             ),
           ),

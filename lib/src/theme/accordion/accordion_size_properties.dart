@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonAccordionSizeProperties extends ThemeExtension<MoonAccordionSizeProperties> with DiagnosticableTreeMixin {
-  /// Accordion border radius.
+  /// The border radius of the MoonAccordion.
   final BorderRadiusGeometry borderRadius;
 
-  /// Accordion header height.
+  /// The height of the MoonAccordion header.
   final double headerHeight;
 
-  /// Accordion icon size value.
+  /// The size value of the MoonAccordion icon.
   final double iconSizeValue;
 
-  /// Padding around accordion label and icon.
+  /// The padding of the MoonAccordion header.
   final EdgeInsetsGeometry headerPadding;
 
-  /// Accordion header text style.
+  /// The text style of the MoonAccordion header.
   final TextStyle headerTextStyle;
 
-  /// Accordion content text style.
+  /// The text style of the MoonAccordion content.
   final TextStyle contentTextStyle;
 
   const MoonAccordionSizeProperties({

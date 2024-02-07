@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonRadioTheme extends ThemeExtension<MoonRadioTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Radio colors.
+  /// The colors of the MoonRadio.
   final MoonRadioColors colors;
 
-  /// Radio properties.
+  /// The properties of the MoonRadio.
   final MoonRadioProperties properties;
 
   MoonRadioTheme({

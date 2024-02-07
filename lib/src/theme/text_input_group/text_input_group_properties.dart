@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTextInputGroupProperties extends ThemeExtension<MoonTextInputGroupProperties> with DiagnosticableTreeMixin {
-  /// TextInputGroup border radius.
+  /// The border radius of the MoonTextInputGroup.
   final BorderRadiusGeometry borderRadius;
 
-  /// TextInputGroup transition duration.
+  /// The duration of the MoonTextInputGroup transition animation (enable and disable).
   final Duration transitionDuration;
 
-  /// TextInputGroup transition curve.
+  /// The curve of the MoonTextInputGroup transition animation (enable and disable).
   final Curve transitionCurve;
 
-  /// The padding around TextInputGroup helper widget or error builder.
+  /// The padding of the MoonTextInputGroup helper and errorBuilder widgets.
   final EdgeInsetsGeometry helperPadding;
 
-  /// TextInputGroup text padding.
+  /// The padding of the MoonTextInputGroup text.
   final EdgeInsetsGeometry textPadding;
 
-  /// TextInputGroup text style.
+  /// The text style of the MoonTextInputGroup.
   final TextStyle textStyle;
 
-  /// TextInputGroup helper or error text style.
+  /// The text style of the MoonTextInputGroup helper and errorBuilder widgets.
   final TextStyle helperTextStyle;
 
   const MoonTextInputGroupProperties({

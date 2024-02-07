@@ -5,10 +5,10 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCircularProgressColors extends ThemeExtension<MoonCircularProgressColors> with DiagnosticableTreeMixin {
-  /// Circular progress color.
+  /// The color of the MoonCircularProgress.
   final Color color;
 
-  /// Circular progress background color.
+  /// The background color of the MoonCircularProgress.
   final Color backgroundColor;
 
   const MoonCircularProgressColors({

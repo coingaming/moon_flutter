@@ -22,7 +22,7 @@ class _CheckboxStoryState extends State<CheckboxStory> {
   Widget build(BuildContext context) {
     final textColorKnob = context.knobs.nullable.options(
       label: "Text color",
-      description: "MoonColors variants for MoonCheckbox with label text.",
+      description: "MoonColors variants for MoonCheckbox label.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -33,7 +33,7 @@ class _CheckboxStoryState extends State<CheckboxStory> {
 
     final checkColorKnob = context.knobs.nullable.options(
       label: "checkColor",
-      description: "MoonColors variants for MoonCheckbox icon.",
+      description: "MoonColors variants for MoonCheckbox check icon.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -66,7 +66,7 @@ class _CheckboxStoryState extends State<CheckboxStory> {
 
     final borderColorKnob = context.knobs.nullable.options(
       label: "borderColor",
-      description: "MoonColors variants for MoonCheckbox border.",
+      description: "MoonColors variants for unchecked MoonCheckbox border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -82,7 +82,7 @@ class _CheckboxStoryState extends State<CheckboxStory> {
 
     final isDisabled = context.knobs.boolean(
       label: "Disabled",
-      description: "onChanged() is null.",
+      description: "MoonCheckbox onChanged() is null.",
     );
 
     return Padding(
@@ -91,7 +91,7 @@ class _CheckboxStoryState extends State<CheckboxStory> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const TextDivider(
-            text: "Customisable MoonCheckbox",
+            text: "MoonCheckbox",
             paddingTop: 0,
           ),
           MoonCheckbox(
@@ -103,7 +103,7 @@ class _CheckboxStoryState extends State<CheckboxStory> {
             value: checkboxValue,
             onChanged: isDisabled ? null : (bool? newValue) => setState(() => checkboxValue = newValue),
           ),
-          const TextDivider(text: "MoonCheckbox with clickable text"),
+          const TextDivider(text: "MoonCheckbox with label"),
           MoonCheckbox.withLabel(
             context,
             label: "With label",

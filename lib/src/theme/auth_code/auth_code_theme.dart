@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/authcode/authcode_colors.dart';
-import 'package:moon_design/src/theme/authcode/authcode_properties.dart';
+import 'package:moon_design/src/theme/auth_code/auth_code_colors.dart';
+import 'package:moon_design/src/theme/auth_code/auth_code_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// AuthCode colors.
+  /// The colors of the MoonAuthCode.
   final MoonAuthCodeColors colors;
 
-  /// AuthCode properties.
+  /// The properties of the MoonAuthCode.
   final MoonAuthCodeProperties properties;
 
   MoonAuthCodeTheme({

@@ -26,61 +26,69 @@ enum MoonSegmentedControlSize {
 typedef MoonCustomSegmentBuilder = Widget Function(BuildContext context, bool isSelected);
 
 class MoonSegmentedControl extends StatefulWidget {
-  /// Controls whether MoonSegmentedControl is disabled.
+  /// Whether the segmented control is disabled.
   final bool isDisabled;
 
-  /// Controls whether MoonSegmentedControl is expanded and takes up all available space horizontally.
+  /// Whether the segmented control is expanded to its full available width horizontally.
   final bool isExpanded;
 
-  /// The border radius of MoonSegmentedControl.
+  /// The border radius of the segmented control.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The background color of MoonSegmentedControl.
+  /// The background color of the segmented control.
   final Color? backgroundColor;
 
-  /// The gap between MoonSegmentedControl segments.
+  /// The gap between the segmented control segments.
   final double? gap;
 
-  /// The height of the MoonSegmentedControl.
+  /// The height of the segmented control.
   final double? height;
 
-  /// The width of the MoonSegmentedControl.
+  /// The width of the segmented control.
   final double? width;
 
-  /// The transition duration of MoonSegmentedControl.
+  /// The duration of the segmented control transition animation.
   final Duration? transitionDuration;
 
-  /// The transition curve of MoonSegmentedControl.
+  /// The curve of the segmented control transition animation.
   final Curve? transitionCurve;
 
-  /// The padding of the MoonSegmentedControl.
+  /// The padding of the segmented control.
   final EdgeInsetsGeometry? padding;
 
-  /// The index of initially selected segment. If [tabController] is provided,
-  /// then [initialIndex] is ignored and [tabController] initial index is used instead.
-  /// To update the segment index externally, use [tabController].
+  /// The index of the initially selected segment.
+  /// This property is overridden by the [tabController]'s initial index if the [tabController] is provided.
+  /// For external updates to the segment index, use [tabController].
   final int initialIndex;
 
-  /// The size of the MoonSegmentedControl.
+  /// The size of the segmented control.
   final MoonSegmentedControlSize? segmentedControlSize;
 
-  /// Custom decoration for the MoonSegmentedControl.
+  /// The custom decoration of the segmented control.
   final Decoration? decoration;
 
-  /// External controller for MoonSegmentedControl segment selection and animation state.
-  /// If [tabController] is provided, then [initialIndex] is ignored and [tabController] initial index is used instead.
+  /// The external controller for managing segment selection and animation in segmented control.
+  /// If tabController is provided, then [initialIndex] is ignored and tabController's index is used instead.
   final TabController? tabController;
 
-  /// Callback that returns current selected segment index.
+  /// The callback that returns the index of the currently selected segment.
   final ValueChanged<int>? onSegmentChanged;
 
-  /// The children of MoonSegmentedControl. At least one child is required.
+  /// The list of segments to display as the children of the segmented control.
+  /// At least one child is required when this property is used.
+  /// Cannot be used in conjunction with the [customSegments] property, one of them must be null.
   final List<Segment>? segments;
 
-  /// The custom children of MoonSegmentedControl. At least one child is required.
+  /// The list of custom segments to display as the children of the segmented control.
+  /// At least one child is required when this property is used.
+  /// Cannot be used in conjunction with the [segments] property, one of them must be null.
   final List<MoonCustomSegmentBuilder>? customSegments;
 
-  /// MDS SegmentedControl widget.
+  /// Creates a Moon Design segmented control.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonSegmentedControl.custom], Moon Design custom segmented control.
   const MoonSegmentedControl({
     super.key,
     this.isDisabled = false,
@@ -103,7 +111,7 @@ class MoonSegmentedControl extends StatefulWidget {
         assert(segments != null && segments.length > 0),
         customSegments = null;
 
-  /// MDS custom SegmentedControl widget.
+  /// Creates a Moon Design custom segmented control.
   const MoonSegmentedControl.custom({
     super.key,
     this.isDisabled = false,

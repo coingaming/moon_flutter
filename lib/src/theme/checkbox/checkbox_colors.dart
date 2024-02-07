@@ -5,19 +5,19 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCheckboxColors extends ThemeExtension<MoonCheckboxColors> with DiagnosticableTreeMixin {
-  /// Checkbox active color.
+  /// The background color of the checked MoonCheckbox.
   final Color activeColor;
 
-  /// Checkbox border color.
+  /// The border color of the unchecked MoonCheckbox.
   final Color borderColor;
 
-  /// Checkbox icon color.
+  /// The color of the check icon when the MoonCheckbox is checked.
   final Color checkColor;
 
-  /// Checkbox inactive color.
+  /// The background color of the unchecked MoonCheckbox.
   final Color inactiveColor;
 
-  /// Checkbox text color.
+  /// The text color of the MoonCheckbox with label.
   final Color textColor;
 
   const MoonCheckboxColors({

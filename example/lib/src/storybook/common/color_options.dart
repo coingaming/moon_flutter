@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-// The below combination of "indexes" and colors in the colorTable() LUT is to bypass the stale closure that the knob
-// would otherwise have.
+// The combination of "indexes" and colors in the colorTable() look-up table (LUT) is designed to circumvent
+// the issue of a stale closure that would occur with the knob otherwise.
 
-/// Index of the color options.
+/// The index of the color options.
 List<Option<int>> colorOptions = const [
   Option(label: "piccolo", value: 0),
   Option(label: "hit", value: 1),
@@ -50,7 +50,7 @@ List<Option<int>> colorOptions = const [
   Option(label: "transparent", value: 39),
 ];
 
-/// LUT for the color options.
+/// The look-up table for the color options.
 List<Color?> colorTable(BuildContext context) => [
       context.moonColors!.piccolo,
       context.moonColors!.hit,

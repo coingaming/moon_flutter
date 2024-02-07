@@ -11,13 +11,13 @@ class ToastStory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final customLabelTextKnob = context.knobs.text(
-      label: "Toast label text",
-      initial: "This is a custom MoonToast text",
+      label: "MoonToast label text",
+      initial: "Custom MoonToast text",
     );
 
     final toastAlignmentKnob = context.knobs.nullable.options(
       label: "toastAlignment",
-      description: "The alignment (position) of MoonToast.",
+      description: "Alignment (position) for MoonToast.",
       enabled: false,
       initial: Alignment.bottomCenter,
       options: const [
@@ -35,7 +35,7 @@ class ToastStory extends StatelessWidget {
 
     final toastVariantKnob = context.knobs.nullable.options(
       label: "variant",
-      description: "The color variant of MoonToast.",
+      description: "The color variant for MoonToast.",
       enabled: false,
       initial: MoonToastVariant.original,
       options: const [
@@ -87,7 +87,7 @@ class ToastStory extends StatelessWidget {
 
     final displayDurationKnob = context.knobs.nullable.sliderInt(
       label: "displayDuration",
-      description: "The duration of showing MoonToast.",
+      description: "Display duration for MoonToast.",
       enabled: false,
       initial: 3,
       min: 1,
@@ -96,7 +96,7 @@ class ToastStory extends StatelessWidget {
 
     final widthKnob = context.knobs.nullable.slider(
       label: "width",
-      description: "The width of MoonToast. If null the toast will be as wide as its children.",
+      description: "Width for MoonToast. If null, the toast will be as wide as its children.",
       enabled: false,
       initial: 230,
       max: MediaQuery.of(context).size.width,
@@ -104,13 +104,12 @@ class ToastStory extends StatelessWidget {
 
     final isPersistentKnob = context.knobs.boolean(
       label: "isPersistent",
-      description:
-          "Whether the toast is persistent across screens (this will not behave as expected only in Storybook).",
+      description: "Whether MoonToast is persistent across screens (will not behave as expected only in Storybook).",
     );
 
     final useSafeAreaKnob = context.knobs.boolean(
       label: "useSafeArea",
-      description: "Whether the toast respects the SafeArea (eg takes into account notches and native system bars)",
+      description: "Whether MoonToast respects the SafeArea (takes into account notches and native system bars).",
       initial: true,
     );
 

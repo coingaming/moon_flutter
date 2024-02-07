@@ -1,57 +1,57 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:moon_design/moon_design.dart';
 
-import 'package:moon_design/src/theme/effects/controls_effects.dart';
-import 'package:moon_design/src/theme/effects/focus_effects.dart';
-import 'package:moon_design/src/theme/effects/hover_effects.dart';
+import 'package:moon_design/src/theme/effects/control_effect.dart';
+import 'package:moon_design/src/theme/effects/focus_effect.dart';
+import 'package:moon_design/src/theme/effects/hover_effect.dart';
+import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonEffectsTheme extends ThemeExtension<MoonEffectsTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Control widgets focus effect.
-  final MoonFocusEffects controlFocusEffect;
+  /// The focus effect properties of the control widgets.
+  final MoonFocusEffect controlFocusEffect;
 
-  /// Control widgets hover effect.
-  final MoonHoverEffects controlHoverEffect;
+  /// The hover effect properties of the control widgets.
+  final MoonHoverEffect controlHoverEffect;
 
-  /// Control widgets focus effect.
-  final MoonControlsEffects controlPulseEffect;
+  /// The pulse effect properties of the control widgets.
+  final MoonControlEffect controlPulseEffect;
 
-  /// Control widgets scale effect.
-  final MoonControlsEffects controlScaleEffect;
+  /// The scale effect properties of the control widgets.
+  final MoonControlEffect controlScaleEffect;
 
   MoonEffectsTheme({
     required this.tokens,
-    MoonFocusEffects? controlFocusEffect,
-    MoonHoverEffects? controlHoverEffect,
-    MoonControlsEffects? controlPulseEffect,
-    MoonControlsEffects? controlScaleEffect,
+    MoonFocusEffect? controlFocusEffect,
+    MoonHoverEffect? controlHoverEffect,
+    MoonControlEffect? controlPulseEffect,
+    MoonControlEffect? controlScaleEffect,
   })  : controlFocusEffect = controlFocusEffect ??
-            MoonFocusEffects(
+            MoonFocusEffect(
               effectColor: tokens.colors.bulma.withOpacity(0.25),
               effectExtent: 4,
               effectDuration: tokens.transitions.defaultTransitionDuration,
               effectCurve: tokens.transitions.defaultTransitionCurve,
             ),
         controlHoverEffect = controlHoverEffect ??
-            MoonHoverEffects(
+            MoonHoverEffect(
               primaryHoverColor: tokens.colors.heles,
               secondaryHoverColor: tokens.colors.jiren,
               hoverDuration: tokens.transitions.defaultTransitionDuration,
               hoverCurve: tokens.transitions.defaultTransitionCurve,
             ),
         controlPulseEffect = controlPulseEffect ??
-            MoonControlsEffects(
+            MoonControlEffect(
               effectColor: tokens.colors.piccolo,
               effectDuration: const Duration(milliseconds: 1400),
               effectCurve: tokens.transitions.defaultTransitionCurve,
               effectExtent: 24,
             ),
         controlScaleEffect = controlScaleEffect ??
-            MoonControlsEffects(
+            MoonControlEffect(
               effectDuration: tokens.transitions.defaultTransitionDuration,
               effectCurve: tokens.transitions.defaultTransitionCurve,
               effectScalar: 0.95,
@@ -60,10 +60,10 @@ class MoonEffectsTheme extends ThemeExtension<MoonEffectsTheme> with Diagnostica
   @override
   MoonEffectsTheme copyWith({
     MoonTokens? tokens,
-    MoonFocusEffects? controlFocusEffect,
-    MoonHoverEffects? controlHoverEffect,
-    MoonControlsEffects? controlPulseEffect,
-    MoonControlsEffects? controlScaleEffect,
+    MoonFocusEffect? controlFocusEffect,
+    MoonHoverEffect? controlHoverEffect,
+    MoonControlEffect? controlPulseEffect,
+    MoonControlEffect? controlScaleEffect,
   }) {
     return MoonEffectsTheme(
       tokens: tokens ?? this.tokens,
@@ -93,9 +93,9 @@ class MoonEffectsTheme extends ThemeExtension<MoonEffectsTheme> with Diagnostica
     properties
       ..add(DiagnosticsProperty("type", "MoonEffectsTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
-      ..add(DiagnosticsProperty<MoonControlsEffects>("controlScaleEffect", controlScaleEffect))
-      ..add(DiagnosticsProperty<MoonControlsEffects>("controlPulseEffect", controlPulseEffect))
-      ..add(DiagnosticsProperty<MoonFocusEffects>("controlFocusEffect", controlFocusEffect))
-      ..add(DiagnosticsProperty<MoonHoverEffects>("controlHoverEffect", controlHoverEffect));
+      ..add(DiagnosticsProperty<MoonControlEffect>("controlScaleEffect", controlScaleEffect))
+      ..add(DiagnosticsProperty<MoonControlEffect>("controlPulseEffect", controlPulseEffect))
+      ..add(DiagnosticsProperty<MoonFocusEffect>("controlFocusEffect", controlFocusEffect))
+      ..add(DiagnosticsProperty<MoonHoverEffect>("controlHoverEffect", controlHoverEffect));
   }
 }

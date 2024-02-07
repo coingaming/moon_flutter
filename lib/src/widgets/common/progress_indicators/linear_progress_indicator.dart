@@ -4,14 +4,16 @@ import 'package:moon_design/src/widgets/common/progress_indicators/base_progress
 import 'package:moon_design/src/widgets/common/progress_indicators/painters/linear_progress_indicator_painter.dart';
 
 class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
-  /// The border radius of the linear progress indicator.
+  /// The container radius of the linear progress indicator.
   final BorderRadiusGeometry containerRadius;
+
+  /// The progress radius of the linear progress indicator.
   final BorderRadiusGeometry progressRadius;
 
   /// The minimum height of the linear progress indicator.
   final double minHeight;
 
-  /// Creates a linear progress indicator.
+  /// Creates a Moon Design linear progress indicator.
   const MoonLinearProgressIndicator({
     super.key,
     super.value,
@@ -25,7 +27,7 @@ class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
     this.progressRadius = BorderRadius.zero,
   }) : assert(minHeight > 0);
 
-  /// Color of the track being filled by the linear indicator.
+  /// The color of the linear track that forms the background for the linear progress indicator.
   @override
   Color get backgroundColor => super.backgroundColor;
 
@@ -41,18 +43,19 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       duration: const Duration(milliseconds: _kIndeterminateLinearDuration),
       vsync: this,
     );
-    if (widget.value == null) {
-      _controller.repeat();
-    }
+
+    if (widget.value == null) _controller.repeat();
   }
 
   @override
   void didUpdateWidget(MoonLinearProgressIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (widget.value == null && !_controller.isAnimating) {
       _controller.repeat();
     } else if (widget.value != null && _controller.isAnimating) {
@@ -63,12 +66,13 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
   @override
   void dispose() {
     _controller.dispose();
+
     super.dispose();
   }
 
   Widget buildStaticProgressIndicator(BuildContext context, double animationValue, TextDirection textDirection) {
-    final resolvedContainerRadius = widget.containerRadius.resolve(Directionality.of(context));
-    final resolvedProgressRadius = widget.progressRadius.resolve(Directionality.of(context));
+    final BorderRadius resolvedContainerRadius = widget.containerRadius.resolve(Directionality.of(context));
+    final BorderRadius resolvedProgressRadius = widget.progressRadius.resolve(Directionality.of(context));
 
     return widget.buildSemanticsWrapper(
       context: context,
@@ -83,9 +87,9 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
               backgroundColor: widget.backgroundColor,
               valueColor: widget.color,
               value: widget.value,
-              // may be null
+              // May be null.
               animationValue: animationValue,
-              // ignored if widget.value is not null
+              // Ignored if 'widget.value' is not null.
               containerRadius: resolvedContainerRadius,
               progressRadius: resolvedProgressRadius,
               textDirection: textDirection,

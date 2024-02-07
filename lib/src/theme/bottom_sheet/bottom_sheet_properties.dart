@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonBottomSheetProperties extends ThemeExtension<MoonBottomSheetProperties> with DiagnosticableTreeMixin {
-  /// BottomSheet border radius.
+  /// The border radius of the MoonBottomSheet.
   final BorderRadiusGeometry borderRadius;
 
-  /// BottomSheet transition duration.
+  /// The duration of the MoonBottomSheet transition animation (slide in or out).
   final Duration transitionDuration;
 
-  /// BottomSheet transition curve.
+  /// The curve of the MoonBottomSheet transition animation (slide in or out).
   final Curve transitionCurve;
 
-  /// BottomSheet text style.
+  /// The text style of the MoonBottomSheet.
   final TextStyle textStyle;
 
   const MoonBottomSheetProperties({

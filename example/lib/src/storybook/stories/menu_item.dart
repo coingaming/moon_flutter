@@ -131,7 +131,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
               ),
               content: showContentKnob
                   ? Text(
-                      "Multi-line default content field as an example for menu item component.",
+                      "Multi-line default content field as an example for MoonMenuItem component.",
                       style: TextStyle(color: contentTextColor),
                     )
                   : null,

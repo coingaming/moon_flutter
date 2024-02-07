@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonCircularProgressTheme extends ThemeExtension<MoonCircularProgressTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Circular progress colors.
+  /// The colors of the MoonCircularProgress.
   final MoonCircularProgressColors colors;
 
-  /// Circular progress sizes.
+  /// The sizes of the MoonCircularProgress.
   final MoonCircularProgressSizes sizes;
 
   MoonCircularProgressTheme({

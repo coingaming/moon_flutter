@@ -142,7 +142,7 @@ class _AccordionStoryState extends State<AccordionStory> {
 
     final showBorderKnob = context.knobs.boolean(
       label: "showBorder",
-      description: "Show border around MoonAccordion.",
+      description: "Show border for MoonAccordion.",
     );
 
     final showDividerKnob = context.knobs.boolean(
@@ -153,7 +153,7 @@ class _AccordionStoryState extends State<AccordionStory> {
 
     final showShadowKnob = context.knobs.boolean(
       label: "Show shadows",
-      description: "Show shadows under MoonAccordion.",
+      description: "Show shadows for MoonAccordion.",
       initial: true,
     );
 

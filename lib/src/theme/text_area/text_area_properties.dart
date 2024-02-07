@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with DiagnosticableTreeMixin {
-  /// TextArea border radius.
+  /// The border radius of the MoonTextArea.
   final BorderRadiusGeometry borderRadius;
 
-  /// TextArea transition duration.
+  /// The duration of the MoonTextArea transition animation (enable and disable).
   final Duration transitionDuration;
 
-  /// TextArea transition curve.
+  /// The curve of the MoonTextArea transition animation (enable and disable).
   final Curve transitionCurve;
 
-  /// The padding around TextArea helper widget or error builder.
+  /// The padding of the MoonTextArea helper and errorBuilder widgets.
   final EdgeInsetsGeometry helperPadding;
 
-  /// TextArea text padding.
+  /// The padding of the MoonTextArea text.
   final EdgeInsetsGeometry textPadding;
 
-  /// TextArea text style.
+  /// The text style of the MoonTextArea.
   final TextStyle textStyle;
 
-  /// TextArea helper or error text style.
+  /// The text style of the MoonTextArea helper and errorBuilder widgets.
   final TextStyle helperTextStyle;
 
   const MoonTextAreaProperties({

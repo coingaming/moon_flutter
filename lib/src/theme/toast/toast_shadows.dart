@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonToastShadows extends ThemeExtension<MoonToastShadows> with DiagnosticableTreeMixin {
-  /// Toast shadows.
+  /// The list of shadows applied to the MoonToast.
   final List<BoxShadow> toastShadows;
 
   const MoonToastShadows({

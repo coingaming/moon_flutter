@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonAccordionProperties extends ThemeExtension<MoonAccordionProperties> with DiagnosticableTreeMixin {
-  /// Accordion transition duration.
+  /// The duration of the MoonAccordion transition animation (expand and collapse).
   final Duration transitionDuration;
 
-  /// Accordion transition curve.
+  /// The curve of the MoonAccordion transition animation (expand and collapse).
   final Curve transitionCurve;
 
   const MoonAccordionProperties({

@@ -12,7 +12,7 @@ class LinearLoaderStory extends StatelessWidget {
   Widget build(BuildContext context) {
     final linearLoaderSizeKnob = context.knobs.nullable.options(
       label: "linearLoaderSize",
-      description: "Size variants for LinearLoader.",
+      description: "Size variants for MoonLinearLoader.",
       enabled: false,
       initial: MoonLinearLoaderSize.x4s,
       options: const [
@@ -26,7 +26,7 @@ class LinearLoaderStory extends StatelessWidget {
 
     final loaderColorKnob = context.knobs.nullable.options(
       label: "color",
-      description: "MoonColors variants for LinearLoader color.",
+      description: "MoonColors variants for MoonLinearLoader.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -37,7 +37,7 @@ class LinearLoaderStory extends StatelessWidget {
 
     final loaderBackgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
-      description: "MoonColors variants for LinearLoader background.",
+      description: "MoonColors variants for MoonLinearLoader background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -48,7 +48,7 @@ class LinearLoaderStory extends StatelessWidget {
 
     final borderRadiusKnob = context.knobs.nullable.sliderInt(
       label: "borderRadius",
-      description: "Border radius for LinearLoader.",
+      description: "Border radius for MoonLinearLoader.",
       enabled: false,
       initial: 8,
       max: 32,

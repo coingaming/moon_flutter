@@ -5,25 +5,25 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with DiagnosticableTreeMixin {
-  /// TextArea background color.
+  /// The background color of the MoonTextArea.
   final Color backgroundColor;
 
-  /// TextArea active border color.
+  /// The border color of the active or focused MoonTextArea.
   final Color activeBorderColor;
 
-  /// TextArea inactive border color.
+  /// The border color of the inactive MoonTextArea.
   final Color inactiveBorderColor;
 
-  /// TextArea error color.
+  /// The color of the MoonTextArea in error state.
   final Color errorColor;
 
-  /// TextArea hover border color.
+  /// The border color of the MoonTextArea on hover.
   final Color hoverBorderColor;
 
-  /// TextArea text color.
+  /// The text color of the MoonTextArea.
   final Color textColor;
 
-  /// TextArea helper text color.
+  /// The text color of the MoonTextArea helper and errorBuilder widgets.
   final Color helperTextColor;
 
   const MoonTextAreaColors({

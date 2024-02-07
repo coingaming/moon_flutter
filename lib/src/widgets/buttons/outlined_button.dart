@@ -6,16 +6,16 @@ class MoonOutlinedButton extends StatelessWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// Whether this button should be focusable.
+  /// Whether the button is focusable.
   final bool isFocusable;
 
-  /// Whether this button should ensure that it has a minimal touch target size.
+  /// Whether to ensure a minimum touch target size for the button.
   final bool ensureMinimalTouchTargetSize;
 
-  /// Whether this button should be full width.
+  /// Whether the button takes up the full width of its parent container.
   final bool isFullWidth;
 
-  /// Whether this button should show a pulse effect.
+  /// Whether to show a continuous pulsating effect.
   final bool showPulseEffect;
 
   /// The border radius of the button.
@@ -24,23 +24,23 @@ class MoonOutlinedButton extends StatelessWidget {
   /// The border color of the button.
   final Color? borderColor;
 
+  /// The custom decoration of the button.
+  final Decoration? decoration;
+
   /// The height of the button.
   final double? height;
 
   /// The width of the button.
   final double? width;
 
-  /// The minimum size of the touch target.
+  /// The minimum size of the button touch target.
   final double minTouchTargetSize;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
   /// The size of the button.
   final MoonButtonSize? buttonSize;
-
-  /// Custom decoration for the button.
-  final Decoration? decoration;
 
   /// The semantic label for the button.
   final String? semanticLabel;
@@ -51,21 +51,22 @@ class MoonOutlinedButton extends StatelessWidget {
   /// The callback that is called when the button is long-pressed.
   final VoidCallback? onLongPress;
 
-  /// The widget in the leading slot of the button.
+  /// The widget to display before the [label] widget of the button.
   final Widget? leading;
 
-  /// The widget in the label slot of the button.
+  /// The primary content of the button widget.
   final Widget? label;
 
-  /// The widget in the trailing slot of the button.
+  /// The widget to display after the [label] widget of the button.
   final Widget? trailing;
 
-  /// MDS outlined button variant.
+  /// Creates a Moon Design outlined button.
   ///
   /// See also:
   ///
-  ///   * [MoonFilledButton], MDS filled button.
-  ///   * [MoonTextButton], MDS text button.
+  ///   * [MoonFilledButton], Moon Design filled button.
+  ///   * [MoonTextButton], Moon Design text button.
+  ///   * [MoonButton.icon], Moon Design icon button.
   const MoonOutlinedButton({
     super.key,
     this.autofocus = false,
@@ -75,12 +76,12 @@ class MoonOutlinedButton extends StatelessWidget {
     this.showPulseEffect = false,
     this.borderRadius,
     this.borderColor,
+    this.decoration,
     this.height,
     this.width,
     this.minTouchTargetSize = 40,
     this.focusNode,
     this.buttonSize,
-    this.decoration,
     this.semanticLabel,
     this.onTap,
     this.onLongPress,

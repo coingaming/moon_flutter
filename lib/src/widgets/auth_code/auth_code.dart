@@ -29,182 +29,184 @@ enum ErrorAnimationType {
 typedef MoonAuthCodeErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
 class MoonAuthCode extends StatefulWidget {
-  /// Shape of auth input field.
+  /// The shape of the auth code input field.
   final AuthFieldShape? authFieldShape;
 
-  /// Controls the keyboard dismissal on last input enter.
+  /// Whether to automatically dismiss the keyboard when the last input is entered.
   final bool autoDismissKeyboard;
 
-  /// {@macro flutter.widgets.Focus.autofocus}.
+  /// {@macro flutter.widgets.Focus.autofocus}
   final bool autoFocus;
 
-  /// Controls whether to auto unfocus.
+  /// Whether to automatically unfocus the auth code.
   final bool autoUnfocus;
 
-  /// Controls whether MoonAuthCode widget is enabled.
+  /// Whether the auth code is enabled.
   final bool enabled;
 
-  /// Controls whether to show fill color for inputs.
+  /// Whether to enable the fill color for the auth code input fields.
   final bool enableInputFill;
 
-  /// When set to true, all characters in the auth input field are replaced by [obscuringCharacter].
+  /// Whether to replace all typed characters in the auth code input fields with the [obscuringCharacter].
   final bool obscureText;
 
-  /// Controls whether typed character should be briefly shown before being obscured.
+  /// Whether to briefly display the typed character before obscuring it with the [obscuringCharacter].
   final bool peekWhenObscuring;
 
-  /// Controls if cursor in selected auth input field should be shown.
+  /// Whether to show the cursor in the selected auth code input field.
   final bool showAuthFieldCursor;
 
-  /// Controls if haptic feedback is used.
+  /// Whether to use haptic feedback (vibration) for auth code error state.
   final bool useHapticFeedback;
 
-  /// Border radius of auth input field.
+  /// The border radius of the auth code input field.
   final BorderRadiusGeometry? borderRadius;
 
-  /// Color of the auth input field cursor.
+  /// The cursor color of the auth code input field.
   final Color? authFieldCursorColor;
 
-  /// Border color of the selected auth input field.
+  /// The border color of the selected auth code input field.
   final Color? selectedBorderColor;
 
-  /// Border color of the active auth input field which has input.
+  /// The border color of the auth code input field with input.
   final Color? activeBorderColor;
 
-  /// Border color of the inactive auth input field, which does not have input.
+  /// The border color of the auth code input field without input.
   final Color? inactiveBorderColor;
 
-  /// Border color of the auth input field when in error mode.
+  /// The border color of the auth code input field in error state.
   final Color? errorBorderColor;
 
-  /// Fill color of the selected auth input field.
+  /// The fill color of the selected auth code input field.
   ///
   /// [enableInputFill] has to be set true.
   final Color? selectedFillColor;
 
-  /// Fill color of the active auth input field which has input.
+  /// The fill color of the auth code input field with input.
   ///
   /// [enableInputFill] has to be set true.
   final Color? activeFillColor;
 
-  /// Fill color of the inactive auth input field which does not have input.
+  /// The fill color of the auth code input field without input.
   ///
   /// [enableInputFill] has to be set true.
   final Color? inactiveFillColor;
 
-  /// Border width for the auth input field.
+  /// The border width of the auth code input field.
   final double? borderWidth;
 
-  /// The opacity value of the AuthCode when disabled.
+  /// The opacity value of the auth code when [enabled] is false.
   final double? disabledOpacityValue;
 
-  /// Horizontal space between input fields.
+  /// The horizontal gap between the auth code input fields.
   final double? gap;
 
-  /// Height of the auth input field.
+  /// The height of the auth code input field.
   final double? height;
 
-  /// Width of the auth input field.
+  /// The width of the auth code input field.
   final double? width;
 
-  /// AuthCode input field animation duration.
+  /// The duration of the auth code input field transition animation.
   final Duration? animationDuration;
 
-  /// AuthCode error animation duration.
+  /// The duration of the auth code error state animation.
   final Duration? errorAnimationDuration;
 
-  /// Peek duration if [peekWhenObscuring] is set to true.
+  /// The duration to display the typed character before it is obscured with [obscuringCharacter].
+  /// The [peekWhenObscuring] has to be set to true.
   final Duration? peekDuration;
 
-  /// AuthCode input field animation curve.
+  /// The curve of the auth code input field transition animation.
   final Curve? animationCurve;
 
-  /// AuthCode error animation curve.
+  /// The curve of the auth code error state animation.
   final Curve? errorAnimationCurve;
 
-  /// Animation type for validation error. Default is [ErrorAnimationType.noAnimation].
+  /// The animation type for the auth code validation error.
   final ErrorAnimationType errorAnimationType;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
-  /// Count of auth input fields.
+  /// The total number of input fields to build for the auth code.
   final int authInputFieldCount;
 
-  /// Box shadow for auth input field.
+  /// The list of shadows applied to the auth code input field.
   final List<BoxShadow>? boxShadows;
 
-  /// Box shadow for selected auth input field.
+  /// The list of shadows applied to the auth code input field with input.
   final List<BoxShadow>? activeBoxShadows;
 
-  /// Box shadow for inactive auth input field.
+  /// The list of shadows applied to the auth code input field without input.
   final List<BoxShadow>? inActiveBoxShadows;
 
-  /// Controls how auth input fields are aligned on the main axis.
+  /// The placement of the auth code input fields along the main axis.
   final MainAxisAlignment mainAxisAlignment;
 
-  /// Error text can be used to force Authcode to be in error state (useful for async errors).
+  /// The error text can be used to force authentication into an error state (useful for asynchronous errors).
   ///
-  /// Note that validator errors have precedence over passed in [errorText].
+  /// The validator errors take precedence over the provided [errorText].
   final String? errorText;
 
-  /// Displays a hint or a placeholder in the input field if it's value is empty.
+  /// The character or placeholder to display in the auth code input field when its value is empty.
   final String? hintCharacter;
 
-  /// Character used for obscuring text if [obscureText] is true.
+  /// The character to use to obscure the text when [obscureText] is true.
   ///
-  /// Defaults to the character U+2022 BULLET (•).
+  /// Defaults to Unicode character U+2022 BULLET (•).
   final String obscuringCharacter;
 
-  /// Semantic label for MoonAuthCode.
+  /// The semantic label for the auth code.
   final String? semanticLabel;
 
-  /// An action user has requested the text input control to perform.
+  /// The action to perform by the text input control.
   final TextInputAction textInputAction;
 
-  /// [TextInputType] for MoonAuthCode.
+  /// The keyboard [TextInputType] for the auth code.
   final TextInputType keyboardType;
 
-  /// Text style of [hintCharacter].
+  /// The text style of the [hintCharacter].
   final TextStyle? hintStyle;
 
-  /// MoonAuthCode text style.
+  /// The text style of the auth code.
   final TextStyle? textStyle;
 
-  /// MoonAuthCode error text style.
+  /// The text style of the auth code in error state.
   final TextStyle? errorTextStyle;
 
-  /// [TextEditingController] for an editable text field.
+  /// The [TextEditingController] used to edit the text in the auth code input field.
   final TextEditingController? textController;
 
-  /// Validator for the [TextFormField].
+  /// The input text validator for the auth code [TextFormField].
+  /// The validator errors take precedence over the provided [errorText].
   final FormFieldValidator<String> validator;
 
-  /// Returns current auth input text.
+  /// The callback that is called when the auth code input text changes.
   final ValueChanged<String>? onChanged;
 
-  /// Returns auth input text when all auth input fields are filled.
+  /// The callback that is called when all the auth code input fields are filled.
   final ValueChanged<String>? onCompleted;
 
-  /// Returns auth input text on done/next action on the keyboard.
+  /// The callback that is called when the 'done' or 'next' action is triggered on the keyboard.
   final ValueChanged<String>? onSubmitted;
 
-  /// [onEditingComplete] callback runs when editing is finished.
+  /// The [onEditingComplete] callback runs when editing is finished.
   /// It differs from [onSubmitted] by having a default value which
   /// updates [textController] and yields keyboard focus.
   ///
-  /// Set this to empty function if keyboard should not close automatically on done/next press.
+  /// Set this to empty function if keyboard should not close automatically on 'done' or 'next' press.
   final VoidCallback? onEditingComplete;
 
-  /// Builder for the error widget.
+  /// A builder to build the auth code error widget.
   final MoonAuthCodeErrorBuilder errorBuilder;
 
-  /// Widget used to obscure text.
+  /// The widget to obscure the auth code input field text.
   ///
   /// Overrides the [obscuringCharacter].
   final Widget? obscuringWidget;
 
-  /// MDS authcode widget.
+  /// Creates a Moon Design auth code.
   const MoonAuthCode({
     super.key,
     this.authFieldShape = AuthFieldShape.box,
@@ -339,8 +341,8 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
     _textEditingController = widget.textController ?? TextEditingController();
 
     _textEditingController.addListener(() {
-      // We use custom error builder and thus need to validate input manually to show validation error.
-      // _validateInput() returns error String in case of error, otherwise null.
+      // Since we use custom error builder, manual input validation is required to trigger validation error.
+      // The _validateInput() method returns an error String in case of an validation error, otherwise null.
       if (_validateInput() != null) {
         if (widget.errorAnimationType == ErrorAnimationType.shake) {
           _errorAnimationController!.forward();
@@ -371,7 +373,7 @@ class _MoonAuthCodeState extends State<MoonAuthCode> with TickerProviderStateMix
       _updateTextField(currentText);
     });
 
-    // Update UI if a default value is set for TextEditingController
+    // If a default value is set for the TextEditingController, update the text field initial value accordingly.
     if (_textEditingController.text.isNotEmpty) _updateTextField(_textEditingController.text);
   }
 
