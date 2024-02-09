@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> with DiagnosticableTreeMixin {
-  /// Button border radius.
+  /// The border radius of the MoonButton.
   final BorderRadiusGeometry borderRadius;
 
-  /// Space between button children.
+  /// The gap between the leading, label and trailing widgets of the MoonButton.
   final double gap;
 
-  /// Button height.
+  /// The height of the MoonButton.
   final double height;
 
-  /// Button icon size value.
+  /// The size value of the MoonButton icon.
   final double iconSizeValue;
 
-  /// Padding around button children.
+  /// The padding of the MoonButton.
   final EdgeInsetsGeometry padding;
 
-  /// Button text style.
+  /// The text style of the MoonButton.
   final TextStyle textStyle;
 
   const MoonButtonSizeProperties({

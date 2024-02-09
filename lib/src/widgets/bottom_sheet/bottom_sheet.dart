@@ -10,6 +10,7 @@ import 'package:moon_design/src/utils/extensions.dart';
 import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
+import 'package:moon_design/src/widgets/bottom_sheet/modal_bottom_sheet.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/utils/bottom_sheet_custom_scroll_physics.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/utils/bottom_sheet_suspended_curve.dart';
 import 'package:moon_design/src/widgets/bottom_sheet/utils/scroll_to_top_status_bar.dart';
@@ -20,15 +21,15 @@ const double _closeProgressThreshold = 0.6;
 
 typedef WidgetWithChildBuilder = Widget Function(BuildContext context, Animation<double> animation, Widget child);
 
-/// A Moon Design bottom sheet.
+/// The Moon Design bottom sheet.
 ///
-/// The [MoonBottomSheet] widget itself is rarely used directly. Instead, prefer to create a modal bottom sheet
-/// with [showMoonBottomSheet].
+/// The MoonBottomSheet widget itself is rarely used directly.
+/// Instead, prefer to create a modal bottom sheet with [showMoonModalBottomSheet].
 class MoonBottomSheet extends StatefulWidget {
-  /// If true, the bottom sheet can be dragged up and down and dismissed by swiping downwards.
+  /// Whether the bottom sheet can be dragged vertically and dismissed by swiping downwards.
   final bool enableDrag;
 
-  /// Forces widget to fill the maximum size of the viewport. If false, it will fit to the content of the widget.
+  /// Whether the bottom sheet is expanded to its full available width or resizes to fit its content.
   final bool isExpanded;
 
   /// The border radius of the bottom sheet.
@@ -37,49 +38,52 @@ class MoonBottomSheet extends StatefulWidget {
   /// The background color of the bottom sheet.
   final Color? backgroundColor;
 
-  /// Custom decoration for the bottom sheet.
+  /// The custom decoration of the bottom sheet.
   final Decoration? decoration;
 
-  /// Determines how fast the sheet should be flinged before closing.
+  /// The minimum velocity required for the bottom sheet to close when flung.
   final double minFlingVelocity;
 
-  /// This parameter specifies when the bottom sheet will be dismissed when user drags it.
+  /// The threshold distance that the bottom sheet must be dragged to before it triggers dismissal.
   final double closeProgressThreshold;
 
-  /// This bottom sheet height.
+  /// The fixed height of the bottom sheet or null to adjust to the content height.
   final double? height;
 
-  /// The duration of the animation for showing and dismissing the bottom sheet.
+  /// The duration of the bottom sheet transition animation (slide in or out).
   final Duration? transitionDuration;
 
-  /// The curve used by the animation for showing and dismissing the bottom sheet.
+  /// The curve of the bottom sheet transition animation (slide in or out).
   final Curve? transitionCurve;
 
   /// The semantic label for the bottom sheet.
   final String? semanticLabel;
 
-  /// Called when the bottom sheet begins to close.
+  /// The callback that is called when the bottom sheet begins the closing process.
   ///
-  /// A bottom sheet might be prevented from closing (e.g., by user interaction) even after this callback is called.
-  /// For this reason, this callback might be called multiple times for a given bottom sheet.
+  /// The bottom sheet may not be fully closed (e.g., due to user interaction) even after this callback is called.
+  /// Therefore, this callback may be called multiple times for the same bottom sheet.
   final void Function() onClosing;
 
-  /// If shouldClose is null, this is ignored.
-  /// If return value is true => The dialog closes
-  /// If return value is false => The dialog cancels close
-  /// Notice that if shouldClose is not null, the dialog will go back to the previous position until the function is
-  /// solved.
+  /// The callback that is called to determine whether the bottom sheet should close based on user interaction.
+  ///
+  /// If [shouldClose] is null, it is ignored.
+  /// If the return value is true, the bottom sheet closes.
+  /// If the return value is false, the bottom sheet remains open.
+  ///
+  /// If [shouldClose] is not null, the bottom sheet will temporarily
+  /// return to its previous position until the function returns a value.
   final Future<bool> Function()? shouldClose;
 
-  /// The animation controller that controls the bottom sheet's entrance and exit animations.
+  /// Controls the animation for the bottom sheet entrance and exit transitions.
   ///
-  /// The BottomSheet widget will manipulate the position of this animation.
+  /// The bottom sheet will manipulate the position of this animation controller.
   final AnimationController animationController;
 
-  /// The scroll controller of the content of the bottom sheet.
+  /// The scroll controller used to navigate the content within the bottom sheet.
   final ScrollController scrollController;
 
-  /// A builder for the contents of the sheet.
+  /// The widget to display inside the bottom sheet as its content.
   final Widget child;
 
   /// Creates a Moon Design modal bottom sheet.
@@ -106,10 +110,10 @@ class MoonBottomSheet extends StatefulWidget {
   @override
   MoonBottomSheetState createState() => MoonBottomSheetState();
 
-  /// Creates an [AnimationController] suitable for a [MoonBottomSheet.animationController].
+  /// Creates an [AnimationController] specifically designed for a [MoonBottomSheet.animationController].
   ///
-  /// This API is available as a convenience for a Material compliant bottom sheet animation. If alternative animation
-  /// durations are required, a different animation controller could be provided.
+  /// This API serves as a convenient mechanism to create a Material compliant bottom sheet animation.
+  /// If custom animation durations are required, a different animation controller should be utilized.
   static AnimationController createAnimationController(TickerProvider vsync, Duration duration) {
     return AnimationController(
       duration: duration,
@@ -122,12 +126,10 @@ class MoonBottomSheet extends StatefulWidget {
 class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderStateMixin {
   final GlobalKey _childKey = GlobalKey(debugLabel: 'BottomSheet child');
 
-  // Used in NotificationListener to detect different ScrollNotifications before/after the dragging gesture.
+  // Used in NotificationListener to identify distinct ScrollNotification events before and after the dragging gesture.
   bool _isDragging = false;
 
   bool _verifyingShouldClose = false;
-
-  Duration? _defaultDuration;
 
   Curve? _defaultCurve;
 
@@ -135,8 +137,8 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
   DateTime? _startTime;
 
-  // We cannot access the DragGesture detector of the scroll view, and therefore DragDownDetails with end velocity.
-  // VelocityTracker is used to calculate the scroll end velocity when trying to close modal by dragging gesture.
+  // The DragGesture detector of the scroll view cannot be directly accessed, therefore a VelocityTracker
+  // is used to determine the scroll end velocity when attempting to dismiss the modal via dragging.
   VelocityTracker? _velocityTracker;
 
   bool get needsVerifyShouldClose => widget.shouldClose != null;
@@ -257,10 +259,10 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
         isScrollReversed ? scrollPosition.pixels : scrollPosition.maxScrollExtent - scrollPosition.pixels;
 
     if (offset <= 0) {
-      // Clamping Scroll Physics ends with a ScrollEndNotification providing DragEndDetail class while
-      // BouncingScrollPhysics and other physics that overflow will not return a drag end info.
+      // ClampingScrollPhysics terminates with a ScrollEndNotification that encompasses a DragEndDetails class, while
+      // BouncingScrollPhysics and other physics that permit overflow do not provide drag end information.
 
-      // We use the velocity from DragEndDetails if available.
+      // We utilize the velocity from DragEndDetails if it is accessible.
       if (notification is ScrollEndNotification) {
         final DragEndDetails? dragDetails = notification.dragDetails;
 
@@ -273,7 +275,7 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
         }
       }
 
-      // Otherwise calculate the velocity with a VelocityTracker.
+      // Otherwise, the velocity is calculated using a VelocityTracker.
       if (_velocityTracker == null) {
         final PointerDeviceKind pointerKind = _defaultPointerDeviceKind(context);
 
@@ -331,10 +333,6 @@ class MoonBottomSheetState extends State<MoonBottomSheet> with TickerProviderSta
 
     final TextStyle effectiveTextStyle =
         context.moonTheme?.bottomSheetTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
-
-    _defaultDuration ??= widget.transitionDuration ??
-        context.moonTheme?.bottomSheetTheme.properties.transitionDuration ??
-        const Duration(milliseconds: 350);
 
     _defaultCurve ??= widget.transitionCurve ??
         context.moonTheme?.bottomSheetTheme.properties.transitionCurve ??
@@ -450,9 +448,9 @@ class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
   }
 }
 
-// Checks the device input type of the OS.
-// Mobile platforms default to 'touch' and desktop to 'mouse'.
-// Used with VelocityTracker
+// Determines the input type of the device's operating system.
+// Mobile platforms default to 'touch' input and desktop to 'mouse' input.
+// Used with VelocityTracker.
 // https://github.com/flutter/flutter/pull/64267#issuecomment-694196304
 PointerDeviceKind _defaultPointerDeviceKind(BuildContext context) {
   final TargetPlatform platform = Theme.of(context).platform;

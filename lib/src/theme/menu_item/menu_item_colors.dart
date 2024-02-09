@@ -5,19 +5,19 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonMenuItemColors extends ThemeExtension<MoonMenuItemColors> with DiagnosticableTreeMixin {
-  /// MenuItem background color.
+  /// The background color of the MoonMenuItem.
   final Color backgroundColor;
 
-  /// MenuItem divider color.
+  /// The color of the MoonMenuItem divider.
   final Color dividerColor;
 
-  /// MenuItem icon color.
+  /// The icon color of the MoonMenuItem.
   final Color iconColor;
 
-  /// MenuItem label text color.
+  /// The text color of the MoonMenuItem label.
   final Color labelTextColor;
 
-  /// MenuItem content text color.
+  /// The text color of the MoonMenuItem content.
   final Color contentTextColor;
 
   const MoonMenuItemColors({

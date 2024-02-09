@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with DiagnosticableTreeMixin {
-  /// Popover border radius.
+  /// The border radius of the MoonPopover.
   final BorderRadiusGeometry borderRadius;
 
-  /// Popover distance to target child widget.
+  /// The distance between the MoonPopover and the target child widget.
   final double distanceToTarget;
 
-  /// Popover transition duration (fade in or out animation).
+  /// The duration of the MoonPopover transition animation (fade in or out).
   final Duration transitionDuration;
 
-  /// Popover transition curve (fade in or out animation).
+  /// The curve of the MoonPopover transition animation (fade in or out).
   final Curve transitionCurve;
 
-  /// Padding around popover content.
+  /// The padding of the MoonPopover content.
   final EdgeInsetsGeometry contentPadding;
 
-  /// Popover text style.
+  /// The text style of the MoonPopover.
   final TextStyle textStyle;
 
   const MoonPopoverProperties({

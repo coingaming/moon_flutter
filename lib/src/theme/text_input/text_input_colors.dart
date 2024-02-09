@@ -5,25 +5,25 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTextInputColors extends ThemeExtension<MoonTextInputColors> with DiagnosticableTreeMixin {
-  /// TextInput background color.
+  /// The background color of the MoonTextInput.
   final Color backgroundColor;
 
-  /// TextInput active border color.
+  /// The border color of the active or focused MoonTextInput.
   final Color activeBorderColor;
 
-  /// TextInput inactive border color.
+  /// The border color of the inactive MoonTextInput.
   final Color inactiveBorderColor;
 
-  /// TextInput error color.
+  /// The color of the MoonTextInput in error state.
   final Color errorColor;
 
-  /// TextInput hover border color.
+  /// The border color of the MoonTextInput on hover.
   final Color hoverBorderColor;
 
-  /// TextInput text color.
+  /// The text color of the MoonTextInput.
   final Color textColor;
 
-  /// TextInput helper text color.
+  /// The text color of the MoonTextInput helper and errorBuilder widgets.
   final Color helperTextColor;
 
   const MoonTextInputColors({

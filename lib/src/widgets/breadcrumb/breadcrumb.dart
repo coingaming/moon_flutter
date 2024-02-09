@@ -11,42 +11,43 @@ import 'package:moon_icons/moon_icons.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonBreadcrumb extends StatefulWidget {
-  /// The divider color of the breadcrumb.
+  /// The color of the breadcrumb divider.
   final Color? dividerColor;
 
-  /// The icon and text color of the breadcrumb's item on hover.
+  /// The icon and text color of the breadcrumb item on hover.
   final Color? hoverEffectColor;
 
-  /// The box decoration of the breadcrumb's item.
+  /// The custom decoration of the breadcrumb item.
   final BoxDecoration? itemDecoration;
 
-  /// The gap between the [divider] widget and the breadcrumb's item.
+  /// The gap between the [divider] widget and the breadcrumb item.
   final double? gap;
 
   /// The padding of the breadcrumb.
   final EdgeInsetsGeometry? padding;
 
-  /// The total count of the breadcrumb's [items] to display.
+  /// The total number of the breadcrumb [items] to display.
   final int visibleItemCount;
 
-  /// The semantic label of the breadcrumb's default show more widget.
+  /// The semantic label for the breadcrumb default [showMoreWidget].
   final String? semanticLabel;
 
-  /// The text style of the breadcrumb's item.
+  /// The text style of the breadcrumb item.
   final TextStyle? itemTextStyle;
 
-  /// The text style of the current breadcrumb's item.
+  /// The text style of the current breadcrumb item.
   final TextStyle? currentItemTextStyle;
 
-  /// The breadcrumb's items to display as a sequence of steps.
+  /// The list of breadcrumb items to display as a sequence of steps.
   final List<MoonBreadcrumbItem> items;
 
-  /// The widget to display between the breadcrumb's items.
+  /// The separating widget to display between the breadcrumb items.
   final Widget? divider;
 
-  /// The single custom widget to replace all the breadcrumb's collapsed items with.
+  /// The single custom widget to replace all the breadcrumb collapsed items with.
   final Widget? showMoreWidget;
 
+  /// Creates a Moon Design breadcrumb.
   const MoonBreadcrumb({
     super.key,
     this.dividerColor,

@@ -42,7 +42,7 @@ class DrawerStory extends StatelessWidget {
 
     final drawerWidthKnob = context.knobs.nullable.sliderInt(
       label: "width",
-      description: "The width of the MoonDrawer",
+      description: "Width for MoonDrawer.",
       enabled: false,
       initial: 200,
       max: MediaQuery.of(context).size.width.round(),

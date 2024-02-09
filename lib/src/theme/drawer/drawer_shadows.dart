@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonDrawerShadows extends ThemeExtension<MoonDrawerShadows> with DiagnosticableTreeMixin {
-  /// Drawer shadows.
+  /// The list of shadows applied to the MoonDrawer.
   final List<BoxShadow> drawerShadows;
 
   const MoonDrawerShadows({

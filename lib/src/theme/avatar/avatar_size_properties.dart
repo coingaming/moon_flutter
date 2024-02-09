@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonAvatarSizeProperties extends ThemeExtension<MoonAvatarSizeProperties> with DiagnosticableTreeMixin {
-  /// Avatar border radius.
+  /// The border radius of the MoonAvatar.
   final BorderRadiusGeometry borderRadius;
 
-  /// Avatar size value.
+  /// The size value of the MoonAvatar.
   final double avatarSizeValue;
 
-  /// Avatar badge margin value.
+  /// The margin value of the MoonAvatar badge.
   final double badgeMarginValue;
 
-  /// Avatar badge size value.
+  /// The size value of the MoonAvatar badge.
   final double badgeSizeValue;
 
-  /// Avatar text style.
+  /// The text style of the MoonAvatar.
   final TextStyle textStyle;
 
   const MoonAvatarSizeProperties({

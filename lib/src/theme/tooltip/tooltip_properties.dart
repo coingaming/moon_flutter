@@ -5,28 +5,28 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTooltipProperties extends ThemeExtension<MoonTooltipProperties> with DiagnosticableTreeMixin {
-  /// Tooltip border radius.
+  /// The border radius of the MoonTooltip.
   final BorderRadiusGeometry borderRadius;
 
-  /// The tooltip arrows base width.
+  /// The base width of the MoonTooltip arrow (tail).
   final double arrowBaseWidth;
 
-  /// The length of the tooltip arrow.
+  /// The length of the MoonTooltip arrow (tail).
   final double arrowLength;
 
-  /// The distance between the tooltip arrow and the widget it is attached to.
+  /// The distance from the tip of the MoonTooltip arrow (tail) to the target widget.
   final double arrowTipDistance;
 
-  /// Tooltip transition duration (fade in or out animation).
+  /// The duration of the MoonTooltip transition animation (fade in or out).
   final Duration transitionDuration;
 
-  /// Tooltip transition curve (fade in or out animation).
+  /// The curve of the MoonTooltip transition animation (fade in or out).
   final Curve transitionCurve;
 
-  /// Padding around tooltip content.
+  /// The padding of the MoonTooltip content.
   final EdgeInsetsGeometry contentPadding;
 
-  /// Tooltip text style.
+  /// The text style of the MoonTooltip.
   final TextStyle textStyle;
 
   const MoonTooltipProperties({

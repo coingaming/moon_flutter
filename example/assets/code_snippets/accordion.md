@@ -23,7 +23,7 @@ class _AccordionState extends State<Accordion> {
     return Column(
       children: [
         MoonAccordion<AccordionItems>(
-          // identityValue and groupIdentityValue can be used to control the 
+          // The identityValue and groupIdentityValue can be used to control the 
           // auto collapse behaviour of the accordion.
           identityValue: AccordionItems.first,
           groupIdentityValue: _currentlyOpenAccordionItem,
@@ -39,7 +39,7 @@ class _AccordionState extends State<Accordion> {
           ],
         ),
         MoonAccordion<AccordionItems>(
-          // identityValue and groupIdentityValue can be used to control the 
+          // The identityValue and groupIdentityValue can be used to control the 
           // auto collapse behaviour of the accordion.
           identityValue: AccordionItems.second,
           groupIdentityValue: _currentlyOpenAccordionItem,

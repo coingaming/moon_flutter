@@ -1,5 +1,5 @@
 // Licensed to the Apache Software Foundation (ASF) under one or more
-// contributor license agreements.  See the NOTICE file distributed with
+// contributor license agreements. See the NOTICE file distributed with
 // this work for additional information regarding copyright ownership.
 // The ASF licenses this file to you under the Apache License,
 // Version 2.0 (the "License"); you may not use this file except in
@@ -16,33 +16,29 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-/// Class that allows callers to measure the size of arbitrary widgets when
-/// laid out with specific constraints.
+/// Allows callers to measure the size of arbitrary widgets when laid out with specific constraints.
 ///
-/// The widget surveyor creates synthetic widget trees to hold the widgets it
-/// measures. This is important because if the widgets (or any widgets in their
-/// subtrees) depend on any inherited widgets (e.g. [Directionality]) that they
-/// assume exist in their ancestry, those assumptions may hold true when the
-/// widget is rendered by the application but prove false when the widget is
-/// rendered via the widget surveyor. Due to this, callers are advised to
-/// either:
+/// The widget surveyor creates synthetic widget trees to hold the widgets it measures. This is crucial
+/// because widgets relying on inherited widgets (e.g., [Directionality]) assume they exist in their ancestry.
+/// These assumptions may hold true when the widget is rendered by the application but prove false when
+/// the widget is rendered via the widget surveyor.
 ///
-///  1. pass in widgets that don't depend on inherited widgets, or
-///  1. ensure all inherited widget dependencies exist in the widget tree
-///     that's passed to the widget surveyor's measure methods.
+/// Due to this, callers should ensure that:
+///
+///  1. Passed-in widgets do not rely on inherited widgets, or
+///  2. All necessary inherited widget dependencies exist in the widget tree provided
+///     to the widget surveyor's measure methods.
 class WidgetSurveyor {
   const WidgetSurveyor();
 
-  /// Builds a widget from the specified builder, inserts the widget into a
-  /// synthetic widget tree, lays out the resulting render tree, and returns
-  /// the size of the laid-out render tree.
+  /// Builds a widget using the specified builder function, inserts the widget into a
+  /// synthetic widget tree, lays out the resulting render tree, and returns the size
+  /// of the laid-out render tree.
   ///
-  /// The build context that's passed to the `builder` argument will represent
-  /// the root of the synthetic tree.
+  /// The build context passed to the [builder] function represents the root of the synthetic tree.
   ///
-  /// The `constraints` argument specify the constraints that will be passed
-  /// to the render tree during layout. If unspecified, the widget will be laid
-  /// out unconstrained.
+  /// The [constraints] argument specifies the constraints passed to the render tree during layout.
+  /// If unspecified, the widget will be laid out unconstrained.
   Size measureBuilder(
     WidgetBuilder builder, {
     BoxConstraints constraints = const BoxConstraints(),
@@ -50,12 +46,11 @@ class WidgetSurveyor {
     return measureWidget(Builder(builder: builder), constraints: constraints);
   }
 
-  /// Inserts the specified widget into a synthetic widget tree, lays out the
-  /// resulting render tree, and returns the size of the laid-out render tree.
+  /// Inserts the specified widget into a synthetic widget tree, lays out the resulting render tree,
+  /// and returns the size of the laid-out render tree.
   ///
-  /// The `constraints` argument specify the constraints that will be passed
-  /// to the render tree during layout. If unspecified, the widget will be laid
-  /// out unconstrained.
+  /// The [constraints] argument specifies the constraints passed to the render tree during layout.
+  /// If unspecified, the widget will be laid out unconstrained.
   Size measureWidget(
     Widget widget, {
     BoxConstraints constraints = const BoxConstraints(),
@@ -120,7 +115,7 @@ class WidgetSurveyor {
       assert(rootView.child != null);
       return rootView;
     } finally {
-      // Un-mount all child elements to properly clean up.
+      // Unmounts all child elements to ensure proper cleanup.
       debugIsPerformingCleanup = true;
       try {
         element.update(RenderObjectToWidgetAdapter<RenderBox>(container: rootView));
@@ -128,7 +123,7 @@ class WidgetSurveyor {
       } finally {
         debugIsPerformingCleanup = false;
       }
-      assert(buildOwner.globalKeyCount == 1); // RenderObjectToWidgetAdapter uses a global key
+      assert(buildOwner.globalKeyCount == 1); // RenderObjectToWidgetAdapter uses a global key.
     }
   }
 }

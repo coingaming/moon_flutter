@@ -11,13 +11,13 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
     heading: MoonTextStyles.heading,
   );
 
-  /// Styles for body text.
+  /// The text styles for the body.
   final MoonTextStyles body;
 
-  /// Styles for caption text.
+  /// The text styles for the caption.
   final MoonTextStyles caption;
 
-  /// Styles for headings.
+  /// The text styles for the heading.
   final MoonTextStyles heading;
 
   const MoonTypography({

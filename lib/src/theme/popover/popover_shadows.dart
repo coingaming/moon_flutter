@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonPopoverShadows extends ThemeExtension<MoonPopoverShadows> with DiagnosticableTreeMixin {
-  /// Popover shadows.
+  /// The list of shadows applied to the MoonPopover.
   final List<BoxShadow> popoverShadows;
 
   const MoonPopoverShadows({

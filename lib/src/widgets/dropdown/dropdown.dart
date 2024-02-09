@@ -24,100 +24,109 @@ enum MoonDropdownAnchorPosition {
 }
 
 class MoonDropdown extends StatefulWidget {
-  /// Sets the dropdown anchor position on dropdown content (follower).
+  /// Sets the dropdown anchor position on dropdown [content] (follower).
   ///
-  /// Note: this will override [MoonDropdownAnchorPosition] property.
+  /// Overrides the [MoonDropdownAnchorPosition] property.
   final Alignment? followerAnchor;
 
-  /// Sets the dropdown anchor position on the child (target).
+  /// Sets the dropdown anchor position on the [child] (target).
   ///
-  /// Note: this will override [MoonDropdownAnchorPosition] property.
+  /// Overrides the [MoonDropdownAnchorPosition] property.
   final Alignment? targetAnchor;
 
-  /// If true, the dropdown will be constrained to the width of its child (target).
+  /// Whether to constrain the dropdown to the width of its [child] (target).
   final bool constrainWidthToChild;
 
-  /// Controls the dropdown visibility.
+  /// Whether to show the dropdown.
   final bool show;
 
   /// The border radius of the dropdown.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The color of the dropdown background.
+  /// The background color of the dropdown.
   final Color? backgroundColor;
 
-  /// The color of the dropdown border.
+  /// The border color of the dropdown.
   final Color borderColor;
 
-  /// Custom decoration for the dropdown.
+  /// The custom decoration of the dropdown.
   final Decoration? decoration;
 
-  /// The width of the dropdown border.
+  /// The border width of the dropdown.
   final double borderWidth;
 
-  /// The distance from the tip of the dropdown arrow (tail) to the target widget.
+  /// The distance between the dropdown and the [child] (target).
   ///
-  /// Note: this will be overriden by the [offset] property.
+  /// Overridden by the [offset] property if set.
   final double? distanceToTarget;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the dropdown [content] to define its minimum height.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? minHeight;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the dropdown [content] to define its minimum width.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? minWidth;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the dropdown [content] to define its maximum height.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? maxHeight;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the dropdown [content] to define its maximum width.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? maxWidth;
 
-  /// Dropdown transition duration (fade in or out animation).
+  /// The duration of the dropdown transition animation (fade in or out).
   final Duration? transitionDuration;
 
-  /// Dropdown transition curve (fade in or out animation).
+  /// The curve of the dropdown transition animation (fade in or out).
   final Curve? transitionCurve;
 
-  /// Padding around the dropdown content.
+  /// The padding of the dropdown [content].
   final EdgeInsetsGeometry? contentPadding;
 
-  /// The margin around dropdown. Used to prevent the dropdown from touching the edges of the viewport.
+  /// The margin of the dropdown. Prevents the dropdown from touching the edges of the viewport.
   final EdgeInsetsGeometry? dropdownMargin;
 
-  /// List of dropdown shadows.
+  /// The list of shadows applied to the dropdown.
   final List<BoxShadow>? dropdownShadows;
 
-  /// Sets the dropdown anchor position on the child (target). Defaults to [MoonDropdownAnchorPosition.bottom]
+  /// Sets the dropdown anchor position on the [child] (target).
   ///
-  /// Note: this is a convenience property whose parameters either will be overriden or ignored when using
-  /// [followerAnchor], [targetAnchor], [offset] or [maxWidth] properties.
+  /// This is a convenience shorthand for setting the anchor position.
+  /// This will be overridden by the [followerAnchor], [targetAnchor], [offset], or [maxWidth] properties if set.
   final MoonDropdownAnchorPosition dropdownAnchorPosition;
 
   /// The offset of the dropdown.
   ///
-  /// Note: this will override [distanceToTarget] property.
+  /// Overrides the [distanceToTarget] property.
   final Offset? offset;
 
-  /// `RouteObserver` used to listen for route changes that will hide the dropdown when the widget's route is not active.
+  /// The observer to keep track of the route changes and automatically hide
+  /// the dropdown when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
-  /// The group id of the dropdown. Used to prevent the dropdown from closing when tapping inside nested dropdowns with
-  /// the same group id.
+  /// The unique group ID of the dropdown.
+  /// This ID is used to associate nested dropdowns and prevent them from closing when tapped inside each other.
   final String? groupId;
 
   /// The semantic label for the dropdown.
   final String? semanticLabel;
 
-  /// Callback that is called when the user taps outside the dropdown.
+  /// The callback that is called when the user taps outside the dropdown.
   final VoidCallback? onTapOutside;
 
-  /// The child (target) of the dropdown.
+  /// The widget to display as the child (target) of the dropdown.
   final Widget child;
 
-  /// The widget that its placed inside the dropdown and functions as its content.
+  /// The widget to display inside the dropdown as its content.
   final Widget content;
 
-  /// MDS dropdown widget.
+  /// Creates a Moon Design dropdown.
   const MoonDropdown({
     super.key,
     required this.show,
@@ -164,7 +173,7 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
 
   bool _routeIsShowing = true;
 
-  bool get shouldShowdropdown => widget.show && _routeIsShowing;
+  bool get shouldShowDropdown => widget.show && _routeIsShowing;
 
   void _showDropdown() {
     _overlayEntry = OverlayEntry(builder: (BuildContext context) => _createOverlayContent());
@@ -282,8 +291,8 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
   @override
   void didPush() {
     _routeIsShowing = true;
-    // Route was pushed onto navigator and is now topmost route.
-    if (shouldShowdropdown) {
+    // Route was added to the navigator and is now the top-most route.
+    if (shouldShowDropdown) {
       _removeDropdown();
 
       WidgetsBinding.instance.addPostFrameCallback((Duration _) {
@@ -305,8 +314,8 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
   Future<void> didPopNext() async {
     _routeIsShowing = true;
 
-    if (shouldShowdropdown) {
-      // Covering route was popped off the navigator.
+    if (shouldShowDropdown) {
+      // The covering route was popped off the navigator.
       _removeDropdown();
 
       await Future.delayed(const Duration(milliseconds: 100), () {
@@ -339,9 +348,9 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
       if (oldWidget.dropdownAnchorPosition != widget.dropdownAnchorPosition) {
         _removeDropdown(immediately: true);
         _showDropdown();
-      } else if (shouldShowdropdown && _overlayEntry == null) {
+      } else if (shouldShowDropdown && _overlayEntry == null) {
         _showDropdown();
-      } else if (!shouldShowdropdown && _overlayEntry != null) {
+      } else if (!shouldShowDropdown && _overlayEntry != null) {
         _removeDropdown();
       }
 
@@ -392,7 +401,7 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
 
     final EdgeInsets resolvedDropdownMargin = effectiveDropdownMargin.resolve(Directionality.of(context));
 
-    final List<BoxShadow> effectivedropdownShadows =
+    final List<BoxShadow> effectiveDropdownShadows =
         widget.dropdownShadows ?? context.moonTheme?.dropdownTheme.shadows.dropdownShadows ?? MoonShadows.light.sm;
 
     MoonDropdownAnchorPosition dropdownAnchorPosition = widget.dropdownAnchorPosition;
@@ -488,7 +497,7 @@ class _MoonDropdownState extends State<MoonDropdown> with RouteAware, SingleTick
                       decoration: widget.decoration ??
                           ShapeDecorationWithPremultipliedAlpha(
                             color: effectiveBackgroundColor,
-                            shadows: effectivedropdownShadows,
+                            shadows: effectiveDropdownShadows,
                             shape: MoonSquircleBorder(
                               borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
                               side: BorderSide(color: widget.borderColor),

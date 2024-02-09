@@ -5,16 +5,16 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAvatarColors extends ThemeExtension<MoonAvatarColors> with DiagnosticableTreeMixin {
-  /// Avatar background color.
+  /// The background color of the MoonAvatar.
   final Color backgroundColor;
 
-  /// Avatar badge color.
+  /// The color of the MoonAvatar badge.
   final Color badgeColor;
 
-  /// Avatar icon color.
+  /// The icon color of the MoonAvatar.
   final Color iconColor;
 
-  /// Avatar text color.
+  /// The text color of the MoonAvatar.
   final Color textColor;
 
   const MoonAvatarColors({

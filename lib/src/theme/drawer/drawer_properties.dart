@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonDrawerProperties extends ThemeExtension<MoonDrawerProperties> with DiagnosticableTreeMixin {
-  /// Drawer border radius.
+  /// The border radius of the MoonDrawer.
   final BorderRadiusGeometry borderRadius;
 
-  /// Drawer width.
+  /// The width of the MoonDrawer.
   final double width;
 
-  /// Drawer text style.
+  /// The text style of the MoonDrawer.
   final TextStyle textStyle;
 
   const MoonDrawerProperties({

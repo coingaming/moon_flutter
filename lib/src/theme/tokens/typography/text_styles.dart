@@ -272,55 +272,55 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     ),
   );
 
-  /// Default text size.
+  /// The default text size.
   final TextStyle textDefault;
 
-  /// Text size 6.
+  /// The text size 6.
   final TextStyle text6;
 
-  /// Text size 8.
+  /// The text size 8.
   final TextStyle text8;
 
-  /// Text size 9.
+  /// The text size 9.
   final TextStyle text9;
 
-  /// Text size 10.
+  /// The text size 10.
   final TextStyle text10;
 
-  /// Text size 12.
+  /// The text size 12.
   final TextStyle text12;
 
-  /// Text size 14.
+  /// The text size 14.
   final TextStyle text14;
 
-  /// Text size 16.
+  /// The text size 16.
   final TextStyle text16;
 
-  /// Text size 18.
+  /// The text size 18.
   final TextStyle text18;
 
-  /// Text size 20.
+  /// The text size 20.
   final TextStyle text20;
 
-  /// Text size 24.
+  /// The text size 24.
   final TextStyle text24;
 
-  /// Text size 32.
+  /// The text size 32.
   final TextStyle text32;
 
-  /// Text size 40.
+  /// The text size 40.
   final TextStyle text40;
 
-  /// Text size 48.
+  /// The text size 48.
   final TextStyle text48;
 
-  /// Text size 56.
+  /// The text size 56.
   final TextStyle text56;
 
-  /// Text size 64.
+  /// The text size 64.
   final TextStyle text64;
 
-  /// Text size 72.
+  /// The text size 72.
   final TextStyle text72;
 
   const MoonTextStyles({
@@ -343,7 +343,7 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     required this.text72,
   });
 
-  /// Creates a copy of this text theme but with the given field replaced in each of the individual text styles.
+  /// Creates a copy of the text theme but with the given field replaced in each of the individual text styles.
   MoonTextStyles apply({
     Color? backgroundColor,
     Color? color,

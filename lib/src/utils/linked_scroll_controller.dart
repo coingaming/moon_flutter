@@ -12,13 +12,13 @@ import 'package:flutter/rendering.dart';
 ///
 /// Controllers are added and returned via [addAndGet]. The initial offset
 /// of the newly created controller is synced to the current offset.
-/// Controllers must be `dispose`d when no longer in use to prevent memory
-/// leaks and performance degradation.
+/// It is important to dispose the controllers when they are no longer in
+/// use to prevent memory leaks and performance degradation.
 ///
-/// If controllers are disposed over the course of the lifetime of this
-/// object the corresponding scrollables should be given unique keys.
-/// Without the keys, Flutter may reuse a controller after it has been disposed,
-/// which can cause the controller offsets to fall out of sync.
+/// If controllers are disposed during the lifetime of this object, the
+/// corresponding scrollables should be given unique keys. Without unique keys,
+/// Flutter may reuse a disposed controller, potentially causing the controller
+/// offsets to fall out of sync.
 class LinkedScrollControllerGroup {
   LinkedScrollControllerGroup() {
     _offsetNotifier = _LinkedScrollControllerGroupOffsetNotifier(this);
@@ -32,9 +32,9 @@ class LinkedScrollControllerGroup {
   double get offset {
     assert(
       _attachedControllers.isNotEmpty,
-      'LinkedScrollControllerGroup does not have any scroll controllers '
-      'attached.',
+      'LinkedScrollControllerGroup does not have any scroll controllers attached.',
     );
+
     return _attachedControllers.first.offset;
   }
 
@@ -42,8 +42,10 @@ class LinkedScrollControllerGroup {
   ScrollController addAndGet() {
     final initialScrollOffset = _attachedControllers.isEmpty ? 0.0 : _attachedControllers.first.position.pixels;
     final controller = _LinkedScrollController(this, initialScrollOffset: initialScrollOffset);
+
     _allControllers.add(controller);
     controller.addListener(_offsetNotifier.notifyListeners);
+
     return controller;
   }
 
@@ -61,15 +63,13 @@ class LinkedScrollControllerGroup {
       _allControllers.where((controller) => controller.hasClients);
 
   /// Animates the scroll position of all linked controllers to [offset].
-  Future<void> animateTo(
-    double offset, {
-    required Curve curve,
-    required Duration duration,
-  }) async {
+  Future<void> animateTo(double offset, {required Curve curve, required Duration duration}) async {
     final animations = <Future<void>>[];
+
     for (final controller in _attachedControllers) {
       animations.add(controller.animateTo(offset, duration: duration, curve: curve));
     }
+
     return Future.wait<void>(animations).then<void>((List<void> _) => null);
   }
 
@@ -86,11 +86,9 @@ class LinkedScrollControllerGroup {
   }
 }
 
-/// This class provides change notification for [LinkedScrollControllerGroup]'s
-/// scroll offset.
+/// This class provides change notification for the scroll offset of a [LinkedScrollControllerGroup].
 ///
-/// This change notifier de-duplicates change events by only firing listeners
-/// when the scroll offset of the group has changed.
+/// It de-duplicates change events by only firing listeners when the scroll offset of the group changes.
 class _LinkedScrollControllerGroupOffsetNotifier extends ChangeNotifier {
   _LinkedScrollControllerGroupOffsetNotifier(this.controllerGroup);
 
@@ -98,21 +96,25 @@ class _LinkedScrollControllerGroupOffsetNotifier extends ChangeNotifier {
 
   /// The cached offset for the group.
   ///
-  /// This value will be used in determining whether to notify listeners.
+  /// This value is used internally to determine whether to notify listeners
+  /// when the offset changes. It helps optimize performance by avoiding unnecessary
+  /// notifications when the offset remains unchanged.
   double? _cachedOffset;
 
   @override
   void notifyListeners() {
     final currentOffset = controllerGroup.offset;
+
     if (currentOffset != _cachedOffset) {
       _cachedOffset = currentOffset;
+
       super.notifyListeners();
     }
   }
 }
 
-/// A scroll controller that mirrors its movements to a peer, which must also
-/// be a [_LinkedScrollController].
+/// A scroll controller that synchronizes its movements with a peer scroll controller.
+/// Both controllers must be instances of [_LinkedScrollController].
 class _LinkedScrollController extends ScrollController {
   final LinkedScrollControllerGroup _controllers;
 
@@ -121,15 +123,13 @@ class _LinkedScrollController extends ScrollController {
   @override
   void dispose() {
     _controllers._allControllers.remove(this);
+
     super.dispose();
   }
 
   @override
   void attach(ScrollPosition position) {
-    assert(
-        position is _LinkedScrollPosition,
-        '_LinkedScrollControllers can only be used with'
-        ' _LinkedScrollPositions.');
+    assert(position is _LinkedScrollPosition, '_LinkedScrollControllers can only be used with _LinkedScrollPositions.');
     final _LinkedScrollPosition linkedPosition = position as _LinkedScrollPosition;
     assert(linkedPosition.owner == this, '_LinkedScrollPosition cannot change controllers once created.');
     super.attach(position);
@@ -169,22 +169,23 @@ class _LinkedScrollController extends ScrollController {
 
   Iterable<_LinkedScrollActivity> link(_LinkedScrollPosition driver) {
     assert(hasClients);
+
     final activities = <_LinkedScrollActivity>[];
+
     for (final position in positions) {
       final linkedPosition = position as _LinkedScrollPosition;
       activities.add(linkedPosition.link(driver));
     }
+
     return activities;
   }
 }
 
-// Implementation details: Whenever position.setPixels or position.forcePixels
-// is called on a _LinkedScrollPosition (which may happen programmatically, or
-// as a result of a user action),  the _LinkedScrollPosition creates a
-// _LinkedScrollActivity for each linked position and uses it to move to or jump
-// to the appropriate offset.
-//
-// When a new activity begins, the set of peer activities is cleared.
+// Implementation details:
+// When position.setPixels or position.forcePixels is called on a _LinkedScrollPosition,
+// it creates a _LinkedScrollActivity for each linked position to move or jump to
+// the appropriate offset, either programmatically or as a result of a user action.
+// When a new activity starts, the set of peer activities is cleared.
 class _LinkedScrollPosition extends ScrollPositionWithSingleContext {
   _LinkedScrollPosition(
     this.owner, {
@@ -198,16 +199,17 @@ class _LinkedScrollPosition extends ScrollPositionWithSingleContext {
 
   final Set<_LinkedScrollActivity> _peerActivities = <_LinkedScrollActivity>{};
 
-  // We override hold to propagate it to all peer controllers.
+  // Overrides the hold method to propagate it to all peer controllers.
   @override
   ScrollHoldController hold(VoidCallback holdCancelCallback) {
     for (final controller in owner._allPeersWithClients) {
       controller.position._holdInternal();
     }
+
     return super.hold(holdCancelCallback);
   }
 
-  // Calls hold without propagating to peers.
+  // Invokes hold without propagating to peers.
   void _holdInternal() {
     super.hold(() {});
   }
@@ -228,13 +230,13 @@ class _LinkedScrollPosition extends ScrollPositionWithSingleContext {
 
   @override
   double setPixels(double newPixels) {
-    if (newPixels == pixels) {
-      return 0.0;
-    }
+    if (newPixels == pixels) return 0.0;
+
     updateUserScrollDirection(newPixels - pixels > 0.0 ? ScrollDirection.forward : ScrollDirection.reverse);
 
     if (owner.canLinkWithPeers) {
       _peerActivities.addAll(owner.linkWithPeers(this));
+
       for (final activity in _peerActivities) {
         activity.moveTo(newPixels);
       }
@@ -249,13 +251,13 @@ class _LinkedScrollPosition extends ScrollPositionWithSingleContext {
 
   @override
   void forcePixels(double value) {
-    if (value == pixels) {
-      return;
-    }
+    if (value == pixels) return;
+
     updateUserScrollDirection(value - pixels > 0.0 ? ScrollDirection.forward : ScrollDirection.reverse);
 
     if (owner.canLinkWithPeers) {
       _peerActivities.addAll(owner.linkWithPeers(this));
+
       for (final activity in _peerActivities) {
         activity.jumpTo(value);
       }
@@ -272,8 +274,10 @@ class _LinkedScrollPosition extends ScrollPositionWithSingleContext {
     if (this.activity is! _LinkedScrollActivity) {
       beginActivity(_LinkedScrollActivity(this));
     }
+
     final _LinkedScrollActivity activity = this.activity! as _LinkedScrollActivity;
     activity.link(driver);
+
     return activity;
   }
 
@@ -281,7 +285,7 @@ class _LinkedScrollPosition extends ScrollPositionWithSingleContext {
     _peerActivities.remove(activity);
   }
 
-  // We override this method to make it public (overridden method is protected)
+  // This method is overridden to make it public; the original method is protected.
   @override
   void updateUserScrollDirection(ScrollDirection value) {
     super.updateUserScrollDirection(value);
@@ -290,6 +294,7 @@ class _LinkedScrollPosition extends ScrollPositionWithSingleContext {
   @override
   void debugFillDescription(List<String> description) {
     super.debugFillDescription(description);
+
     description.add('owner: $owner');
   }
 }
@@ -319,8 +324,7 @@ class _LinkedScrollActivity extends ScrollActivity {
   @override
   bool get isScrolling => true;
 
-  // _LinkedScrollActivity is not self-driven but moved by calls to the [moveTo]
-  // method.
+  // _LinkedScrollActivity is not self-driven; it moves in response to calls to the [moveTo] method.
   @override
   double get velocity => 0.0;
 
@@ -336,12 +340,15 @@ class _LinkedScrollActivity extends ScrollActivity {
 
   void _updateUserScrollDirection() {
     assert(drivers.isNotEmpty);
+
     ScrollDirection commonDirection = drivers.first.userScrollDirection;
+
     for (final driver in drivers) {
       if (driver.userScrollDirection != commonDirection) {
         commonDirection = ScrollDirection.idle;
       }
     }
+
     delegate.updateUserScrollDirection(commonDirection);
   }
 
@@ -350,6 +357,7 @@ class _LinkedScrollActivity extends ScrollActivity {
     for (final driver in drivers) {
       driver.unlink(this);
     }
+
     super.dispose();
   }
 }

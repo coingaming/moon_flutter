@@ -6,25 +6,25 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Extra small table properties.
+  /// The properties of the extra small MoonTable.
   final MoonTableSizeProperties xs;
 
-  /// Small table properties.
+  /// The properties of the small MoonTable.
   final MoonTableSizeProperties sm;
 
-  /// Medium table properties.
+  /// The properties of the medium MoonTable.
   final MoonTableSizeProperties md;
 
-  /// Large table properties.
+  /// The properties of the large MoonTable.
   final MoonTableSizeProperties lg;
 
-  /// Extra large table properties.
+  /// The properties of the extra large MoonTable.
   final MoonTableSizeProperties xl;
 
-  /// Extra extra large table properties.
+  /// The properties of the (2x) extra large MoonTable.
   final MoonTableSizeProperties x2l;
 
   MoonTableSizes({

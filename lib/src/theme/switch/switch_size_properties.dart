@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties> with DiagnosticableTreeMixin {
-  /// Switch height.
+  /// The height of the MoonSwitch.
   final double height;
 
-  /// Switch width.
+  /// The width of the MoonSwitch.
   final double width;
 
-  /// Switch thumb size.
+  /// The size value of the MoonSwitch thumb.
   final double thumbSizeValue;
 
-  /// Switch icon size.
+  /// The size value of the MoonSwitch icon.
   final double iconSizeValue;
 
-  /// Switch track padding.
+  /// The padding of the MoonSwitch.
   final EdgeInsetsGeometry padding;
 
-  /// Switch track text style.
+  /// The text style of the MoonSwitch.
   final TextStyle textStyle;
 
   const MoonSwitchSizeProperties({

@@ -53,7 +53,7 @@ final lightTheme = ThemeData.light().copyWith(
 
 ```dart
 return MaterialApp(
-      title: 'MDS example',
+      title: 'Moon Design System example',
       theme: lightTheme,
       home: const HomePage(),
  );

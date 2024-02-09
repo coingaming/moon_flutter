@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Tag colors.
+  /// The colors of the MoonTag.
   final MoonTagColors colors;
 
-  /// Tag sizes.
+  /// The sizes of the MoonTag.
   final MoonTagSizes sizes;
 
   MoonTagTheme({

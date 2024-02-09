@@ -5,16 +5,16 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonChipColors extends ThemeExtension<MoonChipColors> with DiagnosticableTreeMixin {
-  /// Chip text and border color when active.
+  /// The text and border color of the MoonChip in active state.
   final Color activeColor;
 
-  /// Chip background color.
+  /// The background color of the MoonChip.
   final Color backgroundColor;
 
-  /// Chip background color when active.
+  /// The background color of the MoonChip in active state.
   final Color activeBackgroundColor;
 
-  /// Chip text color.
+  /// The text color of the MoonChip.
   final Color textColor;
 
   const MoonChipColors({

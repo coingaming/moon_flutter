@@ -23,76 +23,85 @@ enum MoonPopoverPosition {
 }
 
 class MoonPopover extends StatefulWidget {
-  // This is required so only one popover is shown at a time.
+  // This is necessary to ensure that only one popover is visible at a time.
   static final List<MoonPopoverState> _openedPopovers = [];
 
-  /// Controls the popover visibility.
+  /// Whether to show the popover.
   final bool show;
 
   /// The border radius of the popover.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The color of the popover background.
+  /// The background color of the popover.
   final Color? backgroundColor;
 
-  /// The color of the popover border.
+  /// The border color of the popover.
   final Color borderColor;
 
-  /// Custom decoration for the popover.
+  /// The custom decoration of the popover.
   final Decoration? decoration;
 
-  /// The width of the popover border.
+  /// The border width of the popover.
   final double borderWidth;
 
-  /// The distance from the tip of the popover arrow (tail) to the target widget.
+  /// The distance between the popover and the [child] (target).
   final double? distanceToTarget;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the popover [content] to define its minimum height.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? minHeight;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the popover [content] to define its minimum width.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? minWidth;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the popover [content] to define its maximum height.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? maxHeight;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the popover [content] to define its maximum width.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? maxWidth;
 
-  /// The margin around popover. Used to prevent the popover from touching the edges of the viewport.
+  /// The margin around the popover. Prevents the popover from touching the edges of the viewport.
   final double popoverMargin;
 
-  /// Popover transition duration (fade in or out animation).
+  /// The duration of the popover transition animation (fade in or out).
   final Duration? transitionDuration;
 
-  /// Popover transition curve (fade in or out animation).
+  /// The curve of the popover transition animation (fade in or out).
   final Curve? transitionCurve;
 
-  /// Padding around the popover content.
+  /// The padding of the popover [content].
   final EdgeInsetsGeometry? contentPadding;
 
-  /// List of popover shadows.
+  /// The list of shadows applied to the popover.
   final List<BoxShadow>? popoverShadows;
 
-  /// Sets the popover position relative to the target. Defaults to [MoonPopoverPosition.vertical]
+  /// Sets the popover position relative to the [child] (target). Defaults to [MoonPopoverPosition.vertical].
   final MoonPopoverPosition popoverPosition;
 
-  /// `RouteObserver` used to listen for route changes that will hide the popover when the widget's route is not active.
+  /// The observer to keep track of the route changes and automatically hide
+  /// the popover when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
   /// The semantic label for the popover.
   final String? semanticLabel;
 
-  /// Callback that is called when the user taps outside the popover.
+  /// The callback that is called when the user taps outside the popover.
   final VoidCallback? onTapOutside;
 
-  /// The child (target) of the popover.
+  /// The widget to display as the child (target) of the popover.
   final Widget child;
 
-  /// The widget that its placed inside the popover and functions as its content.
+  /// The widget to display inside the popover as its content.
   final Widget content;
 
-  /// MDS popover widget.
+  /// Creates a Moon Design popover.
   const MoonPopover({
     super.key,
     required this.show,
@@ -119,7 +128,7 @@ class MoonPopover extends StatefulWidget {
     required this.content,
   });
 
-  // Causes any current popovers to be removed. Won't remove the supplied popover.
+  // Remove all existing popovers except the provided one.
   static void _removeOtherPopovers(MoonPopoverState current) {
     if (_openedPopovers.isNotEmpty) {
       // Avoid concurrent modification.
@@ -270,7 +279,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
   @override
   void didPush() {
     _routeIsShowing = true;
-    // Route was pushed onto navigator and is now topmost route.
+    // Route was added to the navigator and is now the top-most route.
     if (shouldShowPopover) {
       _removePopover();
 
@@ -294,7 +303,7 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
     _routeIsShowing = true;
 
     if (shouldShowPopover) {
-      // Covering route was popped off the navigator.
+      // The covering route was popped off the navigator.
       _removePopover();
 
       await Future.delayed(const Duration(milliseconds: 100), () {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:moon_design/src/widgets/tab_bar/pill_tab.dart';
+
 class MoonPillTabStyle {
-  /// The border radius of tab.
+  /// The border radius of the tab.
   final BorderRadiusGeometry? borderRadius;
 
   /// The color of the tab focus effect.
@@ -13,13 +15,13 @@ class MoonPillTabStyle {
   /// The default text color of the tab.
   final Color? textColor;
 
-  /// The text color of selected tab.
+  /// The text color of the selected tab.
   final Color? selectedTextColor;
 
-  /// Custom decoration of the tab.
+  /// The custom decoration of the tab.
   final Decoration? decoration;
 
-  /// The gap between the leading, label and trailing widgets of tab.
+  /// The gap between the [MoonPillTab.leading], [MoonPillTab.label] and [MoonPillTab.trailing] widgets of the tab.
   final double? tabGap;
 
   /// The padding of the tab.
@@ -30,6 +32,7 @@ class MoonPillTabStyle {
   /// If [TextStyle] color is used, then it overrides the [textColor] and [selectedTextColor].
   final TextStyle? textStyle;
 
+  /// Defines a Moon Design pill tab style.
   const MoonPillTabStyle({
     this.borderRadius,
     this.focusEffectColor,

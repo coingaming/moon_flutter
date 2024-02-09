@@ -263,7 +263,7 @@ class _TableStoryState extends State<TableStory> {
   Widget build(BuildContext context) {
     final tableRowSizeKnob = context.knobs.nullable.options(
       label: "tableRowSize",
-      description: "Size variants for MoonTable.",
+      description: "Size variants for MoonTable row.",
       enabled: false,
       initial: MoonTableRowSize.md,
       options: const [

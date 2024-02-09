@@ -13,21 +13,22 @@ import 'package:moon_design/src/widgets/common/base_control.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonMenuItem extends StatefulWidget {
-  /// Specifies the alignment of label and content of menu item.
+  /// Defines how the [label] and [content] widgets of the menu item are aligned along the cross axis.
   ///
-  /// Default value is [CrossAxisAlignment.start].
+  /// Defaults to the [CrossAxisAlignment.start], which aligns the [label] and [content] widgets
+  /// to the start of the menu item.
   final CrossAxisAlignment? crossAxisAlignment;
 
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// The menu item's border radius.
+  /// The border radius of the menu item.
   final BorderRadiusGeometry? borderRadius;
 
   /// The background color of the menu item.
   final Color? backgroundColor;
 
-  /// Custom decoration for the menu item.
+  /// The custom decoration of the menu item.
   final Decoration? decoration;
 
   /// The height of the menu item.
@@ -36,43 +37,43 @@ class MoonMenuItem extends StatefulWidget {
   /// The width of the menu item.
   final double? width;
 
-  /// The horizontal gap between the leading, label/content and trailing widgets.
+  /// The horizontal gap between the [leading], [label] and [trailing] widgets of the menu item.
   final double? horizontalGap;
 
-  /// The vertical gap between the label and content widgets.
+  /// The vertical gap between the [label] and [content] widgets of the menu item.
   final double? verticalGap;
 
-  /// Menu item hover effect duration.
+  /// The duration of the menu item hover effect.
   final Duration? hoverEffectDuration;
 
-  /// Menu item hover effect curve.
+  /// The curve of the menu item hover effect.
   final Curve? hoverEffectCurve;
 
-  /// Padding for the menu item.
+  /// The padding of the menu item.
   final EdgeInsetsGeometry? menuItemPadding;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
   /// The semantic label for the menu item.
   final String? semanticLabel;
 
-  /// Callback when menu item is tapped. When null, the MoonMenuItem is disabled.
+  /// The callback that is called when the menu item is tapped or pressed. Null value disables the menu item.
   final VoidCallback? onTap;
 
-  /// A widget to display before the menu item header.
+  /// The widget to display before the [label] widget of the menu item.
   final Widget? leading;
 
   /// The primary content of the menu item header.
   final Widget label;
 
-  /// The secondary content of the menu item header.
+  /// The widget to display below the [label] widget of the menu item. The secondary content of the menu item header.
   final Widget? content;
 
-  /// A widget to display after the menu item header.
+  /// The widget to display after the [label] widget of the menu item.
   final Widget? trailing;
 
-  /// MDS MenuItem widget.
+  /// Creates a Moon Design menu item.
   const MoonMenuItem({
     super.key,
     this.crossAxisAlignment,
@@ -96,8 +97,8 @@ class MoonMenuItem extends StatefulWidget {
     this.trailing,
   }) : assert(
           crossAxisAlignment != CrossAxisAlignment.baseline,
-          'CrossAxisAlignment.baseline is not supported since the label and content of menu item '
-          'are aligned in a column, not in a row. Try to use another constant.',
+          'The crossAxisAlignment.baseline is not supported since the label and content of menu item '
+          'are aligned in a column, not in a row. Try using another constant.',
         );
 
   static Iterable<Widget> divideMenuItems({

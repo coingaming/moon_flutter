@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 @immutable
 class MoonCircularLoaderSizeProperties extends ThemeExtension<MoonCircularLoaderSizeProperties>
     with DiagnosticableTreeMixin {
-  /// Circular loader size value.
+  /// The size value of the MoonCircularLoader.
   final double loaderSizeValue;
 
-  /// Circular loader stroke width.
+  /// The stroke width of the MoonCircularLoader.
   final double loaderStrokeWidth;
 
   const MoonCircularLoaderSizeProperties({

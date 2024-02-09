@@ -134,8 +134,8 @@ class AvatarClipper extends CustomClipper<Path> {
             bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x),
           ),
         ),
-      // Badge shape properties
-      _getBadgePath(),
+
+      _getBadgePath(), // Badge shape properties.
     );
 
     final Path pathWithoutBadge = Path()

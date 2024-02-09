@@ -5,37 +5,37 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTableSizeProperties extends ThemeExtension<MoonTableSizeProperties> with DiagnosticableTreeMixin {
-  /// Table row border radius.
+  /// The border radius of the MoonTable row.
   final BorderRadiusGeometry rowBorderRadius;
 
-  /// Space between table rows.
+  /// The vertical gap between the MoonTable rows.
   final double rowGap;
 
-  /// Table row height.
+  /// The height of the MoonTable row.
   final double rowHeight;
 
-  /// Horizontal gap between column label and sort icon.
+  /// The horizontal gap between the MoonTable column label and sort icon.
   final double sortIconGap;
 
-  /// Table column sort icon size value.
+  /// The size value of the MoonTable column sort icon.
   final double sortIconSizeValue;
 
-  /// Table row cell padding.
+  /// The padding of the MoonTable cell.
   final EdgeInsetsGeometry cellPadding;
 
-  /// Table row label padding.
+  /// The padding of the MoonTable row label.
   final EdgeInsetsGeometry rowLabelPadding;
 
-  /// Table column text style.
+  /// The text style of the MoonTable column.
   final TextStyle columnTextStyle;
 
-  /// Table row text style.
+  /// The text style of the MoonTable row.
   final TextStyle rowTextStyle;
 
-  /// Table row label text style.
+  /// The text style of the MoonTable row label.
   final TextStyle rowLabelTextStyle;
 
-  /// Table row animated label text style.
+  /// The text style of the MoonTable row pinned and animated label.
   final TextStyle rowPinnedAnimatedLabelTextStyle;
 
   const MoonTableSizeProperties({

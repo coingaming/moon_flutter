@@ -6,22 +6,22 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// (6x) Extra small linear progress properties.
+  /// The properties of the (6x) extra small MoonLinearProgress.
   final MoonLinearProgressSizeProperties x6s;
 
-  /// (5x) Extra small linear progress properties.
+  /// The properties of the (5x) extra small MoonLinearProgress.
   final MoonLinearProgressSizeProperties x5s;
 
-  /// (4x) Extra small linear progress properties.
+  /// The properties of the (4x) extra small MoonLinearProgress.
   final MoonLinearProgressSizeProperties x4s;
 
-  /// (3x) Extra small linear progress properties.
+  /// The properties of the (3x) extra small MoonLinearProgress.
   final MoonLinearProgressSizeProperties x3s;
 
-  /// (2x) Extra small linear progress properties.
+  /// The properties of the (2x) extra small MoonLinearProgress.
   final MoonLinearProgressSizeProperties x2s;
 
   MoonLinearProgressSizes({

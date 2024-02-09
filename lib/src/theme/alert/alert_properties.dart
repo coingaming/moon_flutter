@@ -5,31 +5,31 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonAlertProperties extends ThemeExtension<MoonAlertProperties> with DiagnosticableTreeMixin {
-  /// Border radius for alert.
+  /// The border radius of the MoonAlert.
   final BorderRadiusGeometry borderRadius;
 
-  /// Horizontal space between alert leading, trailing and label.
+  /// The horizontal gap between the leading, label and trailing widgets of the MoonAlert.
   final double horizontalGap;
 
-  /// Alert Widget minimum height.
+  /// The minimum height of the MoonAlert.
   final double minimumHeight;
 
-  /// Vertical space between alert header and body.
+  /// The vertical gap between the MoonAlert header and content.
   final double verticalGap;
 
-  /// Alert transition duration (show and hide animation).
+  /// The duration of the MoonAlert transition animation (fade in or out).
   final Duration transitionDuration;
 
-  /// Alert transition curve (show and hide animation).
+  /// The curve of the MoonAlert transition animation (fade in or out).
   final Curve transitionCurve;
 
-  /// Alert padding.
+  /// The padding of the MoonAlert.
   final EdgeInsetsGeometry padding;
 
-  /// Alert content text style.
+  /// The text style of the MoonAlert content.
   final TextStyle contentTextStyle;
 
-  /// Alert label text style.
+  /// The text style of the MoonAlert label.
   final TextStyle labelTextStyle;
 
   const MoonAlertProperties({

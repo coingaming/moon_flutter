@@ -22,55 +22,55 @@ class MoonBaseControl extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// Whether this control should absorb drag events.
+  /// Whether to absorb the drag events of the base control.
   final bool absorbDragEvents;
 
-  /// Whether this control should be focusable.
+  /// Whether the base control is focusable.
   final bool isFocusable;
 
-  /// Whether this control should ensure that it has a minimal touch target size.
+  /// Whether to ensure a minimum touch target size for the base control.
   final bool ensureMinimalTouchTargetSize;
 
-  /// Whether the semantic type of this control is button.
+  /// Whether the semantic type of the base control is button.
   final bool semanticTypeIsButton;
 
-  /// Whether this control should show a focus effect.
+  /// Whether the base control shows a focus effect.
   final bool showFocusEffect;
 
-  /// Whether this control should show a pulse effect.
+  /// Whether the base control shows a pulse effect.
   final bool showPulseEffect;
 
-  /// Whether this control should jiggle when the pulse effect is shown.
+  /// Whether the base control shows a jiggle during the pulse effect.
   final bool showPulseEffectJiggle;
 
-  /// Whether this control should show a scale effect.
+  /// Whether the base control shows a scale effect.
   final bool showScaleEffect;
 
-  /// The border radius of the control.
+  /// The border radius of the base control.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The background color of the control.
+  /// The background color of the base control.
   final Color? backgroundColor;
 
-  /// The color of the focus effect.
+  /// The color of the base control focus effect.
   final Color? focusEffectColor;
 
-  /// The color of the pulse effect.
+  /// The color of the base control pulse effect.
   final Color? pulseEffectColor;
 
-  /// The opacity of the control when it is disabled.
+  /// The opacity value of the base control when disabled.
   final double? disabledOpacityValue;
 
-  /// The minimum size of the touch target.
+  /// The minimum size of the base control touch target.
   final double minTouchTargetSize;
 
-  /// The extent of the focus effect.
+  /// The extent of the base control focus effect.
   final double? focusEffectExtent;
 
-  /// The extent of the pulse effect.
+  /// The extent of the base control pulse effect.
   final double? pulseEffectExtent;
 
-  /// The scalar controlling the scaling of the scale effect.
+  /// The degree of scaling applied during the scale effect.
   final double? scaleEffectScalar;
 
   /// The duration of the focus effect.
@@ -91,38 +91,36 @@ class MoonBaseControl extends StatefulWidget {
   /// The curve of the scale effect.
   final Curve? scaleEffectCurve;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
-  /// The builder that builds the child of this control.
-  ///
-  /// This is exclusive with [child]. You cannot use both at the same time.
+  /// A builder to build a custom child for the base control.
+  /// Cannot be used in conjunction with the [child] property, one of them must be null.
   final MoonBaseControlBuilder? builder;
 
-  /// The mouse cursor of the control.
+  /// The mouse cursor of the base control.
   final MouseCursor cursor;
 
-  /// The semantic label for this control.
+  /// The semantic label for the base control.
   final String? semanticLabel;
 
-  /// The callback that is called when the control is focused or unfocused.
+  /// The callback that is called when the base control focus state changes.
   final void Function(bool)? onFocus;
 
-  /// The callback that is called when the control is hovered or unhovered.
+  /// The callback that is called when the base control hover state changes.
   final void Function(bool)? onHover;
 
-  /// The callback that is called when the control is tapped or pressed.
+  /// The callback that is called when the base control is tapped or pressed.
   final VoidCallback? onTap;
 
-  /// The callback that is called when the control is long-pressed.
+  /// The callback that is called when the base control is long-pressed.
   final VoidCallback? onLongPress;
 
-  /// The child of this control.
-  ///
-  /// This is exclusive with [builder]. You cannot use both at the same time.
+  /// The child of the base control.
+  /// Cannot be used in conjunction with the [builder] property, one of them must be null.
   final Widget? child;
 
-  /// MDS base control widget.
+  /// Creates a Moon Design base control.
   const MoonBaseControl({
     super.key,
     this.autofocus = false,
@@ -160,7 +158,7 @@ class MoonBaseControl extends StatefulWidget {
     this.child,
   }) : assert(
           (child == null) != (builder == null),
-          "You must provide either a child or a builder, not both.",
+          "Only either a child or a builder can be provided, not both.",
         );
 
   @override
@@ -331,7 +329,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     final double effectiveDisabledOpacityValue =
         widget.disabledOpacityValue ?? context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    // Focus effect props
+    // Focus effect properties.
     final Color effectiveFocusEffectColor = widget.focusEffectColor ??
         context.moonEffects?.controlFocusEffect.effectColor ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
@@ -350,7 +348,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
         context.moonEffects?.controlFocusEffect.effectCurve ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
 
-    // Pulse effect props
+    // Pulse effect properties.
     final Color effectivePulseEffectColor = widget.pulseEffectColor ??
         context.moonEffects?.controlPulseEffect.effectColor ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectColor!;
@@ -367,7 +365,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
         context.moonEffects?.controlPulseEffect.effectCurve ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectCurve;
 
-    // Scale effect props
+    // Scale effect properties.
     final double effectiveScaleEffectScalar = widget.scaleEffectScalar ??
         context.moonEffects?.controlScaleEffect.effectScalar ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlScaleEffect.effectScalar!;

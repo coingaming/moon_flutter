@@ -11,7 +11,7 @@ import 'package:moon_tokens/moon_tokens.dart';
 typedef MoonTextAreaErrorBuilder = Widget Function(BuildContext context, String? errorText);
 
 class MoonTextArea extends StatelessWidget {
-  /// Used to set the auto validation mode.
+  /// Sets the auto validation mode of the text area.
   final AutovalidateMode autovalidateMode;
 
   /// {@macro flutter.widgets.editableText.autocorrect}
@@ -20,7 +20,7 @@ class MoonTextArea extends StatelessWidget {
   /// {@macro flutter.widgets.editableText.autofocus}
   final bool autofocus;
 
-  /// If false the widget is "disabled": it ignores taps and has a reduced opacity.
+  /// Whether the text area is enabled. When false, taps are ignored and the opacity reduced.
   final bool enabled;
 
   /// {@macro flutter.services.TextInputConfiguration.enableIMEPersonalizedLearning}
@@ -65,40 +65,40 @@ class MoonTextArea extends StatelessWidget {
   /// The border color of the inactive text area.
   final Color? inactiveBorderColor;
 
-  /// The error color of the text area.
+  /// The color of the text area in error state.
   final Color? errorColor;
 
-  /// The border color of the hovered text area.
+  /// The border color of the text area on hover.
   final Color? hoverBorderColor;
 
   /// The text color of the text area.
   final Color? textColor;
 
-  /// The text color of the hint in text area.
+  /// The text color of the text area hint.
   final Color? hintTextColor;
 
-  /// The height of the text area (this does not include the space taken by [MoonTextArea.errorBuilder]).
+  /// The height of the text area (does not include the space taken by [MoonTextArea.errorBuilder]).
   final double? height;
 
-  /// The transition duration for disable animation.
+  /// The duration of the text area transition animation (enable and disable).
   final Duration? transitionDuration;
 
-  /// The transition curve for disable animation.
+  /// The curve of the text area transition animation (enable and disable).
   final Curve? transitionCurve;
 
   /// {@macro flutter.widgets.editableText.scrollPadding}
   final EdgeInsets scrollPadding;
 
-  /// The padding around helper widget or error builder.
+  /// The padding of the [helper] and [errorBuilder] widgets.
   final EdgeInsetsGeometry? helperPadding;
 
-  /// The padding around the text content.
+  /// The padding of the text content.
   final EdgeInsetsGeometry? textPadding;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
-  /// The maximum number of characters (Unicode grapheme clusters) to allow in the text area.
+  /// The maximum number of characters (unicode grapheme clusters) to allow in the text area.
   ///
   /// {@macro flutter.services.lengthLimitingTextInputFormatter.maxLength}
   final int? maxLength;
@@ -127,10 +127,10 @@ class MoonTextArea extends StatelessWidget {
   /// {@macro flutter.widgets.editableText.scrollPhysics}
   final ScrollPhysics? scrollPhysics;
 
-  /// Custom decoration for the text area.
+  /// The custom decoration of the text area.
   final Decoration? decoration;
 
-  /// The text for the hint.
+  /// The hint text to display in the text area.
   final String? hintText;
 
   /// The initial value of the text area.
@@ -141,12 +141,11 @@ class MoonTextArea extends StatelessWidget {
   ///
   /// See also:
   ///
-  ///  * [RestorationManager], which explains how state restoration works in
-  ///    Flutter.
+  ///  * [RestorationManager], which explains how state restoration works in Flutter.
   /// {@endtemplate}
   final String? restorationId;
 
-  /// The semantic label for the widget.
+  /// The semantic label for the text area.
   final String? semanticLabel;
 
   /// {@macro flutter.widgets.editableText.strutStyle}
@@ -161,7 +160,7 @@ class MoonTextArea extends StatelessWidget {
   /// {@macro flutter.widgets.editableText.textDirection}
   final TextDirection? textDirection;
 
-  /// Controls the text being edited.
+  /// The [TextEditingController] used to edit the text in the text area.
   final TextEditingController? controller;
 
   /// The type of action button to use for the keyboard.
@@ -170,30 +169,29 @@ class MoonTextArea extends StatelessWidget {
   /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
   final TextInputAction? textInputAction;
 
-  /// The text style to use for the text being edited.
+  /// The text style of the input text.
   ///
   /// This text style is also used as the base style for the [decoration].
   final TextStyle? textStyle;
 
-  /// The text style to use for the helper or error state text.
+  /// The text style of the [helper] widget or error state text.
   final TextStyle? helperTextStyle;
 
-  /// Validator for the text area widget.
+  /// The text validator for the text area widget.
   final FormFieldValidator<String>? validator;
 
-  /// A callback that is called when the user taps the text area widget.
+  /// The callback that is called when the user taps on the text area.
   final GestureTapCallback? onTap;
 
-  /// A callback that is called when the user taps outside the text area widget.
+  /// The callback that is called when the user taps outside the text area.
   final TapRegionCallback? onTapOutside;
 
   /// {@macro flutter.widgets.editableText.onChanged}
   ///
   /// See also:
   ///
-  ///  * [inputFormatters]: which are called before [onChanged] runs and can validate and change ("format") the input
-  ///    value.
-  ///  * [onEditingComplete], [onSubmitted]: which are more specialized input change notifications.
+  ///  * [inputFormatters]: called before the [onChanged] runs and can validate and change/format the input value.
+  ///  * [onEditingComplete], [onSubmitted]: more specialized input change notifications.
   final ValueChanged<String>? onChanged;
 
   /// {@macro flutter.widgets.editableText.onEditingComplete}
@@ -210,13 +208,13 @@ class MoonTextArea extends StatelessWidget {
   ///    focusable item when the user is done editing.
   final ValueChanged<String>? onSubmitted;
 
-  /// Builder for the error widget.
+  /// A builder to build the text area error widget.
   final MoonTextAreaErrorBuilder? errorBuilder;
 
-  /// The widget in the helper slot of the text area.
+  /// The widget to display below the text area. Not displayed in error state.
   final Widget? helper;
 
-  /// MDS TextArea widget
+  /// Creates a Moon Design text area.
   const MoonTextArea({
     super.key,
     this.autovalidateMode = AutovalidateMode.disabled,

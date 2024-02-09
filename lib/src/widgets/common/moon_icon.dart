@@ -4,9 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MoonIcon extends StatelessWidget {
-  /// Creates an icon.
+  /// Creates a Moon Design icon.
   ///
-  /// This is required for mobile Safari to render custom icons properly.
+  /// This is necessary to ensure that custom icons are rendered correctly in mobile Safari.
+  @Deprecated("Unnecessary with current moon_icons icon font")
   const MoonIcon(
     this.icon, {
     super.key,
@@ -23,21 +24,22 @@ class MoonIcon extends StatelessWidget {
         assert(weight == null || (0.0 < weight)),
         assert(opticalSize == null || (0.0 < opticalSize));
 
-  /// The icon to display. The available icons are described in [Icons].
+  /// The icon to display.
   ///
-  /// The icon can be null, in which case the widget will render as an empty
-  /// space of the specified [size].
+  /// The available icons are described in [Icons].
+  ///
+  /// If the icon is null, the widget will render as an empty space of the specified [size].
   final IconData? icon;
 
   /// The size of the icon in logical pixels.
   ///
-  /// Icons occupy a square with width and height equal to size.
+  /// Icons occupy a square with width and height equal to the specified size.
   ///
   /// Defaults to the nearest [IconTheme]'s [IconThemeData.size].
   ///
-  /// If this [MoonIcon] is being placed inside an [IconButton], then use
-  /// [IconButton.iconSize] instead, so that the [IconButton] can make the splash
-  /// area the appropriate size as well. The [IconButton] uses an [IconTheme] to
+  /// When the [MoonIcon] is used within an [IconButton], it is recommended to
+  /// utilize the [IconButton.iconSize] property to manage both the icon's size and
+  /// the splash area's size. The [IconButton] uses an [IconTheme] to
   /// pass down the size to the [MoonIcon].
   final double? size;
 
@@ -135,7 +137,7 @@ class MoonIcon extends StatelessWidget {
   /// {@end-tool}
   final Color? color;
 
-  /// A list of [Shadow]s that will be painted underneath the icon.
+  /// The list of shadows that will be painted underneath the icon.
   ///
   /// Multiple shadows are supported to replicate lighting from multiple light
   /// sources.

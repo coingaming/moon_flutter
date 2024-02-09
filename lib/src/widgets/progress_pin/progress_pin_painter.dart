@@ -46,7 +46,7 @@ class ProgressPinPainter extends CustomPainter {
     };
     final double offsetY = -(radius + arrowHeight + pinDistance) + (size.height / 2 - thumbRadius);
 
-    // Offset based on directionality
+    // Offset based on directionality.
     double offsetX = progressValue * size.width;
 
     switch (textDirection) {
@@ -56,12 +56,12 @@ class ProgressPinPainter extends CustomPainter {
         offsetX = progressValue * size.width;
     }
 
-    // Assign colors
+    // Assign colors.
     final Paint outerCirclePaint = Paint()..color = pinBorderColor;
     final Paint innerCirclePaint = Paint()..color = pinColor;
     final Paint thumbCirclePaint = Paint()..color = thumbColor;
 
-    // Create outer circle with triangle path
+    // Create outer circle with triangle path.
     final Path path = Path()
       ..addOval(Rect.fromCircle(center: Offset(offsetX, offsetY), radius: radius))
       ..addOval(Rect.fromCircle(center: Offset(offsetX, offsetY), radius: radius))
@@ -70,19 +70,19 @@ class ProgressPinPainter extends CustomPainter {
       ..lineTo(offsetX + arrowWidth / 2, offsetY + radius - 0.5) // shift the destination "up" by 0.5 to avoid aliasing
       ..close();
 
-    // Draw shadow around outer path
+    // Draw shadow around outer path.
     if (showShadow) canvas.drawShadow(path, shadowColor, shadowElevation, false);
 
-    // Draw outer path
+    // Draw outer path.
     canvas.drawPath(path, outerCirclePaint);
 
-    // Draw inner circle
+    // Draw inner circle.
     canvas.drawCircle(Offset(offsetX, offsetY), radius - pinBorderWidth, innerCirclePaint);
 
-    // Draw thumb
+    // Draw thumb.
     canvas.drawCircle(Offset(offsetX, size.height / 2), thumbRadius, thumbCirclePaint);
 
-    // Draw pin text
+    // Draw pin text.
     final TextPainter pinTextPainter = TextPainter(
       text: TextSpan(text: pinText, style: textStyle),
       textDirection: textDirection,

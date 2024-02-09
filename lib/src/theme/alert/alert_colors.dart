@@ -5,16 +5,16 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAlertColors extends ThemeExtension<MoonAlertColors> with DiagnosticableTreeMixin {
-  /// Alert background color.
+  /// The background color of the MoonAlert.
   final Color backgroundColor;
 
-  /// Alert border color.
+  /// The border color of the MoonAlert.
   final Color borderColor;
 
-  /// Alert icon color.
+  /// The icon color of the MoonAlert.
   final Color iconColor;
 
-  /// Alert text color.
+  /// The text color of the MoonAlert.
   final Color textColor;
 
   const MoonAlertColors({

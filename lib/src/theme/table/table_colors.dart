@@ -4,22 +4,22 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTableColors extends ThemeExtension<MoonTableColors> with DiagnosticableTreeMixin {
-  /// Table column text color.
+  /// The text color of the MoonTable column.
   final Color columnTextColor;
 
-  /// Table row text color.
+  /// The text color of the MoonTable row.
   final Color rowTextColor;
 
-  /// Table row label text color.
+  /// The text color of the MoonTable row label.
   final Color rowLabelTextColor;
 
-  /// Table row pinned and animated label text color.
+  /// The text color of the MoonTable row pinned and animated label.
   final Color rowPinnedAnimatedLabelTextColor;
 
-  /// Table icon color.
+  /// The icon color of the MoonTable.
   final Color iconColor;
 
-  /// Table row background color.
+  /// The background color of the MoonTable row.
   final Color rowBackgroundColor;
 
   const MoonTableColors({

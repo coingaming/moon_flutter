@@ -1,24 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:moon_design/src/utils/color_tween_premul.dart';
 
 class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
-  /// The target color for icon.
+  /// The target color for the icon.
   ///
   /// The color must not be null.
   ///
-  /// When this property is changed, the icon color will be animated over [duration] time.
+  /// When this property is set, the icon color will be animated over the specified [duration] time.
   final Color? color;
 
-  /// The target size for icon.
+  /// The target size for the icon.
   ///
   /// The size must not be null.
   ///
-  /// When this property is changed, the icon size will be animated over [duration] time.
+  /// When this property is set, the icon size will be animated over the specified [duration] time.
   final double? size;
 
-  /// The widget below this widget in the tree.
+  /// The widget below this animated icon theme widget in the tree.
   ///
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
@@ -68,8 +67,8 @@ class _AnimatedIconThemeState extends AnimatedWidgetBaseState<AnimatedIconTheme>
   Widget build(BuildContext context) {
     return IconTheme(
       data: IconThemeData(
-        color: _color != null ? _color!.evaluate(animation) : null,
-        size: _size != null ? _size!.evaluate(animation)!.height : null,
+        color: _color?.evaluate(animation),
+        size: _size?.evaluate(animation)?.height,
       ),
       child: widget.child,
     );

@@ -1,49 +1,50 @@
 import 'package:flutter/material.dart';
 
 class PinStyle {
-  /// Whether to show shadow around progress pin. Defaults to true.
+  /// Whether to show a shadow around the progress pin.
   final bool? showShadow;
 
-  /// The color of the pin.
+  /// The color of the progress pin.
   final Color? pinColor;
 
-  /// The color of the pin border.
+  /// The border color of the progress pin.
   final Color? pinBorderColor;
 
-  /// The color of the thumb.
+  /// The color of the progress thumb.
   final Color? thumbColor;
 
-  /// The color of the pin shadow.
+  /// The shadow color of the progress pin.
   final Color? shadowColor;
 
-  /// The height of the pin arrow.
+  /// The height of the progress pin arrow.
   final double? arrowHeight;
 
-  /// The width of the pin arrow.
+  /// The width of the progress pin arrow.
   final double? arrowWidth;
 
-  /// The width of the thumb.
+  /// The width of the progress thumb.
   @Deprecated("Use thumbSizeValue instead")
   final double? thumbWidth;
 
-  /// The size value of the thumb.
+  /// The size value of the progress thumb.
   final double? thumbSizeValue;
 
-  /// The width of the pin.
+  /// The width of the progress pin.
   final double? pinWidth;
 
-  /// The border width of the pin.
+  /// The border width of the progress pin.
   final double? pinBorderWidth;
 
-  /// The vertical distance between pin and linear progress.
+  /// The vertical distance between the progress pin and the linear progress widget.
   final double? pinDistance;
 
-  /// The pin shadow elevation.
+  /// The shadow elevation of the progress pin.
   final double? shadowElevation;
 
-  /// The text style of the pin.
+  /// The text style of the progress pin.
   final TextStyle? textStyle;
 
+  /// Defines a Moon Design linear progress pin style.
   const PinStyle({
     this.showShadow = true,
     this.pinColor,

@@ -5,10 +5,10 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonLinearLoaderColors extends ThemeExtension<MoonLinearLoaderColors> with DiagnosticableTreeMixin {
-  /// Linear loader color.
+  /// The color of the MoonLinearLoader.
   final Color color;
 
-  /// Linear loader background color.
+  /// The background color of the MoonLinearLoader.
   final Color backgroundColor;
 
   const MoonLinearLoaderColors({

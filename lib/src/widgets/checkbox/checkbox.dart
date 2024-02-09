@@ -17,51 +17,59 @@ class MoonCheckbox extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// If true the checkbox's [value] can be true, false, or null.
+  /// Whether the checkbox supports a tri-state (indeterminate).
   ///
-  /// [Checkbox] displays a dash when its value is null.
+  /// When tri-state is true, the checkbox can be in one of three states: true, false, or null.
   ///
-  /// When a tri-state checkbox ([tristate] is true) is tapped, its [onChanged]
-  /// callback will be applied to true if the current value is false, to null if
-  /// value is true, and to false if value is null (i.e. it cycles through false
-  /// => true => null => false when tapped).
+  /// When tri-state is false (the default), the checkbox [value] can only be true or false.
   ///
-  /// If tristate is false (the default), [value] must not be null.
+  /// If tri-state is true, the checkbox displays a dash when its [value] is null, indicating the mixed state.
+  ///
+  /// When a tri-state checkbox is tapped, its [onChanged] callback is invoked, cycling through the three states:
+  /// * If the current value is false, the [value] becomes true.
+  /// * If the current value is true, the [value] becomes null (mixed state).
+  /// * If the current value is null (mixed state), the [value] becomes false.
+  ///
+  /// If tri-state is false, the [value] must not be null.
   final bool tristate;
 
-  /// Whether this checkbox is checked.
+  /// Whether the checkbox is checked.
   ///
   /// When [tristate] is true, a value of null corresponds to the mixed state.
   /// When [tristate] is false, this value must not be null.
   final bool? value;
 
-  /// The color to use when this checkbox is checked.
+  /// The background color of the checked checkbox.
   final Color? activeColor;
 
-  /// The color to use when this checkbox is checked.
-  final Color? borderColor;
-
-  /// The color to use for the check icon when this checkbox is checked.
-  final Color? checkColor;
-
-  /// The color to use for the checkbox's background when the checkbox is not checked.
+  /// The background color of the unchecked checkbox.
   final Color? inactiveColor;
 
-  /// The size of the checkbox's tap target.
+  /// The border color of the unchecked checkbox.
+  final Color? borderColor;
+
+  /// The color of the check icon when the checkbox is checked.
+  final Color? checkColor;
+
+  /// The size of the checkbox tap target.
   ///
   /// Defaults to 40.
   final double tapAreaSizeValue;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
   /// The semantic label for the checkbox.
   final String? semanticLabel;
 
-  /// Callback for when the checkbox value changes.
+  /// The callback that is called when the checkbox value changes.
   final ValueChanged<bool?>? onChanged;
 
-  /// MDS checkbox widget.
+  /// Creates a Moon Design checkbox.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonCheckbox.withLabel], Moon Design checkbox with label.
   const MoonCheckbox({
     super.key,
     this.autofocus = false,
@@ -77,6 +85,7 @@ class MoonCheckbox extends StatefulWidget {
     required this.onChanged,
   });
 
+  /// Creates a Moon Design checkbox with label.
   static Widget withLabel(
     BuildContext context, {
     Key? key,

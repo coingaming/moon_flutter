@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonAccordionShadows extends ThemeExtension<MoonAccordionShadows> with DiagnosticableTreeMixin {
-  /// Accordion shadows.
+  /// The list of shadows applied to the MoonAccordion.
   final List<BoxShadow> shadows;
 
   const MoonAccordionShadows({

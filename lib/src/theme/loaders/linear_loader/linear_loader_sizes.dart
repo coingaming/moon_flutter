@@ -6,22 +6,22 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonLinearLoaderSizes extends ThemeExtension<MoonLinearLoaderSizes> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// (6x) Extra small linear loader properties.
+  /// The properties of the (6x) extra small MoonLinearLoader.
   final MoonLinearLoaderSizeProperties x6s;
 
-  /// (5x) Extra small linear loader properties.
+  /// The properties of the (5x) extra small MoonLinearLoader.
   final MoonLinearLoaderSizeProperties x5s;
 
-  /// (4x) Extra small linear loader properties.
+  /// The properties of the (4x) extra small MoonLinearLoader.
   final MoonLinearLoaderSizeProperties x4s;
 
-  /// (3x) Extra small linear loader properties.
+  /// The properties of the (3x) extra small MoonLinearLoader.
   final MoonLinearLoaderSizeProperties x3s;
 
-  /// (2x) Extra small linear loader properties.
+  /// The properties of the (2x) extra small MoonLinearLoader.
   final MoonLinearLoaderSizeProperties x2s;
 
   MoonLinearLoaderSizes({

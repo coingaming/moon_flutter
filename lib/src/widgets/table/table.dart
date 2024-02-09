@@ -10,32 +10,32 @@ import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/widgets/common/default_animated_text_style.dart';
 import 'package:moon_design/src/widgets/table/table_controllers.dart';
 
-/// [MoonTableRow] used in [MoonTable.rows].
 class MoonTableRow {
-  /// Controls whether the row is selected or not.
+  /// Whether the table row is selected.
   final bool selected;
 
-  /// The height of the row, primarily determined by this value. If not specified,
+  /// The height of the table row, primarily determined by this value. If not explicitly specified,
   /// [MoonTable.rowSize] is used. If [MoonTable.rowSize] is also unspecified,
-  /// the height will dynamically adjust based on the row's content.
+  /// the height will dynamically adjust based on the content of the table row.
   final double? height;
 
-  /// Decoration of the row.
+  /// The custom decoration of the table row.
   final Decoration? decoration;
 
-  /// Callback when the row selection changes.
+  /// The callback that returns the current selection status of the table row as a boolean value.
   final ValueChanged<bool?>? onSelectChanged;
 
-  /// Callback when the row is tapped.
+  /// The callback that is called when the table row is tapped.
   final VoidCallback? onTap;
 
-  /// Label of the row which expands to the whole width of the row. Placed on top of the row cells.
+  /// A widget to display inside the table row, spanning the full width above the row cells.
   final MoonTableRowLabel? label;
 
-  /// List of table row cells.
-  /// The length of the list must be equal to the length of [MoonTableHeader.columns] and can not be empty.
+  /// The list of widgets to display as the cells of the table row.
+  /// Must contain the same number of cells as [MoonTableHeader.columns] and cannot be empty.
   final List<Widget> cells;
 
+  /// Creates a Moon Design table row.
   const MoonTableRow({
     this.selected = false,
     this.height,
@@ -47,38 +47,72 @@ class MoonTableRow {
   }) : assert(cells.length > 0, 'Cells length must not be empty.');
 }
 
+class MoonTableRowLabel {
+  /// Whether the table row label is pinned or scrolls horizontally with the table body during horizontal scrolling.
+  final bool pinned;
+
+  /// The duration of the table row label transition animation during horizontal scrolling.
+  final Duration? transitionDuration;
+
+  /// The curve of the table row label transition animation during horizontal scrolling.
+  final Curve? transitionCurve;
+
+  /// The padding of the table row label.
+  final EdgeInsetsGeometry? padding;
+
+  /// The text style of the table row label when [pinned] is true and the table is being horizontally scrolled.
+  final TextStyle? textStyle;
+
+  /// The animated text style of the table row label when [pinned] is true and the table is being horizontally scrolled.
+  final TextStyle? pinnedAnimatedTextStyle;
+
+  /// The widget displayed inside the table row above the row cells, spanning the full width of the row.
+  final Widget label;
+
+  /// Creates a Moon Design table row label.
+  const MoonTableRowLabel({
+    this.pinned = true,
+    this.transitionDuration,
+    this.transitionCurve,
+    this.padding,
+    this.textStyle,
+    this.pinnedAnimatedTextStyle,
+    required this.label,
+  });
+}
+
 typedef ColumnSortCallback = void Function(int columnIndex, bool ascending);
 
-/// [MoonTableColumn] used in [MoonTableHeader.columns].
 class MoonTableColumn {
-  /// Controls whether the sorting icon is shown or not.
+  /// Whether to show the [sortingIcon] in the table column.
   final bool showSortingIcon;
 
-  /// Gap between column label and sorting icon.
+  /// The gap between the [cell] content and [sortingIcon] of the table column.
   final double? sortingIconGap;
 
-  /// Defines the width of the table column.
-  /// Either [width] for each column or [MoonTable.width] must be provided.
-  /// This is exclusive with [MoonTable.width]. Both can not be used at the same time.
+  /// The width of the table column.
+  /// Either width for each column or [MoonTable.width] must be provided.
+  /// Cannot be used in conjunction with the [MoonTable.width] property, one of them must be null.
   final double? width;
 
-  /// Horizontal alignment of column label and sorting icon.
+  /// The horizontal alignment of the [cell] and [sortingIcon] of the table column.
   final MainAxisAlignment sortingIconAlignment;
 
-  /// Callback when the column is sorted.
+  /// The callback that is called when the table column is sorted.
   final ColumnSortCallback? onSort;
 
-  /// Callback when the column is tapped.
+  /// The callback that is called when the table column is tapped.
   final VoidCallback? onTap;
 
-  /// Table column cell.
+  /// The widget to display as the content of the table column.
   final Widget? cell;
 
-  /// Icon to be displayed when sorting is applied to a column.
+  /// An icon to display when sorting is applied to the table column.
   /// If not set, the default icon is [MoonIcons.chevron_up_16].
-  /// Shown only if [showSortingIcon] is true and [onSort] is not null.
+  /// Displayed only if the [showSortingIcon] is true and [onSort] is not null.
   final Widget? sortingIcon;
 
+  /// Creates a Moon Design table column.
   const MoonTableColumn({
     this.showSortingIcon = true,
     this.sortingIconGap,
@@ -91,19 +125,19 @@ class MoonTableColumn {
   });
 }
 
-/// [MoonTableHeader] used in [MoonTable.header].
 class MoonTableHeader {
-  /// Decoration of the table header row.
+  /// The custom decoration of the table header row.
   final Decoration? decoration;
 
   /// The height of the table header row, primarily determined by this value. If not specified,
   /// [MoonTable.rowSize] is used. If [MoonTable.rowSize] is also unspecified,
-  /// the height will dynamically adjust based on the row's content.
+  /// the height will dynamically adjust based on the content of the table row.
   final double? height;
 
-  /// List of table header columns.
+  /// The list of table columns to display as the content of the table header.
   final List<MoonTableColumn> columns;
 
+  /// Creates a Moon Design table header.
   const MoonTableHeader({
     this.decoration,
     this.height,
@@ -111,59 +145,26 @@ class MoonTableHeader {
   }) : assert(columns.length > 0, 'If header is provided, columns must not be empty.');
 }
 
-/// [MoonTableFooter] used in [MoonTable.footer].
 class MoonTableFooter {
-  /// Decoration of the table footer row.
+  /// The custom decoration of the table footer row.
   final Decoration? decoration;
 
   /// The height of the table footer row, primarily determined by this value. If not specified,
   /// [MoonTable.rowSize] is used. If [MoonTable.rowSize] is also unspecified,
-  /// the height will dynamically adjust based on the row's content.
+  /// the height will dynamically adjust based on the row content.
   final double? height;
 
-  /// List of table footer cells. Cells length must be equal to [MoonTableHeader.columns] length.
+  /// The list of widgets to display as the cells of the table footer.
+  /// Cells length must be equal to [MoonTableHeader.columns] length.
   /// If footer is provided, [cells] must not be empty.
   final List<Widget> cells;
 
+  /// Creates a Moon Design table footer.
   const MoonTableFooter({
     this.decoration,
     this.height,
     required this.cells,
   }) : assert(cells.length > 0, 'If footer is provided, cells must not be empty.');
-}
-
-/// [MoonTableRowLabel] used in [MoonTableRow.label].
-class MoonTableRowLabel {
-  /// Controls whether label of the row is pinned or not during table horizontal scroll.
-  final bool pinned;
-
-  /// Row's animated label transition duration during horizontal scroll.
-  final Duration? transitionDuration;
-
-  /// Row's animated label transition curve during horizontal scroll.
-  final Curve? transitionCurve;
-
-  /// Label padding.
-  final EdgeInsetsGeometry? padding;
-
-  /// Text style of the row's label when [pinned] is true and the table is being horizontally scrolled.
-  final TextStyle? textStyle;
-
-  /// Animated text style of row's label when [pinned] is true and the table is being horizontally scrolled.
-  final TextStyle? pinnedAnimatedTextStyle;
-
-  /// Row label widget. Placed on top of the row cells.
-  final Widget label;
-
-  const MoonTableRowLabel({
-    this.pinned = true,
-    this.transitionDuration,
-    this.transitionCurve,
-    this.padding,
-    this.textStyle,
-    this.pinnedAnimatedTextStyle,
-    required this.label,
-  });
 }
 
 enum MoonTableRowSize {
@@ -181,83 +182,85 @@ typedef OnScrollControllersReady = void Function(
 );
 
 class MoonTable extends StatefulWidget {
-  /// Controls whether the header of the table is pinned or vertically scrollable with table body.
+  /// Whether the header of the table is pinned or vertically scrollable with the table body.
   final bool isHeaderPinned;
 
-  /// Controls whether the footer of the table is pinned or vertically scrollable with table body.
+  /// Whether the footer of the table is pinned or vertically scrollable with the table body.
   final bool isFooterPinned;
 
-  /// Controls if the empty rows placeholder is pinned or horizontally scrollable with table body.
+  /// Whether the [rowsPlaceholder] is pinned or horizontally scrollable with the table body.
   final bool isRowsPlaceholderPinned;
 
-  /// Controls whether the column of the table should be sorted in ascending or descending order.
+  /// Whether to sort the table column in ascending or descending order.
   final bool sortAscending;
 
-  /// Decoration of the table.
+  /// The custom decoration of the table.
   final Decoration? decoration;
 
-  /// Gap between table rows.
+  /// The vertical gap between the table rows.
   final double? rowGap;
 
-  /// The whole height of the table. Defaults to null using up all available space.
+  /// The height of the table. By default, the table expands to fill all available space.
   final double? height;
 
   /// The width of the table.
-  /// Either [MoonTable.width] or [MoonTableColumn.width] for each column must be provided.
-  /// This is exclusive with [MoonTableColumn.width]. Both can not be used at the same time.
+  /// Either the width for the table or the [MoonTableColumn.width] for each column must be provided.
+  /// Cannot be used in conjunction with the [MoonTableColumn.width] property, one of them must be null.
   final double? width;
 
-  /// Padding of the table row cells.
+  /// The padding of the table row cells.
   final EdgeInsetsGeometry? cellPadding;
 
-  /// Padding of the table.
+  /// The padding of the table.
   final EdgeInsetsGeometry? tablePadding;
 
-  /// The index of the column to be sorted by.
+  /// The index of the column to sort the table by.
   final int sortColumnIndex;
 
-  /// Specifies how many columns is in the table.
+  /// The number of columns to build for the table.
   final int columnsCount;
 
-  /// The size of the table row, applied to [MoonTableHeader], [MoonTableFooter] and [MoonTableRow],
-  /// unless these classes have their own height specified.
-  /// If [MoonTable.rowSize] is unspecified, the height will dynamically adjust based on the row's content.
+  /// The size of the table row.
+  /// Applied to table header, footer and rows; unless these widgets have their own height specified.
+  /// If [MoonTable.rowSize] is unspecified, the height will dynamically adjust based on the content of the table row.
   final MoonTableRowSize? rowSize;
 
-  /// Scroll behavior for [MoonTable].
+  /// The scrolling behavior of the table.
   final ScrollBehavior? scrollBehaviour;
 
-  /// Vertical scroll physics of the table.
+  /// The vertical scroll physics of the table.
   final ScrollPhysics? verticalScrollPhysics;
 
-  /// Horizontal scroll physics of the table.
+  /// The horizontal scroll physics of the table.
   final ScrollPhysics? horizontalScrollPhysics;
 
   /// The semantic label for the table.
   final String? semanticLabel;
 
-  /// Returning the vertical and horizontal controller for external usage.
+  /// The callback that returns the vertical and horizontal scroll controller for external usage.
   final OnScrollControllersReady? onScrollControllersReady;
 
-  /// Table header for [MoonTable] widget.
+  /// The header of the table.
   final MoonTableHeader? header;
 
-  /// Table footer for [MoonTable] widget.
+  /// The footer of the table.
   final MoonTableFooter? footer;
 
-  /// List of [MoonTable] rows.
+  /// The list of table rows to display as the table body.
   final List<MoonTableRow> rows;
 
-  /// Widget to show only when provided list of [rows] is empty.
-  /// By default not horizontally scrollable. To make it scrollable, set [pinnedRowsPlaceHolder] to false.
+  /// The widget to display when the provided [rows] property is empty.
+  /// By default it is not horizontally scrollable. To make it scrollable, set the [isRowsPlaceholderPinned] to false.
   final Widget? rowsPlaceholder;
 
-  /// Divider widget between all table body rows.
+  /// The widget that separates the table rows horizontally.
   final Widget? rowDivider;
 
-  /// Widget that is shown at the end of a vertical rows list to signify ongoing content loading while scrolling down.
+  /// The widget to display at the end of an infinite scrolling list
+  /// to signify ongoing content loading while scrolling down.
   final Widget? loadingIndicator;
 
+  /// Creates a Moon Design table.
   const MoonTable({
     super.key,
     this.width,
@@ -350,13 +353,13 @@ class _MoonTableState extends State<MoonTable> {
   }
 
   void _calculateTableWidth() {
-    // If a table width is specified, the available space is divided equally among the columns.
+    // If a fixed table width is specified, the remaining space is uniformly distributed across columns.
     if (widget.width != null) {
       _columnEqualWidth = widget.width! / widget.columnsCount;
 
       _tableWidth = widget.width!;
     } else {
-      // Calculate table width based on columns widths.
+      // Calculates the overall table width based on the combined widths of all its columns.
       _tableWidth = widget.header!.columns.fold<double>(
         0,
         (double totalWidth, MoonTableColumn column) => totalWidth + (column.width!),

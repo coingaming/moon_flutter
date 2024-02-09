@@ -5,19 +5,19 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with DiagnosticableTreeMixin {
-  /// TabBar tab indicator color.
+  /// The color of the MoonTabBar tab indicator.
   final Color indicatorColor;
 
-  /// TabBar default text color.
+  /// The text color of the MoonTabBar.
   final Color textColor;
 
-  /// TabBar selected tab text color.
+  /// The text color of the selected MoonTabBar tab.
   final Color selectedTextColor;
 
-  /// TabBar selected pill tab text color.
+  /// The text color of the selected MoonTabBar pill tab.
   final Color selectedPillTextColor;
 
-  /// TabBar selected pill tab color.
+  /// The background color of the selected MoonTabBar pill tab.
   final Color selectedPillTabColor;
 
   const MoonTabBarColors({

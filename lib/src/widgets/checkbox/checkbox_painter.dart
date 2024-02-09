@@ -62,14 +62,16 @@ class MoonCheckboxPainter extends ToggleablePainter {
     return rect;
   }
 
-  // The checkbox's border color if value == false, or its fill color when
-  // value == true or null.
+  // Controls the checkbox border or fill color based on its checked state.
+  //
+  // When the checkbox is unchecked (value == false), the border color is set to this value.
+  // When the checkbox is checked (value == true) or in the mixed state (value == null), the fill color is set to this value.
   Color _colorAt(double t) {
     // As t goes from 0.0 to 0.25, animate from the inactiveColor to activeColor.
     return t >= 0.25 ? activeColor : colorPremulLerp(inactiveColor, activeColor, t * 4.0)!;
   }
 
-  // White stroke used to paint the check and dash.
+  // The white stroke is used to paint the check and dash.
   Paint _createStrokePaint() {
     return Paint()
       ..color = checkColor
@@ -85,8 +87,7 @@ class MoonCheckboxPainter extends ToggleablePainter {
 
   void _drawCheck(Canvas canvas, Offset origin, double t, Paint paint) {
     assert(t >= 0.0 && t <= 1.0);
-    // As t goes from 0.0 to 1.0, animate the two check mark strokes from the
-    // short side to the long side.
+    // As t goes from 0.0 to 1.0, animate the two check mark strokes from the short side to the long side.
     final Path path = Path();
 
     const Offset start = Offset(_kEdgeSize * 0.15, _kEdgeSize * 0.45);
@@ -113,8 +114,7 @@ class MoonCheckboxPainter extends ToggleablePainter {
 
   void _drawDash(Canvas canvas, Offset origin, double t, Paint paint) {
     assert(t >= 0.0 && t <= 1.0);
-    // As t goes from 0.0 to 1.0, animate the horizontal line from the
-    // mid point outwards.
+    // As t goes from 0.0 to 1.0, animate the horizontal line from the mid point outwards.
     const Offset start = Offset(_kEdgeSize * 0.2, _kEdgeSize * 0.5);
     const Offset mid = Offset(_kEdgeSize * 0.5, _kEdgeSize * 0.5);
     const Offset end = Offset(_kEdgeSize * 0.8, _kEdgeSize * 0.5);
@@ -134,7 +134,7 @@ class MoonCheckboxPainter extends ToggleablePainter {
         ? position.value
         : 1.0 - position.value;
 
-    // Four cases: false to null, false to true, null to false, true to false
+    // Four cases: false to null, false to true, null to false, true to false.
     if (previousValue == false || value == false) {
       final double t = value == false ? 1.0 - tNormalized : tNormalized;
       final Rect outer = _outerRectAt(origin, t);
@@ -143,7 +143,7 @@ class MoonCheckboxPainter extends ToggleablePainter {
       if (t <= 0.5) {
         final BorderSide border = side ?? BorderSide(color: paint.color);
 
-        _drawBox(canvas, outer, paint, border, true); // only paint the border
+        _drawBox(canvas, outer, paint, border, true); // Only paint the border.
       } else {
         _drawBox(canvas, outer, paint, side, true);
 
@@ -156,7 +156,7 @@ class MoonCheckboxPainter extends ToggleablePainter {
         }
       }
     } else {
-      // Two cases: null to true, true to null
+      // Two cases: null to true, true to null.
       final Rect outer = _outerRectAt(origin, 1.0);
       final Paint paint = Paint()..color = _colorAt(1.0);
 

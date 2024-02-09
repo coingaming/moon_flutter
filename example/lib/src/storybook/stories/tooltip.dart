@@ -86,7 +86,7 @@ class _TooltipStoryState extends State<TooltipStory> {
 
     final arrowOffsetKnob = context.knobs.nullable.slider(
       label: "arrowOffsetValue",
-      description: "Set the offset of MoonTooltip arrow.",
+      description: "Offset for MoonTooltip arrow.",
       enabled: false,
       initial: 0,
       min: -100,
@@ -95,7 +95,7 @@ class _TooltipStoryState extends State<TooltipStory> {
 
     final arrowTipDistanceKnob = context.knobs.nullable.slider(
       label: "arrowTipDistance",
-      description: "Set the distance to target child widget.",
+      description: "Distance to target child widget.",
       enabled: false,
       initial: 8,
       max: 100,
@@ -103,15 +103,15 @@ class _TooltipStoryState extends State<TooltipStory> {
 
     final arrowBaseWidthKnob = context.knobs.nullable.slider(
       label: "arrowBaseWidth",
-      description: "Set the base width of MoonTooltip arrow.",
+      description: "Base width for MoonTooltip arrow.",
       enabled: false,
       initial: 16,
       max: 100,
     );
 
     final arrowLengthKnob = context.knobs.nullable.slider(
-      description: "Set the length of MoonTooltip arrow.",
       label: "arrowLength",
+      description: "Length for MoonTooltip arrow.",
       enabled: false,
       initial: 8,
       max: 100,
@@ -119,7 +119,7 @@ class _TooltipStoryState extends State<TooltipStory> {
 
     final showShadowKnob = context.knobs.boolean(
       label: "tooltipShadows",
-      description: "Show shadows under MoonTooltip.",
+      description: "Show shadows for MoonTooltip.",
       initial: true,
     );
 
@@ -137,7 +137,7 @@ class _TooltipStoryState extends State<TooltipStory> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const TextDivider(
-            text: "Customisable MoonTooltip",
+            text: "MoonTooltip",
             paddingTop: 0,
           ),
           StatefulBuilder(
@@ -166,7 +166,7 @@ class _TooltipStoryState extends State<TooltipStory> {
               );
             },
           ),
-          const TextDivider(text: "Show MoonTooltip on long-press"),
+          const TextDivider(text: "MoonTooltip is displayed on long-press"),
           MoonTooltip(
             show: showOnLongPress,
             backgroundColor: backgroundColor,

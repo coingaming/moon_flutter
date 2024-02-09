@@ -6,7 +6,7 @@ import 'package:moon_design/src/theme/breadcrumb/breadcrumb_properties.dart';
 
 @immutable
 class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with DiagnosticableTreeMixin {
-  /// The tokens of the MDS.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
   /// The colors of the MoonBreadcrumb.

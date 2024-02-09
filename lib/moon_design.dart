@@ -3,7 +3,7 @@ library moon_design;
 
 export 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 export 'package:moon_design/src/theme/alert/alert_theme.dart';
-export 'package:moon_design/src/theme/authcode/authcode_theme.dart';
+export 'package:moon_design/src/theme/auth_code/auth_code_theme.dart';
 export 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 export 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_theme.dart';
 export 'package:moon_design/src/theme/button/button_theme.dart';
@@ -48,7 +48,7 @@ export 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 export 'package:moon_design/src/widgets/accordion/accordion.dart';
 export 'package:moon_design/src/widgets/alert/alert.dart';
-export 'package:moon_design/src/widgets/authcode/authcode.dart';
+export 'package:moon_design/src/widgets/auth_code/auth_code.dart';
 export 'package:moon_design/src/widgets/avatar/avatar.dart';
 export 'package:moon_design/src/widgets/bottom_sheet/bottom_sheet.dart';
 export 'package:moon_design/src/widgets/bottom_sheet/modal_bottom_sheet.dart';

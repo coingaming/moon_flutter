@@ -5,13 +5,13 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonDropdownColors extends ThemeExtension<MoonDropdownColors> with DiagnosticableTreeMixin {
-  /// Dropdown text color.
+  /// The text color of the MoonDropdown.
   final Color textColor;
 
-  /// Dropdown icon color.
+  /// The icon color of the MoonDropdown.
   final Color iconColor;
 
-  /// Dropdown background color.
+  /// The background color of the MoonDropdown.
   final Color backgroundColor;
 
   const MoonDropdownColors({

@@ -8,16 +8,16 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonDropdownTheme extends ThemeExtension<MoonDropdownTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Dropdown colors.
+  /// The colors of the MoonDropdown.
   final MoonDropdownColors colors;
 
-  /// Dropdown properties.
+  /// The properties of the MoonDropdown.
   final MoonDropdownProperties properties;
 
-  /// Dropdown shadows.
+  /// The shadows of the MoonDropdown.
   final MoonDropdownShadows shadows;
 
   MoonDropdownTheme({

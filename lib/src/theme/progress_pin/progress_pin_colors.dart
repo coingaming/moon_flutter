@@ -5,19 +5,19 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonProgressPinColors extends ThemeExtension<MoonProgressPinColors> with DiagnosticableTreeMixin {
-  /// Progress pin color.
+  /// The color of the MoonProgressPin.
   final Color pinColor;
 
-  /// Progress pin border color.
+  /// The border color of the MoonProgressPin.
   final Color pinBorderColor;
 
-  /// Progress pin thumb color.
+  /// The color of the MoonProgressPin thumb.
   final Color thumbColor;
 
-  /// Progress pin shadow color.
+  /// The shadow color of the MoonProgressPin.
   final Color shadowColor;
 
-  /// Progress pin text color.
+  /// The text color of the MoonProgressPin.
   final Color textColor;
 
   const MoonProgressPinColors({

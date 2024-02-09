@@ -17,8 +17,7 @@ enum BorderAlign {
 class MoonSquircleBorder extends OutlinedBorder {
   /// The radius for each corner.
   ///
-  /// Negative radius values are clamped to 0.0 by [getInnerPath] and
-  /// [getOuterPath].
+  /// Negative radius values are clamped to 0.0 by [getInnerPath] and [getOuterPath].
   final MoonSquircleBorderRadius borderRadius;
   final BorderAlign borderAlign;
 
@@ -31,7 +30,7 @@ class MoonSquircleBorder extends OutlinedBorder {
   @override
   EdgeInsetsGeometry get dimensions {
     switch (borderAlign) {
-      // Make the border behave like in Figma ie not adding any padding
+      // Ensure that the border behaves like in Figma, i.e., without adding any padding.
       case BorderAlign.inside:
         return EdgeInsets.zero;
       case BorderAlign.center:
@@ -151,8 +150,8 @@ class MoonSquircleBorder extends OutlinedBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        // Since the stroke is painted at the center, we need to adjust the rect
-        // according to the [borderAlign].
+        // Since the stroke is painted at the center of the border, we adjust the rectangle
+        // based on the [borderAlign] to ensure the stroke is properly positioned.
         final adjustedRect = () {
           switch (borderAlign) {
             case BorderAlign.inside:
@@ -217,34 +216,28 @@ class MoonSquircleBorder extends OutlinedBorder {
 }
 
 class MoonSquicleBorderSide with Diagnosticable {
-  /// The border is drawn fully inside of the border path.
+  /// This constant represents the border being drawn fully inside the border path.
   ///
-  /// This is a constant for use with [strokeAlign].
-  ///
-  /// This is the default value for [strokeAlign].
+  /// This is used as the default value for the [strokeAlign] property.
   static const double strokeAlignInside = -1.0;
 
-  /// The border is drawn on the center of the border path, with half of the
-  /// [BorderSide.width] on the inside, and the other half on the outside of
-  /// the path.
+  /// This constant represents the border being drawn along the center of the border path,
+  /// with half of the [BorderSide.width] inside the path and the other half outside.
   ///
-  /// This is a constant for use with [strokeAlign].
+  /// This is used as a value for the [strokeAlign] property.
   static const double strokeAlignCenter = 0.0;
 
-  /// The border is drawn on the outside of the border path.
+  /// This constant represents the border being drawn outside the border path.
   ///
-  /// This is a constant for use with [strokeAlign].
+  /// This is used as a value for the [strokeAlign] property.
   static const double strokeAlignOutside = 1.0;
 
-  /// Creates a [BorderSide] that represents the addition of the two given
-  /// [BorderSide]s.
+  /// Creates a [BorderSide] representing the addition of the two provided [BorderSide]'s.
   ///
-  /// It is only valid to call this if [canMerge] returns true for the two
-  /// sides.
+  /// This method should only be called if [canMerge] returns true for the two sides.
   ///
-  /// If one of the sides is zero-width with [BorderStyle.none], then the other
-  /// side is return as-is. If both of the sides are zero-width with
-  /// [BorderStyle.none], then [BorderSide.none] is returned.
+  /// If one side is zero-width with [BorderStyle.none], the other side is returned as is.
+  /// If both sides are zero-width with [BorderStyle.none], [BorderSide.none] is returned.
   ///
   /// The arguments must not be null.
   static BorderSide merge(BorderSide a, BorderSide b) {
@@ -263,10 +256,10 @@ class MoonSquicleBorderSide with Diagnosticable {
     assert(a.color == b.color);
     assert(a.style == b.style);
     return BorderSide(
-      color: a.color, // == b.color
+      color: a.color, // == b.color.
       width: a.width + b.width,
       strokeAlign: max(a.strokeAlign, b.strokeAlign),
-      style: a.style, // == b.style
+      style: a.style, // == b.style.
     );
   }
 
@@ -275,9 +268,9 @@ class MoonSquicleBorderSide with Diagnosticable {
 
   /// The width of this side of the border, in logical pixels.
   ///
-  /// Setting width to 0.0 will result in a hairline border. This means that
-  /// the border will have the width of one physical pixel. Hairline
-  /// rendering takes shortcuts when the path overlaps a pixel more than once.
+  /// Setting width to 0.0 will result in a hairline border.
+  /// This means that the border will have the width of one physical pixel.
+  /// Hairline rendering takes shortcuts when the path overlaps a pixel more than once.
   /// This means that it will render faster than otherwise, but it might
   /// double-hit pixels, giving it a slightly darker/lighter result.
   ///
@@ -286,8 +279,8 @@ class MoonSquicleBorderSide with Diagnosticable {
 
   /// The style of this side of the border.
   ///
-  /// To omit a side, set [style] to [BorderStyle.none]. This skips
-  /// painting the border, but the border still has a [width].
+  /// To omit a side, set [style] to [BorderStyle.none].
+  /// This skips painting the border, but the border still has a [width].
   final BorderStyle style;
 
   /// A hairline black border that is not rendered.
@@ -350,20 +343,20 @@ class MoonSquicleBorderSide with Diagnosticable {
   }
 
   /// Creates a copy of this border side description but with the width scaled
-  /// by the factor `t`.
+  /// by the factor 't'.
   ///
-  /// The `t` argument represents the multiplicand, or the position on the
-  /// timeline for an interpolation from nothing to `this`, with 0.0 meaning
+  /// The 't' argument represents the multiplicand, or the position on the
+  /// timeline for an interpolation from nothing to 'this', with 0.0 meaning
   /// that the object returned should be the nil variant of this object, 1.0
-  /// meaning that no change should be applied, returning `this` (or something
-  /// equivalent to `this`), and other values meaning that the object should be
-  /// multiplied by `t`. Negative values are treated like zero.
+  /// meaning that no change should be applied, returning 'this' (or something
+  /// equivalent to 'this'), and other values meaning that the object should be
+  /// multiplied by 't'. Negative values are treated like zero.
   ///
   /// Since a zero width is normally painted as a hairline width rather than no
   /// border at all, the zero factor is special-cased to instead change the
   /// style to [BorderStyle.none].
   ///
-  /// Values for `t` are usually obtained from an [Animation<double>], such as
+  /// Values for 't' are usually obtained from an [Animation<double>], such as
   /// an [AnimationController].
   BorderSide scale(double t) {
     return BorderSide(
@@ -397,8 +390,7 @@ class MoonSquicleBorderSide with Diagnosticable {
     }
   }
 
-  /// Whether the two given [BorderSide]s can be merged using
-  /// [BorderSide.merge].
+  /// Whether the two given [BorderSide]s can be merged using [BorderSide.merge].
   ///
   /// Two sides can be merged if one or both are zero-width with
   /// [BorderStyle.none], or if they both have the same color and style.
@@ -434,8 +426,8 @@ class MoonSquicleBorderSide with Diagnosticable {
       return BorderSide(
         color: colorPremulLerp(a.color, b.color, t)!,
         width: width,
-        style: a.style, // == b.style
-        strokeAlign: a.strokeAlign, // == b.strokeAlign
+        style: a.style, // == b.style.
+        strokeAlign: a.strokeAlign, // == b.strokeAlign.
       );
     }
     final Color colorA;

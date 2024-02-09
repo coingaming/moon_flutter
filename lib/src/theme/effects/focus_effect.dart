@@ -6,20 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with DiagnosticableTreeMixin {
-  /// Focus effect color.
+class MoonFocusEffect extends ThemeExtension<MoonFocusEffect> with DiagnosticableTreeMixin {
+  /// The color of the focus effect.
   final Color effectColor;
 
-  /// Focus effect extent.
+  /// The extent of the focus effect.
   final double effectExtent;
 
-  /// Focus effect duration.
+  /// The duration of the focus effect.
   final Duration effectDuration;
 
-  /// Focus effect curve.
+  /// The curve of the focus effect.
   final Curve effectCurve;
 
-  const MoonFocusEffects({
+  const MoonFocusEffect({
     required this.effectColor,
     required this.effectExtent,
     required this.effectDuration,
@@ -27,13 +27,13 @@ class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with Diagnostica
   });
 
   @override
-  MoonFocusEffects copyWith({
+  MoonFocusEffect copyWith({
     Color? effectColor,
     double? effectExtent,
     Duration? effectDuration,
     Curve? effectCurve,
   }) {
-    return MoonFocusEffects(
+    return MoonFocusEffect(
       effectColor: effectColor ?? this.effectColor,
       effectExtent: effectExtent ?? this.effectExtent,
       effectDuration: effectDuration ?? this.effectDuration,
@@ -42,10 +42,10 @@ class MoonFocusEffects extends ThemeExtension<MoonFocusEffects> with Diagnostica
   }
 
   @override
-  MoonFocusEffects lerp(ThemeExtension<MoonFocusEffects>? other, double t) {
-    if (other is! MoonFocusEffects) return this;
+  MoonFocusEffect lerp(ThemeExtension<MoonFocusEffect>? other, double t) {
+    if (other is! MoonFocusEffect) return this;
 
-    return MoonFocusEffects(
+    return MoonFocusEffect(
       effectColor: colorPremulLerp(effectColor, other.effectColor, t)!,
       effectExtent: lerpDouble(effectExtent, other.effectExtent, t)!,
       effectDuration: lerpDuration(effectDuration, other.effectDuration, t),

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> with DiagnosticableTreeMixin {
-  /// TextInput transition duration.
+  /// The duration of the MoonTextInput transition animation (enable and disable).
   final Duration transitionDuration;
 
-  /// TextInput transition curve.
+  /// The curve of the MoonTextInput transition animation (enable and disable).
   final Curve transitionCurve;
 
-  /// The padding around TextInput helper widget or error builder.
+  /// The padding of the MoonTextInput helper and errorBuilder widgets.
   final EdgeInsetsGeometry helperPadding;
 
-  /// TextInput helper or error text style.
+  /// The text style of the MoonTextInput helper and errorBuilder widgets.
   final TextStyle helperTextStyle;
 
   const MoonTextInputProperties({

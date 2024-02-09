@@ -8,10 +8,10 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     defaultTransitionCurve: Curves.easeInOutCubic,
   );
 
-  /// Default transition duration.
+  /// The default transition duration.
   final Duration defaultTransitionDuration;
 
-  /// Default transition curve.
+  /// The default transition curve.
   final Curve defaultTransitionCurve;
 
   const MoonTransitions({

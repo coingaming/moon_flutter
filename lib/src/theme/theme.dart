@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 import 'package:moon_design/src/theme/alert/alert_theme.dart';
-import 'package:moon_design/src/theme/authcode/authcode_theme.dart';
+import 'package:moon_design/src/theme/auth_code/auth_code_theme.dart';
 import 'package:moon_design/src/theme/avatar/avatar_theme.dart';
 import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_theme.dart';
 import 'package:moon_design/src/theme/breadcrumb/breadcrumb_theme.dart';
@@ -45,106 +45,106 @@ import 'package:moon_tokens/moon_tokens.dart';
 
 @immutable
 class MoonTheme extends ThemeExtension<MoonTheme> with DiagnosticableTreeMixin {
-  /// Moon Design System tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Moon Design System MoonAccordion widget theming.
+  /// The theming of the Moon Design System MoonAccordion widget.
   final MoonAccordionTheme accordionTheme;
 
-  /// Moon Design System MoonAlert widget theming.
+  /// The theming of the Moon Design System MoonAlert widget.
   final MoonAlertTheme alertTheme;
 
-  /// Moon Design System MoonAuthCode widget theming.
+  /// The theming of the Moon Design System MoonAuthCode widget.
   final MoonAuthCodeTheme authCodeTheme;
 
-  /// Moon Design System MoonAvatar widget theming.
+  /// The theming of the Moon Design System MoonAvatar widget.
   final MoonAvatarTheme avatarTheme;
 
-  /// Moon Design System MoonBottomSheet widget theming.
+  /// The theming of the Moon Design System MoonBottomSheet widget.
   final MoonBottomSheetTheme bottomSheetTheme;
 
-  /// Moon Design System MoonBreadcrumb widget theming.
+  /// The theming of the Moon Design System MoonBreadcrumb widget.
   final MoonBreadcrumbTheme breadcrumbTheme;
 
-  /// Moon Design System MoonButton widget theming.
+  /// The theming of the Moon Design System MoonButton widget.
   final MoonButtonTheme buttonTheme;
 
-  /// Moon Design System MoonCarousel widget theming.
+  /// The theming of the Moon Design System MoonCarousel widget.
   final MoonCarouselTheme carouselTheme;
 
-  /// Moon Design System MoonCheckbox widget theming.
+  /// The theming of the Moon Design System MoonCheckbox widget.
   final MoonCheckboxTheme checkboxTheme;
 
-  /// Moon Design System MoonChip widget theming.
+  /// The theming of the Moon Design System MoonChip widget.
   final MoonChipTheme chipTheme;
 
-  /// Moon Design System MoonCircularLoader widget theming.
+  /// The theming of the Moon Design System MoonCircularLoader widget.
   final MoonCircularLoaderTheme circularLoaderTheme;
 
-  /// Moon Design System MoonCircularProgress widget theming.
+  /// The theming of the Moon Design System MoonCircularProgress widget.
   final MoonCircularProgressTheme circularProgressTheme;
 
-  /// Moon Design System MoonDotIndicator widget theming.
+  /// The theming of the Moon Design System MoonDotIndicator widget.
   final MoonDotIndicatorTheme dotIndicatorTheme;
 
-  /// Moon Design System MoonDrawer widget theming.
+  /// The theming of the Moon Design System MoonDrawer widget.
   final MoonDrawerTheme drawerTheme;
 
-  /// Moon Design System MoonDropdown widget theming.
+  /// The theming of the Moon Design System MoonDropdown widget.
   final MoonDropdownTheme dropdownTheme;
 
-  /// Moon Design System effects.
+  /// The theming of the Moon Design System effects.
   final MoonEffectsTheme effects;
 
-  /// Moon Design System MoonLinearLoader widget theming.
+  /// The theming of the Moon Design System MoonLinearLoader widget.
   final MoonLinearLoaderTheme linearLoaderTheme;
 
-  /// Moon Design System MoonLinearProgress widget theming.
+  /// The theming of the Moon Design System MoonLinearProgress widget.
   final MoonLinearProgressTheme linearProgressTheme;
 
-  /// Moon Design System MoonMenuItem widget theming.
+  /// The theming of the Moon Design System MoonMenuItem widget.
   final MoonMenuItemTheme menuItemTheme;
 
-  /// Moon Design System MoonModal widget theming.
+  /// The theming of the Moon Design System MoonModal widget.
   final MoonModalTheme modalTheme;
 
-  /// Moon Design System MoonPopover widget theming.
+  /// The theming of the Moon Design System MoonPopover widget.
   final MoonPopoverTheme popoverTheme;
 
-  /// Moon Design System MoonProgressPin widget theming.
+  /// The theming of the Moon Design System MoonProgressPin widget.
   final MoonProgressPinTheme progressPinTheme;
 
-  /// Moon Design System MoonRadio widget theming.
+  /// The theming of the Moon Design System MoonRadio widget.
   final MoonRadioTheme radioTheme;
 
-  /// Moon Design System MoonSegmentedControl widget theming.
+  /// The theming of the Moon Design System MoonSegmentedControl widget.
   final MoonSegmentedControlTheme segmentedControlTheme;
 
-  /// Moon Design System MoonSwitch widget theming.
+  /// The theming of the Moon Design System MoonSwitch widget.
   final MoonSwitchTheme switchTheme;
 
-  /// Moon Design System MoonTabBar widget theming.
+  /// The theming of the Moon Design System MoonTabBar widget.
   final MoonTabBarTheme tabBarTheme;
 
-  /// Moon Design System MoonTable widget theming.
+  /// The theming of the Moon Design System MoonTable widget.
   final MoonTableTheme tableTheme;
 
-  /// Moon Design System MoonTag widget theming.
+  /// The theming of the Moon Design System MoonTag widget.
   final MoonTagTheme tagTheme;
 
-  /// Moon Design System MoonTextArea widget theming.
+  /// The theming of the Moon Design System MoonTextArea widget.
   final MoonTextAreaTheme textAreaTheme;
 
-  /// Moon Design System MoonTextInput widget theming.
+  /// The theming of the Moon Design System MoonTextInput widget.
   final MoonTextInputTheme textInputTheme;
 
-  /// Moon Design System MoonTextInputGroup widget theming.
+  /// The theming of the Moon Design System MoonTextInputGroup widget.
   final MoonTextInputGroupTheme textInputGroupTheme;
 
-  /// Moon Design System MoonToast widget theming.
+  /// The theming of the Moon Design System MoonToast widget.
   final MoonToastTheme toastTheme;
 
-  /// Moon Design System MoonTooltip widget theming.
+  /// The theming of the Moon Design System MoonTooltip widget.
   final MoonTooltipTheme tooltipTheme;
 
   MoonTheme({

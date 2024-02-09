@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonProgressPinProperties extends ThemeExtension<MoonProgressPinProperties> with DiagnosticableTreeMixin {
-  /// Progress pin shadow elevation.
+  /// The shadow elevation of the MoonProgressPin.
   final double shadowElevation;
 
-  /// Progress pin arrow height.
+  /// The height of the MoonProgressPin arrow.
   final double arrowHeight;
 
-  /// Progress pin arrow width.
+  /// The width of the MoonProgressPin arrow.
   final double arrowWidth;
 
-  /// Vertical space between pin and linear progress.
+  /// The vertical distance between the MoonProgressPin and the MoonLinearProgress widget.
   final double pinDistance;
 
-  /// Progress pin width.
+  /// The width of the MoonProgressPin.
   final double pinWidth;
 
-  /// Progress pin border width.
+  /// The border width of the MoonProgressPin.
   final double pinBorderWidth;
 
-  /// Progress pin text style.
+  /// The text style of the MoonProgressPin.
   final TextStyle textStyle;
 
   const MoonProgressPinProperties({

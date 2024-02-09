@@ -16,25 +16,25 @@ enum MoonCircularLoaderSize {
 }
 
 class MoonCircularLoader extends StatelessWidget {
-  /// Color of the circular loader widget.
+  /// The color of the circular loader.
   final Color? color;
 
-  /// Background color of the circular loader widget.
+  /// The background color of the circular loader.
   final Color? backgroundColor;
 
-  /// Size value of the circular loader widget.
+  /// The custom size value of the circular loader. For predefined sizes, use [circularLoaderSize].
   final double? sizeValue;
 
-  /// Stroke width of the circular loader widget.
+  /// The width of the stroke for the circular loader.
   final double? strokeWidth;
 
-  /// Size of the circular loader widget.
+  /// The size of the circular loader.
   final MoonCircularLoaderSize? circularLoaderSize;
 
-  /// Stroke cap of the circular loader widget.
+  /// The shape of the end of the stroke (stroke-cap) for the circular loader.
   final StrokeCap? strokeCap;
 
-  /// MDS circular loader widget.
+  /// Creates a Moon Design circular loader.
   const MoonCircularLoader({
     super.key,
     this.color,

@@ -116,7 +116,7 @@ class _AlertStoryState extends State<AlertStory> {
 
     final showDisabledKnob = context.knobs.boolean(
       label: "Disabled",
-      description: "onTrailingTap() is null.",
+      description: "MoonAlert onTrailingTap() is null.",
     );
 
     final BorderRadiusGeometry? borderRadius =

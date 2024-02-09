@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonDropdownShadows extends ThemeExtension<MoonDropdownShadows> with DiagnosticableTreeMixin {
-  /// Dropdown shadows.
+  /// The list of shadows applied to the MoonDropdown.
   final List<BoxShadow> dropdownShadows;
 
   const MoonDropdownShadows({

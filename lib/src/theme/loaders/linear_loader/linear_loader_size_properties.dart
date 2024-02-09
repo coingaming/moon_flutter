@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 @immutable
 class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSizeProperties>
     with DiagnosticableTreeMixin {
-  /// Linear loader border radius.
+  /// The border radius of the MoonLinearLoader.
   final BorderRadiusGeometry borderRadius;
 
-  /// Linear loader height.
+  /// The height of the MoonLinearLoader.
   final double loaderHeight;
 
   const MoonLinearLoaderSizeProperties({

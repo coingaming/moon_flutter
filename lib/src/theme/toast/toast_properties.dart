@@ -5,28 +5,28 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonToastProperties extends ThemeExtension<MoonToastProperties> with DiagnosticableTreeMixin {
-  /// Toast border radius.
+  /// The border radius of the MoonToast.
   final BorderRadiusGeometry borderRadius;
 
-  /// The horizontal space between toast leading, trailing and label.
+  /// The horizontal gap between the leading, label and trailing widgets of the MoonToast.
   final double horizontalGap;
 
-  /// The vertical space between toast header and body.
+  /// The vertical gap between the MoonToast header and content.
   final double verticalGap;
 
-  /// Toast display duration.
+  /// The duration to display the MoonToast.
   final Duration displayDuration;
 
-  /// Toast transition duration.
+  /// The duration of the MoonToast transition animation (slide in or out).
   final Duration transitionDuration;
 
-  /// Toast transition curve.
+  /// The curve of the MoonToast transition animation (slide in or out).
   final Curve transitionCurve;
 
-  /// Padding around toast content.
+  /// The padding of the MoonToast content.
   final EdgeInsetsGeometry contentPadding;
 
-  /// Toast text style.
+  /// The text style of the MoonToast.
   final TextStyle textStyle;
 
   const MoonToastProperties({

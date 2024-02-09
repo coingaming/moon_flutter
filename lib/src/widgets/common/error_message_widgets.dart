@@ -6,7 +6,7 @@ import 'package:moon_icons/moon_icons.dart';
 class MoonErrorMessages extends StatelessWidget {
   final List<String> errors;
 
-  /// Default error message widget used in [MoonTextInputGroup].
+  /// Creates a default error message widget, utilized in [MoonTextInputGroup].
   const MoonErrorMessages({required this.errors});
 
   List<String> get _nonEmptyErrors => errors.where((String error) => error.isNotEmpty).toList();
@@ -31,7 +31,7 @@ class MoonErrorMessage extends StatefulWidget {
   final Duration duration;
   final Curve curve;
 
-  /// Default error message widget used in [MoonTextInput] and [MoonTextArea].
+  /// Creates a default error message widget, utilized in [MoonTextInput] and [MoonTextArea].
   const MoonErrorMessage({
     super.key,
     required this.errorText,

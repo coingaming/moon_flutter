@@ -111,7 +111,7 @@ class ButtonStory extends StatelessWidget {
 
     final isDisabledKnob = context.knobs.boolean(
       label: "Disabled",
-      description: "onTap() or onLongPress() is null.",
+      description: "MoonButton onTap() or onLongPress() is null.",
     );
 
     IconData resolveIconVariant(MoonButtonSize? buttonSize) {
@@ -142,7 +142,7 @@ class ButtonStory extends StatelessWidget {
         child: Column(
           children: [
             const TextDivider(
-              text: "Base and MoonIcon MoonButton",
+              text: "Base and icon MoonButton",
               paddingTop: 0,
             ),
             MoonButton(
@@ -204,7 +204,7 @@ class ButtonStory extends StatelessWidget {
               label: showLabelKnob ? const Text("MoonTextButton") : null,
               trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
             ),
-            const TextDivider(text: "Custom MoonButtons with non-standard children"),
+            const TextDivider(text: "Customized MoonButtons with non-standard children"),
             MoonButton(
               onTap: isDisabledKnob ? null : () {},
               height: 40,

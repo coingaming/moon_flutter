@@ -103,16 +103,16 @@ class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMix
     ],
   );
 
-  /// Small shadow.
+  /// The small shadow.
   final List<BoxShadow> sm;
 
-  /// Medium shadow.
+  /// The medium shadow.
   final List<BoxShadow> md;
 
-  /// Large shadow.
+  /// The large shadow.
   final List<BoxShadow> lg;
 
-  /// Extra large shadow.
+  /// The extra large shadow.
   final List<BoxShadow> xl;
 
   const MoonShadows({

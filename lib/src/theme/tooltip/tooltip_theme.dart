@@ -8,16 +8,16 @@ import 'package:moon_design/src/theme/tooltip/tooltip_shadows.dart';
 
 @immutable
 class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Tooltip colors.
+  /// The colors of the MoonTooltip.
   final MoonTooltipColors colors;
 
-  /// Tooltip properties.
+  /// The properties of the MoonTooltip.
   final MoonTooltipProperties properties;
 
-  /// Tooltip shadows.
+  /// The shadows of the MoonTooltip.
   final MoonTooltipShadows shadows;
 
   MoonTooltipTheme({

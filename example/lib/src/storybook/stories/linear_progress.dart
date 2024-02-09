@@ -12,7 +12,7 @@ class LinearProgressStory extends StatelessWidget {
   Widget build(BuildContext context) {
     final progressSizeKnob = context.knobs.nullable.options(
       label: "linearProgressSize",
-      description: "Size variants for LinearProgress.",
+      description: "Size variants for MoonLinearProgress.",
       enabled: false,
       initial: MoonLinearProgressSize.x4s,
       options: const [
@@ -26,7 +26,7 @@ class LinearProgressStory extends StatelessWidget {
 
     final progressColorKnob = context.knobs.nullable.options(
       label: "color",
-      description: "MoonColors variants for LinearProgress progress.",
+      description: "MoonColors variants for MoonLinearProgress progress.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -37,7 +37,7 @@ class LinearProgressStory extends StatelessWidget {
 
     final progressBackgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
-      description: "MoonColors variants for LinearProgress background.",
+      description: "MoonColors variants for MoonLinearProgress background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -48,7 +48,7 @@ class LinearProgressStory extends StatelessWidget {
 
     final pinColorKnob = context.knobs.nullable.options(
       label: "pinColor",
-      description: "MoonColors variants for LinearProgress pin.",
+      description: "MoonColors variants for MoonLinearProgress pin.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -59,7 +59,7 @@ class LinearProgressStory extends StatelessWidget {
 
     final pinBorderColorKnob = context.knobs.nullable.options(
       label: "pinBorderColor",
-      description: "MoonColors variants for LinearProgress pin border.",
+      description: "MoonColors variants for MoonLinearProgress pin border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -70,7 +70,7 @@ class LinearProgressStory extends StatelessWidget {
 
     final thumbColorKnob = context.knobs.nullable.options(
       label: "thumbColor",
-      description: "MoonColors variants for LinearProgress thumb.",
+      description: "MoonColors variants for MoonLinearProgress thumb.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -81,7 +81,7 @@ class LinearProgressStory extends StatelessWidget {
 
     final borderRadiusKnob = context.knobs.nullable.sliderInt(
       label: "borderRadius",
-      description: "Border radius for LinearProgress.",
+      description: "Border radius for MoonLinearProgress.",
       enabled: false,
       initial: 8,
       max: 32,
@@ -89,28 +89,28 @@ class LinearProgressStory extends StatelessWidget {
 
     final linearProgressValueKnob = context.knobs.slider(
       label: "value",
-      description: "Value for LinearProgress.",
+      description: "Progress value for MoonLinearProgress.",
       initial: 0.5,
     );
 
     final showPinKnob = context.knobs.boolean(
       label: "showPin",
-      description: "Show pin for LinearProgress",
+      description: "Show pin for MoonLinearProgress.",
     );
 
     final showMinLabelKnob = context.knobs.boolean(
       label: "showMinLabel",
-      description: "Show minLabel for LinearProgress",
+      description: "Show minimum label for MoonLinearProgress.",
     );
 
     final showMaxLabelKnob = context.knobs.boolean(
       label: "showMaxLabel",
-      description: "Show maxLabel for LinearProgress",
+      description: "Show maximum label for MoonLinearProgress.",
     );
 
     final showPinShadowKnob = context.knobs.boolean(
       label: "showPinShadow",
-      description: "Show pin shadow for LinearProgress",
+      description: "Show pin shadow for MoonLinearProgress.",
       initial: true,
     );
 

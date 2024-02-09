@@ -8,16 +8,16 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// SegmentedControl colors.
+  /// The colors of the MoonSegmentedControl.
   final MoonSegmentedControlColors colors;
 
-  /// SegmentedControl properties.
+  /// The properties of the MoonSegmentedControl.
   final MoonSegmentedControlProperties properties;
 
-  /// SegmentedControl sizes.
+  /// The sizes of the MoonSegmentedControl.
   final MoonSegmentedControlSizes sizes;
 
   MoonSegmentedControlTheme({

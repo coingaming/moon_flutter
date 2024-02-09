@@ -16,31 +16,31 @@ enum MoonCircularProgressSize {
 }
 
 class MoonCircularProgress extends StatelessWidget {
-  /// Color of the circular progress widget.
+  /// The color of the circular progress.
   final Color? color;
 
-  /// Background color of the circular progress widget.
+  /// The background color of the circular progress.
   final Color? backgroundColor;
 
-  /// Size value of the circular progress widget.
+  /// The custom size value of the circular progress. For predefined sizes, use [circularProgressSize].
   final double? sizeValue;
 
-  /// Stroke width of the circular progress widget.
+  /// The width of the stroke for the circular progress.
   final double? strokeWidth;
 
-  /// Value of the circular progress widget.
+  /// The progress value of the circular progress.
   final double value;
 
-  /// Size of the circular progress widget.
+  /// The size of the circular progress.
   final MoonCircularProgressSize? circularProgressSize;
 
-  /// The semantic label for the circular progress widget.
+  /// The semantic label for the circular progress.
   final String? semanticLabel;
 
-  /// Stroke cap of the circular progress widget.
+  /// The shape of the end of the stroke (stroke-cap) for the circular progress.
   final StrokeCap? strokeCap;
 
-  /// MDS circular progress widget.
+  /// Creates a Moon Design circular progress.
   const MoonCircularProgress({
     super.key,
     this.color,

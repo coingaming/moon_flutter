@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonButtonTheme extends ThemeExtension<MoonButtonTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Button colors.
+  /// The colors of the MoonButton.
   final MoonButtonColors colors;
 
-  /// Button sizes.
+  /// The sizes of the MoonButton.
   final MoonButtonSizes sizes;
 
   MoonButtonTheme({

@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTabBarProperties extends ThemeExtension<MoonTabBarProperties> with DiagnosticableTreeMixin {
-  /// Gap between TabBar children.
+  /// The gap between the MoonTabBar tabs.
   final double gap;
 
-  /// TabBar transition duration.
+  /// The duration of the MoonTabBar transition animation.
   final Duration transitionDuration;
 
-  /// TabBar transition curve.
+  /// The curve of the MoonTabBar transition animation.
   final Curve transitionCurve;
 
   const MoonTabBarProperties({

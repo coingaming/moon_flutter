@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with DiagnosticableTreeMixin {
-  /// Gap between Carousel items.
+  /// The gap between the MoonCarousel items.
   final double gap;
 
-  /// Carousel item text style.
+  /// The text style of the MoonCarousel items.
   final TextStyle textStyle;
 
-  /// Carousel auto play delay between items.
+  /// The delay between the items in the MoonCarousel's automatic scrolling sequence.
   final Duration autoPlayDelay;
 
-  /// Carousel transition duration.
+  /// The duration of the MoonCarousel autoplay transition animation.
   final Duration transitionDuration;
 
-  /// Carousel transition curve.
+  /// The curve of the MoonCarousel autoplay transition animation.
   final Curve transitionCurve;
 
   const MoonCarouselProperties({

@@ -13,25 +13,25 @@ class MoonDotIndicator extends StatefulWidget {
   /// The color of the unselected dots.
   final Color? unselectedColor;
 
-  /// The gap between each dot.
+  /// The gap between the dots.
   final double? gap;
 
   /// The size of each dot.
   final double? size;
 
-  /// Indicator transition duration.
+  /// The duration of the dot indicator transition animation.
   final Duration? transitionDuration;
 
-  /// Indicator transition curve.
+  /// The curve of the dot indicator transition animation.
   final Curve? transitionCurve;
 
   /// The index of the currently selected dot.
   final int selectedDot;
 
-  /// The total number of dots.
+  /// The total number of dots to build for the indicator.
   final int dotCount;
 
-  /// MDS DotIndicator widget
+  /// Creates a Moon Design dot indicator.
   const MoonDotIndicator({
     this.selectedColor,
     this.unselectedColor,

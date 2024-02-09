@@ -5,16 +5,16 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonModalColors extends ThemeExtension<MoonModalColors> with DiagnosticableTreeMixin {
-  /// Modal text color.
+  /// The text color of the MoonModal.
   final Color textColor;
 
-  /// Modal icon color.
+  /// The icon color of the MoonModal.
   final Color iconColor;
 
-  /// Modal background color.
+  /// The background color of the MoonModal.
   final Color backgroundColor;
 
-  /// Modal barrier color.
+  /// The color of the MoonModal barrier.
   final Color barrierColor;
 
   const MoonModalColors({

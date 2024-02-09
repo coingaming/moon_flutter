@@ -5,13 +5,13 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTagColors extends ThemeExtension<MoonTagColors> with DiagnosticableTreeMixin {
-  /// Tag text color.
+  /// The text color of the MoonTag.
   final Color textColor;
 
-  /// Tag icon color.
+  /// The icon color of the MoonTag.
   final Color iconColor;
 
-  /// Tag background color.
+  /// The background color of the MoonTag.
   final Color backgroundColor;
 
   const MoonTagColors({

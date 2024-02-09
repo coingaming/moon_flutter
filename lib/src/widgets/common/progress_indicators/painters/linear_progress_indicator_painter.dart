@@ -7,8 +7,8 @@ import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 class MoonLinearProgressIndicatorPainter extends CustomPainter {
   static const int _kIndeterminateLinearDuration = 1800;
 
-  // The indeterminate progress animation displays two lines whose leading (head)
-  // and trailing (tail) endpoints are defined by the following four curves.
+  // The indeterminate progress animation consists of two lines, each with a leading (head)
+  // and trailing (tail) endpoint, defined by the following four curves.
   static const Curve _line1Head = Interval(
     0.0,
     750.0 / _kIndeterminateLinearDuration,
@@ -69,9 +69,7 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
     paint.color = valueColor;
 
     void drawBar(double x, double width) {
-      if (width <= 0.0) {
-        return;
-      }
+      if (width <= 0.0) return;
 
       final double left;
       switch (textDirection) {
@@ -89,7 +87,7 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
         bottomRight: MoonSquircleRadius(cornerRadius: progressRadius.bottomRight.x),
       );
 
-      // Clipping progressRect with containerRect
+      // Clipping progressRect with containerRect.
       canvas.clipRRect(containerRect);
 
       canvas.drawRRect(progressRect, paint);

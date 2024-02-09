@@ -6,25 +6,25 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonAvatarSizes extends ThemeExtension<MoonAvatarSizes> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Extra small avatar properties.
+  /// The properties of the extra small MoonAvatar.
   final MoonAvatarSizeProperties xs;
 
-  /// Small avatar properties.
+  /// The properties of the small MoonAvatar.
   final MoonAvatarSizeProperties sm;
 
-  /// Medium avatar properties.
+  /// The properties of the medium MoonAvatar.
   final MoonAvatarSizeProperties md;
 
-  /// Large avatar properties.
+  /// The properties of the large MoonAvatar.
   final MoonAvatarSizeProperties lg;
 
-  /// Extra large avatar properties.
+  /// The properties of the extra large MoonAvatar.
   final MoonAvatarSizeProperties xl;
 
-  /// (2x) Extra large avatar properties.
+  /// The properties of the (2x) extra large MoonAvatar.
   final MoonAvatarSizeProperties x2l;
 
   MoonAvatarSizes({

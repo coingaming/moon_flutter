@@ -5,28 +5,28 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with DiagnosticableTreeMixin {
-  /// Border color of the selected auth input field.
+  /// The border color of the selected MoonAuthCode input field.
   final Color selectedBorderColor;
 
-  /// Border color of the active auth input field which has input, but is not selected.
+  /// The border color of the MoonAuthCode input field with input.
   final Color activeBorderColor;
 
-  /// Border color of the inactive auth input field which has no input.
+  /// The border color of the MoonAuthCode input field without input.
   final Color inactiveBorderColor;
 
-  /// Border color of the auth input field in error mode.
+  /// The border color of the MoonAuthCode input field in error state.
   final Color errorBorderColor;
 
-  /// Fill color of the selected auth input field.
+  /// The fill color of the selected MoonAuthCode input field.
   final Color selectedFillColor;
 
-  /// Fill color of the active auth input field which has input, but is not selected.
+  /// The fill color of the MoonAuthCode input field with input.
   final Color activeFillColor;
 
-  /// Fill color of the inactive auth input field which has no input.
+  /// The fill color of the MoonAuthCode input field without input.
   final Color inactiveFillColor;
 
-  /// AuthCode text color.
+  /// The text color of the MoonAuthCode.
   final Color textColor;
 
   const MoonAuthCodeColors({

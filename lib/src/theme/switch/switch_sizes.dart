@@ -6,16 +6,16 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// (2x) Extra small switch properties.
+  /// The properties of the (2x) extra small MoonSwitch.
   final MoonSwitchSizeProperties x2s;
 
-  /// Extra small switch properties.
+  /// The properties of the extra small MoonSwitch.
   final MoonSwitchSizeProperties xs;
 
-  /// Small switch properties.
+  /// The properties of the small MoonSwitch.
   final MoonSwitchSizeProperties sm;
 
   MoonSwitchSizes({

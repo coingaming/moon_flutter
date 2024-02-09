@@ -5,13 +5,13 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonTooltipColors extends ThemeExtension<MoonTooltipColors> with DiagnosticableTreeMixin {
-  /// Tooltip text color.
+  /// The text color of the MoonTooltip.
   final Color textColor;
 
-  /// Tooltip icon color.
+  /// The icon color of the MoonTooltip.
   final Color iconColor;
 
-  /// Tooltip background color.
+  /// The background color of the MoonTooltip.
   final Color backgroundColor;
 
   const MoonTooltipColors({

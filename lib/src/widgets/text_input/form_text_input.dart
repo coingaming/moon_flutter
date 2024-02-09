@@ -13,18 +13,17 @@ typedef MoonFormTextInputValidationStatusCallback = void Function(String? valida
 class MoonFormTextInput extends FormField<String> {
   final MoonFormTextInputConfiguration configuration;
 
-  /// Creates a [MoonFormTextInput] that contains a [MoonTextInput].
+  /// Creates a Moon Design [MoonFormTextInput] with a [MoonTextInput].
   ///
-  /// When a [controller] is specified, [initialValue] must be null (the default). If [controller] is null,
-  /// then a [TextEditingController] will be constructed automatically and its `text` will be initialized to
-  /// [initialValue] or the empty string.
+  /// If a [controller] is specified, [initialValue] must be null. If [controller] is null,
+  /// a [TextEditingController] is automatically created with its `text` initialized to [initialValue] or an empty string.
   ///
-  /// For documentation about the various parameters, see the [MoonTextInput] class.
+  /// See [MoonTextInput] documentation for details on various parameters.
   ///
-  /// Note that validator errors have precedence over passed in [errorText].
+  /// Validator errors take precedence over the provided [errorText].
   MoonFormTextInput({
     super.key,
-    // MDS props
+    // Moon Design system properties.
     bool hasFloatingLabel = false,
     BorderRadiusGeometry? borderRadius,
     Color? backgroundColor,
@@ -54,7 +53,7 @@ class MoonFormTextInput extends FormField<String> {
     Widget? trailing,
     Widget? helper,
 
-    // Flutter props
+    // Flutter properties.
     this.controller,
     FocusNode? focusNode,
     TextInputType? keyboardType,
@@ -107,7 +106,7 @@ class MoonFormTextInput extends FormField<String> {
     SpellCheckConfiguration? spellCheckConfiguration,
     TextMagnifierConfiguration? magnifierConfiguration,
 
-    // Flutter missing props
+    // Flutter missing properties.
     AppPrivateCommandCallback? onAppPrivateCommand,
     bool canRequestFocus = true,
     bool scribbleEnabled = true,
@@ -124,11 +123,11 @@ class MoonFormTextInput extends FormField<String> {
         assert(minLines == null || minLines > 0),
         assert(
           (maxLines == null) || (minLines == null) || (maxLines >= minLines),
-          "minLines can't be greater than maxLines",
+          "MinLines can not be greater than maxLines",
         ),
         assert(
           !expands || (maxLines == null && minLines == null),
-          "minLines and maxLines must be null when expands is true.",
+          "MinLines and maxLines must be null when 'expands' is true.",
         ),
         assert(!obscureText || maxLines == 1, "Obscured fields cannot be multiline."),
         assert(maxLength == null || maxLength == MoonTextInput.noMaxLength || maxLength > 0),
@@ -332,7 +331,7 @@ class MoonFormTextInput extends FormField<String> {
           },
         );
 
-  /// Controls the text being edited.
+  /// Controls the input text.
   ///
   /// If null, this widget will create its own [TextEditingController] and initialize its [TextEditingController.text]
   /// with [initialValue].
@@ -361,7 +360,7 @@ class _MoonFormTextInputState extends FormFieldState<String> {
     if (_controller != null) {
       _registerController();
     }
-    // Make sure to update the internal [FormFieldState] value to sync up with text editing controller value.
+    // Update the internal [FormFieldState] value to synchronize with the text editing controller value.
     setValue(_effectiveController.text);
   }
 
@@ -428,18 +427,15 @@ class _MoonFormTextInputState extends FormFieldState<String> {
 
   @override
   void reset() {
-    // setState will be called in the superclass, so even though state is being manipulated, no setState call is needed
-    // here.
+    // SetState is handled in the superclass, no additional call needed here.
     _effectiveController.text = widget.initialValue ?? '';
     super.reset();
   }
 
   void _handleControllerChanged() {
-    // Suppress changes that originated from within this class.
-    //
-    // In the case where a controller has been passed in to this widget, we register this change listener. In these
-    // cases, we'll also receive change notifications for changes originating from within this class -- for example,
-    // the reset() method. In such cases, the FormField value will already have been set.
+    // Suppress changes originating from within this class.
+    // When a controller is provided, this change listener is registered. In such cases, we may receive notifications
+    // for changes within this class (e.g., the reset() method), but the FormField value will already be set.
     if (_effectiveController.text != value) {
       didChange(_effectiveController.text);
     }
@@ -447,7 +443,7 @@ class _MoonFormTextInputState extends FormFieldState<String> {
 }
 
 class MoonFormTextInputConfiguration {
-  // MDS props
+  // Moon Design System properties.
   final bool hasFloatingLabel;
   final BorderRadiusGeometry? borderRadius;
   final Color? backgroundColor;
@@ -477,7 +473,7 @@ class MoonFormTextInputConfiguration {
   final Widget? trailing;
   final Widget? helper;
 
-  // Flutter props
+  // Flutter properties.
   final TextMagnifierConfiguration? magnifierConfiguration;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -541,7 +537,7 @@ class MoonFormTextInputConfiguration {
   final AutovalidateMode autovalidateMode;
 
   const MoonFormTextInputConfiguration({
-    //MDS props
+    // Moon Design System properties.
     this.hasFloatingLabel = false,
     this.borderRadius,
     this.backgroundColor,
@@ -570,7 +566,8 @@ class MoonFormTextInputConfiguration {
     this.leading,
     this.trailing,
     this.helper,
-    // Flutter props
+
+    // Flutter properties.
     this.controller,
     this.focusNode,
     this.undoController,

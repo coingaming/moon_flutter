@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonSwitchShadows extends ThemeExtension<MoonSwitchShadows> with DiagnosticableTreeMixin {
-  /// Switch thumb shadows.
+  /// The list of shadows applied to the MoonSwitch thumb.
   final List<BoxShadow> thumbShadows;
 
   const MoonSwitchShadows({

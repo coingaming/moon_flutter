@@ -27,10 +27,10 @@ class MoonToast {
   static Timer? _timer;
   static OverlayEntry? _entry;
 
-  /// MDS toast.
+  /// Creates a Moon Design toast.
   const MoonToast();
 
-  /// Show a MoonToast.
+  /// Displays a Moon Design toast.
   static void show(
     BuildContext context, {
     /// The alignment (position) of the toast.
@@ -39,7 +39,7 @@ class MoonToast {
     /// Whether the toast is persistent (attaches to root navigator).
     bool isPersistent = true,
 
-    /// Whether the toast respects the SafeArea (eg takes into account notches and native system bars).
+    /// Whether to use the [SafeArea] for the toast (takes into account notches and native system bars).
     bool useSafeArea = true,
 
     /// The border radius of the toast.
@@ -48,53 +48,53 @@ class MoonToast {
     /// The background color of the toast.
     Color? backgroundColor,
 
-    /// The horizontal gap between toast leading, trailing and label.
+    /// The horizontal gap between the leading, label and trailing widgets of the toast.
     double? horizontalGap,
 
-    /// The vertical gap between toast header and content.
+    /// The vertical gap between the toast header and content.
     double? verticalGap,
 
-    /// The width of the toast. If null the toast will be as wide as its children.
+    /// The width of the toast. If not specified, adjusts automatically to fit its child elements.
     double? width,
 
-    /// Toast display duration.
+    /// The duration to display the toast.
     Duration? displayDuration,
 
-    /// Toast transition duration (show animation).
+    /// The duration of the toast transition animation (slide in or out).
     Duration? transitionDuration,
 
-    /// Toast transition curve (show animation).
+    /// The curve of the toast transition animation (slide in or out).
     Curve? transitionCurve,
 
-    /// The margin around toast.
+    /// The margin of the toast.
     EdgeInsetsGeometry? margin,
 
-    /// The padding around toast children.
+    /// The padding of the toast.
     EdgeInsetsGeometry? padding,
 
-    /// Toast shadows.
+    /// The list of shadows applied to the toast.
     List<BoxShadow>? toastShadows,
 
-    /// The variant of the toast. Inverted variant flips the color scheme from theming, eg instead of light colors,
-    /// uses dark colors.
+    /// The theming color scheme variant for the toast.
+    /// Inverted variant flips the theming color scheme (uses dark colors instead of light colors).
     MoonToastVariant variant = MoonToastVariant.original,
 
-    /// Custom decoration for the toast.
+    /// The custom decoration of the toast.
     Decoration? decoration,
 
     /// The semantic label for the toast.
     String? semanticLabel,
 
-    /// The widget in the leading slot of the toast.
+    /// The widget to display before the label widget of the toast.
     Widget? leading,
 
-    /// The widget in the label slot of the toast.
+    /// The primary content of the toast widget.
     required Widget label,
 
-    /// The widget in the trailing slot of the toast.
+    /// The widget to display after the label widget of the toast.
     Widget? trailing,
 
-    /// The widget in the content slot of the toast.
+    /// The widget to display below the toast header.
     Widget? content,
   }) {
     final BorderRadiusGeometry effectiveBorderRadius =

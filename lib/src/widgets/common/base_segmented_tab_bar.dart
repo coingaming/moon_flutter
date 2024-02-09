@@ -8,6 +8,7 @@ class BaseSegmentedTabBar extends StatefulWidget {
   final ValueChanged<int> valueChanged;
   final List<Widget> children;
 
+  /// Creates a Moon Design base segmented tab bar.
   const BaseSegmentedTabBar({
     super.key,
     required this.isExpanded,
@@ -57,12 +58,13 @@ class _BaseSegmentedTabBarState extends State<BaseSegmentedTabBar> with TickerPr
   @override
   void dispose() {
     _controller = null;
-    // We don't own the _controller Animation, so it's not disposed here.
+    // Since the _controller's animation is not owned by this widget, it is not disposed here.
     super.dispose();
   }
 
   void _handleTap(int index) {
     assert(index >= 0 && index < widget.children.length);
+
     _controller!.index = index;
     widget.valueChanged.call(index);
   }

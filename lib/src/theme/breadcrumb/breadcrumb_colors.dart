@@ -4,13 +4,13 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonBreadcrumbColors extends ThemeExtension<MoonBreadcrumbColors> with DiagnosticableTreeMixin {
-  /// The icon and text color of the MoonBreadcrumb's item.
+  /// The icon and text color of the MoonBreadcrumb item.
   final Color itemColor;
 
-  /// The icon and text color of the MoonBreadcrumb's current item.
+  /// The icon and text color of the current MoonBreadcrumb item.
   final Color? currentItemColor;
 
-  /// The icon and text color of the MoonBreadcrumb's item on hover.
+  /// The icon and text color of the MoonBreadcrumb item on hover.
   final Color? hoverEffectColor;
 
   const MoonBreadcrumbColors({

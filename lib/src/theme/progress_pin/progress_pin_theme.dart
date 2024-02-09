@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonProgressPinTheme extends ThemeExtension<MoonProgressPinTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Progress pin colors.
+  /// The colors of the MoonProgressPin.
   final MoonProgressPinColors colors;
 
-  /// Progress pin properties.
+  /// The properties of the MoonProgressPin.
   final MoonProgressPinProperties properties;
 
   MoonProgressPinTheme({

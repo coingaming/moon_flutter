@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/widgets/segmented_control/segment_style.dart';
 
 class Segment {
-  /// {@macro flutter.widgets.Focus.autofocus}.
+  /// {@macro flutter.widgets.Focus.autofocus}
   final bool autoFocus;
 
-  /// Whether this segment should be focusable.
+  /// Whether the segment is focusable.
   final bool isFocusable;
 
-  /// Whether this segment should show a focus effect.
+  /// Whether to show a focus outline effect when the segment is focused.
   final bool showFocusEffect;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
   /// The styling options for the segment.
@@ -21,18 +21,19 @@ class Segment {
   /// The semantic label for the segment.
   final String? semanticLabel;
 
-  /// Callback that returns boolean value if segment is currently selected or not.
+  /// The callback that returns the current selection status of the segment as a boolean value.
   final ValueChanged<bool>? isSelected;
 
-  /// The widget in the leading slot of the segment.
+  /// The widget to display before the [label] widget of the segment.
   final Widget? leading;
 
-  /// The widget in the label slot of the segment.
+  /// The primary content of the segment widget.
   final Widget? label;
 
-  /// The widget in the trailing slot of the segment.
+  /// The widget to display after the [label] widget of the segment.
   final Widget? trailing;
 
+  /// Creates a Moon Design segment.
   const Segment({
     this.autoFocus = false,
     this.isFocusable = true,

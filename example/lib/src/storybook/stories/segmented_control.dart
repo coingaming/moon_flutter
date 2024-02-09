@@ -35,7 +35,7 @@ class SegmentedControlStory extends StatelessWidget {
 
     final selectedSegmentColorKnob = context.knobs.nullable.options(
       label: "selectedSegmentColor",
-      description: "MoonColors variants for selected segment.",
+      description: "MoonColors variants for MoonSegmentedControl selected segment.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -46,7 +46,7 @@ class SegmentedControlStory extends StatelessWidget {
 
     final textColorKnob = context.knobs.nullable.options(
       label: "textColor",
-      description: "MoonColors variants for default text.",
+      description: "MoonColors variants for MoonSegmentedControl default text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -57,7 +57,7 @@ class SegmentedControlStory extends StatelessWidget {
 
     final selectedTextColorKnob = context.knobs.nullable.options(
       label: "selectedTextColor",
-      description: "MoonColors variants for selected segment text.",
+      description: "MoonColors variants for MoonSegmentedControl selected segment text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -133,7 +133,7 @@ class SegmentedControlStory extends StatelessWidget {
         child: Column(
           children: [
             const TextDivider(
-              text: "Default MoonSegmentedControl",
+              text: "MoonSegmentedControl",
               paddingTop: 0,
             ),
             Column(
@@ -166,7 +166,7 @@ class SegmentedControlStory extends StatelessWidget {
                     ),
                   ],
                 ),
-                const TextDivider(text: "Icon MoonSegmentedControl"),
+                const TextDivider(text: "MoonSegmentedControl with icons"),
                 MoonSegmentedControl(
                   isDisabled: isDisabledKnob,
                   isExpanded: isExpandedKnob,

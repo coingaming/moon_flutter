@@ -7,7 +7,7 @@ import 'package:moon_design/src/utils/squircle/processed_squircle_radius.dart';
 import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class MoonSquircleBorderRadius extends BorderRadius {
-  /// A border radius with all zero radii.
+  /// The border radius with zero radii.
   static const MoonSquircleBorderRadius zero = MoonSquircleBorderRadius.all(MoonSquircleRadius.zero);
 
   /// The top-left [MoonSquircleRadius].
@@ -28,7 +28,7 @@ class MoonSquircleBorderRadius extends BorderRadius {
 
   MoonSquircleBorderRadius({
     required double cornerRadius,
-    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA for some reason. So we use 0.9 instead.
+    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA. Hence, we use 0.9 instead to avoid this issue.
     double cornerSmoothing = 0.9,
   }) : this.only(
           topLeft: MoonSquircleRadius(
@@ -49,7 +49,7 @@ class MoonSquircleBorderRadius extends BorderRadius {
           ),
         );
 
-  /// Creates a border radius where all radii are [radius].
+  /// Creates a border radius with all radii set to [radius].
   const MoonSquircleBorderRadius.all(MoonSquircleRadius radius)
       : this.only(
           topLeft: radius,
@@ -58,7 +58,7 @@ class MoonSquircleBorderRadius extends BorderRadius {
           bottomRight: radius,
         );
 
-  /// Creates a vertically symmetric border radius where the top and bottom
+  /// Creates a border radius with vertical symmetry, ensuring that the top and bottom
   /// sides of the rectangle have the same radii.
   const MoonSquircleBorderRadius.vertical({
     MoonSquircleRadius top = MoonSquircleRadius.zero,
@@ -70,7 +70,7 @@ class MoonSquircleBorderRadius extends BorderRadius {
           bottomRight: bottom,
         );
 
-  /// Creates a horizontally symmetrical border radius where the left and right
+  /// Creates a border radius with horizontal symmetry, ensuring that the left and right
   /// sides of the rectangle have the same radii.
   const MoonSquircleBorderRadius.horizontal({
     MoonSquircleRadius left = MoonSquircleRadius.zero,
@@ -82,8 +82,8 @@ class MoonSquircleBorderRadius extends BorderRadius {
           bottomRight: right,
         );
 
-  /// Creates a border radius with only the given non-zero values. The other
-  /// corners will be right angles.
+  /// Creates a border radius with only the provided non-zero values, resulting in
+  /// right angles for the other corners.
   const MoonSquircleBorderRadius.only({
     this.topLeft = MoonSquircleRadius.zero,
     this.topRight = MoonSquircleRadius.zero,
@@ -96,7 +96,7 @@ class MoonSquircleBorderRadius extends BorderRadius {
           bottomLeft: bottomLeft,
         );
 
-  /// Needed by internals of Flutter framework.
+  /// Required by Flutter framework internals for proper functioning.
   Radius get _topLeft => topLeft;
   Radius get _topRight => topRight;
   Radius get _bottomLeft => bottomLeft;
@@ -106,8 +106,7 @@ class MoonSquircleBorderRadius extends BorderRadius {
   Radius get _bottomStart => Radius.zero;
   Radius get _bottomEnd => Radius.zero;
 
-  /// Returns a copy of this BorderRadius with the given fields replaced with
-  /// the new values.
+  /// Returns a copy of this BorderRadius with the given fields replaced with the new values.
   @override
   MoonSquircleBorderRadius copyWith({
     Radius? topLeft,
@@ -130,7 +129,7 @@ class MoonSquircleBorderRadius extends BorderRadius {
 
     final result = Path();
 
-    /// Calculating only if values are different
+    /// Calculating only if values are different.
     final processedTopLeft = ProcessedSquircleRadius(
       topLeft,
       width: width,

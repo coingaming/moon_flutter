@@ -81,7 +81,7 @@ class _DropdownStoryState extends State<DropdownStory> {
 
     final distanceToTargetKnob = context.knobs.nullable.slider(
       label: "distanceToTarget",
-      description: "Set the distance to target child widget.",
+      description: "Distance to target child widget.",
       enabled: false,
       initial: 8,
       max: 100,
@@ -89,17 +89,17 @@ class _DropdownStoryState extends State<DropdownStory> {
 
     final showShadowKnob = context.knobs.boolean(
       label: "Show shadow",
-      description: "Show shadows under MoonDropdown.",
+      description: "Show shadows for MoonDropdown.",
       initial: true,
     );
 
     final constrainWidthToChildKnob = context.knobs.boolean(
       label: "constrainWidthToChild",
-      description: "Constrain the width of the MoonDropdown to be same as the child (target).",
+      description: "Constrain the width of MoonDropdown to be the same as the child (target).",
       initial: true,
     );
 
-    // Used to avoid the stale closure within callbacks in Story
+    // Used to avoid the stale closure within callbacks in Story.
     final colorPiccolo = context.moonColors!.piccolo;
     final colorKrillin = context.moonColors!.krillin;
     final colorRoshi100 = context.moonColors!.roshi;
@@ -112,7 +112,7 @@ class _DropdownStoryState extends State<DropdownStory> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextDivider(text: "Dropdown with multiple choices"),
+            const TextDivider(text: "MoonDropdown with multiple choices"),
             MoonDropdown(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               show: _showChoices,
@@ -189,7 +189,7 @@ class _DropdownStoryState extends State<DropdownStory> {
               ),
             ),
             const SizedBox(height: 32),
-            const TextDivider(text: "Dropdown usage as menu"),
+            const TextDivider(text: "MoonDropdown as a menu"),
             MoonDropdown(
               show: _showMenu,
               groupId: _groupId,

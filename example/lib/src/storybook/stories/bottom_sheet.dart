@@ -42,7 +42,7 @@ class BottomSheetStory extends StatelessWidget {
 
     final heightKnob = context.knobs.nullable.slider(
       label: "height",
-      description: "Height of the bottomsheet.",
+      description: "Height of MoonBottomSheet.",
       enabled: false,
       initial: 0.64,
       min: 0.1,

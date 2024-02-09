@@ -23,10 +23,10 @@ class ProcessedSquircleRadius {
     required double width,
     required double height,
   }) {
-    /// Constant factor to convert and angle from degrees to radians.
+    /// Constant factor to convert an angle from degrees to radians.
     const double degrees2Radians = math.pi / 180.0;
 
-    /// Convert [degrees] to radians.
+    /// Convert degrees to radians.
     double radians(double degrees) => degrees * degrees2Radians;
 
     final cornerSmoothing = radius.cornerSmoothing;
@@ -35,7 +35,7 @@ class ProcessedSquircleRadius {
     final maxRadius = math.min(width, height) / 2;
     cornerRadius = math.min(cornerRadius, maxRadius);
 
-    // 12.2 from the article
+    // 12.2 from the article.
     final p = math.min((1 + cornerSmoothing) * cornerRadius, maxRadius);
 
     final double angleAlpha;
@@ -45,11 +45,10 @@ class ProcessedSquircleRadius {
       angleBeta = 90 * (1 - cornerSmoothing);
       angleAlpha = 45 * cornerSmoothing;
     } else {
-      // When `cornerRadius` is larger and `maxRadius / 2`,
-      // these angles also depend on `cornerRadius` and `maxRadius / 2`
+      // When 'cornerRadius' exceeds 'maxRadius / 2', these angles also depend on 'cornerRadius' and 'maxRadius / 2'.
       //
-      // I did a few tests in Figma and this code generated similar but not identical results
-      // `diffRatio` was called `change_percentage` in the orignal code
+      // After conducting several tests in Figma, this code produced similar, albeit not identical, results.
+      // The 'diffRatio' was referred to as 'change_percentage' in the original code.
       final diffRatio = (cornerRadius - maxRadius / 2) / (maxRadius / 2);
 
       angleBeta = 90 * (1 - cornerSmoothing * (1 - diffRatio));
@@ -58,14 +57,14 @@ class ProcessedSquircleRadius {
 
     final angleTheta = (90 - angleBeta) / 2;
 
-    // This was called `h_longest` in the original code
-    // In the article this is the distance between 2 control points: P3 and P4
+    // In the original code, this was referred to as 'h_longest'.
+    // In the article, this represents the distance between two control points: P3 and P4.
     final p3ToP4Distance = cornerRadius * math.tan(radians(angleTheta / 2));
 
-    // This was called `l` in the original code
+    // In the original code, this was referred to as 'l'.
     final circularSectionLength = math.sin(radians(angleBeta / 2)) * cornerRadius * math.sqrt(2);
 
-    // a, b, c and d are from 11.1 in the article
+    // The variables a, b, c, and d correspond to the values mentioned in section 11.1 of the article.
     final c = p3ToP4Distance * math.cos(radians(angleAlpha));
     final d = c * math.tan(radians(angleAlpha));
     final b = (p - circularSectionLength - c - d) / 3;

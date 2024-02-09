@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// TextArea colors.
+  /// The colors of the MoonTextArea.
   final MoonTextAreaColors colors;
 
-  /// TextArea properties.
+  /// The properties of the MoonTextArea.
   final MoonTextAreaProperties properties;
 
   MoonTextAreaTheme({

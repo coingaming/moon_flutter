@@ -21,52 +21,55 @@ class MoonChip extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// Whether the chip should be focusable.
+  /// Whether the chip is focusable.
   final bool isFocusable;
 
-  /// Whether this chip should ensure that it has a minimal touch target size.
+  /// Whether to ensure a minimum touch target size for the chip.
   final bool ensureMinimalTouchTargetSize;
 
-  /// Whether the chip is active/selected.
+  /// Whether the chip is active (selected).
   final bool isActive;
 
-  /// Whether the chip should show a border.
+  /// Whether to show a border around the chip.
   final bool showBorder;
 
-  /// Whether the chip should show a focus effect.
+  /// Whether to show a focus outline effect when the chip is focused.
   final bool showFocusEffect;
 
   /// The border radius of the chip.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The border and text color of the chip when active.
+  /// The text and border color of the chip when [isActive] is true.
   final Color? activeColor;
 
   /// The background color of the chip.
   final Color? backgroundColor;
 
-  /// The background color of the chip when active.
+  /// The background color of the chip when [isActive] is true.
   final Color? activeBackgroundColor;
 
-  /// The border color of the  chip.
+  /// The border color of the chip.
   final Color? borderColor;
 
-  /// The color of the focus effect.
+  /// The color of the chip focus effect.
   final Color? focusEffectColor;
 
   /// The text color of the chip.
   final Color? textColor;
 
+  /// The custom decoration of the chip.
+  final Decoration? decoration;
+
   /// The border width of the chip.
   final double? borderWidth;
 
-  /// The opacity value of the chip when it is disabled.
+  /// The opacity value of the disabled chip.
   final double? disabledOpacityValue;
 
-  /// The extent of the focus effect.
+  /// The extent of the chip focus effect.
   final double? focusEffectExtent;
 
-  /// The gap between the leading or trailing and the label widgets.
+  /// The gap between the [leading], [label] and [trailing] widgets of the chip.
   final double? gap;
 
   /// The height of the chip.
@@ -75,32 +78,29 @@ class MoonChip extends StatefulWidget {
   /// The width of the chip.
   final double? width;
 
-  /// The minimum size of the touch target.
+  /// The minimum size of the chip touch target.
   final double minTouchTargetSize;
 
-  /// The duration of the active effect.
+  /// The duration of the chip active state effect.
   final Duration? activeEffectDuration;
 
-  /// The duration of the focus effect.
+  /// The duration of the chip focus effect.
   final Duration? focusEffectDuration;
 
-  /// The curve of the hover effect.
+  /// The curve of the chip active state effect.
   final Curve? activeEffectCurve;
 
-  /// The curve of the focus effect.
+  /// The curve of the chip focus effect.
   final Curve? focusEffectCurve;
 
   /// The padding of the chip.
   final EdgeInsetsGeometry? padding;
 
-  /// {@macro flutter.widgets.Focus.focusNode}.
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
   /// The size of the chip.
   final MoonChipSize? chipSize;
-
-  /// Custom decoration for the chip.
-  final Decoration? decoration;
 
   /// The semantic label for the chip.
   final String? semanticLabel;
@@ -111,16 +111,20 @@ class MoonChip extends StatefulWidget {
   /// The callback that is called when the chip is long-pressed.
   final VoidCallback? onLongPress;
 
-  /// The widget in the leading slot of the chip.
+  /// The widget to display before the [label] widget of the chip.
   final Widget? leading;
 
-  /// The widget in the label slot of the chip.
+  /// The primary content of the chip widget.
   final Widget? label;
 
-  /// The widget in the trailing slot of the chip.
+  /// The widget to display after the [label] widget of the chip.
   final Widget? trailing;
 
-  /// MDS chip widget
+  /// Creates a Moon Design chip.
+  ///
+  /// See also:
+  ///
+  ///   * [MoonChip.text], Moon Design text chip.
   const MoonChip({
     super.key,
     this.autofocus = false,
@@ -136,6 +140,7 @@ class MoonChip extends StatefulWidget {
     this.borderColor,
     this.focusEffectColor,
     this.textColor,
+    this.decoration,
     this.borderWidth,
     this.disabledOpacityValue,
     this.focusEffectExtent,
@@ -150,7 +155,6 @@ class MoonChip extends StatefulWidget {
     this.padding,
     this.focusNode,
     this.chipSize,
-    this.decoration,
     this.semanticLabel,
     this.onTap,
     this.onLongPress,
@@ -159,7 +163,7 @@ class MoonChip extends StatefulWidget {
     this.trailing,
   });
 
-  /// MDS chip widget text variant
+  /// Creates a Moon Design text chip.
   const MoonChip.text({
     super.key,
     this.autofocus = false,

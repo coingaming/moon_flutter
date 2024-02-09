@@ -5,25 +5,25 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonButtonColors extends ThemeExtension<MoonButtonColors> with DiagnosticableTreeMixin {
-  /// Button border color.
+  /// The border color of the MoonButton.
   final Color borderColor;
 
-  /// Button text color.
+  /// The text color of the MoonButton.
   final Color textColor;
 
-  /// Filled button background color.
+  /// The background color of the MoonButton filled variant.
   final Color filledVariantBackgroundColor;
 
-  /// Filled button text color.
+  /// The text color of the MoonButton filled variant.
   final Color filledVariantTextColor;
 
-  /// Text button focus effect color.
+  /// The focus effect color of the MoonButton text variant.
   final Color textVariantFocusColor;
 
-  /// Text button hover effect color.
+  /// The hover effect color of the MoonButton text variant.
   final Color textVariantHoverColor;
 
-  /// Text button text color.
+  /// The text color of the MoonButton text variant.
   final Color textVariantTextColor;
 
   const MoonButtonColors({

@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with DiagnosticableTreeMixin {
-  /// Primary hover effect color.
+class MoonHoverEffect extends ThemeExtension<MoonHoverEffect> with DiagnosticableTreeMixin {
+  /// The color of the primary hover effect.
   final Color primaryHoverColor;
 
-  /// Secondary hover effect color.
+  /// The color of the secondary hover effect.
   final Color secondaryHoverColor;
 
-  /// Hover effect duration.
+  /// The duration of the hover effect.
   final Duration hoverDuration;
 
-  /// Hover effect curve.
+  /// The curve of the hover effect.
   final Curve hoverCurve;
 
-  const MoonHoverEffects({
+  const MoonHoverEffect({
     required this.primaryHoverColor,
     required this.secondaryHoverColor,
     required this.hoverDuration,
@@ -25,13 +25,13 @@ class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with Diagnostica
   });
 
   @override
-  MoonHoverEffects copyWith({
+  MoonHoverEffect copyWith({
     Color? primaryHoverColor,
     Color? secondaryHoverColor,
     Duration? hoverDuration,
     Curve? hoverCurve,
   }) {
-    return MoonHoverEffects(
+    return MoonHoverEffect(
       primaryHoverColor: primaryHoverColor ?? this.primaryHoverColor,
       secondaryHoverColor: secondaryHoverColor ?? this.secondaryHoverColor,
       hoverDuration: hoverDuration ?? this.hoverDuration,
@@ -40,10 +40,10 @@ class MoonHoverEffects extends ThemeExtension<MoonHoverEffects> with Diagnostica
   }
 
   @override
-  MoonHoverEffects lerp(ThemeExtension<MoonHoverEffects>? other, double t) {
-    if (other is! MoonHoverEffects) return this;
+  MoonHoverEffect lerp(ThemeExtension<MoonHoverEffect>? other, double t) {
+    if (other is! MoonHoverEffect) return this;
 
-    return MoonHoverEffects(
+    return MoonHoverEffect(
       primaryHoverColor: colorPremulLerp(primaryHoverColor, other.primaryHoverColor, t)!,
       secondaryHoverColor: colorPremulLerp(secondaryHoverColor, other.secondaryHoverColor, t)!,
       hoverDuration: lerpDuration(hoverDuration, other.hoverDuration, t),

@@ -7,13 +7,13 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// DotIndicator colors.
+  /// The colors of the MoonDotIndicator.
   final MoonDotIndicatorColors colors;
 
-  /// DotIndicator properties.
+  /// The properties of the MoonDotIndicator.
   final MoonDotIndicatorProperties properties;
 
   MoonDotIndicatorTheme({

@@ -126,7 +126,7 @@ class ChipStory extends StatelessWidget {
         child: Column(
           children: [
             const TextDivider(
-              text: "Default MoonChip",
+              text: "MoonChip",
               paddingTop: 0,
             ),
             MoonChip(
@@ -156,7 +156,7 @@ class ChipStory extends StatelessWidget {
               label: showLabelKnob ? Text(customLabelTextKnob) : null,
               trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
             ),
-            const TextDivider(text: "Preset MoonChip"),
+            const TextDivider(text: "Customized MoonChip"),
             MoonChip(
               isActive: isActiveKnob,
               activeColor: context.moonColors!.dodoria,

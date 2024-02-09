@@ -13,82 +13,83 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonCarousel extends StatefulWidget {
-  /// Axis direction of the carousel. Defaults to `Axis.horizontal`.
+  /// The axis direction in which the carousel scrolls.
   final Axis axisDirection;
 
-  /// Whether to automatically scroll the carousel. Defaults to `false`.
+  /// Whether to enable the automatic scrolling for the carousel.
   final bool autoPlay;
 
-  /// Align selected item to the center of the viewport. When this is true, anchor property is ignored.
+  /// Whether to align the selected carousel item to the center of the viewport.
+  /// When set to true, the [anchor] property is ignored.
   final bool isCentered;
 
-  /// Whether to clamp `maxExtent` to be proportional with anchor. NOTE: This makes the carousel behave like [ListView]
-  /// in terms of how the `maxExtent` is calculated and makes the last item(s) unreachable for the purposes of
-  /// [onIndexChanged] callback.
+  /// Whether to limit the 'maxExtent' proportionally based on the [anchor].
   ///
-  /// Defaults to `false`.
+  /// This makes the carousel behave like a [ListView] in terms of how the 'maxExtent' is calculated
+  /// and makes the last carousel item(s) unreachable for the purposes of the [onIndexChanged] callback.
   final bool clampMaxExtent;
 
-  /// Whether to create an infinite looping list. Defaults to `true`.
+  /// Whether to enable infinite looping for the carousel items.
   final bool loop;
 
-  /// Where to place selected item in the viewport. Ranges from 0 to 1.
+  /// Positions the selected carousel item within the viewport. Values range from 0 to 1.
   ///
-  /// 0.0 means selected item is aligned to start of the viewport, and
-  /// 1.0 meaning selected item is aligned to end of the viewport.
-  /// Defaults to 0.0.
+  /// A value of 0.0 indicates that the selected item is aligned to the start of the viewport,
+  /// and a value of 1.0 indicates that it is aligned to the end of the viewport.
   ///
-  /// This property is ignored when isCentered is set to true.
+  /// This property is ignored when [isCentered] is set to true.
   final double anchor;
 
-  /// Gap between items in the viewport.
+  /// The gap between the carousel items.
   final double? gap;
 
-  /// Maximum width for single item in the viewport.
+  /// The maximum width for each carousel item in the viewport.
   final double itemExtent;
 
-  /// Multiply velocity of carousel scrolling by this factor. Defaults to `0.5`.
+  /// The factor to adjust and multiply the velocity of carousel scrolling.
   final double velocityFactor;
 
-  /// Carousel auto play delay between items.
+  /// The delay between the items in the carousel's automatic scrolling sequence.
   final Duration? autoPlayDelay;
 
-  /// Carousel transition duration (auto play duration).
+  /// The duration of the MoonCarousel [autoplay] transition animation.
   final Duration? transitionDuration;
 
-  /// Accordion transition curve (auto play curve).
+  /// The curve of the MoonCarousel [autoplay] transition animation.
   final Curve? transitionCurve;
 
-  /// Total items to build for the carousel.
+  /// The total number of items to build for the carousel.
   final int itemCount;
 
-  /// Scroll controller for [MoonCarousel].
+  /// The [ScrollController] used to control the carousel.
   final ScrollController? controller;
 
-  /// Physics for [MoonCarousel]. Defaults to [MoonCarouselScrollPhysics], which makes sure we always land on a
-  /// particular item after scrolling.
+  /// The scroll physics of the carousel.
+  ///
+  /// Defaults to [MoonCarouselScrollPhysics], which ensures that the carousel
+  /// always lands on a specific item after scrolling.
   final ScrollPhysics? physics;
 
-  /// Scroll behavior for [MoonCarousel].
+  /// The custom scroll behavior for the carousel.
   final ScrollBehavior? scrollBehavior;
 
-  /// Callback which is fired when item index has changed.
+  /// The callback that is called when the carousel item index has changed.
   final void Function(int index)? onIndexChanged;
 
-  /// For lazily building items in the viewport.
+  /// Builds carousel items lazily within the viewport.
   ///
-  /// When `loop: false`, `itemIndex` is equal to `realIndex` (i.e, index of element).
+  /// When [loop] is false, 'itemIndex' corresponds to 'realIndex' (i.e., the index of the element).
   ///
-  /// When `loop: true`, two indexes are exposed by the `itemBuilder`.
+  /// When [loop] is true, two indexes are exposed by the 'itemBuilder'.
   ///
-  /// First one is the  `itemIndex`, that is the modded item index, i.e. for list of 10, position(11) = 1, and
-  /// position(-1) = 9.
+  /// The first is 'itemIndex', which represents the modded item index,
+  /// e.g., for a list of 10, 'position(11) = 1', and 'position(-1) = 9'.
   ///
-  /// Second one is the `realIndex`, that is the actual index, i.e. [..., -2, -1, 0, 1, 2, ...] in loop.
-  /// `realIndex` is necessary to support `jumpToItem` by tapping on it.
+  /// The second is 'realIndex', which represents the actual index, e.g., [..., -2, -1, 0, 1, 2, ...] in loop.
+  /// The 'realIndex' is essential to support 'jumpToItem' by tapping on it.
   final Widget Function(BuildContext context, int itemIndex, int realIndex) itemBuilder;
 
-  /// MDS Carousel widget.
+  /// Creates a Moon Design carousel.
   const MoonCarousel({
     super.key,
     this.axisDirection = Axis.horizontal,
@@ -126,7 +127,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
 
   late MoonCarouselScrollController _scrollController;
 
-  // Get the anchor for the viewport to place the item at the isCentered.
+  // Calculates the anchor position for the viewport to center the selected item when 'isCentered' is true.
   double _getCenteredAnchor(BoxConstraints constraints) {
     if (!widget.isCentered) return widget.anchor;
 
@@ -224,7 +225,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
         ? EdgeInsetsDirectional.only(end: _effectiveGap)
         : EdgeInsetsDirectional.only(bottom: _effectiveGap);
 
-    /// Delegate for lazily building items in the forward direction.
+    /// Delegate responsible for building items lazily in the forward direction as the viewport scrolls.
     final SliverChildDelegate childDelegate = SliverChildBuilderDelegate(
       (context, index) => Padding(
         padding: resolvedPadding,
@@ -233,7 +234,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
       childCount: widget.loop ? null : widget.itemCount,
     );
 
-    /// Delegate for lazily building items in the reverse direction.
+    /// Delegate responsible for building items lazily in the reverse direction as the viewport scrolls.
     final SliverChildDelegate? reversedChildDelegate = widget.loop
         ? SliverChildBuilderDelegate(
             (context, index) => Padding(
@@ -339,8 +340,8 @@ class _MoonCarouselState extends State<MoonCarousel> {
   }
 }
 
-/// Extends Scrollable to also include viewport children's itemExtent, itemCount, loop and other values.
-/// This is done so that the ScrollPosition and Physics can also access these values via scroll context.
+/// Extends Scrollable by including the viewport's itemExtent, itemCount, loop, and other values.
+/// This allows ScrollPosition and Physics to access these values directly from the scroll context.
 class _MoonCarouselScrollable extends Scrollable {
   final bool clampMaxExtent;
   final bool loop;
@@ -387,7 +388,9 @@ class _MoonCarouselScrollableState extends ScrollableState {
 
 /// Scroll controller for [MoonCarousel].
 class MoonCarouselScrollController extends ScrollController {
-  /// Initial item index for [MoonCarouselScrollController]. Defaults to `0`.
+  /// The initial carousel item index for [MoonCarouselScrollController].
+  ///
+  /// Defaults to '0'.
   final int initialItem;
 
   /// Scroll controller for [MoonCarousel].
@@ -400,7 +403,7 @@ class MoonCarouselScrollController extends ScrollController {
     _autoplayTimer?.cancel();
 
     _autoplayTimer = Timer.periodic(delay, (timer) {
-      // If at end of carousel, animate back to the beginning.
+      // When the carousel reaches the end, animate it back to the beginning.
       if (offset >= position.maxScrollExtent && !position.outOfRange) {
         animateToItem(0, duration: duration, curve: curve);
       } else {
@@ -419,14 +422,13 @@ class MoonCarouselScrollController extends ScrollController {
 
     super.dispose();
   }
-
-  /// Returns the selected item's index. If `loop: true`, then it returns the modded index value.
+  /// Returns the index of the currently selected item. If [MoonCarousel.loop] is true it provides the modded index value.
   int get selectedItem => _getTrueIndex(
         (position as _MoonCarouselScrollPosition).itemIndex,
         (position as _MoonCarouselScrollPosition).itemCount,
       );
 
-  /// Animate to specific item index.
+  /// Animate to the specified item index.
   Future<void> animateToItem(int itemIndex, {Duration? duration, Curve? curve}) async {
     if (!hasClients) return;
 
@@ -440,7 +442,7 @@ class MoonCarouselScrollController extends ScrollController {
     ]);
   }
 
-  /// Jump to specific item index.
+  /// Jump to the specified item index.
   void jumpToItem(int itemIndex) {
     for (final position in positions.cast<_MoonCarouselScrollPosition>()) {
       position.jumpTo(itemIndex * position.itemExtent);
@@ -486,13 +488,14 @@ class MoonCarouselScrollController extends ScrollController {
   }
 }
 
-/// Metrics for the [MoonCarouselScrollController].
+/// The metrics for the [MoonCarouselScrollController].
 class MoonCarouselExtentMetrics extends FixedScrollMetrics {
-  /// The scroll view's currently selected item index.
+  /// The index of the currently selected item within the scroll view.
   final int itemIndex;
 
-  /// This is an immutable snapshot of the current values of scroll positions. This can directly be accessed by
-  /// [ScrollNotification] to get currently selected real item index at any time.
+  /// Provides an immutable snapshot of the current scroll positions within the carousel.
+  /// This snapshot can be directly accessed by [ScrollNotification] to retrieve the currently selected
+  /// real item index at any given moment.
   MoonCarouselExtentMetrics({
     required super.minScrollExtent,
     required super.maxScrollExtent,
@@ -538,7 +541,7 @@ double _clipOffsetToScrollableRange(double offset, double minScrollExtent, doubl
   return math.min(math.max(offset, minScrollExtent), maxScrollExtent);
 }
 
-/// Get the modded item index from the real index.
+// Returns the modded item index from the real index.
 int _getTrueIndex(int currentIndex, int totalCount) {
   if (currentIndex >= 0) return currentIndex % totalCount;
 
@@ -633,12 +636,11 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext implem
   }
 }
 
-/// Physics for the [MoonCarousel].
+/// The physics for the [MoonCarousel].
 class MoonCarouselScrollPhysics extends ScrollPhysics {
-  /// Based on Flutter's [FixedExtentScrollPhysics]. Hence, it always lands on a particular item.
-  ///
-  /// If `loop: false`, friction is applied when user tries to go beyond viewport. The friction factor is calculated the
-  /// same  way as in [BouncingScrollPhysics].
+  /// Extends Flutter's [FixedExtentScrollPhysics] to implement carousel-specific behavior.
+  /// When [MoonCarousel.loop] is false, friction is applied when the user tries to scroll beyond the viewport.
+  /// The friction factor is calculated the same way as in [BouncingScrollPhysics].
   const MoonCarouselScrollPhysics({super.parent});
 
   @override
@@ -697,29 +699,31 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
     final _MoonCarouselScrollPosition metrics = position as _MoonCarouselScrollPosition;
 
     // Scenario 1:
-    // If we're out of range and not headed back in range, defer to the parent ballistics, which should put us back in
-    // range at the scrollable's boundary.
+    // If the carousel is out of range and not returning to range, we defer to the parent ballistics to bring
+    // the carousel back into range at the scrollable boundary.
     if ((velocity <= 0.0 && metrics.pixels <= metrics.minScrollExtent) ||
         (velocity >= 0.0 && metrics.pixels >= metrics.maxScrollExtent)) {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
-    // Create a test simulation to see where it would have ballistically fallen naturally without settling onto items.
+    // Perform a test simulation to determine the carousel's ballistic trajectory without
+    // interference from carousel items, simulating a natural fall.
     final Simulation? testFrictionSimulation = super.createBallisticSimulation(
       metrics,
       velocity * math.min(metrics.velocityFactor + 0.15, 1.0),
     );
 
     // Scenario 2:
-    // If it was going to end up past the scroll extent, defer back to the parent physics' ballistics again which should
-    // put us on the scrollable's boundary.
+    // If the simulated trajectory would have taken the carousel beyond the scroll extent,
+    // defer back to the parent physics' ballistics to prevent it from overshooting the scrollable boundary.
     if (testFrictionSimulation != null &&
         (testFrictionSimulation.x(double.infinity) == metrics.minScrollExtent ||
             testFrictionSimulation.x(double.infinity) == metrics.maxScrollExtent)) {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
-    // From the natural final position, find the nearest item it should have settled to.
+    // From the simulated final position, identify the nearest item the carousel should have settled
+    // onto based on its natural trajectory.
     final int settlingItemIndex = _getItemFromOffset(
       itemExtent: metrics.itemExtent,
       minScrollExtent: metrics.minScrollExtent,
@@ -730,7 +734,8 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
     final double settlingPixels = settlingItemIndex * metrics.itemExtent;
 
     // Scenario 3:
-    // If there's no velocity and we're already at where we intend to land, do nothing.
+    // If the carousel has zero velocity and is already at the position it should settle onto,
+    // there's no need for further action.
     final Tolerance tolerance = toleranceFor(metrics);
 
     if (velocity.abs() < tolerance.velocity && (settlingPixels - metrics.pixels).abs() < tolerance.distance) {
@@ -738,8 +743,8 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
     }
 
     // Scenario 4:
-    // If we're going to end back at the same item because initial velocity is too low to break past it, use a spring
-    // simulation to get back.
+    // If the simulated trajectory indicates the carousel is likely to return to its initial position due to
+    // a lack of sufficient initial velocity, use a spring simulation.
     if (settlingItemIndex == metrics.itemIndex) {
       return SpringSimulation(
         spring,
@@ -751,8 +756,8 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
     }
 
     // Scenario 5:
-    // Create a new friction simulation except the drag will be tweaked to land exactly on the item closest to the
-    // natural stopping point.
+    // Create a new friction simulation, adjusting the drag force to ensure the carousel transitions
+    // to the nearest item, aligning with its natural stopping point.
     return FrictionSimulation.through(
       metrics.pixels,
       settlingPixels,

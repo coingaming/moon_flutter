@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 
 class MoonBreadcrumbItem {
-  /// The gap between the breadcrumb item's [leading], [label] and [trailing] widgets.
+  /// The gap between the [leading], [label] and [trailing] widgets of the breadcrumb item.
   final double? gap;
 
-  /// The semantic label of the breadcrumb's item.
+  /// The semantic label for the breadcrumb item.
   final String? semanticLabel;
 
-  /// Called when the breadcrumb's item is tapped or pressed.
-  /// If null, the breadcrumb's item is disabled.
+  /// The callback that is called when the breadcrumb item is tapped or pressed.
+  /// If null, the breadcrumb item is disabled.
   final VoidCallback? onTap;
 
-  /// The widget placed before the breadcrumb item's [label] widget.
+  /// The widget to display before the [label] widget of the breadcrumb item.
   final Widget? leading;
 
-  /// The main content of the breadcrumb's item.
+  /// The primary content of the breadcrumb item.
   final Widget label;
 
-  /// The widget placed after the breadcrumb item's [label] widget.
+  /// The widget to display after the [label] widget of the breadcrumb item.
   final Widget? trailing;
 
+  /// Creates a Moon Design breadcrumb item.
   const MoonBreadcrumbItem({
     this.gap,
     this.semanticLabel,

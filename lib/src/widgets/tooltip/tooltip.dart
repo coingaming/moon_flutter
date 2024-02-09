@@ -23,29 +23,29 @@ enum MoonTooltipPosition {
 }
 
 class MoonTooltip extends StatefulWidget {
-  // This is required so only one tooltip is shown at a time.
+  // This is required to show only one tooltip at a time.
   static final List<_MoonTooltipState> _openedTooltips = [];
 
   /// Whether the tooltip has an arrow (tail).
   final bool hasArrow;
 
-  /// Whether the tooltip should be dismissed whenever a user taps on it. For more control when to dismiss the tooltip
-  /// rely on the [show] property and [onTap] handler. Defaults to [true].
+  /// Whether to hide (dismiss) the tooltip on tap. Defaults to true.
+  /// For finer control over dismissal, use [show] and [onTap] properties.
   final bool hideOnTap;
 
-  /// Controls the tooltip visibility.
+  /// Whether to show the tooltip.
   final bool show;
 
   /// The border radius of the tooltip.
   final BorderRadiusGeometry? borderRadius;
 
-  /// The color of the tooltip background.
+  /// The background color of the tooltip.
   final Color? backgroundColor;
 
-  /// The color of the tooltip border. Is shown when [borderWidth] is larger than 0.
+  /// The border color of the tooltip. Displayed when [borderWidth] is larger than 0.
   final Color borderColor;
 
-  /// The width of the tooltip arrow (tail) at its base.
+  /// The base width of the tooltip arrow (tail).
   final double? arrowBaseWidth;
 
   /// The length of the tooltip arrow (tail).
@@ -54,58 +54,66 @@ class MoonTooltip extends StatefulWidget {
   /// The offset of the tooltip arrow (tail) from the center of the tooltip.
   final double arrowOffsetValue;
 
-  /// The distance from the tip of the tooltip arrow (tail) to the target widget.
+  /// The distance from the tip of the tooltip arrow (tail) to the [child] (target).
   final double? arrowTipDistance;
 
   /// The width of the tooltip border.
   final double borderWidth;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the tooltip [content] to define its minimum height.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? minHeight;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the tooltip [content] to define its minimum width.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? minWidth;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the tooltip [content] to define its maximum height.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? maxHeight;
 
-  /// Optional size constraint. If a constraint is not set the size will adjust to the content.
+  /// An optional size constraint for the tooltip [content] to define its maximum width.
+  ///
+  /// If a constraint is not provided, the size will automatically adjust to the [content].
   final double? maxWidth;
 
-  /// The margin around tooltip. Used to prevent the tooltip from touching the edges of the viewport.
+  /// The margin of the tooltip. Prevents the tooltip from touching the edges of the viewport.
   final double tooltipMargin;
 
-  /// Tooltip transition duration (fade in or out animation).
+  /// The duration of the tooltip transition animation (fade in or out).
   final Duration? transitionDuration;
 
-  /// Tooltip transition curve (fade in or out animation).
+  /// The curve of the tooltip transition animation (fade in or out).
   final Curve? transitionCurve;
 
-  /// Padding around the tooltip content.
+  /// The padding of the tooltip [content].
   final EdgeInsetsGeometry? contentPadding;
 
-  /// List of tooltip shadows.
+  /// The list of shadows applied to the tooltip.
   final List<BoxShadow>? tooltipShadows;
 
-  /// Sets the tooltip position relative to the target. Defaults to [MoonTooltipPosition.vertical]
+  /// The tooltip position relative to the [child] (target). Defaults to [MoonTooltipPosition.vertical].
   final MoonTooltipPosition tooltipPosition;
 
-  /// `RouteObserver` used to listen for route changes that will hide the tooltip when the widget's route is not active.
+  /// The observer to track route changes and automatically hide the tooltip when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
   /// The semantic label for the tooltip.
   final String? semanticLabel;
 
-  /// Sets a handler for listening to a `tap` event on the tooltip.
+  /// The callback that is called when the tooltip is tapped.
   final VoidCallback? onTap;
 
-  /// The [child] widget which the tooltip will target.
+  /// The widget to display as the child (target) of the tooltip.
   final Widget child;
 
-  /// The widget that its placed inside the tooltip and functions as its content.
+  /// The widget to display inside the tooltip as its content.
   final Widget content;
 
-  /// MDS tooltip widget.
+  /// Creates a Moon Design tooltip.
   const MoonTooltip({
     super.key,
     this.hasArrow = true,
@@ -136,7 +144,7 @@ class MoonTooltip extends StatefulWidget {
     required this.content,
   });
 
-  // Causes any current tooltips to be removed. Won't remove the supplied tooltip.
+  // Clear existing tooltips, excluding the supplied one.
   static void _removeOtherTooltips(_MoonTooltipState current) {
     if (_openedTooltips.isNotEmpty) {
       // Avoid concurrent modification.
@@ -297,7 +305,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   @override
   void didPush() {
     _routeIsShowing = true;
-    // Route was pushed onto navigator and is now topmost route.
+    // Route was added to the navigator and is now the top-most route.
     if (shouldShowTooltip) {
       _removeTooltip();
 
@@ -320,7 +328,7 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     _routeIsShowing = true;
 
     if (shouldShowTooltip) {
-      // Covering route was popped off the navigator.
+      // The covering route was popped off the navigator.
       _removeTooltip();
 
       await Future.delayed(const Duration(milliseconds: 100), () {

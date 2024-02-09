@@ -11,10 +11,10 @@ import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonAlert extends StatefulWidget {
-  /// Controls whether the alert is shown.
+  /// Whether to show the alert.
   final bool show;
 
-  /// Whether the alert should show a border.
+  /// Whether to show a border around the alert.
   final bool showBorder;
 
   /// The border radius of the alert.
@@ -32,48 +32,48 @@ class MoonAlert extends StatefulWidget {
   /// The border width of the alert.
   final double? borderWidth;
 
-  /// The horizontal space between alert leading, trailing and label.
+  /// The horizontal gap between the [leading], [label] and [trailing] widgets of the alert.
   final double? horizontalGap;
 
-  /// The minimum height of Alert.
+  /// The minimum height of the alert.
   final double? minimumHeight;
 
-  /// The vertical space between alert header and content.
+  /// The vertical gap between the alert header and [content].
   final double? verticalGap;
 
-  /// Alert transition duration (show and hide animation).
+  /// The duration of the alert transition animation (fade in or out).
   final Duration? transitionDuration;
 
-  /// Alert transition curve (show and hide animation).
+  /// The curve of the alert transition animation (fade in or out).
   final Curve? transitionCurve;
 
   /// The padding of the alert.
   final EdgeInsetsGeometry? padding;
 
-  /// Custom decoration for the alert.
+  /// The custom decoration of the alert.
   final Decoration? decoration;
 
   /// The semantic label for the alert.
   final String? semanticLabel;
 
-  /// The widget in the leading slot of the alert.
+  /// The widget to display before the [label] widget of the alert.
   final Widget? leading;
 
-  /// The widget in the label slot of the alert.
+  /// The primary content of the alert header.
   final Widget label;
 
-  /// The widget in the trailing slot of the alert.
+  /// The widget to display after the [label] widget of the alert.
   final Widget? trailing;
 
-  /// The widget in the content slot of the alert.
+  /// The widget to display below the alert header.
   final Widget? content;
 
-  /// MDS base alert.
+  /// Creates a Moon Design base alert.
   ///
   /// See also:
   ///
-  ///   * [MoonFilledAlert], MDS filled alert.
-  ///   * [MoonOutlinedAlert], MDS outlined alert.
+  ///   * [MoonAlert.filled], Moon Design filled alert.
+  ///   * [MoonAlert.outlined], Moon Design outlined alert.
   const MoonAlert({
     super.key,
     this.show = false,
@@ -97,11 +97,11 @@ class MoonAlert extends StatefulWidget {
     this.content,
   });
 
-  /// MDS filled alert variant.
+  /// Creates a Moon Design filled alert.
   ///
   /// See also:
   ///
-  ///   * [MoonOutlinedAlert], MDS outlined button.
+  ///   * [MoonAlert.outlined], Moon Design outlined alert.
   const MoonAlert.filled({
     super.key,
     this.show = false,
@@ -124,11 +124,11 @@ class MoonAlert extends StatefulWidget {
         transitionDuration = null,
         transitionCurve = null;
 
-  /// MDS outlined alert variant.
+  /// Creates a Moon Design outlined alert.
   ///
   /// See also:
   ///
-  ///   * [MoonFilledAlert], MDS filled button.
+  ///   * [MoonAlert.filled], Moon Design filled alert.
   const MoonAlert.outlined({
     super.key,
     this.show = false,

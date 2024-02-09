@@ -8,16 +8,16 @@ import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
 class MoonTableTheme extends ThemeExtension<MoonTableTheme> with DiagnosticableTreeMixin {
-  /// MDS tokens.
+  /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// Table colors.
+  /// The colors of the MoonTable.
   final MoonTableColors colors;
 
-  /// Table properties.
+  /// The properties of the MoonTable.
   final MoonTableProperties properties;
 
-  /// Table sizes.
+  /// The sizes of the MoonTable.
   final MoonTableSizes sizes;
 
   MoonTableTheme({

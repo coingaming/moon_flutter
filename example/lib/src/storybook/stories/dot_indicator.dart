@@ -30,7 +30,7 @@ class _DotIndicatorStoryState extends State<DotIndicatorStory> {
 
     final unselectedColorKnob = context.knobs.nullable.options(
       label: "unselectedColor",
-      description: "MoonColors variants for MoonDotIndicator unselected dots.",
+      description: "MoonColors variants for MoonDotIndicator unselected dot.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -41,7 +41,7 @@ class _DotIndicatorStoryState extends State<DotIndicatorStory> {
 
     final sizeKnob = context.knobs.nullable.sliderInt(
       label: "size",
-      description: "MoonDotIndicator dot size.",
+      description: "Dot size for MoonDotIndicator.",
       enabled: false,
       initial: 8,
       max: 32,

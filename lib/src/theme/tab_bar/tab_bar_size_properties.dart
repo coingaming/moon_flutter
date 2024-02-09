@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class MoonTabBarSizeProperties extends ThemeExtension<MoonTabBarSizeProperties> with DiagnosticableTreeMixin {
-  /// TabBar pill tab border radius.
+  /// The border radius of the MoonTabBar pill tab.
   final BorderRadiusGeometry borderRadius;
 
-  /// TabBar height.
+  /// The height of the MoonTabBar.
   final double height;
 
-  /// TabBar tab icon size value.
+  /// The size value of the MoonTabBar icon.
   final double iconSizeValue;
 
-  /// TabBar tab indicator height.
+  /// The height of the MoonTabBar tab indicator.
   final double indicatorHeight;
 
-  /// Gap between leading, label and trailing widgets of tab.
+  /// The horizontal gap between the leading, label and trailing widgets of the MoonTabBar tab.
   final double tabGap;
 
-  /// TabBar tab padding.
+  /// The padding of the MoonTabBar tab.
   final EdgeInsetsGeometry tabPadding;
 
-  /// TabBar default text style.
+  /// The text style of the MoonTabBar.
   final TextStyle textStyle;
 
   const MoonTabBarSizeProperties({

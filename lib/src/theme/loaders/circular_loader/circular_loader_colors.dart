@@ -5,10 +5,10 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonCircularLoaderColors extends ThemeExtension<MoonCircularLoaderColors> with DiagnosticableTreeMixin {
-  /// Circular loader color.
+  /// The color of the MoonCircularLoader.
   final Color color;
 
-  /// Circular loader background color.
+  /// The background color of the MoonCircularLoader.
   final Color backgroundColor;
 
   const MoonCircularLoaderColors({

@@ -5,37 +5,37 @@ import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
 class MoonAccordionColors extends ThemeExtension<MoonAccordionColors> with DiagnosticableTreeMixin {
-  /// Collapsed accordion item header text color.
+  /// The text color of the collapsed MoonAccordion header.
   final Color textColor;
 
-  /// Expanded accordion item header text color.
+  /// The text color of the expanded MoonAccordion header.
   final Color expandedTextColor;
 
-  /// Accordion item content slot widget's text and icon color.
+  /// The text and icon color of the expanded MoonAccordion content.
   final Color contentColor;
 
-  /// Collapsed accordion item header icon color.
+  /// The icon color of the collapsed MoonAccordion header.
   final Color iconColor;
 
-  /// Expanded accordion item header icon color.
+  /// The icon color of the expanded MoonAccordion header.
   final Color expandedIconColor;
 
-  /// Collapsed accordion item default pre-set trailing icon color.
+  /// The default trailing icon color of the collapsed MoonAccordion header.
   final Color trailingIconColor;
 
-  /// Expanded accordion item default pre-set trailing icon color.
+  /// The default trailing icon color of the expanded MoonAccordion header.
   final Color expandedTrailingIconColor;
 
-  /// Collapsed accordion item background color.
+  /// The background color of the collapsed MoonAccordion.
   final Color backgroundColor;
 
-  /// Expanded accordion item background color.
+  /// The background color of the expanded MoonAccordion.
   final Color expandedBackgroundColor;
 
-  /// Accordion item border color.
+  /// The border color of the MoonAccordion.
   final Color borderColor;
 
-  /// Accordion item divider color.
+  /// The color of the line dividing the MoonAccordion header from the body.
   final Color dividerColor;
 
   const MoonAccordionColors({
