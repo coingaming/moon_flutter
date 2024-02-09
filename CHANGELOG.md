@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.2](https://github.com/coingaming/moon_flutter/compare/v0.47.1...v0.47.2) (2024-02-09)
+
+
+### Bug Fixes
+
+* [MDS-942] Improve documentation ([#340](https://github.com/coingaming/moon_flutter/issues/340)) ([c7caf16](https://github.com/coingaming/moon_flutter/commit/c7caf1679a4137686b27bab52ca08c80da331d0b))
+
 ## [0.47.1](https://github.com/coingaming/moon_flutter/compare/v0.47.0...v0.47.1) (2024-02-05)
 
 
