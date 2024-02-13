@@ -6,6 +6,21 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 
 const String _groupId = "dropdown";
 
+enum Choices { first, second, third }
+
+extension ChoicesX on Choices {
+  String get name {
+    switch (this) {
+      case Choices.first:
+        return "Choice #1";
+      case Choices.second:
+        return "Choice #2";
+      case Choices.third:
+        return "Choice #3";
+    }
+  }
+}
+
 class DropdownStory extends StatefulWidget {
   static const path = '/dropdown';
 
@@ -16,10 +31,10 @@ class DropdownStory extends StatefulWidget {
 }
 
 class _DropdownStoryState extends State<DropdownStory> {
-  final Map<String, bool> _availableChoices = {
-    "Choice #1": false,
-    "Choice #2": false,
-    "Choice #3": false,
+  final Map<Choices, bool> _availableChoices = {
+    Choices.first: false,
+    Choices.second: false,
+    Choices.third: false,
   };
 
   bool _showChoices = false;
@@ -114,7 +129,6 @@ class _DropdownStoryState extends State<DropdownStory> {
           children: [
             const TextDivider(text: "MoonDropdown with multiple choices"),
             MoonDropdown(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               show: _showChoices,
               minWidth: 250,
               borderColor: borderColor ?? Colors.transparent,
@@ -124,30 +138,38 @@ class _DropdownStoryState extends State<DropdownStory> {
               distanceToTarget: distanceToTargetKnob,
               dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
               dropdownShadows: showShadowKnob == true ? null : [],
-              onTapOutside: () => setState(() {
-                _showChoices = false;
-              }),
+              onTapOutside: () => setState(() => _showChoices = false),
               content: Column(
                 children: [
-                  MoonCheckbox.withLabel(
-                    context,
-                    label: "Choice #1",
-                    value: _availableChoices["Choice #1"],
-                    onChanged: (bool? isSelected) => setState(() => _availableChoices["Choice #1"] = isSelected!),
+                  MoonMenuItem(
+                    label: Text(Choices.first.name),
+                    onTap: () => setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
+                    trailing: MoonCheckbox(
+                      value: _availableChoices[Choices.first],
+                      tapAreaSizeValue: 0,
+                      onChanged: (_) {},
+                    ),
                   ),
                   const SizedBox(height: 4),
-                  MoonCheckbox.withLabel(
-                    context,
-                    label: "Choice #2",
-                    value: _availableChoices["Choice #2"],
-                    onChanged: (bool? isSelected) => setState(() => _availableChoices["Choice #2"] = isSelected!),
+                  MoonMenuItem(
+                    label: Text(Choices.second.name),
+                    onTap: () =>
+                        setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
+                    trailing: MoonCheckbox(
+                      value: _availableChoices[Choices.second],
+                      tapAreaSizeValue: 0,
+                      onChanged: (_) {},
+                    ),
                   ),
                   const SizedBox(height: 4),
-                  MoonCheckbox.withLabel(
-                    context,
-                    label: "Choice #3",
-                    value: _availableChoices["Choice #3"],
-                    onChanged: (bool? isSelected) => setState(() => _availableChoices["Choice #3"] = isSelected!),
+                  MoonMenuItem(
+                    label: Text(Choices.third.name),
+                    onTap: () => setState(() => _availableChoices[Choices.third] = !_availableChoices[Choices.third]!),
+                    trailing: MoonCheckbox(
+                      value: _availableChoices[Choices.third],
+                      tapAreaSizeValue: 0,
+                      onChanged: (_) {},
+                    ),
                   ),
                 ],
               ),
@@ -156,6 +178,7 @@ class _DropdownStoryState extends State<DropdownStory> {
                 readOnly: true,
                 width: 250,
                 hintText: "Choose an option",
+                onTap: () => setState(() => _showChoices = !_showChoices),
                 leading: _availableChoices.values.any((element) => element == true)
                     ? Center(
                         child: GestureDetector(
@@ -185,7 +208,6 @@ class _DropdownStoryState extends State<DropdownStory> {
                     ),
                   ),
                 ),
-                onTap: () => setState(() => _showChoices = !_showChoices),
               ),
             ),
             const SizedBox(height: 32),

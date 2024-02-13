@@ -34,6 +34,9 @@ class MoonBaseControl extends StatefulWidget {
   /// Whether the semantic type of the base control is button.
   final bool semanticTypeIsButton;
 
+  /// Whether to propagate gestures to the child of the base control.
+  final bool propagateGesturesToChild;
+
   /// Whether the base control shows a focus effect.
   final bool showFocusEffect;
 
@@ -128,6 +131,7 @@ class MoonBaseControl extends StatefulWidget {
     this.isFocusable = true,
     this.ensureMinimalTouchTargetSize = false,
     this.semanticTypeIsButton = false,
+    this.propagateGesturesToChild = false,
     this.showFocusEffect = true,
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
@@ -409,7 +413,6 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
             onShowHoverHighlight: _handleHover,
             child: GestureDetector(
               excludeFromSemantics: true,
-              behavior: HitTestBehavior.opaque,
               onTap: _handleTap,
               onTapDown: _handleTapDown,
               onTapUp: _handleTapUp,
@@ -425,33 +428,36 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
                 minSize: widget.ensureMinimalTouchTargetSize
                     ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)
                     : Size.zero,
-                child: RepaintBoundary(
-                  child: AnimatedScale(
-                    scale: _canAnimateScale ? effectiveScaleEffectScalar : 1,
-                    duration: effectiveScaleEffectDuration,
-                    curve: effectiveScaleEffectCurve,
-                    child: MoonPulseEffect(
-                      show: _canAnimatePulse,
-                      showJiggle: widget.showPulseEffectJiggle,
-                      childBorderRadius: widget.borderRadius,
-                      effectColor: effectivePulseEffectColor,
-                      effectExtent: effectivePulseEffectExtent,
-                      effectCurve: effectivePulseEffectCurve,
-                      effectDuration: effectivePulseEffectDuration,
-                      child: AnimatedOpacity(
-                        opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
-                        duration: context.moonTransitions?.defaultTransitionDuration ??
-                            MoonTransitions.transitions.defaultTransitionDuration,
-                        curve: context.moonTransitions?.defaultTransitionCurve ??
-                            MoonTransitions.transitions.defaultTransitionCurve,
-                        child: MoonFocusEffect(
-                          show: _canAnimateFocus,
-                          effectColor: focusColor,
-                          effectExtent: effectiveFocusEffectExtent,
-                          effectCurve: effectiveFocusEffectCurve,
-                          effectDuration: effectiveFocusEffectDuration,
-                          childBorderRadius: widget.borderRadius,
-                          child: child,
+                child: AbsorbPointer(
+                  absorbing: !widget.propagateGesturesToChild,
+                  child: RepaintBoundary(
+                    child: AnimatedScale(
+                      scale: _canAnimateScale ? effectiveScaleEffectScalar : 1,
+                      duration: effectiveScaleEffectDuration,
+                      curve: effectiveScaleEffectCurve,
+                      child: MoonPulseEffect(
+                        show: _canAnimatePulse,
+                        showJiggle: widget.showPulseEffectJiggle,
+                        childBorderRadius: widget.borderRadius,
+                        effectColor: effectivePulseEffectColor,
+                        effectExtent: effectivePulseEffectExtent,
+                        effectCurve: effectivePulseEffectCurve,
+                        effectDuration: effectivePulseEffectDuration,
+                        child: AnimatedOpacity(
+                          opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
+                          duration: context.moonTransitions?.defaultTransitionDuration ??
+                              MoonTransitions.transitions.defaultTransitionDuration,
+                          curve: context.moonTransitions?.defaultTransitionCurve ??
+                              MoonTransitions.transitions.defaultTransitionCurve,
+                          child: MoonFocusEffect(
+                            show: _canAnimateFocus,
+                            effectColor: focusColor,
+                            effectExtent: effectiveFocusEffectExtent,
+                            effectCurve: effectiveFocusEffectCurve,
+                            effectDuration: effectiveFocusEffectDuration,
+                            childBorderRadius: widget.borderRadius,
+                            child: child,
+                          ),
                         ),
                       ),
                     ),

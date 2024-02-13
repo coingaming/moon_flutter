@@ -20,17 +20,6 @@ class _CheckboxStoryState extends State<CheckboxStory> {
 
   @override
   Widget build(BuildContext context) {
-    final textColorKnob = context.knobs.nullable.options(
-      label: "Text color",
-      description: "MoonColors variants for MoonCheckbox label.",
-      enabled: false,
-      initial: 0,
-      // piccolo
-      options: colorOptions,
-    );
-
-    final textColor = colorTable(context)[textColorKnob ?? 40];
-
     final checkColorKnob = context.knobs.nullable.options(
       label: "checkColor",
       description: "MoonColors variants for MoonCheckbox check icon.",
@@ -75,12 +64,12 @@ class _CheckboxStoryState extends State<CheckboxStory> {
 
     final borderColor = colorTable(context)[borderColorKnob ?? 40];
 
-    final isTristate = context.knobs.boolean(
+    final isTristateKnob = context.knobs.boolean(
       label: "tristate",
       description: "Whether MoonCheckbox uses tristate.",
     );
 
-    final isDisabled = context.knobs.boolean(
+    final isDisabledKnob = context.knobs.boolean(
       label: "Disabled",
       description: "MoonCheckbox onChanged() is null.",
     );
@@ -99,21 +88,32 @@ class _CheckboxStoryState extends State<CheckboxStory> {
             inactiveColor: inactiveColor,
             checkColor: checkColor,
             borderColor: borderColor,
-            tristate: isTristate,
+            tristate: isTristateKnob,
             value: checkboxValue,
-            onChanged: isDisabled ? null : (bool? newValue) => setState(() => checkboxValue = newValue),
+            onChanged: isDisabledKnob ? null : (bool? newValue) => setState(() => checkboxValue = newValue),
           ),
           const TextDivider(text: "MoonCheckbox with label"),
-          MoonCheckbox.withLabel(
-            context,
-            label: "With label",
-            textStyle: TextStyle(color: textColor),
-            activeColor: activeColor,
-            inactiveColor: inactiveColor,
-            checkColor: checkColor,
-            tristate: isTristate,
-            value: checkboxWithLabelValue,
-            onChanged: isDisabled ? null : (bool? newValue) => setState(() => checkboxWithLabelValue = newValue),
+          MoonMenuItem(
+            onTap: isDisabledKnob
+                ? null
+                : () => setState(
+                      () => switch (checkboxWithLabelValue) {
+                        true when isTristateKnob => checkboxWithLabelValue = null,
+                        false when isTristateKnob => checkboxWithLabelValue = true,
+                        null => checkboxWithLabelValue = false,
+                        _ => checkboxWithLabelValue = !checkboxWithLabelValue!,
+                      },
+                    ),
+            label: const Text("With label"),
+            trailing: MoonCheckbox(
+              activeColor: activeColor,
+              inactiveColor: inactiveColor,
+              checkColor: checkColor,
+              tristate: isTristateKnob,
+              value: checkboxWithLabelValue,
+              tapAreaSizeValue: 0,
+              onChanged: isDisabledKnob ? null : (_) {},
+            ),
           ),
         ],
       ),

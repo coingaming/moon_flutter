@@ -3,6 +3,19 @@ import 'package:moon_design/moon_design.dart';
 
 const String _groupId = "dropdown";
 
+enum Choices { first, second }
+
+extension ChoicesX on Choices {
+  String get name {
+    switch (this) {
+      case Choices.first:
+        return "Choice #1";
+      case Choices.second:
+        return "Choice #2";
+    }
+  }
+}
+
 class Dropdown extends StatefulWidget {
   const Dropdown({super.key});
 
@@ -11,9 +24,9 @@ class Dropdown extends StatefulWidget {
 }
 
 class _DropdownState extends State<Dropdown> {
-  final Map<String, bool> _availableChoices = {
-    "Choice #1": false,
-    "Choice #2": false,
+  final Map<Choices, bool> _availableChoices = {
+    Choices.first: false,
+    Choices.second: false,
   };
 
   bool _showChoices = false;
@@ -30,24 +43,25 @@ class _DropdownState extends State<Dropdown> {
         MoonDropdown(
           show: _showChoices,
           constrainWidthToChild: true,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           onTapOutside: () => setState(() => _showChoices = false),
           content: Column(
             children: [
-              MoonCheckbox.withLabel(
-                context,
-                value: _availableChoices["Choice #1"],
-                label: "Choice #1",
-                onChanged: (bool? isSelected) => setState(
-                  () => _availableChoices["Choice #1"] = isSelected!,
+              MoonMenuItem(
+                label: Text(Choices.first.name),
+                onTap: () => setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
+                trailing: MoonCheckbox(
+                  value: _availableChoices[Choices.first],
+                  tapAreaSizeValue: 0,
+                  onChanged: (_) {},
                 ),
               ),
-              MoonCheckbox.withLabel(
-                context,
-                value: _availableChoices["Choice #2"],
-                label: "Choice #2",
-                onChanged: (bool? isSelected) => setState(
-                  () => _availableChoices["Choice #2"] = isSelected!,
+              MoonMenuItem(
+                label: Text(Choices.second.name),
+                onTap: () => setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
+                trailing: MoonCheckbox(
+                  value: _availableChoices[Choices.second],
+                  tapAreaSizeValue: 0,
+                  onChanged: (_) {},
                 ),
               ),
             ],
@@ -59,19 +73,24 @@ class _DropdownState extends State<Dropdown> {
             hintText: "Choose an option",
             onTap: () => setState(() => _showChoices = !_showChoices),
             leading: _availableChoices.values.any((element) => element == true)
-              ? Center(
-                  child: GestureDetector(
-                    onTap: () => setState(() => _availableChoices.updateAll((key, value) => false)),
-                    child: MoonTag(
-                      tagSize: MoonTagSize.xs,
-                      label: Text(
-                        "${_availableChoices.values.where((element) => element == true).length}",
+                ? Center(
+                    child: GestureDetector(
+                      onTap: () => setState(() => _availableChoices.updateAll((key, value) => false)),
+                      child: MoonTag(
+                        tagSize: MoonTagSize.xs,
+                        backgroundColor: context.moonColors!.bulma,
+                        label: Text(
+                          "${_availableChoices.values.where((element) => element == true).length}",
+                          style: TextStyle(color: context.moonColors!.gohan),
+                        ),
+                        trailing: Icon(
+                          MoonIcons.controls_close_small_16_light,
+                          color: context.moonColors!.gohan,
+                        ),
                       ),
-                      trailing: const Icon(MoonIcons.controls_close_small_16_light),
                     ),
-                  ),
-                )
-              : null,
+                  )
+                : null,
             trailing: Center(
               child: AnimatedRotation(
                 duration: const Duration(milliseconds: 200),

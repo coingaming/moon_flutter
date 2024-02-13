@@ -67,10 +67,6 @@ class MoonRadio<T> extends StatefulWidget {
   final ValueChanged<T?>? onChanged;
 
   /// Creates a Moon Design radio button.
-  ///
-  /// See also:
-  ///
-  ///   * [MoonRadio.withLabel], Moon Design radio button with label.
   const MoonRadio({
     super.key,
     this.autofocus = false,
@@ -86,6 +82,7 @@ class MoonRadio<T> extends StatefulWidget {
   });
 
   /// Creates a Moon Design radio button with label.
+  @Deprecated("Use MoonMenuItem instead")
   static Widget withLabel<T>(
     BuildContext context, {
     Key? key,
@@ -117,6 +114,7 @@ class MoonRadio<T> extends StatefulWidget {
 
     return GestureDetector(
       onTap: () => onChanged?.call(value),
+      behavior: HitTestBehavior.opaque,
       child: MouseRegion(
         cursor: isInteractive ? SystemMouseCursors.click : SystemMouseCursors.basic,
         child: ConstrainedBox(

@@ -70,10 +70,7 @@ void main() {
       const label = 'Checkbox label';
 
       await tester.pumpWidget(
-        const TestWidget(
-          widgetKey: key,
-          label: label,
-        ),
+        const TestWidget(widgetKey: key),
       );
 
       expect(find.text(label), findsOneWidget);
@@ -86,7 +83,6 @@ class TestWidget extends StatefulWidget {
   final void Function(bool?)? onChanged;
   final bool isTristate;
   final bool initialValue;
-  final String? label;
 
   const TestWidget({
     super.key,
@@ -94,7 +90,6 @@ class TestWidget extends StatefulWidget {
     this.isTristate = false,
     this.onChanged,
     this.initialValue = false,
-    this.label,
   });
 
   @override
@@ -114,27 +109,15 @@ class _TestWidgetState extends State<TestWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: widget.label != null
-            ? MoonCheckbox.withLabel(
-                context,
-                key: widget.widgetKey,
-                value: checkboxValue,
-                tristate: widget.isTristate,
-                onChanged: (bool? newValue) {
-                  setState(() => checkboxValue = newValue);
-                  widget.onChanged?.call(newValue);
-                },
-                label: widget.label!,
-              )
-            : MoonCheckbox(
-                key: widget.widgetKey,
-                value: checkboxValue,
-                tristate: widget.isTristate,
-                onChanged: (bool? newValue) {
-                  setState(() => checkboxValue = newValue);
-                  widget.onChanged?.call(newValue);
-                },
-              ),
+        body: MoonCheckbox(
+          key: widget.widgetKey,
+          value: checkboxValue,
+          tristate: widget.isTristate,
+          onChanged: (bool? newValue) {
+            setState(() => checkboxValue = newValue);
+            widget.onChanged?.call(newValue);
+          },
+        ),
       ),
     );
   }

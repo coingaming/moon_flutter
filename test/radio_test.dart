@@ -130,8 +130,7 @@ class _TestRadioWidgetState extends State<TestRadioWidget> {
       home: Scaffold(
         body: Center(
           child: SingleChildScrollView(
-            padding:
-                const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
             child: Column(
               children: [
                 MoonRadio(
@@ -164,8 +163,7 @@ const label2 = 'Label 2';
 class TestRadioWithLabelWidget extends StatefulWidget {
   const TestRadioWithLabelWidget({super.key});
   @override
-  State<TestRadioWithLabelWidget> createState() =>
-      _TestRadioWithLabelWidgetState();
+  State<TestRadioWithLabelWidget> createState() => _TestRadioWithLabelWidgetState();
 }
 
 class _TestRadioWithLabelWidgetState extends State<TestRadioWithLabelWidget> {
@@ -177,22 +175,17 @@ class _TestRadioWithLabelWidgetState extends State<TestRadioWithLabelWidget> {
       home: Scaffold(
         body: Center(
           child: SingleChildScrollView(
-            padding:
-                const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
             child: Column(
               children: [
-                MoonRadio.withLabel(
-                  context,
-                  label: label1,
+                MoonRadio(
                   value: Choice.first,
                   groupValue: value,
                   onChanged: (Choice? choice) => setState(() => value = choice),
                 ),
                 const SizedBox(height: 8),
-                MoonRadio.withLabel(
-                  context,
+                MoonRadio(
                   value: Choice.second,
-                  label: label2,
                   groupValue: value,
                   onChanged: (Choice? choice) => setState(() => value = choice),
                 ),

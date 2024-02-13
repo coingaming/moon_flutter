@@ -22,12 +22,15 @@ class _RadioState extends State<Radio> {
           groupValue: radioSelection,
           onChanged: (RadioSelection? selection) => setState(() => radioSelection = selection),
         ),
-        MoonRadio.withLabel(
-          context,
-          value: RadioSelection.second,
-          groupValue: radioSelection,
-          label: "With label",
-          onChanged: (RadioSelection? selection) => setState(() => radioSelection = selection),
+        MoonMenuItem(
+          label: const Text("MoonRadio with label"),
+          onTap: () => setState(() => radioSelection = RadioSelection.second),
+          trailing: MoonRadio(
+            value: RadioSelection.second,
+            groupValue: radioSelection,
+            tapAreaSizeValue: 0,
+            onChanged: (_) {},
+          ),
         ),
       ],
     );

@@ -13,11 +13,16 @@ import 'package:moon_design/src/widgets/common/base_control.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonMenuItem extends StatefulWidget {
-  /// Defines how the [label] and [content] widgets of the menu item are aligned along the cross axis.
+  /// Defines how the widgets of the menu item are aligned along the cross axis.
   ///
-  /// Defaults to the [CrossAxisAlignment.start], which aligns the [label] and [content] widgets
-  /// to the start of the menu item.
-  final CrossAxisAlignment? crossAxisAlignment;
+  /// Defaults to the [CrossAxisAlignment.center].
+  final CrossAxisAlignment? menuItemCrossAxisAlignment;
+
+  /// Defines how the [label] and [content] widgets of the menu item are aligned along the cross axis within [label]
+  /// slot.
+  ///
+  /// Defaults to the [CrossAxisAlignment.start].
+  final CrossAxisAlignment? labelCrossAxisAlignment;
 
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
@@ -76,7 +81,8 @@ class MoonMenuItem extends StatefulWidget {
   /// Creates a Moon Design menu item.
   const MoonMenuItem({
     super.key,
-    this.crossAxisAlignment,
+    this.menuItemCrossAxisAlignment,
+    this.labelCrossAxisAlignment,
     this.autofocus = false,
     this.borderRadius,
     this.backgroundColor,
@@ -96,8 +102,8 @@ class MoonMenuItem extends StatefulWidget {
     this.content,
     this.trailing,
   }) : assert(
-          crossAxisAlignment != CrossAxisAlignment.baseline,
-          'The crossAxisAlignment.baseline is not supported since the label and content of menu item '
+          labelCrossAxisAlignment != CrossAxisAlignment.baseline,
+          'The CrossAxisAlignment.baseline is not supported since the label and content of menu item '
           'are aligned in a column, not in a row. Try using another constant.',
         );
 
@@ -253,6 +259,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
               child: DefaultTextStyle(
                 style: effectiveLabelTextStyle.copyWith(color: effectiveLabelTextColor),
                 child: Row(
+                  crossAxisAlignment: widget.menuItemCrossAxisAlignment ?? CrossAxisAlignment.center,
                   children: [
                     if (widget.leading != null)
                       Padding(
@@ -264,7 +271,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
                     Expanded(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.start,
+                        crossAxisAlignment: widget.labelCrossAxisAlignment ?? CrossAxisAlignment.start,
                         children: [
                           widget.label,
                           if (widget.content != null)
