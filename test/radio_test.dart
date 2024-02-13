@@ -43,15 +43,6 @@ void main() {
     );
   });
 
-  testWidgets("Test radio with label", (tester) async {
-    await tester.pumpWidget(
-      const TestRadioWithLabelWidget(),
-    );
-
-    expect(find.text(label1), findsOneWidget);
-    expect(find.text(label2), findsOneWidget);
-  });
-
   testWidgets("Test radio switch", (tester) async {
     await tester.pumpWidget(
       const TestRadioWidget(

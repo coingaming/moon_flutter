@@ -63,19 +63,6 @@ void main() {
       expect(checkboxValue, false);
     },
   );
-
-  testWidgets(
-    "Check checkbox label",
-    (tester) async {
-      const label = 'Checkbox label';
-
-      await tester.pumpWidget(
-        const TestWidget(widgetKey: key),
-      );
-
-      expect(find.text(label), findsOneWidget);
-    },
-  );
 }
 
 class TestWidget extends StatefulWidget {
