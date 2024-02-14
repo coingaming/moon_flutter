@@ -5,7 +5,7 @@ homepage: https://flutter.moon.io/
 repository: https://github.com/coingaming/moon_flutter
 
 environment:
-  sdk: '>=3.1.2 <4.0.0'
+  sdk: '>=3.2.5 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
