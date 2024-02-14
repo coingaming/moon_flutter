@@ -116,6 +116,7 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
 
   AnimationController? _animationController;
 
+  // RoutePopDisposition.pop breaks the bottomsheet drag to close functionality and eventually causes a crash.
   bool get _hasScopedWillPopCallback => popDisposition == RoutePopDisposition.bubble;
 
   @override
