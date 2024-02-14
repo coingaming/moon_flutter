@@ -22,7 +22,7 @@ class MoonMenuItem extends StatefulWidget {
   /// [content] slots.
   ///
   /// Defaults to the [CrossAxisAlignment.start].
-  final CrossAxisAlignment? labelCrossAxisAlignment;
+  final CrossAxisAlignment? labelAndContentCrossAxisAlignment;
 
   /// Whether the menu item should absorb gestures. If this is true the menu item children will not receive gestures.
   final bool absorbGestures;
@@ -85,7 +85,7 @@ class MoonMenuItem extends StatefulWidget {
   const MoonMenuItem({
     super.key,
     this.menuItemCrossAxisAlignment,
-    this.labelCrossAxisAlignment,
+    this.labelAndContentCrossAxisAlignment,
     this.absorbGestures = false,
     this.autofocus = false,
     this.borderRadius,
@@ -106,7 +106,7 @@ class MoonMenuItem extends StatefulWidget {
     this.content,
     this.trailing,
   }) : assert(
-          labelCrossAxisAlignment != CrossAxisAlignment.baseline,
+          labelAndContentCrossAxisAlignment != CrossAxisAlignment.baseline,
           'The CrossAxisAlignment.baseline is not supported since the label and content of menu item '
           'are aligned in a column, not in a row. Try using another constant.',
         );
@@ -276,7 +276,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
                     Expanded(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: widget.labelCrossAxisAlignment ?? CrossAxisAlignment.start,
+                        crossAxisAlignment: widget.labelAndContentCrossAxisAlignment ?? CrossAxisAlignment.start,
                         children: [
                           widget.label,
                           if (widget.content != null)
