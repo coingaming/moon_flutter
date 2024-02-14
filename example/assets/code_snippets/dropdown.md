@@ -47,8 +47,9 @@ class _DropdownState extends State<Dropdown> {
           content: Column(
             children: [
               MoonMenuItem(
-                label: Text(Choices.first.name),
+                absorbGestures: true,
                 onTap: () => setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
+                label: Text(Choices.first.name),
                 trailing: MoonCheckbox(
                   value: _availableChoices[Choices.first],
                   tapAreaSizeValue: 0,
@@ -56,8 +57,9 @@ class _DropdownState extends State<Dropdown> {
                 ),
               ),
               MoonMenuItem(
-                label: Text(Choices.second.name),
+                absorbGestures: true,
                 onTap: () => setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
+                label: Text(Choices.second.name),
                 trailing: MoonCheckbox(
                   value: _availableChoices[Choices.second],
                   tapAreaSizeValue: 0,

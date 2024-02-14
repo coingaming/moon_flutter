@@ -23,8 +23,9 @@ class _RadioState extends State<Radio> {
           onChanged: (RadioSelection? selection) => setState(() => radioSelection = selection),
         ),
         MoonMenuItem(
-          label: const Text("MoonRadio with label"),
+          absorbGestures: true,
           onTap: () => setState(() => radioSelection = RadioSelection.second),
+          label: const Text("MoonRadio with label"),
           trailing: MoonRadio(
             value: RadioSelection.second,
             groupValue: radioSelection,

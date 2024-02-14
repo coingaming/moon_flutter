@@ -84,6 +84,7 @@ class _RadioStoryState extends State<RadioStory> {
             ),
             const TextDivider(text: "MoonRadio with label"),
             MoonMenuItem(
+              absorbGestures: true,
               onTap: isDisabledKnob
                   ? null
                   : () => setState(
@@ -103,6 +104,7 @@ class _RadioStoryState extends State<RadioStory> {
             ),
             const SizedBox(height: 8),
             MoonMenuItem(
+              absorbGestures: true,
               onTap: isDisabledKnob
                   ? null
                   : () => setState(

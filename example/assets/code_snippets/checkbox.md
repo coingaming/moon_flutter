@@ -22,6 +22,7 @@ class _CheckboxState extends State<Checkbox> {
           onChanged: (bool? newValue) => setState(() => checkboxValue = newValue),
         ),
         MoonMenuItem(
+          absorbGestures: true,
           onTap: () => setState(() => checkboxWithLabelValue = !checkboxWithLabelValue),
           label: const Text("MoonCheckbox with label"),
           trailing: MoonCheckbox(
@@ -31,6 +32,7 @@ class _CheckboxState extends State<Checkbox> {
           ),
         ),
         MoonMenuItem(
+          absorbGestures: true,
           onTap: () => setState(
             () => switch (tristateCheckboxWithLabelValue) {
               true => tristateCheckboxWithLabelValue = null,

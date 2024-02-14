@@ -94,6 +94,7 @@ class _CheckboxStoryState extends State<CheckboxStory> {
           ),
           const TextDivider(text: "MoonCheckbox with label"),
           MoonMenuItem(
+            absorbGestures: true,
             onTap: isDisabledKnob
                 ? null
                 : () => setState(

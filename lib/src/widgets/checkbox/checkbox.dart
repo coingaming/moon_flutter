@@ -82,7 +82,7 @@ class MoonCheckbox extends StatefulWidget {
   });
 
   /// Creates a Moon Design checkbox with label.
-  @Deprecated("Use MoonMenuItem instead")
+  @Deprecated("Use MoonMenuItem instead with MoonCheckbox as trailing widget instead.")
   static Widget withLabel(
     BuildContext context, {
     Key? key,

@@ -24,6 +24,9 @@ class MoonMenuItem extends StatefulWidget {
   /// Defaults to the [CrossAxisAlignment.start].
   final CrossAxisAlignment? labelCrossAxisAlignment;
 
+  /// Whether the menu item should absorb gestures. If this is true the menu item children will not receive gestures.
+  final bool absorbGestures;
+
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
@@ -83,6 +86,7 @@ class MoonMenuItem extends StatefulWidget {
     super.key,
     this.menuItemCrossAxisAlignment,
     this.labelCrossAxisAlignment,
+    this.absorbGestures = false,
     this.autofocus = false,
     this.borderRadius,
     this.backgroundColor,
@@ -228,6 +232,7 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
       enabled: widget.onTap != null,
       child: MoonBaseControl(
         onTap: widget.onTap,
+        propagateGesturesToChild: !widget.absorbGestures,
         autofocus: widget.autofocus,
         focusNode: _effectiveFocusNode,
         borderRadius: effectiveBorderRadius.squircleBorderRadius(context),

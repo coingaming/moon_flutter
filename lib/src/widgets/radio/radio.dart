@@ -82,7 +82,7 @@ class MoonRadio<T> extends StatefulWidget {
   });
 
   /// Creates a Moon Design radio button with label.
-  @Deprecated("Use MoonMenuItem instead")
+  @Deprecated("Use MoonMenuItem instead with MoonCheckbox as trailing widget instead.")
   static Widget withLabel<T>(
     BuildContext context, {
     Key? key,
