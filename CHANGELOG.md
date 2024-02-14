@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.48.1](https://github.com/coingaming/moon_flutter/compare/v0.48.0...v0.48.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* [MDS-993] Bottomsheet route pop hotfix ([#349](https://github.com/coingaming/moon_flutter/issues/349)) ([218cbe0](https://github.com/coingaming/moon_flutter/commit/218cbe042227286daca4c88d9fe8199bc5d45093))
+
 ## [0.48.0](https://github.com/coingaming/moon_flutter/compare/v0.47.3...v0.48.0) (2024-02-14)
 
 
