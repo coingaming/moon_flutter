@@ -116,7 +116,7 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
 
   AnimationController? _animationController;
 
-  bool get _hasScopedWillPopCallback => hasScopedWillPopCallback;
+  bool get _hasScopedWillPopCallback => popDisposition == RoutePopDisposition.pop;
 
   @override
   bool get maintainState => true;
@@ -238,7 +238,7 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
   }
 
   Future<bool> _handleShouldClose() async {
-    final RoutePopDisposition willPop = await widget.route.willPop();
+    final RoutePopDisposition willPop = widget.route.popDisposition;
 
     return willPop != RoutePopDisposition.doNotPop;
   }
