@@ -18,8 +18,8 @@ class MoonMenuItem extends StatefulWidget {
   /// Defaults to the [CrossAxisAlignment.center].
   final CrossAxisAlignment? menuItemCrossAxisAlignment;
 
-  /// Defines how the [label] and [content] widgets of the menu item are aligned along the cross axis within [label]
-  /// slot.
+  /// Defines how the [label] and [content] widgets of the menu item are aligned along the cross axis within [label] and
+  /// [content] slots.
   ///
   /// Defaults to the [CrossAxisAlignment.start].
   final CrossAxisAlignment? labelCrossAxisAlignment;
