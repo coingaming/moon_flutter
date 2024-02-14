@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.3](https://github.com/coingaming/moon_flutter/compare/v0.47.2...v0.47.3) (2024-02-14)
+
+
+### Bug Fixes
+
+* [MDS-985] Deprecate Checkbox and Radio label constructor and replace usages with MenuItem ([#345](https://github.com/coingaming/moon_flutter/issues/345)) ([e9a1c84](https://github.com/coingaming/moon_flutter/commit/e9a1c84cd22462469647bb9ec3599234d1910b88))
+
 ## [0.47.2](https://github.com/coingaming/moon_flutter/compare/v0.47.1...v0.47.2) (2024-02-09)
 
 
