@@ -24,17 +24,6 @@ class _RadioStoryState extends State<RadioStory> {
 
   @override
   Widget build(BuildContext context) {
-    final textColorKnob = context.knobs.nullable.options(
-      label: "Text color",
-      description: "MoonColors variants for MoonRadio label.",
-      enabled: false,
-      initial: 0,
-      // piccolo
-      options: colorOptions,
-    );
-
-    final textColor = colorTable(context)[textColorKnob ?? 40];
-
     final activeColorKnob = context.knobs.nullable.options(
       label: "activeColor",
       description: "MoonColors variants for checked MoonRadio.",
@@ -79,39 +68,59 @@ class _RadioStoryState extends State<RadioStory> {
             MoonRadio(
               value: ChoiceCustom.first,
               groupValue: valueCustom,
-              onChanged: isDisabledKnob ? null : (ChoiceCustom? choice) => setState(() => valueCustom = choice),
               activeColor: activeColor,
               inactiveColor: inactiveColor,
               toggleable: isToggleableKnob,
+              onChanged: isDisabledKnob ? null : (ChoiceCustom? choice) => setState(() => valueCustom = choice),
             ),
             const SizedBox(height: 8),
             MoonRadio(
               value: ChoiceCustom.second,
               groupValue: valueCustom,
-              onChanged: isDisabledKnob ? null : (ChoiceCustom? choice) => setState(() => valueCustom = choice),
               activeColor: activeColor,
               inactiveColor: inactiveColor,
               toggleable: isToggleableKnob,
+              onChanged: isDisabledKnob ? null : (ChoiceCustom? choice) => setState(() => valueCustom = choice),
             ),
             const TextDivider(text: "MoonRadio with label"),
-            MoonRadio.withLabel(
-              context,
-              textStyle: TextStyle(color: textColor),
-              value: ChoiceLabel.first,
-              groupValue: valueLabel,
-              label: "With label #1",
-              onChanged: isDisabledKnob ? null : (ChoiceLabel? choice) => setState(() => valueLabel = choice),
-              toggleable: isToggleableKnob,
+            MoonMenuItem(
+              absorbGestures: true,
+              onTap: isDisabledKnob
+                  ? null
+                  : () => setState(
+                        () => switch (valueLabel) {
+                          ChoiceLabel.first when isToggleableKnob => valueLabel = null,
+                          _ => valueLabel = ChoiceLabel.first,
+                        },
+                      ),
+              label: const Text("With label #1"),
+              trailing: MoonRadio(
+                value: ChoiceLabel.first,
+                groupValue: valueLabel,
+                toggleable: isToggleableKnob,
+                tapAreaSizeValue: 0,
+                onChanged: isDisabledKnob ? null : (_) {},
+              ),
             ),
             const SizedBox(height: 8),
-            MoonRadio.withLabel(
-              context,
-              textStyle: TextStyle(color: textColor),
-              value: ChoiceLabel.second,
-              groupValue: valueLabel,
-              label: "With label #2",
-              onChanged: isDisabledKnob ? null : (ChoiceLabel? choice) => setState(() => valueLabel = choice),
-              toggleable: isToggleableKnob,
+            MoonMenuItem(
+              absorbGestures: true,
+              onTap: isDisabledKnob
+                  ? null
+                  : () => setState(
+                        () => switch (valueLabel) {
+                          ChoiceLabel.second when isToggleableKnob => valueLabel = null,
+                          _ => valueLabel = ChoiceLabel.second,
+                        },
+                      ),
+              label: const Text("With label #2"),
+              trailing: MoonRadio(
+                value: ChoiceLabel.second,
+                groupValue: valueLabel,
+                toggleable: isToggleableKnob,
+                tapAreaSizeValue: 0,
+                onChanged: isDisabledKnob ? null : (_) {},
+              ),
             ),
           ],
         ),

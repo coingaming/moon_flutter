@@ -43,15 +43,6 @@ void main() {
     );
   });
 
-  testWidgets("Test radio with label", (tester) async {
-    await tester.pumpWidget(
-      const TestRadioWithLabelWidget(),
-    );
-
-    expect(find.text(label1), findsOneWidget);
-    expect(find.text(label2), findsOneWidget);
-  });
-
   testWidgets("Test radio switch", (tester) async {
     await tester.pumpWidget(
       const TestRadioWidget(
@@ -130,8 +121,7 @@ class _TestRadioWidgetState extends State<TestRadioWidget> {
       home: Scaffold(
         body: Center(
           child: SingleChildScrollView(
-            padding:
-                const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
             child: Column(
               children: [
                 MoonRadio(
@@ -148,53 +138,6 @@ class _TestRadioWidgetState extends State<TestRadioWidget> {
                   groupValue: value,
                   onChanged: (Choice? choice) => setState(() => value = choice),
                   toggleable: widget.toggleable,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-const label1 = 'Label 1';
-const label2 = 'Label 2';
-
-class TestRadioWithLabelWidget extends StatefulWidget {
-  const TestRadioWithLabelWidget({super.key});
-  @override
-  State<TestRadioWithLabelWidget> createState() =>
-      _TestRadioWithLabelWidgetState();
-}
-
-class _TestRadioWithLabelWidgetState extends State<TestRadioWithLabelWidget> {
-  Choice? value;
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: SingleChildScrollView(
-            padding:
-                const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
-            child: Column(
-              children: [
-                MoonRadio.withLabel(
-                  context,
-                  label: label1,
-                  value: Choice.first,
-                  groupValue: value,
-                  onChanged: (Choice? choice) => setState(() => value = choice),
-                ),
-                const SizedBox(height: 8),
-                MoonRadio.withLabel(
-                  context,
-                  value: Choice.second,
-                  label: label2,
-                  groupValue: value,
-                  onChanged: (Choice? choice) => setState(() => value = choice),
                 ),
               ],
             ),

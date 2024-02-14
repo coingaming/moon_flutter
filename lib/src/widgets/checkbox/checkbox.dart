@@ -66,10 +66,6 @@ class MoonCheckbox extends StatefulWidget {
   final ValueChanged<bool?>? onChanged;
 
   /// Creates a Moon Design checkbox.
-  ///
-  /// See also:
-  ///
-  ///   * [MoonCheckbox.withLabel], Moon Design checkbox with label.
   const MoonCheckbox({
     super.key,
     this.autofocus = false,
@@ -86,6 +82,7 @@ class MoonCheckbox extends StatefulWidget {
   });
 
   /// Creates a Moon Design checkbox with label.
+  @Deprecated("Use MoonMenuItem with MoonCheckbox as a trailing widget instead.")
   static Widget withLabel(
     BuildContext context, {
     Key? key,

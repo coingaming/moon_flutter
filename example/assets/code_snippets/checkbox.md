@@ -10,7 +10,8 @@ class Checkbox extends StatefulWidget {
 
 class _CheckboxState extends State<Checkbox> {
   bool? checkboxValue = false;
-  bool? checkboxWithLabelValue = false;
+  bool checkboxWithLabelValue = false;
+  bool? tristateCheckboxWithLabelValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +21,31 @@ class _CheckboxState extends State<Checkbox> {
           value: checkboxValue,
           onChanged: (bool? newValue) => setState(() => checkboxValue = newValue),
         ),
-        MoonCheckbox.withLabel(
-          context,
-          value: checkboxWithLabelValue,
-          label: "MoonCheckbox with label",
-          onChanged: (bool? newValue) => setState(() => checkboxWithLabelValue = newValue),
+        MoonMenuItem(
+          absorbGestures: true,
+          onTap: () => setState(() => checkboxWithLabelValue = !checkboxWithLabelValue),
+          label: const Text("MoonCheckbox with label"),
+          trailing: MoonCheckbox(
+            value: checkboxWithLabelValue,
+            tapAreaSizeValue: 0,
+            onChanged: (_) => {},
+          ),
+        ),
+        MoonMenuItem(
+          absorbGestures: true,
+          onTap: () => setState(
+            () => switch (tristateCheckboxWithLabelValue) {
+              true => tristateCheckboxWithLabelValue = null,
+              null => tristateCheckboxWithLabelValue = false,
+              false => tristateCheckboxWithLabelValue = true,
+            },
+          ),
+          label: const Text("Tristate MoonCheckbox with label"),
+          trailing: MoonCheckbox(
+            value: tristateCheckboxWithLabelValue,
+            tapAreaSizeValue: 0,
+            onChanged: (_) => {},
+          ),
         ),
       ],
     );
