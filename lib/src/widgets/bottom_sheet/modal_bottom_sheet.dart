@@ -116,7 +116,7 @@ class MoonModalBottomSheetRoute<T> extends PageRoute<T> {
 
   AnimationController? _animationController;
 
-  bool get _hasScopedWillPopCallback => popDisposition == RoutePopDisposition.pop;
+  bool get _hasScopedWillPopCallback => popDisposition == RoutePopDisposition.bubble;
 
   @override
   bool get maintainState => true;
