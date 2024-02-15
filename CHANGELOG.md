@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.48.2](https://github.com/coingaming/moon_flutter/compare/v0.48.1...v0.48.2) (2024-02-15)
+
+
+### Bug Fixes
+
+* [MDS-997] Fix MoonTextInputGroup not being interactable and minor story fixes ([#351](https://github.com/coingaming/moon_flutter/issues/351)) ([ee9e0cc](https://github.com/coingaming/moon_flutter/commit/ee9e0ccaeb0dc7006aef2f965acfc698e6a3a740))
+
 ## [0.48.1](https://github.com/coingaming/moon_flutter/compare/v0.48.0...v0.48.1) (2024-02-14)
 
 
