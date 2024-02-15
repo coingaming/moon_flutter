@@ -85,7 +85,7 @@ class TagStory extends StatelessWidget {
       initial: true,
     );
 
-    final setUpperCase = context.knobs.boolean(
+    final setUpperCaseKnob = context.knobs.boolean(
       label: "isUpperCase",
       description: "Use upper case text for MoonTag.",
     );
@@ -97,7 +97,7 @@ class TagStory extends StatelessWidget {
           borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
           onTap: () {},
           tagSize: tagSizeKnob,
-          isUpperCase: setUpperCase,
+          isUpperCase: setUpperCaseKnob,
           backgroundColor: backgroundColor,
           leading: showLeadingKnob
               ? Icon(
@@ -107,7 +107,7 @@ class TagStory extends StatelessWidget {
               : null,
           label: showLabelKnob
               ? Text(
-                  setUpperCase ? customLabelTextKnob.toUpperCase() : customLabelTextKnob,
+                  setUpperCaseKnob ? customLabelTextKnob.toUpperCase() : customLabelTextKnob,
                   style: TextStyle(color: textColor),
                 )
               : null,

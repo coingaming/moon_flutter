@@ -117,17 +117,17 @@ class ButtonStory extends StatelessWidget {
     IconData resolveIconVariant(MoonButtonSize? buttonSize) {
       switch (buttonSize) {
         case MoonButtonSize.xs:
-          return MoonIcons.other_frame_16_light;
+          return MoonIcons.other_frame_16_regular;
         case MoonButtonSize.sm:
-          return MoonIcons.other_frame_24_light;
+          return MoonIcons.other_frame_24_regular;
         case MoonButtonSize.md:
-          return MoonIcons.other_frame_24_light;
+          return MoonIcons.other_frame_24_regular;
         case MoonButtonSize.lg:
-          return MoonIcons.other_frame_24_light;
+          return MoonIcons.other_frame_24_regular;
         case MoonButtonSize.xl:
-          return MoonIcons.other_frame_24_light;
+          return MoonIcons.other_frame_24_regular;
         default:
-          return MoonIcons.other_frame_24_light;
+          return MoonIcons.other_frame_24_regular;
       }
     }
 
@@ -261,7 +261,7 @@ class ButtonStory extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: context.moonColors!.frieza60,
                   child: const Icon(
-                    MoonIcons.other_rocket_24_light,
+                    MoonIcons.other_rocket_24_regular,
                     size: 24,
                     color: Colors.white,
                   ),

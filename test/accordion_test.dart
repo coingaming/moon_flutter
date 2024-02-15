@@ -97,7 +97,7 @@ void main() {
 
 const String accordionTitle = "Single MoonAccordion item";
 const String accordionContent = "Accordion content";
-const IconData accordionIcon = MoonIcons.other_frame_24_light;
+const IconData accordionIcon = MoonIcons.other_frame_24_regular;
 
 const firstAccordionKey = Key("first_accordion");
 const firstAccordionChildKey = Key("first_accordion_child");
@@ -144,12 +144,10 @@ class GroupedAccordionTestWidget extends StatefulWidget {
   });
 
   @override
-  State<GroupedAccordionTestWidget> createState() =>
-      _GroupedAccordionTestWidgetState();
+  State<GroupedAccordionTestWidget> createState() => _GroupedAccordionTestWidgetState();
 }
 
-class _GroupedAccordionTestWidgetState
-    extends State<GroupedAccordionTestWidget> {
+class _GroupedAccordionTestWidgetState extends State<GroupedAccordionTestWidget> {
   AccordionItems? _currentlyOpenAccordionItem = AccordionItems.first;
 
   @override
@@ -166,7 +164,7 @@ class _GroupedAccordionTestWidgetState
               onExpansionChanged: (AccordionItems? value) {
                 setState(() => _currentlyOpenAccordionItem = value);
               },
-              leading: const Icon(MoonIcons.other_frame_24_light),
+              leading: const Icon(MoonIcons.other_frame_24_regular),
               label: const Text("Grouped MoonAccordion item #1"),
               children: const [
                 Text(
@@ -183,7 +181,7 @@ class _GroupedAccordionTestWidgetState
               onExpansionChanged: (AccordionItems? value) {
                 setState(() => _currentlyOpenAccordionItem = value);
               },
-              leading: const Icon(MoonIcons.other_frame_24_light),
+              leading: const Icon(MoonIcons.other_frame_24_regular),
               label: const Text("Grouped MoonAccordion item #2"),
               children: const [
                 Text(

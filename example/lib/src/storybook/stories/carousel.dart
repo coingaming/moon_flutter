@@ -148,8 +148,8 @@ class _CarouselStoryState extends State<CarouselStory> {
                                   showBorder: true,
                                   icon: Icon(
                                     Directionality.of(context) == TextDirection.ltr
-                                        ? MoonIcons.controls_chevron_left_small_24_light
-                                        : MoonIcons.controls_chevron_right_small_24_light,
+                                        ? MoonIcons.controls_chevron_left_small_24_regular
+                                        : MoonIcons.controls_chevron_right_small_24_regular,
                                   ),
                                   decoration: ShapeDecorationWithPremultipliedAlpha(
                                     color: context.moonColors!.goku,
@@ -165,8 +165,8 @@ class _CarouselStoryState extends State<CarouselStory> {
                                   showBorder: true,
                                   icon: Icon(
                                     Directionality.of(context) == TextDirection.ltr
-                                        ? MoonIcons.controls_chevron_right_small_24_light
-                                        : MoonIcons.controls_chevron_left_small_24_light,
+                                        ? MoonIcons.controls_chevron_right_small_24_regular
+                                        : MoonIcons.controls_chevron_left_small_24_regular,
                                   ),
                                   decoration: ShapeDecorationWithPremultipliedAlpha(
                                     color: context.moonColors!.goku,

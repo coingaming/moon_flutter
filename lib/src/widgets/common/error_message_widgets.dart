@@ -79,7 +79,7 @@ class _MoonErrorMessageState extends State<MoonErrorMessage> with SingleTickerPr
       opacity: _opacityAnimation,
       child: Row(
         children: [
-          Icon(MoonIcons.generic_info_16_light, size: context.moonSizes?.x2s ?? 16),
+          Icon(MoonIcons.generic_info_16_regular, size: context.moonSizes?.x2s ?? 16),
           SizedBox(width: context.moonSizes?.x5s ?? 4),
           Text(widget.errorText),
         ],

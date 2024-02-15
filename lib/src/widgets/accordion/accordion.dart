@@ -366,8 +366,8 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
         turns: _halfTween.animate(_expansionCurvedAnimation!),
         child: Icon(
           switch (iconSize) {
-            16 => MoonIcons.controls_chevron_down_small_16_light,
-            24 => MoonIcons.controls_chevron_down_small_24_light,
+            16 => MoonIcons.controls_chevron_down_small_16_regular,
+            24 => MoonIcons.controls_chevron_down_small_24_regular,
             _ => MoonIcons.controls_chevron_down_small_32_regular,
           },
           size: iconSize,

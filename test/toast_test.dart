@@ -25,8 +25,8 @@ void main() {
   });
 }
 
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
+const IconData leadingIcon = MoonIcons.other_frame_24_regular;
+const IconData trailingIcon = MoonIcons.controls_close_small_24_regular;
 const title = 'Title';
 const body = 'Body';
 

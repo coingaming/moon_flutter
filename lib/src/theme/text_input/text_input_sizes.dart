@@ -47,7 +47,7 @@ class MoonTextInputSizes extends ThemeExtension<MoonTextInputSizes> with Diagnos
               iconSizeValue: tokens.sizes.xs,
               padding: EdgeInsets.symmetric(
                 horizontal: tokens.sizes.x3s,
-                vertical: 6,
+                vertical: tokens.sizes.x5s,
               ),
               textStyle: tokens.typography.body.textDefault,
             ),
@@ -59,7 +59,7 @@ class MoonTextInputSizes extends ThemeExtension<MoonTextInputSizes> with Diagnos
               iconSizeValue: tokens.sizes.xs,
               padding: EdgeInsets.symmetric(
                 horizontal: tokens.sizes.x3s,
-                vertical: tokens.sizes.x4s,
+                vertical: 6,
               ),
               textStyle: tokens.typography.body.text16,
             ),
@@ -71,7 +71,7 @@ class MoonTextInputSizes extends ThemeExtension<MoonTextInputSizes> with Diagnos
               iconSizeValue: tokens.sizes.xs,
               padding: EdgeInsets.symmetric(
                 horizontal: tokens.sizes.x2s,
-                vertical: 10,
+                vertical: 9,
               ),
               textStyle: tokens.typography.body.text16,
             );

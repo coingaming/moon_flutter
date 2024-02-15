@@ -159,7 +159,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                   : null,
               trailing: showTrailingKnob
                   ? Icon(
-                      MoonIcons.controls_chevron_right_24_light,
+                      MoonIcons.controls_chevron_right_24_regular,
                       color: trailingColor,
                     )
                   : null,
@@ -190,7 +190,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                   : null,
               trailing: showTrailingKnob
                   ? Icon(
-                      MoonIcons.controls_chevron_right_24_light,
+                      MoonIcons.controls_chevron_right_24_regular,
                       color: trailingColor,
                     )
                   : null,
@@ -207,7 +207,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
               ),
               leading: showLeadingKnob
                   ? Icon(
-                      MoonIcons.other_frame_24_light,
+                      MoonIcons.other_frame_24_regular,
                       color: leadingColor,
                     )
                   : null,
@@ -231,7 +231,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
               ),
               leading: showLeadingKnob
                   ? Icon(
-                      MoonIcons.other_frame_24_light,
+                      MoonIcons.other_frame_24_regular,
                       color: leadingColor,
                     )
                   : null,
@@ -262,7 +262,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
               ),
               leading: showLeadingKnob
                   ? Icon(
-                      MoonIcons.other_frame_24_light,
+                      MoonIcons.other_frame_24_regular,
                       color: leadingColor ?? context.moonColors!.iconPrimary,
                     )
                   : null,
@@ -291,7 +291,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                         : null,
                     trailing: showTrailingKnob
                         ? Icon(
-                            MoonIcons.other_frame_24_light,
+                            MoonIcons.other_frame_24_regular,
                             color: trailingColor,
                           )
                         : null,
@@ -317,7 +317,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                         : null,
                     trailing: showTrailingKnob
                         ? Icon(
-                            MoonIcons.other_frame_24_light,
+                            MoonIcons.other_frame_24_regular,
                             color: trailingColor,
                           )
                         : null,

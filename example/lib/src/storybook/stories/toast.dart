@@ -137,7 +137,7 @@ class ToastStory extends StatelessWidget {
                   displayDuration: displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
                   borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
                   leading: Icon(
-                    MoonIcons.generic_info_24_light,
+                    MoonIcons.generic_info_24_regular,
                     color: iconColor,
                   ),
                   label: Text(
@@ -145,7 +145,7 @@ class ToastStory extends StatelessWidget {
                     style: TextStyle(color: textColor),
                   ),
                   trailing: Icon(
-                    MoonIcons.generic_star_24_light,
+                    MoonIcons.generic_star_24_regular,
                     color: iconColor,
                   ),
                   content: showContentKnob

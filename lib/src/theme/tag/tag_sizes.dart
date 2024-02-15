@@ -31,7 +31,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
               iconSizeValue: tokens.sizes.x3s,
               padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
               textStyle: tokens.typography.body.text9,
-              upperCaseTextStyle: tokens.typography.caption.text9,
+              upperCaseTextStyle: tokens.typography.caption.text9.copyWith(height: 1.4),
             ),
         xs = xs ??
             MoonTagSizeProperties(
@@ -41,7 +41,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
               iconSizeValue: tokens.sizes.x2s,
               padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
               textStyle: tokens.typography.body.text12,
-              upperCaseTextStyle: tokens.typography.caption.text10,
+              upperCaseTextStyle: tokens.typography.caption.text10.copyWith(height: 1.6),
             ),
         sm = sm ??
             MoonTagSizeProperties(
@@ -51,7 +51,7 @@ class MoonTagSizes extends ThemeExtension<MoonTagSizes> with DiagnosticableTreeM
               iconSizeValue: tokens.sizes.x2s,
               padding: EdgeInsets.symmetric(horizontal: tokens.sizes.x2s),
               textStyle: tokens.typography.body.text12,
-              upperCaseTextStyle: tokens.typography.caption.text10,
+              upperCaseTextStyle: tokens.typography.caption.text10.copyWith(height: 1.6),
             );
 
   @override

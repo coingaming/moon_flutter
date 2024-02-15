@@ -187,7 +187,7 @@ class _TooltipStoryState extends State<TooltipStory> {
             child: MoonChip(
               borderRadius: BorderRadius.circular(20),
               backgroundColor: context.moonColors!.hit,
-              leading: const Icon(MoonIcons.other_frame_24_light),
+              leading: const Icon(MoonIcons.other_frame_24_regular),
               textColor: context.moonColors!.goten,
               label: const Text("MoonChip"),
               onLongPress: () => setState(() => showOnLongPress = true),

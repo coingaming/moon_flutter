@@ -59,8 +59,8 @@ void main() {
 
 const String alertTitle = "Alert title";
 const String alertBody = "Alert body";
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
+const IconData leadingIcon = MoonIcons.other_frame_24_regular;
+const IconData trailingIcon = MoonIcons.controls_close_small_24_regular;
 
 class TestWidget extends StatefulWidget {
   final bool showLeading;

@@ -128,15 +128,14 @@ void main() {
   });
 }
 
-const validText =
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
+const validText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
 const invalidText = 'Lorem';
 
 const hint = 'Hint';
 const error = 'Error';
 const helper = 'Helper';
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
+const IconData leadingIcon = MoonIcons.other_frame_24_regular;
+const IconData trailingIcon = MoonIcons.controls_close_small_24_regular;
 
 class TestWidget extends StatelessWidget {
   final bool enabled;
@@ -167,8 +166,7 @@ class TestWidget extends StatelessWidget {
                     key: widgetKey,
                     enabled: enabled,
                     hintText: hint,
-                    validator: (String? value) =>
-                        value != null && value.length < 10 ? error : null,
+                    validator: (String? value) => value != null && value.length < 10 ? error : null,
                     leading: showLeading ? const Icon(leadingIcon) : null,
                     trailing: showTrailing ? const Icon(trailingIcon) : null,
                     helper: showHelper ? const Text(helper) : null,

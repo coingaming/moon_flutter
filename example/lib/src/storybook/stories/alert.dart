@@ -142,7 +142,7 @@ class _AlertStoryState extends State<AlertStory> {
                   borderRadius: borderRadius,
                   leading: showLeadingKnob
                       ? Icon(
-                          MoonIcons.other_frame_24_light,
+                          MoonIcons.other_frame_24_regular,
                           color: leadingColor,
                         )
                       : null,
@@ -162,7 +162,7 @@ class _AlertStoryState extends State<AlertStory> {
                           borderRadius: borderRadius,
                           disabledOpacityValue: 1,
                           icon: Icon(
-                            MoonIcons.controls_close_small_24_light,
+                            MoonIcons.controls_close_small_24_regular,
                             color: trailingColor,
                             size: 24,
                           ),
@@ -197,7 +197,7 @@ class _AlertStoryState extends State<AlertStory> {
               color: context.moonColors!.chichi,
               backgroundColor: context.moonColors!.chichi10,
               borderRadius: borderRadius,
-              leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
+              leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_regular) : null,
               label: const Text("Filled error MoonAlert"),
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
@@ -205,7 +205,7 @@ class _AlertStoryState extends State<AlertStory> {
                 gap: 0,
                 onTap: () {},
                 icon: Icon(
-                  MoonIcons.controls_close_small_24_light,
+                  MoonIcons.controls_close_small_24_regular,
                   size: 24,
                   color: context.moonColors!.chichi,
                 ),
@@ -226,7 +226,7 @@ class _AlertStoryState extends State<AlertStory> {
               color: context.moonColors!.krillin,
               backgroundColor: context.moonColors!.krillin10,
               borderRadius: borderRadius,
-              leading: showLeadingKnob ? const Icon(MoonIcons.generic_alarm_round_24_light) : null,
+              leading: showLeadingKnob ? const Icon(MoonIcons.generic_alarm_round_24_regular) : null,
               label: const Text("Filled warning MoonAlert"),
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
@@ -234,7 +234,7 @@ class _AlertStoryState extends State<AlertStory> {
                 gap: 0,
                 onTap: () {},
                 icon: Icon(
-                  MoonIcons.controls_close_small_24_light,
+                  MoonIcons.controls_close_small_24_regular,
                   size: 24,
                   color: context.moonColors!.krillin,
                 ),
@@ -255,7 +255,7 @@ class _AlertStoryState extends State<AlertStory> {
               color: context.moonColors!.roshi,
               borderColor: context.moonColors!.roshi,
               borderRadius: borderRadius,
-              leading: showLeadingKnob ? const Icon(MoonIcons.generic_check_rounded_24_light) : null,
+              leading: showLeadingKnob ? const Icon(MoonIcons.generic_check_rounded_24_regular) : null,
               label: const Text("Outlined success MoonAlert"),
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
@@ -263,7 +263,7 @@ class _AlertStoryState extends State<AlertStory> {
                 gap: 0,
                 onTap: () {},
                 icon: Icon(
-                  MoonIcons.controls_close_small_24_light,
+                  MoonIcons.controls_close_small_24_regular,
                   size: 24,
                   color: context.moonColors!.roshi,
                 ),
@@ -284,7 +284,7 @@ class _AlertStoryState extends State<AlertStory> {
               color: context.moonColors!.whis,
               borderColor: context.moonColors!.whis,
               borderRadius: borderRadius,
-              leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_light) : null,
+              leading: showLeadingKnob ? const Icon(MoonIcons.notifications_alert_24_regular) : null,
               label: const Text('Outlined info MoonAlert'),
               trailing: MoonButton.icon(
                 buttonSize: MoonButtonSize.xs,
@@ -292,7 +292,7 @@ class _AlertStoryState extends State<AlertStory> {
                 gap: 0,
                 onTap: () {},
                 icon: Icon(
-                  MoonIcons.controls_close_small_24_light,
+                  MoonIcons.controls_close_small_24_regular,
                   size: 24,
                   color: context.moonColors!.whis,
                 ),
