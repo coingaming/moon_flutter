@@ -29,6 +29,7 @@ class StorybookPage extends StatelessWidget {
       routeWrapperBuilder: RouteWrapperBuilder(
         title: "Moon Design for Flutter",
         theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor: const Color(0xfffafafa), // Use old Material2 scaffold background color
           extensions: <ThemeExtension<dynamic>>[
             MoonTheme(
               tokens: MoonTokens.light.copyWith(

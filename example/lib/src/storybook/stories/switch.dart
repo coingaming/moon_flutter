@@ -96,12 +96,10 @@ class _SwitchStoryState extends State<SwitchStory> {
               activeTrackWidget: const Text(
                 "ON",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 7),
               ),
               inactiveTrackWidget: const Text(
                 "OFF",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 7),
               ),
               value: switchTextValue,
               onChanged: (bool newValue) => setState(() => switchTextValue = newValue),

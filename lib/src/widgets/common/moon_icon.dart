@@ -7,7 +7,7 @@ class MoonIcon extends StatelessWidget {
   /// Creates a Moon Design icon.
   ///
   /// This is necessary to ensure that custom icons are rendered correctly in mobile Safari.
-  @Deprecated("Unnecessary with current moon_icons icon font")
+  @Deprecated("Unnecessary with current moon_icons icon font. Use regular Icon widget instead.")
   const MoonIcon(
     this.icon, {
     super.key,

@@ -330,6 +330,7 @@ class _MoonTextInputGroupState extends State<MoonTextInputGroup> {
           isFocusable: false,
           showFocusEffect: false,
           onTap: widget.enabled ? () {} : null,
+          propagateGesturesToChild: true,
           builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
             return BorderContainer(
               clipBehavior: widget.clipBehavior ?? Clip.none,

@@ -144,12 +144,10 @@ class GroupedAccordionTestWidget extends StatefulWidget {
   });
 
   @override
-  State<GroupedAccordionTestWidget> createState() =>
-      _GroupedAccordionTestWidgetState();
+  State<GroupedAccordionTestWidget> createState() => _GroupedAccordionTestWidgetState();
 }
 
-class _GroupedAccordionTestWidgetState
-    extends State<GroupedAccordionTestWidget> {
+class _GroupedAccordionTestWidgetState extends State<GroupedAccordionTestWidget> {
   AccordionItems? _currentlyOpenAccordionItem = AccordionItems.first;
 
   @override
