@@ -99,8 +99,8 @@ void main() {
   });
 }
 
-const IconData leadingIcon = MoonIcons.other_frame_24_regular;
-const IconData dividerIcon = MoonIcons.arrows_chevron_right_double_16_regular;
+const IconData leadingIcon = MoonIcons.other_frame_24_light;
+const IconData dividerIcon = MoonIcons.arrows_chevron_right_double_16_light;
 
 class TestWidget extends StatelessWidget {
   final bool showLeading;

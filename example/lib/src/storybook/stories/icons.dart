@@ -144,7 +144,7 @@ class _IconsStoryState extends State<IconsStory> {
             controller: _searchController,
             hintText: "Search icons",
             leading: const Icon(
-              MoonIcons.generic_search_24_regular,
+              MoonIcons.generic_search_24_light,
               size: 24,
             ),
             trailing: MouseRegion(
@@ -152,7 +152,7 @@ class _IconsStoryState extends State<IconsStory> {
               child: GestureDetector(
                 onTap: _handleClear,
                 child: const Icon(
-                  MoonIcons.controls_close_small_24_regular,
+                  MoonIcons.controls_close_small_24_light,
                   size: 24,
                 ),
               ),

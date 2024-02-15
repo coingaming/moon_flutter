@@ -147,21 +147,21 @@ class SegmentedControlStory extends StatelessWidget {
                   borderRadius: borderRadius,
                   segments: [
                     Segment(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       segmentStyle: segmentStyle,
                     ),
                   ],
@@ -176,19 +176,19 @@ class SegmentedControlStory extends StatelessWidget {
                   borderRadius: borderRadius,
                   segments: [
                     Segment(
-                      trailing: const Icon(MoonIcons.other_frame_24_regular),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      trailing: const Icon(MoonIcons.other_frame_24_regular),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      trailing: const Icon(MoonIcons.other_frame_24_regular),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
                     Segment(
-                      trailing: const Icon(MoonIcons.other_frame_24_regular),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
                   ],

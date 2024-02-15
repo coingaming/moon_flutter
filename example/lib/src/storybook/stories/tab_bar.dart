@@ -156,21 +156,21 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
                   gap: gapKnob?.toDouble(),
                   tabs: [
                     MoonTab(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab1') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: tabStyle,
                     ),
                     MoonTab(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab2') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: tabStyle,
                     ),
                     MoonTab(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab3') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: tabStyle,
                     ),
                   ],
@@ -182,20 +182,20 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
                   gap: gapKnob?.toDouble(),
                   tabs: [
                     MoonTab(
-                      trailing: const Icon(MoonIcons.other_frame_24_regular),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                     ),
                     MoonTab(
-                      trailing: const Icon(MoonIcons.other_frame_24_regular),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                       disabled: true,
                     ),
                     MoonTab(
-                      trailing: const Icon(MoonIcons.other_frame_24_regular),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                     ),
                     MoonTab(
-                      trailing: const Icon(MoonIcons.other_frame_24_regular),
+                      trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                     ),
                   ],
@@ -207,21 +207,21 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
                   gap: gapKnob?.toDouble(),
                   pillTabs: [
                     MoonPillTab(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab1') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: pillTabStyle,
                     ),
                     MoonPillTab(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab2') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: pillTabStyle,
                     ),
                     MoonPillTab(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       label: showLabelKnob ? const Text('Tab3') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_regular) : null,
+                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
                       tabStyle: pillTabStyle,
                     ),
                   ],
@@ -262,7 +262,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
                                 onTap: () => tabController.animateTo(1),
-                                child: const Icon(MoonIcons.controls_chevron_right_24_regular),
+                                child: const Icon(MoonIcons.controls_chevron_right_24_light),
                               ),
                             ),
                           ],
@@ -276,12 +276,12 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
                           children: [
                             GestureDetector(
                               onTap: () => tabController.animateTo(0),
-                              child: const Icon(MoonIcons.controls_chevron_left_24_regular),
+                              child: const Icon(MoonIcons.controls_chevron_left_24_light),
                             ),
                             const Text('Tab2'),
                             GestureDetector(
                               onTap: () => tabController.animateTo(2),
-                              child: const Icon(MoonIcons.controls_chevron_right_24_regular),
+                              child: const Icon(MoonIcons.controls_chevron_right_24_light),
                             ),
                           ],
                         ),
@@ -299,7 +299,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
                               child: GestureDetector(
                                 onTap: () => tabController.animateTo(1),
                                 child: const Icon(
-                                  MoonIcons.controls_chevron_left_24_regular,
+                                  MoonIcons.controls_chevron_left_24_light,
                                 ),
                               ),
                             ),

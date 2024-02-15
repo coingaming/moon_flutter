@@ -206,7 +206,7 @@ class _DropdownStoryState extends State<DropdownStory> {
                     duration: const Duration(milliseconds: 200),
                     turns: _showChoices ? -0.5 : 0,
                     child: const Icon(
-                      MoonIcons.controls_chevron_down_small_16_regular,
+                      MoonIcons.controls_chevron_down_small_16_light,
                       size: 16,
                     ),
                   ),
@@ -306,7 +306,7 @@ class _DropdownStoryState extends State<DropdownStory> {
                       }),
                       label: const Text("Roshi"),
                       trailing: const Icon(
-                        MoonIcons.controls_chevron_right_16_regular,
+                        MoonIcons.controls_chevron_right_16_light,
                         size: 16,
                       ),
                     ),

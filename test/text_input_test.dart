@@ -134,8 +134,8 @@ const invalidText = 'Lorem';
 const hint = 'Hint';
 const error = 'Error';
 const helper = 'Helper';
-const IconData leadingIcon = MoonIcons.other_frame_24_regular;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_regular;
+const IconData leadingIcon = MoonIcons.other_frame_24_light;
+const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
 
 class TestWidget extends StatelessWidget {
   final bool enabled;

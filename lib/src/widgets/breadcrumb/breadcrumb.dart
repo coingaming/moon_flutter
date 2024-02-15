@@ -203,8 +203,8 @@ class _MoonBreadcrumbState extends State<MoonBreadcrumb> {
       child: widget.divider ??
           Icon(
             Directionality.of(context) == TextDirection.ltr
-                ? MoonIcons.arrows_right_24_regular
-                : MoonIcons.arrows_left_24_regular,
+                ? MoonIcons.arrows_right_24_light
+                : MoonIcons.arrows_left_24_light,
             size: 24,
           ),
     );

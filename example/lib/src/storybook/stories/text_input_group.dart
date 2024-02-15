@@ -170,14 +170,14 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                             ? "The text should be longer than 10 characters."
                             : null,
                         leading: const Icon(
-                          MoonIcons.generic_search_24_regular,
+                          MoonIcons.generic_search_24_light,
                           size: 24,
                         ),
                         trailing: MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
                             child: const Icon(
-                              MoonIcons.controls_close_small_24_regular,
+                              MoonIcons.controls_close_small_24_light,
                               size: 24,
                             ),
                             onTap: () => _textController.clear(),
@@ -199,7 +199,7 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                         hintText: "Enter password (123abc)",
                         validator: (String? value) => value != "123abc" ? "Wrong password." : null,
                         leading: const Icon(
-                          MoonIcons.security_password_24_regular,
+                          MoonIcons.security_password_24_light,
                           size: 24,
                         ),
                         trailing: MouseRegion(

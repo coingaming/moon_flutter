@@ -127,10 +127,10 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
                       label: Text(isHomePage ? 'Home Page' : 'Page $index'),
                     ),
                     leading:
-                        showLeadingKnob && isHomePage ? const Icon(MoonIcons.generic_home_16_regular, size: 16) : null,
+                        showLeadingKnob && isHomePage ? const Icon(MoonIcons.generic_home_16_light, size: 16) : null,
                     label: Text(isHomePage ? 'Home' : 'Page $index'),
                     trailing:
-                        showTrailingKnob && isHomePage ? const Icon(MoonIcons.generic_home_16_regular, size: 16) : null,
+                        showTrailingKnob && isHomePage ? const Icon(MoonIcons.generic_home_16_light, size: 16) : null,
                   );
                 },
               ),
@@ -162,8 +162,8 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
               ),
               divider: Icon(
                 Directionality.of(context) == TextDirection.ltr
-                    ? MoonIcons.controls_chevron_right_small_16_regular
-                    : MoonIcons.controls_chevron_left_small_16_regular,
+                    ? MoonIcons.controls_chevron_right_small_16_light
+                    : MoonIcons.controls_chevron_left_small_16_light,
               ),
               showMoreWidget: MoonDropdown(
                 show: _showDropdown,
@@ -200,7 +200,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
                       buttonSize: MoonButtonSize.xs,
                       hoverEffectColor: Colors.transparent,
                       iconColor: _dropdownIconColor ?? context.moonColors!.iconSecondary,
-                      icon: const Icon(MoonIcons.generic_burger_regular_16_regular),
+                      icon: const Icon(MoonIcons.generic_burger_regular_16_light),
                       onTap: () => setState(() => _showDropdown = !_showDropdown),
                     ),
                   ),
@@ -219,14 +219,14 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
                     ),
                     leading: showLeadingKnob && isHomePage
                         ? const Icon(
-                            MoonIcons.generic_home_16_regular,
+                            MoonIcons.generic_home_16_light,
                             size: 16,
                           )
                         : null,
                     label: Text(isHomePage ? 'Home' : 'Page $index'),
                     trailing: showTrailingKnob && isHomePage
                         ? const Icon(
-                            MoonIcons.generic_home_16_regular,
+                            MoonIcons.generic_home_16_light,
                             size: 16,
                           )
                         : null,

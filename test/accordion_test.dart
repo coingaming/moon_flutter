@@ -97,7 +97,7 @@ void main() {
 
 const String accordionTitle = "Single MoonAccordion item";
 const String accordionContent = "Accordion content";
-const IconData accordionIcon = MoonIcons.other_frame_24_regular;
+const IconData accordionIcon = MoonIcons.other_frame_24_light;
 
 const firstAccordionKey = Key("first_accordion");
 const firstAccordionChildKey = Key("first_accordion_child");
@@ -164,7 +164,7 @@ class _GroupedAccordionTestWidgetState extends State<GroupedAccordionTestWidget>
               onExpansionChanged: (AccordionItems? value) {
                 setState(() => _currentlyOpenAccordionItem = value);
               },
-              leading: const Icon(MoonIcons.other_frame_24_regular),
+              leading: const Icon(MoonIcons.other_frame_24_light),
               label: const Text("Grouped MoonAccordion item #1"),
               children: const [
                 Text(
@@ -181,7 +181,7 @@ class _GroupedAccordionTestWidgetState extends State<GroupedAccordionTestWidget>
               onExpansionChanged: (AccordionItems? value) {
                 setState(() => _currentlyOpenAccordionItem = value);
               },
-              leading: const Icon(MoonIcons.other_frame_24_regular),
+              leading: const Icon(MoonIcons.other_frame_24_light),
               label: const Text("Grouped MoonAccordion item #2"),
               children: const [
                 Text(

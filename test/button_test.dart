@@ -56,8 +56,8 @@ void main() {
 }
 
 const String buttonLabel = "Button label";
-const IconData leadingIcon = MoonIcons.other_frame_24_regular;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_regular;
+const IconData leadingIcon = MoonIcons.other_frame_24_light;
+const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
 
 class TestWidget extends StatefulWidget {
   final bool showLeading;
