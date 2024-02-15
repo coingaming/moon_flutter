@@ -154,7 +154,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                       borderRadius: borderRadius,
                       backgroundColor: context.moonColors!.jiren,
                       avatarSize: MoonAvatarSize.lg,
-                      content: const Icon(MoonIcons.travel_airplane_32_light, size: 32),
+                      content: const Icon(MoonIcons.travel_airplane_32_regular, size: 32),
                     )
                   : null,
               trailing: showTrailingKnob
@@ -185,7 +185,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                       borderRadius: borderRadius,
                       backgroundColor: context.moonColors!.jiren,
                       avatarSize: MoonAvatarSize.md,
-                      content: const Icon(MoonIcons.notifications_activity_32_light, size: 24),
+                      content: const Icon(MoonIcons.notifications_activity_32_regular, size: 24),
                     )
                   : null,
               trailing: showTrailingKnob
