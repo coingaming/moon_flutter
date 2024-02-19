@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.48.5](https://github.com/coingaming/moon_flutter/compare/v0.48.4...v0.48.5) (2024-02-19)
+
+
+### Bug Fixes
+
+* [MDS-1003] Fix TextInput overflow issues ([#355](https://github.com/coingaming/moon_flutter/issues/355)) ([058042c](https://github.com/coingaming/moon_flutter/commit/058042cb12e78e6860a82c94a8e17b5b35b31e35))
+
 ## [0.48.4](https://github.com/coingaming/moon_flutter/compare/v0.48.3...v0.48.4) (2024-02-19)
 
 
