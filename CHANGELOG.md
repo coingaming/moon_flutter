@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.48.4](https://github.com/coingaming/moon_flutter/compare/v0.48.3...v0.48.4) (2024-02-19)
+
+
+### Bug Fixes
+
+* [MDS-1002] Fix Storybook focusing bug ([#356](https://github.com/coingaming/moon_flutter/issues/356)) ([d3181ac](https://github.com/coingaming/moon_flutter/commit/d3181ac5dcb027b67ca34ba2d1d11974bb805179))
+
 ## [0.48.3](https://github.com/coingaming/moon_flutter/compare/v0.48.2...v0.48.3) (2024-02-15)
 
 
