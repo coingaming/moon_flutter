@@ -111,6 +111,7 @@ class TextAreaStory extends StatelessWidget {
                 children: [
                   MoonTextArea(
                     enabled: enabledKnob,
+                    expands: growableKnob,
                     height: growableKnob ? null : 200,
                     textColor: textColor,
                     hintTextColor: hintTextColor,

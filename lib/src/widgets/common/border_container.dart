@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 
 class BorderContainer extends StatefulWidget {
+  final bool expands;
   final Clip clipBehavior;
   final Color? backgroundColor;
   final Decoration? decoration;
@@ -17,6 +18,7 @@ class BorderContainer extends StatefulWidget {
   /// Primarily utilized in [MoonTextInput] and [MoonTextInputGroup].
   const BorderContainer({
     super.key,
+    this.expands = false,
     this.clipBehavior = Clip.none,
     this.backgroundColor,
     this.decoration,
@@ -84,8 +86,12 @@ class _BorderContainerState extends State<BorderContainer> with SingleTickerProv
       animation: _borderAnimation,
       builder: (context, child) {
         return Container(
-          height: widget.height,
-          width: widget.width,
+          constraints: BoxConstraints(
+            minHeight: widget.height ?? 0,
+            minWidth: widget.width ?? 0,
+            maxHeight: widget.expands ? double.infinity : widget.height ?? double.infinity,
+            maxWidth: widget.expands ? double.infinity : widget.width ?? double.infinity,
+          ),
           clipBehavior: widget.clipBehavior,
           decoration: widget.decoration ??
               ShapeDecorationWithPremultipliedAlpha(
