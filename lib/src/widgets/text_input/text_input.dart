@@ -1298,21 +1298,21 @@ class _MoonTextInputState extends State<MoonTextInput>
           backgroundColor: effectiveBackgroundColor,
           border: resolvedBorder,
           decoration: widget.decoration,
-          height: widget.keyboardType == TextInputType.multiline && widget.height == null ? null : effectiveHeight,
+          expands: widget.expands,
+          width: widget.width,
+          height: effectiveHeight,
           duration: effectiveTransitionDuration,
           curve: effectiveTransitionCurve,
           child: Row(
+            crossAxisAlignment: widget.expands ? CrossAxisAlignment.center : CrossAxisAlignment.stretch,
             children: [
               if (widget.leading != null)
-                SizedBox(
-                  height: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      start: resolvedContentPadding.left,
-                      end: effectiveGap,
-                    ),
-                    child: widget.leading,
+                Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    start: resolvedContentPadding.left,
+                    end: effectiveGap,
                   ),
+                  child: widget.leading,
                 ),
               Expanded(
                 child: Padding(
@@ -1371,15 +1371,12 @@ class _MoonTextInputState extends State<MoonTextInput>
                 ),
               ),
               if (widget.trailing != null)
-                SizedBox(
-                  height: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      start: effectiveGap,
-                      end: resolvedContentPadding.right,
-                    ),
-                    child: widget.trailing,
+                Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    start: effectiveGap,
+                    end: resolvedContentPadding.right,
                   ),
+                  child: widget.trailing,
                 ),
             ],
           ),
@@ -1392,38 +1389,34 @@ class _MoonTextInputState extends State<MoonTextInput>
       opacity: widget.enabled ? 1.0 : effectiveDisabledOpacityValue,
       curve: effectiveTransitionCurve,
       duration: effectiveTransitionDuration,
-      child: SizedBox(
-        width: widget.width,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            child,
-            if (widget.helper != null || (widget.errorText != null))
-              RepaintBoundary(
-                child: IconTheme(
-                  data: IconThemeData(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          child,
+          if (widget.helper != null || (widget.errorText != null))
+            RepaintBoundary(
+              child: IconTheme(
+                data: IconThemeData(
+                  color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
+                ),
+                child: DefaultTextStyle(
+                  style: effectiveHelperTextStyle.copyWith(
                     color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
                   ),
-                  child: DefaultTextStyle(
-                    style: effectiveHelperTextStyle.copyWith(
-                      color: widget.errorText != null ? effectiveErrorColor : effectiveHintTextColor,
-                    ),
-                    child: widget.errorText != null
-                        ? widget.errorBuilder?.call(context, widget.errorText) ??
-                            Padding(
-                              padding: effectiveHelperPadding,
-                              child: MoonErrorMessage(errorText: widget.errorText!),
-                            )
-                        : Padding(
+                  child: widget.errorText != null
+                      ? widget.errorBuilder?.call(context, widget.errorText) ??
+                          Padding(
                             padding: effectiveHelperPadding,
-                            child: widget.helper,
-                          ),
-                  ),
+                            child: MoonErrorMessage(errorText: widget.errorText!),
+                          )
+                      : Padding(
+                          padding: effectiveHelperPadding,
+                          child: widget.helper,
+                        ),
                 ),
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
 

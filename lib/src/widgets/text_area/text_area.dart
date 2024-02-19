@@ -32,6 +32,9 @@ class MoonTextArea extends StatelessWidget {
   /// {@macro flutter.services.TextInputConfiguration.enableSuggestions}
   final bool enableSuggestions;
 
+  /// {@macro flutter.widgets.editableText.expands}
+  final bool expands;
+
   /// {@macro flutter.widgets.editableText.readOnly}
   final bool readOnly;
 
@@ -224,6 +227,7 @@ class MoonTextArea extends StatelessWidget {
     this.enableIMEPersonalizedLearning = true,
     this.enableInteractiveSelection,
     this.enableSuggestions = true,
+    this.expands = false,
     this.readOnly = false,
     this.scribbleEnabled = true,
     this.showCursor,
@@ -343,7 +347,7 @@ class MoonTextArea extends StatelessWidget {
       enableSuggestions: enableSuggestions,
       errorColor: effectiveErrorColor,
       errorBuilder: errorBuilder,
-      expands: height != null,
+      expands: expands,
       focusNode: focusNode,
       height: height,
       helper: helper,
