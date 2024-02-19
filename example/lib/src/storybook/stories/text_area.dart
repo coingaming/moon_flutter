@@ -90,9 +90,9 @@ class TextAreaStory extends StatelessWidget {
       initial: true,
     );
 
-    final growableKnob = context.knobs.boolean(
-      label: "Growable",
-      description: "Whether MoonTextArea is growable with unfixed height",
+    final expandsKnob = context.knobs.boolean(
+      label: "expands",
+      description: "Whether MoonTextArea can expand to fit its contents.",
     );
 
     final showHelperKnob = context.knobs.boolean(
@@ -111,8 +111,8 @@ class TextAreaStory extends StatelessWidget {
                 children: [
                   MoonTextArea(
                     enabled: enabledKnob,
-                    expands: growableKnob,
-                    height: growableKnob ? null : 200,
+                    expands: expandsKnob,
+                    height: expandsKnob ? null : 200,
                     textColor: textColor,
                     hintTextColor: hintTextColor,
                     backgroundColor: backgroundColor,
