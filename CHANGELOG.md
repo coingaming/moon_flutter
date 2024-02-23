@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.0](https://github.com/coingaming/moon_flutter/compare/v0.48.5...v0.49.0) (2024-02-23)
+
+
+### Features
+
+* [MDS-990] Combobox component ([#359](https://github.com/coingaming/moon_flutter/issues/359)) ([ee2f3b6](https://github.com/coingaming/moon_flutter/commit/ee2f3b6baf2939e96f00ff7e02e4e8a810fe309a))
+
 ## [0.48.5](https://github.com/coingaming/moon_flutter/compare/v0.48.4...v0.48.5) (2024-02-19)
 
 
