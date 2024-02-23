@@ -5,7 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class AuthCodeStory extends StatelessWidget {
-  static const path = '/auth_code';
+  static const path = '/primitives/auth_code';
 
   const AuthCodeStory({super.key});
 

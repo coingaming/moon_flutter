@@ -5,7 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class ButtonStory extends StatelessWidget {
-  static const path = '/button';
+  static const path = '/primitives/button';
 
   const ButtonStory({super.key});
 
@@ -204,7 +204,7 @@ class ButtonStory extends StatelessWidget {
               label: showLabelKnob ? const Text("MoonTextButton") : null,
               trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
             ),
-            const TextDivider(text: "Customized MoonButtons with non-standard children"),
+            const TextDivider(text: "Custom MoonButtons with non-standard children"),
             MoonButton(
               onTap: isDisabledKnob ? null : () {},
               height: 40,

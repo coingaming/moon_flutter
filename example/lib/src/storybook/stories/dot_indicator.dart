@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class DotIndicatorStory extends StatefulWidget {
-  static const path = '/dot_indicator';
+  static const path = '/primitives/dot_indicator';
 
   const DotIndicatorStory({super.key});
 

@@ -6,7 +6,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class SwitchStory extends StatefulWidget {
-  static const path = '/switch';
+  static const path = '/primitives/switch';
 
   const SwitchStory({super.key});
 
@@ -88,7 +88,7 @@ class _SwitchStoryState extends State<SwitchStory> {
               value: switchValue,
               onChanged: isDisabled ? null : (bool newValue) => setState(() => switchValue = newValue),
             ),
-            const TextDivider(text: "Customized MoonSwitch"),
+            const TextDivider(text: "Custom MoonSwitch"),
             MoonSwitch(
               switchSize: switchSizeKnob,
               activeThumbWidget: const Icon(MoonIcons.generic_check_alternative_16_light),

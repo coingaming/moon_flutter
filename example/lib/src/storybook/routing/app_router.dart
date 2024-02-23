@@ -11,6 +11,7 @@ import 'package:example/src/storybook/stories/checkbox.dart';
 import 'package:example/src/storybook/stories/chip.dart';
 import 'package:example/src/storybook/stories/circular_loader.dart';
 import 'package:example/src/storybook/stories/circular_progress.dart';
+import 'package:example/src/storybook/stories/combobox.dart';
 import 'package:example/src/storybook/stories/dot_indicator.dart';
 import 'package:example/src/storybook/stories/drawer.dart';
 import 'package:example/src/storybook/stories/dropdown.dart';
@@ -35,10 +36,31 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
+const String primitivesDirectory = '/primitives';
+const String compositesDirectory = '/composites';
+
 GoRouter router = GoRouter(
   debugLogDiagnostics: true,
   initialLocation: AccordionStory.path,
   errorBuilder: (context, state) => const RoutingErrorWidget(),
+  redirect: (context, state) {
+    switch (state.uri.path) {
+      case primitivesDirectory:
+        return AccordionStory.path;
+      case compositesDirectory:
+        return ComboboxStory.path;
+      case CircularLoaderStory.subdirectory:
+        return CircularLoaderStory.path;
+      case CircularProgressStory.subdirectory:
+        return CircularProgressStory.path;
+      case '$primitivesDirectory${CircularLoaderStory.subdirectory}':
+        return CircularLoaderStory.path;
+      case '$primitivesDirectory${CircularProgressStory.subdirectory}':
+        return CircularProgressStory.path;
+      default:
+        return null;
+    }
+  },
   routes: <RouteBase>[
     GoRoute(
       path: '/',
@@ -46,30 +68,6 @@ GoRouter router = GoRouter(
         Storybook.storyRouterNotifier.currentStoryRoute = AccordionStory.path;
         return AccordionStory.path;
       },
-    ),
-    GoRoute(
-      path: CircularLoaderStory.subdirectory,
-      redirect: (BuildContext context, GoRouterState state) => CircularLoaderStory.path,
-      routes: [
-        GoRoute(
-          path: CircularLoaderStory.segment,
-          pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
-            child: CircularLoaderStory(),
-          ),
-        ),
-      ],
-    ),
-    GoRoute(
-      path: CircularProgressStory.subdirectory,
-      redirect: (BuildContext context, GoRouterState state) => CircularProgressStory.path,
-      routes: [
-        GoRoute(
-          path: CircularProgressStory.segment,
-          pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
-            child: CircularProgressStory(),
-          ),
-        ),
-      ],
     ),
     GoRoute(
       path: AccordionStory.path,
@@ -129,6 +127,24 @@ GoRouter router = GoRouter(
       path: ChipStory.path,
       pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
         child: ChipStory(),
+      ),
+    ),
+    GoRoute(
+      path: CircularLoaderStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: CircularLoaderStory(),
+      ),
+    ),
+    GoRoute(
+      path: CircularProgressStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: CircularProgressStory(),
+      ),
+    ),
+    GoRoute(
+      path: ComboboxStory.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
+        child: ComboboxStory(),
       ),
     ),
     GoRoute(

@@ -8,7 +8,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 const int _rowsPerPage = 25;
 
 class TableStory extends StatefulWidget {
-  static const path = '/table';
+  static const path = '/primitives/table';
 
   const TableStory({super.key});
 

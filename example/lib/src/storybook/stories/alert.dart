@@ -5,7 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class AlertStory extends StatefulWidget {
-  static const path = '/alert';
+  static const path = '/primitives/alert';
 
   const AlertStory({super.key});
 

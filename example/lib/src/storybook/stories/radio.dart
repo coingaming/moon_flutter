@@ -10,7 +10,7 @@ enum ChoiceCustom { first, second }
 enum ChoiceLabel { first, second }
 
 class RadioStory extends StatefulWidget {
-  static const path = '/radio';
+  static const path = '/primitives/radio';
 
   const RadioStory({super.key});
 

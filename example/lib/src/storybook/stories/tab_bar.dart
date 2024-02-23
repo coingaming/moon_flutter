@@ -5,7 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class TabBarStory extends StatefulWidget {
-  static const path = '/tab_bar';
+  static const path = '/primitives/tab_bar';
 
   const TabBarStory({super.key});
 
@@ -226,7 +226,7 @@ class _TabBarStoryState extends State<TabBarStory> with SingleTickerProviderStat
                     ),
                   ],
                 ),
-                const TextDivider(text: "Customized MoonTabBar with TabBarView"),
+                const TextDivider(text: "Custom MoonTabBar with TabBarView"),
                 MoonTabBar(
                   isExpanded: true,
                   tabController: tabController,

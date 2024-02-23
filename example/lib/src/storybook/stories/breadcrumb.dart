@@ -6,7 +6,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class BreadcrumbStory extends StatefulWidget {
-  static const path = '/breadcrumb';
+  static const path = '/primitives/breadcrumb';
 
   const BreadcrumbStory({super.key});
 
@@ -146,7 +146,7 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
             ),
           ],
         ),
-        const TextDivider(text: "Customized MoonBreadcrumb with MoonDropdown"),
+        const TextDivider(text: "Custom MoonBreadcrumb with MoonDropdown"),
         StatefulBuilder(
           builder: (context, setState) {
             return MoonBreadcrumb(

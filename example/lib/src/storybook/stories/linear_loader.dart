@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class LinearLoaderStory extends StatelessWidget {
-  static const path = '/loader/linear_loader';
+  static const path = '/primitives/loader/linear_loader';
 
   const LinearLoaderStory({super.key});
 

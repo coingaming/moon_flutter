@@ -10,7 +10,7 @@ class TextDivider extends StatelessWidget {
   const TextDivider({
     super.key,
     required this.text,
-    this.paddingTop = 40,
+    this.paddingTop = 48,
     this.paddingBottom = 32,
   });
 

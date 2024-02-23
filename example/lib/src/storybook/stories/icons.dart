@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 
 class IconsStory extends StatefulWidget {
-  static const path = '/icons';
+  static const path = '/primitives/icons';
 
   const IconsStory({super.key});
 

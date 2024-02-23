@@ -5,8 +5,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 
 class CircularLoaderStory extends StatelessWidget {
   static const subdirectory = '/loader';
-  static const path = '/loader/circular_loader';
-  static const segment = 'circular_loader';
+  static const path = '/primitives/loader/circular_loader';
 
   const CircularLoaderStory({super.key});
 

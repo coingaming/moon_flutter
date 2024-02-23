@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class PopoverStory extends StatefulWidget {
-  static const path = '/popover';
+  static const path = '/primitives/popover';
 
   const PopoverStory({super.key});
 

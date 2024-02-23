@@ -7,7 +7,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 enum MenuItem { first, second }
 
 class MenuItemStory extends StatefulWidget {
-  static const path = '/menu_item';
+  static const path = '/primitives/menu_item';
 
   const MenuItemStory({super.key});
 
