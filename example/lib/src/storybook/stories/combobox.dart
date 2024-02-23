@@ -106,7 +106,7 @@ class _ComboboxStoryState extends State<ComboboxStory> {
 
     setState(() {
       _showSingleSelectDropdown = false;
-      if (isOptionSelected) _singleSelectSearchController.clear();
+      if (!isOptionSelected) _singleSelectSearchController.clear();
       _singleSelectFocusNode.unfocus();
     });
   }
