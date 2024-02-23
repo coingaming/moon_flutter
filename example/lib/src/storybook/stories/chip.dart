@@ -5,7 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class ChipStory extends StatelessWidget {
-  static const path = '/chip';
+  static const path = '/primitives/chip';
 
   const ChipStory({super.key});
 
@@ -156,7 +156,7 @@ class ChipStory extends StatelessWidget {
               label: showLabelKnob ? Text(customLabelTextKnob) : null,
               trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
             ),
-            const TextDivider(text: "Customized MoonChip"),
+            const TextDivider(text: "Custom MoonChip"),
             MoonChip(
               isActive: isActiveKnob,
               activeColor: context.moonColors!.dodoria,

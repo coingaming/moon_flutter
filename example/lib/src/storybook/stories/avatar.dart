@@ -5,7 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class AvatarStory extends StatelessWidget {
-  static const path = '/avatar';
+  static const path = '/primitives/avatar';
 
   const AvatarStory({super.key});
 
@@ -133,7 +133,7 @@ class AvatarStory extends StatelessWidget {
               ),
             ),
           ),
-          const TextDivider(text: "Customized MoonAvatar with image background"),
+          const TextDivider(text: "Custom MoonAvatar with image background"),
           MoonAvatar(
             avatarSize: avatarSizeKnob,
             badgeSize: badgeSizeKnob?.toDouble(),

@@ -5,7 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class TooltipStory extends StatefulWidget {
-  static const path = '/tooltip';
+  static const path = '/primitives/tooltip';
 
   const TooltipStory({super.key});
 

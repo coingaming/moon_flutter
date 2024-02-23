@@ -5,7 +5,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class SegmentedControlStory extends StatelessWidget {
-  static const path = '/segmented_control';
+  static const path = '/primitives/segmented_control';
 
   const SegmentedControlStory({super.key});
 

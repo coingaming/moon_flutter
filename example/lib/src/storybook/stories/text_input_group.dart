@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class TextInputGroupStory extends StatefulWidget {
-  static const path = '/text_input_group';
+  static const path = '/primitives/text_input_group';
 
   const TextInputGroupStory({super.key});
 
@@ -169,6 +169,7 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                         validator: (String? value) => value?.length != null && value!.length < 10
                             ? "The text should be longer than 10 characters."
                             : null,
+                        onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
                         leading: const Icon(
                           MoonIcons.generic_search_24_light,
                           size: 24,
@@ -198,6 +199,7 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                         borderRadius: borderRadius,
                         hintText: "Enter password (123abc)",
                         validator: (String? value) => value != "123abc" ? "Wrong password." : null,
+                        onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
                         leading: const Icon(
                           MoonIcons.security_password_24_light,
                           size: 24,

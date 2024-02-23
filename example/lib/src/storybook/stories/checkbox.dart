@@ -6,7 +6,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class CheckboxStory extends StatefulWidget {
-  static const path = '/checkbox';
+  static const path = '/primitives/checkbox';
 
   const CheckboxStory({super.key});
 

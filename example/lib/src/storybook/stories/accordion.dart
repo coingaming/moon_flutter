@@ -7,7 +7,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 enum AccordionItems { first, second }
 
 class AccordionStory extends StatefulWidget {
-  static const path = '/accordion';
+  static const path = '/primitives/accordion';
 
   const AccordionStory({super.key});
 

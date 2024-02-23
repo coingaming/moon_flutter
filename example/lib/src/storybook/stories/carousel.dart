@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class CarouselStory extends StatefulWidget {
-  static const path = '/carousel';
+  static const path = '/primitives/carousel';
 
   const CarouselStory({super.key});
 
@@ -108,7 +108,7 @@ class _CarouselStoryState extends State<CarouselStory> {
                 ),
               ),
             ),
-            const TextDivider(text: "Customized MoonCarousel with extras"),
+            const TextDivider(text: "Custom MoonCarousel with extras"),
             Column(
               children: [
                 SizedBox(

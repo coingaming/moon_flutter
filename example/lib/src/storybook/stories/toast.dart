@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class ToastStory extends StatelessWidget {
-  static const path = '/toast';
+  static const path = '/primitives/toast';
 
   const ToastStory({super.key});
 

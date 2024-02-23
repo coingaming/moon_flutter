@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class BottomSheetStory extends StatelessWidget {
-  static const path = '/bottom_sheet';
+  static const path = '/primitives/bottom_sheet';
 
   const BottomSheetStory({super.key});
 

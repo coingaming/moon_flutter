@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class DrawerStory extends StatelessWidget {
-  static const path = '/drawer';
+  static const path = '/primitives/drawer';
 
   const DrawerStory({super.key});
 

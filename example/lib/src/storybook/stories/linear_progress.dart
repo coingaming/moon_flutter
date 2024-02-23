@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class LinearProgressStory extends StatelessWidget {
-  static const path = '/progress/linear_progress';
+  static const path = '/primitives/progress/linear_progress';
 
   const LinearProgressStory({super.key});
 

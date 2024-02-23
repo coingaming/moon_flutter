@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class TagStory extends StatelessWidget {
-  static const path = '/tag';
+  static const path = '/primitives/tag';
 
   const TagStory({super.key});
 

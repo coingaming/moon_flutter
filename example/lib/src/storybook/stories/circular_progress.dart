@@ -5,8 +5,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 
 class CircularProgressStory extends StatelessWidget {
   static const subdirectory = '/progress';
-  static const path = '/progress/circular_progress';
-  static const segment = 'circular_progress';
+  static const path = '/primitives/progress/circular_progress';
 
   const CircularProgressStory({super.key});
 

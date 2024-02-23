@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class TextInputStory extends StatefulWidget {
-  static const path = '/text_input';
+  static const path = '/primitives/text_input';
 
   const TextInputStory({super.key});
 
@@ -159,7 +159,6 @@ class _TextInputStoryState extends State<TextInputStory> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MoonFormTextInput(
-                  hoverBorderColor: hoverBorderColor,
                   controller: _textController,
                   enabled: enabledKnob,
                   textInputSize: textInputSizeKnob,
@@ -169,11 +168,13 @@ class _TextInputStoryState extends State<TextInputStory> {
                   backgroundColor: backgroundColor,
                   activeBorderColor: activeBorderColor,
                   inactiveBorderColor: inactiveBorderColor,
+                  hoverBorderColor: hoverBorderColor,
                   errorColor: errorColor,
                   borderRadius: borderRadius,
                   hintText: "Enter text (over 10 characters)",
                   validator: (String? value) =>
                       value != null && value.length < 10 ? "The text should be longer than 10 characters." : null,
+                  onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
                   leading: showLeadingKnob
                       ? const Icon(
                           MoonIcons.generic_search_24_light,
@@ -209,10 +210,12 @@ class _TextInputStoryState extends State<TextInputStory> {
                       backgroundColor: backgroundColor,
                       activeBorderColor: activeBorderColor,
                       inactiveBorderColor: inactiveBorderColor,
+                      hoverBorderColor: hoverBorderColor,
                       errorColor: errorColor,
                       borderRadius: borderRadius,
                       hintText: "Enter password (123abc)",
                       validator: (String? value) => value != "123abc" ? "Wrong password." : null,
+                      onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
                       leading: showLeadingKnob
                           ? const Icon(
                               MoonIcons.security_password_24_light,
@@ -245,7 +248,6 @@ class _TextInputStoryState extends State<TextInputStory> {
                 const SizedBox(height: 16),
                 MoonFormTextInput(
                   readOnly: true,
-                  hoverBorderColor: hoverBorderColor,
                   controller: _dateController,
                   enabled: enabledKnob,
                   textInputSize: textInputSizeKnob,
@@ -254,6 +256,7 @@ class _TextInputStoryState extends State<TextInputStory> {
                   backgroundColor: backgroundColor,
                   activeBorderColor: activeBorderColor,
                   inactiveBorderColor: inactiveBorderColor,
+                  hoverBorderColor: hoverBorderColor,
                   errorColor: errorColor,
                   borderRadius: borderRadius,
                   hintText: "Pick a date",

@@ -4,7 +4,7 @@ import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class ModalStory extends StatelessWidget {
-  static const path = '/modal';
+  static const path = '/primitives/modal';
 
   const ModalStory({super.key});
 

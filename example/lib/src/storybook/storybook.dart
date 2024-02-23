@@ -22,14 +22,14 @@ class StorybookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: "Accordion",
+      initialStory: "Primitives/Accordion",
       plugins: _plugins,
       enableLayout: false,
       autoLayoutThreshold: autoLayoutThreshold,
       routeWrapperBuilder: RouteWrapperBuilder(
         title: "Moon Design for Flutter",
         theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: const Color(0xfffafafa), // Use old Material2 scaffold background color
+          scaffoldBackgroundColor: const Color(0xfffafafa), // Use old Material2 scaffold background color.
           extensions: <ThemeExtension<dynamic>>[
             MoonTheme(
               tokens: MoonTokens.light.copyWith(

@@ -7,12 +7,10 @@ enum Choices { first, second }
 
 extension ChoicesX on Choices {
   String get name {
-    switch (this) {
-      case Choices.first:
-        return "Choice #1";
-      case Choices.second:
-        return "Choice #2";
-    }
+    return switch (this) {
+      Choices.first => "Choice #1",
+      Choices.second => "Choice #2",
+    };
   }
 }
 
@@ -69,26 +67,25 @@ class _DropdownState extends State<Dropdown> {
             ],
           ),
           child: MoonTextInput(
-            mouseCursor: MouseCursor.defer,
-            readOnly: true,
             width: 250,
+            readOnly: true,
+            canRequestFocus: false,
+            mouseCursor: MouseCursor.defer,
             hintText: "Choose an option",
             onTap: () => setState(() => _showChoices = !_showChoices),
             leading: _availableChoices.values.any((element) => element == true)
                 ? Center(
-                    child: GestureDetector(
+                    child: MoonTag(
+                      tagSize: MoonTagSize.xs,
+                      backgroundColor: context.moonColors!.bulma,
                       onTap: () => setState(() => _availableChoices.updateAll((key, value) => false)),
-                      child: MoonTag(
-                        tagSize: MoonTagSize.xs,
-                        backgroundColor: context.moonColors!.bulma,
-                        label: Text(
-                          "${_availableChoices.values.where((element) => element == true).length}",
-                          style: TextStyle(color: context.moonColors!.gohan),
-                        ),
-                        trailing: Icon(
-                          MoonIcons.controls_close_small_16_light,
-                          color: context.moonColors!.gohan,
-                        ),
+                      label: Text(
+                        "${_availableChoices.values.where((element) => element == true).length}",
+                        style: TextStyle(color: context.moonColors!.gohan),
+                      ),
+                      trailing: Icon(
+                        MoonIcons.controls_close_small_16_light,
+                        color: context.moonColors!.gohan,
                       ),
                     ),
                   )
