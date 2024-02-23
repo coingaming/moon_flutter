@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.1](https://github.com/coingaming/moon_flutter/compare/v0.49.0...v0.49.1) (2024-02-23)
+
+
+### Bug Fixes
+
+* [NO-TASK] Hotfix for clearing input ([#361](https://github.com/coingaming/moon_flutter/issues/361)) ([991a6ba](https://github.com/coingaming/moon_flutter/commit/991a6ba9aea4c0e1e53a0d952961a2d24d362fbd))
+
 ## [0.49.0](https://github.com/coingaming/moon_flutter/compare/v0.48.5...v0.49.0) (2024-02-23)
 
 
