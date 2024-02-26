@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.4](https://github.com/coingaming/moon_flutter/compare/v0.49.3...v0.49.4) (2024-02-26)
+
+
+### Bug Fixes
+
+* [MDS-1008] Fix open modal giving error on Storybook navigation ([#367](https://github.com/coingaming/moon_flutter/issues/367)) ([170173a](https://github.com/coingaming/moon_flutter/commit/170173a3ab87382851b8befa1a54c6b1470eb854))
+
 ## [0.49.3](https://github.com/coingaming/moon_flutter/compare/v0.49.2...v0.49.3) (2024-02-26)
 
 
