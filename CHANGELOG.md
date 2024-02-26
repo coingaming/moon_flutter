@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.6](https://github.com/coingaming/moon_flutter/compare/v0.49.5...v0.49.6) (2024-02-26)
+
+
+### Bug Fixes
+
+* [MDS-1010] Fix modal and combobox code snippets ([#370](https://github.com/coingaming/moon_flutter/issues/370)) ([1badea7](https://github.com/coingaming/moon_flutter/commit/1badea77346e718007a253e707a63014d56d5906))
+
 ## [0.49.5](https://github.com/coingaming/moon_flutter/compare/v0.49.4...v0.49.5) (2024-02-26)
 
 
