@@ -37,14 +37,14 @@ extension OptionsX on Options {
   }
 }
 
-class ComboboxStory extends StatefulWidget {
-  const ComboboxStory({super.key});
+class Combobox extends StatefulWidget {
+  const Combobox({super.key});
 
   @override
-  State<ComboboxStory> createState() => _ComboboxStoryState();
+  State<Combobox> createState() => _ComboboxState();
 }
 
-class _ComboboxStoryState extends State<ComboboxStory> {
+class _ComboboxState extends State<Combobox> {
   final Map<Options, bool> _optionsList = {
     Options.accordion: false,
     Options.alert: false,

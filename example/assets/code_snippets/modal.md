@@ -9,7 +9,7 @@ class Modal extends StatelessWidget {
     Future<void> modalBuilder(BuildContext context) {
       return showMoonModal<void>(
         context: context,
-        builder: (BuildContext _) {
+        builder: (BuildContext context) {
           return MoonModal(
             child: SizedBox(
               height: 150,
@@ -23,13 +23,15 @@ class Modal extends StatelessWidget {
       );
     }
 
-    return Builder(
-      builder: (BuildContext context) {
-        return MoonFilledButton(
-          label: const Text("Open MoonModal"),
-          onTap: () => modalBuilder(context),
-        );
-      },
+    return Center(
+      child: Builder(
+        builder: (BuildContext context) {
+          return MoonFilledButton(
+            label: const Text("Open MoonModal"),
+            onTap: () => modalBuilder(context),
+          );
+        },
+      ),
     );
   }
 }
