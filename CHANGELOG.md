@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.2](https://github.com/coingaming/moon_flutter/compare/v0.49.1...v0.49.2) (2024-02-26)
+
+
+### Bug Fixes
+
+* [MDS-1007] Fix Storybook story selection and knobs not updating on we… ([#363](https://github.com/coingaming/moon_flutter/issues/363)) ([5f1e934](https://github.com/coingaming/moon_flutter/commit/5f1e9347ffaf3b2a23405a8824fd014a0e5ae65e))
+
 ## [0.49.1](https://github.com/coingaming/moon_flutter/compare/v0.49.0...v0.49.1) (2024-02-23)
 
 
