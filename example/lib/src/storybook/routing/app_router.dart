@@ -98,6 +98,10 @@ GoRouter router = GoRouter(
       pageBuilder: (BuildContext context, GoRouterState state) => const NoTransitionPage(
         child: BottomSheetStory(),
       ),
+      onExit: (BuildContext _) {
+        if (router.canPop()) router.pop();
+        return true;
+      },
     ),
     GoRoute(
       path: BreadcrumbStory.path,
