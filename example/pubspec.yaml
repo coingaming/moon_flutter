@@ -18,7 +18,7 @@ dependencies:
   storybook_flutter:
     git:
       url: https://github.com/coingaming/storybook_flutter.git
-      ref: fc11a6f327d26ed76253310572ca6e7fae8bfb2c
+      ref: 6976f340a4d53c7441dc780fcabdee4d5e776b9a
       path: packages/storybook_flutter
   transparent_image: ^2.0.1
 dev_dependencies:
