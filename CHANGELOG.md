@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.3](https://github.com/coingaming/moon_flutter/compare/v0.49.2...v0.49.3) (2024-02-26)
+
+
+### Bug Fixes
+
+* [MDS-1006] Fix bottom sheet not closing on Storybook navigation ([#365](https://github.com/coingaming/moon_flutter/issues/365)) ([d1f1584](https://github.com/coingaming/moon_flutter/commit/d1f158484806a483a55faa8ead74b80eb618097b))
+
 ## [0.49.2](https://github.com/coingaming/moon_flutter/compare/v0.49.1...v0.49.2) (2024-02-26)
 
 
