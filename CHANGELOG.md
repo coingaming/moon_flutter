@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.5](https://github.com/coingaming/moon_flutter/compare/v0.49.4...v0.49.5) (2024-02-26)
+
+
+### Bug Fixes
+
+* [MDS-1009] Fix Tag uppercase vertical misalignment ([#369](https://github.com/coingaming/moon_flutter/issues/369)) ([b2e049a](https://github.com/coingaming/moon_flutter/commit/b2e049a05bd85932684048486615a5f48301bb1c))
+
 ## [0.49.4](https://github.com/coingaming/moon_flutter/compare/v0.49.3...v0.49.4) (2024-02-26)
 
 
