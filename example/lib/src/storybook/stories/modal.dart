@@ -56,7 +56,7 @@ class ModalStory extends StatelessWidget {
         context: context,
         useRootNavigator: false,
         barrierColor: barrierColor,
-        builder: (BuildContext _) {
+        builder: (BuildContext context) {
           return Directionality(
             textDirection: Directionality.of(context),
             child: MoonModal(
@@ -104,21 +104,13 @@ class ModalStory extends StatelessWidget {
     }
 
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Builder(
-              builder: (BuildContext context) {
-                return MoonFilledButton(
-                  label: const Text("Tap me"),
-                  onTap: () => modalBuilder(context),
-                );
-              },
-            ),
-          ],
-        ),
+      child: Builder(
+        builder: (BuildContext context) {
+          return MoonFilledButton(
+            label: const Text("Tap me"),
+            onTap: () => modalBuilder(context),
+          );
+        },
       ),
     );
   }
