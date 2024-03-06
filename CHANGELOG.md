@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.7](https://github.com/coingaming/moon_flutter/compare/v0.49.6...v0.49.7) (2024-03-06)
+
+
+### Bug Fixes
+
+* [MDS-1019] Fix carousel bugs ([#373](https://github.com/coingaming/moon_flutter/issues/373)) ([dc7f93f](https://github.com/coingaming/moon_flutter/commit/dc7f93f98ab9677a218eda6803c612ae64e28f5f))
+
 ## [0.49.6](https://github.com/coingaming/moon_flutter/compare/v0.49.5...v0.49.6) (2024-02-26)
 
 
