@@ -119,13 +119,11 @@ class MoonCarousel extends StatefulWidget {
 }
 
 class _MoonCarouselState extends State<MoonCarousel> {
-  final Key _forwardListKey = const ValueKey<String>("moon_carousel_key");
-
-  late double _effectiveGap = 0;
-
+  late double _effectiveGap;
   late int _lastReportedItemIndex;
-
   late MoonCarouselScrollController _scrollController;
+
+  final Key _forwardListKey = const ValueKey<String>("moon_carousel_key");
 
   // Calculates the anchor position for the viewport to center the selected item when 'isCentered' is true.
   double _getCenteredAnchor(BoxConstraints constraints) {
@@ -134,6 +132,17 @@ class _MoonCarouselState extends State<MoonCarousel> {
     final maxExtent = widget.axisDirection == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
 
     return ((maxExtent / 2) - (widget.itemExtent / 2)) / maxExtent;
+  }
+
+  // Determines whether the carousel's anchored content surpasses the viewport's width.
+  // If not, clamping is not applicable.
+  bool _clampMaxExtent(double viewportWidth) {
+    final double itemsWidth = widget.itemCount * widget.itemExtent;
+    final double gapWidth = (widget.itemCount - 1) * _effectiveGap;
+    final double anchor = viewportWidth * widget.anchor * 2;
+    final double totalWidth = itemsWidth + gapWidth + anchor;
+
+    return totalWidth >= viewportWidth && widget.clampMaxExtent;
   }
 
   AxisDirection _getDirection(BuildContext context) {
@@ -158,6 +167,8 @@ class _MoonCarouselState extends State<MoonCarousel> {
     _scrollController = (widget.controller as MoonCarouselScrollController?) ?? MoonCarouselScrollController();
 
     _lastReportedItemIndex = _scrollController.initialItem;
+
+    _effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
 
     if (widget.autoPlay) {
       WidgetsBinding.instance.addPostFrameCallback((Duration _) {
@@ -209,6 +220,9 @@ class _MoonCarouselState extends State<MoonCarousel> {
         _scrollController.stopAutoplay();
       }
     }
+    if (widget.gap != oldWidget.gap) {
+      _effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
+    }
   }
 
   @override
@@ -219,8 +233,6 @@ class _MoonCarouselState extends State<MoonCarousel> {
   }
 
   List<Widget> _buildSlivers(BuildContext context, {required AxisDirection axisDirection}) {
-    _effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
-
     final EdgeInsetsDirectional resolvedPadding = widget.axisDirection == Axis.horizontal
         ? EdgeInsetsDirectional.only(end: _effectiveGap)
         : EdgeInsetsDirectional.only(bottom: _effectiveGap);
@@ -303,6 +315,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final double centeredAnchor = _getCenteredAnchor(constraints);
+          final bool clampMaxExtent = _clampMaxExtent(constraints.maxWidth);
 
           return IconTheme(
             data: IconThemeData(
@@ -314,7 +327,7 @@ class _MoonCarouselState extends State<MoonCarousel> {
                 anchor: centeredAnchor,
                 axisDirection: axisDirection,
                 controller: _scrollController,
-                clampMaxExtent: widget.clampMaxExtent,
+                clampMaxExtent: clampMaxExtent,
                 gap: _effectiveGap,
                 itemCount: widget.itemCount,
                 itemExtent: widget.itemExtent + _effectiveGap,
@@ -422,6 +435,7 @@ class MoonCarouselScrollController extends ScrollController {
 
     super.dispose();
   }
+
   /// Returns the index of the currently selected item. If [MoonCarousel.loop] is true it provides the modded index value.
   int get selectedItem => _getTrueIndex(
         (position as _MoonCarouselScrollPosition).itemIndex,

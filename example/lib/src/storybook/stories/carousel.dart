@@ -1,3 +1,4 @@
+import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
@@ -19,11 +20,23 @@ class _CarouselStoryState extends State<CarouselStory> {
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColorKnob = context.knobs.nullable.options(
+      label: "Background color",
+      description: "MoonColors variants for MoonCarousel item background.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final backgroundColor = colorTable(context)[backgroundColorKnob ?? 40];
+
     final itemExtentKnob = context.knobs.nullable.sliderInt(
       label: "itemExtent",
       description: "Extent for MoonCarousel item.",
       enabled: false,
       initial: 114,
+      min: 1,
       max: MediaQuery.of(context).size.width.round(),
     );
 
@@ -72,128 +85,136 @@ class _CarouselStoryState extends State<CarouselStory> {
     );
 
     return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
-        child: Column(
-          children: [
-            const TextDivider(
-              text: "MoonCarousel",
-              paddingTop: 0,
-            ),
-            SizedBox(
-              height: 114,
-              child: OverflowBox(
-                maxWidth: MediaQuery.of(context).size.width,
-                child: MoonCarousel(
-                  velocityFactor: velocityFactorKnob ?? 0.5,
-                  gap: gapKnob?.toDouble() ?? 8,
-                  autoPlay: autoPlayKnob,
-                  itemCount: 10,
-                  itemExtent: itemExtentKnob?.toDouble() ?? 114,
-                  isCentered: isCenteredKnob,
-                  anchor: anchorKnob ?? 0.041,
-                  loop: isLoopedKnob,
-                  clampMaxExtent: clampMaxExtentKnob,
-                  itemBuilder: (BuildContext context, int itemIndex, int realIndex) => Container(
-                    decoration: ShapeDecoration(
-                      color: context.moonColors!.goku,
-                      shape: MoonSquircleBorder(
-                        borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+            child: Column(
+              children: [
+                const TextDivider(
+                  text: "MoonCarousel",
+                  paddingTop: 0,
+                ),
+                SizedBox(
+                  height: 114,
+                  child: OverflowBox(
+                    maxWidth: constraints.maxWidth,
+                    child: MoonCarousel(
+                      velocityFactor: velocityFactorKnob ?? 0.5,
+                      gap: gapKnob?.toDouble() ?? 8,
+                      autoPlay: autoPlayKnob,
+                      itemCount: 10,
+                      itemExtent: itemExtentKnob?.toDouble() ?? 114,
+                      isCentered: isCenteredKnob,
+                      anchor: anchorKnob ?? 16 / (constraints.maxWidth - 16),
+                      loop: isLoopedKnob,
+                      clampMaxExtent: clampMaxExtentKnob,
+                      itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
+                        decoration: ShapeDecoration(
+                          color: backgroundColor ?? context.moonColors!.goku,
+                          shape: MoonSquircleBorder(
+                            borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text("${itemIndex + 1}"),
+                        ),
                       ),
                     ),
-                    child: Center(
-                      child: Text("${itemIndex + 1}"),
-                    ),
                   ),
                 ),
-              ),
-            ),
-            const TextDivider(text: "Custom MoonCarousel with extras"),
-            Column(
-              children: [
-                SizedBox(
-                  height: 180,
-                  child: OverflowBox(
-                    maxWidth: MediaQuery.of(context).size.width,
-                    child: Stack(
-                      children: [
-                        MoonCarousel(
-                          gap: 48,
-                          controller: carouselController,
-                          autoPlay: autoPlayKnob,
-                          itemCount: 5,
-                          itemExtent: MediaQuery.of(context).size.width - 64,
-                          loop: isLoopedKnob,
-                          onIndexChanged: (int index) => setState(() => selectedDot = index),
-                          itemBuilder: (BuildContext context, int itemIndex, int realIndex) => Container(
-                            decoration: ShapeDecoration(
-                              color: context.moonColors!.goku,
-                              shape: MoonSquircleBorder(
-                                borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+                const TextDivider(text: "Custom MoonCarousel with extras"),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 180,
+                      child: OverflowBox(
+                        maxWidth: constraints.maxWidth,
+                        child: Stack(
+                          children: [
+                            MoonCarousel(
+                              gap: 48,
+                              controller: carouselController,
+                              autoPlay: autoPlayKnob,
+                              itemCount: 5,
+                              itemExtent: constraints.maxWidth - 64,
+                              loop: isLoopedKnob,
+                              onIndexChanged: (int index) => setState(() => selectedDot = index),
+                              itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
+                                decoration: ShapeDecoration(
+                                  color: backgroundColor ?? context.moonColors!.goku,
+                                  shape: MoonSquircleBorder(
+                                    borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text("${itemIndex + 1}"),
+                                ),
                               ),
                             ),
-                            child: Center(
-                              child: Text("${itemIndex + 1}"),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                MoonButton.icon(
-                                  buttonSize: MoonButtonSize.sm,
-                                  showBorder: true,
-                                  icon: Icon(
-                                    Directionality.of(context) == TextDirection.ltr
-                                        ? MoonIcons.controls_chevron_left_small_24_light
-                                        : MoonIcons.controls_chevron_right_small_24_light,
-                                  ),
-                                  decoration: ShapeDecorationWithPremultipliedAlpha(
-                                    color: context.moonColors!.goku,
-                                    shadows: context.moonShadows!.sm,
-                                    shape: MoonSquircleBorder(
-                                      borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
+                            Align(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    MoonButton.icon(
+                                      buttonSize: MoonButtonSize.sm,
+                                      showBorder: true,
+                                      icon: Icon(
+                                        Directionality.of(context) == TextDirection.ltr
+                                            ? MoonIcons.controls_chevron_left_small_24_light
+                                            : MoonIcons.controls_chevron_right_small_24_light,
+                                      ),
+                                      decoration: ShapeDecorationWithPremultipliedAlpha(
+                                        color: context.moonColors!.goku,
+                                        shadows: context.moonShadows!.sm,
+                                        shape: MoonSquircleBorder(
+                                          borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
+                                        ),
+                                      ),
+                                      onTap: selectedDot == 0 && !isLoopedKnob
+                                          ? null
+                                          : () => carouselController.previousItem(),
                                     ),
-                                  ),
-                                  onTap: selectedDot == 0 ? null : () => carouselController.previousItem(),
-                                ),
-                                MoonButton.icon(
-                                  buttonSize: MoonButtonSize.sm,
-                                  showBorder: true,
-                                  icon: Icon(
-                                    Directionality.of(context) == TextDirection.ltr
-                                        ? MoonIcons.controls_chevron_right_small_24_light
-                                        : MoonIcons.controls_chevron_left_small_24_light,
-                                  ),
-                                  decoration: ShapeDecorationWithPremultipliedAlpha(
-                                    color: context.moonColors!.goku,
-                                    shadows: context.moonShadows!.sm,
-                                    shape: MoonSquircleBorder(
-                                      borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
+                                    MoonButton.icon(
+                                      buttonSize: MoonButtonSize.sm,
+                                      showBorder: true,
+                                      icon: Icon(
+                                        Directionality.of(context) == TextDirection.ltr
+                                            ? MoonIcons.controls_chevron_right_small_24_light
+                                            : MoonIcons.controls_chevron_left_small_24_light,
+                                      ),
+                                      decoration: ShapeDecorationWithPremultipliedAlpha(
+                                        color: context.moonColors!.goku,
+                                        shadows: context.moonShadows!.sm,
+                                        shape: MoonSquircleBorder(
+                                          borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
+                                        ),
+                                      ),
+                                      onTap: selectedDot == 4 && !isLoopedKnob
+                                          ? null
+                                          : () => carouselController.nextItem(),
                                     ),
-                                  ),
-                                  onTap: selectedDot == 4 ? null : () => carouselController.nextItem(),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                MoonDotIndicator(
-                  selectedDot: selectedDot,
-                  dotCount: 5,
+                    const SizedBox(height: 16),
+                    MoonDotIndicator(
+                      selectedDot: selectedDot,
+                      dotCount: 5,
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -31,7 +31,11 @@ void main() {
       await tester.drag(find.byKey(key), const Offset(-150, 0));
       await tester.pumpAndSettle();
       expect(find.text('1'), findsNothing);
+      expect(find.text('2'), findsOneWidget);
       expect(find.text('3'), findsOneWidget);
+      expect(find.text('4'), findsOneWidget);
+      expect(find.text('5'), findsNothing);
+
     },
   );
 }
@@ -40,6 +44,7 @@ class CarouselTestWidget extends StatelessWidget {
   final Key? widgetKey;
 
   const CarouselTestWidget({super.key, this.widgetKey});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,18 +54,16 @@ class CarouselTestWidget extends StatelessWidget {
           width: 200,
           child: MoonCarousel(
             key: widgetKey,
-            gap: 8,
+            gap: 0,
             itemCount: 10,
             itemExtent: 100,
-            itemBuilder: (BuildContext context, int itemIndex, int realIndex) =>
-                Container(
+            itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
               height: 100,
               width: 100,
               decoration: ShapeDecoration(
                 color: context.moonColors?.goku,
                 shape: MoonSquircleBorder(
-                  borderRadius:
-                      BorderRadius.circular(12).squircleBorderRadius(context),
+                  borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
                 ),
               ),
               child: Center(
