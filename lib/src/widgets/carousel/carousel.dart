@@ -119,11 +119,12 @@ class MoonCarousel extends StatefulWidget {
 }
 
 class _MoonCarouselState extends State<MoonCarousel> {
-  late double _effectiveGap;
   late int _lastReportedItemIndex;
   late MoonCarouselScrollController _scrollController;
 
   final Key _forwardListKey = const ValueKey<String>("moon_carousel_key");
+
+  double _effectiveGap = 0;
 
   // Calculates the anchor position for the viewport to center the selected item when 'isCentered' is true.
   double _getCenteredAnchor(BoxConstraints constraints) {
@@ -167,8 +168,6 @@ class _MoonCarouselState extends State<MoonCarousel> {
     _scrollController = (widget.controller as MoonCarouselScrollController?) ?? MoonCarouselScrollController();
 
     _lastReportedItemIndex = _scrollController.initialItem;
-
-    _effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
 
     if (widget.autoPlay) {
       WidgetsBinding.instance.addPostFrameCallback((Duration _) {
@@ -219,9 +218,6 @@ class _MoonCarouselState extends State<MoonCarousel> {
       } else {
         _scrollController.stopAutoplay();
       }
-    }
-    if (widget.gap != oldWidget.gap) {
-      _effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
     }
   }
 
@@ -292,6 +288,8 @@ class _MoonCarouselState extends State<MoonCarousel> {
             PointerDeviceKind.mouse,
           },
         );
+
+    _effectiveGap = widget.gap ?? context.moonTheme?.carouselTheme.properties.gap ?? MoonSizes.sizes.x2s;
 
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (ScrollUpdateNotification notification) {

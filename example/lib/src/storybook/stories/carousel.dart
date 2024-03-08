@@ -100,14 +100,14 @@ class _CarouselStoryState extends State<CarouselStory> {
                   child: OverflowBox(
                     maxWidth: constraints.maxWidth,
                     child: MoonCarousel(
-                      velocityFactor: velocityFactorKnob ?? 0.5,
                       gap: gapKnob?.toDouble() ?? 8,
+                      velocityFactor: velocityFactorKnob ?? 0.5,
+                      loop: isLoopedKnob,
                       autoPlay: autoPlayKnob,
+                      isCentered: isCenteredKnob,
                       itemCount: 10,
                       itemExtent: itemExtentKnob?.toDouble() ?? 114,
-                      isCentered: isCenteredKnob,
                       anchor: anchorKnob ?? 16 / (constraints.maxWidth - 16),
-                      loop: isLoopedKnob,
                       clampMaxExtent: clampMaxExtentKnob,
                       itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
                         decoration: ShapeDecoration(
@@ -133,12 +133,13 @@ class _CarouselStoryState extends State<CarouselStory> {
                         child: Stack(
                           children: [
                             MoonCarousel(
-                              gap: 48,
-                              controller: carouselController,
-                              autoPlay: autoPlayKnob,
+                              gap: 64,
                               itemCount: 5,
                               itemExtent: constraints.maxWidth - 64,
                               loop: isLoopedKnob,
+                              autoPlay: autoPlayKnob,
+                              controller: carouselController,
+                              physics: const PageScrollPhysics(),
                               onIndexChanged: (int index) => setState(() => selectedDot = index),
                               itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
                                 decoration: ShapeDecoration(
