@@ -19,7 +19,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.8'
+          flutter-version: '3.19.3'
           channel: stable
 
       - name: Install Dependencies
