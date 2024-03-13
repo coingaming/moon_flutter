@@ -2,91 +2,103 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
-// Test
-void main() {
-  const key = Key("modal_test");
+const Key _modalKey = Key("modalKey");
+const Key _showButtonKey = Key("showButtonKey");
+const Key _closeButtonKey = Key("closeButtonKey");
 
-  testWidgets("Modal is shown after clicking on button", (tester) async {
-    await tester.pumpWidget(const TestWidget(key: key, content: content));
-    final button = find.text(openButtonText);
+const Widget _modalContent = Text('Content');
+
+void main() {
+  testWidgets("Provided key is used.", (tester) async {
+    await tester.pumpWidget(
+      const _ModalTestWidget(
+        modalKey: _modalKey,
+      ),
+    );
+
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byKey(_modalKey), findsOneWidget);
   });
 
-  testWidgets("Modal is hidden after clicking outside content", (tester) async {
-    await tester.pumpWidget(const TestWidget(key: key, content: content));
-    final button = find.text(openButtonText);
+  testWidgets("Modal is displayed when the 'show' button is tapped.", (tester) async {
+    await tester.pumpWidget(const _ModalTestWidget());
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_modalContent), findsOneWidget);
+  });
+
+  testWidgets("Modal closes when a tap occurs outside its content, if dismissible.", (tester) async {
+    await tester.pumpWidget(const _ModalTestWidget());
+    final button = find.byKey(_showButtonKey);
+
+    expect(button, findsOneWidget);
+
+    await tester.tap(button);
+    await tester.pumpAndSettle();
+
+    expect(find.byWidget(_modalContent), findsOneWidget);
 
     await tester.tapAt(const Offset(10, 10));
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsNothing);
+    expect(find.byWidget(_modalContent), findsNothing);
   });
 
-  testWidgets(
-      "Modal is not hidden after clicking outside content if not dismissable",
-      (tester) async {
+  testWidgets("Modal stays visible when a tap occurs outside its content, if not dismissible.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        key: key,
-        content: content,
+      const _ModalTestWidget(
         isDismissible: false,
       ),
     );
-    final button = find.text(openButtonText);
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_modalContent), findsOneWidget);
 
     await tester.tapAt(const Offset(10, 10));
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_modalContent), findsOneWidget);
   });
 
-  testWidgets("Modal close after clicking on button", (tester) async {
-    await tester.pumpWidget(const TestWidget(content: content));
-    final button = find.text(openButtonText);
+  testWidgets("Modal closes when the 'close' button is tapped.", (tester) async {
+    await tester.pumpWidget(const _ModalTestWidget());
+    final button = find.byKey(_showButtonKey);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
-    await tester.tap(find.text(closeButtonText));
+    expect(find.byWidget(_modalContent), findsOneWidget);
+
+    await tester.tap(find.byKey(_closeButtonKey));
     await tester.pumpAndSettle();
-    expect(find.byWidget(content), findsNothing);
+
+    expect(find.byWidget(_modalContent), findsNothing);
   });
 }
 
-const String contentText = "Content";
-const Widget content = Text(contentText);
-const String openButtonText = "Open";
-const String closeButtonText = "Close";
-
-class TestWidget extends StatelessWidget {
-  final Widget content;
+class _ModalTestWidget extends StatelessWidget {
+  final Key? modalKey;
   final bool isDismissible;
 
-  const TestWidget({
-    required this.content,
+  const _ModalTestWidget({
+    this.modalKey,
     this.isDismissible = true,
-    super.key,
   });
 
   @override
@@ -94,10 +106,10 @@ class TestWidget extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: StatefulBuilder(
-            builder: (context, setState) {
+          child: Builder(
+            builder: (context) {
               return MoonFilledButton(
-                label: const Text(openButtonText),
+                key: _showButtonKey,
                 onTap: () => modalBuilder(context),
               );
             },
@@ -111,21 +123,18 @@ class TestWidget extends StatelessWidget {
     return showMoonModal<void>(
       context: context,
       barrierDismissible: isDismissible,
-      useRootNavigator: false,
-      builder: (BuildContext _) {
+      builder: (BuildContext context) {
         return Directionality(
           textDirection: Directionality.of(context),
           child: MoonModal(
+            key: modalKey,
             child: SizedBox(
               width: 300,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  content,
+                  _modalContent,
                   MoonFilledButton(
-                    label: const Text(closeButtonText),
-                    isFullWidth: true,
+                    key: _closeButtonKey,
                     onTap: () => Navigator.of(context).pop(),
                   ),
                 ],

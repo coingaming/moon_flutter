@@ -2,146 +2,138 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
-enum Choice { first, second }
+enum _Choice { first, second }
+
+const Key _firstRadioKey = Key("firstRadioKey");
+const Key _secondRadioKey = Key("secondRadioKey");
 
 void main() {
-  const firstKey = Key("first_radio_test");
-  const secondKey = Key("second_radio_test");
-
-  Finder findSelecterFirstRadio() {
+  Finder findSelectorFirstRadio() {
     return find.byWidgetPredicate(
-      (widget) =>
+      (Widget widget) =>
           widget is MoonRadio &&
-          widget.key == firstKey &&
-          widget.value == Choice.first &&
-          widget.groupValue == Choice.first,
+          widget.key == _firstRadioKey &&
+          widget.value == _Choice.first &&
+          widget.groupValue == _Choice.first,
     );
   }
 
-  Finder findSelecterSecondRadio() {
+  Finder findSelectorSecondRadio() {
     return find.byWidgetPredicate(
-      (widget) =>
+      (Widget widget) =>
           widget is MoonRadio &&
-          widget.key == secondKey &&
-          widget.value == Choice.second &&
-          widget.groupValue == Choice.second,
+          widget.key == _secondRadioKey &&
+          widget.value == _Choice.second &&
+          widget.groupValue == _Choice.second,
     );
   }
 
-  testWidgets("Provided key is used", (tester) async {
+  testWidgets("Provided keys are used.", (tester) async {
     await tester.pumpWidget(
-      const TestRadioWidget(
-        firstRadioKey: firstKey,
+      const _RadioTestWidget(
+        firstRadioKey: _firstRadioKey,
+        secondRadioKey: _secondRadioKey,
       ),
     );
 
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is MoonRadio && widget.key == firstKey,
-      ),
-      findsOneWidget,
-    );
+    expect(find.byKey(_firstRadioKey), findsOneWidget);
+    expect(find.byKey(_secondRadioKey), findsOneWidget);
   });
 
-  testWidgets("Test radio switch", (tester) async {
+  testWidgets("The selection of radio buttons can be changed.", (tester) async {
     await tester.pumpWidget(
-      const TestRadioWidget(
-        firstRadioKey: firstKey,
-        secondRadioKey: secondKey,
+      const _RadioTestWidget(
+        firstRadioKey: _firstRadioKey,
+        secondRadioKey: _secondRadioKey,
       ),
     );
 
-    await tester.tap(find.byKey(firstKey));
+    await tester.tap(find.byKey(_firstRadioKey));
     await tester.pumpAndSettle();
 
-    expect(
-      findSelecterFirstRadio(),
-      findsOneWidget,
-    );
+    expect(findSelectorFirstRadio(), findsOneWidget);
 
-    await tester.tap(find.byKey(secondKey));
+    await tester.tap(find.byKey(_secondRadioKey));
     await tester.pumpAndSettle();
-    expect(findSelecterFirstRadio(), findsNothing);
-    expect(findSelecterSecondRadio(), findsOneWidget);
-    await tester.tap(find.byKey(secondKey));
+
+    expect(findSelectorFirstRadio(), findsNothing);
+    expect(findSelectorSecondRadio(), findsOneWidget);
+
+    await tester.tap(find.byKey(_firstRadioKey));
     await tester.pumpAndSettle();
-    expect(findSelecterFirstRadio(), findsNothing);
-    expect(findSelecterSecondRadio(), findsOneWidget);
+
+    expect(findSelectorFirstRadio(), findsOneWidget);
+    expect(findSelectorSecondRadio(), findsNothing);
   });
 
-  testWidgets("Test toggable radio switch", (tester) async {
+  testWidgets("Selected radio button can be unselected.", (tester) async {
     await tester.pumpWidget(
-      const TestRadioWidget(
-        firstRadioKey: firstKey,
-        secondRadioKey: secondKey,
+      const _RadioTestWidget(
+        firstRadioKey: _firstRadioKey,
+        secondRadioKey: _secondRadioKey,
         toggleable: true,
       ),
     );
 
-    await tester.tap(find.byKey(firstKey));
+    await tester.tap(find.byKey(_firstRadioKey));
     await tester.pumpAndSettle();
 
-    expect(
-      findSelecterFirstRadio(),
-      findsOneWidget,
-    );
+    expect(findSelectorFirstRadio(), findsOneWidget);
 
-    await tester.tap(find.byKey(secondKey));
+    await tester.tap(find.byKey(_secondRadioKey));
     await tester.pumpAndSettle();
-    expect(findSelecterFirstRadio(), findsNothing);
-    expect(findSelecterSecondRadio(), findsOneWidget);
-    await tester.tap(find.byKey(secondKey));
+
+    expect(findSelectorFirstRadio(), findsNothing);
+    expect(findSelectorSecondRadio(), findsOneWidget);
+
+    await tester.tap(find.byKey(_secondRadioKey));
     await tester.pumpAndSettle();
-    expect(findSelecterFirstRadio(), findsNothing);
-    expect(findSelecterSecondRadio(), findsNothing);
+
+    expect(findSelectorFirstRadio(), findsNothing);
+    expect(findSelectorSecondRadio(), findsNothing);
   });
 }
 
-class TestRadioWidget extends StatefulWidget {
+class _RadioTestWidget extends StatefulWidget {
   final bool toggleable;
-
   final Key? firstRadioKey;
   final Key? secondRadioKey;
-  const TestRadioWidget({
-    super.key,
-    this.toggleable = false,
+
+  const _RadioTestWidget({
     this.firstRadioKey,
     this.secondRadioKey,
+    this.toggleable = false,
   });
+
   @override
-  State<TestRadioWidget> createState() => _TestRadioWidgetState();
+  State<_RadioTestWidget> createState() => _RadioTestWidgetState();
 }
 
-class _TestRadioWidgetState extends State<TestRadioWidget> {
-  Choice? value;
+class _RadioTestWidgetState extends State<_RadioTestWidget> {
+  _Choice? _value;
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
-            child: Column(
-              children: [
-                MoonRadio(
-                  key: widget.firstRadioKey,
-                  value: Choice.first,
-                  groupValue: value,
-                  onChanged: (Choice? choice) => setState(() => value = choice),
-                  toggleable: widget.toggleable,
-                ),
-                const SizedBox(height: 8),
-                MoonRadio(
-                  value: Choice.second,
-                  key: widget.secondRadioKey,
-                  groupValue: value,
-                  onChanged: (Choice? choice) => setState(() => value = choice),
-                  toggleable: widget.toggleable,
-                ),
-              ],
+        body: Column(
+          children: [
+            MoonRadio(
+              key: widget.firstRadioKey,
+              toggleable: widget.toggleable,
+              value: _Choice.first,
+              groupValue: _value,
+              onChanged: (_Choice? choice) => setState(() => _value = choice),
             ),
-          ),
+            const SizedBox(height: 8),
+            MoonRadio(
+              key: widget.secondRadioKey,
+              toggleable: widget.toggleable,
+              value: _Choice.second,
+              groupValue: _value,
+              onChanged: (_Choice? choice) => setState(() => _value = choice),
+            ),
+          ],
         ),
       ),
     );

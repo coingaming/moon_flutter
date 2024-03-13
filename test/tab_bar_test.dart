@@ -2,145 +2,145 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
+const Key _tabBarKey = Key("tab_bar_test");
+
+const String _firstTabLabel = "Label 1";
+const String _secondTabLabel = "Label 2";
+const String _thirdTabLabel = "Label 3";
+const String _fourthTabLabel = "Label 4";
+const IconData _tabLeadingIcon = MoonIcons.other_frame_24_light;
+const IconData _tabTrailingIcon = MoonIcons.controls_close_small_24_light;
+
 void main() {
-  const key = Key("tab_bar_test");
-
-  testWidgets("Provided key is used", (tester) async {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _TabBarTestWidget(
+        tabBarKey: _tabBarKey,
       ),
     );
 
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is MoonTabBar && widget.key == key,
-      ),
-      findsOneWidget,
-    );
+    expect(find.byKey(_tabBarKey), findsOneWidget);
   });
 
-  testWidgets("Tab bar with leading, trailing, label", (tester) async {
+  testWidgets("Tab bar has a leading, label and trailing widget.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _TabBarTestWidget(
         showLabel: true,
         showLeading: true,
         showTrailing: true,
       ),
     );
 
-    expect(find.textContaining(label), findsWidgets);
-    expect(find.byIcon(leadingIcon), findsWidgets);
-    expect(find.byIcon(trailingIcon), findsWidgets);
+    expect(find.textContaining(_firstTabLabel), findsWidgets);
+    expect(find.textContaining(_secondTabLabel), findsWidgets);
+    expect(find.textContaining(_thirdTabLabel), findsWidgets);
+    expect(find.textContaining(_fourthTabLabel), findsWidgets);
+    expect(find.byIcon(_tabLeadingIcon), findsWidgets);
+    expect(find.byIcon(_tabTrailingIcon), findsWidgets);
   });
 
-  testWidgets("Press tab", (tester) async {
+  testWidgets("Tab onTap callback works.", (tester) async {
     var value = 0;
+
     await tester.pumpWidget(
-      TestWidget(
-        widgetKey: key,
+      _TabBarTestWidget(
         showLabel: true,
         onTap: (index) => value = index,
       ),
     );
 
-    await tester.tap(find.text('$label 2'));
+    await tester.tap(find.text(_secondTabLabel), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 1);
 
-    await tester.tap(find.text('$label 1'));
+    await tester.tap(find.text(_firstTabLabel), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 0);
 
-    await tester.tap(find.text('$label 3'));
+    await tester.tap(find.text(_thirdTabLabel), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 2);
   });
 
-  testWidgets("Disabled press tab", (tester) async {
+  testWidgets("OnTap callback of a disabled tab is ignored.", (tester) async {
     var value = 0;
+
     await tester.pumpWidget(
-      TestWidget(
-        widgetKey: key,
+      _TabBarTestWidget(
         showLabel: true,
         isDisabled: true,
         onTap: (index) => value = index,
       ),
     );
 
-    await tester.tap(find.text('$label 2'));
+    await tester.tap(find.text(_secondTabLabel), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 0);
 
-    await tester.tap(find.text('$label 1'));
+    await tester.tap(find.text(_firstTabLabel), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 0);
 
-    await tester.tap(find.text('$label 3'));
+    await tester.tap(find.text(_thirdTabLabel), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 0);
   });
 }
 
-const String label = "Label";
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
-
-class TestWidget extends StatelessWidget {
+class _TabBarTestWidget extends StatelessWidget {
+  final Key? tabBarKey;
   final bool showLeading;
-  final bool showTrailing;
   final bool showLabel;
-  final Key? widgetKey;
-  final void Function(int)? onTap;
+  final bool showTrailing;
   final bool isDisabled;
+  final void Function(int)? onTap;
 
-  const TestWidget({
-    super.key,
+  const _TabBarTestWidget({
+    this.tabBarKey,
     this.showLeading = false,
     this.showLabel = false,
     this.showTrailing = false,
-    this.widgetKey,
-    this.onTap,
     this.isDisabled = false,
+    this.onTap,
   });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: MoonTabBar(
-          key: widgetKey,
+          key: tabBarKey,
           onTabChanged: onTap,
           tabs: [
             MoonTab(
-              leading: showLeading ? const Icon(leadingIcon) : null,
-              label: showLabel ? const Text('$label 1') : null,
-              trailing: showTrailing ? const Icon(trailingIcon) : null,
               disabled: isDisabled,
+              leading: showLeading ? const Icon(_tabLeadingIcon) : null,
+              label: showLabel ? const Text(_firstTabLabel) : null,
+              trailing: showTrailing ? const Icon(_tabTrailingIcon) : null,
             ),
             MoonTab(
-              leading: showLeading ? const Icon(leadingIcon) : null,
-              label: showLabel ? const Text('$label 2') : null,
-              trailing: showTrailing ? const Icon(trailingIcon) : null,
               disabled: isDisabled,
+              leading: showLeading ? const Icon(_tabLeadingIcon) : null,
+              label: showLabel ? const Text(_secondTabLabel) : null,
+              trailing: showTrailing ? const Icon(_tabTrailingIcon) : null,
             ),
             MoonTab(
-              leading: showLeading ? const Icon(leadingIcon) : null,
-              label: showLabel ? const Text('$label 3') : null,
-              trailing: showTrailing ? const Icon(trailingIcon) : null,
               disabled: isDisabled,
+              leading: showLeading ? const Icon(_tabLeadingIcon) : null,
+              label: showLabel ? const Text(_thirdTabLabel) : null,
+              trailing: showTrailing ? const Icon(_tabTrailingIcon) : null,
             ),
             MoonTab(
-              leading: showLeading ? const Icon(leadingIcon) : null,
-              label: showLabel ? const Text('$label 4') : null,
-              trailing: showTrailing ? const Icon(trailingIcon) : null,
               disabled: isDisabled,
+              leading: showLeading ? const Icon(_tabLeadingIcon) : null,
+              label: showLabel ? const Text(_fourthTabLabel) : null,
+              trailing: showTrailing ? const Icon(_tabTrailingIcon) : null,
             ),
           ],
         ),

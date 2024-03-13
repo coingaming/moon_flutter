@@ -2,68 +2,72 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
-void main() {
-  const key = Key("chip_test");
+const Key _chipKey = Key("chipKey");
 
-  testWidgets("Provided key is used", (tester) async {
+const String _chipLabel = "Label";
+const IconData _chipLeadingIcon = MoonIcons.other_frame_24_light;
+const IconData _chipTrailingIcon = MoonIcons.controls_close_small_24_light;
+
+void main() {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _ChipTestWidget(
+        chipKey: _chipKey,
       ),
     );
-    expect(find.byKey(key), findsOneWidget);
+
+    expect(find.byKey(_chipKey), findsOneWidget);
   });
 
-  testWidgets("Simple chip", (tester) async {
+  testWidgets("Chip has only a label and no leading or trailing widget.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
+      const _ChipTestWidget(
         showLabel: true,
       ),
     );
 
-    expect(find.text(label), findsOneWidget);
+    expect(find.text(_chipLabel), findsOneWidget);
+    expect(find.byIcon(_chipTrailingIcon), findsNothing);
+    expect(find.byIcon(_chipLeadingIcon), findsNothing);
   });
 
-  testWidgets("Chip with leading, trailing, body", (tester) async {
+  testWidgets("Chip has a leading, label and trailing widget.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
+      const _ChipTestWidget(
         showLeading: true,
         showLabel: true,
         showTrailing: true,
       ),
     );
-    expect(find.text(label), findsOneWidget);
-    expect(find.byIcon(trailingIcon), findsOneWidget);
-    expect(find.byIcon(leadingIcon), findsOneWidget);
+
+    expect(find.byIcon(_chipLeadingIcon), findsOneWidget);
+    expect(find.text(_chipLabel), findsOneWidget);
+    expect(find.byIcon(_chipTrailingIcon), findsOneWidget);
   });
 }
 
-const String label = "Label";
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
-
-class TestWidget extends StatelessWidget {
+class _ChipTestWidget extends StatelessWidget {
+  final Key? chipKey;
   final bool showLeading;
   final bool showTrailing;
   final bool showLabel;
-  final Key? widgetKey;
 
-  const TestWidget({
-    super.key,
+  const _ChipTestWidget({
+    this.chipKey,
     this.showLeading = false,
     this.showLabel = false,
     this.showTrailing = false,
-    this.widgetKey,
   });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: MoonChip(
-          key: widgetKey,
-          leading: showLeading ? const Icon(leadingIcon) : null,
-          label: showLabel ? const Text(label) : null,
-          trailing: showTrailing ? const Icon(trailingIcon) : null,
+          key: chipKey,
+          leading: showLeading ? const Icon(_chipLeadingIcon) : null,
+          label: showLabel ? const Text(_chipLabel) : null,
+          trailing: showTrailing ? const Icon(_chipTrailingIcon) : null,
         ),
       ),
     );

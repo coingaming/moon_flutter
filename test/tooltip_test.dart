@@ -4,105 +4,115 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/src/widgets/buttons/filled_button.dart';
 import 'package:moon_design/src/widgets/tooltip/tooltip.dart';
 
+const Key _tooltipKey = Key("tooltipKey");
+const Key _showButtonKey = Key("_showButtonKey");
+
+const Widget _tooltipContent = Text("Content");
+
 void main() {
-  const key = Key("tooltip_test");
+  testWidgets("Provided key is used.", (tester) async {
+    await tester.pumpWidget(
+      const _ToastTestWidget(
+        tooltipKey: _tooltipKey,
+      ),
+    );
 
-  testWidgets("Provided key is used", (tester) async {
-    await tester.pumpWidget(MoonTooltip(key: key, show: true, content: Container(), child: Container()));
-    expect(find.byKey(key), findsOneWidget);
+    expect(find.byKey(_tooltipKey), findsOneWidget);
   });
 
-  testWidgets("Tooltip is shown after clicking on button", (tester) async {
-    await tester.pumpWidget(const TestWidget(key: key, content: content));
-    final button = find.byType(MoonFilledButton);
+  testWidgets("Tooltip is displayed when the 'show' button is tapped.", (tester) async {
+    await tester.pumpWidget(
+      const _ToastTestWidget(
+        tooltipKey: _tooltipKey,
+      ),
+    );
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_tooltipContent), findsOneWidget);
   });
 
-  testWidgets("Tooltip is hidden after clicking on it", (tester) async {
-    await tester.pumpWidget(const TestWidget(key: key, content: content));
-    final button = find.byType(MoonFilledButton);
+  testWidgets("Tooltip closes when tapped.", (tester) async {
+    await tester.pumpWidget(
+      const _ToastTestWidget(
+        tooltipKey: _tooltipKey,
+      ),
+    );
+    final button = find.byKey(_showButtonKey);
+    final tooltipContent = find.byWidget(_tooltipContent);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
-    final tooltipContent = _findTooltipContent(tooltipText);
+
     await tester.tap(tooltipContent);
     await tester.pumpAndSettle();
 
     expect(tooltipContent, findsNothing);
   });
 
-  testWidgets("Provided color is used", (tester) async {
+  testWidgets("Provided background color is used.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        key: key,
-        content: content,
-        color: Colors.red,
+      const _ToastTestWidget(
+        tooltipKey: _tooltipKey,
+        color: Colors.blue,
       ),
     );
-    final button = find.byType(MoonFilledButton);
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_tooltipContent), findsOneWidget);
     expect(
-      find.byWidgetPredicate((widget) => widget is MoonTooltip && widget.backgroundColor == Colors.red),
+      find.byWidgetPredicate((Widget widget) => widget is MoonTooltip && widget.backgroundColor == Colors.blue),
       findsOneWidget,
     );
   });
 }
 
-const String tooltipText = "Tooltip content";
-const Widget content = Text(tooltipText);
-
-Finder _findTooltipContent(String tooltipText) {
-  return find.ancestor(
-    of: find.text(tooltipText),
-    matching: find.byType(Container),
-  );
-}
-
-bool show = false;
-
-class TestWidget extends StatelessWidget {
-  final Widget content;
+class _ToastTestWidget extends StatefulWidget {
+  final Key? tooltipKey;
   final Color color;
 
-  const TestWidget({
-    required this.content,
+  const _ToastTestWidget({
+    this.tooltipKey,
     this.color = Colors.white,
-    super.key,
   });
+
+  @override
+  State<_ToastTestWidget> createState() => _ToastTestWidgetState();
+}
+
+class _ToastTestWidgetState extends State<_ToastTestWidget> {
+  bool _show = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: StatefulBuilder(
-            builder: (context, setState) {
-              return MoonTooltip(
-                show: show,
-                backgroundColor: color,
-                content: content,
+        body: Builder(
+          builder: (BuildContext context) {
+            return Center(
+              child: MoonTooltip(
+                key: widget.tooltipKey,
+                show: _show,
+                backgroundColor: widget.color,
+                content: _tooltipContent,
                 child: MoonFilledButton(
-                  onTap: () {
-                    setState(() => show = true);
-                  },
+                  key: _showButtonKey,
+                  onTap: () => setState(() => _show = true),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

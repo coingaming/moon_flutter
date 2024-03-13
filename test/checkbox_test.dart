@@ -2,106 +2,98 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
+const Key _checkboxKey = Key("checkboxKey");
+
 void main() {
-  const key = Key("cehckbox_test");
+  testWidgets("Provided key is used.", (tester) async {
+    await tester.pumpWidget(
+      const _CheckboxTestWidget(
+        checkboxKey: _checkboxKey,
+      ),
+    );
 
-  testWidgets(
-    "Provided key is used",
-    (tester) async {
-      await tester.pumpWidget(
-        const TestWidget(
-          widgetKey: key,
-        ),
-      );
-      expect(find.byKey(key), findsOneWidget);
-    },
-  );
+    expect(find.byKey(_checkboxKey), findsOneWidget);
+  });
 
-  testWidgets(
-    "Change checkbox value",
-    (tester) async {
-      bool? checkboxValue = false;
-      await tester.pumpWidget(
-        TestWidget(
-          widgetKey: key,
-          onChanged: (newValue) => checkboxValue = newValue,
-        ),
-      );
-      final checkbox = find.byKey(key);
-      await tester.tap(checkbox);
-      await tester.pumpAndSettle();
-      expect(checkboxValue, true);
+  testWidgets("Checkbox value changes after a tap.", (tester) async {
+    bool? checkboxValue = false;
 
-      await tester.tap(checkbox);
-      await tester.pumpAndSettle();
-      expect(checkboxValue, false);
-    },
-  );
+    await tester.pumpWidget(
+      _CheckboxTestWidget(
+        checkboxKey: _checkboxKey,
+        onChanged: (bool? newValue) => checkboxValue = newValue,
+      ),
+    );
+    final checkbox = find.byKey(_checkboxKey);
 
-  testWidgets(
-    "Change tristate checkbox value",
-    (tester) async {
-      bool? checkboxValue = false;
-      await tester.pumpWidget(
-        TestWidget(
-          widgetKey: key,
-          isTristate: true,
-          onChanged: (newValue) => checkboxValue = newValue,
-        ),
-      );
-      final checkbox = find.byKey(key);
-      await tester.tap(checkbox);
-      await tester.pumpAndSettle();
-      expect(checkboxValue, true);
+    await tester.tap(checkbox);
+    await tester.pumpAndSettle();
 
-      await tester.tap(checkbox);
-      await tester.pumpAndSettle();
-      expect(checkboxValue, null);
+    expect(checkboxValue, true);
 
-      await tester.tap(checkbox);
-      await tester.pumpAndSettle();
-      expect(checkboxValue, false);
-    },
-  );
+    await tester.tap(checkbox);
+    await tester.pumpAndSettle();
+
+    expect(checkboxValue, false);
+  });
+
+  testWidgets("Tristate checkbox value changes correctly when tapped multiple times.", (tester) async {
+    bool? checkboxValue = false;
+
+    await tester.pumpWidget(
+      _CheckboxTestWidget(
+        checkboxKey: _checkboxKey,
+        isTristate: true,
+        onChanged: (newValue) => checkboxValue = newValue,
+      ),
+    );
+    final checkbox = find.byKey(_checkboxKey);
+
+    await tester.tap(checkbox);
+    await tester.pumpAndSettle();
+
+    expect(checkboxValue, true);
+
+    await tester.tap(checkbox);
+    await tester.pumpAndSettle();
+
+    expect(checkboxValue, null);
+
+    await tester.tap(checkbox);
+    await tester.pumpAndSettle();
+
+    expect(checkboxValue, false);
+  });
 }
 
-class TestWidget extends StatefulWidget {
-  final Key? widgetKey;
-  final void Function(bool?)? onChanged;
+class _CheckboxTestWidget extends StatefulWidget {
+  final Key? checkboxKey;
   final bool isTristate;
-  final bool initialValue;
+  final void Function(bool?)? onChanged;
 
-  const TestWidget({
-    super.key,
-    this.widgetKey,
+  const _CheckboxTestWidget({
+    this.checkboxKey,
     this.isTristate = false,
     this.onChanged,
-    this.initialValue = false,
   });
 
   @override
-  State<TestWidget> createState() => _TestWidgetState();
+  State<_CheckboxTestWidget> createState() => _CheckboxTestWidgetState();
 }
 
-class _TestWidgetState extends State<TestWidget> {
-  bool? checkboxValue;
-
-  @override
-  void initState() {
-    super.initState();
-    checkboxValue = widget.initialValue;
-  }
+class _CheckboxTestWidgetState extends State<_CheckboxTestWidget> {
+  bool? _checkboxValue = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: MoonCheckbox(
-          key: widget.widgetKey,
-          value: checkboxValue,
+          key: widget.checkboxKey,
+          value: _checkboxValue,
           tristate: widget.isTristate,
           onChanged: (bool? newValue) {
-            setState(() => checkboxValue = newValue);
+            setState(() => _checkboxValue = newValue);
             widget.onChanged?.call(newValue);
           },
         ),

@@ -2,35 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
+const Key _showButtonKey = Key('showButtonKey');
+
+const String _toastLabel = 'Label';
+const String _toastBody = 'Body';
+const IconData _toastLeadingIcon = MoonIcons.other_frame_24_light;
+const IconData _toastTrailingIcon = MoonIcons.controls_close_small_24_light;
+
 void main() {
-  testWidgets("Open toast", (tester) async {
-    await tester.pumpWidget(
-      TestWidget(),
-    );
-    await tester.tap(find.byType(MoonFilledButton));
-    await tester.pump(const Duration(milliseconds: 100));
-    await tester.pump(const Duration(milliseconds: 100));
+  testWidgets("Toast is displayed when the 'show' button is tapped and dismissed after 2 seconds.", (tester) async {
+    await tester.pumpWidget(_ToastTestWidget());
+    await tester.tap(find.byKey(_showButtonKey));
+    await tester.pump(const Duration(milliseconds: 200));
 
-    expect(find.text(title), findsOneWidget);
-    expect(find.text(body), findsOneWidget);
-    expect(find.byIcon(leadingIcon), findsOneWidget);
-    expect(find.byIcon(trailingIcon), findsOneWidget);
-    await tester.pump(const Duration(milliseconds: 100));
-    await tester.pump(const Duration(milliseconds: 100));
-    await tester.pump(const Duration(milliseconds: 100));
-    await tester.pump(const Duration(milliseconds: 100));
-    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text(_toastLabel), findsOneWidget);
+    expect(find.text(_toastBody), findsOneWidget);
+    expect(find.byIcon(_toastLeadingIcon), findsOneWidget);
+    expect(find.byIcon(_toastTrailingIcon), findsOneWidget);
 
-    expect(find.text(title), findsNothing);
+    await tester.pump(const Duration(seconds: 2));
+
+    expect(find.text(_toastLabel), findsNothing);
   });
 }
 
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
-const title = 'Title';
-const body = 'Body';
-
-class TestWidget extends StatelessWidget {
+class _ToastTestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,16 +34,16 @@ class TestWidget extends StatelessWidget {
         body: Builder(
           builder: (context) {
             return MoonFilledButton(
-              label: const Text("Tap me"),
+              key: _showButtonKey,
               onTap: () {
                 MoonToast.show(
                   context,
-                  displayDuration: const Duration(milliseconds: 500),
+                  displayDuration: const Duration(seconds: 2),
                   transitionDuration: Duration.zero,
-                  leading: const Icon(leadingIcon),
-                  label: const Text(title),
-                  trailing: const Icon(trailingIcon),
-                  content: const Text(body),
+                  leading: const Icon(_toastLeadingIcon),
+                  label: const Text(_toastLabel),
+                  trailing: const Icon(_toastTrailingIcon),
+                  content: const Text(_toastBody),
                 );
               },
             );

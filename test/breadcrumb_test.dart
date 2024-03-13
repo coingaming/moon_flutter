@@ -2,118 +2,116 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
+const Key _breadcrumbKey = Key("breadcrumbKey");
+
+const String _showMoreButtonText = '...';
+const String _breadcrumbItem = 'breadcrumb item';
+const IconData _breadcrumbLeadingIcon = MoonIcons.other_frame_24_light;
+const IconData _breadcrumbDividerIcon = MoonIcons.arrows_chevron_right_double_16_light;
+
 void main() {
-  const key = Key("breadcrumb_test");
-
-  testWidgets("Provided key is used", (tester) async {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _BreadCrumbTestWidget(
+        breadcrumbKey: _breadcrumbKey,
       ),
     );
 
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is MoonBreadcrumb && widget.key == key,
-      ),
-      findsOneWidget,
-    );
+    expect(find.byKey(_breadcrumbKey), findsOneWidget);
   });
 
-  testWidgets("More items button", (tester) async {
-    await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
-      ),
-    );
-    final moreButton = find.text('...');
+  testWidgets("Tapping on a 'show more' button expands collapsed items, and the button itself becomes hidden.", (tester) async {
+    await tester.pumpWidget(const _BreadCrumbTestWidget());
+    final moreButton = find.text(_showMoreButtonText);
 
     expect(moreButton, findsOneWidget);
+    // Collapsed item with index 1 is not visible.
     expect(find.textContaining('1'), findsNothing);
 
-    await tester.tap(moreButton);
+    await tester.tap(moreButton, warnIfMissed: false);
     await tester.pumpAndSettle();
+
+    // Collapsed item with index 1 is visible.
     expect(find.textContaining('1'), findsOneWidget);
+    expect(find.textContaining(_showMoreButtonText), findsNothing);
   });
 
-  testWidgets("Item with leading, custom divider and label", (tester) async {
+  testWidgets("Breadcrumb item has a leading, divider and label widget.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _BreadCrumbTestWidget(
         showLeading: true,
       ),
     );
 
-    expect(find.textContaining('p'), findsWidgets);
-
-    expect(find.byIcon(leadingIcon), findsWidgets);
-    expect(find.byIcon(dividerIcon), findsWidgets);
+    expect(find.textContaining(_breadcrumbItem), findsWidgets);
+    expect(find.byIcon(_breadcrumbLeadingIcon), findsWidgets);
+    expect(find.byIcon(_breadcrumbDividerIcon), findsWidgets);
   });
 
-  testWidgets("Test max itemsToShow", (tester) async {
+  testWidgets("Only N items are shown, where N is defined by the value of itemsToShow.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
-        itemsToShow: 2,
+      const _BreadCrumbTestWidget(
+        itemsToShow: 3,
       ),
     );
-    final moreButton = find.text('...');
+    final moreButton = find.textContaining(_showMoreButtonText);
 
     expect(moreButton, findsOneWidget);
-    expect(find.textContaining('p'), findsNWidgets(2));
+    expect(find.textContaining(_breadcrumbItem), findsNWidgets(3));
 
-    await tester.tap(moreButton);
+    await tester.tap(moreButton, warnIfMissed: false);
     await tester.pumpAndSettle();
-    expect(find.textContaining('p'), findsNWidgets(4));
+
+    expect(find.textContaining(_breadcrumbItem), findsNWidgets(4));
   });
 
-  testWidgets("Press breadcrumb item", (tester) async {
-    var value = 0;
+  testWidgets("Breadcrumb item callback works.", (tester) async {
+    int value = 0;
+
     await tester.pumpWidget(
-      TestWidget(
-        widgetKey: key,
-        onPressed: (index) => value = index,
+      _BreadCrumbTestWidget(
+        onTap: (index) => value = index,
       ),
     );
+    final moreButton = find.text(_showMoreButtonText);
 
-    await tester.tap(find.textContaining('2'));
+    // Find breadcrumb item with index 2 and tap on it.
+    await tester.tap(find.textContaining('2'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 2);
 
-    await tester.tap(find.textContaining('0'));
+    // Find breadcrumb item with index 0 and tap on it.
+    await tester.tap(find.textContaining('0'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 0);
-
-    final moreButton = find.text('...');
-
     expect(moreButton, findsOneWidget);
-    await tester.tap(moreButton);
+
+    await tester.tap(moreButton, warnIfMissed: false);
     await tester.pumpAndSettle();
 
-    await tester.tap(find.textContaining('1'));
+    // Find initially collapsed breadcrumb item with index 1 and tap on it.
+    await tester.tap(find.textContaining('1'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(value, 1);
+    // Tapping on a 'show more' button expands collapsed items, and the button itself becomes hidden.
+    expect(moreButton, findsNothing);
   });
 }
 
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData dividerIcon = MoonIcons.arrows_chevron_right_double_16_light;
-
-class TestWidget extends StatelessWidget {
+class _BreadCrumbTestWidget extends StatelessWidget {
+  final Key? breadcrumbKey;
   final bool showLeading;
   final int? itemsToShow;
-  final void Function(int)? onPressed;
-  final Key? widgetKey;
+  final void Function(int)? onTap;
 
-  const TestWidget({
-    super.key,
+  const _BreadCrumbTestWidget({
+    this.breadcrumbKey,
     this.showLeading = false,
     this.itemsToShow,
-    this.onPressed,
-    this.widgetKey,
+    this.onTap,
   });
 
   @override
@@ -123,16 +121,16 @@ class TestWidget extends StatelessWidget {
         body: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: MoonBreadcrumb(
-            key: widgetKey,
+            key: breadcrumbKey,
             visibleItemCount: itemsToShow ?? 3,
-            divider: const Icon(dividerIcon),
+            divider: const Icon(_breadcrumbDividerIcon),
             items: [
               ...List.generate(4, (i) => i).map(
-                (index) {
+                (int index) {
                   return MoonBreadcrumbItem(
-                    label: Text('p$index'),
-                    leading: showLeading ? const Icon(leadingIcon) : null,
-                    onTap: () => onPressed?.call(index),
+                    label: Text('$_breadcrumbItem $index'),
+                    leading: showLeading ? const Icon(_breadcrumbLeadingIcon) : null,
+                    onTap: () => onTap?.call(index),
                   );
                 },
               ),

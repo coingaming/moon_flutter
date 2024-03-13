@@ -2,48 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
+const Key _carouselKey = Key("carouselKey");
+
 void main() {
-  const key = Key("button_test");
+  testWidgets("Provided key is used.", (tester) async {
+    await tester.pumpWidget(
+      const _CarouselTestWidget(
+        carouselKey: _carouselKey,
+      ),
+    );
 
-  testWidgets(
-    "Provided key is used",
-    (tester) async {
-      await tester.pumpWidget(
-        const CarouselTestWidget(
-          widgetKey: key,
-        ),
-      );
-      expect(find.byKey(key), findsOneWidget);
-    },
-  );
+    expect(find.byKey(_carouselKey), findsOneWidget);
+  });
 
-  testWidgets(
-    "Test scroll",
-    (tester) async {
-      await tester.pumpWidget(
-        const CarouselTestWidget(
-          widgetKey: key,
-        ),
-      );
-      expect(find.text('1'), findsOneWidget);
-      expect(find.text('2'), findsOneWidget);
-      expect(find.text('3'), findsNothing);
-      await tester.drag(find.byKey(key), const Offset(-150, 0));
-      await tester.pumpAndSettle();
-      expect(find.text('1'), findsNothing);
-      expect(find.text('2'), findsOneWidget);
-      expect(find.text('3'), findsOneWidget);
-      expect(find.text('4'), findsOneWidget);
-      expect(find.text('5'), findsNothing);
+  testWidgets("Carousel items visibility changes on scroll.", (tester) async {
+    await tester.pumpWidget(const _CarouselTestWidget(carouselKey: _carouselKey));
 
-    },
-  );
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsOneWidget);
+    expect(find.text('2'), findsNothing);
+
+    await tester.drag(find.byKey(_carouselKey), const Offset(-150, 0));
+    await tester.pumpAndSettle();
+
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
+    expect(find.text('2'), findsOneWidget);
+    expect(find.text('3'), findsOneWidget);
+    expect(find.text('4'), findsNothing);
+  });
 }
 
-class CarouselTestWidget extends StatelessWidget {
-  final Key? widgetKey;
+class _CarouselTestWidget extends StatelessWidget {
+  final Key? carouselKey;
 
-  const CarouselTestWidget({super.key, this.widgetKey});
+  const _CarouselTestWidget({this.carouselKey});
 
   @override
   Widget build(BuildContext context) {
@@ -53,23 +46,11 @@ class CarouselTestWidget extends StatelessWidget {
           height: 114,
           width: 200,
           child: MoonCarousel(
-            key: widgetKey,
+            key: carouselKey,
             gap: 0,
             itemCount: 10,
             itemExtent: 100,
-            itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
-              height: 100,
-              width: 100,
-              decoration: ShapeDecoration(
-                color: context.moonColors?.goku,
-                shape: MoonSquircleBorder(
-                  borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
-                ),
-              ),
-              child: Center(
-                child: Text("${itemIndex + 1}"),
-              ),
-            ),
+            itemBuilder: (BuildContext _, int itemIndex, int __) => Text("$itemIndex"),
           ),
         ),
       ),
