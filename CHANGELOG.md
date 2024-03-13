@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.51.0](https://github.com/coingaming/moon_flutter/compare/v0.50.0...v0.51.0) (2024-03-13)
+
+
+### Features
+
+* [MDS-1032] Add onTapAlwaysCalled and cursorErrorColor to Input widgets props ([#379](https://github.com/coingaming/moon_flutter/issues/379)) ([82b0f13](https://github.com/coingaming/moon_flutter/commit/82b0f13ed002ca6d1a9357cdc1ab48fc21bd1cff))
+
 ## [0.50.0](https://github.com/coingaming/moon_flutter/compare/v0.49.8...v0.50.0) (2024-03-12)
 
 
