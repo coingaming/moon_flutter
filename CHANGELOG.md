@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.51.1](https://github.com/coingaming/moon_flutter/compare/v0.51.0...v0.51.1) (2024-03-13)
+
+
+### Bug Fixes
+
+* [MDS-1033] Fix popover closing automatically on tap outside. ([#381](https://github.com/coingaming/moon_flutter/issues/381)) ([e696219](https://github.com/coingaming/moon_flutter/commit/e696219d3d2f671909ce3e593596f962cf7086e6))
+
 ## [0.51.0](https://github.com/coingaming/moon_flutter/compare/v0.50.0...v0.51.0) (2024-03-13)
 
 
