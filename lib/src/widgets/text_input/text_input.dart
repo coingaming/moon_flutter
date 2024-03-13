@@ -194,10 +194,12 @@ class MoonTextInput extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.keyboardType}
   final TextInputType keyboardType;
 
+  /// {@template flutter.widgets.TextField.textInputAction}
   /// The type of action button to use for the keyboard.
   ///
   /// Defaults to [TextInputAction.newline] if [keyboardType] is
   /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
+  /// {@endtemplate}
   final TextInputAction? textInputAction;
 
   /// {@macro flutter.widgets.editableText.textCapitalization}
@@ -353,13 +355,10 @@ class MoonTextInput extends StatefulWidget {
   ///
   /// The cursor indicates the current location of text insertion point in
   /// the field.
-  ///
-  /// If this is null it will default to the ambient
-  /// [DefaultSelectionStyle.cursorColor]. If that is null, and the
-  /// [ThemeData.platform] is [TargetPlatform.iOS] or [TargetPlatform.macOS]
-  /// it will use [CupertinoThemeData.primaryColor]. Otherwise it will use
-  /// the value of [ColorScheme.primary] of [ThemeData.colorScheme].
   final Color? cursorColor;
+
+  /// The color of the cursor when the [MoonTextInput] is showing an error.
+  final Color? cursorErrorColor;
 
   /// Controls how tall the selection highlight boxes are computed to be.
   ///
@@ -391,7 +390,7 @@ class MoonTextInput extends StatefulWidget {
   final DragStartBehavior dragStartBehavior;
 
   /// {@template flutter.material.textfield.onTap}
-  /// The callback that is called for each distinct tap except for every second tap of a double tap.
+  /// Called for the first tap in a series of taps.
   ///
   /// The text field builds a [GestureDetector] to handle input events like tap,
   /// to trigger focus requests, to move the caret, adjust the selection, etc.
@@ -410,7 +409,16 @@ class MoonTextInput extends StatefulWidget {
   /// To listen to arbitrary pointer events without competing with the
   /// text field's internal gesture detector, use a [Listener].
   /// {@endtemplate}
+  ///
+  /// If [onTapAlwaysCalled] is enabled, this will also be called for consecutive
+  /// taps.
   final GestureTapCallback? onTap;
+
+  /// Whether [onTap] should be called for every tap.
+  ///
+  /// Defaults to false, so [onTap] is only called for each distinct tap. When
+  /// enabled, [onTap] is called for every tap including consecutive taps.
+  final bool onTapAlwaysCalled;
 
   /// {@macro flutter.widgets.editableText.onTapOutside}
   ///
@@ -432,21 +440,6 @@ class MoonTextInput extends StatefulWidget {
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// widget.
-  ///
-  /// If [mouseCursor] is a [MaterialStateProperty<MouseCursor>],
-  /// [MaterialStateProperty.resolve] is used for the following [MaterialState]s:
-  ///
-  ///  * [MaterialState.error].
-  ///  * [MaterialState.hovered].
-  ///  * [MaterialState.focused].
-  ///  * [MaterialState.disabled].
-  ///
-  /// If this property is null, [MaterialStateMouseCursor.textable] will be used.
-  ///
-  /// The [mouseCursor] is the only property of [MoonTextInput] that controls the
-  /// appearance of the mouse pointer. All other properties related to "cursor"
-  /// stand for the text cursor, which is usually a blinking vertical line at
-  /// the editing position.
   final MouseCursor? mouseCursor;
 
   /// {@macro flutter.widgets.editableText.scrollPhysics}
@@ -628,6 +621,7 @@ class MoonTextInput extends StatefulWidget {
     this.cursorRadius,
     this.cursorOpacityAnimates,
     this.cursorColor,
+    this.cursorErrorColor,
     this.selectionHeightStyle = ui.BoxHeightStyle.tight,
     this.selectionWidthStyle = ui.BoxWidthStyle.tight,
     this.keyboardAppearance,
@@ -636,6 +630,7 @@ class MoonTextInput extends StatefulWidget {
     bool? enableInteractiveSelection,
     this.selectionControls,
     this.onTap,
+    this.onTapAlwaysCalled = false,
     this.onTapOutside,
     this.mouseCursor,
     this.scrollController,
@@ -728,6 +723,7 @@ class MoonTextInput extends StatefulWidget {
     properties.add(DiagnosticsProperty<Radius>('cursorRadius', cursorRadius, defaultValue: null));
     properties.add(DiagnosticsProperty<bool>('cursorOpacityAnimates', cursorOpacityAnimates, defaultValue: null));
     properties.add(ColorProperty('cursorColor', cursorColor, defaultValue: null));
+    properties.add(ColorProperty('cursorErrorColor', cursorErrorColor, defaultValue: null));
     properties.add(DiagnosticsProperty<Brightness>('keyboardAppearance', keyboardAppearance, defaultValue: null));
     properties.add(
       DiagnosticsProperty<EdgeInsetsGeometry>('scrollPadding', scrollPadding, defaultValue: const EdgeInsets.all(20.0)),
@@ -805,7 +801,9 @@ class _MoonTextInputState extends State<MoonTextInput>
   bool get _hasIntrinsicError =>
       widget.maxLength != null &&
       widget.maxLength! > 0 &&
-      _effectiveController.value.text.characters.length > widget.maxLength!;
+      (widget.controller == null
+          ? !restorePending && _effectiveController.value.text.characters.length > widget.maxLength!
+          : _effectiveController.value.text.characters.length > widget.maxLength!);
 
   MaxLengthEnforcement get _effectiveMaxLengthEnforcement =>
       widget.maxLengthEnforcement ??
@@ -1036,6 +1034,9 @@ class _MoonTextInputState extends State<MoonTextInput>
     final Color effectiveErrorColor =
         widget.errorColor ?? context.moonTheme?.textInputTheme.colors.errorColor ?? MoonColors.light.chichi;
 
+    final Color effectiveCursorErrorColor =
+        widget.cursorErrorColor ?? context.moonTheme?.textInputTheme.colors.errorColor ?? MoonColors.light.chichi;
+
     final Color effectiveHoverBorderColor =
         widget.hoverBorderColor ?? context.moonTheme?.textInputTheme.colors.hoverBorderColor ?? MoonColors.light.beerus;
 
@@ -1170,7 +1171,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         forcePressEnabled = true;
         paintCursorAboveText = true;
         cursorOpacityAnimates ??= true;
-        cursorColor = _hasError ? effectiveErrorColor : widget.cursorColor ?? effectiveTextColor;
+        cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
         selectionColor = selectionStyle.selectionColor ?? cupertinoTheme.primaryColor.withOpacity(0.40);
         cursorRadius ??= const Radius.circular(2.0);
         cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.devicePixelRatioOf(context), 0);
@@ -1181,7 +1182,7 @@ class _MoonTextInputState extends State<MoonTextInput>
         forcePressEnabled = false;
         paintCursorAboveText = true;
         cursorOpacityAnimates ??= false;
-        cursorColor = _hasError ? effectiveErrorColor : widget.cursorColor ?? effectiveTextColor;
+        cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
         selectionColor = selectionStyle.selectionColor ?? cupertinoTheme.primaryColor.withOpacity(0.40);
         cursorRadius ??= const Radius.circular(2.0);
         cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.devicePixelRatioOf(context), 0);
@@ -1197,21 +1198,21 @@ class _MoonTextInputState extends State<MoonTextInput>
         forcePressEnabled = false;
         paintCursorAboveText = false;
         cursorOpacityAnimates ??= false;
-        cursorColor = _hasError ? effectiveErrorColor : widget.cursorColor ?? effectiveTextColor;
+        cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
         selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
 
       case TargetPlatform.linux:
         forcePressEnabled = false;
         paintCursorAboveText = false;
         cursorOpacityAnimates ??= false;
-        cursorColor = _hasError ? effectiveErrorColor : widget.cursorColor ?? effectiveTextColor;
+        cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
         selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
 
       case TargetPlatform.windows:
         forcePressEnabled = false;
         paintCursorAboveText = false;
         cursorOpacityAnimates ??= false;
-        cursorColor = _hasError ? effectiveErrorColor : widget.cursorColor ?? effectiveTextColor;
+        cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
         selectionColor = selectionStyle.selectionColor ?? theme.colorScheme.primary.withOpacity(0.40);
         handleDidGainAccessibilityFocus = () {
           // Automatically activates MoonTextInput on receiving accessibility focus.
@@ -1482,6 +1483,13 @@ class _MoonTextInputSelectionGestureDetectorBuilder extends TextSelectionGesture
   void onSingleTapUp(TapDragUpDetails details) {
     super.onSingleTapUp(details);
     _state._requestKeyboard();
+  }
+
+  @override
+  bool get onUserTapAlwaysCalled => _state.widget.onTapAlwaysCalled;
+
+  @override
+  void onUserTap() {
     _state.widget.onTap?.call();
   }
 
