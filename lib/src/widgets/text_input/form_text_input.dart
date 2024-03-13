@@ -80,6 +80,7 @@ class MoonFormTextInput extends FormField<String> {
     int? maxLength,
     ValueChanged<String>? onChanged,
     GestureTapCallback? onTap,
+    bool onTapAlwaysCalled = false,
     TapRegionCallback? onTapOutside,
     VoidCallback? onEditingComplete,
     ValueChanged<String>? onSubmitted,
@@ -91,6 +92,7 @@ class MoonFormTextInput extends FormField<String> {
     double? cursorHeight,
     Radius? cursorRadius,
     Color? cursorColor,
+    Color? cursorErrorColor,
     Brightness? keyboardAppearance,
     EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
     bool? enableInteractiveSelection,
@@ -145,6 +147,7 @@ class MoonFormTextInput extends FormField<String> {
           contextMenuBuilder: contextMenuBuilder,
           controller: controller,
           cursorColor: cursorColor,
+          cursorErrorColor: cursorErrorColor,
           cursorHeight: cursorHeight,
           cursorOpacityAnimates: cursorOpacityAnimates,
           cursorRadius: cursorRadius,
@@ -191,6 +194,7 @@ class MoonFormTextInput extends FormField<String> {
           onSaved: onSaved,
           onSubmitted: onSubmitted,
           onTap: onTap,
+          onTapAlwaysCalled: onTapAlwaysCalled,
           onTapOutside: onTapOutside,
           padding: padding,
           readOnly: readOnly,
@@ -253,6 +257,7 @@ class MoonFormTextInput extends FormField<String> {
                 contextMenuBuilder: contextMenuBuilder,
                 controller: state._effectiveController,
                 cursorColor: cursorColor,
+                cursorErrorColor: cursorErrorColor,
                 cursorHeight: cursorHeight,
                 cursorOpacityAnimates: cursorOpacityAnimates,
                 cursorRadius: cursorRadius,
@@ -297,6 +302,7 @@ class MoonFormTextInput extends FormField<String> {
                 onEditingComplete: onEditingComplete,
                 onSubmitted: onSubmitted,
                 onTap: onTap,
+                onTapAlwaysCalled: onTapAlwaysCalled,
                 onTapOutside: onTapOutside,
                 padding: padding,
                 readOnly: readOnly,
@@ -510,6 +516,7 @@ class MoonFormTextInputConfiguration {
   final Radius? cursorRadius;
   final bool? cursorOpacityAnimates;
   final Color? cursorColor;
+  final Color? cursorErrorColor;
   final ui.BoxHeightStyle selectionHeightStyle;
   final ui.BoxWidthStyle selectionWidthStyle;
   final Brightness? keyboardAppearance;
@@ -518,6 +525,7 @@ class MoonFormTextInputConfiguration {
   final TextSelectionControls? selectionControls;
   final DragStartBehavior dragStartBehavior;
   final GestureTapCallback? onTap;
+  final bool onTapAlwaysCalled;
   final TapRegionCallback? onTapOutside;
   final MouseCursor? mouseCursor;
   final ScrollPhysics? scrollPhysics;
@@ -604,6 +612,7 @@ class MoonFormTextInputConfiguration {
     this.cursorRadius,
     this.cursorOpacityAnimates,
     this.cursorColor,
+    this.cursorErrorColor,
     this.selectionHeightStyle = ui.BoxHeightStyle.tight,
     this.selectionWidthStyle = ui.BoxWidthStyle.tight,
     this.keyboardAppearance,
@@ -612,6 +621,7 @@ class MoonFormTextInputConfiguration {
     bool? enableInteractiveSelection,
     this.selectionControls,
     this.onTap,
+    this.onTapAlwaysCalled = false,
     this.onTapOutside,
     this.mouseCursor,
     this.scrollController,

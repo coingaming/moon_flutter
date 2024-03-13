@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -341,6 +343,7 @@ class MoonTextArea extends StatelessWidget {
       borderRadius: effectiveBorderRadius,
       controller: controller,
       cursorColor: effectiveTextColor,
+      cursorErrorColor: effectiveErrorColor,
       enabled: enabled,
       enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
       enableInteractiveSelection: enableInteractiveSelection,
