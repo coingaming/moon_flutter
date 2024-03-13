@@ -2,83 +2,91 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
+const Key _menuItemKey = Key("menuItemKey");
+
+const String _menuItemLabel = "Label";
+const String _menuItemContent = "Content";
+const IconData _menuItemLeadingIcon = MoonIcons.other_frame_24_light;
+const IconData _menuItemTrailingIcon = MoonIcons.controls_close_small_24_light;
+
 void main() {
-  const key = Key("menu_item_test");
-
-  testWidgets("Provided key is used", (tester) async {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _MenuItemTestWidget(
+        menuItemKey: _menuItemKey,
       ),
     );
-    expect(find.byKey(key), findsOneWidget);
+
+    expect(find.byKey(_menuItemKey), findsOneWidget);
   });
 
-  testWidgets("Simple menu item", (tester) async {
-    await tester.pumpWidget(
-      const TestWidget(),
-    );
+  testWidgets("Menu item has only label and no leading, trailing or content widget.", (tester) async {
+    await tester.pumpWidget(const _MenuItemTestWidget());
 
-    expect(find.text(title), findsOneWidget);
+    expect(find.text(_menuItemLabel), findsOneWidget);
+    expect(find.byIcon(_menuItemLeadingIcon), findsNothing);
+    expect(find.byIcon(_menuItemTrailingIcon), findsNothing);
+    expect(find.text(_menuItemContent), findsNothing);
   });
 
-  testWidgets("Menu item with leading, trailing, description", (tester) async {
+  testWidgets("Menu item has a leading, label, trailing and content widget.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
+      const _MenuItemTestWidget(
         showLeading: true,
-        showDescription: true,
         showTrailing: true,
+        showContent: true,
       ),
     );
-    expect(find.text(description), findsOneWidget);
-    expect(find.byIcon(trailingIcon), findsOneWidget);
-    expect(find.byIcon(leadingIcon), findsOneWidget);
+
+    expect(find.text(_menuItemLabel), findsOneWidget);
+    expect(find.byIcon(_menuItemLeadingIcon), findsOneWidget);
+    expect(find.byIcon(_menuItemTrailingIcon), findsOneWidget);
+    expect(find.text(_menuItemContent), findsOneWidget);
   });
 
-  testWidgets("Tap menu item", (tester) async {
+  testWidgets("Menu item onTap callback works.", (tester) async {
     bool value = false;
+
     await tester.pumpWidget(
-      TestWidget(
+      _MenuItemTestWidget(
+        menuItemKey: _menuItemKey,
         onTap: () => value = !value,
       ),
     );
-    await tester.tap(find.byType(MoonMenuItem));
+
+    await tester.tap(find.byKey(_menuItemKey));
     await tester.pumpAndSettle();
+
     expect(value, true);
   });
 }
 
-const String title = "Title";
-const String description = "Description";
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
-
-class TestWidget extends StatelessWidget {
+class _MenuItemTestWidget extends StatelessWidget {
+  final Key? menuItemKey;
   final bool showLeading;
   final bool showTrailing;
-  final bool showDescription;
-  final Key? widgetKey;
+  final bool showContent;
   final VoidCallback? onTap;
 
-  const TestWidget({
-    super.key,
+  const _MenuItemTestWidget({
+    this.menuItemKey,
     this.showLeading = false,
-    this.showDescription = false,
     this.showTrailing = false,
-    this.widgetKey,
+    this.showContent = false,
     this.onTap,
   });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: MoonMenuItem(
-          key: widgetKey,
-          leading: showLeading ? const Icon(leadingIcon) : null,
-          content: showDescription ? const Text(description) : null,
-          label: const Text(title),
-          trailing: showTrailing ? const Icon(trailingIcon) : null,
+          key: menuItemKey,
           onTap: onTap,
+          leading: showLeading ? const Icon(_menuItemLeadingIcon) : null,
+          label: const Text(_menuItemLabel),
+          trailing: showTrailing ? const Icon(_menuItemTrailingIcon) : null,
+          content: showContent ? const Text(_menuItemContent) : null,
         ),
       ),
     );

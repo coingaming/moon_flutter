@@ -2,82 +2,85 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
-void main() {
-  const key = Key("alert_test");
+const Key _alertKey = Key("alertKey");
+const Key _closeButtonKey = Key("closeButtonKey");
 
-  testWidgets("Provided key is used", (tester) async {
+const String _alertLabel = "Label";
+const String _alertBody = "Body";
+const IconData _alertLeadingIcon = MoonIcons.other_frame_24_light;
+const IconData _alertTrailingIcon = MoonIcons.controls_close_small_24_light;
+
+void main() {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const Directionality(
-        textDirection: TextDirection.ltr,
-        child: MoonAlert(
-          key: key,
-          label: Text(alertTitle),
-        ),
+      const _AlertTestWidget(
+        alertKey: _alertKey,
       ),
     );
-    expect(find.byKey(key), findsOneWidget);
+
+    expect(find.byKey(_alertKey), findsOneWidget);
   });
 
-  testWidgets("Simple alert", (tester) async {
-    await tester.pumpWidget(
-      const TestWidget(),
-    );
+  testWidgets("Alert has only label widget and no leading, trailing or body widget.", (tester) async {
+    await tester.pumpWidget(const _AlertTestWidget());
 
-    expect(find.text(alertTitle), findsOneWidget);
+    expect(find.text(_alertLabel), findsOneWidget);
+    expect(find.text(_alertBody), findsNothing);
+    expect(find.byIcon(_alertTrailingIcon), findsNothing);
+    expect(find.byIcon(_alertLeadingIcon), findsNothing);
   });
 
-  testWidgets("Alert with leading, trailing, body", (tester) async {
+  testWidgets("Alert has a leading, trailing and body widget.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
+      const _AlertTestWidget(
         showLeading: true,
         showBody: true,
         showTrailing: true,
       ),
     );
-    expect(find.text(alertTitle), findsOneWidget);
-    expect(find.text(alertBody), findsOneWidget);
-    expect(find.byIcon(trailingIcon), findsOneWidget);
-    expect(find.byIcon(leadingIcon), findsOneWidget);
+
+    expect(find.text(_alertLabel), findsOneWidget);
+    expect(find.text(_alertBody), findsOneWidget);
+    expect(find.byIcon(_alertTrailingIcon), findsOneWidget);
+    expect(find.byIcon(_alertLeadingIcon), findsOneWidget);
   });
 
-  testWidgets("Hide alert", (tester) async {
+  testWidgets("Alert is not visible when the 'close' button is tapped.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
+      const _AlertTestWidget(
         showTrailing: true,
       ),
     );
-    final trailing = find.byIcon(trailingIcon);
+    final trailing = find.byKey(_closeButtonKey);
 
-    expect(find.text(alertTitle), findsOneWidget);
+    expect(find.text(_alertLabel), findsOneWidget);
     expect(trailing, findsOneWidget);
 
-    await tester.tap(trailing);
+    await tester.tap(trailing, warnIfMissed: false);
     await tester.pumpAndSettle();
-    expect(find.text(alertTitle), findsNothing);
+
+    expect(find.text(_alertLabel), findsNothing);
   });
 }
 
-const String alertTitle = "Alert title";
-const String alertBody = "Alert body";
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
-
-class TestWidget extends StatefulWidget {
+class _AlertTestWidget extends StatefulWidget {
+  final Key? alertKey;
   final bool showLeading;
   final bool showTrailing;
   final bool showBody;
 
-  const TestWidget({
-    super.key,
+  const _AlertTestWidget({
+    this.alertKey,
     this.showLeading = false,
     this.showTrailing = false,
     this.showBody = false,
   });
+
   @override
-  State<TestWidget> createState() => _TestWidgetState();
+  State<_AlertTestWidget> createState() => _AlertTestWidgetState();
 }
 
-class _TestWidgetState extends State<TestWidget> {
+class _AlertTestWidgetState extends State<_AlertTestWidget> {
   bool _showAlert = true;
 
   @override
@@ -85,33 +88,18 @@ class _TestWidgetState extends State<TestWidget> {
     return MaterialApp(
       home: Scaffold(
         body: MoonAlert(
+          key: widget.alertKey,
           show: _showAlert,
-          leading: widget.showLeading ? const Icon(leadingIcon) : null,
-          label: const SizedBox(
-            height: 24,
-            child: Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: Text(alertTitle),
-            ),
-          ),
+          leading: widget.showLeading ? const Icon(_alertLeadingIcon) : null,
+          label: const Text(_alertLabel),
           trailing: widget.showTrailing
               ? MoonButton.icon(
-                  buttonSize: MoonButtonSize.xs,
-                  disabledOpacityValue: 1,
-                  icon: const Icon(trailingIcon, size: 24),
-                  gap: 0,
+                  key: _closeButtonKey,
+                  icon: const Icon(_alertTrailingIcon),
                   onTap: () => setState(() => _showAlert = !_showAlert),
                 )
               : null,
-          content: widget.showBody
-              ? const SizedBox(
-                  height: 24,
-                  child: Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Text(alertBody),
-                  ),
-                )
-              : null,
+          content: widget.showBody ? const Text(_alertBody) : null,
         ),
       ),
     );

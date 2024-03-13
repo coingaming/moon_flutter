@@ -2,84 +2,110 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
+const Key _tagKey = Key("tagKey");
+
+const String _tagLabel = "Label";
+const IconData _tagLeadingIcon = MoonIcons.other_frame_24_light;
+const IconData _tagTrailingIcon = MoonIcons.controls_close_small_24_light;
+
 void main() {
-  const key = Key("tag_test");
-
-  testWidgets("Provided key is used", (tester) async {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const Directionality(
-        textDirection: TextDirection.ltr,
-        child: MoonTag(
-          key: key,
-          label: Text(title),
-        ),
+      const _TagTestWidget(
+        tagKey: _tagKey,
       ),
     );
-    expect(find.byKey(key), findsOneWidget);
+
+    expect(find.byKey(_tagKey), findsOneWidget);
   });
 
-  testWidgets("Simple tag", (tester) async {
-    await tester.pumpWidget(
-      const TestWidget(),
-    );
+  testWidgets("Default tag has no leading, label or trailing widget.", (tester) async {
+    await tester.pumpWidget(const _TagTestWidget());
 
-    expect(find.text(title), findsOneWidget);
+    expect(find.text(_tagLabel), findsNothing);
+    expect(find.text(_tagLabel), findsNothing);
+    expect(find.text(_tagLabel), findsNothing);
   });
 
-  testWidgets("Tag with leading, trailing", (tester) async {
+  testWidgets("Tag has a leading, label and trailing widget.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
+      const _TagTestWidget(
         showLeading: true,
+        showLabel: true,
         showTrailing: true,
       ),
     );
-    expect(find.text(title), findsOneWidget);
-    expect(find.byIcon(trailingIcon), findsOneWidget);
-    expect(find.byIcon(leadingIcon), findsOneWidget);
+
+    expect(find.text(_tagLabel), findsOneWidget);
+    expect(find.byIcon(_tagTrailingIcon), findsOneWidget);
+    expect(find.byIcon(_tagLeadingIcon), findsOneWidget);
   });
 
-  testWidgets("Press tag", (tester) async {
-    bool isPressed = false;
+  testWidgets("Tag onTap callback works.", (tester) async {
+    bool isTapped = false;
+
     await tester.pumpWidget(
-      TestWidget(
+      _TagTestWidget(
+        tagKey: _tagKey,
         showTrailing: true,
-        onTap: () {
-          isPressed = true;
-        },
+        onTap: () => isTapped = true,
       ),
     );
 
-    await tester.tap(find.byType(MoonTag));
+    await tester.tap(find.byKey(_tagKey));
     await tester.pumpAndSettle();
-    expect(isPressed, true);
+
+    expect(isTapped, true);
+  });
+
+  testWidgets("Tag onLongPress callback works.", (tester) async {
+    bool longPressed = false;
+    bool tapped = false;
+
+    await tester.pumpWidget(
+      _TagTestWidget(
+        tagKey: _tagKey,
+        onLongPress: () => longPressed = true,
+        onTap: () => tapped = true,
+      ),
+    );
+
+    await tester.longPress(find.byKey(_tagKey));
+    await tester.pumpAndSettle();
+
+    expect(longPressed, true);
+    expect(tapped, false);
   });
 }
 
-const String title = "Tag title";
-const IconData leadingIcon = MoonIcons.other_frame_24_light;
-const IconData trailingIcon = MoonIcons.controls_close_small_24_light;
-
-class TestWidget extends StatelessWidget {
+class _TagTestWidget extends StatelessWidget {
+  final Key? tagKey;
   final bool showLeading;
+  final bool showLabel;
   final bool showTrailing;
-
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
-  const TestWidget({
-    super.key,
+  const _TagTestWidget({
+    this.tagKey,
     this.showLeading = false,
+    this.showLabel = false,
     this.showTrailing = false,
     this.onTap,
+    this.onLongPress,
   });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: MoonTag(
+          key: tagKey,
           onTap: onTap,
-          leading: showLeading ? const Icon(leadingIcon) : null,
-          label: const Text(title),
-          trailing: showTrailing ? const Icon(trailingIcon) : null,
+          onLongPress: onLongPress,
+          leading: showLeading ? const Icon(_tagLeadingIcon) : null,
+          label: showLabel ? const Text(_tagLabel) : null,
+          trailing: showTrailing ? const Icon(_tagTrailingIcon) : null,
         ),
       ),
     );

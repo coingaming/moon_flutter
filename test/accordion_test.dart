@@ -2,54 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
-enum AccordionItems { first, second }
+enum _AccordionItems { first, second }
+
+const Key _accordionKey = Key("accordionKey");
+const Key _firstAccordionKey = Key("firstAccordionKey");
+const Key _firstAccordionChildKey = Key("firstAccordionChildKey");
+const Key _secondAccordionKey = Key("secondAccordionKey");
+const Key _secondAccordionChildKey = Key("secondAccordionChildKey");
+
+const String _accordionLabel = "Label";
+const String _accordionContent = "Content";
+const IconData _accordionTrailingIcon = MoonIcons.other_frame_24_light;
 
 void main() {
-  const key = Key("accordion_test");
-
-  testWidgets("Provided key is used", (tester) async {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      Directionality(
-        textDirection: TextDirection.ltr,
-        child: MoonAccordion<AccordionItems>(
-          key: key,
-          label: const Text("Title"),
-          children: [
-            Container(),
-          ],
-        ),
+      const _AccordionTestWidget(
+        accordionKey: _accordionKey,
       ),
     );
-    expect(find.byKey(key), findsOneWidget);
+
+    expect(find.byKey(_accordionKey), findsOneWidget);
   });
 
   group('Single accordion', () {
-    testWidgets("Accordion expands after click", (tester) async {
-      await tester.pumpWidget(
-        const SingleAccordionTestWidget(),
-      );
-      final accordion = find.byKey(firstAccordionKey);
-      final child = find.byKey(firstAccordionChildKey);
+    testWidgets("Accordion expands when tapped.", (tester) async {
+      await tester.pumpWidget(const _SingleAccordionTestWidget());
+      final accordion = find.byKey(_firstAccordionKey);
+      final child = find.byKey(_firstAccordionChildKey);
 
       expect(accordion, findsOneWidget);
       expect(child, findsNothing);
-      expect(find.text(accordionTitle), findsOneWidget);
-      expect(find.byIcon(accordionIcon), findsOneWidget);
+      expect(find.text(_accordionLabel), findsOneWidget);
+      expect(find.byIcon(_accordionTrailingIcon), findsOneWidget);
 
       await tester.tap(accordion);
       await tester.pumpAndSettle();
 
       expect(child, findsOneWidget);
-      expect(find.text(accordionContent), findsOneWidget);
+      expect(find.text(_accordionContent), findsOneWidget);
     });
-    testWidgets("Disabled accordion not expands after click", (tester) async {
+
+    testWidgets("Disabled accordion does not expand when tapped.", (tester) async {
       await tester.pumpWidget(
-        const SingleAccordionTestWidget(
+        const _SingleAccordionTestWidget(
           isDisabled: true,
         ),
       );
-      final accordion = find.byKey(firstAccordionKey);
-      final child = find.byKey(firstAccordionChildKey);
+      final accordion = find.byKey(_firstAccordionKey);
+      final child = find.byKey(_firstAccordionChildKey);
 
       expect(accordion, findsOneWidget);
       expect(child, findsNothing);
@@ -62,30 +63,29 @@ void main() {
   });
 
   group('Grouped accordion', () {
-    testWidgets("First accordion hides when second expands", (tester) async {
-      await tester.pumpWidget(
-        const GroupedAccordionTestWidget(),
-      );
-      final accordion1 = find.byKey(firstAccordionKey);
-      final child1 = find.byKey(firstAccordionChildKey);
+    testWidgets("First accordion collapses when second accordion expands.", (tester) async {
+      await tester.pumpWidget(const _GroupedAccordionTestWidget());
+      // First accordion.
+      final accordion1 = find.byKey(_firstAccordionKey);
+      final child1 = find.byKey(_firstAccordionChildKey);
+      // Second accordion.
+      final accordion2 = find.byKey(_secondAccordionKey);
+      final child2 = find.byKey(_secondAccordionChildKey);
 
-      final accordion2 = find.byKey(secondAccordionKey);
-      final child2 = find.byKey(secondAccordionChildKey);
-
-      //Initially first accordion is expanded
+      // Initially, the first accordion is expanded.
       expect(accordion1, findsOneWidget);
       expect(accordion2, findsOneWidget);
       expect(child1, findsOneWidget);
       expect(child2, findsNothing);
 
-      //Tap on second accordion to expand it
+      // Tap on the second accordion to expand it and collapse the first one.
       await tester.tap(accordion2);
       await tester.pumpAndSettle();
 
       expect(child2, findsOneWidget);
       expect(child1, findsNothing);
 
-      //Tap on second accordion again to close it
+      // Tap on the second accordion again to collapse it.
       await tester.tap(accordion2);
       await tester.pumpAndSettle();
 
@@ -95,41 +95,42 @@ void main() {
   });
 }
 
-const String accordionTitle = "Single MoonAccordion item";
-const String accordionContent = "Accordion content";
-const IconData accordionIcon = MoonIcons.other_frame_24_light;
+class _AccordionTestWidget extends StatelessWidget {
+  final Key? accordionKey;
 
-const firstAccordionKey = Key("first_accordion");
-const firstAccordionChildKey = Key("first_accordion_child");
-const secondAccordionKey = Key("second_accordion");
-const secondAccordionChildKey = Key("second_accordion_child");
+  const _AccordionTestWidget({this.accordionKey});
 
-class SingleAccordionTestWidget extends StatelessWidget {
-  final bool isDisabled;
-
-  const SingleAccordionTestWidget({super.key, this.isDisabled = false});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: MoonAccordion<AccordionItems>(
+        body: MoonAccordion<_AccordionItems>(
+          key: accordionKey,
+          label: const Text(_accordionLabel),
+        ),
+      ),
+    );
+  }
+}
+
+class _SingleAccordionTestWidget extends StatelessWidget {
+  final bool isDisabled;
+
+  const _SingleAccordionTestWidget({this.isDisabled = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: MoonAccordion<_AccordionItems>(
+          key: _firstAccordionKey,
           isDisabled: isDisabled,
-          key: firstAccordionKey,
-          accordionSize: MoonAccordionSize.md,
-          textColor: context.moonColors?.piccolo,
-          expandedTextColor: Colors.amber,
-          iconColor: Colors.red,
-          expandedIconColor: Colors.green,
-          borderColor: Colors.blue,
-          backgroundColor: Colors.yellow,
-          expandedBackgroundColor: Colors.brown,
-          childrenPadding: const EdgeInsets.all(12),
-          leading: const Icon(accordionIcon),
-          label: const Text(accordionTitle),
+          leading: const Icon(_accordionTrailingIcon),
+          label: const Text(_accordionLabel),
           children: const [
             Text(
-              accordionContent,
-              key: firstAccordionChildKey,
+              key: _firstAccordionChildKey,
+              _accordionContent,
             ),
           ],
         ),
@@ -138,55 +139,47 @@ class SingleAccordionTestWidget extends StatelessWidget {
   }
 }
 
-class GroupedAccordionTestWidget extends StatefulWidget {
-  const GroupedAccordionTestWidget({
-    super.key,
-  });
+class _GroupedAccordionTestWidget extends StatefulWidget {
+  const _GroupedAccordionTestWidget();
 
   @override
-  State<GroupedAccordionTestWidget> createState() => _GroupedAccordionTestWidgetState();
+  State<_GroupedAccordionTestWidget> createState() => _GroupedAccordionTestWidgetState();
 }
 
-class _GroupedAccordionTestWidgetState extends State<GroupedAccordionTestWidget> {
-  AccordionItems? _currentlyOpenAccordionItem = AccordionItems.first;
+class _GroupedAccordionTestWidgetState extends State<_GroupedAccordionTestWidget> {
+  _AccordionItems? _currentlyOpenAccordionItem = _AccordionItems.first;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: ListView(
-          clipBehavior: Clip.none,
           children: [
-            MoonAccordion<AccordionItems>(
-              key: firstAccordionKey,
-              identityValue: AccordionItems.first,
+            MoonAccordion<_AccordionItems>(
+              key: _firstAccordionKey,
+              identityValue: _AccordionItems.first,
               groupIdentityValue: _currentlyOpenAccordionItem,
-              onExpansionChanged: (AccordionItems? value) {
-                setState(() => _currentlyOpenAccordionItem = value);
-              },
+              onExpansionChanged: (_AccordionItems? value) => setState(() => _currentlyOpenAccordionItem = value),
               leading: const Icon(MoonIcons.other_frame_24_light),
               label: const Text("Grouped MoonAccordion item #1"),
               children: const [
                 Text(
-                  accordionContent,
-                  key: firstAccordionChildKey,
+                  key: _firstAccordionChildKey,
+                  _accordionContent,
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-            MoonAccordion<AccordionItems>(
-              key: secondAccordionKey,
-              identityValue: AccordionItems.second,
+            MoonAccordion<_AccordionItems>(
+              key: _secondAccordionKey,
+              identityValue: _AccordionItems.second,
               groupIdentityValue: _currentlyOpenAccordionItem,
-              onExpansionChanged: (AccordionItems? value) {
-                setState(() => _currentlyOpenAccordionItem = value);
-              },
+              onExpansionChanged: (_AccordionItems? value) => setState(() => _currentlyOpenAccordionItem = value),
               leading: const Icon(MoonIcons.other_frame_24_light),
               label: const Text("Grouped MoonAccordion item #2"),
               children: const [
                 Text(
-                  accordionContent,
-                  key: secondAccordionChildKey,
+                  key: _secondAccordionChildKey,
+                  _accordionContent,
                 ),
               ],
             ),

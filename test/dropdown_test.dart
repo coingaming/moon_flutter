@@ -4,101 +4,122 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/src/widgets/buttons/filled_button.dart';
 import 'package:moon_design/src/widgets/dropdown/dropdown.dart';
 
-// Test
+const Key _dropdownKey = Key("dropdownKey");
+const Key _showButtonKey = Key("showButtonKey");
+
+const Widget _drawerContent = Text("Content");
+
 void main() {
-  const key = Key("dropdown_test");
+  testWidgets("Provided key is used.", (tester) async {
+    await tester.pumpWidget(
+      const _DropdownTestWidget(
+        dropdownKey: _dropdownKey,
+      ),
+    );
 
-  testWidgets("Provided key is used", (tester) async {
-    await tester.pumpWidget(MoonDropdown(key: key, show: true, content: Container(), child: Container()));
-    expect(find.byKey(key), findsOneWidget);
+    expect(find.byKey(_dropdownKey), findsOneWidget);
   });
 
-  testWidgets("Dropdown is shown after clicking on button", (tester) async {
-    await tester.pumpWidget(const TestWidget(key: key, content: content));
-    final button = find.byType(MoonFilledButton);
+  testWidgets("Dropdown is displayed when the 'show' button is tapped.", (tester) async {
+    await tester.pumpWidget(const _DropdownTestWidget());
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_drawerContent), findsOneWidget);
   });
 
-  testWidgets("Dropdown is hidden after clicking outside content", (tester) async {
-    await tester.pumpWidget(const TestWidget(key: key, content: content));
-    final button = find.byType(MoonFilledButton);
+  testWidgets("Dropdown collapses when a tap occurs outside its content, if dismissible.", (tester) async {
+    await tester.pumpWidget(const _DropdownTestWidget());
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_drawerContent), findsOneWidget);
 
     await tester.tapAt(const Offset(10, 10));
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsNothing);
+    expect(find.byWidget(_drawerContent), findsNothing);
   });
 
-  testWidgets("Provided color is used", (tester) async {
-    await tester.pumpWidget(
-      const TestWidget(
-        key: key,
-        content: content,
-        color: Colors.red,
-      ),
-    );
-    final button = find.byType(MoonFilledButton);
+  testWidgets("Dropdown stays expanded when a tap occurs outside its content, if not dismissible.", (tester) async {
+    await tester.pumpWidget(const _DropdownTestWidget(isDismissible: false));
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_drawerContent), findsOneWidget);
+
+    await tester.tapAt(const Offset(10, 10));
+    await tester.pumpAndSettle();
+
+    expect(find.byWidget(_drawerContent), findsOneWidget);
+  });
+
+  testWidgets("Provided background color is used for dropdown.", (tester) async {
+    await tester.pumpWidget(
+      const _DropdownTestWidget(
+        color: Colors.blue,
+      ),
+    );
+    final button = find.byKey(_showButtonKey);
+
+    expect(button, findsOneWidget);
+
+    await tester.tap(button);
+    await tester.pumpAndSettle();
+
+    expect(find.byWidget(_drawerContent), findsOneWidget);
     expect(
-      find.byWidgetPredicate((widget) => widget is MoonDropdown && widget.backgroundColor == Colors.red),
+      find.byWidgetPredicate((Widget widget) => widget is MoonDropdown && widget.backgroundColor == Colors.blue),
       findsOneWidget,
     );
   });
 }
 
-const String dropdownText = "Dropdown content";
-const Widget content = Text(dropdownText);
-
-bool show = false;
-
-class TestWidget extends StatelessWidget {
-  final Widget content;
+class _DropdownTestWidget extends StatefulWidget {
+  final Key? dropdownKey;
+  final bool isDismissible;
   final Color color;
 
-  const TestWidget({
-    required this.content,
+  const _DropdownTestWidget({
+    this.dropdownKey,
+    this.isDismissible = true,
     this.color = Colors.white,
-    super.key,
   });
+
+  @override
+  State<_DropdownTestWidget> createState() => _DropdownTestWidgetState();
+}
+
+class _DropdownTestWidgetState extends State<_DropdownTestWidget> {
+  bool _show = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: StatefulBuilder(
-            builder: (context, setState) {
-              return MoonDropdown(
-                show: show,
-                backgroundColor: color,
-                content: content,
-                onTapOutside: () => setState(() => show = false),
-                child: MoonFilledButton(
-                  onTap: () {
-                    setState(() => show = true);
-                  },
-                ),
-              );
-            },
+          child: MoonDropdown(
+            key: widget.dropdownKey,
+            show: _show,
+            backgroundColor: widget.color,
+            onTapOutside: () => setState(() => _show = !widget.isDismissible),
+            content: _drawerContent,
+            child: MoonFilledButton(
+              key: _showButtonKey,
+              onTap: () => setState(() => _show = true),
+            ),
           ),
         ),
       ),

@@ -2,78 +2,67 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
+const Key _switchKey = Key("switchKey");
+
 void main() {
-  const key = Key("switch_test");
-
-  testWidgets("Provided key is used", (tester) async {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _SwitchTestWidget(
+        switchKey: _switchKey,
       ),
     );
 
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is MoonSwitch && widget.key == key,
-      ),
-      findsOneWidget,
-    );
+    expect(find.byKey(_switchKey), findsOneWidget);
   });
 
-  testWidgets("Toggle switch", (tester) async {
+  testWidgets("Tapping on a switch changes its value.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _SwitchTestWidget(
+        switchKey: _switchKey,
       ),
     );
 
     expect(
-      find.byWidgetPredicate(
-        (widget) => widget is MoonSwitch && widget.value == true,
-      ),
+      find.byWidgetPredicate((Widget widget) => widget is MoonSwitch && widget.value == true),
       findsOneWidget,
     );
 
-    await tester.tap(find.byKey(key));
+    await tester.tap(find.byKey(_switchKey));
     await tester.pumpAndSettle();
 
     expect(
-      find.byWidgetPredicate(
-        (widget) => widget is MoonSwitch && widget.value == false,
-      ),
+      find.byWidgetPredicate((Widget widget) => widget is MoonSwitch && widget.value == false),
       findsOneWidget,
     );
 
-    await tester.tap(find.byKey(key));
+    await tester.tap(find.byKey(_switchKey));
     await tester.pumpAndSettle();
 
     expect(
-      find.byWidgetPredicate(
-        (widget) => widget is MoonSwitch && widget.value == true,
-      ),
+      find.byWidgetPredicate((Widget widget) => widget is MoonSwitch && widget.value == true),
       findsOneWidget,
     );
   });
 }
 
-class TestWidget extends StatefulWidget {
-  final Key? widgetKey;
+class _SwitchTestWidget extends StatefulWidget {
+  final Key? switchKey;
 
-  const TestWidget({super.key, this.widgetKey});
+  const _SwitchTestWidget({this.switchKey});
 
   @override
-  State<TestWidget> createState() => _TestWidgetState();
+  State<_SwitchTestWidget> createState() => _SwitchTestWidgetState();
 }
 
-class _TestWidgetState extends State<TestWidget> {
-  var _switchValue = true;
+class _SwitchTestWidgetState extends State<_SwitchTestWidget> {
+  bool _switchValue = true;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: MoonSwitch(
-          key: widget.widgetKey,
+          key: widget.switchKey,
           value: _switchValue,
           onChanged: (bool newValue) => setState(() => _switchValue = newValue),
         ),

@@ -2,139 +2,115 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
-void main() {
-  const key = Key("text_area_test");
+const Key _textAreaKey = Key("textAreaKey");
+const Key _submitButtonKey = Key("submitButtonKey");
 
+const String _hintText = 'Hint text';
+const String _errorText = 'Error text';
+const String _helperText = 'Helper text';
+const String _validText = 'Valid text';
+const String _invalidText = 'Invalid text';
+
+void main() {
   Future<void> submit(WidgetTester tester) async {
-    await tester.tap(find.byType(MoonFilledButton));
+    await tester.tap(find.byKey(_submitButtonKey));
     await tester.pumpAndSettle();
   }
 
-  testWidgets("Provided key is used", (tester) async {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _TextAreaTestWidget(
+        textAreaKey: _textAreaKey,
       ),
     );
 
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is MoonTextArea && widget.key == key,
-      ),
-      findsOneWidget,
-    );
+    expect(find.byKey(_textAreaKey), findsOneWidget);
   });
 
-  testWidgets("Enter valid text", (tester) async {
+  testWidgets("When valid text is entered and submitted, error is not shown.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _TextAreaTestWidget(
+        textAreaKey: _textAreaKey,
       ),
     );
+    final textArea = find.byKey(_textAreaKey);
 
-    final textArea = find.byKey(key);
-
-    await tester.enterText(textArea, validText);
+    await tester.enterText(textArea, _validText);
     await tester.pumpAndSettle();
-    expect(
-      find.text(validText),
-      findsOneWidget,
-    );
+
+    expect(find.text(_validText), findsOneWidget);
+
     await submit(tester);
-    expect(
-      find.text(error),
-      findsNothing,
-    );
+
+    expect(find.text(_errorText), findsNothing);
   });
 
-  testWidgets("Enter invalid text", (tester) async {
+  testWidgets("When invalid text is entered and submitted, error is shown.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _TextAreaTestWidget(
+        textAreaKey: _textAreaKey,
       ),
     );
+    final textArea = find.byKey(_textAreaKey);
 
-    final textArea = find.byKey(key);
-
-    await tester.enterText(textArea, invalidText);
+    await tester.enterText(textArea, _invalidText);
     await tester.pumpAndSettle();
-    expect(
-      find.text(invalidText),
-      findsOneWidget,
-    );
+
+    expect(find.text(_invalidText), findsOneWidget);
+
     await submit(tester);
-    expect(
-      find.text(error),
-      findsOneWidget,
-    );
+
+    expect(find.text(_errorText), findsOneWidget);
   });
 
-  testWidgets("Check helper text", (tester) async {
+  testWidgets("Helper text is shown.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _TextAreaTestWidget(
         showHelper: true,
       ),
     );
 
-    expect(
-      find.text(helper),
-      findsOneWidget,
-    );
+    expect(find.text(_helperText), findsOneWidget);
   });
 
-  testWidgets("Check hint", (tester) async {
+  testWidgets("Hint text is shown.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _TextAreaTestWidget(
         showHelper: true,
       ),
     );
 
-    expect(
-      find.text(hint),
-      findsOneWidget,
-    );
+    expect(find.text(_hintText), findsOneWidget);
   });
 
-  testWidgets("Disabled: enter text", (tester) async {
+  testWidgets("When text area is disabled, input cannot be entered.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
+      const _TextAreaTestWidget(
+        textAreaKey: _textAreaKey,
         enabled: false,
       ),
     );
 
-    final textArea = find.byKey(key);
+    final textArea = find.byKey(_textAreaKey);
 
-    await tester.enterText(textArea, validText);
+    await tester.enterText(textArea, _validText);
     await tester.pumpAndSettle();
-    expect(
-      find.text(validText),
-      findsNothing,
-    );
+
+    expect(find.text(_validText), findsNothing);
   });
 }
 
-const validText =
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
-const invalidText = 'Lorem';
-
-const hint = 'Hint';
-const error = 'Error';
-const helper = 'Helper';
-
-class TestWidget extends StatelessWidget {
+class _TextAreaTestWidget extends StatelessWidget {
+  final Key? textAreaKey;
   final bool enabled;
   final bool showHelper;
-  final Key? widgetKey;
 
-  const TestWidget({
-    super.key,
+  const _TextAreaTestWidget({
+    this.textAreaKey,
     this.enabled = true,
     this.showHelper = false,
-    this.widgetKey,
   });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -143,21 +119,16 @@ class TestWidget extends StatelessWidget {
           child: Builder(
             builder: (BuildContext context) {
               return Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   MoonTextArea(
-                    key: widgetKey,
+                    key: textAreaKey,
                     enabled: enabled,
-                    hintText: hint,
-                    validator: (String? value) =>
-                        value?.length != null && value!.length < 10
-                            ? error
-                            : null,
-                    helper: showHelper ? const Text(helper) : null,
+                    hintText: _hintText,
+                    validator: (String? value) => value?.length != null && value!.length > 10 ? _errorText : null,
+                    helper: showHelper ? const Text(_helperText) : null,
                   ),
-                  const SizedBox(height: 32),
                   MoonFilledButton(
-                    label: const Text("Submit"),
+                    key: _submitButtonKey,
                     onTap: () => Form.of(context).validate(),
                   ),
                 ],

@@ -2,86 +2,104 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
-// Test
-void main() {
-  const key = Key("popover_test");
+const Key _popoverKey = Key("popoverKey");
+const Key _showButtonKey = Key("showButtonKey");
+const Key _closeButtonKey = Key("closeButtonKey");
 
-  testWidgets("Provided key is used", (tester) async {
+const Widget _content = Text("Content");
+
+void main() {
+  testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const TestWidget(
-        widgetKey: key,
-        content: content,
+      const _PopoverTestWidget(
+        popoverKey: _popoverKey,
       ),
     );
-    expect(find.byKey(key), findsOneWidget);
+
+    expect(find.byKey(_popoverKey), findsOneWidget);
   });
-  testWidgets("Popover is shown after clicking on button", (tester) async {
-    await tester.pumpWidget(const TestWidget(key: key, content: content));
-    final button = find.text(openButtonText);
+
+  testWidgets("Popover is displayed when the 'show' button is tapped.", (tester) async {
+    await tester.pumpWidget(const _PopoverTestWidget());
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_content), findsOneWidget);
   });
 
-  testWidgets("Popover is hidden after clicking outside content",
-      (tester) async {
-    await tester.pumpWidget(const TestWidget(key: key, content: content));
-    final button = find.text(openButtonText);
+  testWidgets("Popover closes when a tap occurs outside its content, if dismissible.", (tester) async {
+    await tester.pumpWidget(const _PopoverTestWidget());
+    final button = find.byKey(_showButtonKey);
 
     expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
+    expect(find.byWidget(_content), findsOneWidget);
 
     await tester.tapAt(const Offset(10, 10));
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsNothing);
+    expect(find.byWidget(_content), findsNothing);
   });
 
-  testWidgets("Popover is hidden after clicking on button", (tester) async {
-    await tester.pumpWidget(const TestWidget(content: content));
-    final button = find.text(openButtonText);
+  testWidgets("Popover stays visible when a tap occurs outside its content, if not dismissible.", (tester) async {
+    await tester.pumpWidget(
+      const _PopoverTestWidget(
+        isDismissible: false,
+      ),
+    );
+    final button = find.byKey(_showButtonKey);
+
+    expect(button, findsOneWidget);
 
     await tester.tap(button);
     await tester.pumpAndSettle();
 
-    expect(find.byWidget(content), findsOneWidget);
-    await tester.tap(find.text(closeButtonText));
+    expect(find.byWidget(_content), findsOneWidget);
+
+    await tester.tapAt(const Offset(10, 10));
     await tester.pumpAndSettle();
-    expect(find.byWidget(content), findsNothing);
+
+    expect(find.byWidget(_content), findsOneWidget);
+  });
+
+  testWidgets("Popover closes when the 'close' button is tapped.", (tester) async {
+    await tester.pumpWidget(const _PopoverTestWidget());
+    final button = find.byKey(_showButtonKey);
+
+    await tester.tap(button);
+    await tester.pumpAndSettle();
+
+    expect(find.byWidget(_content), findsOneWidget);
+
+    await tester.tap(find.byKey(_closeButtonKey));
+    await tester.pumpAndSettle();
+
+    expect(find.byWidget(_content), findsNothing);
   });
 }
 
-const String contentText = "Content";
-const Widget content = Text(contentText);
-const String openButtonText = "Open";
-const String closeButtonText = "Close";
-
-class TestWidget extends StatefulWidget {
-  final Widget content;
+class _PopoverTestWidget extends StatefulWidget {
+  final Key? popoverKey;
   final bool isDismissible;
-  final Key? widgetKey;
 
-  const TestWidget({
-    required this.content,
+  const _PopoverTestWidget({
+    this.popoverKey,
     this.isDismissible = true,
-    this.widgetKey,
-    super.key,
   });
 
   @override
-  State<TestWidget> createState() => _TestWidgetState();
+  State<_PopoverTestWidget> createState() => _PopoverTestWidgetState();
 }
 
-class _TestWidgetState extends State<TestWidget> {
-  bool show = false;
+class _PopoverTestWidgetState extends State<_PopoverTestWidget> {
+  bool _show = false;
 
   @override
   Widget build(BuildContext context) {
@@ -89,30 +107,24 @@ class _TestWidgetState extends State<TestWidget> {
       home: Scaffold(
         body: Center(
           child: MoonPopover(
-            key: widget.widgetKey,
-            show: show,
-            onTapOutside: widget.isDismissible
-                ? () => setState(() => show = false)
-                : null,
+            key: widget.popoverKey,
+            show: _show,
+            onTapOutside: () => setState(() => _show = !widget.isDismissible),
             content: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 190),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  widget.content,
-                  const SizedBox(height: 16),
+                  _content,
                   MoonFilledButton(
-                    buttonSize: MoonButtonSize.sm,
-                    isFullWidth: true,
-                    onTap: () => setState(() => show = false),
-                    label: const Text(closeButtonText),
+                    key: _closeButtonKey,
+                    onTap: () => setState(() => _show = false),
                   ),
                 ],
               ),
             ),
             child: MoonFilledButton(
-              onTap: () => setState(() => show = !show),
-              label: const Text(openButtonText),
+              key: _showButtonKey,
+              onTap: () => setState(() => _show = !_show),
             ),
           ),
         ),
