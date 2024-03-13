@@ -185,7 +185,6 @@ class MoonPopoverState extends State<MoonPopover> with RouteAware, SingleTickerP
 
   void _handleTapOutside() {
     widget.onTapOutside?.call();
-    _removePopover();
   }
 
   void _clearOverlayEntry() {
