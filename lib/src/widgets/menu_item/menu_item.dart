@@ -36,6 +36,9 @@ class MoonMenuItem extends StatefulWidget {
   /// The background color of the menu item.
   final Color? backgroundColor;
 
+  /// The color of the menu item hover effect.
+  final Color? hoverEffectColor;
+
   /// The custom decoration of the menu item.
   final Decoration? decoration;
 
@@ -90,6 +93,7 @@ class MoonMenuItem extends StatefulWidget {
     this.autofocus = false,
     this.borderRadius,
     this.backgroundColor,
+    this.hoverEffectColor,
     this.decoration,
     this.height,
     this.width,
@@ -204,7 +208,8 @@ class _MoonMenuItemState extends State<MoonMenuItem> with TickerProviderStateMix
     final TextStyle effectiveContentTextStyle =
         context.moonTheme?.menuItemTheme.properties.contentTextStyle ?? MoonTypography.typography.body.text12;
 
-    final Color effectiveHoverEffectColor = context.moonEffects?.controlHoverEffect.primaryHoverColor ??
+    final Color effectiveHoverEffectColor = widget.hoverEffectColor ??
+        context.moonEffects?.controlHoverEffect.primaryHoverColor ??
         MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
 
     final Color resolvedHoverColor =
