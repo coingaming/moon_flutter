@@ -60,7 +60,7 @@ class StorybookPage extends StatelessWidget {
         wrapperBuilder: (BuildContext context, Widget? child) => Scaffold(
           extendBody: true,
           extendBodyBehindAppBar: true,
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           body: SafeArea(
             top: false,
             bottom: false,

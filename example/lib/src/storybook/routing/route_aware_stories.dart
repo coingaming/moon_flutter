@@ -1,38 +1,42 @@
 import 'package:example/src/storybook/routing/app_router.dart';
-import 'package:example/src/storybook/stories/accordion.dart';
-import 'package:example/src/storybook/stories/alert.dart';
-import 'package:example/src/storybook/stories/auth_code.dart';
-import 'package:example/src/storybook/stories/avatar.dart';
-import 'package:example/src/storybook/stories/bottom_sheet.dart';
-import 'package:example/src/storybook/stories/breadcrumb.dart';
-import 'package:example/src/storybook/stories/button.dart';
-import 'package:example/src/storybook/stories/carousel.dart';
-import 'package:example/src/storybook/stories/checkbox.dart';
-import 'package:example/src/storybook/stories/chip.dart';
-import 'package:example/src/storybook/stories/circular_loader.dart';
-import 'package:example/src/storybook/stories/circular_progress.dart';
-import 'package:example/src/storybook/stories/combobox.dart';
-import 'package:example/src/storybook/stories/dot_indicator.dart';
-import 'package:example/src/storybook/stories/drawer.dart';
-import 'package:example/src/storybook/stories/dropdown.dart';
-import 'package:example/src/storybook/stories/icons.dart';
-import 'package:example/src/storybook/stories/linear_loader.dart';
-import 'package:example/src/storybook/stories/linear_progress.dart';
-import 'package:example/src/storybook/stories/menu_item.dart';
-import 'package:example/src/storybook/stories/modal.dart';
-import 'package:example/src/storybook/stories/popover.dart';
-import 'package:example/src/storybook/stories/radio.dart';
-import 'package:example/src/storybook/stories/segmented_control.dart';
-import 'package:example/src/storybook/stories/switch.dart';
-import 'package:example/src/storybook/stories/tab_bar.dart';
-import 'package:example/src/storybook/stories/table.dart';
-import 'package:example/src/storybook/stories/tag.dart';
-import 'package:example/src/storybook/stories/text_area.dart';
-import 'package:example/src/storybook/stories/text_input.dart';
-import 'package:example/src/storybook/stories/text_input_group.dart';
-import 'package:example/src/storybook/stories/toast.dart';
-import 'package:example/src/storybook/stories/tooltip.dart';
+import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
+import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
+import 'package:example/src/storybook/stories/composites/search_generic.dart';
+import 'package:example/src/storybook/stories/composites/search_with_dropdown.dart';
+import 'package:example/src/storybook/stories/primitives/accordion.dart';
+import 'package:example/src/storybook/stories/primitives/alert.dart';
+import 'package:example/src/storybook/stories/primitives/auth_code.dart';
+import 'package:example/src/storybook/stories/primitives/avatar.dart';
+import 'package:example/src/storybook/stories/primitives/bottom_sheet.dart';
+import 'package:example/src/storybook/stories/primitives/breadcrumb.dart';
+import 'package:example/src/storybook/stories/primitives/button.dart';
+import 'package:example/src/storybook/stories/primitives/carousel.dart';
+import 'package:example/src/storybook/stories/primitives/checkbox.dart';
+import 'package:example/src/storybook/stories/primitives/chip.dart';
+import 'package:example/src/storybook/stories/primitives/circular_loader.dart';
+import 'package:example/src/storybook/stories/primitives/circular_progress.dart';
+import 'package:example/src/storybook/stories/primitives/dot_indicator.dart';
+import 'package:example/src/storybook/stories/primitives/drawer.dart';
+import 'package:example/src/storybook/stories/primitives/dropdown.dart';
+import 'package:example/src/storybook/stories/primitives/icons.dart';
+import 'package:example/src/storybook/stories/primitives/linear_loader.dart';
+import 'package:example/src/storybook/stories/primitives/linear_progress.dart';
+import 'package:example/src/storybook/stories/primitives/menu_item.dart';
+import 'package:example/src/storybook/stories/primitives/modal.dart';
+import 'package:example/src/storybook/stories/primitives/popover.dart';
+import 'package:example/src/storybook/stories/primitives/radio.dart';
+import 'package:example/src/storybook/stories/primitives/segmented_control.dart';
+import 'package:example/src/storybook/stories/primitives/switch.dart';
+import 'package:example/src/storybook/stories/primitives/tab_bar.dart';
+import 'package:example/src/storybook/stories/primitives/table.dart';
+import 'package:example/src/storybook/stories/primitives/tag.dart';
+import 'package:example/src/storybook/stories/primitives/text_area.dart';
+import 'package:example/src/storybook/stories/primitives/text_input.dart';
+import 'package:example/src/storybook/stories/primitives/text_input_group.dart';
+import 'package:example/src/storybook/stories/primitives/toast.dart';
+import 'package:example/src/storybook/stories/primitives/tooltip.dart';
 import 'package:flutter/services.dart';
+
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 const String directory = 'assets/code_snippets/';
@@ -40,11 +44,30 @@ const String directory = 'assets/code_snippets/';
 final List<Story> routeAwareStories = [
   // Composite stories.
   Story.asRoute(
-    name: 'Composites/Combobox',
-    routePath: ComboboxStory.path,
+    name: 'Composites/Combobox/single select',
+    routePath: ComboboxSingleSelectStory.path,
     router: router,
-    codeString: fetchAsset('combobox.md'),
+    codeString: fetchAsset('combobox_single_select.md'),
   ),
+  Story.asRoute(
+    name: 'Composites/Combobox/multi select',
+    routePath: ComboboxMultiSelectStory.path,
+    router: router,
+    codeString: fetchAsset('combobox_multi_select.md'),
+  ),
+  Story.asRoute(
+    name: 'Composites/Search/generic',
+    routePath: SearchGenericStory.path,
+    router: router,
+    codeString: fetchAsset('search_generic.md'),
+  ),
+  Story.asRoute(
+    name: 'Composites/Search/with dropdown',
+    routePath: SearchWithDropdownStory.path,
+    router: router,
+    codeString: fetchAsset('search_with_dropdown.md'),
+  ),
+
   // Primitive stories.
   Story.asRoute(
     name: 'Primitives/Accordion',

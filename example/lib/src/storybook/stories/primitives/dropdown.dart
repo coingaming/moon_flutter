@@ -118,6 +118,9 @@ class _DropdownStoryState extends State<DropdownStory> {
     final colorRoshi60 = context.moonColors!.roshi60;
     final colorRoshi10 = context.moonColors!.roshi10;
 
+    final BorderRadiusGeometry? borderRadius =
+        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
       child: Center(
@@ -133,46 +136,51 @@ class _DropdownStoryState extends State<DropdownStory> {
               minWidth: 250,
               borderColor: borderColor ?? Colors.transparent,
               backgroundColor: backgroundColor,
-              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+              borderRadius: borderRadius,
               constrainWidthToChild: constrainWidthToChildKnob,
               distanceToTarget: distanceToTargetKnob,
               dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
               dropdownShadows: showShadowKnob == true ? null : [],
               onTapOutside: () => setState(() => _showChoices = false),
-              content: Column(
-                children: [
-                  MoonMenuItem(
-                    absorbGestures: true,
-                    onTap: () => setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
-                    label: Text(Choices.first.name),
-                    trailing: MoonCheckbox(
-                      value: _availableChoices[Choices.first],
-                      tapAreaSizeValue: 0,
-                      onChanged: (_) {},
+              content: ClipRRect(
+                borderRadius: borderRadius ?? BorderRadius.zero,
+                child: Column(
+                  children: [
+                    MoonMenuItem(
+                      absorbGestures: true,
+                      onTap: () =>
+                          setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
+                      label: Text(Choices.first.name),
+                      trailing: MoonCheckbox(
+                        value: _availableChoices[Choices.first],
+                        tapAreaSizeValue: 0,
+                        onChanged: (_) {},
+                      ),
                     ),
-                  ),
-                  MoonMenuItem(
-                    absorbGestures: true,
-                    onTap: () =>
-                        setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
-                    label: Text(Choices.second.name),
-                    trailing: MoonCheckbox(
-                      value: _availableChoices[Choices.second],
-                      tapAreaSizeValue: 0,
-                      onChanged: (_) {},
+                    MoonMenuItem(
+                      absorbGestures: true,
+                      onTap: () =>
+                          setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
+                      label: Text(Choices.second.name),
+                      trailing: MoonCheckbox(
+                        value: _availableChoices[Choices.second],
+                        tapAreaSizeValue: 0,
+                        onChanged: (_) {},
+                      ),
                     ),
-                  ),
-                  MoonMenuItem(
-                    absorbGestures: true,
-                    onTap: () => setState(() => _availableChoices[Choices.third] = !_availableChoices[Choices.third]!),
-                    label: Text(Choices.third.name),
-                    trailing: MoonCheckbox(
-                      value: _availableChoices[Choices.third],
-                      tapAreaSizeValue: 0,
-                      onChanged: (_) {},
+                    MoonMenuItem(
+                      absorbGestures: true,
+                      onTap: () =>
+                          setState(() => _availableChoices[Choices.third] = !_availableChoices[Choices.third]!),
+                      label: Text(Choices.third.name),
+                      trailing: MoonCheckbox(
+                        value: _availableChoices[Choices.third],
+                        tapAreaSizeValue: 0,
+                        onChanged: (_) {},
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               child: MoonTextInput(
                 width: 270,
@@ -205,7 +213,10 @@ class _DropdownStoryState extends State<DropdownStory> {
                     child: AnimatedRotation(
                       duration: const Duration(milliseconds: 200),
                       turns: _showChoices ? -0.5 : 0,
-                      child: const Icon(MoonIcons.controls_chevron_down_small_24_light),
+                      child: const Icon(
+                        MoonIcons.controls_chevron_down_16_light,
+                        size: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -218,7 +229,6 @@ class _DropdownStoryState extends State<DropdownStory> {
               maxWidth: 250,
               borderColor: borderColor ?? Colors.transparent,
               backgroundColor: backgroundColor,
-              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
               constrainWidthToChild: constrainWidthToChildKnob,
               distanceToTarget: distanceToTargetKnob,
               dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,

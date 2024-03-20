@@ -1317,9 +1317,9 @@ class _MoonTextInputState extends State<MoonTextInput>
                 ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    left: widget.leading != null ? 0 : resolvedContentPadding.left,
-                    right: widget.trailing != null ? 0 : resolvedContentPadding.right,
+                  padding: EdgeInsetsDirectional.only(
+                    start: widget.leading != null ? 0 : resolvedContentPadding.left,
+                    end: widget.trailing != null ? 0 : resolvedContentPadding.right,
                   ),
                   child: Stack(
                     children: [
