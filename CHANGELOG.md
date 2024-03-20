@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.0](https://github.com/coingaming/moon_flutter/compare/v0.51.1...v0.52.0) (2024-03-20)
+
+
+### Features
+
+* [MDS-1034] Create search component ([#384](https://github.com/coingaming/moon_flutter/issues/384)) ([955c039](https://github.com/coingaming/moon_flutter/commit/955c039bc070f363b67c04082a940577b61ed73c))
+
 ## [0.51.1](https://github.com/coingaming/moon_flutter/compare/v0.51.0...v0.51.1) (2024-03-13)
 
 
