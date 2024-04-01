@@ -194,6 +194,7 @@ class _DropdownStoryState extends State<DropdownStory> {
                     ? Center(
                         child: MoonTag(
                           tagSize: MoonTagSize.xs,
+                          isUpperCase: false,
                           backgroundColor: context.moonColors!.bulma,
                           onTap: () => setState(() => _availableChoices.updateAll((key, value) => false)),
                           label: Text(
