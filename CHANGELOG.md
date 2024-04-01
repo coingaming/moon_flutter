@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.2](https://github.com/coingaming/moon_flutter/compare/v0.52.1...v0.52.2) (2024-04-01)
+
+
+### Bug Fixes
+
+* [MDS-1060] Fix Tag icon alignment ([#389](https://github.com/coingaming/moon_flutter/issues/389)) ([5eac85b](https://github.com/coingaming/moon_flutter/commit/5eac85ba971840a7606d971a36f1075a4dae4dd7))
+
 ## [0.52.1](https://github.com/coingaming/moon_flutter/compare/v0.52.0...v0.52.1) (2024-04-01)
 
 
