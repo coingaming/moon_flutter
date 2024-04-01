@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.1](https://github.com/coingaming/moon_flutter/compare/v0.52.0...v0.52.1) (2024-04-01)
+
+
+### Bug Fixes
+
+* [MDS-1057] Fix moon_icons icon font glyphs vertical misalignment ([#387](https://github.com/coingaming/moon_flutter/issues/387)) ([459172d](https://github.com/coingaming/moon_flutter/commit/459172d46b7caa8fffb9ec0e74f48aaf61d1786e))
+
 ## [0.52.0](https://github.com/coingaming/moon_flutter/compare/v0.51.1...v0.52.0) (2024-03-20)
 
 
