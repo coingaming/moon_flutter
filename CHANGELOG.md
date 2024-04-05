@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.3](https://github.com/coingaming/moon_flutter/compare/v0.52.2...v0.52.3) (2024-04-05)
+
+
+### Bug Fixes
+
+* [MDS-1080] Fix MoonTooltip not showing on init ([#392](https://github.com/coingaming/moon_flutter/issues/392)) ([5514dd5](https://github.com/coingaming/moon_flutter/commit/5514dd5f154875c60480a1533a0cbdc900e10021))
+
 ## [0.52.2](https://github.com/coingaming/moon_flutter/compare/v0.52.1...v0.52.2) (2024-04-01)
 
 
