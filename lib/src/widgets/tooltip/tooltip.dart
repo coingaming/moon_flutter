@@ -343,6 +343,10 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
 
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
+
+      if (widget.show) {
+        _showTooltip();
+      }
     });
   }
 
