@@ -7,7 +7,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 enum Component { input, dropdown }
 
 class SearchWithDropdownStory extends StatefulWidget {
-  static const path = '/composites/search/dropdown';
+  static const path = '/composites/search/search_with_dropdown';
 
   const SearchWithDropdownStory({super.key});
 

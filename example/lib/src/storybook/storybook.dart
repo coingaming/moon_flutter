@@ -1,3 +1,4 @@
+import 'package:example/src/storybook/common/widgets/logo.dart';
 import 'package:example/src/storybook/common/widgets/version.dart';
 import 'package:example/src/storybook/routing/route_aware_stories.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class StorybookPage extends StatelessWidget {
       plugins: _plugins,
       enableLayout: false,
       autoLayoutThreshold: autoLayoutThreshold,
+      logoWidget: const MoonLogoWidget(),
       routeWrapperBuilder: RouteWrapperBuilder(
         title: "Moon Design for Flutter",
         theme: ThemeData.light().copyWith(

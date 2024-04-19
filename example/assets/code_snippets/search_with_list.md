@@ -19,14 +19,14 @@ enum Options {
   }
 }
 
-class SearchGeneric extends StatefulWidget {
-  const SearchGeneric({super.key});
+class SearchWithList extends StatefulWidget {
+  const SearchWithList({super.key});
 
 @override
-  State<SearchGeneric> createState() => _SearchGenericState();
+  State<SearchWithList> createState() => _SearchWithListState();
 }
 
-class _SearchGenericState extends State<SearchGeneric> {
+class _SearchWithListState extends State<SearchWithList> {
   final TextEditingController _searchController = TextEditingController();
   final List<Options> _optionsList = Options.values;
 

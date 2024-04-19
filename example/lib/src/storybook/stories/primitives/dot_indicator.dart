@@ -55,45 +55,47 @@ class _DotIndicatorStoryState extends State<DotIndicatorStory> {
       max: 32,
     );
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          MoonDotIndicator(
-            selectedDot: _selectedDot,
-            dotCount: 4,
-            size: sizeKnob?.toDouble(),
-            gap: gapKnob?.toDouble(),
-            selectedColor: selectedColor,
-            unselectedColor: unselectedColor,
-          ),
-          const SizedBox(height: 32),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MoonFilledButton(
-                label: const Text("1"),
-                onTap: () => setState(() => _selectedDot = 0),
-              ),
-              const SizedBox(width: 8),
-              MoonFilledButton(
-                label: const Text("2"),
-                onTap: () => setState(() => _selectedDot = 1),
-              ),
-              const SizedBox(width: 8),
-              MoonFilledButton(
-                label: const Text("3"),
-                onTap: () => setState(() => _selectedDot = 2),
-              ),
-              const SizedBox(width: 8),
-              MoonFilledButton(
-                label: const Text("4"),
-                onTap: () => setState(() => _selectedDot = 3),
-              ),
-            ],
-          ),
-        ],
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MoonDotIndicator(
+              selectedDot: _selectedDot,
+              dotCount: 4,
+              size: sizeKnob?.toDouble(),
+              gap: gapKnob?.toDouble(),
+              selectedColor: selectedColor,
+              unselectedColor: unselectedColor,
+            ),
+            const SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MoonFilledButton(
+                  label: const Text("1"),
+                  onTap: () => setState(() => _selectedDot = 0),
+                ),
+                const SizedBox(width: 8),
+                MoonFilledButton(
+                  label: const Text("2"),
+                  onTap: () => setState(() => _selectedDot = 1),
+                ),
+                const SizedBox(width: 8),
+                MoonFilledButton(
+                  label: const Text("3"),
+                  onTap: () => setState(() => _selectedDot = 2),
+                ),
+                const SizedBox(width: 8),
+                MoonFilledButton(
+                  label: const Text("4"),
+                  onTap: () => setState(() => _selectedDot = 3),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

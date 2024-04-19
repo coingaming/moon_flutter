@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class SearchGenericStory extends StatefulWidget {
+class SearchWithListStory extends StatefulWidget {
   static const subdirectory = '/search';
-  static const path = '/composites/search/generic';
+  static const path = '/composites/search/search_with_list';
 
-  const SearchGenericStory({super.key});
+  const SearchWithListStory({super.key});
 
   @override
-  State<SearchGenericStory> createState() => _SearchGenericStoryState();
+  State<SearchWithListStory> createState() => _SearchWithListStoryState();
 }
 
-class _SearchGenericStoryState extends State<SearchGenericStory> {
+class _SearchWithListStoryState extends State<SearchWithListStory> {
   final TextEditingController _searchController = TextEditingController();
   final List<ComponentOptions> _optionsList = ComponentOptions.values;
 

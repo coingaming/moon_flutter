@@ -107,45 +107,47 @@ class AvatarStory extends StatelessWidget {
       initial: true,
     );
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const TextDivider(
-            text: "MoonAvatar",
-            paddingTop: 0,
-          ),
-          MoonAvatar(
-            avatarSize: avatarSizeKnob,
-            badgeSize: badgeSizeKnob?.toDouble(),
-            borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-            badgeMarginValue: badgeMarginKnob?.toDouble(),
-            backgroundColor: backgroundColor,
-            showBadge: showBadgeKnob,
-            badgeColor: badgeColor,
-            badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
-            content: Padding(
-              padding: const EdgeInsets.only(top: 1.0),
-              child: Text(
-                customLabelTextKnob,
-                style: TextStyle(color: textColor),
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const TextDivider(
+              text: "MoonAvatar",
+              paddingTop: 0,
+            ),
+            MoonAvatar(
+              avatarSize: avatarSizeKnob,
+              badgeSize: badgeSizeKnob?.toDouble(),
+              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+              badgeMarginValue: badgeMarginKnob?.toDouble(),
+              backgroundColor: backgroundColor,
+              showBadge: showBadgeKnob,
+              badgeColor: badgeColor,
+              badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
+              content: Padding(
+                padding: const EdgeInsets.only(top: 1.0),
+                child: Text(
+                  customLabelTextKnob,
+                  style: TextStyle(color: textColor),
+                ),
               ),
             ),
-          ),
-          const TextDivider(text: "Custom MoonAvatar with image background"),
-          MoonAvatar(
-            avatarSize: avatarSizeKnob,
-            badgeSize: badgeSizeKnob?.toDouble(),
-            borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-            badgeMarginValue: badgeMarginKnob?.toDouble(),
-            backgroundColor: backgroundColor,
-            showBadge: showBadgeKnob,
-            badgeColor: badgeColor,
-            badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
-            backgroundImage: const AssetImage("assets/images/placeholder-640x359.png"),
-          ),
-        ],
+            const TextDivider(text: "Custom MoonAvatar with image background"),
+            MoonAvatar(
+              avatarSize: avatarSizeKnob,
+              badgeSize: badgeSizeKnob?.toDouble(),
+              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+              badgeMarginValue: badgeMarginKnob?.toDouble(),
+              backgroundColor: backgroundColor,
+              showBadge: showBadgeKnob,
+              badgeColor: badgeColor,
+              badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
+              backgroundImage: const AssetImage("assets/images/placeholder-640x359.png"),
+            ),
+          ],
+        ),
       ),
     );
   }
