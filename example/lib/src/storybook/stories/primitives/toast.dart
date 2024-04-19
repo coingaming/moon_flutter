@@ -119,7 +119,7 @@ class ToastStory extends StatelessWidget {
     );
 
     return Center(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 64),
         child: Builder(
           builder: (BuildContext context) {

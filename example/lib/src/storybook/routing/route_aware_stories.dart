@@ -1,8 +1,8 @@
 import 'package:example/src/storybook/routing/app_router.dart';
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
 import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
-import 'package:example/src/storybook/stories/composites/search_generic.dart';
 import 'package:example/src/storybook/stories/composites/search_with_dropdown.dart';
+import 'package:example/src/storybook/stories/composites/search_with_list.dart';
 import 'package:example/src/storybook/stories/primitives/accordion.dart';
 import 'package:example/src/storybook/stories/primitives/alert.dart';
 import 'package:example/src/storybook/stories/primitives/auth_code.dart';
@@ -36,7 +36,6 @@ import 'package:example/src/storybook/stories/primitives/text_input_group.dart';
 import 'package:example/src/storybook/stories/primitives/toast.dart';
 import 'package:example/src/storybook/stories/primitives/tooltip.dart';
 import 'package:flutter/services.dart';
-
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 const String directory = 'assets/code_snippets/';
@@ -44,25 +43,25 @@ const String directory = 'assets/code_snippets/';
 final List<Story> routeAwareStories = [
   // Composite stories.
   Story.asRoute(
-    name: 'Composites/Combobox/single select',
+    name: 'Composites/Combobox/single select combobox',
     routePath: ComboboxSingleSelectStory.path,
     router: router,
     codeString: fetchAsset('combobox_single_select.md'),
   ),
   Story.asRoute(
-    name: 'Composites/Combobox/multi select',
+    name: 'Composites/Combobox/multi select combobox',
     routePath: ComboboxMultiSelectStory.path,
     router: router,
     codeString: fetchAsset('combobox_multi_select.md'),
   ),
   Story.asRoute(
-    name: 'Composites/Search/generic',
-    routePath: SearchGenericStory.path,
+    name: 'Composites/Search/search with list',
+    routePath: SearchWithListStory.path,
     router: router,
-    codeString: fetchAsset('search_generic.md'),
+    codeString: fetchAsset('search_with_list.md'),
   ),
   Story.asRoute(
-    name: 'Composites/Search/with dropdown',
+    name: 'Composites/Search/search with dropdown',
     routePath: SearchWithDropdownStory.path,
     router: router,
     codeString: fetchAsset('search_with_dropdown.md'),

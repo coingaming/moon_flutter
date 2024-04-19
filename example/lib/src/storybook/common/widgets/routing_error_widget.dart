@@ -8,10 +8,6 @@ class RoutingErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Page Not Found'),
-          backgroundColor: context.moonColors!.piccolo,
-        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -23,14 +19,15 @@ class RoutingErrorWidget extends StatelessWidget {
               ),
               Text(
                 'Lost in space',
-                style: context.moonTypography!.heading.text24,
+                style: context.moonTypography!.heading.text32,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
               Text(
                 'Houston, we have a problem. Moon not found.',
                 style: context.moonTypography!.body.text16,
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               MoonButton(
                 onTap: () => context.go('/'),
                 borderColor: context.moonColors!.piccolo,

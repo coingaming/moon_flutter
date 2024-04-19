@@ -1,12 +1,17 @@
 import 'package:example/src/storybook/storybook.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:go_router/go_router.dart';
 import 'package:moon_design/moon_design.dart';
 
-void main() {
+void main() async {
   usePathUrlStrategy();
-  GoRouter.optionURLReflectsImperativeAPIs = true;
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
 
   runApp(const MyApp());
 }

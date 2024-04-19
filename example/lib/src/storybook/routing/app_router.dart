@@ -1,8 +1,8 @@
-import 'package:example/src/storybook/routing/routing_error_widget.dart';
+import 'package:example/src/storybook/common/widgets/routing_error_widget.dart';
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
 import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
-import 'package:example/src/storybook/stories/composites/search_generic.dart';
 import 'package:example/src/storybook/stories/composites/search_with_dropdown.dart';
+import 'package:example/src/storybook/stories/composites/search_with_list.dart';
 import 'package:example/src/storybook/stories/primitives/accordion.dart';
 import 'package:example/src/storybook/stories/primitives/alert.dart';
 import 'package:example/src/storybook/stories/primitives/auth_code.dart';
@@ -38,7 +38,6 @@ import 'package:example/src/storybook/stories/primitives/tooltip.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:storybook_flutter/storybook_flutter.dart';
 
 const String primitivesDirectory = '/primitives';
 const String compositesDirectory = '/composites';
@@ -59,10 +58,10 @@ GoRouter router = GoRouter(
       case '$compositesDirectory${ComboboxSingleSelectStory.subdirectory}':
         return ComboboxSingleSelectStory.path;
 
-      case SearchGenericStory.subdirectory:
-        return SearchGenericStory.path;
-      case '$compositesDirectory${SearchGenericStory.subdirectory}':
-        return SearchGenericStory.path;
+      case SearchWithListStory.subdirectory:
+        return SearchWithListStory.path;
+      case '$compositesDirectory${SearchWithListStory.subdirectory}':
+        return SearchWithListStory.path;
 
       case CircularLoaderStory.subdirectory:
         return CircularLoaderStory.path;
@@ -81,7 +80,6 @@ GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       redirect: (BuildContext _, GoRouterState __) {
-        Storybook.storyRouterNotifier.currentStoryRoute = AccordionStory.path;
         return AccordionStory.path;
       },
     ),
@@ -238,9 +236,9 @@ GoRouter router = GoRouter(
       ),
     ),
     GoRoute(
-      path: SearchGenericStory.path,
+      path: SearchWithListStory.path,
       pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
-        child: SearchGenericStory(),
+        child: SearchWithListStory(),
       ),
     ),
     GoRoute(

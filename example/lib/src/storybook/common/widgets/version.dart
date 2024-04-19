@@ -14,8 +14,8 @@ class MoonVersionWidget extends StatefulWidget {
 }
 
 class _MoonVersionWidgetState extends State<MoonVersionWidget> {
-  bool isLargeScreen = MediaQueryData.fromView(PlatformDispatcher.instance.implicitView!).size.width >
-      StorybookPage.autoLayoutThreshold;
+  bool isLargeScreen =
+      MediaQueryData.fromView(PlatformDispatcher.instance.implicitView!).size.width > StorybookPage.autoLayoutThreshold;
 
   String? _version = "";
 
@@ -25,9 +25,7 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
 
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    setState(() {
-      _version = packageInfo.version;
-    });
+    setState(() => _version = packageInfo.version);
   }
 
   @override
@@ -45,11 +43,11 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
                 const SizedBox(width: 8.0),
                 Text(
                   "Moon Design",
-                  style: MoonTypography.typography.heading.text16,
+                  style: MoonTypography.typography.heading.text14,
                 ),
               ],
               const SizedBox(width: 6.0),
-              Text("v$_version", style: MoonTypography.typography.heading.text16),
+              Text("v$_version", style: MoonTypography.typography.heading.text14),
             ],
           ),
         ),

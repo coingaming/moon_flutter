@@ -121,206 +121,208 @@ class _DropdownStoryState extends State<DropdownStory> {
     final BorderRadiusGeometry? borderRadius =
         borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const TextDivider(
-              text: "MoonDropdown with multiple choices",
-              paddingTop: 0,
-            ),
-            MoonDropdown(
-              show: _showChoices,
-              minWidth: 250,
-              borderColor: borderColor ?? Colors.transparent,
-              backgroundColor: backgroundColor,
-              borderRadius: borderRadius,
-              constrainWidthToChild: constrainWidthToChildKnob,
-              distanceToTarget: distanceToTargetKnob,
-              dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
-              dropdownShadows: showShadowKnob == true ? null : [],
-              onTapOutside: () => setState(() => _showChoices = false),
-              content: ClipRRect(
-                borderRadius: borderRadius ?? BorderRadius.zero,
-                child: Column(
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const TextDivider(
+                text: "MoonDropdown with multiple choices",
+                paddingTop: 0,
+              ),
+              MoonDropdown(
+                show: _showChoices,
+                minWidth: 250,
+                borderColor: borderColor ?? Colors.transparent,
+                backgroundColor: backgroundColor,
+                borderRadius: borderRadius,
+                constrainWidthToChild: constrainWidthToChildKnob,
+                distanceToTarget: distanceToTargetKnob,
+                dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
+                dropdownShadows: showShadowKnob == true ? null : [],
+                onTapOutside: () => setState(() => _showChoices = false),
+                content: ClipRRect(
+                  borderRadius: borderRadius ?? BorderRadius.zero,
+                  child: Column(
+                    children: [
+                      MoonMenuItem(
+                        absorbGestures: true,
+                        onTap: () =>
+                            setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
+                        label: Text(Choices.first.name),
+                        trailing: MoonCheckbox(
+                          value: _availableChoices[Choices.first],
+                          tapAreaSizeValue: 0,
+                          onChanged: (_) {},
+                        ),
+                      ),
+                      MoonMenuItem(
+                        absorbGestures: true,
+                        onTap: () =>
+                            setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
+                        label: Text(Choices.second.name),
+                        trailing: MoonCheckbox(
+                          value: _availableChoices[Choices.second],
+                          tapAreaSizeValue: 0,
+                          onChanged: (_) {},
+                        ),
+                      ),
+                      MoonMenuItem(
+                        absorbGestures: true,
+                        onTap: () =>
+                            setState(() => _availableChoices[Choices.third] = !_availableChoices[Choices.third]!),
+                        label: Text(Choices.third.name),
+                        trailing: MoonCheckbox(
+                          value: _availableChoices[Choices.third],
+                          tapAreaSizeValue: 0,
+                          onChanged: (_) {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                child: MoonTextInput(
+                  width: 270,
+                  readOnly: true,
+                  canRequestFocus: false,
+                  mouseCursor: MouseCursor.defer,
+                  hintText: "Choose an option",
+                  onTap: () => setState(() => _showChoices = !_showChoices),
+                  onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
+                  leading: _availableChoices.values.any((element) => element == true)
+                      ? Center(
+                          child: MoonTag(
+                            tagSize: MoonTagSize.xs,
+                            isUpperCase: false,
+                            backgroundColor: context.moonColors!.bulma,
+                            onTap: () => setState(() => _availableChoices.updateAll((key, value) => false)),
+                            label: Text(
+                              "${_availableChoices.values.where((element) => element == true).length}",
+                              style: TextStyle(color: context.moonColors!.gohan),
+                            ),
+                            trailing: Icon(
+                              MoonIcons.controls_close_small_16_light,
+                              color: context.moonColors!.gohan,
+                            ),
+                          ),
+                        )
+                      : null,
+                  trailing: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Center(
+                      child: AnimatedRotation(
+                        duration: const Duration(milliseconds: 200),
+                        turns: _showChoices ? -0.5 : 0,
+                        child: const Icon(
+                          MoonIcons.controls_chevron_down_16_light,
+                          size: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const TextDivider(text: "MoonDropdown as a menu"),
+              MoonDropdown(
+                show: _showMenu,
+                groupId: _groupId,
+                maxWidth: 250,
+                borderColor: borderColor ?? Colors.transparent,
+                backgroundColor: backgroundColor,
+                constrainWidthToChild: constrainWidthToChildKnob,
+                distanceToTarget: distanceToTargetKnob,
+                dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
+                dropdownShadows: showShadowKnob == true ? null : [],
+                onTapOutside: () => setState(() {
+                  _showMenu = false;
+                  _showMenuInner = false;
+                }),
+                content: Column(
                   children: [
                     MoonMenuItem(
-                      absorbGestures: true,
-                      onTap: () =>
-                          setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
-                      label: Text(Choices.first.name),
-                      trailing: MoonCheckbox(
-                        value: _availableChoices[Choices.first],
-                        tapAreaSizeValue: 0,
-                        onChanged: (_) {},
-                      ),
+                      onTap: () => setState(() {
+                        _showMenu = false;
+                        _buttonName = "Piccolo";
+                        _buttonColor = colorPiccolo;
+                      }),
+                      label: const Text("Piccolo"),
                     ),
+                    const SizedBox(height: 4),
                     MoonMenuItem(
-                      absorbGestures: true,
-                      onTap: () =>
-                          setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
-                      label: Text(Choices.second.name),
-                      trailing: MoonCheckbox(
-                        value: _availableChoices[Choices.second],
-                        tapAreaSizeValue: 0,
-                        onChanged: (_) {},
-                      ),
+                      onTap: () => setState(() {
+                        _showMenu = false;
+                        _buttonName = "Krillin";
+                        _buttonColor = colorKrillin;
+                      }),
+                      label: const Text("Krillin"),
                     ),
-                    MoonMenuItem(
-                      absorbGestures: true,
-                      onTap: () =>
-                          setState(() => _availableChoices[Choices.third] = !_availableChoices[Choices.third]!),
-                      label: Text(Choices.third.name),
-                      trailing: MoonCheckbox(
-                        value: _availableChoices[Choices.third],
-                        tapAreaSizeValue: 0,
-                        onChanged: (_) {},
+                    const SizedBox(height: 4),
+                    MoonDropdown(
+                      show: _showMenuInner,
+                      groupId: _groupId,
+                      maxWidth: 100,
+                      constrainWidthToChild: constrainWidthToChildKnob,
+                      distanceToTarget: distanceToTargetKnob,
+                      dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
+                      followerAnchor: dropdownAnchorPositionKnob == null ? Alignment.topLeft : null,
+                      targetAnchor: dropdownAnchorPositionKnob == null ? Alignment.topRight : null,
+                      offset: dropdownAnchorPositionKnob == null ? const Offset(8, 0) : null,
+                      content: Column(
+                        children: [
+                          MoonMenuItem(
+                            onTap: () => setState(() {
+                              _showMenu = false;
+                              _showMenuInner = false;
+                              _buttonName = "Roshi100";
+                              _buttonColor = colorRoshi100;
+                            }),
+                            label: const Text("Roshi100"),
+                          ),
+                          const SizedBox(height: 4),
+                          MoonMenuItem(
+                            onTap: () => setState(() {
+                              _showMenu = false;
+                              _showMenuInner = false;
+                              _buttonName = "Roshi60";
+                              _buttonColor = colorRoshi60;
+                            }),
+                            label: const Text("Roshi60"),
+                          ),
+                          const SizedBox(height: 4),
+                          MoonMenuItem(
+                            onTap: () => setState(() {
+                              _showMenu = false;
+                              _showMenuInner = false;
+                              _buttonName = "Roshi10";
+                              _buttonColor = colorRoshi10;
+                            }),
+                            label: const Text("Roshi10"),
+                          ),
+                        ],
+                      ),
+                      child: MoonMenuItem(
+                        backgroundColor: _showMenuInner ? context.moonColors!.heles : null,
+                        onTap: () => setState(() => _showMenuInner = !_showMenuInner),
+                        label: const Text("Roshi"),
+                        trailing: const Icon(
+                          MoonIcons.controls_chevron_right_16_light,
+                          size: 16,
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              child: MoonTextInput(
-                width: 270,
-                readOnly: true,
-                canRequestFocus: false,
-                mouseCursor: MouseCursor.defer,
-                hintText: "Choose an option",
-                onTap: () => setState(() => _showChoices = !_showChoices),
-                onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
-                leading: _availableChoices.values.any((element) => element == true)
-                    ? Center(
-                        child: MoonTag(
-                          tagSize: MoonTagSize.xs,
-                          isUpperCase: false,
-                          backgroundColor: context.moonColors!.bulma,
-                          onTap: () => setState(() => _availableChoices.updateAll((key, value) => false)),
-                          label: Text(
-                            "${_availableChoices.values.where((element) => element == true).length}",
-                            style: TextStyle(color: context.moonColors!.gohan),
-                          ),
-                          trailing: Icon(
-                            MoonIcons.controls_close_small_16_light,
-                            color: context.moonColors!.gohan,
-                          ),
-                        ),
-                      )
-                    : null,
-                trailing: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Center(
-                    child: AnimatedRotation(
-                      duration: const Duration(milliseconds: 200),
-                      turns: _showChoices ? -0.5 : 0,
-                      child: const Icon(
-                        MoonIcons.controls_chevron_down_16_light,
-                        size: 16,
-                      ),
-                    ),
-                  ),
+                child: MoonFilledButton(
+                  width: 128,
+                  label: Text(_buttonName),
+                  backgroundColor: _buttonColor,
+                  onTap: () => setState(() => _showMenu = !_showMenu),
                 ),
               ),
-            ),
-            const TextDivider(text: "MoonDropdown as a menu"),
-            MoonDropdown(
-              show: _showMenu,
-              groupId: _groupId,
-              maxWidth: 250,
-              borderColor: borderColor ?? Colors.transparent,
-              backgroundColor: backgroundColor,
-              constrainWidthToChild: constrainWidthToChildKnob,
-              distanceToTarget: distanceToTargetKnob,
-              dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
-              dropdownShadows: showShadowKnob == true ? null : [],
-              onTapOutside: () => setState(() {
-                _showMenu = false;
-                _showMenuInner = false;
-              }),
-              content: Column(
-                children: [
-                  MoonMenuItem(
-                    onTap: () => setState(() {
-                      _showMenu = false;
-                      _buttonName = "Piccolo";
-                      _buttonColor = colorPiccolo;
-                    }),
-                    label: const Text("Piccolo"),
-                  ),
-                  const SizedBox(height: 4),
-                  MoonMenuItem(
-                    onTap: () => setState(() {
-                      _showMenu = false;
-                      _buttonName = "Krillin";
-                      _buttonColor = colorKrillin;
-                    }),
-                    label: const Text("Krillin"),
-                  ),
-                  const SizedBox(height: 4),
-                  MoonDropdown(
-                    show: _showMenuInner,
-                    groupId: _groupId,
-                    maxWidth: 100,
-                    constrainWidthToChild: constrainWidthToChildKnob,
-                    distanceToTarget: distanceToTargetKnob,
-                    dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
-                    followerAnchor: dropdownAnchorPositionKnob == null ? Alignment.topLeft : null,
-                    targetAnchor: dropdownAnchorPositionKnob == null ? Alignment.topRight : null,
-                    offset: dropdownAnchorPositionKnob == null ? const Offset(8, 0) : null,
-                    content: Column(
-                      children: [
-                        MoonMenuItem(
-                          onTap: () => setState(() {
-                            _showMenu = false;
-                            _showMenuInner = false;
-                            _buttonName = "Roshi100";
-                            _buttonColor = colorRoshi100;
-                          }),
-                          label: const Text("Roshi100"),
-                        ),
-                        const SizedBox(height: 4),
-                        MoonMenuItem(
-                          onTap: () => setState(() {
-                            _showMenu = false;
-                            _showMenuInner = false;
-                            _buttonName = "Roshi60";
-                            _buttonColor = colorRoshi60;
-                          }),
-                          label: const Text("Roshi60"),
-                        ),
-                        const SizedBox(height: 4),
-                        MoonMenuItem(
-                          onTap: () => setState(() {
-                            _showMenu = false;
-                            _showMenuInner = false;
-                            _buttonName = "Roshi10";
-                            _buttonColor = colorRoshi10;
-                          }),
-                          label: const Text("Roshi10"),
-                        ),
-                      ],
-                    ),
-                    child: MoonMenuItem(
-                      backgroundColor: _showMenuInner ? context.moonColors!.heles : null,
-                      onTap: () => setState(() => _showMenuInner = !_showMenuInner),
-                      label: const Text("Roshi"),
-                      trailing: const Icon(
-                        MoonIcons.controls_chevron_right_16_light,
-                        size: 16,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              child: MoonFilledButton(
-                width: 128,
-                label: Text(_buttonName),
-                backgroundColor: _buttonColor,
-                onTap: () => setState(() => _showMenu = !_showMenu),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

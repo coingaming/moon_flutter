@@ -4,6 +4,7 @@ publish_to: none
 version: 0.52.3
 environment:
   sdk: '>=3.3.1 <4.0.0'
+
 dependencies:
   cupertino_icons: ^1.0.2
   flutter:
@@ -11,21 +12,33 @@ dependencies:
   flutter_svg: ^2.0.1
   flutter_web_plugins:
     sdk: flutter
-  go_router: ^12.0.1
+  go_router: ^12.1.1
   moon_design:
     path: ../
   package_info_plus: ^3.0.2
   storybook_flutter:
     git:
       url: https://github.com/coingaming/storybook_flutter.git
-      ref: 6976f340a4d53c7441dc780fcabdee4d5e776b9a
+      ref: 6f2e9e7ebfcabc043ee43ae33129258790f8d87f
       path: packages/storybook_flutter
   transparent_image: ^2.0.1
+
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
   lint: ^2.1.2
+
+dependency_overrides:
+  device_frame:
+    git:
+      url: https://github.com/bradrushworth/flutter_device_preview.git
+      path: device_frame
+  device_preview:
+    git:
+      url: https://github.com/bradrushworth/flutter_device_preview.git
+      path: device_preview
+
 flutter:
   uses-material-design: true
   fonts:
