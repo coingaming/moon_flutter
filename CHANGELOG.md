@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.0](https://github.com/coingaming/moon_flutter/compare/v0.52.3...v0.53.0) (2024-04-19)
+
+
+### Features
+
+* [MDS-1091] Storybook UI update ([#395](https://github.com/coingaming/moon_flutter/issues/395)) ([12887d3](https://github.com/coingaming/moon_flutter/commit/12887d3c6f93ba2747f5d6ae8ef5b30c57cc0e46))
+
 ## [0.52.3](https://github.com/coingaming/moon_flutter/compare/v0.52.2...v0.52.3) (2024-04-05)
 
 
