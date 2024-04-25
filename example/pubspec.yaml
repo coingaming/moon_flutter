@@ -1,10 +1,9 @@
 name: example
 description: Showcase Moon Design.
 publish_to: none
-version: 0.53.0
+version: 0.54.0
 environment:
   sdk: '>=3.3.1 <4.0.0'
-
 dependencies:
   cupertino_icons: ^1.0.2
   flutter:
@@ -22,13 +21,11 @@ dependencies:
       ref: 89079005d75fbcdfab9931b1cb26dfce155d98d1
       path: packages/storybook_flutter
   transparent_image: ^2.0.1
-
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
   lint: ^2.1.2
-
 dependency_overrides:
   device_frame:
     git:
@@ -38,7 +35,6 @@ dependency_overrides:
     git:
       url: https://github.com/bradrushworth/flutter_device_preview.git
       path: device_preview
-
 flutter:
   uses-material-design: true
   fonts:

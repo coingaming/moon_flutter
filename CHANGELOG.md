@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.54.0](https://github.com/coingaming/moon_flutter/compare/v0.53.0...v0.54.0) (2024-04-25)
+
+
+### Features
+
+* [MDS-1093] Add pages functionality ([#397](https://github.com/coingaming/moon_flutter/issues/397)) ([78eccf9](https://github.com/coingaming/moon_flutter/commit/78eccf972d0d73689a7933ec1d29855be66f8427))
+
 ## [0.53.0](https://github.com/coingaming/moon_flutter/compare/v0.52.3...v0.53.0) (2024-04-19)
 
 
