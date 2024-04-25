@@ -25,7 +25,7 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
 
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    setState(() => _version = packageInfo.version);
+    if (mounted) setState(() => _version = packageInfo.version);
   }
 
   @override

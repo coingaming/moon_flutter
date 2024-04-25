@@ -15,7 +15,7 @@ class StorybookPage extends StatelessWidget {
     enableCompactLayoutDeviceFrame: false,
     initialDeviceFrameData: (
       isFrameVisible: true,
-      device: Devices.ios.iPhone13,
+      device: Devices.ios.iPhone12ProMax,
       orientation: Orientation.portrait,
     ),
   );
