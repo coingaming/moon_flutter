@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.55.0](https://github.com/coingaming/moon_flutter/compare/v0.54.0...v0.55.0) (2024-05-14)
+
+
+### Features
+
+* [MDS-1129] Deprecate Tag uppercase property ([#400](https://github.com/coingaming/moon_flutter/issues/400)) ([cbd666b](https://github.com/coingaming/moon_flutter/commit/cbd666bed42edb2b7172f166626e740860cb88e7))
+
 ## [0.54.0](https://github.com/coingaming/moon_flutter/compare/v0.53.0...v0.54.0) (2024-04-25)
 
 
