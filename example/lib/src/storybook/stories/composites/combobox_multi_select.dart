@@ -226,7 +226,6 @@ class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
                 ? Center(
                     child: MoonTag(
                       tagSize: MoonTagSize.xs,
-                      isUpperCase: false,
                       backgroundColor: context.moonColors!.bulma,
                       onTap: () => setState(() => _selectedOptions.clear()),
                       label: Text(

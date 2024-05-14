@@ -85,11 +85,6 @@ class TagStory extends StatelessWidget {
       initial: true,
     );
 
-    final setUpperCaseKnob = context.knobs.boolean(
-      label: "isUpperCase",
-      description: "Use upper case text for MoonTag.",
-    );
-
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
@@ -97,7 +92,6 @@ class TagStory extends StatelessWidget {
           borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
           onTap: () {},
           tagSize: tagSizeKnob,
-          isUpperCase: setUpperCaseKnob,
           backgroundColor: backgroundColor,
           leading: showLeadingKnob
               ? Icon(
@@ -107,7 +101,7 @@ class TagStory extends StatelessWidget {
               : null,
           label: showLabelKnob
               ? Text(
-                  setUpperCaseKnob ? customLabelTextKnob.toUpperCase() : customLabelTextKnob,
+                  customLabelTextKnob,
                   style: TextStyle(color: textColor),
                 )
               : null,

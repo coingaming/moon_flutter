@@ -70,7 +70,7 @@ class MoonTag extends StatelessWidget {
     @Deprecated(
       "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
     )
-    this.isUpperCase = true,
+    this.isUpperCase = false,
     this.borderRadius,
     this.backgroundColor,
     this.height,
@@ -153,7 +153,9 @@ class MoonTag extends StatelessWidget {
                 size: effectiveMoonTagSize.iconSizeValue,
               ),
               child: DefaultTextStyle(
+                // ignore: deprecated_member_use_from_same_package
                 style: isUpperCase
+                    // ignore: deprecated_member_use_from_same_package
                     ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor)
                     : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),
                 child: Row(
