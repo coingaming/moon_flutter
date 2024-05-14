@@ -17,6 +17,9 @@ enum MoonTagSize {
 
 class MoonTag extends StatelessWidget {
   /// Whether to use the upper case text style for the tag.
+  @Deprecated(
+    "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
+  )
   final bool isUpperCase;
 
   /// The border radius of the tag.
@@ -64,7 +67,10 @@ class MoonTag extends StatelessWidget {
   /// Creates a Moon Design tag.
   const MoonTag({
     super.key,
-    this.isUpperCase = true,
+    @Deprecated(
+      "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
+    )
+    this.isUpperCase = false,
     this.borderRadius,
     this.backgroundColor,
     this.height,
@@ -147,7 +153,9 @@ class MoonTag extends StatelessWidget {
                 size: effectiveMoonTagSize.iconSizeValue,
               ),
               child: DefaultTextStyle(
+                // ignore: deprecated_member_use_from_same_package
                 style: isUpperCase
+                    // ignore: deprecated_member_use_from_same_package
                     ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor)
                     : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),
                 child: Row(

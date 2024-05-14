@@ -128,7 +128,6 @@ class _ComboboxMultiSelectState extends State<ComboboxMultiSelect> {
                     onTap: () => setState(() => _selectedOptions.clear()),
                     child: MoonTag(
                       tagSize: MoonTagSize.xs,
-                      isUpperCase: false,
                       backgroundColor: context.moonColors!.bulma,
                       label: Text(
                         "${_selectedOptions.keys.length}",
