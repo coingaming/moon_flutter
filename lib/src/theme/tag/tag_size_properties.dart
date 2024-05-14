@@ -24,6 +24,9 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
   final TextStyle textStyle;
 
   /// The upper case text style of the MoonTag.
+  @Deprecated(
+    "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
+  )
   final TextStyle upperCaseTextStyle;
 
   const MoonTagSizeProperties({
@@ -33,6 +36,9 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     required this.iconSizeValue,
     required this.padding,
     required this.textStyle,
+    @Deprecated(
+      "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
+    )
     required this.upperCaseTextStyle,
   });
 
