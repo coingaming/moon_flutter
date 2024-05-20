@@ -17,10 +17,10 @@ class ComboboxSingleSelectStory extends StatefulWidget {
 class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _searchController = TextEditingController();
-  final List<ComponentOptions> _optionsList = ComponentOptions.values;
+  final List<Component> _optionsList = Component.values;
 
-  List<ComponentOptions> _filteredOptionsList = [];
-  ComponentOptions? _selectedOption;
+  List<Component> _filteredOptionsList = [];
+  Component? _selectedOption;
   bool _showDropdown = false;
 
   bool get _optionIsSelected => _selectedOption?.name == _searchController.text;
@@ -32,12 +32,12 @@ class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
       if (!_optionIsSelected && _selectedOption != null) _selectedOption = null;
 
       _filteredOptionsList =
-          _optionsList.where((ComponentOptions option) => option.name.toLowerCase().contains(_inputValue)).toList();
+          _optionsList.where((Component option) => option.name.toLowerCase().contains(_inputValue)).toList();
       _showDropdown = true;
     });
   }
 
-  void _handleSelect(ComponentOptions option) {
+  void _handleSelect(Component option) {
     setState(() {
       _showDropdown = false;
       _searchController.text = option.name;
@@ -198,7 +198,7 @@ class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
                         itemCount: _filteredOptionsList.length,
                         itemBuilder: (BuildContext _, int index) {
                           if (index >= _filteredOptionsList.length) return const SizedBox.shrink();
-                          final ComponentOptions option = _filteredOptionsList[index];
+                          final Component option = _filteredOptionsList[index];
 
                           return MoonMenuItem(
                             onTap: () => _handleSelect(option),

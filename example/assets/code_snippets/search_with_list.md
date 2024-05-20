@@ -22,7 +22,7 @@ enum Options {
 class SearchWithList extends StatefulWidget {
   const SearchWithList({super.key});
 
-@override
+  @override
   State<SearchWithList> createState() => _SearchWithListState();
 }
 

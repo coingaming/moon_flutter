@@ -16,9 +16,9 @@ class SearchWithListStory extends StatefulWidget {
 
 class _SearchWithListStoryState extends State<SearchWithListStory> {
   final TextEditingController _searchController = TextEditingController();
-  final List<ComponentOptions> _optionsList = ComponentOptions.values;
+  final List<Component> _optionsList = Component.values;
 
-  List<ComponentOptions> _filteredOptionsList = [];
+  List<Component> _filteredOptionsList = [];
   bool _showSearchResults = false;
 
   String get _inputValue => _searchController.text.trim().toLowerCase();
@@ -26,7 +26,7 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
   void _performSearch() {
     setState(() {
       _filteredOptionsList =
-          _optionsList.where((ComponentOptions option) => option.name.toLowerCase().contains(_inputValue)).toList();
+          _optionsList.where((Component option) => option.name.toLowerCase().contains(_inputValue)).toList();
 
       _showSearchResults = true;
     });
@@ -189,7 +189,7 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
                       itemCount: _filteredOptionsList.length,
                       itemBuilder: (BuildContext _, int index) {
                         if (index >= _filteredOptionsList.length) return const SizedBox.shrink();
-                        final ComponentOptions option = _filteredOptionsList[index];
+                        final Component option = _filteredOptionsList[index];
 
                         return MoonMenuItem(
                           hoverEffectColor: Colors.transparent,

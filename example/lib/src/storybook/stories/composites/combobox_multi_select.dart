@@ -16,10 +16,10 @@ class ComboboxMultiSelectStory extends StatefulWidget {
 class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _searchController = TextEditingController();
-  final Map<ComponentOptions, bool> _selectedOptions = {};
-  final List<ComponentOptions> _optionsList = ComponentOptions.values;
+  final Map<Component, bool> _selectedOptions = {};
+  final List<Component> _optionsList = Component.values;
 
-  List<ComponentOptions> _filteredOptionsList = [];
+  List<Component> _filteredOptionsList = [];
   bool _showDropdown = false;
 
   String get _inputValue => _searchController.text.trim().toLowerCase();
@@ -27,12 +27,12 @@ class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
   void _performSearch() {
     setState(() {
       _filteredOptionsList =
-          _optionsList.where((ComponentOptions option) => option.name.toLowerCase().contains(_inputValue)).toList();
+          _optionsList.where((Component option) => option.name.toLowerCase().contains(_inputValue)).toList();
       _showDropdown = true;
     });
   }
 
-  void _handleSelect(ComponentOptions option, bool isSelected) {
+  void _handleSelect(Component option, bool isSelected) {
     setState(() => isSelected ? _selectedOptions[option] = true : _selectedOptions.remove(option));
   }
 
@@ -188,7 +188,7 @@ class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
                         itemCount: _filteredOptionsList.length,
                         itemBuilder: (BuildContext _, int index) {
                           if (index >= _filteredOptionsList.length) return const SizedBox.shrink();
-                          final ComponentOptions currentOption = _filteredOptionsList[index];
+                          final Component currentOption = _filteredOptionsList[index];
                           final bool isSelected = _selectedOptions.containsKey(currentOption);
 
                           return MoonMenuItem(
