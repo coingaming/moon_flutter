@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.56.0](https://github.com/coingaming/moon_flutter/compare/v0.55.0...v0.56.0) (2024-05-20)
+
+
+### Features
+
+* [MDS-1096] Create home page ([#402](https://github.com/coingaming/moon_flutter/issues/402)) ([8fce52c](https://github.com/coingaming/moon_flutter/commit/8fce52c35ca898cf48ca8a266583377284c571f2))
+
 ## [0.55.0](https://github.com/coingaming/moon_flutter/compare/v0.54.0...v0.55.0) (2024-05-14)
 
 
