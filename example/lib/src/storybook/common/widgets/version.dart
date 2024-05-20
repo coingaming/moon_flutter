@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:example/src/storybook/storybook.dart';
+import 'package:example/src/storybook/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:moon_design/moon_design.dart';
@@ -15,7 +15,10 @@ class MoonVersionWidget extends StatefulWidget {
 
 class _MoonVersionWidgetState extends State<MoonVersionWidget> {
   bool isLargeScreen =
-      MediaQueryData.fromView(PlatformDispatcher.instance.implicitView!).size.width > StorybookPage.autoLayoutThreshold;
+      MediaQueryData.fromView(PlatformDispatcher.instance.implicitView!)
+              .size
+              .width >
+          storybookAutoLayoutThreshold;
 
   String? _version = "";
 
@@ -36,9 +39,15 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: isLargeScreen ? MainAxisAlignment.center : MainAxisAlignment.end,
+            mainAxisAlignment: isLargeScreen
+                ? MainAxisAlignment.center
+                : MainAxisAlignment.end,
             children: [
-              SvgPicture.asset("assets/svg/moon-logo-short.svg", width: 24.0, height: 24.0),
+              SvgPicture.asset(
+                "assets/svg/moon-logo-short.svg",
+                width: 24.0,
+                height: 24.0,
+              ),
               if (isLargeScreen) ...[
                 const SizedBox(width: 8.0),
                 Text(
@@ -47,7 +56,10 @@ class _MoonVersionWidgetState extends State<MoonVersionWidget> {
                 ),
               ],
               const SizedBox(width: 6.0),
-              Text("v$_version", style: MoonTypography.typography.heading.text14),
+              Text(
+                "v$_version",
+                style: MoonTypography.typography.heading.text14,
+              ),
             ],
           ),
         ),

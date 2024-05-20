@@ -1,5 +1,4 @@
 import 'package:example/src/storybook/common/color_options.dart';
-import 'package:example/src/storybook/common/component_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -17,10 +16,10 @@ class SearchWithDropdownStory extends StatefulWidget {
 
 class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
   final TextEditingController _searchController = TextEditingController();
-  final List<ComponentOptions> _optionsList = ComponentOptions.values;
+  final List<Component> _optionsList = Component.values;
 
-  List<ComponentOptions> _filteredOptionsList = [];
-  ComponentOptions? _selectedOption;
+  List<Component> _filteredOptionsList = [];
+  Component? _selectedOption;
   bool _showDropdown = false;
 
   bool get _optionIsSelected => _selectedOption?.name == _searchController.text;
@@ -32,12 +31,12 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
       if (!_optionIsSelected && _selectedOption != null) _selectedOption = null;
 
       _filteredOptionsList =
-          _optionsList.where((ComponentOptions option) => option.name.toLowerCase().contains(_inputValue)).toList();
+          _optionsList.where((Component option) => option.name.toLowerCase().contains(_inputValue)).toList();
       _showDropdown = true;
     });
   }
 
-  void _handleSelect(ComponentOptions option) {
+  void _handleSelect(Component option) {
     setState(() {
       _showDropdown = false;
       _searchController.text = option.name;
@@ -212,7 +211,7 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
                                   itemCount: _filteredOptionsList.length,
                                   itemBuilder: (BuildContext _, int index) {
                                     if (index >= _filteredOptionsList.length) return const SizedBox.shrink();
-                                    final ComponentOptions option = _filteredOptionsList[index];
+                                    final Component option = _filteredOptionsList[index];
 
                                     return MoonMenuItem(
                                       onTap: () => _handleSelect(option),

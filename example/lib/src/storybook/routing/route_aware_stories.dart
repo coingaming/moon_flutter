@@ -1,3 +1,4 @@
+import 'package:example/src/storybook/common/pages/home_page.dart';
 import 'package:example/src/storybook/routing/app_router.dart';
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
 import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
@@ -41,6 +42,14 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 const String directory = 'assets/code_snippets/';
 
 final List<Story> routeAwareStories = [
+  // Pages.
+  Story.asRoute(
+    name: 'Home',
+    routePath: HomePage.path,
+    router: router,
+    isPage: true,
+  ),
+
   // Composite stories.
   Story.asRoute(
     name: 'Composites/Combobox/single select combobox',
@@ -262,4 +271,5 @@ final List<Story> routeAwareStories = [
   ),
 ];
 
-Future<String> fetchAsset(String assetName) async => rootBundle.loadString('$directory$assetName');
+Future<String> fetchAsset(String assetName) async =>
+    rootBundle.loadString('$directory$assetName');

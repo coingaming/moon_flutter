@@ -35,10 +35,16 @@ class _MyAppState extends State<MyApp> {
     return _isInStorybookMode
         ? const StorybookPage()
         : MaterialApp(
-            theme:
-                ThemeData.light().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.light)]),
-            darkTheme:
-                ThemeData.dark().copyWith(extensions: <ThemeExtension<dynamic>>[MoonTheme(tokens: MoonTokens.dark)]),
+            theme: ThemeData.light().copyWith(
+              extensions: <ThemeExtension<dynamic>>[
+                MoonTheme(tokens: MoonTokens.light),
+              ],
+            ),
+            darkTheme: ThemeData.dark().copyWith(
+              extensions: <ThemeExtension<dynamic>>[
+                MoonTheme(tokens: MoonTokens.dark),
+              ],
+            ),
             home: Scaffold(
               body: Center(
                 child: Column(
@@ -47,16 +53,20 @@ class _MyAppState extends State<MyApp> {
                     Text(
                       "Moon Design for Flutter",
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width > 800 ? 72 : 32,
+                        fontSize:
+                            MediaQuery.of(context).size.width > 800 ? 72 : 32,
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.width > 800 ? 36 : 16),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width > 800 ? 36 : 16,
+                    ),
                     GestureDetector(
                       onLongPress: toggleStorybookMode,
                       child: Text(
                         "Coming soon...",
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width > 800 ? 24 : 20,
+                          fontSize:
+                              MediaQuery.of(context).size.width > 800 ? 24 : 20,
                           color: const Color(0xFF999CA0),
                         ),
                       ),

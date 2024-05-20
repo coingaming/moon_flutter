@@ -1,3 +1,4 @@
+import 'package:example/src/storybook/common/constants.dart';
 import 'package:example/src/storybook/common/widgets/logo.dart';
 import 'package:example/src/storybook/common/widgets/version.dart';
 import 'package:example/src/storybook/routing/route_aware_stories.dart';
@@ -7,8 +8,6 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 
 class StorybookPage extends StatelessWidget {
   const StorybookPage({super.key});
-
-  static const double autoLayoutThreshold = 1000;
 
   static final _plugins = initializePlugins(
     enableCodeView: true,
@@ -23,37 +22,45 @@ class StorybookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: "Primitives/Accordion",
+      initialStory: "Home",
       plugins: _plugins,
       enableLayout: false,
-      autoLayoutThreshold: autoLayoutThreshold,
+      autoLayoutThreshold: storybookAutoLayoutThreshold,
+      canvasColor: Colors.white,
       logoWidget: const MoonLogoWidget(),
       routeWrapperBuilder: RouteWrapperBuilder(
         title: "Moon Design for Flutter",
         theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: const Color(0xfffafafa), // Use old Material2 scaffold background color.
+          scaffoldBackgroundColor: const Color(0xFFF6F7F9), // Gohan light.
           extensions: <ThemeExtension<dynamic>>[
             MoonTheme(
               tokens: MoonTokens.light.copyWith(
                 colors: mdsLightColors,
                 typography: MoonTypography.typography.copyWith(
-                  heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
-                  body: MoonTypography.typography.body.apply(fontFamily: "DMSans"),
-                  caption: MoonTypography.typography.caption.apply(fontFamily: "DMSans"),
+                  heading: MoonTypography.typography.heading
+                      .apply(fontFamily: "DMSans"),
+                  body: MoonTypography.typography.body
+                      .apply(fontFamily: "DMSans"),
+                  caption: MoonTypography.typography.caption
+                      .apply(fontFamily: "DMSans"),
                 ),
               ),
             ),
           ],
         ),
         darkTheme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: const Color(0xFF1F1F1F), // Gohan dark.
           extensions: <ThemeExtension<dynamic>>[
             MoonTheme(
               tokens: MoonTokens.dark.copyWith(
                 colors: mdsDarkColors,
                 typography: MoonTypography.typography.copyWith(
-                  heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
-                  body: MoonTypography.typography.body.apply(fontFamily: "DMSans"),
-                  caption: MoonTypography.typography.caption.apply(fontFamily: "DMSans"),
+                  heading: MoonTypography.typography.heading
+                      .apply(fontFamily: "DMSans"),
+                  body: MoonTypography.typography.body
+                      .apply(fontFamily: "DMSans"),
+                  caption: MoonTypography.typography.caption
+                      .apply(fontFamily: "DMSans"),
                 ),
               ),
             ),

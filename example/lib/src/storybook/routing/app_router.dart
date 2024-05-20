@@ -1,3 +1,4 @@
+import 'package:example/src/storybook/common/pages/home_page.dart';
 import 'package:example/src/storybook/common/widgets/routing_error_widget.dart';
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
 import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
@@ -44,8 +45,9 @@ const String compositesDirectory = '/composites';
 
 GoRouter router = GoRouter(
   debugLogDiagnostics: true,
-  initialLocation: AccordionStory.path,
-  errorBuilder: (BuildContext _, GoRouterState __) => const RoutingErrorWidget(),
+  initialLocation: HomePage.path,
+  errorBuilder: (BuildContext _, GoRouterState __) =>
+      const RoutingErrorWidget(),
   redirect: (BuildContext _, GoRouterState state) {
     switch (state.uri.path) {
       case primitivesDirectory:
@@ -78,10 +80,10 @@ GoRouter router = GoRouter(
   },
   routes: <RouteBase>[
     GoRoute(
-      path: '/',
-      redirect: (BuildContext _, GoRouterState __) {
-        return AccordionStory.path;
-      },
+      path: HomePage.path,
+      pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
+        child: HomePage(),
+      ),
     ),
     GoRoute(
       path: AccordionStory.path,

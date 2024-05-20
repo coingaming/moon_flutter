@@ -14,8 +14,8 @@ enum Options {
   tooltip;
 
   String get name {
-   final String rawName = toString().split('.').last;
-   return rawName[0].toUpperCase() + rawName.substring(1);
+    final String rawName = toString().split('.').last;
+    return rawName[0].toUpperCase() + rawName.substring(1);
   }
 }
 
