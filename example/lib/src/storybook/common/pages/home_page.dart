@@ -242,7 +242,6 @@ class HomePage extends StatelessWidget {
                     return Column(
                       children: [
                         _buildCards(context, constraints.maxWidth),
-                        const SizedBox(height: 128.0),
                         const PageFooter(),
                       ],
                     );

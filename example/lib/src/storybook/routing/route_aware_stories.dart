@@ -1,3 +1,4 @@
+import 'package:example/src/storybook/common/pages/colors_page.dart';
 import 'package:example/src/storybook/common/pages/home_page.dart';
 import 'package:example/src/storybook/routing/app_router.dart';
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
@@ -36,6 +37,7 @@ import 'package:example/src/storybook/stories/primitives/text_input.dart';
 import 'package:example/src/storybook/stories/primitives/text_input_group.dart';
 import 'package:example/src/storybook/stories/primitives/toast.dart';
 import 'package:example/src/storybook/stories/primitives/tooltip.dart';
+
 import 'package:flutter/services.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
@@ -46,6 +48,13 @@ final List<Story> routeAwareStories = [
   Story.asRoute(
     name: 'Home',
     routePath: HomePage.path,
+    router: router,
+    isPage: true,
+  ),
+
+  Story.asRoute(
+    name: 'Colors',
+    routePath: ColorsPage.path,
     router: router,
     isPage: true,
   ),
