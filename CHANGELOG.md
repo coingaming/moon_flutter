@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.57.0](https://github.com/coingaming/moon_flutter/compare/v0.56.0...v0.57.0) (2024-05-24)
+
+
+### Features
+
+* [MDS-1140] Create Colors page ([#404](https://github.com/coingaming/moon_flutter/issues/404)) ([95e1c47](https://github.com/coingaming/moon_flutter/commit/95e1c47885819bb27fe9efd96ad1f98f47b768cb))
+
 ## [0.56.0](https://github.com/coingaming/moon_flutter/compare/v0.55.0...v0.56.0) (2024-05-20)
 
 

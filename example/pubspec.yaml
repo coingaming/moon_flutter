@@ -1,7 +1,7 @@
 name: example
 description: Showcase Moon Design.
 publish_to: none
-version: 0.56.0
+version: 0.57.0
 environment:
   sdk: '>=3.3.1 <4.0.0'
 dependencies:
