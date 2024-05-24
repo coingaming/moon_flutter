@@ -1,3 +1,4 @@
+import 'package:example/src/storybook/common/pages/colors_page.dart';
 import 'package:example/src/storybook/common/pages/home_page.dart';
 import 'package:example/src/storybook/common/widgets/routing_error_widget.dart';
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
@@ -79,12 +80,21 @@ GoRouter router = GoRouter(
     }
   },
   routes: <RouteBase>[
+    // Pages.
     GoRoute(
       path: HomePage.path,
       pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
         child: HomePage(),
       ),
     ),
+    GoRoute(
+      path: ColorsPage.path,
+      pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
+        child: ColorsPage(),
+      ),
+    ),
+
+    // Stories.
     GoRoute(
       path: AccordionStory.path,
       pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(

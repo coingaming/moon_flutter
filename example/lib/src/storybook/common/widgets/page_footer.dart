@@ -11,6 +11,7 @@ class PageFooter extends StatelessWidget {
   Widget _buildFooterSocialMediaButtons(BuildContext context) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
+      alignment: WrapAlignment.center,
       children: List.generate(
         SocialMedia.values.length * 2 - 1,
         (int index) {
@@ -41,6 +42,7 @@ class PageFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 112.0),
         Text.rich(
           textAlign: TextAlign.center,
           TextSpan(
