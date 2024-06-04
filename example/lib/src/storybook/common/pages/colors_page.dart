@@ -242,48 +242,46 @@ class ColorsPage extends StatelessWidget {
           right: 24,
           bottom: 16.0,
         ),
-        child: SelectionArea(
-          child: Center(
-            child: SizedBox(
-              width: largeScreenWidth,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxWidth: mediumScreenWidth,
-                    ),
-                    child: Column(
-                      children: [
-                        _buildSectionHeader(
-                          context,
-                          ColorsPageSection.header,
-                        ),
-                        const SizedBox(height: 24.0),
-                        _buildSectionHeader(
-                          context,
-                          ColorsPageSection.mainColors,
-                        ),
-                        _buildMainColorsSection(context),
-                        const SizedBox(height: 48.0),
-                        _buildSectionHeader(
-                          context,
-                          ColorsPageSection.supportiveColors,
-                        ),
-                        _buildSupportiveColorsSection(context),
-                      ],
-                    ),
+        child: Center(
+          child: SizedBox(
+            width: largeScreenWidth,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: mediumScreenWidth,
                   ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: _getFooterWidth(context),
-                    ),
-                    child: const Center(
-                      child: PageFooter(),
-                    ),
+                  child: Column(
+                    children: [
+                      _buildSectionHeader(
+                        context,
+                        ColorsPageSection.header,
+                      ),
+                      const SizedBox(height: 24.0),
+                      _buildSectionHeader(
+                        context,
+                        ColorsPageSection.mainColors,
+                      ),
+                      _buildMainColorsSection(context),
+                      const SizedBox(height: 48.0),
+                      _buildSectionHeader(
+                        context,
+                        ColorsPageSection.supportiveColors,
+                      ),
+                      _buildSupportiveColorsSection(context),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: _getFooterWidth(context),
+                  ),
+                  child: const Center(
+                    child: PageFooter(),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

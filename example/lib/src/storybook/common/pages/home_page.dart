@@ -227,30 +227,27 @@ class HomePage extends StatelessWidget {
           right: 24,
           bottom: 16.0,
         ),
-        child: SelectionArea(
-          child: Center(
-            child: SizedBox(
-              width: largeScreenWidth,
-              child: Column(
-                crossAxisAlignment: layoutWidth > mediumScreenWidth
-                    ? CrossAxisAlignment.start
-                    : CrossAxisAlignment.center,
-                children: [
-                  _buildHeaderSection(context, showLogo),
-                  const SizedBox(height: 48.0),
-                  LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                      return Column(
-                        children: [
-                          _buildCards(context, constraints.maxWidth),
-                          const PageFooter(),
-                        ],
-                      );
-                    },
-                  ),
-                ],
-              ),
+        child: Center(
+          child: SizedBox(
+            width: largeScreenWidth,
+            child: Column(
+              crossAxisAlignment: layoutWidth > mediumScreenWidth
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.center,
+              children: [
+                _buildHeaderSection(context, showLogo),
+                const SizedBox(height: 48.0),
+                LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return Column(
+                      children: [
+                        _buildCards(context, constraints.maxWidth),
+                        const PageFooter(),
+                      ],
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ),

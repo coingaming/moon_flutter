@@ -10,12 +10,11 @@ class AuthCode extends StatelessWidget {
       height: 95, // To avoid widget jumping with error text, use a fixed-height wrapper.
       child: MoonAuthCode(
         validator: (String? pin) {
-          // Matches all numbers.
-          final RegExp regex = RegExp(r'^\d+$');
-
-          return pin != null && pin.length == 4 && !regex.hasMatch(pin)
-            ? 'The input must only contain numbers'
-            : null;
+          if (pin != null && pin != '000000' && pin.length == 6) {
+            return 'The input must be exactly "000000".';
+          } else {
+            return null;
+          }
         },
         errorBuilder: (BuildContext context, String? errorText) {
           return Align(
