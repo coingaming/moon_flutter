@@ -1,5 +1,6 @@
 import 'package:example/src/storybook/common/pages/colors_page.dart';
 import 'package:example/src/storybook/common/pages/home_page.dart';
+import 'package:example/src/storybook/common/pages/typography_page.dart';
 import 'package:example/src/storybook/common/widgets/routing_error_widget.dart';
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
 import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
@@ -91,6 +92,12 @@ GoRouter router = GoRouter(
       path: ColorsPage.path,
       pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
         child: ColorsPage(),
+      ),
+    ),
+    GoRoute(
+      path: TypographyPage.path,
+      pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
+        child: TypographyPage(),
       ),
     ),
 
