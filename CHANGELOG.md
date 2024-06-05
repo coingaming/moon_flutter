@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.58.0](https://github.com/coingaming/moon_flutter/compare/v0.57.0...v0.58.0) (2024-06-05)
+
+
+### Features
+
+* [MDS-1172] Create typography page ([#412](https://github.com/coingaming/moon_flutter/issues/412)) ([88bd6a7](https://github.com/coingaming/moon_flutter/commit/88bd6a7946dd354e440cd828e83eeb36ea2db328))
+
 ## [0.57.0](https://github.com/coingaming/moon_flutter/compare/v0.56.0...v0.57.0) (2024-05-24)
 
 
