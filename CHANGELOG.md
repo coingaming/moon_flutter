@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.0](https://github.com/coingaming/moon_flutter/compare/v0.58.0...v0.59.0) (2024-06-05)
+
+
+### Features
+
+* [MDS-1173] Add inputFormatters property to AuthCode ([#415](https://github.com/coingaming/moon_flutter/issues/415)) ([b1e0102](https://github.com/coingaming/moon_flutter/commit/b1e010203cf3e3e485cf05b852182e21b3e8b7bc))
+
 ## [0.58.0](https://github.com/coingaming/moon_flutter/compare/v0.57.0...v0.58.0) (2024-06-05)
 
 
