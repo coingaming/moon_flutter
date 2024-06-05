@@ -94,47 +94,45 @@ class TypographyPage extends StatelessWidget {
           right: 24,
           bottom: 16.0,
         ),
-        child: SelectionArea(
-          child: Center(
-            child: SizedBox(
-              width: largeScreenWidth,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxWidth: mediumScreenWidth,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildSectionHeader(
-                          context,
-                          TypographyPageSection.typography,
-                        ),
-                        const SizedBox(height: 48.0),
-                        _buildSectionHeader(
-                          context,
-                          TypographyPageSection.body,
-                        ),
-                        _buildTypographyContainer(context, MoonTextStyle.body),
-                        const SizedBox(height: 48.0),
-                        _buildSectionHeader(
-                          context,
-                          TypographyPageSection.heading,
-                        ),
-                        _buildTypographyContainer(
-                          context,
-                          MoonTextStyle.heading,
-                        ),
-                        const Center(
-                          child: PageFooter(),
-                        ),
-                      ],
-                    ),
+        child: Center(
+          child: SizedBox(
+            width: largeScreenWidth,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: mediumScreenWidth,
                   ),
-                ],
-              ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildSectionHeader(
+                        context,
+                        TypographyPageSection.typography,
+                      ),
+                      const SizedBox(height: 48.0),
+                      _buildSectionHeader(
+                        context,
+                        TypographyPageSection.body,
+                      ),
+                      _buildTypographyContainer(context, MoonTextStyle.body),
+                      const SizedBox(height: 48.0),
+                      _buildSectionHeader(
+                        context,
+                        TypographyPageSection.heading,
+                      ),
+                      _buildTypographyContainer(
+                        context,
+                        MoonTextStyle.heading,
+                      ),
+                      const Center(
+                        child: PageFooter(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
