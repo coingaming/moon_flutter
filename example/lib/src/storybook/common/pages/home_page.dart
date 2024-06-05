@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
             ),
           Text(
             HomePageContentType.headerTitle.text,
-            style: typography.heading.text64.copyWith(height: 1.1),
+            style: typography.heading.text64,
           ),
           const SizedBox(height: 24.0),
           Text(
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 72.0),
           Text(
             HomePageContentType.bodyTitle.text,
-            style: typography.heading.text40.copyWith(height: 1.1),
+            style: typography.heading.text40,
           ),
         ],
       ),
@@ -96,7 +96,8 @@ class HomePage extends StatelessWidget {
 
     return MoonButton(
       width: double.infinity,
-      backgroundColor: isGitHub ? Colors.deepPurple : Colors.orange,
+      backgroundColor:
+          isGitHub ? context.moonColors!.piccolo : context.moonColors!.krillin,
       onTap: () => launchURL(socialMedia.url),
       leading: SvgPicture.asset(
         socialMedia.buttonIconPath,
@@ -196,8 +197,7 @@ class HomePage extends StatelessWidget {
                             component.description,
                             maxLines: isExtraSmallScreen ? 3 : 2,
                             overflow: TextOverflow.ellipsis,
-                            style: context.moonTypography!.heading.text14
-                                .copyWith(height: 1.6),
+                            style: context.moonTypography!.heading.text14,
                           ),
                         ],
                       ),
@@ -227,27 +227,30 @@ class HomePage extends StatelessWidget {
           right: 24,
           bottom: 16.0,
         ),
-        child: Center(
-          child: SizedBox(
-            width: largeScreenWidth,
-            child: Column(
-              crossAxisAlignment: layoutWidth > mediumScreenWidth
-                  ? CrossAxisAlignment.start
-                  : CrossAxisAlignment.center,
-              children: [
-                _buildHeaderSection(context, showLogo),
-                const SizedBox(height: 48.0),
-                LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    return Column(
-                      children: [
-                        _buildCards(context, constraints.maxWidth),
-                        const PageFooter(),
-                      ],
-                    );
-                  },
-                ),
-              ],
+        child: SelectionArea(
+          child: Center(
+            child: SizedBox(
+              width: largeScreenWidth,
+              child: Column(
+                crossAxisAlignment: layoutWidth > mediumScreenWidth
+                    ? CrossAxisAlignment.start
+                    : CrossAxisAlignment.center,
+                children: [
+                  _buildHeaderSection(context, showLogo),
+                  const SizedBox(height: 48.0),
+                  LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      return Column(
+                        children: [
+                          _buildCards(context, constraints.maxWidth),
+                          const PageFooter(),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

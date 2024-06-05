@@ -1,5 +1,6 @@
 import 'package:example/src/storybook/common/pages/colors_page.dart';
 import 'package:example/src/storybook/common/pages/home_page.dart';
+import 'package:example/src/storybook/common/pages/typography_page.dart';
 import 'package:example/src/storybook/routing/app_router.dart';
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
 import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
@@ -51,10 +52,15 @@ final List<Story> routeAwareStories = [
     router: router,
     isPage: true,
   ),
-
   Story.asRoute(
     name: 'Colors',
     routePath: ColorsPage.path,
+    router: router,
+    isPage: true,
+  ),
+  Story.asRoute(
+    name: 'Typography',
+    routePath: TypographyPage.path,
     router: router,
     isPage: true,
   ),
