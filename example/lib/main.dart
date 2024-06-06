@@ -16,19 +16,10 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool _isInStorybookMode = true;
-
-  void toggleStorybookMode() {
-    setState(() => _isInStorybookMode = !_isInStorybookMode);
-  }
+  bool get _isInStorybookMode => true;
 
   @override
   Widget build(BuildContext context) {
@@ -47,31 +38,11 @@ class _MyAppState extends State<MyApp> {
             ),
             home: Scaffold(
               body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Moon Design for Flutter",
-                      style: TextStyle(
-                        fontSize:
-                            MediaQuery.of(context).size.width > 800 ? 72 : 32,
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width > 800 ? 36 : 16,
-                    ),
-                    GestureDetector(
-                      onLongPress: toggleStorybookMode,
-                      child: Text(
-                        "Coming soon...",
-                        style: TextStyle(
-                          fontSize:
-                              MediaQuery.of(context).size.width > 800 ? 24 : 20,
-                          color: const Color(0xFF999CA0),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  "Moon Design for Flutter",
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width > 800 ? 72 : 32,
+                  ),
                 ),
               ),
             ),
