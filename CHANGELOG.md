@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.1](https://github.com/coingaming/moon_flutter/compare/v0.59.0...v0.59.1) (2024-06-07)
+
+
+### Bug Fixes
+
+* [MDS-1176] Fix input components context menu ([#417](https://github.com/coingaming/moon_flutter/issues/417)) ([ff6cf21](https://github.com/coingaming/moon_flutter/commit/ff6cf2150d303b16ab19c813608e65fd9fe82adc))
+
 ## [0.59.0](https://github.com/coingaming/moon_flutter/compare/v0.58.0...v0.59.0) (2024-06-05)
 
 
