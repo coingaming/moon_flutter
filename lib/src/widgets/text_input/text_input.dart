@@ -1117,16 +1117,16 @@ class _MoonTextInputState extends State<MoonTextInput>
                 ? hoverBorder
                 : defaultBorder;
 
+    final bool paintCursorAboveText;
+    final Color cursorColor;
+    final Color selectionColor;
+
     bool? cursorOpacityAnimates = widget.cursorOpacityAnimates;
     Color? autocorrectionTextRectColor;
     Offset? cursorOffset;
     Radius? cursorRadius = widget.cursorRadius;
     VoidCallback? handleDidGainAccessibilityFocus;
-
-    final bool paintCursorAboveText;
-    final Color cursorColor;
-    final Color selectionColor;
-    final TextSelectionControls? textSelectionControls = widget.selectionControls;
+    TextSelectionControls? textSelectionControls = widget.selectionControls;
 
     final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor>(
       widget.mouseCursor ?? MaterialStateMouseCursor.textable,
@@ -1169,6 +1169,7 @@ class _MoonTextInputState extends State<MoonTextInput>
       case TargetPlatform.iOS:
         final CupertinoThemeData cupertinoTheme = CupertinoTheme.of(context);
         forcePressEnabled = true;
+        textSelectionControls ??= cupertinoTextSelectionHandleControls;
         paintCursorAboveText = true;
         cursorOpacityAnimates ??= true;
         cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
@@ -1180,6 +1181,7 @@ class _MoonTextInputState extends State<MoonTextInput>
       case TargetPlatform.macOS:
         final CupertinoThemeData cupertinoTheme = CupertinoTheme.of(context);
         forcePressEnabled = false;
+        textSelectionControls ??= cupertinoDesktopTextSelectionHandleControls;
         paintCursorAboveText = true;
         cursorOpacityAnimates ??= false;
         cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
@@ -1196,6 +1198,7 @@ class _MoonTextInputState extends State<MoonTextInput>
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
         forcePressEnabled = false;
+        textSelectionControls ??= materialTextSelectionHandleControls;
         paintCursorAboveText = false;
         cursorOpacityAnimates ??= false;
         cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
@@ -1203,6 +1206,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
       case TargetPlatform.linux:
         forcePressEnabled = false;
+        textSelectionControls ??= desktopTextSelectionHandleControls;
         paintCursorAboveText = false;
         cursorOpacityAnimates ??= false;
         cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
@@ -1210,6 +1214,7 @@ class _MoonTextInputState extends State<MoonTextInput>
 
       case TargetPlatform.windows:
         forcePressEnabled = false;
+        textSelectionControls ??= desktopTextSelectionHandleControls;
         paintCursorAboveText = false;
         cursorOpacityAnimates ??= false;
         cursorColor = _hasError ? effectiveCursorErrorColor : widget.cursorColor ?? effectiveTextColor;
