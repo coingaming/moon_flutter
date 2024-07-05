@@ -181,16 +181,22 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
 
-  bool get _canAnimateFocus => widget.showFocusEffect && _isEnabled && _isFocused;
+  MouseCursor get _cursor =>
+      _isEnabled ? widget.cursor : SystemMouseCursors.basic;
+
+  FocusNode get _effectiveFocusNode =>
+      widget.focusNode ??
+      (_focusNode ??= FocusNode(skipTraversal: !widget.isFocusable));
+
+  bool get _hasPrimaryFocus => _effectiveFocusNode.hasPrimaryFocus;
+
+  bool get _canAnimateFocus =>
+      widget.showFocusEffect && _isEnabled && _isFocused && _hasPrimaryFocus;
 
   bool get _canAnimatePulse => widget.showPulseEffect && _isEnabled;
 
-  bool get _canAnimateScale => widget.showScaleEffect && _isEnabled && (_isPressed || _isLongPressed);
-
-  MouseCursor get _cursor => _isEnabled ? widget.cursor : SystemMouseCursors.basic;
-
-  FocusNode get _effectiveFocusNode =>
-      widget.focusNode ?? (_focusNode ??= FocusNode(skipTraversal: !widget.isFocusable));
+  bool get _canAnimateScale =>
+      widget.showScaleEffect && _isEnabled && (_isPressed || _isLongPressed);
 
   void _handleHover(bool hover) {
     if (hover != _isHovered) {
@@ -201,7 +207,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   }
 
   void _handleFocus(bool focus) {
-    if (focus != _isFocused) {
+    if (focus != _isFocused && _hasPrimaryFocus) {
       setState(() => _isFocused = focus);
 
       widget.onFocus?.call(focus);
@@ -210,7 +216,7 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   void _handleFocusChange(bool hasFocus) {
     setState(() {
-      _isFocused = hasFocus;
+      _isFocused = hasFocus && _hasPrimaryFocus;
 
       if (!hasFocus) {
         _isPressed = false;
