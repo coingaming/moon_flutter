@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.2](https://github.com/coingaming/moon_flutter/compare/v0.59.1...v0.59.2) (2024-07-05)
+
+
+### Bug Fixes
+
+* [MDS-1231] Fix Accordion absorbing children actions ([#423](https://github.com/coingaming/moon_flutter/issues/423)) ([c119d15](https://github.com/coingaming/moon_flutter/commit/c119d158958e4c41004b8bd69f545c6aab22c86b))
+
 ## [0.59.1](https://github.com/coingaming/moon_flutter/compare/v0.59.0...v0.59.1) (2024-06-07)
 
 
