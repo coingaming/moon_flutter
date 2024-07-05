@@ -46,6 +46,10 @@ class MoonAccordion<T> extends StatefulWidget {
   /// To align the [Column] along the expanded accordion, use the [expandedAlignment] property instead.
   final CrossAxisAlignment? expandedCrossAxisAlignment;
 
+  /// Whether to propagate gestures to the children of the accordion.
+  /// Defaults to true.
+  final bool propagateGesturesToChild;
+
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
@@ -173,6 +177,7 @@ class MoonAccordion<T> extends StatefulWidget {
     super.key,
     this.expandedAlignment,
     this.expandedCrossAxisAlignment,
+    this.propagateGesturesToChild = true,
     this.autofocus = false,
     this.hasContentOutside = false,
     this.initiallyExpanded = false,
@@ -385,6 +390,7 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
 
     return MoonBaseControl(
       onTap: widget.isDisabled ? null : _handleTap,
+      propagateGesturesToChild: widget.propagateGesturesToChild,
       autofocus: widget.autofocus,
       focusNode: _effectiveFocusNode,
       borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
