@@ -25,8 +25,12 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
 
   void _performSearch() {
     setState(() {
-      _filteredOptionsList =
-          _optionsList.where((Component option) => option.name.toLowerCase().contains(_inputValue)).toList();
+      _filteredOptionsList = _optionsList
+          .where(
+            (Component option) =>
+                option.name.toLowerCase().contains(_inputValue),
+          )
+          .toList();
 
       _showSearchResults = true;
     });
@@ -89,7 +93,8 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
       options: colorOptions,
     );
 
-    final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+    final inactiveBorderColor =
+        colorTable(context)[inactiveBorderColorKnob ?? 40];
 
     final hoverBorderColorKnob = context.knobs.nullable.options(
       label: "hoverBorderColor",
@@ -141,11 +146,14 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
               MoonTextInput(
                 enabled: enabledKnob,
                 hasFloatingLabel: hasFloatingLabelKnob,
-                activeBorderColor: activeBorderColor ?? context.moonColors!.beerus,
+                activeBorderColor:
+                    activeBorderColor ?? context.moonColors!.beerus,
                 inactiveBorderColor: inactiveBorderColor,
                 backgroundColor: backgroundColor,
                 hoverBorderColor: hoverBorderColor,
-                borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                borderRadius: borderRadiusKnob != null
+                    ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                    : null,
                 textInputSize: textInputSizeKnob,
                 hintText: "Search components",
                 controller: _searchController,
@@ -179,16 +187,21 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
                   ],
                 ),
               ),
-              if (_showSearchResults && _filteredOptionsList.isNotEmpty && enabledKnob)
+              if (_showSearchResults &&
+                  _filteredOptionsList.isNotEmpty &&
+                  enabledKnob)
                 Expanded(
                   child: ScrollConfiguration(
-                    behavior: const ScrollBehavior().copyWith(scrollbars: false),
+                    behavior:
+                        const ScrollBehavior().copyWith(scrollbars: false),
                     child: ListView.builder(
                       shrinkWrap: true,
                       padding: const EdgeInsets.only(top: 8.0),
                       itemCount: _filteredOptionsList.length,
                       itemBuilder: (BuildContext _, int index) {
-                        if (index >= _filteredOptionsList.length) return const SizedBox.shrink();
+                        if (index >= _filteredOptionsList.length) {
+                          return const SizedBox.shrink();
+                        }
                         final Component option = _filteredOptionsList[index];
 
                         return MoonMenuItem(

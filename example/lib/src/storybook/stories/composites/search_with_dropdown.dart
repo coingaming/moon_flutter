@@ -1,9 +1,10 @@
 import 'package:example/src/storybook/common/color_options.dart';
+import 'package:example/src/storybook/common/component_options.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-enum Component { input, dropdown }
+enum _Section { input, dropdown }
 
 class SearchWithDropdownStory extends StatefulWidget {
   static const path = '/composites/search/search_with_dropdown';
@@ -11,7 +12,8 @@ class SearchWithDropdownStory extends StatefulWidget {
   const SearchWithDropdownStory({super.key});
 
   @override
-  State<SearchWithDropdownStory> createState() => _SearchWithDropdownStoryState();
+  State<SearchWithDropdownStory> createState() =>
+      _SearchWithDropdownStoryState();
 }
 
 class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
@@ -30,8 +32,12 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
     setState(() {
       if (!_optionIsSelected && _selectedOption != null) _selectedOption = null;
 
-      _filteredOptionsList =
-          _optionsList.where((Component option) => option.name.toLowerCase().contains(_inputValue)).toList();
+      _filteredOptionsList = _optionsList
+          .where(
+            (Component option) =>
+                option.name.toLowerCase().contains(_inputValue),
+          )
+          .toList();
       _showDropdown = true;
     });
   }
@@ -89,7 +95,8 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
       options: colorOptions,
     );
 
-    final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+    final inactiveBorderColor =
+        colorTable(context)[inactiveBorderColorKnob ?? 40];
 
     final hoverBorderColorKnob = context.knobs.nullable.options(
       label: "hoverBorderColor",
@@ -146,13 +153,20 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
       description: "Whether MoonTextInput has floating label.",
     );
 
-    BorderRadiusGeometry? getBorderRadius(Component component) {
-      final double borderRadiusValue = borderRadiusKnob != null ? borderRadiusKnob.toDouble() : 8;
+    BorderRadiusGeometry? getBorderRadius(_Section variant) {
+      final double borderRadiusValue =
+          borderRadiusKnob != null ? borderRadiusKnob.toDouble() : 8;
 
-      return (distanceToTargetKnob == null || distanceToTargetKnob == 0) && _showDropdown && enabledKnob
+      return (distanceToTargetKnob == null || distanceToTargetKnob == 0) &&
+              _showDropdown &&
+              enabledKnob
           ? BorderRadius.vertical(
-              top: Radius.circular(component == Component.input ? borderRadiusValue : 0),
-              bottom: Radius.circular(component == Component.dropdown ? borderRadiusValue : 0),
+              top: Radius.circular(
+                variant == _Section.input ? borderRadiusValue : 0,
+              ),
+              bottom: Radius.circular(
+                variant == _Section.dropdown ? borderRadiusValue : 0,
+              ),
             )
           : BorderRadius.circular(borderRadiusValue);
     }
@@ -168,10 +182,10 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
                 constrainWidthToChild: true,
                 distanceToTarget: distanceToTargetKnob ?? 0,
                 backgroundColor: backgroundColor,
-                borderRadius: getBorderRadius(Component.dropdown),
+                borderRadius: getBorderRadius(_Section.dropdown),
                 decoration: BoxDecoration(
                   color: context.moonColors!.goku,
-                  borderRadius: getBorderRadius(Component.dropdown),
+                  borderRadius: getBorderRadius(_Section.dropdown),
                   boxShadow: showShadowKnob == true
                       ? const [
                           BoxShadow(
@@ -186,7 +200,8 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
                     left: BorderSide(color: context.moonColors!.beerus),
                     right: BorderSide(color: context.moonColors!.beerus),
                     bottom: BorderSide(color: context.moonColors!.beerus),
-                    top: distanceToTargetKnob == null || distanceToTargetKnob == 0
+                    top: distanceToTargetKnob == null ||
+                            distanceToTargetKnob == 0
                         ? BorderSide.none
                         : BorderSide(color: context.moonColors!.beerus),
                   ),
@@ -197,21 +212,27 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
                     return ConstrainedBox(
                       constraints: const BoxConstraints(maxHeight: 300),
                       child: ScrollConfiguration(
-                        behavior: const ScrollBehavior().copyWith(scrollbars: false),
+                        behavior:
+                            const ScrollBehavior().copyWith(scrollbars: false),
                         child: _filteredOptionsList.isEmpty
                             ? const MoonMenuItem(
                                 label: Text('No results found.'),
                               )
                             : ClipRRect(
-                                borderRadius: getBorderRadius(Component.dropdown) ?? BorderRadius.zero,
+                                borderRadius:
+                                    getBorderRadius(_Section.dropdown) ??
+                                        BorderRadius.zero,
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   clipBehavior: Clip.none,
                                   padding: EdgeInsets.zero,
                                   itemCount: _filteredOptionsList.length,
                                   itemBuilder: (BuildContext _, int index) {
-                                    if (index >= _filteredOptionsList.length) return const SizedBox.shrink();
-                                    final Component option = _filteredOptionsList[index];
+                                    if (index >= _filteredOptionsList.length) {
+                                      return const SizedBox.shrink();
+                                    }
+                                    final Component option =
+                                        _filteredOptionsList[index];
 
                                     return MoonMenuItem(
                                       onTap: () => _handleSelect(option),
@@ -228,11 +249,12 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
                   enabled: enabledKnob,
                   width: constraints.maxWidth,
                   hasFloatingLabel: hasFloatingLabelKnob,
-                  activeBorderColor: activeBorderColor ?? context.moonColors!.beerus,
+                  activeBorderColor:
+                      activeBorderColor ?? context.moonColors!.beerus,
                   inactiveBorderColor: inactiveBorderColor,
                   backgroundColor: backgroundColor,
                   hoverBorderColor: hoverBorderColor,
-                  borderRadius: getBorderRadius(Component.input),
+                  borderRadius: getBorderRadius(_Section.input),
                   hintText: "Search components",
                   controller: _searchController,
                   onTap: () => _performSearch(),

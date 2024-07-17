@@ -6,9 +6,11 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 
 const String _groupId = "dropdown";
 
-enum Choices { first, second, third }
+enum Choices {
+  first,
+  second,
+  third;
 
-extension ChoicesX on Choices {
   String get name {
     return switch (this) {
       Choices.first => "Choice #1",
@@ -44,7 +46,8 @@ class _DropdownStoryState extends State<DropdownStory> {
   Widget build(BuildContext context) {
     final dropdownAnchorPositionKnob = context.knobs.nullable.options(
       label: "dropdownAnchorPosition",
-      description: "Anchor position variants for MoonDropdown on the child (target).",
+      description:
+          "Anchor position variants for MoonDropdown on the child (target).",
       enabled: false,
       initial: MoonDropdownAnchorPosition.bottom,
       options: const [
@@ -54,10 +57,19 @@ class _DropdownStoryState extends State<DropdownStory> {
         Option(label: "right", value: MoonDropdownAnchorPosition.right),
         Option(label: "topLeft", value: MoonDropdownAnchorPosition.topLeft),
         Option(label: "topRight", value: MoonDropdownAnchorPosition.topRight),
-        Option(label: "bottomLeft", value: MoonDropdownAnchorPosition.bottomLeft),
-        Option(label: "bottomRight", value: MoonDropdownAnchorPosition.bottomRight),
+        Option(
+          label: "bottomLeft",
+          value: MoonDropdownAnchorPosition.bottomLeft,
+        ),
+        Option(
+          label: "bottomRight",
+          value: MoonDropdownAnchorPosition.bottomRight,
+        ),
         Option(label: "vertical", value: MoonDropdownAnchorPosition.vertical),
-        Option(label: "horizontal", value: MoonDropdownAnchorPosition.horizontal),
+        Option(
+          label: "horizontal",
+          value: MoonDropdownAnchorPosition.horizontal,
+        ),
       ],
     );
 
@@ -107,7 +119,8 @@ class _DropdownStoryState extends State<DropdownStory> {
 
     final constrainWidthToChildKnob = context.knobs.boolean(
       label: "constrainWidthToChild",
-      description: "Constrain the width of MoonDropdown to be the same as the child (target).",
+      description:
+          "Constrain the width of MoonDropdown to be the same as the child (target).",
       initial: true,
     );
 
@@ -118,8 +131,11 @@ class _DropdownStoryState extends State<DropdownStory> {
     final colorRoshi60 = context.moonColors!.roshi60;
     final colorRoshi10 = context.moonColors!.roshi10;
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(
+            borderRadiusKnob.toDouble(),
+          )
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -140,47 +156,29 @@ class _DropdownStoryState extends State<DropdownStory> {
                 borderRadius: borderRadius,
                 constrainWidthToChild: constrainWidthToChildKnob,
                 distanceToTarget: distanceToTargetKnob,
-                dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
+                dropdownAnchorPosition: dropdownAnchorPositionKnob ??
+                    MoonDropdownAnchorPosition.bottom,
                 dropdownShadows: showShadowKnob == true ? null : [],
                 onTapOutside: () => setState(() => _showChoices = false),
                 content: ClipRRect(
                   borderRadius: borderRadius ?? BorderRadius.zero,
                   child: Column(
-                    children: [
-                      MoonMenuItem(
+                    children: List.generate(
+                      3,
+                      (int index) => MoonMenuItem(
                         absorbGestures: true,
-                        onTap: () =>
-                            setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
-                        label: Text(Choices.first.name),
+                        onTap: () => setState(
+                          () => _availableChoices[Choices.values[index]] =
+                              !_availableChoices[Choices.values[index]]!,
+                        ),
+                        label: Text(Choices.values[index].name),
                         trailing: MoonCheckbox(
-                          value: _availableChoices[Choices.first],
+                          value: _availableChoices[Choices.values[index]],
                           tapAreaSizeValue: 0,
                           onChanged: (_) {},
                         ),
                       ),
-                      MoonMenuItem(
-                        absorbGestures: true,
-                        onTap: () =>
-                            setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
-                        label: Text(Choices.second.name),
-                        trailing: MoonCheckbox(
-                          value: _availableChoices[Choices.second],
-                          tapAreaSizeValue: 0,
-                          onChanged: (_) {},
-                        ),
-                      ),
-                      MoonMenuItem(
-                        absorbGestures: true,
-                        onTap: () =>
-                            setState(() => _availableChoices[Choices.third] = !_availableChoices[Choices.third]!),
-                        label: Text(Choices.third.name),
-                        trailing: MoonCheckbox(
-                          value: _availableChoices[Choices.third],
-                          tapAreaSizeValue: 0,
-                          onChanged: (_) {},
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
                 child: MoonTextInput(
@@ -190,16 +188,22 @@ class _DropdownStoryState extends State<DropdownStory> {
                   mouseCursor: MouseCursor.defer,
                   hintText: "Choose an option",
                   onTap: () => setState(() => _showChoices = !_showChoices),
-                  onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
-                  leading: _availableChoices.values.any((element) => element == true)
+                  onTapOutside: (PointerDownEvent _) =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                  leading: _availableChoices.values
+                          .any((element) => element == true)
                       ? Center(
                           child: MoonTag(
                             tagSize: MoonTagSize.xs,
                             backgroundColor: context.moonColors!.bulma,
-                            onTap: () => setState(() => _availableChoices.updateAll((key, value) => false)),
+                            onTap: () => setState(
+                              () => _availableChoices
+                                  .updateAll((key, value) => false),
+                            ),
                             label: Text(
                               "${_availableChoices.values.where((element) => element == true).length}",
-                              style: TextStyle(color: context.moonColors!.gohan),
+                              style:
+                                  TextStyle(color: context.moonColors!.gohan),
                             ),
                             trailing: Icon(
                               MoonIcons.controls_close_small_16_light,
@@ -232,7 +236,8 @@ class _DropdownStoryState extends State<DropdownStory> {
                 backgroundColor: backgroundColor,
                 constrainWidthToChild: constrainWidthToChildKnob,
                 distanceToTarget: distanceToTargetKnob,
-                dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
+                dropdownAnchorPosition: dropdownAnchorPositionKnob ??
+                    MoonDropdownAnchorPosition.bottom,
                 dropdownShadows: showShadowKnob == true ? null : [],
                 onTapOutside: () => setState(() {
                   _showMenu = false;
@@ -264,10 +269,17 @@ class _DropdownStoryState extends State<DropdownStory> {
                       maxWidth: 100,
                       constrainWidthToChild: constrainWidthToChildKnob,
                       distanceToTarget: distanceToTargetKnob,
-                      dropdownAnchorPosition: dropdownAnchorPositionKnob ?? MoonDropdownAnchorPosition.bottom,
-                      followerAnchor: dropdownAnchorPositionKnob == null ? Alignment.topLeft : null,
-                      targetAnchor: dropdownAnchorPositionKnob == null ? Alignment.topRight : null,
-                      offset: dropdownAnchorPositionKnob == null ? const Offset(8, 0) : null,
+                      dropdownAnchorPosition: dropdownAnchorPositionKnob ??
+                          MoonDropdownAnchorPosition.bottom,
+                      followerAnchor: dropdownAnchorPositionKnob == null
+                          ? Alignment.topLeft
+                          : null,
+                      targetAnchor: dropdownAnchorPositionKnob == null
+                          ? Alignment.topRight
+                          : null,
+                      offset: dropdownAnchorPositionKnob == null
+                          ? const Offset(8, 0)
+                          : null,
                       content: Column(
                         children: [
                           MoonMenuItem(
@@ -302,8 +314,10 @@ class _DropdownStoryState extends State<DropdownStory> {
                         ],
                       ),
                       child: MoonMenuItem(
-                        backgroundColor: _showMenuInner ? context.moonColors!.heles : null,
-                        onTap: () => setState(() => _showMenuInner = !_showMenuInner),
+                        backgroundColor:
+                            _showMenuInner ? context.moonColors!.heles : null,
+                        onTap: () =>
+                            setState(() => _showMenuInner = !_showMenuInner),
                         label: const Text("Roshi"),
                         trailing: const Icon(
                           MoonIcons.controls_chevron_right_16_light,

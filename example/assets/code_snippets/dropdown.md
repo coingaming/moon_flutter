@@ -3,9 +3,10 @@ import 'package:moon_design/moon_design.dart';
 
 const String _groupId = "dropdown";
 
-enum Choices { first, second }
+enum Choices {
+  first,
+  second;
 
-extension ChoicesX on Choices {
   String get name {
     return switch (this) {
       Choices.first => "Choice #1",
@@ -43,28 +44,22 @@ class _DropdownState extends State<Dropdown> {
           constrainWidthToChild: true,
           onTapOutside: () => setState(() => _showChoices = false),
           content: Column(
-            children: [
-              MoonMenuItem(
+            children: List.generate(
+              2,
+              (int index) => MoonMenuItem(
                 absorbGestures: true,
-                onTap: () => setState(() => _availableChoices[Choices.first] = !_availableChoices[Choices.first]!),
-                label: Text(Choices.first.name),
+                onTap: () => setState(
+                  () => _availableChoices[Choices.values[index]] =
+                      !_availableChoices[Choices.values[index]]!,
+                ),
+                label: Text(Choices.values[index].name),
                 trailing: MoonCheckbox(
-                  value: _availableChoices[Choices.first],
+                  value: _availableChoices[Choices.values[index]],
                   tapAreaSizeValue: 0,
                   onChanged: (_) {},
                 ),
               ),
-              MoonMenuItem(
-                absorbGestures: true,
-                onTap: () => setState(() => _availableChoices[Choices.second] = !_availableChoices[Choices.second]!),
-                label: Text(Choices.second.name),
-                trailing: MoonCheckbox(
-                  value: _availableChoices[Choices.second],
-                  tapAreaSizeValue: 0,
-                  onChanged: (_) {},
-                ),
-              ),
-            ],
+            ),
           ),
           child: MoonTextInput(
             width: 250,

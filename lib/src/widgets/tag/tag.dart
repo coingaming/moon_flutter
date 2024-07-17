@@ -18,7 +18,8 @@ enum MoonTagSize {
 class MoonTag extends StatelessWidget {
   /// Whether to use the upper case text style for the tag.
   @Deprecated(
-    "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
+    "Handle upper case text style properly at place of usage. "
+    "This property will be removed in 1.0.0 release.",
   )
   final bool isUpperCase;
 
@@ -68,7 +69,8 @@ class MoonTag extends StatelessWidget {
   const MoonTag({
     super.key,
     @Deprecated(
-      "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
+      "Handle upper case text style properly at place of usage. "
+      "This property will be removed in 1.0.0 release.",
     )
     this.isUpperCase = false,
     this.borderRadius,
@@ -87,41 +89,61 @@ class MoonTag extends StatelessWidget {
     this.trailing,
   });
 
-  MoonTagSizeProperties _getMoonTagSize(BuildContext context, MoonTagSize? moonTagSize) {
+  MoonTagSizeProperties _getMoonTagSize(
+    BuildContext context,
+    MoonTagSize? moonTagSize,
+  ) {
     return switch (moonTagSize) {
-      MoonTagSize.x2s => context.moonTheme?.tagTheme.sizes.x2s ?? MoonTagSizes(tokens: MoonTokens.light).x2s,
-      MoonTagSize.xs => context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizes(tokens: MoonTokens.light).xs,
-      MoonTagSize.sm => context.moonTheme?.tagTheme.sizes.sm ?? MoonTagSizes(tokens: MoonTokens.light).sm,
-      _ => context.moonTheme?.tagTheme.sizes.xs ?? MoonTagSizes(tokens: MoonTokens.light).xs,
+      MoonTagSize.x2s => context.moonTheme?.tagTheme.sizes.x2s ??
+          MoonTagSizes(tokens: MoonTokens.light).x2s,
+      MoonTagSize.xs => context.moonTheme?.tagTheme.sizes.xs ??
+          MoonTagSizes(tokens: MoonTokens.light).xs,
+      MoonTagSize.sm => context.moonTheme?.tagTheme.sizes.sm ??
+          MoonTagSizes(tokens: MoonTokens.light).sm,
+      _ => context.moonTheme?.tagTheme.sizes.xs ??
+          MoonTagSizes(tokens: MoonTokens.light).xs,
     };
   }
 
   @override
   Widget build(BuildContext context) {
-    final MoonTagSizeProperties effectiveMoonTagSize = _getMoonTagSize(context, tagSize);
+    final MoonTagSizeProperties effectiveMoonTagSize =
+        _getMoonTagSize(context, tagSize);
 
-    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveMoonTagSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius =
+        borderRadius ?? effectiveMoonTagSize.borderRadius;
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.tagTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.tagTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
-    final Color effectiveTextColor = context.moonTheme?.tagTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.tagTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor = context.moonTheme?.tagTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.tagTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
     final double effectiveHeight = height ?? effectiveMoonTagSize.height;
 
     final double effectiveGap = gap ?? effectiveMoonTagSize.gap;
 
-    final EdgeInsetsGeometry effectivePadding = padding ?? effectiveMoonTagSize.padding;
+    final EdgeInsetsGeometry effectivePadding =
+        padding ?? effectiveMoonTagSize.padding;
 
-    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
+    final EdgeInsets resolvedDirectionalPadding =
+        effectivePadding.resolve(Directionality.of(context));
 
     final EdgeInsetsGeometry correctedPadding = padding == null
         ? EdgeInsetsDirectional.fromSTEB(
-            leading == null && label != null ? resolvedDirectionalPadding.left : 0,
+            leading == null && label != null
+                ? resolvedDirectionalPadding.left
+                : 0,
             resolvedDirectionalPadding.top,
-            trailing == null && label != null ? resolvedDirectionalPadding.right : 0,
+            trailing == null && label != null
+                ? resolvedDirectionalPadding.right
+                : 0,
             resolvedDirectionalPadding.bottom,
           )
         : resolvedDirectionalPadding;
@@ -135,8 +157,11 @@ class MoonTag extends StatelessWidget {
         onTap: onTap,
         onLongPress: onLongPress,
         child: MouseRegion(
-          cursor: onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+          cursor: onTap != null
+              ? SystemMouseCursors.click
+              : SystemMouseCursors.basic,
           child: Container(
+            width: width,
             height: effectiveHeight,
             padding: correctedPadding,
             constraints: BoxConstraints(minWidth: effectiveHeight),
@@ -144,7 +169,8 @@ class MoonTag extends StatelessWidget {
                 ShapeDecorationWithPremultipliedAlpha(
                   color: effectiveBackgroundColor,
                   shape: MoonSquircleBorder(
-                    borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                    borderRadius:
+                        effectiveBorderRadius.squircleBorderRadius(context),
                   ),
                 ),
             child: IconTheme(
@@ -156,8 +182,12 @@ class MoonTag extends StatelessWidget {
                 // ignore: deprecated_member_use_from_same_package
                 style: isUpperCase
                     // ignore: deprecated_member_use_from_same_package
-                    ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(color: effectiveTextColor)
-                    : effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor),
+                    ? effectiveMoonTagSize.upperCaseTextStyle.copyWith(
+                        color: effectiveTextColor,
+                      )
+                    : effectiveMoonTagSize.textStyle.copyWith(
+                        color: effectiveTextColor,
+                      ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
