@@ -121,8 +121,8 @@ class _SearchWithDropdownState extends State<SearchWithDropdown> {
           hintText: "Search components",
           controller: _searchController,
           borderRadius: _showDropdown ? const BorderRadius.vertical(top: Radius.circular(8)) : null,
-          // The onTap() and onChanged() properties are used instead of a listener to initiate search on every input tap.
-          // Listener only triggers on input change.          
+          // The onTap() and onChanged() properties are used instead of a listener to initiate search 
+          // on every input tap. Listener only triggers on input change.          
           onTap: () => _performSearch(),
           onChanged: (String _) => _performSearch(),
           leading: const Icon(MoonIcons.generic_search_24_light),

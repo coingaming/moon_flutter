@@ -28,10 +28,14 @@ enum MoonTabBarSize {
   md,
 }
 
-typedef MoonCustomTabBuilder = Widget Function(BuildContext context, bool isSelected);
+typedef MoonCustomTabBuilder = Widget Function(
+  BuildContext context,
+  bool isSelected,
+);
 
 class MoonTabBar extends StatefulWidget {
-  /// Whether the tab bar is expanded to its full available width horizontally or resizes to fit its content.
+  /// Whether the tab bar is expanded to its full available width horizontally
+  /// or resizes to fit its content.
   final bool isExpanded;
 
   /// The gap between the tab bar tabs.
@@ -53,7 +57,8 @@ class MoonTabBar extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
 
   /// The index of the initially selected tab.
-  /// This property is overridden by the [tabController]'s initial index if the [tabController] is provided.
+  /// This property is overridden by the [tabController]'s initial index if
+  /// the [tabController] is provided.
   /// For external updates to the tab index, use [tabController].
   final int initialIndex;
 
@@ -64,7 +69,8 @@ class MoonTabBar extends StatefulWidget {
   final Decoration? decoration;
 
   /// The external controller for managing tab selection and animation in tab bar.
-  /// If tabController is provided, then [initialIndex] is ignored and tabController's index is used instead.
+  /// If tabController is provided, then [initialIndex] is ignored and
+  /// tabController's index is used instead.
   final TabController? tabController;
 
   /// The callback that returns the index of the currently selected tab.
@@ -72,17 +78,20 @@ class MoonTabBar extends StatefulWidget {
 
   /// The list of tabs to display as the children of the tab bar.
   /// At least one child is required when this property is used.
-  /// This property cannot be used in conjunction with the [pillTabs] or [customTabs] properties; both must be set to null.
+  /// This property cannot be used in conjunction with the [pillTabs] or
+  /// [customTabs] properties; both must be set to null.
   final List<MoonTab>? tabs;
 
   /// The list of pill tabs to display as the children of the pill tab bar.
   /// At least one child is required when this property is used.
-  /// This property cannot be used in conjunction with the [tabs] or [customTabs] properties; both must be set to null.
+  /// This property cannot be used in conjunction with the [tabs] or [customTabs]
+  /// properties; both must be set to null.
   final List<MoonPillTab>? pillTabs;
 
   /// The list of custom tabs to display as the children of the custom tab bar.
   /// At least one child is required when this property is used.
-  /// This property cannot be used in conjunction with the [tabs] or [pillTabs] properties; both must be set to null.
+  /// This property cannot be used in conjunction with the [tabs] or [pillTabs]
+  /// properties; both must be set to null.
   final List<MoonCustomTabBuilder>? customTabs;
 
   /// Creates a Moon Design tab bar.
@@ -173,14 +182,20 @@ class _MoonTabBarState extends State<MoonTabBar> {
   late Curve _effectiveTransitionCurve;
   late MoonTabBarSizeProperties _effectiveMoonTabBarSize;
 
-  MoonTabBarSizeProperties _getMoonTabBarSize(BuildContext context, MoonTabBarSize? tabBarSize) {
+  MoonTabBarSizeProperties _getMoonTabBarSize(
+    BuildContext context,
+    MoonTabBarSize? tabBarSize,
+  ) {
     switch (tabBarSize) {
       case MoonTabBarSize.sm:
-        return context.moonTheme?.tabBarTheme.sizes.sm ?? MoonTabBarSizes(tokens: MoonTokens.light).sm;
+        return context.moonTheme?.tabBarTheme.sizes.sm ??
+            MoonTabBarSizes(tokens: MoonTokens.light).sm;
       case MoonTabBarSize.md:
-        return context.moonTheme?.tabBarTheme.sizes.md ?? MoonTabBarSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.tabBarTheme.sizes.md ??
+            MoonTabBarSizes(tokens: MoonTokens.light).md;
       default:
-        return context.moonTheme?.tabBarTheme.sizes.md ?? MoonTabBarSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.tabBarTheme.sizes.md ??
+            MoonTabBarSizes(tokens: MoonTokens.light).md;
     }
   }
 
@@ -204,14 +219,17 @@ class _MoonTabBarState extends State<MoonTabBar> {
         pillTab.isSelected?.call(index == _selectedIndex);
       });
     } else {
-      widget.customTabs?.asMap().forEach((int index, Widget Function(BuildContext, bool) customTab) {
+      widget.customTabs
+          ?.asMap()
+          .forEach((int index, Widget Function(BuildContext, bool) customTab) {
         customTab.call(context, index == _selectedIndex);
       });
     }
   }
 
   void _handleTabChange() {
-    final int animationValue = widget.tabController?.animation?.value.round() ?? 0;
+    final int animationValue =
+        widget.tabController?.animation?.value.round() ?? 0;
 
     if (animationValue != _selectedIndex) {
       setState(() {
@@ -231,6 +249,13 @@ class _MoonTabBarState extends State<MoonTabBar> {
     _updateTabsSelectedStatus();
 
     widget.tabController?.animation?.addListener(_handleTabChange);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    widget.tabController?.animation?.removeListener(_handleTabChange);
   }
 
   List<Widget> _generateTabs() {
@@ -295,9 +320,12 @@ class _MoonTabBarState extends State<MoonTabBar> {
         context.moonTheme?.tabBarTheme.properties.transitionCurve ??
         MoonTransitions.transitions.defaultTransitionCurve;
 
-    final double effectiveHeight = widget.height ?? _effectiveMoonTabBarSize.height;
+    final double effectiveHeight =
+        widget.height ?? _effectiveMoonTabBarSize.height;
 
-    final double effectiveGap = widget.gap ?? context.moonTheme?.tabBarTheme.properties.gap ?? MoonSizes.sizes.x5s;
+    final double effectiveGap = widget.gap ??
+        context.moonTheme?.tabBarTheme.properties.gap ??
+        MoonSizes.sizes.x5s;
 
     return Container(
       height: effectiveHeight,
@@ -308,13 +336,13 @@ class _MoonTabBarState extends State<MoonTabBar> {
       child: BaseSegmentedTabBar(
         gap: effectiveGap,
         isExpanded: widget.isExpanded,
-        initialIndex: widget.initialIndex,
         tabController: widget.tabController,
-        children: _generateTabs(),
         valueChanged: (int newIndex) {
           if (_selectedIndex == newIndex) return;
           if (widget.tabs != null && widget.tabs![newIndex].disabled) return;
-          if (widget.pillTabs != null && widget.pillTabs![newIndex].disabled) return;
+          if (widget.pillTabs != null && widget.pillTabs![newIndex].disabled) {
+            return;
+          }
 
           setState(() {
             _selectedIndex = newIndex;
@@ -325,6 +353,7 @@ class _MoonTabBarState extends State<MoonTabBar> {
             }
           });
         },
+        children: _generateTabs(),
       ),
     );
   }
@@ -349,9 +378,12 @@ class _IndicatorTabBuilder extends StatefulWidget {
   State<_IndicatorTabBuilder> createState() => _IndicatorTabBuilderState();
 }
 
-class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleTickerProviderStateMixin {
-  final ColorTweenWithPremultipliedAlpha _indicatorColorTween = ColorTweenWithPremultipliedAlpha();
-  final ColorTweenWithPremultipliedAlpha _textColorTween = ColorTweenWithPremultipliedAlpha();
+class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder>
+    with SingleTickerProviderStateMixin {
+  final ColorTweenWithPremultipliedAlpha _indicatorColorTween =
+      ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _textColorTween =
+      ColorTweenWithPremultipliedAlpha();
   final Tween<double> _indicatorWidthTween = Tween<double>(begin: 0, end: 0);
 
   Animation<Color?>? _indicatorColor;
@@ -361,14 +393,19 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
   AnimationController? _animationController;
 
   void _handleActiveEffect(bool isActive) {
-    isActive ? _animationController?.forward() : _animationController?.reverse();
+    isActive
+        ? _animationController?.forward()
+        : _animationController?.reverse();
   }
 
   @override
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(duration: widget.transitionDuration, vsync: this);
+    _animationController = AnimationController(
+      duration: widget.transitionDuration,
+      vsync: this,
+    );
 
     if (widget.isSelected) _animationController?.value = 1;
   }
@@ -384,8 +421,9 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
   Widget build(BuildContext context) {
     final MoonTabStyle? tabStyle = widget.tab.tabStyle;
 
-    final Color effectiveIndicatorColor =
-        tabStyle?.indicatorColor ?? context.moonTheme?.tabBarTheme.colors.indicatorColor ?? MoonColors.light.piccolo;
+    final Color effectiveIndicatorColor = tabStyle?.indicatorColor ??
+        context.moonTheme?.tabBarTheme.colors.indicatorColor ??
+        MoonColors.light.piccolo;
 
     final Color effectiveTextColor = tabStyle?.textStyle?.color ??
         tabStyle?.textColor ??
@@ -396,33 +434,45 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
         context.moonTheme?.tabBarTheme.colors.selectedTextColor ??
         MoonColors.light.piccolo;
 
-    final TextStyle effectiveTextStyle = widget.moonTabBarSizeProperties.textStyle.merge(tabStyle?.textStyle);
+    final TextStyle effectiveTextStyle =
+        widget.moonTabBarSizeProperties.textStyle.merge(tabStyle?.textStyle);
 
-    final double effectiveIndicatorHeight =
-        tabStyle?.indicatorHeight ?? widget.moonTabBarSizeProperties.indicatorHeight;
+    final double effectiveIndicatorHeight = tabStyle?.indicatorHeight ??
+        widget.moonTabBarSizeProperties.indicatorHeight;
 
-    final double effectiveTabGap = tabStyle?.tabGap ?? widget.moonTabBarSizeProperties.tabGap;
+    final double effectiveTabGap =
+        tabStyle?.tabGap ?? widget.moonTabBarSizeProperties.tabGap;
 
-    final EdgeInsetsGeometry effectiveTabPadding = tabStyle?.tabPadding ?? widget.moonTabBarSizeProperties.tabPadding;
+    final EdgeInsetsGeometry effectiveTabPadding =
+        tabStyle?.tabPadding ?? widget.moonTabBarSizeProperties.tabPadding;
 
-    final EdgeInsets resolvedDirectionalPadding = effectiveTabPadding.resolve(Directionality.of(context));
+    final EdgeInsets resolvedDirectionalPadding =
+        effectiveTabPadding.resolve(Directionality.of(context));
 
     final EdgeInsetsGeometry correctedTabPadding = tabStyle?.tabPadding == null
         ? EdgeInsetsDirectional.fromSTEB(
-            widget.tab.leading == null && widget.tab.label != null ? resolvedDirectionalPadding.left : 0,
+            widget.tab.leading == null && widget.tab.label != null
+                ? resolvedDirectionalPadding.left
+                : 0,
             resolvedDirectionalPadding.top,
-            widget.tab.trailing == null && widget.tab.label != null ? resolvedDirectionalPadding.right : 0,
+            widget.tab.trailing == null && widget.tab.label != null
+                ? resolvedDirectionalPadding.right
+                : 0,
             resolvedDirectionalPadding.bottom,
           )
         : resolvedDirectionalPadding;
 
-    _indicatorColor ??=
-        _animationController!.drive(_indicatorColorTween.chain(CurveTween(curve: widget.transitionCurve)));
+    _indicatorColor ??= _animationController!.drive(
+      _indicatorColorTween.chain(CurveTween(curve: widget.transitionCurve)),
+    );
 
-    _textColor ??= _animationController!.drive(_textColorTween.chain(CurveTween(curve: widget.transitionCurve)));
+    _textColor ??= _animationController!.drive(
+      _textColorTween.chain(CurveTween(curve: widget.transitionCurve)),
+    );
 
-    _indicatorWidth ??=
-        _animationController!.drive(_indicatorWidthTween.chain(CurveTween(curve: widget.transitionCurve)));
+    _indicatorWidth ??= _animationController!.drive(
+      _indicatorWidthTween.chain(CurveTween(curve: widget.transitionCurve)),
+    );
 
     _indicatorColorTween.end = effectiveIndicatorColor;
 
@@ -438,9 +488,18 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
       isFocusable: widget.tab.isFocusable,
       showFocusEffect: widget.tab.showFocusEffect,
       focusEffectColor: tabStyle?.focusEffectColor,
-      cursor: widget.isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
-      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
-        final bool isActive = isEnabled && (widget.isSelected || isHovered || isPressed);
+      cursor: widget.isSelected
+          ? SystemMouseCursors.basic
+          : SystemMouseCursors.click,
+      builder: (
+        BuildContext context,
+        bool isEnabled,
+        bool isHovered,
+        bool isFocused,
+        bool isPressed,
+      ) {
+        final bool isActive =
+            isEnabled && (widget.isSelected || isHovered || isPressed);
 
         _handleActiveEffect(isActive);
 
@@ -457,7 +516,9 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
                       size: widget.moonTabBarSizeProperties.iconSizeValue,
                     ),
                     child: DefaultTextStyle(
-                      style: effectiveTextStyle.copyWith(color: _textColor!.value),
+                      style: effectiveTextStyle.copyWith(
+                        color: _textColor!.value,
+                      ),
                       child: child!,
                     ),
                   );
@@ -471,17 +532,24 @@ class _IndicatorTabBuilderState extends State<_IndicatorTabBuilder> with SingleT
                       children: [
                         if (widget.tab.leading != null)
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: effectiveTabGap),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: effectiveTabGap,
+                            ),
                             child: widget.tab.leading,
                           ),
                         if (widget.tab.label != null)
                           ConstrainedBox(
-                            constraints: BoxConstraints(minHeight: widget.moonTabBarSizeProperties.iconSizeValue),
+                            constraints: BoxConstraints(
+                              minHeight:
+                                  widget.moonTabBarSizeProperties.iconSizeValue,
+                            ),
                             child: Center(child: widget.tab.label),
                           ),
                         if (widget.tab.trailing != null)
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: effectiveTabGap),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: effectiveTabGap,
+                            ),
                             child: widget.tab.trailing,
                           ),
                       ],
@@ -542,9 +610,12 @@ class _PillTabBuilder extends StatefulWidget {
   State<_PillTabBuilder> createState() => _PillTabBuilderState();
 }
 
-class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProviderStateMixin {
-  final ColorTweenWithPremultipliedAlpha _tabColorTween = ColorTweenWithPremultipliedAlpha();
-  final ColorTweenWithPremultipliedAlpha _textColorTween = ColorTweenWithPremultipliedAlpha();
+class _PillTabBuilderState extends State<_PillTabBuilder>
+    with SingleTickerProviderStateMixin {
+  final ColorTweenWithPremultipliedAlpha _tabColorTween =
+      ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _textColorTween =
+      ColorTweenWithPremultipliedAlpha();
 
   Animation<Color?>? _tabColor;
   Animation<Color?>? _textColor;
@@ -552,14 +623,19 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
   AnimationController? _animationController;
 
   void _handleActiveEffect(bool isActive) {
-    isActive ? _animationController?.forward() : _animationController?.reverse();
+    isActive
+        ? _animationController?.forward()
+        : _animationController?.reverse();
   }
 
   @override
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(duration: widget.transitionDuration, vsync: this);
+    _animationController = AnimationController(
+      duration: widget.transitionDuration,
+      vsync: this,
+    );
 
     if (widget.isSelected) _animationController?.value = 1;
   }
@@ -591,26 +667,38 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
         context.moonTheme?.tabBarTheme.colors.selectedPillTextColor ??
         MoonColors.light.textPrimary;
 
-    final TextStyle effectiveTextStyle = widget.moonTabBarSizeProperties.textStyle.merge(tabStyle?.textStyle);
+    final TextStyle effectiveTextStyle =
+        widget.moonTabBarSizeProperties.textStyle.merge(tabStyle?.textStyle);
 
-    final double effectiveTabGap = tabStyle?.tabGap ?? widget.moonTabBarSizeProperties.tabGap;
+    final double effectiveTabGap =
+        tabStyle?.tabGap ?? widget.moonTabBarSizeProperties.tabGap;
 
-    final EdgeInsetsGeometry effectiveTabPadding = tabStyle?.tabPadding ?? widget.moonTabBarSizeProperties.tabPadding;
+    final EdgeInsetsGeometry effectiveTabPadding =
+        tabStyle?.tabPadding ?? widget.moonTabBarSizeProperties.tabPadding;
 
-    final EdgeInsets resolvedDirectionalPadding = effectiveTabPadding.resolve(Directionality.of(context));
+    final EdgeInsets resolvedDirectionalPadding =
+        effectiveTabPadding.resolve(Directionality.of(context));
 
     final EdgeInsetsGeometry correctedTabPadding = tabStyle?.tabPadding == null
         ? EdgeInsetsDirectional.fromSTEB(
-            widget.tab.leading == null && widget.tab.label != null ? resolvedDirectionalPadding.left : 0,
+            widget.tab.leading == null && widget.tab.label != null
+                ? resolvedDirectionalPadding.left
+                : 0,
             resolvedDirectionalPadding.top,
-            widget.tab.trailing == null && widget.tab.label != null ? resolvedDirectionalPadding.right : 0,
+            widget.tab.trailing == null && widget.tab.label != null
+                ? resolvedDirectionalPadding.right
+                : 0,
             resolvedDirectionalPadding.bottom,
           )
         : resolvedDirectionalPadding;
 
-    _tabColor ??= _animationController!.drive(_tabColorTween.chain(CurveTween(curve: widget.transitionCurve)));
+    _tabColor ??= _animationController!.drive(
+      _tabColorTween.chain(CurveTween(curve: widget.transitionCurve)),
+    );
 
-    _textColor ??= _animationController!.drive(_textColorTween.chain(CurveTween(curve: widget.transitionCurve)));
+    _textColor ??= _animationController!.drive(
+      _textColorTween.chain(CurveTween(curve: widget.transitionCurve)),
+    );
 
     _tabColorTween.end = effectiveSelectedTabColor;
 
@@ -627,9 +715,18 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
       showFocusEffect: widget.tab.showFocusEffect,
       focusEffectColor: tabStyle?.focusEffectColor,
       borderRadius: effectiveTabBorderRadius.squircleBorderRadius(context),
-      cursor: widget.isSelected ? SystemMouseCursors.basic : SystemMouseCursors.click,
-      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
-        final bool isActive = isEnabled && (widget.isSelected || isHovered || isPressed);
+      cursor: widget.isSelected
+          ? SystemMouseCursors.basic
+          : SystemMouseCursors.click,
+      builder: (
+        BuildContext context,
+        bool isEnabled,
+        bool isHovered,
+        bool isFocused,
+        bool isPressed,
+      ) {
+        final bool isActive =
+            isEnabled && (widget.isSelected || isHovered || isPressed);
 
         _handleActiveEffect(isActive);
 
@@ -641,7 +738,8 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
                   ShapeDecoration(
                     color: _tabColor!.value,
                     shape: MoonSquircleBorder(
-                      borderRadius: effectiveTabBorderRadius.squircleBorderRadius(context),
+                      borderRadius: effectiveTabBorderRadius
+                          .squircleBorderRadius(context),
                     ),
                   ),
               child: IconTheme(
@@ -665,13 +763,17 @@ class _PillTabBuilderState extends State<_PillTabBuilder> with SingleTickerProvi
                 children: [
                   if (widget.tab.leading != null)
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: effectiveTabGap),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: effectiveTabGap,
+                      ),
                       child: widget.tab.leading,
                     ),
                   if (widget.tab.label != null) widget.tab.label!,
                   if (widget.tab.trailing != null)
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: effectiveTabGap),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: effectiveTabGap,
+                      ),
                       child: widget.tab.trailing,
                     ),
                 ],

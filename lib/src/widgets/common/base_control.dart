@@ -284,17 +284,23 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
     }
   }
 
-  void _handleHorizontalDragStart(DragStartDetails dragStartDetails) => _handleTapDown(null);
+  void _handleHorizontalDragStart(DragStartDetails dragStartDetails) =>
+      _handleTapDown(null);
 
-  void _handleHorizontalDragEnd(DragEndDetails dragEndDetails) => _handleTapUp(null);
+  void _handleHorizontalDragEnd(DragEndDetails dragEndDetails) =>
+      _handleTapUp(null);
 
-  void _handleVerticalDragStart(DragStartDetails dragStartDetails) => _handleTapDown(null);
+  void _handleVerticalDragStart(DragStartDetails dragStartDetails) =>
+      _handleTapDown(null);
 
-  void _handleVerticalDragEnd(DragEndDetails dragEndDetails) => _handleTapUp(null);
+  void _handleVerticalDragEnd(DragEndDetails dragEndDetails) =>
+      _handleTapUp(null);
 
   Color _getFocusColor({required Color focusColor}) {
     if (widget.backgroundColor != null) {
-      return context.isDarkMode ? widget.backgroundColor!.withOpacity(0.8) : widget.backgroundColor!.withOpacity(0.2);
+      return context.isDarkMode
+          ? widget.backgroundColor!.withOpacity(0.8)
+          : widget.backgroundColor!.withOpacity(0.2);
     } else {
       return focusColor;
     }
@@ -304,9 +310,14 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   void initState() {
     super.initState();
 
-    _actions = <Type, Action<Intent>>{ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())};
+    _actions = <Type, Action<Intent>>{
+      ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap()),
+    };
 
-    _focusNode = FocusNode(canRequestFocus: _isEnabled, skipTraversal: !widget.isFocusable);
+    _focusNode = FocusNode(
+      canRequestFocus: _isEnabled,
+      skipTraversal: !widget.isFocusable,
+    );
     _effectiveFocusNode.canRequestFocus = _isEnabled;
 
     if (widget.autofocus) {
@@ -318,7 +329,8 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
   void didUpdateWidget(MoonBaseControl oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.onTap != oldWidget.onTap || widget.onLongPress != oldWidget.onLongPress) {
+    if (widget.onTap != oldWidget.onTap ||
+        widget.onLongPress != oldWidget.onLongPress) {
       if (!_isEnabled) {
         _isHovered = _isPressed = false;
       }
@@ -336,57 +348,81 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
 
   @override
   Widget build(BuildContext context) {
-    final double effectiveDisabledOpacityValue =
-        widget.disabledOpacityValue ?? context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
+    final double effectiveDisabledOpacityValue = widget.disabledOpacityValue ??
+        context.moonOpacities?.disabled ??
+        MoonOpacities.opacities.disabled;
 
     // Focus effect properties.
     final Color effectiveFocusEffectColor = widget.focusEffectColor ??
         context.moonEffects?.controlFocusEffect.effectColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectColor;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlFocusEffect
+            .effectColor;
 
-    final Color focusColor = _getFocusColor(focusColor: effectiveFocusEffectColor);
+    final Color focusColor =
+        _getFocusColor(focusColor: effectiveFocusEffectColor);
 
     final double effectiveFocusEffectExtent = widget.focusEffectExtent ??
         context.moonEffects?.controlFocusEffect.effectExtent ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectExtent;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlFocusEffect
+            .effectExtent;
 
     final Duration effectiveFocusEffectDuration = widget.focusEffectDuration ??
         context.moonEffects?.controlFocusEffect.effectDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlFocusEffect
+            .effectDuration;
 
     final Curve effectiveFocusEffectCurve = widget.focusEffectCurve ??
         context.moonEffects?.controlFocusEffect.effectCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlFocusEffect
+            .effectCurve;
 
     // Pulse effect properties.
     final Color effectivePulseEffectColor = widget.pulseEffectColor ??
         context.moonEffects?.controlPulseEffect.effectColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectColor!;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlPulseEffect
+            .effectColor!;
 
     final double effectivePulseEffectExtent = widget.pulseEffectExtent ??
         context.moonEffects?.controlPulseEffect.effectExtent ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectExtent!;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlPulseEffect
+            .effectExtent!;
 
     final Duration effectivePulseEffectDuration = widget.pulseEffectDuration ??
         context.moonEffects?.controlPulseEffect.effectDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlPulseEffect
+            .effectDuration;
 
     final Curve effectivePulseEffectCurve = widget.pulseEffectCurve ??
         context.moonEffects?.controlPulseEffect.effectCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlPulseEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlPulseEffect
+            .effectCurve;
 
     // Scale effect properties.
     final double effectiveScaleEffectScalar = widget.scaleEffectScalar ??
         context.moonEffects?.controlScaleEffect.effectScalar ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlScaleEffect.effectScalar!;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlScaleEffect
+            .effectScalar!;
 
     final Duration effectiveScaleEffectDuration = widget.scaleEffectDuration ??
         context.moonEffects?.controlScaleEffect.effectDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlScaleEffect.effectDuration;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlScaleEffect
+            .effectDuration;
 
     final Curve effectiveScaleEffectCurve = widget.scaleEffectCurve ??
         context.moonEffects?.controlScaleEffect.effectCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlScaleEffect.effectCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlScaleEffect
+            .effectCurve;
 
     final Widget child = widget.child ??
         widget.builder!(
@@ -426,10 +462,14 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
               onLongPressStart: _handleLongPressStart,
               onLongPressUp: _handleLongPressUp,
               onTapCancel: _handleTapCancel,
-              onHorizontalDragStart: widget.absorbDragEvents ? _handleHorizontalDragStart : null,
-              onHorizontalDragEnd: widget.absorbDragEvents ? _handleHorizontalDragEnd : null,
-              onVerticalDragStart: widget.absorbDragEvents ? _handleVerticalDragStart : null,
-              onVerticalDragEnd: widget.absorbDragEvents ? _handleVerticalDragEnd : null,
+              onHorizontalDragStart:
+                  widget.absorbDragEvents ? _handleHorizontalDragStart : null,
+              onHorizontalDragEnd:
+                  widget.absorbDragEvents ? _handleHorizontalDragEnd : null,
+              onVerticalDragStart:
+                  widget.absorbDragEvents ? _handleVerticalDragStart : null,
+              onVerticalDragEnd:
+                  widget.absorbDragEvents ? _handleVerticalDragEnd : null,
               child: TouchTargetPadding(
                 minSize: widget.ensureMinimalTouchTargetSize
                     ? Size(widget.minTouchTargetSize, widget.minTouchTargetSize)
@@ -450,11 +490,16 @@ class _MoonBaseControlState extends State<MoonBaseControl> {
                         effectCurve: effectivePulseEffectCurve,
                         effectDuration: effectivePulseEffectDuration,
                         child: AnimatedOpacity(
-                          opacity: _isEnabled ? 1 : effectiveDisabledOpacityValue,
-                          duration: context.moonTransitions?.defaultTransitionDuration ??
-                              MoonTransitions.transitions.defaultTransitionDuration,
-                          curve: context.moonTransitions?.defaultTransitionCurve ??
-                              MoonTransitions.transitions.defaultTransitionCurve,
+                          opacity:
+                              _isEnabled ? 1 : effectiveDisabledOpacityValue,
+                          duration: context
+                                  .moonTransitions?.defaultTransitionDuration ??
+                              MoonTransitions
+                                  .transitions.defaultTransitionDuration,
+                          curve:
+                              context.moonTransitions?.defaultTransitionCurve ??
+                                  MoonTransitions
+                                      .transitions.defaultTransitionCurve,
                           child: MoonFocusEffect(
                             show: _canAnimateFocus,
                             effectColor: focusColor,

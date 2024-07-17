@@ -11,7 +11,8 @@ class ComboboxSingleSelectStory extends StatefulWidget {
   const ComboboxSingleSelectStory({super.key});
 
   @override
-  State<ComboboxSingleSelectStory> createState() => _ComboboxSingleSelectStoryState();
+  State<ComboboxSingleSelectStory> createState() =>
+      _ComboboxSingleSelectStoryState();
 }
 
 class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
@@ -31,8 +32,12 @@ class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
     setState(() {
       if (!_optionIsSelected && _selectedOption != null) _selectedOption = null;
 
-      _filteredOptionsList =
-          _optionsList.where((Component option) => option.name.toLowerCase().contains(_inputValue)).toList();
+      _filteredOptionsList = _optionsList
+          .where(
+            (Component option) =>
+                option.name.toLowerCase().contains(_inputValue),
+          )
+          .toList();
       _showDropdown = true;
     });
   }
@@ -110,7 +115,8 @@ class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
       options: colorOptions,
     );
 
-    final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+    final inactiveBorderColor =
+        colorTable(context)[inactiveBorderColorKnob ?? 40];
 
     final hoverBorderColorKnob = context.knobs.nullable.options(
       label: "hoverBorderColor",
@@ -125,7 +131,8 @@ class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
 
     final backgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
-      description: "MoonColors variants for MoonTextInput and MoonDropdown background.",
+      description:
+          "MoonColors variants for MoonTextInput and MoonDropdown background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -167,8 +174,9 @@ class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
       description: "Whether MoonTextInput has floating label.",
     );
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: Padding(
@@ -197,7 +205,9 @@ class _ComboboxSingleSelectStoryState extends State<ComboboxSingleSelectStory> {
                         padding: EdgeInsets.zero,
                         itemCount: _filteredOptionsList.length,
                         itemBuilder: (BuildContext _, int index) {
-                          if (index >= _filteredOptionsList.length) return const SizedBox.shrink();
+                          if (index >= _filteredOptionsList.length) {
+                            return const SizedBox.shrink();
+                          }
                           final Component option = _filteredOptionsList[index];
 
                           return MoonMenuItem(
