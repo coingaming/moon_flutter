@@ -342,8 +342,8 @@ class _MoonAuthCodeState extends State<MoonAuthCode>
   }
 
   void _initializeFocusNode() {
-    _focusNode = widget.focusNode ?? FocusNode();
-    _focusNode.addListener(() => _setState(() {}));
+    _focusNode = (widget.focusNode ?? FocusNode())
+      ..addListener(() => setState(() {}));
   }
 
   void _initializeInputList() {
@@ -573,10 +573,11 @@ class _MoonAuthCodeState extends State<MoonAuthCode>
 
   @override
   void dispose() {
-    _textEditingController.dispose();
+    if (widget.textController == null) _textEditingController.dispose();
+    if (widget.focusNode == null) _focusNode.dispose();
+
     _errorAnimationController!.dispose();
     _cursorController.dispose();
-    _focusNode.dispose();
 
     super.dispose();
   }
@@ -631,8 +632,9 @@ class _MoonAuthCodeState extends State<MoonAuthCode>
           children: [
             Center(
               child: Padding(
-                padding:
-                    EdgeInsets.only(left: _resolvedTextStyle.fontSize! / 1.5),
+                padding: EdgeInsets.only(
+                  left: _resolvedTextStyle.fontSize! / 1.5,
+                ),
                 child: FadeTransition(
                   opacity: _cursorAnimation,
                   child: CustomPaint(
@@ -924,7 +926,5 @@ class _CursorPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter old) {
-    return false;
-  }
+  bool shouldRepaint(CustomPainter old) => false;
 }

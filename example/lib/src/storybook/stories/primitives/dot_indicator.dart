@@ -72,27 +72,16 @@ class _DotIndicatorStoryState extends State<DotIndicatorStory> {
             const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MoonFilledButton(
-                  label: const Text("1"),
-                  onTap: () => setState(() => _selectedDot = 0),
+              children: List.generate(
+                4,
+                (int index) => Padding(
+                  padding: EdgeInsets.only(right: index != 3 ? 8.0 : 0),
+                  child: MoonFilledButton(
+                    label: Text("${index + 1}"),
+                    onTap: () => setState(() => _selectedDot = index),
+                  ),
                 ),
-                const SizedBox(width: 8),
-                MoonFilledButton(
-                  label: const Text("2"),
-                  onTap: () => setState(() => _selectedDot = 1),
-                ),
-                const SizedBox(width: 8),
-                MoonFilledButton(
-                  label: const Text("3"),
-                  onTap: () => setState(() => _selectedDot = 2),
-                ),
-                const SizedBox(width: 8),
-                MoonFilledButton(
-                  label: const Text("4"),
-                  onTap: () => setState(() => _selectedDot = 3),
-                ),
-              ],
+              ),
             ),
           ],
         ),

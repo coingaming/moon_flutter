@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonDrawerColors extends ThemeExtension<MoonDrawerColors> with DiagnosticableTreeMixin {
+class MoonDrawerColors extends ThemeExtension<MoonDrawerColors>
+    with DiagnosticableTreeMixin {
   /// The text color of the MoonDrawer.
   final Color textColor;
 
@@ -14,14 +15,10 @@ class MoonDrawerColors extends ThemeExtension<MoonDrawerColors> with Diagnostica
   /// The background color of the MoonDrawer.
   final Color backgroundColor;
 
-  /// The color of the MoonDrawer barrier.
-  final Color barrierColor;
-
   const MoonDrawerColors({
     required this.textColor,
     required this.iconColor,
     required this.backgroundColor,
-    required this.barrierColor,
   });
 
   @override
@@ -29,13 +26,11 @@ class MoonDrawerColors extends ThemeExtension<MoonDrawerColors> with Diagnostica
     Color? textColor,
     Color? iconColor,
     Color? backgroundColor,
-    Color? barrierColor,
   }) {
     return MoonDrawerColors(
       textColor: textColor ?? this.textColor,
       iconColor: iconColor ?? this.iconColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
-      barrierColor: barrierColor ?? this.barrierColor,
     );
   }
 
@@ -46,8 +41,8 @@ class MoonDrawerColors extends ThemeExtension<MoonDrawerColors> with Diagnostica
     return MoonDrawerColors(
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
       iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
-      barrierColor: colorPremulLerp(barrierColor, other.barrierColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
     );
   }
 
@@ -58,7 +53,6 @@ class MoonDrawerColors extends ThemeExtension<MoonDrawerColors> with Diagnostica
       ..add(DiagnosticsProperty("type", "MoonDrawerColors"))
       ..add(ColorProperty("textColor", textColor))
       ..add(ColorProperty("iconColor", iconColor))
-      ..add(ColorProperty("backgroundColor", backgroundColor))
-      ..add(ColorProperty("barrierColor", barrierColor));
+      ..add(ColorProperty("backgroundColor", backgroundColor));
   }
 }

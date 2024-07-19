@@ -65,61 +65,45 @@ class _RadioStoryState extends State<RadioStory> {
               text: "MoonRadio",
               paddingTop: 0,
             ),
-            MoonRadio(
-              value: ChoiceCustom.first,
-              groupValue: valueCustom,
-              activeColor: activeColor,
-              inactiveColor: inactiveColor,
-              toggleable: isToggleableKnob,
-              onChanged: isDisabledKnob ? null : (ChoiceCustom? choice) => setState(() => valueCustom = choice),
-            ),
-            const SizedBox(height: 8),
-            MoonRadio(
-              value: ChoiceCustom.second,
-              groupValue: valueCustom,
-              activeColor: activeColor,
-              inactiveColor: inactiveColor,
-              toggleable: isToggleableKnob,
-              onChanged: isDisabledKnob ? null : (ChoiceCustom? choice) => setState(() => valueCustom = choice),
-            ),
-            const TextDivider(text: "MoonRadio with label"),
-            MoonMenuItem(
-              absorbGestures: true,
-              onTap: isDisabledKnob
-                  ? null
-                  : () => setState(
-                        () => switch (valueLabel) {
-                          ChoiceLabel.first when isToggleableKnob => valueLabel = null,
-                          _ => valueLabel = ChoiceLabel.first,
-                        },
-                      ),
-              label: const Text("With label #1"),
-              trailing: MoonRadio(
-                value: ChoiceLabel.first,
-                groupValue: valueLabel,
+            ...List.generate(
+              2,
+              (int index) => MoonRadio(
+                value: ChoiceCustom.values[index],
+                groupValue: valueCustom,
+                activeColor: activeColor,
+                inactiveColor: inactiveColor,
                 toggleable: isToggleableKnob,
-                tapAreaSizeValue: 0,
-                onChanged: isDisabledKnob ? null : (_) {},
+                onChanged: isDisabledKnob
+                    ? null
+                    : (ChoiceCustom? choice) =>
+                        setState(() => valueCustom = choice),
               ),
             ),
-            const SizedBox(height: 8),
-            MoonMenuItem(
-              absorbGestures: true,
-              onTap: isDisabledKnob
-                  ? null
-                  : () => setState(
-                        () => switch (valueLabel) {
-                          ChoiceLabel.second when isToggleableKnob => valueLabel = null,
-                          _ => valueLabel = ChoiceLabel.second,
-                        },
-                      ),
-              label: const Text("With label #2"),
-              trailing: MoonRadio(
-                value: ChoiceLabel.second,
-                groupValue: valueLabel,
-                toggleable: isToggleableKnob,
-                tapAreaSizeValue: 0,
-                onChanged: isDisabledKnob ? null : (_) {},
+            const TextDivider(text: "MoonRadio with label"),
+            ...List.generate(
+              2,
+              (int index) => MoonMenuItem(
+                absorbGestures: true,
+                onTap: isDisabledKnob
+                    ? null
+                    : () => setState(
+                          () {
+                            if (isToggleableKnob &&
+                                valueLabel == ChoiceLabel.values[index]) {
+                              valueLabel = null;
+                            } else {
+                              valueLabel = ChoiceLabel.values[index];
+                            }
+                          },
+                        ),
+                label: Text("With label #${index + 1}"),
+                trailing: MoonRadio(
+                  value: ChoiceLabel.values[index],
+                  groupValue: valueLabel,
+                  toggleable: isToggleableKnob,
+                  tapAreaSizeValue: 0,
+                  onChanged: isDisabledKnob ? null : (_) {},
+                ),
               ),
             ),
           ],

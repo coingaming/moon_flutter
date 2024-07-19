@@ -23,12 +23,6 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
   /// The text style of the MoonTag.
   final TextStyle textStyle;
 
-  /// The upper case text style of the MoonTag.
-  @Deprecated(
-    "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
-  )
-  final TextStyle upperCaseTextStyle;
-
   const MoonTagSizeProperties({
     required this.borderRadius,
     required this.gap,
@@ -36,10 +30,6 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     required this.iconSizeValue,
     required this.padding,
     required this.textStyle,
-    @Deprecated(
-      "Handle upper case text style properly at place of usage. This property will be removed in 1.0.0 release.",
-    )
-    required this.upperCaseTextStyle,
   });
 
   @override
@@ -50,7 +40,6 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
     double? iconSizeValue,
     EdgeInsetsGeometry? padding,
     TextStyle? textStyle,
-    TextStyle? upperCaseTextStyle,
   }) {
     return MoonTagSizeProperties(
       borderRadius: borderRadius ?? this.borderRadius,
@@ -59,8 +48,6 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
       iconSizeValue: iconSizeValue ?? this.iconSizeValue,
       padding: padding ?? this.padding,
       textStyle: textStyle ?? this.textStyle,
-      // ignore: deprecated_member_use_from_same_package
-      upperCaseTextStyle: upperCaseTextStyle ?? this.upperCaseTextStyle,
     );
   }
 
@@ -75,8 +62,6 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
-      // ignore: deprecated_member_use_from_same_package
-      upperCaseTextStyle: TextStyle.lerp(upperCaseTextStyle, other.upperCaseTextStyle, t)!,
     );
   }
 
@@ -90,8 +75,6 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
-      // ignore: deprecated_member_use_from_same_package
-      ..add(DiagnosticsProperty<TextStyle>("upperCaseTextStyle", upperCaseTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
 }

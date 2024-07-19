@@ -35,14 +35,16 @@ class SegmentedControlStory extends StatelessWidget {
 
     final selectedSegmentColorKnob = context.knobs.nullable.options(
       label: "selectedSegmentColor",
-      description: "MoonColors variants for MoonSegmentedControl selected segment.",
+      description:
+          "MoonColors variants for MoonSegmentedControl selected segment.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final selectedSegmentColor = colorTable(context)[selectedSegmentColorKnob ?? 40];
+    final selectedSegmentColor =
+        colorTable(context)[selectedSegmentColorKnob ?? 40];
 
     final textColorKnob = context.knobs.nullable.options(
       label: "textColor",
@@ -57,7 +59,8 @@ class SegmentedControlStory extends StatelessWidget {
 
     final selectedTextColorKnob = context.knobs.nullable.options(
       label: "selectedTextColor",
-      description: "MoonColors variants for MoonSegmentedControl selected segment text.",
+      description:
+          "MoonColors variants for MoonSegmentedControl selected segment text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -120,12 +123,14 @@ class SegmentedControlStory extends StatelessWidget {
       textColor: textColor,
       selectedTextColor: selectedTextColor,
       selectedSegmentColor: selectedSegmentColor,
-      segmentBorderRadius:
-          segmentBorderRadiusKnob != null ? BorderRadius.circular(segmentBorderRadiusKnob.toDouble()) : null,
+      segmentBorderRadius: segmentBorderRadiusKnob != null
+          ? BorderRadius.circular(segmentBorderRadiusKnob.toDouble())
+          : null,
     );
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -145,26 +150,19 @@ class SegmentedControlStory extends StatelessWidget {
                   segmentedControlSize: segmentedControlSizeKnob,
                   backgroundColor: backgroundColor,
                   borderRadius: borderRadius,
-                  segments: [
-                    Segment(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
-                      label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
+                  segments: List.generate(
+                    3,
+                    (int index) => Segment(
+                      leading: showLeadingKnob
+                          ? const Icon(MoonIcons.other_frame_24_light)
+                          : null,
+                      label: showLabelKnob ? Text('Tab${index + 1}') : null,
+                      trailing: showTrailingKnob
+                          ? const Icon(MoonIcons.other_frame_24_light)
+                          : null,
                       segmentStyle: segmentStyle,
                     ),
-                    Segment(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
-                      label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
-                      segmentStyle: segmentStyle,
-                    ),
-                    Segment(
-                      leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
-                      label: showLabelKnob ? const Text('Tab') : null,
-                      trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
-                      segmentStyle: segmentStyle,
-                    ),
-                  ],
+                  ),
                 ),
                 const TextDivider(text: "MoonSegmentedControl with icons"),
                 MoonSegmentedControl(
@@ -174,24 +172,13 @@ class SegmentedControlStory extends StatelessWidget {
                   segmentedControlSize: segmentedControlSizeKnob,
                   backgroundColor: backgroundColor,
                   borderRadius: borderRadius,
-                  segments: [
-                    Segment(
+                  segments: List.generate(
+                    4,
+                    (int index) => Segment(
                       trailing: const Icon(MoonIcons.other_frame_24_light),
                       segmentStyle: segmentStyle,
                     ),
-                    Segment(
-                      trailing: const Icon(MoonIcons.other_frame_24_light),
-                      segmentStyle: segmentStyle,
-                    ),
-                    Segment(
-                      trailing: const Icon(MoonIcons.other_frame_24_light),
-                      segmentStyle: segmentStyle,
-                    ),
-                    Segment(
-                      trailing: const Icon(MoonIcons.other_frame_24_light),
-                      segmentStyle: segmentStyle,
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),

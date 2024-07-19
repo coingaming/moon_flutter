@@ -10,7 +10,8 @@ class ComboboxMultiSelectStory extends StatefulWidget {
   const ComboboxMultiSelectStory({super.key});
 
   @override
-  State<ComboboxMultiSelectStory> createState() => _ComboboxMultiSelectStoryState();
+  State<ComboboxMultiSelectStory> createState() =>
+      _ComboboxMultiSelectStoryState();
 }
 
 class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
@@ -26,14 +27,22 @@ class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
 
   void _performSearch() {
     setState(() {
-      _filteredOptionsList =
-          _optionsList.where((Component option) => option.name.toLowerCase().contains(_inputValue)).toList();
+      _filteredOptionsList = _optionsList
+          .where(
+            (Component option) =>
+                option.name.toLowerCase().contains(_inputValue),
+          )
+          .toList();
       _showDropdown = true;
     });
   }
 
   void _handleSelect(Component option, bool isSelected) {
-    setState(() => isSelected ? _selectedOptions[option] = true : _selectedOptions.remove(option));
+    setState(
+      () => isSelected
+          ? _selectedOptions[option] = true
+          : _selectedOptions.remove(option),
+    );
   }
 
   void _showAllOptionsList() {
@@ -100,7 +109,8 @@ class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
       options: colorOptions,
     );
 
-    final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+    final inactiveBorderColor =
+        colorTable(context)[inactiveBorderColorKnob ?? 40];
 
     final hoverBorderColorKnob = context.knobs.nullable.options(
       label: "hoverBorderColor",
@@ -115,7 +125,8 @@ class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
 
     final backgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
-      description: "MoonColors variants for MoonTextInput and MoonDropdown background.",
+      description:
+          "MoonColors variants for MoonTextInput and MoonDropdown background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -157,8 +168,9 @@ class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
       description: "Whether MoonTextInput has floating label.",
     );
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: Padding(
@@ -187,13 +199,20 @@ class _ComboboxMultiSelectStoryState extends State<ComboboxMultiSelectStory> {
                         padding: EdgeInsets.zero,
                         itemCount: _filteredOptionsList.length,
                         itemBuilder: (BuildContext _, int index) {
-                          if (index >= _filteredOptionsList.length) return const SizedBox.shrink();
-                          final Component currentOption = _filteredOptionsList[index];
-                          final bool isSelected = _selectedOptions.containsKey(currentOption);
+                          if (index >= _filteredOptionsList.length) {
+                            return const SizedBox.shrink();
+                          }
+                          final Component currentOption =
+                              _filteredOptionsList[index];
+                          final bool isSelected =
+                              _selectedOptions.containsKey(currentOption);
 
                           return MoonMenuItem(
                             absorbGestures: true,
-                            onTap: () => _handleSelect(currentOption, !isSelected),
+                            onTap: () => _handleSelect(
+                              currentOption,
+                              !isSelected,
+                            ),
                             label: Text(currentOption.name),
                             trailing: MoonCheckbox(
                               value: isSelected,

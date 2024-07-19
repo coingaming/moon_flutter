@@ -84,9 +84,18 @@ class _MenuItemStoryState extends State<MenuItemStory> {
       enabled: false,
       initial: CrossAxisAlignment.center,
       options: [
-        Option(label: CrossAxisAlignment.start.name, value: CrossAxisAlignment.start),
-        Option(label: CrossAxisAlignment.center.name, value: CrossAxisAlignment.center),
-        Option(label: CrossAxisAlignment.end.name, value: CrossAxisAlignment.end),
+        Option(
+          label: CrossAxisAlignment.start.name,
+          value: CrossAxisAlignment.start,
+        ),
+        Option(
+          label: CrossAxisAlignment.center.name,
+          value: CrossAxisAlignment.center,
+        ),
+        Option(
+          label: CrossAxisAlignment.end.name,
+          value: CrossAxisAlignment.end,
+        ),
       ],
     );
 
@@ -121,8 +130,9 @@ class _MenuItemStoryState extends State<MenuItemStory> {
       description: "MoonMenuItem onTap() is null.",
     );
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -154,7 +164,10 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                       borderRadius: borderRadius,
                       backgroundColor: context.moonColors!.jiren,
                       avatarSize: MoonAvatarSize.lg,
-                      content: const Icon(MoonIcons.travel_airplane_32_regular, size: 32),
+                      content: const Icon(
+                        MoonIcons.travel_airplane_32_regular,
+                        size: 32,
+                      ),
                     )
                   : null,
               trailing: showTrailingKnob
@@ -185,7 +198,10 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                       borderRadius: borderRadius,
                       backgroundColor: context.moonColors!.jiren,
                       avatarSize: MoonAvatarSize.md,
-                      content: const Icon(MoonIcons.notifications_activity_32_regular, size: 24),
+                      content: const Icon(
+                        MoonIcons.notifications_activity_32_regular,
+                        size: 24,
+                      ),
                     )
                   : null,
               trailing: showTrailingKnob
@@ -200,7 +216,10 @@ class _MenuItemStoryState extends State<MenuItemStory> {
               borderRadius: borderRadius,
               backgroundColor: backgroundColor,
               menuItemCrossAxisAlignment: menuItemCrossAxisAlignmentKnob,
-              onTap: isDisabledKnob ? null : () => setState(() => checkboxIsSelected = !checkboxIsSelected!),
+              onTap: isDisabledKnob
+                  ? null
+                  : () =>
+                      setState(() => checkboxIsSelected = !checkboxIsSelected!),
               label: Text(
                 "Menu item with MoonCheckbox",
                 style: TextStyle(color: labelTextColor),
@@ -215,7 +234,8 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                   ? MoonCheckbox(
                       value: checkboxIsSelected,
                       tapAreaSizeValue: 24,
-                      onChanged: (bool? isSelected) => setState(() => checkboxIsSelected = isSelected),
+                      onChanged: (bool? isSelected) =>
+                          setState(() => checkboxIsSelected = isSelected),
                     )
                   : null,
             ),
@@ -224,7 +244,9 @@ class _MenuItemStoryState extends State<MenuItemStory> {
               borderRadius: borderRadius,
               backgroundColor: backgroundColor,
               menuItemCrossAxisAlignment: menuItemCrossAxisAlignmentKnob,
-              onTap: isDisabledKnob ? null : () => setState(() => switchIsSelected = !switchIsSelected),
+              onTap: isDisabledKnob
+                  ? null
+                  : () => setState(() => switchIsSelected = !switchIsSelected),
               label: Text(
                 "Menu item with MoonSwitch",
                 style: TextStyle(color: labelTextColor),
@@ -239,7 +261,8 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                   ? MoonSwitch(
                       switchSize: MoonSwitchSize.x2s,
                       value: switchIsSelected,
-                      onChanged: (bool isSelected) => setState(() => switchIsSelected = isSelected),
+                      onChanged: (bool isSelected) =>
+                          setState(() => switchIsSelected = isSelected),
                     )
                   : null,
             ),
@@ -252,7 +275,8 @@ class _MenuItemStoryState extends State<MenuItemStory> {
               accordionSize: MoonAccordionSize.md,
               iconColor: trailingColor,
               backgroundColor: backgroundColor ?? Colors.transparent,
-              expandedBackgroundColor: backgroundColor ?? context.moonColors!.heles,
+              expandedBackgroundColor:
+                  backgroundColor ?? context.moonColors!.heles,
               label: Text(
                 'Expandable menu item',
                 style: context.moonTypography!.body.textDefault.copyWith(
@@ -266,26 +290,31 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                       color: leadingColor ?? context.moonColors!.iconPrimary,
                     )
                   : null,
-              childrenPadding: const EdgeInsets.only(top: 8, bottom: 8, left: 24),
+              childrenPadding:
+                  const EdgeInsets.only(top: 8, bottom: 8, left: 24),
               children: MoonMenuItem.divideMenuItems(
                 context: context,
-                menuItems: [
-                  MoonMenuItem(
+                menuItems: List.generate(
+                  2,
+                  (index) => MoonMenuItem(
                     backgroundColor: backgroundColor,
                     borderRadius: borderRadius,
                     menuItemCrossAxisAlignment: menuItemCrossAxisAlignmentKnob,
-                    onTap: () => setState(() => currentlySelectedMenuItem = MenuItem.first),
+                    onTap: () => setState(
+                      () => currentlySelectedMenuItem = MenuItem.values[index],
+                    ),
                     label: Text(
-                      "Menu item 1 with MoonRadio",
+                      "Menu item ${index + 1} with MoonRadio",
                       style: TextStyle(color: labelTextColor),
                     ),
                     leading: showLeadingKnob
                         ? MoonRadio<MenuItem>(
-                            value: MenuItem.first,
+                            value: MenuItem.values[index],
                             groupValue: currentlySelectedMenuItem,
                             tapAreaSizeValue: 24,
                             onChanged: (MenuItem? selectedMenuItem) => setState(
-                              () => currentlySelectedMenuItem = selectedMenuItem!,
+                              () =>
+                                  currentlySelectedMenuItem = selectedMenuItem!,
                             ),
                           )
                         : null,
@@ -296,33 +325,7 @@ class _MenuItemStoryState extends State<MenuItemStory> {
                           )
                         : null,
                   ),
-                  MoonMenuItem(
-                    backgroundColor: backgroundColor,
-                    borderRadius: borderRadius,
-                    menuItemCrossAxisAlignment: menuItemCrossAxisAlignmentKnob,
-                    onTap: () => setState(() => currentlySelectedMenuItem = MenuItem.second),
-                    label: Text(
-                      "Menu item 2 with MoonRadio",
-                      style: TextStyle(color: labelTextColor),
-                    ),
-                    leading: showLeadingKnob
-                        ? MoonRadio(
-                            value: MenuItem.second,
-                            groupValue: currentlySelectedMenuItem,
-                            tapAreaSizeValue: 24,
-                            onChanged: (MenuItem? selectedMenuItem) => setState(
-                              () => currentlySelectedMenuItem = selectedMenuItem!,
-                            ),
-                          )
-                        : null,
-                    trailing: showTrailingKnob
-                        ? Icon(
-                            MoonIcons.other_frame_24_light,
-                            color: trailingColor,
-                          )
-                        : null,
-                  ),
-                ],
+                ),
               ).toList(),
             ),
           ],

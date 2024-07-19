@@ -45,7 +45,7 @@ class MoonBreadcrumb extends StatefulWidget {
   final Widget? divider;
 
   /// The single custom widget to replace all the breadcrumb collapsed items with.
-  final Widget? showMoreWidget;
+  final MoonBreadcrumbItem? showMoreWidget;
 
   /// Creates a Moon Design breadcrumb.
   const MoonBreadcrumb({
@@ -69,48 +69,89 @@ class MoonBreadcrumb extends StatefulWidget {
 }
 
 class _MoonBreadcrumbState extends State<MoonBreadcrumb> {
-  bool showFullPath = false;
+  bool _showFullPath = false;
 
   List<Widget> _buildItems() {
     final MoonBreadcrumbTheme? theme = context.moonTheme?.breadcrumbTheme;
 
-    final double effectiveGap = widget.gap ?? theme?.properties.gap ?? MoonSizes.sizes.x4s;
+    final double effectiveGap =
+        widget.gap ?? theme?.properties.gap ?? MoonSizes.sizes.x4s;
 
-    final Color effectiveItemTextColor =
-        widget.itemTextStyle?.color ?? theme?.colors.itemColor ?? MoonColors.light.textSecondary;
+    final Color effectiveItemTextColor = widget.itemTextStyle?.color ??
+        theme?.colors.itemColor ??
+        MoonColors.light.textSecondary;
 
     final Color effectiveCurrentItemTextColor =
-        widget.currentItemTextStyle?.color ?? theme?.colors.currentItemColor ?? MoonColors.light.textPrimary;
+        widget.currentItemTextStyle?.color ??
+            theme?.colors.currentItemColor ??
+            MoonColors.light.textPrimary;
 
-    final Color effectiveHoverEffectColor =
-        widget.hoverEffectColor ?? theme?.colors.hoverEffectColor ?? MoonColors.light.textPrimary;
+    final Color effectiveHoverEffectColor = widget.hoverEffectColor ??
+        theme?.colors.hoverEffectColor ??
+        MoonColors.light.textPrimary;
 
-    final TextStyle effectiveItemTextStyle =
-        widget.itemTextStyle ?? theme?.properties.itemTextStyle ?? MoonTextStyles.body.textDefault;
+    final TextStyle effectiveItemTextStyle = widget.itemTextStyle ??
+        theme?.properties.itemTextStyle ??
+        MoonTextStyles.body.textDefault;
 
     final TextStyle effectiveCurrentItemTextStyle =
-        widget.currentItemTextStyle ?? theme?.properties.currentItemTextStyle ?? MoonTextStyles.body.textDefault;
+        widget.currentItemTextStyle ??
+            theme?.properties.currentItemTextStyle ??
+            MoonTextStyles.body.textDefault;
 
     final TextStyle effectiveShowMoreItemTextStyle =
-        theme?.properties.showMoreItemTextStyle ?? MoonTextStyles.caption.textDefault;
+        theme?.properties.showMoreItemTextStyle ??
+            MoonTextStyles.caption.textDefault;
 
     final Duration effectiveTransitionDuration =
-        theme?.properties.transitionDuration ?? MoonTransitions.transitions.defaultTransitionDuration;
+        theme?.properties.transitionDuration ??
+            MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve =
-        theme?.properties.transitionCurve ?? MoonTransitions.transitions.defaultTransitionCurve;
+    final Curve effectiveTransitionCurve = theme?.properties.transitionCurve ??
+        MoonTransitions.transitions.defaultTransitionCurve;
 
-    final int resolvedItemCountToShow = showFullPath ? widget.items.length : widget.visibleItemCount;
+    final int resolvedItemCountToShow =
+        _showFullPath ? widget.items.length : widget.visibleItemCount;
 
     final List<MoonBreadcrumbItem> visibleItemsList = _getVisibleItems();
 
-    final List<Widget> customizedVisibleItemsList = visibleItemsList
-        .map(
-          (MoonBreadcrumbItem item) => Row(
-            children: [
-              if (item != visibleItemsList.first) SizedBox(width: effectiveGap),
-              _BreadcrumbItemBuilder(
-                isCurrent: item == visibleItemsList.last,
+    final List<Widget> customizedVisibleItemsList = visibleItemsList.map(
+      (MoonBreadcrumbItem item) {
+        return Row(
+          children: [
+            if (item != visibleItemsList.first) SizedBox(width: effectiveGap),
+            _BreadcrumbItemBuilder(
+              isCurrent: item == visibleItemsList.last,
+              itemColor: effectiveItemTextColor,
+              currentItemColor: effectiveCurrentItemTextColor,
+              hoverEffectColor: effectiveHoverEffectColor,
+              decoration: widget.itemDecoration,
+              itemTextStyle: effectiveItemTextStyle,
+              currentItemTextStyle: effectiveCurrentItemTextStyle,
+              transitionDuration: effectiveTransitionDuration,
+              transitionCurve: effectiveTransitionCurve,
+              onTap: item.onTap,
+              item: item,
+            ),
+            if (item != visibleItemsList.last) ...[
+              SizedBox(width: effectiveGap),
+              _buildDivider(),
+            ],
+          ],
+        );
+      },
+    ).toList();
+
+    if (widget.items.length > resolvedItemCountToShow &&
+        resolvedItemCountToShow > 1) {
+      customizedVisibleItemsList.insert(
+        1,
+        Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: effectiveGap),
+              child: _BreadcrumbItemBuilder(
+                isCurrent: false,
                 itemColor: effectiveItemTextColor,
                 currentItemColor: effectiveCurrentItemTextColor,
                 hoverEffectColor: effectiveHoverEffectColor,
@@ -119,38 +160,10 @@ class _MoonBreadcrumbState extends State<MoonBreadcrumb> {
                 currentItemTextStyle: effectiveCurrentItemTextStyle,
                 transitionDuration: effectiveTransitionDuration,
                 transitionCurve: effectiveTransitionCurve,
-                onTap: item.onTap,
-                item: item,
-              ),
-              if (item != visibleItemsList.last) ...[
-                SizedBox(width: effectiveGap),
-                _buildDivider(),
-              ],
-            ],
-          ),
-        )
-        .toList();
-
-    if (widget.items.length > resolvedItemCountToShow && resolvedItemCountToShow > 1) {
-      customizedVisibleItemsList.insert(
-        1,
-        Row(
-          children: [
-            widget.showMoreWidget ??
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                  child: _BreadcrumbItemBuilder(
-                    isCurrent: false,
-                    itemColor: effectiveItemTextColor,
-                    currentItemColor: effectiveCurrentItemTextColor,
-                    hoverEffectColor: effectiveHoverEffectColor,
-                    decoration: widget.itemDecoration,
-                    itemTextStyle: effectiveItemTextStyle,
-                    currentItemTextStyle: effectiveCurrentItemTextStyle,
-                    transitionDuration: effectiveTransitionDuration,
-                    transitionCurve: effectiveTransitionCurve,
-                    onTap: () => setState(() => showFullPath = true),
-                    item: MoonBreadcrumbItem(
+                onTap: widget.showMoreWidget?.onTap ??
+                    () => setState(() => _showFullPath = true),
+                item: widget.showMoreWidget ??
+                    MoonBreadcrumbItem(
                       semanticLabel: widget.semanticLabel,
                       label: SizedBox(
                         width: 24,
@@ -161,8 +174,8 @@ class _MoonBreadcrumbState extends State<MoonBreadcrumb> {
                         ),
                       ),
                     ),
-                  ),
-                ),
+              ),
+            ),
             _buildDivider(),
           ],
         ),
@@ -170,22 +183,24 @@ class _MoonBreadcrumbState extends State<MoonBreadcrumb> {
     }
 
     // Restores the breadcrumb's initial collapsed state during every rebuild.
-    showFullPath = false;
+    _showFullPath = false;
 
     return customizedVisibleItemsList;
   }
 
   List<MoonBreadcrumbItem> _getVisibleItems() {
-    final int resolvedItemCountToShow = showFullPath ? widget.items.length : widget.visibleItemCount;
+    final int resolvedItemCountToShow =
+        _showFullPath ? widget.items.length : widget.visibleItemCount;
 
     final List<MoonBreadcrumbItem> visibleItems = resolvedItemCountToShow == 0
         ? []
         : widget.items.length > resolvedItemCountToShow
             ? [
                 widget.items[0],
-                ...List.generate(resolvedItemCountToShow - 1, (index) => widget.items.length - index)
-                    .reversed
-                    .map((int index) => widget.items[index - 1]),
+                ...List.generate(
+                  resolvedItemCountToShow - 1,
+                  (index) => widget.items.length - index,
+                ).reversed.map((int index) => widget.items[index - 1]),
               ]
             : widget.items;
 
@@ -254,24 +269,28 @@ class _BreadcrumbItemBuilder extends StatefulWidget {
   State<_BreadcrumbItemBuilder> createState() => _BreadCrumbItemBuilderState();
 }
 
-class _BreadCrumbItemBuilderState extends State<_BreadcrumbItemBuilder> with SingleTickerProviderStateMixin {
-  final ColorTweenWithPremultipliedAlpha _itemColorTween = ColorTweenWithPremultipliedAlpha();
+class _BreadCrumbItemBuilderState extends State<_BreadcrumbItemBuilder>
+    with SingleTickerProviderStateMixin {
+  final ColorTweenWithPremultipliedAlpha _itemColorTween =
+      ColorTweenWithPremultipliedAlpha();
 
   Animation<Color?>? _itemColor;
 
   AnimationController? _animationController;
 
-  void _handleActiveEffect(bool isActive) {
-    isActive ? _animationController?.forward() : _animationController?.reverse();
-  }
+  void _handleActiveEffect(bool isActive) => isActive
+      ? _animationController?.forward()
+      : _animationController?.reverse();
 
   @override
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(duration: widget.transitionDuration, vsync: this);
-
-    if (widget.isCurrent) _animationController?.value = 1;
+    _animationController = AnimationController(
+      duration: widget.transitionDuration,
+      vsync: this,
+      value: widget.isCurrent ? 1 : 0,
+    );
   }
 
   @override
@@ -283,14 +302,18 @@ class _BreadCrumbItemBuilderState extends State<_BreadcrumbItemBuilder> with Sin
 
   @override
   Widget build(BuildContext context) {
-    final double effectiveGap =
-        widget.item.gap ?? context.moonTheme?.breadcrumbTheme.properties.itemGap ?? MoonSizes.sizes.x6s;
+    final double effectiveGap = widget.item.gap ??
+        context.moonTheme?.breadcrumbTheme.properties.itemGap ??
+        MoonSizes.sizes.x6s;
 
-    final Color resolvedItemColor = widget.isCurrent ? widget.currentItemColor : widget.itemColor;
+    final Color resolvedItemColor =
+        widget.isCurrent ? widget.currentItemColor : widget.itemColor;
 
-    final Color resolvedHoverEffectColor = widget.isCurrent ? widget.currentItemColor : widget.hoverEffectColor;
+    final Color resolvedHoverEffectColor =
+        widget.isCurrent ? widget.currentItemColor : widget.hoverEffectColor;
 
-    final TextStyle resolvedTextStyle = widget.isCurrent ? widget.currentItemTextStyle : widget.itemTextStyle;
+    final TextStyle resolvedTextStyle =
+        widget.isCurrent ? widget.currentItemTextStyle : widget.itemTextStyle;
 
     _itemColor ??= _animationController!.drive(
       _itemColorTween.chain(CurveTween(curve: widget.transitionCurve)),
@@ -304,9 +327,17 @@ class _BreadCrumbItemBuilderState extends State<_BreadcrumbItemBuilder> with Sin
       semanticLabel: widget.item.semanticLabel,
       backgroundColor: widget.decoration?.color,
       borderRadius: widget.decoration?.borderRadius,
+      propagateGesturesToChild: true,
       onTap: widget.onTap,
-      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
-        final bool isActive = isEnabled && (widget.isCurrent || isHovered || isPressed);
+      builder: (
+        BuildContext context,
+        bool isEnabled,
+        bool isHovered,
+        bool isFocused,
+        bool isPressed,
+      ) {
+        final bool isActive =
+            isEnabled && (widget.isCurrent || isHovered || isPressed);
 
         _handleActiveEffect(isActive);
 

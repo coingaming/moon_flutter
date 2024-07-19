@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -16,7 +17,6 @@ class BreadcrumbStory extends StatefulWidget {
 
 class _BreadcrumbStoryState extends State<BreadcrumbStory> {
   bool _showDropdown = false;
-  Color? _dropdownIconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +98,35 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
       description: "Show widget in MoonBreadcrumb item trailing slot.",
     );
 
+    final List<MoonBreadcrumbItem> breadcrumbItems = List.generate(
+      itemCountKnob ?? 7,
+      (int index) {
+        final bool isHomePage = index == 0;
+
+        return MoonBreadcrumbItem(
+          semanticLabel: index.toString(),
+          onTap: () => MoonToast.show(
+            context,
+            displayDuration: const Duration(seconds: 1),
+            label: Text(isHomePage ? 'Home Page' : 'Page $index'),
+          ),
+          leading: showLeadingKnob && isHomePage
+              ? const Icon(
+                  MoonIcons.generic_home_16_light,
+                  size: 16,
+                )
+              : null,
+          label: Text(isHomePage ? 'Home' : 'Page $index'),
+          trailing: showTrailingKnob && isHomePage
+              ? const Icon(
+                  MoonIcons.generic_home_16_light,
+                  size: 16,
+                )
+              : null,
+        );
+      },
+    );
+
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
@@ -108,50 +137,28 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
               text: "MoonBreadcrumb",
               paddingTop: 0,
             ),
-            Column(
-              children: [
-                MoonBreadcrumb(
-                  visibleItemCount: visibleItemCountKnob ?? 3,
-                  gap: gapKnob?.toDouble(),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  hoverEffectColor: hoverEffectColor,
-                  dividerColor: dividerColor,
-                  itemTextStyle: TextStyle(color: itemColor),
-                  currentItemTextStyle: TextStyle(color: currentItemColor),
-                  items: List.generate(
-                    itemCountKnob ?? 7,
-                    (int index) {
-                      final bool isHomePage = index == 0;
-
-                      return MoonBreadcrumbItem(
-                        onTap: () => MoonToast.show(
-                          context,
-                          displayDuration: const Duration(seconds: 1),
-                          label: Text(isHomePage ? 'Home Page' : 'Page $index'),
-                        ),
-                        leading:
-                            showLeadingKnob && isHomePage ? const Icon(MoonIcons.generic_home_16_light, size: 16) : null,
-                        label: Text(isHomePage ? 'Home' : 'Page $index'),
-                        trailing:
-                            showTrailingKnob && isHomePage ? const Icon(MoonIcons.generic_home_16_light, size: 16) : null,
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 16),
-                MoonButton(
-                  backgroundColor: context.moonColors!.piccolo,
-                  onTap: () => setState(() => {}),
-                  label: Text(
-                    'Reset',
-                    style: TextStyle(color: context.moonColors!.goten),
-                  ),
-                ),
-              ],
+            MoonBreadcrumb(
+              visibleItemCount: visibleItemCountKnob ?? 3,
+              gap: gapKnob?.toDouble(),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              hoverEffectColor: hoverEffectColor,
+              dividerColor: dividerColor,
+              itemTextStyle: TextStyle(color: itemColor),
+              currentItemTextStyle: TextStyle(color: currentItemColor),
+              items: breadcrumbItems,
+            ),
+            const SizedBox(height: 32),
+            MoonButton(
+              backgroundColor: context.moonColors!.piccolo,
+              onTap: () => setState(() => {}),
+              label: Text(
+                'Reset',
+                style: TextStyle(color: context.moonColors!.goten),
+              ),
             ),
             const TextDivider(text: "Custom MoonBreadcrumb with MoonDropdown"),
             StatefulBuilder(
-              builder: (context, setState) {
+              builder: (BuildContext context, StateSetter setState) {
                 return MoonBreadcrumb(
                   visibleItemCount: visibleItemCountKnob ?? 3,
                   gap: gapKnob?.toDouble(),
@@ -168,74 +175,37 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
                         ? MoonIcons.controls_chevron_right_small_16_light
                         : MoonIcons.controls_chevron_left_small_16_light,
                   ),
-                  showMoreWidget: MoonDropdown(
-                    show: _showDropdown,
-                    onTapOutside: () => setState(() {
-                      _showDropdown = false;
-                      _dropdownIconColor = context.moonColors!.iconSecondary;
-                    }),
-                    content: Column(
-                      children: List.generate(
-                        4,
-                        (int index) => MoonMenuItem(
-                          width: 120,
-                          onTap: () => MoonToast.show(
-                            context,
-                            displayDuration: const Duration(seconds: 1),
+                  showMoreWidget: MoonBreadcrumbItem(
+                    onTap: () => setState(() => _showDropdown = !_showDropdown),
+                    label: MoonDropdown(
+                      maxHeight: 250,
+                      maxWidth: 150,
+                      show: _showDropdown,
+                      onTapOutside: () => setState(() => _showDropdown = false),
+                      content: ListView(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        children: List.generate(
+                          max(
+                            (itemCountKnob ?? 7) - (visibleItemCountKnob ?? 3),
+                            0,
+                          ),
+                          (int index) => MoonMenuItem(
+                            onTap: () => MoonToast.show(
+                              context,
+                              displayDuration: const Duration(seconds: 1),
+                              label: Text('Page ${index + 1}'),
+                            ),
                             label: Text('Page ${index + 1}'),
                           ),
-                          label: Text('Page ${index + 1}'),
                         ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: gapKnob?.toDouble() ?? 8),
-                      child: MouseRegion(
-                        onHover: (PointerHoverEvent event) {
-                          setState(() => _dropdownIconColor = hoverEffectColor ?? context.moonColors!.iconPrimary);
-                        },
-                        onExit: (PointerExitEvent event) {
-                          if (!_showDropdown) {
-                            setState(() => _dropdownIconColor = itemColor ?? context.moonColors!.iconSecondary);
-                          }
-                        },
-                        child: MoonButton.icon(
-                          buttonSize: MoonButtonSize.xs,
-                          hoverEffectColor: Colors.transparent,
-                          iconColor: _dropdownIconColor ?? context.moonColors!.iconSecondary,
-                          icon: const Icon(MoonIcons.generic_burger_regular_16_light),
-                          onTap: () => setState(() => _showDropdown = !_showDropdown),
-                        ),
+                      child: const Icon(
+                        MoonIcons.generic_burger_regular_16_light,
                       ),
                     ),
                   ),
-                  items: List.generate(
-                    itemCountKnob ?? 7,
-                    (int index) {
-                      final bool isHomePage = index == 0;
-
-                      return MoonBreadcrumbItem(
-                        onTap: () => MoonToast.show(
-                          context,
-                          displayDuration: const Duration(seconds: 1),
-                          label: Text(isHomePage ? 'Home Page' : 'Page $index'),
-                        ),
-                        leading: showLeadingKnob && isHomePage
-                            ? const Icon(
-                                MoonIcons.generic_home_16_light,
-                                size: 16,
-                              )
-                            : null,
-                        label: Text(isHomePage ? 'Home' : 'Page $index'),
-                        trailing: showTrailingKnob && isHomePage
-                            ? const Icon(
-                                MoonIcons.generic_home_16_light,
-                                size: 16,
-                              )
-                            : null,
-                      );
-                    },
-                  ),
+                  items: breadcrumbItems,
                 );
               },
             ),
