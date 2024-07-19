@@ -55,13 +55,11 @@ class DrawerStory extends StatelessWidget {
         drawerScrimColor: barrierColor,
         drawer: MoonDrawer(
           backgroundColor: backgroundColor,
-          barrierColor: barrierColorKnob != null
-              ? barrierColor
-              : context.moonTheme?.drawerTheme.colors.barrierColor ?? MoonColors.light.zeno,
           borderRadius: BorderRadiusDirectional.horizontal(
             end: Radius.circular(borderRadiusKnob?.toDouble() ?? 0),
           ),
-          width: drawerWidthKnob?.toDouble() ?? MediaQuery.of(context).size.width,
+          width:
+              drawerWidthKnob?.toDouble() ?? MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -82,7 +80,10 @@ class DrawerStory extends StatelessWidget {
           child: Builder(
             builder: (BuildContext context) {
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 64.0,
+                  horizontal: 16.0,
+                ),
                 child: MoonFilledButton(
                   label: const Text("Tap me"),
                   onTap: () => Scaffold.of(context).openDrawer(),

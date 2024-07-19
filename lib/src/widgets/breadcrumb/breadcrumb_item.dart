@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MoonBreadcrumbItem {
-  /// The gap between the [leading], [label] and [trailing] widgets of the breadcrumb item.
+  /// The gap between the [leading], [label] and [trailing] widgets of the
+  /// breadcrumb item.
   final double? gap;
 
   /// The semantic label for the breadcrumb item.
@@ -9,6 +10,9 @@ class MoonBreadcrumbItem {
 
   /// The callback that is called when the breadcrumb item is tapped or pressed.
   /// If null, the breadcrumb item is disabled.
+  ///
+  /// For [MoonBreadcrumb.showMoreWidget], when [onTap] is null, default behavior
+  /// is to display all collapsed breadcrumb items.
   final VoidCallback? onTap;
 
   /// The widget to display before the [label] widget of the breadcrumb item.

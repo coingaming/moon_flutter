@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonDrawerProperties extends ThemeExtension<MoonDrawerProperties> with DiagnosticableTreeMixin {
+class MoonDrawerProperties extends ThemeExtension<MoonDrawerProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonDrawer.
   final BorderRadiusGeometry borderRadius;
 
@@ -34,11 +35,15 @@ class MoonDrawerProperties extends ThemeExtension<MoonDrawerProperties> with Dia
   }
 
   @override
-  MoonDrawerProperties lerp(ThemeExtension<MoonDrawerProperties>? other, double t) {
+  MoonDrawerProperties lerp(
+    ThemeExtension<MoonDrawerProperties>? other,
+    double t,
+  ) {
     if (other is! MoonDrawerProperties) return this;
 
     return MoonDrawerProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       width: lerpDouble(width, other.width, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
@@ -49,7 +54,9 @@ class MoonDrawerProperties extends ThemeExtension<MoonDrawerProperties> with Dia
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty("type", "MoonDrawerProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
       ..add(DoubleProperty("width", width))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
   }
