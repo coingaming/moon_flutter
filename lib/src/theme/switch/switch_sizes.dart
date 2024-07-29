@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with DiagnosticableTreeMixin {
+class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -30,7 +31,8 @@ class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with Diagnosticabl
               thumbSizeValue: tokens.sizes.x3s,
               iconSizeValue: tokens.sizes.x3s,
               padding: EdgeInsets.all(tokens.sizes.x6s),
-              textStyle: tokens.typography.caption.text6.copyWith(letterSpacing: 0),
+              textStyle:
+                  tokens.typography.body.text6.copyWith(letterSpacing: 0),
             ),
         xs = xs ??
             MoonSwitchSizeProperties(
@@ -39,7 +41,8 @@ class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with Diagnosticabl
               thumbSizeValue: tokens.sizes.x2s,
               iconSizeValue: tokens.sizes.x2s,
               padding: EdgeInsets.all(tokens.sizes.x5s),
-              textStyle: tokens.typography.caption.text8.copyWith(letterSpacing: 0.1),
+              textStyle:
+                  tokens.typography.body.text8.copyWith(letterSpacing: 0.1),
             ),
         sm = sm ??
             MoonSwitchSizeProperties(
@@ -48,7 +51,8 @@ class MoonSwitchSizes extends ThemeExtension<MoonSwitchSizes> with Diagnosticabl
               thumbSizeValue: tokens.sizes.xs,
               iconSizeValue: tokens.sizes.xs,
               padding: EdgeInsets.all(tokens.sizes.x5s),
-              textStyle: tokens.typography.caption.text10.copyWith(letterSpacing: 0.1),
+              textStyle:
+                  tokens.typography.body.text10.copyWith(letterSpacing: 0.1),
             );
 
   @override

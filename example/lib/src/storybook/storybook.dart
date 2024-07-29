@@ -37,12 +37,14 @@ class StorybookPage extends StatelessWidget {
               tokens: MoonTokens.light.copyWith(
                 colors: mdsLightColors,
                 typography: MoonTypography.typography.copyWith(
-                  heading: MoonTypography.typography.heading
-                      .apply(fontFamily: "DMSans"),
-                  body: MoonTypography.typography.body
-                      .apply(fontFamily: "DMSans"),
-                  caption: MoonTypography.typography.caption
-                      .apply(fontFamily: "DMSans"),
+                  heading: MoonTypography.typography.heading.apply(
+                    fontFamily: "DMSans",
+                    fontWeightDelta: -1,
+                    fontVariations: [const FontVariation('wght', 500)],
+                  ),
+                  body: MoonTypography.typography.body.apply(
+                    fontFamily: "DMSans",
+                  ),
                 ),
               ),
             ),
@@ -55,12 +57,14 @@ class StorybookPage extends StatelessWidget {
               tokens: MoonTokens.dark.copyWith(
                 colors: mdsDarkColors,
                 typography: MoonTypography.typography.copyWith(
-                  heading: MoonTypography.typography.heading
-                      .apply(fontFamily: "DMSans"),
-                  body: MoonTypography.typography.body
-                      .apply(fontFamily: "DMSans"),
-                  caption: MoonTypography.typography.caption
-                      .apply(fontFamily: "DMSans"),
+                  heading: MoonTypography.typography.heading.apply(
+                    fontFamily: "DMSans",
+                    fontWeightDelta: -1,
+                    fontVariations: [const FontVariation('wght', 500)],
+                  ),
+                  body: MoonTypography.typography.body.apply(
+                    fontFamily: "DMSans",
+                  ),
                 ),
               ),
             ),

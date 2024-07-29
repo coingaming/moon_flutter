@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/progress_pin/progress_pin_properties.dart'
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonProgressPinTheme extends ThemeExtension<MoonProgressPinTheme> with DiagnosticableTreeMixin {
+class MoonProgressPinTheme extends ThemeExtension<MoonProgressPinTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -36,7 +37,7 @@ class MoonProgressPinTheme extends ThemeExtension<MoonProgressPinTheme> with Dia
               pinWidth: 36,
               pinBorderWidth: tokens.sizes.x6s,
               shadowElevation: 6,
-              textStyle: tokens.typography.caption.text10,
+              textStyle: tokens.typography.body.text10,
             );
 
   @override
@@ -53,7 +54,10 @@ class MoonProgressPinTheme extends ThemeExtension<MoonProgressPinTheme> with Dia
   }
 
   @override
-  MoonProgressPinTheme lerp(ThemeExtension<MoonProgressPinTheme>? other, double t) {
+  MoonProgressPinTheme lerp(
+    ThemeExtension<MoonProgressPinTheme>? other,
+    double t,
+  ) {
     if (other is! MoonProgressPinTheme) return this;
 
     return MoonProgressPinTheme(
@@ -70,6 +74,11 @@ class MoonProgressPinTheme extends ThemeExtension<MoonProgressPinTheme> with Dia
       ..add(DiagnosticsProperty("type", "MoonProgressPinTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonProgressPinColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonProgressPinProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonProgressPinProperties>(
+          "properties",
+          properties,
+        ),
+      );
   }
 }

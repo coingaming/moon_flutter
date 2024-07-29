@@ -44,7 +44,8 @@ class LinearProgressStory extends StatelessWidget {
       options: colorOptions,
     );
 
-    final backgroundColor = colorTable(context)[progressBackgroundColorKnob ?? 40];
+    final backgroundColor =
+        colorTable(context)[progressBackgroundColorKnob ?? 40];
 
     final pinColorKnob = context.knobs.nullable.options(
       label: "pinColor",
@@ -116,13 +117,15 @@ class LinearProgressStory extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 20),
         child: MoonLinearProgress(
           linearProgressSize: progressSizeKnob,
           value: linearProgressValueKnob,
           color: color,
           backgroundColor: backgroundColor,
-          borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+          borderRadius: borderRadiusKnob != null
+              ? BorderRadius.circular(borderRadiusKnob.toDouble())
+              : null,
           showMinLabel: showMinLabelKnob,
           showMaxLabel: showMaxLabelKnob,
           showPin: showPinKnob,
