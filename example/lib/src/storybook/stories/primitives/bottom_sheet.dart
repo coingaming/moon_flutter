@@ -65,7 +65,9 @@ class BottomSheetStory extends StatelessWidget {
             ? MediaQuery.of(context).size.height * heightKnob
             : MediaQuery.of(context).size.height * 0.7,
         closeProgressThreshold: closeProgressThresholdKnob,
-        borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+        borderRadius: borderRadiusKnob != null
+            ? BorderRadius.circular(borderRadiusKnob.toDouble())
+            : null,
         builder: (BuildContext context) => Column(
           children: [
             Container(
@@ -84,7 +86,7 @@ class BottomSheetStory extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Pick your choice!',
-                      style: MoonTypography.typography.heading.text16,
+                      style: MoonTypography.typography.body.text16,
                     ),
                   ),
                 ),

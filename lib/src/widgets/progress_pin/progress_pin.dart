@@ -46,7 +46,7 @@ class MoonProgressPin extends StatelessWidget {
 
     final TextStyle effectiveTextStyle = pinStyle?.textStyle ??
         context.moonTheme?.progressPinTheme.properties.textStyle ??
-        MoonTypography.typography.caption.text10;
+        MoonTypography.typography.body.text10;
 
     final double effectivePinWidth = pinStyle?.pinWidth ??
         context.moonTheme?.progressPinTheme.properties.pinWidth ??

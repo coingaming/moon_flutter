@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/breadcrumb/breadcrumb_colors.dart';
 import 'package:moon_design/src/theme/breadcrumb/breadcrumb_properties.dart';
 
 @immutable
-class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with DiagnosticableTreeMixin {
+class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -33,7 +34,7 @@ class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with Diagn
               transitionCurve: tokens.transitions.defaultTransitionCurve,
               itemTextStyle: tokens.typography.body.textDefault,
               currentItemTextStyle: tokens.typography.body.textDefault,
-              showMoreItemTextStyle: tokens.typography.caption.textDefault,
+              showMoreItemTextStyle: tokens.typography.body.textDefault,
             );
 
   @override
@@ -50,7 +51,10 @@ class MoonBreadcrumbTheme extends ThemeExtension<MoonBreadcrumbTheme> with Diagn
   }
 
   @override
-  MoonBreadcrumbTheme lerp(ThemeExtension<MoonBreadcrumbTheme>? other, double t) {
+  MoonBreadcrumbTheme lerp(
+    ThemeExtension<MoonBreadcrumbTheme>? other,
+    double t,
+  ) {
     if (other is! MoonBreadcrumbTheme) return this;
 
     return MoonBreadcrumbTheme(

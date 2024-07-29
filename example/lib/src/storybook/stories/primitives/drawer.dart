@@ -58,8 +58,8 @@ class DrawerStory extends StatelessWidget {
           borderRadius: BorderRadiusDirectional.horizontal(
             end: Radius.circular(borderRadiusKnob?.toDouble() ?? 0),
           ),
-          width:
-              drawerWidthKnob?.toDouble() ?? MediaQuery.of(context).size.width,
+          width: drawerWidthKnob?.toDouble() ??
+              MediaQuery.of(context).size.width * 0.8,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

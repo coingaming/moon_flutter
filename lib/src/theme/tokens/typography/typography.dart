@@ -4,37 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/theme/tokens/typography/text_styles.dart';
 
 @immutable
-class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableTreeMixin {
+class MoonTypography extends ThemeExtension<MoonTypography>
+    with DiagnosticableTreeMixin {
   static const typography = MoonTypography(
     body: MoonTextStyles.body,
-    caption: MoonTextStyles.caption,
     heading: MoonTextStyles.heading,
   );
 
   /// The text styles for the body.
   final MoonTextStyles body;
 
-  /// The text styles for the caption.
-  final MoonTextStyles caption;
-
   /// The text styles for the heading.
   final MoonTextStyles heading;
 
-  const MoonTypography({
-    required this.body,
-    required this.caption,
-    required this.heading,
-  });
+  const MoonTypography({required this.body, required this.heading});
 
   @override
-  MoonTypography copyWith({
-    MoonTextStyles? body,
-    MoonTextStyles? caption,
-    MoonTextStyles? heading,
-  }) {
+  MoonTypography copyWith({MoonTextStyles? body, MoonTextStyles? heading}) {
     return MoonTypography(
       body: body ?? this.body,
-      caption: caption ?? this.caption,
       heading: heading ?? this.heading,
     );
   }
@@ -45,7 +33,6 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
 
     return MoonTypography(
       body: body.lerp(other.body, t),
-      caption: caption.lerp(other.caption, t),
       heading: heading.lerp(other.heading, t),
     );
   }
@@ -56,7 +43,6 @@ class MoonTypography extends ThemeExtension<MoonTypography> with DiagnosticableT
     properties
       ..add(DiagnosticsProperty("type", "MoonTypography"))
       ..add(DiagnosticsProperty("body", body))
-      ..add(DiagnosticsProperty("caption", caption))
       ..add(DiagnosticsProperty("heading", heading));
   }
 }

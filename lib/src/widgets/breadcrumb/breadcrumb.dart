@@ -101,7 +101,7 @@ class _MoonBreadcrumbState extends State<MoonBreadcrumb> {
 
     final TextStyle effectiveShowMoreItemTextStyle =
         theme?.properties.showMoreItemTextStyle ??
-            MoonTextStyles.caption.textDefault;
+            MoonTextStyles.body.textDefault;
 
     final Duration effectiveTransitionDuration =
         theme?.properties.transitionDuration ??
