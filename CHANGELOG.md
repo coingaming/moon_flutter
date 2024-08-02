@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/coingaming/moon_flutter/compare/v0.59.3...v1.0.0) (2024-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* [MDS-1264] Release v1.0.0 ([#432](https://github.com/coingaming/moon_flutter/issues/432))
+
+### Features
+
+* [MDS-1264] Release v1.0.0 ([#432](https://github.com/coingaming/moon_flutter/issues/432)) ([a7c8713](https://github.com/coingaming/moon_flutter/commit/a7c8713efa61d97ce570d2aca42ba3d3c5d0c1bc))
+
 ## [0.59.3](https://github.com/coingaming/moon_flutter/compare/v0.59.2...v0.59.3) (2024-07-17)
 
 
