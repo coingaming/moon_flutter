@@ -7,6 +7,10 @@
 _Note: This project uses **[Release Please](https://github.com/googleapis/release-please)** and **[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)** spec, please follow the conventions or consider using **[Commitizen](https://github.com/commitizen/cz-cli)**
 to write commit messages._
 
+## Disclaimer
+
+The current major release, v1.0.0, will be maintained as-is and will not receive further updates, except for patches. The v1 theming is based on the soon-to-be deprecated Moon Design Figma v1 and lacks flexibility. For greater control over theming with v1 of moon_flutter, it is recommended to create custom wrapper widgets around the moon_flutter widgets that align with your project's specific theming requirements.
+
 ## Resources
 
 - 📱 [Playground](https://flutter.moon.io)
@@ -22,7 +26,13 @@ final lightTokens = MoonTokens.light.copyWith(
     textPrimary: Colors.amber,
   ),
   typography: MoonTypography.typography.copyWith(
-    heading: MoonTypography.typography.heading.apply(fontFamily: "DMSans"),
+    heading: MoonTypography.typography.heading.apply(
+      // Using variable font and bumping down the font weight compared to the
+      // baseline 600 for heading.
+      fontFamily: "DMSans",
+      fontWeightDelta: -1,
+      fontVariations: [const FontVariation('wght', 500)],
+    ),
   ),
 );
 
