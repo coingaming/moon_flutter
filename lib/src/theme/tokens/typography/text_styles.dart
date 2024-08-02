@@ -2,9 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableTreeMixin {
-  static const _semiBold = FontWeight.w500;
-  static const _semiBoldVariation = [FontVariation('wght', 500)];
+class MoonTextStyles extends ThemeExtension<MoonTextStyles>
+    with DiagnosticableTreeMixin {
+  static const _semiBold = FontWeight.w600;
+  static const _semiBoldVariation = [FontVariation('wght', 600)];
 
   static const body = MoonTextStyles(
     textDefault: TextStyle(
@@ -143,128 +144,6 @@ class MoonTextStyles extends ThemeExtension<MoonTextStyles> with DiagnosticableT
     ),
     text72: TextStyle(
       fontSize: 72,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-  );
-
-  static const caption = MoonTextStyles(
-    textDefault: TextStyle(
-      fontSize: 14,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text6: TextStyle(
-      fontSize: 6,
-      height: 1.1,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text8: TextStyle(
-      fontSize: 8,
-      height: 1.1,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text9: TextStyle(
-      fontSize: 9,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text10: TextStyle(
-      fontSize: 10,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text12: TextStyle(
-      fontSize: 12,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text14: TextStyle(
-      fontSize: 14,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text16: TextStyle(
-      fontSize: 16,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text18: TextStyle(
-      fontSize: 18,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text20: TextStyle(
-      fontSize: 20,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text24: TextStyle(
-      fontSize: 24,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text32: TextStyle(
-      fontSize: 32,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text40: TextStyle(
-      fontSize: 40,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text48: TextStyle(
-      fontSize: 48,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text56: TextStyle(
-      fontSize: 56,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text64: TextStyle(
-      fontSize: 64,
-      height: 1.2,
-      letterSpacing: 1,
-      fontVariations: _semiBoldVariation,
-      fontWeight: _semiBold,
-    ),
-    text72: TextStyle(
-      fontSize: 72,
-      height: 1.2,
-      letterSpacing: 1,
       fontVariations: _semiBoldVariation,
       fontWeight: _semiBold,
     ),

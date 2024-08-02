@@ -186,6 +186,7 @@ class _TabBarStoryState extends State<TabBarStory>
                   tabs: List.generate(
                     4,
                     (int index) => MoonTab(
+                      disabled: index == 1,
                       trailing: const Icon(MoonIcons.other_frame_24_light),
                       tabStyle: tabStyle,
                     ),

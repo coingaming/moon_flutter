@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/checkbox/checkbox_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonCheckboxTheme extends ThemeExtension<MoonCheckboxTheme> with DiagnosticableTreeMixin {
+class MoonCheckboxTheme extends ThemeExtension<MoonCheckboxTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -26,13 +27,9 @@ class MoonCheckboxTheme extends ThemeExtension<MoonCheckboxTheme> with Diagnosti
               borderColor: tokens.colors.trunks,
               checkColor: tokens.colors.goten,
               inactiveColor: Colors.transparent,
-              textColor: tokens.colors.textPrimary,
             ),
         properties = properties ??
-            MoonCheckboxProperties(
-              borderRadius: tokens.borders.interactiveXs,
-              textStyle: tokens.typography.body.textDefault,
-            );
+            MoonCheckboxProperties(borderRadius: tokens.borders.interactiveXs);
 
   @override
   MoonCheckboxTheme copyWith({
@@ -65,6 +62,8 @@ class MoonCheckboxTheme extends ThemeExtension<MoonCheckboxTheme> with Diagnosti
       ..add(DiagnosticsProperty("type", "MoonCheckboxTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonCheckboxColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonCheckboxProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonCheckboxProperties>("properties", properties),
+      );
   }
 }

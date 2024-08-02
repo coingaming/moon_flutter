@@ -30,7 +30,8 @@ class MoonLinearProgress extends StatelessWidget {
 
   /// Whether the pin height is added to the linear progress height.
   /// Applies only when both this and [showPin] are true.
-  /// Otherwise, the pin acts as an overlay without affecting the linear progress height.
+  /// Otherwise, the pin acts as an overlay without affecting the linear
+  /// progress height.
   final bool pinAffectsHeight;
 
   /// The border radius of the linear progress.
@@ -48,7 +49,8 @@ class MoonLinearProgress extends StatelessWidget {
   /// The height of the linear progress.
   final double? height;
 
-  /// The vertical gap between the linear progress and the [minLabel] and [maxLabel] widgets.
+  /// The vertical gap between the linear progress and the [minLabel] and
+  /// [maxLabel] widgets.
   ///
   /// Has effect only if [showMinLabel] and [showMaxLabel] are true.
   final double? verticalGap;
@@ -120,13 +122,17 @@ class MoonLinearProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoonLinearProgressSizeProperties effectiveProgressSize = _getMoonProgressSize(context, linearProgressSize);
+    final MoonLinearProgressSizeProperties effectiveProgressSize =
+        _getMoonProgressSize(context, linearProgressSize);
 
-    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveProgressSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius =
+        borderRadius ?? effectiveProgressSize.borderRadius;
 
-    // This is used to ensure that the corners of the progress bar properly touch the thumb with bigger bar variants.
+    // This is used to ensure that the corners of the progress bar properly
+    // touch the thumb with bigger bar variants.
     final BorderRadiusGeometry progressRadius = switch (effectiveBorderRadius) {
-      BorderRadiusDirectional() when showPin == true => BorderRadiusDirectional.only(
+      BorderRadiusDirectional() when showPin == true =>
+        BorderRadiusDirectional.only(
           topStart: effectiveBorderRadius.topStart,
           bottomStart: effectiveBorderRadius.bottomStart,
         ),
@@ -137,39 +143,50 @@ class MoonLinearProgress extends StatelessWidget {
       _ => effectiveBorderRadius,
     };
 
-    final Color effectiveColor =
-        color ?? context.moonTheme?.linearProgressTheme.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveColor = color ??
+        context.moonTheme?.linearProgressTheme.colors.color ??
+        MoonColors.light.piccolo;
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.linearProgressTheme.colors.backgroundColor ?? MoonColors.light.beerus;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.linearProgressTheme.colors.backgroundColor ??
+        MoonColors.light.beerus;
 
-    final Color effectiveTextColor =
-        textColor ?? context.moonTheme?.linearProgressTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor = textColor ??
+        context.moonTheme?.linearProgressTheme.colors.textColor ??
+        MoonColors.light.textPrimary;
 
-    final double effectiveHeight = height ?? effectiveProgressSize.progressHeight;
+    final double effectiveHeight =
+        height ?? effectiveProgressSize.progressHeight;
 
-    final double effectiveVerticalGap = verticalGap ?? effectiveProgressSize.verticalGap;
+    final double effectiveVerticalGap =
+        verticalGap ?? effectiveProgressSize.verticalGap;
 
     final double effectiveThumbSizeValue =
-        // ignore: deprecated_member_use_from_same_package
-        (pinStyle?.thumbSizeValue ?? pinStyle?.thumbWidth) ?? effectiveProgressSize.thumbSizeValue;
+        pinStyle?.thumbSizeValue ?? effectiveProgressSize.thumbSizeValue;
 
-    final double effectivePinWidth =
-        pinStyle?.pinWidth ?? context.moonTheme?.progressPinTheme.properties.pinWidth ?? 36;
+    final double effectivePinWidth = pinStyle?.pinWidth ??
+        context.moonTheme?.progressPinTheme.properties.pinWidth ??
+        36;
 
-    final double effectivePinDistance =
-        pinStyle?.pinDistance ?? context.moonTheme?.progressPinTheme.properties.pinDistance ?? MoonSizes.sizes.x5s;
+    final double effectivePinDistance = pinStyle?.pinDistance ??
+        context.moonTheme?.progressPinTheme.properties.pinDistance ??
+        MoonSizes.sizes.x5s;
 
-    final double effectivePinArrowHeight =
-        pinStyle?.arrowHeight ?? context.moonTheme?.progressPinTheme.properties.arrowHeight ?? 6;
+    final double effectivePinArrowHeight = pinStyle?.arrowHeight ??
+        context.moonTheme?.progressPinTheme.properties.arrowHeight ??
+        6;
 
     final TextStyle effectiveTextStyle = effectiveProgressSize.textStyle;
 
     final double resolvedPaddingValue =
-        effectiveThumbSizeValue - effectiveHeight > 0 ? effectiveThumbSizeValue / 2 - effectiveHeight / 2 : 0;
+        effectiveThumbSizeValue - effectiveHeight > 0
+            ? effectiveThumbSizeValue / 2 - effectiveHeight / 2
+            : 0;
 
-    final double heightWithPin =
-        effectivePinWidth + effectivePinArrowHeight + effectivePinDistance + effectiveThumbSizeValue;
+    final double heightWithPin = effectivePinWidth +
+        effectivePinArrowHeight +
+        effectivePinDistance +
+        effectiveThumbSizeValue;
 
     Widget child = MoonLinearProgressIndicator(
       value: value,
@@ -200,7 +217,8 @@ class MoonLinearProgress extends StatelessWidget {
               if (showMinLabel)
                 Expanded(
                   child: DefaultTextStyle(
-                    style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                    style:
+                        effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: minLabel ?? const Text("0%"),
@@ -210,7 +228,8 @@ class MoonLinearProgress extends StatelessWidget {
               if (showMaxLabel)
                 Expanded(
                   child: DefaultTextStyle(
-                    style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+                    style:
+                        effectiveTextStyle.copyWith(color: effectiveTextColor),
                     child: Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: maxLabel ?? const Text("100%"),

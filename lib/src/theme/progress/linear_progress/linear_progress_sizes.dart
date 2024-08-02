@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_s
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> with DiagnosticableTreeMixin {
+class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -37,7 +38,7 @@ class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> wi
               progressHeight: tokens.sizes.x6s,
               thumbSizeValue: tokens.sizes.x3s,
               verticalGap: tokens.sizes.x4s,
-              textStyle: tokens.typography.caption.text10,
+              textStyle: tokens.typography.body.text10,
             ),
         x5s = x5s ??
             MoonLinearProgressSizeProperties(
@@ -45,7 +46,7 @@ class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> wi
               progressHeight: tokens.sizes.x5s,
               thumbSizeValue: tokens.sizes.x3s,
               verticalGap: tokens.sizes.x4s,
-              textStyle: tokens.typography.caption.text10,
+              textStyle: tokens.typography.body.text10,
             ),
         x4s = x4s ??
             MoonLinearProgressSizeProperties(
@@ -53,7 +54,7 @@ class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> wi
               progressHeight: tokens.sizes.x4s,
               thumbSizeValue: tokens.sizes.x3s,
               verticalGap: 6,
-              textStyle: tokens.typography.caption.text10,
+              textStyle: tokens.typography.body.text10,
             ),
         x3s = x3s ??
             MoonLinearProgressSizeProperties(
@@ -61,7 +62,7 @@ class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> wi
               progressHeight: tokens.sizes.x3s,
               thumbSizeValue: tokens.sizes.x2s,
               verticalGap: 6,
-              textStyle: tokens.typography.caption.text10,
+              textStyle: tokens.typography.body.text10,
             ),
         x2s = x2s ??
             MoonLinearProgressSizeProperties(
@@ -69,7 +70,7 @@ class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> wi
               progressHeight: tokens.sizes.x2s,
               thumbSizeValue: tokens.sizes.x2s,
               verticalGap: tokens.sizes.x5s,
-              textStyle: tokens.typography.caption.text10,
+              textStyle: tokens.typography.body.text10,
             );
 
   @override
@@ -92,7 +93,10 @@ class MoonLinearProgressSizes extends ThemeExtension<MoonLinearProgressSizes> wi
   }
 
   @override
-  MoonLinearProgressSizes lerp(ThemeExtension<MoonLinearProgressSizes>? other, double t) {
+  MoonLinearProgressSizes lerp(
+    ThemeExtension<MoonLinearProgressSizes>? other,
+    double t,
+  ) {
     if (other is! MoonLinearProgressSizes) return this;
 
     return MoonLinearProgressSizes(

@@ -22,10 +22,6 @@ class PinStyle {
   /// The width of the progress pin arrow.
   final double? arrowWidth;
 
-  /// The width of the progress thumb.
-  @Deprecated("Use thumbSizeValue instead")
-  final double? thumbWidth;
-
   /// The size value of the progress thumb.
   final double? thumbSizeValue;
 
@@ -53,7 +49,6 @@ class PinStyle {
     this.shadowColor,
     this.arrowHeight,
     this.arrowWidth,
-    @Deprecated("Use thumbSizeValue instead") this.thumbWidth,
     this.thumbSizeValue,
     this.pinWidth,
     this.pinBorderWidth,
@@ -70,7 +65,6 @@ class PinStyle {
     Color? shadowColor,
     double? arrowHeight,
     double? arrowWidth,
-    double? thumbWidth,
     double? thumbSizeValue,
     double? pinWidth,
     double? pinBorderWidth,
@@ -86,8 +80,6 @@ class PinStyle {
       shadowColor: shadowColor ?? this.shadowColor,
       arrowHeight: arrowHeight ?? this.arrowHeight,
       arrowWidth: arrowWidth ?? this.arrowWidth,
-      // ignore: deprecated_member_use_from_same_package
-      thumbWidth: thumbWidth ?? this.thumbWidth,
       thumbSizeValue: thumbSizeValue ?? this.thumbSizeValue,
       pinWidth: pinWidth ?? this.pinWidth,
       pinBorderWidth: pinBorderWidth ?? this.pinBorderWidth,
