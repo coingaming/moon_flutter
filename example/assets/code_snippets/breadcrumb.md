@@ -11,7 +11,6 @@ class BreadcrumbStory extends StatefulWidget {
 
 class _BreadcrumbStoryState extends State<BreadcrumbStory> {
   bool _showDropdown = false;
-  Color? _dropdownIconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -50,38 +49,21 @@ class _BreadcrumbStoryState extends State<BreadcrumbStory> {
                 ? MoonIcons.controls_chevron_right_small_16_light
                 : MoonIcons.controls_chevron_left_small_16_light,
           ),
-          showMoreWidget: MoonDropdown(
-            show: _showDropdown,
-            onTapOutside: () => setState(() {
-              _showDropdown = false;
-              _dropdownIconColor = context.moonColors!.iconSecondary;
-            }),
-            content: Column(
-              children: List.generate(
-                3,
-                (int index) => MoonMenuItem(
-                  onTap: () {},
-                  label: Text('Page ${index + 1}'),
+          showMoreWidget: MoonBreadcrumbItem(
+            onTap: () => setState(() => _showDropdown = !_showDropdown),
+            label: MoonDropdown(
+              show: _showDropdown,
+              onTapOutside: () => setState(() => _showDropdown = false),
+              content: Column(
+                children: List.generate(
+                  3,
+                  (int index) => MoonMenuItem(
+                    onTap: () {},
+                    label: Text('Page ${index + 1}'),
+                  ),
                 ),
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: MouseRegion(
-                onHover: (PointerHoverEvent _) {
-                  setState(() => _dropdownIconColor = context.moonColors!.iconPrimary);
-                },
-                onExit: (PointerExitEvent _) {
-                  if (!_showDropdown) setState(() => _dropdownIconColor = context.moonColors!.iconSecondary);
-                },
-                child: MoonButton.icon(
-                  buttonSize: MoonButtonSize.xs,
-                  hoverEffectColor: Colors.transparent,
-                  iconColor: _dropdownIconColor ?? context.moonColors!.iconSecondary,
-                  onTap: () => setState(() => _showDropdown = !_showDropdown),
-                  icon: const Icon(MoonIcons.generic_burger_regular_16_light),
-                ),
-              ),
+              child: const Icon(MoonIcons.generic_burger_regular_16_light),
             ),
           ),
           items: List.generate(
