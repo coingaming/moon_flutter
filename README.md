@@ -11,6 +11,8 @@ to write commit messages._
 
 The current major release, v1.0.0, will be maintained as-is and will not receive further updates, except for patches. The v1 theming is based on the soon-to-be deprecated Moon Design Figma v1 and lacks flexibility. For greater control over theming with v1 of moon_flutter, it is recommended to create custom wrapper widgets around the moon_flutter widgets that align with your project's specific theming requirements.
 
+There is ongoing background work for v2 which aims to be more modular, scalable and themable.
+
 ## Resources
 
 - 📱 [Playground](https://flutter.moon.io)
