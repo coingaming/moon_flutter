@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/coingaming/moon_flutter/compare/v1.0.0...v1.0.1) (2024-08-08)
+
+
+### Bug Fixes
+
+* update license ([2a678cd](https://github.com/coingaming/moon_flutter/commit/2a678cd26fbed732e381a1aa2035fcbd8caff619))
+
 ## [1.0.0](https://github.com/coingaming/moon_flutter/compare/v0.59.3...v1.0.0) (2024-08-02)
 
 
