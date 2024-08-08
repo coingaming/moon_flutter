@@ -4,7 +4,8 @@ enum SocialMedia {
   medium,
   linkedIn,
   gitHub,
-  figma;
+  figma,
+  license;
 
   String get name {
     final String rawName = toString().split('.').last;
@@ -18,6 +19,8 @@ enum SocialMedia {
         gitHub => 'https://github.com/coingaming/moon_flutter',
         figma =>
           'https://www.figma.com/community/file/1002945721703152933/moon-design-system',
+        license =>
+          'https://github.com/coingaming/moon_flutter/blob/main/LICENSE',
       };
 
   String get buttonIconPath => switch (this) {
