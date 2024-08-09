@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/coingaming/moon_flutter/compare/v1.0.2...v1.0.3) (2024-08-09)
+
+
+### Bug Fixes
+
+* revert back to MIT license ([372bc1a](https://github.com/coingaming/moon_flutter/commit/372bc1a1c1ea7357bbb482de612fe03efd8471d8))
+
 ## [1.0.2](https://github.com/coingaming/moon_flutter/compare/v1.0.1...v1.0.2) (2024-08-08)
 
 
