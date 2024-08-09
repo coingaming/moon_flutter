@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/coingaming/moon_flutter/compare/v1.0.1...v1.0.2) (2024-08-08)
+
+
+### Bug Fixes
+
+* add license link to footer [MDS-1279] ([#435](https://github.com/coingaming/moon_flutter/issues/435)) ([deaa1a0](https://github.com/coingaming/moon_flutter/commit/deaa1a0cfa90357dc36d6f613148f0cef126a4ca))
+
 ## [1.0.1](https://github.com/coingaming/moon_flutter/compare/v1.0.0...v1.0.1) (2024-08-08)
 
 
