@@ -46,7 +46,8 @@ class _AccordionStoryState extends State<AccordionStory> {
 
     final expandedTextColorKnob = context.knobs.nullable.options(
       label: "expandedTextColor",
-      description: "MoonColors variants for expanded MoonAccordion header text.",
+      description:
+          "MoonColors variants for expanded MoonAccordion header text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -108,7 +109,8 @@ class _AccordionStoryState extends State<AccordionStory> {
       options: colorOptions,
     );
 
-    final expandedBackgroundColor = colorTable(context)[expandedBackgroundColorKnob ?? 40];
+    final expandedBackgroundColor =
+        colorTable(context)[expandedBackgroundColorKnob ?? 40];
 
     final borderColorKnob = context.knobs.nullable.options(
       label: "borderColor",
@@ -158,10 +160,17 @@ class _AccordionStoryState extends State<AccordionStory> {
     );
 
     const String contentText =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do "
+        "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim "
+        "ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "
+        "aliquip ex ea commodo consequat. Duis aute irure dolor in "
+        "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
+        "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
+        "culpa qui officia deserunt mollit anim id est laborum.";
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return ListView(
       clipBehavior: Clip.none,
@@ -188,7 +197,8 @@ class _AccordionStoryState extends State<AccordionStory> {
           showDivider: showDividerKnob,
           shadows: showShadowKnob == true ? null : [],
           childrenPadding: const EdgeInsets.all(12),
-          onExpansionChanged: (AccordionItems? value) => setState(() => _currentlyOpenAccordionItem = value),
+          onExpansionChanged: (AccordionItems? value) =>
+              setState(() => _currentlyOpenAccordionItem = value),
           leading: const Icon(MoonIcons.other_frame_24_light),
           label: const Text("Grouped MoonAccordion item #1"),
           children: [
@@ -216,7 +226,8 @@ class _AccordionStoryState extends State<AccordionStory> {
           showDivider: showDividerKnob,
           shadows: showShadowKnob == true ? null : [],
           childrenPadding: const EdgeInsets.all(12),
-          onExpansionChanged: (AccordionItems? value) => setState(() => _currentlyOpenAccordionItem = value),
+          onExpansionChanged: (AccordionItems? value) =>
+              setState(() => _currentlyOpenAccordionItem = value),
           leading: const Icon(MoonIcons.other_frame_24_light),
           label: const Text("Grouped MoonAccordion item #2"),
           children: [

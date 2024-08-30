@@ -22,28 +22,37 @@ enum MoonAccordionSize {
 }
 
 class MoonAccordion<T> extends StatefulWidget {
-  /// The alignment of [children], which are arranged in a column when the accordion is expanded.
+  /// The alignment of [children], which are arranged in a column when the
+  /// accordion is expanded.
   ///
-  /// Internally, the expanded accordion uses a [Column] widget for [children] and an [Align] widget
-  /// to align the column. The [expandedAlignment] parameter is directly passed into the [Align].
+  /// Internally, the expanded accordion uses a [Column] widget for [children]
+  /// and an [Align] widget to align the column. The [expandedAlignment]
+  /// parameter is directly passed into the [Align].
   ///
   /// Modifying this property controls the alignment of the column within the
-  /// expanded accordion, not the alignment of [children] widgets within the column.
+  /// expanded accordion, not the alignment of [children] widgets within the
+  /// column.
   /// To align each child within [children], see [expandedCrossAxisAlignment].
   ///
-  /// The width of the column is determined by the widest child widget in [children].
+  /// The width of the column is determined by the widest child widget in
+  /// [children].
   final AlignmentGeometry? expandedAlignment;
 
-  /// The alignment of each child within [children] when the accordion is expanded.
+  /// The alignment of each child within [children] when the accordion is
+  /// expanded.
   ///
   /// Internally, the expanded accordion uses a [Column] widget for
-  /// [children], and the `crossAxisAlignment` parameter is directly passed into the [Column].
+  /// [children], and the `crossAxisAlignment` parameter is directly passed into
+  /// the [Column].
   ///
-  /// Modifying this property controls the cross axis alignment of each child within its [Column].
-  /// The width of the [Column] housing [children] will be the same as the widest child widget in [children].
-  /// It is not necessarily that the width of the [Column] is equal to the width of the expanded accordion.
+  /// Modifying this property controls the cross axis alignment of each child
+  /// within its [Column]. The width of the [Column] housing [children] will be
+  /// the same as the widest child widget in [children]. It is not necessarily
+  /// that the width of the [Column] is equal to the width of the expanded
+  /// accordion.
   ///
-  /// To align the [Column] along the expanded accordion, use the [expandedAlignment] property instead.
+  /// To align the [Column] along the expanded accordion, use the
+  /// [expandedAlignment] property instead.
   final CrossAxisAlignment? expandedCrossAxisAlignment;
 
   /// Whether to propagate gestures to the children of the accordion.
@@ -56,19 +65,21 @@ class MoonAccordion<T> extends StatefulWidget {
   /// Whether to display the accordion content outside of its header.
   final bool hasContentOutside;
 
-  /// Whether the accordion is initially expanded (true) or collapsed (false, the default).
-  ///
-  /// If the [identityValue] matches the [groupIdentityValue], this parameter is disregarded.
+  /// Whether the accordion is initially expanded (true) or collapsed (false).
+  /// Defaults to collapsed state.
+  /// If the [identityValue] matches the [groupIdentityValue], this parameter is
+  /// disregarded.
   final bool initiallyExpanded;
 
   /// Whether the accordion is disabled.
   final bool isDisabled;
 
-  /// Whether to preserve the state of the [children] when the accordion expands and collapses.
+  /// Whether to preserve the state of the [children] when the accordion expands
+  /// and collapses.
   ///
-  /// When true, the children remain in the widget tree even when the accordion is collapsed.
-  /// When false (default), the children are removed from the tree when the accordion is
-  /// collapsed and recreated when it is expanded.
+  /// When true, the children remain in the widget tree even when the accordion
+  /// is collapsed. When false (default), the children are removed from the tree
+  /// when the accordion is collapsed and recreated when it is expanded.
   final bool maintainState;
 
   /// Whether to show a border around the accordion.
@@ -110,7 +121,8 @@ class MoonAccordion<T> extends StatefulWidget {
   /// The custom decoration of the accordion.
   final Decoration? decoration;
 
-  /// The gap between the [leading], [label] and [trailing] widgets of the accordion header.
+  /// The gap between the [leading], [label] and [trailing] widgets of the
+  /// accordion header.
   final double? gap;
 
   /// The height of the accordion header.
@@ -145,12 +157,14 @@ class MoonAccordion<T> extends StatefulWidget {
 
   /// The currently selected identity value for a group of accordions.
   ///
-  /// This accordion is considered selected if its [identityValue] is equal to the [groupIdentityValue].
+  /// This accordion is considered selected if its [identityValue] is equal to
+  /// the [groupIdentityValue].
   final T? groupIdentityValue;
 
   /// The callback that is called when the accordion expands or collapses.
   ///
-  /// When the accordion expansion changes, this function is called with the [identityValue].
+  /// When the accordion expansion changes, this function is called with the
+  /// [identityValue].
   final ValueChanged<T?>? onExpansionChanged;
 
   /// The widget to display before the [label] widget of the accordion.
@@ -215,18 +229,22 @@ class MoonAccordion<T> extends StatefulWidget {
     this.children = const <Widget>[],
   }) : assert(
           expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
-          'CrossAxisAlignment.baseline is not supported since the expanded children '
-          'are aligned in a column, not a row. Try to use another constant.',
+          'CrossAxisAlignment.baseline is not supported since the expanded '
+          'children are aligned in a column, not a row. Try to use another '
+          'constant.',
         );
 
-  bool get _selected => identityValue != null && identityValue == groupIdentityValue;
+  bool get _selected =>
+      identityValue != null && identityValue == groupIdentityValue;
 
   @override
   State<MoonAccordion<T>> createState() => _MoonAccordionState<T>();
 }
 
-class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProviderStateMixin {
-  static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: 0.5);
+class _MoonAccordionState<T> extends State<MoonAccordion<T>>
+    with TickerProviderStateMixin {
+  static final Animatable<double> _halfTween =
+      Tween<double>(begin: 0.0, end: 0.5);
 
   late MoonAccordionSizeProperties _effectiveMoonAccordionSize;
   late BorderRadiusGeometry _effectiveBorderRadius;
@@ -234,10 +252,14 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
   late EdgeInsets _resolvedDirectionalHeaderPadding;
   late double _effectiveHeaderHeight;
 
-  final ColorTweenWithPremultipliedAlpha _textColorTween = ColorTweenWithPremultipliedAlpha();
-  final ColorTweenWithPremultipliedAlpha _iconColorTween = ColorTweenWithPremultipliedAlpha();
-  final ColorTweenWithPremultipliedAlpha _backgroundColorTween = ColorTweenWithPremultipliedAlpha();
-  final ColorTweenWithPremultipliedAlpha _hoverColorTween = ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _textColorTween =
+      ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _iconColorTween =
+      ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _backgroundColorTween =
+      ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _hoverColorTween =
+      ColorTweenWithPremultipliedAlpha();
 
   Animation<Color?>? _textColor;
   Animation<Color?>? _iconColor;
@@ -255,10 +277,13 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
 
   bool _isExpanded = false;
 
-  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+  FocusNode get _effectiveFocusNode =>
+      widget.focusNode ?? (_focusNode ??= FocusNode());
 
   void _handleActiveState(bool isActive) {
-    isActive ? _hoverAnimationController!.forward() : _hoverAnimationController!.reverse();
+    isActive
+        ? _hoverAnimationController!.forward()
+        : _hoverAnimationController!.reverse();
   }
 
   void _handleTap() {
@@ -281,18 +306,26 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
     widget.onExpansionChanged?.call(_isExpanded ? widget.identityValue : null);
   }
 
-  MoonAccordionSizeProperties _getMoonAccordionSize(BuildContext context, MoonAccordionSize? moonAccordionSize) {
+  MoonAccordionSizeProperties _getMoonAccordionSize(
+    BuildContext context,
+    MoonAccordionSize? moonAccordionSize,
+  ) {
     switch (moonAccordionSize) {
       case MoonAccordionSize.sm:
-        return context.moonTheme?.accordionTheme.sizes.sm ?? MoonAccordionSizes(tokens: MoonTokens.light).sm;
+        return context.moonTheme?.accordionTheme.sizes.sm ??
+            MoonAccordionSizes(tokens: MoonTokens.light).sm;
       case MoonAccordionSize.md:
-        return context.moonTheme?.accordionTheme.sizes.md ?? MoonAccordionSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.accordionTheme.sizes.md ??
+            MoonAccordionSizes(tokens: MoonTokens.light).md;
       case MoonAccordionSize.lg:
-        return context.moonTheme?.accordionTheme.sizes.lg ?? MoonAccordionSizes(tokens: MoonTokens.light).lg;
+        return context.moonTheme?.accordionTheme.sizes.lg ??
+            MoonAccordionSizes(tokens: MoonTokens.light).lg;
       case MoonAccordionSize.xl:
-        return context.moonTheme?.accordionTheme.sizes.xl ?? MoonAccordionSizes(tokens: MoonTokens.light).xl;
+        return context.moonTheme?.accordionTheme.sizes.xl ??
+            MoonAccordionSizes(tokens: MoonTokens.light).xl;
       default:
-        return context.moonTheme?.accordionTheme.sizes.md ?? MoonAccordionSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.accordionTheme.sizes.md ??
+            MoonAccordionSizes(tokens: MoonTokens.light).md;
     }
   }
 
@@ -300,8 +333,8 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
   void initState() {
     super.initState();
 
-    _isExpanded =
-        PageStorage.maybeOf(context)?.readState(context) as bool? ?? widget.initiallyExpanded || widget._selected;
+    _isExpanded = PageStorage.maybeOf(context)?.readState(context) as bool? ??
+        widget.initiallyExpanded || widget._selected;
 
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       if (!mounted) return;
@@ -316,13 +349,11 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
   void didUpdateWidget(MoonAccordion<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.identityValue == null && widget.groupIdentityValue == null) return;
-
-    if (widget._selected) {
-      _isExpanded = true;
-    } else {
-      _isExpanded = false;
+    if (widget.identityValue == null && widget.groupIdentityValue == null) {
+      return;
     }
+
+    _isExpanded = widget._selected;
 
     setState(() {
       if (_isExpanded) {
@@ -349,7 +380,8 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
   }
 
   Widget? _buildIcon(BuildContext context) {
-    final double iconSize = _getMoonAccordionSize(context, widget.accordionSize).iconSizeValue;
+    final double iconSize =
+        _getMoonAccordionSize(context, widget.accordionSize).iconSizeValue;
 
     final Color effectiveTrailingIconColor = widget.iconColor ??
         context.moonTheme?.accordionTheme.colors.trailingIconColor ??
@@ -382,11 +414,13 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
   }
 
   Widget _buildDecorationContainer({required Widget child}) {
-    final Color effectiveBorderColor =
-        widget.borderColor ?? context.moonTheme?.accordionTheme.colors.borderColor ?? MoonColors.light.beerus;
+    final Color effectiveBorderColor = widget.borderColor ??
+        context.moonTheme?.accordionTheme.colors.borderColor ??
+        MoonColors.light.beerus;
 
-    final List<BoxShadow> effectiveShadows =
-        widget.shadows ?? context.moonTheme?.accordionTheme.shadows.shadows ?? MoonShadows.light.sm;
+    final List<BoxShadow> effectiveShadows = widget.shadows ??
+        context.moonTheme?.accordionTheme.shadows.shadows ??
+        MoonShadows.light.sm;
 
     return MoonBaseControl(
       onTap: widget.isDisabled ? null : _handleTap,
@@ -394,7 +428,13 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
       autofocus: widget.autofocus,
       focusNode: _effectiveFocusNode,
       borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
-      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
+      builder: (
+        BuildContext context,
+        bool isEnabled,
+        bool isHovered,
+        bool isFocused,
+        bool isPressed,
+      ) {
         final bool isActive = isHovered || isFocused;
 
         _handleActiveState(isActive);
@@ -403,14 +443,17 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
           animation: _hoverAnimationController!,
           builder: (BuildContext context, Widget? child) {
             return Container(
-              clipBehavior: widget.clipBehavior ?? Clip.none,
+              clipBehavior: widget.clipBehavior ?? Clip.hardEdge,
               decoration: widget.decoration ??
                   ShapeDecoration(
                     color: _hoverColor!.value,
                     shadows: effectiveShadows,
                     shape: MoonSquircleBorder(
-                      side: widget.showBorder ? BorderSide(color: effectiveBorderColor) : BorderSide.none,
-                      borderRadius: _effectiveBorderRadius.squircleBorderRadius(context),
+                      side: widget.showBorder
+                          ? BorderSide(color: effectiveBorderColor)
+                          : BorderSide.none,
+                      borderRadius:
+                          _effectiveBorderRadius.squircleBorderRadius(context),
                     ),
                   ),
               child: child,
@@ -423,55 +466,79 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
   }
 
   Widget _buildContent(BuildContext context, Widget? rootChild) {
-    _effectiveHoverEffectColor ??= context.moonEffects?.controlHoverEffect.primaryHoverColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
+    _effectiveHoverEffectColor ??=
+        context.moonEffects?.controlHoverEffect.primaryHoverColor ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlHoverEffect
+                .primaryHoverColor;
 
-    _effectiveMoonAccordionSize = _getMoonAccordionSize(context, widget.accordionSize);
+    _effectiveMoonAccordionSize =
+        _getMoonAccordionSize(context, widget.accordionSize);
 
-    _effectiveBorderRadius = widget.borderRadius ?? _effectiveMoonAccordionSize.borderRadius;
+    _effectiveBorderRadius =
+        widget.borderRadius ?? _effectiveMoonAccordionSize.borderRadius;
 
-    _effectiveHeaderHeight = widget.headerHeight ?? _effectiveMoonAccordionSize.headerHeight;
+    _effectiveHeaderHeight =
+        widget.headerHeight ?? _effectiveMoonAccordionSize.headerHeight;
 
-    _effectiveHeaderPadding = widget.headerPadding ?? _effectiveMoonAccordionSize.headerPadding;
+    _effectiveHeaderPadding =
+        widget.headerPadding ?? _effectiveMoonAccordionSize.headerPadding;
 
-    _resolvedDirectionalHeaderPadding = _effectiveHeaderPadding.resolve(Directionality.of(context));
+    _resolvedDirectionalHeaderPadding =
+        _effectiveHeaderPadding.resolve(Directionality.of(context));
 
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.accordionTheme.colors.backgroundColor ?? MoonColors.light.goku;
-
-    final Color effectiveExpandedBackgroundColor = widget.expandedBackgroundColor ??
-        context.moonTheme?.accordionTheme.colors.expandedBackgroundColor ??
+    final Color effectiveBackgroundColor = widget.backgroundColor ??
+        context.moonTheme?.accordionTheme.colors.backgroundColor ??
         MoonColors.light.goku;
 
-    final Color effectiveIconColor =
-        widget.iconColor ?? context.moonTheme?.accordionTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveExpandedBackgroundColor =
+        widget.expandedBackgroundColor ??
+            context.moonTheme?.accordionTheme.colors.expandedBackgroundColor ??
+            MoonColors.light.goku;
+
+    final Color effectiveIconColor = widget.iconColor ??
+        context.moonTheme?.accordionTheme.colors.iconColor ??
+        MoonColors.light.iconPrimary;
 
     final Color effectiveExpandedIconColor = widget.expandedIconColor ??
         context.moonTheme?.accordionTheme.colors.expandedIconColor ??
         MoonColors.light.iconPrimary;
 
-    final Color effectiveTextColor =
-        widget.textColor ?? context.moonTheme?.accordionTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor = widget.textColor ??
+        context.moonTheme?.accordionTheme.colors.textColor ??
+        MoonColors.light.textPrimary;
 
     final Color effectiveExpandedTextColor = widget.expandedTextColor ??
         context.moonTheme?.accordionTheme.colors.expandedTextColor ??
         MoonColors.light.textPrimary;
 
     final Color effectiveContentTextColor =
-        context.moonTheme?.accordionTheme.colors.contentColor ?? MoonColors.light.textPrimary;
+        context.moonTheme?.accordionTheme.colors.contentColor ??
+            MoonColors.light.textPrimary;
 
-    final TextStyle effectiveHeaderTextStyle = _effectiveMoonAccordionSize.headerTextStyle;
+    final TextStyle effectiveHeaderTextStyle =
+        _effectiveMoonAccordionSize.headerTextStyle;
 
-    final TextStyle effectiveContentTextStyle = _effectiveMoonAccordionSize.contentTextStyle;
+    final TextStyle effectiveContentTextStyle =
+        _effectiveMoonAccordionSize.contentTextStyle;
 
-    final Color effectiveHoverEffectColor = context.moonEffects?.controlHoverEffect.primaryHoverColor ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.primaryHoverColor;
+    final Color effectiveHoverEffectColor =
+        context.moonEffects?.controlHoverEffect.primaryHoverColor ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlHoverEffect
+                .primaryHoverColor;
 
-    final Duration effectiveHoverEffectDuration = context.moonEffects?.controlHoverEffect.hoverDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
+    final Duration effectiveHoverEffectDuration =
+        context.moonEffects?.controlHoverEffect.hoverDuration ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlHoverEffect
+                .hoverDuration;
 
-    final Curve effectiveHoverEffectCurve = context.moonEffects?.controlHoverEffect.hoverCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
+    final Curve effectiveHoverEffectCurve =
+        context.moonEffects?.controlHoverEffect.hoverCurve ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlHoverEffect
+                .hoverCurve;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.accordionTheme.properties.transitionDuration ??
@@ -481,23 +548,34 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
         context.moonTheme?.accordionTheme.properties.transitionCurve ??
         MoonTransitions.transitions.defaultTransitionCurve;
 
-    _expansionAnimationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
+    _expansionAnimationController ??=
+        AnimationController(duration: effectiveTransitionDuration, vsync: this);
 
-    _expansionCurvedAnimation ??=
-        CurvedAnimation(parent: _expansionAnimationController!, curve: effectiveTransitionCurve);
+    _expansionCurvedAnimation ??= CurvedAnimation(
+      parent: _expansionAnimationController!,
+      curve: effectiveTransitionCurve,
+    );
 
-    _hoverAnimationController ??= AnimationController(duration: effectiveHoverEffectDuration, vsync: this);
+    _hoverAnimationController ??= AnimationController(
+      duration: effectiveHoverEffectDuration,
+      vsync: this,
+    );
 
-    _backgroundColor ??= _backgroundColorTween.animate(_expansionCurvedAnimation!);
+    _backgroundColor ??=
+        _backgroundColorTween.animate(_expansionCurvedAnimation!);
     _backgroundColorTween
       ..begin = effectiveBackgroundColor
       ..end = effectiveExpandedBackgroundColor;
 
-    _hoverColor ??=
-        _hoverAnimationController!.drive(_hoverColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)));
+    _hoverColor ??= _hoverAnimationController!.drive(
+      _hoverColorTween.chain(CurveTween(curve: effectiveHoverEffectCurve)),
+    );
     _hoverColorTween
       ..begin = _backgroundColor!.value
-      ..end = Color.alphaBlend(effectiveHoverEffectColor, _backgroundColor!.value!);
+      ..end = Color.alphaBlend(
+        effectiveHoverEffectColor,
+        _backgroundColor!.value!,
+      );
 
     _textColor ??= _textColorTween.animate(_expansionCurvedAnimation!);
     _textColorTween
@@ -521,12 +599,17 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
               children: [
                 if (widget.leading != null)
                   Padding(
-                    padding: EdgeInsetsDirectional.only(end: widget.gap ?? _resolvedDirectionalHeaderPadding.left),
+                    padding: EdgeInsetsDirectional.only(
+                      end: widget.gap ?? _resolvedDirectionalHeaderPadding.left,
+                    ),
                     child: widget.leading,
                   ),
                 Expanded(child: widget.label),
                 Padding(
-                  padding: EdgeInsetsDirectional.only(start: widget.gap ?? _resolvedDirectionalHeaderPadding.right),
+                  padding: EdgeInsetsDirectional.only(
+                    start:
+                        widget.gap ?? _resolvedDirectionalHeaderPadding.right,
+                  ),
                   child: widget.trailing ?? _buildIcon(context)!,
                 ),
               ],
@@ -540,7 +623,9 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
       child: IconTheme(
         data: IconThemeData(color: effectiveContentTextColor),
         child: DefaultTextStyle(
-          style: effectiveContentTextStyle.copyWith(color: effectiveContentTextColor),
+          style: effectiveContentTextStyle.copyWith(
+            color: effectiveContentTextColor,
+          ),
           child: Align(
             alignment: widget.expandedAlignment ?? Alignment.topCenter,
             heightFactor: _expansionCurvedAnimation!.value,
@@ -580,16 +665,21 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveDividerColor =
-        widget.dividerColor ?? context.moonTheme?.accordionTheme.colors.dividerColor ?? MoonColors.light.beerus;
+    final Color effectiveDividerColor = widget.dividerColor ??
+        context.moonTheme?.accordionTheme.colors.dividerColor ??
+        MoonColors.light.beerus;
 
     final Duration effectiveTransitionDuration = widget.transitionDuration ??
         context.moonTheme?.accordionTheme.properties.transitionDuration ??
         MoonTransitions.transitions.defaultTransitionDuration;
 
-    _expansionAnimationController ??= AnimationController(duration: effectiveTransitionDuration, vsync: this);
+    _expansionAnimationController ??= AnimationController(
+      duration: effectiveTransitionDuration,
+      vsync: this,
+    );
 
-    final bool isClosed = !_isExpanded && _expansionAnimationController!.isDismissed;
+    final bool isClosed =
+        !_isExpanded && _expansionAnimationController!.isDismissed;
 
     final bool shouldRemoveChildren = isClosed && !widget.maintainState;
 
@@ -599,11 +689,13 @@ class _MoonAccordionState<T> extends State<MoonAccordion<T>> with TickerProvider
         enabled: !isClosed,
         child: Column(
           children: [
-            if (widget.showDivider && !widget.hasContentOutside) Container(height: 1, color: effectiveDividerColor),
+            if (widget.showDivider && !widget.hasContentOutside)
+              Container(height: 1, color: effectiveDividerColor),
             Padding(
               padding: widget.childrenPadding ?? EdgeInsets.zero,
               child: Column(
-                crossAxisAlignment: widget.expandedCrossAxisAlignment ?? CrossAxisAlignment.center,
+                crossAxisAlignment: widget.expandedCrossAxisAlignment ??
+                    CrossAxisAlignment.center,
                 children: widget.children,
               ),
             ),
