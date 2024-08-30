@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/coingaming/moon_flutter/compare/v1.0.3...v1.0.4) (2024-08-30)
+
+
+### Bug Fixes
+
+* [MDS-1318] Fix Accordion clip behavior ([#439](https://github.com/coingaming/moon_flutter/issues/439)) ([2c33904](https://github.com/coingaming/moon_flutter/commit/2c33904790ee518e0e0dc98b715474336aa7d24a))
+
 ## [1.0.3](https://github.com/coingaming/moon_flutter/compare/v1.0.2...v1.0.3) (2024-08-09)
 
 
