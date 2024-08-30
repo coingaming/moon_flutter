@@ -48,6 +48,9 @@ class MoonButton extends StatefulWidget {
   /// Whether to show a scale effect when the button is tapped or long-pressed.
   final bool showScaleEffect;
 
+  /// Whether to propagate gestures to the child of the base control.
+  final bool propagateGesturesToChild;
+
   /// The border radius of the button.
   final BorderRadiusGeometry? borderRadius;
 
@@ -172,6 +175,7 @@ class MoonButton extends StatefulWidget {
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
     this.showScaleEffect = true,
+    this.propagateGesturesToChild = false,
     this.borderRadius,
     this.backgroundColor,
     this.borderColor,
@@ -227,6 +231,7 @@ class MoonButton extends StatefulWidget {
     this.showPulseEffect = false,
     this.showPulseEffectJiggle = true,
     this.showScaleEffect = true,
+    this.propagateGesturesToChild = false,
     this.borderRadius,
     this.backgroundColor,
     this.borderColor,
@@ -378,6 +383,7 @@ class _MoonButtonState extends State<MoonButton> with SingleTickerProviderStateM
       showPulseEffect: widget.showPulseEffect,
       showPulseEffectJiggle: widget.showPulseEffectJiggle,
       showScaleEffect: widget.showScaleEffect,
+      propagateGesturesToChild: widget.propagateGesturesToChild,
       borderRadius: effectiveBorderRadius,
       backgroundColor: widget.backgroundColor,
       focusEffectColor: widget.focusEffectColor,
