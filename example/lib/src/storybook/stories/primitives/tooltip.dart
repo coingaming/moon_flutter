@@ -129,7 +129,9 @@ class _TooltipStoryState extends State<TooltipStory> {
       initial: true,
     );
 
-    final borderRadius = borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -149,7 +151,8 @@ class _TooltipStoryState extends State<TooltipStory> {
                   borderWidth: 1,
                   borderColor: borderColor ?? Colors.transparent,
                   borderRadius: borderRadius,
-                  tooltipPosition: tooltipPositionKnob ?? MoonTooltipPosition.top,
+                  tooltipPosition:
+                      tooltipPositionKnob ?? MoonTooltipPosition.top,
                   hasArrow: showArrowKnob,
                   arrowBaseWidth: arrowBaseWidthKnob,
                   arrowLength: arrowLengthKnob,

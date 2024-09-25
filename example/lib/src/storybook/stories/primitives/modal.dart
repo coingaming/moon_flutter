@@ -61,7 +61,9 @@ class ModalStory extends StatelessWidget {
             textDirection: Directionality.of(context),
             child: MoonModal(
               backgroundColor: backgroundColor,
-              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+              borderRadius: borderRadiusKnob != null
+                  ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                  : null,
               child: SizedBox(
                 width: 300,
                 child: Column(
@@ -72,7 +74,8 @@ class ModalStory extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
                       child: Text(
                         "MoonModal title",
-                        style: context.moonTypography!.heading.text18.copyWith(color: textColor),
+                        style: context.moonTypography!.heading.text18
+                            .copyWith(color: textColor),
                       ),
                     ),
                     Divider(
@@ -83,7 +86,8 @@ class ModalStory extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
                       child: Text(
                         "Re-open the MoonModal to view the updated knob value.",
-                        style: context.moonTypography!.body.text14.copyWith(color: textColor),
+                        style: context.moonTypography!.body.text14
+                            .copyWith(color: textColor),
                       ),
                     ),
                     Padding(

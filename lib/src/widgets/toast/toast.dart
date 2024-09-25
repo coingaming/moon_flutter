@@ -320,7 +320,11 @@ class MoonToast {
 
     Future.delayed(
       _timeBetweenToasts,
-      () => Navigator.of(toastEntry.buildContext).overlay?.insert(_entry!),
+      () {
+        if (toastEntry.buildContext.mounted) {
+          Navigator.of(toastEntry.buildContext).overlay?.insert(_entry!);
+        }
+      },
     );
   }
 

@@ -96,7 +96,9 @@ class ToastStory extends StatelessWidget {
 
     final widthKnob = context.knobs.nullable.slider(
       label: "width",
-      description: "Width for MoonToast. If null, the toast will be as wide as its children.",
+      description:
+          "Width for MoonToast. If null, the toast will be as wide as its "
+          "children.",
       enabled: false,
       initial: 230,
       max: MediaQuery.of(context).size.width,
@@ -104,12 +106,16 @@ class ToastStory extends StatelessWidget {
 
     final isPersistentKnob = context.knobs.boolean(
       label: "isPersistent",
-      description: "Whether MoonToast is persistent across screens (will not behave as expected only in Storybook).",
+      description:
+          "Whether MoonToast is persistent across screens (will not behave as "
+          "expected only in Storybook).",
     );
 
     final useSafeAreaKnob = context.knobs.boolean(
       label: "useSafeArea",
-      description: "Whether MoonToast respects the SafeArea (takes into account notches and native system bars).",
+      description:
+          "Whether MoonToast respects the SafeArea (takes into account notches "
+          "and native system bars).",
       initial: true,
     );
 
@@ -134,8 +140,12 @@ class ToastStory extends StatelessWidget {
                   width: widthKnob,
                   toastAlignment: toastAlignmentKnob ?? Alignment.bottomCenter,
                   variant: toastVariantKnob ?? MoonToastVariant.original,
-                  displayDuration: displayDurationKnob != null ? Duration(seconds: displayDurationKnob) : null,
-                  borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                  displayDuration: displayDurationKnob != null
+                      ? Duration(seconds: displayDurationKnob)
+                      : null,
+                  borderRadius: borderRadiusKnob != null
+                      ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                      : null,
                   leading: Icon(
                     MoonIcons.generic_info_24_light,
                     color: iconColor,

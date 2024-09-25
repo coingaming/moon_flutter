@@ -23,3 +23,4 @@ linter:
   rules:
     depend_on_referenced_packages: false
     use_setters_to_change_properties: false
+    avoid_classes_with_only_static_members: false
