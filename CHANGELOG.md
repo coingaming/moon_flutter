@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/coingaming/moon_flutter/compare/v1.0.4...v1.0.5) (2024-09-25)
+
+
+### Bug Fixes
+
+* [MDS-1331] Dispose animation controllers for tooltip and popover ([#441](https://github.com/coingaming/moon_flutter/issues/441)) ([3466cfd](https://github.com/coingaming/moon_flutter/commit/3466cfda9e96940661e77d6aaacfafd072299da4))
+
 ## [1.0.4](https://github.com/coingaming/moon_flutter/compare/v1.0.3...v1.0.4) (2024-08-30)
 
 
