@@ -42,7 +42,8 @@ class MoonTooltip extends StatefulWidget {
   /// The background color of the tooltip.
   final Color? backgroundColor;
 
-  /// The border color of the tooltip. Displayed when [borderWidth] is larger than 0.
+  /// The border color of the tooltip. Displayed when [borderWidth] is larger
+  /// than 0.
   final Color borderColor;
 
   /// The base width of the tooltip arrow (tail).
@@ -54,33 +55,43 @@ class MoonTooltip extends StatefulWidget {
   /// The offset of the tooltip arrow (tail) from the center of the tooltip.
   final double arrowOffsetValue;
 
-  /// The distance from the tip of the tooltip arrow (tail) to the [child] (target).
+  /// The distance from the tip of the tooltip arrow (tail) to the
+  /// [child] (target).
   final double? arrowTipDistance;
 
   /// The width of the tooltip border.
   final double borderWidth;
 
-  /// An optional size constraint for the tooltip [content] to define its minimum height.
+  /// An optional size constraint for the tooltip [content] to define its
+  /// minimum height.
   ///
-  /// If a constraint is not provided, the size will automatically adjust to the [content].
+  /// If a constraint is not provided, the size will automatically adjust to
+  /// the [content].
   final double? minHeight;
 
-  /// An optional size constraint for the tooltip [content] to define its minimum width.
+  /// An optional size constraint for the tooltip [content] to define its
+  /// minimum width.
   ///
-  /// If a constraint is not provided, the size will automatically adjust to the [content].
+  /// If a constraint is not provided, the size will automatically adjust to
+  /// the [content].
   final double? minWidth;
 
-  /// An optional size constraint for the tooltip [content] to define its maximum height.
+  /// An optional size constraint for the tooltip [content] to define its
+  /// maximum height.
   ///
-  /// If a constraint is not provided, the size will automatically adjust to the [content].
+  /// If a constraint is not provided, the size will automatically adjust to
+  /// the [content].
   final double? maxHeight;
 
-  /// An optional size constraint for the tooltip [content] to define its maximum width.
+  /// An optional size constraint for the tooltip [content] to define its
+  /// maximum width.
   ///
-  /// If a constraint is not provided, the size will automatically adjust to the [content].
+  /// If a constraint is not provided, the size will automatically adjust to
+  /// the [content].
   final double? maxWidth;
 
-  /// The margin of the tooltip. Prevents the tooltip from touching the edges of the viewport.
+  /// The margin of the tooltip. Prevents the tooltip from touching the edges of
+  /// the viewport.
   final double tooltipMargin;
 
   /// The duration of the tooltip transition animation (fade in or out).
@@ -95,10 +106,12 @@ class MoonTooltip extends StatefulWidget {
   /// The list of shadows applied to the tooltip.
   final List<BoxShadow>? tooltipShadows;
 
-  /// The tooltip position relative to the [child] (target). Defaults to [MoonTooltipPosition.vertical].
+  /// The tooltip position relative to the [child] (target).
+  /// Defaults to [MoonTooltipPosition.vertical].
   final MoonTooltipPosition tooltipPosition;
 
-  /// The observer to track route changes and automatically hide the tooltip when the widget's route is not active.
+  /// The observer to track route changes and automatically hide the tooltip
+  /// when the widget's route is not active.
   final RouteObserver<PageRoute<dynamic>>? routeObserver;
 
   /// The semantic label for the tooltip.
@@ -162,7 +175,8 @@ class MoonTooltip extends StatefulWidget {
   _MoonTooltipState createState() => _MoonTooltipState();
 }
 
-class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTickerProviderStateMixin {
+class _MoonTooltipState extends State<MoonTooltip>
+    with RouteAware, SingleTickerProviderStateMixin {
   final GlobalKey _tooltipKey = GlobalKey();
   final LayerLink _layerLink = LayerLink();
 
@@ -176,7 +190,9 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   bool get shouldShowTooltip => widget.show && _routeIsShowing;
 
   void _showTooltip() {
-    _overlayEntry = OverlayEntry(builder: (BuildContext context) => _createOverlayContent());
+    _overlayEntry = OverlayEntry(
+      builder: (BuildContext context) => _createOverlayContent(),
+    );
     Overlay.of(context).insert(_overlayEntry!);
 
     MoonTooltip._openedTooltips.add(this);
@@ -208,12 +224,19 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
   }
 
   void _handleTap(TapDownDetails details) {
-    final RenderBox? tooltipRenderBox = _tooltipKey.currentContext?.findRenderObject() as RenderBox?;
-    final RenderBox? overlayRenderBox = Overlay.of(context).context.findRenderObject() as RenderBox?;
-    final Offset? tooltipPosition = tooltipRenderBox?.localToGlobal(Offset.zero, ancestor: overlayRenderBox);
+    final RenderBox? tooltipRenderBox =
+        _tooltipKey.currentContext?.findRenderObject() as RenderBox?;
+    final RenderBox? overlayRenderBox =
+        Overlay.of(context).context.findRenderObject() as RenderBox?;
+    final Offset? tooltipPosition = tooltipRenderBox?.localToGlobal(
+      Offset.zero,
+      ancestor: overlayRenderBox,
+    );
 
     if (widget.hideOnTap ||
-        tooltipPosition != null && !tooltipRenderBox!.size.contains(details.localPosition - tooltipPosition)) {
+        tooltipPosition != null &&
+            !tooltipRenderBox!.size
+                .contains(details.localPosition - tooltipPosition)) {
       _removeTooltip();
     }
 
@@ -229,90 +252,82 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     required double tooltipTargetGlobalCenter,
     required double tooltipTargetGlobalRight,
   }) {
-    switch (tooltipPosition) {
-      case MoonTooltipPosition.top:
-        return _TooltipPositionProperties(
+    return switch (tooltipPosition) {
+      MoonTooltipPosition.top => _TooltipPositionProperties(
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topCenter,
           followerAnchor: Alignment.bottomCenter,
-          tooltipMaxWidth:
-              overlayWidth - ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
-        );
-
-      case MoonTooltipPosition.bottom:
-        return _TooltipPositionProperties(
+          tooltipMaxWidth: overlayWidth -
+              ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() -
+              widget.tooltipMargin * 2,
+        ),
+      MoonTooltipPosition.bottom => _TooltipPositionProperties(
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomCenter,
           followerAnchor: Alignment.topCenter,
-          tooltipMaxWidth:
-              overlayWidth - ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() - widget.tooltipMargin * 2,
-        );
-
-      case MoonTooltipPosition.left:
-        return _TooltipPositionProperties(
+          tooltipMaxWidth: overlayWidth -
+              ((overlayWidth / 2 - tooltipTargetGlobalCenter) * 2).abs() -
+              widget.tooltipMargin * 2,
+        ),
+      MoonTooltipPosition.left => _TooltipPositionProperties(
           offset: Offset(-(arrowTipDistance + arrowLength), 0),
           targetAnchor: Alignment.centerLeft,
           followerAnchor: Alignment.centerRight,
-          tooltipMaxWidth: tooltipTargetGlobalLeft - arrowLength - arrowTipDistance - widget.tooltipMargin,
-        );
-
-      case MoonTooltipPosition.right:
-        return _TooltipPositionProperties(
+          tooltipMaxWidth: tooltipTargetGlobalLeft -
+              arrowLength -
+              arrowTipDistance -
+              widget.tooltipMargin,
+        ),
+      MoonTooltipPosition.right => _TooltipPositionProperties(
           offset: Offset(arrowTipDistance + arrowLength, 0),
           targetAnchor: Alignment.centerRight,
           followerAnchor: Alignment.centerLeft,
-          tooltipMaxWidth:
-              overlayWidth - tooltipTargetGlobalRight - arrowLength - arrowTipDistance - widget.tooltipMargin,
-        );
-
-      case MoonTooltipPosition.topLeft:
-        return _TooltipPositionProperties(
+          tooltipMaxWidth: overlayWidth -
+              tooltipTargetGlobalRight -
+              arrowLength -
+              arrowTipDistance -
+              widget.tooltipMargin,
+        ),
+      MoonTooltipPosition.topLeft => _TooltipPositionProperties(
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topRight,
           followerAnchor: Alignment.bottomRight,
           tooltipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
-        );
-
-      case MoonTooltipPosition.topRight:
-        return _TooltipPositionProperties(
+        ),
+      MoonTooltipPosition.topRight => _TooltipPositionProperties(
           offset: Offset(0, -(arrowTipDistance + arrowLength)),
           targetAnchor: Alignment.topLeft,
           followerAnchor: Alignment.bottomLeft,
-          tooltipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
-        );
-
-      case MoonTooltipPosition.bottomLeft:
-        return _TooltipPositionProperties(
+          tooltipMaxWidth:
+              overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
+        ),
+      MoonTooltipPosition.bottomLeft => _TooltipPositionProperties(
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomRight,
           followerAnchor: Alignment.topRight,
           tooltipMaxWidth: tooltipTargetGlobalRight - widget.tooltipMargin,
-        );
-
-      case MoonTooltipPosition.bottomRight:
-        return _TooltipPositionProperties(
+        ),
+      MoonTooltipPosition.bottomRight => _TooltipPositionProperties(
           offset: Offset(0, arrowTipDistance + arrowLength),
           targetAnchor: Alignment.bottomLeft,
           followerAnchor: Alignment.topLeft,
-          tooltipMaxWidth: overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
-        );
-
-      default:
-        throw AssertionError(tooltipPosition);
-    }
+          tooltipMaxWidth:
+              overlayWidth - tooltipTargetGlobalLeft - widget.tooltipMargin,
+        ),
+      _ => throw AssertionError(tooltipPosition),
+    };
   }
 
   @override
   void didPush() {
     _routeIsShowing = true;
+
     // Route was added to the navigator and is now the top-most route.
     if (shouldShowTooltip) {
       _removeTooltip();
 
       WidgetsBinding.instance.addPostFrameCallback((Duration _) {
-        if (!mounted) return;
-
-        _showTooltip();
+        if (mounted) _showTooltip();
       });
     }
   }
@@ -342,11 +357,10 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
-      widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
+      widget.routeObserver
+          ?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
 
-      if (widget.show) {
-        _showTooltip();
-      }
+      if (widget.show) _showTooltip();
     });
   }
 
@@ -356,7 +370,8 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
 
     if (oldWidget.routeObserver != widget.routeObserver) {
       oldWidget.routeObserver?.unsubscribe(this);
-      widget.routeObserver?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
+      widget.routeObserver
+          ?.subscribe(this, ModalRoute.of(context)! as PageRoute<dynamic>);
     }
 
     WidgetsBinding.instance.addPostFrameCallback((Duration _) {
@@ -377,18 +392,16 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
 
   @override
   void deactivate() {
-    if (_overlayEntry != null) {
-      _removeTooltip(immediately: true);
-    }
+    if (_overlayEntry != null) _removeTooltip(immediately: true);
 
     super.deactivate();
   }
 
   @override
   void dispose() {
-    if (_overlayEntry != null) {
-      _removeTooltip(immediately: true);
-    }
+    _animationController?.dispose();
+
+    if (_overlayEntry != null) _removeTooltip(immediately: true);
 
     widget.routeObserver?.unsubscribe(this);
 
@@ -402,47 +415,69 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         context.moonTheme?.tooltipTheme.properties.borderRadius ??
         MoonBorders.borders.interactiveXs;
 
-    final resolvedBorderRadius = effectiveBorderRadius.resolve(Directionality.of(context));
+    final resolvedBorderRadius =
+        effectiveBorderRadius.resolve(Directionality.of(context));
 
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.tooltipTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = widget.backgroundColor ??
+        context.moonTheme?.tooltipTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
-    final Color effectiveTextColor = context.moonTheme?.tooltipTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.tooltipTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor = context.moonTheme?.tooltipTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.tooltipTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
-    final double effectiveArrowBaseWidth =
-        widget.arrowBaseWidth ?? context.moonTheme?.tooltipTheme.properties.arrowBaseWidth ?? 16;
+    final double effectiveArrowBaseWidth = widget.arrowBaseWidth ??
+        context.moonTheme?.tooltipTheme.properties.arrowBaseWidth ??
+        16;
 
-    final double effectiveArrowLength =
-        widget.hasArrow ? (widget.arrowLength ?? context.moonTheme?.tooltipTheme.properties.arrowLength ?? 8) : 0;
+    final double effectiveArrowLength = widget.hasArrow
+        ? (widget.arrowLength ??
+            context.moonTheme?.tooltipTheme.properties.arrowLength ??
+            8)
+        : 0;
 
-    final double effectiveArrowTipDistance =
-        widget.arrowTipDistance ?? context.moonTheme?.tooltipTheme.properties.arrowTipDistance ?? 8;
+    final double effectiveArrowTipDistance = widget.arrowTipDistance ??
+        context.moonTheme?.tooltipTheme.properties.arrowTipDistance ??
+        8;
 
-    final EdgeInsetsGeometry effectiveContentPadding =
-        widget.contentPadding ?? context.moonTheme?.tooltipTheme.properties.contentPadding ?? const EdgeInsets.all(12);
+    final EdgeInsetsGeometry effectiveContentPadding = widget.contentPadding ??
+        context.moonTheme?.tooltipTheme.properties.contentPadding ??
+        const EdgeInsets.all(12);
 
-    final EdgeInsets resolvedContentPadding = effectiveContentPadding.resolve(Directionality.of(context));
+    final EdgeInsets resolvedContentPadding =
+        effectiveContentPadding.resolve(Directionality.of(context));
 
-    final List<BoxShadow> effectiveTooltipShadows =
-        widget.tooltipShadows ?? context.moonTheme?.tooltipTheme.shadows.tooltipShadows ?? MoonShadows.light.sm;
+    final List<BoxShadow> effectiveTooltipShadows = widget.tooltipShadows ??
+        context.moonTheme?.tooltipTheme.shadows.tooltipShadows ??
+        MoonShadows.light.sm;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.tooltipTheme.properties.textStyle ?? MoonTypography.typography.body.text12;
+        context.moonTheme?.tooltipTheme.properties.textStyle ??
+            MoonTypography.typography.body.text12;
 
-    final overlayRenderBox = Overlay.of(context).context.findRenderObject()! as RenderBox;
+    final overlayRenderBox =
+        Overlay.of(context).context.findRenderObject()! as RenderBox;
 
     final targetRenderBox = context.findRenderObject()! as RenderBox;
 
-    final tooltipTargetGlobalCenter =
-        targetRenderBox.localToGlobal(targetRenderBox.size.center(Offset.zero), ancestor: overlayRenderBox);
+    final tooltipTargetGlobalCenter = targetRenderBox.localToGlobal(
+      targetRenderBox.size.center(Offset.zero),
+      ancestor: overlayRenderBox,
+    );
 
-    final tooltipTargetGlobalLeft =
-        targetRenderBox.localToGlobal(targetRenderBox.size.centerLeft(Offset.zero), ancestor: overlayRenderBox);
+    final tooltipTargetGlobalLeft = targetRenderBox.localToGlobal(
+      targetRenderBox.size.centerLeft(Offset.zero),
+      ancestor: overlayRenderBox,
+    );
 
-    final tooltipTargetGlobalRight =
-        targetRenderBox.localToGlobal(targetRenderBox.size.centerRight(Offset.zero), ancestor: overlayRenderBox);
+    final tooltipTargetGlobalRight = targetRenderBox.localToGlobal(
+      targetRenderBox.size.centerRight(Offset.zero),
+      ancestor: overlayRenderBox,
+    );
 
     if (Directionality.of(context) == TextDirection.rtl ||
         tooltipPosition == MoonTooltipPosition.horizontal ||
@@ -461,11 +496,13 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
         case MoonTooltipPosition.bottomRight:
           tooltipPosition = MoonTooltipPosition.bottomLeft;
         case MoonTooltipPosition.vertical:
-          tooltipPosition = tooltipTargetGlobalCenter.dy < overlayRenderBox.size.center(Offset.zero).dy
+          tooltipPosition = tooltipTargetGlobalCenter.dy <
+                  overlayRenderBox.size.center(Offset.zero).dy
               ? MoonTooltipPosition.bottom
               : MoonTooltipPosition.top;
         case MoonTooltipPosition.horizontal:
-          tooltipPosition = tooltipTargetGlobalCenter.dx < overlayRenderBox.size.center(Offset.zero).dx
+          tooltipPosition = tooltipTargetGlobalCenter.dx <
+                  overlayRenderBox.size.center(Offset.zero).dx
               ? MoonTooltipPosition.right
               : MoonTooltipPosition.left;
         default:
@@ -505,7 +542,13 @@ class _MoonTooltipState extends State<MoonTooltip> with RouteAware, SingleTicker
                     data: IconThemeData(color: effectiveIconColor),
                     child: Container(
                       key: _tooltipKey,
-                      constraints: BoxConstraints(maxWidth: tooltipPositionParameters.tooltipMaxWidth),
+                      constraints: BoxConstraints(
+                        minHeight: widget.minHeight ?? 0,
+                        minWidth: widget.minWidth ?? 0,
+                        maxHeight: widget.maxHeight ?? double.infinity,
+                        maxWidth: widget.maxWidth ??
+                            tooltipPositionParameters.tooltipMaxWidth,
+                      ),
                       padding: resolvedContentPadding,
                       decoration: ShapeDecorationWithPremultipliedAlpha(
                         color: effectiveBackgroundColor,

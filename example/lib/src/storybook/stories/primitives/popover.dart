@@ -95,7 +95,9 @@ class _PopoverStoryState extends State<PopoverStory> {
               show: show,
               borderColor: borderColor ?? Colors.transparent,
               backgroundColor: backgroundColor,
-              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+              borderRadius: borderRadiusKnob != null
+                  ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                  : null,
               distanceToTarget: distanceToTargetKnob,
               popoverPosition: popoverPositionKnob ?? MoonPopoverPosition.top,
               popoverShadows: showShadowKnob == true ? null : [],

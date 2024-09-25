@@ -9,9 +9,10 @@ import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
-/// Displays a modal overlay over the app's current content, incorporating entrance and exit animations,
-/// modal barrier color, and modal barrier behavior, enabling dialog dismissal via barrier taps.
-/// Intended for use in conjunction with [MoonModal].
+/// Displays a modal overlay over the app's current content, incorporating
+/// entrance and exit animations, modal barrier color, and modal barrier
+/// behavior, enabling dialog dismissal via barrier taps. Intended for use in
+/// conjunction with [MoonModal].
 Future<T?> showMoonModal<T>({
   bool barrierDismissible = true,
   bool useRootNavigator = true,
@@ -33,8 +34,9 @@ Future<T?> showMoonModal<T>({
     to: Navigator.of(context, rootNavigator: useRootNavigator).context,
   );
 
-  final Color effectiveBarrierColor =
-      barrierColor ?? context.moonTheme?.modalTheme.colors.barrierColor ?? MoonColors.light.zeno;
+  final Color effectiveBarrierColor = barrierColor ??
+      context.moonTheme?.modalTheme.colors.barrierColor ??
+      MoonColors.light.zeno;
 
   final Duration effectiveTransitionDuration = transitionDuration ??
       context.moonTheme?.modalTheme.properties.transitionDuration ??
@@ -65,11 +67,15 @@ bool _debugIsActive(BuildContext context) {
   if (context is Element && !context.debugIsActive) {
     throw FlutterError.fromParts(<DiagnosticsNode>[
       ErrorSummary('This BuildContext is no longer valid.'),
-      ErrorDescription('The showMoonModal function context parameter is a BuildContext that is no longer valid.'),
+      ErrorDescription(
+        'The showMoonModal function context parameter is a BuildContext that is '
+        'no longer valid.',
+      ),
       ErrorHint(
-        'This can commonly occur when the showMoonModal function is called after awaiting a Future. '
-        'In this situation the BuildContext might refer to a widget that has already been disposed during the await. '
-        'Consider using a parent context instead.',
+        'This can commonly occur when the showMoonModal function is called after '
+        'awaiting a Future. In this situation the BuildContext might refer to a '
+        'widget that has already been disposed during the await. Consider using '
+        'a parent context instead.',
       ),
     ]);
   }
@@ -78,8 +84,9 @@ bool _debugIsActive(BuildContext context) {
 }
 
 class MoonModalRoute<T> extends RawDialogRoute<T> {
-  /// A Moon Design modal route with entrance and exit animations, modal barrier color, and modal barrier behavior
-  /// that allows dismissing the modal when tapped on the barrier.
+  /// A Moon Design modal route with entrance and exit animations, modal barrier
+  /// color, and modal barrier behavior that allows dismissing the modal when
+  /// tapped on the barrier.
   MoonModalRoute({
     super.anchorPoint,
     required super.barrierColor,
@@ -93,15 +100,18 @@ class MoonModalRoute<T> extends RawDialogRoute<T> {
     required BuildContext context,
     required WidgetBuilder builder,
   }) : super(
-          barrierLabel: barrierLabel ?? MaterialLocalizations.of(context).modalBarrierDismissLabel,
-          pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
+          barrierLabel: barrierLabel ??
+              MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          pageBuilder: (
+            BuildContext buildContext,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) {
             final Widget pageChild = Builder(builder: builder);
 
             Widget modal = themes?.wrap(pageChild) ?? pageChild;
 
-            if (useSafeArea) {
-              modal = SafeArea(child: modal);
-            }
+            if (useSafeArea) modal = SafeArea(child: modal);
 
             return modal;
           },
@@ -152,18 +162,25 @@ class MoonModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadiusGeometry effectiveBorderRadius =
-        borderRadius ?? context.moonTheme?.modalTheme.properties.borderRadius ?? MoonBorders.borders.surfaceSm;
+    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ??
+        context.moonTheme?.modalTheme.properties.borderRadius ??
+        MoonBorders.borders.surfaceSm;
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.modalTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.modalTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
-    final Color effectiveTextColor = context.moonTheme?.modalTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.modalTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor = context.moonTheme?.modalTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.modalTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
     final TextStyle effectiveTextStyle =
-        context.moonTheme?.modalTheme.properties.textStyle ?? MoonTypography.typography.body.textDefault;
+        context.moonTheme?.modalTheme.properties.textStyle ??
+            MoonTypography.typography.body.textDefault;
 
     return Semantics(
       label: semanticLabel,
@@ -177,7 +194,8 @@ class MoonModal extends StatelessWidget {
                   ShapeDecorationWithPremultipliedAlpha(
                     color: effectiveBackgroundColor,
                     shape: MoonSquircleBorder(
-                      borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                      borderRadius:
+                          effectiveBorderRadius.squircleBorderRadius(context),
                     ),
                   ),
               child: child,
