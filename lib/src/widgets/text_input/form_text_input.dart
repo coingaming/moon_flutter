@@ -8,15 +8,18 @@ import 'package:moon_design/src/widgets/text_input/text_input.dart';
 
 export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType;
 
-typedef MoonFormTextInputValidationStatusCallback = void Function(String? validationErrorText);
+typedef MoonFormTextInputValidationStatusCallback = void Function(
+  String? validationErrorText,
+);
 
 class MoonFormTextInput extends FormField<String> {
   final MoonFormTextInputConfiguration configuration;
 
   /// Creates a Moon Design [MoonFormTextInput] with a [MoonTextInput].
   ///
-  /// If a [controller] is specified, [initialValue] must be null. If [controller] is null,
-  /// a [TextEditingController] is automatically created with its `text` initialized to [initialValue] or an empty string.
+  /// If a [controller] is specified, [initialValue] must be null.
+  /// If [controller] is null, a [TextEditingController] is automatically
+  /// created with its `text` initialized to [initialValue] or an empty string.
   ///
   /// See [MoonTextInput] documentation for details on various parameters.
   ///
@@ -104,7 +107,8 @@ class MoonFormTextInput extends FormField<String> {
     super.restorationId,
     bool enableIMEPersonalizedLearning = true,
     MouseCursor? mouseCursor,
-    EditableTextContextMenuBuilder? contextMenuBuilder = defaultContextMenuBuilder,
+    EditableTextContextMenuBuilder? contextMenuBuilder =
+        defaultContextMenuBuilder,
     SpellCheckConfiguration? spellCheckConfiguration,
     TextMagnifierConfiguration? magnifierConfiguration,
 
@@ -119,8 +123,7 @@ class MoonFormTextInput extends FormField<String> {
     ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
     ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
     UndoHistoryController? undoController,
-  })  : assert(initialValue == null || controller == null),
-        assert(obscuringCharacter.length == 1),
+  })  : assert(obscuringCharacter.length == 1),
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
@@ -131,8 +134,15 @@ class MoonFormTextInput extends FormField<String> {
           !expands || (maxLines == null && minLines == null),
           "MinLines and maxLines must be null when 'expands' is true.",
         ),
-        assert(!obscureText || maxLines == 1, "Obscured fields cannot be multiline."),
-        assert(maxLength == null || maxLength == MoonTextInput.noMaxLength || maxLength > 0),
+        assert(
+          !obscureText || maxLines == 1,
+          "Obscured fields cannot be multiline.",
+        ),
+        assert(
+          maxLength == null ||
+              maxLength == MoonTextInput.noMaxLength ||
+              maxLength > 0,
+        ),
         configuration = MoonFormTextInputConfiguration(
           activeBorderColor: activeBorderColor,
           autocorrect: autocorrect,
@@ -156,7 +166,8 @@ class MoonFormTextInput extends FormField<String> {
           dragStartBehavior: dragStartBehavior,
           enabled: enabled ?? true,
           enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-          enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
+          enableInteractiveSelection:
+              enableInteractiveSelection ?? (!obscureText || !readOnly),
           enableSuggestions: enableSuggestions,
           errorBorderColor: errorBorderColor,
           errorBuilder: errorBuilder,
@@ -207,8 +218,14 @@ class MoonFormTextInput extends FormField<String> {
           selectionHeightStyle: selectionHeightStyle,
           selectionWidthStyle: selectionWidthStyle,
           showCursor: showCursor,
-          smartDashesType: smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-          smartQuotesType: smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+          smartDashesType: smartDashesType ??
+              (obscureText
+                  ? SmartDashesType.disabled
+                  : SmartDashesType.enabled),
+          smartQuotesType: smartQuotesType ??
+              (obscureText
+                  ? SmartQuotesType.disabled
+                  : SmartQuotesType.enabled),
           spellCheckConfiguration: spellCheckConfiguration,
           strutStyle: strutStyle,
           style: style,
@@ -227,11 +244,13 @@ class MoonFormTextInput extends FormField<String> {
           width: width,
         ),
         super(
-          initialValue: controller != null ? controller.text : (initialValue ?? ""),
+          initialValue:
+              controller != null ? controller.text : (initialValue ?? ""),
           enabled: enabled ?? true,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
           builder: (FormFieldState<String> field) {
-            final _MoonFormTextInputState state = field as _MoonFormTextInputState;
+            final _MoonFormTextInputState state =
+                field as _MoonFormTextInputState;
 
             validationStatusCallback?.call(field.errorText);
 
@@ -266,7 +285,8 @@ class MoonFormTextInput extends FormField<String> {
                 dragStartBehavior: dragStartBehavior,
                 enabled: enabled ?? true,
                 enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-                enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
+                enableInteractiveSelection:
+                    enableInteractiveSelection ?? (!obscureText || !readOnly),
                 enableSuggestions: enableSuggestions,
                 errorBorderColor: errorBorderColor,
                 errorBuilder: errorBuilder,
@@ -315,8 +335,14 @@ class MoonFormTextInput extends FormField<String> {
                 selectionHeightStyle: selectionHeightStyle,
                 selectionWidthStyle: selectionWidthStyle,
                 showCursor: showCursor,
-                smartDashesType: smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-                smartQuotesType: smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+                smartDashesType: smartDashesType ??
+                    (obscureText
+                        ? SmartDashesType.disabled
+                        : SmartDashesType.enabled),
+                smartQuotesType: smartQuotesType ??
+                    (obscureText
+                        ? SmartQuotesType.disabled
+                        : SmartQuotesType.enabled),
                 spellCheckConfiguration: spellCheckConfiguration,
                 strutStyle: strutStyle,
                 style: style,
@@ -343,7 +369,10 @@ class MoonFormTextInput extends FormField<String> {
   /// with [initialValue].
   final TextEditingController? controller;
 
-  static Widget defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
+  static Widget defaultContextMenuBuilder(
+    BuildContext context,
+    EditableTextState editableTextState,
+  ) {
     return AdaptiveTextSelectionToolbar.editableText(
       editableTextState: editableTextState,
     );
@@ -356,7 +385,8 @@ class MoonFormTextInput extends FormField<String> {
 class _MoonFormTextInputState extends FormFieldState<String> {
   RestorableTextEditingController? _controller;
 
-  TextEditingController get _effectiveController => _moonFormTextInput.controller ?? _controller!.value;
+  TextEditingController get _effectiveController =>
+      _moonFormTextInput.controller ?? _controller!.value;
 
   MoonFormTextInput get _moonFormTextInput => super.widget as MoonFormTextInput;
 
@@ -377,7 +407,9 @@ class _MoonFormTextInputState extends FormFieldState<String> {
 
   void _createLocalController([TextEditingValue? value]) {
     assert(_controller == null);
-    _controller = value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
+    _controller = value == null
+        ? RestorableTextEditingController()
+        : RestorableTextEditingController.fromValue(value);
     if (!restorePending) {
       _registerController();
     }
@@ -387,7 +419,11 @@ class _MoonFormTextInputState extends FormFieldState<String> {
   void initState() {
     super.initState();
     if (_moonFormTextInput.controller == null) {
-      _createLocalController(widget.initialValue != null ? TextEditingValue(text: widget.initialValue!) : null);
+      _createLocalController(
+        widget.initialValue != null
+            ? TextEditingValue(text: widget.initialValue!)
+            : null,
+      );
     } else {
       _moonFormTextInput.controller!.addListener(_handleControllerChanged);
     }
@@ -400,7 +436,8 @@ class _MoonFormTextInputState extends FormFieldState<String> {
       oldWidget.controller?.removeListener(_handleControllerChanged);
       _moonFormTextInput.controller?.addListener(_handleControllerChanged);
 
-      if (oldWidget.controller != null && _moonFormTextInput.controller == null) {
+      if (oldWidget.controller != null &&
+          _moonFormTextInput.controller == null) {
         _createLocalController(oldWidget.controller!.value);
       }
 
@@ -639,8 +676,12 @@ class MoonFormTextInputConfiguration {
     this.onSaved,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
-  })  : smartDashesType = smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType = smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
-        keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        enableInteractiveSelection = enableInteractiveSelection ?? (!readOnly || !obscureText);
+  })  : smartDashesType = smartDashesType ??
+            (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType = smartQuotesType ??
+            (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        keyboardType = keyboardType ??
+            (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
+        enableInteractiveSelection =
+            enableInteractiveSelection ?? (!readOnly || !obscureText);
 }

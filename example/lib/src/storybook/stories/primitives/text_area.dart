@@ -63,7 +63,8 @@ class TextAreaStory extends StatelessWidget {
       options: colorOptions,
     );
 
-    final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+    final inactiveBorderColor =
+        colorTable(context)[inactiveBorderColorKnob ?? 40];
 
     final errorColorKnob = context.knobs.nullable.options(
       label: "errorColor",
@@ -119,13 +120,18 @@ class TextAreaStory extends StatelessWidget {
                     activeBorderColor: activeBorderColor,
                     inactiveBorderColor: inactiveBorderColor,
                     errorColor: errorColor,
-                    borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
-                    hintText: "Enter your text here...",
-                    validator: (String? value) => value?.length != null && value!.length < 10
-                        ? "The text should be longer than 10 characters."
+                    borderRadius: borderRadiusKnob != null
+                        ? BorderRadius.circular(borderRadiusKnob.toDouble())
                         : null,
-                    onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
-                    helper: showHelperKnob ? const Text("Supporting text") : null,
+                    hintText: "Enter your text here...",
+                    validator: (String? value) =>
+                        value?.length != null && value!.length < 10
+                            ? "The text should be longer than 10 characters."
+                            : null,
+                    onTapOutside: (PointerDownEvent _) =>
+                        FocusManager.instance.primaryFocus?.unfocus(),
+                    helper:
+                        showHelperKnob ? const Text("Supporting text") : null,
                   ),
                   const SizedBox(height: 32),
                   MoonFilledButton(
