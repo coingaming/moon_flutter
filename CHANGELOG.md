@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/coingaming/moon_flutter/compare/v1.0.5...v1.0.6) (2024-10-09)
+
+
+### Bug Fixes
+
+* [MDS-1351] Fix input assertions. ([#444](https://github.com/coingaming/moon_flutter/issues/444)) ([034059f](https://github.com/coingaming/moon_flutter/commit/034059f956335b224310c687302dea66d79b023f))
+
 ## [1.0.5](https://github.com/coingaming/moon_flutter/compare/v1.0.4...v1.0.5) (2024-09-25)
 
 
