@@ -66,18 +66,21 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
 
     final activeChildrenBorderColorKnob = context.knobs.nullable.options(
       label: "activeBorderColor",
-      description: "MoonColors variants for MoonTextInputGroup children active border.",
+      description:
+          "MoonColors variants for MoonTextInputGroup children active border.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final activeBorderColor = colorTable(context)[activeChildrenBorderColorKnob ?? 40];
+    final activeBorderColor =
+        colorTable(context)[activeChildrenBorderColorKnob ?? 40];
 
     final errorBorderColorKnob = context.knobs.nullable.options(
       label: "errorBorderColor",
-      description: "MoonColors variants for MoonTextInputGroup error state border.",
+      description:
+          "MoonColors variants for MoonTextInputGroup error state border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -133,8 +136,9 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
       description: "Show widget in MoonTextInputGroup helper slot.",
     );
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -151,8 +155,10 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                     borderColor: borderColor,
                     errorColor: errorColor,
                     borderRadius: borderRadius,
-                    orientation: orientationKnob ?? MoonTextInputGroupOrientation.vertical,
-                    helper: showHelperKnob ? const Text("Supporting text") : null,
+                    orientation: orientationKnob ??
+                        MoonTextInputGroupOrientation.vertical,
+                    helper:
+                        showHelperKnob ? const Text("Supporting text") : null,
                     children: [
                       MoonFormTextInput(
                         textInputSize: MoonTextInputSize.xl,
@@ -166,10 +172,12 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                         errorColor: errorColor,
                         borderRadius: borderRadius,
                         hintText: "Enter text (over 10 characters)",
-                        validator: (String? value) => value?.length != null && value!.length < 10
+                        validator: (String? value) => value?.length != null &&
+                                value!.length < 10
                             ? "The text should be longer than 10 characters."
                             : null,
-                        onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
+                        onTapOutside: (PointerDownEvent _) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                         leading: const Icon(
                           MoonIcons.generic_search_24_light,
                           size: 24,
@@ -198,8 +206,10 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                         errorColor: errorColor,
                         borderRadius: borderRadius,
                         hintText: "Enter password (123abc)",
-                        validator: (String? value) => value != "123abc" ? "Wrong password." : null,
-                        onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
+                        validator: (String? value) =>
+                            value != "123abc" ? "Wrong password." : null,
+                        onTapOutside: (PointerDownEvent _) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                         leading: const Icon(
                           MoonIcons.security_password_24_light,
                           size: 24,
@@ -212,12 +222,16 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                                 alignment: Alignment.centerRight,
                                 child: Text(
                                   _hidePassword ? "Show" : "Hide",
-                                  style:
-                                      DefaultTextStyle.of(context).style.copyWith(decoration: TextDecoration.underline),
+                                  style: DefaultTextStyle.of(context)
+                                      .style
+                                      .copyWith(
+                                        decoration: TextDecoration.underline,
+                                      ),
                                 ),
                               ),
                             ),
-                            onTap: () => setState(() => _hidePassword = !_hidePassword),
+                            onTap: () =>
+                                setState(() => _hidePassword = !_hidePassword),
                           ),
                         ),
                       ),

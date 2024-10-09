@@ -87,7 +87,8 @@ class _TextInputStoryState extends State<TextInputStory> {
       options: colorOptions,
     );
 
-    final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+    final inactiveBorderColor =
+        colorTable(context)[inactiveBorderColorKnob ?? 40];
 
     final hoverBorderColorKnob = context.knobs.nullable.options(
       label: "hoverBorderColor",
@@ -147,8 +148,9 @@ class _TextInputStoryState extends State<TextInputStory> {
       description: "Show widget in MoonTextInput helper slot.",
     );
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -174,8 +176,11 @@ class _TextInputStoryState extends State<TextInputStory> {
                     borderRadius: borderRadius,
                     hintText: "Enter text (over 10 characters)",
                     validator: (String? value) =>
-                        value != null && value.length < 10 ? "The text should be longer than 10 characters." : null,
-                    onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
+                        value != null && value.length < 10
+                            ? "The text should be longer than 10 characters."
+                            : null,
+                    onTapOutside: (PointerDownEvent _) =>
+                        FocusManager.instance.primaryFocus?.unfocus(),
                     leading: showLeadingKnob
                         ? const Icon(
                             MoonIcons.generic_search_24_light,
@@ -194,7 +199,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                             ),
                           )
                         : null,
-                    helper: showHelperKnob ? const Text("Supporting text") : null,
+                    helper:
+                        showHelperKnob ? const Text("Supporting text") : null,
                   ),
                   const SizedBox(height: 16),
                   StatefulBuilder(
@@ -215,8 +221,10 @@ class _TextInputStoryState extends State<TextInputStory> {
                         errorColor: errorColor,
                         borderRadius: borderRadius,
                         hintText: "Enter password (123abc)",
-                        validator: (String? value) => value != "123abc" ? "Wrong password." : null,
-                        onTapOutside: (PointerDownEvent _) => FocusManager.instance.primaryFocus?.unfocus(),
+                        validator: (String? value) =>
+                            value != "123abc" ? "Wrong password." : null,
+                        onTapOutside: (PointerDownEvent _) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                         leading: showLeadingKnob
                             ? const Icon(
                                 MoonIcons.security_password_24_light,
@@ -234,15 +242,22 @@ class _TextInputStoryState extends State<TextInputStory> {
                                         _hidePassword ? "Show" : "Hide",
                                         style: DefaultTextStyle.of(context)
                                             .style
-                                            .copyWith(decoration: TextDecoration.underline),
+                                            .copyWith(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                            ),
                                       ),
                                     ),
                                   ),
-                                  onTap: () => setState(() => _hidePassword = !_hidePassword),
+                                  onTap: () => setState(
+                                    () => _hidePassword = !_hidePassword,
+                                  ),
                                 ),
                               )
                             : null,
-                        helper: showHelperKnob ? const Text("Supporting text") : null,
+                        helper: showHelperKnob
+                            ? const Text("Supporting text")
+                            : null,
                       );
                     },
                   ),
@@ -261,7 +276,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                     errorColor: errorColor,
                     borderRadius: borderRadius,
                     hintText: "Pick a date",
-                    validator: (String? value) => value != null && value.isEmpty ? "Pick a date." : null,
+                    validator: (String? value) =>
+                        value != null && value.isEmpty ? "Pick a date." : null,
                     onTap: () async {
                       final DateTime? pickedDate = await showDatePicker(
                         context: context,
@@ -271,7 +287,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                       );
 
                       if (pickedDate != null) {
-                        _dateController.text = "${pickedDate.toLocal()}".split(" ")[0];
+                        _dateController.text =
+                            "${pickedDate.toLocal()}".split(" ")[0];
                       }
                     },
                     leading: showLeadingKnob
@@ -292,7 +309,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                             ),
                           )
                         : null,
-                    helper: showHelperKnob ? const Text("Supporting text") : null,
+                    helper:
+                        showHelperKnob ? const Text("Supporting text") : null,
                   ),
                   const SizedBox(height: 32),
                   MoonFilledButton(
