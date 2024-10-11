@@ -60,7 +60,6 @@ class BottomSheetStory extends StatelessWidget {
         context: context,
         backgroundColor: backgroundColor,
         barrierColor: barrierColor,
-        enableDrag: true,
         height: heightKnob != null
             ? MediaQuery.of(context).size.height * heightKnob
             : MediaQuery.of(context).size.height * 0.7,

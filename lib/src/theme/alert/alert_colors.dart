@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonAlertColors extends ThemeExtension<MoonAlertColors> with DiagnosticableTreeMixin {
+class MoonAlertColors extends ThemeExtension<MoonAlertColors>
+    with DiagnosticableTreeMixin {
   /// The background color of the MoonAlert.
   final Color backgroundColor;
 
@@ -44,7 +45,8 @@ class MoonAlertColors extends ThemeExtension<MoonAlertColors> with Diagnosticabl
     if (other is! MoonAlertColors) return this;
 
     return MoonAlertColors(
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
       iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,

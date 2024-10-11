@@ -11,8 +11,8 @@ class MoonBreadcrumbItem {
   /// The callback that is called when the breadcrumb item is tapped or pressed.
   /// If null, the breadcrumb item is disabled.
   ///
-  /// For [MoonBreadcrumb.showMoreWidget], when [onTap] is null, default behavior
-  /// is to display all collapsed breadcrumb items.
+  /// For [MoonBreadcrumb.showMoreWidget], when [onTap] is null, default
+  /// behavior is to display all collapsed breadcrumb items.
   final VoidCallback? onTap;
 
   /// The widget to display before the [label] widget of the breadcrumb item.

@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with DiagnosticableTreeMixin {
+class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonTextArea.
   final BorderRadiusGeometry borderRadius;
 
@@ -56,17 +57,24 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
   }
 
   @override
-  MoonTextAreaProperties lerp(ThemeExtension<MoonTextAreaProperties>? other, double t) {
+  MoonTextAreaProperties lerp(
+    ThemeExtension<MoonTextAreaProperties>? other,
+    double t,
+  ) {
     if (other is! MoonTextAreaProperties) return this;
 
     return MoonTextAreaProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      helperPadding: EdgeInsetsGeometry.lerp(helperPadding, other.helperPadding, t)!,
+      helperPadding:
+          EdgeInsetsGeometry.lerp(helperPadding, other.helperPadding, t)!,
       textPadding: EdgeInsetsGeometry.lerp(textPadding, other.textPadding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
-      helperTextStyle: TextStyle.lerp(helperTextStyle, other.helperTextStyle, t)!,
+      helperTextStyle:
+          TextStyle.lerp(helperTextStyle, other.helperTextStyle, t)!,
     );
   }
 
@@ -74,13 +82,29 @@ class MoonTextAreaProperties extends ThemeExtension<MoonTextAreaProperties> with
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTextAreaProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("helperPadding", helperPadding))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("textPadding", textPadding))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
-      ..add(DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle));
+      ..add(
+        DiagnosticsProperty("type", "MoonTextAreaProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>("helperPadding", helperPadding),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>("textPadding", textPadding),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("textStyle", textStyle),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle),
+      );
   }
 }

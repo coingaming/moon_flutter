@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/auth_code/auth_code_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme> with DiagnosticableTreeMixin {
+class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -38,7 +39,8 @@ class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme> with Diagnosti
               height: tokens.sizes.xl,
               width: tokens.sizes.lg,
               animationDuration: tokens.transitions.defaultTransitionDuration,
-              errorAnimationDuration: tokens.transitions.defaultTransitionDuration,
+              errorAnimationDuration:
+                  tokens.transitions.defaultTransitionDuration,
               peekDuration: tokens.transitions.defaultTransitionDuration,
               animationCurve: tokens.transitions.defaultTransitionCurve,
               errorAnimationCurve: tokens.transitions.defaultTransitionCurve,
@@ -77,6 +79,8 @@ class MoonAuthCodeTheme extends ThemeExtension<MoonAuthCodeTheme> with Diagnosti
       ..add(DiagnosticsProperty("type", "MoonAuthCodeTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonAuthCodeColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonAuthCodeProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonAuthCodeProperties>("properties", properties),
+      );
   }
 }

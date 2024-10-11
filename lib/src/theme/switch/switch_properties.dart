@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonSwitchProperties extends ThemeExtension<MoonSwitchProperties> with DiagnosticableTreeMixin {
+class MoonSwitchProperties extends ThemeExtension<MoonSwitchProperties>
+    with DiagnosticableTreeMixin {
   /// The duration of the MoonSwitch toggle animation.
   final Duration transitionDuration;
 
@@ -26,11 +27,15 @@ class MoonSwitchProperties extends ThemeExtension<MoonSwitchProperties> with Dia
   }
 
   @override
-  MoonSwitchProperties lerp(ThemeExtension<MoonSwitchProperties>? other, double t) {
+  MoonSwitchProperties lerp(
+    ThemeExtension<MoonSwitchProperties>? other,
+    double t,
+  ) {
     if (other is! MoonSwitchProperties) return this;
 
     return MoonSwitchProperties(
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
     );
   }
@@ -39,8 +44,14 @@ class MoonSwitchProperties extends ThemeExtension<MoonSwitchProperties> with Dia
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonSwitchProperties"))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
+      ..add(
+        DiagnosticsProperty("type", "MoonSwitchProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      );
   }
 }

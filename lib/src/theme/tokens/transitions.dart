@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTransitions extends ThemeExtension<MoonTransitions> with DiagnosticableTreeMixin {
+class MoonTransitions extends ThemeExtension<MoonTransitions>
+    with DiagnosticableTreeMixin {
   static const transitions = MoonTransitions(
     defaultTransitionDuration: Duration(milliseconds: 200),
     defaultTransitionCurve: Curves.easeInOutCubic,
@@ -25,8 +26,10 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     Curve? defaultTransitionCurve,
   }) {
     return MoonTransitions(
-      defaultTransitionDuration: defaultTransitionDuration ?? this.defaultTransitionDuration,
-      defaultTransitionCurve: defaultTransitionCurve ?? this.defaultTransitionCurve,
+      defaultTransitionDuration:
+          defaultTransitionDuration ?? this.defaultTransitionDuration,
+      defaultTransitionCurve:
+          defaultTransitionCurve ?? this.defaultTransitionCurve,
     );
   }
 
@@ -35,7 +38,11 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
     if (other is! MoonTransitions) return this;
 
     return MoonTransitions(
-      defaultTransitionDuration: lerpDuration(defaultTransitionDuration, other.defaultTransitionDuration, t),
+      defaultTransitionDuration: lerpDuration(
+        defaultTransitionDuration,
+        other.defaultTransitionDuration,
+        t,
+      ),
       defaultTransitionCurve: other.defaultTransitionCurve,
     );
   }
@@ -44,8 +51,23 @@ class MoonTransitions extends ThemeExtension<MoonTransitions> with Diagnosticabl
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTransitions"))
-      ..add(DiagnosticsProperty<Duration>("defaultTransitionDuration", defaultTransitionDuration))
-      ..add(DiagnosticsProperty<Curve>("defaultTransitionCurve", defaultTransitionCurve));
+      ..add(
+        DiagnosticsProperty(
+          "type",
+          "MoonTransitions",
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>(
+          "defaultTransitionDuration",
+          defaultTransitionDuration,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>(
+          "defaultTransitionCurve",
+          defaultTransitionCurve,
+        ),
+      );
   }
 }

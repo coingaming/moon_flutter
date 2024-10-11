@@ -91,7 +91,10 @@ class _CheckboxStoryState extends State<CheckboxStory> {
               borderColor: borderColor,
               tristate: isTristateKnob,
               value: checkboxValue,
-              onChanged: isDisabledKnob ? null : (bool? newValue) => setState(() => checkboxValue = newValue),
+              onChanged: isDisabledKnob
+                  ? null
+                  : (bool? newValue) =>
+                      setState(() => checkboxValue = newValue),
             ),
             const TextDivider(text: "MoonCheckbox with label"),
             MoonMenuItem(
@@ -100,10 +103,13 @@ class _CheckboxStoryState extends State<CheckboxStory> {
                   ? null
                   : () => setState(
                         () => switch (checkboxWithLabelValue) {
-                          true when isTristateKnob => checkboxWithLabelValue = null,
-                          false when isTristateKnob => checkboxWithLabelValue = true,
+                          true when isTristateKnob => checkboxWithLabelValue =
+                              null,
+                          false when isTristateKnob => checkboxWithLabelValue =
+                              true,
                           null => checkboxWithLabelValue = false,
-                          _ => checkboxWithLabelValue = !checkboxWithLabelValue!,
+                          _ => checkboxWithLabelValue =
+                              !checkboxWithLabelValue!,
                         },
                       ),
               label: const Text("With label"),

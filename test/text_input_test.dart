@@ -29,7 +29,8 @@ void main() {
     expect(find.byKey(_textInputKey), findsOneWidget);
   });
 
-  testWidgets("When valid text is entered and submitted, error is not shown.", (tester) async {
+  testWidgets("When valid text is entered and submitted, error is not shown.",
+      (tester) async {
     await tester.pumpWidget(
       const _TextInputTestWidget(
         textInputKey: _textInputKey,
@@ -47,7 +48,8 @@ void main() {
     expect(find.text(_errorText), findsNothing);
   });
 
-  testWidgets("When invalid text is entered and submitted, error is shown.", (tester) async {
+  testWidgets("When invalid text is entered and submitted, error is shown.",
+      (tester) async {
     await tester.pumpWidget(
       const _TextInputTestWidget(
         textInputKey: _textInputKey,
@@ -97,7 +99,8 @@ void main() {
     expect(find.byIcon(_textInputTrailingIcon), findsOneWidget);
   });
 
-  testWidgets("When text input is disabled, input cannot be entered.", (tester) async {
+  testWidgets("When text input is disabled, input cannot be entered.",
+      (tester) async {
     await tester.pumpWidget(
       const _TextInputTestWidget(
         textInputKey: _textInputKey,
@@ -142,9 +145,13 @@ class _TextInputTestWidget extends StatelessWidget {
                     key: textInputKey,
                     enabled: enabled,
                     hintText: _hintText,
-                    validator: (String? value) => value != null && value.length > 10 ? _errorText : null,
-                    leading: showLeading ? const Icon(_textInputLeadingIcon) : null,
-                    trailing: showTrailing ? const Icon(_textInputTrailingIcon) : null,
+                    validator: (String? value) =>
+                        value != null && value.length > 10 ? _errorText : null,
+                    leading:
+                        showLeading ? const Icon(_textInputLeadingIcon) : null,
+                    trailing: showTrailing
+                        ? const Icon(_textInputTrailingIcon)
+                        : null,
                     helper: showHelper ? const Text(_helperText) : null,
                   ),
                   MoonFilledButton(

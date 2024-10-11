@@ -21,7 +21,8 @@ class MoonPillTabStyle {
   /// The custom decoration of the tab.
   final Decoration? decoration;
 
-  /// The gap between the [MoonPillTab.leading], [MoonPillTab.label] and [MoonPillTab.trailing] widgets of the tab.
+  /// The gap between the [MoonPillTab.leading], [MoonPillTab.label] and
+  /// [MoonPillTab.trailing] widgets of the tab.
   final double? tabGap;
 
   /// The padding of the tab.
@@ -29,7 +30,8 @@ class MoonPillTabStyle {
 
   /// The text style of the tab.
   ///
-  /// If [TextStyle] color is used, then it overrides the [textColor] and [selectedTextColor].
+  /// If [TextStyle] color is used, then it overrides the [textColor] and
+  /// [selectedTextColor].
   final TextStyle? textStyle;
 
   /// Defines a Moon Design pill tab style.

@@ -18,7 +18,8 @@ void main() {
     expect(find.byKey(_authCodeKey), findsOneWidget);
   });
 
-  testWidgets("When valid code is entered, error message is not shown.", (tester) async {
+  testWidgets("When valid code is entered, error message is not shown.",
+      (tester) async {
     await tester.pumpWidget(const _AuthCodeTestWidget());
     final widget = find.byType(TextFormField).first;
 
@@ -28,7 +29,8 @@ void main() {
     expect(find.text(_validatorErrorMessage), findsNothing);
   });
 
-  testWidgets("When invalid code is entered, error message is shown.", (tester) async {
+  testWidgets("When invalid code is entered, error message is shown.",
+      (tester) async {
     await tester.pumpWidget(const _AuthCodeTestWidget());
     final widget = find.byType(TextFormField).first;
 
@@ -38,7 +40,8 @@ void main() {
     expect(find.text(_validatorErrorMessage), findsOneWidget);
   });
 
-  testWidgets("Validator errors take precedence over the provided errorText.", (tester) async {
+  testWidgets("Validator errors take precedence over the provided errorText.",
+      (tester) async {
     await tester.pumpWidget(
       const _AuthCodeTestWidget(
         providedErrorMessage: _providedErrorMessage,
@@ -72,8 +75,11 @@ class _AuthCodeTestWidget extends StatelessWidget {
             key: authCodeKey,
             authInputFieldCount: 4,
             errorText: providedErrorMessage,
-            validator: (String? pin) => pin?.length == 4 && pin != '9921' ? _validatorErrorMessage : null,
-            errorBuilder: (BuildContext context, String? errorText) => Text(errorText ?? ''),
+            validator: (String? pin) => pin?.length == 4 && pin != '9921'
+                ? _validatorErrorMessage
+                : null,
+            errorBuilder: (BuildContext context, String? errorText) =>
+                Text(errorText ?? ''),
           ),
         ),
       ),

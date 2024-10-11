@@ -205,10 +205,14 @@ class MoonChip extends StatefulWidget {
   State<MoonChip> createState() => _MoonChipState();
 }
 
-class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin {
-  final ColorTweenWithPremultipliedAlpha _backgroundColorTween = ColorTweenWithPremultipliedAlpha();
-  final ColorTweenWithPremultipliedAlpha _borderColorTween = ColorTweenWithPremultipliedAlpha();
-  final ColorTweenWithPremultipliedAlpha _textColorTween = ColorTweenWithPremultipliedAlpha();
+class _MoonChipState extends State<MoonChip>
+    with SingleTickerProviderStateMixin {
+  final ColorTweenWithPremultipliedAlpha _backgroundColorTween =
+      ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _borderColorTween =
+      ColorTweenWithPremultipliedAlpha();
+  final ColorTweenWithPremultipliedAlpha _textColorTween =
+      ColorTweenWithPremultipliedAlpha();
 
   Animation<Color?>? _backgroundColor;
   Animation<Color?>? _borderColor;
@@ -217,17 +221,25 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
   AnimationController? _animationController;
 
   void _handleActiveEffect(bool shouldAnimate) {
-    shouldAnimate ? _animationController?.forward() : _animationController?.reverse();
+    shouldAnimate
+        ? _animationController?.forward()
+        : _animationController?.reverse();
   }
 
-  MoonChipSizeProperties _getMoonChipSize(BuildContext context, MoonChipSize? moonChipSize) {
+  MoonChipSizeProperties _getMoonChipSize(
+    BuildContext context,
+    MoonChipSize? moonChipSize,
+  ) {
     switch (moonChipSize) {
       case MoonChipSize.sm:
-        return context.moonTheme?.chipTheme.sizes.sm ?? MoonChipSizes(tokens: MoonTokens.light).sm;
+        return context.moonTheme?.chipTheme.sizes.sm ??
+            MoonChipSizes(tokens: MoonTokens.light).sm;
       case MoonChipSize.md:
-        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.chipTheme.sizes.md ??
+            MoonChipSizes(tokens: MoonTokens.light).md;
       default:
-        return context.moonTheme?.chipTheme.sizes.md ?? MoonChipSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.chipTheme.sizes.md ??
+            MoonChipSizes(tokens: MoonTokens.light).md;
     }
   }
 
@@ -240,60 +252,86 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final MoonChipSizeProperties effectiveMoonChipSize = _getMoonChipSize(context, widget.chipSize);
+    final MoonChipSizeProperties effectiveMoonChipSize =
+        _getMoonChipSize(context, widget.chipSize);
 
-    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ?? effectiveMoonChipSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius =
+        widget.borderRadius ?? effectiveMoonChipSize.borderRadius;
 
-    final double effectiveBorderWidth =
-        widget.borderWidth ?? context.moonBorders?.defaultBorderWidth ?? MoonBorders.borders.defaultBorderWidth;
+    final double effectiveBorderWidth = widget.borderWidth ??
+        context.moonBorders?.defaultBorderWidth ??
+        MoonBorders.borders.defaultBorderWidth;
 
-    final double effectiveHeight = widget.height ?? effectiveMoonChipSize.height;
+    final double effectiveHeight =
+        widget.height ?? effectiveMoonChipSize.height;
 
     final double effectiveGap = widget.gap ?? effectiveMoonChipSize.gap;
 
-    final Color effectiveActiveColor =
-        widget.activeColor ?? context.moonTheme?.chipTheme.colors.activeColor ?? MoonColors.light.piccolo;
+    final Color effectiveActiveColor = widget.activeColor ??
+        context.moonTheme?.chipTheme.colors.activeColor ??
+        MoonColors.light.piccolo;
 
-    final Color effectiveBackgroundColor =
-        widget.backgroundColor ?? context.moonTheme?.chipTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = widget.backgroundColor ??
+        context.moonTheme?.chipTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
     final Color effectiveActiveBackgroundColor = widget.activeBackgroundColor ??
         context.moonTheme?.chipTheme.colors.activeBackgroundColor ??
         MoonColors.light.jiren;
 
-    final Color effectiveTextColor =
-        widget.textColor ?? context.moonTheme?.chipTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor = widget.textColor ??
+        context.moonTheme?.chipTheme.colors.textColor ??
+        MoonColors.light.textPrimary;
 
-    final Duration effectiveActiveEffectDuration = widget.activeEffectDuration ??
-        context.moonEffects?.controlHoverEffect.hoverDuration ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverDuration;
+    final Duration effectiveActiveEffectDuration =
+        widget.activeEffectDuration ??
+            context.moonEffects?.controlHoverEffect.hoverDuration ??
+            MoonEffectsTheme(tokens: MoonTokens.light)
+                .controlHoverEffect
+                .hoverDuration;
 
     final Curve effectiveActiveEffectCurve = widget.activeEffectCurve ??
         context.moonEffects?.controlHoverEffect.hoverCurve ??
-        MoonEffectsTheme(tokens: MoonTokens.light).controlHoverEffect.hoverCurve;
+        MoonEffectsTheme(tokens: MoonTokens.light)
+            .controlHoverEffect
+            .hoverCurve;
 
-    final EdgeInsetsGeometry effectivePadding = widget.padding ?? effectiveMoonChipSize.padding;
+    final EdgeInsetsGeometry effectivePadding =
+        widget.padding ?? effectiveMoonChipSize.padding;
 
-    final EdgeInsets resolvedDirectionalPadding = effectivePadding.resolve(Directionality.of(context));
+    final EdgeInsets resolvedDirectionalPadding =
+        effectivePadding.resolve(Directionality.of(context));
 
     final EdgeInsetsGeometry correctedPadding = widget.padding == null
         ? EdgeInsetsDirectional.fromSTEB(
-            widget.leading == null && widget.label != null ? resolvedDirectionalPadding.left : 0,
+            widget.leading == null && widget.label != null
+                ? resolvedDirectionalPadding.left
+                : 0,
             resolvedDirectionalPadding.top,
-            widget.trailing == null && widget.label != null ? resolvedDirectionalPadding.right : 0,
+            widget.trailing == null && widget.label != null
+                ? resolvedDirectionalPadding.right
+                : 0,
             resolvedDirectionalPadding.bottom,
           )
         : resolvedDirectionalPadding;
 
-    _animationController ??= AnimationController(duration: effectiveActiveEffectDuration, vsync: this);
+    _animationController ??= AnimationController(
+      duration: effectiveActiveEffectDuration,
+      vsync: this,
+    );
 
-    _backgroundColor ??=
-        _animationController!.drive(_backgroundColorTween.chain(CurveTween(curve: effectiveActiveEffectCurve)));
+    _backgroundColor ??= _animationController!.drive(
+      _backgroundColorTween
+          .chain(CurveTween(curve: effectiveActiveEffectCurve)),
+    );
 
-    _borderColor ??=
-        _animationController!.drive(_borderColorTween.chain(CurveTween(curve: effectiveActiveEffectCurve)));
+    _borderColor ??= _animationController!.drive(
+      _borderColorTween.chain(CurveTween(curve: effectiveActiveEffectCurve)),
+    );
 
-    _textColor ??= _animationController!.drive(_textColorTween.chain(CurveTween(curve: effectiveActiveEffectCurve)));
+    _textColor ??= _animationController!.drive(
+      _textColorTween.chain(CurveTween(curve: effectiveActiveEffectCurve)),
+    );
 
     _backgroundColorTween
       ..begin = effectiveBackgroundColor
@@ -324,7 +362,13 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
       semanticLabel: widget.semanticLabel,
       onTap: widget.onTap ?? () {},
       onLongPress: widget.onLongPress,
-      builder: (BuildContext context, bool isEnabled, bool isHovered, bool isFocused, bool isPressed) {
+      builder: (
+        BuildContext context,
+        bool isEnabled,
+        bool isHovered,
+        bool isFocused,
+        bool isPressed,
+      ) {
         final bool canAnimate = widget.isActive || isHovered || isFocused;
 
         _handleActiveEffect(canAnimate);
@@ -338,7 +382,8 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
                 size: effectiveMoonChipSize.iconSizeValue,
               ),
               child: DefaultTextStyle(
-                style: effectiveMoonChipSize.textStyle.copyWith(color: _textColor!.value),
+                style: effectiveMoonChipSize.textStyle
+                    .copyWith(color: _textColor!.value),
                 child: Container(
                   width: widget.width,
                   height: effectiveHeight,
@@ -348,11 +393,16 @@ class _MoonChipState extends State<MoonChip> with SingleTickerProviderStateMixin
                       ShapeDecoration(
                         color: _backgroundColor!.value,
                         shape: MoonSquircleBorder(
-                          borderRadius: effectiveBorderRadius.squircleBorderRadius(context),
+                          borderRadius: effectiveBorderRadius
+                              .squircleBorderRadius(context),
                           side: BorderSide(
-                            color: widget.showBorder ? _borderColor!.value! : Colors.transparent,
+                            color: widget.showBorder
+                                ? _borderColor!.value!
+                                : Colors.transparent,
                             width: widget.showBorder ? effectiveBorderWidth : 0,
-                            style: widget.showBorder ? BorderStyle.solid : BorderStyle.none,
+                            style: widget.showBorder
+                                ? BorderStyle.solid
+                                : BorderStyle.none,
                           ),
                         ),
                       ),

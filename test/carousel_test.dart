@@ -16,7 +16,8 @@ void main() {
   });
 
   testWidgets("Carousel items visibility changes on scroll.", (tester) async {
-    await tester.pumpWidget(const _CarouselTestWidget(carouselKey: _carouselKey));
+    await tester
+        .pumpWidget(const _CarouselTestWidget(carouselKey: _carouselKey));
 
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsOneWidget);
@@ -50,7 +51,8 @@ class _CarouselTestWidget extends StatelessWidget {
             gap: 0,
             itemCount: 10,
             itemExtent: 100,
-            itemBuilder: (BuildContext _, int itemIndex, int __) => Text("$itemIndex"),
+            itemBuilder: (BuildContext _, int itemIndex, int __) =>
+                Text("$itemIndex"),
           ),
         ),
       ),

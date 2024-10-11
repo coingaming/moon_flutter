@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with DiagnosticableTreeMixin {
+class MoonSwitchColors extends ThemeExtension<MoonSwitchColors>
+    with DiagnosticableTreeMixin {
   /// The background color of the active (on) MoonSwitch track.
   final Color activeTrackColor;
 
@@ -68,12 +69,18 @@ class MoonSwitchColors extends ThemeExtension<MoonSwitchColors> with Diagnostica
     if (other is! MoonSwitchColors) return this;
 
     return MoonSwitchColors(
-      activeTrackColor: colorPremulLerp(activeTrackColor, other.activeTrackColor, t)!,
-      inactiveTrackColor: colorPremulLerp(inactiveTrackColor, other.inactiveTrackColor, t)!,
-      activeTextColor: colorPremulLerp(activeTextColor, other.activeTextColor, t)!,
-      inactiveTextColor: colorPremulLerp(inactiveTextColor, other.inactiveTextColor, t)!,
-      activeIconColor: colorPremulLerp(activeIconColor, other.activeIconColor, t)!,
-      inactiveIconColor: colorPremulLerp(inactiveIconColor, other.inactiveIconColor, t)!,
+      activeTrackColor:
+          colorPremulLerp(activeTrackColor, other.activeTrackColor, t)!,
+      inactiveTrackColor:
+          colorPremulLerp(inactiveTrackColor, other.inactiveTrackColor, t)!,
+      activeTextColor:
+          colorPremulLerp(activeTextColor, other.activeTextColor, t)!,
+      inactiveTextColor:
+          colorPremulLerp(inactiveTextColor, other.inactiveTextColor, t)!,
+      activeIconColor:
+          colorPremulLerp(activeIconColor, other.activeIconColor, t)!,
+      inactiveIconColor:
+          colorPremulLerp(inactiveIconColor, other.inactiveIconColor, t)!,
       thumbIconColor: colorPremulLerp(thumbIconColor, other.thumbIconColor, t)!,
       thumbColor: colorPremulLerp(thumbColor, other.thumbColor, t)!,
     );

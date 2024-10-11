@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMixin {
+class MoonBorders extends ThemeExtension<MoonBorders>
+    with DiagnosticableTreeMixin {
   static const borders = MoonBorders(
     interactiveXs: BorderRadius.all(Radius.circular(4)),
     interactiveSm: BorderRadius.all(Radius.circular(8)),
@@ -86,15 +87,20 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
     if (other is! MoonBorders) return this;
 
     return MoonBorders(
-      interactiveXs: BorderRadiusGeometry.lerp(interactiveXs, other.interactiveXs, t)!,
-      interactiveSm: BorderRadiusGeometry.lerp(interactiveSm, other.interactiveSm, t)!,
-      interactiveMd: BorderRadiusGeometry.lerp(interactiveMd, other.interactiveMd, t)!,
+      interactiveXs:
+          BorderRadiusGeometry.lerp(interactiveXs, other.interactiveXs, t)!,
+      interactiveSm:
+          BorderRadiusGeometry.lerp(interactiveSm, other.interactiveSm, t)!,
+      interactiveMd:
+          BorderRadiusGeometry.lerp(interactiveMd, other.interactiveMd, t)!,
       surfaceXs: BorderRadiusGeometry.lerp(surfaceXs, other.surfaceXs, t)!,
       surfaceSm: BorderRadiusGeometry.lerp(surfaceSm, other.surfaceSm, t)!,
       surfaceMd: BorderRadiusGeometry.lerp(surfaceMd, other.surfaceMd, t)!,
       surfaceLg: BorderRadiusGeometry.lerp(surfaceLg, other.surfaceLg, t)!,
-      defaultBorderWidth: lerpDouble(defaultBorderWidth, other.defaultBorderWidth, t)!,
-      activeBorderWidth: lerpDouble(activeBorderWidth, other.activeBorderWidth, t)!,
+      defaultBorderWidth:
+          lerpDouble(defaultBorderWidth, other.defaultBorderWidth, t)!,
+      activeBorderWidth:
+          lerpDouble(activeBorderWidth, other.activeBorderWidth, t)!,
     );
   }
 
@@ -102,10 +108,30 @@ class MoonBorders extends ThemeExtension<MoonBorders> with DiagnosticableTreeMix
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonBorders"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("interactiveXs", interactiveXs))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("interactiveSm", interactiveSm))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("interactiveMd", interactiveMd))
+      ..add(
+        DiagnosticsProperty(
+          "type",
+          "MoonBorders",
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>(
+          "interactiveXs",
+          interactiveXs,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>(
+          "interactiveSm",
+          interactiveSm,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>(
+          "interactiveMd",
+          interactiveMd,
+        ),
+      )
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("surfaceXs", surfaceXs))
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("surfaceSm", surfaceSm))
       ..add(DiagnosticsProperty<BorderRadiusGeometry>("surfaceMd", surfaceMd))

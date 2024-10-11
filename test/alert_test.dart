@@ -21,7 +21,9 @@ void main() {
     expect(find.byKey(_alertKey), findsOneWidget);
   });
 
-  testWidgets("Alert has only label widget and no leading, trailing or body widget.", (tester) async {
+  testWidgets(
+      "Alert has only label widget and no leading, trailing or body widget.",
+      (tester) async {
     await tester.pumpWidget(const _AlertTestWidget());
 
     expect(find.text(_alertLabel), findsOneWidget);
@@ -45,7 +47,8 @@ void main() {
     expect(find.byIcon(_alertLeadingIcon), findsOneWidget);
   });
 
-  testWidgets("Alert is not visible when the 'close' button is tapped.", (tester) async {
+  testWidgets("Alert is not visible when the 'close' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(
       const _AlertTestWidget(
         showTrailing: true,

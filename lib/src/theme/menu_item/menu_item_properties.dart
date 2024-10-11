@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with DiagnosticableTreeMixin {
+class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonMenuItem.
   final BorderRadiusGeometry borderRadius;
 
@@ -52,16 +53,21 @@ class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with
   }
 
   @override
-  MoonMenuItemProperties lerp(ThemeExtension<MoonMenuItemProperties>? other, double t) {
+  MoonMenuItemProperties lerp(
+    ThemeExtension<MoonMenuItemProperties>? other,
+    double t,
+  ) {
     if (other is! MoonMenuItemProperties) return this;
 
     return MoonMenuItemProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       verticalGap: lerpDouble(verticalGap, other.verticalGap, t)!,
       minimumHeight: lerpDouble(minimumHeight, other.minimumHeight, t)!,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       labelTextStyle: TextStyle.lerp(labelTextStyle, other.labelTextStyle, t)!,
-      contentTextStyle: TextStyle.lerp(contentTextStyle, other.contentTextStyle, t)!,
+      contentTextStyle:
+          TextStyle.lerp(contentTextStyle, other.contentTextStyle, t)!,
     );
   }
 
@@ -69,12 +75,26 @@ class MoonMenuItemProperties extends ThemeExtension<MoonMenuItemProperties> with
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonMenuItemProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DoubleProperty("verticalGap", verticalGap))
-      ..add(DoubleProperty("minimumHeight", minimumHeight))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
-      ..add(DiagnosticsProperty<TextStyle>("labelTextStyle", labelTextStyle))
-      ..add(DiagnosticsProperty<TextStyle>("contentTextStyle", contentTextStyle));
+      ..add(
+        DiagnosticsProperty("type", "MoonMenuItemProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DoubleProperty("verticalGap", verticalGap),
+      )
+      ..add(
+        DoubleProperty("minimumHeight", minimumHeight),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("labelTextStyle", labelTextStyle),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("contentTextStyle", contentTextStyle),
+      );
   }
 }

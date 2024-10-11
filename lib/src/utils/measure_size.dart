@@ -17,7 +17,10 @@ class MeasureSize extends SingleChildRenderObjectWidget {
 
   @override
   RenderObject createRenderObject(BuildContext context) {
-    return MeasureSizeRenderObject(onChange: onChange, getInitialSize: getInitialSize);
+    return MeasureSizeRenderObject(
+      onChange: onChange,
+      getInitialSize: getInitialSize,
+    );
   }
 }
 
@@ -26,7 +29,10 @@ class MeasureSizeRenderObject extends RenderProxyBox {
   final OnWidgetSizeChange onChange;
   final bool getInitialSize;
 
-  MeasureSizeRenderObject({required this.onChange, this.getInitialSize = false});
+  MeasureSizeRenderObject({
+    required this.onChange,
+    this.getInitialSize = false,
+  });
 
   @override
   void performLayout() {

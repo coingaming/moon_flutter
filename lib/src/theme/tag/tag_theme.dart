@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/tag/tag_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTagTheme extends ThemeExtension<MoonTagTheme> with DiagnosticableTreeMixin {
+class MoonTagTheme extends ThemeExtension<MoonTagTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

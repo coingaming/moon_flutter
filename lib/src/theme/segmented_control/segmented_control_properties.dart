@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonSegmentedControlProperties extends ThemeExtension<MoonSegmentedControlProperties>
+class MoonSegmentedControlProperties
+    extends ThemeExtension<MoonSegmentedControlProperties>
     with DiagnosticableTreeMixin {
   /// The border radius of the MoonSegmentedControl.
   final BorderRadiusGeometry borderRadius;
@@ -47,13 +48,18 @@ class MoonSegmentedControlProperties extends ThemeExtension<MoonSegmentedControl
   }
 
   @override
-  MoonSegmentedControlProperties lerp(ThemeExtension<MoonSegmentedControlProperties>? other, double t) {
+  MoonSegmentedControlProperties lerp(
+    ThemeExtension<MoonSegmentedControlProperties>? other,
+    double t,
+  ) {
     if (other is! MoonSegmentedControlProperties) return this;
 
     return MoonSegmentedControlProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
     );
@@ -63,11 +69,23 @@ class MoonSegmentedControlProperties extends ThemeExtension<MoonSegmentedControl
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonSegmentedControlProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DoubleProperty("gap", gap))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding));
+      ..add(
+        DiagnosticsProperty("type", "MoonSegmentedControlProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DoubleProperty("gap", gap),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding),
+      );
   }
 }

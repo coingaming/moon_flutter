@@ -7,7 +7,8 @@ import 'package:moon_design/src/theme/popover/popover_shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme> with DiagnosticableTreeMixin {
+class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -40,7 +41,8 @@ class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme> with Diagnostica
               contentPadding: EdgeInsets.all(tokens.sizes.x3s),
               textStyle: tokens.typography.body.textDefault,
             ),
-        shadows = shadows ?? MoonPopoverShadows(popoverShadows: tokens.shadows.sm);
+        shadows =
+            shadows ?? MoonPopoverShadows(popoverShadows: tokens.shadows.sm);
 
   @override
   MoonPopoverTheme copyWith({
@@ -73,10 +75,20 @@ class MoonPopoverTheme extends ThemeExtension<MoonPopoverTheme> with Diagnostica
   void debugFillProperties(DiagnosticPropertiesBuilder diagnosticProperties) {
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
-      ..add(DiagnosticsProperty("type", "MoonPopoverTheme"))
-      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
-      ..add(DiagnosticsProperty<MoonPopoverColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonPopoverProperties>("properties", properties))
-      ..add(DiagnosticsProperty<MoonPopoverShadows>("shadows", shadows));
+      ..add(
+        DiagnosticsProperty("type", "MoonPopoverTheme"),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTokens>("tokens", tokens),
+      )
+      ..add(
+        DiagnosticsProperty<MoonPopoverColors>("colors", colors),
+      )
+      ..add(
+        DiagnosticsProperty<MoonPopoverProperties>("properties", properties),
+      )
+      ..add(
+        DiagnosticsProperty<MoonPopoverShadows>("shadows", shadows),
+      );
   }
 }

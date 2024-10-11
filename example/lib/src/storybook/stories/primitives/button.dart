@@ -133,8 +133,9 @@ class ButtonStory extends StatelessWidget {
 
     final IconData resolvedIconVariant = resolveIconVariant(buttonSizeKnob);
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -204,7 +205,9 @@ class ButtonStory extends StatelessWidget {
               label: showLabelKnob ? const Text("MoonTextButton") : null,
               trailing: showTrailingKnob ? Icon(resolvedIconVariant) : null,
             ),
-            const TextDivider(text: "Custom MoonButtons with non-standard children"),
+            const TextDivider(
+              text: "Custom MoonButtons with non-standard children",
+            ),
             MoonButton(
               onTap: isDisabledKnob ? null : () {},
               height: 40,
@@ -253,7 +256,10 @@ class ButtonStory extends StatelessWidget {
                     context.moonColors!.dodoria,
                   ],
                 ),
-                shape: const StarBorder(pointRounding: 0.5, valleyRounding: 0.5),
+                shape: const StarBorder(
+                  pointRounding: 0.5,
+                  valleyRounding: 0.5,
+                ),
               ),
               label: SizedBox(
                 width: 32,

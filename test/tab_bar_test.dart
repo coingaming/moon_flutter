@@ -22,7 +22,8 @@ void main() {
     expect(find.byKey(_tabBarKey), findsOneWidget);
   });
 
-  testWidgets("Tab bar has a leading, label and trailing widget.", (tester) async {
+  testWidgets("Tab bar has a leading, label and trailing widget.",
+      (tester) async {
     await tester.pumpWidget(
       const _TabBarTestWidget(
         showLabel: true,

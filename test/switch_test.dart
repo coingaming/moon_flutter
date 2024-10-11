@@ -23,7 +23,9 @@ void main() {
     );
 
     expect(
-      find.byWidgetPredicate((Widget widget) => widget is MoonSwitch && widget.value == true),
+      find.byWidgetPredicate(
+        (Widget widget) => widget is MoonSwitch && widget.value == true,
+      ),
       findsOneWidget,
     );
 
@@ -31,7 +33,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.byWidgetPredicate((Widget widget) => widget is MoonSwitch && widget.value == false),
+      find.byWidgetPredicate(
+        (Widget widget) => widget is MoonSwitch && widget.value == false,
+      ),
       findsOneWidget,
     );
 
@@ -39,7 +43,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.byWidgetPredicate((Widget widget) => widget is MoonSwitch && widget.value == true),
+      find.byWidgetPredicate(
+        (Widget widget) => widget is MoonSwitch && widget.value == true,
+      ),
       findsOneWidget,
     );
   });

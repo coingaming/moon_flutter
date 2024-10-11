@@ -21,7 +21,8 @@ class SegmentStyle {
   /// The custom decoration of the segment.
   final Decoration? decoration;
 
-  /// The gap between the [Segment.leading], [Segment.label] and [Segment.trailing] widgets of the segment.
+  /// The gap between the [Segment.leading], [Segment.label] and
+  /// [Segment.trailing] widgets of the segment.
   final double? segmentGap;
 
   /// The padding of the segment.
@@ -29,7 +30,8 @@ class SegmentStyle {
 
   /// The text style of the segment.
   ///
-  /// If [TextStyle] color is used, then it overrides the [textColor] and [selectedTextColor].
+  /// If [TextStyle] color is used, then it overrides the [textColor] and
+  /// [selectedTextColor].
   final TextStyle? textStyle;
 
   /// Defines a Moon Design segment style.

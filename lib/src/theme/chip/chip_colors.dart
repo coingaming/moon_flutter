@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonChipColors extends ThemeExtension<MoonChipColors> with DiagnosticableTreeMixin {
+class MoonChipColors extends ThemeExtension<MoonChipColors>
+    with DiagnosticableTreeMixin {
   /// The text and border color of the MoonChip in active state.
   final Color activeColor;
 
@@ -34,7 +35,8 @@ class MoonChipColors extends ThemeExtension<MoonChipColors> with DiagnosticableT
     return MoonChipColors(
       activeColor: activeColor ?? this.activeColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
-      activeBackgroundColor: activeBackgroundColor ?? this.activeBackgroundColor,
+      activeBackgroundColor:
+          activeBackgroundColor ?? this.activeBackgroundColor,
       textColor: textColor ?? this.textColor,
     );
   }
@@ -45,8 +47,13 @@ class MoonChipColors extends ThemeExtension<MoonChipColors> with DiagnosticableT
 
     return MoonChipColors(
       activeColor: colorPremulLerp(activeColor, other.activeColor, t)!,
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
-      activeBackgroundColor: colorPremulLerp(activeBackgroundColor, other.activeBackgroundColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      activeBackgroundColor: colorPremulLerp(
+        activeBackgroundColor,
+        other.activeBackgroundColor,
+        t,
+      )!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
     );
   }

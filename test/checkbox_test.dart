@@ -37,7 +37,9 @@ void main() {
     expect(checkboxValue, false);
   });
 
-  testWidgets("Tristate checkbox value changes correctly when tapped multiple times.", (tester) async {
+  testWidgets(
+      "Tristate checkbox value changes correctly when tapped multiple times.",
+      (tester) async {
     bool? checkboxValue = false;
 
     await tester.pumpWidget(

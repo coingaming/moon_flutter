@@ -104,7 +104,8 @@ class MoonToast {
   }) {
     assert(
       displayDuration == null || (displayDuration > _timeBetweenToasts),
-      'The display duration must be greater than the time between toasts (200 ms).',
+      'The display duration must be greater than the time between toasts '
+      '(200 ms).',
     );
 
     final MoonToastTheme? toastTheme = context.moonTheme?.toastTheme;

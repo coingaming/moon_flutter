@@ -6,7 +6,9 @@ import 'package:moon_design/src/theme/progress/circular_progress/circular_progre
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonCircularProgressTheme extends ThemeExtension<MoonCircularProgressTheme> with DiagnosticableTreeMixin {
+class MoonCircularProgressTheme
+    extends ThemeExtension<MoonCircularProgressTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -41,7 +43,10 @@ class MoonCircularProgressTheme extends ThemeExtension<MoonCircularProgressTheme
   }
 
   @override
-  MoonCircularProgressTheme lerp(ThemeExtension<MoonCircularProgressTheme>? other, double t) {
+  MoonCircularProgressTheme lerp(
+    ThemeExtension<MoonCircularProgressTheme>? other,
+    double t,
+  ) {
     if (other is! MoonCircularProgressTheme) return this;
 
     return MoonCircularProgressTheme(

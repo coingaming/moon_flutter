@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonBreadcrumbColors extends ThemeExtension<MoonBreadcrumbColors> with DiagnosticableTreeMixin {
+class MoonBreadcrumbColors extends ThemeExtension<MoonBreadcrumbColors>
+    with DiagnosticableTreeMixin {
   /// The icon and text color of the MoonBreadcrumb item.
   final Color itemColor;
 
@@ -41,8 +42,10 @@ class MoonBreadcrumbColors extends ThemeExtension<MoonBreadcrumbColors> with Dia
 
     return MoonBreadcrumbColors(
       itemColor: colorPremulLerp(itemColor, other.itemColor, t)!,
-      currentItemColor: colorPremulLerp(currentItemColor, other.currentItemColor, t),
-      hoverEffectColor: colorPremulLerp(hoverEffectColor, other.hoverEffectColor, t),
+      currentItemColor:
+          colorPremulLerp(currentItemColor, other.currentItemColor, t),
+      hoverEffectColor:
+          colorPremulLerp(hoverEffectColor, other.hoverEffectColor, t),
     );
   }
 

@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/loaders/linear_loader/linear_loader_sizes.
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonLinearLoaderTheme extends ThemeExtension<MoonLinearLoaderTheme> with DiagnosticableTreeMixin {
+class MoonLinearLoaderTheme extends ThemeExtension<MoonLinearLoaderTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -41,7 +42,10 @@ class MoonLinearLoaderTheme extends ThemeExtension<MoonLinearLoaderTheme> with D
   }
 
   @override
-  MoonLinearLoaderTheme lerp(ThemeExtension<MoonLinearLoaderTheme>? other, double t) {
+  MoonLinearLoaderTheme lerp(
+    ThemeExtension<MoonLinearLoaderTheme>? other,
+    double t,
+  ) {
     if (other is! MoonLinearLoaderTheme) return this;
 
     return MoonLinearLoaderTheme(

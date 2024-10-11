@@ -53,7 +53,8 @@ class MoonCarousel extends StatefulWidget {
   /// The factor to adjust and multiply the velocity of carousel scrolling.
   final double velocityFactor;
 
-  /// The delay between the items in the carousel's automatic scrolling sequence.
+  /// The delay between the items in the carousel's automatic scrolling
+  /// sequence.
   final Duration? autoPlayDelay;
 
   /// The duration of the MoonCarousel [autoplay] transition animation.
@@ -560,9 +561,9 @@ class MoonCarouselExtentMetrics extends FixedScrollMetrics {
   /// The index of the currently selected item within the scroll view.
   final int itemIndex;
 
-  /// Provides an immutable snapshot of the current scroll positions within the carousel.
-  /// This snapshot can be directly accessed by [ScrollNotification] to retrieve the currently selected
-  /// real item index at any given moment.
+  /// Provides an immutable snapshot of the current scroll positions within the
+  /// carousel. This snapshot can be directly accessed by [ScrollNotification]
+  /// to retrieve the currently selected real item index at any given moment.
   MoonCarouselExtentMetrics({
     required super.minScrollExtent,
     required super.maxScrollExtent,
@@ -726,10 +727,10 @@ class _MoonCarouselScrollPosition extends ScrollPositionWithSingleContext
 
 /// The physics for the [MoonCarousel].
 class MoonCarouselScrollPhysics extends ScrollPhysics {
-  /// Extends Flutter's [FixedExtentScrollPhysics] to implement carousel-specific
-  /// behavior. When [MoonCarousel.loop] is false, friction is applied when the
-  /// user tries to scroll beyond the viewport. The friction factor is calculated
-  /// the same way as in [BouncingScrollPhysics].
+  /// Extends Flutter's [FixedExtentScrollPhysics] to implement
+  /// carousel-specific behavior. When [MoonCarousel.loop] is false, friction is
+  /// applied when the user tries to scroll beyond the viewport. The friction
+  /// factor is calculated the same way as in [BouncingScrollPhysics].
   const MoonCarouselScrollPhysics({super.parent});
 
   @override
@@ -747,9 +748,10 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
           ),
           ErrorDescription(
             'The proposed new position, $value, is exactly equal to the current '
-            'position of the given ${position.runtimeType}, ${position.pixels}.\n'
-            'The applyBoundaryConditions method should only be called when the '
-            'value is going to actually change the pixels, otherwise it is redundant.',
+            'position of the given ${position.runtimeType}, ${position.pixels}.'
+            '\n The applyBoundaryConditions method should only be called when '
+            'the value is going to actually change the pixels, otherwise it is '
+            'redundant.',
           ),
           DiagnosticsProperty<ScrollPhysics>(
             'The physics object in question was',
@@ -806,8 +808,9 @@ class MoonCarouselScrollPhysics extends ScrollPhysics {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
-    // Perform a test simulation to determine the carousel's ballistic trajectory
-    // without interference from carousel items, simulating a natural fall.
+    // Perform a test simulation to determine the carousel's ballistic
+    // trajectory without interference from carousel items, simulating a natural
+    // fall.
     final Simulation? testFrictionSimulation = super.createBallisticSimulation(
       metrics,
       velocity * math.min(metrics.velocityFactor + 0.15, 1.0),

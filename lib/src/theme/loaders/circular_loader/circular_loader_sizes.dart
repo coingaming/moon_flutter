@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/loaders/circular_loader/circular_loader_si
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonCircularLoaderSizes extends ThemeExtension<MoonCircularLoaderSizes> with DiagnosticableTreeMixin {
+class MoonCircularLoaderSizes extends ThemeExtension<MoonCircularLoaderSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -77,7 +78,10 @@ class MoonCircularLoaderSizes extends ThemeExtension<MoonCircularLoaderSizes> wi
   }
 
   @override
-  MoonCircularLoaderSizes lerp(ThemeExtension<MoonCircularLoaderSizes>? other, double t) {
+  MoonCircularLoaderSizes lerp(
+    ThemeExtension<MoonCircularLoaderSizes>? other,
+    double t,
+  ) {
     if (other is! MoonCircularLoaderSizes) return this;
 
     return MoonCircularLoaderSizes(

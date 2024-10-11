@@ -2,14 +2,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTextInputGroupProperties extends ThemeExtension<MoonTextInputGroupProperties> with DiagnosticableTreeMixin {
+class MoonTextInputGroupProperties
+    extends ThemeExtension<MoonTextInputGroupProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonTextInputGroup.
   final BorderRadiusGeometry borderRadius;
 
-  /// The duration of the MoonTextInputGroup transition animation (enable and disable).
+  /// The duration of the MoonTextInputGroup transition animation
+  /// (enable and disable).
   final Duration transitionDuration;
 
-  /// The curve of the MoonTextInputGroup transition animation (enable and disable).
+  /// The curve of the MoonTextInputGroup transition animation
+  /// (enable and disable).
   final Curve transitionCurve;
 
   /// The padding of the MoonTextInputGroup helper and errorBuilder widgets.
@@ -56,17 +60,24 @@ class MoonTextInputGroupProperties extends ThemeExtension<MoonTextInputGroupProp
   }
 
   @override
-  MoonTextInputGroupProperties lerp(ThemeExtension<MoonTextInputGroupProperties>? other, double t) {
+  MoonTextInputGroupProperties lerp(
+    ThemeExtension<MoonTextInputGroupProperties>? other,
+    double t,
+  ) {
     if (other is! MoonTextInputGroupProperties) return this;
 
     return MoonTextInputGroupProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      helperPadding: EdgeInsetsGeometry.lerp(helperPadding, other.helperPadding, t)!,
+      helperPadding:
+          EdgeInsetsGeometry.lerp(helperPadding, other.helperPadding, t)!,
       textPadding: EdgeInsetsGeometry.lerp(textPadding, other.textPadding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
-      helperTextStyle: TextStyle.lerp(helperTextStyle, other.helperTextStyle, t)!,
+      helperTextStyle:
+          TextStyle.lerp(helperTextStyle, other.helperTextStyle, t)!,
     );
   }
 
@@ -74,11 +85,36 @@ class MoonTextInputGroupProperties extends ThemeExtension<MoonTextInputGroupProp
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTextInputGroupProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("helperPadding", helperPadding))
+      ..add(
+        DiagnosticsProperty(
+          "type",
+          "MoonTextInputGroupProperties",
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>(
+          "borderRadius",
+          borderRadius,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>(
+          "transitionDuration",
+          transitionDuration,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>(
+          "transitionCurve",
+          transitionCurve,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>(
+          "helperPadding",
+          helperPadding,
+        ),
+      )
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("textPadding", textPadding))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
       ..add(DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle));

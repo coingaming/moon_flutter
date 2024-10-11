@@ -8,7 +8,8 @@ import 'package:moon_design/src/theme/switch/switch_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonSwitchTheme extends ThemeExtension<MoonSwitchTheme> with DiagnosticableTreeMixin {
+class MoonSwitchTheme extends ThemeExtension<MoonSwitchTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

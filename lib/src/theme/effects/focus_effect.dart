@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonFocusEffect extends ThemeExtension<MoonFocusEffect> with DiagnosticableTreeMixin {
+class MoonFocusEffect extends ThemeExtension<MoonFocusEffect>
+    with DiagnosticableTreeMixin {
   /// The color of the focus effect.
   final Color effectColor;
 

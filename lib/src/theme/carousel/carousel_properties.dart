@@ -4,14 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with DiagnosticableTreeMixin {
+class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties>
+    with DiagnosticableTreeMixin {
   /// The gap between the MoonCarousel items.
   final double gap;
 
   /// The text style of the MoonCarousel items.
   final TextStyle textStyle;
 
-  /// The delay between the items in the MoonCarousel's automatic scrolling sequence.
+  /// The delay between the items in the MoonCarousel's automatic scrolling
+  /// sequence.
   final Duration autoPlayDelay;
 
   /// The duration of the MoonCarousel autoplay transition animation.
@@ -46,14 +48,18 @@ class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with
   }
 
   @override
-  MoonCarouselProperties lerp(ThemeExtension<MoonCarouselProperties>? other, double t) {
+  MoonCarouselProperties lerp(
+    ThemeExtension<MoonCarouselProperties>? other,
+    double t,
+  ) {
     if (other is! MoonCarouselProperties) return this;
 
     return MoonCarouselProperties(
       gap: lerpDouble(gap, other.gap, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
       autoPlayDelay: lerpDuration(autoPlayDelay, other.autoPlayDelay, t),
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
     );
   }
@@ -66,7 +72,11 @@ class MoonCarouselProperties extends ThemeExtension<MoonCarouselProperties> with
       ..add(DoubleProperty("gap", gap))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
       ..add(DiagnosticsProperty<Duration>("autoPlayDelay", autoPlayDelay))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      );
   }
 }

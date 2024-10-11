@@ -80,9 +80,11 @@ class TooltipShape extends ShapeBorder {
     }
 
     if (tooltipPosition == MoonTooltipPosition.right) {
-      tooltipCenter = rect.centerLeft.translate(-arrowLength - arrowTipDistance, 0);
+      tooltipCenter =
+          rect.centerLeft.translate(-arrowLength - arrowTipDistance, 0);
     } else if (tooltipPosition == MoonTooltipPosition.left) {
-      tooltipCenter = rect.centerRight.translate(arrowLength + arrowTipDistance, 0);
+      tooltipCenter =
+          rect.centerRight.translate(arrowLength + arrowTipDistance, 0);
     }
 
     switch (tooltipPosition) {
@@ -96,7 +98,10 @@ class TooltipShape extends ShapeBorder {
           // To corner of arrow base.
           ..lineTo(
             min(
-              max(arrowOffset + tooltipCenter.dx + arrowBaseWidth / 2, rect.left + bottomLeftRadius + arrowBaseWidth),
+              max(
+                arrowOffset + tooltipCenter.dx + arrowBaseWidth / 2,
+                rect.left + bottomLeftRadius + arrowBaseWidth,
+              ),
               rect.right - bottomRightRadius,
             ),
             rect.bottom,
@@ -106,7 +111,10 @@ class TooltipShape extends ShapeBorder {
           // To opposite corner of arrow base.
           ..lineTo(
             max(
-              min(arrowOffset + tooltipCenter.dx - arrowBaseWidth / 2, rect.right - bottomRightRadius - arrowBaseWidth),
+              min(
+                arrowOffset + tooltipCenter.dx - arrowBaseWidth / 2,
+                rect.right - bottomRightRadius - arrowBaseWidth,
+              ),
               rect.left + bottomLeftRadius,
             ),
             rect.bottom,
@@ -127,7 +135,10 @@ class TooltipShape extends ShapeBorder {
           // To corner of arrow base.
           ..lineTo(
             min(
-              max(arrowOffset + tooltipCenter.dx + arrowBaseWidth / 2, rect.left + topRightRadius + arrowBaseWidth),
+              max(
+                arrowOffset + tooltipCenter.dx + arrowBaseWidth / 2,
+                rect.left + topRightRadius + arrowBaseWidth,
+              ),
               rect.right - topRightRadius,
             ),
             rect.top,
@@ -137,7 +148,10 @@ class TooltipShape extends ShapeBorder {
           // To opposite corner of arrow base.
           ..lineTo(
             max(
-              min(arrowOffset + tooltipCenter.dx - arrowBaseWidth / 2, rect.right - topLeftRadius - arrowBaseWidth),
+              min(
+                arrowOffset + tooltipCenter.dx - arrowBaseWidth / 2,
+                rect.right - topLeftRadius - arrowBaseWidth,
+              ),
               rect.left + topLeftRadius,
             ),
             rect.top,
@@ -169,12 +183,18 @@ class TooltipShape extends ShapeBorder {
             ),
           )
           // To arrow tip.
-          ..lineTo(tooltipCenter.dx - arrowTipDistance, -arrowOffset + tooltipCenter.dy)
+          ..lineTo(
+            tooltipCenter.dx - arrowTipDistance,
+            -arrowOffset + tooltipCenter.dy,
+          )
           // To opposite corner of arrow base.
           ..lineTo(
             rect.right,
             min(
-              max(-arrowOffset + tooltipCenter.dy + arrowBaseWidth / 2, rect.top + topRightRadius + arrowBaseWidth),
+              max(
+                -arrowOffset + tooltipCenter.dy + arrowBaseWidth / 2,
+                rect.top + topRightRadius + arrowBaseWidth,
+              ),
               rect.bottom - bottomRightRadius,
             ),
           )
@@ -209,7 +229,10 @@ class TooltipShape extends ShapeBorder {
             ),
           )
           // To arrow tip.
-          ..lineTo(tooltipCenter.dx + arrowTipDistance, -arrowOffset + tooltipCenter.dy)
+          ..lineTo(
+            tooltipCenter.dx + arrowTipDistance,
+            -arrowOffset + tooltipCenter.dy,
+          )
           // To opposite corner of arrow base.
           ..lineTo(
             rect.left,
@@ -240,19 +263,28 @@ class TooltipShape extends ShapeBorder {
             min(
               rect.right - bottomRightRadius,
               max(
-                arrowOffset + rect.right - (childWidth / 2) + (arrowBaseWidth / 2),
+                arrowOffset +
+                    rect.right -
+                    (childWidth / 2) +
+                    (arrowBaseWidth / 2),
                 rect.left + bottomLeftRadius + arrowBaseWidth,
               ),
             ),
             rect.bottom,
           )
           // To arrow tip.
-          ..lineTo(arrowOffset + rect.right - (childWidth / 2), rect.bottom + arrowLength)
+          ..lineTo(
+            arrowOffset + rect.right - (childWidth / 2),
+            rect.bottom + arrowLength,
+          )
           // To opposite corner of arrow base.
           ..lineTo(
             max(
               min(
-                arrowOffset + rect.right - (childWidth / 2) - (arrowBaseWidth / 2),
+                arrowOffset +
+                    rect.right -
+                    (childWidth / 2) -
+                    (arrowBaseWidth / 2),
                 rect.right - bottomRightRadius - arrowBaseWidth,
               ),
               rect.left + bottomLeftRadius,
@@ -281,7 +313,10 @@ class TooltipShape extends ShapeBorder {
           ..lineTo(
             min(
               max(
-                arrowOffset + rect.left + (childWidth / 2) + (arrowBaseWidth / 2),
+                arrowOffset +
+                    rect.left +
+                    (childWidth / 2) +
+                    (arrowBaseWidth / 2),
                 rect.left + bottomLeftRadius + arrowBaseWidth,
               ),
               rect.right - bottomRightRadius,
@@ -289,12 +324,18 @@ class TooltipShape extends ShapeBorder {
             rect.bottom,
           )
           // To arrow tip.
-          ..lineTo(arrowOffset + rect.left + (childWidth / 2), rect.bottom + arrowLength)
+          ..lineTo(
+            arrowOffset + rect.left + (childWidth / 2),
+            rect.bottom + arrowLength,
+          )
           // To opposite corner of arrow base.
           ..lineTo(
             max(
               min(
-                arrowOffset + rect.left + (childWidth / 2) - (arrowBaseWidth / 2),
+                arrowOffset +
+                    rect.left +
+                    (childWidth / 2) -
+                    (arrowBaseWidth / 2),
                 rect.right - bottomRightRadius - arrowBaseWidth,
               ),
               rect.left + bottomLeftRadius,
@@ -318,7 +359,10 @@ class TooltipShape extends ShapeBorder {
           ..lineTo(
             min(
               max(
-                arrowOffset + rect.right - (childWidth / 2) + (arrowBaseWidth / 2),
+                arrowOffset +
+                    rect.right -
+                    (childWidth / 2) +
+                    (arrowBaseWidth / 2),
                 rect.left + topRightRadius + arrowBaseWidth,
               ),
               rect.right - topRightRadius,
@@ -326,12 +370,18 @@ class TooltipShape extends ShapeBorder {
             rect.top,
           )
           // To arrow tip.
-          ..lineTo(arrowOffset + rect.right - (childWidth / 2), rect.top - arrowLength)
+          ..lineTo(
+            arrowOffset + rect.right - (childWidth / 2),
+            rect.top - arrowLength,
+          )
           // To opposite corner of arrow base.
           ..lineTo(
             max(
               min(
-                arrowOffset + rect.right - (childWidth / 2) - (arrowBaseWidth / 2),
+                arrowOffset +
+                    rect.right -
+                    (childWidth / 2) -
+                    (arrowBaseWidth / 2),
                 rect.right - bottomRightRadius - arrowBaseWidth,
               ),
               rect.left + topLeftRadius,
@@ -357,7 +407,10 @@ class TooltipShape extends ShapeBorder {
           ..lineTo(
             min(
               max(
-                arrowOffset + rect.left + (childWidth / 2) + (arrowBaseWidth / 2),
+                arrowOffset +
+                    rect.left +
+                    (childWidth / 2) +
+                    (arrowBaseWidth / 2),
                 rect.left + topRightRadius + arrowBaseWidth,
               ),
               rect.right - topRightRadius,
@@ -365,12 +418,18 @@ class TooltipShape extends ShapeBorder {
             rect.top,
           )
           // To arrow tip.
-          ..lineTo(arrowOffset + rect.left + (childWidth / 2), rect.top - arrowLength)
+          ..lineTo(
+            arrowOffset + rect.left + (childWidth / 2),
+            rect.top - arrowLength,
+          )
           // To opposite corner of arrow base.
           ..lineTo(
             max(
               min(
-                arrowOffset + rect.left + (childWidth / 2) - (arrowBaseWidth / 2),
+                arrowOffset +
+                    rect.left +
+                    (childWidth / 2) -
+                    (arrowBaseWidth / 2),
                 rect.right - bottomRightRadius - arrowBaseWidth,
               ),
               rect.left + topLeftRadius,
@@ -398,7 +457,8 @@ class TooltipShape extends ShapeBorder {
   @override
   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
     final Paint paint = Paint()
-      // If borderWidth is set to 0, set the color to be transparent to avoid strange behavior with border.
+      // If borderWidth is set to 0, set the color to be transparent to avoid
+      // strange behavior with border.
       ..color = borderWidth == 0 ? Colors.transparent : borderColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = borderWidth;

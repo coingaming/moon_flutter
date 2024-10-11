@@ -7,7 +7,8 @@ import 'package:moon_design/src/theme/drawer/drawer_shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with DiagnosticableTreeMixin {
+class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -37,7 +38,8 @@ class MoonDrawerTheme extends ThemeExtension<MoonDrawerTheme> with Diagnosticabl
               width: 448,
               textStyle: tokens.typography.body.textDefault,
             ),
-        shadows = shadows ?? MoonDrawerShadows(drawerShadows: tokens.shadows.lg);
+        shadows =
+            shadows ?? MoonDrawerShadows(drawerShadows: tokens.shadows.lg);
 
   @override
   MoonDrawerTheme copyWith({

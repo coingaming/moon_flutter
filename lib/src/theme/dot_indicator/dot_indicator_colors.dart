@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonDotIndicatorColors extends ThemeExtension<MoonDotIndicatorColors> with DiagnosticableTreeMixin {
+class MoonDotIndicatorColors extends ThemeExtension<MoonDotIndicatorColors>
+    with DiagnosticableTreeMixin {
   /// The color of the selected MoonDotIndicator dot.
   final Color selectedColor;
 
@@ -28,12 +29,19 @@ class MoonDotIndicatorColors extends ThemeExtension<MoonDotIndicatorColors> with
   }
 
   @override
-  MoonDotIndicatorColors lerp(ThemeExtension<MoonDotIndicatorColors>? other, double t) {
+  MoonDotIndicatorColors lerp(
+    ThemeExtension<MoonDotIndicatorColors>? other,
+    double t,
+  ) {
     if (other is! MoonDotIndicatorColors) return this;
 
     return MoonDotIndicatorColors(
       selectedColor: colorPremulLerp(selectedColor, other.selectedColor, t)!,
-      unselectedColor: colorPremulLerp(unselectedColor, other.unselectedColor, t)!,
+      unselectedColor: colorPremulLerp(
+        unselectedColor,
+        other.unselectedColor,
+        t,
+      )!,
     );
   }
 

@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme> with DiagnosticableTreeMixin {
+class MoonAvatarTheme extends ThemeExtension<MoonAvatarTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

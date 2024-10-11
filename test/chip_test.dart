@@ -19,7 +19,8 @@ void main() {
     expect(find.byKey(_chipKey), findsOneWidget);
   });
 
-  testWidgets("Chip has only a label and no leading or trailing widget.", (tester) async {
+  testWidgets("Chip has only a label and no leading or trailing widget.",
+      (tester) async {
     await tester.pumpWidget(
       const _ChipTestWidget(
         showLabel: true,

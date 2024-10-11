@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTableProperties extends ThemeExtension<MoonTableProperties> with DiagnosticableTreeMixin {
+class MoonTableProperties extends ThemeExtension<MoonTableProperties>
+    with DiagnosticableTreeMixin {
   /// The duration of the MoonTable row label transition animation during horizontal scrolling.
   final Duration transitionDuration;
 
@@ -26,11 +27,15 @@ class MoonTableProperties extends ThemeExtension<MoonTableProperties> with Diagn
   }
 
   @override
-  MoonTableProperties lerp(ThemeExtension<MoonTableProperties>? other, double t) {
+  MoonTableProperties lerp(
+    ThemeExtension<MoonTableProperties>? other,
+    double t,
+  ) {
     if (other is! MoonTableProperties) return this;
 
     return MoonTableProperties(
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
     );
   }
@@ -39,8 +44,14 @@ class MoonTableProperties extends ThemeExtension<MoonTableProperties> with Diagn
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTableProperties"))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
+      ..add(
+        DiagnosticsProperty("type", "MoonTableProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      );
   }
 }

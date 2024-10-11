@@ -19,7 +19,8 @@ void main() {
     expect(find.byKey(_buttonKey), findsOneWidget);
   });
 
-  testWidgets("Button has a leading, label and trailing widget.", (tester) async {
+  testWidgets("Button has a leading, label and trailing widget.",
+      (tester) async {
     await tester.pumpWidget(
       const _ButtonTestWidget(
         showLeading: true,

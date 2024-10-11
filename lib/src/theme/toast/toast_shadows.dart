@@ -2,13 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonToastShadows extends ThemeExtension<MoonToastShadows> with DiagnosticableTreeMixin {
+class MoonToastShadows extends ThemeExtension<MoonToastShadows>
+    with DiagnosticableTreeMixin {
   /// The list of shadows applied to the MoonToast.
   final List<BoxShadow> toastShadows;
 
-  const MoonToastShadows({
-    required this.toastShadows,
-  });
+  const MoonToastShadows({required this.toastShadows});
 
   @override
   MoonToastShadows copyWith({List<BoxShadow>? toastShadows}) {

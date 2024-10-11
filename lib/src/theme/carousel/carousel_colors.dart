@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonCarouselColors extends ThemeExtension<MoonCarouselColors> with DiagnosticableTreeMixin {
+class MoonCarouselColors extends ThemeExtension<MoonCarouselColors>
+    with DiagnosticableTreeMixin {
   /// The text color of the MoonCarousel items.
   final Color textColor;
 

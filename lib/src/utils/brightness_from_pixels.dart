@@ -4,11 +4,12 @@ double getBrightnessFromBytes(Uint8List bytes) {
   /// Calculates the brightness score for each pixel in the image.
   ///
   /// For each pixel, a brightness score is assigned based on its color.
-  /// Bright pixels receive a positive value, while dark pixels receive a negative value.
-  /// A score close to 0 indicates a neutral grey color.
+  /// Bright pixels receive a positive value, while dark pixels receive a
+  /// negative value. A score close to 0 indicates a neutral grey color.
   ///
   /// The score is discounted if the pixel has transparency (alpha < 255).
-  /// For example, a semi-transparent black pixel (#000000 with alpha < 255) has a negative score.
+  /// For example, a semi-transparent black pixel (#000000 with alpha < 255)
+  /// has a negative score.
   double totalScore = 0.0;
 
   for (int i = 0; i < bytes.length; i += 4) {

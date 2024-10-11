@@ -5,7 +5,9 @@ import 'package:moon_design/src/theme/segmented_control/segmented_control_size_p
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonSegmentedControlSizes extends ThemeExtension<MoonSegmentedControlSizes> with DiagnosticableTreeMixin {
+class MoonSegmentedControlSizes
+    extends ThemeExtension<MoonSegmentedControlSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -25,7 +27,8 @@ class MoonSegmentedControlSizes extends ThemeExtension<MoonSegmentedControlSizes
               segmentGap: tokens.sizes.x5s,
               height: tokens.sizes.md,
               iconSizeValue: tokens.sizes.xs,
-              segmentPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              segmentPadding:
+                  EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
               textStyle: tokens.typography.heading.textDefault,
             ),
         md = md ??
@@ -34,7 +37,8 @@ class MoonSegmentedControlSizes extends ThemeExtension<MoonSegmentedControlSizes
               segmentGap: tokens.sizes.x4s,
               height: tokens.sizes.lg,
               iconSizeValue: tokens.sizes.xs,
-              segmentPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x2s),
+              segmentPadding:
+                  EdgeInsets.symmetric(horizontal: tokens.sizes.x2s),
               textStyle: tokens.typography.heading.textDefault,
             );
 
@@ -52,7 +56,10 @@ class MoonSegmentedControlSizes extends ThemeExtension<MoonSegmentedControlSizes
   }
 
   @override
-  MoonSegmentedControlSizes lerp(ThemeExtension<MoonSegmentedControlSizes>? other, double t) {
+  MoonSegmentedControlSizes lerp(
+    ThemeExtension<MoonSegmentedControlSizes>? other,
+    double t,
+  ) {
     if (other is! MoonSegmentedControlSizes) return this;
 
     return MoonSegmentedControlSizes(

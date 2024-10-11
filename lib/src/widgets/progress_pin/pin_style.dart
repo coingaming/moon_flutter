@@ -31,7 +31,8 @@ class PinStyle {
   /// The border width of the progress pin.
   final double? pinBorderWidth;
 
-  /// The vertical distance between the progress pin and the linear progress widget.
+  /// The vertical distance between the progress pin and the linear progress
+  /// widget.
   final double? pinDistance;
 
   /// The shadow elevation of the progress pin.

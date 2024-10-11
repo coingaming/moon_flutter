@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/modal/modal_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonModalTheme extends ThemeExtension<MoonModalTheme> with DiagnosticableTreeMixin {
+class MoonModalTheme extends ThemeExtension<MoonModalTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

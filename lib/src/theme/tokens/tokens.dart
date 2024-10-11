@@ -10,7 +10,8 @@ import 'package:moon_design/src/theme/tokens/typography/typography.dart';
 import 'package:moon_tokens/moon_tokens.dart';
 
 @immutable
-class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin {
+class MoonTokens extends ThemeExtension<MoonTokens>
+    with DiagnosticableTreeMixin {
   static const light = MoonTokens(
     borders: MoonBorders.borders,
     colors: MoonColors.light,
@@ -39,7 +40,8 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
   /// The colors of the Moon Design System.
   final MoonColors colors;
 
-  /// The colors of the Moon Design System that are from complementary theme (light -> dark, dark -> light).
+  /// The colors of the Moon Design System that are from complementary theme
+  /// (light -> dark, dark -> light).
   final MoonColors complementaryColors;
 
   /// The opacities of the Moon Design System.
@@ -97,7 +99,8 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
     return MoonTokens(
       borders: borders.lerp(other.borders, t),
       colors: colors.lerp(other.colors, t),
-      complementaryColors: complementaryColors.lerp(other.complementaryColors, t),
+      complementaryColors:
+          complementaryColors.lerp(other.complementaryColors, t),
       opacities: opacities.lerp(other.opacities, t),
       shadows: shadows.lerp(other.shadows, t),
       sizes: sizes.lerp(other.sizes, t),
@@ -117,7 +120,17 @@ class MoonTokens extends ThemeExtension<MoonTokens> with DiagnosticableTreeMixin
       ..add(DiagnosticsProperty<MoonOpacities>("MoonOpacities", opacities))
       ..add(DiagnosticsProperty<MoonShadows>("MoonShadows", shadows))
       ..add(DiagnosticsProperty<MoonSizes>("MoonSizes", sizes))
-      ..add(DiagnosticsProperty<MoonTransitions>("MoonTransitions", transitions))
-      ..add(DiagnosticsProperty<MoonTypography>("MoonTypography", typography));
+      ..add(
+        DiagnosticsProperty<MoonTransitions>(
+          "MoonTransitions",
+          transitions,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTypography>(
+          "MoonTypography",
+          typography,
+        ),
+      );
   }
 }

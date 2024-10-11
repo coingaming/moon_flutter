@@ -45,7 +45,8 @@ class CircularLoaderStory extends StatelessWidget {
       options: colorOptions,
     );
 
-    final backgroundColor = colorTable(context)[loaderBackgroundColorKnob ?? 40];
+    final backgroundColor =
+        colorTable(context)[loaderBackgroundColorKnob ?? 40];
 
     final loaderStrokeCapKnob = context.knobs.nullable.options(
       label: "strokeCap",

@@ -7,14 +7,16 @@ class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
   ///
   /// The color must not be null.
   ///
-  /// When this property is set, the icon color will be animated over the specified [duration] time.
+  /// When this property is set, the icon color will be animated over the
+  /// specified [duration] time.
   final Color? color;
 
   /// The target size for the icon.
   ///
   /// The size must not be null.
   ///
-  /// When this property is set, the icon size will be animated over the specified [duration] time.
+  /// When this property is set, the icon size will be animated over the
+  /// specified [duration] time.
   final double? size;
 
   /// The widget below this animated icon theme widget in the tree.
@@ -36,30 +38,43 @@ class AnimatedIconTheme extends ImplicitlyAnimatedWidget {
   });
 
   @override
-  AnimatedWidgetBaseState<AnimatedIconTheme> createState() => _AnimatedIconThemeState();
+  AnimatedWidgetBaseState<AnimatedIconTheme> createState() =>
+      _AnimatedIconThemeState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Color>('iconColor', color, defaultValue: null));
-    properties.add(DiagnosticsProperty<double>('iconSize', size, defaultValue: null));
+    properties.add(
+      DiagnosticsProperty<Color>('iconColor', color, defaultValue: null),
+    );
+    properties.add(
+      DiagnosticsProperty<double>('iconSize', size, defaultValue: null),
+    );
   }
 }
 
-class _AnimatedIconThemeState extends AnimatedWidgetBaseState<AnimatedIconTheme> {
+class _AnimatedIconThemeState
+    extends AnimatedWidgetBaseState<AnimatedIconTheme> {
   ColorTweenWithPremultipliedAlpha? _color;
   SizeTween? _size;
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
     if (widget.color != null) {
-      _color = visitor(_color, widget.color, (dynamic value) => ColorTweenWithPremultipliedAlpha(begin: value as Color))
-          as ColorTweenWithPremultipliedAlpha?;
+      _color = visitor(
+        _color,
+        widget.color,
+        (dynamic value) =>
+            ColorTweenWithPremultipliedAlpha(begin: value as Color),
+      ) as ColorTweenWithPremultipliedAlpha?;
     }
 
     if (widget.size != null) {
-      _size = visitor(_size, Size(widget.size!, widget.size!), (dynamic value) => SizeTween(begin: value as Size))
-          as SizeTween?;
+      _size = visitor(
+        _size,
+        Size(widget.size!, widget.size!),
+        (dynamic value) => SizeTween(begin: value as Size),
+      ) as SizeTween?;
     }
   }
 

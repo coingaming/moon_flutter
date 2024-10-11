@@ -183,7 +183,8 @@ class MoonAccordion<T> extends StatefulWidget {
   /// may replace the rotating expansion arrow icon.
   final Widget? trailing;
 
-  /// The list of widgets to display as the content of the accordion when the accordion expands.
+  /// The list of widgets to display as the content of the accordion when the
+  /// accordion expands.
   final List<Widget> children;
 
   /// Creates a Moon Design accordion.

@@ -7,7 +7,8 @@ import 'package:moon_design/src/theme/dropdown/dropdown_shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonDropdownTheme extends ThemeExtension<MoonDropdownTheme> with DiagnosticableTreeMixin {
+class MoonDropdownTheme extends ThemeExtension<MoonDropdownTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -41,7 +42,8 @@ class MoonDropdownTheme extends ThemeExtension<MoonDropdownTheme> with Diagnosti
               dropdownMargin: EdgeInsets.all(tokens.sizes.x4s),
               textStyle: tokens.typography.body.textDefault,
             ),
-        shadows = shadows ?? MoonDropdownShadows(dropdownShadows: tokens.shadows.sm);
+        shadows =
+            shadows ?? MoonDropdownShadows(dropdownShadows: tokens.shadows.sm);
 
   @override
   MoonDropdownTheme copyWith({
@@ -74,10 +76,20 @@ class MoonDropdownTheme extends ThemeExtension<MoonDropdownTheme> with Diagnosti
   void debugFillProperties(DiagnosticPropertiesBuilder diagnosticProperties) {
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
-      ..add(DiagnosticsProperty("type", "MoonDropdownTheme"))
-      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
-      ..add(DiagnosticsProperty<MoonDropdownColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonDropdownProperties>("properties", properties))
-      ..add(DiagnosticsProperty<MoonDropdownShadows>("shadows", shadows));
+      ..add(
+        DiagnosticsProperty("type", "MoonDropdownTheme"),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTokens>("tokens", tokens),
+      )
+      ..add(
+        DiagnosticsProperty<MoonDropdownColors>("colors", colors),
+      )
+      ..add(
+        DiagnosticsProperty<MoonDropdownProperties>("properties", properties),
+      )
+      ..add(
+        DiagnosticsProperty<MoonDropdownShadows>("shadows", shadows),
+      );
   }
 }

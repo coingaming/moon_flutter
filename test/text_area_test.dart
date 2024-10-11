@@ -27,7 +27,8 @@ void main() {
     expect(find.byKey(_textAreaKey), findsOneWidget);
   });
 
-  testWidgets("When valid text is entered and submitted, error is not shown.", (tester) async {
+  testWidgets("When valid text is entered and submitted, error is not shown.",
+      (tester) async {
     await tester.pumpWidget(
       const _TextAreaTestWidget(
         textAreaKey: _textAreaKey,
@@ -45,7 +46,8 @@ void main() {
     expect(find.text(_errorText), findsNothing);
   });
 
-  testWidgets("When invalid text is entered and submitted, error is shown.", (tester) async {
+  testWidgets("When invalid text is entered and submitted, error is shown.",
+      (tester) async {
     await tester.pumpWidget(
       const _TextAreaTestWidget(
         textAreaKey: _textAreaKey,
@@ -83,7 +85,8 @@ void main() {
     expect(find.text(_hintText), findsOneWidget);
   });
 
-  testWidgets("When text area is disabled, input cannot be entered.", (tester) async {
+  testWidgets("When text area is disabled, input cannot be entered.",
+      (tester) async {
     await tester.pumpWidget(
       const _TextAreaTestWidget(
         textAreaKey: _textAreaKey,
@@ -124,7 +127,10 @@ class _TextAreaTestWidget extends StatelessWidget {
                     key: textAreaKey,
                     enabled: enabled,
                     hintText: _hintText,
-                    validator: (String? value) => value?.length != null && value!.length > 10 ? _errorText : null,
+                    validator: (String? value) =>
+                        value?.length != null && value!.length > 10
+                            ? _errorText
+                            : null,
                     helper: showHelper ? const Text(_helperText) : null,
                   ),
                   MoonFilledButton(

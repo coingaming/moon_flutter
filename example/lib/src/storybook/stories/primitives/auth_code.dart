@@ -95,18 +95,21 @@ class AuthCodeStory extends StatelessWidget {
 
     final selectedBorderColorKnob = context.knobs.nullable.options(
       label: "selectedBorderColor",
-      description: "MoonColors variants for MoonAuthCode selected input field border.",
+      description:
+          "MoonColors variants for MoonAuthCode selected input field border.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final selectedBorderColor = colorTable(context)[selectedBorderColorKnob ?? 40];
+    final selectedBorderColor =
+        colorTable(context)[selectedBorderColorKnob ?? 40];
 
     final activeBorderColorKnob = context.knobs.nullable.options(
       label: "activeBorderColor",
-      description: "MoonColors variants for MoonAuthCode active input field border.",
+      description:
+          "MoonColors variants for MoonAuthCode active input field border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -117,14 +120,16 @@ class AuthCodeStory extends StatelessWidget {
 
     final inactiveBorderColorKnob = context.knobs.nullable.options(
       label: "inactiveBorderColor",
-      description: "MoonColors variants for MoonAuthCode inactive input field border.",
+      description:
+          "MoonColors variants for MoonAuthCode inactive input field border.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final inactiveBorderColor = colorTable(context)[inactiveBorderColorKnob ?? 40];
+    final inactiveBorderColor =
+        colorTable(context)[inactiveBorderColorKnob ?? 40];
 
     final borderRadiusKnob = context.knobs.nullable.sliderInt(
       label: "borderRadius",
@@ -159,11 +164,13 @@ class AuthCodeStory extends StatelessWidget {
 
     final errorAnimationKnob = context.knobs.boolean(
       label: "Error shake animation",
-      description: "Show error with shake animation (ErrorAnimationType.shake).",
+      description:
+          "Show error with shake animation (ErrorAnimationType.shake).",
     );
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -178,7 +185,8 @@ class AuthCodeStory extends StatelessWidget {
               enabled: enableKnob,
               enableInputFill: true,
               authInputFieldCount: 4,
-              mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+              mainAxisAlignment:
+                  mainAxisAlignmentKnob ?? MainAxisAlignment.center,
               borderRadius: borderRadius,
               textStyle: TextStyle(color: textColor),
               authFieldCursorColor: cursorColor,
@@ -193,13 +201,15 @@ class AuthCodeStory extends StatelessWidget {
               obscureText: obscuringKnob,
               peekWhenObscuring: peekWhenObscuringKnob,
               validator: (String? value) => null,
-              errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
+              errorBuilder: (BuildContext context, String? errorText) =>
+                  const SizedBox(),
             ),
             const TextDivider(text: "Active MoonAuthCode"),
             MoonAuthCode(
               autoFocus: true,
               enableInputFill: true,
-              mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+              mainAxisAlignment:
+                  mainAxisAlignmentKnob ?? MainAxisAlignment.center,
               borderRadius: borderRadius,
               textStyle: TextStyle(color: textColor),
               authFieldCursorColor: cursorColor,
@@ -214,7 +224,8 @@ class AuthCodeStory extends StatelessWidget {
               obscureText: obscuringKnob,
               peekWhenObscuring: peekWhenObscuringKnob,
               validator: (String? value) => null,
-              errorBuilder: (BuildContext context, String? errorText) => const SizedBox(),
+              errorBuilder: (BuildContext context, String? errorText) =>
+                  const SizedBox(),
             ),
             const TextDivider(text: "Error MoonAuthCode"),
             SizedBox(
@@ -222,8 +233,11 @@ class AuthCodeStory extends StatelessWidget {
               child: MoonAuthCode(
                 enableInputFill: true,
                 authInputFieldCount: 4,
-                mainAxisAlignment: mainAxisAlignmentKnob ?? MainAxisAlignment.center,
-                errorAnimationType: errorAnimationKnob ? ErrorAnimationType.shake : ErrorAnimationType.noAnimation,
+                mainAxisAlignment:
+                    mainAxisAlignmentKnob ?? MainAxisAlignment.center,
+                errorAnimationType: errorAnimationKnob
+                    ? ErrorAnimationType.shake
+                    : ErrorAnimationType.noAnimation,
                 borderRadius: borderRadius,
                 textStyle: TextStyle(color: textColor),
                 authFieldCursorColor: cursorColor,
@@ -238,11 +252,9 @@ class AuthCodeStory extends StatelessWidget {
                 obscureText: obscuringKnob,
                 peekWhenObscuring: peekWhenObscuringKnob,
                 validator: (String? pin) {
-                  if (pin != null && pin != '0000' && pin.length == 4) {
-                    return 'The input must be exactly "0000".';
-                  } else {
-                    return null;
-                  }
+                  return (pin != null && pin != '0000' && pin.length == 4)
+                      ? 'The input must be exactly "0000".'
+                      : null;
                 },
                 errorBuilder: (BuildContext context, String? errorText) {
                   return Align(

@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTabBarProperties extends ThemeExtension<MoonTabBarProperties> with DiagnosticableTreeMixin {
+class MoonTabBarProperties extends ThemeExtension<MoonTabBarProperties>
+    with DiagnosticableTreeMixin {
   /// The gap between the MoonTabBar tabs.
   final double gap;
 
@@ -34,12 +35,16 @@ class MoonTabBarProperties extends ThemeExtension<MoonTabBarProperties> with Dia
   }
 
   @override
-  MoonTabBarProperties lerp(ThemeExtension<MoonTabBarProperties>? other, double t) {
+  MoonTabBarProperties lerp(
+    ThemeExtension<MoonTabBarProperties>? other,
+    double t,
+  ) {
     if (other is! MoonTabBarProperties) return this;
 
     return MoonTabBarProperties(
       gap: lerpDouble(gap, other.gap, t)!,
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
     );
   }
@@ -48,9 +53,17 @@ class MoonTabBarProperties extends ThemeExtension<MoonTabBarProperties> with Dia
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTabBarProperties"))
-      ..add(DoubleProperty("gap", gap))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
+      ..add(
+        DiagnosticsProperty("type", "MoonTabBarProperties"),
+      )
+      ..add(
+        DoubleProperty("gap", gap),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      );
   }
 }

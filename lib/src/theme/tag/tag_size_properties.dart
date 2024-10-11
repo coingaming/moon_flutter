@@ -4,11 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with DiagnosticableTreeMixin {
+class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonTag.
   final BorderRadiusGeometry borderRadius;
 
-  /// The horizontal gap between the leading, label and trailing widgets of the MoonTag.
+  /// The horizontal gap between the leading, label and trailing widgets of the
+  /// MoonTag.
   final double gap;
 
   /// The height of the MoonTag.
@@ -52,11 +54,15 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
   }
 
   @override
-  MoonTagSizeProperties lerp(ThemeExtension<MoonTagSizeProperties>? other, double t) {
+  MoonTagSizeProperties lerp(
+    ThemeExtension<MoonTagSizeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonTagSizeProperties) return this;
 
     return MoonTagSizeProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
@@ -69,8 +75,18 @@ class MoonTagSizeProperties extends ThemeExtension<MoonTagSizeProperties> with D
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTagSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
+      ..add(
+        DiagnosticsProperty(
+          "type",
+          "MoonTagSizeProperties",
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>(
+          "borderRadius",
+          borderRadius,
+        ),
+      )
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))

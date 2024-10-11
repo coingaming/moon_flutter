@@ -34,7 +34,8 @@ class BorderContainer extends StatefulWidget {
   _BorderContainerState createState() => _BorderContainerState();
 }
 
-class _BorderContainerState extends State<BorderContainer> with SingleTickerProviderStateMixin {
+class _BorderContainerState extends State<BorderContainer>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _borderAnimation;
   late ShapeBorderTween _border;
@@ -89,8 +90,12 @@ class _BorderContainerState extends State<BorderContainer> with SingleTickerProv
           constraints: BoxConstraints(
             minHeight: widget.height ?? 0,
             minWidth: widget.width ?? 0,
-            maxHeight: widget.expands ? double.infinity : widget.height ?? double.infinity,
-            maxWidth: widget.expands ? double.infinity : widget.width ?? double.infinity,
+            maxHeight: widget.expands
+                ? double.infinity
+                : widget.height ?? double.infinity,
+            maxWidth: widget.expands
+                ? double.infinity
+                : widget.width ?? double.infinity,
           ),
           clipBehavior: widget.clipBehavior,
           decoration: widget.decoration ??

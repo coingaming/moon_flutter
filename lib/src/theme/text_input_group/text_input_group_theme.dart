@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/text_input_group/text_input_group_properti
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme> with DiagnosticableTreeMixin {
+class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -53,7 +54,10 @@ class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme> wi
   }
 
   @override
-  MoonTextInputGroupTheme lerp(ThemeExtension<MoonTextInputGroupTheme>? other, double t) {
+  MoonTextInputGroupTheme lerp(
+    ThemeExtension<MoonTextInputGroupTheme>? other,
+    double t,
+  ) {
     if (other is! MoonTextInputGroupTheme) return this;
 
     return MoonTextInputGroupTheme(
@@ -70,6 +74,11 @@ class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme> wi
       ..add(DiagnosticsProperty("type", "MoonTextInputGroupTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonTextInputGroupColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonTextInputGroupProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonTextInputGroupProperties>(
+          "properties",
+          properties,
+        ),
+      );
   }
 }

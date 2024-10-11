@@ -2,13 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonDrawerShadows extends ThemeExtension<MoonDrawerShadows> with DiagnosticableTreeMixin {
+class MoonDrawerShadows extends ThemeExtension<MoonDrawerShadows>
+    with DiagnosticableTreeMixin {
   /// The list of shadows applied to the MoonDrawer.
   final List<BoxShadow> drawerShadows;
 
-  const MoonDrawerShadows({
-    required this.drawerShadows,
-  });
+  const MoonDrawerShadows({required this.drawerShadows});
 
   @override
   MoonDrawerShadows copyWith({List<BoxShadow>? drawerShadows}) {
@@ -22,7 +21,11 @@ class MoonDrawerShadows extends ThemeExtension<MoonDrawerShadows> with Diagnosti
     if (other is! MoonDrawerShadows) return this;
 
     return MoonDrawerShadows(
-      drawerShadows: BoxShadow.lerpList(drawerShadows, other.drawerShadows, t)!,
+      drawerShadows: BoxShadow.lerpList(
+        drawerShadows,
+        other.drawerShadows,
+        t,
+      )!,
     );
   }
 
@@ -30,7 +33,11 @@ class MoonDrawerShadows extends ThemeExtension<MoonDrawerShadows> with Diagnosti
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonDrawerShadows"))
-      ..add(DiagnosticsProperty<List<BoxShadow>>("drawerShadows", drawerShadows));
+      ..add(
+        DiagnosticsProperty("type", "MoonDrawerShadows"),
+      )
+      ..add(
+        DiagnosticsProperty<List<BoxShadow>>("drawerShadows", drawerShadows),
+      );
   }
 }

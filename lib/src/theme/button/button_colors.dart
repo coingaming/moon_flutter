@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonButtonColors extends ThemeExtension<MoonButtonColors> with DiagnosticableTreeMixin {
+class MoonButtonColors extends ThemeExtension<MoonButtonColors>
+    with DiagnosticableTreeMixin {
   /// The border color of the MoonButton.
   final Color borderColor;
 
@@ -49,10 +50,14 @@ class MoonButtonColors extends ThemeExtension<MoonButtonColors> with Diagnostica
     return MoonButtonColors(
       borderColor: borderColor ?? this.borderColor,
       textColor: textColor ?? this.textColor,
-      filledVariantBackgroundColor: filledVariantBackgroundColor ?? this.filledVariantBackgroundColor,
-      filledVariantTextColor: filledVariantTextColor ?? this.filledVariantTextColor,
-      textVariantFocusColor: textVariantFocusColor ?? this.textVariantFocusColor,
-      textVariantHoverColor: textVariantHoverColor ?? this.textVariantHoverColor,
+      filledVariantBackgroundColor:
+          filledVariantBackgroundColor ?? this.filledVariantBackgroundColor,
+      filledVariantTextColor:
+          filledVariantTextColor ?? this.filledVariantTextColor,
+      textVariantFocusColor:
+          textVariantFocusColor ?? this.textVariantFocusColor,
+      textVariantHoverColor:
+          textVariantHoverColor ?? this.textVariantHoverColor,
       textVariantTextColor: textVariantTextColor ?? this.textVariantTextColor,
     );
   }
@@ -64,12 +69,28 @@ class MoonButtonColors extends ThemeExtension<MoonButtonColors> with Diagnostica
     return MoonButtonColors(
       borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
-      filledVariantBackgroundColor:
-          colorPremulLerp(filledVariantBackgroundColor, other.filledVariantBackgroundColor, t)!,
-      filledVariantTextColor: colorPremulLerp(filledVariantTextColor, other.filledVariantTextColor, t)!,
-      textVariantFocusColor: colorPremulLerp(textVariantFocusColor, other.textVariantFocusColor, t)!,
-      textVariantHoverColor: colorPremulLerp(textVariantHoverColor, other.textVariantHoverColor, t)!,
-      textVariantTextColor: colorPremulLerp(textVariantTextColor, other.textVariantTextColor, t)!,
+      filledVariantBackgroundColor: colorPremulLerp(
+        filledVariantBackgroundColor,
+        other.filledVariantBackgroundColor,
+        t,
+      )!,
+      filledVariantTextColor: colorPremulLerp(
+        filledVariantTextColor,
+        other.filledVariantTextColor,
+        t,
+      )!,
+      textVariantFocusColor: colorPremulLerp(
+        textVariantFocusColor,
+        other.textVariantFocusColor,
+        t,
+      )!,
+      textVariantHoverColor: colorPremulLerp(
+        textVariantHoverColor,
+        other.textVariantHoverColor,
+        t,
+      )!,
+      textVariantTextColor:
+          colorPremulLerp(textVariantTextColor, other.textVariantTextColor, t)!,
     );
   }
 
@@ -77,10 +98,30 @@ class MoonButtonColors extends ThemeExtension<MoonButtonColors> with Diagnostica
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonButtonColors"))
-      ..add(ColorProperty("borderColor", borderColor))
-      ..add(ColorProperty("textColor", textColor))
-      ..add(ColorProperty("filledVariantBackgroundColor", filledVariantBackgroundColor))
+      ..add(
+        DiagnosticsProperty(
+          "type",
+          "MoonButtonColors",
+        ),
+      )
+      ..add(
+        ColorProperty(
+          "borderColor",
+          borderColor,
+        ),
+      )
+      ..add(
+        ColorProperty(
+          "textColor",
+          textColor,
+        ),
+      )
+      ..add(
+        ColorProperty(
+          "filledVariantBackgroundColor",
+          filledVariantBackgroundColor,
+        ),
+      )
       ..add(ColorProperty("filledVariantTextColor", filledVariantTextColor))
       ..add(ColorProperty("textVariantFocusColor", textVariantFocusColor))
       ..add(ColorProperty("textVariantHoverColor", textVariantHoverColor))

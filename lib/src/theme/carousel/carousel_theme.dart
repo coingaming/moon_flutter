@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/carousel/carousel_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonCarouselTheme extends ThemeExtension<MoonCarouselTheme> with DiagnosticableTreeMixin {
+class MoonCarouselTheme extends ThemeExtension<MoonCarouselTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -65,6 +66,8 @@ class MoonCarouselTheme extends ThemeExtension<MoonCarouselTheme> with Diagnosti
       ..add(DiagnosticsProperty("type", "MoonCarouselTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonCarouselColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonCarouselProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonCarouselProperties>("properties", properties),
+      );
   }
 }

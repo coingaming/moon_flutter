@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with DiagnosticableTreeMixin {
+class MoonTabBarColors extends ThemeExtension<MoonTabBarColors>
+    with DiagnosticableTreeMixin {
   /// The color of the MoonTabBar tab indicator.
   final Color indicatorColor;
 
@@ -40,7 +41,8 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
       indicatorColor: indicatorColor ?? this.indicatorColor,
       textColor: textColor ?? this.textColor,
       selectedTextColor: selectedTextColor ?? this.selectedTextColor,
-      selectedPillTextColor: selectedPillTextColor ?? this.selectedPillTextColor,
+      selectedPillTextColor:
+          selectedPillTextColor ?? this.selectedPillTextColor,
       selectedPillTabColor: selectedPillTabColor ?? this.selectedPillTabColor,
     );
   }
@@ -52,9 +54,15 @@ class MoonTabBarColors extends ThemeExtension<MoonTabBarColors> with Diagnostica
     return MoonTabBarColors(
       indicatorColor: colorPremulLerp(indicatorColor, other.indicatorColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
-      selectedTextColor: colorPremulLerp(selectedTextColor, other.selectedTextColor, t)!,
-      selectedPillTextColor: colorPremulLerp(selectedPillTextColor, other.selectedPillTextColor, t)!,
-      selectedPillTabColor: colorPremulLerp(selectedPillTabColor, other.selectedPillTabColor, t)!,
+      selectedTextColor:
+          colorPremulLerp(selectedTextColor, other.selectedTextColor, t)!,
+      selectedPillTextColor: colorPremulLerp(
+        selectedPillTextColor,
+        other.selectedPillTextColor,
+        t,
+      )!,
+      selectedPillTabColor:
+          colorPremulLerp(selectedPillTabColor, other.selectedPillTabColor, t)!,
     );
   }
 

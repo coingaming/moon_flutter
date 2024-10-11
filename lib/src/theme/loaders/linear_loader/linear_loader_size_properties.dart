@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSizeProperties>
+class MoonLinearLoaderSizeProperties
+    extends ThemeExtension<MoonLinearLoaderSizeProperties>
     with DiagnosticableTreeMixin {
   /// The border radius of the MoonLinearLoader.
   final BorderRadiusGeometry borderRadius;
@@ -29,11 +30,15 @@ class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSize
   }
 
   @override
-  MoonLinearLoaderSizeProperties lerp(ThemeExtension<MoonLinearLoaderSizeProperties>? other, double t) {
+  MoonLinearLoaderSizeProperties lerp(
+    ThemeExtension<MoonLinearLoaderSizeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonLinearLoaderSizeProperties) return this;
 
     return MoonLinearLoaderSizeProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       loaderHeight: lerpDouble(loaderHeight, other.loaderHeight, t)!,
     );
   }
@@ -42,8 +47,14 @@ class MoonLinearLoaderSizeProperties extends ThemeExtension<MoonLinearLoaderSize
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonLinearLoaderSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DoubleProperty("loaderHeight", loaderHeight));
+      ..add(
+        DiagnosticsProperty("type", "MoonLinearLoaderSizeProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DoubleProperty("loaderHeight", loaderHeight),
+      );
   }
 }

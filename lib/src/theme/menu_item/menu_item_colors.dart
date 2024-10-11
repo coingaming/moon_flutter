@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonMenuItemColors extends ThemeExtension<MoonMenuItemColors> with DiagnosticableTreeMixin {
+class MoonMenuItemColors extends ThemeExtension<MoonMenuItemColors>
+    with DiagnosticableTreeMixin {
   /// The background color of the MoonMenuItem.
   final Color backgroundColor;
 
@@ -50,11 +51,13 @@ class MoonMenuItemColors extends ThemeExtension<MoonMenuItemColors> with Diagnos
     if (other is! MoonMenuItemColors) return this;
 
     return MoonMenuItemColors(
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       dividerColor: colorPremulLerp(dividerColor, other.dividerColor, t)!,
       iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
       labelTextColor: colorPremulLerp(labelTextColor, other.labelTextColor, t)!,
-      contentTextColor: colorPremulLerp(contentTextColor, other.contentTextColor, t)!,
+      contentTextColor:
+          colorPremulLerp(contentTextColor, other.contentTextColor, t)!,
     );
   }
 

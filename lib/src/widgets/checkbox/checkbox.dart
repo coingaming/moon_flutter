@@ -18,13 +18,17 @@ class MoonCheckbox extends StatefulWidget {
 
   /// Whether the checkbox supports a tri-state (indeterminate).
   ///
-  /// When tri-state is true, the checkbox can be in one of three states: true, false, or null.
+  /// When tri-state is true, the checkbox can be in one of three states: true,
+  /// false, or null.
   ///
-  /// When tri-state is false (the default), the checkbox [value] can only be true or false.
+  /// When tri-state is false (the default), the checkbox [value] can only be
+  /// true or false.
   ///
-  /// If tri-state is true, the checkbox displays a dash when its [value] is null, indicating the mixed state.
+  /// If tri-state is true, the checkbox displays a dash when its [value] is
+  /// null, indicating the mixed state.
   ///
-  /// When a tri-state checkbox is tapped, its [onChanged] callback is invoked, cycling through the three states:
+  /// When a tri-state checkbox is tapped, its [onChanged] callback is invoked,
+  /// cycling through the three states:
   /// * If the current value is false, the [value] becomes true.
   /// * If the current value is true, the [value] becomes null (mixed state).
   /// * If the current value is null (mixed state), the [value] becomes false.

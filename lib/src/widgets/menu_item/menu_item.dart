@@ -53,7 +53,8 @@ class MoonMenuItem extends StatefulWidget {
   /// of the menu item.
   final double? horizontalGap;
 
-  /// The vertical gap between the [label] and [content] widgets of the menu item.
+  /// The vertical gap between the [label] and [content] widgets of the menu
+  /// item.
   final double? verticalGap;
 
   /// The duration of the menu item hover effect.

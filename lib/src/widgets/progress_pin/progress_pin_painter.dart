@@ -44,7 +44,8 @@ class ProgressPinPainter extends CustomPainter {
       _ when thumbSizeValue != null => thumbSizeValue! / 2,
       _ => size.height / 2,
     };
-    final double offsetY = -(radius + arrowHeight + pinDistance) + (size.height / 2 - thumbRadius);
+    final double offsetY =
+        -(radius + arrowHeight + pinDistance) + (size.height / 2 - thumbRadius);
 
     // Offset based on directionality.
     double offsetX = progressValue * size.width;
@@ -63,24 +64,44 @@ class ProgressPinPainter extends CustomPainter {
 
     // Create outer circle with triangle path.
     final Path path = Path()
-      ..addOval(Rect.fromCircle(center: Offset(offsetX, offsetY), radius: radius))
-      ..addOval(Rect.fromCircle(center: Offset(offsetX, offsetY), radius: radius))
-      ..moveTo(offsetX - arrowWidth / 2, offsetY + radius - 0.5) // shift the origin "up" by 0.5 to avoid aliasing
+      ..addOval(
+        Rect.fromCircle(center: Offset(offsetX, offsetY), radius: radius),
+      )
+      ..addOval(
+        Rect.fromCircle(center: Offset(offsetX, offsetY), radius: radius),
+      )
+      ..moveTo(
+        offsetX - arrowWidth / 2,
+        offsetY + radius - 0.5,
+      ) // shift the origin "up" by 0.5 to avoid aliasing
       ..lineTo(offsetX, offsetY + radius + arrowHeight)
-      ..lineTo(offsetX + arrowWidth / 2, offsetY + radius - 0.5) // shift the destination "up" by 0.5 to avoid aliasing
+      ..lineTo(
+        offsetX + arrowWidth / 2,
+        offsetY + radius - 0.5,
+      ) // shift the destination "up" by 0.5 to avoid aliasing
       ..close();
 
     // Draw shadow around outer path.
-    if (showShadow) canvas.drawShadow(path, shadowColor, shadowElevation, false);
+    if (showShadow) {
+      canvas.drawShadow(path, shadowColor, shadowElevation, false);
+    }
 
     // Draw outer path.
     canvas.drawPath(path, outerCirclePaint);
 
     // Draw inner circle.
-    canvas.drawCircle(Offset(offsetX, offsetY), radius - pinBorderWidth, innerCirclePaint);
+    canvas.drawCircle(
+      Offset(offsetX, offsetY),
+      radius - pinBorderWidth,
+      innerCirclePaint,
+    );
 
     // Draw thumb.
-    canvas.drawCircle(Offset(offsetX, size.height / 2), thumbRadius, thumbCirclePaint);
+    canvas.drawCircle(
+      Offset(offsetX, size.height / 2),
+      thumbRadius,
+      thumbCirclePaint,
+    );
 
     // Draw pin text.
     final TextPainter pinTextPainter = TextPainter(
@@ -89,7 +110,13 @@ class ProgressPinPainter extends CustomPainter {
     );
 
     pinTextPainter.layout();
-    pinTextPainter.paint(canvas, Offset(offsetX - pinTextPainter.width / 2, offsetY - pinTextPainter.height / 2));
+    pinTextPainter.paint(
+      canvas,
+      Offset(
+        offsetX - pinTextPainter.width / 2,
+        offsetY - pinTextPainter.height / 2,
+      ),
+    );
   }
 
   @override

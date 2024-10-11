@@ -45,7 +45,8 @@ class CircularProgressStory extends StatelessWidget {
       options: colorOptions,
     );
 
-    final backgroundColor = colorTable(context)[circularProgressBackgroundColorKnob ?? 40];
+    final backgroundColor =
+        colorTable(context)[circularProgressBackgroundColorKnob ?? 40];
 
     final circularProgressStrokeCapKnob = context.knobs.nullable.options(
       label: "strokeCap",

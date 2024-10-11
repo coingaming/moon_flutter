@@ -7,7 +7,8 @@ import 'package:moon_design/src/theme/table/table_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTableTheme extends ThemeExtension<MoonTableTheme> with DiagnosticableTreeMixin {
+class MoonTableTheme extends ThemeExtension<MoonTableTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

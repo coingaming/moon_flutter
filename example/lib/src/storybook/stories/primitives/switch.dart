@@ -64,7 +64,8 @@ class _SwitchStoryState extends State<SwitchStory> {
       options: colorOptions,
     );
 
-    final inactiveTrackColor = colorTable(context)[inactiveTrackColorKnob ?? 40];
+    final inactiveTrackColor =
+        colorTable(context)[inactiveTrackColorKnob ?? 40];
 
     final isDisabled = context.knobs.boolean(
       label: "Disabled",
@@ -86,13 +87,19 @@ class _SwitchStoryState extends State<SwitchStory> {
               activeTrackColor: activeTrackColor,
               inactiveTrackColor: inactiveTrackColor,
               value: switchValue,
-              onChanged: isDisabled ? null : (bool newValue) => setState(() => switchValue = newValue),
+              onChanged: isDisabled
+                  ? null
+                  : (bool newValue) => setState(() => switchValue = newValue),
             ),
             const TextDivider(text: "Custom MoonSwitch"),
             MoonSwitch(
               switchSize: switchSizeKnob,
-              activeThumbWidget: const Icon(MoonIcons.generic_check_alternative_16_light),
-              inactiveThumbWidget: const Icon(MoonIcons.controls_close_small_16_light),
+              activeThumbWidget: const Icon(
+                MoonIcons.generic_check_alternative_16_light,
+              ),
+              inactiveThumbWidget: const Icon(
+                MoonIcons.controls_close_small_16_light,
+              ),
               activeTrackWidget: const Text(
                 "ON",
                 textAlign: TextAlign.center,
@@ -102,7 +109,8 @@ class _SwitchStoryState extends State<SwitchStory> {
                 textAlign: TextAlign.center,
               ),
               value: switchTextValue,
-              onChanged: (bool newValue) => setState(() => switchTextValue = newValue),
+              onChanged: (bool newValue) =>
+                  setState(() => switchTextValue = newValue),
             ),
             const SizedBox(height: 32),
             MoonSwitch(
@@ -110,7 +118,8 @@ class _SwitchStoryState extends State<SwitchStory> {
               activeTrackWidget: const Icon(MoonIcons.other_moon_16_light),
               inactiveTrackWidget: const Icon(MoonIcons.other_sun_16_light),
               value: switchIconValue,
-              onChanged: (bool newValue) => setState(() => switchIconValue = newValue),
+              onChanged: (bool newValue) =>
+                  setState(() => switchIconValue = newValue),
             ),
           ],
         ),

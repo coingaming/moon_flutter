@@ -18,10 +18,7 @@ class MoonRadioColors extends ThemeExtension<MoonRadioColors>
   });
 
   @override
-  MoonRadioColors copyWith({
-    Color? activeColor,
-    Color? inactiveColor,
-  }) {
+  MoonRadioColors copyWith({Color? activeColor, Color? inactiveColor}) {
     return MoonRadioColors(
       activeColor: activeColor ?? this.activeColor,
       inactiveColor: inactiveColor ?? this.inactiveColor,

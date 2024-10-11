@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/button/button_size_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonButtonSizes extends ThemeExtension<MoonButtonSizes> with DiagnosticableTreeMixin {
+class MoonButtonSizes extends ThemeExtension<MoonButtonSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

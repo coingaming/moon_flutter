@@ -117,50 +117,73 @@ class MoonAvatar extends StatelessWidget {
     }
   }
 
-  MoonAvatarSizeProperties _getMoonAvatarSize(BuildContext context, MoonAvatarSize? moonAvatarSize) {
+  MoonAvatarSizeProperties _getMoonAvatarSize(
+    BuildContext context,
+    MoonAvatarSize? moonAvatarSize,
+  ) {
     switch (moonAvatarSize) {
       case MoonAvatarSize.xs:
-        return context.moonTheme?.avatarTheme.sizes.xs ?? MoonAvatarSizes(tokens: MoonTokens.light).xs;
+        return context.moonTheme?.avatarTheme.sizes.xs ??
+            MoonAvatarSizes(tokens: MoonTokens.light).xs;
       case MoonAvatarSize.sm:
-        return context.moonTheme?.avatarTheme.sizes.sm ?? MoonAvatarSizes(tokens: MoonTokens.light).sm;
+        return context.moonTheme?.avatarTheme.sizes.sm ??
+            MoonAvatarSizes(tokens: MoonTokens.light).sm;
       case MoonAvatarSize.md:
-        return context.moonTheme?.avatarTheme.sizes.md ?? MoonAvatarSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.avatarTheme.sizes.md ??
+            MoonAvatarSizes(tokens: MoonTokens.light).md;
       case MoonAvatarSize.lg:
-        return context.moonTheme?.avatarTheme.sizes.lg ?? MoonAvatarSizes(tokens: MoonTokens.light).lg;
+        return context.moonTheme?.avatarTheme.sizes.lg ??
+            MoonAvatarSizes(tokens: MoonTokens.light).lg;
       case MoonAvatarSize.xl:
-        return context.moonTheme?.avatarTheme.sizes.xl ?? MoonAvatarSizes(tokens: MoonTokens.light).xl;
+        return context.moonTheme?.avatarTheme.sizes.xl ??
+            MoonAvatarSizes(tokens: MoonTokens.light).xl;
       case MoonAvatarSize.x2l:
-        return context.moonTheme?.avatarTheme.sizes.x2l ?? MoonAvatarSizes(tokens: MoonTokens.light).x2l;
+        return context.moonTheme?.avatarTheme.sizes.x2l ??
+            MoonAvatarSizes(tokens: MoonTokens.light).x2l;
       default:
-        return context.moonTheme?.avatarTheme.sizes.md ?? MoonAvatarSizes(tokens: MoonTokens.light).md;
+        return context.moonTheme?.avatarTheme.sizes.md ??
+            MoonAvatarSizes(tokens: MoonTokens.light).md;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final MoonAvatarSizeProperties effectiveMoonAvatarSize = _getMoonAvatarSize(context, avatarSize);
+    final MoonAvatarSizeProperties effectiveMoonAvatarSize =
+        _getMoonAvatarSize(context, avatarSize);
 
-    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ?? effectiveMoonAvatarSize.borderRadius;
+    final BorderRadiusGeometry effectiveBorderRadius =
+        borderRadius ?? effectiveMoonAvatarSize.borderRadius;
 
-    final resolvedBorderRadius = effectiveBorderRadius.resolve(Directionality.of(context));
+    final resolvedBorderRadius =
+        effectiveBorderRadius.resolve(Directionality.of(context));
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.avatarTheme.colors.backgroundColor ?? MoonColors.light.goku;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.avatarTheme.colors.backgroundColor ??
+        MoonColors.light.goku;
 
-    final Color effectiveBadgeColor =
-        badgeColor ?? context.moonTheme?.avatarTheme.colors.badgeColor ?? MoonColors.light.roshi;
+    final Color effectiveBadgeColor = badgeColor ??
+        context.moonTheme?.avatarTheme.colors.badgeColor ??
+        MoonColors.light.roshi;
 
-    final Color effectiveTextColor = context.moonTheme?.avatarTheme.colors.textColor ?? MoonColors.light.textPrimary;
+    final Color effectiveTextColor =
+        context.moonTheme?.avatarTheme.colors.textColor ??
+            MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor = context.moonTheme?.avatarTheme.colors.iconColor ?? MoonColors.light.iconPrimary;
+    final Color effectiveIconColor =
+        context.moonTheme?.avatarTheme.colors.iconColor ??
+            MoonColors.light.iconPrimary;
 
-    final double effectiveAvatarHeight = height ?? effectiveMoonAvatarSize.avatarSizeValue;
+    final double effectiveAvatarHeight =
+        height ?? effectiveMoonAvatarSize.avatarSizeValue;
 
-    final double effectiveAvatarWidth = width ?? effectiveMoonAvatarSize.avatarSizeValue;
+    final double effectiveAvatarWidth =
+        width ?? effectiveMoonAvatarSize.avatarSizeValue;
 
-    final double effectiveBadgeMarginValue = badgeMarginValue ?? effectiveMoonAvatarSize.badgeMarginValue;
+    final double effectiveBadgeMarginValue =
+        badgeMarginValue ?? effectiveMoonAvatarSize.badgeMarginValue;
 
-    final double effectiveBadgeSize = badgeSize ?? effectiveMoonAvatarSize.badgeSizeValue;
+    final double effectiveBadgeSize =
+        badgeSize ?? effectiveMoonAvatarSize.badgeSizeValue;
 
     return Semantics(
       label: semanticLabel,
@@ -174,9 +197,12 @@ class MoonAvatar extends StatelessWidget {
           children: [
             Positioned.fill(
               child: ClipPath(
-                // TODO: Since clipper does not work properly on mobile web/PWA, we are disabling it. Remove this check
-                //  when it has been fixed from Flutter side.
-                clipper: kIsWeb && MediaQueryData.fromView(View.of(context)).size.width < 500
+                // TODO: Since clipper does not work properly on mobile web/PWA,
+                //  we are disabling it. Remove this check when it has been
+                //  fixed from Flutter side.
+                clipper: kIsWeb &&
+                        MediaQueryData.fromView(View.of(context)).size.width <
+                            500
                     ? null
                     : AvatarClipper(
                         showBadge: showBadge,
@@ -189,7 +215,8 @@ class MoonAvatar extends StatelessWidget {
                         textDirection: Directionality.of(context),
                       ),
                 child: DefaultTextStyle(
-                  style: effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor),
+                  style: effectiveMoonAvatarSize.textStyle
+                      .copyWith(color: effectiveTextColor),
                   child: IconTheme(
                     data: IconThemeData(
                       color: effectiveIconColor,
@@ -204,7 +231,8 @@ class MoonAvatar extends StatelessWidget {
                               )
                             : null,
                         shape: MoonSquircleBorder(
-                          borderRadius: resolvedBorderRadius.squircleBorderRadius(context),
+                          borderRadius: resolvedBorderRadius
+                              .squircleBorderRadius(context),
                         ),
                       ),
                       child: Center(child: content),

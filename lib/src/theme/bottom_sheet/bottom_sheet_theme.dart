@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/bottom_sheet/bottom_sheet_properties.dart'
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with DiagnosticableTreeMixin {
+class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -49,7 +50,10 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
   }
 
   @override
-  MoonBottomSheetTheme lerp(ThemeExtension<MoonBottomSheetTheme>? other, double t) {
+  MoonBottomSheetTheme lerp(
+    ThemeExtension<MoonBottomSheetTheme>? other,
+    double t,
+  ) {
     if (other is! MoonBottomSheetTheme) return this;
 
     return MoonBottomSheetTheme(
@@ -66,6 +70,11 @@ class MoonBottomSheetTheme extends ThemeExtension<MoonBottomSheetTheme> with Dia
       ..add(DiagnosticsProperty("type", "MoonBottomSheetTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonBottomSheetColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonBottomSheetProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonBottomSheetProperties>(
+          "properties",
+          properties,
+        ),
+      );
   }
 }

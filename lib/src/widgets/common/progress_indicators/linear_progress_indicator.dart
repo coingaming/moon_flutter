@@ -27,15 +27,19 @@ class MoonLinearProgressIndicator extends MoonBaseProgressIndicator {
     this.progressRadius = BorderRadius.zero,
   }) : assert(minHeight > 0);
 
-  /// The color of the linear track that forms the background for the linear progress indicator.
+  /// The color of the linear track that forms the background for the linear
+  /// progress indicator.
   @override
   Color get backgroundColor => super.backgroundColor;
 
   @override
-  State<MoonLinearProgressIndicator> createState() => _MoonLinearProgressIndicatorState();
+  State<MoonLinearProgressIndicator> createState() =>
+      _MoonLinearProgressIndicatorState();
 }
 
-class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicator> with SingleTickerProviderStateMixin {
+class _MoonLinearProgressIndicatorState
+    extends State<MoonLinearProgressIndicator>
+    with SingleTickerProviderStateMixin {
   static const int _kIndeterminateLinearDuration = 1800;
 
   late AnimationController _controller;
@@ -70,9 +74,15 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
     super.dispose();
   }
 
-  Widget buildStaticProgressIndicator(BuildContext context, double animationValue, TextDirection textDirection) {
-    final BorderRadius resolvedContainerRadius = widget.containerRadius.resolve(Directionality.of(context));
-    final BorderRadius resolvedProgressRadius = widget.progressRadius.resolve(Directionality.of(context));
+  Widget buildStaticProgressIndicator(
+    BuildContext context,
+    double animationValue,
+    TextDirection textDirection,
+  ) {
+    final BorderRadius resolvedContainerRadius =
+        widget.containerRadius.resolve(Directionality.of(context));
+    final BorderRadius resolvedProgressRadius =
+        widget.progressRadius.resolve(Directionality.of(context));
 
     return widget.buildSemanticsWrapper(
       context: context,
@@ -105,13 +115,21 @@ class _MoonLinearProgressIndicatorState extends State<MoonLinearProgressIndicato
     final TextDirection textDirection = Directionality.of(context);
 
     if (widget.value != null) {
-      return buildStaticProgressIndicator(context, _controller.value, textDirection);
+      return buildStaticProgressIndicator(
+        context,
+        _controller.value,
+        textDirection,
+      );
     }
 
     return AnimatedBuilder(
       animation: _controller.view,
       builder: (BuildContext context, Widget? child) {
-        return buildStaticProgressIndicator(context, _controller.value, textDirection);
+        return buildStaticProgressIndicator(
+          context,
+          _controller.value,
+          textDirection,
+        );
       },
     );
   }

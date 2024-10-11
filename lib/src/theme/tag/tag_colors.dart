@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonTagColors extends ThemeExtension<MoonTagColors> with DiagnosticableTreeMixin {
+class MoonTagColors extends ThemeExtension<MoonTagColors>
+    with DiagnosticableTreeMixin {
   /// The text color of the MoonTag.
   final Color textColor;
 
@@ -40,7 +41,8 @@ class MoonTagColors extends ThemeExtension<MoonTagColors> with DiagnosticableTre
     return MoonTagColors(
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
       iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
     );
   }
 

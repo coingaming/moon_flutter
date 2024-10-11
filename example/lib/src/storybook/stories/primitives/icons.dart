@@ -28,7 +28,9 @@ class _IconsStoryState extends State<IconsStory> {
     return trios;
   }
 
-  Iterable<Map<String, IconData>> _getSortedIcons(Map<String, IconData> iconsMap) {
+  Iterable<Map<String, IconData>> _getSortedIcons(
+    Map<String, IconData> iconsMap,
+  ) {
     final Map<String, Map<String, IconData>> lightSegments = {};
     final Map<String, Map<String, IconData>> regularSegments = {};
 
@@ -54,14 +56,17 @@ class _IconsStoryState extends State<IconsStory> {
     final Map<String, Map<String, IconData>> combinedSegments = {};
 
     // Get all unique segment names.
-    final Set<String> allSegments = lightSegments.keys.toSet()..addAll(regularSegments.keys);
+    final Set<String> allSegments = lightSegments.keys.toSet()
+      ..addAll(regularSegments.keys);
 
     for (final String segment in allSegments) {
       combinedSegments[segment] = {};
 
       // Get the list of keys from light and regular segments for this segment.
-      final List<String> lightKeys = lightSegments[segment]?.keys.toList() ?? [];
-      final List<String> regularKeys = regularSegments[segment]?.keys.toList() ?? [];
+      final List<String> lightKeys =
+          lightSegments[segment]?.keys.toList() ?? [];
+      final List<String> regularKeys =
+          regularSegments[segment]?.keys.toList() ?? [];
 
       // Group the keys in trios.
       final List<List<String>> lightTrios = _groupInTrios(lightKeys);
@@ -93,7 +98,10 @@ class _IconsStoryState extends State<IconsStory> {
     setState(() {
       _filteredIcons = Map.fromEntries(
         iconsMap.entries
-            .where((entry) => entry.key.contains(_searchController.text.toLowerCase()))
+            .where(
+              (entry) =>
+                  entry.key.contains(_searchController.text.toLowerCase()),
+            )
             .map((entry) => MapEntry(entry.key, entry.value)),
       );
     });
@@ -126,7 +134,8 @@ class _IconsStoryState extends State<IconsStory> {
   Widget build(BuildContext context) {
     final sortedIcons = _getSortedIcons(_filteredIcons);
 
-    final ScrollBehavior scrollBehaviour = ScrollConfiguration.of(context).copyWith(
+    final ScrollBehavior scrollBehaviour =
+        ScrollConfiguration.of(context).copyWith(
       scrollbars: false,
       overscroll: false,
       dragDevices: {
