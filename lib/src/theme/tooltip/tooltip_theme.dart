@@ -7,7 +7,8 @@ import 'package:moon_design/src/theme/tooltip/tooltip_properties.dart';
 import 'package:moon_design/src/theme/tooltip/tooltip_shadows.dart';
 
 @immutable
-class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with DiagnosticableTreeMixin {
+class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -42,7 +43,8 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
               contentPadding: EdgeInsets.all(tokens.sizes.x3s),
               textStyle: tokens.typography.body.text12,
             ),
-        shadows = shadows ?? MoonTooltipShadows(tooltipShadows: tokens.shadows.sm);
+        shadows =
+            shadows ?? MoonTooltipShadows(tooltipShadows: tokens.shadows.sm);
 
   @override
   MoonTooltipTheme copyWith({
@@ -75,10 +77,20 @@ class MoonTooltipTheme extends ThemeExtension<MoonTooltipTheme> with Diagnostica
   void debugFillProperties(DiagnosticPropertiesBuilder diagnosticProperties) {
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
-      ..add(DiagnosticsProperty("type", "MoonTooltipTheme"))
-      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
-      ..add(DiagnosticsProperty<MoonTooltipColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonTooltipProperties>("properties", properties))
-      ..add(DiagnosticsProperty<MoonTooltipShadows>("shadows", shadows));
+      ..add(
+        DiagnosticsProperty("type", "MoonTooltipTheme"),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTokens>("tokens", tokens),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTooltipColors>("colors", colors),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTooltipProperties>("properties", properties),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTooltipShadows>("shadows", shadows),
+      );
   }
 }

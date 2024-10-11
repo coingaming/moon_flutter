@@ -7,8 +7,9 @@ import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 class MoonLinearProgressIndicatorPainter extends CustomPainter {
   static const int _kIndeterminateLinearDuration = 1800;
 
-  // The indeterminate progress animation consists of two lines, each with a leading (head)
-  // and trailing (tail) endpoint, defined by the following four curves.
+  // The indeterminate progress animation consists of two lines, each with a
+  // leading (head) and trailing (tail) endpoint, defined by the following four
+  // curves.
   static const Curve _line1Head = Interval(
     0.0,
     750.0 / _kIndeterminateLinearDuration,
@@ -61,8 +62,10 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
       Offset.zero & size,
       topLeft: MoonSquircleRadius(cornerRadius: containerRadius.topLeft.x),
       topRight: MoonSquircleRadius(cornerRadius: containerRadius.topRight.x),
-      bottomLeft: MoonSquircleRadius(cornerRadius: containerRadius.bottomLeft.x),
-      bottomRight: MoonSquircleRadius(cornerRadius: containerRadius.bottomRight.x),
+      bottomLeft:
+          MoonSquircleRadius(cornerRadius: containerRadius.bottomLeft.x),
+      bottomRight:
+          MoonSquircleRadius(cornerRadius: containerRadius.bottomRight.x),
     );
     canvas.drawRRect(containerRect, paint);
 
@@ -83,8 +86,10 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
         Offset(left, 0.0) & Size(width, size.height),
         topLeft: MoonSquircleRadius(cornerRadius: progressRadius.topLeft.x),
         topRight: MoonSquircleRadius(cornerRadius: progressRadius.topRight.x),
-        bottomLeft: MoonSquircleRadius(cornerRadius: progressRadius.bottomLeft.x),
-        bottomRight: MoonSquircleRadius(cornerRadius: progressRadius.bottomRight.x),
+        bottomLeft:
+            MoonSquircleRadius(cornerRadius: progressRadius.bottomLeft.x),
+        bottomRight:
+            MoonSquircleRadius(cornerRadius: progressRadius.bottomRight.x),
       );
 
       // Clipping progressRect with containerRect.
@@ -97,10 +102,12 @@ class MoonLinearProgressIndicatorPainter extends CustomPainter {
       drawBar(0.0, clampDouble(value!, 0.0, 1.0) * size.width);
     } else {
       final double x1 = size.width * _line1Tail.transform(animationValue);
-      final double width1 = size.width * _line1Head.transform(animationValue) - x1;
+      final double width1 =
+          size.width * _line1Head.transform(animationValue) - x1;
 
       final double x2 = size.width * _line2Tail.transform(animationValue);
-      final double width2 = size.width * _line2Head.transform(animationValue) - x2;
+      final double width2 =
+          size.width * _line2Head.transform(animationValue) - x2;
 
       drawBar(x1, width1);
       drawBar(x2, width2);

@@ -22,7 +22,8 @@ class MoonCircularProgress extends StatelessWidget {
   /// The background color of the circular progress.
   final Color? backgroundColor;
 
-  /// The custom size value of the circular progress. For predefined sizes, use [circularProgressSize].
+  /// The custom size value of the circular progress. For predefined sizes, use
+  /// [circularProgressSize].
   final double? sizeValue;
 
   /// The width of the stroke for the circular progress.
@@ -81,18 +82,22 @@ class MoonCircularProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor =
-        color ?? context.moonTheme?.circularProgressTheme.colors.color ?? MoonColors.light.piccolo;
+    final Color effectiveColor = color ??
+        context.moonTheme?.circularProgressTheme.colors.color ??
+        MoonColors.light.piccolo;
 
-    final Color effectiveBackgroundColor =
-        backgroundColor ?? context.moonTheme?.circularProgressTheme.colors.backgroundColor ?? MoonColors.light.beerus;
+    final Color effectiveBackgroundColor = backgroundColor ??
+        context.moonTheme?.circularProgressTheme.colors.backgroundColor ??
+        MoonColors.light.beerus;
 
     final MoonCircularProgressSizeProperties effectiveMoonCircularProgressSize =
         _getMoonCircularProgressSize(context, circularProgressSize);
 
-    final double effectiveSize = sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
+    final double effectiveSize =
+        sizeValue ?? effectiveMoonCircularProgressSize.progressSizeValue;
 
-    final double effectiveStrokeWidth = strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
+    final double effectiveStrokeWidth =
+        strokeWidth ?? effectiveMoonCircularProgressSize.progressStrokeWidth;
 
     final StrokeCap effectiveStrokeCap = strokeCap ?? StrokeCap.round;
 

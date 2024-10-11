@@ -7,7 +7,8 @@ import 'package:moon_design/src/theme/text_input/text_input_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with DiagnosticableTreeMixin {
+class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -77,10 +78,20 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme> with Diagnos
   void debugFillProperties(DiagnosticPropertiesBuilder diagnosticProperties) {
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
-      ..add(DiagnosticsProperty("type", "MoonTextInputTheme"))
-      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
-      ..add(DiagnosticsProperty<MoonTextInputColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonTextInputProperties>("properties", properties))
-      ..add(DiagnosticsProperty<MoonTextInputSizes>("sizes", sizes));
+      ..add(
+        DiagnosticsProperty("type", "MoonTextInputTheme"),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTokens>("tokens", tokens),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTextInputColors>("colors", colors),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTextInputProperties>("properties", properties),
+      )
+      ..add(
+        DiagnosticsProperty<MoonTextInputSizes>("sizes", sizes),
+      );
   }
 }

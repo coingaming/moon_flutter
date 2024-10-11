@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/progress/linear_progress/linear_progress_s
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme> with DiagnosticableTreeMixin {
+class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -42,7 +43,10 @@ class MoonLinearProgressTheme extends ThemeExtension<MoonLinearProgressTheme> wi
   }
 
   @override
-  MoonLinearProgressTheme lerp(ThemeExtension<MoonLinearProgressTheme>? other, double t) {
+  MoonLinearProgressTheme lerp(
+    ThemeExtension<MoonLinearProgressTheme>? other,
+    double t,
+  ) {
     if (other is! MoonLinearProgressTheme) return this;
 
     return MoonLinearProgressTheme(

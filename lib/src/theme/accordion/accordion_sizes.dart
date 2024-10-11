@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/accordion/accordion_size_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonAccordionSizes extends ThemeExtension<MoonAccordionSizes> with DiagnosticableTreeMixin {
+class MoonAccordionSizes extends ThemeExtension<MoonAccordionSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

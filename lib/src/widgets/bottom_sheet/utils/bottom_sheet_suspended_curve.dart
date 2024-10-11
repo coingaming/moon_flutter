@@ -32,7 +32,8 @@ class BottomSheetSuspendedCurve extends Curve {
     this.curve = Curves.easeOutCubic,
   });
 
-  /// The progress value at which the transition should begin using the specified [curve].
+  /// The progress value at which the transition should begin using the
+  /// specified [curve].
   final double startingPoint;
 
   /// The curve to be applied when the specified [startingPoint] is reached.

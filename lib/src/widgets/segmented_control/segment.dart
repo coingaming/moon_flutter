@@ -21,7 +21,8 @@ class Segment {
   /// The semantic label for the segment.
   final String? semanticLabel;
 
-  /// The callback that returns the current selection status of the segment as a boolean value.
+  /// The callback that returns the current selection status of the segment as a
+  /// boolean value.
   final ValueChanged<bool>? isSelected;
 
   /// The widget to display before the [label] widget of the segment.

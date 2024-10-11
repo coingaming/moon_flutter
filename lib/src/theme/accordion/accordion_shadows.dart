@@ -2,13 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonAccordionShadows extends ThemeExtension<MoonAccordionShadows> with DiagnosticableTreeMixin {
+class MoonAccordionShadows extends ThemeExtension<MoonAccordionShadows>
+    with DiagnosticableTreeMixin {
   /// The list of shadows applied to the MoonAccordion.
   final List<BoxShadow> shadows;
 
-  const MoonAccordionShadows({
-    required this.shadows,
-  });
+  const MoonAccordionShadows({required this.shadows});
 
   @override
   MoonAccordionShadows copyWith({List<BoxShadow>? shadows}) {
@@ -18,7 +17,10 @@ class MoonAccordionShadows extends ThemeExtension<MoonAccordionShadows> with Dia
   }
 
   @override
-  MoonAccordionShadows lerp(ThemeExtension<MoonAccordionShadows>? other, double t) {
+  MoonAccordionShadows lerp(
+    ThemeExtension<MoonAccordionShadows>? other,
+    double t,
+  ) {
     if (other is! MoonAccordionShadows) return this;
 
     return MoonAccordionShadows(

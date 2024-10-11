@@ -35,7 +35,8 @@ class MoonAuthCode extends StatefulWidget {
   /// The shape of the auth code input field.
   final AuthFieldShape? authFieldShape;
 
-  /// Whether to automatically dismiss the keyboard when the last input is entered.
+  /// Whether to automatically dismiss the keyboard when the last input is
+  /// entered.
   final bool autoDismissKeyboard;
 
   /// {@macro flutter.widgets.Focus.autofocus}
@@ -50,10 +51,12 @@ class MoonAuthCode extends StatefulWidget {
   /// Whether to enable the fill color for the auth code input fields.
   final bool enableInputFill;
 
-  /// Whether to replace all typed characters in the auth code input fields with the [obscuringCharacter].
+  /// Whether to replace all typed characters in the auth code input fields with
+  /// the [obscuringCharacter].
   final bool obscureText;
 
-  /// Whether to briefly display the typed character before obscuring it with the [obscuringCharacter].
+  /// Whether to briefly display the typed character before obscuring it with
+  /// the [obscuringCharacter].
   final bool peekWhenObscuring;
 
   /// Whether to show the cursor in the selected auth code input field.
@@ -116,8 +119,8 @@ class MoonAuthCode extends StatefulWidget {
   /// The duration of the auth code error state animation.
   final Duration? errorAnimationDuration;
 
-  /// The duration to display the typed character before it is obscured with [obscuringCharacter].
-  /// The [peekWhenObscuring] has to be set to true.
+  /// The duration to display the typed character before it is obscured with
+  /// [obscuringCharacter]. The [peekWhenObscuring] has to be set to true.
   final Duration? peekDuration;
 
   /// The curve of the auth code input field transition animation.
@@ -150,12 +153,14 @@ class MoonAuthCode extends StatefulWidget {
   /// The placement of the auth code input fields along the main axis.
   final MainAxisAlignment mainAxisAlignment;
 
-  /// The error text can be used to force authentication into an error state (useful for asynchronous errors).
+  /// The error text can be used to force authentication into an error state
+  /// (useful for asynchronous errors).
   ///
   /// The validator errors take precedence over the provided [errorText].
   final String? errorText;
 
-  /// The character or placeholder to display in the auth code input field when its value is empty.
+  /// The character or placeholder to display in the auth code input field when
+  /// its value is empty.
   final String? hintCharacter;
 
   /// The character to use to obscure the text when [obscureText] is true.
@@ -181,7 +186,8 @@ class MoonAuthCode extends StatefulWidget {
   /// The text style of the auth code in error state.
   final TextStyle? errorTextStyle;
 
-  /// The [TextEditingController] used to edit the text in the auth code input field.
+  /// The [TextEditingController] used to edit the text in the auth code input
+  /// field.
   final TextEditingController? textController;
 
   /// The input text validator for the auth code [TextFormField].
@@ -191,17 +197,20 @@ class MoonAuthCode extends StatefulWidget {
   /// The callback that is called when the auth code input text changes.
   final ValueChanged<String>? onChanged;
 
-  /// The callback that is called when all the auth code input fields are filled.
+  /// The callback that is called when all the auth code input fields are
+  /// filled.
   final ValueChanged<String>? onCompleted;
 
-  /// The callback that is called when the 'done' or 'next' action is triggered on the keyboard.
+  /// The callback that is called when the 'done' or 'next' action is triggered
+  /// on the keyboard.
   final ValueChanged<String>? onSubmitted;
 
   /// The [onEditingComplete] callback runs when editing is finished.
   /// It differs from [onSubmitted] by having a default value which
   /// updates [textController] and yields keyboard focus.
   ///
-  /// Set this to empty function if keyboard should not close automatically on 'done' or 'next' press.
+  /// Set this to empty function if keyboard should not close automatically on
+  /// 'done' or 'next' press.
   final VoidCallback? onEditingComplete;
 
   /// A builder to build the auth code error widget.

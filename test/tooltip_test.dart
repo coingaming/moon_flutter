@@ -20,7 +20,8 @@ void main() {
     expect(find.byKey(_tooltipKey), findsOneWidget);
   });
 
-  testWidgets("Tooltip is displayed when the 'show' button is tapped.", (tester) async {
+  testWidgets("Tooltip is displayed when the 'show' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(
       const _ToastTestWidget(
         tooltipKey: _tooltipKey,
@@ -72,7 +73,10 @@ void main() {
 
     expect(find.byWidget(_tooltipContent), findsOneWidget);
     expect(
-      find.byWidgetPredicate((Widget widget) => widget is MoonTooltip && widget.backgroundColor == Colors.blue),
+      find.byWidgetPredicate(
+        (Widget widget) =>
+            widget is MoonTooltip && widget.backgroundColor == Colors.blue,
+      ),
       findsOneWidget,
     );
   });

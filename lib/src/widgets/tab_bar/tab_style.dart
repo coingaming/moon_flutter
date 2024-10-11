@@ -21,7 +21,8 @@ class MoonTabStyle {
   /// The height of the tab indicator.
   final double? indicatorHeight;
 
-  /// The gap between the [MoonTab.leading], [MoonTab.label] and [MoonTab.trailing] widgets of the tab.
+  /// The gap between the [MoonTab.leading], [MoonTab.label] and
+  /// [MoonTab.trailing] widgets of the tab.
   final double? tabGap;
 
   /// The padding of the tab.
@@ -29,7 +30,8 @@ class MoonTabStyle {
 
   /// The text style of the tab.
   ///
-  /// If [TextStyle] color is used, then it overrides the [textColor] and [selectedTextColor].
+  /// If [TextStyle] color is used, then it overrides the [textColor] and
+  /// [selectedTextColor].
   final TextStyle? textStyle;
 
   /// Defines a Moon Design tab style.

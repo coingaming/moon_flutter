@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/table/table_size_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableTreeMixin {
+class MoonTableSizes extends ThemeExtension<MoonTableSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -43,7 +44,8 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               sortIconSizeValue: tokens.sizes.x2s,
               sortIconGap: tokens.sizes.x5s,
               cellPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
-              rowLabelPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
+              rowLabelPadding:
+                  EdgeInsets.symmetric(horizontal: tokens.sizes.x4s),
               columnTextStyle: tokens.typography.heading.text12,
               rowTextStyle: tokens.typography.body.text12,
               rowLabelTextStyle: tokens.typography.body.text12,
@@ -57,11 +59,13 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               sortIconSizeValue: tokens.sizes.x2s,
               sortIconGap: tokens.sizes.x5s,
               cellPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
-              rowLabelPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              rowLabelPadding:
+                  EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowLabelTextStyle: tokens.typography.body.textDefault,
-              rowPinnedAnimatedLabelTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedLabelTextStyle:
+                  tokens.typography.body.textDefault,
             ),
         md = md ??
             MoonTableSizeProperties(
@@ -71,11 +75,13 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               sortIconSizeValue: tokens.sizes.x2s,
               sortIconGap: tokens.sizes.x5s,
               cellPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
-              rowLabelPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              rowLabelPadding:
+                  EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowLabelTextStyle: tokens.typography.body.textDefault,
-              rowPinnedAnimatedLabelTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedLabelTextStyle:
+                  tokens.typography.body.textDefault,
             ),
         lg = lg ??
             MoonTableSizeProperties(
@@ -85,11 +91,13 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               sortIconSizeValue: tokens.sizes.x2s,
               sortIconGap: tokens.sizes.x5s,
               cellPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
-              rowLabelPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              rowLabelPadding:
+                  EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowLabelTextStyle: tokens.typography.body.textDefault,
-              rowPinnedAnimatedLabelTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedLabelTextStyle:
+                  tokens.typography.body.textDefault,
             ),
         xl = xl ??
             MoonTableSizeProperties(
@@ -99,11 +107,13 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               sortIconSizeValue: tokens.sizes.x2s,
               sortIconGap: tokens.sizes.x5s,
               cellPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
-              rowLabelPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              rowLabelPadding:
+                  EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowLabelTextStyle: tokens.typography.body.textDefault,
-              rowPinnedAnimatedLabelTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedLabelTextStyle:
+                  tokens.typography.body.textDefault,
             ),
         x2l = x2l ??
             MoonTableSizeProperties(
@@ -113,11 +123,13 @@ class MoonTableSizes extends ThemeExtension<MoonTableSizes> with DiagnosticableT
               sortIconSizeValue: tokens.sizes.x2s,
               sortIconGap: tokens.sizes.x5s,
               cellPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
-              rowLabelPadding: EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
+              rowLabelPadding:
+                  EdgeInsets.symmetric(horizontal: tokens.sizes.x3s),
               columnTextStyle: tokens.typography.heading.textDefault,
               rowTextStyle: tokens.typography.body.textDefault,
               rowLabelTextStyle: tokens.typography.body.textDefault,
-              rowPinnedAnimatedLabelTextStyle: tokens.typography.body.textDefault,
+              rowPinnedAnimatedLabelTextStyle:
+                  tokens.typography.body.textDefault,
             );
 
   @override

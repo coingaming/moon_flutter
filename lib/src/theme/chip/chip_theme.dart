@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/chip/chip_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonChipTheme extends ThemeExtension<MoonChipTheme> with DiagnosticableTreeMixin {
+class MoonChipTheme extends ThemeExtension<MoonChipTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

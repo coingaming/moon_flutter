@@ -2,13 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonSwitchShadows extends ThemeExtension<MoonSwitchShadows> with DiagnosticableTreeMixin {
+class MoonSwitchShadows extends ThemeExtension<MoonSwitchShadows>
+    with DiagnosticableTreeMixin {
   /// The list of shadows applied to the MoonSwitch thumb.
   final List<BoxShadow> thumbShadows;
 
-  const MoonSwitchShadows({
-    required this.thumbShadows,
-  });
+  const MoonSwitchShadows({required this.thumbShadows});
 
   @override
   MoonSwitchShadows copyWith({List<BoxShadow>? thumbShadows}) {

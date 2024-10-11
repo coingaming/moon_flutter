@@ -32,7 +32,8 @@ class MoonSegmentedControl extends StatefulWidget {
   /// Whether the segmented control is disabled.
   final bool isDisabled;
 
-  /// Whether the segmented control is expanded to its full available width horizontally.
+  /// Whether the segmented control is expanded to its full available
+  /// width horizontally.
   final bool isExpanded;
 
   /// The border radius of the segmented control.
@@ -60,8 +61,9 @@ class MoonSegmentedControl extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
 
   /// The index of the initially selected segment.
-  /// This property is overridden by the [tabController]'s initial index if the [tabController] is provided.
-  /// For external updates to the segment index, use [tabController].
+  /// This property is overridden by the [tabController]'s initial index if the
+  /// [tabController] is provided. For external updates to the segment index,
+  /// use [tabController].
   final int initialIndex;
 
   /// The size of the segmented control.
@@ -70,21 +72,24 @@ class MoonSegmentedControl extends StatefulWidget {
   /// The custom decoration of the segmented control.
   final Decoration? decoration;
 
-  /// The external controller for managing segment selection and animation in segmented control.
-  /// If tabController is provided, then [initialIndex] is ignored and tabController's index is used instead.
+  /// The external controller for managing segment selection and animation in
+  /// segmented control. If tabController is provided, then [initialIndex] is
+  /// ignored and tabController's index is used instead.
   final TabController? tabController;
 
   /// The callback that returns the index of the currently selected segment.
   final ValueChanged<int>? onSegmentChanged;
 
   /// The list of segments to display as the children of the segmented control.
-  /// At least one child is required when this property is used.
-  /// Cannot be used in conjunction with the [customSegments] property, one of them must be null.
+  /// At least one child is required when this property is used. Cannot be used
+  /// in conjunction with the [customSegments] property, one of them must be
+  /// null.
   final List<Segment>? segments;
 
-  /// The list of custom segments to display as the children of the segmented control.
-  /// At least one child is required when this property is used.
-  /// Cannot be used in conjunction with the [segments] property, one of them must be null.
+  /// The list of custom segments to display as the children of the segmented
+  /// control. At least one child is required when this property is used. Cannot
+  /// be used in conjunction with the [segments] property, one of them must be
+  /// null.
   final List<MoonCustomSegmentBuilder>? customSegments;
 
   /// Creates a Moon Design segmented control.

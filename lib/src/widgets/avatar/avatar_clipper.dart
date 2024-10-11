@@ -130,8 +130,10 @@ class AvatarClipper extends CustomClipper<Path> {
             height,
             topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x),
             topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x),
-            bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x),
-            bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x),
+            bottomLeft:
+                MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x),
+            bottomRight:
+                MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x),
           ),
         ),
 
@@ -147,8 +149,10 @@ class AvatarClipper extends CustomClipper<Path> {
           height,
           topLeft: MoonSquircleRadius(cornerRadius: borderRadius.topLeft.x),
           topRight: MoonSquircleRadius(cornerRadius: borderRadius.topRight.x),
-          bottomLeft: MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x),
-          bottomRight: MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x),
+          bottomLeft:
+              MoonSquircleRadius(cornerRadius: borderRadius.bottomLeft.x),
+          bottomRight:
+              MoonSquircleRadius(cornerRadius: borderRadius.bottomRight.x),
         ),
       );
 

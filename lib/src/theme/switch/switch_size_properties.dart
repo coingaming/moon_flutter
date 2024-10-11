@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties> with DiagnosticableTreeMixin {
+class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties>
+    with DiagnosticableTreeMixin {
   /// The height of the MoonSwitch.
   final double height;
 
@@ -52,7 +53,10 @@ class MoonSwitchSizeProperties extends ThemeExtension<MoonSwitchSizeProperties> 
   }
 
   @override
-  MoonSwitchSizeProperties lerp(ThemeExtension<MoonSwitchSizeProperties>? other, double t) {
+  MoonSwitchSizeProperties lerp(
+    ThemeExtension<MoonSwitchSizeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonSwitchSizeProperties) return this;
 
     return MoonSwitchSizeProperties(

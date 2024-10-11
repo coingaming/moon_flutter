@@ -10,7 +10,8 @@ class MoonSquircleRadius extends Radius {
 
   const MoonSquircleRadius({
     required double cornerRadius,
-    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA for some reason. So we use 0.9 instead.
+    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA for some
+    // reason. So we use 0.9 instead.
     this.cornerSmoothing = 0.9,
   }) : super.circular(cornerRadius);
 
@@ -116,7 +117,8 @@ class MoonSquircleRadius extends Radius {
 
   /// Linearly interpolate between two smooth radii.
   ///
-  /// If either is null, this function substitutes [MoonSquircleRadius.zero] instead.
+  /// If either is null, this function substitutes [MoonSquircleRadius.zero]
+  /// instead.
   ///
   /// The `t` argument represents position on the timeline, with 0.0 meaning
   /// that the interpolation has not started, returning `a` (or something
@@ -129,7 +131,11 @@ class MoonSquircleRadius extends Radius {
   ///
   /// Values for `t` are usually obtained from an [Animation<double>], such as
   /// an [AnimationController].
-  static MoonSquircleRadius? lerp(MoonSquircleRadius? a, MoonSquircleRadius? b, double t) {
+  static MoonSquircleRadius? lerp(
+    MoonSquircleRadius? a,
+    MoonSquircleRadius? b,
+    double t,
+  ) {
     if (b == null) {
       if (a == null) {
         return null;
@@ -149,7 +155,12 @@ class MoonSquircleRadius extends Radius {
       } else {
         return MoonSquircleRadius(
           cornerRadius: lerpDouble(a.cornerRadius, b.cornerRadius, t) ?? 0,
-          cornerSmoothing: lerpDouble(a.cornerSmoothing, b.cornerSmoothing, t) ?? 0,
+          cornerSmoothing: lerpDouble(
+                a.cornerSmoothing,
+                b.cornerSmoothing,
+                t,
+              ) ??
+              0,
         );
       }
     }

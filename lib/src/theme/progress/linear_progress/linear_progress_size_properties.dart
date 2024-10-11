@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgressSizeProperties>
+class MoonLinearProgressSizeProperties
+    extends ThemeExtension<MoonLinearProgressSizeProperties>
     with DiagnosticableTreeMixin {
   /// The border radius of the MoonLinearProgress.
   final BorderRadiusGeometry borderRadius;
@@ -15,7 +16,8 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
   /// The size value of the MoonLinearProgress thumb.
   final double thumbSizeValue;
 
-  /// The vertical gap between the MoonLinearProgress and the minLabel and maxLabel widgets.
+  /// The vertical gap between the MoonLinearProgress and the minLabel and
+  /// maxLabel widgets.
   final double verticalGap;
 
   /// The text style of the MoonLinearProgress minLabel and maxLabel widgets.
@@ -47,11 +49,15 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
   }
 
   @override
-  MoonLinearProgressSizeProperties lerp(ThemeExtension<MoonLinearProgressSizeProperties>? other, double t) {
+  MoonLinearProgressSizeProperties lerp(
+    ThemeExtension<MoonLinearProgressSizeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonLinearProgressSizeProperties) return this;
 
     return MoonLinearProgressSizeProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       progressHeight: lerpDouble(progressHeight, other.progressHeight, t)!,
       thumbSizeValue: lerpDouble(thumbSizeValue, other.thumbSizeValue, t)!,
       verticalGap: lerpDouble(verticalGap, other.verticalGap, t)!,
@@ -63,11 +69,23 @@ class MoonLinearProgressSizeProperties extends ThemeExtension<MoonLinearProgress
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonLinearProgressSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DoubleProperty("progressHeight", progressHeight))
-      ..add(DoubleProperty("thumbSizeValue", thumbSizeValue))
-      ..add(DoubleProperty("verticalGap", verticalGap))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
+      ..add(
+        DiagnosticsProperty("type", "MoonLinearProgressSizeProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DoubleProperty("progressHeight", progressHeight),
+      )
+      ..add(
+        DoubleProperty("thumbSizeValue", thumbSizeValue),
+      )
+      ..add(
+        DoubleProperty("verticalGap", verticalGap),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("textStyle", textStyle),
+      );
   }
 }

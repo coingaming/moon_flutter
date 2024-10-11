@@ -6,10 +6,7 @@ import 'package:flutter/rendering.dart';
 class TouchTargetPadding extends SingleChildRenderObjectWidget {
   final Size minSize;
 
-  const TouchTargetPadding({
-    super.child,
-    required this.minSize,
-  });
+  const TouchTargetPadding({super.child, required this.minSize});
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -17,7 +14,10 @@ class TouchTargetPadding extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, covariant _RenderTouchTargetPadding renderObject) {
+  void updateRenderObject(
+    BuildContext context,
+    covariant _RenderTouchTargetPadding renderObject,
+  ) {
     renderObject.minSize = minSize;
   }
 }
@@ -30,46 +30,36 @@ class _RenderTouchTargetPadding extends RenderShiftedBox {
   Size get minSize => _minSize;
 
   set minSize(Size value) {
-    if (_minSize == value) {
-      return;
+    if (_minSize != value) {
+      _minSize = value;
+      markNeedsLayout();
     }
-    _minSize = value;
-    markNeedsLayout();
   }
 
   @override
-  double computeMinIntrinsicWidth(double height) {
-    if (child != null) {
-      return math.max(child!.getMinIntrinsicWidth(height), minSize.width);
-    }
-    return 0.0;
-  }
+  double computeMinIntrinsicWidth(double height) => child != null
+      ? math.max(child!.getMinIntrinsicWidth(height), minSize.width)
+      : 0.0;
 
   @override
-  double computeMinIntrinsicHeight(double width) {
-    if (child != null) {
-      return math.max(child!.getMinIntrinsicHeight(width), minSize.height);
-    }
-    return 0.0;
-  }
+  double computeMinIntrinsicHeight(double width) => child != null
+      ? math.max(child!.getMinIntrinsicHeight(width), minSize.height)
+      : 0.0;
 
   @override
-  double computeMaxIntrinsicWidth(double height) {
-    if (child != null) {
-      return math.max(child!.getMaxIntrinsicWidth(height), minSize.width);
-    }
-    return 0.0;
-  }
+  double computeMaxIntrinsicWidth(double height) => child != null
+      ? math.max(child!.getMaxIntrinsicWidth(height), minSize.width)
+      : 0.0;
 
   @override
-  double computeMaxIntrinsicHeight(double width) {
-    if (child != null) {
-      return math.max(child!.getMaxIntrinsicHeight(width), minSize.height);
-    }
-    return 0.0;
-  }
+  double computeMaxIntrinsicHeight(double width) => child != null
+      ? math.max(child!.getMaxIntrinsicHeight(width), minSize.height)
+      : 0.0;
 
-  Size _computeSize({required BoxConstraints constraints, required ChildLayouter layoutChild}) {
+  Size _computeSize({
+    required BoxConstraints constraints,
+    required ChildLayouter layoutChild,
+  }) {
     if (child != null) {
       final Size childSize = layoutChild(child!, constraints);
       final double height = math.max(childSize.width, minSize.width);
@@ -95,16 +85,17 @@ class _RenderTouchTargetPadding extends RenderShiftedBox {
     );
     if (child != null) {
       final BoxParentData childParentData = child!.parentData! as BoxParentData;
-      childParentData.offset = Alignment.center.alongOffset(size - child!.size as Offset);
+      childParentData.offset =
+          Alignment.center.alongOffset(size - child!.size as Offset);
     }
   }
 
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) {
-    if (super.hitTest(result, position: position)) {
-      return true;
-    }
+    if (super.hitTest(result, position: position)) return true;
+
     final Offset center = child!.size.center(Offset.zero);
+
     return result.addWithRawTransform(
       transform: MatrixUtils.forceToPoint(center),
       position: center,

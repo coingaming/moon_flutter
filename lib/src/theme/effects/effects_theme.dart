@@ -7,7 +7,8 @@ import 'package:moon_design/src/theme/effects/hover_effect.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonEffectsTheme extends ThemeExtension<MoonEffectsTheme> with DiagnosticableTreeMixin {
+class MoonEffectsTheme extends ThemeExtension<MoonEffectsTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -93,9 +94,29 @@ class MoonEffectsTheme extends ThemeExtension<MoonEffectsTheme> with Diagnostica
     properties
       ..add(DiagnosticsProperty("type", "MoonEffectsTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
-      ..add(DiagnosticsProperty<MoonControlEffect>("controlScaleEffect", controlScaleEffect))
-      ..add(DiagnosticsProperty<MoonControlEffect>("controlPulseEffect", controlPulseEffect))
-      ..add(DiagnosticsProperty<MoonFocusEffect>("controlFocusEffect", controlFocusEffect))
-      ..add(DiagnosticsProperty<MoonHoverEffect>("controlHoverEffect", controlHoverEffect));
+      ..add(
+        DiagnosticsProperty<MoonControlEffect>(
+          "controlScaleEffect",
+          controlScaleEffect,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<MoonControlEffect>(
+          "controlPulseEffect",
+          controlPulseEffect,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<MoonFocusEffect>(
+          "controlFocusEffect",
+          controlFocusEffect,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<MoonHoverEffect>(
+          "controlHoverEffect",
+          controlHoverEffect,
+        ),
+      );
   }
 }

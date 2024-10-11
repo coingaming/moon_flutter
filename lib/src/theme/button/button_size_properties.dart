@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> with DiagnosticableTreeMixin {
+class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonButton.
   final BorderRadiusGeometry borderRadius;
 
@@ -52,11 +53,15 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
   }
 
   @override
-  MoonButtonSizeProperties lerp(ThemeExtension<MoonButtonSizeProperties>? other, double t) {
+  MoonButtonSizeProperties lerp(
+    ThemeExtension<MoonButtonSizeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonButtonSizeProperties) return this;
 
     return MoonButtonSizeProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
@@ -69,8 +74,12 @@ class MoonButtonSizeProperties extends ThemeExtension<MoonButtonSizeProperties> 
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonButtonSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
+      ..add(
+        DiagnosticsProperty("type", "MoonButtonSizeProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
       ..add(DoubleProperty("gap", gap))
       ..add(DoubleProperty("height", height))
       ..add(DoubleProperty("iconSizeValue", iconSizeValue))

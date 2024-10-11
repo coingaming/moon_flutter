@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonCircularProgressSizeProperties extends ThemeExtension<MoonCircularProgressSizeProperties>
+class MoonCircularProgressSizeProperties
+    extends ThemeExtension<MoonCircularProgressSizeProperties>
     with DiagnosticableTreeMixin {
   /// The size value of the MoonCircularProgress.
   final double progressSizeValue;
@@ -29,12 +30,17 @@ class MoonCircularProgressSizeProperties extends ThemeExtension<MoonCircularProg
   }
 
   @override
-  MoonCircularProgressSizeProperties lerp(ThemeExtension<MoonCircularProgressSizeProperties>? other, double t) {
+  MoonCircularProgressSizeProperties lerp(
+    ThemeExtension<MoonCircularProgressSizeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonCircularProgressSizeProperties) return this;
 
     return MoonCircularProgressSizeProperties(
-      progressSizeValue: lerpDouble(progressSizeValue, other.progressSizeValue, t)!,
-      progressStrokeWidth: lerpDouble(progressStrokeWidth, other.progressStrokeWidth, t)!,
+      progressSizeValue:
+          lerpDouble(progressSizeValue, other.progressSizeValue, t)!,
+      progressStrokeWidth:
+          lerpDouble(progressStrokeWidth, other.progressStrokeWidth, t)!,
     );
   }
 

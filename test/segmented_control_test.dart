@@ -21,7 +21,8 @@ void main() {
     expect(find.byKey(_segmentedControlKey), findsOneWidget);
   });
 
-  testWidgets("Segment has a leading, label and trailing widget.", (tester) async {
+  testWidgets("Segment has a leading, label and trailing widget.",
+      (tester) async {
     await tester.pumpWidget(
       const _SegmentedControlTestWidget(
         showLabel: true,
@@ -63,7 +64,9 @@ void main() {
     expect(value, 2);
   });
 
-  testWidgets("The onTap callbacks of segments are ignored if segmented control is disabled.", (tester) async {
+  testWidgets(
+      "The onTap callbacks of segments are ignored if segmented control is "
+      "disabled.", (tester) async {
     var value = 0;
 
     await tester.pumpWidget(

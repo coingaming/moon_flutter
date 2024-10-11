@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/text_input/text_input_size_properties.dart
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTextInputSizes extends ThemeExtension<MoonTextInputSizes> with DiagnosticableTreeMixin {
+class MoonTextInputSizes extends ThemeExtension<MoonTextInputSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with DiagnosticableTreeMixin {
+class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonAuthCode input field.
   final BorderRadiusGeometry borderRadius;
 
@@ -72,7 +73,8 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
       height: height ?? this.height,
       width: width ?? this.width,
       animationDuration: animationDuration ?? this.animationDuration,
-      errorAnimationDuration: errorAnimationDuration ?? this.errorAnimationDuration,
+      errorAnimationDuration:
+          errorAnimationDuration ?? this.errorAnimationDuration,
       peekDuration: peekDuration ?? this.peekDuration,
       animationCurve: animationCurve ?? this.animationCurve,
       errorAnimationCurve: errorAnimationCurve ?? this.errorAnimationCurve,
@@ -82,16 +84,22 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
   }
 
   @override
-  MoonAuthCodeProperties lerp(ThemeExtension<MoonAuthCodeProperties>? other, double t) {
+  MoonAuthCodeProperties lerp(
+    ThemeExtension<MoonAuthCodeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonAuthCodeProperties) return this;
 
     return MoonAuthCodeProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       gap: lerpDouble(gap, other.gap, t)!,
       height: lerpDouble(height, other.height, t)!,
       width: lerpDouble(width, other.width, t)!,
-      animationDuration: lerpDuration(animationDuration, other.animationDuration, t),
-      errorAnimationDuration: lerpDuration(errorAnimationDuration, other.errorAnimationDuration, t),
+      animationDuration:
+          lerpDuration(animationDuration, other.animationDuration, t),
+      errorAnimationDuration:
+          lerpDuration(errorAnimationDuration, other.errorAnimationDuration, t),
       peekDuration: lerpDuration(peekDuration, other.peekDuration, t),
       animationCurve: other.animationCurve,
       errorAnimationCurve: other.errorAnimationCurve,
@@ -104,17 +112,44 @@ class MoonAuthCodeProperties extends ThemeExtension<MoonAuthCodeProperties> with
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonAuthCodeProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DoubleProperty("gap", gap))
-      ..add(DoubleProperty("height", height))
-      ..add(DoubleProperty("width", width))
-      ..add(DiagnosticsProperty<Duration>("animationDuration", animationDuration))
-      ..add(DiagnosticsProperty<Duration>("errorAnimationDuration", errorAnimationDuration))
-      ..add(DiagnosticsProperty<Duration>("peekDuration", peekDuration))
-      ..add(DiagnosticsProperty<Curve>("animationCurve", animationCurve))
-      ..add(DiagnosticsProperty<Curve>("errorAnimationCurve", errorAnimationCurve))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
-      ..add(DiagnosticsProperty<TextStyle>("errorTextStyle", errorTextStyle));
+      ..add(
+        DiagnosticsProperty("type", "MoonAuthCodeProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DoubleProperty("gap", gap),
+      )
+      ..add(
+        DoubleProperty("height", height),
+      )
+      ..add(
+        DoubleProperty("width", width),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("animationDuration", animationDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>(
+          "errorAnimationDuration",
+          errorAnimationDuration,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("peekDuration", peekDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("animationCurve", animationCurve),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("errorAnimationCurve", errorAnimationCurve),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("textStyle", textStyle),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("errorTextStyle", errorTextStyle),
+      );
   }
 }

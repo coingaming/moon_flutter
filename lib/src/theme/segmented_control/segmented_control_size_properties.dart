@@ -4,12 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonSegmentedControlSizeProperties extends ThemeExtension<MoonSegmentedControlSizeProperties>
+class MoonSegmentedControlSizeProperties
+    extends ThemeExtension<MoonSegmentedControlSizeProperties>
     with DiagnosticableTreeMixin {
   /// The border radius of the MoonSegmentedControl segment.
   final BorderRadiusGeometry segmentBorderRadius;
 
-  /// The horizontal gap between the leading, label and trailing widgets of the MoonSegmentedControl segment.
+  /// The horizontal gap between the leading, label and trailing widgets of the
+  /// MoonSegmentedControl segment.
   final double segmentGap;
 
   /// The height of the MoonSegmentedControl.
@@ -53,15 +55,23 @@ class MoonSegmentedControlSizeProperties extends ThemeExtension<MoonSegmentedCon
   }
 
   @override
-  MoonSegmentedControlSizeProperties lerp(ThemeExtension<MoonSegmentedControlSizeProperties>? other, double t) {
+  MoonSegmentedControlSizeProperties lerp(
+    ThemeExtension<MoonSegmentedControlSizeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonSegmentedControlSizeProperties) return this;
 
     return MoonSegmentedControlSizeProperties(
-      segmentBorderRadius: BorderRadiusGeometry.lerp(segmentBorderRadius, other.segmentBorderRadius, t)!,
+      segmentBorderRadius: BorderRadiusGeometry.lerp(
+        segmentBorderRadius,
+        other.segmentBorderRadius,
+        t,
+      )!,
       segmentGap: lerpDouble(segmentGap, other.segmentGap, t)!,
       height: lerpDouble(height, other.height, t)!,
       iconSizeValue: lerpDouble(iconSizeValue, other.iconSizeValue, t)!,
-      segmentPadding: EdgeInsetsGeometry.lerp(segmentPadding, other.segmentPadding, t)!,
+      segmentPadding:
+          EdgeInsetsGeometry.lerp(segmentPadding, other.segmentPadding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -70,12 +80,47 @@ class MoonSegmentedControlSizeProperties extends ThemeExtension<MoonSegmentedCon
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonSegmentedControlSizeProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("segmentBorderRadius", segmentBorderRadius))
-      ..add(DoubleProperty("segmentGap", segmentGap))
-      ..add(DoubleProperty("height", height))
-      ..add(DoubleProperty("iconSizeValue", iconSizeValue))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("segmentPadding", segmentPadding))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
+      ..add(
+        DiagnosticsProperty(
+          "type",
+          "MoonSegmentedControlSizeProperties",
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>(
+          "segmentBorderRadius",
+          segmentBorderRadius,
+        ),
+      )
+      ..add(
+        DoubleProperty(
+          "segmentGap",
+          segmentGap,
+        ),
+      )
+      ..add(
+        DoubleProperty(
+          "height",
+          height,
+        ),
+      )
+      ..add(
+        DoubleProperty(
+          "iconSizeValue",
+          iconSizeValue,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>(
+          "segmentPadding",
+          segmentPadding,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>(
+          "textStyle",
+          textStyle,
+        ),
+      );
   }
 }

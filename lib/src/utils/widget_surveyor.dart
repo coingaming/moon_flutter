@@ -16,29 +16,33 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-/// Allows callers to measure the size of arbitrary widgets when laid out with specific constraints.
+/// Allows callers to measure the size of arbitrary widgets when laid out with
+/// specific constraints.
 ///
-/// The widget surveyor creates synthetic widget trees to hold the widgets it measures. This is crucial
-/// because widgets relying on inherited widgets (e.g., [Directionality]) assume they exist in their ancestry.
-/// These assumptions may hold true when the widget is rendered by the application but prove false when
-/// the widget is rendered via the widget surveyor.
+/// The widget surveyor creates synthetic widget trees to hold the widgets it
+/// measures. This is crucial because widgets relying on inherited widgets
+/// (e.g., [Directionality]) assume they exist in their ancestry. These
+/// assumptions may hold true when the widget is rendered by the application but
+/// prove false when the widget is rendered via the widget surveyor.
 ///
 /// Due to this, callers should ensure that:
 ///
 ///  1. Passed-in widgets do not rely on inherited widgets, or
-///  2. All necessary inherited widget dependencies exist in the widget tree provided
-///     to the widget surveyor's measure methods.
+///  2. All necessary inherited widget dependencies exist in the widget tree
+///  provided to the widget surveyor's measure methods.
 class WidgetSurveyor {
   const WidgetSurveyor();
 
-  /// Builds a widget using the specified builder function, inserts the widget into a
-  /// synthetic widget tree, lays out the resulting render tree, and returns the size
-  /// of the laid-out render tree.
+  /// Builds a widget using the specified builder function, inserts the widget
+  /// into a synthetic widget tree, lays out the resulting render tree, and
+  /// returns the size of the laid-out render tree.
   ///
-  /// The build context passed to the [builder] function represents the root of the synthetic tree.
+  /// The build context passed to the [builder] function represents the root of
+  /// the synthetic tree.
   ///
-  /// The [constraints] argument specifies the constraints passed to the render tree during layout.
-  /// If unspecified, the widget will be laid out unconstrained.
+  /// The [constraints] argument specifies the constraints passed to the render
+  /// tree during layout. If unspecified, the widget will be laid out
+  /// unconstrained.
   Size measureBuilder(
     WidgetBuilder builder, {
     BoxConstraints constraints = const BoxConstraints(),
@@ -46,11 +50,12 @@ class WidgetSurveyor {
     return measureWidget(Builder(builder: builder), constraints: constraints);
   }
 
-  /// Inserts the specified widget into a synthetic widget tree, lays out the resulting render tree,
-  /// and returns the size of the laid-out render tree.
+  /// Inserts the specified widget into a synthetic widget tree, lays out the
+  /// resulting render tree, and returns the size of the laid-out render tree.
   ///
-  /// The [constraints] argument specifies the constraints passed to the render tree during layout.
-  /// If unspecified, the widget will be laid out unconstrained.
+  /// The [constraints] argument specifies the constraints passed to the render
+  /// tree during layout. If unspecified, the widget will be laid out
+  /// unconstrained.
   Size measureWidget(
     Widget widget, {
     BoxConstraints constraints = const BoxConstraints(),
@@ -65,7 +70,8 @@ class WidgetSurveyor {
     TextBaseline baseline = TextBaseline.alphabetic,
     BoxConstraints constraints = const BoxConstraints(),
   }) {
-    final SurveyorView rendered = _render(widget, constraints, baselineToCalculate: baseline);
+    final SurveyorView rendered =
+        _render(widget, constraints, baselineToCalculate: baseline);
     return rendered.childBaseline ?? rendered.size.height;
   }
 
@@ -74,7 +80,8 @@ class WidgetSurveyor {
     TextBaseline baseline = TextBaseline.alphabetic,
     BoxConstraints constraints = const BoxConstraints(),
   }) {
-    final SurveyorView rendered = _render(widget, constraints, baselineToCalculate: baseline);
+    final SurveyorView rendered =
+        _render(widget, constraints, baselineToCalculate: baseline);
     return rendered.childBaseline;
   }
 
@@ -90,7 +97,8 @@ class WidgetSurveyor {
           if (!debugIsPerformingCleanup) {
             throw FlutterError.fromParts(<DiagnosticsNode>[
               ErrorSummary('Visual update was requested during survey.'),
-              ErrorDescription('WidgetSurveyor does not support a render object '
+              ErrorDescription(
+                  'WidgetSurveyor does not support a render object '
                   'calling markNeedsLayout(), markNeedsPaint(), or '
                   'markNeedsSemanticUpdate() while the widget is being surveyed.'),
             ]);
@@ -102,7 +110,8 @@ class WidgetSurveyor {
     final SurveyorView rootView = pipelineOwner.rootNode = SurveyorView();
     final BuildOwner buildOwner = BuildOwner(focusManager: FocusManager());
     assert(buildOwner.globalKeyCount == 0);
-    final RenderObjectToWidgetElement element = RenderObjectToWidgetAdapter<RenderBox>(
+    final RenderObjectToWidgetElement element =
+        RenderObjectToWidgetAdapter<RenderBox>(
       container: rootView,
       debugShortDescription: '[root]',
       child: widget,
@@ -118,17 +127,22 @@ class WidgetSurveyor {
       // Unmounts all child elements to ensure proper cleanup.
       debugIsPerformingCleanup = true;
       try {
-        element.update(RenderObjectToWidgetAdapter<RenderBox>(container: rootView));
+        element.update(
+          RenderObjectToWidgetAdapter<RenderBox>(container: rootView),
+        );
         buildOwner.finalizeTree();
       } finally {
         debugIsPerformingCleanup = false;
       }
-      assert(buildOwner.globalKeyCount == 1); // RenderObjectToWidgetAdapter uses a global key.
+      assert(
+        buildOwner.globalKeyCount == 1,
+      ); // RenderObjectToWidgetAdapter uses a global key.
     }
   }
 }
 
-class SurveyorView extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
+class SurveyorView extends RenderBox
+    with RenderObjectWithChildMixin<RenderBox> {
   BoxConstraints? childConstraints;
   TextBaseline? baselineToCalculate;
   double? childBaseline;

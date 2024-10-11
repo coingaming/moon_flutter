@@ -19,7 +19,8 @@ void main() {
     expect(find.byKey(_tagKey), findsOneWidget);
   });
 
-  testWidgets("Default tag has no leading, label or trailing widget.", (tester) async {
+  testWidgets("Default tag has no leading, label or trailing widget.",
+      (tester) async {
     await tester.pumpWidget(const _TagTestWidget());
 
     expect(find.text(_tagLabel), findsNothing);

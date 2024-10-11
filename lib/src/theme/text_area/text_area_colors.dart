@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with DiagnosticableTreeMixin {
+class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors>
+    with DiagnosticableTreeMixin {
   /// The background color of the MoonTextArea.
   final Color backgroundColor;
 
@@ -62,13 +63,18 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors> with Diagnos
     if (other is! MoonTextAreaColors) return this;
 
     return MoonTextAreaColors(
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
-      activeBorderColor: colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
-      inactiveBorderColor: colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      activeBorderColor:
+          colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
+      inactiveBorderColor:
+          colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
       errorColor: colorPremulLerp(errorColor, other.errorColor, t)!,
-      hoverBorderColor: colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
+      hoverBorderColor:
+          colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
-      helperTextColor: colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
+      helperTextColor:
+          colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
     );
   }
 

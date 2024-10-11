@@ -33,10 +33,16 @@ class MoonCircularProgressIndicatorPainter extends CustomPainter {
     required this.strokeCap,
   })  : arcStart = value != null
             ? _startAngle
-            : _startAngle + tailValue * 3 / 2 * math.pi + rotationValue * math.pi * 2.0 + offsetValue * 0.5 * math.pi,
+            : _startAngle +
+                tailValue * 3 / 2 * math.pi +
+                rotationValue * math.pi * 2.0 +
+                offsetValue * 0.5 * math.pi,
         arcSweep = value != null
             ? clampDouble(value, 0.0, 1.0) * _sweep
-            : math.max(headValue * 3 / 2 * math.pi - tailValue * 3 / 2 * math.pi, _epsilon);
+            : math.max(
+                headValue * 3 / 2 * math.pi - tailValue * 3 / 2 * math.pi,
+                _epsilon,
+              );
 
   @override
   void paint(Canvas canvas, Size size) {

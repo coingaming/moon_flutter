@@ -20,7 +20,9 @@ void main() {
     expect(find.byKey(_menuItemKey), findsOneWidget);
   });
 
-  testWidgets("Menu item has only label and no leading, trailing or content widget.", (tester) async {
+  testWidgets(
+      "Menu item has only label and no leading, trailing or content widget.",
+      (tester) async {
     await tester.pumpWidget(const _MenuItemTestWidget());
 
     expect(find.text(_menuItemLabel), findsOneWidget);
@@ -29,7 +31,8 @@ void main() {
     expect(find.text(_menuItemContent), findsNothing);
   });
 
-  testWidgets("Menu item has a leading, label, trailing and content widget.", (tester) async {
+  testWidgets("Menu item has a leading, label, trailing and content widget.",
+      (tester) async {
     await tester.pumpWidget(
       const _MenuItemTestWidget(
         showLeading: true,

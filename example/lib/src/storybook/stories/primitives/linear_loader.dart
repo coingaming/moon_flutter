@@ -44,7 +44,8 @@ class LinearLoaderStory extends StatelessWidget {
       options: colorOptions,
     );
 
-    final backgroundColor = colorTable(context)[loaderBackgroundColorKnob ?? 40];
+    final backgroundColor =
+        colorTable(context)[loaderBackgroundColorKnob ?? 40];
 
     final borderRadiusKnob = context.knobs.nullable.sliderInt(
       label: "borderRadius",
@@ -61,7 +62,9 @@ class LinearLoaderStory extends StatelessWidget {
           linearLoaderSize: linearLoaderSizeKnob,
           color: color,
           backgroundColor: backgroundColor,
-          borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+          borderRadius: borderRadiusKnob != null
+              ? BorderRadius.circular(borderRadiusKnob.toDouble())
+              : null,
         ),
       ),
     );

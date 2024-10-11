@@ -4,7 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonDotIndicatorProperties extends ThemeExtension<MoonDotIndicatorProperties> with DiagnosticableTreeMixin {
+class MoonDotIndicatorProperties
+    extends ThemeExtension<MoonDotIndicatorProperties>
+    with DiagnosticableTreeMixin {
   /// The gap between the MoonDotIndicator dots.
   final double gap;
 
@@ -40,13 +42,20 @@ class MoonDotIndicatorProperties extends ThemeExtension<MoonDotIndicatorProperti
   }
 
   @override
-  MoonDotIndicatorProperties lerp(ThemeExtension<MoonDotIndicatorProperties>? other, double t) {
+  MoonDotIndicatorProperties lerp(
+    ThemeExtension<MoonDotIndicatorProperties>? other,
+    double t,
+  ) {
     if (other is! MoonDotIndicatorProperties) return this;
 
     return MoonDotIndicatorProperties(
       gap: lerpDouble(gap, other.gap, t)!,
       size: lerpDouble(size, other.size, t)!,
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionDuration: lerpDuration(
+        transitionDuration,
+        other.transitionDuration,
+        t,
+      ),
       transitionCurve: other.transitionCurve,
     );
   }
@@ -55,10 +64,20 @@ class MoonDotIndicatorProperties extends ThemeExtension<MoonDotIndicatorProperti
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonDotIndicatorProperties"))
-      ..add(DoubleProperty("gap", gap))
-      ..add(DoubleProperty("size", size))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve));
+      ..add(
+        DiagnosticsProperty("type", "MoonDotIndicatorProperties"),
+      )
+      ..add(
+        DoubleProperty("gap", gap),
+      )
+      ..add(
+        DoubleProperty("size", size),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      );
   }
 }

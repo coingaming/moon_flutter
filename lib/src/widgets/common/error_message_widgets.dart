@@ -9,7 +9,8 @@ class MoonErrorMessages extends StatelessWidget {
   /// Creates a default error message widget, utilized in [MoonTextInputGroup].
   const MoonErrorMessages({required this.errors});
 
-  List<String> get _nonEmptyErrors => errors.where((String error) => error.isNotEmpty).toList();
+  List<String> get _nonEmptyErrors =>
+      errors.where((String error) => error.isNotEmpty).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,8 @@ class MoonErrorMessage extends StatefulWidget {
   final Duration duration;
   final Curve curve;
 
-  /// Creates a default error message widget, utilized in [MoonTextInput] and [MoonTextArea].
+  /// Creates a default error message widget, utilized in [MoonTextInput]
+  /// and [MoonTextArea].
   const MoonErrorMessage({
     super.key,
     required this.errorText,
@@ -43,7 +45,8 @@ class MoonErrorMessage extends StatefulWidget {
   State<MoonErrorMessage> createState() => _MoonErrorMessageState();
 }
 
-class _MoonErrorMessageState extends State<MoonErrorMessage> with SingleTickerProviderStateMixin {
+class _MoonErrorMessageState extends State<MoonErrorMessage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
 
@@ -79,7 +82,10 @@ class _MoonErrorMessageState extends State<MoonErrorMessage> with SingleTickerPr
       opacity: _opacityAnimation,
       child: Row(
         children: [
-          Icon(MoonIcons.generic_info_16_light, size: context.moonSizes?.x2s ?? 16),
+          Icon(
+            MoonIcons.generic_info_16_light,
+            size: context.moonSizes?.x2s ?? 16,
+          ),
           SizedBox(width: context.moonSizes?.x5s ?? 4),
           Text(widget.errorText),
         ],

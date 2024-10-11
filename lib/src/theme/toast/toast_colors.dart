@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonToastColors extends ThemeExtension<MoonToastColors> with DiagnosticableTreeMixin {
+class MoonToastColors extends ThemeExtension<MoonToastColors>
+    with DiagnosticableTreeMixin {
   /// The background color of the MoonToast light variant.
   final Color lightVariantBackgroundColor;
 
@@ -42,11 +43,15 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
     Color? darkVariantIconColor,
   }) {
     return MoonToastColors(
-      lightVariantBackgroundColor: lightVariantBackgroundColor ?? this.lightVariantBackgroundColor,
-      darkVariantBackgroundColor: darkVariantBackgroundColor ?? this.darkVariantBackgroundColor,
-      lightVariantTextColor: lightVariantTextColor ?? this.lightVariantTextColor,
+      lightVariantBackgroundColor:
+          lightVariantBackgroundColor ?? this.lightVariantBackgroundColor,
+      darkVariantBackgroundColor:
+          darkVariantBackgroundColor ?? this.darkVariantBackgroundColor,
+      lightVariantTextColor:
+          lightVariantTextColor ?? this.lightVariantTextColor,
       darkVariantTextColor: darkVariantTextColor ?? this.darkVariantTextColor,
-      lightVariantIconColor: lightVariantIconColor ?? this.lightVariantIconColor,
+      lightVariantIconColor:
+          lightVariantIconColor ?? this.lightVariantIconColor,
       darkVariantIconColor: darkVariantIconColor ?? this.darkVariantIconColor,
     );
   }
@@ -56,12 +61,36 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
     if (other is! MoonToastColors) return this;
 
     return MoonToastColors(
-      lightVariantBackgroundColor: colorPremulLerp(lightVariantBackgroundColor, other.lightVariantBackgroundColor, t)!,
-      darkVariantBackgroundColor: colorPremulLerp(darkVariantBackgroundColor, other.darkVariantBackgroundColor, t)!,
-      lightVariantTextColor: colorPremulLerp(lightVariantTextColor, other.lightVariantTextColor, t)!,
-      darkVariantTextColor: colorPremulLerp(darkVariantTextColor, other.darkVariantTextColor, t)!,
-      lightVariantIconColor: colorPremulLerp(lightVariantIconColor, other.lightVariantIconColor, t)!,
-      darkVariantIconColor: colorPremulLerp(darkVariantIconColor, other.darkVariantIconColor, t)!,
+      lightVariantBackgroundColor: colorPremulLerp(
+        lightVariantBackgroundColor,
+        other.lightVariantBackgroundColor,
+        t,
+      )!,
+      darkVariantBackgroundColor: colorPremulLerp(
+        darkVariantBackgroundColor,
+        other.darkVariantBackgroundColor,
+        t,
+      )!,
+      lightVariantTextColor: colorPremulLerp(
+        lightVariantTextColor,
+        other.lightVariantTextColor,
+        t,
+      )!,
+      darkVariantTextColor: colorPremulLerp(
+        darkVariantTextColor,
+        other.darkVariantTextColor,
+        t,
+      )!,
+      lightVariantIconColor: colorPremulLerp(
+        lightVariantIconColor,
+        other.lightVariantIconColor,
+        t,
+      )!,
+      darkVariantIconColor: colorPremulLerp(
+        darkVariantIconColor,
+        other.darkVariantIconColor,
+        t,
+      )!,
     );
   }
 
@@ -69,9 +98,24 @@ class MoonToastColors extends ThemeExtension<MoonToastColors> with Diagnosticabl
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonToastColors"))
-      ..add(ColorProperty("lightVariantBackgroundColor", lightVariantBackgroundColor))
-      ..add(ColorProperty("darkVariantBackgroundColor", darkVariantBackgroundColor))
+      ..add(
+        DiagnosticsProperty(
+          "type",
+          "MoonToastColors",
+        ),
+      )
+      ..add(
+        ColorProperty(
+          "lightVariantBackgroundColor",
+          lightVariantBackgroundColor,
+        ),
+      )
+      ..add(
+        ColorProperty(
+          "darkVariantBackgroundColor",
+          darkVariantBackgroundColor,
+        ),
+      )
       ..add(ColorProperty("lightVariantTextColor", lightVariantTextColor))
       ..add(ColorProperty("darkVariantTextColor", darkVariantTextColor))
       ..add(ColorProperty("lightVariantIconColor", lightVariantIconColor))

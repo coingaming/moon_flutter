@@ -4,7 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonProgressPinProperties extends ThemeExtension<MoonProgressPinProperties> with DiagnosticableTreeMixin {
+class MoonProgressPinProperties
+    extends ThemeExtension<MoonProgressPinProperties>
+    with DiagnosticableTreeMixin {
   /// The shadow elevation of the MoonProgressPin.
   final double shadowElevation;
 
@@ -14,7 +16,8 @@ class MoonProgressPinProperties extends ThemeExtension<MoonProgressPinProperties
   /// The width of the MoonProgressPin arrow.
   final double arrowWidth;
 
-  /// The vertical distance between the MoonProgressPin and the MoonLinearProgress widget.
+  /// The vertical distance between the MoonProgressPin and the
+  /// MoonLinearProgress widget.
   final double pinDistance;
 
   /// The width of the MoonProgressPin.
@@ -58,7 +61,10 @@ class MoonProgressPinProperties extends ThemeExtension<MoonProgressPinProperties
   }
 
   @override
-  MoonProgressPinProperties lerp(ThemeExtension<MoonProgressPinProperties>? other, double t) {
+  MoonProgressPinProperties lerp(
+    ThemeExtension<MoonProgressPinProperties>? other,
+    double t,
+  ) {
     if (other is! MoonProgressPinProperties) return this;
 
     return MoonProgressPinProperties(

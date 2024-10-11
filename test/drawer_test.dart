@@ -26,7 +26,8 @@ void main() {
     expect(find.byKey(_drawerKey), findsOneWidget);
   });
 
-  testWidgets("Drawer is displayed when the open button is tapped.", (tester) async {
+  testWidgets("Drawer is displayed when the open button is tapped.",
+      (tester) async {
     await tester.pumpWidget(const _DrawerTestWidget());
 
     final button = find.byKey(_openButtonKey);
@@ -39,7 +40,8 @@ void main() {
     expect(find.byWidget(_drawerContent), findsOneWidget);
   });
 
-  testWidgets("Drawer closes when a tap occurs outside its content.", (tester) async {
+  testWidgets("Drawer closes when a tap occurs outside its content.",
+      (tester) async {
     await tester.pumpWidget(const _DrawerTestWidget());
 
     final button = find.byKey(_openButtonKey);
@@ -55,7 +57,8 @@ void main() {
     expect(find.byWidget(_drawerContent), findsNothing);
   });
 
-  testWidgets("Drawer closes when the 'close' button is tapped.", (tester) async {
+  testWidgets("Drawer closes when the 'close' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(const _DrawerTestWidget());
 
     final button = find.byKey(_openButtonKey);

@@ -20,7 +20,14 @@ class _TableStoryState extends State<TableStory> {
   late final List<_TableData> _tableDataOriginal;
   late List<_TableData> _tableDataToShow;
 
-  final List<String> _columnNames = ['ID', 'First name', 'Last name', 'Age', 'Activity'];
+  final List<String> _columnNames = [
+    'ID',
+    'First name',
+    'Last name',
+    'Age',
+    'Activity',
+  ];
+
   final List<bool> _columnSorting = List.generate(6, (int _) => true);
 
   bool _checkAllBoxes = false;
@@ -56,10 +63,14 @@ class _TableStoryState extends State<TableStory> {
     verticalScrollController.addListener(() {
       if (verticalScrollController.hasClients && _infiniteScrollKnob) {
         final double pixels = verticalScrollController.position.pixels;
-        final double maxScrollExtent = verticalScrollController.position.maxScrollExtent;
+        final double maxScrollExtent =
+            verticalScrollController.position.maxScrollExtent;
 
         if (pixels >= maxScrollExtent && _rowsToShow < _rowsPerPage * 5) {
-          _tableDataToShow += _tableDataOriginal.sublist(_rowsToShow, _rowsToShow + _rowsPerPage);
+          _tableDataToShow += _tableDataOriginal.sublist(
+            _rowsToShow,
+            _rowsToShow + _rowsPerPage,
+          );
 
           setState(() => _rowsToShow += _rowsPerPage);
         }
@@ -90,7 +101,9 @@ class _TableStoryState extends State<TableStory> {
             _tableDataToShow.sort((a, b) => a.activity.compareTo(b.activity));
         }
 
-        if (!_sortAscending) _tableDataToShow = _tableDataToShow.reversed.toList();
+        if (!_sortAscending) {
+          _tableDataToShow = _tableDataToShow.reversed.toList();
+        }
       });
     }
   }
@@ -130,10 +143,18 @@ class _TableStoryState extends State<TableStory> {
           ? BoxDecoration(
               border: Border(
                 left: Directionality.of(context) == TextDirection.ltr
-                    ? Divider.createBorderSide(context, color: context.moonColors!.beerus, width: 1)
+                    ? Divider.createBorderSide(
+                        context,
+                        color: context.moonColors!.beerus,
+                        width: 1,
+                      )
                     : BorderSide.none,
                 right: Directionality.of(context) == TextDirection.rtl
-                    ? Divider.createBorderSide(context, color: context.moonColors!.beerus, width: 1)
+                    ? Divider.createBorderSide(
+                        context,
+                        color: context.moonColors!.beerus,
+                        width: 1,
+                      )
                     : BorderSide.none,
               ),
             )
@@ -159,7 +180,8 @@ class _TableStoryState extends State<TableStory> {
         _showCheckboxes ? 6 : 5,
         (int index) {
           final bool checkboxColumn = index == 0 && _showCheckboxes;
-          final double columnWidth = index == 0 || index == 1 && _showCheckboxes ? 64 : 128;
+          final double columnWidth =
+              index == 0 || index == 1 && _showCheckboxes ? 64 : 128;
 
           return MoonTableColumn(
             width: columnWidth,
@@ -174,8 +196,10 @@ class _TableStoryState extends State<TableStory> {
                 });
               }
             },
-            onSort:
-                checkboxColumn ? null : (int columnIndex, bool sortAscending) => _onSort(columnIndex, sortAscending),
+            onSort: checkboxColumn
+                ? null
+                : (int columnIndex, bool sortAscending) =>
+                    _onSort(columnIndex, sortAscending),
             cell: checkboxColumn
                 ? _headerCheckBox()
                 : _buildCell(
@@ -200,7 +224,10 @@ class _TableStoryState extends State<TableStory> {
               ? 'Total:'
               : (index == ageColumnIndex || index == activityColumnIndex)
                   ? _tableDataToShow
-                      .map((_TableData item) => index == ageColumnIndex ? item.age : item.activity)
+                      .map(
+                        (_TableData item) =>
+                            index == ageColumnIndex ? item.age : item.activity,
+                      )
                       .reduce((int value, int element) => value + element)
                       .toString()
                   : '-';
@@ -219,8 +246,10 @@ class _TableStoryState extends State<TableStory> {
 
         return MoonTableRow(
           selected: row.selected,
-          onSelectChanged:
-              _rowsSelectableKnob ? (bool? selected) => setState(() => row.selected = selected ?? false) : null,
+          onSelectChanged: _rowsSelectableKnob
+              ? (bool? selected) =>
+                  setState(() => row.selected = selected ?? false)
+              : null,
           decoration: ShapeDecorationWithPremultipliedAlpha(
             color: _zebraStyleKnob
                 ? row.selected
@@ -233,7 +262,8 @@ class _TableStoryState extends State<TableStory> {
                     : _rowColor ?? context.moonColors!.goku,
             shape: MoonSquircleBorder(
               borderRadius: _borderRadiusKnob != null
-                  ? BorderRadius.circular(_borderRadiusKnob!.toDouble()).squircleBorderRadius(context)
+                  ? BorderRadius.circular(_borderRadiusKnob!.toDouble())
+                      .squircleBorderRadius(context)
                   : BorderRadius.circular(8).squircleBorderRadius(context),
             ),
           ),
@@ -244,8 +274,10 @@ class _TableStoryState extends State<TableStory> {
                 child: MoonCheckbox(
                   tapAreaSizeValue: 0,
                   value: row.selected,
-                  onChanged:
-                      _rowsSelectableKnob ? (bool? onChanged) => setState(() => row.selected = !row.selected) : null,
+                  onChanged: _rowsSelectableKnob
+                      ? (bool? onChanged) =>
+                          setState(() => row.selected = !row.selected)
+                      : null,
                 ),
               ),
             _buildCell(row.id, firstCell: !_showCheckboxes),
@@ -365,7 +397,8 @@ class _TableStoryState extends State<TableStory> {
 
     if (_showCheckboxes != showCheckboxesKnob) {
       _showCheckboxes = showCheckboxesKnob;
-      _sortColumnIndex = showCheckboxesKnob ? _sortColumnIndex + 1 : _sortColumnIndex - 1;
+      _sortColumnIndex =
+          showCheckboxesKnob ? _sortColumnIndex + 1 : _sortColumnIndex - 1;
     }
 
     if (_infiniteScrollKnob != infiniteScrollKnob) {
@@ -396,7 +429,9 @@ class _TableStoryState extends State<TableStory> {
           footer: _generateTableFooter(),
           rows: _generateTableRows(),
           tablePadding: const EdgeInsets.symmetric(horizontal: 16),
-          cellPadding: EdgeInsets.symmetric(vertical: tableRowSizeKnob == MoonTableRowSize.xs ? 4 : 8),
+          cellPadding: EdgeInsets.symmetric(
+            vertical: tableRowSizeKnob == MoonTableRowSize.xs ? 4 : 8,
+          ),
           onScrollControllersReady: (
             ScrollController verticalScrollController,
             ScrollController horizontalScrollController,

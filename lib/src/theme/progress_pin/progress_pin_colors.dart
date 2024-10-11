@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonProgressPinColors extends ThemeExtension<MoonProgressPinColors> with DiagnosticableTreeMixin {
+class MoonProgressPinColors extends ThemeExtension<MoonProgressPinColors>
+    with DiagnosticableTreeMixin {
   /// The color of the MoonProgressPin.
   final Color pinColor;
 
@@ -46,7 +47,10 @@ class MoonProgressPinColors extends ThemeExtension<MoonProgressPinColors> with D
   }
 
   @override
-  MoonProgressPinColors lerp(ThemeExtension<MoonProgressPinColors>? other, double t) {
+  MoonProgressPinColors lerp(
+    ThemeExtension<MoonProgressPinColors>? other,
+    double t,
+  ) {
     if (other is! MoonProgressPinColors) return this;
 
     return MoonProgressPinColors(

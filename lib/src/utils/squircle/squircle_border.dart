@@ -17,7 +17,8 @@ enum BorderAlign {
 class MoonSquircleBorder extends OutlinedBorder {
   /// The radius for each corner.
   ///
-  /// Negative radius values are clamped to 0.0 by [getInnerPath] and [getOuterPath].
+  /// Negative radius values are clamped to 0.0 by [getInnerPath] and
+  /// [getOuterPath].
   final MoonSquircleBorderRadius borderRadius;
   final BorderAlign borderAlign;
 
@@ -30,7 +31,8 @@ class MoonSquircleBorder extends OutlinedBorder {
   @override
   EdgeInsetsGeometry get dimensions {
     switch (borderAlign) {
-      // Ensure that the border behaves like in Figma, i.e., without adding any padding.
+      // Ensure that the border behaves like in Figma, i.e., without adding any
+      // padding.
       case BorderAlign.inside:
         return EdgeInsets.zero;
       case BorderAlign.center:
@@ -53,7 +55,11 @@ class MoonSquircleBorder extends OutlinedBorder {
     if (a is MoonSquircleBorder) {
       return MoonSquircleBorder(
         side: MoonSquicleBorderSide.lerp(a.side, side, t),
-        borderRadius: MoonSquircleBorderRadius.lerp(a.borderRadius, borderRadius, t)!,
+        borderRadius: MoonSquircleBorderRadius.lerp(
+          a.borderRadius,
+          borderRadius,
+          t,
+        )!,
       );
     }
     return super.lerpFrom(a, t);
@@ -64,7 +70,8 @@ class MoonSquircleBorder extends OutlinedBorder {
     if (b is MoonSquircleBorder) {
       return MoonSquircleBorder(
         side: MoonSquicleBorderSide.lerp(side, b.side, t),
-        borderRadius: MoonSquircleBorderRadius.lerp(borderRadius, b.borderRadius, t)!,
+        borderRadius:
+            MoonSquircleBorderRadius.lerp(borderRadius, b.borderRadius, t)!,
       );
     }
     return super.lerpTo(b, t);
@@ -150,8 +157,9 @@ class MoonSquircleBorder extends OutlinedBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        // Since the stroke is painted at the center of the border, we adjust the rectangle
-        // based on the [borderAlign] to ensure the stroke is properly positioned.
+        // Since the stroke is painted at the center of the border, we adjust
+        // the rectangle based on the [borderAlign] to ensure the stroke is
+        // properly positioned.
         final adjustedRect = () {
           switch (borderAlign) {
             case BorderAlign.inside:
@@ -216,13 +224,15 @@ class MoonSquircleBorder extends OutlinedBorder {
 }
 
 class MoonSquicleBorderSide with Diagnosticable {
-  /// This constant represents the border being drawn fully inside the border path.
+  /// This constant represents the border being drawn fully inside the border
+  /// path.
   ///
   /// This is used as the default value for the [strokeAlign] property.
   static const double strokeAlignInside = -1.0;
 
-  /// This constant represents the border being drawn along the center of the border path,
-  /// with half of the [BorderSide.width] inside the path and the other half outside.
+  /// This constant represents the border being drawn along the center of the
+  /// border path, with half of the [BorderSide.width] inside the path and the
+  /// other half outside.
   ///
   /// This is used as a value for the [strokeAlign] property.
   static const double strokeAlignCenter = 0.0;
@@ -232,12 +242,15 @@ class MoonSquicleBorderSide with Diagnosticable {
   /// This is used as a value for the [strokeAlign] property.
   static const double strokeAlignOutside = 1.0;
 
-  /// Creates a [BorderSide] representing the addition of the two provided [BorderSide]'s.
+  /// Creates a [BorderSide] representing the addition of the two provided
+  /// [BorderSide]'s.
   ///
-  /// This method should only be called if [canMerge] returns true for the two sides.
+  /// This method should only be called if [canMerge] returns true for the two
+  /// sides.
   ///
-  /// If one side is zero-width with [BorderStyle.none], the other side is returned as is.
-  /// If both sides are zero-width with [BorderStyle.none], [BorderSide.none] is returned.
+  /// If one side is zero-width with [BorderStyle.none], the other side is
+  /// returned as is. If both sides are zero-width with [BorderStyle.none],
+  /// [BorderSide.none] is returned.
   ///
   /// The arguments must not be null.
   static BorderSide merge(BorderSide a, BorderSide b) {
@@ -270,9 +283,9 @@ class MoonSquicleBorderSide with Diagnosticable {
   ///
   /// Setting width to 0.0 will result in a hairline border.
   /// This means that the border will have the width of one physical pixel.
-  /// Hairline rendering takes shortcuts when the path overlaps a pixel more than once.
-  /// This means that it will render faster than otherwise, but it might
-  /// double-hit pixels, giving it a slightly darker/lighter result.
+  /// Hairline rendering takes shortcuts when the path overlaps a pixel more
+  /// than once. This means that it will render faster than otherwise, but it
+  /// might double-hit pixels, giving it a slightly darker/lighter result.
   ///
   /// To omit the border entirely, set the [style] to [BorderStyle.none].
   final double width;
@@ -302,7 +315,8 @@ class MoonSquicleBorderSide with Diagnosticable {
   /// [width] as additional padding:
   /// - [strokeAlignInside] provides padding with full [width].
   /// - [strokeAlignCenter] provides padding with half [width].
-  /// - [strokeAlignOutside] provides zero padding, as stroke is drawn entirely outside.
+  /// - [strokeAlignOutside] provides zero padding, as stroke is drawn entirely
+  /// outside.
   ///
   /// This property is not honored by [toPaint] (because the [Paint] object
   /// cannot represent it); it is intended that classes that use [BorderSide]
@@ -327,7 +341,8 @@ class MoonSquicleBorderSide with Diagnosticable {
     this.strokeAlign = strokeAlignInside,
   }) : assert(width >= 0.0);
 
-  /// Creates a copy of this border but with the given fields replaced with the new values.
+  /// Creates a copy of this border but with the given fields replaced with the
+  /// new values.
   BorderSide copyWith({
     Color? color,
     double? width,
@@ -370,7 +385,8 @@ class MoonSquicleBorderSide with Diagnosticable {
   /// in this border's style.
   ///
   /// The [strokeAlign] property is not reflected in the [Paint]; consumers must
-  /// implement that directly by inflating or deflating their region appropriately.
+  /// implement that directly by inflating or deflating their region
+  /// appropriately.
   ///
   /// Not all borders use this method to paint their border sides. For example,
   /// non-uniform rectangular [Border]s have beveled edges and so paint their
@@ -397,7 +413,8 @@ class MoonSquicleBorderSide with Diagnosticable {
   ///
   /// The arguments must not be null.
   static bool canMerge(BorderSide a, BorderSide b) {
-    if ((a.style == BorderStyle.none && a.width == 0.0) || (b.style == BorderStyle.none && b.width == 0.0)) {
+    if ((a.style == BorderStyle.none && a.width == 0.0) ||
+        (b.style == BorderStyle.none && b.width == 0.0)) {
       return true;
     }
     return a.style == b.style && a.color == b.color;
@@ -502,9 +519,33 @@ class MoonSquicleBorderSide with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Color>('color', color, defaultValue: const Color(0xFF000000)));
-    properties.add(DoubleProperty('width', width, defaultValue: 1.0));
-    properties.add(DoubleProperty('strokeAlign', strokeAlign, defaultValue: strokeAlignInside));
-    properties.add(EnumProperty<BorderStyle>('style', style, defaultValue: BorderStyle.solid));
+    properties.add(
+      DiagnosticsProperty<Color>(
+        'color',
+        color,
+        defaultValue: const Color(0xFF000000),
+      ),
+    );
+    properties.add(
+      DoubleProperty(
+        'width',
+        width,
+        defaultValue: 1.0,
+      ),
+    );
+    properties.add(
+      DoubleProperty(
+        'strokeAlign',
+        strokeAlign,
+        defaultValue: strokeAlignInside,
+      ),
+    );
+    properties.add(
+      EnumProperty<BorderStyle>(
+        'style',
+        style,
+        defaultValue: BorderStyle.solid,
+      ),
+    );
   }
 }

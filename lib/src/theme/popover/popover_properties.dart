@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with DiagnosticableTreeMixin {
+class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonPopover.
   final BorderRadiusGeometry borderRadius;
 
@@ -52,15 +53,22 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
   }
 
   @override
-  MoonPopoverProperties lerp(ThemeExtension<MoonPopoverProperties>? other, double t) {
+  MoonPopoverProperties lerp(
+    ThemeExtension<MoonPopoverProperties>? other,
+    double t,
+  ) {
     if (other is! MoonPopoverProperties) return this;
 
     return MoonPopoverProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
-      distanceToTarget: lerpDouble(distanceToTarget, other.distanceToTarget, t)!,
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      distanceToTarget:
+          lerpDouble(distanceToTarget, other.distanceToTarget, t)!,
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      contentPadding: EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
+      contentPadding:
+          EdgeInsetsGeometry.lerp(contentPadding, other.contentPadding, t)!,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
   }
@@ -69,12 +77,32 @@ class MoonPopoverProperties extends ThemeExtension<MoonPopoverProperties> with D
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonPopoverProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DoubleProperty("distanceToTarget", distanceToTarget))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("contentPadding", contentPadding))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
+      ..add(
+        DiagnosticsProperty("type", "MoonPopoverProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DoubleProperty("distanceToTarget", distanceToTarget),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>(
+          "contentPadding",
+          contentPadding,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>(
+          "textStyle",
+          textStyle,
+        ),
+      );
   }
 }

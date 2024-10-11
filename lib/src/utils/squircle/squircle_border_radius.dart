@@ -8,7 +8,8 @@ import 'package:moon_design/src/utils/squircle/squircle_radius.dart';
 
 class MoonSquircleBorderRadius extends BorderRadius {
   /// The border radius with zero radii.
-  static const MoonSquircleBorderRadius zero = MoonSquircleBorderRadius.all(MoonSquircleRadius.zero);
+  static const MoonSquircleBorderRadius zero =
+      MoonSquircleBorderRadius.all(MoonSquircleRadius.zero);
 
   /// The top-left [MoonSquircleRadius].
   @override
@@ -28,7 +29,8 @@ class MoonSquircleBorderRadius extends BorderRadius {
 
   MoonSquircleBorderRadius({
     required double cornerRadius,
-    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA. Hence, we use 0.9 instead to avoid this issue.
+    // The value of 1 or 1.0 leads to NaN error in mobile web/PWA. Hence, we use
+    // 0.9 instead to avoid this issue.
     double cornerSmoothing = 0.9,
   }) : this.only(
           topLeft: MoonSquircleRadius(
@@ -58,8 +60,8 @@ class MoonSquircleBorderRadius extends BorderRadius {
           bottomRight: radius,
         );
 
-  /// Creates a border radius with vertical symmetry, ensuring that the top and bottom
-  /// sides of the rectangle have the same radii.
+  /// Creates a border radius with vertical symmetry, ensuring that the top and
+  /// bottom sides of the rectangle have the same radii.
   const MoonSquircleBorderRadius.vertical({
     MoonSquircleRadius top = MoonSquircleRadius.zero,
     MoonSquircleRadius bottom = MoonSquircleRadius.zero,
@@ -70,8 +72,8 @@ class MoonSquircleBorderRadius extends BorderRadius {
           bottomRight: bottom,
         );
 
-  /// Creates a border radius with horizontal symmetry, ensuring that the left and right
-  /// sides of the rectangle have the same radii.
+  /// Creates a border radius with horizontal symmetry, ensuring that the left
+  /// and right sides of the rectangle have the same radii.
   const MoonSquircleBorderRadius.horizontal({
     MoonSquircleRadius left = MoonSquircleRadius.zero,
     MoonSquircleRadius right = MoonSquircleRadius.zero,
@@ -82,8 +84,8 @@ class MoonSquircleBorderRadius extends BorderRadius {
           bottomRight: right,
         );
 
-  /// Creates a border radius with only the provided non-zero values, resulting in
-  /// right angles for the other corners.
+  /// Creates a border radius with only the provided non-zero values, resulting
+  /// in right angles for the other corners.
   const MoonSquircleBorderRadius.only({
     this.topLeft = MoonSquircleRadius.zero,
     this.topRight = MoonSquircleRadius.zero,
@@ -98,15 +100,23 @@ class MoonSquircleBorderRadius extends BorderRadius {
 
   /// Required by Flutter framework internals for proper functioning.
   Radius get _topLeft => topLeft;
+
   Radius get _topRight => topRight;
+
   Radius get _bottomLeft => bottomLeft;
+
   Radius get _bottomRight => bottomRight;
+
   Radius get _topStart => Radius.zero;
+
   Radius get _topEnd => Radius.zero;
+
   Radius get _bottomStart => Radius.zero;
+
   Radius get _bottomEnd => Radius.zero;
 
-  /// Returns a copy of this BorderRadius with the given fields replaced with the new values.
+  /// Returns a copy of this BorderRadius with the given fields replaced with
+  /// the new values.
   @override
   MoonSquircleBorderRadius copyWith({
     Radius? topLeft,
@@ -117,8 +127,10 @@ class MoonSquircleBorderRadius extends BorderRadius {
     return MoonSquircleBorderRadius.only(
       topLeft: topLeft is MoonSquircleRadius ? topLeft : this.topLeft,
       topRight: topRight is MoonSquircleRadius ? topRight : this.topRight,
-      bottomLeft: bottomLeft is MoonSquircleRadius ? bottomLeft : this.bottomLeft,
-      bottomRight: bottomRight is MoonSquircleRadius ? bottomRight : this.bottomRight,
+      bottomLeft:
+          bottomLeft is MoonSquircleRadius ? bottomLeft : this.bottomLeft,
+      bottomRight:
+          bottomRight is MoonSquircleRadius ? bottomRight : this.bottomRight,
     );
   }
 
@@ -275,7 +287,11 @@ class MoonSquircleBorderRadius extends BorderRadius {
   /// If either is null, this function interpolates from [BorderRadius.zero].
   ///
   /// {@macro dart.ui.shadow.lerp}
-  static MoonSquircleBorderRadius? lerp(MoonSquircleBorderRadius? a, MoonSquircleBorderRadius? b, double t) {
+  static MoonSquircleBorderRadius? lerp(
+    MoonSquircleBorderRadius? a,
+    MoonSquircleBorderRadius? b,
+    double t,
+  ) {
     if (a == null && b == null) return null;
     if (a == null) return b! * t;
     if (b == null) return a * (1.0 - t);
@@ -297,7 +313,9 @@ class MoonSquircleBorderRadius extends BorderRadius {
 
   @override
   String toString() {
-    if (topLeft == topRight && topLeft == bottomRight && topLeft == bottomLeft) {
+    if (topLeft == topRight &&
+        topLeft == bottomRight &&
+        topLeft == bottomLeft) {
       final radius = topLeft.toString();
       return 'MoonSquircleBorderRadius${radius.substring(12)}';
     }

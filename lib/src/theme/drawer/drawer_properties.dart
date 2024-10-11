@@ -53,11 +53,17 @@ class MoonDrawerProperties extends ThemeExtension<MoonDrawerProperties>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonDrawerProperties"))
+      ..add(
+        DiagnosticsProperty("type", "MoonDrawerProperties"),
+      )
       ..add(
         DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
       )
-      ..add(DoubleProperty("width", width))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
+      ..add(
+        DoubleProperty("width", width),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("textStyle", textStyle),
+      );
   }
 }

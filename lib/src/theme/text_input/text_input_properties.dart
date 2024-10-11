@@ -2,8 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> with DiagnosticableTreeMixin {
-  /// The duration of the MoonTextInput transition animation (enable and disable).
+class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties>
+    with DiagnosticableTreeMixin {
+  /// The duration of the MoonTextInput transition animation
+  /// (enable and disable).
   final Duration transitionDuration;
 
   /// The curve of the MoonTextInput transition animation (enable and disable).
@@ -38,14 +40,20 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
   }
 
   @override
-  MoonTextInputProperties lerp(ThemeExtension<MoonTextInputProperties>? other, double t) {
+  MoonTextInputProperties lerp(
+    ThemeExtension<MoonTextInputProperties>? other,
+    double t,
+  ) {
     if (other is! MoonTextInputProperties) return this;
 
     return MoonTextInputProperties(
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
-      helperPadding: EdgeInsetsGeometry.lerp(helperPadding, other.helperPadding, t)!,
-      helperTextStyle: TextStyle.lerp(helperTextStyle, other.helperTextStyle, t)!,
+      helperPadding:
+          EdgeInsetsGeometry.lerp(helperPadding, other.helperPadding, t)!,
+      helperTextStyle:
+          TextStyle.lerp(helperTextStyle, other.helperTextStyle, t)!,
     );
   }
 
@@ -53,10 +61,20 @@ class MoonTextInputProperties extends ThemeExtension<MoonTextInputProperties> wi
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTextInputProperties"))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("helperPadding", helperPadding))
-      ..add(DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle));
+      ..add(
+        DiagnosticsProperty("type", "MoonTextInputProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>("helperPadding", helperPadding),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle),
+      );
   }
 }

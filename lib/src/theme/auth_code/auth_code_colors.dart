@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with DiagnosticableTreeMixin {
+class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors>
+    with DiagnosticableTreeMixin {
   /// The border color of the selected MoonAuthCode input field.
   final Color selectedBorderColor;
 
@@ -68,13 +69,20 @@ class MoonAuthCodeColors extends ThemeExtension<MoonAuthCodeColors> with Diagnos
     if (other is! MoonAuthCodeColors) return this;
 
     return MoonAuthCodeColors(
-      selectedBorderColor: colorPremulLerp(selectedBorderColor, other.selectedBorderColor, t)!,
-      activeBorderColor: colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
-      inactiveBorderColor: colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
-      errorBorderColor: colorPremulLerp(errorBorderColor, other.errorBorderColor, t)!,
-      selectedFillColor: colorPremulLerp(selectedFillColor, other.selectedFillColor, t)!,
-      activeFillColor: colorPremulLerp(activeFillColor, other.activeFillColor, t)!,
-      inactiveFillColor: colorPremulLerp(inactiveFillColor, other.inactiveFillColor, t)!,
+      selectedBorderColor:
+          colorPremulLerp(selectedBorderColor, other.selectedBorderColor, t)!,
+      activeBorderColor:
+          colorPremulLerp(activeBorderColor, other.activeBorderColor, t)!,
+      inactiveBorderColor:
+          colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
+      errorBorderColor:
+          colorPremulLerp(errorBorderColor, other.errorBorderColor, t)!,
+      selectedFillColor:
+          colorPremulLerp(selectedFillColor, other.selectedFillColor, t)!,
+      activeFillColor:
+          colorPremulLerp(activeFillColor, other.activeFillColor, t)!,
+      inactiveFillColor:
+          colorPremulLerp(inactiveFillColor, other.inactiveFillColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
     );
   }

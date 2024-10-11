@@ -10,7 +10,9 @@ const IconData _toastLeadingIcon = MoonIcons.other_frame_24_light;
 const IconData _toastTrailingIcon = MoonIcons.controls_close_small_24_light;
 
 void main() {
-  testWidgets("Toast is displayed when the 'show' button is tapped and dismissed after 2 seconds.", (tester) async {
+  testWidgets(
+      "Toast is displayed when the 'show' button is tapped and dismissed after "
+      "2 seconds.", (tester) async {
     await tester.pumpWidget(_ToastTestWidget());
     await tester.tap(find.byKey(_showButtonKey));
     await tester.pump(const Duration(milliseconds: 200));

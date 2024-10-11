@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/tab_bar/tab_bar_size_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTabBarSizes extends ThemeExtension<MoonTabBarSizes> with DiagnosticableTreeMixin {
+class MoonTabBarSizes extends ThemeExtension<MoonTabBarSizes>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

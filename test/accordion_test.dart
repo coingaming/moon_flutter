@@ -43,7 +43,8 @@ void main() {
       expect(find.text(_accordionContent), findsOneWidget);
     });
 
-    testWidgets("Disabled accordion does not expand when tapped.", (tester) async {
+    testWidgets("Disabled accordion does not expand when tapped.",
+        (tester) async {
       await tester.pumpWidget(
         const _SingleAccordionTestWidget(
           isDisabled: true,
@@ -63,7 +64,8 @@ void main() {
   });
 
   group('Grouped accordion', () {
-    testWidgets("First accordion collapses when second accordion expands.", (tester) async {
+    testWidgets("First accordion collapses when second accordion expands.",
+        (tester) async {
       await tester.pumpWidget(const _GroupedAccordionTestWidget());
       // First accordion.
       final accordion1 = find.byKey(_firstAccordionKey);
@@ -143,10 +145,12 @@ class _GroupedAccordionTestWidget extends StatefulWidget {
   const _GroupedAccordionTestWidget();
 
   @override
-  State<_GroupedAccordionTestWidget> createState() => _GroupedAccordionTestWidgetState();
+  State<_GroupedAccordionTestWidget> createState() =>
+      _GroupedAccordionTestWidgetState();
 }
 
-class _GroupedAccordionTestWidgetState extends State<_GroupedAccordionTestWidget> {
+class _GroupedAccordionTestWidgetState
+    extends State<_GroupedAccordionTestWidget> {
   _AccordionItems? _currentlyOpenAccordionItem = _AccordionItems.first;
 
   @override
@@ -159,7 +163,8 @@ class _GroupedAccordionTestWidgetState extends State<_GroupedAccordionTestWidget
               key: _firstAccordionKey,
               identityValue: _AccordionItems.first,
               groupIdentityValue: _currentlyOpenAccordionItem,
-              onExpansionChanged: (_AccordionItems? value) => setState(() => _currentlyOpenAccordionItem = value),
+              onExpansionChanged: (_AccordionItems? value) =>
+                  setState(() => _currentlyOpenAccordionItem = value),
               leading: const Icon(MoonIcons.other_frame_24_light),
               label: const Text("Grouped MoonAccordion item #1"),
               children: const [
@@ -173,7 +178,8 @@ class _GroupedAccordionTestWidgetState extends State<_GroupedAccordionTestWidget
               key: _secondAccordionKey,
               identityValue: _AccordionItems.second,
               groupIdentityValue: _currentlyOpenAccordionItem,
-              onExpansionChanged: (_AccordionItems? value) => setState(() => _currentlyOpenAccordionItem = value),
+              onExpansionChanged: (_AccordionItems? value) =>
+                  setState(() => _currentlyOpenAccordionItem = value),
               leading: const Icon(MoonIcons.other_frame_24_light),
               label: const Text("Grouped MoonAccordion item #2"),
               children: const [

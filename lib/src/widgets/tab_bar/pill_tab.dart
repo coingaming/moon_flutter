@@ -24,7 +24,8 @@ class MoonPillTab {
   /// The semantic label for the tab.
   final String? semanticLabel;
 
-  /// The callback that returns the current selection status of the tab as a boolean value.
+  /// The callback that returns the current selection status of the tab as a
+  /// boolean value.
   final ValueChanged<bool>? isSelected;
 
   /// The widget to display before the [label] widget of the tab.

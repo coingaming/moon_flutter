@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/dot_indicator/dot_indicator_properties.dar
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with DiagnosticableTreeMixin {
+class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -47,7 +48,10 @@ class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with D
   }
 
   @override
-  MoonDotIndicatorTheme lerp(ThemeExtension<MoonDotIndicatorTheme>? other, double t) {
+  MoonDotIndicatorTheme lerp(
+    ThemeExtension<MoonDotIndicatorTheme>? other,
+    double t,
+  ) {
     if (other is! MoonDotIndicatorTheme) return this;
 
     return MoonDotIndicatorTheme(
@@ -64,6 +68,11 @@ class MoonDotIndicatorTheme extends ThemeExtension<MoonDotIndicatorTheme> with D
       ..add(DiagnosticsProperty("type", "MoonDotIndicatorTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonDotIndicatorColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonDotIndicatorProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonDotIndicatorProperties>(
+          "properties",
+          properties,
+        ),
+      );
   }
 }

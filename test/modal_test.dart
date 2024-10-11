@@ -26,7 +26,8 @@ void main() {
     expect(find.byKey(_modalKey), findsOneWidget);
   });
 
-  testWidgets("Modal is displayed when the 'show' button is tapped.", (tester) async {
+  testWidgets("Modal is displayed when the 'show' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(const _ModalTestWidget());
     final button = find.byKey(_showButtonKey);
 
@@ -38,7 +39,10 @@ void main() {
     expect(find.byWidget(_modalContent), findsOneWidget);
   });
 
-  testWidgets("Modal closes when a tap occurs outside its content, if dismissible.", (tester) async {
+  testWidgets(
+      "Modal closes when a tap occurs outside its content, if dismissible.", (
+    tester,
+  ) async {
     await tester.pumpWidget(const _ModalTestWidget());
     final button = find.byKey(_showButtonKey);
 
@@ -55,7 +59,9 @@ void main() {
     expect(find.byWidget(_modalContent), findsNothing);
   });
 
-  testWidgets("Modal stays visible when a tap occurs outside its content, if not dismissible.", (tester) async {
+  testWidgets(
+      "Modal stays visible when a tap occurs outside its content,"
+      " if not dismissible.", (tester) async {
     await tester.pumpWidget(
       const _ModalTestWidget(
         isDismissible: false,
@@ -76,7 +82,8 @@ void main() {
     expect(find.byWidget(_modalContent), findsOneWidget);
   });
 
-  testWidgets("Modal closes when the 'close' button is tapped.", (tester) async {
+  testWidgets("Modal closes when the 'close' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(const _ModalTestWidget());
     final button = find.byKey(_showButtonKey);
 

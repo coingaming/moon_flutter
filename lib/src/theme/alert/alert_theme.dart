@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/alert/alert_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonAlertTheme extends ThemeExtension<MoonAlertTheme> with DiagnosticableTreeMixin {
+class MoonAlertTheme extends ThemeExtension<MoonAlertTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

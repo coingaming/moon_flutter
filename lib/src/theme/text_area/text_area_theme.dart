@@ -6,7 +6,8 @@ import 'package:moon_design/src/theme/text_area/text_area_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme> with DiagnosticableTreeMixin {
+class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -72,6 +73,8 @@ class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme> with Diagnosti
       ..add(DiagnosticsProperty("type", "MoonTextAreaTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonTextAreaColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonTextAreaProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonTextAreaProperties>("properties", properties),
+      );
   }
 }

@@ -44,7 +44,8 @@ class MoonBreadcrumb extends StatefulWidget {
   /// The separating widget to display between the breadcrumb items.
   final Widget? divider;
 
-  /// The single custom widget to replace all the breadcrumb collapsed items with.
+  /// The single custom widget to replace all the breadcrumb collapsed items
+  /// with.
   final MoonBreadcrumbItem? showMoreWidget;
 
   /// Creates a Moon Design breadcrumb.

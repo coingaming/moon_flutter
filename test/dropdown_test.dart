@@ -20,7 +20,8 @@ void main() {
     expect(find.byKey(_dropdownKey), findsOneWidget);
   });
 
-  testWidgets("Dropdown is displayed when the 'show' button is tapped.", (tester) async {
+  testWidgets("Dropdown is displayed when the 'show' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(const _DropdownTestWidget());
     final button = find.byKey(_showButtonKey);
 
@@ -32,7 +33,9 @@ void main() {
     expect(find.byWidget(_drawerContent), findsOneWidget);
   });
 
-  testWidgets("Dropdown collapses when a tap occurs outside its content, if dismissible.", (tester) async {
+  testWidgets(
+      "Dropdown collapses when a tap occurs outside its content, if dismissible.",
+      (tester) async {
     await tester.pumpWidget(const _DropdownTestWidget());
     final button = find.byKey(_showButtonKey);
 
@@ -49,7 +52,9 @@ void main() {
     expect(find.byWidget(_drawerContent), findsNothing);
   });
 
-  testWidgets("Dropdown stays expanded when a tap occurs outside its content, if not dismissible.", (tester) async {
+  testWidgets(
+      "Dropdown stays expanded when a tap occurs outside its content, if not dismissible.",
+      (tester) async {
     await tester.pumpWidget(const _DropdownTestWidget(isDismissible: false));
     final button = find.byKey(_showButtonKey);
 
@@ -66,7 +71,8 @@ void main() {
     expect(find.byWidget(_drawerContent), findsOneWidget);
   });
 
-  testWidgets("Provided background color is used for dropdown.", (tester) async {
+  testWidgets("Provided background color is used for dropdown.",
+      (tester) async {
     await tester.pumpWidget(
       const _DropdownTestWidget(
         color: Colors.blue,
@@ -81,7 +87,10 @@ void main() {
 
     expect(find.byWidget(_drawerContent), findsOneWidget);
     expect(
-      find.byWidgetPredicate((Widget widget) => widget is MoonDropdown && widget.backgroundColor == Colors.blue),
+      find.byWidgetPredicate(
+        (Widget widget) =>
+            widget is MoonDropdown && widget.backgroundColor == Colors.blue,
+      ),
       findsOneWidget,
     );
   });

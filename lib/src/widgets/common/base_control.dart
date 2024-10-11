@@ -98,7 +98,8 @@ class MoonBaseControl extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// A builder to build a custom child for the base control.
-  /// Cannot be used in conjunction with the [child] property, one of them must be null.
+  /// Cannot be used in conjunction with the [child] property, one of them must
+  /// be null.
   final MoonBaseControlBuilder? builder;
 
   /// The mouse cursor of the base control.
@@ -120,7 +121,8 @@ class MoonBaseControl extends StatefulWidget {
   final VoidCallback? onLongPress;
 
   /// The child of the base control.
-  /// Cannot be used in conjunction with the [builder] property, one of them must be null.
+  /// Cannot be used in conjunction with the [builder] property, one of them
+  /// must be null.
   final Widget? child;
 
   /// Creates a Moon Design base control.

@@ -16,10 +16,12 @@ class MoonAnimatedDefaultTextStyle extends StatefulWidget {
   });
 
   @override
-  _MoonAnimatedDefaultTextStyleState createState() => _MoonAnimatedDefaultTextStyleState();
+  _MoonAnimatedDefaultTextStyleState createState() =>
+      _MoonAnimatedDefaultTextStyleState();
 }
 
-class _MoonAnimatedDefaultTextStyleState extends State<MoonAnimatedDefaultTextStyle>
+class _MoonAnimatedDefaultTextStyleState
+    extends State<MoonAnimatedDefaultTextStyle>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _textStyleAnimation;

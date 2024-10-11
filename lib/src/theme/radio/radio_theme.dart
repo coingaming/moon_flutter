@@ -23,10 +23,7 @@ class MoonRadioTheme extends ThemeExtension<MoonRadioTheme>
             );
 
   @override
-  MoonRadioTheme copyWith({
-    MoonTokens? tokens,
-    MoonRadioColors? colors,
-  }) {
+  MoonRadioTheme copyWith({MoonTokens? tokens, MoonRadioColors? colors}) {
     return MoonRadioTheme(
       tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,

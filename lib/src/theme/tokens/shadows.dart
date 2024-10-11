@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonShadows extends ThemeExtension<MoonShadows> with DiagnosticableTreeMixin {
+class MoonShadows extends ThemeExtension<MoonShadows>
+    with DiagnosticableTreeMixin {
   static const light = MoonShadows(
     sm: [
       BoxShadow(

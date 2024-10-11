@@ -24,7 +24,8 @@ void main() {
     expect(find.byKey(_bottomSheetKey), findsOneWidget);
   });
 
-  testWidgets("Bottom sheet is displayed when the 'show' button is tapped.", (tester) async {
+  testWidgets("Bottom sheet is displayed when the 'show' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(const _BottomSheetTestWidget());
     final button = find.byKey(_showButtonKey);
 
@@ -36,7 +37,9 @@ void main() {
     expect(find.byWidget(_bottomSheetContent), findsOneWidget);
   });
 
-  testWidgets("Bottom sheet closes when a tap occurs outside its content, if dismissible.", (tester) async {
+  testWidgets(
+      "Bottom sheet closes when a tap occurs outside its content, "
+      "if dismissible.", (tester) async {
     await tester.pumpWidget(const _BottomSheetTestWidget());
     final button = find.byKey(_showButtonKey);
 
@@ -53,7 +56,9 @@ void main() {
     expect(find.byWidget(_bottomSheetContent), findsNothing);
   });
 
-  testWidgets("Bottom sheet stays visible when a tap occurs outside its content, if not dismissible.", (tester) async {
+  testWidgets(
+      "Bottom sheet stays visible when a tap occurs outside its content, "
+      "if not dismissible.", (tester) async {
     await tester.pumpWidget(
       const _BottomSheetTestWidget(
         isDismissible: false,

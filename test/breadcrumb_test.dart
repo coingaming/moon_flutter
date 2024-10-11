@@ -7,7 +7,8 @@ const Key _breadcrumbKey = Key("breadcrumbKey");
 const String _showMoreButtonText = '...';
 const String _breadcrumbItem = 'breadcrumb item';
 const IconData _breadcrumbLeadingIcon = MoonIcons.other_frame_24_light;
-const IconData _breadcrumbDividerIcon = MoonIcons.arrows_chevron_right_double_16_light;
+const IconData _breadcrumbDividerIcon =
+    MoonIcons.arrows_chevron_right_double_16_light;
 
 void main() {
   testWidgets("Provided key is used.", (tester) async {
@@ -20,7 +21,9 @@ void main() {
     expect(find.byKey(_breadcrumbKey), findsOneWidget);
   });
 
-  testWidgets("Tapping on a 'show more' button expands collapsed items, and the button itself becomes hidden.", (tester) async {
+  testWidgets(
+      "Tapping on a 'show more' button expands collapsed items, and the "
+      "button itself becomes hidden.", (tester) async {
     await tester.pumpWidget(const _BreadCrumbTestWidget());
     final moreButton = find.text(_showMoreButtonText);
 
@@ -36,7 +39,8 @@ void main() {
     expect(find.textContaining(_showMoreButtonText), findsNothing);
   });
 
-  testWidgets("Breadcrumb item has a leading, divider and label widget.", (tester) async {
+  testWidgets("Breadcrumb item has a leading, divider and label widget.",
+      (tester) async {
     await tester.pumpWidget(
       const _BreadCrumbTestWidget(
         showLeading: true,
@@ -48,7 +52,9 @@ void main() {
     expect(find.byIcon(_breadcrumbDividerIcon), findsWidgets);
   });
 
-  testWidgets("Only N items are shown, where N is defined by the value of itemsToShow.", (tester) async {
+  testWidgets(
+      "Only N items are shown, where N is defined by the value of itemsToShow.",
+      (tester) async {
     await tester.pumpWidget(
       const _BreadCrumbTestWidget(
         itemsToShow: 3,
@@ -96,7 +102,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(value, 1);
-    // Tapping on a 'show more' button expands collapsed items, and the button itself becomes hidden.
+    // Tapping on a 'show more' button expands collapsed items, and the button
+    // itself becomes hidden.
     expect(moreButton, findsNothing);
   });
 }
@@ -129,7 +136,8 @@ class _BreadCrumbTestWidget extends StatelessWidget {
                 (int index) {
                   return MoonBreadcrumbItem(
                     label: Text('$_breadcrumbItem $index'),
-                    leading: showLeading ? const Icon(_breadcrumbLeadingIcon) : null,
+                    leading:
+                        showLeading ? const Icon(_breadcrumbLeadingIcon) : null,
                     onTap: () => onTap?.call(index),
                   );
                 },

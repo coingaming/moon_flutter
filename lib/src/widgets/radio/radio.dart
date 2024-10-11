@@ -16,14 +16,17 @@ class MoonRadio<T> extends StatefulWidget {
   /// Set to true if this radio button is allowed to be returned to an
   /// indeterminate state by selecting it again when selected.
   ///
-  /// To indicate returning to an indeterminate state, [onChanged] is called with null.
+  /// To indicate returning to an indeterminate state, [onChanged] is called
+  /// with null.
   ///
-  /// If true, [onChanged] is called with [value] when selected while [groupValue] != [value],
-  /// or with null when selected again while [groupValue] == [value].
+  /// If true, [onChanged] is called with [value] when selected while
+  /// [groupValue] != [value], or with null when selected again while
+  /// [groupValue] == [value].
   ///
-  /// If false, [onChanged] is called with [value] when selected while [groupValue] != [value],
-  /// and only by selecting another radio button in the group (i.e. changing the value of [groupValue])
-  /// can this radio button be unselected.
+  /// If false, [onChanged] is called with [value] when selected while
+  /// [groupValue] != [value], and only by selecting another radio button in the
+  /// group (i.e. changing the value of [groupValue]) can this radio button be
+  /// unselected.
   final bool toggleable;
 
   /// The color of the active (selected) radio button.
@@ -48,21 +51,24 @@ class MoonRadio<T> extends StatefulWidget {
 
   /// The value of a group of radio buttons.
   ///
-  /// This radio button is considered selected if its [value] matches the [groupValue].
+  /// This radio button is considered selected if its [value] matches the
+  /// [groupValue].
   final T? groupValue;
 
   /// The callback that is called when the user selects the radio button.
   ///
-  /// The radio button passes its [value] as a parameter to [onChanged] callback. The radio
-  /// button does not actually change state until the parent widget rebuilds the
-  /// radio button with the new [groupValue].
+  /// The radio button passes its [value] as a parameter to [onChanged]
+  /// callback. The radio button does not actually change state until the parent
+  /// widget rebuilds the radio button with the new [groupValue].
   ///
   /// If null, the radio button is displayed as disabled.
   ///
-  /// The provided callback is not invoked if this radio button is already selected.
+  /// The provided callback is not invoked if this radio button is already
+  /// selected.
   ///
   /// The callback provided to [onChanged] should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent gets rebuilt.
+  /// [StatefulWidget] using the [State.setState] method, so that the parent
+  /// gets rebuilt.
   final ValueChanged<T?>? onChanged;
 
   /// Creates a Moon Design radio button.

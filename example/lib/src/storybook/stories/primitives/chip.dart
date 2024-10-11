@@ -69,7 +69,8 @@ class ChipStory extends StatelessWidget {
       options: colorOptions,
     );
 
-    final activeBackgroundColor = colorTable(context)[activeBackgroundColorKnob ?? 40];
+    final activeBackgroundColor =
+        colorTable(context)[activeBackgroundColorKnob ?? 40];
 
     final borderColorKnob = context.knobs.nullable.options(
       label: "borderColor",
@@ -117,8 +118,9 @@ class ChipStory extends StatelessWidget {
       description: "Show widget in MoonChip trailing slot.",
     );
 
-    final BorderRadiusGeometry? borderRadius =
-        borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null;
+    final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
 
     return Center(
       child: SingleChildScrollView(
@@ -139,9 +141,13 @@ class ChipStory extends StatelessWidget {
               borderRadius: borderRadius,
               showBorder: showBorderKnob,
               chipSize: chipSizeKnob,
-              leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
+              leading: showLeadingKnob
+                  ? const Icon(MoonIcons.other_frame_24_light)
+                  : null,
               label: showLabelKnob ? Text(customLabelTextKnob) : null,
-              trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
+              trailing: showTrailingKnob
+                  ? const Icon(MoonIcons.other_frame_24_light)
+                  : null,
             ),
             const TextDivider(text: "Text MoonChip"),
             MoonChip.text(
@@ -152,9 +158,13 @@ class ChipStory extends StatelessWidget {
               borderRadius: borderRadius,
               showBorder: showBorderKnob,
               chipSize: chipSizeKnob,
-              leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
+              leading: showLeadingKnob
+                  ? const Icon(MoonIcons.other_frame_24_light)
+                  : null,
               label: showLabelKnob ? Text(customLabelTextKnob) : null,
-              trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
+              trailing: showTrailingKnob
+                  ? const Icon(MoonIcons.other_frame_24_light)
+                  : null,
             ),
             const TextDivider(text: "Custom MoonChip"),
             MoonChip(
@@ -166,9 +176,13 @@ class ChipStory extends StatelessWidget {
               borderWidth: 2,
               showBorder: showBorderKnob,
               chipSize: chipSizeKnob,
-              leading: showLeadingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
+              leading: showLeadingKnob
+                  ? const Icon(MoonIcons.other_frame_24_light)
+                  : null,
               label: showLabelKnob ? Text(customLabelTextKnob) : null,
-              trailing: showTrailingKnob ? const Icon(MoonIcons.other_frame_24_light) : null,
+              trailing: showTrailingKnob
+                  ? const Icon(MoonIcons.other_frame_24_light)
+                  : null,
             ),
           ],
         ),

@@ -89,7 +89,9 @@ class TagStory extends StatelessWidget {
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
         child: MoonTag(
-          borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+          borderRadius: borderRadiusKnob != null
+              ? BorderRadius.circular(borderRadiusKnob.toDouble())
+              : null,
           onTap: () {},
           tagSize: tagSizeKnob,
           backgroundColor: backgroundColor,

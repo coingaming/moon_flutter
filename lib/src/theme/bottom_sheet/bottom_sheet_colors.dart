@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonBottomSheetColors extends ThemeExtension<MoonBottomSheetColors> with DiagnosticableTreeMixin {
+class MoonBottomSheetColors extends ThemeExtension<MoonBottomSheetColors>
+    with DiagnosticableTreeMixin {
   /// The text color of the MoonBottomSheet.
   final Color textColor;
 
@@ -40,13 +41,17 @@ class MoonBottomSheetColors extends ThemeExtension<MoonBottomSheetColors> with D
   }
 
   @override
-  MoonBottomSheetColors lerp(ThemeExtension<MoonBottomSheetColors>? other, double t) {
+  MoonBottomSheetColors lerp(
+    ThemeExtension<MoonBottomSheetColors>? other,
+    double t,
+  ) {
     if (other is! MoonBottomSheetColors) return this;
 
     return MoonBottomSheetColors(
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
       iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       barrierColor: colorPremulLerp(barrierColor, other.barrierColor, t)!,
     );
   }

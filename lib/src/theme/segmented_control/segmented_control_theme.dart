@@ -7,7 +7,9 @@ import 'package:moon_design/src/theme/segmented_control/segmented_control_sizes.
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme> with DiagnosticableTreeMixin {
+class MoonSegmentedControlTheme
+    extends ThemeExtension<MoonSegmentedControlTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -58,7 +60,10 @@ class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme
   }
 
   @override
-  MoonSegmentedControlTheme lerp(ThemeExtension<MoonSegmentedControlTheme>? other, double t) {
+  MoonSegmentedControlTheme lerp(
+    ThemeExtension<MoonSegmentedControlTheme>? other,
+    double t,
+  ) {
     if (other is! MoonSegmentedControlTheme) return this;
 
     return MoonSegmentedControlTheme(
@@ -76,7 +81,17 @@ class MoonSegmentedControlTheme extends ThemeExtension<MoonSegmentedControlTheme
       ..add(DiagnosticsProperty("type", "MoonSegmentedControlTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonSegmentedControlColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonSegmentedControlProperties>("properties", properties))
-      ..add(DiagnosticsProperty<MoonSegmentedControlSizes>("sizes", sizes));
+      ..add(
+        DiagnosticsProperty<MoonSegmentedControlProperties>(
+          "properties",
+          properties,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<MoonSegmentedControlSizes>(
+          "sizes",
+          sizes,
+        ),
+      );
   }
 }

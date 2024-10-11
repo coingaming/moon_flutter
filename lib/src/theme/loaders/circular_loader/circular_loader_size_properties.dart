@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonCircularLoaderSizeProperties extends ThemeExtension<MoonCircularLoaderSizeProperties>
+class MoonCircularLoaderSizeProperties
+    extends ThemeExtension<MoonCircularLoaderSizeProperties>
     with DiagnosticableTreeMixin {
   /// The size value of the MoonCircularLoader.
   final double loaderSizeValue;
@@ -29,12 +30,16 @@ class MoonCircularLoaderSizeProperties extends ThemeExtension<MoonCircularLoader
   }
 
   @override
-  MoonCircularLoaderSizeProperties lerp(ThemeExtension<MoonCircularLoaderSizeProperties>? other, double t) {
+  MoonCircularLoaderSizeProperties lerp(
+    ThemeExtension<MoonCircularLoaderSizeProperties>? other,
+    double t,
+  ) {
     if (other is! MoonCircularLoaderSizeProperties) return this;
 
     return MoonCircularLoaderSizeProperties(
       loaderSizeValue: lerpDouble(loaderSizeValue, other.loaderSizeValue, t)!,
-      loaderStrokeWidth: lerpDouble(loaderStrokeWidth, other.loaderStrokeWidth, t)!,
+      loaderStrokeWidth:
+          lerpDouble(loaderStrokeWidth, other.loaderStrokeWidth, t)!,
     );
   }
 

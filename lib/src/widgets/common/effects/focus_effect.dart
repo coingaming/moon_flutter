@@ -27,7 +27,8 @@ class MoonFocusEffect extends StatefulWidget {
   State<MoonFocusEffect> createState() => _MoonFocusEffectState();
 }
 
-class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProviderStateMixin {
+class _MoonFocusEffectState extends State<MoonFocusEffect>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController = AnimationController(
     vsync: this,
     duration: widget.effectDuration,
@@ -43,7 +44,9 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
   void didUpdateWidget(MoonFocusEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    widget.show ? _animationController.forward() : _animationController.reverse();
+    widget.show
+        ? _animationController.forward()
+        : _animationController.reverse();
   }
 
   @override
@@ -55,7 +58,9 @@ class _MoonFocusEffectState extends State<MoonFocusEffect> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final resolvedBorderRadius = widget.childBorderRadius?.resolve(Directionality.of(context)) ?? BorderRadius.zero;
+    final resolvedBorderRadius =
+        widget.childBorderRadius?.resolve(Directionality.of(context)) ??
+            BorderRadius.zero;
 
     return AnimatedBuilder(
       animation: _animationController,

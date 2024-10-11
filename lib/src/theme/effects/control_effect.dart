@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonControlEffect extends ThemeExtension<MoonControlEffect> with DiagnosticableTreeMixin {
+class MoonControlEffect extends ThemeExtension<MoonControlEffect>
+    with DiagnosticableTreeMixin {
   /// The effect color of the control.
   final Color? effectColor;
 

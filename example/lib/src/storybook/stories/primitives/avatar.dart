@@ -51,7 +51,8 @@ class AvatarStory extends StatelessWidget {
       options: colorOptions,
     );
 
-    final backgroundColor = colorTable(context)[avatarBackgroundColorKnob ?? 40];
+    final backgroundColor =
+        colorTable(context)[avatarBackgroundColorKnob ?? 40];
 
     final badgeColorKnob = context.knobs.nullable.options(
       label: "badgeColor",
@@ -120,12 +121,15 @@ class AvatarStory extends StatelessWidget {
             MoonAvatar(
               avatarSize: avatarSizeKnob,
               badgeSize: badgeSizeKnob?.toDouble(),
-              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+              borderRadius: borderRadiusKnob != null
+                  ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                  : null,
               badgeMarginValue: badgeMarginKnob?.toDouble(),
               backgroundColor: backgroundColor,
               showBadge: showBadgeKnob,
               badgeColor: badgeColor,
-              badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
+              badgeAlignment:
+                  avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
               content: Padding(
                 padding: const EdgeInsets.only(top: 1.0),
                 child: Text(
@@ -138,13 +142,17 @@ class AvatarStory extends StatelessWidget {
             MoonAvatar(
               avatarSize: avatarSizeKnob,
               badgeSize: badgeSizeKnob?.toDouble(),
-              borderRadius: borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+              borderRadius: borderRadiusKnob != null
+                  ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                  : null,
               badgeMarginValue: badgeMarginKnob?.toDouble(),
               backgroundColor: backgroundColor,
               showBadge: showBadgeKnob,
               badgeColor: badgeColor,
-              badgeAlignment: avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
-              backgroundImage: const AssetImage("assets/images/placeholder-640x359.png"),
+              badgeAlignment:
+                  avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
+              backgroundImage:
+                  const AssetImage("assets/images/placeholder-640x359.png"),
             ),
           ],
         ),

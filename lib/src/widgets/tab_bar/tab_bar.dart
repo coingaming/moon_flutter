@@ -68,8 +68,8 @@ class MoonTabBar extends StatefulWidget {
   /// The custom decoration of the tab bar.
   final Decoration? decoration;
 
-  /// The external controller for managing tab selection and animation in tab bar.
-  /// If tabController is provided, then [initialIndex] is ignored and
+  /// The external controller for managing tab selection and animation in tab
+  /// bar. If tabController is provided, then [initialIndex] is ignored and
   /// tabController's index is used instead.
   final TabController? tabController;
 
@@ -84,8 +84,8 @@ class MoonTabBar extends StatefulWidget {
 
   /// The list of pill tabs to display as the children of the pill tab bar.
   /// At least one child is required when this property is used.
-  /// This property cannot be used in conjunction with the [tabs] or [customTabs]
-  /// properties; both must be set to null.
+  /// This property cannot be used in conjunction with the [tabs] or
+  /// [customTabs] properties; both must be set to null.
   final List<MoonPillTab>? pillTabs;
 
   /// The list of custom tabs to display as the children of the custom tab bar.

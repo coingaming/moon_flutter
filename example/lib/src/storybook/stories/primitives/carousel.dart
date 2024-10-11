@@ -14,7 +14,8 @@ class CarouselStory extends StatefulWidget {
 }
 
 class _CarouselStoryState extends State<CarouselStory> {
-  MoonCarouselScrollController carouselController = MoonCarouselScrollController();
+  MoonCarouselScrollController carouselController =
+      MoonCarouselScrollController();
 
   int selectedDot = 0;
 
@@ -88,7 +89,10 @@ class _CarouselStoryState extends State<CarouselStory> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 64.0,
+              horizontal: 16.0,
+            ),
             child: Column(
               children: [
                 const TextDivider(
@@ -109,11 +113,17 @@ class _CarouselStoryState extends State<CarouselStory> {
                       itemExtent: itemExtentKnob?.toDouble() ?? 114,
                       anchor: anchorKnob ?? 16 / (constraints.maxWidth - 16),
                       clampMaxExtent: clampMaxExtentKnob,
-                      itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
+                      itemBuilder: (
+                        BuildContext context,
+                        int itemIndex,
+                        int _,
+                      ) =>
+                          Container(
                         decoration: ShapeDecoration(
                           color: backgroundColor ?? context.moonColors!.goku,
                           shape: MoonSquircleBorder(
-                            borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+                            borderRadius: BorderRadius.circular(12)
+                                .squircleBorderRadius(context),
                           ),
                         ),
                         child: Center(
@@ -140,12 +150,20 @@ class _CarouselStoryState extends State<CarouselStory> {
                               autoPlay: autoPlayKnob,
                               controller: carouselController,
                               physics: const PageScrollPhysics(),
-                              onIndexChanged: (int index) => setState(() => selectedDot = index),
-                              itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
+                              onIndexChanged: (int index) =>
+                                  setState(() => selectedDot = index),
+                              itemBuilder: (
+                                BuildContext context,
+                                int itemIndex,
+                                int _,
+                              ) =>
+                                  Container(
                                 decoration: ShapeDecoration(
-                                  color: backgroundColor ?? context.moonColors!.goku,
+                                  color: backgroundColor ??
+                                      context.moonColors!.goku,
                                   shape: MoonSquircleBorder(
-                                    borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+                                    borderRadius: BorderRadius.circular(12)
+                                        .squircleBorderRadius(context),
                                   ),
                                 ),
                                 child: Center(
@@ -155,42 +173,56 @@ class _CarouselStoryState extends State<CarouselStory> {
                             ),
                             Align(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     MoonButton.icon(
                                       buttonSize: MoonButtonSize.sm,
                                       showBorder: true,
                                       icon: Icon(
-                                        Directionality.of(context) == TextDirection.ltr
-                                            ? MoonIcons.controls_chevron_left_small_24_light
-                                            : MoonIcons.controls_chevron_right_small_24_light,
+                                        Directionality.of(context) ==
+                                                TextDirection.ltr
+                                            ? MoonIcons
+                                                .controls_chevron_left_small_24_light
+                                            : MoonIcons
+                                                .controls_chevron_right_small_24_light,
                                       ),
-                                      decoration: ShapeDecorationWithPremultipliedAlpha(
+                                      decoration:
+                                          ShapeDecorationWithPremultipliedAlpha(
                                         color: context.moonColors!.goku,
                                         shadows: context.moonShadows!.sm,
                                         shape: MoonSquircleBorder(
-                                          borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
+                                          borderRadius: BorderRadius.circular(8)
+                                              .squircleBorderRadius(context),
                                         ),
                                       ),
                                       onTap: selectedDot == 0 && !isLoopedKnob
                                           ? null
-                                          : () => carouselController.previousItem(),
+                                          : () =>
+                                              carouselController.previousItem(),
                                     ),
                                     MoonButton.icon(
                                       buttonSize: MoonButtonSize.sm,
                                       showBorder: true,
                                       icon: Icon(
-                                        Directionality.of(context) == TextDirection.ltr
-                                            ? MoonIcons.controls_chevron_right_small_24_light
-                                            : MoonIcons.controls_chevron_left_small_24_light,
+                                        Directionality.of(context) ==
+                                                TextDirection.ltr
+                                            ? MoonIcons
+                                                .controls_chevron_right_small_24_light
+                                            : MoonIcons
+                                                .controls_chevron_left_small_24_light,
                                       ),
-                                      decoration: ShapeDecorationWithPremultipliedAlpha(
+                                      decoration:
+                                          ShapeDecorationWithPremultipliedAlpha(
                                         color: context.moonColors!.goku,
                                         shadows: context.moonShadows!.sm,
                                         shape: MoonSquircleBorder(
-                                          borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
+                                          borderRadius: BorderRadius.circular(8)
+                                              .squircleBorderRadius(context),
                                         ),
                                       ),
                                       onTap: selectedDot == 4 && !isLoopedKnob

@@ -68,13 +68,16 @@ class MoonSwitch extends StatefulWidget {
   /// The semantic label for the switch.
   final String? semanticLabel;
 
-  /// The callback that is called when the switch toggles between the active (on) and inactive (off) states.
+  /// The callback that is called when the switch toggles between the
+  /// active (on) and inactive (off) states.
   final ValueChanged<bool>? onChanged;
 
-  /// The widget to display on the left side of the switch track when the switch is active (on).
+  /// The widget to display on the left side of the switch track when the switch
+  /// is active (on).
   final Widget? activeTrackWidget;
 
-  /// The widget to display on the right side of the switch track when the switch is inactive (off).
+  /// The widget to display on the right side of the switch track when the
+  /// switch is inactive (off).
   final Widget? inactiveTrackWidget;
 
   /// The widget to display inside the thumb when the switch is active (on).
@@ -161,7 +164,8 @@ class _MoonSwitchState extends State<MoonSwitch>
   // animation attempts to move the thumb to the closest end after the most
   // recent drag animation. This ensures that the curve remains unchanged when
   // the controller's value is not 0 or 1.
-  // It can be set to false when it's an implicit animation triggered by changes in widget.value.
+  // It can be set to false when it's an implicit animation triggered by changes
+  // in widget.value.
   void _resumePositionAnimation({bool isLinear = true}) {
     _needsPositionAnimation = false;
 

@@ -8,7 +8,8 @@ import 'package:moon_design/src/theme/accordion/accordion_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with DiagnosticableTreeMixin {
+class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -89,8 +90,14 @@ class MoonAccordionTheme extends ThemeExtension<MoonAccordionTheme> with Diagnos
       ..add(DiagnosticsProperty("type", "MoonAccordionTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonAccordionColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonAccordionProperties>("properties", properties))
-      ..add(DiagnosticsProperty<MoonAccordionShadows>("shadows", shadows))
-      ..add(DiagnosticsProperty<MoonAccordionSizes>("sizes", sizes));
+      ..add(
+        DiagnosticsProperty<MoonAccordionProperties>("properties", properties),
+      )
+      ..add(
+        DiagnosticsProperty<MoonAccordionShadows>("shadows", shadows),
+      )
+      ..add(
+        DiagnosticsProperty<MoonAccordionSizes>("sizes", sizes),
+      );
   }
 }

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonTextInputGroupColors extends ThemeExtension<MoonTextInputGroupColors> with DiagnosticableTreeMixin {
+class MoonTextInputGroupColors extends ThemeExtension<MoonTextInputGroupColors>
+    with DiagnosticableTreeMixin {
   /// The background color of the MoonTextInputGroup.
   final Color backgroundColor;
 
@@ -46,15 +47,21 @@ class MoonTextInputGroupColors extends ThemeExtension<MoonTextInputGroupColors> 
   }
 
   @override
-  MoonTextInputGroupColors lerp(ThemeExtension<MoonTextInputGroupColors>? other, double t) {
+  MoonTextInputGroupColors lerp(
+    ThemeExtension<MoonTextInputGroupColors>? other,
+    double t,
+  ) {
     if (other is! MoonTextInputGroupColors) return this;
 
     return MoonTextInputGroupColors(
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       errorColor: colorPremulLerp(errorColor, other.errorColor, t)!,
-      helperTextColor: colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
+      helperTextColor:
+          colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
       borderColor: colorPremulLerp(borderColor, other.borderColor, t)!,
-      hoverBorderColor: colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
+      hoverBorderColor:
+          colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
     );
   }
 

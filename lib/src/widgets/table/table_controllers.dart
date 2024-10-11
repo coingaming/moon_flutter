@@ -6,7 +6,8 @@ class TableControllers {
   late ScrollController verticalScrollController;
   late ScrollController horizontalScrollController;
 
-  final LinkedScrollControllerGroup _horizontalControllersGroup = LinkedScrollControllerGroup();
+  final LinkedScrollControllerGroup _horizontalControllersGroup =
+      LinkedScrollControllerGroup();
 
   final bool isHeaderPinned;
   final bool isFooterPinned;
@@ -27,9 +28,18 @@ class TableControllers {
     verticalScrollController = ScrollController();
     horizontalScrollController = _horizontalControllersGroup.addAndGet();
 
-    if (isHeaderPinned) headerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
-    if (isFooterPinned) footerHorizontalScrollController = _horizontalControllersGroup.addAndGet();
-    if (!hasPinnedEmptyPlaceholder) rowsPlaceholderHorizontalScrollController = _horizontalControllersGroup.addAndGet();
+    if (isHeaderPinned) {
+      headerHorizontalScrollController =
+          _horizontalControllersGroup.addAndGet();
+    }
+    if (isFooterPinned) {
+      footerHorizontalScrollController =
+          _horizontalControllersGroup.addAndGet();
+    }
+    if (!hasPinnedEmptyPlaceholder) {
+      rowsPlaceholderHorizontalScrollController =
+          _horizontalControllersGroup.addAndGet();
+    }
   }
 
   void dispose() {
@@ -38,6 +48,8 @@ class TableControllers {
 
     if (isHeaderPinned) headerHorizontalScrollController?.dispose();
     if (isFooterPinned) footerHorizontalScrollController?.dispose();
-    if (!hasPinnedEmptyPlaceholder) rowsPlaceholderHorizontalScrollController?.dispose();
+    if (!hasPinnedEmptyPlaceholder) {
+      rowsPlaceholderHorizontalScrollController?.dispose();
+    }
   }
 }

@@ -19,7 +19,8 @@ void main() {
     expect(find.byKey(_popoverKey), findsOneWidget);
   });
 
-  testWidgets("Popover is displayed when the 'show' button is tapped.", (tester) async {
+  testWidgets("Popover is displayed when the 'show' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(const _PopoverTestWidget());
     final button = find.byKey(_showButtonKey);
 
@@ -31,7 +32,9 @@ void main() {
     expect(find.byWidget(_content), findsOneWidget);
   });
 
-  testWidgets("Popover closes when a tap occurs outside its content, if dismissible.", (tester) async {
+  testWidgets(
+      "Popover closes when a tap occurs outside its content, if dismissible.",
+      (tester) async {
     await tester.pumpWidget(const _PopoverTestWidget());
     final button = find.byKey(_showButtonKey);
 
@@ -48,7 +51,9 @@ void main() {
     expect(find.byWidget(_content), findsNothing);
   });
 
-  testWidgets("Popover stays visible when a tap occurs outside its content, if not dismissible.", (tester) async {
+  testWidgets(
+      "Popover stays visible when a tap occurs outside its content, "
+      "if not dismissible.", (tester) async {
     await tester.pumpWidget(
       const _PopoverTestWidget(
         isDismissible: false,
@@ -69,7 +74,8 @@ void main() {
     expect(find.byWidget(_content), findsOneWidget);
   });
 
-  testWidgets("Popover closes when the 'close' button is tapped.", (tester) async {
+  testWidgets("Popover closes when the 'close' button is tapped.",
+      (tester) async {
     await tester.pumpWidget(const _PopoverTestWidget());
     final button = find.byKey(_showButtonKey);
 

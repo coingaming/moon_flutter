@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonBottomSheetProperties extends ThemeExtension<MoonBottomSheetProperties> with DiagnosticableTreeMixin {
+class MoonBottomSheetProperties
+    extends ThemeExtension<MoonBottomSheetProperties>
+    with DiagnosticableTreeMixin {
   /// The border radius of the MoonBottomSheet.
   final BorderRadiusGeometry borderRadius;
 
@@ -38,12 +40,17 @@ class MoonBottomSheetProperties extends ThemeExtension<MoonBottomSheetProperties
   }
 
   @override
-  MoonBottomSheetProperties lerp(ThemeExtension<MoonBottomSheetProperties>? other, double t) {
+  MoonBottomSheetProperties lerp(
+    ThemeExtension<MoonBottomSheetProperties>? other,
+    double t,
+  ) {
     if (other is! MoonBottomSheetProperties) return this;
 
     return MoonBottomSheetProperties(
-      borderRadius: BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
-      transitionDuration: lerpDuration(transitionDuration, other.transitionDuration, t),
+      borderRadius:
+          BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
+      transitionDuration:
+          lerpDuration(transitionDuration, other.transitionDuration, t),
       transitionCurve: other.transitionCurve,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
     );
@@ -53,10 +60,20 @@ class MoonBottomSheetProperties extends ThemeExtension<MoonBottomSheetProperties
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonBottomSheetProperties"))
-      ..add(DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius))
-      ..add(DiagnosticsProperty<Duration>("transitionDuration", transitionDuration))
-      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
-      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle));
+      ..add(
+        DiagnosticsProperty("type", "MoonBottomSheetProperties"),
+      )
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>("transitionCurve", transitionCurve),
+      )
+      ..add(
+        DiagnosticsProperty<TextStyle>("textStyle", textStyle),
+      );
   }
 }

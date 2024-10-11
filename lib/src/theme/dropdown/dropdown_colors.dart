@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonDropdownColors extends ThemeExtension<MoonDropdownColors> with DiagnosticableTreeMixin {
+class MoonDropdownColors extends ThemeExtension<MoonDropdownColors>
+    with DiagnosticableTreeMixin {
   /// The text color of the MoonDropdown.
   final Color textColor;
 
@@ -40,7 +41,8 @@ class MoonDropdownColors extends ThemeExtension<MoonDropdownColors> with Diagnos
     return MoonDropdownColors(
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
       iconColor: colorPremulLerp(iconColor, other.iconColor, t)!,
-      backgroundColor: colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
+      backgroundColor:
+          colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
     );
   }
 

@@ -7,7 +7,8 @@ import 'package:moon_design/src/theme/toast/toast_shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonToastTheme extends ThemeExtension<MoonToastTheme> with DiagnosticableTreeMixin {
+class MoonToastTheme extends ThemeExtension<MoonToastTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 

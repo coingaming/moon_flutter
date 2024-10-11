@@ -5,7 +5,8 @@ import 'package:moon_design/src/theme/menu_item/menu_item_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonMenuItemTheme extends ThemeExtension<MoonMenuItemTheme> with DiagnosticableTreeMixin {
+class MoonMenuItemTheme extends ThemeExtension<MoonMenuItemTheme>
+    with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
@@ -68,6 +69,8 @@ class MoonMenuItemTheme extends ThemeExtension<MoonMenuItemTheme> with Diagnosti
       ..add(DiagnosticsProperty("type", "MoonMenuItemTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
       ..add(DiagnosticsProperty<MoonMenuItemColors>("colors", colors))
-      ..add(DiagnosticsProperty<MoonMenuItemProperties>("properties", properties));
+      ..add(
+        DiagnosticsProperty<MoonMenuItemProperties>("properties", properties),
+      );
   }
 }

@@ -4,20 +4,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonOpacities extends ThemeExtension<MoonOpacities> with DiagnosticableTreeMixin {
+class MoonOpacities extends ThemeExtension<MoonOpacities>
+    with DiagnosticableTreeMixin {
   static const opacities = MoonOpacities(disabled: 0.6);
 
   /// The disabled opacity value.
   final double disabled;
 
-  const MoonOpacities({
-    required this.disabled,
-  });
+  const MoonOpacities({required this.disabled});
 
   @override
-  MoonOpacities copyWith({
-    double? disabled,
-  }) {
+  MoonOpacities copyWith({double? disabled}) {
     return MoonOpacities(
       disabled: disabled ?? this.disabled,
     );
