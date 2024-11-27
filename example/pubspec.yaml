@@ -14,7 +14,7 @@ dependencies:
   go_router: ^12.1.1
   moon_design:
     path: ../
-  package_info_plus: ^3.0.2
+  package_info_plus: ^8.0.2
   storybook_flutter:
     git:
       url: https://github.com/coingaming/storybook_flutter.git
