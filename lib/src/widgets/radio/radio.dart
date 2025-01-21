@@ -170,10 +170,9 @@ class _RadioState<T> extends State<MoonRadio<T>>
     final double effectiveDisabledOpacityValue =
         context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
-        MaterialStateProperty.resolveWith<MouseCursor>(
-            (Set<MaterialState> states) {
-      return MaterialStateMouseCursor.clickable.resolve(states);
+    final WidgetStateProperty<MouseCursor> effectiveMouseCursor =
+        WidgetStateProperty.resolveWith<MouseCursor>((Set<WidgetState> states) {
+      return WidgetStateMouseCursor.clickable.resolve(states);
     });
 
     return Semantics(
@@ -183,7 +182,7 @@ class _RadioState<T> extends State<MoonRadio<T>>
       child: TouchTargetPadding(
         minSize: Size(widget.tapAreaSizeValue, widget.tapAreaSizeValue),
         child: MoonFocusEffect(
-          show: states.contains(MaterialState.focused),
+          show: states.contains(WidgetState.focused),
           effectExtent: effectiveFocusEffectExtent,
           childBorderRadius: BorderRadius.circular(8),
           effectColor: effectiveFocusEffectColor,
@@ -191,7 +190,7 @@ class _RadioState<T> extends State<MoonRadio<T>>
           effectDuration: effectiveFocusEffectDuration,
           child: RepaintBoundary(
             child: AnimatedOpacity(
-              opacity: states.contains(MaterialState.disabled)
+              opacity: states.contains(WidgetState.disabled)
                   ? effectiveDisabledOpacityValue
                   : 1,
               duration: effectiveFocusEffectDuration,

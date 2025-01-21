@@ -1006,12 +1006,12 @@ class _MoonTextInputState extends State<MoonTextInput>
         Theme.of(context).platform,
       );
 
-  Set<MaterialState> get _materialState {
-    return <MaterialState>{
-      if (!_isEnabled) MaterialState.disabled,
-      if (_isHovering) MaterialState.hovered,
-      if (_hasFocus) MaterialState.focused,
-      if (_hasError) MaterialState.error,
+  Set<WidgetState> get _materialState {
+    return <WidgetState>{
+      if (!_isEnabled) WidgetState.disabled,
+      if (_isHovering) WidgetState.hovered,
+      if (_hasFocus) WidgetState.focused,
+      if (_hasError) WidgetState.error,
     };
   }
 
@@ -1363,8 +1363,8 @@ class _MoonTextInputState extends State<MoonTextInput>
     TextSelectionControls? textSelectionControls = widget.selectionControls;
 
     final MouseCursor effectiveMouseCursor =
-        MaterialStateProperty.resolveAs<MouseCursor>(
-      widget.mouseCursor ?? MaterialStateMouseCursor.textable,
+        WidgetStateProperty.resolveAs<MouseCursor>(
+      widget.mouseCursor ?? WidgetStateMouseCursor.textable,
       _materialState,
     );
 
