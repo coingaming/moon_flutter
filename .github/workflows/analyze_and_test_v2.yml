@@ -1,4 +1,4 @@
-name: Analyze and test
+name: Analyze and test (v2)
 on:
   pull_request:
     branches:
