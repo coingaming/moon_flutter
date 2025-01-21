@@ -104,11 +104,11 @@ class _MoonCheckboxState extends State<MoonCheckbox>
   bool? get value => widget.value;
 
   BorderSide? _resolveSide(BorderSide? side) {
-    if (side is MaterialStateBorderSide) {
-      return MaterialStateProperty.resolveAs<BorderSide?>(side, states);
+    if (side is WidgetStateBorderSide) {
+      return WidgetStateProperty.resolveAs<BorderSide?>(side, states);
     }
 
-    if (!states.contains(MaterialState.selected)) return side;
+    if (!states.contains(WidgetState.selected)) return side;
 
     return null;
   }
@@ -188,10 +188,9 @@ class _MoonCheckboxState extends State<MoonCheckbox>
     final double effectiveDisabledOpacityValue =
         context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    final MaterialStateProperty<MouseCursor> effectiveMouseCursor =
-        MaterialStateProperty.resolveWith<MouseCursor>(
-            (Set<MaterialState> states) {
-      return MaterialStateMouseCursor.clickable.resolve(states);
+    final WidgetStateProperty<MouseCursor> effectiveMouseCursor =
+        WidgetStateProperty.resolveWith<MouseCursor>((Set<WidgetState> states) {
+      return WidgetStateMouseCursor.clickable.resolve(states);
     });
 
     return Semantics(
@@ -202,14 +201,14 @@ class _MoonCheckboxState extends State<MoonCheckbox>
         minSize: Size(widget.tapAreaSizeValue, widget.tapAreaSizeValue),
         child: RepaintBoundary(
           child: MoonFocusEffect(
-            show: states.contains(MaterialState.focused),
+            show: states.contains(WidgetState.focused),
             childBorderRadius: effectiveBorderRadius,
             effectColor: effectiveFocusEffectColor,
             effectCurve: effectiveFocusEffectCurve,
             effectDuration: effectiveFocusEffectDuration,
             effectExtent: effectiveFocusEffectExtent,
             child: AnimatedOpacity(
-              opacity: states.contains(MaterialState.disabled)
+              opacity: states.contains(WidgetState.disabled)
                   ? effectiveDisabledOpacityValue
                   : 1,
               duration: effectiveFocusEffectDuration,

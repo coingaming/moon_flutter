@@ -92,6 +92,22 @@ class _AlertStoryState extends State<AlertStory> {
       max: 32,
     );
 
+    final horizontalGapKnob = context.knobs.nullable.slider(
+      label: "horizontalGap",
+      description: "Horizontal gap between header elements of MoonAlert.",
+      enabled: false,
+      initial: 12,
+      max: 32,
+    );
+
+    final verticalGapKnob = context.knobs.nullable.slider(
+      label: "verticalGap",
+      description: "Vertical gap between header and content of MoonAlert.",
+      enabled: false,
+      initial: 8,
+      max: 32,
+    );
+
     final showBorderKnob = context.knobs.boolean(
       label: "showBorder",
       description: "Show border for MoonAlert.",
@@ -141,6 +157,8 @@ class _AlertStoryState extends State<AlertStory> {
                   borderColor: borderColor,
                   backgroundColor: backgroundColor,
                   borderRadius: borderRadius,
+                  horizontalGap: horizontalGapKnob,
+                  verticalGap: verticalGapKnob,
                   leading: showLeadingKnob
                       ? Icon(
                           MoonIcons.other_frame_24_light,
