@@ -2,7 +2,7 @@ name: Analyze and test
 on:
   pull_request:
     branches:
-      - main
+      - v2
     types: [ opened, synchronize, reopened ]
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.3'
+          flutter-version: '3.24.5'
           channel: stable
 
       - name: Install Dependencies
