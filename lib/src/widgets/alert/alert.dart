@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/theme.dart';
+import 'package:mix/mix.dart';
+import 'package:moon_core/moon_core.dart';
+
 import 'package:moon_design/src/theme/tokens/borders.dart';
 import 'package:moon_design/src/theme/tokens/sizes.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
-import 'package:moon_design/src/utils/extensions.dart';
-import 'package:moon_design/src/utils/shape_decoration_premul.dart';
-import 'package:moon_design/src/utils/squircle/squircle_border.dart';
+
 import 'package:moon_tokens/moon_tokens.dart';
 
-class MoonAlert extends StatefulWidget {
+class MoonAlert extends StatelessWidget {
   /// Whether to show the alert.
   final bool show;
 
@@ -36,11 +36,11 @@ class MoonAlert extends StatefulWidget {
   /// of the alert.
   final double? horizontalGap;
 
-  /// The minimum height of the alert.
-  final double? minimumHeight;
-
   /// The vertical gap between the alert header and [content].
   final double? verticalGap;
+
+  /// The minimum height of the alert.
+  final double? minimumHeight;
 
   /// The duration of the alert transition animation (fade in or out).
   final Duration? transitionDuration;
@@ -153,214 +153,114 @@ class MoonAlert extends StatefulWidget {
         transitionCurve = null;
 
   @override
-  State<MoonAlert> createState() => _MoonAlertState();
-}
-
-class _MoonAlertState extends State<MoonAlert>
-    with SingleTickerProviderStateMixin {
-  bool _isVisible = true;
-
-  AnimationController? _animationController;
-  Animation<double>? _curvedAnimation;
-
-  TextStyle _getLabelTextStyle({required BuildContext context}) {
-    if (widget.content != null) {
-      return context.moonTheme?.alertTheme.properties.labelTextStyle ??
-          MoonTypography.typography.heading.textDefault;
-    } else {
-      return context.moonTheme?.alertTheme.properties.contentTextStyle ??
-          MoonTypography.typography.body.textDefault;
-    }
-  }
-
-  void _showAlert() {
-    _animationController!.forward();
-
-    setState(() => _isVisible = true);
-  }
-
-  void _hideAlert() {
-    _animationController!.reverse().then<void>((void value) {
-      if (mounted) setState(() => _isVisible = false);
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
-      if (!mounted) return;
-
-      if (_isVisible) _animationController!.value = 1.0;
-    });
-  }
-
-  @override
-  void didUpdateWidget(MoonAlert oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (oldWidget.show != widget.show) {
-      widget.show ? _showAlert() : _hideAlert();
-    }
-  }
-
-  @override
-  void dispose() {
-    _animationController!.dispose();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final BorderRadiusGeometry effectiveBorderRadius = widget.borderRadius ??
-        context.moonTheme?.alertTheme.properties.borderRadius ??
-        MoonBorders.borders.interactiveSm;
+    final BorderRadiusGeometry effectiveBorderRadius =
+        borderRadius ?? MoonBorders.borders.interactiveSm;
 
-    final double effectiveBorderWidth = widget.borderWidth ??
-        context.moonBorders?.defaultBorderWidth ??
-        MoonBorders.borders.defaultBorderWidth;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? MoonColors.light.goku;
 
-    final double effectiveHorizontalGap = widget.horizontalGap ??
-        context.moonTheme?.alertTheme.properties.horizontalGap ??
-        MoonSizes.sizes.x3s;
+    final Color effectiveBorderColor = borderColor ?? MoonColors.light.bulma;
 
-    final double effectiveVerticalGap = widget.verticalGap ??
-        context.moonTheme?.alertTheme.properties.verticalGap ??
-        MoonSizes.sizes.x4s;
+    final Color effectiveTextColor = color ?? MoonColors.light.textPrimary;
 
-    final double effectiveMinimumHeight = widget.minimumHeight ??
-        context.moonTheme?.alertTheme.properties.minimumHeight ??
-        MoonSizes.sizes.xl;
+    final Color effectiveIconColor = color ?? MoonColors.light.iconPrimary;
 
-    final Color effectiveBackgroundColor = widget.backgroundColor ??
-        context.moonTheme?.alertTheme.colors.backgroundColor ??
-        MoonColors.light.goku;
+    final double effectiveBorderWidth =
+        borderWidth ?? MoonBorders.borders.defaultBorderWidth;
 
-    final Color effectiveBorderColor = widget.borderColor ??
-        context.moonTheme?.alertTheme.colors.borderColor ??
-        MoonColors.light.bulma;
+    final double effectiveHorizontalGap = horizontalGap ?? MoonSizes.sizes.x3s;
 
-    final Color effectiveTextColor = widget.color ??
-        context.moonTheme?.alertTheme.colors.textColor ??
-        MoonColors.light.textPrimary;
+    final double effectiveVerticalGap = verticalGap ?? MoonSizes.sizes.x4s;
 
-    final Color effectiveIconColor = widget.color ??
-        context.moonTheme?.alertTheme.colors.iconColor ??
-        MoonColors.light.iconPrimary;
+    final double effectiveMinimumHeight = minimumHeight ?? MoonSizes.sizes.xl;
 
-    final EdgeInsetsGeometry effectivePadding = widget.padding ??
-        context.moonTheme?.alertTheme.properties.padding ??
-        EdgeInsets.all(MoonSizes.sizes.x2s);
-
-    final TextStyle effectiveLabelTextStyle =
-        _getLabelTextStyle(context: context);
-
-    final TextStyle effectiveContentTextStyle =
-        context.moonTheme?.alertTheme.properties.contentTextStyle ??
-            MoonTypography.typography.body.textDefault;
-
-    final Duration effectiveTransitionDuration = widget.transitionDuration ??
-        context.moonTheme?.alertTheme.properties.transitionDuration ??
+    final Duration effectiveTransitionDuration = transitionDuration ??
         MoonTransitions.transitions.defaultTransitionDuration;
 
-    final Curve effectiveTransitionCurve = widget.transitionCurve ??
-        context.moonTheme?.alertTheme.properties.transitionCurve ??
-        MoonTransitions.transitions.defaultTransitionCurve;
+    final Curve effectiveTransitionCurve =
+        transitionCurve ?? MoonTransitions.transitions.defaultTransitionCurve;
 
-    _animationController ??= AnimationController(
-      duration: effectiveTransitionDuration,
-      vsync: this,
-    );
+    final EdgeInsetsGeometry effectivePadding =
+        padding ?? EdgeInsets.all(MoonSizes.sizes.x2s);
 
-    _curvedAnimation ??= CurvedAnimation(
-      parent: _animationController!,
-      curve: effectiveTransitionCurve,
-    );
+    final TextStyle effectiveLabelTextStyle = content != null
+        ? MoonTypography.typography.heading.textDefault
+        : MoonTypography.typography.body.textDefault;
 
-    return Visibility(
-      visible: _isVisible,
-      child: Semantics(
-        label: widget.semanticLabel,
-        child: RepaintBoundary(
-          child: FadeTransition(
-            opacity: _curvedAnimation!,
-            child: Container(
-              padding: effectivePadding,
-              constraints: BoxConstraints(minHeight: effectiveMinimumHeight),
-              decoration: widget.decoration ??
-                  ShapeDecorationWithPremultipliedAlpha(
-                    color: effectiveBackgroundColor,
-                    shape: MoonSquircleBorder(
-                      side: BorderSide(
-                        color: effectiveBorderColor,
-                        width: widget.showBorder ? effectiveBorderWidth : 0,
-                        style: widget.showBorder
-                            ? BorderStyle.solid
-                            : BorderStyle.none,
-                      ),
-                      borderRadius:
-                          effectiveBorderRadius.squircleBorderRadius(context),
-                    ),
-                  ),
-              child: IconTheme(
-                data: IconThemeData(
-                  color: effectiveIconColor,
-                ),
-                child: DefaultTextStyle(
-                  style: effectiveContentTextStyle.copyWith(
-                    color: effectiveTextColor,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          if (widget.leading != null)
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                end: effectiveHorizontalGap,
-                              ),
-                              child: widget.leading,
-                            ),
-                          DefaultTextStyle(
-                            style: effectiveLabelTextStyle.copyWith(
-                              color: effectiveTextColor,
-                            ),
-                            child: Expanded(
-                              child: widget.label,
-                            ),
-                          ),
-                          if (widget.trailing != null)
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                start: effectiveHorizontalGap,
-                              ),
-                              child: widget.trailing,
-                            ),
-                        ],
-                      ),
-                      if (widget.content != null)
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.only(
-                                  top: effectiveVerticalGap,
-                                ),
-                                child: widget.content,
-                              ),
-                            ),
-                          ],
-                        ),
-                    ],
-                  ),
+    final TextStyle effectiveContentTextStyle =
+        MoonTypography.typography.body.textDefault;
+
+    final BoxSpecAttribute effectiveDecoration = decoration != null
+        ? decorationToAttribute(decoration!)
+        : decorationToAttribute(
+            ShapeDecorationWithPremultipliedAlpha(
+              color: effectiveBackgroundColor,
+              shape: MoonBorder(
+                borderRadius: effectiveBorderRadius,
+                side: BorderSide(
+                  color: effectiveBorderColor,
+                  width: showBorder ? effectiveBorderWidth : 0,
+                  style: showBorder ? BorderStyle.solid : BorderStyle.none,
                 ),
               ),
             ),
+          );
+
+    final Style alertStyle = Style(
+      $box.chain
+        ..padding.as(effectivePadding)
+        ..constraints.minHeight(effectiveMinimumHeight),
+      effectiveDecoration,
+      $flex.chain
+        ..gap(effectiveVerticalGap)
+        ..mainAxisAlignment.center(),
+      $with.iconTheme.data(color: effectiveIconColor),
+      $with.defaultTextStyle.style.as(
+        effectiveContentTextStyle.copyWith(color: effectiveTextColor),
+      ),
+    );
+
+    final Style labelTextStyle = Style(
+      $with.expanded(),
+      $with.defaultTextStyle.style.as(
+        effectiveLabelTextStyle.copyWith(color: effectiveTextColor),
+      ),
+    );
+
+    final Style headerRowStyle = Style(
+      $flex.gap(effectiveHorizontalGap),
+    );
+
+    return MoonRawAlert(
+      show: show,
+      style: alertStyle,
+      semanticLabel: semanticLabel,
+      transitionCurve: effectiveTransitionCurve,
+      transitionDuration: effectiveTransitionDuration,
+      child: StyledColumn(
+        inherit: true,
+        children: [
+          StyledRow(
+            style: headerRowStyle,
+            children: [
+              if (leading != null) leading!,
+              SpecBuilder(
+                style: labelTextStyle,
+                builder: (BuildContext _) => label,
+              ),
+              if (trailing != null) trailing!,
+            ],
           ),
-        ),
+          if (content != null)
+            Row(
+              children: [
+                Expanded(
+                  child: content!,
+                ),
+              ],
+            ),
+        ],
       ),
     );
   }
