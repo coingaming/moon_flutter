@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'package:moon_core/moon_core.dart';
+
 import 'package:moon_design/moon_design.dart';
 import 'package:moon_design/src/theme/table/table_size_properties.dart';
 import 'package:moon_design/src/theme/table/table_sizes.dart';

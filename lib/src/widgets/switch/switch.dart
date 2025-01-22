@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:moon_core/moon_core.dart';
+
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
 import 'package:moon_design/src/theme/switch/switch_size_properties.dart';
 import 'package:moon_design/src/theme/switch/switch_sizes.dart';
@@ -10,10 +12,10 @@ import 'package:moon_design/src/theme/tokens/shadows.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/utils/extensions.dart';
-import 'package:moon_design/src/utils/shape_decoration_premul.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border.dart';
 import 'package:moon_design/src/utils/squircle/squircle_border_radius.dart';
 import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
+
 import 'package:moon_tokens/moon_tokens.dart';
 
 enum MoonSwitchSize {
