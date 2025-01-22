@@ -26,8 +26,8 @@ class _CarouselState extends State<Carousel> {
               itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
                 decoration: ShapeDecoration(
                   color: context.moonColors!.goku,
-                  shape: MoonSquircleBorder(
-                    borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+                  shape: MoonBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 child: Center(
@@ -54,8 +54,8 @@ class _CarouselState extends State<Carousel> {
                   itemBuilder: (BuildContext context, int itemIndex, int _) => Container(
                     decoration: ShapeDecoration(
                       color: context.moonColors!.goku,
-                      shape: MoonSquircleBorder(
-                        borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+                      shape: MoonBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     child: Center(
