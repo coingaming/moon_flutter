@@ -1,6 +1,7 @@
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:moon_core/moon_core.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
@@ -108,6 +109,10 @@ class AvatarStory extends StatelessWidget {
       initial: true,
     );
 
+    final BorderRadius? borderRadius = borderRadiusKnob != null
+        ? BorderRadius.circular(borderRadiusKnob.toDouble())
+        : null;
+
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
@@ -121,30 +126,23 @@ class AvatarStory extends StatelessWidget {
             MoonAvatar(
               avatarSize: avatarSizeKnob,
               badgeSize: badgeSizeKnob?.toDouble(),
-              borderRadius: borderRadiusKnob != null
-                  ? BorderRadius.circular(borderRadiusKnob.toDouble())
-                  : null,
+              borderRadius: borderRadius,
               badgeMarginValue: badgeMarginKnob?.toDouble(),
               backgroundColor: backgroundColor,
               showBadge: showBadgeKnob,
               badgeColor: badgeColor,
               badgeAlignment:
                   avatarBadgeAlignmentKnob ?? MoonBadgeAlignment.bottomRight,
-              content: Padding(
-                padding: const EdgeInsets.only(top: 1.0),
-                child: Text(
-                  customLabelTextKnob,
-                  style: TextStyle(color: textColor),
-                ),
+              content: Text(
+                customLabelTextKnob,
+                style: TextStyle(color: textColor),
               ),
             ),
             const TextDivider(text: "Custom MoonAvatar with image background"),
             MoonAvatar(
               avatarSize: avatarSizeKnob,
               badgeSize: badgeSizeKnob?.toDouble(),
-              borderRadius: borderRadiusKnob != null
-                  ? BorderRadius.circular(borderRadiusKnob.toDouble())
-                  : null,
+              borderRadius: borderRadius,
               badgeMarginValue: badgeMarginKnob?.toDouble(),
               backgroundColor: backgroundColor,
               showBadge: showBadgeKnob,
