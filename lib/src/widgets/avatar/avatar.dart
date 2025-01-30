@@ -1,15 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:mix/mix.dart';
 import 'package:moon_core/moon_core.dart';
 
 import 'package:moon_design/src/theme/avatar/avatar_size_properties.dart';
 import 'package:moon_design/src/theme/avatar/avatar_sizes.dart';
-import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
-import 'package:moon_design/src/utils/extensions.dart';
-import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-import 'package:moon_design/src/widgets/avatar/avatar_clipper.dart';
 
 import 'package:moon_tokens/moon_tokens.dart';
 
@@ -20,13 +16,6 @@ enum MoonAvatarSize {
   lg,
   xl,
   x2l,
-}
-
-enum MoonBadgeAlignment {
-  topLeft,
-  topRight,
-  bottomLeft,
-  bottomRight,
 }
 
 class MoonAvatar extends StatelessWidget {
@@ -66,6 +55,9 @@ class MoonAvatar extends StatelessWidget {
   /// The semantic label for the avatar.
   final String? semanticLabel;
 
+  /// The widget to display within the badge.
+  final Widget? badgeContent;
+
   /// The widget to display within the avatar.
   final Widget? content;
 
@@ -84,68 +76,23 @@ class MoonAvatar extends StatelessWidget {
     this.avatarSize,
     this.badgeAlignment = MoonBadgeAlignment.bottomRight,
     this.semanticLabel,
+    this.badgeContent,
     this.content,
   });
-
-  Alignment _avatarAlignmentMapper(BuildContext context) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
-
-    if (isRTL) {
-      switch (badgeAlignment) {
-        case MoonBadgeAlignment.topLeft:
-          return Alignment.topRight;
-        case MoonBadgeAlignment.topRight:
-          return Alignment.topLeft;
-        case MoonBadgeAlignment.bottomLeft:
-          return Alignment.bottomRight;
-        case MoonBadgeAlignment.bottomRight:
-          return Alignment.bottomLeft;
-        default:
-          return Alignment.bottomRight;
-      }
-    } else {
-      switch (badgeAlignment) {
-        case MoonBadgeAlignment.topLeft:
-          return Alignment.topLeft;
-        case MoonBadgeAlignment.topRight:
-          return Alignment.topRight;
-        case MoonBadgeAlignment.bottomLeft:
-          return Alignment.bottomLeft;
-        case MoonBadgeAlignment.bottomRight:
-          return Alignment.bottomRight;
-        default:
-          return Alignment.bottomRight;
-      }
-    }
-  }
 
   MoonAvatarSizeProperties _getMoonAvatarSize(
     BuildContext context,
     MoonAvatarSize? moonAvatarSize,
   ) {
-    switch (moonAvatarSize) {
-      case MoonAvatarSize.xs:
-        return context.moonTheme?.avatarTheme.sizes.xs ??
-            MoonAvatarSizes(tokens: MoonTokens.light).xs;
-      case MoonAvatarSize.sm:
-        return context.moonTheme?.avatarTheme.sizes.sm ??
-            MoonAvatarSizes(tokens: MoonTokens.light).sm;
-      case MoonAvatarSize.md:
-        return context.moonTheme?.avatarTheme.sizes.md ??
-            MoonAvatarSizes(tokens: MoonTokens.light).md;
-      case MoonAvatarSize.lg:
-        return context.moonTheme?.avatarTheme.sizes.lg ??
-            MoonAvatarSizes(tokens: MoonTokens.light).lg;
-      case MoonAvatarSize.xl:
-        return context.moonTheme?.avatarTheme.sizes.xl ??
-            MoonAvatarSizes(tokens: MoonTokens.light).xl;
-      case MoonAvatarSize.x2l:
-        return context.moonTheme?.avatarTheme.sizes.x2l ??
-            MoonAvatarSizes(tokens: MoonTokens.light).x2l;
-      default:
-        return context.moonTheme?.avatarTheme.sizes.md ??
-            MoonAvatarSizes(tokens: MoonTokens.light).md;
-    }
+    return switch (moonAvatarSize) {
+      MoonAvatarSize.xs => MoonAvatarSizes(tokens: MoonTokens.light).xs,
+      MoonAvatarSize.sm => MoonAvatarSizes(tokens: MoonTokens.light).sm,
+      MoonAvatarSize.md => MoonAvatarSizes(tokens: MoonTokens.light).md,
+      MoonAvatarSize.lg => MoonAvatarSizes(tokens: MoonTokens.light).lg,
+      MoonAvatarSize.xl => MoonAvatarSizes(tokens: MoonTokens.light).xl,
+      MoonAvatarSize.x2l => MoonAvatarSizes(tokens: MoonTokens.light).x2l,
+      _ => MoonAvatarSizes(tokens: MoonTokens.light).md,
+    };
   }
 
   @override
@@ -159,21 +106,14 @@ class MoonAvatar extends StatelessWidget {
     final resolvedBorderRadius =
         effectiveBorderRadius.resolve(Directionality.of(context));
 
-    final Color effectiveBackgroundColor = backgroundColor ??
-        context.moonTheme?.avatarTheme.colors.backgroundColor ??
-        MoonColors.light.goku;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? MoonColors.light.goku;
 
-    final Color effectiveBadgeColor = badgeColor ??
-        context.moonTheme?.avatarTheme.colors.badgeColor ??
-        MoonColors.light.roshi;
+    final Color effectiveBadgeColor = badgeColor ?? MoonColors.light.roshi;
 
-    final Color effectiveTextColor =
-        context.moonTheme?.avatarTheme.colors.textColor ??
-            MoonColors.light.textPrimary;
+    final Color effectiveTextColor = MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.avatarTheme.colors.iconColor ??
-            MoonColors.light.iconPrimary;
+    final Color effectiveIconColor = MoonColors.light.iconPrimary;
 
     final double effectiveAvatarHeight =
         height ?? effectiveMoonAvatarSize.avatarSizeValue;
@@ -187,76 +127,52 @@ class MoonAvatar extends StatelessWidget {
     final double effectiveBadgeSize =
         badgeSize ?? effectiveMoonAvatarSize.badgeSizeValue;
 
-    return Semantics(
-      label: semanticLabel,
-      button: false,
-      focusable: false,
-      image: backgroundImage != null,
-      child: SizedBox(
-        width: effectiveAvatarWidth,
-        height: effectiveAvatarHeight,
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: ClipPath(
-                // TODO: Since clipper does not work properly on mobile web/PWA,
-                //  we are disabling it. Remove this check when it has been
-                //  fixed from Flutter side.
-                clipper: kIsWeb &&
-                        MediaQueryData.fromView(View.of(context)).size.width <
-                            500
-                    ? null
-                    : AvatarClipper(
-                        showBadge: showBadge,
-                        width: effectiveAvatarWidth,
-                        height: effectiveAvatarHeight,
-                        borderRadius: resolvedBorderRadius,
-                        badgeSize: effectiveBadgeSize,
-                        badgeMarginValue: effectiveBadgeMarginValue,
-                        badgeAlignment: badgeAlignment,
-                        textDirection: Directionality.of(context),
-                      ),
-                child: DefaultTextStyle(
-                  style: effectiveMoonAvatarSize.textStyle
-                      .copyWith(color: effectiveTextColor),
-                  child: IconTheme(
-                    data: IconThemeData(
-                      color: effectiveIconColor,
-                    ),
-                    child: DecoratedBox(
-                      decoration: ShapeDecorationWithPremultipliedAlpha(
-                        color: effectiveBackgroundColor,
-                        image: backgroundImage != null
-                            ? DecorationImage(
-                                image: backgroundImage!,
-                                fit: BoxFit.cover,
-                              )
-                            : null,
-                        shape: MoonSquircleBorder(
-                          borderRadius: resolvedBorderRadius
-                              .squircleBorderRadius(context),
-                        ),
-                      ),
-                      child: Center(child: content),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            if (showBadge)
-              Align(
-                alignment: _avatarAlignmentMapper(context),
-                child: Container(
-                  height: effectiveBadgeSize,
-                  width: effectiveBadgeSize,
-                  decoration: BoxDecoration(
-                    color: effectiveBadgeColor,
-                    borderRadius: BorderRadius.circular(effectiveBadgeSize / 2),
-                  ),
-                ),
-              ),
-          ],
+    final TextStyle resolvedTextStyle =
+        effectiveMoonAvatarSize.textStyle.copyWith(color: effectiveTextColor);
+
+    final Style baseStyle = Style(
+      $box.alignment.center(),
+      $with.defaultTextStyle.style.as(resolvedTextStyle),
+      $with.iconTheme.data.color(effectiveIconColor),
+    );
+
+    final Style badgeStyle = baseStyle.add(
+      $box.shapeDecoration.as(
+        ShapeDecorationWithPremultipliedAlpha(
+          color: effectiveBadgeColor,
+          shape: MoonBorder(
+            borderRadius: BorderRadius.circular(effectiveBadgeSize / 2),
+          ),
         ),
+      ),
+    );
+
+    final Style contentStyle = baseStyle.add(
+      $box.shapeDecoration.as(
+        ShapeDecorationWithPremultipliedAlpha(
+          color: effectiveBackgroundColor,
+          shape: MoonBorder(borderRadius: resolvedBorderRadius),
+          image: backgroundImage != null
+              ? DecorationImage(image: backgroundImage!, fit: BoxFit.cover)
+              : null,
+        ),
+      ),
+    );
+
+    return MoonRawAvatar(
+      showBadge: showBadge,
+      semanticLabel: semanticLabel,
+      badgeSizeValue: effectiveBadgeSize,
+      badgeMarginValue: effectiveBadgeMarginValue,
+      badgeAlignment: badgeAlignment,
+      avatarSize: Size(effectiveAvatarWidth, effectiveAvatarHeight),
+      badge: Box(
+        style: badgeStyle,
+        child: badgeContent,
+      ),
+      content: Box(
+        style: contentStyle,
+        child: content,
       ),
     );
   }
