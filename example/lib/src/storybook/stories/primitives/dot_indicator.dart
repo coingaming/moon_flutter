@@ -62,8 +62,8 @@ class _DotIndicatorStoryState extends State<DotIndicatorStory> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MoonDotIndicator(
-              selectedDot: _selectedDot,
               dotCount: 4,
+              selectedDot: _selectedDot,
               size: sizeKnob?.toDouble(),
               gap: gapKnob?.toDouble(),
               selectedColor: selectedColor,
@@ -75,7 +75,7 @@ class _DotIndicatorStoryState extends State<DotIndicatorStory> {
               children: List.generate(
                 4,
                 (int index) => Padding(
-                  padding: EdgeInsets.only(right: index != 3 ? 8.0 : 0),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: MoonFilledButton(
                     label: Text("${index + 1}"),
                     onTap: () => setState(() => _selectedDot = index),
