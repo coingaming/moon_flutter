@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:mix/mix.dart';
+import 'package:moon_core/moon_core.dart';
+
 import 'package:moon_design/src/theme/effects/effects_theme.dart';
+import 'package:moon_design/src/theme/effects/focus_effect.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/opacities.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
-import 'package:moon_design/src/utils/touch_target_padding.dart';
-import 'package:moon_design/src/widgets/common/effects/focus_effect.dart';
-import 'package:moon_design/src/widgets/radio/radio_painter.dart';
+
 import 'package:moon_tokens/moon_tokens.dart';
 
 class MoonRadio<T> extends StatefulWidget {
@@ -86,126 +88,103 @@ class MoonRadio<T> extends StatefulWidget {
     required this.onChanged,
   });
 
-  bool get _selected => value == groupValue;
-
   @override
   State<MoonRadio<T>> createState() => _RadioState<T>();
 }
 
-class _RadioState<T> extends State<MoonRadio<T>>
-    with TickerProviderStateMixin, ToggleableStateMixin {
-  final MoonRadioPainter _painter = MoonRadioPainter();
+class _RadioState<T> extends State<MoonRadio<T>> {
+  bool get _selected => widget.value == widget.groupValue;
 
-  void _handleChanged(bool? selected) {
-    if (selected == null) {
-      widget.onChanged!(null);
-
-      return;
-    }
-    if (selected) {
-      widget.onChanged!(widget.value);
-    }
-  }
-
-  @override
-  void didUpdateWidget(MoonRadio<T> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget._selected != oldWidget._selected) animateToValue();
-  }
-
-  @override
-  void dispose() {
-    _painter.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  ValueChanged<bool?>? get onChanged =>
-      widget.onChanged != null ? _handleChanged : null;
-
-  @override
-  bool get tristate => widget.toggleable;
-
-  @override
-  bool? get value => widget._selected;
+  ShapeDecorationWithPremultipliedAlpha _getFocusDecoration(
+    double width,
+    Color color,
+  ) =>
+      ShapeDecorationWithPremultipliedAlpha(
+        shape: CircleBorder(
+          side: BorderSide(
+            width: width,
+            color: color,
+            strokeAlign: BorderSide.strokeAlignOutside,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
-    const Size size = Size(16, 16);
+    const double sizeValue = 16;
+    const double dotSizeValue = (sizeValue - 1) / 2;
 
-    final Color effectiveActiveColor = widget.activeColor ??
-        context.moonTheme?.radioTheme.colors.activeColor ??
-        MoonColors.light.piccolo;
+    final MoonFocusEffect focusEffect =
+        MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect;
 
-    final Color effectiveInactiveColor = widget.inactiveColor ??
-        context.moonTheme?.radioTheme.colors.inactiveColor ??
-        MoonColors.light.trunks;
+    final Color effectiveActiveColor =
+        widget.activeColor ?? MoonColors.light.piccolo;
 
-    final Color effectiveFocusEffectColor =
-        context.moonEffects?.controlFocusEffect.effectColor ??
-            MoonEffectsTheme(tokens: MoonTokens.light)
-                .controlFocusEffect
-                .effectColor;
+    final Color effectiveInactiveColor =
+        widget.inactiveColor ?? MoonColors.light.trunks;
 
-    final double effectiveFocusEffectExtent =
-        context.moonEffects?.controlFocusEffect.effectExtent ??
-            MoonEffectsTheme(tokens: MoonTokens.light)
-                .controlFocusEffect
-                .effectExtent;
+    final Color effectiveFocusEffectColor = focusEffect.effectColor;
 
-    final Duration effectiveFocusEffectDuration =
-        context.moonEffects?.controlFocusEffect.effectDuration ??
-            MoonEffectsTheme(tokens: MoonTokens.light)
-                .controlFocusEffect
-                .effectDuration;
+    final double effectiveFocusEffectExtent = focusEffect.effectExtent;
 
-    final Curve effectiveFocusEffectCurve =
-        context.moonEffects?.controlFocusEffect.effectCurve ??
-            MoonEffectsTheme(tokens: MoonTokens.light)
-                .controlFocusEffect
-                .effectCurve;
+    final Duration effectiveFocusEffectDuration = focusEffect.effectDuration;
+
+    final Curve effectiveFocusEffectCurve = focusEffect.effectCurve;
 
     final double effectiveDisabledOpacityValue =
         context.moonOpacities?.disabled ?? MoonOpacities.opacities.disabled;
 
-    final WidgetStateProperty<MouseCursor> effectiveMouseCursor =
-        WidgetStateProperty.resolveWith<MouseCursor>((Set<WidgetState> states) {
-      return WidgetStateMouseCursor.clickable.resolve(states);
-    });
+    final Style dotStyle = Style(
+      $box.chain
+        ..width(_selected ? dotSizeValue : 0)
+        ..height(_selected ? dotSizeValue : 0)
+        ..color(effectiveActiveColor)
+        ..shape.circle(),
+    ).animate(duration: effectiveFocusEffectDuration);
 
-    return Semantics(
-      label: widget.semanticLabel,
-      inMutuallyExclusiveGroup: true,
-      checked: widget._selected,
-      child: TouchTargetPadding(
-        minSize: Size(widget.tapAreaSizeValue, widget.tapAreaSizeValue),
-        child: MoonFocusEffect(
-          show: states.contains(WidgetState.focused),
-          effectExtent: effectiveFocusEffectExtent,
-          childBorderRadius: BorderRadius.circular(8),
-          effectColor: effectiveFocusEffectColor,
-          effectCurve: effectiveFocusEffectCurve,
-          effectDuration: effectiveFocusEffectDuration,
-          child: RepaintBoundary(
-            child: AnimatedOpacity(
-              opacity: states.contains(WidgetState.disabled)
-                  ? effectiveDisabledOpacityValue
-                  : 1,
-              duration: effectiveFocusEffectDuration,
-              child: buildToggleable(
-                focusNode: widget.focusNode,
-                autofocus: widget.autofocus,
-                mouseCursor: effectiveMouseCursor,
-                size: size,
-                painter: _painter
-                  ..position = position
-                  ..activeColor = effectiveActiveColor
-                  ..inactiveColor = effectiveInactiveColor,
-              ),
-            ),
+    final Style baseStyle = Style(
+      $box.chain
+        ..height(sizeValue)
+        ..width(sizeValue)
+        ..border
+            .color(_selected ? effectiveActiveColor : effectiveInactiveColor)
+        ..alignment.center()
+        ..shape.circle(),
+    ).animate(duration: effectiveFocusEffectDuration);
+
+    final Style effectsStyle = Style(
+      $box.shapeDecoration.as(_getFocusDecoration(0, Colors.transparent)),
+      $with.animatedOpacity(
+        opacity: widget.onChanged == null ? effectiveDisabledOpacityValue : 1,
+        duration: effectiveFocusEffectDuration,
+      ),
+      $on.focus(
+        $box.shapeDecoration.as(
+          _getFocusDecoration(
+            effectiveFocusEffectExtent,
+            effectiveFocusEffectColor,
           ),
+        ),
+      ),
+    ).animate(
+      duration: effectiveFocusEffectDuration,
+      curve: effectiveFocusEffectCurve,
+    );
+
+    return MoonBaseSingleSelectWidget(
+      value: widget.value,
+      groupValue: widget.groupValue,
+      toggleable: widget.toggleable,
+      focusNode: widget.focusNode,
+      autofocus: widget.autofocus,
+      semanticLabel: widget.semanticLabel,
+      tapAreaSizeValue: widget.tapAreaSizeValue,
+      style: effectsStyle,
+      onChanged: widget.onChanged,
+      child: Box(
+        style: baseStyle,
+        child: Box(
+          style: dotStyle,
         ),
       ),
     );

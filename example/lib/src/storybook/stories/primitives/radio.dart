@@ -26,7 +26,7 @@ class _RadioStoryState extends State<RadioStory> {
   Widget build(BuildContext context) {
     final activeColorKnob = context.knobs.nullable.options(
       label: "activeColor",
-      description: "MoonColors variants for checked MoonRadio.",
+      description: "MoonColors variants for selected MoonRadio.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -37,7 +37,7 @@ class _RadioStoryState extends State<RadioStory> {
 
     final inactiveColorKnob = context.knobs.nullable.options(
       label: "inactiveColor",
-      description: "MoonColors variants for unchecked MoonRadio.",
+      description: "MoonColors variants for unselected MoonRadio.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -82,29 +82,27 @@ class _RadioStoryState extends State<RadioStory> {
             const TextDivider(text: "MoonRadio with label"),
             ...List.generate(
               2,
-              (int index) => MoonMenuItem(
-                absorbGestures: true,
-                onTap: isDisabledKnob
-                    ? null
-                    : () => setState(
-                          () {
-                            if (isToggleableKnob &&
-                                valueLabel == ChoiceLabel.values[index]) {
-                              valueLabel = null;
-                            } else {
-                              valueLabel = ChoiceLabel.values[index];
-                            }
-                          },
-                        ),
-                label: Text("With label #${index + 1}"),
-                trailing: MoonRadio(
-                  value: ChoiceLabel.values[index],
-                  groupValue: valueLabel,
-                  toggleable: isToggleableKnob,
-                  tapAreaSizeValue: 0,
-                  onChanged: isDisabledKnob ? null : (_) {},
-                ),
-              ),
+              (int index) {
+                final ChoiceLabel value = ChoiceLabel.values[index];
+                final shouldReset = isToggleableKnob && valueLabel == value;
+
+                return MoonMenuItem(
+                  absorbGestures: true,
+                  onTap: isDisabledKnob
+                      ? null
+                      : () => setState(
+                            () => valueLabel = shouldReset ? null : value,
+                          ),
+                  label: Text("With label #${index + 1}"),
+                  trailing: MoonRadio(
+                    value: value,
+                    groupValue: valueLabel,
+                    toggleable: isToggleableKnob,
+                    tapAreaSizeValue: 0,
+                    onChanged: isDisabledKnob ? null : (_) {},
+                  ),
+                );
+              },
             ),
           ],
         ),
