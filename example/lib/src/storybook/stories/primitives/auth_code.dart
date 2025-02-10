@@ -1,6 +1,7 @@
 import 'package:example/src/storybook/common/color_options.dart';
 import 'package:example/src/storybook/common/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:moon_core/moon_core.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
@@ -27,7 +28,7 @@ class AuthCodeStory extends StatelessWidget {
     );
 
     final shapeKnob = context.knobs.nullable.options(
-      label: "shape",
+      label: "authFieldShape",
       description: "Shape of MoonAuthCode input fields.",
       enabled: false,
       initial: AuthFieldShape.box,
@@ -50,7 +51,7 @@ class AuthCodeStory extends StatelessWidget {
     final textColor = colorTable(context)[textColorKnob ?? 40];
 
     final cursorColorKnob = context.knobs.nullable.options(
-      label: "authFieldCursorColor",
+      label: "cursorColor",
       description: "MoonColors variants for MoonAuthCode cursor.",
       enabled: false,
       initial: 0,
@@ -59,6 +60,18 @@ class AuthCodeStory extends StatelessWidget {
     );
 
     final cursorColor = colorTable(context)[cursorColorKnob ?? 40];
+
+    final cursorErrorColorKnob = context.knobs.nullable.options(
+      label: "cursorErrorColor",
+      description:
+          "MoonColors variants for MoonAuthCode cursor in error state.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final cursorErrorColor = colorTable(context)[cursorErrorColorKnob ?? 40];
 
     final selectedFillColorKnob = context.knobs.nullable.options(
       label: "selectedFillColor",
@@ -144,7 +157,7 @@ class AuthCodeStory extends StatelessWidget {
       description: "Gap between MoonAuthCode input fields.",
       enabled: false,
       initial: 8,
-      max: 12,
+      max: 16,
     );
 
     final enableKnob = context.knobs.boolean(
@@ -163,7 +176,7 @@ class AuthCodeStory extends StatelessWidget {
     );
 
     final errorAnimationKnob = context.knobs.boolean(
-      label: "Error shake animation",
+      label: "errorAnimationType",
       description:
           "Show error with shake animation (ErrorAnimationType.shake).",
     );
@@ -189,7 +202,8 @@ class AuthCodeStory extends StatelessWidget {
                   mainAxisAlignmentKnob ?? MainAxisAlignment.center,
               borderRadius: borderRadius,
               textStyle: TextStyle(color: textColor),
-              authFieldCursorColor: cursorColor,
+              cursorColor: cursorColor,
+              cursorErrorColor: cursorErrorColor,
               selectedFillColor: selectedFillColor,
               activeFillColor: activeFillColor,
               inactiveFillColor: inactiveFillColor,
@@ -202,7 +216,7 @@ class AuthCodeStory extends StatelessWidget {
               peekWhenObscuring: peekWhenObscuringKnob,
               validator: (String? value) => null,
               errorBuilder: (BuildContext context, String? errorText) =>
-                  const SizedBox(),
+                  const SizedBox.shrink(),
             ),
             const TextDivider(text: "Active MoonAuthCode"),
             MoonAuthCode(
@@ -212,7 +226,8 @@ class AuthCodeStory extends StatelessWidget {
                   mainAxisAlignmentKnob ?? MainAxisAlignment.center,
               borderRadius: borderRadius,
               textStyle: TextStyle(color: textColor),
-              authFieldCursorColor: cursorColor,
+              cursorColor: cursorColor,
+              cursorErrorColor: cursorErrorColor,
               selectedFillColor: selectedFillColor,
               activeFillColor: activeFillColor,
               inactiveFillColor: inactiveFillColor,
@@ -224,8 +239,8 @@ class AuthCodeStory extends StatelessWidget {
               obscureText: obscuringKnob,
               peekWhenObscuring: peekWhenObscuringKnob,
               validator: (String? value) => null,
-              errorBuilder: (BuildContext context, String? errorText) =>
-                  const SizedBox(),
+              errorBuilder: (BuildContext _, String? __) =>
+                  const SizedBox.shrink(),
             ),
             const TextDivider(text: "Error MoonAuthCode"),
             SizedBox(
@@ -233,6 +248,7 @@ class AuthCodeStory extends StatelessWidget {
               child: MoonAuthCode(
                 enableInputFill: true,
                 authInputFieldCount: 4,
+                disabledOpacityValue: 1,
                 mainAxisAlignment:
                     mainAxisAlignmentKnob ?? MainAxisAlignment.center,
                 errorAnimationType: errorAnimationKnob
@@ -240,28 +256,28 @@ class AuthCodeStory extends StatelessWidget {
                     : ErrorAnimationType.noAnimation,
                 borderRadius: borderRadius,
                 textStyle: TextStyle(color: textColor),
-                authFieldCursorColor: cursorColor,
+                cursorColor: cursorColor,
+                cursorErrorColor: cursorErrorColor,
                 selectedFillColor: selectedFillColor,
                 activeFillColor: activeFillColor,
                 inactiveFillColor: inactiveFillColor,
                 selectedBorderColor: selectedBorderColor,
                 activeBorderColor: activeBorderColor,
                 inactiveBorderColor: inactiveBorderColor,
+                animationDuration: const Duration(seconds: 1),
                 gap: gapKnob?.toDouble(),
                 authFieldShape: shapeKnob,
                 obscureText: obscuringKnob,
                 peekWhenObscuring: peekWhenObscuringKnob,
                 validator: (String? pin) {
-                  return (pin != null && pin != '0000' && pin.length == 4)
-                      ? 'The input must be exactly "0000".'
+                  return (pin != null && pin != "0000" && pin.length == 4)
+                      ? "The input must be exactly '0000'."
                       : null;
                 },
-                errorBuilder: (BuildContext context, String? errorText) {
-                  return Align(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Text(errorText ?? ''),
-                    ),
+                errorBuilder: (BuildContext _, String? errorText) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(errorText ?? ""),
                   );
                 },
               ),
