@@ -68,7 +68,7 @@ class TagStory extends StatelessWidget {
       max: 32,
     );
 
-    final gapKnob = context.knobs.nullable.slider(
+    final gapKnob = context.knobs.nullable.sliderInt(
       label: "gap",
       description: "Gap between MoonTag leading, label and trailing slots.",
       enabled: false,
@@ -93,16 +93,17 @@ class TagStory extends StatelessWidget {
       initial: true,
     );
 
-    final Icon icon = Icon(
-      MoonIcons.controls_close_small_16_light,
-      color: iconColor,
+    final icon = HugeIcon(
+      icon: HugeIcons.strokeRoundedCancel01,
+      color: iconColor ?? Colors.black,
+      size: 12.0,
     );
 
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 64.0, horizontal: 16.0),
         child: MoonTag(
-          gap: gapKnob,
+          gap: gapKnob?.toDouble(),
           tagSize: tagSizeKnob,
           backgroundColor: backgroundColor,
           borderRadius: borderRadiusKnob != null

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:mix/mix.dart';
 import 'package:moon_core/moon_core.dart';
+
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 import 'package:moon_design/src/theme/tag/tag_sizes.dart';
-import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
+
 import 'package:moon_tokens/moon_tokens.dart';
 
 enum MoonTagSize {
@@ -78,18 +81,13 @@ class MoonTag extends StatelessWidget {
   MoonTagSizeProperties _getMoonTagSize(
     BuildContext context,
     MoonTagSize? moonTagSize,
-  ) {
-    return switch (moonTagSize) {
-      MoonTagSize.x2s => context.moonTheme?.tagTheme.sizes.x2s ??
-          MoonTagSizes(tokens: MoonTokens.light).x2s,
-      MoonTagSize.xs => context.moonTheme?.tagTheme.sizes.xs ??
-          MoonTagSizes(tokens: MoonTokens.light).xs,
-      MoonTagSize.sm => context.moonTheme?.tagTheme.sizes.sm ??
-          MoonTagSizes(tokens: MoonTokens.light).sm,
-      _ => context.moonTheme?.tagTheme.sizes.xs ??
-          MoonTagSizes(tokens: MoonTokens.light).xs,
-    };
-  }
+  ) =>
+      switch (moonTagSize) {
+        MoonTagSize.x2s => MoonTagSizes(tokens: MoonTokens.light).x2s,
+        MoonTagSize.xs => MoonTagSizes(tokens: MoonTokens.light).xs,
+        MoonTagSize.sm => MoonTagSizes(tokens: MoonTokens.light).sm,
+        _ => MoonTagSizes(tokens: MoonTokens.light).xs,
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -99,17 +97,12 @@ class MoonTag extends StatelessWidget {
     final BorderRadiusGeometry effectiveBorderRadius =
         borderRadius ?? effectiveMoonTagSize.borderRadius;
 
-    final Color effectiveBackgroundColor = backgroundColor ??
-        context.moonTheme?.tagTheme.colors.backgroundColor ??
-        MoonColors.light.goku;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? MoonColors.light.goku;
 
-    final Color effectiveTextColor =
-        context.moonTheme?.tagTheme.colors.textColor ??
-            MoonColors.light.textPrimary;
+    final Color effectiveTextColor = MoonColors.light.textPrimary;
 
-    final Color effectiveIconColor =
-        context.moonTheme?.tagTheme.colors.iconColor ??
-            MoonColors.light.iconPrimary;
+    final Color effectiveIconColor = MoonColors.light.iconPrimary;
 
     final double effectiveHeight = height ?? effectiveMoonTagSize.height;
 
@@ -118,59 +111,46 @@ class MoonTag extends StatelessWidget {
     final EdgeInsetsGeometry effectivePadding =
         padding ?? effectiveMoonTagSize.padding;
 
-    final EdgeInsets resolvedDirectionalPadding =
-        effectivePadding.resolve(Directionality.of(context));
-
-    final EdgeInsetsGeometry correctedPadding = padding == null
-        ? EdgeInsetsDirectional.fromSTEB(
-            leading == null && label != null
-                ? resolvedDirectionalPadding.left
-                : effectiveGap,
-            resolvedDirectionalPadding.top,
-            trailing == null && label != null
-                ? resolvedDirectionalPadding.right
-                : effectiveGap,
-            resolvedDirectionalPadding.bottom,
-          )
-        : resolvedDirectionalPadding;
-
     final TextStyle resolvedTextStyle =
         effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor);
 
+    final SystemMouseCursor effectiveMouseCursor =
+        (onTap != null || onLongPress != null)
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic;
+
+    final Style tagStyle = Style(
+      $box.chain
+        ..height(effectiveHeight)
+        ..constraints(minWidth: effectiveHeight)
+        ..padding.as(effectivePadding),
+      width != null ? $box.width(width!) : null,
+      decorationToAttribute(
+        decoration ??
+            ShapeDecorationWithPremultipliedAlpha(
+              color: effectiveBackgroundColor,
+              shape: MoonBorder(borderRadius: effectiveBorderRadius),
+            ),
+      ),
+      $flex.chain
+        ..gap(effectiveGap)
+        ..mainAxisSize.min()
+        ..mainAxisAlignment.center(),
+      $with.defaultTextStyle.style.as(resolvedTextStyle),
+      $with.iconTheme.data(
+        color: effectiveIconColor,
+        size: effectiveMoonTagSize.iconSizeValue,
+      ),
+    );
+
     return MoonBaseInteractiveWidget(
       semanticLabel: semanticLabel,
+      mouseCursor: effectiveMouseCursor,
       focusNode: FocusNode(skipTraversal: true),
       onTap: onTap,
       onLongPress: onLongPress,
-      mouseCursor: (onTap != null || onLongPress != null)
-          ? SystemMouseCursors.click
-          : SystemMouseCursors.basic,
       child: HBox(
-        style: Style(
-          $box.chain
-            ..height(effectiveHeight)
-            ..constraints(minWidth: effectiveHeight)
-            ..color(Colors.white)
-            ..borderRadius(4.0)
-            ..padding.as(correctedPadding),
-          width != null ? $box.width(width!) : null,
-          decorationToAttribute(
-            decoration ??
-                ShapeDecorationWithPremultipliedAlpha(
-                  color: effectiveBackgroundColor,
-                  shape: MoonBorder(borderRadius: effectiveBorderRadius),
-                ),
-          ),
-          $flex.chain
-            ..mainAxisAlignment.center()
-            ..mainAxisSize.min()
-            ..gap(effectiveGap),
-          $with.defaultTextStyle.style.as(resolvedTextStyle),
-          $with.iconTheme.data(
-            color: effectiveIconColor,
-            size: effectiveMoonTagSize.iconSizeValue,
-          ),
-        ),
+        style: tagStyle,
         children: [
           if (leading != null) leading!,
           if (label != null) label!,
