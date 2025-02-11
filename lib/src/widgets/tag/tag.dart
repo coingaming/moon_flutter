@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:mix/mix.dart';
 import 'package:moon_core/moon_core.dart';
-
 import 'package:moon_design/src/theme/tag/tag_size_properties.dart';
 import 'package:moon_design/src/theme/tag/tag_sizes.dart';
 import 'package:moon_design/src/theme/theme.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
-import 'package:moon_design/src/utils/extensions.dart';
-import 'package:moon_design/src/utils/squircle/squircle_border.dart';
-
 import 'package:moon_tokens/moon_tokens.dart';
 
 enum MoonTagSize {
@@ -129,70 +125,57 @@ class MoonTag extends StatelessWidget {
         ? EdgeInsetsDirectional.fromSTEB(
             leading == null && label != null
                 ? resolvedDirectionalPadding.left
-                : 0,
+                : effectiveGap,
             resolvedDirectionalPadding.top,
             trailing == null && label != null
                 ? resolvedDirectionalPadding.right
-                : 0,
+                : effectiveGap,
             resolvedDirectionalPadding.bottom,
           )
         : resolvedDirectionalPadding;
 
-    return Semantics(
-      label: semanticLabel,
-      button: false,
-      focusable: false,
-      child: GestureDetector(
-        excludeFromSemantics: true,
-        onTap: onTap,
-        onLongPress: onLongPress,
-        child: MouseRegion(
-          cursor: onTap != null
-              ? SystemMouseCursors.click
-              : SystemMouseCursors.basic,
-          child: Container(
-            width: width,
-            height: effectiveHeight,
-            padding: correctedPadding,
-            constraints: BoxConstraints(minWidth: effectiveHeight),
-            decoration: decoration ??
+    final TextStyle resolvedTextStyle =
+        effectiveMoonTagSize.textStyle.copyWith(color: effectiveTextColor);
+
+    return MoonBaseInteractiveWidget(
+      semanticLabel: semanticLabel,
+      focusNode: FocusNode(skipTraversal: true),
+      onTap: onTap,
+      onLongPress: onLongPress,
+      mouseCursor: (onTap != null || onLongPress != null)
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
+      child: HBox(
+        style: Style(
+          $box.chain
+            ..height(effectiveHeight)
+            ..constraints(minWidth: effectiveHeight)
+            ..color(Colors.white)
+            ..borderRadius(4.0)
+            ..padding.as(correctedPadding),
+          width != null ? $box.width(width!) : null,
+          decorationToAttribute(
+            decoration ??
                 ShapeDecorationWithPremultipliedAlpha(
                   color: effectiveBackgroundColor,
-                  shape: MoonSquircleBorder(
-                    borderRadius:
-                        effectiveBorderRadius.squircleBorderRadius(context),
-                  ),
+                  shape: MoonBorder(borderRadius: effectiveBorderRadius),
                 ),
-            child: IconTheme(
-              data: IconThemeData(
-                color: effectiveIconColor,
-                size: effectiveMoonTagSize.iconSizeValue,
-              ),
-              child: DefaultTextStyle(
-                style: effectiveMoonTagSize.textStyle.copyWith(
-                  color: effectiveTextColor,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (leading != null)
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                        child: leading,
-                      ),
-                    if (label != null) label!,
-                    if (trailing != null)
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: effectiveGap),
-                        child: trailing,
-                      ),
-                  ],
-                ),
-              ),
-            ),
+          ),
+          $flex.chain
+            ..mainAxisAlignment.center()
+            ..mainAxisSize.min()
+            ..gap(effectiveGap),
+          $with.defaultTextStyle.style.as(resolvedTextStyle),
+          $with.iconTheme.data(
+            color: effectiveIconColor,
+            size: effectiveMoonTagSize.iconSizeValue,
           ),
         ),
+        children: [
+          if (leading != null) leading!,
+          if (label != null) label!,
+          if (trailing != null) trailing!,
+        ],
       ),
     );
   }
