@@ -1,6 +1,8 @@
 /// Moon Design for Flutter
 library moon_design;
 
+export 'package:hugeicons/hugeicons.dart';
+
 export 'package:moon_design/src/theme/accordion/accordion_theme.dart';
 export 'package:moon_design/src/theme/alert/alert_theme.dart';
 export 'package:moon_design/src/theme/auth_code/auth_code_theme.dart';

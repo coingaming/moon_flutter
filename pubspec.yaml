@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  hugeicons: ^0.0.3
   moon_core:
     git:
       url: https://github.com/coingaming/moon_flutter_core
