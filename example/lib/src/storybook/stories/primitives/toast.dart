@@ -33,6 +33,22 @@ class ToastStory extends StatelessWidget {
       ],
     );
 
+    final headerAlignmentKnob = context.knobs.nullable.options(
+      label: "headerAlignment",
+      description:
+          "MainAxisAlignment for MoonToast header slots (width has to be provided).",
+      enabled: false,
+      initial: MainAxisAlignment.center,
+      options: const [
+        Option(label: "start", value: MainAxisAlignment.start),
+        Option(label: "center", value: MainAxisAlignment.center),
+        Option(label: "end", value: MainAxisAlignment.end),
+        Option(label: "spaceBetween", value: MainAxisAlignment.spaceBetween),
+        Option(label: "spaceAround", value: MainAxisAlignment.spaceAround),
+        Option(label: "spaceEvenly", value: MainAxisAlignment.spaceEvenly),
+      ],
+    );
+
     final toastVariantKnob = context.knobs.nullable.options(
       label: "variant",
       description: "The color variant for MoonToast.",
@@ -85,15 +101,6 @@ class ToastStory extends StatelessWidget {
       max: 32,
     );
 
-    final displayDurationKnob = context.knobs.nullable.sliderInt(
-      label: "displayDuration",
-      description: "Display duration for MoonToast.",
-      enabled: false,
-      initial: 3,
-      min: 1,
-      max: 10,
-    );
-
     final widthKnob = context.knobs.nullable.slider(
       label: "width",
       description:
@@ -104,11 +111,31 @@ class ToastStory extends StatelessWidget {
       max: MediaQuery.of(context).size.width,
     );
 
-    final isPersistentKnob = context.knobs.boolean(
-      label: "isPersistent",
+    final horizontalGapKnob = context.knobs.nullable.sliderInt(
+      label: "horizontalGap",
       description:
-          "Whether MoonToast is persistent across screens (will not behave as "
-          "expected only in Storybook).",
+          "Horizontal gap between leading, label and trailing slots of MoonToast.",
+      enabled: false,
+      initial: 16,
+      max: 32,
+    );
+
+    final verticalGapKnob = context.knobs.nullable.sliderInt(
+      label: "verticalGap",
+      description:
+          "Vertical gap between leading, label and trailing slots of MoonToast.",
+      enabled: false,
+      initial: 16,
+      max: 32,
+    );
+
+    final displayDurationKnob = context.knobs.nullable.sliderInt(
+      label: "displayDuration",
+      description: "Display duration for MoonToast.",
+      enabled: false,
+      initial: 3,
+      min: 1,
+      max: 10,
     );
 
     final useSafeAreaKnob = context.knobs.boolean(
@@ -134,33 +161,35 @@ class ToastStory extends StatelessWidget {
               onTap: () {
                 MoonToast.show(
                   context,
-                  backgroundColor: backgroundColor,
-                  isPersistent: isPersistentKnob,
-                  useSafeArea: useSafeAreaKnob,
                   width: widthKnob,
-                  toastAlignment: toastAlignmentKnob ?? Alignment.bottomCenter,
+                  useSafeArea: useSafeAreaKnob,
+                  horizontalGap: horizontalGapKnob?.toDouble(),
+                  verticalGap: verticalGapKnob?.toDouble(),
+                  backgroundColor: backgroundColor,
                   variant: toastVariantKnob ?? MoonToastVariant.original,
-                  displayDuration: displayDurationKnob != null
-                      ? Duration(seconds: displayDurationKnob)
-                      : null,
+                  headerAlignment: headerAlignmentKnob,
+                  toastAlignment: toastAlignmentKnob ?? Alignment.bottomCenter,
+                  displayDuration: Duration(seconds: displayDurationKnob ?? 3),
                   borderRadius: borderRadiusKnob != null
                       ? BorderRadius.circular(borderRadiusKnob.toDouble())
                       : null,
                   leading: Icon(
-                    MoonIcons.generic_info_24_light,
+                    MoonIcons.generic_about_24_light,
                     color: iconColor,
                   ),
-                  label: Text(
-                    customLabelTextKnob,
-                    style: TextStyle(color: textColor),
+                  label: Flexible(
+                    child: Text(
+                      customLabelTextKnob,
+                      style: TextStyle(color: textColor),
+                    ),
                   ),
                   trailing: Icon(
-                    MoonIcons.generic_star_24_light,
+                    MoonIcons.generic_info_24_light,
                     color: iconColor,
                   ),
                   content: showContentKnob
                       ? Align(
-                          alignment: AlignmentDirectional.centerStart,
+                          alignment: AlignmentDirectional.center,
                           child: Text(
                             "Here goes MoonToast content",
                             style: TextStyle(color: textColor),
