@@ -4,29 +4,27 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTextInputSizeProperties
-    extends ThemeExtension<MoonTextInputSizeProperties>
+class MoonInputSizeProperties extends ThemeExtension<MoonInputSizeProperties>
     with DiagnosticableTreeMixin {
-  /// The border radius of the MoonTextInput.
+  /// The border radius of the MoonInput.
   final BorderRadiusGeometry borderRadius;
 
-  /// The height of the MoonTextInput.
+  /// The height of the MoonInput.
   final double height;
 
-  /// The gap between the leading, label and trailing widgets of the
-  /// MoonTextInput.
+  /// The gap between the leading, label and trailing widgets of the MoonInput.
   final double gap;
 
-  /// The size value of the MoonTextInput icon.
+  /// The size value of the MoonInput icon.
   final double iconSizeValue;
 
-  /// The padding of the MoonTextInput.
+  /// The padding of the MoonInput.
   final EdgeInsetsGeometry padding;
 
-  /// The text style of the MoonTextInput.
+  /// The text style of the MoonInput.
   final TextStyle textStyle;
 
-  const MoonTextInputSizeProperties({
+  const MoonInputSizeProperties({
     required this.borderRadius,
     required this.height,
     required this.gap,
@@ -36,7 +34,7 @@ class MoonTextInputSizeProperties
   });
 
   @override
-  MoonTextInputSizeProperties copyWith({
+  MoonInputSizeProperties copyWith({
     BorderRadiusGeometry? borderRadius,
     double? height,
     double? gap,
@@ -44,7 +42,7 @@ class MoonTextInputSizeProperties
     EdgeInsetsGeometry? padding,
     TextStyle? textStyle,
   }) {
-    return MoonTextInputSizeProperties(
+    return MoonInputSizeProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       height: height ?? this.height,
       gap: gap ?? this.gap,
@@ -55,13 +53,13 @@ class MoonTextInputSizeProperties
   }
 
   @override
-  MoonTextInputSizeProperties lerp(
-    ThemeExtension<MoonTextInputSizeProperties>? other,
+  MoonInputSizeProperties lerp(
+    ThemeExtension<MoonInputSizeProperties>? other,
     double t,
   ) {
-    if (other is! MoonTextInputSizeProperties) return this;
+    if (other is! MoonInputSizeProperties) return this;
 
-    return MoonTextInputSizeProperties(
+    return MoonInputSizeProperties(
       borderRadius:
           BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       height: lerpDouble(height, other.height, t)!,
@@ -76,26 +74,14 @@ class MoonTextInputSizeProperties
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-        DiagnosticsProperty("type", "MoonTextInputSizeProperties"),
-      )
+      ..add(DiagnosticsProperty("type", "MoonInputSizeProperties"))
+      ..add(DoubleProperty("height", height))
+      ..add(DoubleProperty("gap", gap))
+      ..add(DoubleProperty("iconSizeValue", iconSizeValue))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding))
+      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
       ..add(
         DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
-      )
-      ..add(
-        DoubleProperty("height", height),
-      )
-      ..add(
-        DoubleProperty("gap", gap),
-      )
-      ..add(
-        DoubleProperty("iconSizeValue", iconSizeValue),
-      )
-      ..add(
-        DiagnosticsProperty<EdgeInsetsGeometry>("padding", padding),
-      )
-      ..add(
-        DiagnosticsProperty<TextStyle>("textStyle", textStyle),
       );
   }
 }

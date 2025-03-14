@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 
-class TextInput extends StatefulWidget {
-  const TextInput({super.key});
+class Input extends StatefulWidget {
+  const Input({super.key});
 
   @override
-  State<TextInput> createState() => _TextInputState();
+  State<Input> createState() => _InputState();
 }
 
-class _TextInputState extends State<TextInput> {
+class _InputState extends State<Input> {
   final TextEditingController _textController = TextEditingController();
 
   @override
@@ -18,7 +18,7 @@ class _TextInputState extends State<TextInput> {
         builder: (BuildContext context) {
           return Column(
             children: [
-              MoonFormTextInput(
+              MoonInput.form(
                 controller: _textController,
                 validator: (String? value) => value != null && value.length < 5 
                   ? "The text should be longer than 5 characters." 

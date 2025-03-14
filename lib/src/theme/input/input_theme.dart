@@ -1,43 +1,43 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/text_input/text_input_colors.dart';
-import 'package:moon_design/src/theme/text_input/text_input_properties.dart';
-import 'package:moon_design/src/theme/text_input/text_input_sizes.dart';
+import 'package:moon_design/src/theme/input/input_colors.dart';
+import 'package:moon_design/src/theme/input/input_properties.dart';
+import 'package:moon_design/src/theme/input/input_sizes.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme>
+class MoonInputTheme extends ThemeExtension<MoonInputTheme>
     with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// The colors of the MoonTextInput.
-  final MoonTextInputColors colors;
+  /// The colors of the MoonInput.
+  final MoonInputColors colors;
 
-  /// The properties of the MoonTextInput.
-  final MoonTextInputProperties properties;
+  /// The properties of the MoonInput.
+  final MoonInputProperties properties;
 
-  /// The sizes of the MoonTextInput.
-  final MoonTextInputSizes sizes;
+  /// The sizes of the MoonInput.
+  final MoonInputSizes sizes;
 
-  MoonTextInputTheme({
+  MoonInputTheme({
     required this.tokens,
-    MoonTextInputColors? colors,
-    MoonTextInputProperties? properties,
-    MoonTextInputSizes? sizes,
+    MoonInputColors? colors,
+    MoonInputProperties? properties,
+    MoonInputSizes? sizes,
   })  : colors = colors ??
-            MoonTextInputColors(
+            MoonInputColors(
               backgroundColor: tokens.colors.goku,
               activeBorderColor: tokens.colors.piccolo,
               inactiveBorderColor: tokens.colors.beerus,
               errorColor: tokens.colors.chichi,
-              hoverBorderColor: tokens.colors.beerus,
+              hoverColor: tokens.colors.beerus,
               textColor: tokens.colors.textPrimary,
               helperTextColor: tokens.colors.textSecondary,
             ),
         properties = properties ??
-            MoonTextInputProperties(
+            MoonInputProperties(
               // The duration value extracted from:
               // https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/textfield/TextInputLayout.java
               transitionDuration: const Duration(milliseconds: 167),
@@ -45,16 +45,16 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme>
               helperPadding: EdgeInsets.only(top: tokens.sizes.x4s),
               helperTextStyle: tokens.typography.body.text12,
             ),
-        sizes = sizes ?? MoonTextInputSizes(tokens: tokens);
+        sizes = sizes ?? MoonInputSizes(tokens: tokens);
 
   @override
-  MoonTextInputTheme copyWith({
+  MoonInputTheme copyWith({
     MoonTokens? tokens,
-    MoonTextInputColors? colors,
-    MoonTextInputProperties? properties,
-    MoonTextInputSizes? sizes,
+    MoonInputColors? colors,
+    MoonInputProperties? properties,
+    MoonInputSizes? sizes,
   }) {
-    return MoonTextInputTheme(
+    return MoonInputTheme(
       tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
@@ -63,10 +63,10 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme>
   }
 
   @override
-  MoonTextInputTheme lerp(ThemeExtension<MoonTextInputTheme>? other, double t) {
-    if (other is! MoonTextInputTheme) return this;
+  MoonInputTheme lerp(ThemeExtension<MoonInputTheme>? other, double t) {
+    if (other is! MoonInputTheme) return this;
 
-    return MoonTextInputTheme(
+    return MoonInputTheme(
       tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
@@ -78,20 +78,10 @@ class MoonTextInputTheme extends ThemeExtension<MoonTextInputTheme>
   void debugFillProperties(DiagnosticPropertiesBuilder diagnosticProperties) {
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
-      ..add(
-        DiagnosticsProperty("type", "MoonTextInputTheme"),
-      )
-      ..add(
-        DiagnosticsProperty<MoonTokens>("tokens", tokens),
-      )
-      ..add(
-        DiagnosticsProperty<MoonTextInputColors>("colors", colors),
-      )
-      ..add(
-        DiagnosticsProperty<MoonTextInputProperties>("properties", properties),
-      )
-      ..add(
-        DiagnosticsProperty<MoonTextInputSizes>("sizes", sizes),
-      );
+      ..add(DiagnosticsProperty("type", "MoonInputTheme"))
+      ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
+      ..add(DiagnosticsProperty<MoonInputColors>("colors", colors))
+      ..add(DiagnosticsProperty<MoonInputProperties>("properties", properties))
+      ..add(DiagnosticsProperty<MoonInputSizes>("sizes", sizes));
   }
 }

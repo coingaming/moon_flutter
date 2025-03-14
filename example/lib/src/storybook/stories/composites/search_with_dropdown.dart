@@ -77,7 +77,7 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
   Widget build(BuildContext context) {
     final activeBorderColorKnob = context.knobs.nullable.options(
       label: "activeBorderColor",
-      description: "MoonColors variants for MoonTextInput active border.",
+      description: "MoonColors variants for MoonInput active border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -88,7 +88,7 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
 
     final inactiveBorderColorKnob = context.knobs.nullable.options(
       label: "inactiveBorderColor",
-      description: "MoonColors variants for MoonTextInput inactive border.",
+      description: "MoonColors variants for MoonInput inactive border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -98,20 +98,20 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
     final inactiveBorderColor =
         colorTable(context)[inactiveBorderColorKnob ?? 40];
 
-    final hoverBorderColorKnob = context.knobs.nullable.options(
-      label: "hoverBorderColor",
-      description: "MoonColors variants for MoonTextInput border on hover.",
+    final hoverColorKnob = context.knobs.nullable.options(
+      label: "hoverColor",
+      description: "MoonColors variants for MoonInput on hover.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final hoverBorderColor = colorTable(context)[hoverBorderColorKnob ?? 40];
+    final hoverColor = colorTable(context)[hoverColorKnob ?? 40];
 
     final backgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
-      description: "MoonColors variants for MoonTextInput background.",
+      description: "MoonColors variants for MoonInput background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -122,7 +122,7 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
 
     final borderRadiusKnob = context.knobs.nullable.sliderInt(
       label: "borderRadius",
-      description: "Border radius for MoonTextInput and MoonDropdown",
+      description: "Border radius for MoonInput and MoonDropdown",
       enabled: false,
       initial: 8,
       max: 32,
@@ -144,13 +144,13 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
 
     final enabledKnob = context.knobs.boolean(
       label: "enabled",
-      description: "Switch between MoonTextInput enabled and disabled states.",
+      description: "Switch between MoonInput enabled and disabled states.",
       initial: true,
     );
 
     final hasFloatingLabelKnob = context.knobs.boolean(
       label: "hasFloatingLabel",
-      description: "Whether MoonTextInput has floating label.",
+      description: "Whether MoonInput has floating label.",
     );
 
     BorderRadiusGeometry? getBorderRadius(_Section variant) {
@@ -245,7 +245,7 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
                     );
                   },
                 ),
-                child: MoonTextInput(
+                child: MoonInput(
                   enabled: enabledKnob,
                   width: constraints.maxWidth,
                   hasFloatingLabel: hasFloatingLabelKnob,
@@ -253,7 +253,7 @@ class _SearchWithDropdownStoryState extends State<SearchWithDropdownStory> {
                       activeBorderColor ?? context.moonColors!.beerus,
                   inactiveBorderColor: inactiveBorderColor,
                   backgroundColor: backgroundColor,
-                  hoverBorderColor: hoverBorderColor,
+                  hoverColor: hoverColor,
                   borderRadius: getBorderRadius(_Section.input),
                   hintText: "Search components",
                   controller: _searchController,

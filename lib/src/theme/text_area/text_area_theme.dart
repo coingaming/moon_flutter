@@ -27,7 +27,7 @@ class MoonTextAreaTheme extends ThemeExtension<MoonTextAreaTheme>
               activeBorderColor: tokens.colors.piccolo,
               inactiveBorderColor: tokens.colors.beerus,
               errorColor: tokens.colors.chichi,
-              hoverBorderColor: tokens.colors.beerus,
+              hoverColor: tokens.colors.beerus,
               textColor: tokens.colors.textPrimary,
               helperTextColor: tokens.colors.trunks,
             ),

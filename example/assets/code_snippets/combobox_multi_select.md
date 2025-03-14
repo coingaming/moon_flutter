@@ -113,7 +113,7 @@ class _ComboboxMultiSelectState extends State<ComboboxMultiSelect> {
                   },
                 ),
         ),
-        child: MoonTextInput(
+        child: MoonInput(
           focusNode: _focusNode,
           hintText: "Select multiple components",
           controller: _searchController,

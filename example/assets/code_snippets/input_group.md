@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 
-class TextInputGroup extends StatefulWidget {
-  const TextInputGroup({super.key});
+class InputGroup extends StatefulWidget {
+  const InputGroup({super.key});
 
   @override
-  State<TextInputGroup> createState() => _TextInputGroupState();
+  State<InputGroup> createState() => _InputGroupState();
 }
 
-class _TextInputGroupState extends State<TextInputGroup> {
+class _InputGroupState extends State<InputGroup> {
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -21,10 +21,10 @@ class _TextInputGroupState extends State<TextInputGroup> {
         builder: (context) {
           return Column(
             children: [
-              MoonTextInputGroup(
+              MoonInputGroup(
                 children: [
-                  MoonFormTextInput(
-                    textInputSize: MoonTextInputSize.xl,
+                  MoonInput.form(
+                    inputSize: MoonInputSize.xl,
                     controller: _textController,
                     validator: (String? value) => value?.length != null && value!.length < 5
                       ? "The text should be longer than 5 characters."
@@ -35,8 +35,8 @@ class _TextInputGroupState extends State<TextInputGroup> {
                       child: const Icon(MoonIcons.controls_close_small_24_light),
                     ),
                   ),
-                  MoonFormTextInput(
-                    textInputSize: MoonTextInputSize.xl,
+                  MoonInput.form(
+                    inputSize: MoonInputSize.xl,
                     obscureText: _hidePassword,
                     controller: _passwordController,
                     validator: (String? value) => value != "123" ? "Wrong password." : null,

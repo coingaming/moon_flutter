@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class TextInputGroupStory extends StatefulWidget {
-  static const path = '/primitives/text_input_group';
+class InputGroupStory extends StatefulWidget {
+  static const path = '/primitives/input_group';
 
-  const TextInputGroupStory({super.key});
+  const InputGroupStory({super.key});
 
   @override
-  State<TextInputGroupStory> createState() => _TextInputGroupStoryState();
+  State<InputGroupStory> createState() => _InputGroupStoryState();
 }
 
-class _TextInputGroupStoryState extends State<TextInputGroupStory> {
+class _InputGroupStoryState extends State<InputGroupStory> {
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -22,7 +22,7 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
   Widget build(BuildContext context) {
     final textColorKnob = context.knobs.nullable.options(
       label: "textColor",
-      description: "MoonColors variants for MoonTextInputGroup text.",
+      description: "MoonColors variants for MoonInputGroup text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -33,7 +33,7 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
 
     final hintTextColorKnob = context.knobs.nullable.options(
       label: "hintTextColor",
-      description: "MoonColors variants for MoonTextInputGroup hint text.",
+      description: "MoonColors variants for MoonInputGroup hint text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -42,9 +42,31 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
 
     final hintTextColor = colorTable(context)[hintTextColorKnob ?? 40];
 
+    final labelColorKnob = context.knobs.nullable.options(
+      label: "Label text color",
+      description: "MoonColors variants for MoonInputGroup label text.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final labelColor = colorTable(context)[labelColorKnob ?? 40];
+
+    final helperTextColorKnob = context.knobs.nullable.options(
+      label: "Helper text color",
+      description: "MoonColors variants for MoonInputGroup helper text.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final helperTextColor = colorTable(context)[helperTextColorKnob ?? 40];
+
     final backgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
-      description: "MoonColors variants for MoonTextInputGroup background.",
+      description: "MoonColors variants for MoonInputGroup background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -55,7 +77,7 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
 
     final borderColorKnob = context.knobs.nullable.options(
       label: "borderColor",
-      description: "MoonColors variants for MoonTextInputGroup border.",
+      description: "MoonColors variants for MoonInputGroup border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -64,10 +86,21 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
 
     final borderColor = colorTable(context)[borderColorKnob ?? 40];
 
+    final hoverColorKnob = context.knobs.nullable.options(
+      label: "hoverColor",
+      description: "MoonColors variants for MoonInputGroup children on hover.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final hoverColor = colorTable(context)[hoverColorKnob ?? 40];
+
     final activeChildrenBorderColorKnob = context.knobs.nullable.options(
       label: "activeBorderColor",
       description:
-          "MoonColors variants for MoonTextInputGroup children active border.",
+          "MoonColors variants for MoonInputGroup children active border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -77,21 +110,9 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
     final activeBorderColor =
         colorTable(context)[activeChildrenBorderColorKnob ?? 40];
 
-    final errorBorderColorKnob = context.knobs.nullable.options(
-      label: "errorBorderColor",
-      description:
-          "MoonColors variants for MoonTextInputGroup error state border.",
-      enabled: false,
-      initial: 0,
-      // piccolo
-      options: colorOptions,
-    );
-
-    final errorBorderColor = colorTable(context)[errorBorderColorKnob ?? 40];
-
     final errorColorKnob = context.knobs.nullable.options(
       label: "errorColor",
-      description: "MoonColors variants for MoonTextInputGroup in error state.",
+      description: "MoonColors variants for MoonInputGroup in error state.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -102,24 +123,24 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
 
     final orientationKnob = context.knobs.nullable.options(
       label: "orientation",
-      description: "MoonTextInputGroup orientation.",
+      description: "MoonInputGroup orientation.",
       enabled: false,
-      initial: MoonTextInputGroupOrientation.vertical,
+      initial: MoonInputGroupOrientation.vertical,
       options: [
         const Option(
           label: "vertical",
-          value: MoonTextInputGroupOrientation.vertical,
+          value: MoonInputGroupOrientation.vertical,
         ),
         const Option(
           label: "horizontal",
-          value: MoonTextInputGroupOrientation.horizontal,
+          value: MoonInputGroupOrientation.horizontal,
         ),
       ],
     );
 
     final borderRadiusKnob = context.knobs.nullable.sliderInt(
       label: "borderRadius",
-      description: "Border radius for MoonTextInputGroup.",
+      description: "Border radius for MoonInputGroup.",
       enabled: false,
       initial: 8,
       max: 32,
@@ -131,9 +152,21 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
       initial: true,
     );
 
-    final showHelperKnob = context.knobs.boolean(
-      label: "helper",
-      description: "Show widget in MoonTextInputGroup helper slot.",
+    final showLabelKnob = context.knobs.boolean(
+      label: "label",
+      description: "Show label for MoonInputGroup.",
+      initial: true,
+    );
+
+    final showHintKnob = context.knobs.boolean(
+      label: "hintText",
+      description: "Show hint text for MoonInputGroup children.",
+      initial: true,
+    );
+
+    final showHelperTextKnob = context.knobs.boolean(
+      label: "helperText",
+      description: "Show helper text for MoonInputGroup.",
     );
 
     final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
@@ -149,29 +182,33 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  MoonTextInputGroup(
+                  MoonInputGroup(
                     enabled: enabledKnob,
                     backgroundColor: backgroundColor,
                     borderColor: borderColor,
+                    hoverColor: hoverColor,
                     errorColor: errorColor,
+                    hintColor: hintTextColor,
+                    label: showLabelKnob
+                        ? Text(
+                            "Input Group",
+                            style: TextStyle(color: labelColor ?? Colors.black),
+                          )
+                        : null,
+                    helperErrorTextStyle: TextStyle(color: helperTextColor),
                     borderRadius: borderRadius,
-                    orientation: orientationKnob ??
-                        MoonTextInputGroupOrientation.vertical,
-                    helper:
-                        showHelperKnob ? const Text("Supporting text") : null,
+                    orientation:
+                        orientationKnob ?? MoonInputGroupOrientation.vertical,
+                    helperText: showHelperTextKnob ? "Supporting text" : null,
                     children: [
-                      MoonFormTextInput(
-                        textInputSize: MoonTextInputSize.xl,
+                      MoonInput.form(
+                        inputSize: MoonInputSize.xl,
                         controller: _textController,
-                        enabled: enabledKnob,
-                        hasFloatingLabel: true,
                         textColor: textColor,
-                        hintTextColor: hintTextColor,
                         activeBorderColor: activeBorderColor,
-                        errorBorderColor: errorBorderColor,
-                        errorColor: errorColor,
-                        borderRadius: borderRadius,
-                        hintText: "Enter text (over 10 characters)",
+                        hintText: showHintKnob
+                            ? "Enter text (over 10 characters)"
+                            : null,
                         validator: (String? value) => value?.length != null &&
                                 value!.length < 10
                             ? "The text should be longer than 10 characters."
@@ -193,19 +230,15 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                           ),
                         ),
                       ),
-                      MoonFormTextInput(
-                        textInputSize: MoonTextInputSize.xl,
+                      MoonInput.form(
+                        inputSize: MoonInputSize.xl,
                         controller: _passwordController,
-                        enabled: enabledKnob,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: _hidePassword,
-                        hasFloatingLabel: true,
                         textColor: textColor,
-                        hintTextColor: hintTextColor,
                         activeBorderColor: activeBorderColor,
-                        errorColor: errorColor,
-                        borderRadius: borderRadius,
-                        hintText: "Enter password (123abc)",
+                        hintText:
+                            showHintKnob ? "Enter password (123abc)" : null,
                         validator: (String? value) =>
                             value != "123abc" ? "Wrong password." : null,
                         onTapOutside: (PointerDownEvent _) =>
@@ -240,7 +273,8 @@ class _TextInputGroupStoryState extends State<TextInputGroupStory> {
                   const SizedBox(height: 32),
                   MoonFilledButton(
                     label: const Text("Submit"),
-                    onTap: () => Form.of(context).validate(),
+                    onTap:
+                        enabledKnob ? () => Form.of(context).validate() : null,
                   ),
                 ],
               );

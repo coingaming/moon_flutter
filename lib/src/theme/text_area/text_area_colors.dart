@@ -18,13 +18,13 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors>
   /// The color of the MoonTextArea in error state.
   final Color errorColor;
 
-  /// The border color of the MoonTextArea on hover.
-  final Color hoverBorderColor;
+  /// The hover effect color of the MoonTextArea.
+  final Color hoverColor;
 
   /// The text color of the MoonTextArea.
   final Color textColor;
 
-  /// The text color of the MoonTextArea helper and errorBuilder widgets.
+  /// The text color of the MoonTextArea helper widget.
   final Color helperTextColor;
 
   const MoonTextAreaColors({
@@ -32,7 +32,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors>
     required this.activeBorderColor,
     required this.inactiveBorderColor,
     required this.errorColor,
-    required this.hoverBorderColor,
+    required this.hoverColor,
     required this.textColor,
     required this.helperTextColor,
   });
@@ -43,7 +43,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors>
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? errorColor,
-    Color? hoverBorderColor,
+    Color? hoverColor,
     Color? textColor,
     Color? helperTextColor,
   }) {
@@ -52,7 +52,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors>
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
       errorColor: errorColor ?? this.errorColor,
-      hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,
+      hoverColor: hoverColor ?? this.hoverColor,
       textColor: textColor ?? this.textColor,
       helperTextColor: helperTextColor ?? this.helperTextColor,
     );
@@ -70,8 +70,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors>
       inactiveBorderColor:
           colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
       errorColor: colorPremulLerp(errorColor, other.errorColor, t)!,
-      hoverBorderColor:
-          colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
+      hoverColor: colorPremulLerp(hoverColor, other.hoverColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
       helperTextColor:
           colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
@@ -87,7 +86,7 @@ class MoonTextAreaColors extends ThemeExtension<MoonTextAreaColors>
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
       ..add(ColorProperty("errorColor", errorColor))
-      ..add(ColorProperty("hoverBorderColor", hoverBorderColor))
+      ..add(ColorProperty("hoverColor", hoverColor))
       ..add(ColorProperty("textColor", textColor))
       ..add(ColorProperty("helperTextColor", helperTextColor));
   }

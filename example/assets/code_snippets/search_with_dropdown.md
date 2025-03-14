@@ -117,7 +117,7 @@ class _SearchWithDropdownState extends State<SearchWithDropdown> {
                   },
                 ),
         ),
-        child: MoonTextInput(
+        child: MoonInput(
           hintText: "Search components",
           controller: _searchController,
           borderRadius: _showDropdown ? const BorderRadius.vertical(top: Radius.circular(8)) : null,

@@ -16,6 +16,8 @@ import 'package:example/src/storybook/stories/primitives/dot_indicator.dart';
 import 'package:example/src/storybook/stories/primitives/drawer.dart';
 import 'package:example/src/storybook/stories/primitives/dropdown.dart';
 import 'package:example/src/storybook/stories/primitives/icons.dart';
+import 'package:example/src/storybook/stories/primitives/input.dart';
+import 'package:example/src/storybook/stories/primitives/input_group.dart';
 import 'package:example/src/storybook/stories/primitives/linear_loader.dart';
 import 'package:example/src/storybook/stories/primitives/linear_progress.dart';
 import 'package:example/src/storybook/stories/primitives/menu_item.dart';
@@ -28,8 +30,6 @@ import 'package:example/src/storybook/stories/primitives/tab_bar.dart';
 import 'package:example/src/storybook/stories/primitives/table.dart';
 import 'package:example/src/storybook/stories/primitives/tag.dart';
 import 'package:example/src/storybook/stories/primitives/text_area.dart';
-import 'package:example/src/storybook/stories/primitives/text_input.dart';
-import 'package:example/src/storybook/stories/primitives/text_input_group.dart';
 import 'package:example/src/storybook/stories/primitives/toast.dart';
 import 'package:example/src/storybook/stories/primitives/tooltip.dart';
 
@@ -51,6 +51,8 @@ enum Component {
   drawer,
   dropdown,
   icons,
+  input,
+  inputGroup,
   linearLoader,
   linearProgress,
   menuItem,
@@ -64,8 +66,6 @@ enum Component {
   table,
   tag,
   textArea,
-  textInput,
-  textInputGroup,
   toast,
   tooltip;
 
@@ -111,6 +111,9 @@ enum Component {
           "Dropdown list allows users to choose one value from a menu by clicking.",
         icons =>
           'Commonly used interface icons provided by Moon Design System.',
+        input => 'Input fields allow users to enter text.',
+        inputGroup =>
+          'Combine different types of inputs into groups to save vertical space on designs.',
         linearLoader =>
           "Loaders provide visual feedback for in-progress tasks.",
         linearProgress =>
@@ -135,9 +138,6 @@ enum Component {
         tag =>
           "Tags are interactive keywords used to organize and categorize objects.",
         textArea => 'A form control for entering and editing multi-line text.',
-        textInput => 'Text input fields allow users to enter text.',
-        textInputGroup =>
-          'Combine different types of inputs into groups to save vertical space on designs.',
         toast =>
           "Toast provides brief feedback message without interrupting the interface.",
         tooltip => 'Tooltip displays additional information about an element.',
@@ -161,6 +161,8 @@ enum Component {
         drawer => DrawerStory.path,
         dropdown => DropdownStory.path,
         icons => IconsStory.path,
+        input => InputStory.path,
+        inputGroup => InputGroupStory.path,
         linearLoader => LinearLoaderStory.path,
         linearProgress => LinearProgressStory.path,
         menuItem => MenuItemStory.path,
@@ -174,8 +176,6 @@ enum Component {
         table => TableStory.path,
         tag => TagStory.path,
         textArea => TextAreaStory.path,
-        textInput => TextInputStory.path,
-        textInputGroup => TextInputGroupStory.path,
         toast => ToastStory.path,
         tooltip => TooltipStory.path,
       };

@@ -32,6 +32,17 @@ class TextAreaStory extends StatelessWidget {
 
     final hintTextColor = colorTable(context)[hintTextColorKnob ?? 40];
 
+    final helperTextColorKnob = context.knobs.nullable.options(
+      label: "Helper text color",
+      description: "MoonColors variants for MoonTextArea helper text.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final helperTextColor = colorTable(context)[helperTextColorKnob ?? 40];
+
     final backgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
       description: "MoonColors variants for MoonTextArea background.",
@@ -96,9 +107,21 @@ class TextAreaStory extends StatelessWidget {
       description: "Whether MoonTextArea can expand to fit its contents.",
     );
 
-    final showHelperKnob = context.knobs.boolean(
-      label: "helper",
-      description: "Show widget in MoonTextArea helper slot.",
+    final showLabelKnob = context.knobs.boolean(
+      label: "label",
+      description: "Show widget in MoonTextArea label slot.",
+      initial: true,
+    );
+
+    final showHintKnob = context.knobs.boolean(
+      label: "hintText",
+      description: "Show MoonTextArea hint text.",
+      initial: true,
+    );
+
+    final showHelperTextKnob = context.knobs.boolean(
+      label: "helperText",
+      description: "Show MoonTextArea helper text.",
     );
 
     return Center(
@@ -115,6 +138,7 @@ class TextAreaStory extends StatelessWidget {
                     expands: expandsKnob,
                     height: expandsKnob ? null : 200,
                     textColor: textColor,
+                    helperErrorTextStyle: TextStyle(color: helperTextColor),
                     hintTextColor: hintTextColor,
                     backgroundColor: backgroundColor,
                     activeBorderColor: activeBorderColor,
@@ -123,15 +147,15 @@ class TextAreaStory extends StatelessWidget {
                     borderRadius: borderRadiusKnob != null
                         ? BorderRadius.circular(borderRadiusKnob.toDouble())
                         : null,
-                    hintText: "Enter your text here...",
                     validator: (String? value) =>
                         value?.length != null && value!.length < 10
                             ? "The text should be longer than 10 characters."
                             : null,
                     onTapOutside: (PointerDownEvent _) =>
                         FocusManager.instance.primaryFocus?.unfocus(),
-                    helper:
-                        showHelperKnob ? const Text("Supporting text") : null,
+                    hintText: showHintKnob ? "Enter your text here..." : null,
+                    helperText: showHelperTextKnob ? "Supporting text" : null,
+                    label: showLabelKnob ? const Text("Label") : null,
                   ),
                   const SizedBox(height: 32),
                   MoonFilledButton(
