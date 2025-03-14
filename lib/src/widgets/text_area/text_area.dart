@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:moon_design/src/theme/theme.dart';
-import 'package:moon_design/src/theme/tokens/sizes.dart';
-import 'package:moon_design/src/theme/tokens/transitions.dart';
 import 'package:moon_design/src/theme/tokens/typography/typography.dart';
-import 'package:moon_design/src/widgets/text_input/form_text_input.dart';
+import 'package:moon_design/src/widgets/input/input.dart';
+
 import 'package:moon_tokens/moon_tokens.dart';
 
 typedef MoonTextAreaErrorBuilder = Widget Function(
@@ -75,8 +73,8 @@ class MoonTextArea extends StatelessWidget {
   /// The color of the text area in error state.
   final Color? errorColor;
 
-  /// The border color of the text area on hover.
-  final Color? hoverBorderColor;
+  /// The hover effect color of the text area.
+  final Color? hoverColor;
 
   /// The text color of the text area.
   final Color? textColor;
@@ -94,11 +92,14 @@ class MoonTextArea extends StatelessWidget {
   /// The curve of the text area transition animation (enable and disable).
   final Curve? transitionCurve;
 
+  /// The padding of the text area [label].
+  final EdgeInsetsGeometry? labelPadding;
+
   /// {@macro flutter.widgets.editableText.scrollPadding}
   final EdgeInsets scrollPadding;
 
   /// The padding of the [helper] and [errorBuilder] widgets.
-  final EdgeInsetsGeometry? helperPadding;
+  final EdgeInsetsGeometry? helperErrorPadding;
 
   /// The padding of the text content.
   final EdgeInsetsGeometry? textPadding;
@@ -143,6 +144,10 @@ class MoonTextArea extends StatelessWidget {
   /// The hint text to display in the text area.
   final String? hintText;
 
+  /// The helper text to display below the text area. Not displayed in error state.
+  /// To customize the helper, use [helper]. Mutually exclusive with [helper].
+  final String? helperText;
+
   /// The initial value of the text area.
   final String? initialValue;
 
@@ -155,9 +160,6 @@ class MoonTextArea extends StatelessWidget {
   ///  Flutter.
   /// {@endtemplate}
   final String? restorationId;
-
-  /// The semantic label for the text area.
-  final String? semanticLabel;
 
   /// {@macro flutter.widgets.editableText.strutStyle}
   final StrutStyle? strutStyle;
@@ -185,8 +187,8 @@ class MoonTextArea extends StatelessWidget {
   /// This text style is also used as the base style for the [decoration].
   final TextStyle? textStyle;
 
-  /// The text style of the [helper] widget or error state text.
-  final TextStyle? helperTextStyle;
+  /// The text style of the [helper] and error state text.
+  final TextStyle? helperErrorTextStyle;
 
   /// The text validator for the text area widget.
   final FormFieldValidator<String>? validator;
@@ -228,189 +230,153 @@ class MoonTextArea extends StatelessWidget {
   /// The widget to display below the text area. Not displayed in error state.
   final Widget? helper;
 
+  /// The widget that describes the text area field. Displayed above the text area.
+  final Widget? label;
+
   /// Creates a Moon Design text area.
   const MoonTextArea({
     super.key,
-    this.autovalidateMode = AutovalidateMode.disabled,
+    this.activeBorderColor,
     this.autocorrect = true,
+    this.autofillHints,
     this.autofocus = false,
-    this.enabled = true,
+    this.autovalidateMode = AutovalidateMode.disabled,
+    this.backgroundColor,
+    this.borderRadius,
+    this.clipBehavior,
+    this.controller,
+    this.decoration,
     this.enableIMEPersonalizedLearning = true,
     this.enableInteractiveSelection,
     this.enableSuggestions = true,
-    this.expands = false,
-    this.readOnly = false,
-    this.scribbleEnabled = true,
-    this.showCursor,
-    this.borderRadius,
-    this.keyboardAppearance,
-    this.clipBehavior,
-    this.backgroundColor,
-    this.activeBorderColor,
-    this.inactiveBorderColor,
+    this.enabled = true,
+    this.errorBuilder,
     this.errorColor,
-    this.hoverBorderColor,
-    this.textColor,
-    this.hintTextColor,
-    this.height,
-    this.transitionDuration,
-    this.transitionCurve,
-    this.scrollPadding = const EdgeInsets.all(24.0),
-    this.helperPadding,
-    this.textPadding,
+    this.expands = false,
     this.focusNode,
-    this.validator,
-    this.maxLength,
-    this.minLines,
-    this.autofillHints,
-    this.inputFormatters,
-    this.maxLengthEnforcement,
-    this.scrollController,
-    this.scrollPhysics,
-    this.decoration,
+    this.height,
+    this.helper,
+    this.helperText,
+    this.helperErrorPadding,
+    this.helperErrorTextStyle,
     this.hintText,
+    this.hintTextColor,
+    this.hoverColor,
+    this.inactiveBorderColor,
     this.initialValue,
-    this.restorationId,
-    this.semanticLabel,
-    this.strutStyle,
-    this.textAlign = TextAlign.start,
-    this.textCapitalization = TextCapitalization.none,
-    this.textDirection,
-    this.controller,
-    this.textInputAction,
-    this.textStyle,
-    this.helperTextStyle,
-    this.onTap,
-    this.onTapOutside,
+    this.inputFormatters,
+    this.keyboardAppearance,
+    this.label,
+    this.labelPadding,
+    this.maxLength,
+    this.maxLengthEnforcement,
+    this.minLines,
     this.onChanged,
     this.onEditingComplete,
     this.onSaved,
     this.onSubmitted,
-    this.errorBuilder,
-    this.helper,
-  });
+    this.onTap,
+    this.onTapOutside,
+    this.readOnly = false,
+    this.restorationId,
+    this.scribbleEnabled = true,
+    this.scrollController,
+    this.scrollPadding = const EdgeInsets.all(24.0),
+    this.scrollPhysics,
+    this.showCursor,
+    this.strutStyle,
+    this.textAlign = TextAlign.start,
+    this.textCapitalization = TextCapitalization.none,
+    this.textColor,
+    this.textDirection,
+    this.textInputAction,
+    this.textPadding,
+    this.textStyle,
+    this.transitionCurve,
+    this.transitionDuration,
+    this.validator,
+  }) : assert(
+          helperText == null || helper == null,
+          'Either helperText or helper can be provided, but not both.',
+        );
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadiusGeometry effectiveBorderRadius = borderRadius ??
-        context.moonTheme?.textAreaTheme.properties.borderRadius ??
-        BorderRadius.circular(8);
+    final EdgeInsetsGeometry effectiveTextPadding =
+        textPadding ?? const EdgeInsets.all(12);
 
-    final Color effectiveBackgroundColor = backgroundColor ??
-        context.moonTheme?.textAreaTheme.colors.backgroundColor ??
-        MoonColors.light.goku;
+    final TextStyle effectiveTextStyle =
+        textStyle ?? MoonTypography.typography.body.text16;
 
-    final Color effectiveActiveBorderColor = activeBorderColor ??
-        context.moonTheme?.textAreaTheme.colors.activeBorderColor ??
-        MoonColors.light.piccolo;
+    final Color effectiveTextColor = textColor ?? MoonColors.light.textPrimary;
 
-    final Color effectiveInactiveBorderColor = inactiveBorderColor ??
-        context.moonTheme?.textAreaTheme.colors.inactiveBorderColor ??
-        MoonColors.light.beerus;
+    final TextStyle resolvedTextStyle =
+        effectiveTextStyle.copyWith(color: effectiveTextColor);
 
-    final Color effectiveErrorColor = errorColor ??
-        context.moonTheme?.textAreaTheme.colors.errorColor ??
-        MoonColors.light.chichi;
-
-    final Color effectiveHoverBorderColor = hoverBorderColor ??
-        context.moonTheme?.textAreaTheme.colors.hoverBorderColor ??
-        MoonColors.light.beerus;
-
-    final Color effectiveTextColor = textColor ??
-        context.moonTheme?.textAreaTheme.colors.textColor ??
-        MoonColors.light.textPrimary;
-
-    final Color effectiveHelperTextColor = hintTextColor ??
-        context.moonTheme?.textAreaTheme.colors.helperTextColor ??
-        MoonColors.light.trunks;
-
-    final EdgeInsetsGeometry effectiveHelperPadding = helperPadding ??
-        context.moonTheme?.textAreaTheme.properties.helperPadding ??
-        EdgeInsets.only(
-          left: MoonSizes.sizes.x3s,
-          top: MoonSizes.sizes.x4s,
-          right: MoonSizes.sizes.x3s,
-        );
-
-    final EdgeInsetsGeometry effectiveTextPadding = textPadding ??
-        context.moonTheme?.textAreaTheme.properties.textPadding ??
-        const EdgeInsets.all(16);
-
-    final TextStyle effectiveTextStyle = textStyle ??
-        context.moonTheme?.textAreaTheme.properties.textStyle ??
-        MoonTypography.typography.body.text16;
-
-    final TextStyle effectiveHelperTextStyle = helperTextStyle ??
-        context.moonTheme?.textAreaTheme.properties.helperTextStyle ??
-        MoonTypography.typography.body.text12;
-
-    final Duration effectiveTransitionDuration = transitionDuration ??
-        context.moonTheme?.textAreaTheme.properties.transitionDuration ??
-        MoonTransitions.transitions.defaultTransitionDuration;
-
-    final Curve effectiveTransitionCurve = transitionCurve ??
-        context.moonTheme?.textAreaTheme.properties.transitionCurve ??
-        MoonTransitions.transitions.defaultTransitionCurve;
-
-    return MoonFormTextInput(
-      activeBorderColor: effectiveActiveBorderColor,
+    return MoonInput.form(
+      activeBorderColor: activeBorderColor,
       autocorrect: autocorrect,
       autofillHints: autofillHints,
       autofocus: autofocus,
       autovalidateMode: autovalidateMode,
-      backgroundColor: effectiveBackgroundColor,
-      borderRadius: effectiveBorderRadius,
+      backgroundColor: backgroundColor,
+      borderRadius: borderRadius,
+      clipBehavior: clipBehavior ?? Clip.hardEdge,
       controller: controller,
       cursorColor: effectiveTextColor,
-      cursorErrorColor: effectiveErrorColor,
-      enabled: enabled,
+      cursorErrorColor: errorColor,
+      decoration: decoration,
       enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
       enableInteractiveSelection: enableInteractiveSelection,
       enableSuggestions: enableSuggestions,
-      errorColor: effectiveErrorColor,
+      enabled: enabled,
       errorBuilder: errorBuilder,
+      errorColor: errorColor,
       expands: expands,
       focusNode: focusNode,
       height: height,
       helper: helper,
-      helperPadding: effectiveHelperPadding,
-      helperTextStyle: effectiveHelperTextStyle,
+      helperText: helperText,
+      helperErrorPadding: helperErrorPadding,
+      helperErrorTextStyle: helperErrorTextStyle,
       hintText: hintText,
-      hintTextColor: effectiveHelperTextColor,
-      hoverBorderColor: effectiveHoverBorderColor,
-      inactiveBorderColor: effectiveInactiveBorderColor,
+      hintTextColor: hintTextColor,
+      hoverColor: hoverColor,
+      inactiveBorderColor: inactiveBorderColor,
       initialValue: initialValue,
       inputFormatters: inputFormatters,
       keyboardAppearance: keyboardAppearance,
       keyboardType: TextInputType.multiline,
+      label: label,
+      labelPadding: labelPadding,
       maxLength: maxLength,
       maxLengthEnforcement: maxLengthEnforcement,
       maxLines: null,
       minLines: minLines,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete,
-      onSubmitted: onSubmitted,
       onSaved: onSaved,
+      onSubmitted: onSubmitted,
       onTap: onTap,
       onTapOutside: onTapOutside,
       padding: effectiveTextPadding,
       readOnly: readOnly,
       restorationId: restorationId,
+      scribbleEnabled: scribbleEnabled,
       scrollController: scrollController,
       scrollPadding: scrollPadding,
       scrollPhysics: scrollPhysics,
-      decoration: decoration,
       showCursor: showCursor,
       strutStyle: strutStyle,
-      style: effectiveTextStyle.copyWith(color: effectiveTextColor),
+      style: resolvedTextStyle,
       textAlign: textAlign,
       textAlignVertical: TextAlignVertical.top,
       textCapitalization: textCapitalization,
-      textColor: effectiveTextColor,
+      textColor: textColor,
       textDirection: textDirection,
       textInputAction: textInputAction,
-      transitionCurve: effectiveTransitionCurve,
-      transitionDuration: effectiveTransitionDuration,
+      transitionCurve: transitionCurve,
+      transitionDuration: transitionDuration,
       validator: validator,
     );
   }

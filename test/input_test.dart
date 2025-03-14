@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moon_design/moon_design.dart';
 
-const Key _textInputKey = Key("textInputKey");
+const Key _inputKey = Key("inputKey");
 const Key _submitButtonKey = Key("submitButtonKey");
 
 const String _hintText = 'Hint text';
@@ -10,8 +10,8 @@ const String _errorText = 'Error text';
 const String _helperText = 'Helper text';
 const String _validText = 'Valid text';
 const String _invalidText = 'Invalid text';
-const IconData _textInputLeadingIcon = MoonIcons.other_frame_24_light;
-const IconData _textInputTrailingIcon = MoonIcons.controls_close_small_24_light;
+const IconData _inputLeadingIcon = MoonIcons.other_frame_24_light;
+const IconData _inputTrailingIcon = MoonIcons.controls_close_small_24_light;
 
 void main() {
   Future<void> submit(WidgetTester tester) async {
@@ -21,24 +21,24 @@ void main() {
 
   testWidgets("Provided key is used.", (tester) async {
     await tester.pumpWidget(
-      const _TextInputTestWidget(
-        textInputKey: _textInputKey,
+      const _InputTestWidget(
+        inputKey: _inputKey,
       ),
     );
 
-    expect(find.byKey(_textInputKey), findsOneWidget);
+    expect(find.byKey(_inputKey), findsOneWidget);
   });
 
   testWidgets("When valid text is entered and submitted, error is not shown.",
       (tester) async {
     await tester.pumpWidget(
-      const _TextInputTestWidget(
-        textInputKey: _textInputKey,
+      const _InputTestWidget(
+        inputKey: _inputKey,
       ),
     );
-    final textInput = find.byKey(_textInputKey);
+    final input = find.byKey(_inputKey);
 
-    await tester.enterText(textInput, _validText);
+    await tester.enterText(input, _validText);
     await tester.pumpAndSettle();
 
     expect(find.text(_validText), findsOneWidget);
@@ -51,13 +51,13 @@ void main() {
   testWidgets("When invalid text is entered and submitted, error is shown.",
       (tester) async {
     await tester.pumpWidget(
-      const _TextInputTestWidget(
-        textInputKey: _textInputKey,
+      const _InputTestWidget(
+        inputKey: _inputKey,
       ),
     );
-    final textInput = find.byKey(_textInputKey);
+    final input = find.byKey(_inputKey);
 
-    await tester.enterText(textInput, _invalidText);
+    await tester.enterText(input, _invalidText);
     await tester.pumpAndSettle();
 
     expect(find.text(_invalidText), findsOneWidget);
@@ -69,7 +69,7 @@ void main() {
 
   testWidgets("Helper text is shown.", (tester) async {
     await tester.pumpWidget(
-      const _TextInputTestWidget(
+      const _InputTestWidget(
         showHelper: true,
       ),
     );
@@ -79,7 +79,7 @@ void main() {
 
   testWidgets("Hint text is shown.", (tester) async {
     await tester.pumpWidget(
-      const _TextInputTestWidget(
+      const _InputTestWidget(
         showHelper: true,
       ),
     );
@@ -87,28 +87,28 @@ void main() {
     expect(find.text(_hintText), findsOneWidget);
   });
 
-  testWidgets("Text input has a leading and trailing widget.", (tester) async {
+  testWidgets("Input has a leading and trailing widget.", (tester) async {
     await tester.pumpWidget(
-      const _TextInputTestWidget(
+      const _InputTestWidget(
         showLeading: true,
         showTrailing: true,
       ),
     );
 
-    expect(find.byIcon(_textInputLeadingIcon), findsOneWidget);
-    expect(find.byIcon(_textInputTrailingIcon), findsOneWidget);
+    expect(find.byIcon(_inputLeadingIcon), findsOneWidget);
+    expect(find.byIcon(_inputTrailingIcon), findsOneWidget);
   });
 
-  testWidgets("When text input is disabled, input cannot be entered.",
+  testWidgets("When input is disabled, text cannot be entered.",
       (tester) async {
     await tester.pumpWidget(
-      const _TextInputTestWidget(
-        textInputKey: _textInputKey,
+      const _InputTestWidget(
+        inputKey: _inputKey,
         enabled: false,
       ),
     );
 
-    final textArea = find.byKey(_textInputKey);
+    final textArea = find.byKey(_inputKey);
 
     await tester.enterText(textArea, _validText);
     await tester.pumpAndSettle();
@@ -117,15 +117,15 @@ void main() {
   });
 }
 
-class _TextInputTestWidget extends StatelessWidget {
-  final Key? textInputKey;
+class _InputTestWidget extends StatelessWidget {
+  final Key? inputKey;
   final bool enabled;
   final bool showHelper;
   final bool showLeading;
   final bool showTrailing;
 
-  const _TextInputTestWidget({
-    this.textInputKey,
+  const _InputTestWidget({
+    this.inputKey,
     this.enabled = true,
     this.showHelper = false,
     this.showLeading = false,
@@ -141,17 +141,15 @@ class _TextInputTestWidget extends StatelessWidget {
             builder: (BuildContext context) {
               return Column(
                 children: [
-                  MoonFormTextInput(
-                    key: textInputKey,
+                  MoonInput.form(
+                    key: inputKey,
                     enabled: enabled,
                     hintText: _hintText,
                     validator: (String? value) =>
                         value != null && value.length > 10 ? _errorText : null,
-                    leading:
-                        showLeading ? const Icon(_textInputLeadingIcon) : null,
-                    trailing: showTrailing
-                        ? const Icon(_textInputTrailingIcon)
-                        : null,
+                    leading: showLeading ? const Icon(_inputLeadingIcon) : null,
+                    trailing:
+                        showTrailing ? const Icon(_inputTrailingIcon) : null,
                     helper: showHelper ? const Text(_helperText) : null,
                   ),
                   MoonFilledButton(

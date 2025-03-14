@@ -371,8 +371,8 @@ class MoonSquicleBorderSide with Diagnosticable {
   /// border at all, the zero factor is special-cased to instead change the
   /// style to [BorderStyle.none].
   ///
-  /// Values for 't' are usually obtained from an [Animation<double>], such as
-  /// an [AnimationController].
+  /// Values for 't' are usually obtained from an [Animation] of type [double],
+  /// such as an [AnimationController].
   BorderSide scale(double t) {
     return BorderSide(
       color: color,

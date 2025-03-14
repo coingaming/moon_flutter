@@ -65,7 +65,7 @@ class _SearchWithListState extends State<SearchWithList> {
       children: [
         Column(
           children: [
-            MoonTextInput(
+            MoonInput(
               hintText: "Search components",
               controller: _searchController,
               // The onTap() and onChanged() properties are used instead of a listener to initiate search on every input tap.

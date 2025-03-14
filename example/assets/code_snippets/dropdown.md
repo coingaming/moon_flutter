@@ -61,7 +61,7 @@ class _DropdownState extends State<Dropdown> {
               ),
             ),
           ),
-          child: MoonTextInput(
+          child: MoonInput(
             width: 250,
             readOnly: true,
             canRequestFocus: false,

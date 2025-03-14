@@ -4,68 +4,68 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/src/utils/color_premul_lerp.dart';
 
 @immutable
-class MoonTextInputColors extends ThemeExtension<MoonTextInputColors>
+class MoonInputColors extends ThemeExtension<MoonInputColors>
     with DiagnosticableTreeMixin {
-  /// The background color of the MoonTextInput.
+  /// The background color of the MoonInput.
   final Color backgroundColor;
 
-  /// The border color of the active or focused MoonTextInput.
+  /// The border color of the active or focused MoonInput.
   final Color activeBorderColor;
 
-  /// The border color of the inactive MoonTextInput.
+  /// The border color of the inactive MoonInput.
   final Color inactiveBorderColor;
 
-  /// The color of the MoonTextInput in error state.
+  /// The color of the MoonInput in error state.
   final Color errorColor;
 
-  /// The border color of the MoonTextInput on hover.
-  final Color hoverBorderColor;
+  /// The hover effect color of the MoonInput.
+  final Color hoverColor;
 
-  /// The text color of the MoonTextInput.
+  /// The text color of the MoonInput.
   final Color textColor;
 
-  /// The text color of the MoonTextInput helper and errorBuilder widgets.
+  /// The text color of the MoonInput helper widget.
   final Color helperTextColor;
 
-  const MoonTextInputColors({
+  const MoonInputColors({
     required this.backgroundColor,
     required this.activeBorderColor,
     required this.inactiveBorderColor,
     required this.errorColor,
-    required this.hoverBorderColor,
+    required this.hoverColor,
     required this.textColor,
     required this.helperTextColor,
   });
 
   @override
-  MoonTextInputColors copyWith({
+  MoonInputColors copyWith({
     Color? backgroundColor,
     Color? activeBorderColor,
     Color? inactiveBorderColor,
     Color? errorColor,
-    Color? hoverBorderColor,
+    Color? hoverColor,
     Color? textColor,
     Color? helperTextColor,
   }) {
-    return MoonTextInputColors(
+    return MoonInputColors(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       activeBorderColor: activeBorderColor ?? this.activeBorderColor,
       inactiveBorderColor: inactiveBorderColor ?? this.inactiveBorderColor,
       errorColor: errorColor ?? this.errorColor,
-      hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,
+      hoverColor: hoverColor ?? this.hoverColor,
       textColor: textColor ?? this.textColor,
       helperTextColor: helperTextColor ?? this.helperTextColor,
     );
   }
 
   @override
-  MoonTextInputColors lerp(
-    ThemeExtension<MoonTextInputColors>? other,
+  MoonInputColors lerp(
+    ThemeExtension<MoonInputColors>? other,
     double t,
   ) {
-    if (other is! MoonTextInputColors) return this;
+    if (other is! MoonInputColors) return this;
 
-    return MoonTextInputColors(
+    return MoonInputColors(
       backgroundColor:
           colorPremulLerp(backgroundColor, other.backgroundColor, t)!,
       activeBorderColor:
@@ -73,8 +73,7 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors>
       inactiveBorderColor:
           colorPremulLerp(inactiveBorderColor, other.inactiveBorderColor, t)!,
       errorColor: colorPremulLerp(errorColor, other.errorColor, t)!,
-      hoverBorderColor:
-          colorPremulLerp(hoverBorderColor, other.hoverBorderColor, t)!,
+      hoverColor: colorPremulLerp(hoverColor, other.hoverColor, t)!,
       textColor: colorPremulLerp(textColor, other.textColor, t)!,
       helperTextColor:
           colorPremulLerp(helperTextColor, other.helperTextColor, t)!,
@@ -85,12 +84,12 @@ class MoonTextInputColors extends ThemeExtension<MoonTextInputColors>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "MoonTextInputColors"))
+      ..add(DiagnosticsProperty("type", "MoonInputColors"))
       ..add(ColorProperty("backgroundColor", backgroundColor))
       ..add(ColorProperty("activeBorderColor", activeBorderColor))
       ..add(ColorProperty("inactiveBorderColor", inactiveBorderColor))
       ..add(ColorProperty("errorColor", errorColor))
-      ..add(ColorProperty("hoverBorderColor", hoverBorderColor))
+      ..add(ColorProperty("hoverColor", hoverColor))
       ..add(ColorProperty("textColor", textColor))
       ..add(ColorProperty("helperTextColor", helperTextColor));
   }

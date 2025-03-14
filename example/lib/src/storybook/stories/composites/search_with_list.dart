@@ -60,22 +60,22 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
 
   @override
   Widget build(BuildContext context) {
-    final textInputSizeKnob = context.knobs.nullable.options(
-      label: "textInputSize",
-      description: "Size variants for MoonTextInput.",
+    final inputSizeKnob = context.knobs.nullable.options(
+      label: "inputSize",
+      description: "Size variants for MoonInput.",
       enabled: false,
-      initial: MoonTextInputSize.md,
+      initial: MoonInputSize.md,
       options: const [
-        Option(label: "sm", value: MoonTextInputSize.sm),
-        Option(label: "md", value: MoonTextInputSize.md),
-        Option(label: "lg", value: MoonTextInputSize.lg),
-        Option(label: "xl", value: MoonTextInputSize.xl),
+        Option(label: "sm", value: MoonInputSize.sm),
+        Option(label: "md", value: MoonInputSize.md),
+        Option(label: "lg", value: MoonInputSize.lg),
+        Option(label: "xl", value: MoonInputSize.xl),
       ],
     );
 
     final activeBorderColorKnob = context.knobs.nullable.options(
       label: "activeBorderColor",
-      description: "MoonColors variants for MoonTextInput active border.",
+      description: "MoonColors variants for MoonInput active border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -86,7 +86,7 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
 
     final inactiveBorderColorKnob = context.knobs.nullable.options(
       label: "inactiveBorderColor",
-      description: "MoonColors variants for MoonTextInput inactive border.",
+      description: "MoonColors variants for MoonInput inactive border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -96,20 +96,20 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
     final inactiveBorderColor =
         colorTable(context)[inactiveBorderColorKnob ?? 40];
 
-    final hoverBorderColorKnob = context.knobs.nullable.options(
-      label: "hoverBorderColor",
-      description: "MoonColors variants for MoonTextInput border on hover.",
+    final hoverColorKnob = context.knobs.nullable.options(
+      label: "hoverColor",
+      description: "MoonColors variants for MoonInput on hover.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final hoverBorderColor = colorTable(context)[hoverBorderColorKnob ?? 40];
+    final hoverColor = colorTable(context)[hoverColorKnob ?? 40];
 
     final backgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
-      description: "MoonColors variants for MoonTextInput background.",
+      description: "MoonColors variants for MoonInput background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -120,7 +120,7 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
 
     final borderRadiusKnob = context.knobs.nullable.sliderInt(
       label: "borderRadius",
-      description: "Border radius for MoonTextInput",
+      description: "Border radius for MoonInput",
       enabled: false,
       initial: 8,
       max: 32,
@@ -128,13 +128,13 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
 
     final enabledKnob = context.knobs.boolean(
       label: "enabled",
-      description: "Switch between MoonTextInput enabled and disabled states.",
+      description: "Switch between MoonInput enabled and disabled states.",
       initial: true,
     );
 
     final hasFloatingLabelKnob = context.knobs.boolean(
       label: "hasFloatingLabel",
-      description: "Whether MoonTextInput has floating label.",
+      description: "Whether MoonInput has floating label.",
     );
 
     return Padding(
@@ -143,18 +143,18 @@ class _SearchWithListStoryState extends State<SearchWithListStory> {
         children: [
           Column(
             children: [
-              MoonTextInput(
+              MoonInput(
                 enabled: enabledKnob,
                 hasFloatingLabel: hasFloatingLabelKnob,
                 activeBorderColor:
                     activeBorderColor ?? context.moonColors!.beerus,
                 inactiveBorderColor: inactiveBorderColor,
                 backgroundColor: backgroundColor,
-                hoverBorderColor: hoverBorderColor,
+                hoverColor: hoverColor,
                 borderRadius: borderRadiusKnob != null
                     ? BorderRadius.circular(borderRadiusKnob.toDouble())
                     : null,
-                textInputSize: textInputSizeKnob,
+                inputSize: inputSizeKnob,
                 hintText: "Search components",
                 controller: _searchController,
                 onTap: () => _performSearch(),

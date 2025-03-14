@@ -1,7 +1,9 @@
 import 'package:example/src/storybook/common/pages/colors_page.dart';
 import 'package:example/src/storybook/common/pages/home_page.dart';
 import 'package:example/src/storybook/common/pages/typography_page.dart';
+
 import 'package:example/src/storybook/routing/app_router.dart';
+
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
 import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
 import 'package:example/src/storybook/stories/composites/search_with_dropdown.dart';
@@ -22,6 +24,8 @@ import 'package:example/src/storybook/stories/primitives/dot_indicator.dart';
 import 'package:example/src/storybook/stories/primitives/drawer.dart';
 import 'package:example/src/storybook/stories/primitives/dropdown.dart';
 import 'package:example/src/storybook/stories/primitives/icons.dart';
+import 'package:example/src/storybook/stories/primitives/input.dart';
+import 'package:example/src/storybook/stories/primitives/input_group.dart';
 import 'package:example/src/storybook/stories/primitives/linear_loader.dart';
 import 'package:example/src/storybook/stories/primitives/linear_progress.dart';
 import 'package:example/src/storybook/stories/primitives/menu_item.dart';
@@ -34,12 +38,11 @@ import 'package:example/src/storybook/stories/primitives/tab_bar.dart';
 import 'package:example/src/storybook/stories/primitives/table.dart';
 import 'package:example/src/storybook/stories/primitives/tag.dart';
 import 'package:example/src/storybook/stories/primitives/text_area.dart';
-import 'package:example/src/storybook/stories/primitives/text_input.dart';
-import 'package:example/src/storybook/stories/primitives/text_input_group.dart';
 import 'package:example/src/storybook/stories/primitives/toast.dart';
 import 'package:example/src/storybook/stories/primitives/tooltip.dart';
 
 import 'package:flutter/services.dart';
+
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 const String directory = 'assets/code_snippets/';
@@ -189,6 +192,18 @@ final List<Story> routeAwareStories = [
     codeString: fetchAsset('icons.md'),
   ),
   Story.asRoute(
+    name: 'Primitives/Input',
+    routePath: InputStory.path,
+    router: router,
+    codeString: fetchAsset('input.md'),
+  ),
+  Story.asRoute(
+    name: 'Primitives/InputGroup',
+    routePath: InputGroupStory.path,
+    router: router,
+    codeString: fetchAsset('input_group.md'),
+  ),
+  Story.asRoute(
     name: 'Primitives/Loader/LinearLoader',
     routePath: LinearLoaderStory.path,
     router: router,
@@ -259,18 +274,6 @@ final List<Story> routeAwareStories = [
     routePath: TextAreaStory.path,
     router: router,
     codeString: fetchAsset('text_area.md'),
-  ),
-  Story.asRoute(
-    name: 'Primitives/TextInput',
-    routePath: TextInputStory.path,
-    router: router,
-    codeString: fetchAsset('text_input.md'),
-  ),
-  Story.asRoute(
-    name: 'Primitives/TextInputGroup',
-    routePath: TextInputGroupStory.path,
-    router: router,
-    codeString: fetchAsset('text_input_group.md'),
   ),
   Story.asRoute(
     name: 'Primitives/Toast',

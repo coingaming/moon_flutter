@@ -115,7 +115,7 @@ class _ComboboxSingleSelectState extends State<ComboboxSingleSelect> {
                   },
                 ),
         ),
-        child: MoonTextInput(
+        child: MoonInput(
           focusNode: _focusNode,
           hintText: "Select single component",
           controller: _searchController,

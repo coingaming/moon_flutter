@@ -2,33 +2,30 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class MoonTextInputGroupProperties
-    extends ThemeExtension<MoonTextInputGroupProperties>
+class MoonInputGroupProperties extends ThemeExtension<MoonInputGroupProperties>
     with DiagnosticableTreeMixin {
-  /// The border radius of the MoonTextInputGroup.
+  /// The border radius of the MoonInputGroup.
   final BorderRadiusGeometry borderRadius;
 
-  /// The duration of the MoonTextInputGroup transition animation
-  /// (enable and disable).
+  /// The duration of the MoonInputGroup transition animation (enable and disable).
   final Duration transitionDuration;
 
-  /// The curve of the MoonTextInputGroup transition animation
-  /// (enable and disable).
+  /// The curve of the MoonInputGroup transition animation (enable and disable).
   final Curve transitionCurve;
 
-  /// The padding of the MoonTextInputGroup helper and errorBuilder widgets.
+  /// The padding of the MoonInputGroup helper and errorBuilder widgets.
   final EdgeInsetsGeometry helperPadding;
 
-  /// The padding of the MoonTextInputGroup text.
+  /// The padding of the MoonInputGroup text.
   final EdgeInsetsGeometry textPadding;
 
-  /// The text style of the MoonTextInputGroup.
+  /// The text style of the MoonInputGroup.
   final TextStyle textStyle;
 
-  /// The text style of the MoonTextInputGroup helper and errorBuilder widgets.
+  /// The text style of the MoonInputGroup helper and errorBuilder widgets.
   final TextStyle helperTextStyle;
 
-  const MoonTextInputGroupProperties({
+  const MoonInputGroupProperties({
     required this.borderRadius,
     required this.transitionDuration,
     required this.transitionCurve,
@@ -39,7 +36,7 @@ class MoonTextInputGroupProperties
   });
 
   @override
-  MoonTextInputGroupProperties copyWith({
+  MoonInputGroupProperties copyWith({
     BorderRadiusGeometry? borderRadius,
     Duration? transitionDuration,
     Curve? transitionCurve,
@@ -48,7 +45,7 @@ class MoonTextInputGroupProperties
     TextStyle? textStyle,
     TextStyle? helperTextStyle,
   }) {
-    return MoonTextInputGroupProperties(
+    return MoonInputGroupProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       transitionCurve: transitionCurve ?? this.transitionCurve,
@@ -60,13 +57,13 @@ class MoonTextInputGroupProperties
   }
 
   @override
-  MoonTextInputGroupProperties lerp(
-    ThemeExtension<MoonTextInputGroupProperties>? other,
+  MoonInputGroupProperties lerp(
+    ThemeExtension<MoonInputGroupProperties>? other,
     double t,
   ) {
-    if (other is! MoonTextInputGroupProperties) return this;
+    if (other is! MoonInputGroupProperties) return this;
 
-    return MoonTextInputGroupProperties(
+    return MoonInputGroupProperties(
       borderRadius:
           BorderRadiusGeometry.lerp(borderRadius, other.borderRadius, t)!,
       transitionDuration:
@@ -85,38 +82,19 @@ class MoonTextInputGroupProperties
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-        DiagnosticsProperty(
-          "type",
-          "MoonTextInputGroupProperties",
-        ),
-      )
-      ..add(
-        DiagnosticsProperty<BorderRadiusGeometry>(
-          "borderRadius",
-          borderRadius,
-        ),
-      )
-      ..add(
-        DiagnosticsProperty<Duration>(
-          "transitionDuration",
-          transitionDuration,
-        ),
-      )
-      ..add(
-        DiagnosticsProperty<Curve>(
-          "transitionCurve",
-          transitionCurve,
-        ),
-      )
-      ..add(
-        DiagnosticsProperty<EdgeInsetsGeometry>(
-          "helperPadding",
-          helperPadding,
-        ),
-      )
+      ..add(DiagnosticsProperty("type", "MoonInputGroupProperties"))
+      ..add(DiagnosticsProperty<Curve>("transitionCurve", transitionCurve))
       ..add(DiagnosticsProperty<EdgeInsetsGeometry>("textPadding", textPadding))
       ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
-      ..add(DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle));
+      ..add(DiagnosticsProperty<TextStyle>("helperTextStyle", helperTextStyle))
+      ..add(
+        DiagnosticsProperty<BorderRadiusGeometry>("borderRadius", borderRadius),
+      )
+      ..add(
+        DiagnosticsProperty<Duration>("transitionDuration", transitionDuration),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry>("helperPadding", helperPadding),
+      );
   }
 }

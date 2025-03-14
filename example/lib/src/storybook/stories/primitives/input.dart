@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class TextInputStory extends StatefulWidget {
-  static const path = '/primitives/text_input';
+class InputStory extends StatefulWidget {
+  static const path = '/primitives/input';
 
-  const TextInputStory({super.key});
+  const InputStory({super.key});
 
   @override
-  State<TextInputStory> createState() => _TextInputStoryState();
+  State<InputStory> createState() => _InputStoryState();
 }
 
-class _TextInputStoryState extends State<TextInputStory> {
+class _InputStoryState extends State<InputStory> {
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -21,22 +21,22 @@ class _TextInputStoryState extends State<TextInputStory> {
 
   @override
   Widget build(BuildContext context) {
-    final textInputSizeKnob = context.knobs.nullable.options(
-      label: "textInputSize",
-      description: "Size variants for MoonTextInput.",
+    final inputSizeKnob = context.knobs.nullable.options(
+      label: "inputSize",
+      description: "Size variants for MoonInput.",
       enabled: false,
-      initial: MoonTextInputSize.md,
+      initial: MoonInputSize.md,
       options: const [
-        Option(label: "sm", value: MoonTextInputSize.sm),
-        Option(label: "md", value: MoonTextInputSize.md),
-        Option(label: "lg", value: MoonTextInputSize.lg),
-        Option(label: "xl", value: MoonTextInputSize.xl),
+        Option(label: "sm", value: MoonInputSize.sm),
+        Option(label: "md", value: MoonInputSize.md),
+        Option(label: "lg", value: MoonInputSize.lg),
+        Option(label: "xl", value: MoonInputSize.xl),
       ],
     );
 
     final textColorKnob = context.knobs.nullable.options(
       label: "textColor",
-      description: "MoonColors variants for MoonTextInput text.",
+      description: "MoonColors variants for MoonInput text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -47,7 +47,7 @@ class _TextInputStoryState extends State<TextInputStory> {
 
     final hintTextColorKnob = context.knobs.nullable.options(
       label: "hintTextColor",
-      description: "MoonColors variants for MoonTextInput hint text.",
+      description: "MoonColors variants for MoonInput hint text.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -56,9 +56,20 @@ class _TextInputStoryState extends State<TextInputStory> {
 
     final hintTextColor = colorTable(context)[hintTextColorKnob ?? 40];
 
+    final helperTextColorKnob = context.knobs.nullable.options(
+      label: "Helper text color",
+      description: "MoonColors variants for MoonInput helper text.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final helperTextColor = colorTable(context)[helperTextColorKnob ?? 40];
+
     final backgroundColorKnob = context.knobs.nullable.options(
       label: "backgroundColor",
-      description: "MoonColors variants for MoonTextInput background.",
+      description: "MoonColors variants for MoonInput background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -69,7 +80,7 @@ class _TextInputStoryState extends State<TextInputStory> {
 
     final activeBorderColorKnob = context.knobs.nullable.options(
       label: "activeBorderColor",
-      description: "MoonColors variants for MoonTextInput active border.",
+      description: "MoonColors variants for MoonInput active border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -80,7 +91,7 @@ class _TextInputStoryState extends State<TextInputStory> {
 
     final inactiveBorderColorKnob = context.knobs.nullable.options(
       label: "inactiveBorderColor",
-      description: "MoonColors variants for MoonTextInput inactive border.",
+      description: "MoonColors variants for MoonInput inactive border.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -90,20 +101,20 @@ class _TextInputStoryState extends State<TextInputStory> {
     final inactiveBorderColor =
         colorTable(context)[inactiveBorderColorKnob ?? 40];
 
-    final hoverBorderColorKnob = context.knobs.nullable.options(
-      label: "hoverBorderColor",
-      description: "MoonColors variants for MoonTextInput border on hover.",
+    final hoverColorKnob = context.knobs.nullable.options(
+      label: "hoverColor",
+      description: "MoonColors variants for MoonInput on hover.",
       enabled: false,
       initial: 0,
       // piccolo
       options: colorOptions,
     );
 
-    final hoverBorderColor = colorTable(context)[hoverBorderColorKnob ?? 40];
+    final hoverColor = colorTable(context)[hoverColorKnob ?? 40];
 
     final errorColorKnob = context.knobs.nullable.options(
       label: "errorColor",
-      description: "MoonColors variants for MoonTextInput in error state.",
+      description: "MoonColors variants for MoonInput in error state.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -114,7 +125,7 @@ class _TextInputStoryState extends State<TextInputStory> {
 
     final borderRadiusKnob = context.knobs.nullable.sliderInt(
       label: "borderRadius",
-      description: "Border radius for MoonTextInput.",
+      description: "Border radius for MoonInput.",
       enabled: false,
       initial: 8,
       max: 32,
@@ -128,24 +139,36 @@ class _TextInputStoryState extends State<TextInputStory> {
 
     final hasFloatingLabelKnob = context.knobs.boolean(
       label: "hasFloatingLabel",
-      description: "Whether MoonTextInput has floating label.",
+      description: "Whether MoonInput has floating label.",
     );
 
     final showLeadingKnob = context.knobs.boolean(
       label: "leading",
-      description: "Show widget in MoonTextInput leading slot.",
+      description: "Show widget in MoonInput leading slot.",
       initial: true,
     );
 
     final showTrailingKnob = context.knobs.boolean(
       label: "trailing",
-      description: "Show widget in MoonTextInput trailing slot.",
+      description: "Show widget in MoonInput trailing slot.",
+      initial: true,
+    );
+
+    final showLabelKnob = context.knobs.boolean(
+      label: "label",
+      description: "Show label for MoonInput.",
+      initial: true,
+    );
+
+    final showHintKnob = context.knobs.boolean(
+      label: "hintText",
+      description: "Show hint text for MoonInput.",
       initial: true,
     );
 
     final showHelperKnob = context.knobs.boolean(
-      label: "helper",
-      description: "Show widget in MoonTextInput helper slot.",
+      label: "helperText",
+      description: "Show helper text for MoonInput.",
     );
 
     final BorderRadiusGeometry? borderRadius = borderRadiusKnob != null
@@ -161,26 +184,30 @@ class _TextInputStoryState extends State<TextInputStory> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MoonFormTextInput(
+                  MoonInput.form(
                     controller: _textController,
                     enabled: enabledKnob,
-                    textInputSize: textInputSizeKnob,
+                    inputSize: inputSizeKnob,
                     hasFloatingLabel: hasFloatingLabelKnob,
                     textColor: textColor,
                     hintTextColor: hintTextColor,
+                    helperErrorTextStyle: TextStyle(color: helperTextColor),
                     backgroundColor: backgroundColor,
                     activeBorderColor: activeBorderColor,
                     inactiveBorderColor: inactiveBorderColor,
-                    hoverBorderColor: hoverBorderColor,
+                    hoverColor: hoverColor,
                     errorColor: errorColor,
                     borderRadius: borderRadius,
-                    hintText: "Enter text (over 10 characters)",
                     validator: (String? value) =>
                         value != null && value.length < 10
                             ? "The text should be longer than 10 characters."
                             : null,
                     onTapOutside: (PointerDownEvent _) =>
                         FocusManager.instance.primaryFocus?.unfocus(),
+                    label: showLabelKnob ? const Text("Label") : null,
+                    hintText:
+                        showHintKnob ? "Enter text (over 10 characters)" : null,
+                    helperText: showHelperKnob ? 'Supporting Text' : null,
                     leading: showLeadingKnob
                         ? const Icon(
                             MoonIcons.generic_search_24_light,
@@ -199,32 +226,34 @@ class _TextInputStoryState extends State<TextInputStory> {
                             ),
                           )
                         : null,
-                    helper:
-                        showHelperKnob ? const Text("Supporting text") : null,
                   ),
                   const SizedBox(height: 16),
                   StatefulBuilder(
-                    builder: (context, setState) {
-                      return MoonFormTextInput(
+                    builder: (BuildContext context, StateSetter setState) {
+                      return MoonInput.form(
                         controller: _passwordController,
                         enabled: enabledKnob,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: _hidePassword,
-                        textInputSize: textInputSizeKnob,
+                        inputSize: inputSizeKnob,
                         hasFloatingLabel: hasFloatingLabelKnob,
                         textColor: textColor,
                         hintTextColor: hintTextColor,
+                        helperErrorTextStyle: TextStyle(color: helperTextColor),
                         backgroundColor: backgroundColor,
                         activeBorderColor: activeBorderColor,
                         inactiveBorderColor: inactiveBorderColor,
-                        hoverBorderColor: hoverBorderColor,
+                        hoverColor: hoverColor,
                         errorColor: errorColor,
                         borderRadius: borderRadius,
-                        hintText: "Enter password (123abc)",
                         validator: (String? value) =>
                             value != "123abc" ? "Wrong password." : null,
                         onTapOutside: (PointerDownEvent _) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
+                        label: showLabelKnob ? const Text("Label") : null,
+                        hintText:
+                            showHintKnob ? "Enter password (123abc)" : null,
+                        helperText: showHelperKnob ? "Supporting text" : null,
                         leading: showLeadingKnob
                             ? const Icon(
                                 MoonIcons.security_password_24_light,
@@ -255,27 +284,24 @@ class _TextInputStoryState extends State<TextInputStory> {
                                 ),
                               )
                             : null,
-                        helper: showHelperKnob
-                            ? const Text("Supporting text")
-                            : null,
                       );
                     },
                   ),
                   const SizedBox(height: 16),
-                  MoonFormTextInput(
+                  MoonInput.form(
                     readOnly: true,
                     controller: _dateController,
                     enabled: enabledKnob,
-                    textInputSize: textInputSizeKnob,
+                    inputSize: inputSizeKnob,
                     textColor: textColor,
                     hintTextColor: hintTextColor,
+                    helperErrorTextStyle: TextStyle(color: helperTextColor),
                     backgroundColor: backgroundColor,
                     activeBorderColor: activeBorderColor,
                     inactiveBorderColor: inactiveBorderColor,
-                    hoverBorderColor: hoverBorderColor,
+                    hoverColor: hoverColor,
                     errorColor: errorColor,
                     borderRadius: borderRadius,
-                    hintText: "Pick a date",
                     validator: (String? value) =>
                         value != null && value.isEmpty ? "Pick a date." : null,
                     onTap: () async {
@@ -291,6 +317,8 @@ class _TextInputStoryState extends State<TextInputStory> {
                             "${pickedDate.toLocal()}".split(" ")[0];
                       }
                     },
+                    hintText: showHintKnob ? "Pick a date" : null,
+                    helperText: showHelperKnob ? "Supporting text" : null,
                     leading: showLeadingKnob
                         ? const Icon(
                             MoonIcons.time_calendar_24_light,
@@ -309,8 +337,6 @@ class _TextInputStoryState extends State<TextInputStory> {
                             ),
                           )
                         : null,
-                    helper:
-                        showHelperKnob ? const Text("Supporting text") : null,
                   ),
                   const SizedBox(height: 32),
                   MoonFilledButton(

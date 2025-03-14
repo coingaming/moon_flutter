@@ -2,6 +2,7 @@ import 'package:example/src/storybook/common/pages/colors_page.dart';
 import 'package:example/src/storybook/common/pages/home_page.dart';
 import 'package:example/src/storybook/common/pages/typography_page.dart';
 import 'package:example/src/storybook/common/widgets/routing_error_widget.dart';
+
 import 'package:example/src/storybook/stories/composites/combobox_multi_select.dart';
 import 'package:example/src/storybook/stories/composites/combobox_single_select.dart';
 import 'package:example/src/storybook/stories/composites/search_with_dropdown.dart';
@@ -22,6 +23,8 @@ import 'package:example/src/storybook/stories/primitives/dot_indicator.dart';
 import 'package:example/src/storybook/stories/primitives/drawer.dart';
 import 'package:example/src/storybook/stories/primitives/dropdown.dart';
 import 'package:example/src/storybook/stories/primitives/icons.dart';
+import 'package:example/src/storybook/stories/primitives/input.dart';
+import 'package:example/src/storybook/stories/primitives/input_group.dart';
 import 'package:example/src/storybook/stories/primitives/linear_loader.dart';
 import 'package:example/src/storybook/stories/primitives/linear_progress.dart';
 import 'package:example/src/storybook/stories/primitives/menu_item.dart';
@@ -34,12 +37,11 @@ import 'package:example/src/storybook/stories/primitives/tab_bar.dart';
 import 'package:example/src/storybook/stories/primitives/table.dart';
 import 'package:example/src/storybook/stories/primitives/tag.dart';
 import 'package:example/src/storybook/stories/primitives/text_area.dart';
-import 'package:example/src/storybook/stories/primitives/text_input.dart';
-import 'package:example/src/storybook/stories/primitives/text_input_group.dart';
 import 'package:example/src/storybook/stories/primitives/toast.dart';
 import 'package:example/src/storybook/stories/primitives/tooltip.dart';
 
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
 
 const String primitivesDirectory = '/primitives';
@@ -215,6 +217,18 @@ GoRouter router = GoRouter(
       ),
     ),
     GoRoute(
+      path: InputStory.path,
+      pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
+        child: InputStory(),
+      ),
+    ),
+    GoRoute(
+      path: InputGroupStory.path,
+      pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
+        child: InputGroupStory(),
+      ),
+    ),
+    GoRoute(
       path: LinearLoaderStory.path,
       pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
         child: LinearLoaderStory(),
@@ -300,18 +314,6 @@ GoRouter router = GoRouter(
       path: TextAreaStory.path,
       pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
         child: TextAreaStory(),
-      ),
-    ),
-    GoRoute(
-      path: TextInputStory.path,
-      pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
-        child: TextInputStory(),
-      ),
-    ),
-    GoRoute(
-      path: TextInputGroupStory.path,
-      pageBuilder: (BuildContext _, GoRouterState __) => const NoTransitionPage(
-        child: TextInputGroupStory(),
       ),
     ),
     GoRoute(

@@ -149,7 +149,7 @@ class _IconsStoryState extends State<IconsStory> {
         backgroundColor: context.moonColors?.goku,
         title: Theme(
           data: Theme.of(context),
-          child: MoonTextInput(
+          child: MoonInput(
             controller: _searchController,
             hintText: "Search icons",
             leading: const Icon(

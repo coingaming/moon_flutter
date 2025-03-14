@@ -1,36 +1,36 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:moon_design/src/theme/text_input_group/text_input_group_colors.dart';
-import 'package:moon_design/src/theme/text_input_group/text_input_group_properties.dart';
+import 'package:moon_design/src/theme/input_group/input_group_colors.dart';
+import 'package:moon_design/src/theme/input_group/input_group_properties.dart';
 import 'package:moon_design/src/theme/tokens/tokens.dart';
 
 @immutable
-class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme>
+class MoonInputGroupTheme extends ThemeExtension<MoonInputGroupTheme>
     with DiagnosticableTreeMixin {
   /// The tokens of the Moon Design System.
   final MoonTokens tokens;
 
-  /// The colors of the MoonTextInputGroup.
-  final MoonTextInputGroupColors colors;
+  /// The colors of the MoonInputGroup.
+  final MoonInputGroupColors colors;
 
-  /// The properties of the MoonTextInputGroup.
-  final MoonTextInputGroupProperties properties;
+  /// The properties of the MoonInputGroup.
+  final MoonInputGroupProperties properties;
 
-  MoonTextInputGroupTheme({
+  MoonInputGroupTheme({
     required this.tokens,
-    MoonTextInputGroupColors? colors,
-    MoonTextInputGroupProperties? properties,
+    MoonInputGroupColors? colors,
+    MoonInputGroupProperties? properties,
   })  : colors = colors ??
-            MoonTextInputGroupColors(
+            MoonInputGroupColors(
               backgroundColor: tokens.colors.goku,
               errorColor: tokens.colors.chichi,
               helperTextColor: tokens.colors.trunks,
               borderColor: tokens.colors.beerus,
-              hoverBorderColor: tokens.colors.beerus,
+              hoverColor: tokens.colors.beerus,
             ),
         properties = properties ??
-            MoonTextInputGroupProperties(
+            MoonInputGroupProperties(
               borderRadius: tokens.borders.interactiveSm,
               transitionDuration: tokens.transitions.defaultTransitionDuration,
               transitionCurve: tokens.transitions.defaultTransitionCurve,
@@ -41,12 +41,12 @@ class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme>
             );
 
   @override
-  MoonTextInputGroupTheme copyWith({
+  MoonInputGroupTheme copyWith({
     MoonTokens? tokens,
-    MoonTextInputGroupColors? colors,
-    MoonTextInputGroupProperties? properties,
+    MoonInputGroupColors? colors,
+    MoonInputGroupProperties? properties,
   }) {
-    return MoonTextInputGroupTheme(
+    return MoonInputGroupTheme(
       tokens: tokens ?? this.tokens,
       colors: colors ?? this.colors,
       properties: properties ?? this.properties,
@@ -54,13 +54,13 @@ class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme>
   }
 
   @override
-  MoonTextInputGroupTheme lerp(
-    ThemeExtension<MoonTextInputGroupTheme>? other,
+  MoonInputGroupTheme lerp(
+    ThemeExtension<MoonInputGroupTheme>? other,
     double t,
   ) {
-    if (other is! MoonTextInputGroupTheme) return this;
+    if (other is! MoonInputGroupTheme) return this;
 
-    return MoonTextInputGroupTheme(
+    return MoonInputGroupTheme(
       tokens: tokens.lerp(other.tokens, t),
       colors: colors.lerp(other.colors, t),
       properties: properties.lerp(other.properties, t),
@@ -71,14 +71,11 @@ class MoonTextInputGroupTheme extends ThemeExtension<MoonTextInputGroupTheme>
   void debugFillProperties(DiagnosticPropertiesBuilder diagnosticProperties) {
     super.debugFillProperties(diagnosticProperties);
     diagnosticProperties
-      ..add(DiagnosticsProperty("type", "MoonTextInputGroupTheme"))
+      ..add(DiagnosticsProperty("type", "MoonInputGroupTheme"))
       ..add(DiagnosticsProperty<MoonTokens>("tokens", tokens))
-      ..add(DiagnosticsProperty<MoonTextInputGroupColors>("colors", colors))
+      ..add(DiagnosticsProperty<MoonInputGroupColors>("colors", colors))
       ..add(
-        DiagnosticsProperty<MoonTextInputGroupProperties>(
-          "properties",
-          properties,
-        ),
+        DiagnosticsProperty<MoonInputGroupProperties>("properties", properties),
       );
   }
 }
