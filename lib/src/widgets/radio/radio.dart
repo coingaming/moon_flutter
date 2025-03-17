@@ -31,11 +31,20 @@ class MoonRadio<T> extends StatefulWidget {
   /// unselected.
   final bool toggleable;
 
-  /// The color of the active (selected) radio button.
+  /// The background color of the active (selected) radio button.
   final Color? activeColor;
 
   /// The background color of the inactive (unselected) radio button.
   final Color? inactiveColor;
+
+  /// The border color of the active (selected) radio button.
+  final Color? activeBorderColor;
+
+  /// The border color of the inactive (unselected) radio button.
+  final Color? inactiveBorderColor;
+
+  /// The indicator color of the active (selected) radio button.
+  final Color? indicatorColor;
 
   /// The size of the radio button tap target.
   ///
@@ -80,6 +89,9 @@ class MoonRadio<T> extends StatefulWidget {
     this.toggleable = false,
     this.activeColor,
     this.inactiveColor,
+    this.activeBorderColor,
+    this.inactiveBorderColor,
+    this.indicatorColor,
     this.tapAreaSizeValue = 40,
     this.focusNode,
     this.semanticLabel,
@@ -111,8 +123,8 @@ class _RadioState<T> extends State<MoonRadio<T>> {
 
   @override
   Widget build(BuildContext context) {
-    const double sizeValue = 16;
-    const double dotSizeValue = (sizeValue - 1) / 2;
+    const double sizeValue = 20;
+    const double dotSizeValue = 8;
 
     final MoonFocusEffect focusEffect =
         MoonEffectsTheme(tokens: MoonTokens.light).controlFocusEffect;
@@ -121,7 +133,23 @@ class _RadioState<T> extends State<MoonRadio<T>> {
         widget.activeColor ?? MoonColors.light.piccolo;
 
     final Color effectiveInactiveColor =
-        widget.inactiveColor ?? MoonColors.light.trunks;
+        widget.inactiveColor ?? const Color.fromRGBO(252, 252, 253, 1);
+
+    final Color effectiveActiveBorderColor =
+        widget.activeBorderColor ?? effectiveActiveColor;
+
+    final Color effectiveInactiveBorderColor =
+        widget.inactiveBorderColor ?? const Color.fromRGBO(205, 206, 214, 1);
+
+    final Color effectiveIndicatorColor =
+        widget.indicatorColor ?? const Color.fromRGBO(252, 252, 253, 1);
+
+    const Color hoverColor = Color.fromRGBO(28, 32, 36, 0.08);
+
+    final effectiveHoverColor = Color.alphaBlend(
+      hoverColor,
+      _selected ? effectiveActiveColor : effectiveInactiveColor,
+    );
 
     final Color effectiveFocusEffectColor = focusEffect.effectColor;
 
@@ -138,7 +166,7 @@ class _RadioState<T> extends State<MoonRadio<T>> {
       $box.chain
         ..width(_selected ? dotSizeValue : 0)
         ..height(_selected ? dotSizeValue : 0)
-        ..color(effectiveActiveColor)
+        ..color(_selected ? effectiveIndicatorColor : effectiveInactiveColor)
         ..shape.circle(),
     ).animate(duration: effectiveFocusEffectDuration);
 
@@ -146,10 +174,18 @@ class _RadioState<T> extends State<MoonRadio<T>> {
       $box.chain
         ..height(sizeValue)
         ..width(sizeValue)
-        ..border
-            .color(_selected ? effectiveActiveColor : effectiveInactiveColor)
+        ..color(_selected ? effectiveActiveColor : effectiveInactiveColor)
+        ..border(
+          width: 2,
+          color: _selected
+              ? effectiveActiveBorderColor
+              : effectiveInactiveBorderColor,
+        )
         ..alignment.center()
         ..shape.circle(),
+      $on.hover(
+        $box.color(effectiveHoverColor),
+      ),
     ).animate(duration: effectiveFocusEffectDuration);
 
     final Style effectsStyle = Style(

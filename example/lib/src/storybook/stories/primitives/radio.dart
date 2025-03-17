@@ -26,7 +26,7 @@ class _RadioStoryState extends State<RadioStory> {
   Widget build(BuildContext context) {
     final activeColorKnob = context.knobs.nullable.options(
       label: "activeColor",
-      description: "MoonColors variants for selected MoonRadio.",
+      description: "MoonColors variants for selected MoonRadio background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -37,7 +37,7 @@ class _RadioStoryState extends State<RadioStory> {
 
     final inactiveColorKnob = context.knobs.nullable.options(
       label: "inactiveColor",
-      description: "MoonColors variants for unselected MoonRadio.",
+      description: "MoonColors variants for unselected MoonRadio background.",
       enabled: false,
       initial: 0,
       // piccolo
@@ -45,6 +45,40 @@ class _RadioStoryState extends State<RadioStory> {
     );
 
     final inactiveColor = colorTable(context)[inactiveColorKnob ?? 40];
+
+    final activeBorderColorKnob = context.knobs.nullable.options(
+      label: "activeBorderColor",
+      description: "MoonColors variants for selected MoonRadio border.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final activeBorderColor = colorTable(context)[activeBorderColorKnob ?? 40];
+
+    final inactiveBorderColorKnob = context.knobs.nullable.options(
+      label: "inactiveBorderColor",
+      description: "MoonColors variants for unselected MoonRadio border.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final inactiveBorderColor =
+        colorTable(context)[inactiveBorderColorKnob ?? 40];
+
+    final indicatorColorKnob = context.knobs.nullable.options(
+      label: "indicatorColor",
+      description: "MoonColors variants for selected MoonRadio indicator.",
+      enabled: false,
+      initial: 0,
+      // piccolo
+      options: colorOptions,
+    );
+
+    final indicatorColor = colorTable(context)[indicatorColorKnob ?? 40];
 
     final isToggleableKnob = context.knobs.boolean(
       label: "toggleable",
@@ -72,6 +106,9 @@ class _RadioStoryState extends State<RadioStory> {
                 groupValue: valueCustom,
                 activeColor: activeColor,
                 inactiveColor: inactiveColor,
+                activeBorderColor: activeBorderColor,
+                inactiveBorderColor: inactiveBorderColor,
+                indicatorColor: indicatorColor,
                 toggleable: isToggleableKnob,
                 onChanged: isDisabledKnob
                     ? null
